@@ -1,0 +1,26 @@
+{
+  "reason": "Old singleton grid axis caused a phase-by-phase cross-comparison instead of a matched comparison",
+  "failed_validator_sha256": "e7b8b6ecd8737bf20b3d3a758f329638acfc2a9376d73f34c507429ed24b0ca3",
+  "corrected_validator_sha256": "887b40a6f18abd2324326fec4774ba625e0d0065f63703580b1b93f3f172e09c",
+  "diagnosis_sha256": "38c5c649b7d0c653cdbc3ffba0d8e85400631e5006efbcfde9d6d8f4012a8dea",
+  "edits": [
+    [
+      "FOLDER = se.ROOT/'real_phase_adapter_validation'",
+      "FOLDER = se.ROOT/'real_phase_adapter_validation_corrected'"
+    ],
+    [
+      "independent = np.array([se.linear_statistics(v, targets, 3.)[1] for v in exact])",
+      "independent = se.linear_statistics(exact, targets, 3.)[1]"
+    ],
+    [
+      "approximate = real.bank_loglikes(bank, phases, targets, 0)",
+      "approximate = real.bank_loglikes(bank, phases, targets, 0)\n        if independent.shape != approximate.shape:\n            raise ValueError('Independent likelihood shapes differ')"
+    ],
+    [
+      "names = ['validate_real_phase_adapter.py'",
+      "names = ['validate_real_phase_adapter_corrected.py', 'REAL_PHASE_VALIDATION_CORRECTION.json', 'validate_real_phase_adapter.py'"
+    ]
+  ],
+  "tolerance_changed": false,
+  "physical_algorithm_changed": false
+}

@@ -1,0 +1,44 @@
+{
+  "status": "REGISTERED_NONBLIND_SOURCE_FAMILY_MIXTURE",
+  "date_utc": "2026-09-22T08:25:43.844861+00:00",
+  "runs": {
+    "IMRPhenomXPHM": "phase_ringdown_balanced/IMRPhenomXPHM_seed130892_N16384",
+    "SEOBNRv4HM": "phase_native_seob/SEOBNRv4HM_seed130901_N2048"
+  },
+  "family_prior": {
+    "IMRPhenomXPHM": 0.5,
+    "SEOBNRv4HM": 0.5
+  },
+  "prior_scope": "Explicit equal model prior, conditional comparison only; same weights under a=0 and a=1. Consistent with earlier C5 family-mixture control, not derived from TGL.",
+  "formula": "Z_a=sum_f pi_f Z_fa; lnB=lnZ_1-lnZ_0. Never average lnB_f and never multiply simulations.",
+  "error_scope": "Centered family influence, paired within each family, independent between draws of different families; delta method invalid at low ESS.",
+  "acceptance": "Individual family precision cannot be hidden by mixture. Independent repeats, rate controls and continuous-strength bias/coverage remain mandatory.",
+  "target_order": "The frozen INJECTIONS.json label order, a=0 then a=1 component blocks",
+  "numerical_tests": {
+    "component_ESS_min": 100,
+    "component_max_weight": 0.05,
+    "lnB_MC_sd_max": 0.2
+  },
+  "reused_noise_intervals": 50,
+  "mock_datasets": 1200,
+  "physical_partition_selected": false,
+  "actual_event_strain_used": false,
+  "C6_changed": false,
+  "hashes": {
+    "source_family_mixture.py": "8e12185b8dc954cb9f4e3a35c9f1cd83498051c6b6735cef77a009b2c3d3dadc",
+    "combine_source_families.py": "c70a7ad786e7bba9aa46d265ecc5035653a74fce92abe9f53f49564116028f01",
+    "source_family_mixture_validation/REGISTRATION.json": "a6ed14c611f771c7562760f86b1f6a403583fbb9ab1d4b914035e97b7d5dd569",
+    "source_family_mixture_validation/RESULT.json": "7be90060fbe49573cbe5002532c338b1c435a573676424d50f371411bd388a15",
+    "INJECTIONS.json": "98a62aac521938955ac90c7a8a19e884ffd2bfc468d9a436164bf26d48299631",
+    "INJECTIONS.npz": "27dfc5fa47342efbaab30d32d915a7f0afd151f1cbae493bc44a813112472265",
+    "REGISTRATION.json": "cfde6683725ae3613cca2f3b46f55b7fd3ca9b0aac4443e297bb72cc7d2b7e6e",
+    "phase_runs/REGISTRATION.json": "a47a203a5a794048d5d71f1e6b4db7f37b7187a5cea0cb8e1a8c51960275a3fc",
+    "audit_phase_source.py": "43f4c78aec69f141c7c2a1bd860ed728fcbfb32ece6a7d0327cb872a1d9418bb",
+    "phase_ringdown_balanced/IMRPhenomXPHM_seed130892_N16384/START.json": "31af068d5fe43da8dc27d3171df47188ab4c1b8459c35fb84d4b9bf73405cf6a",
+    "phase_ringdown_balanced/IMRPhenomXPHM_seed130892_N16384/PROPOSALS.npz": "ac5074d31ea48466bda6f7fd85dfaa8f9d5a3dc1a9015e783bee3373fc05c322",
+    "phase_ringdown_balanced/REGISTRATION.json": "4c3464405e77139fa96198a7027e91256534fce6f80d2b7da7a09360262ed805",
+    "phase_native_seob/SEOBNRv4HM_seed130901_N2048/START.json": "c68bc077955892d62533db56bb01c88b645894e90c20fa31713a81fb6cc86cd5",
+    "phase_native_seob/SEOBNRv4HM_seed130901_N2048/PROPOSALS.npz": "29df29259777dac8cab89082f85ba771bb3d1a6dfd22820808dd4f1f278183d9",
+    "phase_native_seob/REGISTRATION.json": "b6ef3665b895959ecd8480434170c373bff16a7cc6502c2eb21bb1ee87acb69b"
+  }
+}

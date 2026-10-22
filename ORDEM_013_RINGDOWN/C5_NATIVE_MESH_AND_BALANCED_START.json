@@ -1,0 +1,223 @@
+{
+  "status": "NUMERICAL_CONTROLS_COMPLETE_SOURCE_INTEGRATION_RUNNING",
+  "date_utc": "2026-09-22T07:45:16.709680+00:00",
+  "previous_goal_turn": "PROGRESS:8192 integration/audits,504 phase tests,native source reconstruction; side reply about prompt did not change goal state",
+  "this_goal_turn": "PROGRESS:180 native-adapter tests; actual internal-grid refinement; cross-fit proposal diagnostics; normalization oracle; fresh16384 draw integration launched",
+  "adapter": {
+    "status": "PASS_NATIVE_SEOB_PHASE_ADAPTER",
+    "count": 180,
+    "failures": 0,
+    "max_relative_error": 6.221071209865647e-16,
+    "max_logL_errors_SNR40_600": [
+      2.9558577807620168e-12,
+      6.402842700481415e-10
+    ],
+    "max_peak_difference_s": 0.0
+  },
+  "mesh": {
+    "status": "ACTUAL_INTERNAL_MESH_MEASURED_NOT_SCIENTIFIC_ACCEPTANCE",
+    "internal_step_ratios": [
+      2.0,
+      1.9999999999735776
+    ],
+    "adapter_pass": true,
+    "adapter_check_count": 12,
+    "all_rate_pass": false,
+    "comparisons": [
+      {
+        "low": 131072,
+        "high": 262144,
+        "psd": "O4",
+        "max_logL_integral_change_SNR40_200_600": [
+          0.018844313753220376,
+          0.10277967175716185,
+          0.42911079700570554
+        ],
+        "passes_by_SNR": [
+          true,
+          false,
+          false
+        ],
+        "noiseless_common_amplitude_residual_norm_SNR600": [
+          0.1732387415169877,
+          0.1710361710845319
+        ],
+        "caveat": "Residual norms are waveform distances, not detection sigma. No full-source marginalization."
+      },
+      {
+        "low": 131072,
+        "high": 262144,
+        "psd": "O5",
+        "max_logL_integral_change_SNR40_200_600": [
+          0.03420079632007855,
+          0.16937047861210885,
+          0.5557254943414591
+        ],
+        "passes_by_SNR": [
+          true,
+          false,
+          false
+        ],
+        "noiseless_common_amplitude_residual_norm_SNR600": [
+          0.1727952411250968,
+          0.17069122318044194
+        ],
+        "caveat": "Residual norms are waveform distances, not detection sigma. No full-source marginalization."
+      },
+      {
+        "low": 262144,
+        "high": 524288,
+        "psd": "O4",
+        "max_logL_integral_change_SNR40_200_600": [
+          0.03589824316577506,
+          0.2524450656019326,
+          1.6064154748164583
+        ],
+        "passes_by_SNR": [
+          true,
+          false,
+          false
+        ],
+        "noiseless_common_amplitude_residual_norm_SNR600": [
+          0.34732389789001533,
+          0.3428553582930649
+        ],
+        "caveat": "Residual norms are waveform distances, not detection sigma. No full-source marginalization."
+      },
+      {
+        "low": 262144,
+        "high": 524288,
+        "psd": "O5",
+        "max_logL_integral_change_SNR40_200_600": [
+          0.06001458376431401,
+          0.23731354734263732,
+          1.6252408181026112
+        ],
+        "passes_by_SNR": [
+          true,
+          false,
+          false
+        ],
+        "noiseless_common_amplitude_residual_norm_SNR600": [
+          0.35081750544623047,
+          0.34662168165761315
+        ],
+        "caveat": "Residual norms are waveform distances, not detection sigma. No full-source marginalization."
+      }
+    ]
+  },
+  "proposal": {
+    "selected": {
+      "id": "rms_K6",
+      "min_fold_gain10": 0.826769501293517,
+      "min_fold_median_gain": 3.0301197183518873,
+      "rows": [
+        {
+          "id": "rms_K6",
+          "fold": 0,
+          "gain_quantiles": [
+            0.16767061112526954,
+            0.826769501293517,
+            3.839258925945913,
+            23.849442538535722,
+            39.83069226087774
+          ],
+          "efficiency_quantiles": [
+            0.00012520916771875966,
+            0.0021201675835101565,
+            0.010299799309961262,
+            0.02465839957298552,
+            0.057406098944089524
+          ],
+          "training_ESS": 155.45151340666484,
+          "second_moment_max_contribution_quantiles": [
+            0.5557164060630392,
+            0.9253717930963655,
+            0.9998334565716845
+          ]
+        },
+        {
+          "id": "rms_K6",
+          "fold": 1,
+          "gain_quantiles": [
+            0.11159588746509652,
+            1.072291839705146,
+            3.0301197183518873,
+            8.029582063171725,
+            38.7753010869113
+          ],
+          "efficiency_quantiles": [
+            0.00011136727021601674,
+            0.0018900376228951762,
+            0.008266819813149182,
+            0.01785478089544822,
+            0.033780222920727625
+          ],
+          "training_ESS": 116.05919432254112,
+          "second_moment_max_contribution_quantiles": [
+            0.4679627047619699,
+            0.8786097930585486,
+            0.9998971773427907
+          ]
+        }
+      ]
+    },
+    "training_weight_ESS": 206.66631013109958,
+    "df": 30.0,
+    "components": 6,
+    "normalization_mean": 1.0111630988462545,
+    "normalization_MC_error": 0.015773679690989063,
+    "moment_max_standardized_error": 1.2838414444610011,
+    "density_error": 8.881784197001252e-16
+  },
+  "active_processes": [
+    {
+      "tool": "write_stdin",
+      "session_id": 62818,
+      "status": "LIVE_OBSERVED_BEFORE_RECORD",
+      "folder": "cache/source_evidence/phase_ringdown_balanced/IMRPhenomXPHM_seed130892_N16384",
+      "last_progress": {
+        "done": 288,
+        "valid_draws": 8554,
+        "seconds": 152.165914602,
+        "date_utc": "2026-09-22T07:45:11.929437+00:00"
+      },
+      "observation": "Tool returned live session and progressing output immediately before this record; revalidate next turn"
+    }
+  ],
+  "scientific_acceptance": false,
+  "physical_prior_changed": false,
+  "C6_changed": false,
+  "hashes": {
+    "record_native_mesh_and_balanced_start.py": "4c55fb0c342bbfc3c3a62207b7e1fda52f144b423b9e9affd83d408b8ee8ce6e",
+    "cache/source_evidence/native_seob_phase_source.py": "bb2db74e009d014dcdffa50ac6e4368ea88deff2e3f86f2a5e9fc467570ccd5b",
+    "cache/source_evidence/validate_native_seob_phase.py": "8f7d80665a37e847fa7d5dfc342caa67ae38448414420c67838b9322dcdc9313",
+    "cache/source_evidence/refine_native_internal_mesh.py": "7f152a8472e05adfe3056927e4b0402b569ff2f086d8483cc33cde27327414a3",
+    "cache/source_evidence/diagnose_proposal_efficiency.py": "ea4174d9a4a0bc221511e5ed7ced43b0f3809afaedf588b5abf72f4d97da2e5a",
+    "cache/source_evidence/diagnose_balanced_proposal.py": "79d46b2a6a125012469a8bc094f19d819a5ced4c8c6c18fbde934f04bc96c4d0",
+    "cache/source_evidence/refine_balanced_source_proposal.py": "af03ff79b21a73fd6554ff36c6da6a0b5274b00e57d82c3f422cee0d6a918d2b",
+    "cache/source_evidence/direct_seob_modes.py": "7cb9fd39298dd8f6dbedbf436ae42137d54a44287003a01b0e342456c8187415",
+    "cache/source_evidence/native_seob_phase_validation/REGISTRATION.json": "64f44d5096f6278ec1e72957faea14b0214fc3ebb4a8ca530c7b7afaa914dc28",
+    "cache/source_evidence/native_seob_phase_validation/RESULT.json": "106704c909943a3001dacba8fa6f393fd77a1081c550e47afa6f94de3ea4fba3",
+    "cache/source_evidence/native_internal_mesh_refinement/REGISTRATION.json": "182314fc0178e28d91a2e4ce031b8630430a8e4e73005da7f25d2ded51503262",
+    "cache/source_evidence/native_internal_mesh_refinement/RESULT.json": "e63ea3023e30245f70d02f08411d16a47f7a04417bc0a56edbdbd99acafb4f1d",
+    "cache/source_evidence/proposal_efficiency_diagnostic/REGISTRATION.json": "5114891072a37d8f01b4c4f37fe058850edbb3fa2666dd9a8228168607b4d920",
+    "cache/source_evidence/proposal_efficiency_diagnostic/RESULT.json": "5dc050c75b225edb18257ce4436b364cfaf6d34d716c07cbe13b9bfb3b10d4bc",
+    "cache/source_evidence/balanced_proposal_diagnostic/REGISTRATION.json": "14e07d4405203e9d05a210f162d33a9feaac6b2b3f6fb8b3014c3d42eb5a9488",
+    "cache/source_evidence/balanced_proposal_diagnostic/RESULT.json": "981ff3affc26a0953841dbe0b4c8404f03e68a16e47de74f486628ddcac5b68d",
+    "cache/source_evidence/phase_ringdown_balanced/PROPOSAL.json": "bce89a73bcbd5ff4c003d7032e066b27976cf67c7d119fd1cf8323d1591e663a",
+    "cache/source_evidence/phase_ringdown_balanced/REGISTRATION.json": "4c3464405e77139fa96198a7027e91256534fce6f80d2b7da7a09360262ed805",
+    "cache/source_evidence/phase_ringdown_balanced/PROPOSAL_ORACLE.json": "5d877d41a7a9393a7ff3f5698f24572ef7229fa247f65d6b0c3abce074d211f3",
+    "cache/source_evidence/phase_ringdown_balanced/IMRPhenomXPHM_seed130892_N16384/START.json": "31af068d5fe43da8dc27d3171df47188ab4c1b8459c35fb84d4b9bf73405cf6a",
+    "cache/source_evidence/phase_ringdown_balanced/IMRPhenomXPHM_seed130892_N16384/PROPOSALS.npz": "ac5074d31ea48466bda6f7fd85dfaa8f9d5a3dc1a9015e783bee3373fc05c322",
+    "cache/source_evidence/native_internal_mesh_refinement/integrals_131072_O4.npz": "430544b983bdd112b0659ec1716de6274827ca240333e665a643400f344ec1c7",
+    "cache/source_evidence/native_internal_mesh_refinement/integrals_131072_O5.npz": "772fc81deb9b9e6c693bef6c81411fa4569aa57f4f9cce37d68e5d6b6bb197bc",
+    "cache/source_evidence/native_internal_mesh_refinement/integrals_262144_O4.npz": "2b5f2f43deaff55e2f222522fc305f7ce22cbf22aa726d699fa7e3d30c221989",
+    "cache/source_evidence/native_internal_mesh_refinement/integrals_262144_O5.npz": "0a65dca3d1741616f4015234a5880c9916106e86a1cad98d46c7df2ac56e6c9d",
+    "cache/source_evidence/native_internal_mesh_refinement/integrals_524288_O4.npz": "555e2f8e25a643f27c77b7321d9f33a6919285cb6667fd526a9be25c6aee1d2a",
+    "cache/source_evidence/native_internal_mesh_refinement/integrals_524288_O5.npz": "a37db2f191479ed8de6d7429d3c000b861822117f7171226efa0d14474074b4b",
+    "cache/source_evidence/native_internal_mesh_refinement/raw_131072.npz": "86e19f882752f84226759e945ab7320cb6aa8a2d56e4cca92196e2b1fb3069b3",
+    "cache/source_evidence/native_internal_mesh_refinement/raw_262144.npz": "97ba8225b715a1681795ad7d65c6bacf798e0b3136d27027d28e1a9bbae4032e",
+    "cache/source_evidence/native_internal_mesh_refinement/raw_524288.npz": "2c2054868456678b4ba74667d22fc485cc58e74fc0b2faab0c98e7bd942b3ac2"
+  }
+}

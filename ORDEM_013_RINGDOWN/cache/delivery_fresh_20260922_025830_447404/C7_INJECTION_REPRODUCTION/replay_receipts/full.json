@@ -1,0 +1,85 @@
+{
+  "stage": "full",
+  "run": "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/C7_INJECTION_REPRODUCTION/cache/run_full_20260922_020759_269479/ORDEM_013_RINGDOWN",
+  "date_utc": "2026-09-22T02:08:06.372497+00:00",
+  "manifest_sha256": "fe81800c5f40ad0ea450e299d623920ddb4f572786db7f191cab23793b424b24",
+  "external_inputs": 2,
+  "reference_results_copied_as_inputs": false,
+  "commands": [
+    [
+      "prepare_imr_controls.py"
+    ],
+    [
+      "prepare_empirical_noise.py"
+    ],
+    [
+      "prepare_recolored_noise.py"
+    ],
+    [
+      "forecast_recolored_imr.py"
+    ],
+    [
+      "verify_recolored_forecast.py"
+    ]
+  ],
+  "status": "PASS",
+  "comparisons": [
+    {
+      "output": "C5_IMR_CONTROLS.json",
+      "numerical_leaves": 24,
+      "max_absolute_difference": 0.0,
+      "output_sha256": "a4214c275d2f110c5cf16014a136961f817acc451da2f1f9e29b071f93cb9e7a",
+      "checked_fields": [
+        "parameters",
+        "families"
+      ]
+    },
+    {
+      "output": "C5_EMPIRICAL_NOISE.json",
+      "numerical_leaves": 612,
+      "max_absolute_difference": 0.0,
+      "output_sha256": "72075dcae90165fd0885a7d7e4bd891846875133f2f93a358b18848b62c59bdf",
+      "checked_fields": [
+        "detectors"
+      ]
+    },
+    {
+      "output": "C5_RECOLORED_NOISE.json",
+      "numerical_leaves": 152,
+      "max_absolute_difference": 0,
+      "output_sha256": "088fe6927b17e8461df6a05c0d129da28654cf001e3833df24713cfe0d3ec477",
+      "checked_fields": [
+        "scenarios"
+      ]
+    },
+    {
+      "output": "C5_RECOLORED_FORECAST.json",
+      "numerical_leaves": 73412,
+      "max_absolute_difference": 0,
+      "output_sha256": "0825d9e83c57155496b552cb8e806c2245cc1f66dc86c27b4e68b3a551011a0c",
+      "checked_fields": [
+        "number_of_cells",
+        "low_frequency_controls",
+        "results"
+      ]
+    },
+    {
+      "output": "C5_RECOLORED_VALIDATION.json",
+      "numerical_leaves": 672,
+      "max_absolute_difference": 0.0,
+      "output_sha256": "cd4e58c2aecb3e374a3fdfcf5dd8877591db07e42a1b13e021cd1e7c18ce58a2",
+      "checked_fields": [
+        "independent_SVD_controls",
+        "continuous_profile_refinement",
+        "noise_only_prior_volume"
+      ]
+    }
+  ],
+  "tolerance": {
+    "relative": 2e-07,
+    "absolute": 1e-10
+  },
+  "numpy_version": "2.5.3",
+  "scipy_version": "1.18.1",
+  "h5py_version": "3.16.0"
+}

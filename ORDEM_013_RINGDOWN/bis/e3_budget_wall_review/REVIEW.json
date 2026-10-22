@@ -1,0 +1,1582 @@
+{
+  "status": "FINITE_B3_STATIC_REVIEW_CHANGES_REQUIRED_NO_EXECUTION",
+  "created_utc": "2026-09-22T23:12:42.336688+00:00",
+  "reviewed_delivery_sha256": "31c280db92835bf5199202c62019f77324a301b5a27f6fb6c9452b4c0874f6e9",
+  "findings": [
+    {
+      "id": "B3-R1",
+      "severity": "P1_DEPENDENCY_BEFORE_ACTIVATION",
+      "source": "refeito/activate_wall_budget_013bis.py:47; bis/e2_code/registration_guard.py:157,196",
+      "issue": "Activation witness draft has prose but omits exact allocation_sha256: and registered_utc: lines required by frozen check_witness. Receipt alone does not make load_jobs accept it.",
+      "proposed_fix": "Before activation, append exactly one machine hash line for the active budget bytes and one registered UTC line. Test those regexes against a finite mock witness; do not change guard. This review does not execute or activate anything."
+    },
+    {
+      "id": "B3-R2",
+      "severity": "P2_PIN_AND_ACTIVATION_PREFLIGHT",
+      "source": "refeito/deliver_b3_wall_013bis.py:20-29,107",
+      "issue": "Before first output the delivery checks only budget hash and review approved flag. It neither validates complete activation receipt/witness/parent/candidate bindings nor compares COMPARISON to the independently reviewed Kerr pin. Later listing hashes records current bytes but does not enforce reviewed identity.",
+      "proposed_fix": "Preflight all named sources and destinations before new(fiche): activation status and parent/candidate/review/witness pins; approved review candidate binding; Kerr review hash and its input_hashes COMPARISON pin; empty new jobs/counts and bounded reserve. No scientific imports required. Use a snapshot of verified bytes for rendering."
+    }
+  ],
+  "editorial_notes": [
+    {
+      "id": "B3-N1",
+      "source": "refeito/deliver_b3_wall_013bis.py:42-51",
+      "text": "Print mass_frame explicitly: Mf detector-frame Msun, af dimensionless. Replace razão de larguras by diferença de medianas dividida pela largura em quadratura."
+    },
+    {
+      "id": "B3-N2",
+      "source": "refeito/deliver_b3_wall_013bis.py:51",
+      "text": "A revisão conferiu os dados completos is too broad: B checked complete posterior samples and metadata/pins, not strain bytes or reconstructed covariance. Say posteriores completos e metadados/pins no escopo do parecer."
+    },
+    {
+      "id": "B3-N3",
+      "source": "refeito/deliver_b3_wall_013bis.py:98",
+      "text": "Cost totals agree. Add separate Welch diagnostic3.402371976s if claiming complete itemized E3 costs; otherwise explicitly say its receipt is in budget. Do not add launcher/runner totals twice."
+    },
+    {
+      "id": "B3-N4",
+      "source": "refeito/deliver_b3_wall_013bis.py:101-103",
+      "text": "Commands shown contain ellipses or omit actual WSL/Python prefix; label as abbreviated locators rather than exact replay commands. No rerun authorized by reproduction prose."
+    }
+  ],
+  "checks": [
+    {
+      "name": "scripts_parse_without_execution",
+      "passed": true
+    },
+    {
+      "name": "candidate_zero_PE_and_injections",
+      "passed": true
+    },
+    {
+      "name": "cost_unknown_not_zero",
+      "passed": true
+    },
+    {
+      "name": "five_alternatives",
+      "passed": true
+    },
+    {
+      "name": "14_10_4",
+      "passed": true
+    },
+    {
+      "name": "ten_Ncalib_readings",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-B0.0497",
+      "passed": true
+    },
+    {
+      "name": "ceil R-B0.0497",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-B0.0497",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-B0.058",
+      "passed": true
+    },
+    {
+      "name": "ceil R-B0.058",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-B0.058",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-B0.24",
+      "passed": true
+    },
+    {
+      "name": "ceil R-B0.24",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-B0.24",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-MOD0.0497",
+      "passed": true
+    },
+    {
+      "name": "ceil R-MOD0.0497",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-MOD0.0497",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-MOD0.058",
+      "passed": true
+    },
+    {
+      "name": "ceil R-MOD0.058",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-MOD0.058",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-MOD0.24",
+      "passed": true
+    },
+    {
+      "name": "ceil R-MOD0.24",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-MOD0.24",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-RAIZ-00.0497",
+      "passed": true
+    },
+    {
+      "name": "ceil R-RAIZ-00.0497",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-RAIZ-00.0497",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-RAIZ-00.058",
+      "passed": true
+    },
+    {
+      "name": "ceil R-RAIZ-00.058",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-RAIZ-00.058",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-RAIZ-00.24",
+      "passed": true
+    },
+    {
+      "name": "ceil R-RAIZ-00.24",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-RAIZ-00.24",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-LIN0.0497",
+      "passed": true
+    },
+    {
+      "name": "ceil R-LIN0.0497",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-LIN0.0497",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-LIN0.058",
+      "passed": true
+    },
+    {
+      "name": "ceil R-LIN0.058",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-LIN0.058",
+      "passed": true
+    },
+    {
+      "name": "Ncalc R-LIN0.24",
+      "passed": true
+    },
+    {
+      "name": "ceil R-LIN0.24",
+      "passed": true
+    },
+    {
+      "name": "ten cells R-LIN0.24",
+      "passed": true
+    },
+    {
+      "name": "median difference Mf",
+      "passed": true
+    },
+    {
+      "name": "descriptive normalized difference Mf",
+      "passed": true
+    },
+    {
+      "name": "90 overlap Mf",
+      "passed": true
+    },
+    {
+      "name": "median difference af",
+      "passed": true
+    },
+    {
+      "name": "descriptive normalized difference af",
+      "passed": true
+    },
+    {
+      "name": "90 overlap af",
+      "passed": true
+    },
+    {
+      "name": "comparison pin in independent Kerr review",
+      "passed": true
+    },
+    {
+      "name": "Kerr accepted scope",
+      "passed": true
+    },
+    {
+      "name": "samples/ESS/ncall",
+      "passed": true
+    },
+    {
+      "name": "Kerr wall",
+      "passed": true
+    },
+    {
+      "name": "Kerr CPU",
+      "passed": true
+    },
+    {
+      "name": "pilot exact controller",
+      "passed": true
+    },
+    {
+      "name": "295_receipt_rows",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_0",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_1",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_2",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_3",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_4",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_5",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_6",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_7",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_8",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_9",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_10",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_11",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_12",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_13",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_14",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_15",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_16",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_17",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_18",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_19",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_20",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_21",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_22",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_23",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_24",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_25",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_26",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_27",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_28",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_29",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_30",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_31",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_32",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_33",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_34",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_35",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_36",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_37",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_38",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_39",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_40",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_41",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_42",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_43",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_44",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_45",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_46",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_47",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_48",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_49",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_50",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_51",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_52",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_53",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_54",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_55",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_56",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_57",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_58",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_59",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_60",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_61",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_62",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_63",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_64",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_65",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_66",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_67",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_68",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_69",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_70",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_71",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_72",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_73",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_74",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_75",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_76",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_77",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_78",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_79",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_80",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_81",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_82",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_83",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_84",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_85",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_86",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_87",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_88",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_89",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_90",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_91",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_92",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_93",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_94",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_95",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_96",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_97",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_98",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_99",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_100",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_101",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_102",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_103",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_104",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_105",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_106",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_107",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_108",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_109",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_110",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_111",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_112",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_113",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_114",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_115",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_116",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_117",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_118",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_119",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_120",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_121",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_122",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_123",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_124",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_125",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_126",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_127",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_128",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_129",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_130",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_131",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_132",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_133",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_134",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_135",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_136",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_137",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_138",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_139",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_140",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_141",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_142",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_143",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_144",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_145",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_146",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_147",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_148",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_149",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_150",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_151",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_152",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_153",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_154",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_155",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_156",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_157",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_158",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_159",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_160",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_161",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_162",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_163",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_164",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_165",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_166",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_167",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_168",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_169",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_170",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_171",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_172",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_173",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_174",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_175",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_176",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_177",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_178",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_179",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_180",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_181",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_182",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_183",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_184",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_185",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_186",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_187",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_188",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_189",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_190",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_191",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_192",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_193",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_194",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_195",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_196",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_197",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_198",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_199",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_200",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_201",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_202",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_203",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_204",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_205",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_206",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_207",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_208",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_209",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_210",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_211",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_212",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_213",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_214",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_215",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_216",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_217",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_218",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_219",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_220",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_221",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_222",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_223",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_224",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_225",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_226",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_227",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_228",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_229",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_230",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_231",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_232",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_233",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_234",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_235",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_236",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_237",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_238",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_239",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_240",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_241",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_242",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_243",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_244",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_245",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_246",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_247",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_248",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_249",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_250",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_251",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_252",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_253",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_254",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_255",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_256",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_257",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_258",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_259",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_260",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_261",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_262",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_263",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_264",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_265",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_266",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_267",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_268",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_269",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_270",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_271",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_272",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_273",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_274",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_275",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_276",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_277",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_278",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_279",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_280",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_281",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_282",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_283",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_284",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_285",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_286",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_287",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_288",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_289",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_290",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_291",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_292",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_293",
+      "passed": true
+    },
+    {
+      "name": "reported_hash_equality_294",
+      "passed": true
+    },
+    {
+      "name": "size_layout_metadata_only",
+      "passed": true
+    },
+    {
+      "name": "one_metadata_exception",
+      "passed": true
+    },
+    {
+      "name": "fixture_prior_review",
+      "passed": true
+    },
+    {
+      "name": "same_negative_fixture_path",
+      "passed": true
+    },
+    {
+      "name": "readlink_target_inside_fixture_lexically",
+      "passed": true
+    },
+    {
+      "name": "witness_pattern_missing_in_draft",
+      "passed": true
+    }
+  ],
+  "check_count": 356,
+  "counts_058": [
+    {
+      "reading": "R-B",
+      "N_cell": 214,
+      "N_ten": 2140
+    },
+    {
+      "reading": "R-MOD",
+      "N_cell": 62,
+      "N_ten": 620
+    },
+    {
+      "reading": "R-RAIZ-0",
+      "N_cell": 62,
+      "N_ten": 620
+    },
+    {
+      "reading": "R-LIN",
+      "N_cell": 17,
+      "N_ten": 170
+    }
+  ],
+  "integrity_receipt_counts": {
+    "inputs": 217,
+    "sources": 31,
+    "delivered_part_A": 47
+  },
+  "integrity_scope": "Receipt internal consistency checked;295 original files NOT reread/rehashed by this review.",
+  "symlink": {
+    "command": [
+      "wsl.exe",
+      "--exec",
+      "readlink",
+      "--",
+      "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_allocation_review/fixtures_001/finding_symlink_output_escape/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_allocation_prepare/candidates"
+    ],
+    "returncode": 0,
+    "stdout": "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_allocation_review/fixtures_001/finding_symlink_output_escape/escaped_sidecar\n",
+    "evidence": "Executed once via exec tool during this review; only symlink text read. No readlink -f, target enumeration or target contents.",
+    "classification": "KNOWN_NEGATIVE_FIXTURE_WSL_SYMLINK_METADATA_EXCEPTION",
+    "scope": "Metadata exception explained, not an integrity hash failure of the295 named files and not blanket integrity proof of its target."
+  },
+  "witness_mock": {
+    "hash": [],
+    "date": []
+  },
+  "source_pins": {
+    "refeito/deliver_b3_wall_013bis.py": {
+      "sha256": "31c280db92835bf5199202c62019f77324a301b5a27f6fb6c9452b4c0874f6e9",
+      "bytes": 11603
+    },
+    "refeito/activate_wall_budget_013bis.py": {
+      "sha256": "69c2976e643369a6d65570029f3274f79c57eb80cb6cbfdc1e9553dfa2a5415e",
+      "bytes": 4207
+    },
+    "bis/e2_code/registration_guard.py": {
+      "sha256": "3cb2d9ef0672ccdf9bbca8547102b9a1323ea9d51bbc780732bb78bad99b40d7",
+      "bytes": 15710
+    },
+    "bis/e3_budget_wall/ORCAMENTO_40H_CANDIDATE.json": {
+      "sha256": "e7d4ed6004289c91978ffe49f4478da56dcae492c49646118abf8b693c1e7036",
+      "bytes": 126184
+    },
+    "cache/E3_KERR220_CALIBRATION_V2/public_psd/COMPARISON.json": {
+      "sha256": "39e0073a17aa9236420cf93232786f5a289593359aa40e1c01103474c1821efb",
+      "bytes": 3636
+    },
+    "bis/e3_pyring_review/KERR_V2_POST_RESULT_REVIEW.json": {
+      "sha256": "0e92967fd6f228ad2e6bc003b0ed8a67a994a6fdc6d660013e99c66a686248c7",
+      "bytes": 2190412
+    },
+    "cache/E3_KERR220_CALIBRATION_V1/COST.json": {
+      "sha256": "e96a7fd06856c68c292291adcce7f7b2304ac2ce729324bfe4117802401dd50a",
+      "bytes": 934
+    },
+    "cache/E3_KERR220_CALIBRATION_V2/COST.json": {
+      "sha256": "80f25a146f817af4f276fd497e801a02a7764bb5ee2a833c7539f5d48200c97d",
+      "bytes": 684
+    },
+    "cache/E3_PSEOB_PILOT_V1/CONTROLLER.json": {
+      "sha256": "bf3f874342d15c4d7687380baf52710237dab7a67fb4ffc0a759a3f59506d72b",
+      "bytes": 828
+    },
+    "bis/FINAL_INTEGRITY_20260922T230100445220Z.json": {
+      "sha256": "35df54303d0fb07e87ddcf0ad0e6c597749f856e9fb50cb6531a7025a18ae9da",
+      "bytes": 123701
+    },
+    "bis/e3_allocation_review/FIXTURE_RESULTS_001.json": {
+      "sha256": "abfd1af130231811a200c302928da99ba29697eca79c51cd174a7fa6a0b280a0",
+      "bytes": 6419
+    },
+    "bis/e3_allocation_review/audit_fixtures.py": {
+      "sha256": "b2d0f175d4d5047e6f108dcaf6fad07e36f3abbba0cfae141af2e7c31819d871",
+      "bytes": 16343
+    },
+    "bis/e3_allocation_review/INDEPENDENT_ALLOCATION_REVIEW_V1.md": {
+      "sha256": "dfb23f0fb25bb3f906473a93586a9c34bfb26f8bba8896bf7cc23f03583d1e84",
+      "bytes": 9909
+    },
+    "bis/e3_allocation_review/BOUNDARY_ADDENDUM_001.json": {
+      "sha256": "f64d4cbcadeb551141f9d4dbef8a70bba3b33d618882c167ae5d5bc44024a009",
+      "bytes": 1158
+    }
+  },
+  "execution": {
+    "delivery": false,
+    "activation": false,
+    "scientific": false,
+    "strain_or_posterior_payload": false,
+    "symlink_target_contents": false
+  },
+  "scope": "Budget builder authored by this agent; this is review of the main delivery source and metadata, not independent approval of its own budget. B supplies that independent budget review."
+}

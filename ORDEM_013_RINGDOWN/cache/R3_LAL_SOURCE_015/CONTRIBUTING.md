@@ -1,0 +1,430 @@
+# Contributing to LALSuite
+
+This page outlines the recommended procedure for contributing changes to the
+LALSuite repository. Please read the [IGWN Computing Guide to
+GitLab][compguidegit] before you start.
+
+[[_TOC_]]
+
+## Building LALSuite
+
+Please see [here][buildfromsrc] for instructions on building LALSuite from source.
+
+## Contributing Code
+
+All contributions to LALSuite code must be made using the fork and [merge
+request][mergerequests] [workflow][forkworkflow], which must then be reviewed by
+one of the project maintainers.
+
+If you wish to contribute new code, or changes to existing code, please follow
+this development workflow:
+
+### Configure Git
+
+You should first ensure that Git is correctly configured on your machine. In
+particular, you should set your name and email address; these will appear on any
+commits made to the LALSuite repository. To do this, run these commands:
+
+1. ```
+   git config --global user.name "..."
+   ```
+
+   where `...` is replaced with your name (i.e. your human name, not your
+   computer user/login name).
+
+1. ```
+   git config --global user.email "..."
+   ```
+
+   where `...` is replaced with your email address, preferably a `@ligo.org`
+   address if you have one.
+
+You only need to do this **once for every machine** you will use to develop
+LALSuite.
+
+For a complete guide to configuring Git for the first time, see
+[here][gitsetup].
+
+### Make a fork (copy) of LALSuite
+
+You only need to do this **once**.
+
+1. Go to the [LALSuite repository home page][lalsuiterepo].
+
+1. Click on the *Fork* button, that should lead you [here][lalsuiteforks].
+
+1. Select the namespace that you want to create the fork in, this will usually
+   be your personal namespace.
+
+If you can't see the *Fork* button, make sure that you are logged in by checking
+for your account profile photo in the top right-hand corner of the screen.
+
+### Clone your fork
+
+Make sure that you have installed and configured [Git-LFS][gitlfs]:
+
+```
+git lfs install
+```
+
+for the management of large files. This is required to successfully build and
+install your development fork.
+
+Then, clone your fork with
+
+```
+git clone git@git.ligo.org:<namespace>/lalsuite.git
+```
+
+### Installing pre-commit hooks
+
+LALSuite uses pre-commit hooks to check/fix a variety of code quality issues.
+These are run by the [`pre-commit`][precommit] tool, which can be installed
+using `conda`, `pip`, etc. Once `pre-commit` is installed, it must be
+configured:
+
+```
+cd lalsuite
+pre-commit install
+```
+
+You only need to do this **once**.
+
+The pre-commit hooks are run every time a new commit is made. If any code
+quality issues are identified, these will usually be fixed automatically, but
+you will need to include the extra changes in the commit e.g. using `git
+add`. Once all code quality issues are resolved, the new commit will be created.
+
+### Keeping your fork up to date
+
+Link your clone to the main (`upstream`) repository so that you can `fetch` and
+`pull` changes, `merge` them with your clone, and `push` them to your fork. Do
+*not* make changes on your master branch.
+
+1. Link your fork to the main repository:
+
+    ```
+    cd lalsuite
+    git remote add upstream git@git.ligo.org:lscsoft/lalsuite.git
+    ```
+
+   You only need to do this **once**.
+
+1. Update your `master` branch to track changes from upstream:
+
+    ```
+    git checkout master
+    git fetch upstream
+    git branch --set-upstream-to upstream/master
+    git pull
+    ```
+
+   You only need to do this **once**.
+
+1. Fetch new changes from the `upstream` repository, merge them with your master
+   branch, and push them to your fork on `git.ligo.org`:
+
+    ```
+    git checkout master
+    git pull
+    git push origin master
+    ```
+
+1. You can see which remotes are configured using
+
+   ```
+   git remote -v
+   ```
+
+   If you have followed the instructions thus far, you should see four
+   lines. Lines one and two begin with `origin` and reference your fork on
+   `git.ligo.org` with both `fetch` and `push` methods. Lines three and four
+   begin with `upstream` and refer to the main repository on `git.ligo.org` with
+   both `fetch` and `push` methods.
+
+### Making changes
+
+All changes should be developed on a feature branch in order to keep them
+separate from other work, thus simplifying the review and merge once the work is
+complete. The workflow is:
+
+1. Create a new feature branch configured to track the `master` branch:
+
+   ```
+   git checkout master
+   git pull
+   git checkout -b my-new-feature upstream/master
+   ```
+
+   This command creates the new branch `my-new-feature`, sets up tracking the
+   `upstream` repository, and checks out the new branch. There are other ways to
+   do these steps, but this is a good habit since it will allow you to `fetch`
+   and `merge` changes from `upstream/master` directly onto the branch.
+
+1. Develop the changes you would like to introduce, using `git commit` to
+   finalise a specific change. Ideally commit small units of change often,
+   rather than creating one large commit at the end, this will simplify review
+   and make modifying any changes easier.
+
+   Commit messages should be clear, identifying which code was changed, and
+   why. Common practice is to use a short summary line (<50 characters),
+   followed by a blank line, then more information in longer lines.
+
+1. Push your changes to the remote copy of your fork on `git.ligo.org`. The
+   first `push` of any new feature branch will require the `-u/--set-upstream`
+   option to `push` to create a link between your new branch and the `origin`
+   remote:
+
+    ```
+    git push --set-upstream origin my-new-feature
+    ```
+
+    Subsequent pushes can be made with just:
+
+    ```
+    git push
+    ```
+
+1. Keep your feature branch up to date with the `upstream` repository by doing:
+
+   ```
+   git checkout master
+   git pull
+   git checkout my-new-feature
+   git rebase upstream/master
+   git push -f origin my-new-feature
+   ```
+
+   This works if you created your branch with the `checkout` command above. If
+   you forgot to add the `upstream/master` starting point, then you will need to
+   dig deeper into git commands to get changes and merge them into your feature
+   branch.
+
+   If there are conflicts between `upstream` changes and your changes, you will
+   need to resolve them before pushing everything to your fork.
+
+### Open a merge request
+
+When you feel that your work is finished, you should create a merge request to
+propose that your changes be merged into the main (`upstream`) repository.
+
+After you have pushed your new feature branch to `origin`, you should find a new
+button on the [LALSuite repository home page][lalsuiterepo] inviting you to
+create a merge request out of your newly pushed branch. (If the button does not
+exist, you can initiate a merge request by going to the `Merge Requests` tab on
+your fork website on `git.ligo.org` and clicking `New merge request`)
+
+You should click the button, and proceed to fill in the title and description
+boxes on the merge request page:
+
+- Please provide a descriptive title for the merge request.
+
+- In the **Detailed Description** section of the description box, please provide
+  a detailed description of the changes, why they are being made, etc. Also
+  indicate appropriate tickets and tests that have been run to determine that
+  the changes work as intended and do not introduce other problems.
+
+- In the **API Changes** section of the description box, please tick one of the
+  following checkboxes:
+
+  - *These changes do not modify the API*. Examples of such changes are:
+    - C code:
+      - No changes to a public C header (i.e. any `.h` header which is installed
+        in `include/lal`).
+
+    - Python code:
+
+      - No changes to the arguments of a function/class method which is public
+        (i.e. its name is not preceded by an `_`).
+
+      - No new public functions/class methods.
+
+      - No new classes/modules.
+
+  - *These changes are backwards compatible*. Examples of such changes are:
+
+    - C code:
+
+      - Adding a new type/struct/function to a public C header.
+
+    - Python code:
+
+      - Adding a new optional argument to an existing public function/class
+        method, which does not change behaviour if the default value is used.
+
+      - Adding a new public function/class method.
+
+      - Adding a new class/module.
+
+  - *These changes are backwards incompatible*. Examples of such changes are:
+
+    - C code:
+
+      - Modifying an existing type/struct/function in a public C header.
+
+      - Removing or renaming an existing type/struct/function from a public C
+        header.
+
+    - Python code:
+
+      - Adding a new positional (i.e. non-optional) argument to an existing
+        public function/class method.
+
+      - Removing or renaming arguments (even optional ones) of an existing
+        public function/class method.
+
+      - Changing the return values of an existing public function/class method.
+
+      - Removing or renaming an existing public function/class method.
+
+      - Removing or renaming a class/module.
+
+- If you checked the *These changes are backwards incompatible* checkbox:
+
+  - In the **Justification for Backwards Incompatible Changes** section of the
+    description box, please provide a justification for why these changes are
+    necessary and why they need to be done in a backwards incompatible way.
+
+- In the **Review Status** section of the description box, please provide
+  details on any reviews related to these changes and the associated reviewers.
+
+- It is recommended that you check the box to *Remove source branch when merge
+  request is accepted*; this will result in the branch being automatically
+  removed from your fork when the merge request is accepted.
+
+Once the request has been opened, one of the maintainers will assign someone to
+review the change. There may be suggestions and/or discussion with the
+reviewer. These interactions are intended to make the resulting changes
+better. The reviewer will merge your request.
+
+Once the changes are merged into the upstream repository, you should remove the
+development branch from your clone using
+
+```
+git branch -d my-new-feature
+```
+
+A feature branch should *not* be repurposed for further development as this can
+result in problems merging upstream changes.
+
+### Continuous integration
+
+GitLab runs continuous integration (CI) pipelines on LALSuite to ensure that it
+builds and passes its test suite on a wide variety of platforms. The two CI
+pipelines of interest to developers are:
+
+1. The *push* CI pipeline runs whenever you push commit(s) to your LALSuite
+   fork. This pipeline performs some basic checks that LALSuite still builds and
+   passes its tests with your changes:
+
+   - each component LALSuite package can be build and installed in sequence (the
+     so-called *package-level build*);
+
+   - LALSuite can build all component packages at once (the so-called *top-level
+     build*);
+
+   - the LALSuite [Doxygen][doxygen] documentation can be built;
+
+   - some basic checks for code style/formatting/whitespace errors, build
+     byproduct files missing from `.gitignore`, etc.
+
+1. The *merge* CI pipeline runs when you are ready to submit your changes to the
+   upstream LALSuite fork via a merge request. This pipeline runs a much more
+   comprehensive series of checks that LALSuite still builds and passes its
+   tests with a wide variety of platforms (MacOS, various Linux distributions)
+   and compilers (`clang`, `gcc`). It also checks that LALSuite packages for a
+   number of package management systems (RPM, Debian, CUDA, Conda, Python
+   wheels) are built correctly.
+
+To trigger the *merge* CI pipeline from a regular commit push (in place of the
+*push* pipeline), you can add the special text `[ci merge]` to the commit
+message. For complicated developments, this is recommended as a check that your
+changes pass the *merge* CI pipeline before opening the merge request.
+
+For reference, the following table gives the complete list of CI pipelines and
+how to trigger then:
+
+<table>
+    <thead>
+        <tr>
+            <th>Pipeline</th>
+            <th>Triggers</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Build and test Docker development images</td>
+            <td>
+                Commit message: <code>[ci sched devimg]</code><br/>
+                OR<br/>
+                Schedule variable: <code>LCI_PIPE_TYPE=sched-devimg</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Build snapshot Docker images and wheels</td>
+            <td>
+                Commit message: <code>[ci sched snapshot]</code><br/>
+                OR<br/>
+                Schedule variable: <code>LCI_PIPE_TYPE=sched-snapshot</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Build and deploy Doxygen documentation</td>
+            <td>
+                Commit message: <code>[ci sched doc]</code><br/>
+                OR<br/>
+                Schedule variable: <code>LCI_PIPE_TYPE=sched-doc</code>
+            </td>
+        </tr>
+        <tr>
+            <td>LALSuite release tag</td>
+            <td>
+                Branch name matches: <code>/^release/</code><br/>
+                Branch location: <code>lscsoft/lalsuite</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Merge request</td>
+            <td>
+                Commit message: <code>[ci merge]</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Post-merge request tasks</td>
+            <td>
+                Commit message: <code>[ci postmerge]</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Debug jobs that track API changes</td>
+            <td>
+                Commit message: <code>[ci debug api]</code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+## More Information
+
+* The LALSuite GitLab [wiki][lalsuitewiki] has a list of frequently asked
+  questions.
+
+* The main GitLab [documentation][githelp] contains further information
+  regarding the usage of GitLab.
+
+[buildfromsrc]:     https://git.ligo.org/lscsoft/lalsuite/-/wikis/BUILD
+[compguidegit]:     https://computing.docs.ligo.org/guide/gitlab/
+[doxygen]:          https://doxygen.nl
+[forkworkflow]:     https://git.ligo.org/help/user/project/repository/forking_workflow.html
+[githelp]:          https://git.ligo.org/help
+[gitlfs]:           https://wiki.ligo.org/Computing/GitLFS
+[gitsetup]:         https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+[helpdesk]:         mailto:contact+lscsoft-lalsuite-1438-issue-@support.ligo.org
+[lalsuitedocs]:     https://docs.ligo.org/lscsoft/lalsuite
+[lalsuiteforks]:    https://git.ligo.org/lscsoft/lalsuite/-/forks/new
+[lalsuiterepo]:     https://git.ligo.org/lscsoft/lalsuite
+[lalsuitewiki]:     https://git.ligo.org/lscsoft/lalsuite/-/wikis/home
+[mergerequests]:    https://git.ligo.org/help/user/project/merge_requests/index.html
+[precommit]:        https://pre-commit.com/
+[prettyastyle]:     https://astyle.sourceforge.net/
+[prettyblack]:      https://black.readthedocs.io/en/stable/

@@ -1,0 +1,172 @@
+{
+  "status": "SOURCE_IMPLEMENTATION_READ__LEGACY_BINARY_VERSION_UNAVAILABLE",
+  "date_utc": "2026-09-22T02:26:16.106708+00:00",
+  "sources": [
+    {
+      "path": "cache/literature/gwtc3_source/LALInferenceInitCBC_7_26.html",
+      "url": "https://lscsoft.docs.ligo.org/lalsuite/7.26/lalinference/_l_a_l_inference_init_c_b_c_8c_source.html",
+      "bytes": 784970,
+      "sha256": "29a698bdcda0e1f58269f3163b92b98991c8e992e4ed5c2733e53c38fee825a2",
+      "inspected_lines": [
+        {
+          "source_line": 662,
+          "text": "void LALInferenceRegisterUniformVariableREAL8(LALInferenceRunState *state, LALInferenceVariables *var, const char *name, REAL8 startval, REAL8 min, REAL8 max, LALInferenceParamVaryType varytype)"
+        },
+        {
+          "source_line": 663,
+          "text": "{"
+        },
+        {
+          "source_line": 664,
+          "text": "char minopt[VARNAME_MAX+7];"
+        },
+        {
+          "source_line": 665,
+          "text": "char maxopt[VARNAME_MAX+7];"
+        },
+        {
+          "source_line": 666,
+          "text": "char valopt[VARNAME_MAX+3];"
+        },
+        {
+          "source_line": 667,
+          "text": "char fixopt[VARNAME_MAX+7];"
+        },
+        {
+          "source_line": 668,
+          "text": "ProcessParamsTable *ppt=NULL;"
+        },
+        {
+          "source_line": 669,
+          "text": ""
+        },
+        {
+          "source_line": 670,
+          "text": "sprintf(minopt,\"--%s-min\",name);"
+        },
+        {
+          "source_line": 671,
+          "text": "sprintf(maxopt,\"--%s-max\",name);"
+        },
+        {
+          "source_line": 672,
+          "text": "sprintf(valopt,\"--%s\",name);"
+        },
+        {
+          "source_line": 673,
+          "text": "sprintf(fixopt,\"--fix-%s\",name);"
+        },
+        {
+          "source_line": 674,
+          "text": ""
+        },
+        {
+          "source_line": 675,
+          "text": "if((ppt=LALInferenceGetProcParamVal(state->commandLine,minopt))) min=atof(ppt->value);"
+        },
+        {
+          "source_line": 676,
+          "text": "if((ppt=LALInferenceGetProcParamVal(state->commandLine,maxopt))) max=atof(ppt->value);"
+        },
+        {
+          "source_line": 677,
+          "text": "if((ppt=LALInferenceGetProcParamVal(state->commandLine,fixopt))) {"
+        },
+        {
+          "source_line": 678,
+          "text": "varytype=LALINFERENCE_PARAM_FIXED;"
+        },
+        {
+          "source_line": 679,
+          "text": "startval=atof(ppt->value);"
+        },
+        {
+          "source_line": 680,
+          "text": "}"
+        },
+        {
+          "source_line": 681,
+          "text": "if((ppt=LALInferenceGetProcParamVal(state->commandLine,valopt))) startval=atof(ppt->value);"
+        },
+        {
+          "source_line": 682,
+          "text": "else if(varytype!=LALINFERENCE_PARAM_FIXED) startval=min+(max-min)*gsl_rng_uniform(state->GSLrandom);"
+        },
+        {
+          "source_line": 715,
+          "text": ""
+        },
+        {
+          "source_line": 716,
+          "text": "LALInferenceAddVariable(var,name,&startval,LALINFERENCE_REAL8_t,varytype);"
+        },
+        {
+          "source_line": 717,
+          "text": "LALInferenceAddMinMaxPrior(state->priorArgs, name, &min, &max, LALINFERENCE_REAL8_t);"
+        },
+        {
+          "source_line": 718,
+          "text": ""
+        },
+        {
+          "source_line": 719,
+          "text": "}"
+        },
+        {
+          "source_line": 720,
+          "text": ""
+        },
+        {
+          "source_line": 721,
+          "text": ""
+        },
+        {
+          "source_line": 722,
+          "text": "/* Setup the variables to control template generation for the CBC model */"
+        },
+        {
+          "source_line": 2558,
+          "text": "/* Relative shifts for ringdown frequencies and inverse damping times (SEOBNRv4HM) */"
+        },
+        {
+          "source_line": 2559,
+          "text": "if (checkParamInList(ppt->value,\"domega220\")) LALInferenceRegisterUniformVariableREAL8(state, model->params, \"domega220\", tmpVal, domega_min, domega_max, LALINFERENCE_PARAM_LINEAR);"
+        },
+        {
+          "source_line": 2560,
+          "text": "if (checkParamInList(ppt->value,\"dtau220\")) LALInferenceRegisterUniformVariableREAL8(state, model->params, \"dtau220\", tmpVal, dtau_min, dtau_max, LALINFERENCE_PARAM_LINEAR);"
+        }
+      ]
+    },
+    {
+      "path": "cache/literature/gwtc3_source/LALSimIMREOBHybridRingdown.html",
+      "url": "https://lscsoft.docs.ligo.org/lalsuite/7.26/lalsimulation/_l_a_l_sim_i_m_r_e_o_b_hybrid_ringdown_8c_source.html",
+      "bytes": 438905,
+      "sha256": "248ac641300a0416eeb557b2d54c0bc66ab1989f8c44b6d14eac7e7112b436ba",
+      "inspected_lines": [
+        {
+          "source_line": 1071,
+          "text": "if (( l == 2 ) && (m == 2)){"
+        },
+        {
+          "source_line": 1072,
+          "text": "modefreqs->data[0] = creal(modefreqs->data[0])*(1. + domega220) + I*cimag(modefreqs->data[0])/(1. + dtau220);"
+        },
+        {
+          "source_line": 1073,
+          "text": "}"
+        }
+      ]
+    }
+  ],
+  "assertions": {
+    "frequency": "Re(omega) multiplied by 1+domega220",
+    "damping": "Im(omega) divided by 1+dtau220: dtau is fractional damping TIME, not fractional rate",
+    "prior": "Independent uniform parameter registrations; --name-min/--name-max override default bounds",
+    "ratio": "For points/curves inside each released rectangular support, the deformation-prior density ratio is one under this convention"
+  },
+  "release_files": 18,
+  "limitation": "Later source documentation and released configs do not prove the precise original binary/postprocessing fit version; numerical ratios retain this conditional assumption",
+  "correction": "The unversioned URL in C4_GWTC3_220.json returned 404. The versioned source URLs above were obtained, saved, hashed and inspected. No numerical result was changed.",
+  "misleading_source_comment": "The InitCBC comment says inverse damping times; the waveform implementation determines the fractional TIME convention"
+}

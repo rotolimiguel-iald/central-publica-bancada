@@ -1,0 +1,136 @@
+{
+  "status": "DOCUMENTARY_SCENARIOS_NOT_MEASURED_FORECAST",
+  "as_of_utc": "2026-09-22T19:24:01.438609+00:00",
+  "part_b_budget": {
+    "status": "PART_B_STARTED__NO_BLIND_DATA_AUTHORIZED_BEFORE_E2",
+    "started_utc": "2026-09-22T19:06:33.802143+00:00",
+    "hard_deadline_utc": "2026-09-24T11:06:33.802143+00:00",
+    "authorized_wall_hours": 40,
+    "accounting": "Conservative continuous wall time from this receipt, including orchestration and reviews; simultaneous workers count once. Part A and diagnostic jobs started before this receipt excluded as jobs, but overlapping elapsed wall time is still charged.",
+    "initial_envelope_hours": {
+      "E0_E1_existing_data": 2,
+      "E2_E5_E4_registration_and_light_controls": 2,
+      "E3_1_pilot_maximum": 10,
+      "E3_2_E3_3_calibration_and_blind_events_reserve": 24,
+      "test_E6_E7_final": 2
+    },
+    "allocation_scope": "Provisional upper bounds before any Part B compute; E3.2 replaces reserves using actual pilot cost, without extending the fixed deadline. No guarantee to consume all budget.",
+    "old_jobs_policy": "No heavy job before E3.1 termination of own old groups; lightweight existing-data calculations only meanwhile.",
+    "blind_gate": "E2 registered hash and tunnel witness required before PE of blind events or reading posterior published after 2026-09-22.",
+    "ma_sha256": "1e1b31226ddbc211f7a751c4add712d4deeeb99939d5b74c87b45e6d3d3fcbf4",
+    "part_a_manifest_sha256": "a4fe6be99038dcd8ef832303d237673ef2edaef69a7a76567180c223a3dfbcf0",
+    "opening_sha256": "0118a54b7a806a0a5ef5572afc8349c223cc3da4bec62ff18a9cd1b07433f9f0",
+    "code_sha256": "805fd5808a427413e9eac67d02ab37d1cd998069581b405031fb8715e014b6a2"
+  },
+  "o5_gain": {
+    "bbh_range_ratio": [
+      1.5625,
+      1.7857142857142858
+    ],
+    "bns_range_ratio": [
+      1.736842105263158,
+      2.0625
+    ],
+    "bns_upper_only": 2.0625,
+    "range_source": "LIGO-P1200087-v55, Table 2, printed p10, archived 2019-09-04 PDF",
+    "range_scope": "Historical projected orientation-averaged range for single detector threshold SNR8, BBH30+30 solar masses. Not a universal network/ringdown SNR multiplier.",
+    "c5_ratio": 1.987241229884367,
+    "c5_status": "DECLARED_LOCAL_C5_RESULT_READ_AND_HASHED_NOT_REMEASURED_HERE",
+    "c5_sha256": "ef7a800369ba07328852b2ffe6a54c13f9b20476775f557113ca31fc50a5a22b",
+    "c5_scope": {
+      "mass_detector_solar": 68.1,
+      "spin": 0.68,
+      "source_status": "ILLUSTRATIVE_INPUT",
+      "frequency_band_hz": [
+        20,
+        2048
+      ],
+      "frequency_step_hz": 0.125
+    },
+    "c5_limit": "Same source/projection and individual reference PSD; not network or cosmological population. No Fisher rerun.",
+    "current_o5_scope": "T2500310-v2 distinguishes O5a/b/c; terminal A+ sensitivity is not guaranteed at O5 start"
+  },
+  "timelines": [
+    {
+      "project": "O5",
+      "source": "https://observing.docs.ligo.org/plan/",
+      "document_date": "2026-09-03",
+      "status": "PLANNED_START_OPEN",
+      "statement": "O5 plans/timeline under discussion/refinement. Six-month IR1 planned early/mid-November 2026; IR1 is not O5."
+    },
+    {
+      "project": "ET",
+      "source": "https://einsteintelescope.eu/about-et/overview/",
+      "document_date": null,
+      "status": "PLANNING_NOT_COMMITTED",
+      "statement": "Official overview: observations by early 2040s; site decision foreseen 2027. Page publication date not displayed; retrieval dated."
+    },
+    {
+      "project": "ET optimistic alternative",
+      "source": "https://www.einstein-telescope.it/en/questions-answers/",
+      "document_date": null,
+      "status": "OPTIMISTIC_CONDITIONAL",
+      "statement": "Around 2035 in the most optimistic case, conditional on construction (~10 years) and funding; not reconciled into a fixed date."
+    },
+    {
+      "project": "CE",
+      "source": "https://dcc.cosmicexplorer.org/CE-G2600054/public",
+      "document_date": "2026-09-03",
+      "figure_date": "2026-03-10",
+      "status": "ILLUSTRATIVE_PROJECT_TIMELINE",
+      "statement": "Slide 5: construction 2035-2039, commissioning into 2040, Run from 2041. Title/date and graphic inspected. No funded/delivered commitment inferred."
+    },
+    {
+      "project": "GWTC-6",
+      "source": "https://gwosc.org/api/v2/catalogs",
+      "document_date": null,
+      "status": "NO_RELEASE_OR_OFFICIAL_DATE_FOUND_IN_CHECKED_SOURCES",
+      "statement": "Not in 18-catalog API snapshot; May/June 2027 in prior input is an analogy, not an official release date. Negative search does not prove nonexistence everywhere."
+    }
+  ],
+  "ringdown_basis": {
+    "berti": "arXiv:2505.23895v3 section7.1/Figure76, 10 August2026",
+    "bhagwat": "arXiv:2304.02283v2, 25 September2023",
+    "snr_window": "About 10M after strain peak, amplitude/phase fits and SNR integration consistent (Bhagwat section II). Upper time endpoint not explicitly established in this read scope.",
+    "window_mass_convention": "Do not silently equate paper symbol M to local final-mass tM convention; exact conversion not certified here",
+    "rates_per_year": [
+      {
+        "network": "ET triangle10km",
+        "rho_ge50": 28,
+        "error50": 7,
+        "rho_ge100": 3,
+        "error100": 1
+      },
+      {
+        "network": "ET twoL15km",
+        "rho_ge50": 70,
+        "error50": 9,
+        "rho_ge100": 7,
+        "error100": 3
+      },
+      {
+        "network": "ET triangle10km+CE",
+        "rho_ge50": 161,
+        "error50": 14,
+        "rho_ge100": 13,
+        "error100": 5
+      },
+      {
+        "network": "ET twoL15km+CE",
+        "rho_ge50": 246,
+        "error50": 16,
+        "rho_ge100": 18,
+        "error100": 7
+      }
+    ],
+    "status": "KNOWN_CONDITIONAL_POPULATION_FORECAST_NOT_OBSERVED_COUNTS",
+    "applicability": "Berti order100/year at RD>=50 is configuration/population dependent. Multi-mode Fisher forecast, not delta_tau220 identifiability or 5-sigma evidence.",
+    "uncertainty": "Quoted errors belong to source simulation; not a new confidence interval on astrophysical rate"
+  },
+  "deferred": [
+    "sigma(SNR) fit until A standard deviations and exact event join are supplied",
+    "Mass/final-spin selection: final spin absent from metadata default summary",
+    "O5 counts/rates/Poisson bands require definition of selected population and exposure; calendar duration is not live time",
+    "No reading chosen; no sigma scaling, PE, source population simulation, posterior or strain acquisition performed"
+  ]
+}

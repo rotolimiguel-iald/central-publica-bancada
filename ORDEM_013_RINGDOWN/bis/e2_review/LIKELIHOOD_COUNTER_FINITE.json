@@ -1,0 +1,38 @@
+{
+  "status": "FINITE_MOCK_ONLY_NOT_PE",
+  "created_utc": "2026-09-22T20:58:27.633258+00:00",
+  "checks": [
+    "direct_ratio_and_full_once_each_noise_excluded",
+    "pre_generator_exception_counted_and_preserved",
+    "two_fork_workers_14_evaluations_aggregated",
+    "astropy_and_pandas_active_origins_match_existing_runtime_pins"
+  ],
+  "counter": {
+    "calls": 17,
+    "completed": 16,
+    "raised": 1,
+    "total_wall_seconds": 0.00014681999998344963,
+    "scope": "Shared actual ratio frontier, direct or via full likelihood; includes setup and failed pre-generator calls; excludes noise-only calls"
+  },
+  "active_origins": {
+    "astropy": {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/astropy/__init__.py",
+      "sha256": "504a8c61b094e896fa8be41d6d28e468dd8852324bb7870839f16546f42bc50b"
+    },
+    "pandas": {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/pandas/__init__.py",
+      "sha256": "742f85c135ee654bff1203efcee7664bf82fc7305ac3912ff304a063f5f7ea3c"
+    }
+  },
+  "wall_seconds": 0.1710047469999978,
+  "pinned_base_log_likelihood_source": "    def log_likelihood(self, parameters=None):\n        return self.log_likelihood_ratio(parameters=parameters) + self.noise_log_likelihood()\n",
+  "base_source_path": "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/likelihood/base.py",
+  "sources": {
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e2_review/test_likelihood_counter.py": "7c7ab986a7a7989a5330a663961b133943078827fb43eb689ac172717b7c58d0",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e2_code/pe_runner.py": "6712610a0392abe629b6ea5b5f4fa5a45b2c8b9a3dfb123c952513f18cef68fa",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e2_code/registration_guard.py": "9576db51615627c1264ef51ba228c47a12f162c6c62f68b939306135e1ae3743",
+    "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/likelihood/base.py": "e40cd20a3f5ae1636cf4d0724c518c8612b844cd95ca3eaa17012ae3806619ac",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/E2_SCIENTIFIC_RUNTIME_MANIFEST.json": "afd5a5a2b23b2a27a3e277077b99e9e6f3327779f6137b99655da946d65e2c1d"
+  },
+  "limits": "Physical likelihood body mocked; real inherited full->ratio wrapper and actual fork shared counter exercised; no sampler or physical data run"
+}

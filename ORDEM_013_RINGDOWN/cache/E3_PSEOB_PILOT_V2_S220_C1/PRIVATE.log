@@ -1,0 +1,45 @@
+21:13 bilby INFO    : Waveform generator instantiated: WaveformGenerator(duration=16, sampling_frequency=4096, start_time=1420878129.0, frequency_domain_source_model=pseob_source.pseob_frequency_domain, time_domain_source_model=None, parameter_conversion=pseob_source.parameter_conversion, waveform_arguments={'waveform_approximant': 'pSEOBNRv4HM_PA', 'analysis_time_contract': {'start_GPS': 1420878129.0, 'duration_s': 16, 'roll_off_s': 0.2}, 'minimum_frequency': 20.0, 'maximum_frequency': 1024.0, 'generation_maximum_frequency_hz': 4096, 'generation_sample_rate_hz': 8192, 'reference_frequency': 20.0, 'catch_waveform_errors': True})
+21:13 bilby INFO    : Analysis priors:
+21:13 bilby INFO    : mass_1=Uniform(minimum=15, maximum=100, name='mass_1', latex_label='$m_1$', unit=None, boundary=None)
+21:13 bilby INFO    : mass_2=Uniform(minimum=10, maximum=100, name='mass_2', latex_label='$m_2$', unit=None, boundary=None)
+21:13 bilby INFO    : chi_1=Uniform(minimum=-0.99, maximum=0.99, name='chi_1', latex_label='$\\chi_1$', unit=None, boundary=None)
+21:13 bilby INFO    : chi_2=Uniform(minimum=-0.99, maximum=0.99, name='chi_2', latex_label='$\\chi_2$', unit=None, boundary=None)
+21:13 bilby INFO    : luminosity_distance=Uniform(minimum=100, maximum=2000, name='luminosity_distance', latex_label='$d_L$', unit=None, boundary=None)
+21:13 bilby INFO    : theta_jn=Sine(minimum=0, maximum=3.141592653589793, name='theta_jn', latex_label='$\\theta_{JN}$', unit=None, boundary=None)
+21:13 bilby INFO    : phase=Uniform(minimum=0, maximum=6.283185307179586, name='phase', latex_label='$\\phi$', unit=None, boundary='periodic')
+21:13 bilby INFO    : ra=Uniform(minimum=0, maximum=6.283185307179586, name='ra', latex_label='$\\mathrm{RA}$', unit=None, boundary='periodic')
+21:13 bilby INFO    : dec=Cosine(minimum=-1.5707963267948966, maximum=1.5707963267948966, name='dec', latex_label='$\\mathrm{DEC}$', unit=None, boundary=None)
+21:13 bilby INFO    : psi=Uniform(minimum=0, maximum=3.141592653589793, name='psi', latex_label='$\\psi$', unit=None, boundary='periodic')
+21:13 bilby INFO    : geocent_time=Uniform(minimum=1420878141.05, maximum=1420878141.3500001, name='geocent_time', latex_label='$t_c$', unit=None, boundary=None)
+21:13 bilby INFO    : dtau220=Uniform(minimum=-0.8, maximum=2, name='dtau220', latex_label='dtau220', unit=None, boundary=None)
+21:13 bilby INFO    : domega220=Uniform(minimum=-0.8, maximum=2, name='domega220', latex_label='domega220', unit=None, boundary=None)
+21:13 bilby INFO    : mass_ratio=Constraint(minimum=0.125, maximum=1, name='mass_ratio', latex_label='$q$', unit=None)
+21:13 bilby INFO    : dtau440=0.0
+21:13 bilby INFO    : domega440=0.0
+21:13 bilby INFO    : Analysis likelihood class: <class '__main__.counted_likelihood_class.<locals>.CountedLikelihood'>
+21:13 bilby INFO    : Analysis likelihood noise evidence: -330488.75798360823
+21:13 bilby INFO    : Single likelihood evaluation took 1.077e-01 s
+21:13 bilby WARNING : Kwargs contain both 'rstate' and 'seed', ignoring 'seed'.
+21:13 bilby INFO    : Using sampler RecordedDynesty with kwargs {'nlive': 512, 'bound': 'live', 'sample': 'rwalk', 'periodic': None, 'reflective': None, 'update_interval': 600, 'first_update': None, 'rstate': Generator(PCG64) at 0x7244DB934F20, 'queue_size': 24, 'pool': None, 'use_pool': None, 'live_points': None, 'logl_args': None, 'logl_kwargs': None, 'ptform_args': None, 'ptform_kwargs': None, 'enlarge': None, 'bootstrap': None, 'walks': 50, 'facc': 0.2, 'slices': None, 'ncdim': None, 'blob': False, 'save_evaluation_history': False, 'history_filename': None, 'maxiter': None, 'maxcall': 5738602, 'dlogz': 0.1, 'logl_max': inf, 'add_live': True, 'print_progress': False, 'print_func': <bound method Dynesty._print_func of <__main__.sampler_class.<locals>.RecordedDynesty object at 0x7244db907320>>, 'save_bounds': False, 'checkpoint_file': None, 'checkpoint_every': 60, 'resume': False, 'seed': 15260303}
+21:13 bilby INFO    : Checkpoint every check_point_delta_t = 600s
+21:13 bilby INFO    : Running for label 'GW250114_PILOT_V2_S220_C1', output will be saved to '/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/cache/E3_PSEOB_PILOT_V2_S220_C1'
+21:13 bilby INFO    : Using lal version 7.7.1
+21:13 bilby INFO    : Using lal git version Branch: None;Tag: lalsuite-v7.26.15;Id: 2c00d8c200308422036d0a23b7c0394f7c73faad;;Builder: Unknown User <>;Repository status: CLEAN: All modifications committed
+21:13 bilby INFO    : Using lalsimulation version 6.2.1
+21:13 bilby INFO    : Using lalsimulation git version Branch: None;Tag: lalsuite-v7.26.15;Id: 2c00d8c200308422036d0a23b7c0394f7c73faad;;Builder: Unknown User <>;Repository status: CLEAN: All modifications committed
+21:13 bilby INFO    : Using dynesty version 3.1.0
+21:13 bilby INFO    : Setting up multiproccesing pool with 24 processes
+21:13 bilby INFO    : Generating initial points from the prior
+21:14 bilby INFO    : Using the bilby-implemented ensemble rwalk sampling method with ACT estimated chain length. An average of 4 steps will be accepted up to chain length 5000.
+/opt/lal_env/lib/python3.12/site-packages/dynesty/sampler.py:1081: UserWarning: The sampling was stopped short due to maxiter/maxcall limit the delta(log(z)) criterion is not achieved; posterior may be poorly sampled
+  warnings.warn('The sampling was stopped short due to'
+03:37 bilby INFO    : Starting to close worker pool.
+03:37 bilby INFO    : Finished closing worker pool.
+03:37 bilby INFO    : Rejection sampling nested samples to obtain 1 posterior samples
+03:37 bilby INFO    : Sampling time: 6:23:24.610932
+03:37 bilby INFO    : Summary of results:
+nsamples: 1
+ln_noise_evidence: -330488.758
+ln_evidence: -327341.596 +/-  4.535
+ln_bayes_factor: 3147.162 +/-  4.535
+

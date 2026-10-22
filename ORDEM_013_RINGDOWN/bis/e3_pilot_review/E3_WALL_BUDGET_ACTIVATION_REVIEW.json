@@ -1,0 +1,107 @@
+{
+  "status": "ACTIVATION_CHANGES_REQUIRED_DOCUMENTARY_ONLY",
+  "approved": false,
+  "authorizer_sha256": "69c2976e643369a6d65570029f3274f79c57eb80cb6cbfdc1e9553dfa2a5415e",
+  "candidate_sha256": "e7d4ed6004289c91978ffe49f4478da56dcae492c49646118abf8b693c1e7036",
+  "candidate_approval_receipt_sha256": "cbea2938b692b79206cf87977567ba060963a0a835e1bb10502a4dad1ce51943",
+  "blocking_findings": [
+    {
+      "id": "BW-A1",
+      "reason": "Pinned review accepts duplicate approved keys and NaN. Both finite fixtures register the synthetic budget.",
+      "fix": "Strict JSON duplicate/nonfinite rejection for review/candidate/jobs, typed approved identity True; retain exact candidate/review pins."
+    }
+  ],
+  "notes": [
+    {
+      "id": "BW-N1",
+      "reason": "Missing opening witness is read only after budget publication, causing partial publication without receipt.",
+      "fix": "Read and pin opening witness before first write; preflight pending paths and retain explicit partial/failure receipt if later publication fails."
+    }
+  ],
+  "checks": {
+    "source_unchanged": true,
+    "normal_documentary_fixture": true,
+    "duplicate_approval_accepted": true,
+    "nonfinite_review_accepted": true,
+    "opening_failure_after_budget": true,
+    "expired_refused": true,
+    "existing_budget_preserved": true,
+    "pending_refused": true,
+    "jobs_change_refused": true
+  },
+  "finite_cases": [
+    {
+      "case": "normal",
+      "error": null,
+      "budget_written": true,
+      "receipt_written": true,
+      "witness_written": true,
+      "original_preserved": null
+    },
+    {
+      "case": "duplicate_approval",
+      "error": null,
+      "budget_written": true,
+      "receipt_written": true,
+      "witness_written": true,
+      "original_preserved": null
+    },
+    {
+      "case": "nonfinite_review",
+      "error": null,
+      "budget_written": true,
+      "receipt_written": true,
+      "witness_written": true,
+      "original_preserved": null
+    },
+    {
+      "case": "missing_opening",
+      "error": "FileNotFoundError",
+      "budget_written": true,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "expired",
+      "error": "TimeoutError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "existing_budget",
+      "error": "FileExistsError",
+      "budget_written": true,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": true
+    },
+    {
+      "case": "existing_pending",
+      "error": "FileExistsError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "jobs_changed",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    }
+  ],
+  "optimization": 1,
+  "review_source_sha256": "977cfc8da7a7435b3e5fb615bdedb431c9360ede2845c52126f388901d76d7b6",
+  "scope": "AST functions only in owned temporary roots. No actual activation, guard, jobs, runtime or science execution. Candidate itself separately approved. External principal-provided independent review hash is trust anchor; authorizer does not authenticate reviewer identity cryptographically.",
+  "positive_findings": [
+    "Fixed candidate reserve is not reset by activation.",
+    "Exact parent E2 and jobs pins checked; zero new allocations required.",
+    "Exclusive temporary writes and hard-link publication preserve existing outputs.",
+    "No subprocess/science launch or guard/job override."
+  ]
+}

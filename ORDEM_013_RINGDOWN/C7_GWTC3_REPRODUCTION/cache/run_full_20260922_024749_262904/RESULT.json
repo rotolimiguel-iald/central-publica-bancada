@@ -1,0 +1,75 @@
+{
+  "stage": "full",
+  "run": "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/C7_GWTC3_REPRODUCTION/cache/run_full_20260922_024749_262904/ORDEM_013_RINGDOWN",
+  "date_utc": "2026-09-22T02:48:27.565318+00:00",
+  "manifest_sha256": "77f9f8883837fcc34899f962991560a92b19e9a9e1fefa9804f7c1f9eada99b5",
+  "external_inputs": 18,
+  "reference_results_copied_as_inputs": false,
+  "comparison_inputs": [
+    {
+      "path": "C4_CATALOG_220.json",
+      "role": "GPS identity and comparison column only; not a GWTC-3 likelihood input"
+    }
+  ],
+  "reference_scope": "No target GWTC-3 results used as inputs; newer-catalog output is a declared identity/comparison input only",
+  "commands": [
+    [
+      "gwtc3_posterior_readout.py"
+    ],
+    [
+      "read_gwtc3_selection.py"
+    ],
+    [
+      "combine_gwtc3.py"
+    ]
+  ],
+  "status": "PASS",
+  "comparisons": [
+    {
+      "output": "C4_GWTC3_220.json",
+      "numerical_leaves": 6485,
+      "max_absolute_difference": 0,
+      "output_sha256": "d9dc9b09a8d91dc7f85c5e849091db619b1c22a633b09c97d82bcf434e9c6053",
+      "checked_fields": [
+        "N_events",
+        "rows",
+        "catalog",
+        "duplicate_reconciliation"
+      ],
+      "all_strings_in_checked_subtrees_exact": true
+    },
+    {
+      "output": "C4_GWTC3_SELECTION.json",
+      "numerical_leaves": 0,
+      "max_absolute_difference": 0,
+      "output_sha256": "ef18f3b0495d58bffc5f968f86ca860eefd3becb570cd75bfc9f88fa8fee5dd3",
+      "checked_fields": [
+        "table_events",
+        "excluded_by_authors",
+        "selected_events",
+        "archive_products_outside_table"
+      ],
+      "all_strings_in_checked_subtrees_exact": true
+    },
+    {
+      "output": "C4_GWTC3_PUBLISHED_COMBINATION.json",
+      "numerical_leaves": 113,
+      "max_absolute_difference": 0,
+      "output_sha256": "f6dbd853223b803984d352aebe3fd64f786b3f26458988cbb4b37a752f8b1ddd",
+      "checked_fields": [
+        "N_events",
+        "selected_events",
+        "common_deformation_GR_diagnostics",
+        "catalog"
+      ],
+      "all_strings_in_checked_subtrees_exact": true
+    }
+  ],
+  "tolerance": {
+    "relative": 2e-07,
+    "absolute": 1e-10
+  },
+  "numpy_version": "2.5.3",
+  "scipy_version": "1.18.1",
+  "h5py_version": "3.16.0"
+}

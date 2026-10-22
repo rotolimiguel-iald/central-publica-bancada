@@ -1,0 +1,165 @@
+{
+  "status": "CHANGED_BOUNDARIES_REVIEW_V3",
+  "snapshot": "MAIN_CODE_REVIEW_SNAPSHOT_V3.json",
+  "snapshot_sha256": "dcab9fda683201c68d8fcaa1ff0d47eb6e8af24e86fbcd4402009adf316db47a",
+  "fixtures": [
+    {
+      "name": "changed_campaign_deadline_exception_receipt",
+      "passed": true,
+      "detail": {
+        "launched_stub_calls": 0,
+        "error": "SystemExit: 2",
+        "aggregate_receipt": true,
+        "aggregate_status": "SYNTHETIC_NULL_CAMPAIGN_FAILED"
+      }
+    },
+    {
+      "name": "changed_campaign_bad_receipt_exception_receipt",
+      "passed": true,
+      "detail": {
+        "launched_stub_calls": 1,
+        "error": "SystemExit: 2",
+        "aggregate_receipt": true,
+        "aggregate_status": "SYNTHETIC_NULL_CAMPAIGN_FAILED"
+      }
+    },
+    {
+      "name": "changed_campaign_timeout_bytes_receipt",
+      "passed": true,
+      "detail": {
+        "launched_stub_calls": 1,
+        "error": "SystemExit: 2",
+        "aggregate_receipt": true,
+        "aggregate_status": "SYNTHETIC_NULL_CAMPAIGN_FAILED"
+      }
+    },
+    {
+      "name": "registered_quality_hold_missing_GW240515_005301",
+      "passed": true,
+      "detail": {
+        "error": "KeyError: 'data_quality_resolution'",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "registered_quality_hold_missing_GW240615_160735",
+      "passed": true,
+      "detail": {
+        "error": "KeyError: 'data_quality_resolution'",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "registered_quality_hold_missing_GW240930_035959",
+      "passed": true,
+      "detail": {
+        "error": "KeyError: 'data_quality_resolution'",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "registered_quality_hold_missing_GW241102_144729",
+      "passed": true,
+      "detail": {
+        "error": "KeyError: 'data_quality_resolution'",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "registered_quality_hold_failed_GW240515_005301",
+      "passed": true,
+      "detail": {
+        "error": "ValueError: Data quality hold unresolved or evidence changed",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "registered_quality_hold_wrong_pin_GW240515_005301",
+      "passed": true,
+      "detail": {
+        "error": "ValueError: Data quality hold unresolved or evidence changed",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "registered_quality_hold_valid_GW240515_005301",
+      "passed": true,
+      "detail": {
+        "error": null,
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "dynamic_quality_hold_missing_GW240515_005301",
+      "passed": true,
+      "detail": {
+        "error": "KeyError: 'data_quality_resolution'",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "dynamic_quality_hold_wrong_pin_GW240515_005301",
+      "passed": true,
+      "detail": {
+        "error": "ValueError: Data quality hold unresolved or evidence changed",
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "dynamic_quality_hold_valid_GW240515_005301",
+      "passed": true,
+      "detail": {
+        "error": null,
+        "boundary": "load_jobs; witness mocked, evidence SHA/time/review checks real"
+      }
+    },
+    {
+      "name": "fetch_wall_handler_interrupt",
+      "passed": true,
+      "detail": "Registered download wall deadline reached"
+    },
+    {
+      "name": "fetch_wall_cleanup_restores_timer_and_handler",
+      "passed": true,
+      "detail": "Mock timer only; no live socket, transfer, signal or timing benchmark"
+    },
+    {
+      "name": "fetch_existing_timer_refused",
+      "passed": true,
+      "detail": "Refuse to replace an existing wall timer"
+    },
+    {
+      "name": "draft003_16s_window_static_contract",
+      "passed": true,
+      "detail": {
+        "duration_s": 16,
+        "segment_start_GPS": 1420878129.0,
+        "scope": "validate_config only"
+      }
+    },
+    {
+      "name": "draft003_GPS_anchor_matches_pilot",
+      "passed": true,
+      "detail": {
+        "event": "GW250114_082203",
+        "anchor": 1420878141.2,
+        "event_GPS": 1420878141.2
+      }
+    },
+    {
+      "name": "draft003_exactly_25_registered_null_cells",
+      "passed": true,
+      "detail": 25
+    },
+    {
+      "name": "remnant_bridge_present_static_only",
+      "passed": true,
+      "detail": "Presence check only, not PE execution or numerical fit"
+    }
+  ],
+  "passed": 20,
+  "failed": 0,
+  "changed_live_since_snapshot": [],
+  "no_real_MC_PE_waveform_strain_network": true,
+  "correction_to_v2": "authorize_event classifies identity; load_jobs enforces pinned hold-resolution before launch. Four v2 authorize_event probes alone did not establish a launch bypass."
+}

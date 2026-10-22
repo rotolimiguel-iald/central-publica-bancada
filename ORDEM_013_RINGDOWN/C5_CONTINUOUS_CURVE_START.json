@@ -1,0 +1,134 @@
+{
+  "status": "CONTINUOUS_CALIBRATION_READER_VALIDATED_SOURCE_CURVES_RUNNING",
+  "date_utc": "2026-09-22T10:07:23.151865+00:00",
+  "previous_goal_turn": "PROGRESS: Phenom rate passed;32768 fresh source draws launched;real continuous API checked.",
+  "this_goal_turn": "PROGRESS: paired continuous integration and interval reader passed independent oracles and nine refusal controls;complete strength evaluator passed306 direct-wave checks;full SEOB source curves started.",
+  "arithmetic": {
+    "status": "PASS_CONTINUOUS_CALIBRATION_ARITHMETIC",
+    "max_integral_error_in_MC_sd": 0.7260976622227343,
+    "paired_covariance_absolute_error": 7.942035023340496e-17,
+    "cemetery_logz_error": 2.649790109554573e-15,
+    "gaussian_MLE_error": 2.7755575615628914e-16,
+    "gaussian_interval_error": 0.0015211291948356576,
+    "gaussian_oracle_cell": {
+      "cell": {
+        "psd": "ORACLE",
+        "source": "analytic",
+        "injection_family": "analytic",
+        "injection_a": 0.0,
+        "snr": 0.0
+      },
+      "N": 50,
+      "all_curves_usable": true,
+      "diagnostic_bias": 3.5561831257524545e-17,
+      "diagnostic_coverage": 0.88,
+      "calibrated_bias": 3.5561831257524545e-17,
+      "calibrated_coverage": 0.88,
+      "numerical_and_local_calibration_pass": true,
+      "failed_curves": 0
+    },
+    "refused_controls": [
+      "flat",
+      "boundary",
+      "disconnected",
+      "one_failed_mock_not_dropped",
+      "single_dominant_source_draw",
+      "nan",
+      "empty_integral",
+      "duplicate_strength",
+      "duplicate_noise"
+    ],
+    "physical_injections_calibrated": false,
+    "strength_prior_selected": false,
+    "scientific_acceptance": false,
+    "registration_sha256": "1b2e60cc0d886b945e3ac30f323f60cf95b12924bf2a0dda0cd2a6c063d8fbe0"
+  },
+  "waveform_summary": {
+    "points": 3,
+    "full_wave_checks": 306,
+    "max_relative_wave_error": 1.05977554593841e-07,
+    "max_logL_error": 1.1763999253844304e-05,
+    "max_quadrature_error": 4.470666794986755e-06,
+    "max_binary_endpoint_error": 0.0
+  },
+  "checkpoints_verified": [
+    {
+      "file": "chunk_00000.npz",
+      "points": 16,
+      "sha256": "ace6d97d6c2e452ce8aee7d50202ea579d1c7d5142f8cc48261b9bb7abab89d9"
+    },
+    {
+      "file": "chunk_00001.npz",
+      "points": 16,
+      "sha256": "beda95021bdac9fbddb5070dd26313edb84eadaed4e7d1eb5a8a776ec036ec03"
+    },
+    {
+      "file": "chunk_00002.npz",
+      "points": 16,
+      "sha256": "8d91ed1b31672b3a68650177d59b2b16f60d5dcbd545c90d93c4c07c5d6c9818"
+    }
+  ],
+  "checkpoint_points": 48,
+  "active_processes": [
+    {
+      "session_id": 34860,
+      "kind": "binary_source",
+      "workers": 4,
+      "folder": "cache\\source_evidence\\phase_real_refined\\IMRPhenomXPHM_seed130972_N32768",
+      "last_progress": {
+        "done": 2128,
+        "valid_draws": 22384,
+        "seconds": 1619.7728894330012,
+        "date_utc": "2026-09-22T10:07:12.878641+00:00"
+      },
+      "observation": "Specific write_stdin handle returned live during this turn; revalidate on continuation."
+    },
+    {
+      "session_id": 40860,
+      "kind": "binary_source",
+      "workers": 4,
+      "folder": "cache\\source_evidence\\phase_native_repeat\\SEOBNRv4HM_seed130942_N16384",
+      "last_progress": {
+        "done": 3392,
+        "valid_draws": 8520,
+        "seconds": 4385.756441509,
+        "date_utc": "2026-09-22T10:07:07.962587+00:00"
+      },
+      "observation": "Specific write_stdin handle returned live during this turn; revalidate on continuation."
+    },
+    {
+      "session_id": 19681,
+      "kind": "continuous_source",
+      "workers": 2,
+      "folder": "cache\\source_evidence\\continuous_source_curves\\SEOBNRv4HM_seed130942_N16384",
+      "last_progress": {
+        "completed": 48,
+        "valid_draws": 8520,
+        "seconds": 197.19850271799987,
+        "date_utc": "2026-09-22T10:07:10.188839+00:00"
+      },
+      "observation": "Specific write_stdin handle returned live during this turn; revalidate on continuation."
+    }
+  ],
+  "registered_not_started": "cache\\source_evidence\\continuous_source_curves\\IMRPhenomXPHM_seed130972_N32768",
+  "physical_bias_coverage_complete": false,
+  "scientific_acceptance": false,
+  "strength_prior_selected": false,
+  "physical_prior_changed": false,
+  "C6_changed": false,
+  "hashes": {
+    "cache/source_evidence/continuous_source_calibration.py": "f206fa9237654a1369eea9c3ddd966fa2f2f1d5bfa464e4ff10ec9d252cef0fb",
+    "cache/source_evidence/validate_continuous_calibration.py": "64ea0a49fdc80ec4cd56dbfdbef8a315b2fc5bbb87afcea942e5221390431ad7",
+    "cache/source_evidence/controlled_continuous_source.py": "3373a580390ca51a7953667ed2055e83c8d58a9220119e0deb9d3a32ed0aa3c8",
+    "cache/source_evidence/validate_controlled_continuous_source.py": "3aeb109b923cf7929a9f41f7254243fde6f9b78dfcea19494cdee409bfb9cf91",
+    "cache/source_evidence/run_continuous_source_curves.py": "7473bda8e5c5a306589159c80866ea469efae9b49a98f168b91d02303062497c",
+    "cache/source_evidence/continuous_calibration_validation/REGISTRATION.json": "1b2e60cc0d886b945e3ac30f323f60cf95b12924bf2a0dda0cd2a6c063d8fbe0",
+    "cache/source_evidence/continuous_calibration_validation/RESULT.json": "9d60fdee82bcdc85f5991489121210063f7371e78fa2e1add0486b689262b455",
+    "cache/source_evidence/controlled_continuous_validation/REGISTRATION.json": "b15519af4f3d5fb139135bd8cb093402c8e619f49808bbe55db71172bff0b941",
+    "cache/source_evidence/controlled_continuous_validation/RESULT.json": "00751b1f30161d224f7a27dd8c37cbdd9f2e9d0d2a4a4f83af01e06c8cb961f9",
+    "cache/source_evidence/continuous_source_curves\\SEOBNRv4HM_seed130942_N16384\\REGISTRATION.json": "93ba610c6889e804952190f9b6a6e000bf7cbf86f1906cede9f951798fe94064",
+    "cache/source_evidence/continuous_source_curves\\IMRPhenomXPHM_seed130972_N32768\\REGISTRATION.json": "fc82a1ba786a0e0d16175d0962f26b3757e1c725ac4a051c10eb57be1b9b96c2",
+    "cache/source_evidence/continuous_source_curves\\SEOBNRv4HM_seed130942_N16384\\START.json": "5751d1f460859af461390b7b6835fa7f1c176486609ccf193d1877532527be7e",
+    "record_continuous_curve_start.py": "f3c63aac91ab2718ad91c67acfb6897d8727a04eb8d4b11fe871118a3f7d70d1"
+  }
+}

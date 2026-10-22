@@ -1,0 +1,148 @@
+{
+  "status": "WALL_BUDGET_ACTIVATION_V2_CLOSED_DOCUMENTARY_ONLY",
+  "approved": true,
+  "authorizer_sha256": "3b0afeddc2e0fcd6b6239602e79e65b96da35f76e5713c68704ebdc06949bf63",
+  "candidate_sha256": "e7d4ed6004289c91978ffe49f4478da56dcae492c49646118abf8b693c1e7036",
+  "candidate_review_sha256": "cbea2938b692b79206cf87977567ba060963a0a835e1bb10502a4dad1ce51943",
+  "opening_witness_sha256": "0118a54b7a806a0a5ef5572afc8349c223cc3da4bec62ff18a9cd1b07433f9f0",
+  "created_utc": "2026-09-22T23:13:39.297861+00:00",
+  "blocking_findings": [],
+  "closed_findings": [
+    "BW-A1"
+  ],
+  "notes": [
+    {
+      "id": "BW-N1",
+      "status": "NONBLOCKING_RESIDUAL",
+      "reason": "Opening-witness read remains after budget publication. Actual opening exists and is hashed here; missing-opening fixture leaves partial documentary output. If any publication fails preserve it and issue explicit failure/successor, never treat partial budget alone as completed activation."
+    }
+  ],
+  "checks": {
+    "source_unchanged": true,
+    "normal_documentary_fixture": true,
+    "duplicate_approval_refused": true,
+    "nonfinite_review_refused": true,
+    "opening_failure_after_budget": true,
+    "expired_refused": true,
+    "existing_budget_preserved": true,
+    "pending_refused": true,
+    "jobs_change_refused": true,
+    "overflow_review_refused": true,
+    "future_review_refused": true,
+    "bool_allocation_refused": true,
+    "global_exceeded_refused": true,
+    "actual_opening_exists": true,
+    "actual_candidate_approved_pin": true,
+    "actual_reserve_unexpired_at_review": true
+  },
+  "finite_cases": [
+    {
+      "case": "normal",
+      "error": null,
+      "budget_written": true,
+      "receipt_written": true,
+      "witness_written": true,
+      "original_preserved": null
+    },
+    {
+      "case": "duplicate_approval",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "nonfinite_review",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "missing_opening",
+      "error": "FileNotFoundError",
+      "budget_written": true,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "expired",
+      "error": "TimeoutError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "existing_budget",
+      "error": "FileExistsError",
+      "budget_written": true,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": true
+    },
+    {
+      "case": "existing_pending",
+      "error": "FileExistsError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "jobs_changed",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "overflow_review",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "future_review",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "bool_allocation",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    },
+    {
+      "case": "global_exceeded",
+      "error": "ValueError",
+      "budget_written": false,
+      "receipt_written": false,
+      "witness_written": false,
+      "original_preserved": null
+    }
+  ],
+  "optimization": 1,
+  "review_source_sha256": "e2dad6379537265ec0bca14c3e82ddfadc8400ba737bdff9d99ea1176e0c544d",
+  "scope": "Approved for exact reviewed candidate and authorizer bytes, documentary zero-job activation only. AST fixtures in owned temporary roots; real activation NOT performed. No runtime guard override/science approval. Principal must use the independently issued candidate review hash; sender self-approval is outside this authorization.",
+  "finalization_stop_utc": "2026-09-23T01:02:56.988802+00:00",
+  "trust_boundary": "External principal-supplied independent review hash, not cryptographic reviewer identity authentication.",
+  "positive_findings": [
+    "Duplicate keys, NaN and overflow refused before write.",
+    "Schema/status and exact integer-zero fields validated.",
+    "Fixed reserve and global cap, future/naive review rejection; no deadline restart.",
+    "No subprocess/science or job override. Exclusive writes and pending preflight.",
+    "Exact reviewed parent registration/jobs pins and candidate identity."
+  ]
+}

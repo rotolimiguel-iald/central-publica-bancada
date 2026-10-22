@@ -1,0 +1,59 @@
+{
+  "status": "PYRING_IMPORTED",
+  "source_sha256": "e6f3a571d950a9cbd33b9d43fa75fd784c4cfbb636573ab784b19e69ec828b94",
+  "source_origin": "https://files.pythonhosted.org/packages/f1/5c/1c4904112483a22816229edb776339cd9fd9c30f27a824973ec58c721159/pyRingGW-2.7.0.tar.gz",
+  "target": "cache/pyring_oracle/vendor",
+  "steps": [
+    {
+      "command": [
+        "/opt/lal_env/bin/python",
+        "-B",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-deps",
+        "--target",
+        "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/cache/pyring_oracle/vendor",
+        "Cython==3.0.12",
+        "setuptools==80.9.0",
+        "wheel==0.45.1",
+        "seaborn==0.13.2"
+      ],
+      "exit_code": 0,
+      "log": "cache/pyring_oracle/step_0.txt",
+      "sha256": "e9e0f75517482ebb69a5376b71b52ac9ab8c6df67dcce563cd337989cdaa387a"
+    },
+    {
+      "command": [
+        "/opt/lal_env/bin/python",
+        "-B",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-deps",
+        "--no-build-isolation",
+        "--target",
+        "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/cache/pyring_oracle/vendor",
+        "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/cache/source_distributions/pyRingGW-2.7.0.tar.gz"
+      ],
+      "exit_code": 0,
+      "log": "cache/pyring_oracle/step_1.txt",
+      "sha256": "7ae8ca92dfa624cf5a4001c466e94ea94741858db1d1df3d650a9d1d514214bd"
+    },
+    {
+      "command": [
+        "/opt/lal_env/bin/python",
+        "-B",
+        "-c",
+        "import pyRing,pyRing.likelihood as l; print('PYRING_LOADED',pyRing.__version__,l.__file__)"
+      ],
+      "exit_code": 0,
+      "log": "cache/pyring_oracle/step_2.txt",
+      "sha256": "34ab6cedeb7c5f50108afc0942d373dd652c74548829e092de48704a9e99b6fc"
+    }
+  ],
+  "system_environment_modified": false,
+  "scope": "Upstream functions available for a likelihood oracle; no LVK posterior reproduction claimed"
+}

@@ -1,0 +1,65 @@
+{
+  "status": "REGISTERED_CONTINUOUS_TWO_FAMILY_MIXTURE",
+  "date_utc": "2026-09-22T10:22:29.940773+00:00",
+  "runs": {
+    "IMRPhenomXPHM": "continuous_source_curves/IMRPhenomXPHM_seed130972_N32768",
+    "SEOBNRv4HM": "continuous_source_curves/SEOBNRv4HM_seed130942_N16384"
+  },
+  "family_prior": {
+    "IMRPhenomXPHM": 0.5,
+    "SEOBNRv4HM": 0.5
+  },
+  "family_prior_scope": "Same explicit equal conditional model prior at every strength; not derived from TGL",
+  "formula": "Z(a)=sum_f prior(f)*Z_f(a). Reuse centered within-family paired covariance, independent between families.",
+  "strengths": [
+    -4.0,
+    -3.5,
+    -3.0,
+    -2.5,
+    -2.0,
+    -1.5,
+    -1.0,
+    -0.5,
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0
+  ],
+  "strength_prior_selected": false,
+  "prerequisites": [
+    "Complete continuous results and hashed arrays",
+    "Full binary/continuous endpoint audits for both families",
+    "Parent proposal density audits pinned to completed binary results"
+  ],
+  "interpretation": "Diagnostic LR90 intervals of nuisance-marginal model-averaged likelihood; empirical bias/coverage required",
+  "scope": "R-B,SNR40,O4/O5;all1200 frozen mocks,50 reused noises. Other readings/SNR remain in full objective.",
+  "precision": "Both individual families must pass at every strength; mixture MCsd<=0.2. No imprecise family may be hidden.",
+  "repeat_and_rate_scope": "Not paid by arithmetic or averaging; independent continuous repeats and rate/grid controls still required",
+  "binomial_coverage": "Do not treat1200 mocks as independent events; report cells separately by source/injection family/a/PSD/SNR",
+  "C6_changed": false,
+  "scientific_acceptance": false,
+  "hashes": {
+    "combine_continuous_source_curves.py": "b74aa70c305c66e80c3c2b9857f80c44fc7962c57f8e096366b3eab3c9c3e7b9",
+    "continuous_family_mixture.py": "a76a8001afb21ed76a7dbac016eaa939c36c00b01c25324e03000e21a483b978",
+    "source_family_mixture.py": "8e12185b8dc954cb9f4e3a35c9f1cd83498051c6b6735cef77a009b2c3d3dadc",
+    "continuous_source_calibration.py": "f206fa9237654a1369eea9c3ddd966fa2f2f1d5bfa464e4ff10ec9d252cef0fb",
+    "tgl_ringdown_likelihood.py": "f16517e62fca96cc348aac17369e75e1fb9b07f1e95fef06f7630c8b94153bca",
+    "continuous_family_mixture_validation/RESULT.json": "37342e279f0e61e94e6657ff59bdee729e9306eeeaf23247abaf30393e72074b",
+    "continuous_family_mixture_validation/REGISTRATION.json": "d0914ba7c9e283666f51575d90a46b0dcf88a027cf76d53d6f2709271934558d",
+    "run_continuous_source_curves.py": "7473bda8e5c5a306589159c80866ea469efae9b49a98f168b91d02303062497c",
+    "audit_continuous_endpoints.py": "75baac0f50510952c9fb46aa7fa05073b632be6851f1ba9e3ef7f3aea406219c",
+    "INJECTIONS.json": "98a62aac521938955ac90c7a8a19e884ffd2bfc468d9a436164bf26d48299631",
+    "INJECTIONS.npz": "27dfc5fa47342efbaab30d32d915a7f0afd151f1cbae493bc44a813112472265",
+    "continuous_source_curves/IMRPhenomXPHM_seed130972_N32768/REGISTRATION.json": "fc82a1ba786a0e0d16175d0962f26b3757e1c725ac4a051c10eb57be1b9b96c2",
+    "phase_real_refined/IMRPhenomXPHM_seed130972_N32768/PROPOSALS.npz": "4a87ab65d8f38b32095e98edf4d4a6bbb79da72fdda2460a93d86ab259e32dcd",
+    "phase_real_refined/IMRPhenomXPHM_seed130972_N32768/START.json": "7d244365681cdd5489cd01dd5a76c248b0b197c71ffcb939f64cebdf7313cb40",
+    "continuous_source_curves/SEOBNRv4HM_seed130942_N16384/REGISTRATION.json": "93ba610c6889e804952190f9b6a6e000bf7cbf86f1906cede9f951798fe94064",
+    "phase_native_repeat/SEOBNRv4HM_seed130942_N16384/PROPOSALS.npz": "589c4c117ce00fbce93eca5fc7c7fc36d46bc97458d23145ba150de616ca9bfd",
+    "phase_native_repeat/SEOBNRv4HM_seed130942_N16384/START.json": "a6b2cd7ade635319c07772432c964a0b25cc6e5629712ceb2bd5ac287c6abca3"
+  }
+}

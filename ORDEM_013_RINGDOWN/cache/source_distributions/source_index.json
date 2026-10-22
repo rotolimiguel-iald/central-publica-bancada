@@ -1,0 +1,477 @@
+{
+  "sources": [
+    {
+      "package": "pyringgw",
+      "member": "pyRingGW-2.7.0/pyRing/eob_utils.pyx",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\c1ec6ec4f1aa8efe.pyx",
+      "sha256": "43bf7bf7c9f993ab02782fbdcc3c7191b2b270647ed14cc708442ec312ed9f6b",
+      "hits": [
+        [
+          1316,
+          "# functions: JimenezFortezaRemnantMass, JimenezFortezaRemnantSpin #"
+        ],
+        [
+          1319,
+          "cdef double _JimenezFortezaRemnantMass(double nu, double X1, double X2, double chi1, double chi2, double M) nogil:"
+        ],
+        [
+          1321,
+          "    Compute the BH final mass with the aligned-spin NR fit by Xisco Jimenez Forteza,"
+        ],
+        [
+          1330,
+          "          functions JimenezFortezaRemnantMass and JimenezFortezaRemnantSpin"
+        ],
+        [
+          1413,
+          "cdef double _JimenezFortezaRemnantSpin(double nu, double X1, double X2, double chi1, double chi2) nogil:"
+        ],
+        [
+          1415,
+          "    Compute the BH final spin with the aligned-spin NR fit by Xisco Jimenez Forteza,"
+        ],
+        [
+          1424,
+          "          functions JimenezFortezaRemnantMass and JimenezFortezaRemnantSpin"
+        ]
+      ]
+    },
+    {
+      "package": "pyringgw",
+      "member": "pyRingGW-2.7.0/pyRing/initialise.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\61bc37dc5ca6d9b3.py",
+      "sha256": "e1f239f399e0b195c394fde3451233a80cafc232be7a445c28e3d8798974d01b",
+      "hits": [
+        [
+          596,
+          "    if (input_par['injection-approximant']=='TEOBResumSPM'):"
+        ],
+        [
+          929,
+          "               injection-approximant      Option to select the waveform approximant to be injected.  Current available options: ['Damped-sinusoids', 'Morlet-Gabor-wavelets', 'Kerr', 'MMRDNS', 'MMRDNP', 'KHS_2012', 'TEOBResumSPM', 'NR', 'LAL-X'where X is any LAL approximant]. If 'NR', requires a PYRI"
+        ],
+        [
+          940,
+          "               template                   Template to be used in the run. Current available options: ['Damped-sinusoids', 'Kerr', 'MMRDNS', 'MMRDNP', 'KHS_2012', 'TEOBResumSPM']. Default: 'Kerr'."
+        ],
+        [
+          943,
+          "               teob-modes                 Modes to be used in 'TEOBResumSPM' template. Available modes: [(2,2), (2,1), (3,3), (3,2), (3,1), (4,4), (4,3), (4,2), (4,1), (5,5)]. For the accuracy of specific modes, see Chapter 6.2.2 and Appendix C.3 of `https://etd.adm.unipi.it/t/etd-10022022-163345`. "
+        ],
+        [
+          973,
+          "               domega-tgr-modes           Modes on which to sample on fractional deviations from GR predictions in the QNM frequencies. Available for models: ['Kerr', 'MMRDNP', 'TEOBResumSPM']. For 'TEOBResumSPM' only n=0 modes can currently be selected. Example of expected syntax: [(2,2,0)]. Defaul"
+        ],
+        [
+          974,
+          "               dtau-tgr-modes             Modes on which to sample on fractional deviations from GR predictions in the QNM damping times. Available for models: ['Kerr', 'MMRDNP', 'TEOBResumSPM']. For 'TEOBResumSPM' only n=0 modes can currently be selected.  Example of expected syntax: [(2,2,0)]. Def"
+        ]
+      ]
+    },
+    {
+      "package": "pyringgw",
+      "member": "pyRingGW-2.7.0/pyRing/inject_signal.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\eff9f00d3f27910b.py",
+      "sha256": "d48c7767688012c567cd32234c3205b73a8edee84c91958f56f9fc2ec879c032",
+      "hits": [
+        [
+          99,
+          "    elif (kwargs['injection-approximant']=='TEOBResumSPM'         ): wf_model = TEOBPM_injection(               **kwargs)"
+        ],
+        [
+          220,
+          "        for (s,l,m,n) in dtaus.keys():   TGR_parameters['dtau_{}{}{}'.format(l,m,n)] = dtaus[(s,l,m,n)]"
+        ]
+      ]
+    },
+    {
+      "package": "pyringgw",
+      "member": "pyRingGW-2.7.0/pyRing/plots.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\c97cfc3ac6f0de36.py",
+      "sha256": "becbf1b1ad85504357be87a1ce0801035b8d9e8c2d2d2f539b7f02f94dbf6cd1",
+      "hits": [
+        [
+          990,
+          "    plt.savefig(os.path.join(output_dir,'Parameters/dtau_{}{}{}_{}.png'.format(l,m,n,Num_mode)) ,bbox_inches='tight')"
+        ],
+        [
+          1366,
+          "    if((input_par['injection-approximant']=='NR') or (input_par['injection-approximant']=='MMRDNP') or (input_par['injection-approximant']=='TEOBResumSPM') or ('LAL' in input_par['injection-approximant'])):"
+        ],
+        [
+          1421,
+          "    if((input_par['injection-approximant']=='NR') or (input_par['injection-approximant']=='TEOBResumSPM') or ('LAL' in input_par['injection-approximant'])):"
+        ],
+        [
+          1427,
+          "        if not(input_par['injection-approximant']=='TEOBResumSPM'):"
+        ],
+        [
+          2077,
+          "            dtau       = x['dtau_{0}{1}{2}'.format(l, m, n)]"
+        ],
+        [
+          2103,
+          "                        filename      = os.path.join(kwargs['output'],'Plots/dtau_corner.pdf'))"
+        ],
+        [
+          2108,
+          "            dtau      = x['dtau_{0}{1}{2}'.format(l, m, n)]"
+        ],
+        [
+          2147,
+          "                        filename      = os.path.join(kwargs['output'],'Plots/dtau_corner.pdf'))"
+        ]
+      ]
+    },
+    {
+      "package": "pyringgw",
+      "member": "pyRingGW-2.7.0/pyRing/pyRing.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\96e10ffbd912afc4.py",
+      "sha256": "a531d54684223e43877d79750f0b1e6eca8c235b7a766b3d5b340516e31876fa",
+      "hits": [
+        [
+          85,
+          "    if((approx_name=='TEOBResumSPM') and ('phase' in name)): default_param_name = 'phase'"
+        ],
+        [
+          696,
+          "        self.dtau_tgr_modes         = kwargs['dtau-tgr-modes']"
+        ],
+        [
+          710,
+          "            self.EsGB_corrections_dict['dtau_220']   = utils.EsGB_corrections('dtau_220'  , self.ParSpec_Dmax_TGR)"
+        ],
+        [
+          753,
+          "        if ((self.domega_tgr_modes is not None) or (self.dtau_tgr_modes is not None)):"
+        ],
+        [
+          775,
+          "            if (self.dtau_tgr_modes is not None):"
+        ],
+        [
+          776,
+          "                for mode in self.dtau_tgr_modes:"
+        ],
+        [
+          779,
+          "                        name = 'dtau_{}{}{}'.format(l, m, n)"
+        ],
+        [
+          786,
+          "                        basename = 'dtau_{}{}{}'.format(l, m, n)"
+        ],
+        [
+          947,
+          "        if((self.domega_tgr_modes is not None) and (self.dtau_tgr_modes is not None) and not(self.TGR_overtones_ordering=='Unordered')):"
+        ],
+        [
+          966,
+          "                for mode in self.dtau_tgr_modes:"
+        ],
+        [
+          971,
+          "                        tau_eff              = wf.QNM_fit(l,m,  n).tau(x['Mf'], x['af'])*(1.0+x['dtau_{}{}{}'.format(l, m,   n)])"
+        ],
+        [
+          972,
+          "                        try:    tau_eff_next = wf.QNM_fit(l,m,n+1).tau(x['Mf'], x['af'])*(1.0+x['dtau_{}{}{}'.format(l, m, n+1)])"
+        ],
+        [
+          977,
+          "                        tau_eff              = wf.QNM_fit(l,m,  n).tau(x['Mf'], x['af'])*(1.0+x['dtau_{}{}{}'.format(l, m,   n)])"
+        ],
+        [
+          978,
+          "                        try:    tau_eff_prev = wf.QNM_fit(l,m,n-1).tau(x['Mf'], x['af'])*(1.0+x['dtau_{}{}{}'.format(l, m, n-1)])"
+        ],
+        [
+          1289,
+          "                        name  = 'dtau_{}{}{}'.format(l, m, n)"
+        ],
+        [
+          1420,
+          "                        name = 'dtau_{}{}{}'.format(l, m, n)"
+        ],
+        [
+          1570,
+          "                        name = 'dtau_{}{}{}'.format(l, m, n)"
+        ],
+        [
+          1673,
+          "                        single_bounds = read_parameter_bounds(self.Config, configparser, kwargs, phase_name, self.default_bounds, 'TEOBResumSPM')"
+        ],
+        [
+          1680,
+          "                    single_bounds = read_parameter_bounds(self.Config, configparser, kwargs, name, self.default_bounds, 'TEOBResumSPM')"
+        ],
+        [
+          1696,
+          "                    if not(n==0): raise ValueError('With the TEOBResumSPM model currently only n=0 TGR modes deviations are supported.')"
+        ],
+        [
+          1706,
+          "                    if not(n==0): raise ValueError('With the TEOBResumSPM model currently only n=0 TGR modes deviations are supported.')"
+        ],
+        [
+          1707,
+          "                    name = 'dtau_{}{}{}'.format(l, m, n)"
+        ],
+        [
+          1883,
+          "    elif (input_par['template']=='TEOBResumSPM'):          signal_model = TEOBPMModel(        **input_par)"
+        ],
+        [
+          2218,
+          "            elif (input_par['template']=='TEOBResumSPM'):"
+        ],
+        [
+          2228,
+          "            if((input_par['template']=='Kerr') or (input_par['template']=='MMRDNP') or (input_par['template']=='TEOBResumSPM')):"
+        ]
+      ]
+    },
+    {
+      "package": "pyringgw",
+      "member": "pyRingGW-2.7.0/pyRing/utils.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\8d19713ba216b7cf.py",
+      "sha256": "16be2534878a449837b26cba87a901516ae521b20d7580f02e9aac95822c41cb",
+      "hits": [
+        [
+          956,
+          "                'dtau_220'  : [-0.0528 , -0.08   ,  3.914],"
+        ],
+        [
+          993,
+          "    elif(name=='dtau_220'):"
+        ]
+      ]
+    },
+    {
+      "package": "pyringgw",
+      "member": "pyRingGW-2.7.0/pyRing/waveform.pyx",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\c298deb981885af2.pyx",
+      "sha256": "5bef20a32764543743cca8bf1a69daedcca565b02143955838312d1d183305d3",
+      "hits": [
+        [
+          1132,
+          "            try:    dtau  = self.TGR_params['dtau_{}{}{}'.format(l,m,n)]"
+        ],
+        [
+          1160,
+          "                if not(  'dtau_{}{}{}'.format(l,m,n) in self.TGR_params.keys()): tau  = self.qnms_ParSpec[(s,l,m,n)].tau(self.Mf, self.af, 0.0  , np.array([]))"
+        ],
+        [
+          1422,
+          "        try:    dtau  = self.TGR_params['dtau_{}{}{}'.format(self.single_l, self.single_m, self.single_n)]"
+        ],
+        [
+          1444,
+          "            try:    dtau  = self.TGR_params['dtau_{}{}{}'.format(l, m, n)]"
+        ],
+        [
+          1616,
+          "            try:    dtau  = self.TGR_params['dtau_{}{}{}'.format(  l_prime, m_prime, n)]"
+        ],
+        [
+          1733,
+          "        try   : dtau  = self.TGR_params['dtau_{}{}{}'.format(l,m,0)]"
+        ],
+        [
+          1822,
+          "        # Impose that the conventions of TEOBResumSPM are respected, first BH is the heaviest."
+        ],
+        [
+          1850,
+          "            self.Mf = eu._JimenezFortezaRemnantMass(self.nu, self.X1, self.X2, self.chi1, self.chi2, self.M)   # [solar masses]"
+        ],
+        [
+          1851,
+          "            self.af = eu._JimenezFortezaRemnantSpin(self.nu, self.X1, self.X2, self.chi1, self.chi2)           # [adimensional]"
+        ],
+        [
+          1900,
+          "            dtau1  = self.TGR_params['dtau_{}{}0'.format(l,m)]"
+        ],
+        [
+          1907,
+          "                dtau2  = self.TGR_params['dtau_{}{}1'.format(l,m)]"
+        ],
+        [
+          2164,
+          "    def JimenezFortezaRemnantMass(self):"
+        ],
+        [
+          2165,
+          "        return eu._JimenezFortezaRemnantMass(self.nu, self.X1, self.X2, self.chi1, self.chi2, self.M)"
+        ],
+        [
+          2167,
+          "    def JimenezFortezaRemnantSpin(self):"
+        ],
+        [
+          2168,
+          "        return eu._JimenezFortezaRemnantSpin(self.nu, self.X1, self.X2, self.chi1, self.chi2)"
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/gw/conversions/__init__.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\2394014e6e89a1e7.py",
+      "sha256": "a55763ce08e38ed39366e30952ba34430ff6a413c507580313b6a02be66592cb",
+      "hits": [
+        [
+          30,
+          "from .remnant import _final_from_initial_BBH"
+        ],
+        [
+          1491,
+          "        _data, fits = _final_from_initial_BBH("
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/gw/conversions/nrutils.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\52dc4e2d22d687eb.py",
+      "sha256": "1ced8dab20e2755d8b2702167296496085721628330de4d6f04a839d046e2d37",
+      "hits": [
+        [
+          281,
+          "    precessing using the fit from David Keitel, Xisco Jimenez Forteza,"
+        ],
+        [
+          372,
+          "    the fit by David Keitel, Xisco Jimenez Forteza, Sascha Husa, Lionel London"
+        ],
+        [
+          432,
+          "    BBH using the fit by Sascha Husa, Xisco Jimenez Forteza, David Keitel"
+        ],
+        [
+          451,
+          "    BBH using the fit by David Keitel, Xisco Jimenez Forteza, Sascha Husa,"
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/gw/conversions/remnant.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\bcfbc7b255c9a18e.py",
+      "sha256": "e5fc9fa3276d22323d25e53eca59bcd077baabaa2bee09a87a733dfa3d61d5bd",
+      "hits": [
+        [
+          61,
+          "def _final_from_initial_NSBH(*args, **kwargs):"
+        ],
+        [
+          173,
+          "def _final_from_initial_BBH("
+        ],
+        [
+          466,
+          "        return _final_from_initial_NSBH(*args, **kwargs)[1]"
+        ],
+        [
+          467,
+          "    return _final_from_initial_BBH(*args, **kwargs)[0]"
+        ],
+        [
+          532,
+          "        return _final_from_initial_NSBH(*args, **kwargs)[1]"
+        ],
+        [
+          533,
+          "    return _final_from_initial_BBH(*args, **kwargs)[1]"
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/gw/file/standard_names.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\91c8237cc4205ebe.py",
+      "sha256": "41a9530f377a7cad4540473e86727ec4b0b929869d4cd1a3d784dbfd9f55b6b8",
+      "hits": [
+        [
+          61,
+          "    \"af_nonevol\": \"final_spin_non_evolved\","
+        ],
+        [
+          181,
+          "    \"final_spin_non_evolved\": \"final_spin_non_evolved\","
+        ],
+        [
+          649,
+          "    \"final_spin_non_evolved\": ("
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/gw/plots/latex_labels.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\e6f3ae7d695f2982.py",
+      "sha256": "85a236515e6123cdf5c85a1f5a7cbb15cc8b638fa9175a395df70da86348a174",
+      "hits": [
+        [
+          131,
+          "    \"final_spin_non_evolved\": r\"$a_{\\mathrm{final}}^{\\mathrm{nonevol}}$\","
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/gw/webpage/tgr.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\5b321e49057ee5e8.py",
+      "sha256": "84222d608237ddbdf05271bcd461faa28ac0ffefaecaff0dd1beb9cb06c60d7f",
+      "hits": [
+        [
+          303,
+          "                    base_string.format(_label, \"final_mass_non_evolved_final_spin_non_evolved\"),"
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/tests/base.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\e8323f9cdbda8da4.py",
+      "sha256": "415127ebba452c09a39e7b6f8dbf22fb958c74a49756deec432e87b07561a170",
+      "hits": [
+        [
+          43,
+          "        'peak_luminosity_non_evolved', 'final_spin_non_evolved',"
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/tests/conversion_test.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\3fc11f8f620a4555.py",
+      "sha256": "e773b5856239bf0884d06015d12f3f47a26f13c0f1301579687a550288397220",
+      "hits": [
+        [
+          587,
+          "            'phi_1', 'phi_2', 'chi_eff', 'chi_p', 'final_spin_non_evolved',"
+        ],
+        [
+          628,
+          "            'final_spin_non_evolved': Array([0.46198316]),"
+        ]
+      ]
+    },
+    {
+      "package": "pesummary",
+      "member": "pesummary-1.0.0/pesummary/tests/executable_test.py",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\source_distributions\\selected\\3f2f45daf6cf88bd.py",
+      "sha256": "3c10c7ab0aee6e5efae6c694644a67e5cc07629d38228e38d75445ba2dc69a39",
+      "hits": [
+        [
+          1014,
+          "                \"final_mass_non_evolved_final_spin_non_evolved\""
+        ]
+      ]
+    }
+  ],
+  "executed": false
+}

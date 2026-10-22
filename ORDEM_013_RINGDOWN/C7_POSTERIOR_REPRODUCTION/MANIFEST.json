@@ -1,0 +1,609 @@
+{
+  "status": "POSTERIOR_REGENERATION_SUPPLEMENT",
+  "created_utc": "2026-09-22T02:02:43.466024+00:00",
+  "generator_sha256": "8bd69de6079d01c7b9fe2e3523dfba89fc436af5d3c5af05e50cb66821d5f523",
+  "assets": [
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/fetch_public.py",
+      "destination": "ORDEM_013_RINGDOWN/fetch_public.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py",
+      "destination": "ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/posterior_220_readout.py",
+      "destination": "ORDEM_013_RINGDOWN/posterior_220_readout.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/catalog_220_readout.py",
+      "destination": "ORDEM_013_RINGDOWN/catalog_220_readout.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/joint_modes_posterior.py",
+      "destination": "ORDEM_013_RINGDOWN/joint_modes_posterior.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/free_clock_posterior.py",
+      "destination": "ORDEM_013_RINGDOWN/free_clock_posterior.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/combine_catalog.py",
+      "destination": "ORDEM_013_RINGDOWN/combine_catalog.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/REGISTRO_C4.json",
+      "destination": "ORDEM_013_RINGDOWN/REGISTRO_C4.json"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/C4_SCHEMA.json",
+      "destination": "ORDEM_013_RINGDOWN/C4_SCHEMA.json"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/C4_CATALOG_SCHEMA.json",
+      "destination": "ORDEM_013_RINGDOWN/C4_CATALOG_SCHEMA.json"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/QNM_GRID.json",
+      "destination": "ORDEM_013_RINGDOWN/QNM_GRID.json"
+    },
+    {
+      "path": "assets/TUNEL/DO_CHATGPT/ENTREGA_013_C4a_REGISTRO_POSTERIORES.md",
+      "destination": "TUNEL/DO_CHATGPT/ENTREGA_013_C4a_REGISTRO_POSTERIORES.md"
+    }
+  ],
+  "stages": {
+    "primary": {
+      "commands": [
+        [
+          "posterior_220_readout.py"
+        ]
+      ],
+      "outputs": [
+        {
+          "name": "C4_220_INITIAL.json",
+          "fields": [
+            "N",
+            "quantiles",
+            "rows"
+          ]
+        }
+      ]
+    },
+    "joint": {
+      "commands": [
+        [
+          "joint_modes_posterior.py"
+        ]
+      ],
+      "outputs": [
+        {
+          "name": "C4_JOINT_MODES.json",
+          "fields": [
+            "N",
+            "GR_HPD_controls",
+            "rows",
+            "independent_five_dimensional_KDE_quadrature"
+          ]
+        }
+      ]
+    },
+    "free_clock": {
+      "commands": [
+        [
+          "free_clock_posterior.py"
+        ]
+      ],
+      "outputs": [
+        {
+          "name": "C4_FREE_CLOCK.json",
+          "fields": [
+            "N",
+            "rows"
+          ]
+        }
+      ]
+    },
+    "catalog": {
+      "commands": [
+        [
+          "catalog_220_readout.py"
+        ],
+        [
+          "combine_catalog.py"
+        ]
+      ],
+      "outputs": [
+        {
+          "name": "C4_CATALOG_220.json",
+          "fields": [
+            "N_events",
+            "N_posterior_draws",
+            "rows",
+            "catalog"
+          ]
+        },
+        {
+          "name": "C4_CATALOG_COMBINATION.json",
+          "fields": [
+            "common_deformation_GR_diagnostics",
+            "catalog"
+          ]
+        }
+      ]
+    }
+  },
+  "external_inputs": [
+    {
+      "path": "cache/public/17018009/extracted/TGR_companion_S250114ax_results/gw250114_pseobnr/posterior_samples.h5",
+      "bytes": 59249916,
+      "sha256": "b9971bcd7d72fdd4a176483990854ae917992ad15cd793d15840dc2fe824a627",
+      "archive": "17018009",
+      "member": "TGR_companion_S250114ax_results/gw250114_pseobnr/posterior_samples.h5",
+      "stages": [
+        "primary",
+        "joint",
+        "free_clock"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW250114_082203_Prod0.h5",
+      "bytes": 59249916,
+      "sha256": "b9971bcd7d72fdd4a176483990854ae917992ad15cd793d15840dc2fe824a627",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW250114_082203_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW200311_115853_Prod0.h5",
+      "bytes": 39744340,
+      "sha256": "655699ef55e69772e52be76270c443f96d28ce994e0805ff758ad83f7de27103",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW200311_115853_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW170104_101158_Prod0.h5",
+      "bytes": 27834863,
+      "sha256": "7d7068231b54bfa294d62b960cb08d7888d59ddf63ca040282f734f9d286a7ca",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW170104_101158_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240514_121713_Prod0.h5",
+      "bytes": 36611720,
+      "sha256": "4f4776119f820529305ed2ea6d1eb0c076809359c18b3971b80a91e8cd27b87b",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240514_121713_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW241225_082815_Prod0.h5",
+      "bytes": 30202096,
+      "sha256": "1d2dd90ed2b72b5550db7de499e38f88900938648f1a023c9fc8e8c468a1143e",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW241225_082815_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240919_061559_Prod0.h5",
+      "bytes": 36483720,
+      "sha256": "2ddb5612cd6de8b3d3fe06fa4e489962113abe04a1bd3c86aceda13605c2bc92",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240919_061559_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW241127_061008_Prod0.h5",
+      "bytes": 32038471,
+      "sha256": "1424476790528dfa0ecf955a3f0658f7eeb2d3c8af3737572cf7ca5b4ffb3d30",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW241127_061008_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW241129_021832_Prod0.h5",
+      "bytes": 35597263,
+      "sha256": "95f48d16bda84ba3111489c5882b3b396eb0fa89983333466667fa94bf94b351",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW241129_021832_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240716_034900_Prod0.h5",
+      "bytes": 28756999,
+      "sha256": "7d57ecc2d6ab79f54aeef0fa5cd61bc6675a49a16325a6522e40f98d1f1fc52a",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240716_034900_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW200224_222234_Prod0.h5",
+      "bytes": 32419900,
+      "sha256": "2f305645afa8bb03eda8bfb86832fac4ebd0c6f584187a5a1c06a565588adb1c",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW200224_222234_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240705_053215_Prod0.h5",
+      "bytes": 25139496,
+      "sha256": "021567cb315415333219c58d6c01ae9b4f14a1497ea3dbe47dca22bb53e2eb0b",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240705_053215_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW190521_074359_Prod0.h5",
+      "bytes": 28987052,
+      "sha256": "e78ae2678155ccb905a48b7a4c90866fb3c158c6592a3dfa618ed22e52da0362",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW190521_074359_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW191109_010717_Prod0.h5",
+      "bytes": 32226791,
+      "sha256": "382f355b9aa5d59d8551ef1f5945a2d2dc63c6d1991cb486bc7b3129fd7f6173",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW191109_010717_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW231226_101520_Prod0.h5",
+      "bytes": 32049135,
+      "sha256": "70f619507e656e702e5c2b9fa849701bfb9033ca56b5de858e4c03ba0d6b649f",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW231226_101520_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW241006_015333_Prod0.h5",
+      "bytes": 39371663,
+      "sha256": "5279a6d5d809125407103ed6154a27c7b29d6a4ddf106002f98156c5021739db",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW241006_015333_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240920_124024_Prod0.h5",
+      "bytes": 27069695,
+      "sha256": "55ee5818d0a7c8b9e487ac418ea19c2be757957c8695222ad62d845ee352510f",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240920_124024_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW200129_065458_Prod0.h5",
+      "bytes": 37772932,
+      "sha256": "9ab35b32fb46d41e8901b52d721fdaf65a9a58e0acbac6cdb6e905d7dd44065e",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW200129_065458_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW230914_111401_Prod0.h5",
+      "bytes": 27634291,
+      "sha256": "6b8770361be4817dc6c64701eadc239541418f8c16c515407dda12c8fe342fc1",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW230914_111401_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW231206_233901_Prod0.h5",
+      "bytes": 28384527,
+      "sha256": "2814f4c058a59bdf31903daf667389b50583aad1783055bcf1448b82e83576d7",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW231206_233901_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW190519_153544_Prod0.h5",
+      "bytes": 39744340,
+      "sha256": "7f81149dad489b3a5b2563ebbee87cea65a0777607d9716f868616eb5d85cba5",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW190519_153544_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW230628_231200_Prod0.h5",
+      "bytes": 25704535,
+      "sha256": "80b61edea729c50cb623c867bc172487699c0dba475941d3e141da07f07d5aaa",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW230628_231200_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW200208_130117_Prod0.h5",
+      "bytes": 37617399,
+      "sha256": "707816640ff804954f94dd9585f08ab208b7b040be039d70b27113d6258ec7b7",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW200208_130117_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW150914_095045_Prod0.h5",
+      "bytes": 28370807,
+      "sha256": "ee037d6b7bf4b5844cc5085959ae9c85cf9009105ae741ba4ce15cc8421fa29d",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW150914_095045_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240615_113620_Prod0.h5",
+      "bytes": 25066120,
+      "sha256": "019f3078cd1fbbf9fc84766a12d044023bc918f145b1acc0bb4f60028156d29c",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240615_113620_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240621_195059_Prod0.h5",
+      "bytes": 35310920,
+      "sha256": "1691b7ce0a01bd2e7341abc9bf27c017f6d1726d2088c1fcc41b86f669ce128c",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240621_195059_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW231028_153006_Prod0.h5",
+      "bytes": 32068575,
+      "sha256": "6cfd5e9c7af014d17d74b726844170b2e109899621dc5d860546ffa202ab7c1b",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW231028_153006_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW250119_025138_Prod0.h5",
+      "bytes": 28144056,
+      "sha256": "ad6bcf11dee76e7dedc383206cac22172668c2de6f581b9069527c652644ee0c",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW250119_025138_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW190630_185205_Prod0.h5",
+      "bytes": 28916636,
+      "sha256": "b171f2bf2eeee33e1d93d8f6ba0cbb1efa0fe67ef616fb2949f0a710338fd2b3",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW190630_185205_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW230927_153832_Prod0.h5",
+      "bytes": 25888671,
+      "sha256": "57d55c936ae03885e222026ed8abab843cce68fd3b045a43be3fbc1016d01d68",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW230927_153832_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW240511_031507_Prod0.h5",
+      "bytes": 35330063,
+      "sha256": "a112cb0e3040e37bf8dbdd0295e15a145cbd160be16bc33207ceccb49b837cda",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW240511_031507_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW190828_063405_Prod0.h5",
+      "bytes": 39744340,
+      "sha256": "e374f20deb3d21e98ee9b3dfab44f13480020cd9c1e4585d3a48ab19a5ff3e4c",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW190828_063405_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW231102_071736_Prod0.h5",
+      "bytes": 32246975,
+      "sha256": "6f64ce47488762bd7d0f4dc0bd00540af801b277218725318d7692420e3cdab6",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW231102_071736_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW190910_112807_Prod0.h5",
+      "bytes": 28465452,
+      "sha256": "20a5795c0d3d4bfb66ba681ee72eb5c0b0d8b6ecea12363139e7b0034cf6bcc8",
+      "archive": "21454847",
+      "member": "pSEOB/metafiles/pSEOB_GW190910_112807_Prod0.h5",
+      "stages": [
+        "catalog"
+      ]
+    },
+    {
+      "path": "cache/public/21454847/extracted/pSEOB/pSEOBNR_main_figure.ipynb",
+      "bytes": 425488,
+      "sha256": "db64f5c1ee3eba2fd3546504945dfabbcb568b3d0f9ba9cad6687c2a76897f33",
+      "archive": "21454847",
+      "member": "pSEOB/pSEOBNR_main_figure.ipynb",
+      "stages": [
+        "catalog"
+      ]
+    }
+  ],
+  "archives": [
+    {
+      "id": "17018009",
+      "record": 17018009,
+      "filename": "TGR_companion_S250114ax_results.tar.gz",
+      "bytes": 1671496586,
+      "sha256": "18d740c816285451532892466d05de603568dc38169f18057bddf78d01eced36",
+      "url": "https://zenodo.org/api/records/17018009/files/TGR_companion_S250114ax_results.tar.gz/content",
+      "attribution": "LVK, CC BY 4.0",
+      "doi": "10.5281/zenodo.17018009"
+    },
+    {
+      "id": "21454847",
+      "record": 21454847,
+      "filename": "pSEOB.tar.gz",
+      "bytes": 711331923,
+      "sha256": "ee1d64487597132ff0a84d138c93fe81d2338543cc89a5e37ceb5e045a284685",
+      "url": "https://zenodo.org/api/records/21454847/files/pSEOB.tar.gz/content",
+      "attribution": "LVK, CC BY 4.0",
+      "doi": "10.5281/zenodo.21454847"
+    }
+  ],
+  "shipped_files": [
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/C4_CATALOG_SCHEMA.json",
+      "bytes": 169206,
+      "sha256": "9339c27512482f55b6bfd0b76364ea37cae2abcbaf65f16d3d36a50b9ed92724"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/C4_SCHEMA.json",
+      "bytes": 235493,
+      "sha256": "c4076fca98bcb544f3808a903d6d6005978435b79c4f9dee5371970881ab39d4"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/catalog_220_readout.py",
+      "bytes": 8370,
+      "sha256": "c2b43d633b39195a086a7961cdcc9842ec90fb4d5b25cf5114641b33191707de"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/combine_catalog.py",
+      "bytes": 6093,
+      "sha256": "18096abb16e15935192d25d9af0ed9b2eef621f3ed21503553e084edaa2df50b"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/fetch_public.py",
+      "bytes": 3793,
+      "sha256": "ef32471eb12d59c326fca451568ca9c7400f11c2a03b4ad1f8f09f5c0967d7b5"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/free_clock_posterior.py",
+      "bytes": 7859,
+      "sha256": "acb13e9a0fc90130f1f68440b663bb9090a1cf0daba092380e70a010ad0e28f1"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/joint_modes_posterior.py",
+      "bytes": 8381,
+      "sha256": "6084957e9ceb82ddeab70e14cfdc08b5c1bc50984ed38deb702bea3fcdfb36c8"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/posterior_220_readout.py",
+      "bytes": 6501,
+      "sha256": "f5cccda67b341785cc5101cd7c3447cd6d945ef7e0f0703aa4da1b031ff72279"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/QNM_GRID.json",
+      "bytes": 169231,
+      "sha256": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/REGISTRO_C4.json",
+      "bytes": 2768,
+      "sha256": "2bebc171ddbcef43d7b50b9076dd806b64829a05a769b6e4fe23b73ec121ac59"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py",
+      "bytes": 8382,
+      "sha256": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652"
+    },
+    {
+      "path": "assets/TUNEL/DO_CHATGPT/ENTREGA_013_C4a_REGISTRO_POSTERIORES.md",
+      "bytes": 1785,
+      "sha256": "0f8076c14ecbe7bd54ec8d62fb00d5fc6715d69b15c1931f748739cf7469eb19"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1700,
+      "sha256": "1c739eb0bdf5b4140b4e7a255a15bceaa9272664658e326e29079a77d7a2edfc"
+    },
+    {
+      "path": "reference/C4_220_INITIAL.json",
+      "bytes": 6954,
+      "sha256": "f5550b7b1f129e83b4874f95b223e82ca973e0812bd98c150a6c04cd37747edc"
+    },
+    {
+      "path": "reference/C4_CATALOG_220.json",
+      "bytes": 673228,
+      "sha256": "93bdc413130d294acde91ec03f8392b8d9c5ec5b33fdc97274371656503d8e17"
+    },
+    {
+      "path": "reference/C4_CATALOG_COMBINATION.json",
+      "bytes": 12167,
+      "sha256": "f3d8c1959ded3efd15045923ce0cbafe7356ec888ced1934d8d0c183046d0d01"
+    },
+    {
+      "path": "reference/C4_FREE_CLOCK.json",
+      "bytes": 64009,
+      "sha256": "cbf63327719372780ec3b3c89376360e78828c45198ee5cfd5bf04cd5ea328b1"
+    },
+    {
+      "path": "reference/C4_JOINT_MODES.json",
+      "bytes": 9740,
+      "sha256": "8b2e0fea734caed23f05c3a9f9a2f3f7aaa8f19ed71d2f9d9a841129739e742f"
+    },
+    {
+      "path": "reproduce.py",
+      "bytes": 9385,
+      "sha256": "7cb02c6749342c48cfc7df47976247b0baed52f52b9aa6ec195d5bec5b8b18e0"
+    }
+  ]
+}

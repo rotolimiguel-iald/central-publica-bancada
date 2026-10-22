@@ -1,0 +1,72 @@
+{
+  "status": "FINITE_MOCK_REPRODUCTIONS_NOT_PE_VALIDATION",
+  "utc": "2026-09-22T20:09:54.106412+00:00",
+  "tests": [
+    {
+      "name": "ZERO_WAVEFORM_ACCEPTED",
+      "reproduced": true,
+      "detail": "Both fake polarizations zero pass wrapper without rejection"
+    },
+    {
+      "name": "NONFINITE_WAVEFORM_ACCEPTED",
+      "reproduced": true,
+      "detail": "Fake nonfinite polarization passes wrapper unchanged"
+    },
+    {
+      "name": "NONE_PROPAGATED_EXPECTED",
+      "reproduced": true,
+      "detail": "None propagation is valid Bilby likelihood behavior, not a bug"
+    },
+    {
+      "name": "FRESH_DICTIONARY_OK",
+      "reproduced": true,
+      "detail": "Three calls created distinct dictionaries; four deformation setters used"
+    },
+    {
+      "name": "FRACTIONAL_START_SILENTLY_ROUNDED",
+      "reproduced": true,
+      "detail": {
+        "requested_start": 100.1,
+        "returned_start": 100.0,
+        "sample_rate": 4
+      }
+    },
+    {
+      "name": "EMPTY_DQ_REQUIREMENTS_PASS_BAD_FLAGS",
+      "reproduced": true,
+      "detail": "No flags requested causes all bad flags to pass; registration must forbid empty lists"
+    },
+    {
+      "name": "LEADER_EXIT_LEAVES_WORKER_UNCHECKED",
+      "reproduced": true,
+      "detail": "No group-existence probe or SIGKILL after leader returns; no real process launched"
+    },
+    {
+      "name": "NAN_INFORMATION_THRESHOLD_ACCEPTED",
+      "reproduced": true,
+      "detail": "Registered threshold not checked finite; no seed accessed"
+    },
+    {
+      "name": "ZERO_CHUNK_NO_PROGRESS",
+      "reproduced": true,
+      "detail": "Three zero-length chunks with no progress; finite mock cutoff, no MC campaign"
+    }
+  ],
+  "script_sha256": "d534f71cb14c9bde0f143406c9f4f0109d0855babb40a088022734d01e3ee560",
+  "snapshots": {
+    "blinding.py": "9bad589f08d25148f03bd9bd76b2081da46dd1f3716557bc837d8e4e20e01681",
+    "pe_runner.py": "c2d41fc0eb78906345e97aca624ca8eb169cedaa6629a406eaa0a348edcfbc6f",
+    "pseob_source.py": "048acba2de9ccfeed8835ae9ff32e336c4cd68093ad03c55108a621ae9a56b3a",
+    "registration_guard.py": "7a5505b06eb63a22c866f3ce6f202c25b09cad01758c9b8d9fa65d25f9f66507",
+    "route_iv_null.py": "64a6bff75a2299190b60fa03468f5ebc778e349389299d58686f947919a4d403",
+    "run_controlled.py": "e73ab74efc1311c20870e7b7bcd6fb8d3d2cf5ffa7eef14c38145624e3e6362f",
+    "strain_io.py": "7c1ac2359e5fd949c5d1a313cacc25712ab3afc009f7acf593209fa14cf53753",
+    "synthetic_null.py": "a5b898285bf6da0f3c226256733b058bb90d11eecaf9c491806c9993285c0cf9"
+  },
+  "real_waveform_calls": 0,
+  "real_strain_files_opened": 0,
+  "pe_calls": 0,
+  "secret_bytes_read": 0,
+  "real_processes_spawned": 0,
+  "numpy_version": "2.5.3"
+}

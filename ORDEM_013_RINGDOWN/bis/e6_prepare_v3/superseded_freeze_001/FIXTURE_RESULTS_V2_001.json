@@ -1,0 +1,523 @@
+{
+  "status": "FINITE_METADATA_FIXTURES_V2",
+  "created_utc": "2026-09-22T22:56:54.154833+00:00",
+  "cases": [
+    {
+      "id": "valid_actual_sequence",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": "Dummy activate only; no assembly/publication"
+    },
+    {
+      "id": "stage_before_E2_activation",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Stage receipt predates E2 activation",
+      "result": null
+    },
+    {
+      "id": "TEST_before_allocation_and_calibration",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: TEST/calibration precedes prerequisite activity",
+      "result": null
+    },
+    {
+      "id": "wrong_receipt_predecessor_hash",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Stage predecessor pin differs",
+      "result": null
+    },
+    {
+      "id": "wrong_actual_evidence_predecessor_hash",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Source predecessor evidence pin differs",
+      "result": null
+    },
+    {
+      "id": "receipt_dates_cannot_hide_reversed_activity",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: TEST/calibration precedes prerequisite activity",
+      "result": null
+    },
+    {
+      "id": "future_actual_time",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Actual activity/wall chronology invalid",
+      "result": null
+    },
+    {
+      "id": "naive_actual_time",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Timezone required",
+      "result": null
+    },
+    {
+      "id": "malformed_actual_time",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Invalid isoformat string: 'INVALID'",
+      "result": null
+    },
+    {
+      "id": "authorization_after_activity",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Activity precedes its sourced authorization",
+      "result": null
+    },
+    {
+      "id": "existing_GO_before_E2_allowed",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": "Dummy activate only; no assembly/publication"
+    },
+    {
+      "id": "retrospective_adapter_truthful_dates",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": "Dummy activate only; no assembly/publication"
+    },
+    {
+      "id": "blocked_no_execution_walls_preserved",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": "Dummy activate only; no assembly/publication"
+    },
+    {
+      "id": "partial_no_execution_walls_preserved",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": "Dummy activate only; no assembly/publication"
+    },
+    {
+      "id": "unavailable_no_execution_walls_preserved",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": "Dummy activate only; no assembly/publication"
+    },
+    {
+      "id": "completed_without_execution_refused",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Completed stage cannot declare no execution",
+      "result": null
+    },
+    {
+      "id": "wall_without_reason_refused",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: No-execution wall must have a sourced reason",
+      "result": null
+    },
+    {
+      "id": "execution_after_missing_allocation_refused",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Execution cannot follow a missing prerequisite",
+      "result": null
+    },
+    {
+      "id": "valid_tau220",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "NOT_FALSIFIED_POWERED",
+        "physical_z": 0.2
+      }
+    },
+    {
+      "id": "valid_tau440",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "NOT_FALSIFIED_POWERED",
+        "physical_z": 0.2
+      }
+    },
+    {
+      "id": "valid_df_width_IV",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "NOT_FALSIFIED_POWERED",
+        "physical_z": 0.2
+      }
+    },
+    {
+      "id": "red_gate_physical_ratio",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: No compatible independently reviewed E3.3 green gate",
+      "result": null
+    },
+    {
+      "id": "red_calibration_physical_ratio",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Calibration stage cannot publish observed physical significance",
+      "result": null
+    },
+    {
+      "id": "green_calibration_physical_ratio",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Calibration stage cannot publish observed physical significance",
+      "result": null
+    },
+    {
+      "id": "valid_TEST_physical_ratio_only",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "NOT_FALSIFIED_POWERED",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "unpaid_partial_NOT_FALSIFIED_UNDERPOWERED",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incomplete stages forbid physical readout",
+      "result": null
+    },
+    {
+      "id": "valid_underpowered_z_below5",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "NOT_FALSIFIED_UNDERPOWERED",
+        "physical_z": 0.2
+      }
+    },
+    {
+      "id": "valid_underpowered_without_physical_number",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "NOT_FALSIFIED_UNDERPOWERED",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "underpowered_missing_reviewed_power_status",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Underpowered requires reviewed insufficient power, not a high-power threshold",
+      "result": null
+    },
+    {
+      "id": "wrong_calibration_receipt",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Test must link the reviewed E3.3 receipt",
+      "result": null
+    },
+    {
+      "id": "partial_physical_result",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incomplete stages forbid physical readout",
+      "result": null
+    },
+    {
+      "id": "unpaid_physical_result",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: No compatible independently reviewed E3.3 green gate",
+      "result": null
+    },
+    {
+      "id": "red_z_physical",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: No compatible independently reviewed E3.3 green gate",
+      "result": null
+    },
+    {
+      "id": "green_tau_gate_in_Hz",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: TAU220_POPULATION/sigma_c_calibrated",
+      "result": null
+    },
+    {
+      "id": "cross_mode_440_gate_in_220_units",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: TAU440_FIXED_SOURCE_FISHER/sigma_c_calibrated",
+      "result": null
+    },
+    {
+      "id": "IV_width_as_tau",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: DF220_POPULATION_WIDTH_IV/sigma_sys_df",
+      "result": null
+    },
+    {
+      "id": "IV_width_as_fraction_without_width_type",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: DF220_POPULATION_WIDTH_IV/sigma_sys_df",
+      "result": null
+    },
+    {
+      "id": "count_not_information",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: TAU220_POPULATION/N90_information_target",
+      "result": null
+    },
+    {
+      "id": "information_not_count",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: TAU220_POPULATION/N90_count_scenario",
+      "result": null
+    },
+    {
+      "id": "equivalents_channel_mismatch",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: TAU220_POPULATION/GW250114_equivalents",
+      "result": null
+    },
+    {
+      "id": "rate_wrong_time_base",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: TAU220_POPULATION/rate_per_year",
+      "result": null
+    },
+    {
+      "id": "z_in_Hz",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Incompatible semantic unit: TAU220_POPULATION/z_physical",
+      "result": null
+    },
+    {
+      "id": "future_O4C_GWTC6_physical_test",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Future groups are conditional projections only in this contract",
+      "result": null
+    },
+    {
+      "id": "future_O4C_GWTC6_conditional_projection",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "AWAITING_DATA",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "future_O5_BANDA_physical_test",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Future groups are conditional projections only in this contract",
+      "result": null
+    },
+    {
+      "id": "future_O5_BANDA_conditional_projection",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "AWAITING_DATA",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "future_ET_physical_test",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Future groups are conditional projections only in this contract",
+      "result": null
+    },
+    {
+      "id": "future_ET_conditional_projection",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "AWAITING_DATA",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "future_CE_physical_test",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Future groups are conditional projections only in this contract",
+      "result": null
+    },
+    {
+      "id": "future_CE_conditional_projection",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "AWAITING_DATA",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "future_ET_physical_test",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Future groups are conditional projections only in this contract",
+      "result": null
+    },
+    {
+      "id": "red_data_AWAITING_DATA",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Present test data with red/OPEN gate means INCONCLUSIVE_SYSTEMATICS",
+      "result": null
+    },
+    {
+      "id": "open_data_AWAITING_DATA",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Present test data with red/OPEN gate means INCONCLUSIVE_SYSTEMATICS",
+      "result": null
+    },
+    {
+      "id": "red_data_INCONCLUSIVE",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "INCONCLUSIVE_SYSTEMATICS",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "red_conditional_diagnostic_allowed",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "INCONCLUSIVE_SYSTEMATICS",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "no_data_OPEN",
+      "expected_rejection": false,
+      "rejected": false,
+      "passed": true,
+      "error": null,
+      "result": {
+        "verdict": "AWAITING_DATA",
+        "physical_z": null
+      }
+    },
+    {
+      "id": "no_data_falsified",
+      "expected_rejection": true,
+      "rejected": true,
+      "passed": true,
+      "error": "ValueError: Physical readout before reviewed calibrated green gate",
+      "result": null
+    },
+    {
+      "id": "empty_dummy_grid_180",
+      "passed": true,
+      "expected_rejection": false,
+      "rejected": false,
+      "error": null,
+      "result": {
+        "cells": 180
+      }
+    }
+  ],
+  "total": 58,
+  "passed": 58,
+  "negative_accepted": [],
+  "failures": [],
+  "generator_sha256": "ff7861eb81ac309a22d268cf9a8f56bc45980822bc07e1b806091aa06fa9064f",
+  "fixture_script_sha256": "13d83c7907f027b1057e7d0806bda472b8d465dca0afcfde222d8594a624aea2",
+  "producer_main_called": false,
+  "real_scientific_baselines_assembled": false,
+  "actual_E6_executed": false,
+  "actual_authorization_created": false,
+  "physical_numbers": "DUMMY_ONLY",
+  "limitation": "Metadata unit/guard fixtures, not independent closing review or proof of real receipt chronology"
+}

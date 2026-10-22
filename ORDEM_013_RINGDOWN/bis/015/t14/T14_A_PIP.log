@@ -1,0 +1,82 @@
+Collecting pyseobnr==0.3.7
+  Downloading pyseobnr-0.3.7.tar.gz (1.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 6.8 MB/s eta 0:00:00
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting numpy>=1.23.0 (from pyseobnr==0.3.7)
+  Downloading numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting scipy>=1.8.0 (from pyseobnr==0.3.7)
+  Downloading scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.4/62.4 kB 516.1 MB/s eta 0:00:00
+Collecting h5py (from pyseobnr==0.3.7)
+  Downloading h5py-3.16.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+Collecting numexpr (from pyseobnr==0.3.7)
+  Downloading numexpr-2.14.2-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+Collecting numba (from pyseobnr==0.3.7)
+  Downloading numba-0.67.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.7 kB)
+Collecting qnm (from pyseobnr==0.3.7)
+  Downloading qnm-0.4.4-py3-none-any.whl.metadata (10 kB)
+Collecting scri (from pyseobnr==0.3.7)
+  Downloading scri-2024.0.14-py3-none-any.whl.metadata (5.9 kB)
+Collecting pygsl_lite (from pyseobnr==0.3.7)
+  Downloading pygsl_lite-0.1.8.tar.gz (118 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 118.2/118.2 kB 144.8 MB/s eta 0:00:00
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Getting requirements to build wheel did not run successfully.
+  │ exit code: 1
+  ╰─> [36 lines of output]
+      /tmp/pip-install-lkbfxdet/pygsl-lite_271076111ae34689b4ebdcc4c54c5643/gsl_dist/gsl_Location.py:63: SyntaxWarning: invalid escape sequence '\.'
+        return re.split('\.',version)
+      /bin/sh: 1: gsl-config: not found
+      Traceback (most recent call last):
+        File "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/cache/t14_pyseobnr_venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 353, in <module>
+          main()
+        File "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/cache/t14_pyseobnr_venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 335, in main
+          json_out['return_val'] = hook(**hook_input['kwargs'])
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/cache/t14_pyseobnr_venv/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 118, in get_requires_for_build_wheel
+          return hook(config_settings)
+                 ^^^^^^^^^^^^^^^^^^^^^
+        File "/tmp/pip-build-env-hgx1sket/overlay/lib/python3.12/site-packages/setuptools/build_meta.py", line 333, in get_requires_for_build_wheel
+          return self._get_build_requires(config_settings, requirements=[])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/tmp/pip-build-env-hgx1sket/overlay/lib/python3.12/site-packages/setuptools/build_meta.py", line 301, in _get_build_requires
+          self.run_setup()
+        File "/tmp/pip-build-env-hgx1sket/overlay/lib/python3.12/site-packages/setuptools/build_meta.py", line 317, in run_setup
+          exec(code, locals())  # noqa: S102 # exec is intentional here
+          ^^^^^^^^^^^^^^^^^^^^
+        File "<string>", line 69, in <module>
+        File "/tmp/pip-install-lkbfxdet/pygsl-lite_271076111ae34689b4ebdcc4c54c5643/gsl_packages.py", line 6, in <module>
+          from swig_extension import SWIG_Extension
+        File "/tmp/pip-install-lkbfxdet/pygsl-lite_271076111ae34689b4ebdcc4c54c5643/gsl_dist/swig_extension.py", line 4, in <module>
+          from gsl_Extension import gsl_Extension, gsl_Location
+        File "/tmp/pip-install-lkbfxdet/pygsl-lite_271076111ae34689b4ebdcc4c54c5643/gsl_dist/gsl_Extension.py", line 21, in <module>
+          from gsl_Location import gsl_Location
+        File "/tmp/pip-install-lkbfxdet/pygsl-lite_271076111ae34689b4ebdcc4c54c5643/gsl_dist/gsl_Location.py", line 158, in <module>
+          gsl_Location = _gsl_Location_gsl_config()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/tmp/pip-install-lkbfxdet/pygsl-lite_271076111ae34689b4ebdcc4c54c5643/gsl_dist/gsl_Location.py", line 111, in __init__
+          self.prefix         = self.get_gsl_info('--prefix').strip()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/tmp/pip-install-lkbfxdet/pygsl-lite_271076111ae34689b4ebdcc4c54c5643/gsl_dist/gsl_Location.py", line 133, in get_gsl_info
+          raise DistutilsExecError("could not start %s"%self.gsl_config_tool)
+      distutils.errors.DistutilsExecError: could not start gsl-config
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+error: subprocess-exited-with-error
+
+× Getting requirements to build wheel did not run successfully.
+│ exit code: 1
+╰─> See above for output.
+
+note: This error originates from a subprocess, and is likely not a problem with pip.

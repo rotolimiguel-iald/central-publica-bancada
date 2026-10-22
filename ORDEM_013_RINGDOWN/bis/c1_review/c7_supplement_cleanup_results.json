@@ -1,0 +1,463 @@
+{
+  "status": "VERIFIED_3_NEGATIVES_AND_PRESERVED_ASSETS_WITH_2_LIFECYCLE_FINDINGS",
+  "method": "Read/hash/ZIP and AST lifecycle-only in-memory probes under optimize=1; no wrapper/science subprocess",
+  "utc": "2026-09-22T18:47:45.716209+00:00",
+  "builder_sha256": "34e13ec2124dc07b089a7b5f2df14000e96dfd7d91e678e1a1c58f14cea03ade",
+  "controls_sha256": "f3b5412fe7c9f0d43e8920002b81240d8542cf5af1105b855f6ae2d8c6a364d1",
+  "script_sha256": "fdb09dad3827f17e2668996f9079466ff7a55d70994682df5a37b2fc8fef709d",
+  "rows": [
+    {
+      "package": "C7_POSTERIOR_REPRODUCTION_v3",
+      "shipped_files": 20,
+      "unchanged_old_files": 17,
+      "scientific_assets": 12,
+      "new_manifest_sha256": "10febaba4ab58663ebc0d09cc3cf308e3574abce95544dedc53b8b6872a8f577",
+      "new_zip_sha256": "e0c3f5022fd3391267f15fec7d36ed9a0cb1bb081a0d3fe30a92f9ccd3d8aa40",
+      "old_zip_sha256": "194a0a02b703d6ae49723d435a06fd73144bc1b9a138dbcb604c8cc3fbb8eecc",
+      "historical_zip_extra_receipts": {
+        "C7_POSTERIOR_REPRODUCTION/replay_receipts/catalog.json": "8216aa4b1cb89d6eb85aeb6a513a43c645a2801b5f379cb87d555172a0a7534b",
+        "C7_POSTERIOR_REPRODUCTION/replay_receipts/free_clock.json": "b0e0b3a8b2f6b661bbd3559cbd92fc07d11b057fafb247c34dbcde891fdf468a",
+        "C7_POSTERIOR_REPRODUCTION/replay_receipts/joint.json": "37f10e8535602b5aa11b6b64b2457b280a9225e79b2bf88b61efd6ccaab35426",
+        "C7_POSTERIOR_REPRODUCTION/replay_receipts/primary.json": "9f269f269a50983f3a37a71b52a0e657df47fa8308d8b73f2a0e2f6262f6eb57"
+      },
+      "wrapper_sha256": "690513005ddc89013ee7604bca1a04a47391bc077eb71be7aea43e32579b338b",
+      "negative_log_sha256": "4b4d2908a253fe5a2713c988d0bc5bf0e80154835408d7313d2ef50b0030b6b9",
+      "temporary_absent": true,
+      "temporary": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\supplement_cleanup_v3\\replay_primary_5ks2venx",
+      "removal_receipt_sha256": "71ae501752e28f17f9d637ccfc29095c2a49ffea2a122623bd5cc276356459f8",
+      "intent_receipt_sha256": "14fa008d427b1fe235372c85a0d38d0caaf34bc35437af117b5fa2670d5ce03b",
+      "lifecycle_probe": {
+        "first_setup_line": 127,
+        "try_line": 137,
+        "final_cleanup_line": 211,
+        "cases": [
+          {
+            "case": "internal_work",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/package/new_work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "internal_output",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/package/new_output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "preserved_mkdir_fails",
+            "error": "PermissionError: Injected output failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ]
+            ],
+            "remaining_mock_temporaries": [
+              "/work/replay_stage_fake"
+            ]
+          },
+          {
+            "case": "normal",
+            "error": null,
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "report_write_fails",
+            "error": "PermissionError: Injected report write failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          }
+        ]
+      }
+    },
+    {
+      "package": "C7_GWTC3_REPRODUCTION_v3",
+      "shipped_files": 26,
+      "unchanged_old_files": 23,
+      "scientific_assets": 15,
+      "new_manifest_sha256": "0efef44e885e16c863e98a8691fc0b21b4bfe80dc1c611db69b1cb5053408dbc",
+      "new_zip_sha256": "6d48fe8d1d9e4c9aa9b7b009f6c73145455f580e36a0f2645f6393bf38453c0d",
+      "old_zip_sha256": "8b0c8fcffa7ce36616c7dab39b963c1f343c9e770c620471f0ddc46aabe70407",
+      "historical_zip_extra_receipts": {
+        "C7_GWTC3_REPRODUCTION/replay_receipts/full.json": "c983765b6ae1244fad398bdd54f5395488a58b3a75aed8b2f0f1a16a6054e06f"
+      },
+      "wrapper_sha256": "de105c0dbd10505d39d28c54075cbbe564678ef5de5d2f07b53fdc867006e9ca",
+      "negative_log_sha256": "e5c38d4256deadac8265c4ac6f555e1f92e0d95dd48e751c058797d0292fed46",
+      "temporary_absent": true,
+      "temporary": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\supplement_cleanup_v3\\replay_full_i_5l35tv",
+      "removal_receipt_sha256": "fbab8868cf143c6627628bad2f5f59f74d73ba41ffa1589a7966bf71e94c1d13",
+      "intent_receipt_sha256": "e16e33120a09e3bd78055c1d238dda21db43e0ff1adca120308a3d7fa197e39d",
+      "lifecycle_probe": {
+        "first_setup_line": 130,
+        "try_line": 140,
+        "final_cleanup_line": 241,
+        "cases": [
+          {
+            "case": "internal_work",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/package/new_work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "internal_output",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/package/new_output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "preserved_mkdir_fails",
+            "error": "PermissionError: Injected output failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ]
+            ],
+            "remaining_mock_temporaries": [
+              "/work/replay_stage_fake"
+            ]
+          },
+          {
+            "case": "normal",
+            "error": null,
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "report_write_fails",
+            "error": "PermissionError: Injected report write failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          }
+        ]
+      }
+    },
+    {
+      "package": "C7_INJECTION_REPRODUCTION_v3",
+      "shipped_files": 26,
+      "unchanged_old_files": 23,
+      "scientific_assets": 18,
+      "new_manifest_sha256": "b967ac7998c52983c053a8a8a79f89f39ff50f75c6b85a8d273199625373a79e",
+      "new_zip_sha256": "16e01691ebc09ba9ce64b96fa68facbd46ed104ec94dcb9f84b3bdf2ba2d9ec4",
+      "old_zip_sha256": "0e94898309569440f3aab339f3c2b1c2e1eac41a96ace904bb5d7d23c05a4492",
+      "historical_zip_extra_receipts": {
+        "C7_INJECTION_REPRODUCTION/replay_receipts/full.json": "ff75e67994f18247183df6ed3c7f4e786241b201f326a7ba8c45d902b1838484"
+      },
+      "wrapper_sha256": "c64f13a17d17a2d383659ce69502d3713a8c0b56fda4660255fbfc1fdd712d3f",
+      "negative_log_sha256": "f17ba928e0b3b3cc0c741be9c9e4e0001f05fcbd56a0da53983c0b0986b30671",
+      "temporary_absent": true,
+      "temporary": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\supplement_cleanup_v3\\replay_full_49zxhfu4",
+      "removal_receipt_sha256": "96dfbf954a249342f64435d4dd7e4f26cea04f28bdc1f9fadf12d2fb2ef366b9",
+      "intent_receipt_sha256": "83ea215eed3c58ae62f400e1f65b5df01b54b4998f54963d00ff372a7b59350c",
+      "lifecycle_probe": {
+        "first_setup_line": 128,
+        "try_line": 138,
+        "final_cleanup_line": 219,
+        "cases": [
+          {
+            "case": "internal_work",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/package/new_work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "internal_output",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/package/new_output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "preserved_mkdir_fails",
+            "error": "PermissionError: Injected output failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ]
+            ],
+            "remaining_mock_temporaries": [
+              "/work/replay_stage_fake"
+            ]
+          },
+          {
+            "case": "normal",
+            "error": null,
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "report_write_fails",
+            "error": "PermissionError: Injected report write failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "status": "DOCUMENTARY_FEASIBILITY_ONLY_NOT_INSTALLED_OR_BENCHMARKED",
+  "observed_utc": "2026-09-22T22:22:36Z",
+  "alternative": 5,
+  "runtime": "/opt/lal_env",
+  "local_readonly_command": "/opt/lal_env/bin/python -B: importlib.util.find_spec('pyseobnr'); shutil.which for gcc/swig/gsl-config/pkg-config",
+  "local_metadata": {
+    "pyseobnr_spec": null,
+    "gcc": "/usr/bin/gcc",
+    "swig": null,
+    "gsl-config": null,
+    "pkg-config": null
+  },
+  "local_scope": "Module discovery and PATH only. Missing tool paths do not establish absence of shared libraries or headers. No package or scientific module imported, no install, no waveform.",
+  "primary_sources": [
+    {
+      "url": "https://waveforms.docs.ligo.org/software/pyseobnr/source/installation.html",
+      "method": "web open, 2026-09-22",
+      "displayed_documentation_version": "0.3.7.dev22+geb12889a1",
+      "paraphrase": "Source installation lists Python>=3.9, gcc, gsl and swig; a clean venv or conda environment is recommended. GSL/Python binding binary incompatibility can prevent operation."
+    },
+    {
+      "url": "https://waveforms.docs.ligo.org/software/pyseobnr/source/notebooks/example_precession.html",
+      "method": "web open, 2026-09-22",
+      "paraphrase": "The example invokes SEOBNRv5PHM with spin vectors through generate_modes_opt. This verifies a documented GR precessing interface, not a reviewed pSEOB deformation adapter for the frozen E2 runner."
+    }
+  ],
+  "bounded_search": {
+    "query": "site:waveforms.docs.ligo.org/software/pyseobnr dtau domega",
+    "result": "No indexed result in this query; absence of support is not established."
+  },
+  "installation_wall_seconds": null,
+  "waveform_seconds_per_call": null,
+  "end_to_end_PE_wall_seconds": null,
+  "cost_status": "OPEN_UNMEASURED_NOT_ZERO",
+  "integration": "Current registered runner fixes pSEOBNRv4HM_PA. A new backend would require a separate runtime, reviewed implementation, validation and witnessed amendment; changing a job field cannot activate it.",
+  "selection": "No allocation chosen by this note. No numerical speedup transferred from published benchmarks to this machine.",
+  "scientific_execution": false
+}

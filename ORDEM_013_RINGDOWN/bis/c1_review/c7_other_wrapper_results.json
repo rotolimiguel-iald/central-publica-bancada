@@ -1,0 +1,331 @@
+{
+  "status": "PASS_SCOPED_EXECUTION_AND_CLEANUP_DESIGN_CHECKS",
+  "utc": "2026-09-22T18:51:18.451844+00:00",
+  "scope": "Fully mocked main plus read-only byte/receipt checks; no actual wrapper subprocess or scientific run",
+  "wrapper_sha256": "b0ad7cfc75aad16be66c0eb6093b417d8e9cd3ba2bc165bda9f486fb20cf3dd6",
+  "builder_sha256": "98178c2e7808cba64ca337d3a915d15d625786b4aed9dc466db0125b714a6788",
+  "build_receipt_sha256": "7c1178492093d70a8a6c137303cd86f5f6a9cdd456565981f1ea04afd3c49551",
+  "script_sha256": "eed2f019fbc265fd7ac81e576597c8b779e0ff179516534c55dd9b4cc4aa8a38",
+  "packages": [
+    {
+      "package": "C7_COHERENT_SOURCE_REPRODUCTION_v3",
+      "manifest_files": 25,
+      "old_files_preserved": 23,
+      "manifest_sha256": "d100ac062c42f787eec67b41894bf2c0efae7a7596d06daaf97ca87d1af48741",
+      "archive_sha256": "523c8336c45e709be3f01b36b81b94c1c1ec1aa3e1641a397785b74bf888de4d",
+      "old_archive_sha256": "19be994825bb76618dcfd1edcf3a819141a66a07999dc1324b41d1f7fb8efc3e",
+      "wrapper_sha256": "b0ad7cfc75aad16be66c0eb6093b417d8e9cd3ba2bc165bda9f486fb20cf3dd6",
+      "legacy_script_sha256": "4be49c57061b7fda1a9c9ab453c466c4ef7540da9f4001a4a4544489e439cded",
+      "receipt_sha256": "47e3f32185ff84c4616a3d16ca91d166add0861d71e6e241e746f9fb1f1eab12",
+      "temporary_absent": true
+    },
+    {
+      "package": "C7_IMR_RECOVERY_REPRODUCTION_v3",
+      "manifest_files": 25,
+      "old_files_preserved": 23,
+      "manifest_sha256": "54ce55cdf82fb5753eb2ad6a1f132ebdbe611581639ea4e4f37b0f76bb8996e2",
+      "archive_sha256": "536c53dc396251bfd5f8220330e155b4bedf12f9ead50f30d30fd7f89daa1618",
+      "old_archive_sha256": "7dd26dad74ce5fc101c9183654af33394f62a3cb06e261704aa7ef3a64a98c22",
+      "wrapper_sha256": "b0ad7cfc75aad16be66c0eb6093b417d8e9cd3ba2bc165bda9f486fb20cf3dd6",
+      "legacy_script_sha256": "c2f862223d0c333355dbf460fa79675dc497078cb250134d7986715f8ca84094",
+      "receipt_sha256": "0ec71fc823c1abd80b0c997db012aefa0836def530eaa9aae263ff9cba7682f9",
+      "temporary_absent": true
+    },
+    {
+      "package": "C7_NATIVE_SEOB_WAVEFORM_v3",
+      "manifest_files": 12,
+      "old_files_preserved": 10,
+      "manifest_sha256": "9ad0def2be06b2022ad8d61beac8cf49a93acb9d33f011a2e6f57925af5608d3",
+      "archive_sha256": "5b713e0de66df57e29513a2ddc28581418ab98bc0653e1972161037bd8c50264",
+      "old_archive_sha256": "a368ae336532096297ceb4a7a9554dbb13dc648b8024f770b94183433a1eb09d",
+      "wrapper_sha256": "b0ad7cfc75aad16be66c0eb6093b417d8e9cd3ba2bc165bda9f486fb20cf3dd6",
+      "legacy_script_sha256": "21129fc410e638f2703c87f4fceeb27040d3053d46767c63fe6a2c27067946c4",
+      "receipt_sha256": "67ee5ef385bf27f788d058a3cc5ed07b5c38ec8d54ccf16cec0b3c33d35f40eb",
+      "temporary_absent": true
+    }
+  ],
+  "mock_cases": [
+    {
+      "case": "verify_only",
+      "error": null,
+      "events": [],
+      "receipts": {}
+    },
+    {
+      "case": "prepare",
+      "error": null,
+      "events": [
+        [
+          "mkdir",
+          "/work"
+        ],
+        [
+          "mkdir",
+          "/output"
+        ],
+        [
+          "mkdir",
+          "/output/package_20260922_185118_125142"
+        ],
+        [
+          "mkdtemp",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "mkdir",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "copyfile",
+          "/package/asset.py",
+          "/work/legacy_replay_fake/asset.py"
+        ],
+        [
+          "copyfile",
+          "/package/MANIFEST.json",
+          "/work/legacy_replay_fake/MANIFEST.json"
+        ],
+        [
+          "rmtree",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "open",
+          "/output/package_20260922_185118_125142/RECEIPT.json",
+          "xb"
+        ]
+      ],
+      "receipts": {
+        "/output/package_20260922_185118_125142/RECEIPT.json": {
+          "status": "PREPARATION_VERIFIED_NO_COMPUTATION",
+          "scientific_calibration": false,
+          "temporary_removed": true,
+          "temporary": "/work/legacy_replay_fake",
+          "utc": "2026-09-22T18:51:18.125142+00:00",
+          "manifest_sha256": "MOCK_PIN"
+        }
+      }
+    },
+    {
+      "case": "mock_run_zero",
+      "error": null,
+      "events": [
+        [
+          "mkdir",
+          "/work"
+        ],
+        [
+          "mkdir",
+          "/output"
+        ],
+        [
+          "mkdir",
+          "/output/package_20260922_185118_125142"
+        ],
+        [
+          "mkdtemp",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "mkdir",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "copyfile",
+          "/package/asset.py",
+          "/work/legacy_replay_fake/asset.py"
+        ],
+        [
+          "copyfile",
+          "/package/MANIFEST.json",
+          "/work/legacy_replay_fake/MANIFEST.json"
+        ],
+        [
+          "open",
+          "/output/package_20260922_185118_125142/run.log",
+          "xb"
+        ],
+        [
+          "simulated_subprocess",
+          [
+            "MOCK_PYTHON",
+            "-B",
+            "/work/legacy_replay_fake/reproduce_legacy.py"
+          ]
+        ],
+        [
+          "rmtree",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "open",
+          "/output/package_20260922_185118_125142/RECEIPT.json",
+          "xb"
+        ]
+      ],
+      "receipts": {
+        "/output/package_20260922_185118_125142/RECEIPT.json": {
+          "status": "LEGACY_REPLAY_EXIT_ZERO",
+          "scientific_calibration": false,
+          "exit_code": 0,
+          "temporary_removed": true,
+          "temporary": "/work/legacy_replay_fake",
+          "utc": "2026-09-22T18:51:18.125142+00:00",
+          "manifest_sha256": "MOCK_PIN"
+        }
+      }
+    },
+    {
+      "case": "mock_run_failure",
+      "error": "RuntimeError: Legacy replay failed; external log preserved",
+      "events": [
+        [
+          "mkdir",
+          "/work"
+        ],
+        [
+          "mkdir",
+          "/output"
+        ],
+        [
+          "mkdir",
+          "/output/package_20260922_185118_126145"
+        ],
+        [
+          "mkdtemp",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "mkdir",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "copyfile",
+          "/package/asset.py",
+          "/work/legacy_replay_fake/asset.py"
+        ],
+        [
+          "copyfile",
+          "/package/MANIFEST.json",
+          "/work/legacy_replay_fake/MANIFEST.json"
+        ],
+        [
+          "open",
+          "/output/package_20260922_185118_126145/run.log",
+          "xb"
+        ],
+        [
+          "simulated_subprocess",
+          [
+            "MOCK_PYTHON",
+            "-B",
+            "/work/legacy_replay_fake/reproduce_legacy.py"
+          ]
+        ],
+        [
+          "rmtree",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "open",
+          "/output/package_20260922_185118_126145/RECEIPT.json",
+          "xb"
+        ]
+      ],
+      "receipts": {
+        "/output/package_20260922_185118_126145/RECEIPT.json": {
+          "status": "LEGACY_REPLAY_FAILED",
+          "scientific_calibration": false,
+          "exit_code": 1,
+          "error": "Legacy replay failed; external log preserved",
+          "temporary_removed": true,
+          "temporary": "/work/legacy_replay_fake",
+          "utc": "2026-09-22T18:51:18.126145+00:00",
+          "manifest_sha256": "MOCK_PIN"
+        }
+      }
+    },
+    {
+      "case": "copy_failure",
+      "error": "PermissionError: Mock asset copy failure",
+      "events": [
+        [
+          "mkdir",
+          "/work"
+        ],
+        [
+          "mkdir",
+          "/output"
+        ],
+        [
+          "mkdir",
+          "/output/package_20260922_185118_126145"
+        ],
+        [
+          "mkdtemp",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "mkdir",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "copyfile",
+          "/package/asset.py",
+          "/work/legacy_replay_fake/asset.py"
+        ],
+        [
+          "rmtree",
+          "/work/legacy_replay_fake"
+        ],
+        [
+          "open",
+          "/output/package_20260922_185118_126145/RECEIPT.json",
+          "xb"
+        ]
+      ],
+      "receipts": {
+        "/output/package_20260922_185118_126145/RECEIPT.json": {
+          "status": "INTERRUPTED",
+          "scientific_calibration": false,
+          "error": "Mock asset copy failure",
+          "temporary_removed": true,
+          "temporary": "/work/legacy_replay_fake",
+          "utc": "2026-09-22T18:51:18.126651+00:00",
+          "manifest_sha256": "MOCK_PIN"
+        }
+      }
+    },
+    {
+      "case": "internal_work",
+      "error": "ValueError: Roots must be outside package",
+      "events": [],
+      "receipts": {}
+    },
+    {
+      "case": "internal_output",
+      "error": "ValueError: Roots must be outside package",
+      "events": [],
+      "receipts": {}
+    },
+    {
+      "case": "output_mkdir_failure",
+      "error": "PermissionError: Mock output failure",
+      "events": [
+        [
+          "mkdir",
+          "/work"
+        ],
+        [
+          "mkdir",
+          "/output"
+        ],
+        [
+          "mkdir",
+          "/output/package_20260922_185118_126651"
+        ]
+      ],
+      "receipts": {}
+    }
+  ]
+}

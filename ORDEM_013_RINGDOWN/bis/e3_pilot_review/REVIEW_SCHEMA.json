@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Future nonblind pilot review output",
+  "type": "object",
+  "required": [
+    "status",
+    "posterior_summary",
+    "comparison",
+    "scientific_acceptance",
+    "created_utc",
+    "review_script_sha256",
+    "contract_sha256"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "AWAITING_COMPLETED_CONTROLLER_NO_POSTERIOR_READ",
+        "PARTIAL_OR_REFUSED_NO_POSTERIOR_REVIEW",
+        "REVIEW_REFUSED_OR_SCHEMA_OPEN",
+        "NUMERICAL_CONSISTENCY_CHECKED_REQUIRES_SCIENTIFIC_REVIEW"
+      ]
+    },
+    "scientific_acceptance": {
+      "const": false
+    },
+    "posterior_summary": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "comparison": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "issues": {
+      "type": "array"
+    },
+    "created_utc": {
+      "type": "string"
+    },
+    "review_script_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "not": {
+              "const": "NUMERICAL_CONSISTENCY_CHECKED_REQUIRES_SCIENTIFIC_REVIEW"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "posterior_summary": {
+            "type": "null"
+          },
+          "comparison": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

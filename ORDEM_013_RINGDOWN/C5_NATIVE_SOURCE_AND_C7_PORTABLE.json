@@ -1,0 +1,88 @@
+{
+  "status": "PORTABLE_WAVEFORM_VERIFIED_TWO_SOURCE_FAMILIES_RUNNING",
+  "date_utc": "2026-09-22T08:07:42.169719+00:00",
+  "previous_goal_turn": "PROGRESS: native modes/mesh controls; sampling diagnostics and balanced16384 proposal launched",
+  "this_goal_turn": "PROGRESS: independent original-vs-native SEOB phase-integral validation; second-family prior oracle and2048 pilot launched; portable waveform regenerated in isolated Python; corrupted-copy rejection verified",
+  "native_integral_max_error": 1.1434362306772528e-05,
+  "native_integral_components_per_point": 2400,
+  "native_integral_points": 4,
+  "timing_caveat": "Validation native timing benefits from original held-out waveform cache; not a clean benchmark",
+  "seob_prior_oracle_mean": 0.9959546126321275,
+  "seob_prior_oracle_standard_error": 0.015648269073660785,
+  "seob_prior_oracle_max_standardized_error": 0.9946938034173121,
+  "portable_replay": {
+    "status": "PASS_ISOLATED_PORTABLE_REPLAY_AND_TAMPER_REJECTION",
+    "date_utc": "2026-09-22T08:07:42.169719+00:00",
+    "command": "python -I -B C7_NATIVE_SEOB_WAVEFORM/reproduce.py",
+    "count": 144,
+    "max_relative_error": 4.0127806320932996e-16,
+    "guards": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "result": "C7_NATIVE_SEOB_WAVEFORM/cache/replay_20260922_080209_864989/RESULT.json",
+    "result_sha256": "8262b938587c554916130fc337132fd9012541a6c7f8ad5e2516de534dd5982d",
+    "archive": "cache/C7_NATIVE_SEOB_WAVEFORM_v1.zip",
+    "archive_sha256": "a368ae336532096297ceb4a7a9554dbb13dc648b8024f770b94183433a1eb09d",
+    "tamper_rejected": true,
+    "scientific_acceptance": false,
+    "scope": "Standalone model consumer and real waveform regeneration; not independent external review or calibrated physical evidence"
+  },
+  "active_processes": [
+    {
+      "tool": "write_stdin",
+      "session_id": 62818,
+      "family": "IMRPhenomXPHM",
+      "status": "LIVE_OBSERVED_BEFORE_RECORD",
+      "folder": "cache/source_evidence/phase_ringdown_balanced/IMRPhenomXPHM_seed130892_N16384",
+      "last_progress": {
+        "done": 2928,
+        "valid_draws": 8554,
+        "seconds": 1499.760576958,
+        "date_utc": "2026-09-22T08:07:39.524100+00:00"
+      },
+      "observation": "Live tool handle and progressing output verified immediately before record; revalidate next turn"
+    },
+    {
+      "tool": "write_stdin",
+      "session_id": 61984,
+      "family": "SEOBNRv4HM",
+      "status": "LIVE_OBSERVED_BEFORE_RECORD",
+      "folder": "cache/source_evidence/phase_native_seob/SEOBNRv4HM_seed130901_N2048",
+      "last_progress": {
+        "done": 320,
+        "valid_draws": 1024,
+        "seconds": 828.5535341859999,
+        "date_utc": "2026-09-22T08:07:36.034610+00:00"
+      },
+      "observation": "Live tool handle and progressing output verified immediately before record; revalidate next turn"
+    }
+  ],
+  "scientific_acceptance": false,
+  "C6_changed": false,
+  "hashes": {
+    "record_native_package_and_seob_start.py": "4eb23cc51cae962337d5a3fbf306178fea21e53d909cef32e5873efb2def2050",
+    "build_native_waveform_package.py": "456643f2582fbaa20da5f6b6e1f4015f8f3ef8f8ffa8ce4d2069e494865ced72",
+    "verify_native_package_integrity.py": "9747c5688e21ff0f9a290dc0de2aee0c68ada94f25b7afd87a180070fc1ff372",
+    "C7_NATIVE_SEOB_WAVEFORM_PACKAGE.json": "9e68a2d2f4153c29d99a2bfbef3e9de2c8df7f25cd29b8ad83676e570d57b08c",
+    "C7_NATIVE_SEOB_INTEGRITY_VALIDATION.json": "3fb3c27c6671e66247a439ca6a8e437606dd4a5a4c09e168fb08a7a56b12e51d",
+    "C7_NATIVE_SEOB_REPLAY_VALIDATION.json": "054937a524d8a7187d661130b29d148c20903c59e6af8181283353d8f47f3288",
+    "C7_NATIVE_SEOB_WAVEFORM/cache/replay_20260922_080209_864989/RESULT.json": "8262b938587c554916130fc337132fd9012541a6c7f8ad5e2516de534dd5982d",
+    "cache/C7_NATIVE_SEOB_WAVEFORM_v1.zip": "a368ae336532096297ceb4a7a9554dbb13dc648b8024f770b94183433a1eb09d",
+    "C7_NATIVE_SEOB_WAVEFORM/MANIFEST.json": "a8d8ab561d1b96f3826a89b458943efafdd51a092e712c2c1bdbde8036721913",
+    "cache/source_evidence/native_seob_source_likelihood.py": "942000641f1c1f096319857b340357a1606df3e4b040be32e6a67e30c13a345d",
+    "cache/source_evidence/validate_native_source_integral.py": "2b1906606c2a037c9647a3bce182111368f61ec5c791f69b9867b3e389f80818",
+    "cache/source_evidence/run_native_seob_source.py": "8255927ce5991fbad1d3817105daeba703250a0edf5a3f964d72636b5e28e7e4",
+    "cache/source_evidence/native_source_integral_validation/REGISTRATION.json": "0a45412c4283b5bbac84859d0d8ebc6447234880c6e30f495ac5e0d778d77775",
+    "cache/source_evidence/native_source_integral_validation/RESULT.json": "e1caf33c4878a99fea1c27a1450b4c2528afc8b677fb35e7a370cb10eb32b830",
+    "cache/source_evidence/phase_native_seob/REGISTRATION.json": "b6ef3665b895959ecd8480434170c373bff16a7cc6502c2eb21bb1ee87acb69b",
+    "cache/source_evidence/phase_native_seob/PROPOSAL.json": "efd8f63d0b7a7215b7f42d01a9c682cbaa69fc9fdf490eac110d5881d6da1763",
+    "cache/source_evidence/phase_native_seob/PROPOSAL_ORACLE.json": "d01b269df9d50f7524b41149fd58b22abd856cf9df8b7b6ac1dfda81074faf0a",
+    "cache/source_evidence/phase_native_seob/SEOBNRv4HM_seed130901_N2048/START.json": "c68bc077955892d62533db56bb01c88b645894e90c20fa31713a81fb6cc86cd5",
+    "cache/source_evidence/phase_native_seob/SEOBNRv4HM_seed130901_N2048/PROPOSALS.npz": "29df29259777dac8cab89082f85ba771bb3d1a6dfd22820808dd4f1f278183d9"
+  }
+}

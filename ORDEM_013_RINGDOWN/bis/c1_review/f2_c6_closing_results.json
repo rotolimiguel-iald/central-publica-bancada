@@ -1,0 +1,486 @@
+{
+  "utc": "2026-09-22T18:26:49.936026+00:00",
+  "status": "T1_T2_C6_R1_CLOSED",
+  "optimization": 1,
+  "script_sha256": "7e1a2ae2a447a75405bdd801062eb5aeb3b50198ce91620b8a1489682c4a4a5e",
+  "input_hashes": {
+    "C4_PYRING.json": "76af853137f3e7d3396f001eb44cfc3a6366d2e92b9d9ed7b8454ec8b0f35b0a",
+    "C4_GWTC3_220.json": "d9dc9b09a8d91dc7f85c5e849091db619b1c22a633b09c97d82bcf434e9c6053",
+    "REAPROVEITAMENTO_C6.md": "a8a7014580e78b0006ab6fc05cbd5a1f613389db1f585788f1b75690803aa033",
+    "bis/F2_ALL_READING_TABLES.json": "0797b9d6779cde734bdfdb8a97c6f204c41c23c3941042206679639132aaaf8e",
+    "C4_CATALOG_COMBINATION.json": "f3d8c1959ded3efd15045923ce0cbafe7356ec888ced1934d8d0c183046d0d01",
+    "C4_GWTC3_PUBLISHED_COMBINATION.json": "f6dbd853223b803984d352aebe3fd64f786b3f26458988cbb4b37a752f8b1ddd",
+    "C4_CATALOG_220.json": "93bdc413130d294acde91ec03f8392b8d9c5ec5b33fdc97274371656503d8e17",
+    "C4_GWTC3_COMBINATION.json": "f88c2aa84f98891734f6dc67229a97777bd201ffca40bc479c86bc2fd4fd1f4e",
+    "C6_ADENDO_REALIZADO_v2.json": "df39aee5e80ad97d1ccb74d094dbd19a1c2a391011995e36dcaca1e88394917e",
+    "bis/F2_TABLES_C6PRE_REVIEW.md": "9f02f4fd723aab2450f7e9f78c39e41212c2de7d18eafdb442c459345fd57ea4",
+    "QNM_GRID.json": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24",
+    "bis/F2_ALL_READING_TABLES_v2.json": "761eb108231aef3db26a07adcecab08884b299ad5ffb7b45a0360516d63e178f",
+    "REAPROVEITAMENTO_C6_v2.md": "af5245e8f990b359c5048418bc9a207e3cdb47fdddd660c1d78f9814fd43eb48",
+    "bis/F2_ALL_READING_TABLES_v2.csv": "6df05db50416c3ce5e75aa0071f4999a6766535c3cb7b8fee4990e4eceaf41cb",
+    "PORTAO_DO_PODER_013_v2.json": "c2972e3cc32286532908875b2a3ddb5d168d0669a6846e3e2c1d16e855c2b133",
+    "refeito/record_c6pre_013bis_v2.py": "29df659d14aafad63642ca510df821ae2f3826a28477cb3998ae8cbe76b85d71",
+    "c6_engine.py": "94c724c4cb1764b7a62209da08c37a40d7936c98b344da714d1bd7733352de3c",
+    "tgl_ringdown_prediction.py": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+    "REGISTRO_C6.json": "ded00f09b5010d622b67b4ea4e559a216818f578440a0f60772130174ececf14",
+    "bis/F2_ALL_READING_TABLES.csv": "9dd2ac0a3d80fd2536b2b209ac32f7f723f1787908c53efd3c6e095be4904a29",
+    "refeito/record_c6pre_013bis.py": "61ec0d023d6beb79f49e0e58d9a2a11475575460847b2709c7d5fce9c7c27e13",
+    "bis/C3_C6_TIMING_013BIS.json": "56906841f92020988defa1dd774b02add88c34e6d18e9617375aab0323abcc1b",
+    "refeito/summarize_f2_tables_013bis.py": "2acfa26ac603fb2cb9686889e157703fa7485a8ab545ba3f2ff2dcf697c1138c",
+    "bis/c1_review/f2_tables_c6_results.json": "a431a2ca0021a2ec74ef53d3591ceb2ec94514d927aa48a6724f0427771d9239",
+    "C6_RESULTS.json": "781a3741a68875eba0fcef02d596dab7d36103d9e926edc6bec18fb485a055e8",
+    "refeito/summarize_f2_tables_013bis_v2.py": "74fd157caa118d3943edf5396f12cd7ed200de717f788feaa8b63f2636cf702c",
+    "C6_PYRING_START_COMPARISON.json": "59dfef3554288c6117debec7827a8b7cd56c6422ff3710a8a39deb4470645a18",
+    "C5_EMPIRICAL_NOISE.json": "a748e279a04f08e0218bcda347ff9d2750068e53b2cefed35a6b36935199e3ef",
+    "C6_ADENDO_REALIZADO.json": "0d377951463a2557e4cdcebbb297b57dacb2fc685efeead958f6ce3cccc4aa6c"
+  },
+  "positive_guard": {
+    "rejected": false,
+    "reached_post_guard": true,
+    "computed": [
+      "R-A",
+      "R-B",
+      "R-GLOBAL",
+      "R-LIN",
+      "R-MOD",
+      "R-RAIZ-0",
+      "R-RAIZ-EP4",
+      "R-RAIZ-REST"
+    ],
+    "pyRing_computed": [
+      "R-B",
+      "R-LIN",
+      "R-MOD",
+      "R-RAIZ-0"
+    ]
+  },
+  "negative_guards": [
+    {
+      "category": "pyRing",
+      "mutation": "missing",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "pyRing",
+      "mutation": "duplicate",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "pyRing",
+      "mutation": "extra",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "pSEOB",
+      "mutation": "missing",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "pSEOB",
+      "mutation": "duplicate",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "pSEOB",
+      "mutation": "extra",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "GWTC3",
+      "mutation": "missing",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "GWTC3",
+      "mutation": "duplicate",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    },
+    {
+      "category": "GWTC3",
+      "mutation": "extra",
+      "rejected": true,
+      "error": "Computed reading coverage missing, extra or duplicated",
+      "reached_post_guard": false
+    }
+  ],
+  "guard_block_lines": [
+    21,
+    33
+  ],
+  "first_top_level_write_line": 109,
+  "table_rows": 60,
+  "csv_rows": 60,
+  "table_row_types": [
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-A",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-B",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-RAIZ-0",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-RAIZ-EP4",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-RAIZ-REST",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-LIN",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-MOD",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-GLOBAL",
+      "result_type": "RELATIONAL_IDENTITY_IN_DECLARED_IMPLEMENTATION"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-PROP",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GWTC5_31",
+      "reading": "R-RAIZ-COHERENT",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-A",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-B",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-RAIZ-0",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-RAIZ-EP4",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-RAIZ-REST",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-LIN",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-MOD",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-GLOBAL",
+      "result_type": "RELATIONAL_IDENTITY_IN_DECLARED_IMPLEMENTATION"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-PROP",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GWTC5_33",
+      "reading": "R-RAIZ-COHERENT",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-A",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-B",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-RAIZ-0",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-RAIZ-EP4",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-RAIZ-REST",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-LIN",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-MOD",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-GLOBAL",
+      "result_type": "RELATIONAL_IDENTITY_IN_DECLARED_IMPLEMENTATION"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-PROP",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GWTC3_10",
+      "reading": "R-RAIZ-COHERENT",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-A",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-B",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-RAIZ-0",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-RAIZ-EP4",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-RAIZ-REST",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-LIN",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-MOD",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-GLOBAL",
+      "result_type": "RELATIONAL_IDENTITY_IN_DECLARED_IMPLEMENTATION"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-PROP",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GWTC3_18",
+      "reading": "R-RAIZ-COHERENT",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-A",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-B",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-RAIZ-0",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-RAIZ-EP4",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-RAIZ-REST",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-LIN",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-MOD",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-GLOBAL",
+      "result_type": "RELATIONAL_IDENTITY_IN_DECLARED_IMPLEMENTATION"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-PROP",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GW250114_pSEOB",
+      "reading": "R-RAIZ-COHERENT",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-A",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__BELOW_RESOLUTION"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-B",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-RAIZ-0",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-RAIZ-EP4",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__BELOW_RESOLUTION"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-RAIZ-REST",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__BELOW_RESOLUTION"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-LIN",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-MOD",
+      "result_type": "COMPUTED_CONDITIONAL_DENSITY"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-GLOBAL",
+      "result_type": "RELATIONAL_IDENTITY_IN_DECLARED_IMPLEMENTATION"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-PROP",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    },
+    {
+      "dataset": "GW250114_pyRing",
+      "reading": "R-RAIZ-COHERENT",
+      "result_type": "CONDITIONAL_NUMERICAL_EQUIVALENCE__PHYSICAL_MAPPING_OPEN"
+    }
+  ],
+  "original_table_values_unchanged": true,
+  "companion_hash_matches_all_60": true,
+  "C6_predictions": [
+    {
+      "reading": "R-A",
+      "value": -3.239771675534261e-42,
+      "independent_previous_expected": -3.239771675534261e-42,
+      "changed": true
+    },
+    {
+      "reading": "R-B",
+      "value": -0.017176580635735218,
+      "independent_previous_expected": -0.017176580635735218,
+      "changed": false
+    },
+    {
+      "reading": "R-MOD",
+      "value": -0.05060694871893885,
+      "independent_previous_expected": -0.05060694871893887,
+      "changed": false
+    },
+    {
+      "reading": "R-RAIZ-0",
+      "value": -0.03403741972095873,
+      "independent_previous_expected": -0.034037419720958736,
+      "changed": false
+    },
+    {
+      "reading": "R-RAIZ-EP4",
+      "value": -3.2397716755342616e-42,
+      "independent_previous_expected": -3.2397716755342616e-42,
+      "changed": true
+    },
+    {
+      "reading": "R-RAIZ-REST",
+      "value": -1.5014386838782304e-82,
+      "independent_previous_expected": -1.5014386838782307e-82,
+      "changed": true
+    },
+    {
+      "reading": "R-LIN",
+      "value": -0.06583401929524743,
+      "independent_previous_expected": -0.06583401929524743,
+      "changed": false
+    },
+    {
+      "reading": "R-GLOBAL",
+      "value": -0.0,
+      "independent_previous_expected": -0.0,
+      "changed": false
+    }
+  ],
+  "C6_lnB_and_uncertainties_unchanged": true,
+  "inputs_unchanged": true,
+  "limitations": "Only the three named findings. Actual guard block isolated via AST; production writers/builders not executed. No strain, posterior, C5, density or QNM computation."
+}

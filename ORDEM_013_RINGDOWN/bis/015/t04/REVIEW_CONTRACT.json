@@ -1,0 +1,119 @@
+{
+  "at": "2026-09-26T16:47:35.653940+00:00",
+  "status": "READ_ONLY_REVIEW_MAP_NOT_CONVERGENCE_RESULT",
+  "registration_sha256": "a02c4224b0c832a85e8eaef736197754235aa573290760bb2307ad6ac4c713b4",
+  "job": "GW250114_PILOT_V2_S220",
+  "settings": {
+    "seed": 15260302,
+    "workers": 24,
+    "nlive": 512,
+    "dlogz": 0.1,
+    "walks": 50,
+    "maxcall": 3000000,
+    "minimum_posterior_samples": 1000,
+    "minimum_effective_samples": 100
+  },
+  "source_sha256": "11c5588fabf5ae0e97d855008a22255bceec7c39380eb94701948a3df55fd370",
+  "function_locations": {
+    "terminal_state": {
+      "first_line": 104,
+      "last_line": 117
+    },
+    "convergence": {
+      "first_line": 146,
+      "last_line": 163
+    },
+    "posterior_columns": {
+      "first_line": 166,
+      "last_line": 174
+    },
+    "edom_posterior_status": {
+      "first_line": 177,
+      "last_line": 191
+    },
+    "likelihood_snapshot": {
+      "first_line": 39,
+      "last_line": 43
+    }
+  },
+  "checks": [
+    {
+      "id": "identity",
+      "evidence": [
+        "t04/pilot/RESULT.json",
+        "CONTROLLER.json",
+        "LAUNCH_CONTEXT.json"
+      ],
+      "criterion": "Same registration/job and clean owned process group before any next job"
+    },
+    {
+      "id": "terminal",
+      "evidence": [
+        "PRIVATE_CONVERGENCE.json"
+      ],
+      "function": "terminal_state",
+      "criterion": "Finite terminal quantities, non-plateau, strict ncall<maxcall and delta_logz<dlogz; captured before adding live points",
+      "limitation": "Raw live_logl not included by this terminal_state receipt; do not claim independent recomputation of unpersisted live arrays"
+    },
+    {
+      "id": "weights_and_samples",
+      "evidence": [
+        "PRIVATE_CONVERGENCE.json",
+        "raw result hdf5"
+      ],
+      "function": "convergence",
+      "criterion": "Finite nonnegative weights,positive sum; ESS=(sumw)^2/sum(w^2)>=registered minimum;posterior count>=registered minimum;ncall_reported==ncall"
+    },
+    {
+      "id": "edom",
+      "evidence": [
+        "EDOM_LOG.jsonl",
+        "EDOM_SUMMARY.json",
+        "PRIVATE_CONVERGENCE.json"
+      ],
+      "function": "edom_posterior_status",
+      "criterion": "EDOM log count agrees with sourcecounter;0inside declared marginal99%mass/spin box",
+      "limitation": "The mass/spin box is the registered diagnostic; not a theorem excluding all numerical bias"
+    },
+    {
+      "id": "paired_columns",
+      "evidence": [
+        "ANALYST_OUTPUT.json",
+        "PRIVATE_REMNANT_CONVERSION.json"
+      ],
+      "function": "posterior_columns",
+      "criterion": "All physical/deformation and derived columns finite,paired; fixed440columns exactly0;derived remnant and external cosmology scope retained"
+    },
+    {
+      "id": "cost",
+      "evidence": [
+        "CONTROLLER.json",
+        "PRIVATE_CONVERGENCE.json",
+        "t04/pilot/RESULT.json"
+      ],
+      "criterion": "Actual wall,CPU and process observations;sourcecalls and sampler_ncall distinct;sum per-sourcewall is not jobwall or exactCPU"
+    },
+    {
+      "id": "reported_quantity",
+      "evidence": [
+        "ANALYST_OUTPUT.json"
+      ],
+      "criterion": "Own nonblind dtau220 interval versus published comparison; alignedv4HM versus precessingv5PHM family caveat;no discovery sigma from pilot"
+    },
+    {
+      "id": "branch_after_terminal",
+      "evidence": [
+        "CONTROLLER.json",
+        "PRIVATE_CONVERGENCE.json",
+        "ANALYST_STATUS.json",
+        "FAILURE.json"
+      ],
+      "criterion": "T04C/D/H/E/F per measured status; cleanup first; newID/seed/allocation before any authorized new run;never repeat existing job"
+    }
+  ],
+  "branch_C_rate": "r=sampler_ncall/cost.wall_seconds from completed measured receipt,not sum of per-sourcewall",
+  "branch_C_formula": "min(floor(0.9*28800*r),9000000);if<=3000000 goD;budget must be registered beforejob",
+  "source_not_changed": true,
+  "science_not_reexecuted": true,
+  "gate_changed": false
+}

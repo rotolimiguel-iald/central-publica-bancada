@@ -1,0 +1,35 @@
+{
+  "status": "PRE_REGISTERED_DIAGNOSTIC_NOT_BANK",
+  "branch": "T10_A",
+  "scope": "NONBLIND_SYNTHETIC_GAUSSIAN_COLOR_PSD_PUBLIC_B4",
+  "seed": 15260410,
+  "source_event": "GW250114_082203",
+  "injection": {
+    "Mf_detector_solar": 73.50528713232194,
+    "af": 0.7519521363178578,
+    "dtau220": 0.0,
+    "psi": 0.5,
+    "cosiota": 0.2,
+    "A2220_1_unscaled": 1.0,
+    "A2220_2_unscaled": 0.3,
+    "phi2220_1": 0.3,
+    "phi2220_2": 1.1,
+    "target_optimal_network_snr": 19.1,
+    "amplitude_rule": "multiply both unscaled amplitudes by target_snr / norm(base_waveform) under the public PSD covariance"
+  },
+  "noise": "one seeded standard Gaussian vector per detector transformed by the pinned public PSD Cholesky; shared identically between both posterior fits",
+  "variants": [
+    "free_Mf_af_Uniform_as_F",
+    "inspiral_informed_joint_Gaussian_from_released_Mf_af_marginals_and_covariance"
+  ],
+  "informed_prior_mu": [73.50528713232194, 0.7519521363178578],
+  "informed_prior_covariance": [[16.04214790032647, 0.24841990976473485], [0.24841990976473485, 0.004244514336251826]],
+  "informed_prior_status": "INPUT_IMR_RD_OBSERVABLE_CHANGE_NOT_OPERATOR_RATIFIED",
+  "bounds": "Gaussian unbounded; invalid physical samples assigned -infinity likelihood explicitly",
+  "other_priors": "same as existing Kerr V2 F CONFIG.json",
+  "sampler": {"nlive": 512, "walks": 50, "dlogz": 0.1, "maxcall": 3000000},
+  "hard_cap_hours_each": 1.5,
+  "diagnostic_excluded_from_bank": true,
+  "diagnostic_excluded_from_sigma_c": true,
+  "gate_eligible": false
+}

@@ -1,0 +1,85 @@
+{
+  "status": "SPECIFICATION_ONLY_NOT_IMPLEMENTED_NOT_EXECUTED",
+  "scientific_execution": false,
+  "observer_execution": false,
+  "ownership": "bis/e3_pilot_review",
+  "frozen_sources_modified": false,
+  "proposed_interval_seconds": 5,
+  "proposed_observer_only_final_metadata_grace_seconds": 15,
+  "deadline_source": "Pinned job and LAUNCH_CONTEXT.stop_utc; no new scientific deadline",
+  "identity_fields": [
+    "boot_id",
+    "pid",
+    "start_ticks",
+    "pid_namespace",
+    "uid",
+    "ppid",
+    "pgid",
+    "sid",
+    "observed_ancestry"
+  ],
+  "snapshot_fields": [
+    "sequence",
+    "utc_start",
+    "utc_end",
+    "monotonic_start",
+    "monotonic_end",
+    "clock_ticks_per_second",
+    "owned_identity_records",
+    "per_identity_utime_ticks",
+    "per_identity_stime_ticks",
+    "per_identity_max_cpu_ticks",
+    "observed_group_cpu_lower_bound_seconds",
+    "controller_cpu_separate_seconds",
+    "coverage_gaps",
+    "read_errors",
+    "observer_own_cpu_seconds",
+    "sweep_wall_seconds"
+  ],
+  "unavailable_scientific_fields_default": {
+    "source_calls": null,
+    "likelihood_calls": null,
+    "sampler_ncall": null,
+    "ess": null,
+    "convergence": null,
+    "converged_event_cost": null
+  },
+  "terminal_statuses": [
+    "OBSERVER_COMPLETE",
+    "OBSERVER_INCOMPLETE",
+    "OWNERSHIP_UNRESOLVED"
+  ],
+  "aggregation": "Sum largest observed own utime+stime once per verified process identity; exclude child aggregates and duplicate thread sums; keep controller RUSAGE_CHILDREN separate.",
+  "nonblocking_for_full_order": true,
+  "no_scientific_stop_authority": true,
+  "no_launch_or_signal_authority": true,
+  "forbidden_reads": [
+    "stdout",
+    "stderr",
+    "PRIVATE.log",
+    "process_memory",
+    "cmdline",
+    "environ",
+    "strain",
+    "posterior",
+    "HDF5",
+    "NPZ",
+    "checkpoint"
+  ],
+  "source_pins": {
+    "bis/e2_code/pe_runner.py": "6712610a0392abe629b6ea5b5f4fa5a45b2c8b9a3dfb123c952513f18cef68fa",
+    "bis/e2_code/run_controlled.py": "7b5dd6484014942ee5fdd9fc3e529eaf05f9dffe463f35cdd10a01bdcf86334d",
+    "bis/e3_pilot_review/PROTOCOL.md": "e180974d1b621f8631981e852db7127e389310997dfcfb0b3685e0f77a697dd2",
+    "bis/e3_pilot_review/OS_RESOURCE_OBSERVER_SPEC.md": "4a591e1ecc221f29cc7583886357902db6894e26773ba931ad79756c079aea60"
+  },
+  "primary_documentation": [
+    {
+      "url": "https://man7.org/linux/man-pages/man5/proc_pid_stat.5.html",
+      "scope": "PID identity and CPU tick fields; browsed, no local primary-source mirror claimed"
+    },
+    {
+      "url": "https://man7.org/linux/man-pages/man2/getrusage.2.html",
+      "scope": "Waited-child resource accounting; browsed, no local primary-source mirror claimed"
+    }
+  ]
+}

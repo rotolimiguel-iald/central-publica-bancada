@@ -1,0 +1,11 @@
+{
+  "status": "FAILED_BEFORE_PRIVATE_DIRECTORY_OR_SEED_CREATION",
+  "stage": "private_directory Prepare: powershell.exe -File",
+  "observed_error": "PSSecurityException / UnauthorizedAccess: execution of scripts disabled on this system",
+  "verification": "Read-only Verify reproduced the execution-policy error. Test-Path returned false for seed and registration; Get-Item found no private directory.",
+  "seed_created": false,
+  "registration_created": false,
+  "science_executed": false,
+  "policy_changed": false,
+  "recovery": "Preserve V1 application, candidate002 and source snapshot. Replace PowerShell helper with reviewed native Windows ACL API and create a new V2 review application before another attempt."
+}

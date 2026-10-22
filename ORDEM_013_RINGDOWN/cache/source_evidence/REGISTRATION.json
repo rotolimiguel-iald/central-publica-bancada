@@ -1,0 +1,146 @@
+{
+  "status": "REGISTERED_NONBLIND_NONLINEAR_SOURCE_INTEGRATION",
+  "date_utc": "2026-09-22T04:48:40.463376+00:00",
+  "sources": [
+    {
+      "name": "reference",
+      "mass": 72.0,
+      "q": 1.1818181818181819,
+      "s1": 0.05,
+      "s2": -0.03,
+      "inclination": 0.6,
+      "phase": 0.37,
+      "psi": 0.0
+    },
+    {
+      "name": "source_64",
+      "mass": 64.0,
+      "q": 1.5,
+      "s1": 0.15,
+      "s2": 0.05,
+      "inclination": 1.0,
+      "phase": 0.8,
+      "psi": 0.22
+    },
+    {
+      "name": "source_90",
+      "mass": 90.0,
+      "q": 2.0,
+      "s1": 0.25,
+      "s2": -0.15,
+      "inclination": 0.9,
+      "phase": 1.2,
+      "psi": 0.45
+    }
+  ],
+  "injection_families": [
+    "IMRPhenomXPHM",
+    "SEOBNRv4HM"
+  ],
+  "recovery_families": [
+    "IMRPhenomXPHM",
+    "SEOBNRv4HM"
+  ],
+  "psds": [
+    "O4",
+    "O5"
+  ],
+  "reading": "R-B",
+  "injection_a": [
+    0.0,
+    1.0
+  ],
+  "recovery_a": [
+    0.0,
+    1.0
+  ],
+  "noise_indices": [
+    50,
+    100
+  ],
+  "N_per_cell": 50,
+  "target_snr": 40.0,
+  "time_start_s": 0.0034,
+  "n_time": 410,
+  "sampling_hz": 2048,
+  "waveform_hz": 8192,
+  "time_scope": "Fixed 3.4 ms after intrinsic complex-22 peak for every injection, same time samples under both hypotheses; new experiment, old C6 untouched",
+  "priors": {
+    "total_detector_mass_solar": [
+      50.0,
+      110.0
+    ],
+    "mass_ratio": [
+      1.0,
+      3.0
+    ],
+    "spin1z": [
+      -0.4,
+      0.4
+    ],
+    "spin2z": [
+      -0.4,
+      0.4
+    ],
+    "cos_inclination": [
+      -0.95,
+      0.95
+    ],
+    "orbital_reference_phase": [
+      0.0,
+      6.283185307179586
+    ],
+    "peak_shift_ms": [
+      -1.0,
+      1.0
+    ],
+    "types": "Independent uniforms in listed physical coordinates, not in their logs",
+    "amplitude_prior_sd": 3.0,
+    "distance": "Inverse-Rayleigh D_ref=403 Mpc, shared two Gaussian coefficients; NOT uniform volume",
+    "polarization": "Uniform modulo pi, common to network"
+  },
+  "conditioning": "Known sky/responses/time delays, zero transverse spins, 22/44 whole-harmonic conditional damping; other harmonics unchanged",
+  "mixture": "Computational arithmetic mean of 2400 separate centered likelihood components. NEVER product of injections. Evidence reconstructed per component; equivalent ratios independent of centering.",
+  "centers": "Known injected-signal log likelihood ratio: .5||h||^2 + n dot h; numerical integration only, never source prior",
+  "pilot": {
+    "nlive": 256,
+    "sample": "rwalk",
+    "walks": 20,
+    "bound": "multi",
+    "dlogz": 0.5,
+    "maxcall": 24000,
+    "seed": 130522,
+    "processes": 6
+  },
+  "integration_diagnostics": {
+    "min_component_ESS": 100,
+    "max_component_weight": 0.05,
+    "independent_seed_and_nlive_repeat_required": true,
+    "max_lnB_between_repeats": 0.2,
+    "max_rate_control_logL_change": 0.1
+  },
+  "acceptance": "No cell accepted from a single pilot. Stop limits, ESS, multimodal stability, waveform rate and opposite-family controls remain explicit",
+  "outstanding": [
+    "repeat convergence",
+    "continuous-dephasing posterior bias/coverage",
+    "SNR200/600",
+    "other conditional readings",
+    "physical partition selection remains external"
+  ],
+  "no_target_strain_read": true,
+  "original_C6_unchanged": true,
+  "hashes": {
+    "source_evidence.py": "0590f8e15bd508e525d2911fc570615671fdcdbc328399f4d7d8cb05d9816f7a",
+    "validate_source_evidence.py": "e2e81c1891c8d6c6253cd987f2aec25b4c1d787b5188d2a2f8587436928f2379",
+    "coherent_imr_model.py": "4d9e568816c3b47e8e59b2401334a1a66541247fa80ed36495949aa4f5bca497",
+    "coherent_imr_likelihood.py": "883613f37e7861c95ec43790c18ce7e790f7c708de776a75cb5496bc5fb3d74e",
+    "tgl_ringdown_likelihood.py": "f16517e62fca96cc348aac17369e75e1fb9b07f1e95fef06f7630c8b94153bca",
+    "tgl_ringdown_prediction.py": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+    "QNM_GRID.json": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24",
+    "REGISTRO_C6.json": "ded00f09b5010d622b67b4ea4e559a216818f578440a0f60772130174ececf14",
+    "PROVENANCE.json": "ba6b1f184d7b789a9752a0941722bf378a8d6a4282ad0b76370fec70efef245e",
+    "vendor/MANIFEST.json": "862341565cd495341e3bfef5912c6da9145e17d2af94ffa3c9caf0f920a25b3f",
+    "cache/recolored_noise/O4_noise.npz": "03aa894405014ac2599ffa760b9b14d10410a68f60a962625dc4eaf4bffcd528",
+    "cache/recolored_noise/O5_noise.npz": "aaf09f21792c7fb42cd98a47aaa0e646894ce4ddb0b5ccb63d757da3de410c09"
+  }
+}

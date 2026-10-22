@@ -1,0 +1,397 @@
+{
+  "status": "REQUIREMENTS_INSPECTED__NO_PHYSICAL_ACCEPTANCE_PROMOTION",
+  "date_utc": "2026-09-22T02:56:19.408429+00:00",
+  "goal_completion_claimed": false,
+  "requirements": [
+    {
+      "id": "C0.a,e",
+      "requirement": "Atomic claims, nonempty lines 3-65, sources and corrected sentences",
+      "outcome": "VERIFIED_ARTIFACT",
+      "evidence": [
+        "C0_AUDITORIA.json",
+        "C0_AUDITORIA.md"
+      ],
+      "finding": "24 claims; 38 required lines covered. Literature access scope remains explicit, not upgraded."
+    },
+    {
+      "id": "C0.b,c,d",
+      "requirement": "Units, independent Liouvillian, jump-count distinction, signed-generator choices",
+      "outcome": "VERIFIED_CONDITIONAL_RESULT",
+      "evidence": [
+        "verify_c0_c3.py",
+        "C0_C3_checks.json",
+        "C2_MAPEAMENTO_ANALITICO.md"
+      ],
+      "finding": "Independent Kronecker Liouvillian and spectral gaps agree; K+ and |K| differ. GM/c^3 is a time. No physical extension selected."
+    },
+    {
+      "id": "G1/C1",
+      "requirement": "Gamma(M,spin,D), clocks, FP-5, root/quadratic/linear/global/propagation alternatives",
+      "outcome": "VERIFIED_CONDITIONAL_RESULT",
+      "evidence": [
+        "C1_TABLES.json",
+        "C1_LEITURAS_E_RELOGIOS.md",
+        "C2_MAPEAMENTO_ANALITICO.md",
+        "tgl_ringdown_prediction.py"
+      ],
+      "finding": "C1_LEITURAS_E_RELOGIOS.md + C1_TABLES.json implement the requested C1 table under descriptive filenames. Local source rate does not depend directly on distance; propagation is a separate spectral model. Physical clock/partition remain unselected as ordered."
+    },
+    {
+      "id": "G2/C1",
+      "requirement": "Evaluate Gamma/omega, rather than assert it is small for every interpretation",
+      "outcome": "VERIFIED_CONDITIONAL_RESULT",
+      "evidence": [
+        "C1_TABLES.json",
+        "C7_GWTC3_EVENT_READINGS.csv",
+        "C7_INDEPENDENT/tables/event_reading_predictions.csv"
+      ],
+      "finding": "Dimensionless ratios are evaluated by reading and event. Small Gamma/omega does not itself establish detectability or exclusion; source/clock and QNM domain restrictions apply."
+    },
+    {
+      "id": "C1.MOD",
+      "requirement": "Corotation, modular/Killing clock and Kerr state hypotheses",
+      "outcome": "CONDITIONAL_WITH_SOURCE_LIMIT",
+      "evidence": [
+        "C1_TABLES.json",
+        "C1_LEITURAS_E_RELOGIOS.md",
+        "C0_ADENDO_ESCOPO_LITERATURA.md",
+        "QNM_GRID.json"
+      ],
+      "finding": "Positive finite KMS oscillator checked; exact Kerr QNM used for the corotating gap. It is not a construction of the physical Kerr state. Kay-Wald and Milburn were read only at abstract scope; broader claims are not supported here."
+    },
+    {
+      "id": "C2",
+      "requirement": "Ensemble, single trajectories, energy/power, finite occupation and colored noise",
+      "outcome": "VERIFIED_CONDITIONAL_RESULT",
+      "evidence": [
+        "C2_MAPEAMENTO_ANALITICO.md",
+        "C2_TRAJECTORY_RECOVERY.json",
+        "C3_UNRAVELING_API.json",
+        "trajectory_recovery.py"
+      ],
+      "finding": "22 estimator/noise cells, 1100 fits. Colored noise here is declared synthetic OU+white; later C5 uses actual off-source intervals. Large N~10^78 is an analytic initial-slope extrapolation, not an exact finite computation or measured occupation."
+    },
+    {
+      "id": "G4/C3",
+      "requirement": "Public prediction and waveform modules; a=0/1, constants regression and actual consumer",
+      "outcome": "VERIFIED_CONDITIONAL_RESULT",
+      "evidence": [
+        "tgl_ringdown_prediction.py",
+        "tgl_ringdown_template.py",
+        "tgl_ringdown_unravelings.py",
+        "C3_PREDICTION_COMPATIBILITY.json",
+        "C3_MULTIMODE_TEMPLATE.json",
+        "C3_UNRAVELING_API.json"
+      ],
+      "finding": "Legacy A/B within 1e-12; 264 later predictions unchanged; actual Bilby consumers checked. Higher modes need explicit exact QNM and angular projection. Not a full inspiral-merger modified-gravity waveform or pyRing plugin."
+    },
+    {
+      "id": "C4.sources",
+      "requirement": "Actual released samples, prior semantics, file custody and no repeated event evidence",
+      "outcome": "VERIFIED_WITH_PROVENANCE_LIMIT",
+      "evidence": [
+        "C4_CATALOG_220.json",
+        "C4_GWTC3_220.json",
+        "C4_GWTC3_SCHEMA.json",
+        "C4_GWTC3_CONVENTIONS.json",
+        "C4_GWTC3_SELECTION.json",
+        "C4_CATALOG_PRIOR_AUDIT.json"
+      ],
+      "finding": "33 newer and 18 older products, 12 overlaps. Release-specific combinations are alternatives, never multiplied. Legacy executable/remnant fit and some pyRing merge provenance remain unavailable."
+    },
+    {
+      "id": "C4.statistics",
+      "requirement": "Joint densities, sample-dependent predictions, marginals, prior alternatives and GR-relative decisions",
+      "outcome": "VERIFIED_CONDITIONAL_RESULT",
+      "evidence": [
+        "C4_220_INITIAL.json",
+        "C4_JOINT_MODES.json",
+        "C4_FREE_CLOCK.json",
+        "C4_CATALOG_COMBINATION.json",
+        "C4_GWTC3_PUBLISHED_COMBINATION.json",
+        "REGISTRO_C4.json",
+        "posterior_220_readout.py",
+        "free_clock_posterior.py"
+      ],
+      "finding": "Joint KDE/conditional-curve results, bootstrap/bandwidth controls and two free-clock priors are explicit. Catalog verdict remains INCONCLUSIVE_SYSTEMATICS, including GR-region and local-density qualifications. No ln B-to-sigma conversion."
+    },
+    {
+      "id": "G3/C5.compute",
+      "requirement": "O4/O5 distributions under both hypotheses, PSD controls and full injection matrix",
+      "outcome": "VERIFIED_CONDITIONAL_RESULT",
+      "evidence": [
+        "C5_FISHER_EMPIRICAL.json",
+        "PSD_CONTROLS.json",
+        "C5_RECOLORED_FORECAST.json",
+        "C5_RECOLORED_VALIDATION.json",
+        "forecast_recolored_imr.py",
+        "verify_recolored_forecast.py"
+      ],
+      "finding": "4608 cells with 50 paired intervals each, actual off-source O4 noise recolored to design PSDs, two IMR families and six SNRs. Reused intervals are not independent observations; remnant is fixed in this forecast. O5 is a sensitivity scenario, not a promise."
+    },
+    {
+      "id": "C5.acceptance",
+      "requirement": "Bias <=0.2 and 90% coverage in [0.80,0.97] across both IMR families",
+      "outcome": "FAILED_SCIENTIFIC_ACCEPTANCE",
+      "evidence": [
+        "C5_RECOLORED_FORECAST.json",
+        "C5_RECOLORED_VALIDATION.json"
+      ],
+      "finding": "0 FULL_IMR groups pass both families and both injected amplitudes. Negative result retained. Passing numerical reproduction or a selected cell cannot replace this gate."
+    },
+    {
+      "id": "C6.registration",
+      "requirement": "Nonblind pre-read registration, guards, actual strain and all five starts",
+      "outcome": "VERIFIED_MEASUREMENT",
+      "evidence": [
+        "REGISTRO_C6.json",
+        "C6_RESULTS.json",
+        "C6_GUARD_TEST.json",
+        "C7_INDEPENDENT/C6_REPRODUCTION_RESULT.json"
+      ],
+      "finding": "Frozen input hashes still match; all starts converge; full registered strain result reproduced in a fresh copy. Code/input/registration mutations are refused. Physical interpretation remains INCONCLUSIVE_SYSTEMATICS."
+    },
+    {
+      "id": "C6.external_comparison",
+      "requirement": "Comparison with released pyRing analyses at corresponding starts",
+      "outcome": "PARTIAL_NOT_IDENTICAL_REPRODUCTION",
+      "evidence": [
+        "C6_PYRING_START_COMPARISON.json"
+      ],
+      "finding": "Eight released products at 6/8/10/12 tM compared. No 10.5 tM product exists in the inspected release. PSD, trigger, modes and priors differ; identical pyRing inference was not reproduced. This cannot validate model adequacy by itself."
+    },
+    {
+      "id": "C7",
+      "requirement": "English package, event/readout tables, modules and fresh-directory regeneration",
+      "outcome": "VERIFIED_WITH_EXPLICIT_SCOPE",
+      "evidence": [
+        "C7_INDEPENDENT/README.md",
+        "C7_POSTERIOR_REPRODUCTION/README.md",
+        "C7_INJECTION_REPRODUCTION/README.md",
+        "C7_GWTC3_REPRODUCTION/README.md",
+        "C7_PACKAGE_VALIDATION.json",
+        "C7_SUPPLEMENTS_VALIDATION.json",
+        "C7_GWTC3_REPRODUCTION_VALIDATION.json"
+      ],
+      "finding": "Waveform demo and registered strain reproduced; posterior stages, injection chain and GWTC-3 replay verified. Public URLs/hashes permit download, but this round used local verified archives. Original LVK samplers and independent external review are not claimed."
+    }
+  ],
+  "evidence": {
+    "C0_AUDITORIA.json": {
+      "bytes": 24269,
+      "sha256": "f0009e1194282434ac599a35df68573db08967951a320218184670e15e1559cd"
+    },
+    "C0_AUDITORIA.md": {
+      "bytes": 16531,
+      "sha256": "fc85dafd94e7a86c0c1c3e6450104c3644302a94d70917c141d8005ca77ef039"
+    },
+    "C0_C3_checks.json": {
+      "bytes": 19110,
+      "sha256": "0592189981243c503a36967cd9285666e5120c804cca41bb23e233a6bd5230b0"
+    },
+    "verify_c0_c3.py": {
+      "bytes": 5630,
+      "sha256": "b232d1390e4b9a32c2f42ee3453e33fd4e34b73b0457c41fc5efb81b25f138fb"
+    },
+    "C2_MAPEAMENTO_ANALITICO.md": {
+      "bytes": 6659,
+      "sha256": "3b1b04893605f6a01a39e18567903d0a24d678a9fc0276e01b7d99efc9df503e"
+    },
+    "C1_TABLES.json": {
+      "bytes": 28916,
+      "sha256": "bf5ac0d2dad2322a5b0cb1ac3b861870447e6f2ff41c1ab251e443b61a56d79a"
+    },
+    "C1_LEITURAS_E_RELOGIOS.md": {
+      "bytes": 8731,
+      "sha256": "c86b35a8ee08874c2782131a04ff5f13e0b8ea9df78b3f36a38502ab39e29997"
+    },
+    "tgl_ringdown_prediction.py": {
+      "bytes": 8382,
+      "sha256": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652"
+    },
+    "C7_GWTC3_EVENT_READINGS.csv": {
+      "bytes": 28851,
+      "sha256": "d48eca4106876c068e1bf01acb0be7d112e9303436b77f6d8597c54a90b1dddb"
+    },
+    "C7_INDEPENDENT/tables/event_reading_predictions.csv": {
+      "bytes": 89341,
+      "sha256": "14ba80daf42a49721e4500c72073b3ca90384f40a74f10fc18f5447480cdcdfc"
+    },
+    "C0_ADENDO_ESCOPO_LITERATURA.md": {
+      "bytes": 2786,
+      "sha256": "15ff3b8fd2e82484f0fe2e1bdd4d916cb859ad8ffadbef714cac660373341775"
+    },
+    "QNM_GRID.json": {
+      "bytes": 169231,
+      "sha256": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24"
+    },
+    "C2_TRAJECTORY_RECOVERY.json": {
+      "bytes": 271259,
+      "sha256": "339be42bec67a48e1e3341d678ac9bc0804c6e1db035e6b4b57df62673eafd38"
+    },
+    "C3_UNRAVELING_API.json": {
+      "bytes": 3756,
+      "sha256": "e280b73ccbdeece3ee051e2ffa32fd963e85ff81717a9df8881a04f5f5c6ed24"
+    },
+    "trajectory_recovery.py": {
+      "bytes": 8825,
+      "sha256": "a5648ee2303159fb8cd083d9f490ff6d1ec0d1231f2a9fb6e8163ea93de01b33"
+    },
+    "C3_PREDICTION_COMPATIBILITY.json": {
+      "bytes": 413,
+      "sha256": "6bbdde29d964589c179b93675ecd3bdd82610e97d816805825231ea93b2fd99b"
+    },
+    "tgl_ringdown_template.py": {
+      "bytes": 4714,
+      "sha256": "16d7fbc25e94b0351e7050aa5055db421365953782cec1a668d68f11e5cc5132"
+    },
+    "tgl_ringdown_unravelings.py": {
+      "bytes": 7815,
+      "sha256": "2858efdbf0e1f8ba2b8419e9f2a987c340ae02e2e5825495f0d3381b2d26e830"
+    },
+    "C3_MULTIMODE_TEMPLATE.json": {
+      "bytes": 1805,
+      "sha256": "20ada0cc440388aa636cd78e40a1330433137d7fd5bd7d10ce689a40f40bd7f1"
+    },
+    "C4_CATALOG_220.json": {
+      "bytes": 673228,
+      "sha256": "93bdc413130d294acde91ec03f8392b8d9c5ec5b33fdc97274371656503d8e17"
+    },
+    "C4_GWTC3_220.json": {
+      "bytes": 402498,
+      "sha256": "d9dc9b09a8d91dc7f85c5e849091db619b1c22a633b09c97d82bcf434e9c6053"
+    },
+    "C4_CATALOG_COMBINATION.json": {
+      "bytes": 12167,
+      "sha256": "f3d8c1959ded3efd15045923ce0cbafe7356ec888ced1934d8d0c183046d0d01"
+    },
+    "C4_GWTC3_PUBLISHED_COMBINATION.json": {
+      "bytes": 9307,
+      "sha256": "f6dbd853223b803984d352aebe3fd64f786b3f26458988cbb4b37a752f8b1ddd"
+    },
+    "C4_GWTC3_SCHEMA.json": {
+      "bytes": 368887,
+      "sha256": "59570d2dd11e6077198dffb39f9d8addcc06945c07f88c822905bebbaa7b7a7e"
+    },
+    "C4_GWTC3_CONVENTIONS.json": {
+      "bytes": 6131,
+      "sha256": "01205e018dc407304194cc18d04b9d9ad42b3b01cc42659b7c8cbd950770bfe1"
+    },
+    "C4_GWTC3_SELECTION.json": {
+      "bytes": 1563,
+      "sha256": "ef18f3b0495d58bffc5f968f86ca860eefd3becb570cd75bfc9f88fa8fee5dd3"
+    },
+    "C4_CATALOG_PRIOR_AUDIT.json": {
+      "bytes": 115403,
+      "sha256": "d5a8ca83e7f4895961d15186c3b81fd91732e8f720ffe5a9bb80383e4083aaf1"
+    },
+    "C4_220_INITIAL.json": {
+      "bytes": 6954,
+      "sha256": "f5550b7b1f129e83b4874f95b223e82ca973e0812bd98c150a6c04cd37747edc"
+    },
+    "C4_JOINT_MODES.json": {
+      "bytes": 9740,
+      "sha256": "8b2e0fea734caed23f05c3a9f9a2f3f7aaa8f19ed71d2f9d9a841129739e742f"
+    },
+    "C4_FREE_CLOCK.json": {
+      "bytes": 64009,
+      "sha256": "cbf63327719372780ec3b3c89376360e78828c45198ee5cfd5bf04cd5ea328b1"
+    },
+    "REGISTRO_C4.json": {
+      "bytes": 2768,
+      "sha256": "2bebc171ddbcef43d7b50b9076dd806b64829a05a769b6e4fe23b73ec121ac59"
+    },
+    "posterior_220_readout.py": {
+      "bytes": 6501,
+      "sha256": "f5cccda67b341785cc5101cd7c3447cd6d945ef7e0f0703aa4da1b031ff72279"
+    },
+    "free_clock_posterior.py": {
+      "bytes": 7859,
+      "sha256": "acb13e9a0fc90130f1f68440b663bb9090a1cf0daba092380e70a010ad0e28f1"
+    },
+    "C5_RECOLORED_FORECAST.json": {
+      "bytes": 4807377,
+      "sha256": "0825d9e83c57155496b552cb8e806c2245cc1f66dc86c27b4e68b3a551011a0c"
+    },
+    "C5_RECOLORED_VALIDATION.json": {
+      "bytes": 42063,
+      "sha256": "cd4e58c2aecb3e374a3fdfcf5dd8877591db07e42a1b13e021cd1e7c18ce58a2"
+    },
+    "C5_FISHER_EMPIRICAL.json": {
+      "bytes": 139909,
+      "sha256": "00fbe67f5aa5b38212e8b6c4e6654d09e6cbc23b9e0e5306ee3d7cb77a3bc508"
+    },
+    "PSD_CONTROLS.json": {
+      "bytes": 2196,
+      "sha256": "eafa22ff5611cc991aa0d53b9d302a91000ec5fb035b6bd4e122fb12d4de9cb9"
+    },
+    "forecast_recolored_imr.py": {
+      "bytes": 12104,
+      "sha256": "02e09d1f8b29217b60ee8b72ef1b94e9fe3a2adba92972f8d6cfe2d9a6cabc6e"
+    },
+    "verify_recolored_forecast.py": {
+      "bytes": 6489,
+      "sha256": "72454a50c6583cfa2e7ece7282f558ac4486b21b52e19c4bdbbc8d2520f2ca21"
+    },
+    "C6_RESULTS.json": {
+      "bytes": 50604,
+      "sha256": "781a3741a68875eba0fcef02d596dab7d36103d9e926edc6bec18fb485a055e8"
+    },
+    "REGISTRO_C6.json": {
+      "bytes": 5644,
+      "sha256": "ded00f09b5010d622b67b4ea4e559a216818f578440a0f60772130174ececf14"
+    },
+    "C6_GUARD_TEST.json": {
+      "bytes": 874,
+      "sha256": "46aa5d66b7db186b19c4148149b6ebe9a3ec8ffeb75c78530641a1fbc46a5c4e"
+    },
+    "C7_INDEPENDENT/C6_REPRODUCTION_RESULT.json": {
+      "bytes": 240,
+      "sha256": "0ed044f5db8d47cc845fc2de0b78da9e70250f6f4cfcbe3a1ac282b32b2e61a4"
+    },
+    "C6_PYRING_START_COMPARISON.json": {
+      "bytes": 8113,
+      "sha256": "59dfef3554288c6117debec7827a8b7cd56c6422ff3710a8a39deb4470645a18"
+    },
+    "C7_PACKAGE_VALIDATION.json": {
+      "bytes": 1355,
+      "sha256": "9b333c7859c1c5b9ea60076e84fc173c88b7cbe96c6cdff50bf0a307511989c1"
+    },
+    "C7_SUPPLEMENTS_VALIDATION.json": {
+      "bytes": 6748,
+      "sha256": "da1b54fcd7e40dc76b3218f11acfdd6942315beb52077484adcea655e3a92f17"
+    },
+    "C7_GWTC3_REPRODUCTION_VALIDATION.json": {
+      "bytes": 1504,
+      "sha256": "900df79b4aa68bd80cb0b555d823c739e3beb726de2aa844dbf0deb0c0f8299e"
+    },
+    "C7_INDEPENDENT/README.md": {
+      "bytes": 10317,
+      "sha256": "4b8f73158cae5c7231725ec2d4c8dd12a62db3720e26b4b189d3ae898468272b"
+    },
+    "C7_POSTERIOR_REPRODUCTION/README.md": {
+      "bytes": 1700,
+      "sha256": "1c739eb0bdf5b4140b4e7a255a15bceaa9272664658e326e29079a77d7a2edfc"
+    },
+    "C7_INJECTION_REPRODUCTION/README.md": {
+      "bytes": 2167,
+      "sha256": "98673d05fb02f083cccaca5605574ead1b21bfcaf26cd423265b266cea5a6a08"
+    },
+    "C7_GWTC3_REPRODUCTION/README.md": {
+      "bytes": 2593,
+      "sha256": "1b8d2f3636662335423a68900e1d489457ba9ea0a1dbb47c71ede99e7018dd95"
+    }
+  },
+  "mathematical_scope": "Conditional implications from specified generators/clocks; not a unique physical identification",
+  "C5_full_IMR_groups_passing_all": 0,
+  "unresolved_acceptance": [
+    "C5 two-family bias/coverage gate failed",
+    "C6 pyRing comparison differs in model/priors and lacks a released 10.5 tM product",
+    "Physical partition, clock and observed unraveling were intentionally not selected"
+  ],
+  "source_access_limits": [
+    "Kay-Wald and Milburn full texts not read here",
+    "Legacy executable/remnant and pyRing merging provenance unavailable"
+  ],
+  "remaining_delivery_review": "Inspect this consolidated audit and English overview against original objective before any goal completion decision"
+}

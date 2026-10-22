@@ -1,0 +1,97 @@
+{
+  "status": "LOCAL_STATIC_SPECIFICATION_REVIEW_NO_IMPLEMENTATION",
+  "at_utc": "2026-09-26T15:02:01.608960+00:00",
+  "source_pins": {
+    "order": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_015_continuacao_do_ringdown_rumo_ao_5sigma.md",
+      "sha256": "c903681d01eec5ed8d55b7fe69e061a79b3a7b73eecede8f895cfb2d127f75a3",
+      "bytes": 135319
+    },
+    "v1_consumer": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\e7_prepare\\producer\\tgl_ringdown_ampliacao.py",
+      "sha256": "99a9ebc8e8a22c3a14f06b8f6dd465400beaf4d95cbef989d7d5652b5b4b8355",
+      "bytes": 29940
+    },
+    "v1_1_guard": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\e2_code_v1_1\\registration_guard.py",
+      "sha256": "ce3db9a0073c18ba10d889bb8ff3452993558f2b789e86284649b2f17a4766b7",
+      "bytes": 31436
+    },
+    "v1_execution_receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\E7_FINAL_EXECUTION_V1.json",
+      "sha256": "035212e25370f7d7c780c4a2e1f4a5732785d83b55e60417e8c5ee9ea31f10c9",
+      "bytes": 3489
+    },
+    "v1_1_registration": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\RINGDOWN_5SIGMA_V1_1.json",
+      "sha256": "96571187bec3c1d7ceb209a5aa0b30f30e2f5719184950cea668363f13794c51",
+      "bytes": 228439
+    }
+  },
+  "formula_ast_sha256": {
+    "conditional_projection": "8b611a1bc45e5de67a3bc72e6f72438e0866465e875cdfe81faffa140eeb022c",
+    "prediction_draws": "8aee25531bdfceae4063264e96a6229b5019fd0acb6eaec221128a962db0e76d",
+    "reading_diagnostics": "70cb8f2d1ba8411a74b84d3511563b01ea6efe361944a5ad7fc2bdd51c338a7b",
+    "fullsample_diagnostics": "3b4a4f3f1765ae2924fe9fe9d1d602a70924c49df8fad8fa4e4d098f6872e200"
+  },
+  "observations": [
+    "T12 requires four formula ASTs unchanged, an embedded guard without external importlib or directory checks, and a new producer tree in bis/e7_prepare_v1_1/producer; V1 tree remains byte-identical.",
+    "Current V1.1 registration still points e7.guard_path to bis/e2_code/registration_guard.py and e7.producer_directory to bis/e7_prepare/producer. T12 must use the next witnessed V1.1.<n> link before any test data.",
+    "The V1 E7 execution receipt pins an historical posterior product. Its original registration/authorization/producer identities belong to V1; they cannot be relabeled as V1.1 execution.",
+    "registration_guard.checked_registration includes activation, scientific runtime and time_guard. During phase L the V1.1 clock is intentionally absent; a T12 read-only preparation must not claim full launch activation or bypass the clock for jobs."
+  ],
+  "essential_controls": [
+    {
+      "id": "C1",
+      "check": "Pin the exact new sub-amendment file and witness externally; traverse consecutive V1.1.<n> parent hashes, chronology, unchanged statistical subobject and append-only jobs; select only the latest witnessed link. Registration content or posterior text is not authority."
+    },
+    {
+      "id": "C2",
+      "check": "Embed the consumer-specific guard in the new producer code, with no dynamic importlib file loading and no directory-presence success criterion. Pin individual required source/plan/nuisance/receipt artifacts and compare registered producer-tree manifest hashes when T12 requires them. A missing file is a visible refusal or declared transported pin, never proof of local verification."
+    },
+    {
+      "id": "C3",
+      "check": "For any PE launch or blind test, still require the V1.1 activation evidence, runtime, clock and management audit from the registration contract. A consumer-only preparation may return AWAITING_DATA before the phase-P clock exists; it cannot authorize a job."
+    },
+    {
+      "id": "C4",
+      "check": "Check ast.dump(FunctionDef, include_attributes=False) equality for the four formulas against the recorded source AST pins; require one top-level definition of each and fail on duplicate/rebinding. Test formula mutation as a negative control. Helper and context changes need separate tests even when the four ASTs match."
+    },
+    {
+      "id": "C5",
+      "check": "For historical E7 posterior JSON, verify its byte hash against E7_FINAL_EXECUTION_V1 and the old V1 receipt/authorization lineage; retain provenance fields as V1. New V1.1 analysis is a derived result under a newly witnessed sub-amendment, not a claim that old extraction ran again."
+    },
+    {
+      "id": "C6",
+      "check": "Bind the old payload events to the new registered plan by ordered event_id, role, catalogue, source/tar hashes, dataset/model/frame/units, full N and field/prior mapping; reject duplicates, changed membership, altered payload bytes or a mismatched plan. Avoid changing old payload fields merely to satisfy a new schema."
+    },
+    {
+      "id": "C7",
+      "check": "If .h5/tar are present, compute and compare their SHA256 before accepting local verification; a mismatch refuses. If absent, report exact transported pins as DECLARADO from the E7 receipt and remain AWAITING_DATA; no ok=true for missing source files."
+    },
+    {
+      "id": "C8",
+      "check": "Keep test_count derived from event roles, never total event count. Historical GWTC5_33 calibration events yield test_count=0. Blind_test requires management release and a separately implemented blind adapter; calibration-only data cannot make a 5-sigma verdict."
+    },
+    {
+      "id": "C9",
+      "check": "In each matrix row retain operational N_target_information=null plus CONDITIONAL_PLANNING_ONLY E0 targets and registered mixture planning values, with a red gate and named missing obligations. No offset-zero test, physical lnB/z or calibrated sigma inferred from these projections."
+    },
+    {
+      "id": "C10",
+      "check": "Repeat 53 inherited tests plus new negatives: stale/unsigned chain, forged historical receipt pin, absent versus altered .h5/tar, changed role/test_count, formula AST mutation, e7 tree/path mismatch and attempted blind release. Distinguish static preparation controls from an actual phase-P execution."
+    }
+  ],
+  "limits": [
+    "No source modified, no emenda registered, no provider call, no tests or PE executed",
+    "No E2_PRIVATE read",
+    "No claim that V1.1 registration or new producer has already been amended or tested"
+  ],
+  "recorded_v1_execution_product_sha256": "81e65ff3c54260611ae4bf7539624119050f9ee7389d52cbc4ef2756f54771c0",
+  "current_v1_1_e7_paths": {
+    "guard_path": "ORDEM_013_RINGDOWN/bis/e2_code/registration_guard.py",
+    "producer_directory": "ORDEM_013_RINGDOWN/bis/e7_prepare/producer",
+    "plan_path": "ORDEM_013_RINGDOWN/bis/e7_prepare/EXTRACTION_PLAN.json",
+    "nuisance_path": "ORDEM_013_RINGDOWN/NUISANCE_V1.json"
+  }
+}

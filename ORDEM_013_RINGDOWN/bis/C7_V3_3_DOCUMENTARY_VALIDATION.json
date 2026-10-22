@@ -1,0 +1,76 @@
+{
+  "status": "PASS_DOCUMENTARY_CORRECTION_SAME_EXECUTION_BYTES",
+  "changed_files": [
+    "provenance/SHIPPED_ATTRIBUTIONS.json"
+  ],
+  "execution_files_identical": [
+    "reproduce_c6.py",
+    "reproduction/ORDEM_013_RINGDOWN/C5_EMPIRICAL_IMR_STARTS.json",
+    "reproduction/ORDEM_013_RINGDOWN/C5_EMPIRICAL_NOISE.json",
+    "reproduction/ORDEM_013_RINGDOWN/C5_LIKELIHOOD_VALIDATION.json",
+    "reproduction/ORDEM_013_RINGDOWN/C6_DOWNLOADS.json",
+    "reproduction/ORDEM_013_RINGDOWN/QNM_GRID.json",
+    "reproduction/ORDEM_013_RINGDOWN/REGISTRO_C6.json",
+    "reproduction/ORDEM_013_RINGDOWN/c6_engine.py",
+    "reproduction/ORDEM_013_RINGDOWN/cache/empirical_noise/H1_noise.npz",
+    "reproduction/ORDEM_013_RINGDOWN/cache/empirical_noise/L1_noise.npz",
+    "reproduction/ORDEM_013_RINGDOWN/cache/gwosc/metadata_1.json",
+    "reproduction/ORDEM_013_RINGDOWN/fetch_public.py",
+    "reproduction/ORDEM_013_RINGDOWN/run_c6_grid.py",
+    "reproduction/ORDEM_013_RINGDOWN/tgl_ringdown_likelihood.py",
+    "reproduction/ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py",
+    "reproduction/TUNEL/DO_CHATGPT/ENTREGA_013_C6a_REGISTRO_TOEPLITZ.md",
+    "run_demo.py",
+    "tgl_ringdown_likelihood.py",
+    "tgl_ringdown_prediction.py",
+    "tgl_ringdown_template.py",
+    "tgl_ringdown_unravelings.py",
+    "unit_checks.py",
+    "verify_delivery.py",
+    "verify_manifest.py"
+  ],
+  "attribution_hashes_verified": 78,
+  "replayed_science": false,
+  "prior_replay": "bis/C7_V3_2_C6_REPLAY.json",
+  "prior_replay_sha256": "1dcf50f436e5d3f0dd1f6fb76c3b4bf93f0d32e884b762303f341a7a74103c14",
+  "checks": [
+    {
+      "args": [
+        "verify_delivery.py"
+      ],
+      "result": {
+        "status": "PASS",
+        "files": 79,
+        "scope": "Byte identity only; not scientific or physical certification"
+      }
+    },
+    {
+      "args": [
+        "-O",
+        "unit_checks.py"
+      ],
+      "result": {
+        "status": "PASS",
+        "legacy_relative_errors": {
+          "A": 3.951998679763808e-16,
+          "B": 3.4760409478204096e-16
+        },
+        "guard_controls": 5,
+        "nonfinite_and_type_controls": 48,
+        "scope": "Numerical regression and input refusal; no calibration or physical conclusion"
+      }
+    },
+    {
+      "args": [
+        "reproduce_c6.py"
+      ],
+      "result": {
+        "status": "PACKAGE_HASHES_VERIFIED",
+        "files": 79,
+        "experiment_run": false
+      }
+    }
+  ],
+  "archive_sha256": "bf10adf6a8479ca9e299f86bdf2c791ffd02843f0d5e9df08ac466464005f72a",
+  "temporary_removed": true
+}

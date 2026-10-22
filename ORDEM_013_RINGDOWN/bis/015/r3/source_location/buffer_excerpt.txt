@@ -1,0 +1,41 @@
+2059:   /* Allocate the high sample rate vectors */
+2060:   if(dtau220 > 0)
+2061:     {
+2062:       /*If dtau220>0 we need a larger array than in GR case to accomodate the whole ringdown*/
+2063:       sigReHi =
+2064: 		XLALCreateREAL8Vector (retLen +
+2065: 			   	   (UINT4) ceil (20 * (1. + dtau220) /
+2066: 					 	 (cimag (modeFreq) * deltaTHigh)));
+2067:       sigImHi =
+2068: 		XLALCreateREAL8Vector (retLen +
+2069: 			   	   (UINT4) ceil (20 * (1. + dtau220) /
+2070: 					 	 (cimag (modeFreq) * deltaTHigh)));
+2071:       omegaHi =
+2072: 		XLALCreateREAL8Vector (retLen +
+2073: 			   	   (UINT4) ceil (20 * (1. + dtau220) /
+2074: 					 	 (cimag (modeFreq) * deltaTHigh)));
+2075:       vPhiVecHi =
+2076: 		XLALCreateREAL8Vector (retLen +
+2077: 				   (UINT4) ceil (20 * (1. + dtau220) /
+2078: 						 (cimag (modeFreq) * deltaTHigh)));
+2079:     }
+2080:   else {
+2081:     /* Allocate the high sample rate vectors */
+2082:       sigReHi =
+2083:         XLALCreateREAL8Vector (retLen +
+2084: 			       (UINT4) ceil (20 /
+2085: 					     (cimag (modeFreq) * deltaTHigh)));
+2086:       sigImHi =
+2087:         XLALCreateREAL8Vector (retLen +
+2088: 			       (UINT4) ceil (20 /
+2089: 					     (cimag (modeFreq) * deltaTHigh)));
+2090:       omegaHi =
+2091:         XLALCreateREAL8Vector (retLen +
+2092: 			       (UINT4) ceil (20 /
+2093: 					     (cimag (modeFreq) * deltaTHigh)));
+2094:       vPhiVecHi =
+2095:     	XLALCreateREAL8Vector (retLen +
+2096:                                (UINT4) ceil (20 /
+2097:                                        	     (cimag (modeFreq) * deltaTHigh)));
+2098: 
+2099:   }

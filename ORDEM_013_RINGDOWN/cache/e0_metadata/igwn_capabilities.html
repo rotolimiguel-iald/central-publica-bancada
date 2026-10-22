@@ -1,0 +1,1372 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="quickstart.html">
+      
+      
+        <link rel="next" href="analysis/index.html">
+      
+      
+      <link rel="icon" href="_static/favicon.ico">
+    
+    
+      
+        <title>Observing Capabilities - IGWN | Public Alerts User Guide</title>
+      
+    
+    
+      
+        
+      
+      
+
+
+    
+  
+  <link rel="stylesheet" href="_static/stylesheets/igwn-mkdocs-material.css">
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.74c816e3f9967dd6e.min.css?v=6cfe2491" />
+        <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+        <link rel="stylesheet" href="_static/css/userguide_style.css">
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="igwn" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="IGWN | Public Alerts User Guide" class="md-header__button md-logo" aria-label="IGWN | Public Alerts User Guide" data-md-component="logo">
+      <img src="_static/logo.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IGWN | Public Alerts User Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Observing Capabilities
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="igwn" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0 9.821 9.821 0 0 0-17.64 0"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://git.ligo.org/emfollow/userguide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    userguide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+
+  <!-- Navigation -->
+  
+    
+    <div
+      class="md-sidebar md-sidebar--primary"
+      data-md-component="sidebar"
+      data-md-type="navigation"
+      
+    >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="IGWN | Public Alerts User Guide" class="md-nav__button md-logo" aria-label="IGWN | Public Alerts User Guide" data-md-component="logo">
+      <img src="_static/logo.png" alt="logo">
+    </a>
+    IGWN | Public Alerts User Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://git.ligo.org/emfollow/userguide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    userguide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quickstart.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Getting Started Checklist</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span>Observing Capabilities</span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Observing Capabilities</span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#timeline" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:timeline (reference label)"><span>Timeline</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-status" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:live status (reference label)"><span>Live Status</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-alert-rate-and-localization-accuracy" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:public alert rate and localization accuracy (reference label)"><span>Public Alert Rate and Localization Accuracy</span></span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Alert Rate and Localization Accuracy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detection-threshold" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:detection threshold (reference label)"><span>Detection Threshold</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detector-network" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:detector network (reference label)"><span>Detector Network</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-distribution" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:source distribution (reference label)"><span>Source Distribution</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:summary statistics (reference label)"><span>Summary Statistics</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cumulative-histograms" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:cumulative histograms (reference label)"><span>Cumulative Histograms</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="capabilities:references (reference label)"><span>References</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Data Analysis</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="content.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Alert Contents</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Sample Code</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Additional Resources</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="early_warning.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Early-<wbr>Warning Alerts</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Change Log</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Glossary</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+          <div class="userguide-feedback__box">
+            <p class="userguide-feedback__h1">Question? Issues? Feedback?<p>
+            <p class="userguide-feedback__p">Email <a href="mailto:emfollow-userguide@support.ligo.org">emfollow-userguide@support.ligo.org</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <!-- Table of contents -->
+  
+
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+                  
+
+
+  
+    <a href="https://git.ligo.org/emfollow/userguide/-/blob/main/capabilities.rst" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://git.ligo.org/emfollow/userguide/-/raw/main/capabilities.rst" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+<h1 id="observing-capabilities">Observing Capabilities<a class="headerlink" href="#observing-capabilities" title="Link to this heading">¶</a></h1>
+<p>This section summarizes the projected observing capabilities of the global
+gravitational-wave detector network, superseding the Living Review
+<a class="footnote-reference brackets" href="#footcite-2020lrr-23-3a" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> on prospects for observing and localizing gravitational-wave
+transients with Advanced LIGO, Advanced Virgo, and KAGRA.</p>
+<h2 id="timeline">Timeline<a class="headerlink" href="#timeline" title="Link to this heading">¶</a></h2>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Check the <a class="reference external" href="https://observing.docs.ligo.org/plan/index.html" title="(in Observing Plans)"><span class="xref std std-doc">LIGO, Virgo, and KAGRA Observing Run Plans</span></a> for the latest details on scheduling of the next
+observing run, which are summarized here.</p>
+</div>
+<p>The gravitational-wave observing schedule is divided into Observing Runs or
+epochs of months to years of operation at fixed sensitivity, down time for
+construction and commissioning, and transitional Engineering Runs or between
+commissioning and observing runs. The long-term observing schedule is shown
+below. Downtime for upgrades and commissioning are depicted by vertical gray
+bands.</p>
+<p>Since <a class="reference internal" href="glossary.html#term-BNS" title="BNS (glossary term)"><span class="xref std std-term">BNS</span></a> mergers are a well-studied class of gravitational-wave
+signals, this figure gives the BNS <a class="reference internal" href="glossary.html#term-range" title="range (glossary term)"><span class="xref std std-term">range</span></a> for a single-detector SNR
+threshold of 8 in each observing run.</p>
+<figure class="align-default">
+<img alt="Long-term observing schedule" src="_images/ObsScen_timeline.png" />
+</figure>
+<p>As of this writing (July 2026), LIGO, Virgo, KAGRA are in commissioning and
+brief periods of data collection are possible. We may send alerts for
+exceptional events during periods of good data quality.</p>
+<p>There will be an interim six-month observing run, designated IR1, starting
+between late October and mid November 2026. Both LIGO detectors will be
+observing; Virgo will join but may go offline at times for maintenance and
+upgrades; KAGRA will join if able to.</p>
+<p>Observing Run 5 (O5), currently conceived of as spanning 2029-2031, is still in
+an early planning stage.</p>
+<h2 id="live-status">Live Status<a class="headerlink" href="#live-status" title="Link to this heading">¶</a></h2>
+<p>There are a handful of public web pages that report live status of the
+LIGO/Virgo/KAGRA detectors and alert infrastructure.</p>
+<ul>
+<li><div class="line-block">
+<div class="line"><strong>Detector Status Portal</strong>: Daily summary of detector performance.</div>
+<div class="line"><a class="reference external" href="https://gwosc.org/detector_status/">https://gwosc.org/detector_status/</a></div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><strong>GWIStat</strong>: Real-time detector up/down status and estimated range.</div>
+<div class="line"><a class="reference external" href="https://online.ligo.org">https://online.ligo.org</a></div>
+</div>
+</li>
+</ul>
+<h2 id="public-alert-rate-and-localization-accuracy">Public Alert Rate and Localization Accuracy<a class="headerlink" href="#public-alert-rate-and-localization-accuracy" title="Link to this heading">¶</a></h2>
+<p>Here we provide predicted public alert rates, distances, and localization
+uncertainties for <a class="reference internal" href="glossary.html#term-BNS" title="BNS (glossary term)"><span class="xref std std-term">BNS</span></a>, <a class="reference internal" href="glossary.html#term-NSBH" title="NSBH (glossary term)"><span class="xref std std-term">NSBH</span></a>, and <a class="reference internal" href="glossary.html#term-BBH" title="BBH (glossary term)"><span class="xref std std-term">BBH</span></a> mergers in O4 and
+O5, based on a Monte Carlo simulation of detection and localization of events.</p>
+<p>The predicted rate of <a class="reference internal" href="glossary.html#term-BNS" title="BNS (glossary term)"><span class="xref std std-term">BNS</span></a> alerts has decreased significantly compared
+to previous versions of this document due to downward revision of the
+<a class="reference internal" href="glossary.html#term-BNS" title="BNS (glossary term)"><span class="xref std std-term">BNS</span></a> merger rate density estimated from analysis of O4
+<a class="footnote-reference brackets" href="#footcite-2025arxiv250818083t" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+<p>The O4 simulation results are included to demonstrate approximate agreement
+with past alerts. For O5, we include three scenarios representing a range of
+plausible sensitivities: O5a, O5b, and O5c.</p>
+<p>The methodology and results of the simulation are described in
+<a class="footnote-reference brackets" href="#footcite-2020lrr-23-3a" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#footcite-2022apj-924-54p" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, and
+<a class="footnote-reference brackets" href="#footcite-2023apj-958-158k" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
+<p><strong>Source code to reproduce these simulations</strong> is available at
+<a class="reference external" href="https://github.com/lpsinger/observing-scenarios-simulations/tree/v4">https://github.com/lpsinger/observing-scenarios-simulations/tree/v4</a> or
+<a class="extlink-doi reference external" href="https://doi.org/10.5281/zenodo.18224889">doi:10.5281/zenodo.18224889</a>.</p>
+<p><strong>Sky localization FITS files</strong> from these simulations are provided at
+<a class="extlink-doi reference external" href="https://doi.org/10.5281/zenodo.18223624">doi:10.5281/zenodo.18223624</a>.</p>
+<h3 id="detection-threshold">Detection Threshold<a class="headerlink" href="#detection-threshold" title="Link to this heading">¶</a></h3>
+<p>The network <a class="reference internal" href="glossary.html#term-SNR" title="SNR (glossary term)"><span class="xref std std-term">SNR</span></a> threshold for detection was set to 8 in order to
+approximately reproduce the rate of <em>public alerts that were sent in O3 and O4</em>
+(see <a class="footnote-reference brackets" href="#footcite-2022apj-924-54p" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>).</p>
+<div class="important tip admonition">
+<p class="admonition-title">Important</p>
+<p><strong>This section predicts the rate of public alerts, not the rate of highly
+confident detections. Most public alerts do not survive as confident
+detections in the authoritative LIGO/Virgo/KAGRA compact binary
+catalogs.</strong></p>
+</div>
+<h3 id="detector-network">Detector Network<a class="headerlink" href="#detector-network" title="Link to this heading">¶</a></h3>
+<p>The detector sensitivities during IR1 will probably
+be similar to that of O4, but it is not yet clear how much of the run Virgo
+will be operating. Accordingly, below we have provided O4 simulations for both
+a Hanford-Livingston (HL) and a Hanford-Livingston-Virgo (HLV) network.</p>
+<p>For O5, we include three scenarios representing a range of plausible
+sensitivities: O5a, O5b, and O5c.</p>
+<p>The detector amplitude spectral density (Hz<span class="math notranslate nohighlight">\(^{-1/2}\)</span>) curves used for
+O4 are available in <a class="extlink-dcc reference external" href="https://dcc.ligo.org/T2500363-v1/public">LIGO-T2500363-v1</a> and <a class="extlink-dcc reference external" href="https://dcc.ligo.org/T2500388-v1/public">LIGO-T2500388-v1</a>. The curves for
+O5 are available in <a class="extlink-dcc reference external" href="https://dcc.ligo.org/T2500310-v2/public">LIGO-T2500310-v2</a> and
+<a class="reference external" href="https://tds.virgo-gw.eu/?r=25115">VIR-0797A-25</a>.</p>
+<p>We assume that each detector has an independent observing duty cycle of 70%.</p>
+<h3 id="source-distribution">Source Distribution<a class="headerlink" href="#source-distribution" title="Link to this heading">¶</a></h3>
+<p>We draw masses and spins of compact objects from the global fit to 158 mergers
+in the Gravitational-Wave Transient Catalog (GWTC) 4.0
+<a class="footnote-reference brackets" href="#footcite-2025arxiv250818083t" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. The distribution is described below.</p>
+<p class="rubric">Masses</p>
+<p>The joint 2D distribution of the primary mass <span class="math notranslate nohighlight">\(m_1\)</span> and the secondary
+mass <span class="math notranslate nohighlight">\(m_2\)</span> is the Binned Gaussian Process (BGP) model from
+<a class="footnote-reference brackets" href="#footcite-2025arxiv250818083t" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, available as a data file in
+<a class="extlink-doi reference external" href="https://doi.org/10.5281/zenodo.16911563">doi:10.5281/zenodo.16911563</a>, and shown in the figure below.</p>
+<figure class="align-default" id="id14">
+<img alt="_images/mass-distribution.svg" src="_images/mass-distribution.svg" />
+<figcaption>
+<p><span class="caption-text"><span class="caption-text">
+Binned Gaussian Process (BGP) model for the joint distribution of
+<span class="math notranslate nohighlight">\(m_1\)</span> and <span class="math notranslate nohighlight">\(m_2\)</span>.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<p class="rubric">Spins</p>
+<p>The spins of the binary component objects are isotropically oriented. Component
+objects with masses less than 2.5 <span class="math notranslate nohighlight">\(M_\odot\)</span> have spin magnitudes that are
+uniformly distributed from 0 to 0.4, and components with greater masses have
+spin magnitudes that are uniformly distributed from 0 to 1.</p>
+<p class="rubric">Sky Location, orientation</p>
+<p>Sources are isotropically distributed on the sky and have isotropically
+oriented orbital planes.</p>
+<p class="rubric">Redshift</p>
+<p>Sources are uniformly distributed in differential comoving volume per unit
+proper time.</p>
+<p class="rubric">Rate</p>
+<p>The total rate density of mergers, integrated across all masses and spins, is
+set to <span class="math notranslate nohighlight">\(110_{-60}^{+130}\,\mathrm{Gpc}^{-3}\mathrm{yr}^{-1}\)</span>
+(<a class="footnote-reference brackets" href="#footcite-2025arxiv250818083t" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, Table 2, second row, last column).</p>
+<h3 id="summary-statistics">Summary Statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading">¶</a></h3>
+<p>The table below summarizes the estimated public alert rate and sky localization
+accuracy in O4 and O5. All values are given as a 5% to 95% confidence
+intervals.</p>
+<table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>Observing
+run</p></th>
+<th class="head" rowspan="2"><p>Network</p></th>
+<th class="head" colspan="3"><p>Source class</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p><a class="reference internal" href="glossary.html#term-BNS" title="BNS (glossary term)"><span class="xref std std-term">BNS</span></a></p></th>
+<th class="head"><p><a class="reference internal" href="glossary.html#term-NSBH" title="NSBH (glossary term)"><span class="xref std std-term">NSBH</span></a></p></th>
+<th class="head"><p><a class="reference internal" href="glossary.html#term-BBH" title="BBH (glossary term)"><span class="xref std std-term">BBH</span></a></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td colspan="5"><div class="line-block">
+<div class="line"><strong>Merger rate per unit comoving volume per unit proper time</strong></div>
+<div class="line">(Gpc<sup>-3</sup> year<sup>-1</sup>,
+log-normal uncertainty)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td colspan="2"></td>
+<td><p><span class="math notranslate nohighlight">\(45
+^{+53}
+_{-24}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(25
+^{+29}
+_{-14}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(40
+^{+48}
+_{-22}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td colspan="5"><div class="line-block">
+<div class="line"><strong>Sensitive volume: detection rate / merger rate</strong></div>
+<div class="line">(Gpc<sup>3</sup>, Monte Carlo uncertainty)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>O4</p></td>
+<td><p>HL</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.049
+^{+0.016}
+_{-0.013}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.152
+^{+0.037}
+_{-0.031}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(5.10
+^{+0.16}
+_{-0.15}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O4</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.061
+^{+0.017}
+_{-0.015}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.203
+^{+0.043}
+_{-0.037}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(6.04
+^{+0.17}
+_{-0.17}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5a</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.129
+^{+0.028}
+_{-0.025}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.484
+^{+0.072}
+_{-0.065}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(12.90
+^{+0.28}
+_{-0.27}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O5b</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.236
+^{+0.040}
+_{-0.036}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.867
+^{+0.103}
+_{-0.095}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(18.77
+^{+0.36}
+_{-0.35}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5c</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.340
+^{+0.049}
+_{-0.044}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1.04
+^{+0.11}
+_{-0.11}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(22.04
+^{+0.40}
+_{-0.39}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td colspan="5"><div class="line-block">
+<div class="line"><strong>Annual number of public alerts</strong></div>
+<div class="line">(log-normal merger rate uncertainty <span class="math notranslate nohighlight">\(\times\)</span> Poisson
+counting uncertainty)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>O4</p></td>
+<td><p>HL</p></td>
+<td><p><span class="math notranslate nohighlight">\(1
+^{+4}
+_{-1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(3
+^{+7}
+_{-3}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(210
+^{+250}
+_{-120}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O4</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(2
+^{+4}
+_{-2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(4
+^{+9}
+_{-4}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(240
+^{+290}
+_{-140}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5a</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(5
+^{+9}
+_{-5}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(11
+^{+17}
+_{-8}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(520
+^{+620}
+_{-290}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O5b</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(10
+^{+15}
+_{-8}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(21
+^{+28}
+_{-14}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(760
+^{+910}
+_{-420}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5c</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(15
+^{+20}
+_{-11}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(25
+^{+33}
+_{-16}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(890
+^{+1060}
+_{-490}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td colspan="5"><div class="line-block">
+<div class="line"><strong>Median luminosity distance</strong></div>
+<div class="line">(Mpc, Monte Carlo uncertainty)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>O4</p></td>
+<td><p>HL</p></td>
+<td><p><span class="math notranslate nohighlight">\(225
+^{+61}
+_{-38}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(424
+^{+48}
+_{-32}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1835
+^{+46}
+_{-45}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O4</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(266
+^{+33}
+_{-44}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(471
+^{+49}
+_{-55}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1987
+^{+37}
+_{-42}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5a</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(375
+^{+40}
+_{-52}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(589
+^{+45}
+_{-44}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2595
+^{+43}
+_{-41}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O5b</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(438
+^{+17}
+_{-45}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(757
+^{+53}
+_{-64}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(3052
+^{+44}
+_{-39}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5c</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(473
+^{+27}
+_{-37}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(808
+^{+58}
+_{-54}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(3241
+^{+39}
+_{-43}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td colspan="5"><div class="line-block">
+<div class="line"><strong>Median 90% credible area</strong></div>
+<div class="line">(deg<sup>2</sup>, Monte Carlo uncertainty)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>O4</p></td>
+<td><p>HL</p></td>
+<td><p><span class="math notranslate nohighlight">\(1900
+^{+520}
+_{-470}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1860
+^{+520}
+_{-340}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2277
+^{+61}
+_{-58}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O4</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(1420
+^{+310}
+_{-250}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2150
+^{+380}
+_{-310}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1837
+^{+55}
+_{-48}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5a</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(1260
+^{+130}
+_{-280}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1540
+^{+140}
+_{-400}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1238
+^{+27}
+_{-31}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O5b</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(1350
+^{+240}
+_{-240}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1710
+^{+170}
+_{-120}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1472
+^{+31}
+_{-32}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5c</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(1150
+^{+240}
+_{-170}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1320
+^{+130}
+_{-190}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1155
+^{+29}
+_{-25}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td colspan="5"><div class="line-block">
+<div class="line"><strong>Median 90% credible comoving volume</strong></div>
+<div class="line">(10<sup>3</sup> Mpc<sup>3</sup>,
+Monte Carlo uncertainty)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>O4</p></td>
+<td><p>HL</p></td>
+<td><p><span class="math notranslate nohighlight">\(28
+^{+11}
+_{-14}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(69
+^{+30}
+_{-17}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2560
+^{+150}
+_{-150}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O4</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(22.5
+^{+9.8}
+_{-9.4}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(117
+^{+47}
+_{-28}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2550
+^{+140}
+_{-150}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5a</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(36
+^{+18}
+_{-13}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(139
+^{+62}
+_{-49}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2750
+^{+140}
+_{-130}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>O5b</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(57
+^{+28}
+_{-18}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(346
+^{+32}
+_{-67}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(5000
+^{+180}
+_{-180}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>O5c</p></td>
+<td><p>HLV</p></td>
+<td><p><span class="math notranslate nohighlight">\(71
+^{+21}
+_{-17}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(247
+^{+84}
+_{-29}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(4100
+^{+160}
+_{-140}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Merger rate per unit comoving volume per unit proper time</strong> is the
+astrophysical rate of mergers in the reference frame that is comoving with the
+Hubble flow. It is averaged over a distribution of masses and spins that is
+assumed to be non-evolving.</p>
+<div class="caution warning admonition">
+<p class="admonition-title">Caution</p>
+<p>The merger rate per comoving volume should not be confused with the binary
+formation rate, due to the time delay between formation and merger.</p>
+<p>It should also not be confused with the merger rate per unit comoving volume
+per unit <em>observer</em> time. If the number density per unit comoving volume is
+<span class="math notranslate nohighlight">\(n = dN / dV_C\)</span>, and the merger rate per unit proper time <span class="math notranslate nohighlight">\(\tau\)</span>
+is <span class="math notranslate nohighlight">\(R = dn/d\tau\)</span>, then the merger rate per unit <em>observer</em> time is
+<span class="math notranslate nohighlight">\(R / (1 + z)\)</span>, with the factor of <span class="math notranslate nohighlight">\(1 + z\)</span> accounting for time
+dilation.</p>
+<p>See <a class="footnote-reference brackets" href="#footcite-2021cqgra-38e5010c" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> for further discussion of cosmological
+distance measures as they relate to sensitivity figures of merit for
+gravitational-wave detectors.</p>
+</div>
+<p><strong>Sensitive volume</strong> is the quotient of the rate of detected events per unit
+observer time and the merger rate per unit comoving volume per unit proper
+time. The definition is given in the glossary entry for <a class="reference internal" href="glossary.html#term-sensitive-volume" title="sensitive volume (glossary term)"><span class="xref std std-term">sensitive
+volume</span></a>. To calculate the detection rate, multiply the merger rate by the
+sensitive volume.</p>
+<p>The quoted confidence interval represents the uncertainty from the Monte Carlo
+simulation.</p>
+<p><strong>Annual number of public alerts</strong> is the number of alerts in one calendar
+year of observation. The quoted confidence interval incorporates both the
+log-normal distribution of the merger rate <em>and</em> Poisson counting statistics,
+but does not include the Monte Carlo error (which is negligible compared to the
+first two sources of uncertainty).</p>
+<p>The remaining sections all give median values over the population of detectable
+events.</p>
+<p><strong>Median luminosity distance</strong> is the median luminosity distance in Mpc of
+detectable events. The quoted confidence interval represents the uncertainty
+from the Monte Carlo simulation.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Although the luminosity distances for BNSs in the table above are about
+twice as large as the BNS <a class="reference internal" href="glossary.html#term-range" title="range (glossary term)"><span class="xref std std-term">ranges</span></a> in the figure in the
+<a class="reference internal" href="#timeline"><span class="std std-ref">Timeline</span></a> section, the median luminosity distances should
+be better predictors of the typical distances of events that will be
+detectable during the corresponding observing runs.</p>
+<p>The reason is that the BNS range is a characteristic distance for a single
+GW detector, not a network of detectors. LIGO, Virgo, and KAGRA as a network
+are sensitive to a greater fraction of the sky and a greater fraction of
+binary orientations than any single detector alone.</p>
+</div>
+<p><strong>Median 90% credible area</strong> is the area in deg<span class="math notranslate nohighlight">\(^2\)</span> of the smallest
+(not necessarily simply connected) region on the sky that has a 90% chance of
+containing the true location of the source.</p>
+<p><strong>Median 90% credible volume</strong> is the median comoving volume enclosed in the
+smallest region of space that has a 90% chance of containing the true location
+of the source.</p>
+<h3 id="cumulative-histograms">Cumulative Histograms<a class="headerlink" href="#cumulative-histograms" title="Link to this heading">¶</a></h3>
+<p>Below are cumulative histograms of the 90% credible area, 90% credible comoving
+volume, and luminosity distance of detectable events in O3, O4, and O5.</p>
+<figure class="align-default" id="id15">
+<img alt="_images/annual-predictions.svg" src="_images/annual-predictions.svg" />
+<figcaption>
+<p><span class="caption-text"><span class="caption-text">
+Cumulative annual public alert rate of simulated mergers as a function of
+90% credible area (left column), 90% credible comoving volume (middle
+column), or luminosity distance (right column). Rates are given for three
+sub-populations: BNS (top row), NSBH (middle row), and BBH (bottom row).
+The shaded bands give the inner 90% confidence interval including
+uncertainty in the estimated merger rate, Monte Carlo uncertainty from the
+finite sample size of the simulation, and Poisson fluctuations in the number
+of sources detected in one year.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a><div class="legend">
+<p>This plot is based on Figure 2 of <a class="footnote-reference brackets" href="#footcite-2022apj-924-54p" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> but uses the
+simulations described above employing the mass and spin distributions from
+<a class="footnote-reference brackets" href="#footcite-2025arxiv250818083t" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+</div>
+</figcaption>
+</figure>
+<h2 id="references">References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<div class="docutils container" id="id13">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-2020lrr-23-3a" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
+<p>B. P. Abbott, R. Abbott, T. D. Abbott, et al. Prospects for observing and localizing gravitational-wave transients with Advanced LIGO, Advanced Virgo and KAGRA. <em>Living Reviews in Relativity</em>, 23(1):3, December 2020. <a class="reference external" href="https://doi.org/10.1007/s41114-020-00026-9">doi:10.1007/s41114-020-00026-9</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-2025arxiv250818083t" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id7">2</a>,<a role="doc-backlink" href="#id8">3</a>,<a role="doc-backlink" href="#id9">4</a>,<a role="doc-backlink" href="#id12">5</a>)</span>
+<p>The LIGO Scientific Collaboration, the Virgo Collaboration, the KAGRA Collaboration, et al. GWTC-4.0: Population Properties of Merging Compact Binaries. <em>arXiv e-prints</em>, pages arXiv:2508.18083, August 2025. <a class="reference external" href="https://arxiv.org/abs/2508.18083">arXiv:2508.18083</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.2508.18083">doi:10.48550/arXiv.2508.18083</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-2022apj-924-54p" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id6">2</a>,<a role="doc-backlink" href="#id11">3</a>)</span>
+<p>Polina Petrov, Leo P. Singer, Michael W. Coughlin, et al. Data-driven Expectations for Electromagnetic Counterpart Searches Based on LIGO/Virgo Public Alerts. <em>ApJ</em>, 924(2):54, January 2022. <a class="reference external" href="https://arxiv.org/abs/2108.07277">arXiv:2108.07277</a>, <a class="reference external" href="https://doi.org/10.3847/1538-4357/ac366d">doi:10.3847/1538-4357/ac366d</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-2023apj-958-158k" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">4</a><span class="fn-bracket">]</span></span>
+<p>R. Weizmann Kiendrebeogo, Amanda M. Farah, Emily M. Foley, et al. Updated Observing Scenarios and Multimessenger Implications for the International Gravitational-wave Networks O4 and O5. <em>ApJ</em>, 958(2):158, December 2023. <a class="reference external" href="https://arxiv.org/abs/2306.09234">arXiv:2306.09234</a>, <a class="reference external" href="https://doi.org/10.3847/1538-4357/acfcb1">doi:10.3847/1538-4357/acfcb1</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-2021cqgra-38e5010c" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">5</a><span class="fn-bracket">]</span></span>
+<p>Hsin-Yu Chen, Daniel E. Holz, John Miller, et al. Distance measures in gravitational-wave astrophysics and cosmology. <em>Classical and Quantum Gravity</em>, 38(5):055010, March 2021. <a class="reference external" href="https://arxiv.org/abs/1709.08079">arXiv:1709.08079</a>, <a class="reference external" href="https://doi.org/10.1088/1361-6382/abd594">doi:10.1088/1361-6382/abd594</a>.</p>
+</aside>
+</aside>
+</div>
+<!--
+  source-file.html | custom IGWN Sphinx source-file block
+
+  Copyright (C) 2022 Cardiff University
+  License: MIT, see LICENSE for details
+-->
+
+<!-- NOTE: this file is deliberately empty to override
+     the source-file.html from sphinx-immaterial -->
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="quickstart.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started Checklist">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Getting Started Checklist
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="analysis/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: Data Analysis">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Data Analysis
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <!--
+  copyright.html | custom IGWN Sphinx copyright footer block
+
+  This file should be kept as precisely in-sync with
+  /mkdocs/material_igwn/partials/copyright.html as
+  possible to ensure a consistent display between
+  IGWN Sphinx and MkDocs themes.
+
+  Copyright (C) 2022 Cardiff University
+  License: MIT, see LICENSE for details
+-->
+
+<div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+        Copyright &#169; 2018-2025, LIGO Scientific Collaboration, Virgo Collaboration, KAGRA Collaboration.
+        
+    </div>
+  
+
+  
+  <!--
+  acknowledgements.html | custom igwn-material acknowledgements footer block
+
+  Copyright (C) 2022 Cardiff University
+  License: MIT, see LICENSE for details
+-->
+
+<div class="md-footer-acknowledgements">
+  <a target="_blank" href="https://gwcenter.icrr.u-tokyo.ac.jp/" title="KAGRA homepage">
+    <img
+      src="_static/images/kagra.png"
+      alt="KAGRA logo">
+  </a>
+  <a target="_blank" href="https://www.ligo.caltech.edu/" title="LIGO Lab homepage">
+    <img
+      src="_static/images/ligo.png"
+      alt="LIGO logo">
+  </a>
+  <a target="_blank" href="https://ligo.org" title="LSC homepage">
+    <img
+      src="_static/images/lsc.png"
+      alt="LSC logo">
+  </a>
+  <a target="_blank" href="https://www.ego-gw.it/" title="EGO homepage">
+    <img
+      src="_static/images/virgo.png"
+      alt="Virgo logo">
+  </a>
+</div>
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    8.2.3
+     and
+    <a href="https://computing.docs.ligo.org/igwn-material/sphinx/"
+       target="_blank" rel="noopener">Sphinx-Immaterial-IGWN</a>
+  <div>
+    Last updated Aug 05, 2026.
+  </div>
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.action.edit", "content.action.view", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.top", "toc.follow", "toc.integrate"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+        <script src="_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js"></script>
+    
+  </body>
+</html>

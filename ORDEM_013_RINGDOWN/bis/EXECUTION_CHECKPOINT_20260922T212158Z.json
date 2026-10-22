@@ -1,0 +1,64 @@
+{
+  "utc": "2026-09-22T21:21:58.987528+00:00",
+  "goal": "ORDEM_013BIS through final report, not v369 rerun",
+  "stage": "E2_CANDIDATE_ASSEMBLED_WAITING_ACTIVATION_SEALER_INDEPENDENT_CLOSURE",
+  "registered": false,
+  "seed_exists": false,
+  "null_campaign_outputs": [],
+  "science_declaration": "No new PE/strain values/waveforms/MC campaign in this stage. Finite toys/mocks and two remnant rows are separate.",
+  "files_sha256": {
+    "bis/E2_REVIEW_CANDIDATE_001.json": "d4d91d925e449441bc726d7313f247fca11a72726b3473c65bf901f4328e0161",
+    "bis/E2_DESIGN_DRAFT_004.json": "487c49dc6b52c9e8c6b857305c160e8249afa7188708cd6be1e36c8a1d9d3303",
+    "bis/e2_review/ACTIVATION_V2_CLOSING_RECEIPT.json": "b3df1827d4387de3e4584a93fa739774c87bd64a2a35af7b2fc6970bd948f7e3",
+    "bis/e4_e5_prepare/PE_R1_R2_R3_CLOSING_REVIEW.md": "1da6c752d3313e18e2dd8e086d7254555d472a7aa8c0f9dcf14759d1569ef30f",
+    "bis/e7_prepare/MAIN_CODE_REVIEW_CLOSING_V3.md": "03c85cf53fa30c67ca60454d5ca70320406c8281994ef8d92de5acd3f33fd993",
+    "bis/e2_publication_census/E7_INDEPENDENT_REVIEW_V4.md": "ef51c72771f903c9bd973956bcf43c2cc58b2c0d52a84aa93c5b6f2e8f5eb20d",
+    "refeito/seal_e2_013bis.py": "ce99da4a9e16405c5f469d8a7cfa956ffcdf044d4fbce99d731e3a226e90cdc6",
+    "refeito/e2_private_directory.ps1": "73247d9846b18b9464355aaf9667b7abaf0f8b8013ea8378034f7fea765761e5",
+    "refeito/write_e2_review_application_013bis.py": "d7e534e206278b888063dd5f545dcb8774aeaf604de64155896b4a68c0365553",
+    "refeito/smoke_e2_registration_013bis.py": "54a35e12d6a71c0431b593ba13ae6e65bca70b7021f06392b9ae30bd117b665b",
+    "refeito/activate_e4_e5_013bis.py": "cb3bf2f5e9178ed35621ee19b73339082717c7d5063b4bd8bd54c871b0c8334b",
+    "refeito/close_f0_at_pilot_013bis.py": "ebb34e0a42eed99fe3ed7c139a67ec9b3552b33149c7c59a660e9ed22f4a73dc"
+  },
+  "required_next": [
+    "Read E2_SEALER_CLOSING_REVIEW.md and address blocking findings only; no new user confirmation",
+    "Apply existing GO to exact candidate via write_e2_review_application_013bis.py after reading scoped reviews",
+    "Windows seal_e2_013bis.py exact candidate and application hashes; creates exclusive NTFS private seed then final activation marker",
+    "WSL smoke_e2_registration_013bis.py; launch null_campaign.py and activate_e4_e5_013bis.py",
+    "Independent E4 numerical review, formal B2 delivery; F0 stop only before E3.1, then Kerr and pilot",
+    "E3.2 budget, E3.3 possible calibration/blind PE, test, E6,E7, final report"
+  ],
+  "freeze": [
+    "bis/e2_code/**/*.py (14)",
+    "bis/e4_e5_prepare/**/*.py (66)",
+    "bis/e7_prepare/producer/**/*.py (2)"
+  ],
+  "agents": {
+    "Averroes": "01a0ca10-c0e8-7c62-8ee8-4f153cd38299 — Kerr preparation/repin after final guard",
+    "Beauvoir": "01a0ca1b-47e5-73c3-9c38-e334310b6c8c — independent Kerr review in bis/e3_pyring_review",
+    "Wegener": "01a0cac1-c4c5-7de1-af2e-e0ba93627b41 — independent E4/E5 numerical review preparation, await activation",
+    "Russell": "01a0cac4-d5d0-79c3-85e1-32c4165adaf3 — E2 sealer closing, E7 F3 closed"
+  },
+  "budget": {
+    "status": "PART_B_STARTED__NO_BLIND_DATA_AUTHORIZED_BEFORE_E2",
+    "started_utc": "2026-09-22T19:06:33.802143+00:00",
+    "hard_deadline_utc": "2026-09-24T11:06:33.802143+00:00",
+    "authorized_wall_hours": 40,
+    "accounting": "Conservative continuous wall time from this receipt, including orchestration and reviews; simultaneous workers count once. Part A and diagnostic jobs started before this receipt excluded as jobs, but overlapping elapsed wall time is still charged.",
+    "initial_envelope_hours": {
+      "E0_E1_existing_data": 2,
+      "E2_E5_E4_registration_and_light_controls": 2,
+      "E3_1_pilot_maximum": 10,
+      "E3_2_E3_3_calibration_and_blind_events_reserve": 24,
+      "test_E6_E7_final": 2
+    },
+    "allocation_scope": "Provisional upper bounds before any Part B compute; E3.2 replaces reserves using actual pilot cost, without extending the fixed deadline. No guarantee to consume all budget.",
+    "old_jobs_policy": "No heavy job before E3.1 termination of own old groups; lightweight existing-data calculations only meanwhile.",
+    "blind_gate": "E2 registered hash and tunnel witness required before PE of blind events or reading posterior published after 2026-09-22.",
+    "ma_sha256": "1e1b31226ddbc211f7a751c4add712d4deeeb99939d5b74c87b45e6d3d3fcbf4",
+    "part_a_manifest_sha256": "a4fe6be99038dcd8ef832303d237673ef2edaef69a7a76567180c223a3dfbcf0",
+    "opening_sha256": "0118a54b7a806a0a5ef5572afc8349c223cc3da4bec62ff18a9cd1b07433f9f0",
+    "code_sha256": "805fd5808a427413e9eac67d02ab37d1cd998069581b405031fb8715e014b6a2"
+  },
+  "scope": "Writes Chatgpt only. No canonical/kernel/memory/Atlas/site/push. F0 old processes not yet stopped; no heavy new job yet."
+}

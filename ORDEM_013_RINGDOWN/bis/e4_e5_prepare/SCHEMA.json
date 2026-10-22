@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "E4 E5 preparation plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "created_utc",
+    "input_manifest_sha256",
+    "readings",
+    "variants",
+    "E4",
+    "E5",
+    "activation",
+    "not_executed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "status": {
+      "const": "PREPARED_NOT_SCIENTIFICALLY_EXECUTED_AWAITING_E2"
+    },
+    "created_utc": {
+      "type": "string"
+    },
+    "input_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "readings": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "R-A",
+          "R-B",
+          "R-MOD",
+          "R-RAIZ-0",
+          "R-RAIZ-EP4",
+          "R-RAIZ-REST",
+          "R-RAIZ-COHERENT",
+          "R-LIN",
+          "R-GLOBAL",
+          "R-PROP"
+        ]
+      }
+    },
+    "variants": {
+      "const": [
+        "ONLY_220_DEFORMED",
+        "BOTH_220_440_DEFORMED"
+      ]
+    },
+    "E4": {
+      "type": "object",
+      "required": [
+        "fisher",
+        "posterior",
+        "fixed_free_robustness",
+        "output_scope"
+      ]
+    },
+    "E5": {
+      "type": "object",
+      "required": [
+        "models",
+        "statistic",
+        "full_posterior",
+        "information",
+        "secondary",
+        "jitter_transfer",
+        "sigma_sys",
+        "archived_information_populations"
+      ]
+    },
+    "activation": {
+      "type": "object"
+    },
+    "not_executed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "future_result": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "status",
+        "plan_sha256",
+        "input_manifest_sha256",
+        "E4_fisher",
+        "E4_archived_marginals",
+        "E5_information",
+        "E5_contract",
+        "performance"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "status": {
+          "const": "NONBLIND_CONDITIONAL_DETERMINISTIC_DIAGNOSTICS"
+        },
+        "new_PE": {
+          "const": false
+        },
+        "new_waveforms": {
+          "const": false
+        },
+        "new_test_data": {
+          "const": false
+        },
+        "population_fit_executed": {
+          "const": false
+        },
+        "null_calibration_executed": {
+          "const": false
+        },
+        "performance": {
+          "type": "object",
+          "required": [
+            "wall_seconds_through_computation",
+            "process_CPU_seconds_through_computation"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "E6_REVIEWED_STAGE_V1"
+    },
+    "stage": {
+      "enum": [
+        "E3.2",
+        "E3.3",
+        "TEST"
+      ]
+    },
+    "registration_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "outcome": {
+      "enum": [
+        "COMPLETED",
+        "PARTIAL",
+        "BLOCKED",
+        "UNAVAILABLE"
+      ]
+    },
+    "issued_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "artifact": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "route": {
+            "enum": [
+              "TAU220_POPULATION",
+              "TAU440_FIXED_SOURCE_FISHER",
+              "DF220_POPULATION_WIDTH_IV"
+            ]
+          },
+          "reading": {
+            "enum": [
+              "R-A",
+              "R-B",
+              "R-MOD",
+              "R-RAIZ-0",
+              "R-RAIZ-EP4",
+              "R-RAIZ-REST",
+              "R-RAIZ-COHERENT",
+              "R-LIN",
+              "R-GLOBAL",
+              "R-PROP"
+            ]
+          },
+          "data_group": {
+            "enum": [
+              "O4_HOJE",
+              "O4_CEGO",
+              "O4C_GWTC6",
+              "O5_BANDA",
+              "ET",
+              "CE"
+            ]
+          },
+          "scenario_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "metrics": {
+            "type": "object",
+            "propertyNames": {
+              "enum": [
+                "z_expected_conditional",
+                "N90_information_target",
+                "N90_count_scenario",
+                "GW250114_equivalents",
+                "delta",
+                "sigma",
+                "correction_over_sigma",
+                "rate_per_year",
+                "rate_CI",
+                "z_physical",
+                "lnB"
+              ]
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "pointer": {
+                  "type": "string",
+                  "pattern": "^(/.*)?$"
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pointer",
+                "unit"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "gate_pointer": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^(/.*)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "test_summary_pointer": {
+            "type": "string",
+            "pattern": "^(/.*)?$"
+          },
+          "calibration_receipt_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "calibration_scenario_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "route",
+          "reading",
+          "data_group",
+          "scenario_id",
+          "scope",
+          "metrics"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "stage",
+    "registration_sha256",
+    "outcome",
+    "issued_utc",
+    "artifact",
+    "review",
+    "bindings"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Proposed normalized interface, not an existing E3 receipt or a fabricated acceptance. Independent review must duplicate exact bindings and outcome."
+}

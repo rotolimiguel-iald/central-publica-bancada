@@ -1,0 +1,48 @@
+{
+  "stage": "catalog",
+  "run": "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/C7_POSTERIOR_REPRODUCTION/cache/run_catalog_20260922_020404_699983/ORDEM_013_RINGDOWN",
+  "date_utc": "2026-09-22T02:04:36.606592+00:00",
+  "manifest_sha256": "6a5a1a0bc09e10ecfd966ae9a81c9833219345beba9f8e2642ee6ae982d6939f",
+  "external_inputs": 34,
+  "reference_results_copied_as_inputs": false,
+  "commands": [
+    [
+      "catalog_220_readout.py"
+    ],
+    [
+      "combine_catalog.py"
+    ]
+  ],
+  "status": "PASS",
+  "comparisons": [
+    {
+      "output": "C4_CATALOG_220.json",
+      "numerical_leaves": 10866,
+      "max_absolute_difference": 0,
+      "output_sha256": "cd162bc5624018599c4bc22884720348d0be241e518ae3d62fb9a380b066281e",
+      "checked_fields": [
+        "N_events",
+        "N_posterior_draws",
+        "rows",
+        "catalog"
+      ]
+    },
+    {
+      "output": "C4_CATALOG_COMBINATION.json",
+      "numerical_leaves": 192,
+      "max_absolute_difference": 0,
+      "output_sha256": "f3d8c1959ded3efd15045923ce0cbafe7356ec888ced1934d8d0c183046d0d01",
+      "checked_fields": [
+        "common_deformation_GR_diagnostics",
+        "catalog"
+      ]
+    }
+  ],
+  "tolerance": {
+    "relative": 2e-07,
+    "absolute": 1e-10
+  },
+  "numpy_version": "2.5.3",
+  "scipy_version": "1.18.1",
+  "h5py_version": "3.16.0"
+}

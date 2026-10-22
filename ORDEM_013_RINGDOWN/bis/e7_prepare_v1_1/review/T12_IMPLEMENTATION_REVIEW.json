@@ -1,0 +1,80 @@
+{
+  "status": "INDEPENDENT_LOCAL_STATIC_IMPLEMENTATION_REVIEW_NO_EXECUTION",
+  "at_utc": "2026-09-26T15:09:57.101584+00:00",
+  "examined": {
+    "producer": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\e7_prepare_v1_1\\producer\\tgl_ringdown_ampliacao.py",
+      "sha256": "106d82530727946f7f97f98a655e92527a5ea829ff91b43e15d3f3f4a290ae13",
+      "bytes": 41945
+    },
+    "candidate": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\e7_prepare_v1_1\\CANDIDATE_V1_1_1.json",
+      "sha256": "96903be3fcc59a052b43b7b85d561e507f2810dbc1a23a307c9a12a640dbde72",
+      "bytes": 229831
+    },
+    "tests": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\e7_prepare_v1_1\\tests\\test_rite.py",
+      "sha256": "7228d8d321d3c33ecb34cbc39a28ec3a3f94bab33ed6cb6b109e4963ae77bc77",
+      "bytes": 6816
+    }
+  },
+  "method": [
+    "read new producer functions from STATISTICAL_FIELDS",
+    "read candidate metadata and test_rite source",
+    "Python AST parse only",
+    "no tests, PE, remote providers, emenda registration, source modification or E2_PRIVATE"
+  ],
+  "verified_by_inspection": [
+    {
+      "id": "V1",
+      "point": "run_rite admits only historical E7 posterior SHA from pinned receipt, calibration-only plan, and returns AWAITING_DATA with physical lnB/z null and no heavy/blind authorization."
+    },
+    {
+      "id": "V2",
+      "point": "Four legacy formula ASTs are tested for equality by test_rite; verification here is static source inspection, not an independent execution of that test."
+    },
+    {
+      "id": "V3",
+      "point": "Source and tar files present are SHA checked; absent files are labeled DECLARADO_NOT_VERIFIED_HERE and add a red-gate reason."
+    },
+    {
+      "id": "V4",
+      "point": "Conditional E0 targets are copied from registered planning_targets with CONDITIONAL_PLANNING_ONLY label; test_count uses blind_test role, not calibration-event count."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "title": "Registered E7 code identity incompletely checked by embedded_context",
+      "location": "producer/tgl_ringdown_ampliacao.py:559-560",
+      "evidence": "Only __file__ is hashed against producer_tree_sha256[tgl_ringdown_ampliacao.py]. The function does not require e7.producer_directory to equal the new producer path, e7.guard_path to equal the embedded consumer, guard_sha256 to match it, or verify the other tree entry. A witnessed candidate with these metadata fields inconsistent can still pass this read-only consumer.",
+      "action": "Require exact registered path identities and hash equality for the files actually used; if the two-file tree is claimed complete, verify its registered file set without accepting mere directory existence. Preserve no external importlib."
+    },
+    {
+      "id": "F2",
+      "severity": "LOW",
+      "title": "Malformed V1.1 amendment filename is silently ignored",
+      "location": "producer/tgl_ringdown_ampliacao.py:553-570",
+      "evidence": "The later-link search filters malformed names instead of rejecting them. A file matching RINGDOWN_5SIGMA_V1_1_*.json with an invalid ordinal such as _02.json is ignored here, whereas registration_guard.numbered_chain rejects malformed chain names. The read-only consumer and launch guard can disagree about chain validity.",
+      "action": "Reject every globbed chain member that does not match the canonical numbered pattern; also reject a gap or duplicate ordinal explicitly."
+    },
+    {
+      "id": "F3",
+      "severity": "LOW",
+      "title": "Transported 440 rows lack local scope binding",
+      "location": "producer/tgl_ringdown_ampliacao.py:684-689",
+      "evidence": "The T05 receipt SHA is pinned, but all rows with mode==440 are returned without checking receipt status, event identity against the intended single nonblind calibration event, or expected row schema. The label says single-event/nonblind solely from local text.",
+      "action": "Validate T05 status, event/role and row schema before carrying its 440 rows; otherwise mark the transport as DECLARADO/OPEN with the receipt pin and no event association."
+    },
+    {
+      "id": "F4",
+      "severity": "LOW",
+      "title": "Historical authorization field in amendment is not bound to used receipt pin",
+      "location": "producer/tgl_ringdown_ampliacao.py:709-713",
+      "evidence": "run_rite takes authorization SHA from the E7 execution receipt and checks the file at candidate e7_rite_v1_1.legacy_authorization_path, but never compares that SHA to e7_rite_v1_1.legacy_authorization_sha256. This is metadata inconsistency rather than an execution bypass because the receipt still pins the used bytes.",
+      "action": "Require candidate declared historical authorization SHA == receipt.authorization_sha256 and check its canonical path."
+    }
+  ],
+  "prepublication_limit": "CANDIDATE_V1_1_1.json is still a candidate, not a witnessed/published sub-amendment. No real T12 rite execution or physical verification was observed."
+}

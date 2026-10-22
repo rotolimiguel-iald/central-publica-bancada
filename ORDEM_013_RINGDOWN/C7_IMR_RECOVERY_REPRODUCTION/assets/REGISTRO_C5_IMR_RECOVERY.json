@@ -1,0 +1,84 @@
+{
+  "status": "REGISTERED_NONBLIND_MODEL_ADEQUACY_EXTENSION",
+  "created_utc": "2026-09-22T03:32:43.262666+00:00",
+  "prior_knowledge": "All previous injection/strain results are known; this is not a blind discovery test",
+  "computed_psds": [
+    "O4",
+    "O5"
+  ],
+  "readings": [
+    "R-A",
+    "R-B",
+    "R-RAIZ-0",
+    "R-RAIZ-EP4",
+    "R-RAIZ-REST",
+    "R-LIN",
+    "R-MOD",
+    "R-GLOBAL"
+  ],
+  "snrs": [
+    40.0,
+    200.0,
+    600.0
+  ],
+  "injection_amplitudes": [
+    0.0,
+    1.0
+  ],
+  "noise_indices": [
+    50,
+    256
+  ],
+  "N": 206,
+  "start_tM": 10.0,
+  "sample_rate_hz": 2048.0,
+  "amplitude_prior_sd_strain": 1e-20,
+  "response_factors": {
+    "H1": [
+      0.7,
+      0.2
+    ],
+    "L1": [
+      -0.3,
+      0.8
+    ]
+  },
+  "source_parameters": "The two fixed, family-specific remnants and original binary parameters from C5_IMR_CONTROLS; no parameter estimation or external IMR prior",
+  "recovery": "Exact 22,44,other harmonic shapes from each supplied IMR family; six independently Gaussian real coefficients per detector",
+  "waveform_normalization": "Each harmonic pair divided by its maximum polarization norm in the declared interval at a=0. The divisor stays fixed for every a and is identical under both point hypotheses.",
+  "deformation": "Whole 22 and 44 harmonics damped by their fundamental Gamma times time since the 22 peak; other modes unchanged, matching prior C5 injections. It is a conditional transposition, not a unique overtone theory.",
+  "recovery_choices": [
+    "SEOBNRv4HM",
+    "IMRPhenomXPHM",
+    "EQUAL_FAMILY_MIXTURE"
+  ],
+  "family_mixture": "Prior probability 1/2 for each entire network family under a=0 and a=1. Bayesian marginal likelihood is logsumexp minus log(2), not the maximum. Diagnostic profile likelihood maximizes over the two families.",
+  "criteria": {
+    "max_absolute_median_bias": 0.2,
+    "coverage90_min": 0.8,
+    "coverage90_max": 0.97,
+    "profile_boundary_hits": 0,
+    "minimum_injections": 50
+  },
+  "diagnostic_grid": "Both-family-safe interval [-0.8,2]/max(Gamma*tau_GR), 2401 points plus exact 0 and 1; negative a is diagnostic only, never a physical hypothesis",
+  "unidentifiable": "max(Gamma*tau_GR)<1e-12 receives only point likelihoods and no claimed calibration",
+  "interpretation": "Same-family success is manufactured closure, opposite-family fit is mismatch control. Mixture success covers only the declared two-family set at this one source; it does not pay full astrophysical acceptance.",
+  "no_target_strain_read": true,
+  "original_C6_unchanged": true,
+  "hashes": {
+    "calibrate_imr_recovery.py": "d409fa2225cc25a2eda8591b57f5e2e789c44b5eee647b2a6d525a69aab8c45a",
+    "tgl_ringdown_prediction.py": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+    "tgl_ringdown_likelihood.py": "f16517e62fca96cc348aac17369e75e1fb9b07f1e95fef06f7630c8b94153bca",
+    "diagnose_overtones.py": "9702959b339ad292ff48d4420f575cc402bddf20d4f0fe2282b5a5cdc15c97f0",
+    "forecast_recolored_imr.py": "02e09d1f8b29217b60ee8b72ef1b94e9fe3a2adba92972f8d6cfe2d9a6cabc6e",
+    "QNM_GRID.json": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24",
+    "C5_EXTRA_QNMS.json": "be9f839dcb69814baca963f97c997dae259aa2a7bf2e83de004228869f9d1297",
+    "C5_IMR_CONTROLS.json": "1fe989525c3c9cff7059caa748eea541f94d01f9d416840117072c1f094fe2c1",
+    "C5_RECOLORED_NOISE.json": "088fe6927b17e8461df6a05c0d129da28654cf001e3833df24713cfe0d3ec477",
+    "REGISTRO_C6.json": "ded00f09b5010d622b67b4ea4e559a216818f578440a0f60772130174ececf14",
+    "cache/imr_controls/SEOBNRv4HM.npz": "d879ac7bebc28006010aa3eba233957b65095224c369f8dd7abc6157308824a6",
+    "cache/imr_controls/IMRPhenomXPHM.npz": "cb1a343325f2c610f6c48b00b6b0b8f9328e41781c57c09f9f901149f62e5446",
+    "cache/recolored_noise/O4_noise.npz": "03aa894405014ac2599ffa760b9b14d10410a68f60a962625dc4eaf4bffcd528",
+    "cache/recolored_noise/O5_noise.npz": "aaf09f21792c7fb42cd98a47aaa0e646894ce4ddb0b5ccb63d757da3de410c09"
+  }
+}

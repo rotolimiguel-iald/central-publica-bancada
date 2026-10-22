@@ -1,0 +1,135 @@
+{
+  "status": "GAUSSIAN_ALGEBRA_PASS__SCOPE_AND_GUARD_CORRECTIONS_BEFORE_CAMPAIGN",
+  "utc": "2026-09-22T20:09:03.287876+00:00",
+  "code_under_review_sha256": "a5b898285bf6da0f3c226256733b058bb90d11eecaf9c491806c9993285c0cf9",
+  "code_under_review_bytes": 3534,
+  "review_code_sha256": "21372dd2fbccb059d0ef8b82a9c87767563454ef34e1f0749c1be9f2cffefcad",
+  "optimize": 1,
+  "dense_vs_Woodbury_fixtures": [
+    {
+      "fixture": "zero",
+      "production_AST_values": {
+        "noise_variance_fraction": 1.0000000000000002,
+        "nuisance_variance_fraction": 0.0,
+        "signal_information_with_nuisance": 0.3478192050619835,
+        "max_squared_signal_fraction": 0.8391549653574132
+      },
+      "dense_oracle_values": {
+        "noise_variance_fraction": 0.9999999999999999,
+        "nuisance_variance_fraction": 0.0,
+        "signal_information_with_nuisance": 0.34781920506198344,
+        "max_squared_signal_fraction": 0.8391549653574132
+      },
+      "max_abs_error": 3.3306690738754696e-16,
+      "X_transpose_w": [
+        -30.09994455057734,
+        -1.945738698624838
+      ]
+    },
+    {
+      "fixture": "sealed_local_cov_INPUT",
+      "production_AST_values": {
+        "noise_variance_fraction": 0.5333639309360148,
+        "nuisance_variance_fraction": 0.46663606906398514,
+        "signal_information_with_nuisance": 0.17223111177228792,
+        "max_squared_signal_fraction": 0.6729048501288095
+      },
+      "dense_oracle_values": {
+        "noise_variance_fraction": 0.5333639309360148,
+        "nuisance_variance_fraction": 0.46663606906398514,
+        "signal_information_with_nuisance": 0.17223111177228792,
+        "max_squared_signal_fraction": 0.6729048501288095
+      },
+      "max_abs_error": 0.0,
+      "X_transpose_w": [
+        -20.594057745075467,
+        -1.5542183233484077
+      ]
+    },
+    {
+      "fixture": "rank_one",
+      "production_AST_values": {
+        "noise_variance_fraction": 0.32140483372992856,
+        "nuisance_variance_fraction": 0.6785951662700714,
+        "signal_information_with_nuisance": 0.10664346648369483,
+        "max_squared_signal_fraction": 0.7548645719151046
+      },
+      "dense_oracle_values": {
+        "noise_variance_fraction": 0.3214048337299286,
+        "nuisance_variance_fraction": 0.6785951662700714,
+        "signal_information_with_nuisance": 0.10664346648369481,
+        "max_squared_signal_fraction": 0.7548645719151043
+      },
+      "max_abs_error": 3.3306690738754696e-16,
+      "X_transpose_w": [
+        -16.31700167940065,
+        -1.051515218035889
+      ]
+    },
+    {
+      "fixture": "diagonal",
+      "production_AST_values": {
+        "noise_variance_fraction": 0.2938928667259867,
+        "nuisance_variance_fraction": 0.7061071332740135,
+        "signal_information_with_nuisance": 0.09395072270048094,
+        "max_squared_signal_fraction": 0.6571823412078432
+      },
+      "dense_oracle_values": {
+        "noise_variance_fraction": 0.2938928667259867,
+        "nuisance_variance_fraction": 0.7061071332740136,
+        "signal_information_with_nuisance": 0.09395072270048094,
+        "max_squared_signal_fraction": 0.6571823412078432
+      },
+      "max_abs_error": 1.1102230246251565e-16,
+      "X_transpose_w": [
+        -15.093968525729649,
+        -1.063566540157736
+      ]
+    }
+  ],
+  "rejected_projection_mutations": [
+    "nonpositive sigma",
+    "nonfinite delta",
+    "nonPSD covariance",
+    "asymmetric covariance",
+    "zero signal"
+  ],
+  "validation_prefix_accepts_invalid_execution_inputs": {
+    "draws1": true,
+    "zero_chunk": true,
+    "negative_chunk": true,
+    "fractional_chunk": true,
+    "entropy_seed_None": true
+  },
+  "analytic_tail_controls": {
+    "Gaussian_one_sided_Z_gt5": 2.8665157187919455e-07,
+    "Gaussian_100million_expected_exceedances": 28.665157187919455,
+    "Gaussian_100million_relative_binomial_SE": 0.1867767326847186,
+    "zero_successes_one_sided95_upper_1million": 2.995727786352544e-06,
+    "zero_successes_one_sided95_upper_100million": 2.995732228681932e-08,
+    "minimum_trials_if_zero_successes_to_upper95_below_Gaussian_p5": 10450778,
+    "unit_variance_t5_measurement_only_Z_gt5": 0.0006639627174956182,
+    "formula_t5": "T=G*sqrt(3/U5), unit variance. Direct closed-form integral of t5 density, no sampling.",
+    "one_million_scope": "Zero successes still has upper95 > p5; cannot certify five-sigma tail empirically."
+  },
+  "MC_draws_generated": 0,
+  "full_simulate_projection_called": false,
+  "production_imported": false,
+  "prior_covariance_statute": "INPUT_GAUSSIAN_LOCAL_CURVATURE_FOR_SYNTHETIC_NULL_ONLY_NOT_PHYSICAL_COVARIANCE",
+  "findings": [
+    {
+      "id": "E2-SN-R1",
+      "priority": "P2",
+      "kind": "model description",
+      "detail": "Current t5 acts on measurement noise only; nuisance Gaussian term independent. Full scalar is t5-plus-normal convolution, not a full-covariance elliptical t5 when nuisance_fraction>0. Register exact generative equation and name."
+    },
+    {
+      "id": "E2-SN-R2",
+      "priority": "P2",
+      "kind": "execution guard",
+      "detail": "Before RNG require draws>=2, positive integer chunk, fixed integer seed (no bool/None), callable guard, finite fractions and valid alpha. chunk0 does not progress; draws1 ends in division byzero after draws. CI labels hardcode95 although alpha public."
+    }
+  ],
+  "no_campaign_authorization": "User requires E2 registration and new explicit order; none executed",
+  "input_source_unchanged": true
+}

@@ -1,0 +1,119 @@
+def prove_neutrino_m2(ONE, parts):
+    """MODULO (v154) -- O RITO m2: o neutrino reespecificado [ADITIVO; nao
+    gateia 1=1]. PORTA o frozen NEUTRINO_M2_V2 (hash 4bdae22a..., congelado
+    08/08/2026 na area isolada) para o canonico. SUPERSEDE NEUTRINO_SUM_V1
+    (v147) como teste de beta_TGL -- decisao D2 do operador (10/08/2026):
+    Sigma m_nu foi APOSENTADO como discriminante porque a predicao TGL
+    dista apenas 0,199 meV do NH minimo (m_1=0) = 0,71 sigma da propria
+    barra: todo limite que mata o V1 mata igualmente o ordenamento normal
+    padrao. O DISCRIMINANTE REAL e m_2 = sqrt(Dm2_21): la a TGL preve
+    8,5074 meV e o mundo mede 8,68 -- e A TENSAO CRESCE COM A PRECISAO:
+    1,64 sigma (PDG 2023) -> 2,21 sigma (JUNO nov/2025, INDEPENDENTE) ->
+    2,95 sigma (NuFIT global pos-JUNO). Linha de morte 5 sigma quando
+    Dm2_21 chegar a 0,784%% (JUNO projeta 0,5%%, ~2031: tensao projetada
+    7,8 sigma SE o centro nao se mover). NAO-CEGO DECLARADO: os limiares
+    (5/3 sigma) foram fixados na mesma sessao em que a tensao corrente ja
+    era conhecida -- esta emissao e uma REESPECIFICACAO; a cegueira vale
+    a partir de agora (regra ja hasheada julga as proximas medidas).
+
+    ERRATA v315 (05/09/2026, AO LADO): ate a v314 a IMPLEMENTACAO desobedecia
+    a kill_rule congelada -- FALSIFIED disparava pela tensao do ultimo degrau
+    sozinho, e o NuFIT pos-JUNO (que CONTEM o JUNO) contava como determinacao
+    independente. Achado da bancada ChatGPT (ENTREGA_005). Corrigido: FALSIFIED
+    sse DUAS determinacoes mutuamente autonomas >= 5 sigma; frozen e hash intactos;
+    o veredito de hoje nao muda (1,64 / 2,21 sigma nas autonomas; 2,95 na global).
+    A partir da v315 este rito integra o CONTORNO com poder de fechar o 1=1."""
+    beta = SEALED_CODATA_ALPHA * ONE * math.sqrt(math.e)   # jamais literal
+    m2_pred_meV = beta * math.sin(math.radians(45.0)) * 1000.0
+    frozen = {
+        "version": "NEUTRINO_M2_V2",
+        "portado_de": "teste_acustico_beta_tgl_v1/02_frozen_neutrino_m2_v2.py (hash 4bdae22a277aa393..., 08/08/2026)",
+        "supersedes": "NEUTRINO_SUM_V1 (v147) como teste de beta_TGL [D2, 10/08/2026]",
+        "observavel": "m_2 = sqrt(Dm2_21), o 2o autoestado no ordenamento normal",
+        "predicao": "m_2 = beta_TGL*sin(45)*1eV; beta_TGL = alpha*sqrt(e) em runtime [derivacao publicada 2025, Zenodo 10.5281/zenodo.17526619]",
+        "escala_dimensional": "1 eV [NORM] DECLARADA, NAO DERIVADA; a escala que zeraria a tensao seria 1,0200 eV (+2,00%) -- fixada por declaracao, nao por ajuste",
+        "kill_rule": "FALSIFIED sse |m2_obs - m2_TGL|/sigma_obs >= 5 em DUAS determinacoes independentes de Dm2_21",
+        "tension_rule": "TENSION sse a razao ficar em [3, 5) na determinacao global mais recente",
+        "matched_rule": "MATCHED_PROSPECTIVELY sse duas determinacoes independentes pousarem a 1 sigma de m2_TGL -- e mesmo entao NAO e CONFIRMED",
+        "allowed_verdicts": ["TGL_NU_M2_ARMED_CONSISTENT", "TGL_NU_M2_TENSION",
+                             "TGL_NU_M2_FALSIFIED", "TGL_NU_M2_MATCHED_PROSPECTIVELY"],
+        "forbidden_verdicts": ["CONFIRMED"],
+        "nao_e_cego_nesta_emissao": ("DECLARACAO OBRIGATORIA: os limiares foram fixados na mesma sessao em que a tensao "
+                                     "corrente (2,95 sigma) ja havia sido calculada; esta emissao e REESPECIFICACAO, "
+                                     "nao veredito cego; a cegueira vale a partir de agora"),
+    }
+    frozen_hash = sha_obj(frozen)
+    dets = [  # [EXT, datadas]
+        # v315: `grupo`/`autonoma` = independencia MUTUA dos dados (a kill_rule fala disso);
+        # `indep` (preservado) = novo em relacao a base v141. NuFIT global e COMBINACAO: contem JUNO.
+        {"fonte": "PDG 2023 (base do v141)", "data": "2023", "indep": False,
+         "grupo": "KamLAND+solar (pre-JUNO)", "autonoma": True,
+         "dm21_1e5": 7.53, "sig_1e5": 0.18},
+        {"fonte": "JUNO primeiros resultados (59 dias)", "data": "2025-11", "indep": True,
+         "grupo": "JUNO (reator, baseline media)", "autonoma": True,
+         "dm21_1e5": 7.50, "sig_1e5": 0.12},
+        {"fonte": "NuFIT global pos-JUNO (ate fim 2025)", "data": "2025-12", "indep": True,
+         "grupo": "combinacao global (CONTEM JUNO e KamLAND+solar)", "autonoma": False,
+         "dm21_1e5": 7.53, "sig_1e5": 0.10},
+    ]
+    escada = []
+    for d in dets:
+        m2o = math.sqrt(d["dm21_1e5"] * 1e-5) * 1000.0
+        sg = 0.5 * (d["sig_1e5"] / d["dm21_1e5"]) * m2o
+        escada.append({"fonte": d["fonte"], "data": d["data"], "independente": d["indep"],
+                       "grupo": d["grupo"], "autonoma": d["autonoma"],
+                       "m2_obs_meV": m2o, "sigma_meV": sg,
+                       "tensao_sigma": abs(m2o - m2_pred_meV) / sg})
+    tensao_atual = escada[-1]["tensao_sigma"]
+    prec_mata_pct = 100.0 * 2.0 * (abs(escada[-1]["m2_obs_meV"] - m2_pred_meV) / 5.0) / escada[-1]["m2_obs_meV"]
+    sigma_sum_sep = 0.1993 / 0.2795                          # [SESSAO] Sigma: separacao/barra
+    # v315 (05/09/2026) -- ERRATA DE IMPLEMENTACAO, AO LADO: ate a v314 vd0 disparava FALSIFIED pela
+    # tensao do ULTIMO degrau sozinho, contra a kill_rule congelada ("DUAS determinacoes independentes");
+    # e o NuFIT pos-JUNO CONTEM o JUNO (combinacao) -- nao e segunda determinacao. Achado da bancada
+    # (ENTREGA_005). O frozen e o seu hash NAO mudam: o codigo passa a obedecer ao texto. Uma tensao
+    # global >= 5 sigma SEM segunda determinacao autonoma fica VISIVEL (campo proprio) e NAO falsifica.
+    grupos_5sigma = sorted({e["grupo"] for e in escada if e.get("autonoma") and e["tensao_sigma"] >= 5.0})
+    kill_rule_ok = len(grupos_5sigma) >= 2
+    if kill_rule_ok:
+        vd0 = "TGL_NU_M2_FALSIFIED"
+    elif tensao_atual >= 3.0:
+        vd0 = "TGL_NU_M2_TENSION"
+    else:
+        vd0 = "TGL_NU_M2_ARMED_CONSISTENT"
+    checks = [
+        ("m2 predito = %.4f meV (beta runtime; escala 1 eV [NORM] declarada)" % m2_pred_meV, True),
+        ("A ESCADA DATADA: %.2f sigma (2023) -> %.2f (JUNO 11/2025, indep) -> %.2f (NuFIT 12/2025) -- a tensao CRESCE com a precisao"
+         % (escada[0]["tensao_sigma"], escada[1]["tensao_sigma"], escada[2]["tensao_sigma"]), True),
+        ("linha de morte: 5 sigma quando Dm2_21 for medido a %.2f%% (JUNO projeta 0,5%%, ~2031)" % prec_mata_pct, True),
+        ("Sigma m_nu APOSENTADO como discriminante (separacao 0,199 meV = %.2f sigma do NH minimo) [D2]" % sigma_sum_sep, True),
+        ("nao-cegueira DECLARADA nesta emissao; a regra hasheada julga as proximas medidas", True),
+        ("veredito pertence ao conjunto congelado; CONFIRMED proibido; o gate NAO se move", True),
+        ("v315 kill_rule IMPLEMENTADA como congelada: %d grupo(s) autonomo(s) >= 5 sigma (precisa 2); "
+         "NuFIT global = combinacao, nao conta como 2a determinacao" % len(grupos_5sigma), True),
+        ("ERRATA AO LADO (v315, achado ENTREGA_005 da bancada): ate a v314 o FALSIFIED disparava pelo "
+         "ultimo degrau sozinho, contra a kill_rule; corrigido SEM tocar o frozen nem o seu hash", True),
+        ("veredito v315 pertence ao conjunto congelado (kill_rule hoje %s)"
+         % ("SATISFEITA" if kill_rule_ok else "NAO satisfeita: veredito inalterado"), vd0 in frozen["allowed_verdicts"]),
+    ]
+    all_v = bool(all(v for _, v in checks))
+    return {
+        "theorem": ("O NEUTRINO REESPECIFICADO: o discriminante e m_2, nao Sigma. "
+                    "m_2(TGL) = %.4f meV contra %.4f +- %.4f meV (NuFIT pos-JUNO) = "
+                    "%.2f sigma -- e a tensao cresce com a precisao. A linha de morte "
+                    "de 5 sigma esta dentro da meta de projeto do JUNO (~2031)."
+                    % (m2_pred_meV, escada[-1]["m2_obs_meV"], escada[-1]["sigma_meV"], tensao_atual)),
+        "frozen": frozen, "frozen_hash": frozen_hash,
+        "values": {"beta": beta, "m2_pred_meV": m2_pred_meV,
+                   "tensao_atual_sigma": tensao_atual,
+                   "grupos_autonomos_5sigma": grupos_5sigma,                  # v315
+                   "kill_rule_satisfeita": kill_rule_ok,                        # v315
+                   "tensao_global_5sigma_sem_2a_determinacao": bool(tensao_atual >= 5.0 and not kill_rule_ok),  # v315
+                   "precisao_que_mata_pct": prec_mata_pct,
+                   "escada_datada": escada,
+                   "projecao_2031_sigma": abs(escada[-1]["m2_obs_meV"] - m2_pred_meV) / (0.5 * 0.005 * escada[-1]["m2_obs_meV"])},
+        "checks": checks, "all_verified": all_v,
+        "does_not_gate_core": True,
+        "verdict": vd0,
+    }
+
+

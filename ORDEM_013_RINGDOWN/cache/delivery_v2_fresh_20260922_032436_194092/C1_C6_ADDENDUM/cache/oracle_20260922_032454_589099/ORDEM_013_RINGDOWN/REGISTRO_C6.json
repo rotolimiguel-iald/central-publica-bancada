@@ -1,0 +1,128 @@
+{
+  "status": "REGISTERED_NONBLIND_BEFORE_TARGET_STRAIN",
+  "created_utc": "2026-09-22T00:56:31.808127+00:00",
+  "on_source_strain_read_at_registration": false,
+  "nonblind_reason": "Published GW250114 posteriors and summaries already analyzed; no target-window strain downloaded/read by this task",
+  "event": "GW250114_082203",
+  "reference_peak_GPS": {
+    "H1": 1420878141.2189023,
+    "L1": 1420878141.2164068
+  },
+  "reference_source": "Released pyRing config TEOB 0M; H1 peak and fixed sky. L1 relative delay from LAL detector geometry.",
+  "reference_mass_for_start_solar": 68.40897469707073,
+  "reference_tM_seconds": 0.0003369477856078424,
+  "reference_redshift": 0.086,
+  "start_times_tM": [
+    6.0,
+    8.0,
+    10.0,
+    10.5,
+    12.0
+  ],
+  "primary_start_tM": 10.0,
+  "interval_samples": 410,
+  "analysis_sample_rate_hz": 2048,
+  "sample_stride": 2,
+  "time_selection": "First original 4096 Hz sample at or after requested start, then every second sample; no pre-onset data used in filtering",
+  "noise": "Wholly off-source first 2048 s of previous chunk: median Welch. Exact covariance at retained sample lags, degree-2 polynomial quotient formed through spectral factors; fixed before target data.",
+  "quality_required": [
+    "DATA",
+    "CBC_CAT1",
+    "CBC_CAT2",
+    "CBC_CAT3"
+  ],
+  "injection_flags_required": [
+    "NO_CBC_HW_INJ",
+    "NO_BURST_HW_INJ",
+    "NO_DETCHAR_HW_INJ",
+    "NO_STOCH_HW_INJ"
+  ],
+  "likelihood": "Gaussian finite-interval Toeplitz quotient, 220+440 exact Kerr fundamentals, independent complex amplitudes per detector",
+  "scope": "Conditional ensemble ringdown model. Both modes deformed together. Mass/spin integrated with shared broad priors; independently Gaussian detector quadratures, not full polarization-coherent IMR evidence. No product with earlier analyses of this event.",
+  "mass_detector_prior_solar": [
+    40.0,
+    100.0
+  ],
+  "spin_prior": [
+    0.0,
+    0.95
+  ],
+  "prior_origin": "Declared broad uniform priors, not the same-event IMR posterior",
+  "amplitude_prior_sd_scaled": [
+    1.0,
+    10.0,
+    30.0
+  ],
+  "primary_amplitude_sd_scaled": 10.0,
+  "amplitude_unit_strain": 1e-21,
+  "amplitude_prior": "Zero-mean independent real Gaussians per quadrature; analytically marginalized, determinant retained",
+  "computed_readings": [
+    "R-GLOBAL",
+    "R-B",
+    "R-RAIZ-0",
+    "R-LIN",
+    "R-MOD"
+  ],
+  "subresolution_readings": {
+    "R-A": "Same as GR within double precision at this scale; Planck source clock redshift explicit",
+    "R-RAIZ-EP4": "Same as GR within double precision",
+    "R-RAIZ-REST": "Same as GR within double precision"
+  },
+  "omitted_nonexponential": "Root-coherent field requires occupation and Poisson-sum template; not silently replaced by an exponential",
+  "quadrature_grids": [
+    [
+      61,
+      81
+    ],
+    [
+      121,
+      161
+    ],
+    [
+      241,
+      321
+    ]
+  ],
+  "quadrature_convergence_abs_lnB": 0.05,
+  "convergence_rule": "Compare levels 0 and 1; if abs lnB difference exceeds 0.05, use level 2 and report remaining discrepancy. No exclusion from unconverged integral.",
+  "physical_gate": "C5 two-family injection calibration failed: every actual-data verdict is INCONCLUSIVE_SYSTEMATICS regardless of Bayes ratio. Do not tune start times or priors to obtain an exclusion.",
+  "comparison_release": "pyRing TEOB existing posterior at 0M; Kerr220/221/222 posteriors at 6,8,10,12M exist. No 10.5M posterior in released archive index. Different mode/prior models are controls, not identical replicated likelihoods.",
+  "target_downloads": [
+    {
+      "gps_start": 1420877824,
+      "utc_start": "2025-01-14T08:16:46",
+      "detector": "H1",
+      "sample_rate_kHz": 4,
+      "hdf5_url": "https://gwosc.org/archive/data/O4b_4KHZ_R1/1420820480/H-H1_GWOSC_O4b_4KHZ_R1-1420877824-4096.hdf5",
+      "gwf_url": "https://gwosc.org/archive/data/O4b_4KHZ_R1/1420820480/H-H1_GWOSC_O4b_4KHZ_R1-1420877824-4096.gwf",
+      "detail_url": "https://gwosc.org/api/v2/strain-files/H1-1420877824-4kHz"
+    },
+    {
+      "gps_start": 1420877824,
+      "utc_start": "2025-01-14T08:16:46",
+      "detector": "L1",
+      "sample_rate_kHz": 4,
+      "hdf5_url": "https://gwosc.org/archive/data/O4b_4KHZ_R1/1420820480/L-L1_GWOSC_O4b_4KHZ_R1-1420877824-4096.hdf5",
+      "gwf_url": "https://gwosc.org/archive/data/O4b_4KHZ_R1/1420820480/L-L1_GWOSC_O4b_4KHZ_R1-1420877824-4096.gwf",
+      "detail_url": "https://gwosc.org/api/v2/strain-files/L1-1420877824-4kHz"
+    }
+  ],
+  "versions": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "h5py": "3.16.0",
+    "lal": "7.7.1"
+  },
+  "code_and_input_hashes": {
+    "c6_engine.py": "94c724c4cb1764b7a62209da08c37a40d7936c98b344da714d1bd7733352de3c",
+    "tgl_ringdown_prediction.py": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+    "tgl_ringdown_likelihood.py": "f16517e62fca96cc348aac17369e75e1fb9b07f1e95fef06f7630c8b94153bca",
+    "QNM_GRID.json": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24",
+    "C5_EMPIRICAL_NOISE.json": "a748e279a04f08e0218bcda347ff9d2750068e53b2cefed35a6b36935199e3ef",
+    "C5_EMPIRICAL_IMR_STARTS.json": "220117a57b178018de94ae212a7a8f2afaceff07585ea30ad3b394336ed0c145",
+    "C5_LIKELIHOOD_VALIDATION.json": "49f36dc63a2193a92e7f0be66395c9d802e4b1ab5c88f346d046665c288ebfaf",
+    "cache/gwosc/metadata_1.json": "58b85fa5c621b5b08b84073481867d723ebaede4a31fda4613e13ea611a3a5e2",
+    "cache/empirical_noise/H1_noise.npz": "09bdbe3c0ea7f93b58376a40e1fe769d6d70a39f130831bd2afdfcd3908b8f67",
+    "cache/empirical_noise/L1_noise.npz": "7f8763499989bc2a4d26a92aa8cb8446a3f3ba32bf3d4ee957ad9273f9c705d5"
+  }
+}

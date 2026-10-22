@@ -1,0 +1,444 @@
+{
+  "status": "TEMPORARY_CREATION_WINDOW_CLOSED_BUT_MKDIR_BEFORE_CONFINEMENT_REMAINS",
+  "utc": "2026-09-22T18:52:36.726283+00:00",
+  "no_scientific_run": true,
+  "builder_sha256": "8427dfbb39aae431699350c7eae23fb47391f40860768d6d4bb9a11ad0d0ae3f",
+  "build_receipt_sha256": "5ea7169a0b6d3a7f1de0e143342c5c62bc10645fc2adfb4df4b5501e35c0879a",
+  "final_builder_read_only": {
+    "path": "refeito\\build_final_bundle_v3_3_013bis.py",
+    "sha256": "2d352ce062a73d1806e526b156004a88c1be13fba3b0caef67392aa0df173406",
+    "selected_packages": [
+      "C7_INDEPENDENT_v3_3",
+      "C7_POSTERIOR_REPRODUCTION_v3",
+      "C7_GWTC3_REPRODUCTION_v3",
+      "C7_INJECTION_REPRODUCTION_v3",
+      "C7_IMR_RECOVERY_REPRODUCTION_v3",
+      "C7_COHERENT_SOURCE_REPRODUCTION_v3",
+      "C7_NATIVE_SEOB_WAVEFORM_v3"
+    ],
+    "current_corrected_supplements_selected": false
+  },
+  "script_sha256": "6dda8b114e274af09cac346e0da54c2e4263aaa0aa232d40919dd0b4a429f4e5",
+  "rows": [
+    {
+      "package": "C7_POSTERIOR_REPRODUCTION_v3_1",
+      "files": 20,
+      "manifest_sha256": "f4c394e4a611306535f5b67075b185565860de1e3b01285e500f65e3b20e4416",
+      "archive_sha256": "fc1ae3dc0d05c77960c567e61bd8d7753fdef60877c530b53bcde36664e51360",
+      "wrapper_sha256": "5f25f1bc5ac2fe1b1d7b04dfa7741fa11b7a93e51c2636a1ab1e64fef87b4b4a",
+      "changed_files": [
+        "README.md",
+        "reproduce.py"
+      ],
+      "negative_log_sha256": "d57f3791eca8417bc06824628442830609b6450a52a94a91fbcd9d6e1b2be079",
+      "removal_receipt_sha256": "7b5e73f97c6969b363c88658e530821b66fa1f155f59cb8eef7fba33409c6770",
+      "temporary_absent": true,
+      "lifecycle_probe": {
+        "first_setup_line": 127,
+        "try_line": 135,
+        "final_cleanup_line": 210,
+        "cases": [
+          {
+            "case": "internal_work",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/package/new_work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "internal_output",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/package/new_output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "preserved_mkdir_fails",
+            "error": "PermissionError: Injected output failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "normal",
+            "error": null,
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "report_write_fails",
+            "error": "PermissionError: Injected report write failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          }
+        ]
+      }
+    },
+    {
+      "package": "C7_GWTC3_REPRODUCTION_v3_1",
+      "files": 26,
+      "manifest_sha256": "4f90a183ae7b479ca172b0bd5c601c680cf6d0c858f36e38d7a3f481b6247e2e",
+      "archive_sha256": "df7dc532a2079997a4c840bb1b4c4feb014d918f8eb28add5febbe41738776f7",
+      "wrapper_sha256": "92b79a436988f8088c6a4db171e6833537e0e3b47093a15f51a0e4df2c263e30",
+      "changed_files": [
+        "README.md",
+        "reproduce.py"
+      ],
+      "negative_log_sha256": "2bf031392c45edcc9a13ea10519f8b70e152afd1d6443821becc157e8dd00a8c",
+      "removal_receipt_sha256": "90eea55e695bcc65ed48a58780d472d77eacae017a8987bdca62df7a30135900",
+      "temporary_absent": true,
+      "lifecycle_probe": {
+        "first_setup_line": 130,
+        "try_line": 138,
+        "final_cleanup_line": 240,
+        "cases": [
+          {
+            "case": "internal_work",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/package/new_work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "internal_output",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/package/new_output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "preserved_mkdir_fails",
+            "error": "PermissionError: Injected output failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "normal",
+            "error": null,
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "report_write_fails",
+            "error": "PermissionError: Injected report write failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          }
+        ]
+      }
+    },
+    {
+      "package": "C7_INJECTION_REPRODUCTION_v3_1",
+      "files": 26,
+      "manifest_sha256": "04612ade082d6af67fca342126b85109a55d7bf99f5d177e915f2a951e2359fb",
+      "archive_sha256": "c04ca9f9d01feedd0ba9217f9720f256b66cfab505cc929e759140e0901e1680",
+      "wrapper_sha256": "318138326321162cba60ea8232cd54cbf5eef415ba5cdac1e6241469bfbbd764",
+      "changed_files": [
+        "README.md",
+        "reproduce.py"
+      ],
+      "negative_log_sha256": "c1a2e47b00c07ea03581abe37c846dcfac2c7dbef90b666015addf3d8da81dba",
+      "removal_receipt_sha256": "abf4851f76bb332057ea8deececa6f57e8bb1fafaad8bfbfe67738373c81b916",
+      "temporary_absent": true,
+      "lifecycle_probe": {
+        "first_setup_line": 128,
+        "try_line": 136,
+        "final_cleanup_line": 218,
+        "cases": [
+          {
+            "case": "internal_work",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/package/new_work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "internal_output",
+            "error": "ValueError: Work/output directories must be outside immutable package",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/package/new_output"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "preserved_mkdir_fails",
+            "error": "PermissionError: Injected output failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "normal",
+            "error": null,
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          },
+          {
+            "case": "report_write_fails",
+            "error": "PermissionError: Injected report write failure",
+            "events": [
+              [
+                "mkdir",
+                "/work"
+              ],
+              [
+                "mkdir",
+                "/output"
+              ],
+              [
+                "mkdir",
+                "/output/package_stage_fixed"
+              ],
+              [
+                "mkdtemp",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/CLEANUP_INTENT.json"
+              ],
+              [
+                "rmtree",
+                "/work/replay_stage_fake"
+              ],
+              [
+                "atomic",
+                "/output/package_stage_fixed/TEMPORARY_REMOVED.json"
+              ]
+            ],
+            "remaining_mock_temporaries": []
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,499 @@
+{
+  "schema_version": "ORDEM015_T01_T13_CLOSING_AUDIT_V1",
+  "audited_utc": "2026-09-27T11:11:35.153926+00:00",
+  "scope": "Compilação documental T01–T13. Somente leitura de ordem, entregas existentes, orçamento v12 e resultados; sem PE nova.",
+  "source_sha256": {
+    "order": "c903681d01eec5ed8d55b7fe69e061a79b3a7b73eecede8f895cfb2d127f75a3",
+    "budget_v12": "e54fb7a0de69e2ba834ef805c26dc103496d3e6f2cec09583e3d646dff39fd1d"
+  },
+  "budget_v12": {
+    "registered_utc": "2026-09-27T10:42:22.689357+00:00",
+    "authorized_machine_hours": 35.01724298083333,
+    "spent_machine_hours_all_targets_snapshot": 13.221245983976575,
+    "remaining_machine_hours_derived": 21.795996996856758,
+    "cost_rule": "UNION_OF_OWNED_HEAVY_JOB_INTERVALS",
+    "note": "As horas por alvo não incluem trabalho leve/bancada. O saldo v12 não autoriza execução adicional."
+  },
+  "targets": [
+    {
+      "target": "T01",
+      "state": "PARCIAL",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "documentary_outputs": 23,
+        "E6_repaired_pointers": 20,
+        "E6_rate_cells": 30,
+        "E6_correction_OPEN": 964,
+        "partial_metered_usd": "3.0821417664"
+      },
+      "proof": "Erratas F0, centros/candidatas, E6 e estatutos documentadas ao lado; 23 saídas verificadas localmente.",
+      "limit": "Comparação/revisão independente ainda pendente no recibo T01; 964 correções/σ E6 permanecem OPEN. O gasto USD é parcial, não custo total.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0,
+        "budget_items": [],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "light_cpu_seconds_documented": 17.234375,
+        "metered_usd_partial": "3.0821417664",
+        "total_cost_usd": null
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t01_delivery/RESULT.json",
+          "sha256": "35f147afa978d60b5e1fed79828d388c96283f6f4cb4a0438269eab3f7f26348"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t01_e6_review_v2/RESULT.json",
+          "sha256": "cc9fd46788dd2c2f589f16e83fa158fad099b7a968bb4dcc9b4ba842746fa50e"
+        },
+        {
+          "path_relative_to_Chatgpt": "TUNEL/DO_CHATGPT/ENTREGA_015_T01_erratas.md",
+          "sha256": "bf2695240c3359a4a3349299d59640a6ca04e4efc89b13dcbd77e4b4bec92674"
+        }
+      ]
+    },
+    {
+      "target": "T02",
+      "state": "PAGO",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "registered_scan": {
+          "FINITE": 80,
+          "DOMAIN_RETURNED_NONE": 3,
+          "CRASH": 37,
+          "OTHER": 0
+        },
+        "pooled_EDOM_fraction": 0.0435,
+        "cpu_seconds": 399.66127300000005,
+        "wall_seconds": 462.909858519
+      },
+      "proof": "Adendo nativo reproduziu a fronteira, a sequência com aborto no sorteio 16 e a regra de fmax; diagnóstico da falha entregue.",
+      "limit": "Mecanismo do heap é inferido da fonte; retLen/indAmax/Nrdwave não medidos. Nenhuma PE nova ou σ físico.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0,
+        "budget_items": [],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "light_cpu_seconds_documented": 399.66127300000005
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/e3_pilot_failure_diagnostic/DIAGNOSIS_ADENDO_v2.json",
+          "sha256": "54abbd376a6aae3baeab6f9f7d7bbd71942715ce33c41ec025e817b8cbf7c160"
+        },
+        {
+          "path_relative_to_Chatgpt": "TUNEL/DO_CHATGPT/ENTREGA_015_T02_diagnostico.md",
+          "sha256": "98ab7df984ffe41261d39505f407f7165bf9168130a56f4aa7472fd98990b516"
+        }
+      ]
+    },
+    {
+      "target": "T03",
+      "state": "PARCIAL",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "registration_chain": "V1.1 → V1.1.1 → V1.1.2 → V1.1.3",
+        "accepted_null_cells": 0,
+        "remaining_null_cells": 30,
+        "science_complete": false
+      },
+      "proof": "Registro e cadeia de emendas/guarda testemunhados; rodada de nulos contabilizada e encerrada terminalmente.",
+      "limit": "0 células aceitas e 30 restantes; caudas sintéticas e calibração sistemática não pagas. Registro não equivale a p físico.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0.997271070546574,
+        "budget_items": [
+          {
+            "item": "T03_nulls_IV_and_t5",
+            "actual_machine_hours": 0.997271070546574,
+            "status": "T03_MEDIDA_PARTIAL_NO_RETRY"
+          }
+        ],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate."
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/RINGDOWN_5SIGMA_V1_1_3.json",
+          "sha256": "74a2c8b656244ff4e127add5186199454c8248ef84b1b1050e72de09ed765515"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/post_nulls_001/T03_TERMINAL.json",
+          "sha256": "b95f346b5424dbabbcc843cbafd149b7527ab17eebe04a6e8f0837a85a5ea273"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/nulls_campaign_001/RESULT.json",
+          "sha256": "142d8fbcbcde607c7350506757ca2558e8af6918dcf59e57c9f376d9e36d473e"
+        }
+      ]
+    },
+    {
+      "target": "T04",
+      "state": "PARCIAL",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "runner_qualified": true,
+        "pSEOB_pilot_posterior_accepted": false,
+        "branch_C_delta_logz": 425.33480044518365,
+        "branch_C_ESS": 1.0000000000004259,
+        "branch_F_delta_logz": 0.09997822135365081,
+        "branch_F_ESS": 3051.7756961962286,
+        "branch_F_posterior_samples": 2058,
+        "branch_F_sigma_eligible": false
+      },
+      "proof": "Adaptador qualificado e pilotos executados. Ramo F gerou posterior diagnóstico descritivo com rc0.",
+      "limit": "Piloto pSEOB e ramo C pararam sem posterior aceito; H foi interrompido. F não identifica sozinho Mf/af/dτ220 e não entra em σ; custo por posterior científico convergido segue aberto.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 10.410584104853333,
+        "budget_items": [
+          {
+            "item": "T04_runner_qualification",
+            "actual_machine_hours": 0.012895170291111147,
+            "status": "T04_ADAPTER_400_QUALIFIED"
+          },
+          {
+            "item": "T04_pilot_220",
+            "actual_machine_hours": 3.766908319326667,
+            "status": "PARTIAL_MAXCALL_NOT_ACCEPTED"
+          },
+          {
+            "item": "T04_branch_C",
+            "actual_machine_hours": 6.410089644876389,
+            "status": "PARTIAL_MAXCALL_NOT_ACCEPTED"
+          },
+          {
+            "item": "T04_branch_H",
+            "actual_machine_hours": 0.04163974425333333,
+            "status": "INTERRUPTED_ROUTE_CORRECTION_NOT_ACCEPTED_POSTERIOR"
+          },
+          {
+            "item": "T04_branch_F",
+            "actual_machine_hours": 0.17905122610583335,
+            "status": "F_DIAGNOSTIC_CONVERGED_PENDING_INDEPENDENT_NUMERIC_REVIEW"
+          }
+        ],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate."
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t04/QUALIFICATION_DELIVERY.json",
+          "sha256": "13ce85290d91466cf6273e7fb3806a4edb8daf6cd64510949e78964282de5492"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t04/pilot/RESULT.json",
+          "sha256": "920e9f4de574b24ebfd9b1bb309338e7259c09a9ea0ee4c0f058dd625141b3ae"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t04/branch_c/RESULT.json",
+          "sha256": "9663242560623d92e933bdab82ca176022f6b3606ee285aceea6c8a9eecaea36"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t04/branch_h/RESULT.json",
+          "sha256": "d8565e08f755262b0cdbbe5c3c1fc2a9901343d51dc8740ca16947c00ca321b3"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t04/branch_f/RESULT.json",
+          "sha256": "3ed4951d27fb27d8b17a9443a93eed39b8c0a6d53263e0d4cd66f5b2e3c7e7c8"
+        }
+      ]
+    },
+    {
+      "target": "T05",
+      "state": "PAGO",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "rho_440_effective_proxy": 1.763035274139,
+        "O5_RB_N90_conditional": 2289.94,
+        "paired_220_draws": 608681,
+        "GW250114_440_draws": 40776,
+        "physical_N": null
+      },
+      "proof": "Diagnóstico 440, duas variantes e pareamento QNM calculados; divergência do N90 da ordem corrigida pelo resultado reproduzível.",
+      "limit": "ρ440 é proxy Fisher dominado pelo prior, não SNR físico; N90 condicional a fontes idênticas e sem sistemática. Nenhum σ físico.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0,
+        "budget_items": [],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "light_cpu_seconds_documented": 3.720717
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t05/RESULT.json",
+          "sha256": "3d959ac7ce751bc69c7edac051bb774426930b6e183a6bc1567bd981d8b087d3"
+        },
+        {
+          "path_relative_to_Chatgpt": "TUNEL/DO_CHATGPT/ENTREGA_015_T05_440.md",
+          "sha256": "5dd21bc79ec43e866e468d53c126d5f6b149adc983d2dea439805481c0c88ef6"
+        }
+      ]
+    },
+    {
+      "target": "T06",
+      "state": "PAGO",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "events": 33,
+        "Gaussian_LRT": 0,
+        "KDE_LRT": 0,
+        "Gaussian_nominal_profile_limit": 0.023328574,
+        "KDE_nominal_profile_limit": 0.023188691,
+        "physical_sigma_jitter": null
+      },
+      "proof": "Rota IV diagnóstica não cega executada sobre 33 posteriores com dois perfis e jackknife.",
+      "limit": "Limites são níveis nominais de perfil, sem cobertura física calibrada; seleção, prior conjunto e transferência de jitter permanecem abertos.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0,
+        "budget_items": [],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "light_cpu_seconds_documented": 56.483522
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t06/RESULT.json",
+          "sha256": "ed606fd444bc94b7e8a5c2b3c85aba7b305bf7a8c90a3df8de8b390f28e3d0d3"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t06/AUDIT.json",
+          "sha256": "106fe25b98366db3cffc6c6b29bd14583b5dee1dc6e282c389ee75b428c07694"
+        }
+      ]
+    },
+    {
+      "target": "T07",
+      "state": "PARCIAL",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "registered": 33,
+        "power_measured": 31,
+        "rho_defined": 17,
+        "rho_undefined": 14,
+        "unmeasured": 2,
+        "GW250114_rho": 19.099703012182275
+      },
+      "proof": "Portão v3 e ρ de excesso medidos onde definidos, com controle GW250114 consistente com F4.",
+      "limit": "z_free por leitura, N90 físico e σ físico não pagos; 14 casos sem excesso positivo e 2 sem medida.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 1.1956373977777779,
+        "budget_items": [
+          {
+            "item": "T07_gate_v3_rho",
+            "actual_machine_hours": 1.1956373977777779,
+            "status": "T07_MEDIDA_PARTIAL_NO_ZFREE_NO_PHYSICAL_SIGMA"
+          }
+        ],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate."
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t07/T07_FINAL_RESULT.json",
+          "sha256": "e66afcfade58f2f796cea0f46299de9d58df9bfdb7bbc0294c30650ebcb61455"
+        }
+      ]
+    },
+    {
+      "target": "T08",
+      "state": "PARCIAL",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "census": 74,
+        "public_PE_listed": 70,
+        "GR_full_IMR_MAP_here": 0,
+        "rho_split_measured_here": 0,
+        "PE_data_GB": 40.769296948,
+        "transfer_only_forecast_hours": 7.52752707234725
+      },
+      "proof": "Censo/metadados de PE e piloto de um evento entregues; custo de transferência estimado a partir de uma descarga observada.",
+      "limit": "Seleção dos 74, ε com IC e α por leitura não pagos; piloto não reproduz a tabela LVK. 7,53 h é extrapolação, não gasto.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0.24163856388888888,
+        "budget_items": [
+          {
+            "item": "T08_selection",
+            "actual_machine_hours": 0.24163856388888888,
+            "status": "T08_MEDIDA_PARTIAL_ONE_GR_SPLIT_SNR_PILOT_NO_74_SELECTION_NO_EPSILON_ALPHA"
+          }
+        ],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate."
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t08/T08_FINAL_RESULT.json",
+          "sha256": "27d5246738239045a3e8f161138893a208ea781eb17aeda75d5f60790af7057f"
+        }
+      ]
+    },
+    {
+      "target": "T09",
+      "state": "NÃO_PAGO",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "operator_box_b_authorization": false,
+        "PE_started": false,
+        "lnBayes_440_220": null
+      },
+      "proof": "Checagem de pré-condição documenta ausência da linha do operador para caixa (b); nenhum piloto 440 livre iniciado.",
+      "limit": "Custo 2,6–3,3 h por piloto é estimado e condicional à autorização; nenhuma razão de evidências foi medida.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0.0,
+        "budget_items": [
+          {
+            "item": "T09_440_free",
+            "actual_machine_hours": 0.0,
+            "status": "T09_NAO_PAGO_OPERATOR_BOX_B_LINE_ABSENT"
+          }
+        ],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "estimated_if_authorized_machine_hours": [
+          2.6,
+          3.3
+        ],
+        "estimated_ceiling_hours": 8.0
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t09/T09_PREREQUISITE_RESULT.json",
+          "sha256": "8dd90242b3f815c293187dedbf25fcf3afda7580dccf787f89fa5406330b5e55"
+        }
+      ]
+    },
+    {
+      "target": "T10",
+      "state": "PARCIAL",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "A_width_ratio": 2.0347237587829947,
+        "C_bank_cells": 10,
+        "C_SNR_bins": [
+          19.1,
+          17.0,
+          15.0,
+          13.0,
+          12.0
+        ],
+        "sigma_injection_ensemble": null,
+        "sigma_c": null,
+        "D_transfer_forecast_hours": [
+          12.820179289752778,
+          19.23026893462917
+        ]
+      },
+      "proof": "Alternativas A/B/C medidas em escopo diagnóstico; banco sintético de 10 células gerado e custos por comando registrados.",
+      "limit": "Sem covariância real qualificada, recuperação do banco, transferência pSEOB ou σ(c) por leitura. Previsão D não é execução.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0.20166955635444442,
+        "budget_items": [
+          {
+            "item": "T10_calibration",
+            "actual_machine_hours": 0.20166955635444442,
+            "status": "T10_MEDIDA_BANK_GENERATED_NO_TRANSFER_OR_SIGMA_C"
+          }
+        ],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate."
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t10/T10_FINAL_RESULT.json",
+          "sha256": "689806ca4917868b066f8b5ffd0dcd9df5aad2470cef3c341adc18b010c72fce"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t10/T10_A_FINAL_RESULT.json",
+          "sha256": "b7608f8932478fab48cf945c59e73542780c6e55f46e19d707ba7b93ab53613b"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t10/T10_C_BANK_RESULT_v4.json",
+          "sha256": "05eb55665a1f8134bc88ca4a6361dd198e28b0c8db4ed0d52fe5396352c04216"
+        }
+      ]
+    },
+    {
+      "target": "T11",
+      "state": "PAGO",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "baseline_tension_sigma_against_declared_scale": 2.9528540277344604,
+        "tests": 19,
+        "new_external_provider_calls": 0
+      },
+      "proof": "Leitor da regra congelada e testes reproduzem 2,95σ contra a escala declarada; modelo de duas determinações autônomas preservado.",
+      "limit": "É ferramenta, não nova determinação de neutrino; veredito do registro e gate intactos. Custo de coordenação desconhecido.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0,
+        "budget_items": [],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "coordination_cost_usd": null
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/neutrino_m2_reader/DELIVERY.json",
+          "sha256": "0d197cbe9d11fcb193b5e9400b47c637a8c7df3c46775b89506dada75394ed74"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/neutrino_m2_reader/TEST_RECEIPT.json",
+          "sha256": "289e613cb7022dc357b4443b9afd3e9c47fe0d215cd75231855f669f259e6119"
+        }
+      ]
+    },
+    {
+      "target": "T12",
+      "state": "PAGO",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "calibration_events": 33,
+        "blind_tests": 0,
+        "paired_220_rows": 330,
+        "max_abs_delta_T05": 6.938893903907228e-17,
+        "variant_tests": 72
+      },
+      "proof": "Variante E7 com fórmulas idênticas, 72 testes da variante, replay rc0 e subemenda V1.1.1 anterior ao uso; falha de ativação corrigida em V1.1.2.",
+      "limit": "Entrega do preparador/rito, sem eventos cegos, lnB ou z físico; replay não ativa campanha nem incorpora código em um.py.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0,
+        "budget_items": [],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "light_replay_wall_seconds_documented": 19.4
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/e7_prepare_v1_1/RESULT.json",
+          "sha256": "462c66dbc21efed2a7f9dadea5c990c32fea743fa1bf678d3f2f6762b44a523f"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/e7_prepare_v1_1/RITE_REPLAY_RESULT.json",
+          "sha256": "9834bf3c799dedf29efda5d9554051dbc69cd2f3888561f404e64c8a1cafdc94"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/activation_v2/REGISTERED_RESULT.json",
+          "sha256": "aa33411d85b05f40f235ab3a6fd34fbb975ca544ab8dce19388a7effeb168a32"
+        }
+      ]
+    },
+    {
+      "target": "T13",
+      "state": "PARCIAL",
+      "statute": "[REAL] artefatos locais; [DERIVED] classificação de escopo",
+      "essential_numbers": {
+        "removed_fixtures": 3,
+        "unlinked": 2,
+        "remaining_unlisted_fixture_count": 1,
+        "canonical_source_differences_count": 4,
+        "bench_interval_hours": 0.11366947690645854
+      },
+      "proof": "Três fixtures nomeadas removidas, dois links desfeitos e recibo de integridade novo emitido; checagem da semente ficou em metadados.",
+      "limit": "Fixture 214951 ainda ilegível e fora da remoção autorizada; quatro diferenças de fontes canônicas registradas sem tocá-las. A checagem Windows inicial da semente falhou e o reparo entre identidades não foi reexecutado.",
+      "machine_cost": {
+        "actual_heavy_machine_hours_v12": 0,
+        "budget_items": [],
+        "basis": "ORCAMENTO_015_v12.json/accounting; union of occupied heavy-job intervals. Light CPU and bench time are separate.",
+        "bench_interval_hours_not_machine": 0.11366947690645854
+      },
+      "evidence": [
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t13/RESULT.json",
+          "sha256": "5b43350e22e27b95097ade2a896bd4344abbdcd9abe3972a0c29772b51bb2d06"
+        },
+        {
+          "path_relative_to_Chatgpt": "ORDEM_013_RINGDOWN/bis/015/t13/FINAL_INTEGRITY_015_v3_20260926T102634778604Z.json",
+          "sha256": "929635745e721fea1a947350ac5f0ee95652f0d460e40c12af18ef5c9ca942bc"
+        }
+      ]
+    }
+  ],
+  "classification_rule": "PAGO = aceitação no escopo expresso do alvo; PARCIAL = entrega útil com requisito material ainda aberto; NÃO_PAGO = pré-condição bloqueante/execução ausente. Diagnóstico pago não equivale a sigma físico.",
+  "limits": "Estatutos são avaliação documental do snapshot v12; resultados posteriores exigem nova auditoria. Fontes e hashes foram lidos dos bytes presentes. Nenhuma confirmação física ou mudança de gate é inferida."
+}

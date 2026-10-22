@@ -1,0 +1,90 @@
+{
+  "status": "MEDIDA_INFEASIBLE_UNDER_CURRENT_PROTOCOL_NO_PILOT",
+  "created_utc": "2026-09-27T11:04:37.348488+00:00",
+  "prereg_sha256": "1618fba2ee0c4d77de82ec17d04d6526946c293461bdde20d3bd2d8a068c62c9",
+  "source_pins_verified": true,
+  "noise": {
+    "condition_limit": 1000000000000.0,
+    "H1_B2": 1009549310545.7432,
+    "H1_pass": false,
+    "H1_excess_percent": 0.954931054574315,
+    "L1_B2": 2085758915.2395008,
+    "L1_pass": true,
+    "real_H1L1_network_qualified": false,
+    "H1_B3_regularized_input_only": "REGULARIZED_INPUT_NOT_PHYSICAL_NO_PE"
+  },
+  "instrument": {
+    "fitted_parameter_T10_A": "dtau220",
+    "requested_parameter_T15": "delta_f_hat",
+    "same_observable": false,
+    "Brownian_phase_is_seeded_stochastic_phase_not_deterministic_frequency_shift": true,
+    "one_mode_free_Mf_af_independent_log_f_log_tau_observables": 2,
+    "one_mode_free_Mf_af_delta_f_parameters": 3,
+    "structural_rank_upper_bound": 2,
+    "structural_nullity_lower_bound": 1,
+    "T10_free_dtau_posterior_sd_one_realization": 0.31342208077203004,
+    "T10_informed_dtau_posterior_sd_one_realization": 0.15403667422623182,
+    "posterior_sd_is_not_ensemble_sigma": true,
+    "Aprime_rank_with_hypothetical_440": 3,
+    "Aprime_actual_440_injected_amplitude": 0,
+    "T10_bank_waveforms": 10,
+    "T10_bank_recovered": 0,
+    "sigma_jit_rec": null,
+    "sigma_sys_delta_f_hat": null
+  },
+  "budget": {
+    "authorized_machine_hours": 35.01724298083333,
+    "spent_machine_hours_before_T15": 13.221245983976575,
+    "envelope_remaining_hours_arithmetic_not_unallocated": 21.795996996856758,
+    "T15_allocated_machine_hours": 1.0,
+    "T15_spent_machine_hours_before": 0.0,
+    "workers_limit": 28,
+    "n_Brownian_injections": 50,
+    "n_per_family": 25,
+    "single_recovery_measured_T10_A_synthetic_dtau_proxy": {
+      "fits": 50,
+      "single_fit_seconds": 456.87620518999995,
+      "serial_cpu_hours": 6.345502849861111,
+      "ideal_worker_lower_bound_hours": 0.22662510178075396,
+      "whole_wave_wall_hours": 0.25382011399444443
+    },
+    "single_recovery_order_Kerr_V2_638s_proxy": {
+      "fits": 50,
+      "single_fit_seconds": 638.34,
+      "serial_cpu_hours": 8.865833333333333,
+      "ideal_worker_lower_bound_hours": 0.31663690476190476,
+      "whole_wave_wall_hours": 0.35463333333333336
+    },
+    "paired_GR_Brownian_measured_T10_A_synthetic_dtau_proxy": {
+      "fits": 100,
+      "single_fit_seconds": 456.87620518999995,
+      "serial_cpu_hours": 12.691005699722222,
+      "ideal_worker_lower_bound_hours": 0.4532502035615079,
+      "whole_wave_wall_hours": 0.5076402279888889
+    },
+    "paired_GR_Brownian_order_Kerr_V2_638s_proxy": {
+      "fits": 100,
+      "single_fit_seconds": 638.34,
+      "serial_cpu_hours": 17.731666666666666,
+      "ideal_worker_lower_bound_hours": 0.6332738095238095,
+      "whole_wave_wall_hours": 0.7092666666666667
+    },
+    "caveat": "The measured T10-A runtime is one synthetic-noise dtau posterior. Neither it nor 638.34s measures real-noise Brownian delta_f recovery, overhead or convergence."
+  },
+  "decision": {
+    "pilot_injections_run": 0,
+    "posterior_fits_run_T15": 0,
+    "reason": [
+      "H1_B2_CONDITION_FAIL",
+      "DELTA_F_ESTIMATOR_ABSENT_IN_T10",
+      "ONE_MODE_FREE_MF_AF_NONIDENTIFIABLE"
+    ],
+    "minimum_protocol_changes": [
+      "Qualify H1+L1 real off-source covariance under the fixed threshold, or explicitly change the target to L1-only with a new pre-registration.",
+      "Implement and freeze a delta_f220 estimator and paired GR/Brownian recovery with seeded phase/noise and convergence checks.",
+      "Supply independent remnant information from a ratified inspiral prior (label IMR-RD), or inject and measure a nonzero second mode with free Mf/af and demonstrate posterior identifiability."
+    ],
+    "no_single_scalar_change_suffices": true,
+    "gate_changed": false
+  }
+}

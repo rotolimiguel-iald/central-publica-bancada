@@ -1,0 +1,135 @@
+{
+  "status": "EXPECTED_REGISTERED_CONDITIONING_FAILURE_REPRODUCED_ONCE",
+  "started_utc": "2026-09-22T22:04:16.488195+00:00",
+  "script_sha256": "90a8d3d34c78917a8046635a17f381c0119f1fc874e8b4c446909bfa94047623",
+  "prepare_calls": 1,
+  "cond_observations": [
+    {
+      "detector": "H1",
+      "shape": [
+        819,
+        819
+      ],
+      "dtype": "float64",
+      "diagonal_min": 522.1774146858008,
+      "diagonal_max": 522.1774146858008,
+      "covariance_scale": "Toeplitz(acf)/reference_amplitude^2; reference_amplitude=1e-21",
+      "cond_norm": "2 (np.linalg.cond default; SVD)",
+      "condition_number": 1054767037430.555,
+      "condition_number_repr": "1054767037430.555",
+      "condition_number_hex": "0x1.eb2a0777ed1c3p+39",
+      "registered_threshold": 1000000000000.0,
+      "threshold_exceeded_or_nonfinite": true,
+      "matrix_sha256_C_order": "4dca8ada3760ba6f6daed6cdab1428f1b954e9948852d7bd165bea0196cd54df",
+      "matrix_bytes_unchanged_by_observer": true
+    }
+  ],
+  "tests": {
+    "observer_same_return_object_and_unchanged_input": true,
+    "finite_analytic_diagonal_cond_2": true,
+    "wall_expired": true,
+    "monotonic_expired": true,
+    "expected_original_exception_preserved": true,
+    "single_prepare_expected_shape_819": true,
+    "np_cond_restored": true,
+    "watched_sources_config_authorization_failure_unchanged": true
+  },
+  "PE_calls": 0,
+  "waveform_calls": 0,
+  "draws": 0,
+  "posterior_values_read": false,
+  "alternate_PSD_prepared": false,
+  "thread_caps_requested": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "BLIS_NUM_THREADS": "1"
+  },
+  "custody_verify_seconds": 1.1319581719999405,
+  "custody_verify": "PASSED_REAL_AUTHORIZATION_AND_SOURCE_RUNTIME_PINS",
+  "custody_hashing_scope": "verify hashes all manifest pins, including an existing reference-posterior file; no posterior values parsed",
+  "diagnostic_stop_utc": "2026-09-22T22:06:11.488214+00:00",
+  "exception": {
+    "type": "ValueError",
+    "message": "Covariance fails registered conditioning threshold; no jitter",
+    "frames": [
+      {
+        "file": "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_kerr_failure_diagnostic/diagnose_welch_once.py",
+        "line": 163,
+        "function": "main"
+      },
+      {
+        "file": "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/conditioning.py",
+        "line": 74,
+        "function": "prepare"
+      }
+    ]
+  },
+  "preparation_wall_seconds": 1.3265965240000241,
+  "detectors_not_reached": [
+    "L1"
+  ],
+  "eigenvalues": "NOT_COMPUTED; condition/diagonal suffice for this scoped diagnosis",
+  "input_pins_checked_by_prepare": {
+    "H1": {
+      "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/on_source/H-H1_GWOSC_O4b_4KHZ_R1-1420877824-4096.hdf5",
+      "onsource_sha256": "db0b394ff10573f0e86b484adc59f176307c53fdc5f5ba5109a898f712674889",
+      "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+      "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+    }
+  },
+  "thread_count_scope": "Environment caps set before scientific imports; no threadpoolctl or process-wide thread attestation",
+  "source_hashes_before": {
+    "ORDEM_013_RINGDOWN/bis/E3_KERR_AUTHORIZATION_V1.json": "10c6164cf223341888183cd3b2b95664a9394eda20e84ec2751492a7f168cbc7",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/MANIFEST_v3.json": "3b327c742e5634dbd9220d6e7e725fbe94ebc7a89fa6f117aa2aa6f5261aee7e",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/CONFIG.json": "597bbdd4f5862b33620ef5c144a328c1273f1f443f7d5c18e1f45b232a836f6b",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/build_preparation.py": "49ec7a0d502cf0e320e6a275e4506d3f059c1e4b1ee339a7d493368d47dbe4e5",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/conditioning.py": "fae2795f0b2fd0f7d6d21798fb80754ef96544d6169dff7934fc06d1a81dd557",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/controller.py": "f34adbe5a5e801d80caf6296283d8e0ede57942c4abb6d6b55420cfc7e8c395b",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/custody.py": "35ee07ff1f4a8d9eaab740c8db219873354ceead4564d7335397e3452aedf25f",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/extract_public_psds.py": "11247f2865d6b28a3791ffc3a2b67b17c7c034fbd878e454909d768751e93fab",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/finalize_preparation.py": "5299a2a71b4f88e8c8e8cf632d9b80f760d247d4a718a07c0db75206c5b1ed85",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/kerr_model.py": "d1ecfb420a61bf998b86b818f4b98350947e0d41961a411d50260401df47ac38",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/repin_manifest_v2.py": "701e78afd483b0a6706ff37a5e2d55a5a312fc8ff533e0cf73ee7cd0c92be00a",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/runner.py": "d4f1975c4c0671e305507b41dbeaf5c9432c6c28f90cc25947e43bcdf27ead50",
+    "ORDEM_013_RINGDOWN/bis/e2_code/strain_io.py": "a52faf32e88088320c57d303987a31ec2b9b59c93e162923d603c2c96b21a5b6",
+    "ORDEM_013_RINGDOWN/bis/e2_code/registration_guard.py": "3cb2d9ef0672ccdf9bbca8547102b9a1323ea9d51bbc780732bb78bad99b40d7",
+    "ORDEM_013_RINGDOWN/cache/E3_KERR220_CALIBRATION_V1/welch/FAILURE.json": "4b9859260ab01cba4368f3cba02d74d0c456ed372a4d99ef2eb556aa0ebbf0c1",
+    "ORDEM_013_RINGDOWN/cache/E3_KERR220_CALIBRATION_V1/ENVELOPE.json": "416cf933fdb0a4382534b2e5d159ac2ebed5a47ca21588712d3d750fbbd7e420",
+    "ORDEM_013_RINGDOWN/cache/E3_KERR220_CALIBRATION_V1/welch/CONTEXT.json": "30915fc3ab49539f34f053190b1e09743f02e84aade053b1e033c4d5dce2bba7"
+  },
+  "source_hashes_after": {
+    "ORDEM_013_RINGDOWN/bis/E3_KERR_AUTHORIZATION_V1.json": "10c6164cf223341888183cd3b2b95664a9394eda20e84ec2751492a7f168cbc7",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/MANIFEST_v3.json": "3b327c742e5634dbd9220d6e7e725fbe94ebc7a89fa6f117aa2aa6f5261aee7e",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/CONFIG.json": "597bbdd4f5862b33620ef5c144a328c1273f1f443f7d5c18e1f45b232a836f6b",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/build_preparation.py": "49ec7a0d502cf0e320e6a275e4506d3f059c1e4b1ee339a7d493368d47dbe4e5",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/conditioning.py": "fae2795f0b2fd0f7d6d21798fb80754ef96544d6169dff7934fc06d1a81dd557",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/controller.py": "f34adbe5a5e801d80caf6296283d8e0ede57942c4abb6d6b55420cfc7e8c395b",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/custody.py": "35ee07ff1f4a8d9eaab740c8db219873354ceead4564d7335397e3452aedf25f",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/extract_public_psds.py": "11247f2865d6b28a3791ffc3a2b67b17c7c034fbd878e454909d768751e93fab",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/finalize_preparation.py": "5299a2a71b4f88e8c8e8cf632d9b80f760d247d4a718a07c0db75206c5b1ed85",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/kerr_model.py": "d1ecfb420a61bf998b86b818f4b98350947e0d41961a411d50260401df47ac38",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/repin_manifest_v2.py": "701e78afd483b0a6706ff37a5e2d55a5a312fc8ff533e0cf73ee7cd0c92be00a",
+    "ORDEM_013_RINGDOWN/bis/e3_pyring_preparation/runner.py": "d4f1975c4c0671e305507b41dbeaf5c9432c6c28f90cc25947e43bcdf27ead50",
+    "ORDEM_013_RINGDOWN/bis/e2_code/strain_io.py": "a52faf32e88088320c57d303987a31ec2b9b59c93e162923d603c2c96b21a5b6",
+    "ORDEM_013_RINGDOWN/bis/e2_code/registration_guard.py": "3cb2d9ef0672ccdf9bbca8547102b9a1323ea9d51bbc780732bb78bad99b40d7",
+    "ORDEM_013_RINGDOWN/cache/E3_KERR220_CALIBRATION_V1/welch/FAILURE.json": "4b9859260ab01cba4368f3cba02d74d0c456ed372a4d99ef2eb556aa0ebbf0c1",
+    "ORDEM_013_RINGDOWN/cache/E3_KERR220_CALIBRATION_V1/ENVELOPE.json": "416cf933fdb0a4382534b2e5d159ac2ebed5a47ca21588712d3d750fbbd7e420",
+    "ORDEM_013_RINGDOWN/cache/E3_KERR220_CALIBRATION_V1/welch/CONTEXT.json": "30915fc3ab49539f34f053190b1e09743f02e84aade053b1e033c4d5dce2bba7"
+  },
+  "cost": {
+    "wall_seconds_through_checks": 3.4023719759999267,
+    "process_cpu_seconds_through_checks": 1.632795384,
+    "cost_scope": "Includes custody, deterministic wrapper tests, single preparation and source rehash; excludes final receipt flush",
+    "processes": 1,
+    "requested_BLAS_threads": 1
+  },
+  "finished_utc": "2026-09-22T22:04:19.890602+00:00",
+  "all_written_files": [
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_kerr_failure_diagnostic/diagnose_welch_once.py",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_kerr_failure_diagnostic/ONCE_CLAIM.json",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/ORDEM_013_RINGDOWN/bis/e3_kerr_failure_diagnostic/DIAGNOSTIC.json"
+  ]
+}

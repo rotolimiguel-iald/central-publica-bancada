@@ -1,0 +1,3486 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "E6_REACH_TABLE_V2"
+    },
+    "status": {
+      "const": "ASSEMBLED_REVIEWED_SOURCES_NOT_NEW_SCIENCE"
+    },
+    "registration_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorization_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "generator_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "readings": {
+      "const": [
+        "R-A",
+        "R-B",
+        "R-MOD",
+        "R-RAIZ-0",
+        "R-RAIZ-EP4",
+        "R-RAIZ-REST",
+        "R-RAIZ-COHERENT",
+        "R-LIN",
+        "R-GLOBAL",
+        "R-PROP"
+      ]
+    },
+    "routes": {
+      "const": [
+        "TAU220_POPULATION",
+        "TAU440_FIXED_SOURCE_FISHER",
+        "DF220_POPULATION_WIDTH_IV"
+      ]
+    },
+    "data_groups": {
+      "const": [
+        "O4_HOJE",
+        "O4_CEGO",
+        "O4C_GWTC6",
+        "O5_BANDA",
+        "ET",
+        "CE"
+      ]
+    },
+    "cells": {
+      "type": "array",
+      "minItems": 180,
+      "maxItems": 180,
+      "items": {
+        "type": "object",
+        "properties": {
+          "route": {
+            "enum": [
+              "TAU220_POPULATION",
+              "TAU440_FIXED_SOURCE_FISHER",
+              "DF220_POPULATION_WIDTH_IV"
+            ]
+          },
+          "reading": {
+            "enum": [
+              "R-A",
+              "R-B",
+              "R-MOD",
+              "R-RAIZ-0",
+              "R-RAIZ-EP4",
+              "R-RAIZ-REST",
+              "R-RAIZ-COHERENT",
+              "R-LIN",
+              "R-GLOBAL",
+              "R-PROP"
+            ]
+          },
+          "data_group": {
+            "enum": [
+              "O4_HOJE",
+              "O4_CEGO",
+              "O4C_GWTC6",
+              "O5_BANDA",
+              "ET",
+              "CE"
+            ]
+          },
+          "reading_statute": {
+            "enum": [
+              "INPUT",
+              "CONJECTURE"
+            ]
+          },
+          "scenarios": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "scope": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "metrics": {
+                  "type": "object",
+                  "properties": {
+                    "z_expected_conditional": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "N90_information_target": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "N90_count_scenario": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "GW250114_equivalents": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "delta": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "sigma": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "correction_over_sigma": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "rate_per_year": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "rate_CI": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "z_physical": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "lnB": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "z_expected_conditional",
+                    "N90_information_target",
+                    "N90_count_scenario",
+                    "GW250114_equivalents",
+                    "delta",
+                    "sigma",
+                    "correction_over_sigma",
+                    "rate_per_year",
+                    "rate_CI",
+                    "z_physical",
+                    "lnB"
+                  ],
+                  "additionalProperties": false
+                },
+                "gate": {
+                  "type": "object",
+                  "properties": {
+                    "color": {
+                      "enum": [
+                        "green",
+                        "red",
+                        "OPEN"
+                      ]
+                    },
+                    "status": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "sigma_c_calibrated": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "floor5_INPUT": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "floor15_sensitivity": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "sigma_sys_df": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "sigma_jit_recovered": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "correction_over_sigma_physical": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "unit": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "source": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "sha256": {
+                                  "type": "string",
+                                  "pattern": "^[0-9a-f]{64}$"
+                                },
+                                "pointer": {
+                                  "type": "string",
+                                  "pattern": "^(/.*)?$"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "sha256",
+                                "pointer"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "status",
+                        "unit",
+                        "source",
+                        "reason"
+                      ],
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "status": {
+                                "const": "OPEN"
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "source": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "sha256": {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-f]{64}$"
+                                  },
+                                  "pointer": {
+                                    "type": "string",
+                                    "pattern": "^(/.*)?$"
+                                  }
+                                },
+                                "required": [
+                                  "path",
+                                  "sha256",
+                                  "pointer"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "color",
+                    "status",
+                    "sigma_c_calibrated",
+                    "floor5_INPUT",
+                    "floor15_sensitivity",
+                    "sigma_sys_df",
+                    "sigma_jit_recovered",
+                    "correction_over_sigma_physical"
+                  ],
+                  "additionalProperties": true
+                },
+                "verdict": {
+                  "enum": [
+                    "NOT_FALSIFIED_UNDERPOWERED",
+                    "NOT_FALSIFIED_POWERED",
+                    "INCONCLUSIVE_SYSTEMATICS",
+                    "EXCLUDED_IN_READING",
+                    "FALSIFIED_IN_READING",
+                    "AWAITING_DATA"
+                  ]
+                },
+                "physical_test_present": {
+                  "type": "boolean"
+                },
+                "references": {
+                  "type": "array"
+                }
+              },
+              "required": [
+                "id",
+                "scope",
+                "metrics",
+                "gate",
+                "verdict",
+                "physical_test_present",
+                "references"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "rate_contexts": {
+            "type": "array"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "route",
+          "reading",
+          "data_group",
+          "reading_statute",
+          "scenarios",
+          "rate_contexts",
+          "notes"
+        ],
+        "additionalProperties": true,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "route": {
+                  "const": "TAU220_POPULATION"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "scenarios": {
+                  "items": {
+                    "properties": {
+                      "metrics": {
+                        "properties": {
+                          "z_expected_conditional": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless",
+                                        "dimensionless_conditional",
+                                        "dimensionless_optimistic"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "N90_information_target": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "sum_inverse_variance_dtau"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "N90_count_scenario": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "event_count",
+                                        "events_illustrative",
+                                        "events_illustrative_only"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "GW250114_equivalents": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "target_equivalents_sigma_tau_0.058",
+                                        "current_equivalents_sigma_tau_0.058"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "delta": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau220",
+                                        "fractional_dtau220_illustrative"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "correction_over_sigma": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless",
+                                        "dimensionless_common_weighted"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "rate_per_year": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "per_year"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "rate_CI": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "per_year_CI90"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "z_physical": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "lnB": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "gate": {
+                        "properties": {
+                          "sigma_c_calibrated": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "floor5_INPUT": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "floor15_sensitivity": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma_sys_df": {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma_jit_recovered": {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "correction_over_sigma_physical": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "route": {
+                  "const": "TAU440_FIXED_SOURCE_FISHER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "scenarios": {
+                  "items": {
+                    "properties": {
+                      "metrics": {
+                        "properties": {
+                          "z_expected_conditional": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless",
+                                        "dimensionless_local_GR"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "N90_information_target": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "sum_inverse_variance_dtau440"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "N90_count_scenario": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "event_count",
+                                        "continuous_identical_source_count"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "GW250114_equivalents": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "current_dtau440_information_equivalents",
+                                        "target_dtau440_information_equivalents"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "delta": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau440"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau440"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "correction_over_sigma": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless",
+                                        "absolute_delta_over_sigma_local_GR"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "rate_per_year": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "per_year"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "rate_CI": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "per_year_CI90"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "z_physical": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "lnB": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "gate": {
+                        "properties": {
+                          "sigma_c_calibrated": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau440"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "floor5_INPUT": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau440"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "floor15_sensitivity": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_dtau440"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma_sys_df": {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma_jit_recovered": {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "correction_over_sigma_physical": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "route": {
+                  "const": "DF220_POPULATION_WIDTH_IV"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "scenarios": {
+                  "items": {
+                    "properties": {
+                      "metrics": {
+                        "properties": {
+                          "z_expected_conditional": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "N90_information_target": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "local_information_variance_df220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "N90_count_scenario": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "event_count",
+                                        "scenario_events_lower_bound"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "GW250114_equivalents": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "current_df_variance_information_equivalents",
+                                        "target_df_variance_information_equivalents"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "delta": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "fractional_df220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "width_fractional_df220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "correction_over_sigma": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "rate_per_year": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "per_year"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "rate_CI": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "per_year_CI90"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "z_physical": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "lnB": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "gate": {
+                        "properties": {
+                          "sigma_c_calibrated": {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "floor5_INPUT": {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "floor15_sensitivity": {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma_sys_df": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "width_fractional_df220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "sigma_jit_recovered": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "width_fractional_df220"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "correction_over_sigma_physical": {
+                            "allOf": [
+                              {
+                                "if": {
+                                  "properties": {
+                                    "value": {
+                                      "not": {
+                                        "type": "null"
+                                      }
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "properties": {
+                                    "unit": {
+                                      "enum": [
+                                        "dimensionless"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "data_group": {
+                  "enum": [
+                    "O4C_GWTC6",
+                    "O5_BANDA",
+                    "ET",
+                    "CE"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "scenarios": {
+                  "items": {
+                    "properties": {
+                      "verdict": {
+                        "const": "AWAITING_DATA"
+                      },
+                      "physical_test_present": {
+                        "const": false
+                      },
+                      "metrics": {
+                        "properties": {
+                          "z_physical": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          },
+                          "lnB": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "gate": {
+                        "properties": {
+                          "correction_over_sigma_physical": {
+                            "properties": {
+                              "value": {
+                                "type": "null"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "reviewed_stage_receipts": {
+      "type": "object",
+      "properties": {
+        "E3.2": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "E3.3": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "TEST": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "E3.2",
+        "E3.3",
+        "TEST"
+      ],
+      "additionalProperties": false
+    },
+    "source_pins": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "new_scientific_computations": {
+      "const": false
+    },
+    "lnB_recomputed": {
+      "const": false
+    },
+    "E7_extraction_authorized": {
+      "const": false
+    },
+    "order_completed": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema",
+    "status",
+    "registration_sha256",
+    "authorization_sha256",
+    "generator_sha256",
+    "readings",
+    "routes",
+    "data_groups",
+    "cells",
+    "reviewed_stage_receipts",
+    "source_pins",
+    "new_scientific_computations",
+    "lnB_recomputed",
+    "E7_extraction_authorized",
+    "order_completed"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Structural schema only. Cross-source scientific and activation constraints live in CONTRACT/code; schema validation is not execution approval."
+}

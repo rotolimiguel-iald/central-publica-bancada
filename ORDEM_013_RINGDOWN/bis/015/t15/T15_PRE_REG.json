@@ -1,0 +1,46 @@
+{
+  "title": "T-15 pre-registration: Brownian phase recovery of delta_f_hat",
+  "registered_utc": "2026-09-27T11:02:37Z",
+  "status": "PRE_REGISTERED_BEFORE_ANY_T15_INJECTION_OR_PE",
+  "scope": "NONBLIND_INSTRUMENTAL_DIAGNOSTIC_ONLY",
+  "question": "Can 50 Brownian-phase injections in two families yield an auditable recovery scatter for delta_f_hat with the current Kerr V2 postpeak 220 instrument and at most one T15 machine-hour?",
+  "source_pins_sha256": {
+    "order_T15": "c903681d01eec5ed8d55b7fe69e061a79b3a7b73eecede8f895cfb2d127f75a3",
+    "budget_v12": "e54fb7a0de69e2ba834ef805c26dc103496d3e6f2cec09583e3d646dff39fd1d",
+    "unravelings": "2858efdbf0e1f8ba2b8419e9f2a987c340ae02e2e5825495f0d3381b2d26e830",
+    "template": "16d7fbc25e94b0351e7050aa5055db421365953782cec1a668d68f11e5cc5132",
+    "prediction": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+    "T10_final": "689806ca4917868b066f8b5ffd0dcd9df5aad2470cef3c341adc18b010c72fce",
+    "T10_posterior_audit": "cd04f281fe55e2ae1ed718af9e1b8d4b0aacfc5bdd872aafe6d2196b69b13582",
+    "T10_noise": "321ae1e1a6ee6b3d0bd61306f0effb696350426c498caf54cc14c341dd08457a",
+    "T10_Aprime_rank": "8e283c6451f36f4ca523da9e5b39c8a4d94e337e840e605300ef0c87e93d0ea6",
+    "T10_bank": "05eb55665a1f8134bc88ca4a6361dd198e28b0c8db4ed0d52fe5396352c04216"
+  },
+  "design_if_all_gates_pass": {
+    "n_total": 50,
+    "n_per_family": 25,
+    "families": ["SEOBNRv4HM", "IMRPhenomXPHM"],
+    "injection": "220 postpeak plus Brownian phase realization with seed per injection, fixed onset, pinned readout and estimator; match each realization to a paired GR injection and identical off-source noise",
+    "seed_rule": "record base seed and derived unique injection/noise seeds before running; no seed selection after inspecting fitted values",
+    "noise": "GW250114 real off-source H1+L1; each detector must pass the registered covariance condition <= 1e12; no B3 regularized or B4 synthetic sample may be called real-network recovery",
+    "fit": "Kerr V2 220 with explicit delta_f220, identical priors and fit window in paired Brownian/GR recoveries; free Mf/af requires an independently identified mode or an externally specified inspiral prior (then label IMR-RD)",
+    "estimand": "within-family scatter of paired (delta_f_hat_Brownian - delta_f_hat_GR) over independent noise/phase realizations, with uncertainty interval; report posterior widths separately",
+    "qualification": "both detector noise covariances pass; delta_f model exists; likelihood/sampler converges; null-direction removed by measured two-mode information or ratified external prior; pilot cost forecast <= 1.0 allocated machine-hour",
+    "pilot": "only after all qualification checks, run exactly two injections (one per family), inspect convergence and actual time; 1.0 hour absolute allocation",
+    "failure_action": "if any qualification fails, do not run the two-injection pilot or campaign; emit MEDIDA with numerical cost and required protocol change"
+  },
+  "known_before_execution": {
+    "H1_condition": 1009549310545.7432,
+    "L1_condition": 2085758915.2395008,
+    "conditioning_limit": 1000000000000.0,
+    "T10_220_free_dtau_posterior_sd_one_realization": 0.31342208077203004,
+    "T10_220_informed_dtau_posterior_sd_one_realization": 0.15403667422623182,
+    "T10_Aprime": "rank 3 only for a proposed 440 mode; injected 440 amplitude zero; no two-mode posterior",
+    "T10_bank": "10 GR waveforms generated, no PE transfer",
+    "T15_allocation_machine_hours": 1.0
+  },
+  "decision": "FAIL_CLOSED_NO_PILOT_UNDER_CURRENT_PROTOCOL",
+  "sigma_jit_rec": null,
+  "sigma_sys_delta_f_hat": null,
+  "gate_changed": false
+}

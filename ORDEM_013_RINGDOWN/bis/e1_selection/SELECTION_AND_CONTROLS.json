@@ -1,0 +1,1094 @@
+{
+  "status": "E1_2_3_4_DOCUMENTARY_AND_ARCHIVED_CONTROLS_COMPLETE__SELECTION_EFFICIENCY_OPEN",
+  "utc": "2026-09-22T19:52:15.907660+00:00",
+  "E0_seal_verified": true,
+  "reading_scope": {
+    "full_papers_read": false,
+    "method": "Selected primary passages within GWTC3 VIII.1.2, GWTC4 III 2.2, GWTC5 7.2; PDFs archived, no claim of integral reading",
+    "passages_file": "SOURCE_PASSAGES.json",
+    "web_crosscheck": "GWTC3 v3 accessible; GWTC4/5 HTML returned 404; local primary PDF/text used"
+  },
+  "selection": {
+    "LVK_pSEOBNR_operational_indicator": "I_catalog_and_quality(d) * 1[rho_inspiral_GR(d)>=8] * 1[rho_postinspiral_GR(d)>=8]",
+    "O4_summary": "Median SNR from SEOBNRv5PHM GR analyses where available, not posterior deformational widths",
+    "O1_O3_summary": "MAP GR IMRPhenomXPHM_MSA for later reanalyses; do not retroactively relabel original GWTC3 v4HM recovery",
+    "availability": "Published membership can be read from tables; neither split-SNR per-event values nor exact executable implementation/frequency boundary were reconstructed here. Unavailable split SNR remains null, not approximated from GWOSC total.",
+    "baseline_catalog_quality": "GWTC4 overview: >=2 detectors, FAR<=1e-3/yr. GWTC5 section2 uses inherited catalog/test criteria; not replaced by total SNR alone.",
+    "E0_INPUT_indicator": "1[rho_GWOSC_network>=12] * 1[median_Mf_detector>=40 Msun] * 1[0<=median_chif<0.98]",
+    "priority": "rho_GWOSC_network>=30; not extra eligibility cut",
+    "missing": "AWAITING_GR_METADATA; null eligibility when required metadata unavailable",
+    "statistical_efficiency_definition": "epsilon(theta)=integral I_select(d) p(d|theta) dd; alpha(Lambda)=integral epsilon(theta) p(theta|Lambda) dtheta",
+    "efficiency": null,
+    "normalization_alpha": null,
+    "efficiency_status": "OPEN_NOT_CALIBRATED",
+    "known_count_is_efficiency": false,
+    "inference_scope": "For a population conditioned on N selected detections, alpha(Lambda)^(-N) normalization requires a selection model consistent with the likelihood; Poisson-count formulation is different. No normalization inserted or fitted here.",
+    "positive_bias": "LVK says selection may favor positive damping deviations; this is not a quantified correction or proof of unique cause. GWTC3 also discusses prior asymmetry, correlations, noise modeling and finite catalog.",
+    "no_transport": [
+      "rho_GWOSC != separate inspiral/postinspiral SNR",
+      "postinspiral >=8 != pure 220 RD window >=8",
+      "published binary selection != calibrated efficiency",
+      "c(sigma) fit does not alone pay selection efficiency"
+    ]
+  },
+  "LVK_controls": {
+    "pseobnr_injection": {
+      "independent_injections": 1,
+      "recoveries": [
+        "NR_with_44",
+        "NR_without_44"
+      ],
+      "posterior_rows_per_recovery": 20000,
+      "prior_220": [
+        -0.8,
+        2.0
+      ],
+      "prior_positive_mass": 0.7142857142857143,
+      "prior_440": [
+        -0.8,
+        0.8
+      ],
+      "free_440_nuisance_both": true,
+      "lnB": null,
+      "c_SNR_curve_paid": false,
+      "coverage_curve_paid": false,
+      "scope": "Reuse F2 verified descriptive point. No posterior reread or PE. Two recoveries not independent events; posterior mass at GR not frequentist coverage."
+    },
+    "RD": {
+      "free_220_deformations": false,
+      "physical_220_df_dg_fixed_zero": true,
+      "available_nonKerr": "221 deviations; logarithmic df,dg, not fractional dtau",
+      "fractional_mapping": "delta_f=exp(df)-1; delta_tau=exp(-dg)-1",
+      "pSEOB_220_robustness_lnB": null,
+      "c_SNR_curve_paid": false,
+      "scope": "Reused F2 schema audit; no new NC/strain access. Unit coordinates not physical deformation; varying Kerr M/chi does not supply free 220."
+    },
+    "gate": "NAO_PAGO_CURVA_C_SNR_PSEOB_AND_SELECTION_EFFICIENCY; handed to E3, no execution here"
+  },
+  "C2": {
+    "original_N50_SNR20": {
+      "N": 50,
+      "mean": 0.030314299676117783,
+      "sd": 0.09298118404326379,
+      "se": 0.013149525151949245,
+      "median": 0.015181518693959117
+    },
+    "manager_replay_N50_SNR20": {
+      "SNR": 20.0,
+      "N": 50,
+      "seed": 13042600,
+      "mean": 0.03031429912231811,
+      "median": 0.015181517613623482,
+      "sd": 0.09298118390985943,
+      "se": 0.01314952513308302,
+      "q05_50_95": [
+        -0.10263334504213675,
+        0.015181517613623482,
+        0.2074036865235747
+      ],
+      "z_mean": 2.3053531451147284
+    },
+    "original_vs_replay_absolute_differences": {
+      "N": 0,
+      "mean": 5.537996727866812e-10,
+      "sd": 1.3340435700559539e-10,
+      "se": 1.886622455482545e-11,
+      "median": 1.0803356351868354e-09
+    },
+    "comparison_absolute_tolerance": 2e-08,
+    "existing_N2000_curve": [
+      {
+        "SNR": 20.0,
+        "N": 2000,
+        "seed": 13042600,
+        "mean": 0.010300029213829465,
+        "median": 0.004366925587016172,
+        "sd": 0.10089030134990927,
+        "se": 0.0022559757208883593,
+        "q05_50_95": [
+          -0.14464699837306122,
+          0.004366925587016172,
+          0.19049183027148897
+        ],
+        "z_mean": 4.565664922038041,
+        "mean_times_snr_squared": 4.120011685531786,
+        "residual_against_4_over_snr_squared_in_SE": 0.13299310407087145,
+        "verification": "Summary algebra checked; 2000 individual fits not archived in this file; no estimator rerun"
+      },
+      {
+        "SNR": 40.0,
+        "N": 2000,
+        "seed": 13042600,
+        "mean": 0.002599262415239502,
+        "median": 0.0013841515657657963,
+        "sd": 0.0495582296277645,
+        "se": 0.0011081557029222551,
+        "q05_50_95": [
+          -0.07645815908340768,
+          0.0013841515657657963,
+          0.08894741073463132
+        ],
+        "z_mean": 2.3455750923675556,
+        "mean_times_snr_squared": 4.158819864383203,
+        "residual_against_4_over_snr_squared_in_SE": 0.08957442981860982,
+        "verification": "Summary algebra checked; 2000 individual fits not archived in this file; no estimator rerun"
+      },
+      {
+        "SNR": 200.0,
+        "N": 2000,
+        "seed": 13042600,
+        "mean": 0.00013009960497356525,
+        "median": 0.00011220554833362792,
+        "sd": 0.009869361525875961,
+        "se": 0.00022068563266379698,
+        "q05_50_95": [
+          -0.015709601974100273,
+          0.00011220554833362792,
+          0.016849071322722096
+        ],
+        "z_mean": 0.5895245802963766,
+        "mean_times_snr_squared": 5.20398419894261,
+        "residual_against_4_over_snr_squared_in_SE": 0.13639132104000817,
+        "verification": "Summary algebra checked; 2000 individual fits not archived in this file; no estimator rerun"
+      }
+    ],
+    "new_readonly_control": "Original 50 dtau fits recomputed; separate manager replay differs at numerical optimizer level, errors recorded. N2000 summaries checked algebraically only",
+    "readout": "Single channel whitened RG sinusoid, 128/4096 s, OU+white synthetic noise; variable projection, free df/logtau and amplitude/phase. Same seed/noise across SNR points; correlated controls. Not pSEOB PE.",
+    "functional_form_scope": "4/rho^2 descriptive agreement in this conditional estimator, not fitted/adopted universal c(rho). At rho200 mean consistent with zero.",
+    "expanded_1000_at_rho20": {
+      "noise_free": {
+        "N": 1000,
+        "mean_dtau": 0.0,
+        "mean_dtau_standard_error": 0.0,
+        "mean_df": 0.0,
+        "df_standard_deviation": 0.0,
+        "df_standard_deviation_standard_error": 0.0,
+        "df_05_50_95": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "dtau_05_50_95": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "uncertainty_method": "IID influence-function SE",
+        "distinct_noise_windows": null,
+        "boundary_count": 0,
+        "optimizer_failures": 0
+      },
+      "recolored": {
+        "N": 1000,
+        "mean_dtau": -0.0024056327973431867,
+        "mean_dtau_standard_error": 0.006326418046083744,
+        "mean_df": -0.007052787483004551,
+        "df_standard_deviation": 0.018303274558835503,
+        "df_standard_deviation_standard_error": 0.000913154850776346,
+        "df_05_50_95": [
+          -0.03483285647721171,
+          -0.007952940237463714,
+          0.023729869132564637
+        ],
+        "dtau_05_50_95": [
+          -0.14783167990947815,
+          -0.008312508189074145,
+          0.1412678757976271
+        ],
+        "uncertainty_method": "Cluster influence-function SE by original off-source window; finite empirical support, not 1000 independent noise windows",
+        "distinct_noise_windows": 251,
+        "boundary_count": 0,
+        "optimizer_failures": 0
+      }
+    },
+    "expanded_scope": "Different window 128/2048s and recolored finite noise library of 256; not another point of same synthetic curve."
+  },
+  "C5": {
+    "historical_proxy_definition": "abs(median(a_hat)-a_injected)*abs(delta_RB_GW250114_median); not signed bias, not exact nonlinear conversion",
+    "historical_delta": -0.01984528542342861,
+    "exact_conversion": "delta_tau(a)=-a*x220/(1+a*x220); bias relative to same-family injected truth",
+    "scope": "Fixed representative source, fixed family-specific remnant, whole 22/44 deformation; marginal Gaussian quadrature amplitudes and profile a estimate. Not full astrophysical pSEOB posterior PE or calibrated operational c(rho).",
+    "snr_basis": "Two illustrative response channels, network norm from 10 tM, reference source 403 Mpc; not GWOSC total network SNR or peak SNR.",
+    "summaries": {
+      "40": {
+        "cells": 8,
+        "N_per_cell": 206,
+        "historical_abs_proxy_median": 0.008302087259846158,
+        "historical_abs_proxy_range": [
+          0.0027675675841960126,
+          0.020317082963432088
+        ],
+        "exact_abs_median_bias_median_across_cells": 0.008544026459027007,
+        "exact_mean_bias_range": [
+          -0.005663783553312308,
+          0.016304611371255592
+        ],
+        "SE_mean_range": [
+          0.0031071409885306154,
+          0.004280700715539091
+        ],
+        "pooled_SE": null,
+        "scope": "Eight paired scenarios, not eight independent estimates; range is not confidence interval. SNR>=200 inverse-crime/numerical-waveform caveats remain."
+      },
+      "200": {
+        "cells": 8,
+        "N_per_cell": 206,
+        "historical_abs_proxy_median": 0.0010563872311716675,
+        "historical_abs_proxy_range": [
+          0.0004934876163706958,
+          0.001943907385008953
+        ],
+        "exact_abs_median_bias_median_across_cells": 0.0010959676516251538,
+        "exact_mean_bias_range": [
+          -0.0011314047522919897,
+          0.0004112550643668641
+        ],
+        "SE_mean_range": [
+          0.0006162913512802048,
+          0.0006973736873641915
+        ],
+        "pooled_SE": null,
+        "scope": "Eight paired scenarios, not eight independent estimates; range is not confidence interval. SNR>=200 inverse-crime/numerical-waveform caveats remain."
+      },
+      "600": {
+        "cells": 8,
+        "N_per_cell": 206,
+        "historical_abs_proxy_median": 0.0003519300045010226,
+        "historical_abs_proxy_range": [
+          0.0002443560895934051,
+          0.0006103780212673448
+        ],
+        "exact_abs_median_bias_median_across_cells": 0.0003585489524516302,
+        "exact_mean_bias_range": [
+          -0.00037587178904380957,
+          0.00010878598140614969
+        ],
+        "SE_mean_range": [
+          0.00020519806626885143,
+          0.0002212784457832365
+        ],
+        "pooled_SE": null,
+        "scope": "Eight paired scenarios, not eight independent estimates; range is not confidence interval. SNR>=200 inverse-crime/numerical-waveform caveats remain."
+      }
+    },
+    "cells": [
+      {
+        "psd": "O4",
+        "SNR": 40.0,
+        "injected_a": 0.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 36,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 36,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.008014343293599544,
+        "a_median_signed_bias": 0.40384117046450274,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.0028850759379444257,
+        "SE_mean_conditional": 0.003126786647744859,
+        "exact_median_bias_dtau": -0.008250502484068454,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.014331342273358803,
+          0.0008040387307330001
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 200.0,
+        "injected_a": 0.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 37,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 37,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0013124953674705842,
+        "a_median_signed_bias": 0.06613638148641092,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.0005494409426485247,
+        "SE_mean_conditional": 0.0006262972758334655,
+        "exact_median_bias_dtau": -0.001360556373863776,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.002642136623990551,
+          0.00033654163661127014
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 600.0,
+        "injected_a": 0.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 38,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 38,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0003842528494442791,
+        "a_median_signed_bias": 0.019362424941021226,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.0001827362022743714,
+        "SE_mean_conditional": 0.00020909843697900244,
+        "exact_median_bias_dtau": -0.0003987072110159395,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0008657929524172873,
+          0.00010609252750619907
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 40.0,
+        "injected_a": 1.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 39,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 39,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.006561869215547112,
+        "a_median_signed_bias": 0.3306512894896645,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.002809363263180452,
+        "SE_mean_conditional": 0.0031071409885306154,
+        "exact_median_bias_dtau": -0.006495853312047165,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.014690784610358314,
+          0.0007154911737449823
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 200.0,
+        "injected_a": 1.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 40,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 40,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0014362356629380947,
+        "a_median_signed_bias": 0.07237163045498596,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.0005453283227236823,
+        "SE_mean_conditional": 0.000619960396768925,
+        "exact_median_bias_dtau": -0.0014291937520925328,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0026436791159104335,
+          0.00038887177467538184
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 600.0,
+        "injected_a": 1.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 41,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 41,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0004075537797654579,
+        "a_median_signed_bias": 0.020536554202657875,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.00018197517272917907,
+        "SE_mean_conditional": 0.00020682335832358136,
+        "exact_median_bias_dtau": -0.00040597689628790387,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0008902590817422666,
+          0.00014143192367702118
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 40.0,
+        "injected_a": 0.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 54,
+        "coverage_90": 0.7572815533980582,
+        "boundary_hits": 0,
+        "source_results_index": 54,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.020317082963432088,
+        "a_median_signed_bias": -1.023773784550687,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 0.0159396639127117,
+        "SE_mean_conditional": 0.0039346253975307745,
+        "exact_median_bias_dtau": 0.021543529586303303,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          0.006015285337611192,
+          0.032979163646553976
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 200.0,
+        "injected_a": 0.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 55,
+        "coverage_90": 0.9223300970873787,
+        "boundary_hits": 0,
+        "source_results_index": 55,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0008002790948727509,
+        "a_median_signed_bias": -0.04032590500955814,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 0.0004112550643668641,
+        "SE_mean_conditional": 0.0006973736873641915,
+        "exact_median_bias_dtau": 0.0008313789293865317,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0012679632986199543,
+          0.002198740749941927
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 600.0,
+        "injected_a": 0.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 56,
+        "coverage_90": 0.9223300970873787,
+        "boundary_hits": 0,
+        "source_results_index": 56,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.00029801315035968273,
+        "a_median_signed_bias": -0.015016823593167345,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 0.00010878598140614969,
+        "SE_mean_conditional": 0.0002212784457832365,
+        "exact_median_bias_dtau": 0.0003094339133079651,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.00042007057673471606,
+          0.0006970421144954801
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 40.0,
+        "injected_a": 1.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 57,
+        "coverage_90": 0.7864077669902912,
+        "boundary_hits": 0,
+        "source_results_index": 57,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.011285841830325728,
+        "a_median_signed_bias": -0.5686913334590835,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 0.016304611371255592,
+        "SE_mean_conditional": 0.004280700715539091,
+        "exact_median_bias_dtau": 0.011377280538113311,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0008059885499594778,
+          0.019634406813525792
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 200.0,
+        "injected_a": 1.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 58,
+        "coverage_90": 0.9223300970873787,
+        "boundary_hits": 0,
+        "source_results_index": 58,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0004934876163706958,
+        "a_median_signed_bias": -0.024866743200785746,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 0.00018703266393365822,
+        "SE_mean_conditional": 0.0006547233900188451,
+        "exact_median_bias_dtau": 0.0004920171183205937,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0011733881603433888,
+          0.0017789350072134683
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O4",
+        "SNR": 600.0,
+        "injected_a": 1.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 59,
+        "coverage_90": 0.9271844660194175,
+        "boundary_hits": 0,
+        "source_results_index": 59,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0003104813255062144,
+        "a_median_signed_bias": -0.015645092468142163,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 6.101299750167766e-05,
+        "SE_mean_conditional": 0.00021624120626729504,
+        "exact_median_bias_dtau": 0.000309498534470376,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0004037737016637545,
+          0.0006261716694046411
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 40.0,
+        "injected_a": 0.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 36,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 324,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.00858983122609277,
+        "a_median_signed_bias": 0.4328398933457482,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.005663783553312308,
+        "SE_mean_conditional": 0.003179913114006426,
+        "exact_median_bias_dtau": -0.00883755043398556,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.014701963236273473,
+          -0.0019044918301227918
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 200.0,
+        "injected_a": 0.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 37,
+        "coverage_90": 0.9368932038834952,
+        "boundary_hits": 0,
+        "source_results_index": 325,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.001943907385008953,
+        "a_median_signed_bias": 0.09795310793131995,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.0011314047522919897,
+        "SE_mean_conditional": 0.0006220770732077125,
+        "exact_median_bias_dtau": -0.002013766668866576,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0030442694919779485,
+          3.233073014952987e-05
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 600.0,
+        "injected_a": 0.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 38,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 326,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0006103780212673448,
+        "a_median_signed_bias": 0.030756827540850337,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.00037587178904380957,
+        "SE_mean_conditional": 0.00020722445276546628,
+        "exact_median_bias_dtau": -0.0006331895500818792,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0010447198738900818,
+          -7.81287387416974e-06
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 40.0,
+        "injected_a": 1.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 39,
+        "coverage_90": 0.9223300970873787,
+        "boundary_hits": 0,
+        "source_results_index": 327,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.009064290800319416,
+        "a_median_signed_bias": 0.45674781727343916,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.005532731756517403,
+        "SE_mean_conditional": 0.0031528549867743992,
+        "exact_median_bias_dtau": -0.008950220623095816,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.013280341858778012,
+          -0.0018427732832710375
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 200.0,
+        "injected_a": 1.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 40,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 328,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0016294138267245798,
+        "a_median_signed_bias": 0.08210583984853925,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.0011205091118454379,
+        "SE_mean_conditional": 0.0006162913512802048,
+        "exact_median_bias_dtau": -0.0016211066971414598,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.002714298939349758,
+          -0.00039235553718979313
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 600.0,
+        "injected_a": 1.0,
+        "injection_family": "SEOBNRv4HM",
+        "recovery": "SEOBNRv4HM",
+        "N": 206,
+        "draws_index": 41,
+        "coverage_90": 0.9320388349514563,
+        "boundary_hits": 0,
+        "source_results_index": 329,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0005116985332542684,
+        "a_median_signed_bias": 0.025784387693924327,
+        "x220_family": 0.02060002962411439,
+        "exact_mean_bias_dtau": -0.0003728159515330211,
+        "SE_mean_conditional": 0.00020519806626885143,
+        "exact_median_bias_dtau": -0.0005096678058825015,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0009413208944292241,
+          -8.300639441195454e-05
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 40.0,
+        "injected_a": 0.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 54,
+        "coverage_90": 0.7378640776699029,
+        "boundary_hits": 0,
+        "source_results_index": 342,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0058047210733592446,
+        "a_median_signed_bias": -0.292498744639188,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 0.009407072788052225,
+        "SE_mean_conditional": 0.003901451382357734,
+        "exact_median_bias_dtau": 0.006062419168710394,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0027909591591107176,
+          0.02266087147529076
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 200.0,
+        "injected_a": 0.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 55,
+        "coverage_90": 0.9077669902912622,
+        "boundary_hits": 0,
+        "source_results_index": 343,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0005836671409382565,
+        "a_median_signed_bias": 0.029410871574021336,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": -0.00063167940885478,
+        "SE_mean_conditional": 0.0006548209121265199,
+        "exact_median_bias_dtau": -0.0006054564803668877,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.002035215384505459,
+          0.0006135764406287709
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 600.0,
+        "injected_a": 0.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 56,
+        "coverage_90": 0.912621359223301,
+        "boundary_hits": 0,
+        "source_results_index": 344,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0002443560895934051,
+        "a_median_signed_bias": 0.01231305493368855,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": -0.00020750040753672355,
+        "SE_mean_conditional": 0.00021816615420427597,
+        "exact_median_bias_dtau": -0.00025357678593973944,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.000641565497404372,
+          0.00022538942428035346
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 40.0,
+        "injected_a": 1.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 57,
+        "coverage_90": 0.7912621359223301,
+        "boundary_hits": 0,
+        "source_results_index": 345,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0027675675841960126,
+        "a_median_signed_bias": -0.1394571821541415,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": 0.011403791094625637,
+        "SE_mean_conditional": 0.004273164302767683,
+        "exact_median_bias_dtau": 0.002765750807133781,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.005348083940674094,
+          0.01301066829854804
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 200.0,
+        "injected_a": 1.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 58,
+        "coverage_90": 0.9174757281553398,
+        "boundary_hits": 0,
+        "source_results_index": 346,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.0006821704113334478,
+        "a_median_signed_bias": 0.03437443185010092,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": -0.000694690246875896,
+        "SE_mean_conditional": 0.0006452643590056799,
+        "exact_median_bias_dtau": -0.0006793229824900819,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0023235820437849317,
+          0.0005616708140312593
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      },
+      {
+        "psd": "O5",
+        "SNR": 600.0,
+        "injected_a": 1.0,
+        "injection_family": "IMRPhenomXPHM",
+        "recovery": "IMRPhenomXPHM",
+        "N": 206,
+        "draws_index": 59,
+        "coverage_90": 0.9174757281553398,
+        "boundary_hits": 0,
+        "source_results_index": 347,
+        "distinct_paired_GPS": 206,
+        "historical_absolute_bias_proxy": 0.00031960715955776605,
+        "a_median_signed_bias": 0.016104941437649956,
+        "x220_family": 0.020599366463141696,
+        "exact_mean_bias_dtau": -0.00022587920853386206,
+        "SE_mean_conditional": 0.00021441810098865425,
+        "exact_median_bias_dtau": -0.00031839069388732086,
+        "median_bias_CI90_order_statistics_IID_conditional": [
+          -0.0008192869512316098,
+          0.0002609833552055345
+        ],
+        "order_interval_one_based": [
+          91,
+          116
+        ],
+        "error_scope": "Conditional on independent noise windows; inter-window dependence/PSD/model error not calibrated. Shared windows across cells: no independence of cells."
+      }
+    ],
+    "source_systematics_review": "Main-agent review of 2388 comparisons read/hash-checked; this audit separately checks only 24 R-B same-family archived cells.",
+    "uncertainty": "Mean SE conditional on 206 distinct paired noise intervals; median order-statistic interval assumes IID. No pooled SE, no model/PSD uncertainty measured; same noise reused.",
+    "transfer_to_LVK": "OPEN; do not splice C2 and C5 into one curve; no nuisance fit performed",
+    "Fisher": "sigma~2/rho only conditional local fixed-source diagnostic; free single220 M/spin nonidentifiability remains; no new Fisher computation"
+  },
+  "not_performed": [
+    "new MC/injections",
+    "strain",
+    "posterior downloads or test posterior access",
+    "waveform generation",
+    "C5 rerun",
+    "nuisance fitting",
+    "E2/E3",
+    "physical reading selection"
+  ],
+  "source_hashes": {
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\PORTAO_DA_AMPLIACAO_V1.json": {
+      "sha256": "710028a7d2af7b649511afe369d88462d2add95c5fecbb1fb03c517fc91fe8a0",
+      "bytes": 903525
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\PORTAO_DA_AMPLIACAO_V1.md": {
+      "sha256": "4fd8568d643525e415ab6d890a33220ce1eeb1447cad77f474d8cfce7e4c2dac",
+      "bytes": 6876
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\medicao_da_ampliacao\\B_catalogos\\arxiv_2607.19293_gwtc5_tgr.pdf": {
+      "sha256": "4ab5df879daa2f4acd2d9fac32e64f5daf78d8fddd73ba5d76ecc5a2047ab101",
+      "bytes": 1894358
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\medicao_da_ampliacao\\B_catalogos\\gwtc5_tgr.txt": {
+      "sha256": "d523ae94f23f40b55e7688702b444cf35fb2c2dc90610a6d03bfbd2ef8eefccf",
+      "bytes": 248915
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\medicao_da_ampliacao\\B_catalogos\\arxiv_2603.19021_gwtc4_tgr3.pdf": {
+      "sha256": "51d9c51cac8767cdfa0ca10f547b554b10cc5149519117c567451696fe2e4728",
+      "bytes": 12678467
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\medicao_da_ampliacao\\B_catalogos\\gwtc4_tgr3.txt": {
+      "sha256": "db4c7edbc0861946d1eea6873b191959231df0c5df3c9ce44276d5272c5129a8",
+      "bytes": 214415
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\literature\\gwtc3_article_v3.html": {
+      "sha256": "9c5271fba4aaa144bafa904e40c1dfe3e853b60b9e705be267dd22a0236f8ee2",
+      "bytes": 2702327
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\medicao_da_ampliacao\\C_piso_sistematico\\s02_measure.py": {
+      "sha256": "b5e4a1103fa270048e53e0df92e69126efc55f43f14af3bea08b0f91897d3441",
+      "bytes": 17236
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\revisao_da_gerencia\\ceticos\\c2_refeito\\refazer_snr20.py": {
+      "sha256": "171236d2f578f1a41aae3074415e333999e559995f77286b7a10d9b040f4e269",
+      "bytes": 2163
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\revisao_da_gerencia\\ceticos\\c2_refeito\\refeito_N50.json": {
+      "sha256": "9d9f380669afef1652321d32b7c0d9508da80765376b0f4a73754b5939add04a",
+      "bytes": 327
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\C2_TRAJECTORY_RECOVERY.json": {
+      "sha256": "339be42bec67a48e1e3341d678ac9bc0804c6e1db035e6b4b57df62673eafd38",
+      "bytes": 271259
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\revisao_da_gerencia\\ceticos\\c2_refeito\\refeito_N2000.json": {
+      "sha256": "35375916c1e00e266178ca24af9fa04a5620675f6c6fb59c84b70dd29e2bc5ab",
+      "bytes": 1005
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\C2_TRAJECTORY_expanded_1000.json": {
+      "sha256": "9d734d976146188ae83a9557ae947f1021c7cfef26c49e998f39b1c1a128d691",
+      "bytes": 4681894
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\C5_IMR_RECOVERY.json": {
+      "sha256": "bda4441856c23a643be6dc467b65059c4fc968d54971a73490710ffc67568cb6",
+      "bytes": 493476
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\REGISTRO_C5_IMR_RECOVERY.json": {
+      "sha256": "804af656c37fef53cfd09abdec6745677efc7087551dd53f8cb95c66e00d7898",
+      "bytes": 3997
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\imr_recovery\\O4_draws.npz": {
+      "sha256": "a79ab602d4b9fa2a1c9cf30de3cdf0ad663703a557ea88574473ec45e646c487",
+      "bytes": 904874
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\cache\\imr_recovery\\O5_draws.npz": {
+      "sha256": "1feacc7bf0f4e668a9afd8249778f21bc201c92e4e2f22dddc38f88bc3410434",
+      "bytes": 905214
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\e0_core\\SYSTEMATICS_ADENDO.json": {
+      "sha256": "d1ed739909f00e1dba2e39474fccc46fc92480d6e27e5c74c91f3853bf677df0",
+      "bytes": 2246537
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\E0_SYSTEMATICS_REVIEW.json": {
+      "sha256": "2c001d14ce7a117bfab31f2d848eaf9954f2828bf888a068e9a3a951dd8980c7",
+      "bytes": 1179
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_INSUMOS\\medicao_da_ampliacao\\C_piso_sistematico\\C_piso_medicoes.json": {
+      "sha256": "cfdb198d667df8f73ac6d35efff859dcbbcb43481cd673fbf554e1cb56e94db0",
+      "bytes": 227627
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\C4_CATALOG_220.json": {
+      "sha256": "93bdc413130d294acde91ec03f8392b8d9c5ec5b33fdc97274371656503d8e17",
+      "bytes": 673228
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\F2_INJECTION_INDEPENDENT_REVIEW.md": {
+      "sha256": "e518a10af574f65bafedc0f719af90fca857c7a49636e9da01d0bd437058ed89",
+      "bytes": 10652
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\F2_RD_APPLICABILITY_REVIEW.md": {
+      "sha256": "8e48acb49334c3d66b424320d37369b5bffc2ad9f938ef050bd788d51ad4c87c",
+      "bytes": 21059
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\F2_RD_APPLICABILITY_REVIEW.json": {
+      "sha256": "2076f9fc296b30063dbe1272f834c0135e33dcd015fc948d50362a0a84daa5b3",
+      "bytes": 437681
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\f2_injection\\REPORT.md": {
+      "sha256": "720b041f207520bbe36264b1d77f475794a077bbbaa5840d486f634cc85357ca",
+      "bytes": 12992
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\f2_injection\\RECEIPT.json": {
+      "sha256": "0d4120d77f179d4d4d3aeb90c52168bf56365b8796bbdf726e9529934058db77",
+      "bytes": 3309
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\f2_injection\\DESCRIPTIVE_RESULT.json": {
+      "sha256": "bc1fec39f21d92dd19d0953d4d9ae14bae4b2eed5ea80aa60a405fc42e091ecc",
+      "bytes": 57206
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\f2_injection\\PRIOR_CONTRACT.json": {
+      "sha256": "1900f0bc77d98e99be08e5e476388975f5b2d90b68da561555c36349876dad1e",
+      "bytes": 2849
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\c1_review\\f2_injection_independent_results.json": {
+      "sha256": "9787e57f7c68ed2dbb507a68b3bb82aacae15b43ca9fc4c6cbe6a18eec74f928",
+      "bytes": 5199
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\f2_review\\rd_inventory.json": {
+      "sha256": "7745a49b005df4f4c0556f1c05e71c5f468efab4507e672c495ddff865f2cd1e",
+      "bytes": 7418470
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\C5_FISHER_v3.json": {
+      "sha256": "ef7a800369ba07328852b2ffe6a54c13f9b20476775f557113ca31fc50a5a22b",
+      "bytes": 438271
+    },
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\C2_ADENDO_OBSERVAVEL_v2.md": {
+      "sha256": "6eb9df8379ebd6ae3cd7e0c2e0ffbd70dfe78ccb5ce3b68418c8ac51c29bb6b1",
+      "bytes": 7695
+    }
+  },
+  "wall_seconds_before_writes": 0.34435060000396334
+}

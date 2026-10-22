@@ -1,0 +1,78 @@
+{
+  "at": "2026-09-26T15:49:00.091200+00:00",
+  "status": "LOCAL_STATIC_REVIEW_ONLY_NOT_EXECUTED",
+  "scope": "T04 qualification and pilot supervisor, calibration and budget controls",
+  "files_sha256": {
+    "supervise_t04.py": "254190a0c1144039a4bbaffc76644014acb9695f76469a911da046683df19839",
+    "qualification_child.py": "7a50f4f7314868d9f3eeed14342c78f2f66785b723efb33f9a007882ae05f551",
+    "QUALIFICATION_PLAN.json": "a8637f36882b97266c76907244f68724c083d47e217b01df0cc34a63969d7cd5",
+    "QUALIFICATION_JOB.json": "f905df2f857959425e8a92ca70ebf87fd6e59ac0cc462e32a078edd939f48732"
+  },
+  "observed": {
+    "qualification_job_items": 400,
+    "unique_labels": 400,
+    "mode": "calibration",
+    "generation_sample_rate_hz": 8192,
+    "generation_maximum_frequency_hz": 4096,
+    "plan_job_hash_matches": true,
+    "plan_child_hash_matches": true,
+    "qualify_started": false,
+    "pilot_started": false,
+    "allocation_qualification_hours": 0.2,
+    "allocation_pilot_hours": 4.0
+  },
+  "findings": [
+    {
+      "id": "T04-F1",
+      "severity": "BLOCK_BEFORE_PILOT",
+      "statute": "DERIVED_FROM_CODE",
+      "location": "supervise_t04.py:50-52,73-98; run_controlled.py:41-47",
+      "diagnosis": "O controller recebe cfg.wall_budget_seconds=28800 (8h), mas a alocação T04 é 4h. O supervisor tenta SIGTERM em 4h-25s; como o controller foi iniciado em nova sessão, perda/kill do supervisor pode deixá-lo executar até o limite próprio de 8h. O teto de 4h não está incorporado ao filho responsável pela execução.",
+      "recommendation": "Amarrar o limite de 4h no controller/guard em nova árvore testemunhada ou em watchdog de processo/cgroup com evidência de término; não depender apenas do supervisor."
+    },
+    {
+      "id": "T04-F2",
+      "severity": "BLOCK_BEFORE_PILOT",
+      "statute": "DERIVED_FROM_CODE",
+      "location": "supervise_t04.py:87-99",
+      "diagnosis": "A contagem total<=28 é amostrada a cada 30s em /proc. Uma expansão transitória acima de 28 entre amostras não é impedida; cfg.sampler.workers<=28 não equivale ao total de processos incluindo controller, runner e auxiliares.",
+      "recommendation": "Aplicar limite de processos no grupo/cgroup ou outro mecanismo hard antes do lançamento; manter snapshots como auditoria adicional."
+    },
+    {
+      "id": "T04-F3",
+      "severity": "FIX_BEFORE_QUALIFICATION",
+      "statute": "DERIVED_FROM_CODE",
+      "location": "supervise_t04.py:35-46,64-65",
+      "diagnosis": "A pasta qualify/pilot é criada antes do overflow_probe e de outros preparos. Uma falha nessa janela deixa pasta sem RESULT nem recibo de falha, e a política mkdir(exist_ok=False) impede nova execução sem diagnóstico inequívoco.",
+      "recommendation": "Executar todo preflight sem efeito antes de reservar a pasta, ou gravar recibo terminal de falha/identidade em qualquer falha após a reserva; nunca apagar e repetir por suposição."
+    },
+    {
+      "id": "T04-F4",
+      "severity": "FIX_BEFORE_QUALIFICATION",
+      "statute": "DERIVED_FROM_CODE",
+      "location": "supervise_t04.py:88-99; qualification_child.py:20-30",
+      "diagnosis": "T04_ADAPTER_400_QUALIFIED depende de 400 linhas RETURNED finitas e rc0, mas não exige 400 PRECALLs pareados, ordem/rótulos iguais aos 400 itens do job nem resumo source_calls. O job atual tem 400 rótulos distintos; essa identidade ainda não é verificada no recibo de execução.",
+      "recommendation": "Exigir pareamento exato PRECALL/RETURN por ordem e rótulo com os itens pinados, sem linhas excedentes/faltantes, e conferir counters/summary antes de qualificar."
+    },
+    {
+      "id": "T04-F5",
+      "severity": "FIX_BEFORE_PILOT",
+      "statute": "DERIVED_FROM_CODE",
+      "location": "supervise_t04.py:100-108",
+      "diagnosis": "O ramo piloto grava T04_PILOT_FINISHED_REQUIRES_REVIEW mesmo com returncode != 0, fault, budget_stopped ou recibo controller ausente; o processo depois sai 2, mas um leitor do RESULT isolado verá status de término que não classifica a falha.",
+      "recommendation": "Classificar explicitamente FAILED_OR_INTERRUPTED, BUDGET_STOPPED_PARTIAL, CLEANUP_UNCONFIRMED e FINISHED_REQUIRES_REVIEW apenas com rc0, sem fault, sem stop e com CONTROLLER válido; preservar revisão posterior."
+    }
+  ],
+  "positive_controls": [
+    "checked_registration e load_authorized_configuration antes do lançamento",
+    "modo calibration conferido",
+    "alocação ligada ao hash devolvido pela configuração",
+    "pasta nova e recusa de cache piloto existente",
+    "SIGTERM encaminhado ao controller; controller possui cleanup_group para seu filho",
+    "plan hashes do job e child conferidos; 400 itens distintos atuais",
+    "blind=false e review_required_before_any_posterior_claim"
+  ],
+  "no_jobs_launched": true,
+  "no_provider_calls": true,
+  "gate_changed": false
+}

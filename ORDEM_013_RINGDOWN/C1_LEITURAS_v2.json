@@ -1,0 +1,826 @@
+{
+  "status": "C1_CORRECTED_CONDITIONAL_READINGS__PRIMARY_KERR_TEXTS_NOT_FULLY_ACCESSED",
+  "created_utc": "2026-09-22T03:05:38.161883+00:00",
+  "rows": [
+    {
+      "reading": "R-A",
+      "operator": "H=hbar*omega*N; K=tau_star*H/hbar; L_phys=sqrt(beta/tau_star)*K",
+      "clock": "tau_star,src=t_P; tau_star,det=(1+z)*t_P",
+      "clock_status": "INPUT_PRINCIPLED_IDENTIFICATION",
+      "rate_or_spectral_exponent": "beta*(1+z)*t_P*omega^2/2",
+      "canonical_scope": "EXISTING_QUADRATIC_LAW__EFFECTIVE_QNM_BRIDGE_INPUT",
+      "sources": [
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            190966
+          ],
+          "matching_text": "\"law\": \"Gamma_omega = (1/2) beta tau_star omega^2"
+        },
+        {
+          "path": "cache/casa/ringdown_dephasing_v2.py",
+          "sha256": "0793c58d6995194b8b119bd54be3883718c2b51bb6f4b5c8b71fe9720544302b",
+          "lines": [
+            141
+          ],
+          "matching_text": "delta_B = -0.5 * BETA * gm"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": null,
+      "exclusion_scope": "P1 matter not excluded; P2 local independent optical arm modes excluded. These are separate physical partitions, not a universal verdict on the theory.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 7.974066495714945e-40,
+          "gamma_over_omega": 5.085408052700647e-43,
+          "x": 3.225638341534709e-42,
+          "delta_tau": -3.225638341534709e-42,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 8.601257585634903e-40,
+          "gamma_over_omega": 5.4996140048453e-43,
+          "x": 3.518786483290034e-42,
+          "delta_tau": -3.518786483290034e-42,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "excluded_if_universal_P1_matter": false,
+      "excluded_if_universal_P2_independent_arm_light_modes": true,
+      "P2_tau_star_bound_in_tP": 0.014728200218275977,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-B",
+      "operator": "H=hbar*omega*N; K=tM*H/hbar; L_phys=sqrt(beta/tM)*K",
+      "clock": "tau_star,src=G*M_src/c^3; tau_star,det=tM",
+      "clock_status": "INPUT_SOURCE_MASS_CLOCK",
+      "rate_or_spectral_exponent": "beta*w(chi)^2/(2*tM)",
+      "canonical_scope": "EXISTING_V346_BRANCH__NOT_DERIVED_CLOCK",
+      "sources": [
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            190966
+          ],
+          "matching_text": "\"law\": \"Gamma_omega = (1/2) beta tau_star omega^2"
+        },
+        {
+          "path": "cache/casa/ringdown_dephasing_v2.py",
+          "sha256": "0793c58d6995194b8b119bd54be3883718c2b51bb6f4b5c8b71fe9720544302b",
+          "lines": [
+            141
+          ],
+          "matching_text": "delta_B = -0.5 * BETA * gm"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": null,
+      "exclusion_scope": "A source-dependent mass clock is not one universal constant. v369 G*m_atom/c^3 is invisible; G*M_Earth/c^3 is excluded. Reusing a BH mass clock in an atom would be a different, excluded common-clock assumption.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 4.934799858082798,
+          "gamma_over_omega": 0.0031471358998882088,
+          "x": 0.01996206030961212,
+          "delta_tau": -0.019571375334836067,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 4.949162972842757,
+          "gamma_over_omega": 0.003164477487939188,
+          "x": 0.02024709479869986,
+          "delta_tau": -0.019845285423424525,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-MOD",
+      "operator": "K=(2*pi/kappa)*(omega-m*Omega_H)*N+log(Z); d rho/ds=-(beta/2)[K,[K,rho]]",
+      "clock": "ds/dt=kappa/(2*pi), with Kerr kappa and positive corotating gap",
+      "clock_status": "CONJECTURE_KMS_OSCILLATOR_IDENTIFICATION",
+      "rate_or_spectral_exponent": "pi*beta*(omega-m*Omega_H)^2/kappa",
+      "canonical_scope": "NEW_MANAGEMENT_HYPOTHESIS__NOT_TGL_CANON",
+      "sources": [
+        {
+          "path": "cache/casa/TheHorizonRate.lean",
+          "sha256": "0638b438d53d6c6e356057c277817df2940a0d019ce715c8662b568000383caa",
+          "lines": [
+            48
+          ],
+          "matching_text": "structure HorizonRateWitness"
+        },
+        {
+          "path": "C2_MAPEAMENTO_ANALITICO.md",
+          "sha256": "3b1b04893605f6a01a39e18567903d0a24d678a9fc0276e01b7d99efc9df503e",
+          "lines": [
+            64
+          ],
+          "matching_text": "## 5. Massa, spin e distância"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": true,
+      "exclusion_scope": "If the same local KMS horizon period governs laboratory clocks (terrestrial Unruh-g), v369 excludes that extension. A non-universality rule is required to avoid it; the operator specifies the physical partition.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 9.681695055909639,
+          "gamma_over_omega": 0.006207738639491905,
+          "x": 0.039486392473962205,
+          "delta_tau": -0.03798644480567483,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 9.275340859829049,
+          "gamma_over_omega": 0.005961260664552078,
+          "x": 0.03824879794670742,
+          "delta_tau": -0.036839722831704835,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "physical_statute": "CONJECTURE — management hypothesis, not TGL canon",
+      "step5": "Numerical coincidence near spin 0.68, not identity with R-RAIZ-0.",
+      "spin_discriminant": [
+        {
+          "spin": 0.0,
+          "exact_qnm": [
+            0.37367168441804177,
+            -0.08896231568893546
+          ],
+          "delta_mod": -0.19178821379681749,
+          "delta_root_zero": -0.02464503197295564,
+          "delta_mod_bcw_control": -0.19090707343364302,
+          "mod_bcw_relative_error": -0.004594340526618335
+        },
+        {
+          "spin": 0.3,
+          "exact_qnm": [
+            0.4195266817638512,
+            -0.08772927189431164
+          ],
+          "delta_mod": -0.11101134014805747,
+          "delta_root_zero": -0.02796279162594528,
+          "delta_mod_bcw_control": -0.11162022599394691,
+          "mod_bcw_relative_error": 0.005484897714750359
+        },
+        {
+          "spin": 0.5,
+          "exact_qnm": [
+            0.46412302597593846,
+            -0.08563883498806331
+          ],
+          "delta_mod": -0.06820425790144337,
+          "delta_root_zero": -0.03157271689883926,
+          "delta_mod_bcw_control": -0.06976272405518305,
+          "mod_bcw_relative_error": 0.022849983295642584
+        },
+        {
+          "spin": 0.6785,
+          "exact_qnm": [
+            0.5233493217999183,
+            -0.08156361203792303
+          ],
+          "delta_mod": -0.036835071513377594,
+          "delta_root_zero": -0.03716463104553357,
+          "delta_mod_bcw_control": -0.03800667663820979,
+          "mod_bcw_relative_error": 0.03180678295701678
+        },
+        {
+          "spin": 0.8,
+          "exact_qnm": [
+            0.5860169749088701,
+            -0.07562955235606139
+          ],
+          "delta_mod": -0.01933999837526089,
+          "delta_root_zero": -0.04453642732187575,
+          "delta_mod_bcw_control": -0.019087722881020987,
+          "mod_bcw_relative_error": -0.01304423554464229
+        },
+        {
+          "spin": 0.9,
+          "exact_qnm": [
+            0.6716142721321627,
+            -0.06486923587579517
+          ],
+          "delta_mod": -0.007654321960600899,
+          "delta_root_zero": -0.058630529807715874,
+          "delta_mod_bcw_control": -0.005907587747177081,
+          "mod_bcw_relative_error": -0.22820234403710538
+        },
+        {
+          "spin": 0.95,
+          "exact_qnm": [
+            0.7463199987169307,
+            -0.05314900804598179
+          ],
+          "delta_mod": -0.0029829371905945776,
+          "delta_root_zero": -0.07789223574554446,
+          "delta_mod_bcw_control": -0.001470162055145829,
+          "mod_bcw_relative_error": -0.5071428054934046
+        }
+      ],
+      "exact_QNM_provenance": "qnm 0.4.4; fresh mode evaluation in numerical controls; old catalog values preserved",
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-RAIZ-0",
+      "operator": "K=tau_star*omega*N>=0; L_phys=sqrt(beta/tau_star)*sqrt(K); coherence 0 to 1",
+      "clock": "s=t/tau_star; tau_star cancels from the positive-root gap",
+      "clock_status": "INPUT_POSITIVE_GENERATOR_AND_VACUUM_COHERENCE",
+      "rate_or_spectral_exponent": "beta*omega/2",
+      "canonical_scope": "FINITE_ROOT_FORM_CANON__OSCILLATOR_READOUT_CONDITIONAL",
+      "sources": [
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            2311
+          ],
+          "matching_text": "def _verb_L(ONE):"
+        },
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            2838
+          ],
+          "matching_text": "so' coincide com kbar = 1/4"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": true,
+      "exclusion_scope": "EXCLUDED_IF_UNIVERSAL to the measured Sr atomic transition, as recorded in v369. Does not by itself exclude a BH-only partition or a macroscopic coherent state.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 9.432713012574997,
+          "gamma_over_omega": 0.006015650200401572,
+          "x": 0.03815684353072011,
+          "delta_tau": -0.03675441121300185,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 9.408325179393314,
+          "gamma_over_omega": 0.006015650200401571,
+          "x": 0.038489589623425705,
+          "delta_tau": -0.037063048111423726,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-RAIZ-EP4",
+      "operator": "K=tau_star*(omega0+omega*N)>=0; L_phys=sqrt(beta/tau_star)*sqrt(K)",
+      "clock": "omega0=1/[4*t_P*(1+z)] from an E_P/4 source offset",
+      "clock_status": "INPUT_BACKGROUND_E_P_OVER_4",
+      "rate_or_spectral_exponent": "beta*omega^2/[2*(sqrt(omega0+omega)+sqrt(omega0))^2]",
+      "canonical_scope": "EXISTING_V369_OFFSET_RECONCILIATION__PHYSICAL_IDENTIFICATION_INPUT",
+      "sources": [
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            2311
+          ],
+          "matching_text": "def _verb_L(ONE):"
+        },
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            2838
+          ],
+          "matching_text": "so' coincide com kbar = 1/4"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": null,
+      "exclusion_scope": "P1 matter not excluded; P2 local independent optical arm modes excluded. These are separate physical partitions, not a universal verdict on the theory.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 7.974066495714945e-40,
+          "gamma_over_omega": 5.085408052700647e-43,
+          "x": 3.225638341534709e-42,
+          "delta_tau": -3.225638341534709e-42,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 8.601257585634905e-40,
+          "gamma_over_omega": 5.499614004845301e-43,
+          "x": 3.5187864832900346e-42,
+          "delta_tau": -3.5187864832900346e-42,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "excluded_if_universal_P1_matter": false,
+      "excluded_if_universal_P2_independent_arm_light_modes": true,
+      "P2_tau_star_bound_in_tP": 0.014728200218275977,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-RAIZ-REST",
+      "operator": "Same positive-root generator with source-rest-energy background",
+      "clock": "omega0=M_src*c^2/[hbar*(1+z)]",
+      "clock_status": "CONJECTURE_REMNANT_REST_OFFSET",
+      "rate_or_spectral_exponent": "beta*omega^2/[2*(sqrt(omega0+omega)+sqrt(omega0))^2]",
+      "canonical_scope": "ATOMIC_OFFSET_TEST_CANON__REMNANT_TRANSPOSITION_NEW",
+      "sources": [
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            2311
+          ],
+          "matching_text": "def _verb_L(ONE):"
+        },
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            2838
+          ],
+          "matching_text": "so' coincide com kbar = 1/4"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": true,
+      "exclusion_scope": "EXCLUDED_IF_UNIVERSAL using the rest energy of each atomic system, recorded in v369. The BH rest-energy offset is a distinct, explicitly conditional transposition.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 3.2212925704542708e-80,
+          "gamma_over_omega": 2.0543579849372903e-83,
+          "x": 1.303064732422522e-82,
+          "delta_tau": -1.303064732422522e-82,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 3.737077989773064e-80,
+          "gamma_over_omega": 2.389474590794734e-83,
+          "x": 1.5288438215565292e-82,
+          "delta_tau": -1.5288438215565292e-82,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-RAIZ-COHERENT",
+      "operator": "Positive-root generator of N on a coherent state with mean occupation Nbar",
+      "clock": "Root clock cancels; Nbar=E_mode/(hbar*omega_src) needs an excitation model",
+      "clock_status": "CONJECTURE_OCCUPATION_AND_READOUT",
+      "rate_or_spectral_exponent": "Gamma_initial=(beta*omega/2)*E_Poisson[1/(sqrt(n+1)+sqrt(n))^2] ~ beta*omega/(8*Nbar)",
+      "canonical_scope": "NEW_COHERENT_READOUT_OF_EXISTING_ROOT_FORM",
+      "sources": [
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            2311
+          ],
+          "matching_text": "def _verb_L(ONE):"
+        },
+        {
+          "path": "C2_MAPEAMENTO_ANALITICO.md",
+          "sha256": "3b1b04893605f6a01a39e18567903d0a24d678a9fc0276e01b7d99efc9df503e",
+          "lines": [
+            64
+          ],
+          "matching_text": "## 5. Massa, spin e distância"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": null,
+      "exclusion_scope": "No universal exclusion follows from the 0-to-1 atomic test without specifying occupation and observable. Nbar=10^78 is a scenario, not a measured source energy.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 2.358178253143749e-78,
+          "gamma_over_omega": 1.503912550100393e-81,
+          "x": null,
+          "delta_tau": null,
+          "type": "INITIAL_SLOPE_ONLY"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 2.3520812948483286e-78,
+          "gamma_over_omega": 1.5039125501003927e-81,
+          "x": null,
+          "delta_tau": null,
+          "type": "INITIAL_SLOPE_ONLY"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-LIN",
+      "operator": "Schur generator D(rho_nm)=-beta*omega*abs(n-m)*rho_nm; Cauchy phase representation",
+      "clock": "Physical spectral gap omega*abs(n-m); coefficient 1 is a bridge assumption",
+      "clock_status": "CONJECTURE_LINEAR_GAP_PHYSICAL_BRIDGE",
+      "rate_or_spectral_exponent": "beta*omega",
+      "canonical_scope": "CANON_LINEAR_GAP_COMMENT__PHYSICAL_QNM_BRIDGE_NEW",
+      "sources": [
+        {
+          "path": "cache/casa/NoFullWitness.lean",
+          "sha256": "fde4ca999c40e6892d1958bee15a066786adb1363b8e3514f41eeb8b8909a654",
+          "lines": [
+            25
+          ],
+          "matching_text": "e^{−tβ·gap} < 1"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": true,
+      "exclusion_scope": "DERIVED conditional exclusion if the coefficient-1 linear law is universal on Sr: rate is twice the already-excluded root vacuum rate. This is not a new clock measurement.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 18.865426025149993,
+          "gamma_over_omega": 0.012031300400803144,
+          "x": 0.07631368706144022,
+          "delta_tau": -0.07090283063276137,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 18.816650358786628,
+          "gamma_over_omega": 0.012031300400803142,
+          "x": 0.07697917924685141,
+          "delta_tau": -0.07147694285109965,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-GLOBAL",
+      "operator": "Common total-Hamiltonian time noise on system AND reference; relational observable commuting with total H",
+      "clock": "Same time noise in system/reference; cancellation is conditional",
+      "clock_status": "INPUT_RELATIONAL_PARTITION",
+      "rate_or_spectral_exponent": "Gamma_relative=0",
+      "canonical_scope": "V369_P3_CONDITIONAL_NO_LOCAL_OBSERVABLE",
+      "sources": [
+        {
+          "path": "cache/casa/um.py",
+          "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+          "lines": [
+            191013
+          ],
+          "matching_text": "\"partition_declared\": (\"MODULAR_LAB_BRIDGE_OPEN"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": -1,
+        "quantity": "rate in inverse seconds"
+      },
+      "distance_dependence": "No independent D dependence in local rate; D enters received amplitude/SNR and z(D) in frame conversion",
+      "excluded_if_universal": null,
+      "exclusion_scope": "No local observable under the declared cancellation assumptions, hence no local exclusion. Not a statement that every measurement is insensitive to global dephasing.",
+      "measurements": [
+        {
+          "event": "GW150914_legacy_remnant",
+          "input_reference": "cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json per_series[2]; z=0 convention, not a measured redshift",
+          "gamma_per_s": 0.0,
+          "gamma_over_omega": 0.0,
+          "x": 0.0,
+          "delta_tau": -0.0,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        },
+        {
+          "event": "GW250114_public_posterior_medians",
+          "input_reference": "pSEOB public posterior; marginal medians for display, joint samples used in C4",
+          "gamma_per_s": 0.0,
+          "gamma_over_omega": 0.0,
+          "x": 0.0,
+          "delta_tau": -0.0,
+          "type": "ENSEMBLE_ADDITIVE_RATE"
+        }
+      ],
+      "propagation_example": null,
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "reading": "R-PROP",
+      "operator": "Independent local quadratic time noise on propagated spectral components in FLRW",
+      "clock": "Local source/rest clock t_P along the path; FLRW time-redshift relation",
+      "clock_status": "CONJECTURE_PROPAGATION_MODEL",
+      "rate_or_spectral_exponent": "Xi=(beta*t_P*omega_obs^2/2)*integral_0^z (1+zprime)/H(zprime) dzprime",
+      "canonical_scope": "NEW_PROPAGATION_TRANSPOSITION__NOT_A_RINGDOWN_RATE",
+      "sources": [
+        {
+          "path": "C2_MAPEAMENTO_ANALITICO.md",
+          "sha256": "3b1b04893605f6a01a39e18567903d0a24d678a9fc0276e01b7d99efc9df503e",
+          "lines": [
+            64
+          ],
+          "matching_text": "## 5. Massa, spin e distância"
+        }
+      ],
+      "compatible_with_FP5": true,
+      "FP5_scope": "No kappa or tau_star inferred from alpha/beta; physical scale supplied, or absent. This is compliance with the construction rule, not a compiled theorem about this physical identification.",
+      "units": {
+        "seconds_power": 0,
+        "quantity": "dimensionless spectral exponent"
+      },
+      "distance_dependence": "Via z(D) and path integral; not assigned a local ringdown x",
+      "excluded_if_universal": null,
+      "exclusion_scope": "Atomic limits bound the universal clock conditionally; they do not fix spatial noise correlations or the propagation readout. Source-mass clock over the whole path would be a further assumption.",
+      "measurements": [],
+      "propagation_example": {
+        "Xi": 3.010403355438708e-23,
+        "H0_km_s_Mpc": 70.0,
+        "Omega_m": 0.3,
+        "z_max": 0.0842531803391908,
+        "scope": "INPUT flat FLRW illustration; not ringdown damping"
+      },
+      "relation_to_operator_16Sep": null,
+      "physical_selection": null,
+      "units_derived_SI_mass_length_time": [
+        "0",
+        "0",
+        "0"
+      ]
+    }
+  ],
+  "source_references": {
+    "quadratic": {
+      "path": "cache/casa/um.py",
+      "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+      "lines": [
+        190966
+      ],
+      "matching_text": "\"law\": \"Gamma_omega = (1/2) beta tau_star omega^2"
+    },
+    "legacy": {
+      "path": "cache/casa/ringdown_dephasing_v2.py",
+      "sha256": "0793c58d6995194b8b119bd54be3883718c2b51bb6f4b5c8b71fe9720544302b",
+      "lines": [
+        141
+      ],
+      "matching_text": "delta_B = -0.5 * BETA * gm"
+    },
+    "root": {
+      "path": "cache/casa/um.py",
+      "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+      "lines": [
+        2311
+      ],
+      "matching_text": "def _verb_L(ONE):"
+    },
+    "root_offset": {
+      "path": "cache/casa/um.py",
+      "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+      "lines": [
+        2838
+      ],
+      "matching_text": "so' coincide com kbar = 1/4"
+    },
+    "linear": {
+      "path": "cache/casa/NoFullWitness.lean",
+      "sha256": "fde4ca999c40e6892d1958bee15a066786adb1363b8e3514f41eeb8b8909a654",
+      "lines": [
+        25
+      ],
+      "matching_text": "e^{−tβ·gap} < 1"
+    },
+    "FP5": {
+      "path": "cache/casa/TheHorizonRate.lean",
+      "sha256": "0638b438d53d6c6e356057c277817df2940a0d019ce715c8662b568000383caa",
+      "lines": [
+        48
+      ],
+      "matching_text": "structure HorizonRateWitness"
+    },
+    "FP5_scope": {
+      "path": "cache/casa/TheHorizonRate.lean",
+      "sha256": "0638b438d53d6c6e356057c277817df2940a0d019ce715c8662b568000383caa",
+      "lines": [
+        15
+      ],
+      "matching_text": "κ = F(α, β, θ_M, …)"
+    },
+    "partition": {
+      "path": "cache/casa/um.py",
+      "sha256": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+      "lines": [
+        191013
+      ],
+      "matching_text": "\"partition_declared\": (\"MODULAR_LAB_BRIDGE_OPEN"
+    },
+    "own_derivation": {
+      "path": "C2_MAPEAMENTO_ANALITICO.md",
+      "sha256": "3b1b04893605f6a01a39e18567903d0a24d678a9fc0276e01b7d99efc9df503e",
+      "lines": [
+        64
+      ],
+      "matching_text": "## 5. Massa, spin e distância"
+    }
+  },
+  "FP5_source": {
+    "path": "cache/casa/TheHorizonRate.lean",
+    "sha256": "0638b438d53d6c6e356057c277817df2940a0d019ce715c8662b568000383caa",
+    "lines": [
+      48
+    ],
+    "matching_text": "structure HorizonRateWitness"
+  },
+  "hypothesis_selected": false,
+  "clock_evidence": {
+    "path": "cache/casa/um_absoluto.json",
+    "sha256": "456f0ab149bb13f6997972dbfaf9c72a2891d744c22f04241eefa619e4953a95",
+    "key": "core.clock_test_result_v369",
+    "root_law": {
+      "kbar_zero_Gamma_per_s": 16223721861861.957,
+      "kbar_rest_mass_Gamma_per_s": 88.84332899537758,
+      "kbar_code_1_Gamma_per_s": 5.897091177105283e-16,
+      "kbar_quarter_EP_Gamma_per_s": 2.358836470842113e-15,
+      "Gamma_canonical_per_s": 2.3588364708421127e-15,
+      "Gamma_ub_Sr_95_per_s": 0.011313497001923294,
+      "units_note": "as leituras usam as unidades do proprio modulo P6 (k = E tau*/hbar, taxa em 1/tau*): tau* cancela",
+      "kbar_zero_excluded": true,
+      "kbar_rest_mass_excluded": true,
+      "code_over_canonical": 0.25000000000000006,
+      "quarter_EP_over_canonical": 1.0000000000000002
+    },
+    "alternatives": {
+      "tP_over_beta_vs_clock_5sigma_orders": 10.537947407791195,
+      "tP_over_beta_vs_best_matter_bound_orders": 7.349938736594645,
+      "unruh_g_Gamma_Sr_per_s": 8.404237275553537e+36,
+      "GM_earth_over_c3_Gamma_Sr_per_s": 6.47282814431523e+17,
+      "Gm_atom_over_c3_Gamma_Sr_per_s": 1.5657082976943127e-32,
+      "unruh_g_excluded": true,
+      "GM_earth_excluded": true,
+      "Gm_atom_invisible": true,
+      "Gm_atom_below_canonical": true
+    },
+    "linear_universal_Sr_rate_per_s": 32447443723723.914,
+    "linear_rate_is_new_measurement": false
+  },
+  "numerical_source": {
+    "path": "C1_TABLES.json",
+    "sha256": "bf5ac0d2dad2322a5b0cb1ac3b861870447e6f2ff41c1ab251e443b61a56d79a"
+  },
+  "limits": [
+    "Propagation Xi and coherent initial slope are not exponential ringdown predictions.",
+    "Source program is a frozen read-only copy; presence of a Lean declaration does not certify a new compilation.",
+    "Kerr KMS identification is conditional; primary Kay-Wald full text has not been read in this task.",
+    "Partition-specific fields govern R-A and R-RAIZ-EP4; a null aggregate is not a favorable verdict.",
+    "Kay-Wald full text access failed (403); Sewell DOI returned a redirect, not the article. No claim of reading either full article.",
+    "Bisognano-Wichmann 1975/1976 complete PDFs archived; relevant introduction, modular and theorem sections read, not every proof.",
+    "Numerical controls re-evaluate all 264 CSV rows, including the requested 99 R-A/R-RAIZ-EP4/R-RAIZ-REST rows. The 132 sub-resolution count also includes 33 exactly zero R-GLOBAL rows."
+  ],
+  "generator_sha256": "91d80e48f451fe92c7434f914582d066b3f9dd6440e9ee3dff6a97fcc78ed8aa",
+  "supersedes": "C1_LEITURAS.json",
+  "supersedes_sha256": "333a9d8b7d650affb21e63564a399fa3048e407de71f7b9d57ec4d2cd2e583b3",
+  "updated_utc": "2026-09-22T17:12:34.512406+00:00",
+  "numerical_controls": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\C1_NUMERICAL_CONTROLS.json",
+    "sha256": "886f7d87dc95280986fdc685ad127b2bf400fdf1b20fab540685db4272bb666c"
+  },
+  "primary_retrievals": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\C1_PRIMARY_RETRIEVALS.json",
+    "sha256": "b22f77abeb19f8f0ea761259cf5019507bdc8cbf5ab81c9c88302ab8dcb98c3e"
+  }
+}

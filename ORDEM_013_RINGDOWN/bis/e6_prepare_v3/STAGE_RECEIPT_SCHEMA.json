@@ -1,0 +1,321 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "E6_REVIEWED_STAGE_V2"
+    },
+    "stage": {
+      "enum": [
+        "E3.2",
+        "E3.3",
+        "TEST"
+      ]
+    },
+    "registration_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "outcome": {
+      "enum": [
+        "COMPLETED",
+        "PARTIAL",
+        "BLOCKED",
+        "UNAVAILABLE"
+      ]
+    },
+    "issued_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "artifact": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "route": {
+            "enum": [
+              "TAU220_POPULATION",
+              "TAU440_FIXED_SOURCE_FISHER",
+              "DF220_POPULATION_WIDTH_IV"
+            ]
+          },
+          "reading": {
+            "enum": [
+              "R-A",
+              "R-B",
+              "R-MOD",
+              "R-RAIZ-0",
+              "R-RAIZ-EP4",
+              "R-RAIZ-REST",
+              "R-RAIZ-COHERENT",
+              "R-LIN",
+              "R-GLOBAL",
+              "R-PROP"
+            ]
+          },
+          "data_group": {
+            "enum": [
+              "O4_HOJE",
+              "O4_CEGO",
+              "O4C_GWTC6",
+              "O5_BANDA",
+              "ET",
+              "CE"
+            ]
+          },
+          "scenario_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "metrics": {
+            "type": "object",
+            "propertyNames": {
+              "enum": [
+                "z_expected_conditional",
+                "N90_information_target",
+                "N90_count_scenario",
+                "GW250114_equivalents",
+                "delta",
+                "sigma",
+                "correction_over_sigma",
+                "rate_per_year",
+                "rate_CI",
+                "z_physical",
+                "lnB"
+              ]
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "pointer": {
+                  "type": "string",
+                  "pattern": "^(/.*)?$"
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pointer",
+                "unit"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "gate_pointer": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^(/.*)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "test_summary_pointer": {
+            "type": "string",
+            "pattern": "^(/.*)?$"
+          },
+          "calibration_receipt_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "calibration_scenario_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "route",
+          "reading",
+          "data_group",
+          "scenario_id",
+          "scope",
+          "metrics"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "predecessor": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "object",
+      "required": [
+        "kind",
+        "evidence"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "ALLOCATION_REGISTERED",
+            "EXECUTED",
+            "NO_EXECUTION"
+          ]
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "authorized_utc_pointer": {
+          "type": "string",
+          "pattern": "^(/.*)?$"
+        },
+        "started_utc_pointer": {
+          "type": "string",
+          "pattern": "^(/.*)?$"
+        },
+        "finished_utc_pointer": {
+          "type": "string",
+          "pattern": "^(/.*)?$"
+        },
+        "recorded_utc_pointer": {
+          "type": "string",
+          "pattern": "^(/.*)?$"
+        },
+        "reason_pointer": {
+          "type": "string",
+          "pattern": "^(/.*)?$"
+        },
+        "predecessor_evidence_sha256_pointer": {
+          "type": "string",
+          "pattern": "^(/.*)?$"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "NO_EXECUTION"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "recorded_utc_pointer",
+              "reason_pointer"
+            ]
+          },
+          "else": {
+            "required": [
+              "authorized_utc_pointer",
+              "started_utc_pointer",
+              "finished_utc_pointer"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "stage",
+    "registration_sha256",
+    "outcome",
+    "issued_utc",
+    "artifact",
+    "review",
+    "bindings",
+    "predecessor",
+    "timeline"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "V2 reviewed source chronology/predecessor metadata; no fabricated execution timestamps. Semantic enforcement in generator.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "enum": [
+              "E3.3",
+              "TEST"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "timeline": {
+            "required": [
+              "predecessor_evidence_sha256_pointer"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1699 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Gravitational Wave Open Science Center" />
+    <meta name="keywords" content="gravitational waves, open data" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>API Documentation</title>
+    <link
+      rel="shortcut icon"
+      href="/static/images/icons/gwosc-fav.ico"
+    />
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/solid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/fontawesome.min.js"></script>
+    <!-- Popperjs -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha256-BRqBN7dYgABqtY9Hd4ynE+1slnEw+roEPFzQ7TRRfcg="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <!-- Gwosc style and scripts -->
+    <link rel="stylesheet" href="/static/css/gwosc.css" />
+    <script src="/static/js/gwosc.js"></script>
+
+    
+<link href="/static/css/apidocs.css" rel="stylesheet" />
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+  </head>
+
+  <body>
+    <header class="primary-header">
+      <div class="brand-logo">
+        <a href="/">
+          <img src="/static/images/gwosc_logo.svg" alt="GWOSC logo" />
+        </a>
+      </div>
+      <nav class="primary-nav" role="navigation" id="top-menu">
+        <ul class="nav-list">
+          <li class="nav-list-item">
+            Get Data
+            <ul class="nav-sublist">
+              <li class="nav-sublist-item"><a href="/data/">Data Sets</a></li>
+              <li class="nav-sublist-item">
+                <a href="/eventapi/">Events and Catalogs</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/timeline/">Timelines</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-list-item">
+            Tutorials
+            <ul class="nav-sublist">
+              <li class="nav-sublist-item">
+                <a href="/path/">Learning Path</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/tutorials/">Tutorials</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/workshops/">Workshops</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-list-item">
+            Software
+            <ul class="nav-sublist">
+              <li class="nav-sublist-item">
+                <a href="/interactive/">Web Apps</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/gps/">GPS Time Converter</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/mysources/">Source Visibility Check</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/software/">Libraries</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/api/">API Documentation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-list-item">
+            About
+            <ul class="nav-sublist">
+              <li class="nav-sublist-item">
+                <a href="/about/">About GWOSC</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/acknowledgement/">Acknowledge</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/contact/">Contact Us</a>
+              </li>
+              <li class="nav-sublist-item">
+                <a href="/projects/">Papers and Projects</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <button class="mobile-nav-toggle">
+        <img
+          class="hamburger-icon"
+          src="/static/images/hamburger_menu.svg"
+          alt=""
+        />
+      </button>
+    </header>
+
+    <main>
+      <nav class="contextual-menu">
+        
+      </nav>
+      
+      <div class="main-container">
+        
+<h1 class="h1-docs">GWOSC Public API Documentation</h1>
+
+<div class="text-content">
+  <p>
+    The <a href="/">Gravitational Wave Open Science Center</a> offers a public
+    API, mostly in the form of JSON format that provides data on timeline
+    segments, catalogs, list of datasets with and without bulk strain data, and
+    single datasets.
+  </p>
+
+  <div class="gwosc-client-alert">
+    <p>
+      If you are working in a Python project, we recommend installing the
+      <a href="https://gwosc.readthedocs.io">gwosc Python client</a> to interact
+      with our API.
+    </p>
+    <pre><code>pip install gwosc</code></pre>
+  </div>
+
+  <div id="summary">
+    <h2 class="h2-docs">Summary</h2>
+    <p><strong>Timeline segments</strong></p>
+
+    <ul>
+      <li>
+        <a href="#timeline1">
+          <code
+            >/timeline/segments/all/&lt;dataset&gt;/&lt;GPS_start&gt;/&lt;duration&gt;/</code
+          >:
+        </a>
+        Return all the timelines for a given dataset, along with the intervals
+        of time (segments) in which the data for each timeline pass the
+        validation test.
+      </li>
+      <li>
+        <a href="#timeline2">
+          <code
+            >/timeline/segments/json/&lt;dataset&gt;/&lt;timelines&gt;/&lt;GPS_start&gt;/&lt;duration&gt;/</code
+          >:
+        </a>
+        Return the segments for a single timeline in the GPS time interval
+        [GPS_start, GPS_start + duration].
+      </li>
+    </ul>
+
+    <p><strong>Archive</strong></p>
+
+    <ul>
+      <li>
+        <a href="#archive-all"><code>/archive/all/json/</code>:</a>
+        Return information for all datasets.
+      </li>
+      <li>
+        <a href="#archive1">
+          <code>/archive/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code>:
+        </a>
+        Return information for all datasets in GPS interval time [GPS_start,
+        GPS_end].
+      </li>
+      <li>
+        <a href="#archive2">
+          <code
+            >/archive/links/&lt;dataset&gt;/&lt;detector&gt;/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code
+          >:
+        </a>
+        Returns information about each of the strain files in a dataset for a
+        given detector and GPS time interval.
+      </li>
+      <li>
+        <a href="#archive3">
+          <code>/archive/dataset/&lt;dataset&gt;/json/</code>:
+        </a>
+        Return information about the dataset, including bitmask information.
+      </li>
+    </ul>
+
+    <p><strong>Event Portal API</strong></p>
+    <p>
+      The Event Portal API provides data on catalogs, events and list of events.
+      For more information, read the
+      <a href="/eventportaldocs">Event Portal documentation</a> page.
+    </p>
+    <ul>
+      <li>
+        <a href="#event1"> <code>/eventapi/json/</code>: </a>
+        Return a dictionary with all the catalogs, a description and url to its
+        release page.
+      </li>
+      <li>
+        <a href="#event2"> <code>/eventapi/jsonfull/allevents/</code>: </a>
+        Return the whole list of events and their parameters with optional bulk
+        strain data release download links.
+      </li>
+      <li>
+        <a href="#event3"> <code>/eventapi/jsonfull/GWTC/</code>: </a>
+        Returns the full list of events in the cumulative GWTC catalog with
+        optional bulk strain data release download links.
+      </li>
+      <li>
+        <a href="#event4">
+          <code>/eventapi/jsonfull/&lt;cat_name&gt;/</code>:
+        </a>
+        Returns the full list of events in the <i>cat_name</i> catalog with
+        optional bulk strain data release download links.
+      </li>
+      <li>
+        <a href="#event5"> <code>/eventapi/jsonfull/query/show</code>: </a>
+        Return all events that satisfy the criteria set in the provided GET
+        parameters.
+      </li>
+      <li>
+        <a href="#event6">
+          <code
+            >/eventapi/json/&lt;cat_name&gt;/&lt;event_name&gt;/[v&lt;version&gt;/]</code
+          >:
+        </a>
+        Return a detail json for a single event <code>event_name</code>.
+      </li>
+      <li>
+        <a href="#event6">
+          <code
+            >/eventapi/json/event/&lt;event_name&gt;/[v&lt;version&gt;/]</code
+          >:
+        </a>
+        Return a detail json for a single event <code>event_name</code>. Alias
+        of the previous node.
+      </li>
+    </ul>
+  </div>
+
+  <div id="tutorial">
+    <h2 class="h2-docs">Interact with the API</h2>
+    <p>
+      Below are some examples to download json pages using commonly used web
+      tools.
+    </p>
+    <p>
+      The json information can be accessed programmatically from python, from the
+      command line using <a href="https://curl.se">curl</a>, from inside the web
+      browser as javascript client code, or directly using your web browser.
+    </p>
+    <p>
+      In these three examples we show how to download the contents at
+      <a
+        href="/timeline/segments/all/O1/1126051217/200000/"
+        >https://gwosc.org/timeline/segments/all/O1/1126051217/200000/</a
+      >
+      using <a href="https://curl.se/docs/">curl</a>, the python library
+      <a href="https://docs.python-requests.org">requests</a>, and the
+      <a href="https://drstearns.github.io/tutorials/ajax/">fetch function</a>
+      for javascript.
+    </p>
+    <p>
+      The same code can be applied to any other API node by replacing the
+      example path with any of the URLs described in this documentation.
+    </p>
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          data-bs-toggle="tab"
+          href="#tutorial-py"
+          role="tab"
+          aria-selected="true"
+          >python</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" href="#tutorial-cu" role="tab"
+          >curl</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" href="#tutorial-js" role="tab"
+          >javascript</a
+        >
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div
+        id="tutorial-py"
+        class="tab-pane fade show active"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <pre><code>
+import requests
+r = requests.get(
+  "https://gwosc.org/timeline/segments/all/O1/1126051217/200000/"
+  )
+r.json()</code></pre>
+      </div>
+      <div id="tutorial-cu" class="tab-pane fade" role="tabpanel" tabindex="0">
+        <pre><code>
+curl -o response.json https://gwosc.org/timeline/segments/all/O1/1126051217/200000/</code></pre>
+      </div>
+      <div id="tutorial-js" class="tab-pane fade" role="tabpanel" tabindex="0">
+        <pre><code>
+var url = new URL("https://gwosc.org/timeline/segments/all/O1/1126051217/200000/");
+fetch(url)
+  .then(response => response.json())
+  .then(function(response) {
+    // work with response
+    console.log(response);
+  })
+  .catch(function (err) {
+    alert(err.message);
+  });
+</code></pre>
+      </div>
+    </div>
+
+    <p>
+      For an example on how to pass GET parameters, see
+      <a href="#event5"> <code>/eventapi/jsonfull/query/show</code></a
+      >.
+    </p>
+  </div>
+
+  <h2 class="h2-docs">Timeline Segments</h2>
+
+  <div class="api-node">
+    <p class="node-url" id="timeline1">
+      <code
+        >/timeline/segments/all/&lt;dataset&gt;/&lt;GPS_start&gt;/&lt;duration&gt;/</code
+      >
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Return all the timelines for a given dataset, along with the intervals
+          of time (segments) in which the data for each timeline pass the
+          validation test.
+        </p>
+        <p>
+          The list of validated segments returned will be constrained to the
+          time interval <code>[GPS_start, GPS_start + duration]</code>
+        </p>
+        <p>
+          To find all available datasets, see
+          <a href="#archive1">
+            <code>/archive/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code>
+          </a>
+        </p>
+        <p>
+          To find the GPS time of a specific UTC time, you can use the
+          <a href="/gps/" target="_blank">GPS conversion tool</a>.
+        </p>
+      </div>
+
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          Return all the timelines for the O1 run and its validated segments
+          between times 1,126,051,217 and 1,126,251,217.
+        </p>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/timeline/segments/all/O1/1126051217/200000/"
+            target="_blank"
+            >/timeline/segments/all/O1/1126051217/200000/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;L1_NO_CW_HW_INJ&quot;: {
+    &quot;dataset&quot;: &quot;O1&quot;,
+    &quot;start&quot;: 1126051217,
+    &quot;id&quot;: &quot;L1_NO_CW_HW_INJ&quot;,
+    &quot;end&quot;: 1126251217,
+    &quot;segments&quot;: [[1126051217, 1126151760]]
+  },
+  ...
+  &quot;H1_DATA&quot;: {
+    &quot;dataset&quot;: &quot;O1&quot;,
+    &quot;start&quot;: 1126051217,
+    &quot;id&quot;: &quot;H1_DATA&quot;,
+    &quot;end&quot;: 1126251217,
+    &quot;segments&quot;: [
+      [1126073529, 1126114861], [1126121462, 1126123267], ...[1126155799, 1126166028]
+      ]
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="timeline2">
+      <code
+        >/timeline/segments/json/&lt;dataset&gt;/&lt;timeline&gt;/&lt;GPS_start&gt;/&lt;duration&gt;/</code
+      >
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Return the intervals of time (segments) in which the data for a
+          particular dataset timeline pass the validation test.
+        </p>
+        <p>
+          The list of validated segments returned will be constrained to the
+          time interval <code>[GPS_start, GPS_start + duration]</code>
+        </p>
+        <p>
+          To find all available datasets, see
+          <a href="#archive1">
+            <code>/archive/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code>
+          </a>
+        </p>
+        <p>
+          To find the list of available timelines for a dataset, see
+          <code
+            >/timeline/segments/all/&lt;dataset&gt;/&lt;GPS_start&gt;/&lt;duration&gt;/</code
+          >.
+        </p>
+        <p>
+          To find the GPS time of a specific UTC time, you can use the
+          <a href="/gps/" target="_blank">GPS conversion tool</a>.
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/timeline/segments/json/O1/L1_NO_CW_HW_INJ/1126051217/2000000/"
+            target="_blank"
+            >/timeline/segments/json/O1/L1_NO_CW_HW_INJ/1126051217/2000000/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+
+        <pre>
+{
+  &quot;dataset&quot;: &quot;O1&quot;,
+  &quot;start&quot;: 1126051217,
+  &quot;id&quot;: &quot;L1_NO_CW_HW_INJ&quot;,
+  &quot;end&quot;: 1128051217,
+  &quot;segments&quot;: [
+      [1126051217, 1126151760], [1126976280, 1128051217]
+    ]
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <h2 class="h2-docs">Archive</h2>
+
+  <div class="api-node">
+    <p class="node-url" id="archive-all">
+      <code>/archive/all/json/</code>
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>Return information for all events and runs.</p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+        <p>
+          <a class="accent-color" href="/archive/all/json/" target="_blank"
+            >/archive/all/json/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;events&quot;: {
+    &quot;151116-v1&quot;: {
+      &quot;detectors&quot;: [],
+      &quot;UTCtime&quot;: &quot;2015-11-16T22:41:48.700000&quot;,
+      &quot;GPStime&quot;: 1131748925.7,
+      &quot;DQbits&quot;: 8,
+      &quot;INJbits&quot;: 8,
+      &quot;frametype&quot;: &quot;&quot;
+    },
+    ...
+    &quot;GW150914-v3&quot;: {
+      &quot;detectors&quot;: [],
+      &quot;UTCtime&quot;: &quot;2015-09-14T09:50:45.400000&quot;,
+      &quot;GPStime&quot;: 1126259462.4,
+      &quot;DQbits&quot;: 8,
+      &quot;INJbits&quot;: 8,
+      &quot;frametype&quot;: &quot;&quot;
+    }
+  },
+  ...
+  &quot;runs&quot;: {
+    &quot;O1&quot;: {
+      &quot;detectors&quot;: [
+        &quot;H1&quot;,
+        &quot;L1&quot;
+      ],
+      &quot;UTCstart&quot;: &quot;2015-09-12T00:00:00&quot;,
+      &quot;GPSstart&quot;: 1126051217,
+      &quot;UTCend&quot;: &quot;2016-01-19T16:00:00&quot;,
+      &quot;GPSend&quot;: 1137254417,
+      &quot;DQbits&quot;: 2,
+      &quot;INJbits&quot;: 1,
+      &quot;frametype&quot;: &quot;%s_HOFT_C02&quot;
+    },
+    ...
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="archive1">
+      <code>/archive/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code>
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Return information for all events and runs in the given GPS interval
+          time [GPS_start, GPS_end].
+        </p>
+        <p>
+          To find the GPS time of a specific UTC time, you can use the
+          <a href="/gps/" target="_blank">GPS conversion tool</a>.
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+        <p>
+          <a
+            class="accent-color"
+            href="/archive/1126051217/1137254417/json/"
+            target="_blank"
+            >/archive/1126051217/1137254417/json/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;events&quot;: {
+    &quot;151116-v1&quot;: {
+      &quot;detectors&quot;: [],
+      &quot;UTCtime&quot;: &quot;2015-11-16T22:41:48.700000&quot;,
+      &quot;GPStime&quot;: 1131748925.7,
+      &quot;DQbits&quot;: 8,
+      &quot;INJbits&quot;: 8,
+      &quot;frametype&quot;: &quot;&quot;
+    },
+    ...
+    &quot;GW150914-v3&quot;: {
+      &quot;detectors&quot;: [],
+      &quot;UTCtime&quot;: &quot;2015-09-14T09:50:45.400000&quot;,
+      &quot;GPStime&quot;: 1126259462.4,
+      &quot;DQbits&quot;: 8,
+      &quot;INJbits&quot;: 8,
+      &quot;frametype&quot;: &quot;&quot;
+    }
+  },
+  &quot;runs&quot;: {
+    &quot;O1&quot;: {
+      &quot;detectors&quot;: [
+        &quot;H1&quot;,
+        &quot;L1&quot;
+      ],
+      &quot;UTCstart&quot;: &quot;2015-09-12T00:00:00&quot;,
+      &quot;GPSstart&quot;: 1126051217,
+      &quot;UTCend&quot;: &quot;2016-01-19T16:00:00&quot;,
+      &quot;GPSend&quot;: 1137254417,
+      &quot;DQbits&quot;: 2,
+      &quot;INJbits&quot;: 1,
+      &quot;frametype&quot;: &quot;%s_HOFT_C02&quot;
+    }
+    ...
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="archive2">
+      <code
+        >/archive/links/&lt;dataset&gt;/&lt;detector&gt;/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code
+      >
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Returns information about each of the strain files in a dataset for a
+          given detector and GPS time interval.
+        </p>
+        <p>
+          To find all available datasets, see
+          <a href="#archive1">
+            <code>/archive/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code>
+          </a>
+        </p>
+        <p>
+          The <i>&lt;detector&gt;</i> string should be one of "H1", "L1", "V1",
+          "G1" or "K1".
+        </p>
+        <p>
+          To find the GPS time of a specific UTC time, you can use the
+          <a href="/gps/" target="_blank">GPS conversion tool</a>.
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/archive/links/O1/L1/1126224017/1126310417/json/"
+            target="_blank"
+            >/archive/links/O1/L1/1126224017/1126310417/json/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;dataset&quot;: &quot;O1&quot;,
+  &quot;GPSstart&quot;: 1126224017,
+  &quot;GPSend&quot;: 1126310417,
+  &quot;strain&quot;: [
+    {
+      &quot;GPSstart&quot;: 1126232064,
+      &quot;UTCstart&quot;: &quot;2015-09-14T02:14:07&quot;,
+      &quot;detector&quot;: &quot;L1&quot;,
+      &quot;sampling_rate&quot;: 4096,
+      &quot;duration&quot;: 4096,
+      &quot;format&quot;: &quot;hdf5&quot;,
+      &quot;url&quot;: &quot;https://www...hdf5&quot;,
+      &quot;min_strain&quot;: -2.71368506428908e-18,
+      &quot;max_strain&quot;: 4.68890735544809e-19,
+      &quot;mean_strain&quot;: -1.07118201346881e-18,
+      &quot;stdev_strain&quot;: 3.094487852454e-19,
+      &quot;duty_cycle&quot;: 51.46484375,
+      &quot;BLRMS200&quot;: 1.83744275213856e-23,
+      &quot;BLRMS1000&quot;: 1.08227364482578e-21,
+      &quot;BNS&quot;: 56.846848301425
+    },
+    ...
+  ]
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="archive3">
+      <code>/archive/dataset/&lt;dataset&gt;/json/</code>
+    </p>
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Return information about the dataset, including bitmask information.
+        </p>
+        <p>
+          To find all available datasets, see
+          <a href="#archive1">
+            <code>/archive/&lt;GPS_start&gt;/&lt;GPS_end&gt;/json/</code>
+          </a>
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/archive/dataset/GW150914-v1/json/"
+            target="_blank"
+            >/archive/dataset/GW150914-v1/json/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;shortName&quot;: &quot;GW150914-v1&quot;,
+  &quot;version&quot;: &quot;1&quot;,
+  &quot;release&quot;: &quot;1&quot;,
+  &quot;description&quot;: &quot;https://doi.org/10.7935/K5MW2F23    The 4 kHz files...&quot;,
+  &quot;duration&quot;: 4096,
+  &quot;npoints&quot;: 16777216,
+  &quot;npointsQI&quot;: 4096,
+  &quot;dqbits&quot;: 7,
+  &quot;injbits&quot;: 5,
+  &quot;bits&quot;: [
+    {
+      &quot;mask&quot;: 1,
+      &quot;bit&quot;: 0,
+      &quot;shortName&quot;: &quot;NO_CBC_HW_INJ&quot;,
+      &quot;description&quot;: &quot;no cbc injections&quot;
+    },
+    ...
+  ]
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <h2 class="h2-docs">Event Portal</h2>
+
+  <p>
+    All of the JSON responses in the Event Portal contain most of the parameters
+    described below. See also
+    <a
+      href="https://lscsoft.docs.ligo.org/pesummary/latest/gw/parameters.html"
+      >parameter names from PE summary</a
+    >.
+  </p>
+
+  <p>
+    The <code>events</code> key has all events matching the search criteria.
+    Each key inside <code>events</code> is the name of an event followed by the
+    version number prefixed with <code>-v</code>. So for example the 3rd version
+    for <code>GW150914</code> will appear under the
+    <code>GW150914-v3</code> key.
+  </p>
+
+  <p>
+    Each version will provide parameters for the event. The parameters that
+    contain error estimation will have a corresponding
+    <code>_lower</code> and <code>_upper</code> counterparts for the lower and
+    upper limits of the 90% confidence error bar. Some parameters also contain a
+    <code>_unit</code> counterpart that denotes the physical unit in which the
+    parameter is measured.
+  </p>
+
+  <p>For example:</p>
+
+  <div>
+    <pre>
+  &quot;chirp_mass&quot;: 5.12,
+  &quot;chirp_mass_lower&quot;: 1.0,
+  &quot;chirp_mass_unit&quot;: &quot;M_sun&quot;,
+  &quot;chirp_mass_upper&quot;: 0.5,</pre
+    >
+  </div>
+
+  <p>translates to \( {\cal{M}} = {5.12}^{+0.5}_{-1.0} M_{\odot} \).</p>
+
+  <h3 class="h3-docs">JSON Response Keys</h3>
+
+  <ul>
+    <li>
+      <code>version</code>: The revision number of this entry for the event.
+    </li>
+    <li>
+      <code>gracedb_id</code>: The corresponding trigger ID in the
+      <a href="https://gracedb.ligo.org" target="_blank">GraceDB</a> database.
+    </li>
+    <li><code>GPS</code>: The GPS merger time at the geocenter in seconds.</li>
+    <li>
+      <code>catalog.shortName</code>: The release that this parameter estimation
+      belongs to.
+    </li>
+    <li><code>chi_eff</code>: The effective inspiral spin parameter.</li>
+    <li>
+      <code>chirp_mass</code>: The detector-frame chirp mass of the binary
+      defined by \( {\cal{M}} = \frac{(M_1 M_2)^{3/5}}{(M_1 + M_2)^{1/5}} \) in
+      units of solar mass.
+    </li>
+    <li>
+      <code>chirp_mass_source</code>: The source-frame chirp mass of the binary
+      as measured in the source frame \( {\cal{M}}_{\circ}={\cal M}(1 + z) \) in
+      units of solar mass.
+    </li>
+    <li>
+      <code>commonName</code>: The name of the event as used in the literature,
+      e.g. GW150914.
+    </li>
+    <li>
+      <code>far</code>: The False Alarm Rate of the detection in events per
+      year.
+    </li>
+    <li>
+      <code>p_astro</code>: The probability of astronomical origin, assuming a
+      compact binary.
+    </li>
+    <li>
+      <code>final_mass_source</code>: The source-frame remnant mass estimated
+      using the spins evolved to the ISCO frequency in units of solar mass.
+    </li>
+    <li>
+      <code>total_mass_source</code>: The source-frame combined mass of the
+      primary and secondary masses in units of solar mass.
+    </li>
+    <li>
+      <code>jsonurl</code>: The URL for a json detail of the event (see
+      <code>/eventapi/json/event/&lt;event_name&gt;/</code>).
+    </li>
+    <li>
+      <code>luminosity_distance</code>: The luminosity distance to the source in
+      Mpc.
+    </li>
+    <li>
+      <code>mass_1_source</code>: The source mass of the heavier object in the
+      binary in units of solar mass.
+    </li>
+    <li>
+      <code>mass_2_source</code>: The source mass of the lighter object in the
+      binary in units of solar mass.
+    </li>
+    <li>
+      <code>network_matched_filter_snr</code>: The matched filter signal to
+      noise ratio in the gravitational wave detector network.
+    </li>
+    <li>
+      <code>redshift</code>: The redshift depending on specified cosmology.
+    </li>
+    <li><code>reference</code>: The URL to the relevant documentation page.</li>
+    <li>
+      <code>strain</code>: A list of strain files associated with this version
+      of the event. The options differ in format, sampling rate, duration and
+      detector.
+
+      <ul>
+        <li>
+          <code>GPSstart</code>: The GPS time of the first sample in the file.
+        </li>
+        <li>
+          <code>detector</code>: A two-letter string denoting the detector
+          (<code>H1</code>, <code>L1</code>, <code>V1</code>, etc).
+        </li>
+        <li>
+          <code>duration</code>: One of <code>32</code>s, <code>4096</code>s.
+        </li>
+        <li>
+          <code>format</code>: One of <code>gwf</code>, g-zipped
+          <code>txt</code>, and <code>hdf5</code>.
+        </li>
+        <li>
+          <code>sampling_rate</code>: One of <code>4096</code> Hz or
+          <code>16384</code> Hz.
+        </li>
+        <li><code>url</code>: Contains the URL to download the strain file.</li>
+      </ul>
+    </li>
+    <li>
+      <code>parameters</code>: Contains a dictionary of parameter sets for
+      different analyses. The keys of the dictionary are the name of each
+      analysis. Each parameter set contains a list of parameters specific to the
+      analysis pipeline. The following keys are common to all pipelines:
+
+      <ul>
+        <li>
+          <code>data_url</code>: URL to download source file for this pipeline.
+        </li>
+        <li>
+          <code>date_added</code>: The date this pipeline was added to the
+          database.
+        </li>
+        <li>
+          <code>is_preferred</code>: A boolean <code>true</code>/<code
+            >false</code
+          >
+          that marks if this pipeline is the preferred one for the parameter
+          estimations.
+        </li>
+        <li>
+          <code>pipeline_type</code>: the string <code>pe</code> for parameter
+          estimation pipelines or <code>search</code> for search pipelines.
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="api-node">
+    <p class="node-url" id="event1"><code>/eventapi/json/</code></p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Return a dictionary with all the catalogs, a description and url to
+          its release page.
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/eventapi/json/"
+            target="_blank"
+          >
+            /eventapi/json/
+          </a>
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;GWTC-1-confident&quot;: {
+    &quot;description&quot;: &quot;Confident detections...&quot;,
+    &quot;url&quot;: &quot;https://www.../GWTC-1-confident&quot;
+  },
+  ...
+  &quot;O3_IMBH_marginal&quot;: {
+    &quot;description&quot;: &quot;O3 IMBH marginal candidates...&quot;,
+    &quot;url&quot;: &quot;https://www.../O3_IMBH_marginal&quot;
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="event2">
+      <code>/eventapi/jsonfull/allevents/</code>
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Return the whole list of events and their parameters with optional
+          bulk strain data release download links.
+        </p>
+        <p>
+          Additional output formats are available replacing
+          <code>jsonfull</code> by <code>json</code>, <code>ascii</code> or
+          <code>csv</code> in the url.
+        </p>
+        <p>
+          i.e. <code>/eventapi/ascii/allevents/</code>,
+          <code>/eventapi/csv/allevents/</code>.
+        </p>
+      </div>
+
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/eventapi/jsonfull/allevents/"
+            target="_blank"
+          >
+            /eventapi/jsonfull/allevents/
+          </a>
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;events&quot;: {
+    &quot;151008-v1&quot;: {
+      &quot;GPS&quot;: 1128348574.5,
+      &quot;catalog.shortName&quot;: &quot;GWTC-1-marginal&quot;,
+      &quot;chi_eff&quot;: null,
+      &quot;chi_eff_lower&quot;: null,
+      &quot;chi_eff_unit&quot;: null,
+      &quot;chi_eff_upper&quot;: null,
+      &quot;chirp_mass&quot;: 5.12,
+      &quot;chirp_mass_lower&quot;: null,
+      &quot;chirp_mass_source&quot;: null,
+      &quot;chirp_mass_source_lower&quot;: null,
+      &quot;chirp_mass_source_unit&quot;: null,
+      &quot;chirp_mass_source_upper&quot;: null,
+      &quot;chirp_mass_unit&quot;: &quot;M_sun&quot;,
+      &quot;chirp_mass_upper&quot;: null,
+      &quot;commonName&quot;: &quot;151008&quot;,
+      &quot;far&quot;: 10.17,
+      &quot;far_lower&quot;: null,
+      &quot;far_unit&quot;: &quot;yr^-1&quot;,
+      &quot;far_upper&quot;: null,
+      &quot;final_mass_source&quot;: null,
+      &quot;final_mass_source_lower&quot;: null,
+      &quot;final_mass_source_unit&quot;: null,
+      &quot;final_mass_source_upper&quot;: null,
+      &quot;jsonurl&quot;: &quot;https://www.../151008/v1&quot;,
+      &quot;luminosity_distance&quot;: null,
+      &quot;luminosity_distance_lower&quot;: null,
+      &quot;luminosity_distance_unit&quot;: null,
+      &quot;luminosity_distance_upper&quot;: null,
+      &quot;mass_1_source&quot;: null,
+      &quot;mass_1_source_lower&quot;: null,
+      &quot;mass_1_source_unit&quot;: null,
+      &quot;mass_1_source_upper&quot;: null,
+      &quot;mass_2_source&quot;: null,
+      &quot;mass_2_source_lower&quot;: null,
+      &quot;mass_2_source_unit&quot;: null,
+      &quot;mass_2_source_upper&quot;: null,
+      &quot;network_matched_filter_snr&quot;: 8.8,
+      &quot;network_matched_filter_snr_lower&quot;: null,
+      &quot;network_matched_filter_snr_unit&quot;: &quot;&quot;,
+      &quot;network_matched_filter_snr_upper&quot;: null,
+      &quot;redshift&quot;: null,
+      &quot;redshift_lower&quot;: null,
+      &quot;redshift_unit&quot;: null,
+      &quot;redshift_upper&quot;: null,
+      &quot;reference&quot;: &quot;https://doi.org/10.7935/82H3-HH23&quot;,
+      &quot;strain&quot;: [
+        {
+          &quot;GPSstart&quot;: 1128348559,
+          &quot;detector&quot;: &quot;H1&quot;,
+          &quot;duration&quot;: 32,
+          &quot;format&quot;: &quot;gwf&quot;,
+          &quot;sampling_rate&quot;: 16384,
+          &quot;url&quot;: &quot;https://...gwf&quot;
+        },
+        ...
+        {
+          &quot;GPSstart&quot;: 1128346527,
+          &quot;detector&quot;: &quot;L1&quot;,
+          &quot;duration&quot;: 4096,
+          &quot;format&quot;: &quot;txt&quot;,
+          &quot;sampling_rate&quot;: 4096,
+          &quot;url&quot;: &quot;https://...txt.gz&quot;
+        }
+      ],
+      &quot;total_mass_source&quot;: null,
+      &quot;total_mass_source_lower&quot;: null,
+      &quot;total_mass_source_unit&quot;: null,
+      &quot;total_mass_source_upper&quot;: null,
+      &quot;version&quot;: 1
+    },
+    ...
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="event3"><code>/eventapi/jsonfull/GWTC/</code></p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Returns the full list of events in the cumulative Grativational Wave
+          Transient Catalog with optional bulk strain data release download
+          links.
+        </p>
+        <p>
+          Additional output formats are available replacing <code>json</code> by
+          <code>json</code>, <code>ascii</code> or <code>csv</code> in the url.
+        </p>
+        <p>
+          i.e. <code>/eventapi/ascii/allevents/</code>,
+          <code>/eventapi/csv/allevents/</code>.
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/eventapi/jsonfull/GWTC/"
+            target="_blank"
+            >/eventapi/jsonfull/GWTC/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;events&quot;: {
+    &quot;GW150914-v3&quot;: {
+      &quot;GPS&quot;: 1126259462.4,
+      ...
+      "strain": [
+      {
+        "GPSstart": 1126259447,
+        "detector": "H1",
+        "duration": 32,
+        "format": "gwf",
+        "sampling_rate": 16384,
+        "url": "https://...gwf"
+      },
+      ...
+      ],
+      &quot;version&quot;: 3
+    },
+    ...
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="event4">
+      <code>/eventapi/jsonfull/&lt;cat_name&gt;/</code>
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Returns the full list of events in the <i>cat_name</i> catalog with
+          optional bulk strain data release download links.
+        </p>
+        <p>
+          Additional output formats are available replacing <code>json</code> by
+          <code>json</code>, <code>ascii</code> or <code>csv</code> in the url.
+        </p>
+        <p>
+          i.e. <code>/eventapi/ascii/allevents/</code>,
+          <code>/eventapi/csv/allevents/</code>.
+        </p>
+        <p>
+          To find a list of all available catalogs, see
+          <a href="#event1"><code>/eventapi/json/</code></a>
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/eventapi/jsonfull/GWTC-1-marginal/"
+            target="_blank"
+            >/eventapi/jsonfull/GWTC-1-marginal/</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;events&quot;: {
+    &quot;151008-v1&quot;: {
+      &quot;GPS&quot;: 1128348574.5,
+      "strain": [
+      {
+        "GPSstart": 1128348559,
+        "detector": "H1",
+        "duration": 32,
+        "format": "gwf",
+        "sampling_rate": 16384,
+        "url": "https://...gwf"
+      },
+      ...
+      ],
+      ...
+      &quot;version&quot;: 1
+    },
+    ...
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="event5">
+      <code>/eventapi/jsonfull/query/show</code>
+    </p>
+
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>
+          Return all events that satisfy the criteria set in the
+          <code>GET</code> parameters.
+        </p>
+        <p>
+          Additional output formats are available replacing
+          <code>jsonfull</code> by <code>json</code>, <code>ascii</code> or
+          <code>csv</code> in the url.
+        </p>
+        <p>
+          i.e. <code>/eventapi/ascii/allevents/</code>,
+          <code>/eventapi/csv/allevents/</code>.
+        </p>
+        <p>
+          Prepend the GET parameters with <code>min-</code> and
+          <code>max-</code>
+          to delimit the search range of that parameter.
+        </p>
+        <p>Append GET parameters with &#38;.</p>
+        <h3 class="h3-docs">GET Parameters</h3>
+        <p>
+          <code>name-contains</code>: A string that the event (or an alias) may
+          contain.
+        </p>
+        <p><code>release</code>: A comma-separated list of catalogs.</p>
+        <p>
+          <code>gps-time</code>: The GPS time interval enclosing the events.
+        </p>
+        <p>
+          <code>lastver</code>: Boolean to show (=true) or hide (=false)
+          previous versions of the events.
+        </p>
+        <p>
+          <code>mass-1-source</code>: The source mass of the heavier compact
+          object in the merger, as measured in the source frame.
+        </p>
+        <p>
+          <code>mass-2-source</code>: The source mass of the lighter compact
+          object in the merger, as measured in the source frame.
+        </p>
+        <p>
+          <code>network-matched-filter-snr</code>: The network Signal to Noise
+          Ratio of the Matched Filtering.
+        </p>
+        <p>
+          <code>luminosity-distance</code>: The luminosity distance to the
+          source.
+        </p>
+        <p>
+          <code>chi-eff</code>: Spin parameter indicating the effective inspiral
+          spin.
+        </p>
+        <p>
+          <code>total-mass-source</code>: The total mass of the binary as
+          measured in the source frame.
+        </p>
+        <p>
+          <code>chirp-mass</code>: The chirp mass of the binary defined by \(
+          {\cal M}= \frac{(M_1 M_2)^{3/5}}{(M_1 + M_2)^{1/5}} \).
+        </p>
+        <p>
+          <code>chirp-mass-source</code>: The chirp mass of the binary as
+          measured in the source frame \( {\cal M}_{\circ}={\cal M}(1 + z) \).
+        </p>
+        <p><code>redshift</code>: The calculated redshift.</p>
+        <p>
+          <code>far</code>: The False Alarm Rate of the detection in events per
+          year.
+        </p>
+        <p>
+          <code>p-astro</code>: The probability of astronomical origin, assuming
+          a compact binary.
+        </p>
+        <p>
+          <code>final-mass-source</code>: The mass of the remnant compact object
+          after merger, assuming a binary black hole model, and measured in the
+          source frame.
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/eventapi/jsonfull/query/show?min-mass-1-source=2&max-mass-1-source=10&max-chi-eff=0.5"
+            target="_blank"
+            >/eventapi/jsonfull/query/show?min-mass-1-source=2&amp;max-mass-1-source=10&amp;max-chi-eff=0.5</a
+          >
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;events&quot;: {
+    &quot;GW190425-v2&quot;: {
+      &quot;GPS&quot;: 1240215503.0,
+      ...
+      &quot;version&quot;: 2
+    },
+    ...
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+
+    <div class="getparams-example">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-bs-toggle="tab" href="#getparams-py"
+            >python</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" href="#getparams-cu">curl</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" href="#getparams-js"
+            >javascript</a
+          >
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="getparams-py" class="tab-pane fade show active">
+          <pre>
+import requests
+payload = {
+  "min-mass-1-source": 2,
+  "max-mass-1-source": 10,
+  "max-chi-eff": 0.5,
+}
+r = requests.get(
+  "https://gwosc.org/eventapi/jsonfull/query/show",
+  params=payload,
+  )
+r.json()</pre
+          >
+        </div>
+        <div id="getparams-cu" class="tab-pane fade">
+          <pre>
+curl -o response.json \
+"https://gwosc.org/eventapi/jsonfull/query/show\
+?min-mass-1-source=2&max-mass-1-source=10&max-chi-eff=0.5"</pre
+          >
+        </div>
+        <div id="getparams-js" class="tab-pane fade">
+          <pre>
+var search_params = {
+  "min-mass-1-source" : 2,
+  "max-mass-1-source" : 10,
+  "max-chi-eff" : 0.5
+};
+var url = new URL("https://gwosc.org/eventapi/jsonfull/query/show");
+for (let key in search_params) { url.searchParams.append(key, search_params[key]); }
+fetch(url)
+  .then(function(response) {
+      segments = response.json();
+  })
+  .catch(function(err) {
+      alert(err.message);
+  });</pre
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="api-node">
+    <p class="node-url" id="event6">
+      <code>
+        /eventapi/json/&lt;cat_name&gt;/&lt;event_name&gt;/[v&lt;version&gt;/]
+      </code>
+      <code>/eventapi/json/event/&lt;event_name&gt;/[v&lt;version&gt;/]</code>
+    </p>
+    <div class="row api-row">
+      <div class="col-md-6 api-info">
+        <p>Return a detail json for a single event <code>event_name</code>.</p>
+        <p>
+          If <code>v&lt;version&gt;</code> is omitted, it will automatically return
+          the latest version.
+        </p>
+        <p>
+          If <code>&lt;cat_name&gt;</code> is provided, it will return the event
+          version corresponding to <code>cat_name</code>.
+        </p>
+        <p>
+          If both <code>v&lt;version&gt;</code> and <code>&lt;cat_name&gt;</code> are
+          provided but are incompatible, it will return a 404 page.
+        </p>
+        <p>
+          To find a list of all available catalogs, see
+          <a href="#event1"><code>/eventapi/json/</code></a>
+        </p>
+        <p>
+          To find a list of all available <code>v&lt;event_name&gt;</code> and
+          <code>v&lt;version&gt;</code>, see
+          <a href="#event2"><code>/eventapi/json/allevents/</code></a
+          >.
+        </p>
+      </div>
+      <div class="col-md-6 api-example">
+        <h3 class="h3-docs">Example:</h3>
+
+        <p>
+          <a
+            class="accent-color"
+            href="/eventapi/json/O1_O2-Preliminary/GW150914/v1/"
+            target="_blank"
+            >/eventapi/json/O1_O2-Preliminary/GW150914/v1/
+          </a>
+        </p>
+
+        <h3 class="h3-docs">Returns:</h3>
+        <p><i>(truncated response)</i></p>
+        <pre>
+{
+  &quot;events&quot;: {
+    &quot;GW150914-v1&quot;: {
+      &quot;GPS&quot;: 1126259462.4,
+      &quot;catalog.shortName&quot;: &quot;O1_O2-Preliminary&quot;,
+      &quot;chi_eff&quot;: null,
+      &quot;chi_eff_lower&quot;: null,
+      &quot;chi_eff_unit&quot;: null,
+      &quot;chi_eff_upper&quot;: null,
+      &quot;chirp_mass&quot;: null,
+      &quot;chirp_mass_lower&quot;: null,
+      &quot;chirp_mass_source&quot;: null,
+      &quot;chirp_mass_source_lower&quot;: null,
+      &quot;chirp_mass_source_unit&quot;: null,
+      &quot;chirp_mass_source_upper&quot;: null,
+      &quot;chirp_mass_unit&quot;: null,
+      &quot;chirp_mass_upper&quot;: null,
+      &quot;commonName&quot;: &quot;GW150914&quot;,
+      &quot;far&quot;: null,
+      &quot;far_lower&quot;: null,
+      &quot;far_unit&quot;: null,
+      &quot;far_upper&quot;: null,
+      &quot;final_mass_source&quot;: null,
+      &quot;final_mass_source_lower&quot;: null,
+      &quot;final_mass_source_unit&quot;: null,
+      &quot;final_mass_source_upper&quot;: null,
+      &quot;jsonurl&quot;: &quot;https://...&quot;,
+      &quot;luminosity_distance&quot;: null,
+      &quot;luminosity_distance_lower&quot;: null,
+      &quot;luminosity_distance_unit&quot;: null,
+      &quot;luminosity_distance_upper&quot;: null,
+      &quot;mass_1_source&quot;: null,
+      &quot;mass_1_source_lower&quot;: null,
+      &quot;mass_1_source_unit&quot;: null,
+      &quot;mass_1_source_upper&quot;: null,
+      &quot;mass_2_source&quot;: null,
+      &quot;mass_2_source_lower&quot;: null,
+      &quot;mass_2_source_unit&quot;: null,
+      &quot;mass_2_source_upper&quot;: null,
+      &quot;network_matched_filter_snr&quot;: null,
+      &quot;network_matched_filter_snr_lower&quot;: null,
+      &quot;network_matched_filter_snr_unit&quot;: null,
+      &quot;network_matched_filter_snr_upper&quot;: null,
+      &quot;parameters&quot;: {},
+      &quot;redshift&quot;: null,
+      &quot;redshift_lower&quot;: null,
+      &quot;redshift_unit&quot;: null,
+      &quot;redshift_upper&quot;: null,
+      &quot;reference&quot;: &quot;https://doi.org/10.7935/K5MW2F23&quot;,
+      &quot;strain&quot;: [
+        {
+          &quot;GPSstart&quot;: 1126259446,
+          &quot;detector&quot;: &quot;H1&quot;,
+          &quot;duration&quot;: 32,
+          &quot;format&quot;: &quot;gwf&quot;,
+          &quot;sampling_rate&quot;: 16384,
+          &quot;url&quot;: &quot;https://...gwf&quot;
+        },
+        ...
+      ],
+      &quot;total_mass_source&quot;: null,
+      &quot;total_mass_source_lower&quot;: null,
+      &quot;total_mass_source_unit&quot;: null,
+      &quot;total_mass_source_upper&quot;: null,
+      &quot;version&quot;: 1
+    }
+  }
+}
+</pre
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+      
+      <div id="toast-box"></div>
+    </main>
+
+    <footer>
+      <div class="footer-container container">
+        <div class="sponsor-list">
+          <div class="sponsor-row">
+            <div class="sponsor-icon-container sponsor-nsf">
+              <a href="https://www.nsf.gov/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/nsf_logo.png"
+                  alt="NSF logo"
+                />
+              </a>
+            </div>
+            <div class="sponsor-icon-container sponsor-infn">
+              <a href="https://home.infn.it/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/infn_logo.png"
+                  alt="INFN logo"
+                />
+              </a>
+            </div>
+            <div class="sponsor-icon-container sponsor-cnrs">
+              <a href="https://www.cnrs.fr/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/cnrs_logo.png"
+                  alt="CNRS logo"
+                />
+              </a>
+            </div>
+            <div class="sponsor-icon-container sponsor-ego">
+              <a href="https://www.ego-gw.it/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/ego_logo.png"
+                  alt="EGO logo"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="sponsor-row">
+            <div class="sponsor-icon-container sponsor-lsc">
+              <a href="https://www.ligo.org/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/lsc_logo.png"
+                  alt="LSC logo"
+                />
+              </a>
+            </div>
+            <div class="sponsor-icon-container sponsor-ligo">
+              <a href="https://www.ligo.caltech.edu/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/ligo_logo.png"
+                  alt="LIGO logo"
+                />
+              </a>
+            </div>
+            <div class="sponsor-icon-container sponsor-virgo">
+              <a href="https://www.virgo-gw.eu/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/virgo_logo.png"
+                  alt="Virgo logo"
+                />
+              </a>
+            </div>
+            <div class="sponsor-icon-container sponsor-kagra">
+              <a href="https://gwcenter.icrr.u-tokyo.ac.jp/en/" target="_blank">
+                <img
+                  class="sponsor-icon"
+                  src="/static/images/footer_icons/monotone/kagra_logo.png"
+                  alt="Kagra logo"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p>Other Related Sites</p>
+          <ul class="useful-sites">
+            <li>
+              <a class="accent-color" href="/detector_status/" target="_blank"
+                >Detector Status</a
+              >
+            </li>
+            <li>
+              <a
+                class="accent-color"
+                href="https://gracedb.ligo.org"
+                target="_blank"
+                >Low Latency Alerts</a
+              >
+            </li>
+            <li>
+              <a
+                class="accent-color"
+                href="https://zenodo.org/communities/ligo-virgo-kagra/"
+                target="_blank"
+                >Analysis Results on Zenodo.org</a
+              >
+            </li>
+            <li>
+              <a
+                class="accent-color"
+                href="https://ask.igwn.org/"
+                target="_blank"
+                >The gravitational wave community forum
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-acknowledge">
+          <a
+            class="accent-color"
+            rel="license"
+            href="https://creativecommons.org/licenses/by/4.0/"
+          >
+            <img
+              id="cc-logo"
+              alt="Creative Commons License"
+              src="/static/images/by.png"
+              width="100px"
+              ;
+            />
+          </a>
+          <p>
+            Data released under a
+            <a
+              class="accent-color"
+              href="https://creativecommons.org/licenses/by/4.0/"
+              >CC BY 4.0 License</a
+            >.
+          </p>
+          <p>
+            Please follow
+            <a class="accent-color" href="/acknowledgement/"
+              >acknowledgement guidelines</a
+            >.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

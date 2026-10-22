@@ -1,0 +1,13 @@
+[REAL — reaproveitamento C1; sem seleção física]
+
+Existia: tgl_ringdown_prediction.py:16 (β em runtime), :48 (BCW), :73 (prediction), :109 (R-MOD); C1_LEITURAS.json; QNM_GRID.json; C4_CATALOG_220.json; C7_INDEPENDENT/tables/event_reading_predictions.csv.
+Reusado: as funções de predição e os insumos congelados; a biblioteca qnm 0.4.4 já disponível. Novo: controles em spin, dimensões derivadas, reprodução CSV, perfis de constantes, bandeiras separadas P1/P2 e adendo de limites bibliográficos.
+Motivo: atender as correções medidas de F1 sem apagar a v1 nem transformar hipótese modular em identificação física.
+Não pago: identificação física do estado Kerr; leitura integral de Kay–Wald/Sewell; calibração da transferência realização→posterior.
+Axiomas: N/A — sem Lean.
+
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\C1_LEITURAS.json — SHA256 333a9d8b7d650affb21e63564a399fa3048e407de71f7b9d57ec4d2cd2e583b3
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\C1_LEITURAS_v4.json — SHA256 126270a896d8589870954b209155f26a8b08295839b31e0e9a6e28e512621980
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\bis\C1_NUMERICAL_CONTROLS_v2.json — SHA256 a5c943922993fdef3d09a8b898feb4210586e360121c32da4857ddd644e3edec
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\C1_ADENDO_CORRECOES_013BIS_v3.md — SHA256 a688b542e5d4d1c6be356d2196f6bf9661609bc9b0c50c7ea3b0152fe3e2feed
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\tgl_ringdown_prediction.py — SHA256 fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652

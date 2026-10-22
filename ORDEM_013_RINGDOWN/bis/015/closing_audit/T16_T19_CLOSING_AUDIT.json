@@ -1,0 +1,90 @@
+{
+  "schema_version": "ORDEM015_T16_T19_CLOSING_AUDIT_V1",
+  "audited_utc": "2026-09-27T11:03:30Z",
+  "scope": "Documentary read-only audit of official order sections T16-T19, operator opening, searched ratification/audited receipt, and budget v12. No blind PE or external-data verification.",
+  "source_sha256": {
+    "Chatgpt/TUNEL/PARA_CHATGPT/ORDEM_015_continuacao_do_ringdown_rumo_ao_5sigma.md": "c903681d01eec5ed8d55b7fe69e061a79b3a7b73eecede8f895cfb2d127f75a3",
+    "Chatgpt/TUNEL/DO_CHATGPT/ENTREGA_015_ABERTURA_operador.md": "dbd0a307438dda2969a21baf64665d54e8b70fb84c3fe10f8c233ddeac736610",
+    "Chatgpt/TUNEL/DO_CHATGPT/ENTREGA_015_ORCAMENTO_015_v12.md": "3ff303900d8d96f20c9bce70ca10364dfaa15f2fb7482875c90b3edec0fa4f04",
+    "Chatgpt/ORDEM_013_RINGDOWN/ORCAMENTO_015_v12.json": "e54fb7a0de69e2ba834ef805c26dc103496d3e6f2cec09583e3d646dff39fd1d",
+    "Chatgpt/ORDEM_013_RINGDOWN/bis/015/E2_PE_JOBS_ALLOCATION_015_V4.json": "4ff0d4e17fac4ccc6d3eb0ffafa4ea1cec2b2c31ea26f4bcd7e6a167f84ac4b2",
+    "Chatgpt/ORDEM_013_RINGDOWN/bis/015/t04/branch_f/RESULT.json": "3ed4951d27fb27d8b17a9443a93eed39b8c0a6d53263e0d4cd66f5b2e3c7e7c8",
+    "Chatgpt/ORDEM_013_RINGDOWN/bis/015/t10/T10_FINAL_RESULT.json": "689806ca4917868b066f8b5ffd0dcd9df5aad2470cef3c341adc18b010c72fce"
+  },
+  "budget_v12": {
+    "registered_utc": "2026-09-27T10:42:22.689357+00:00",
+    "authorized_machine_hours": 35.01724298083333,
+    "spent_machine_hours": 13.221245983976575,
+    "remaining_machine_hours_derived": 21.795996996856758,
+    "remaining_formula": "authorized_machine_hours - accounting.machine_hours_spent",
+    "t16_allocated_machine_hours": 0.0,
+    "t16_actual_machine_hours": 0.0,
+    "unallocated_machine_hours": 0.0,
+    "statute": "[REAL] snapshot in v12; remaining balance does not authorize reallocation or execution"
+  },
+  "states": {
+    "T16": {
+      "state": "NÃO_PAGO",
+      "statute": "[REAL] documentary gate; [DERIVED] cost",
+      "missing_or_unmet_prerequisites_verified": [
+        "Operator opening expressly records no V1.1 ratification; no later ratification was found among ENTREGA_015*.md in the DO_CHATGPT directory.",
+        "Operator opening expressly records no decision for external seed custody or formal acceptance of procedural blindness; no later decision was found in the same scoped notes.",
+        "Required PARA_CHATGPT/RECIBO_015_V1_1_AUDITADA.md was absent from the checked directory.",
+        "T10_FINAL_RESULT.json has sigma_c=null, reports no event-bin sigma(c), and leaves all ten readings red or underpowered.",
+        "T04 branch F RESULT.json is diagnostic, sigma_eligible=false; v12 branch C/H posteriors are unaccepted. T04 convergence for blind PE is not established by these receipts.",
+        "E2_PE_JOBS_ALLOCATION_015_V4.json contains only GW250114 calibration jobs and downloads={}; no blind-event strain/license receipts or per-event generation fmax are registered there. Public strain availability was not checked externally."
+      ],
+      "estimated_machine_hours_three_events_derived": [7.8, 9.9],
+      "estimated_machine_hours_one_event_derived": [2.6, 3.3],
+      "cost_formula": "3 x (2.6 to 3.3 hours/event), from official order T16",
+      "arithmetic_note": "The order's prose also says 7.8-9.8 h; 3 x 3.3 = 9.9 h. Budget v12 uses 9.9 h estimate. Neither is measured runtime.",
+      "target_5sigma": "not purchased by this exercise"
+    },
+    "T17": {
+      "state": "NÃO_PAGO",
+      "statute": "[INPUT] no-run order; [DERIVED] ceiling-based cost, convergence open",
+      "missing_or_unmet_prerequisites_verified": [
+        "Official T17 says NÃO RODA; no T17 machine-hour allocation appears among v12 items."
+      ],
+      "r_lin_and_r_mod_raiz_cpu_hours_derived": [1512, 9672],
+      "r_lin_and_r_mod_raiz_formula": "(12 to 62 injections) x (63 to 78 CPU-h/PE) x 2 families; endpoint pairings 12x63x2 and 62x78x2",
+      "r_lin_and_r_mod_raiz_wall_days_derived_at_22_to_24_workers": [2.625, 18.318181818181817],
+      "r_b_cpu_hours_derived": [134820, 166920],
+      "r_b_formula": "2140 PE x (63 to 78 CPU-h/PE)",
+      "r_b_wall_days_derived_at_22_to_24_workers": [234.0625, 316.1363636363636],
+      "cost_source": "Official order T17, ceiling of 3e6 calls; estimated CPU cost, not observed completion"
+    },
+    "T18": {
+      "state": "NÃO_PAGO",
+      "statute": "[REAL] opening lacks authorizing line; [INPUT] conditional cost",
+      "missing_or_unmet_prerequisites_verified": [
+        "ENTREGA_015_ABERTURA_operador.md has no T18 authorization line.",
+        "It also has no operator line defining extension of Phi_total to w(a) != -1, the blocking prerequisite for stage 2a.",
+        "The official order places stage 2b only after stage 2a."
+      ],
+      "stage_2a_machine_hours_estimated": [1, 3],
+      "stage_2a_bench_hours_estimated": [2, 4],
+      "stage_2b_bench_days_estimated": 1,
+      "cost_source": "Official order T18; no execution or expenditure verified"
+    },
+    "T19": {
+      "state": "AWAITING_DATA",
+      "statute": "[INPUT] official order; external availability not independently checked",
+      "missing_or_unmet_prerequisites_verified": [
+        "Official order requires public GW250207_115645 strain plus negative census, GWTC-6/O4c, and O5 for the data route; it marks those conditions pending.",
+        "The bilateral/kappa voids reading depends on external data; the order marks lens amendment V10 AWAITING_DATA."
+      ],
+      "machine_hours": null,
+      "cost_source": "No executable machine-cost estimate for T19 in audited order/v12; unknown, not zero"
+    }
+  },
+  "checks": {
+    "order_sha_matches_budget_order_sha": true,
+    "jobs_sha_matches_budget_jobs_sha": true,
+    "budget_sha_matches_witness": true,
+    "seed_or_private_directory_opened": false,
+    "blind_pe_executed": false,
+    "originals_or_memories_modified": false,
+    "limitation": "Absence claims are limited to the named receipt path and scoped operator notes; this audit did not inspect private/seed directories or external GWOSC availability."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PRESPECIFIED_BEFORE_LOCAL_POSTERIOR_INSPECTION__NOT_BLIND",
+  "date": "2026-09-21",
+  "scope": "Posterior comparison only; not permission or registration to read on-source strain",
+  "known_information": "Published central GW250114 constraints and older catalogue/V2 values were already read. Selection and hypotheses are NOT BLIND.",
+  "readings": ["R-A", "R-B", "R-MOD", "R-PROP", "R-GLOBAL", "R-RAIZ-0", "R-RAIZ-REST", "R-RAIZ-EP4", "R-RAIZ-COHERENT", "R-LIN"],
+  "primary": {"record": 17018009, "product": "gw250114_pseobnr/posterior_samples.h5", "parameters": "joint fractional df220,dtau220; actual key names and prior must be inspected"},
+  "secondary": "pyRing TEOB 220 variants; robustness only, not independent evidence",
+  "catalogues": [21454847, 17461225],
+  "duplicate_policy": "One primary likelihood contribution per physical event, prefer current cumulative release; never multiply the GW250114 standalone likelihood again if included in catalogue",
+  "exclusion_rule": {"relative_BF_threshold": 100, "ln_B_reading_over_GR_max": "-log(100)", "GR_credible_region": 0.95, "both_conditions_required": true, "if_GR_outside_same_region": "INCONCLUSIVE_SYSTEMATICS", "scope": "Operational decision rule, not universal statistical definition of exclusion"},
+  "KDE": {"dimensions": "joint df,dtau plus spin when prediction depends on it; mass/redshift added only for non-negligible mass-dependent corrections", "bandwidth_primary": "Scott", "bandwidth_robustness_multipliers": [0.7, 1.0, 1.4], "bootstrap_replicates": 200, "tail_policy": "No strong exclusion from unsupported KDE tails; require stability and effective local support"},
+  "priors": {"point_models": "Retain common nuisance prior from release; divide by actual broad-model deformation prior at each restricted point", "free_tau": ["uniform source tau in [tP,tM_source]", "log-uniform source tau in [tP,tM_source]"], "mass_dependent_bounds": "Conditional prior given source mass, explicitly normalized", "missing_prior": "FAIL_CLOSED_NO_BAYES_FACTOR"},
+  "spin_dependent_model_identity": "Z_L/Z_broad = integral p_broad(eta,delta=g_L(eta)|d)/pi_broad(delta=g_L(eta)|eta) d eta, for matched nuisance prior. Bayes ratio is ratio of these integrals, NOT a posterior mean of pointwise conditional ratios.",
+  "small_correction_policy": "Below 1e-6 report analytic scale and numerical indistinguishability at posterior resolution; no false precision in logB",
+  "unresolved_mapping": "Propagation, global noise and coherent-root cases require their own physical observables; no arbitrary deterministic damping assignment",
+  "permitted_verdicts": ["NOT_EXCLUDED", "EXCLUDED_IN_READING", "INCONCLUSIVE_SYSTEMATICS", "AWAITING_DATA", "OPEN_PHYSICAL_MAPPING"],
+  "confirmation": false
+}

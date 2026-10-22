@@ -1,0 +1,17 @@
+{
+  "status": "PRE_REGISTERED_SOFTWARE_REPAIR_BEFORE_SECOND_INFORMED_FIT",
+  "branch": "T10_A",
+  "supersedes_failed_attempt_result_sha256": "f28ae9a84bd731a75eff6f7e257a19983b74047e8d71e28434005be72dbd68d9",
+  "failed_attempt_error": "ValueError('Each parameter must have the same number of requested values.')",
+  "failed_attempt_produced_posterior": false,
+  "v1_script_sha256": "7e3552f31c606a81c779ec1f867f3317a432d59c4639226ded8e4340f3009574",
+  "v2_script_sha256": "544b4759146c8df4236d46dd15c264cf20ad85e2a8eb1d15551529d26622ca5a",
+  "repair": "Replace Bilby MultivariateGaussian joint-prior adapter by two independent standard-normal latent variables mapped through the Cholesky factor of the same preregistered 2x2 covariance. The induced physical Mf,af prior is the same joint Gaussian; the scientific prior, seed, injection, noise, other eight parameter priors, likelihood and stopping rule do not change.",
+  "latent_mapping": "[Mf,af]^T = mu + chol(cov) [zMf,zAf]^T; zMf,zAf independently standard Gaussian",
+  "physical_support": "outside Mf>0 and 0<=af<1 gets negative-infinite likelihood; no clipping",
+  "new_variant": "informed_latent_v2",
+  "output_directory": "fit_informed_latent_v2",
+  "machine_ceiling_hours": 1.5,
+  "gate_eligible": false,
+  "no_new_physical_parameter_or_reading": true
+}

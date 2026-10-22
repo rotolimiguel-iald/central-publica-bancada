@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Independent Kerr post-result review",
+  "type": "object",
+  "required": [
+    "status",
+    "blocking_findings",
+    "input_hashes",
+    "convergence_review",
+    "cost_review",
+    "posterior_analysis",
+    "limitations",
+    "scientific_execution"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "WAITING_COMPLETION_RECEIPT",
+        "NO_ACCEPTED_POSTERIOR_ANALYSIS",
+        "REVIEW_PENDING",
+        "NONBLIND_CALIBRATION_REVIEWED_WITH_LIMITATIONS"
+      ]
+    },
+    "blocking_findings": {
+      "type": "array"
+    },
+    "input_hashes": {
+      "type": "object"
+    },
+    "convergence_review": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "cost_review": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "posterior_analysis": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scientific_execution": {
+      "const": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "WAITING_COMPLETION_RECEIPT",
+              "NO_ACCEPTED_POSTERIOR_ANALYSIS",
+              "REVIEW_PENDING"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "posterior_analysis": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

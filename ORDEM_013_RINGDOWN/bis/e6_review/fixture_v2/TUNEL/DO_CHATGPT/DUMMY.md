@@ -1,0 +1,1 @@
+registro_sha256: e1e4fdd62b86a9a94f210607d2c9ab63b43e1f3c5b81d4dc4421ad3df46e0f5b

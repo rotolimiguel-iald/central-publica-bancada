@@ -1,0 +1,3 @@
+[REAL — correção de ambiente dentro da tentativa T07(a)]
+
+A primeira invocação do runner pré-registrado usou `/opt/lal_env/bin/python -B` e terminou rc=1 antes de ler dados ou executar ajuste: `ModuleNotFoundError: No module named 'pycbc'`. O log original é `T07_RUN.log`; nenhum resultado por leitura foi criado. Foi encontrado o ambiente preexistente `/opt/pycbc_env/bin/python`, que importa PyCBC 2.11.0, lalsimulation 6.2.1, SciPy e NumPy com rc=0. O runner e a pré-inscrição não foram alterados. A repetição usa somente esse interpretador existente, em modo `-B`, dentro do mesmo teto T07; não instala nada em `/opt`.

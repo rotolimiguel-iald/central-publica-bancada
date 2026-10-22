@@ -1,0 +1,107 @@
+{
+  "status": "REGISTERED_NONBLIND_NONLINEAR_CONSTRUCTIVE_CONTROL",
+  "date_utc": "2026-09-22T04:23:50.048178+00:00",
+  "sources": [
+    {
+      "name": "reference",
+      "mass": 72.0,
+      "q": 1.1818181818181819,
+      "s1": 0.05,
+      "s2": -0.03,
+      "inclination": 0.6,
+      "phase": 0.37,
+      "psi": 0.0
+    },
+    {
+      "name": "source_64",
+      "mass": 64.0,
+      "q": 1.5,
+      "s1": 0.15,
+      "s2": 0.05,
+      "inclination": 1.0,
+      "phase": 0.8,
+      "psi": 0.22
+    },
+    {
+      "name": "source_90",
+      "mass": 90.0,
+      "q": 2.0,
+      "s1": 0.25,
+      "s2": -0.15,
+      "inclination": 0.9,
+      "phase": 1.2,
+      "psi": 0.45
+    }
+  ],
+  "families": [
+    "SEOBNRv4HM",
+    "IMRPhenomXPHM"
+  ],
+  "reading": "R-B",
+  "injected_a": 1.0,
+  "recovery_a": 0.0,
+  "reference_SNR": 40.0,
+  "primary_PSD": "O5",
+  "holdout_metric_PSD": "O4",
+  "generation_sample_rate": 8192,
+  "verification_sample_rate": 16384,
+  "sample_rate": 2048,
+  "n_samples": 410,
+  "start": "10 tM after intrinsic complex-22 amplitude peak, fixed throughout each fit",
+  "peak": "Face-on isolated 22 amplitude; independent of source inclination and reference phase",
+  "unknowns": [
+    "log total mass",
+    "log mass ratio",
+    "spin1z",
+    "spin2z",
+    "inclination",
+    "orbital reference phase",
+    "peak shift in ms",
+    "distance",
+    "common polarization"
+  ],
+  "amplitude_treatment": "Two real shared network columns exactly represent distance and one common polarization rotation; coefficients profiled by least squares. No independent harmonic/detector fitting coefficients.",
+  "search": "Derivative-free bounded Powell over seven coordinates, maxfev350; start from best of original source and prior registered candidate. Local search only; previous peak convention preserved separately",
+  "local_half_widths": [
+    0.12,
+    0.3,
+    0.3,
+    0.3,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "conditioning_steps": [
+    0.01,
+    0.02,
+    0.02,
+    0.02,
+    0.05,
+    0.05,
+    0.03
+  ],
+  "physical_bounds": "q in [1,4], spin1/spin2 in [-.8,.8], inclination in [.03,pi-.03]; intersect with local box",
+  "stopping": "ftol1e-7,xtol1e-4; retain best explicit candidate even on evaluation-budget exit, never call it global optimum",
+  "acceptance": "Report full residual norms and rate-doubling stability. A candidate residual below one at SNR40 is a constructive local degeneracy only if the high-rate residual remains below one. No universal exclusion rule or Bayes factor.",
+  "source_fidelity": "Same whole-harmonic 22/44 damping as prior C5; other modes unchanged. A conditional readout, not a unique TGL overtone law.",
+  "no_noise_added": true,
+  "no_target_strain_read": true,
+  "no_C6_change": true,
+  "result_limits": [
+    "no posterior integration",
+    "no varied-source noise coverage",
+    "no blind discovery",
+    "not complete astrophysical inference"
+  ],
+  "hashes": {
+    "nonlinear_coherent_recovery.py": "8c05dfa7d5e71fb17634ce4514290710a5208c1486472034e368161f8fb4dfa4",
+    "coherent_imr_model.py": "4d9e568816c3b47e8e59b2401334a1a66541247fa80ed36495949aa4f5bca497",
+    "tgl_ringdown_prediction.py": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+    "QNM_GRID.json": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24",
+    "REGISTRO_C6.json": "ded00f09b5010d622b67b4ea4e559a216818f578440a0f60772130174ececf14",
+    "C5_SOURCE_UNCERTAINTY_SUMMARY.json": "45e0d7aa63c591b29c4ad1cea9b4da8d3e16c77f2821df7f8ef5e93e1fd894f9",
+    "PREVIOUS_CANDIDATES.json": "a91955406ebca4b968232e0464bf45dcfe236f9f2ce29bc859ecda519f91426d",
+    "cache/recolored_noise/O4_noise.npz": "03aa894405014ac2599ffa760b9b14d10410a68f60a962625dc4eaf4bffcd528",
+    "cache/recolored_noise/O5_noise.npz": "aaf09f21792c7fb42cd98a47aaa0e646894ce4ddb0b5ccb63d757da3de410c09"
+  }
+}

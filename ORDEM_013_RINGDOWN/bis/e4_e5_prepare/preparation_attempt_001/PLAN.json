@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "status": "PREPARED_NOT_SCIENTIFICALLY_EXECUTED_AWAITING_E2",
+  "created_utc": "2026-09-22T20:30:57.371317+00:00",
+  "input_manifest_sha256": "ed774783c061a2c5e43be5c2e2f615d6de5e9122b5481534b37f67c1fd11bcb2",
+  "readings": [
+    "R-A",
+    "R-B",
+    "R-MOD",
+    "R-RAIZ-0",
+    "R-RAIZ-EP4",
+    "R-RAIZ-REST",
+    "R-RAIZ-COHERENT",
+    "R-LIN",
+    "R-GLOBAL",
+    "R-PROP"
+  ],
+  "variants": [
+    "ONLY_220_DEFORMED",
+    "BOTH_220_440_DEFORMED"
+  ],
+  "E4": {
+    "fisher": {
+      "reference_source": {
+        "mass_detector_Msun": 68.1,
+        "spin": 0.68,
+        "redshift": 0.0,
+        "statute": "INPUT_FIXED_REFERENCE_NOT_GW250114_MEDIAN"
+      },
+      "f_min_Hz": 20.0,
+      "f_max_Hz": 2048.0,
+      "df_Hz": 0.125,
+      "isolated_440_snr_grid": [
+        10,
+        20,
+        40,
+        80,
+        200,
+        600
+      ],
+      "snr_routes": [
+        "ISOLATED_440_GRID",
+        "AMPLITUDE_FIXA_INPUT"
+      ],
+      "normal_90_quantile": 1.2815515655446004,
+      "operational_delta_min": 1e-12,
+      "QNM": "Pinned 440 cubic spline, no extrapolation; CODATA2018_IAU2015; beta=alpha_CODATA2018*sqrt(e) runtime",
+      "profiles": [
+        "FIXED_SOURCE_FREQUENCY",
+        "FREE_FREQUENCY_FIXED_TAU_GR"
+      ],
+      "amplitude_phase": "Marginalized with Schur complement in analytical causal damped-mode Fourier Fisher",
+      "mass_spin": "Fixed; no claim to remove single-mode free-M/chi degeneracy",
+      "snr_transport": "Two INPUT routes: equal isolated rho440 per PSD compares shapes; same reference source with amplitude A=rho440_O4_INPUT/||h||_O4 propagates rho440_PSD=rho440_O4_INPUT*||h||_PSD/||h||_O4. No network IMR conversion.",
+      "counts": "N50=25/z_local^2 [INPUT E(Z)=5]; N90conditional=(5+1.2815515655446004)^2/z_local^2 for known unit-variance one-sided Gaussian Z. Neither is calibrated significance or realistic yield. Zero or |delta|<1e-12 => null operational targets with OPEN reason.",
+      "same_source_detector_gain": "Computed future from analytical GR440 norm in each reference PSD, fixed source and amplitude across PSDs",
+      "same_source_gain_status": "INPUT_O4_MODE_SNR_ANCHOR_NOT_MEASURED_ASTROPHYSICAL_AMPLITUDE",
+      "R_PROP_and_COHERENT": "Explicit OPEN rows, no universal exponential rate; R-GLOBAL zero by construction",
+      "R_MOD_scope": "CONJECTURE_RESTRICTED_KMS_AND_MODULAR_CLOCK__NO_GLOBAL_KERR_HARTLE_HAWKING"
+    },
+    "posterior": {
+      "path": "cache/public/17018009/extracted/TGR_companion_S250114ax_results/gw250114_pseobnr/posterior_samples.h5",
+      "sha256": "b9971bcd7d72fdd4a176483990854ae917992ad15cd793d15840dc2fe824a627",
+      "label": "pSEOBNRv5PHM",
+      "N": 40776,
+      "event": "GW250114",
+      "statute": "NONBLIND_CALIBRATION_ALREADY_AUDITED",
+      "mass_frame": "final_mass_non_evolved detector frame, as audited C4; redshift retained sample by sample",
+      "prior_strings": {
+        "domega220": "Uniform(minimum=-0.8, maximum=2.0, name='domega220', latex_label='domega220', unit=None, boundary=None)",
+        "dtau220": "Uniform(minimum=-0.8, maximum=2.0, name='dtau220', latex_label='dtau220', unit=None, boundary=None)",
+        "domega440": "Uniform(minimum=-0.8, maximum=4.0, name='domega440', latex_label='domega440', unit=None, boundary=None)",
+        "dtau440": "Uniform(minimum=-0.8, maximum=4.0, name='dtau440', latex_label='dtau440', unit=None, boundary=None)"
+      },
+      "bounds": {
+        "domega220": [
+          -0.8,
+          2.0
+        ],
+        "dtau220": [
+          -0.8,
+          2.0
+        ],
+        "domega440": [
+          -0.8,
+          4.0
+        ],
+        "dtau440": [
+          -0.8,
+          4.0
+        ]
+      },
+      "bandwidth_multipliers": [
+        0.7,
+        1.0,
+        1.3
+      ],
+      "ESS_min": 100,
+      "estimators": [
+        "Paired-residual 2D Scott KDE with three bandwidths, full sample",
+        "Independent 2D Gaussian full moments, no KDE bandwidth"
+      ],
+      "estimand": "log p_residual(0)-log p_free_sector(0); same paired sample, other mode marginalized identically",
+      "range_scope": "Estimator sensitivity, not CI or frequentist coverage. Gaussian moments do not solve hard-prior boundaries.",
+      "boundaries": "Report marginal quantiles, edge fractions and unbounded KDE mass outside each original prior; no silent boundary renormalization.",
+      "global_prior_and_nuisance_normalization": "OPEN; uniform tested-coordinate ratio=1 does not by itself prove global evidence contract",
+      "lnB": null,
+      "KDE4D_evidence": false,
+      "joint_220_440_lnB": null,
+      "double_count": "Do not multiply 220 and 440 marginal diagnostics from the same event",
+      "sample_selection": "All 40776 paired draws; no thinning, seed, bandwidth selection or sample filtering"
+    },
+    "fixed_free_robustness": {
+      "status": "OPEN_NO_MATCHED_FIXED440_PRODUCT_IDENTIFIED_IN_AUDITED_C4_SCHEMA",
+      "available": "GW250114 single archived pSEOBNRv5PHM posterior with both 220 and 440 free; 32/33 catalog products fix higher-mode deviations in other events",
+      "not_comparable": [
+        "Different events do not isolate the fixed/free440 effect",
+        "Conditioning the free440 posterior near zero is not an independent fixed440 recovery",
+        "The one LVK injection compares injected mode content, while both recovery products have free440"
+      ],
+      "comparison_executed": false,
+      "new_PE_required_for_matched_fixed_free": "OPEN; no such PE authorized here"
+    },
+    "output_scope": "All ten readings and both physical variants in forecasts. 220 and 440 sector diagnostics explicitly separate. Joint220+440 evidence and matched fixed/free comparison remain OPEN when unsupported."
+  },
+  "E5": {
+    "models": [
+      {
+        "name": "BROWNIAN_PHASE",
+        "statute": "INPUT_ORDER_ROUTE_IV_UNRAVELING",
+        "law": "dphi=sqrt(2*Gamma) dW; E exp(i phi)=exp(-Gamma*t)",
+        "recovered_frequency_scatter": null,
+        "limitation": "White frequency noise has no finite pointwise frequency variance; finite-window estimator transfer required"
+      },
+      {
+        "name": "CAUCHY_PHASE",
+        "statute": "ALTERNATIVE_CONDITIONAL_UNRAVELING_CONTROL",
+        "law": "Symmetric stable increments with scale Gamma*dt; same first-harmonic ensemble decay",
+        "variance": null,
+        "limitation": "No finite increment variance; cannot reuse Gaussian sigma_pop or Brownian transfer"
+      },
+      {
+        "name": "POISSON_COHERENT_OCCUPATION",
+        "statute": "CONJECTURE_EFFECTIVE_OSCILLATOR",
+        "law": "F(t)=sum_n Pois(n;N) exp[-beta*omega*t/(2*(sqrt(n+1)+sqrt(n))^2)]",
+        "limitation": "Poisson is occupation weights here, not a Poisson time-jump process. N/amplitude mapping and fitting window OPEN; not single exponential"
+      },
+      {
+        "name": "COMPOUND_POISSON_TIME_JUMPS",
+        "statute": "OPEN_MODEL_NOT_DEFINED_BY_OCCUPATION_SUM",
+        "law": "Characteristic exponent lambda*(E exp(iJ)-1) if chosen",
+        "limitation": "Jump law/intensity and estimator transfer not supplied; no sigma or event rate assigned"
+      },
+      {
+        "name": "DETERMINISTIC_ENSEMBLE",
+        "statute": "DERIVED_CONDITIONAL_MEAN",
+        "law": "h_GR*exp(-Gamma*t); ensemble delta_f=0",
+        "intrinsic_phase_jitter": 0,
+        "limitation": "Zero intrinsic jitter in this deterministic model does not imply zero recovered scatter or bias"
+      }
+    ],
+    "statistic": {
+      "name": "HETEROSCEDASTIC_GAUSSIAN_PROFILE_LRT_SYNTHETIC_INPUT",
+      "variance": "v_i=sigma_i^2+sigma_sys^2+q, q=sigma_jit_rec^2>=0; total intrinsic sigma_pop^2=sigma_sys^2+q",
+      "null": "q=0 i.e. sigma_pop=sigma_sys; not null total width zero unless sigma_sys=0 lower-bound scenario",
+      "alternative": "q>0; common mean mu profiled under both hypotheses",
+      "loglike": "-0.5 sum_i[log(2*pi*v_i)+(y_i-mu)^2/v_i]",
+      "threshold": 25.0,
+      "crossing": "LRT>25.0",
+      "p_value": null,
+      "calibration": "Separate heterogeneous route-IV null using registered real sigma_i and empirical tail/upper limit; not scalar matched-filter null",
+      "five_sigma_claim": false,
+      "odds_not_LRT": "Bayes odds additionally require model/prior normalization; no equivalence assumed"
+    },
+    "full_posterior": {
+      "observable": "sigma_pop of delta_f220, all full paired posterior samples, never population of medians",
+      "prepared_identity": "logscore=sum_i log(mean_s Normal(df_is|mu,sigma_pop)/pi_i(df_is))",
+      "uniform_prior": "pi_i=1/W_i; factor W_i retained per event. Ratio=1 only where identical constant tested priors cancel in a specified comparison.",
+      "global_contract": "OPEN nuisance-prior compatibility, complete support, selection alpha(Lambda) and calibration; not a calibrated hierarchical likelihood",
+      "point_null": "sigma_pop=0 is not approximated by a silently chosen small Gaussian; needs separately registered density/delta-null method",
+      "execution": "Utility prepared; no full-posterior population fit in this package; principal owns nuisance"
+    },
+    "information": {
+      "formula": "I(q=0)=0.5*sum_i(sigma_i^2+sigma_sys^2)^(-2) in Gaussian model; relative weight=1/sigma_i^4 only when sigma_sys=0",
+      "known_mean_scope": "Local expected information; fitted-mean finite-N effects and tails need calibration",
+      "sigma_input": "Archived full posterior std_ddof1 of df, a planning proxy for measurement error",
+      "no_double_weight": "Do not multiply an already heteroscedastic log likelihood by sigma^-4 again",
+      "sample_policy": "All E0.3 eligible events; no posterior-width cut. Archived31/33/10/18 are calibration scenarios, not E2 test selection."
+    },
+    "secondary": {
+      "statute": "PROPOSED_INPUT_FOR_E2_TO_PIN",
+      "statistic": "Fraction |delta_f_hat_i-mu_hat|>3*sigma_i; report uncentered |delta_f_hat_i|>3*sigma_i alongside as order wording",
+      "center": "Profile common mean; its fit and estimator must also be reproduced under null",
+      "event_estimator": "Posterior mean proposed diagnostic; not substitute for primary full-posterior inference",
+      "interpretation": "Sensitivity to heavy tails/jumps, not unique evidence of Poisson/Cauchy law",
+      "multiplicity": "Secondary only; separately calibrated after fixed selection, with false-alarm allocation decided in E2; no sigma claim"
+    },
+    "jitter_transfer": {
+      "status": "OPEN",
+      "sigma_jit_rec": null,
+      "needed": "Brownian injections through registered recovery pipeline, finite window, source convention and seeds; future E3 owner, not executed here"
+    },
+    "sigma_sys": {
+      "status": "OPEN",
+      "delta_f_floor": null,
+      "needed": "GR two-family calibration in delta_f channel; C5 a/dtau bias is not delta_f sigma_sys"
+    },
+    "N_targets": "LOWER_BOUND_SCENARIOS_UNTIL_TRANSFER_AND_SYSTEMATICS; no physical detection promise",
+    "historical_sigma_limit": {
+      "value": 0.0243,
+      "level": 0.9,
+      "MLE": 0,
+      "statute": "DECLARADO_IN_ORDER_NONBLIND_EXPLORATORY_NOT_RECOMPUTED_HERE"
+    },
+    "archived_information_populations": [
+      "GWTC5_31",
+      "GWTC5_33",
+      "GWTC3_10",
+      "GWTC3_18"
+    ],
+    "scientific_reading_selected": false
+  },
+  "activation": {
+    "required_status": "AUTHORIZED_BY_PRINCIPAL_AFTER_E2",
+    "allowed_task": "E4_E5_DETERMINISTIC_ARCHIVED_CALIBRATION_ONLY",
+    "pins": [
+      "PLAN.json",
+      "INPUT_MANIFEST.json",
+      "SCHEMA.json",
+      "deterministic_e4_e5.py"
+    ],
+    "E2_field": "e4_e5_preparation_pins must equal activation package_sha256 map",
+    "witness": "Existing outgoing tunnel note includes actual E2 registration SHA256; registration and witness separately hashed",
+    "run": "python -B -O deterministic_e4_e5.py --execute --authorization <principal_activation.json>",
+    "authorization_is_not_generated_here": true,
+    "new_test_data_allowed": false,
+    "dependencies": "Existing WSL /opt/lal_env numpy/scipy/h5py; not imported/tested scientifically during preparation",
+    "output": "Only own runs/<new_run_id>/DETERMINISTIC_DIAGNOSTICS.json plus RESULT_RECEIPT.json; wall and process CPU recorded; require no existing directory; source pins rechecked before and after"
+  },
+  "not_executed": [
+    "Fisher440",
+    "QNM predictions",
+    "posterior value access",
+    "density fitting",
+    "population inference",
+    "MC/null",
+    "PE",
+    "waveform generation",
+    "test strain",
+    "E2 registration"
+  ]
+}

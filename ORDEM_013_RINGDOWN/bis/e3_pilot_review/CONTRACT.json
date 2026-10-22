@@ -1,0 +1,233 @@
+{
+  "status": "PREPARATION_ONLY_NOT_RESULT_REVIEW",
+  "job": "GW250114_PILOT",
+  "event": "GW250114_082203",
+  "mode": "calibration",
+  "registration_sha256": "e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416",
+  "job_config": {
+    "event": "GW250114_082203",
+    "mode": "calibration",
+    "variant": "220_plus_440_free",
+    "privacy_mode": "procedural_same_host",
+    "fixed_deformation_parameters": {},
+    "remnant_conversion_INPUT": {
+      "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+      "cosmology_name": "Planck18_external_INPUT",
+      "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+      "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+      "cosmology_parameters": {
+        "H0_km_s_Mpc": 67.66,
+        "Om0": 0.30966,
+        "Tcmb0_K": 2.7255,
+        "Neff": 3.046,
+        "m_nu_eV": [
+          0.0,
+          0.0,
+          0.06
+        ],
+        "Ob0": 0.04897
+      },
+      "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+      "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+      "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+      "created_utc": "2026-09-22T20:35:47.646490+00:00",
+      "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+    },
+    "output_directory_name": "E3_PSEOB_PILOT_V1",
+    "label": "GW250114_pSEOBv4HM_PA_pilot",
+    "event_GPS": 1420878141.2,
+    "segment_start_GPS": 1420878129.0,
+    "duration_s": 16,
+    "sample_rate_hz": 4096,
+    "minimum_frequency_hz": 20.0,
+    "maximum_frequency_hz": 1024.0,
+    "reference_frequency_hz": 20.0,
+    "psd_duration_s": 256,
+    "psd_segment_s": 8,
+    "offsource_exclusion_s": 16.0,
+    "onsource_roll_off_s": 0.2,
+    "quality_required": [
+      "DATA",
+      "CBC_CAT1",
+      "CBC_CAT2",
+      "CBC_CAT3"
+    ],
+    "injection_flags_required": [
+      "NO_CBC_HW_INJ",
+      "NO_BURST_HW_INJ",
+      "NO_DETCHAR_HW_INJ",
+      "NO_STOCH_HW_INJ"
+    ],
+    "detectors": [
+      "H1",
+      "L1"
+    ],
+    "data": {
+      "H1": {
+        "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/on_source/H-H1_GWOSC_O4b_4KHZ_R1-1420877824-4096.hdf5",
+        "onsource_sha256": "db0b394ff10573f0e86b484adc59f176307c53fdc5f5ba5109a898f712674889",
+        "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+        "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+      },
+      "L1": {
+        "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/on_source/L-L1_GWOSC_O4b_4KHZ_R1-1420877824-4096.hdf5",
+        "onsource_sha256": "d95a6ebf274800f48fd966caf9198d6e2f91928d50d339c0c592defee06e82c1",
+        "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+        "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+      }
+    },
+    "priors": {
+      "mass_1": {
+        "kind": "Uniform",
+        "minimum": 15,
+        "maximum": 100
+      },
+      "mass_2": {
+        "kind": "Uniform",
+        "minimum": 10,
+        "maximum": 100
+      },
+      "mass_ratio": {
+        "kind": "Constraint",
+        "minimum": 0.125,
+        "maximum": 1
+      },
+      "chi_1": {
+        "kind": "Uniform",
+        "minimum": -0.99,
+        "maximum": 0.99
+      },
+      "chi_2": {
+        "kind": "Uniform",
+        "minimum": -0.99,
+        "maximum": 0.99
+      },
+      "luminosity_distance": {
+        "kind": "Uniform",
+        "minimum": 100,
+        "maximum": 2000
+      },
+      "theta_jn": {
+        "kind": "Sine",
+        "minimum": 0,
+        "maximum": 3.141592653589793
+      },
+      "phase": {
+        "kind": "Uniform",
+        "minimum": 0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "ra": {
+        "kind": "Uniform",
+        "minimum": 0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "dec": {
+        "kind": "Cosine",
+        "minimum": -1.5707963267948966,
+        "maximum": 1.5707963267948966
+      },
+      "psi": {
+        "kind": "Uniform",
+        "minimum": 0,
+        "maximum": 3.141592653589793,
+        "boundary": "periodic"
+      },
+      "geocent_time": {
+        "kind": "Uniform",
+        "minimum": 1420878141.05,
+        "maximum": 1420878141.3500001
+      },
+      "dtau220": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 2
+      },
+      "dtau440": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 4
+      },
+      "domega220": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 2
+      },
+      "domega440": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 2
+      }
+    },
+    "wall_budget_seconds": 28800,
+    "sampler": {
+      "seed": 132203,
+      "workers": 24,
+      "nlive": 512,
+      "dlogz": 0.1,
+      "walks": 50,
+      "maxcall": 3000000,
+      "minimum_posterior_samples": 1000,
+      "minimum_effective_samples": 100
+    },
+    "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+    "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration"
+  },
+  "source_pins": {
+    "RINGDOWN_5SIGMA_V1.json": "e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416",
+    "bis\\e2_code\\pe_runner.py": "6712610a0392abe629b6ea5b5f4fa5a45b2c8b9a3dfb123c952513f18cef68fa",
+    "bis\\e2_code\\run_controlled.py": "7b5dd6484014942ee5fdd9fc3e529eaf05f9dffe463f35cdd10a01bdcf86334d",
+    "bis\\e2_code\\remnant_conversion.py": "87604de5c8fa7139cd6aa4d0c4fde09476105769735e44d476f3b9a55aa11bc1",
+    "bis\\e2_code\\pseob_source.py": "2c9a053177bd2671da1879f60343434b3605b3274994b42d68aa50cd68f4ff2f"
+  },
+  "fields": {
+    "PHYSICAL": [
+      "mass_1",
+      "mass_2",
+      "chi_1",
+      "chi_2",
+      "luminosity_distance",
+      "theta_jn",
+      "phase",
+      "ra",
+      "dec",
+      "psi",
+      "geocent_time"
+    ],
+    "DEFORMATIONS": [
+      "dtau220",
+      "dtau440",
+      "domega220",
+      "domega440"
+    ],
+    "DERIVED_PHYSICAL": [
+      "final_mass_detector",
+      "final_spin",
+      "redshift"
+    ]
+  },
+  "published_dtau220_documentary_target": {
+    "median": -0.013,
+    "q05": -0.103,
+    "q95": 0.087,
+    "source_path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_013BIS_fechamento_e_ampliacao_dos_eventos_ate_5sigma.md",
+    "source_sha256": "a907d07bc484b53cc6db237dc5972f4dcc47be03ad084c832201bb648981454b",
+    "quoted_context": "- **E3.1 — Piloto (autorizado: o operador liberou 40 h de máquina para esta ordem):** **o GW250114** (strain on/off-source já em `cache\\gwosc`; o único com resultado pSEOB robusto publicado; outro evento só como segundo piloto, com o publicado daquele evento como critério), UMA família (pSEOBNRv4HM_PA), PE IMR completa bilby+dynesty com (M, χ) livres, DTau220 (e DTau440) livres, PSD off-source, BLAS a 1 thread por processo. **Antes do piloto:** reproduzir o `Kerr_220_10M` do pyRing com configuração equivalente (trigtime 1420878141,2190118; céu fixo; amplitudes coerentes; PSD) e imprimir a diferença residual contra 73,5 M☉ / χ 0,752 [aud_2]; inícios com atraso fracionário ou 16 kHz. **Mede o custo real por evento** (hoje: 81–542 CPU-h estimados por 3×10⁶–2×10⁷ avaliações × 0,0975 s por forma de onda `[DERIVED sobre KNOWN, fator 6,7 de incerteza]`) e reproduz o δτ̂₂₂₀ publicado (−0,013 [−0,103; +0,087]) dentro da sua σ, **dizendo que compara pSEOBNRv4HM_PA (spins alinhados) com o pSEOBNRv5PHM (precessante) do publicado** — uma diferença fica atribuível (família × wrapper × configuração) só com esse aviso. **Conclui e segue para E3.2 (sem esperar recibo)**: custo medido com log, posterior com hash e diferença contra o publicado entram em `ENTREGA_013BIS_B3_piloto_e_orcamento.md`.",
+    "status": "DOCUMENTARY_REFERENCE_NOT_NEW_POSTERIOR_MEASUREMENT"
+  },
+  "published_remnant_reference": {
+    "status": "AWAITING_EXPLICIT_MATCHED_REFERENCE_SUMMARY",
+    "required": [
+      "source_path",
+      "source_sha256",
+      "family",
+      "mass_frame",
+      "median",
+      "q05",
+      "q95"
+    ],
+    "scope": "Never substitute Kerr220 Mf/af for pSEOBv5PHM reference; detector mass required; no automatic source-frame conversion from independent quantiles"
+  }
+}

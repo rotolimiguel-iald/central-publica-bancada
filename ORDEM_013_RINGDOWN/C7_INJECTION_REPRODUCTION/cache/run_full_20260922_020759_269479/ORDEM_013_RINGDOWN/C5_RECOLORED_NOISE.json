@@ -1,0 +1,297 @@
+{
+  "status": "CONDITIONAL_REFERENCE_RECOLORING_VALIDATED",
+  "scope": "Identical target PSD in two illustrative response channels; not an ET/CE network geometry or an O5 achieved sensitivity. Measured residual coordinates are transported by an explicit convention; future non-Gaussian noise is unknown.",
+  "no_on_source_strain_access": true,
+  "samples_per_detector": 256,
+  "degree": 2,
+  "stride": 2,
+  "fs_original": 4096,
+  "low_frequency_exponent_primary": 4,
+  "low_frequency_controls": [
+    2,
+    6
+  ],
+  "source_sha256": "c7a454a4faaa110ecd9cad3b2210736e779458a22577e62f655c31d740c9da06",
+  "scenarios": [
+    {
+      "psd": "O4",
+      "curve": {
+        "key": "O4",
+        "filename": "aLIGO_O4_high_asd.txt",
+        "kind": "ASD",
+        "source": "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/detector/noise_curves/aLIGO_O4_high_asd.txt",
+        "sha256": "eb5ec9b081c3d86d2f4257b9aff6a57566d168b8a95e5e57b7909eebad021780",
+        "rows": 2736,
+        "frequency_min": 10.21659,
+        "frequency_max": 4995.378
+      },
+      "cache_path": "cache/recolored_noise/O4_noise.npz",
+      "cache_sha256": "03aa894405014ac2599ffa760b9b14d10410a68f60a962625dc4eaf4bffcd528",
+      "assumption": {
+        "lowest_tabulated_hz": 10.21659,
+        "low_frequency_continuation": "PSD(f_min)*(f/f_min)^(-4)",
+        "extrapolated_bins": 40,
+        "DC": "Exactly quotiented; value zero is computational only"
+      },
+      "whitening_residual": 3.1506457224326376e-10,
+      "recoloring_checks": [
+        {
+          "detector": "H1",
+          "max_coordinate_error": 5.925071544510274e-11,
+          "N": 256,
+          "reduced_chisquare_mean": 0.9371381585303385
+        },
+        {
+          "detector": "L1",
+          "max_coordinate_error": 8.19322387712873e-11,
+          "N": 256,
+          "reduced_chisquare_mean": 1.007537680904289
+        }
+      ],
+      "independent_Gaussian_energy": 1.0030011577253626,
+      "filter_norm_relative_change_low_exponent": {
+        "2": [
+          0.01064961168613543,
+          0.004093322145859224,
+          0.0036962924530543617,
+          0.0023958544643327695,
+          0.001748708569744739,
+          0.0008451058685903234,
+          0.001102643476174725,
+          0.00023243625544200341
+        ],
+        "4": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "6": [
+          -0.01312127685157749,
+          -0.004223897971282753,
+          -0.004548960410194147,
+          -0.0027079976817068196,
+          -0.002131028157743242,
+          -0.0009758949763289948,
+          -0.0013330385410640355,
+          -0.0002708699937982173
+        ]
+      },
+      "max_filter_norm_fractional_sensitivity": 0.01312127685157749
+    },
+    {
+      "psd": "O5",
+      "curve": {
+        "key": "O5",
+        "filename": "Aplus_asd.txt",
+        "kind": "ASD",
+        "source": "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/detector/noise_curves/Aplus_asd.txt",
+        "sha256": "ca415777c33b392495c40e7b5906548d80e054be2f241eec9338db9cfb144ab7",
+        "rows": 3000,
+        "frequency_min": 5.0,
+        "frequency_max": 5000.0
+      },
+      "cache_path": "cache/recolored_noise/O5_noise.npz",
+      "cache_sha256": "aaf09f21792c7fb42cd98a47aaa0e646894ce4ddb0b5ccb63d757da3de410c09",
+      "assumption": {
+        "lowest_tabulated_hz": 5.0,
+        "low_frequency_continuation": "PSD(f_min)*(f/f_min)^(-4)",
+        "extrapolated_bins": 19,
+        "DC": "Exactly quotiented; value zero is computational only"
+      },
+      "whitening_residual": 2.5559679031292614e-10,
+      "recoloring_checks": [
+        {
+          "detector": "H1",
+          "max_coordinate_error": 5.226619137488342e-11,
+          "N": 256,
+          "reduced_chisquare_mean": 0.9371381585303385
+        },
+        {
+          "detector": "L1",
+          "max_coordinate_error": 7.570621907149189e-11,
+          "N": 256,
+          "reduced_chisquare_mean": 1.007537680904289
+        }
+      ],
+      "independent_Gaussian_energy": 0.9992147333689877,
+      "filter_norm_relative_change_low_exponent": {
+        "2": [
+          0.004255820568419777,
+          0.003091694453775551,
+          0.0015484914498544722,
+          0.0013805274514124832,
+          0.0007663750256765578,
+          0.00046201476917340223,
+          0.0005043988053416992,
+          0.000122085019254925
+        ],
+        "4": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "6": [
+          -0.005479794755344769,
+          -0.003760955817145084,
+          -0.0019884137061469964,
+          -0.0017169933402071402,
+          -0.0009789632226970824,
+          -0.0005786119676236545,
+          -0.0006419309229819259,
+          -0.00015330368399357752
+        ]
+      },
+      "max_filter_norm_fractional_sensitivity": 0.005479794755344769
+    },
+    {
+      "psd": "ET",
+      "curve": {
+        "key": "ET",
+        "filename": "ET_D_psd.txt",
+        "kind": "PSD",
+        "source": "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/detector/noise_curves/ET_D_psd.txt",
+        "sha256": "92089fb91b5a22aec20a63114da84cf1e494b7507fb7c41e601e070c95792cd6",
+        "rows": 3000,
+        "frequency_min": 1.0,
+        "frequency_max": 10000.0
+      },
+      "cache_path": "cache/recolored_noise/ET_noise.npz",
+      "cache_sha256": "db131715dab777a51b7aaecdcd412c7c99d35e6046d210bb76ce9d22165124d2",
+      "assumption": {
+        "lowest_tabulated_hz": 1.0,
+        "low_frequency_continuation": "PSD(f_min)*(f/f_min)^(-4)",
+        "extrapolated_bins": 3,
+        "DC": "Exactly quotiented; value zero is computational only"
+      },
+      "whitening_residual": 4.7423991265116805e-07,
+      "recoloring_checks": [
+        {
+          "detector": "H1",
+          "max_coordinate_error": 6.963604692877823e-09,
+          "N": 256,
+          "reduced_chisquare_mean": 0.9371381585303385
+        },
+        {
+          "detector": "L1",
+          "max_coordinate_error": 9.988013860429135e-09,
+          "N": 256,
+          "reduced_chisquare_mean": 1.007537680904289
+        }
+      ],
+      "independent_Gaussian_energy": 1.0031869511369693,
+      "filter_norm_relative_change_low_exponent": {
+        "2": [
+          0.0011127790508684843,
+          0.0015978923854820248,
+          0.00043762635303568054,
+          0.0005804375997597866,
+          0.00023405718855173951,
+          0.00018809830999488852,
+          0.00016293744003559318,
+          4.5301911163031505e-05
+        ],
+        "4": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "6": [
+          -0.0008610943606518484,
+          -0.0011942618597770016,
+          -0.00033741365035477866,
+          -0.00043811311622121707,
+          -0.00017995324257435996,
+          -0.00014132464820848512,
+          -0.00012517904886499842,
+          -3.443466839170295e-05
+        ]
+      },
+      "max_filter_norm_fractional_sensitivity": 0.0015978923854820248
+    },
+    {
+      "psd": "CE",
+      "curve": {
+        "key": "CE",
+        "filename": "CE_psd.txt",
+        "kind": "PSD",
+        "source": "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/detector/noise_curves/CE_psd.txt",
+        "sha256": "a8934610ae6395a86129a70bf913d2b3469a477f872fec18c626b49dc7aa3f49",
+        "rows": 3000,
+        "frequency_min": 5.0,
+        "frequency_max": 5000.0
+      },
+      "cache_path": "cache/recolored_noise/CE_noise.npz",
+      "cache_sha256": "fc7497a2911eafd20b5884fe0b7933ead98c3d55924c3474337567f405555dd2",
+      "assumption": {
+        "lowest_tabulated_hz": 5.0,
+        "low_frequency_continuation": "PSD(f_min)*(f/f_min)^(-4)",
+        "extrapolated_bins": 19,
+        "DC": "Exactly quotiented; value zero is computational only"
+      },
+      "whitening_residual": 2.840391301774966e-13,
+      "recoloring_checks": [
+        {
+          "detector": "H1",
+          "max_coordinate_error": 1.2975731600306517e-13,
+          "N": 256,
+          "reduced_chisquare_mean": 0.9371381585303385
+        },
+        {
+          "detector": "L1",
+          "max_coordinate_error": 1.3000711618360583e-13,
+          "N": 256,
+          "reduced_chisquare_mean": 1.007537680904289
+        }
+      ],
+      "independent_Gaussian_energy": 1.0093250024510059,
+      "filter_norm_relative_change_low_exponent": {
+        "2": [
+          0.0024820844075443826,
+          0.004684022696472612,
+          0.0010508369088177982,
+          0.0016032332303239638,
+          0.0005999458762728782,
+          0.0004817735628979136,
+          0.0004241213081432882,
+          0.00012045975795205166
+        ],
+        "4": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "6": [
+          -0.003552681851300532,
+          -0.006336767998202375,
+          -0.001490784520066124,
+          -0.0021959079462144926,
+          -0.0008433583879575712,
+          -0.000662902166280066,
+          -0.0005932137059411202,
+          -0.0001660298719481368
+        ]
+      },
+      "max_filter_norm_fractional_sensitivity": 0.006336767998202375
+    }
+  ]
+}

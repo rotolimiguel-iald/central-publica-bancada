@@ -1,0 +1,15 @@
+{
+  "operation": "submit",
+  "request_id": "d40d0bfb-4442-4c04-ba65-2255d254412b",
+  "execution_constraints": {
+    "mission_id": "ORDEM_016",
+    "branch_id": "B_R3",
+    "lemma_id": "lal_buffer_patch_review",
+    "role": "draft",
+    "required_provider": "deepseek",
+    "max_calls": 1,
+    "max_cost_usd": null,
+    "max_output_tokens": 16384
+  },
+  "prompt": "ORDEM016/Parte B, ORDEM015 R3, uma pergunta de engenharia. No lalsimulation 7.26.15, arquivo LALSimIMRSpinAlignedEOB.c linhas 2060-2099, o comprimento extra de quatro vetores de alta amostragem é calculado quando dtau220>0 por ceil(20*(1+dtau220)/(cimag(modeFreq)*deltaTHigh)); no ramo else por ceil(20/(cimag(modeFreq)*deltaTHigh)). O programa usa simultaneamente os modos 220 e 440, mas a caixa registrada admite dtau440 até 4; houve abort nativo reproduzível nessa região, enquanto dtau440=0 foi finito. R3 pede patch mínimo que dimensione pelo máximo dos fatores (1+dtau_lm) dos modos, verificação de capacidade/overflow, build isolado em venv próprio e qualificação de 122 pontos, sem uso científico do binário emendado. Qual desenho de patch e quais controles adversariais verificariam a suficiência do buffer sem alterar a física? Distinguir hipótese causal da prova de correção; considere sinais de cimag(modeFreq), limites de UINT4/size_t, todas as alocações e os tamanhos realmente usados. Não execute nem edite fontes, não proponha instalar em /opt, não declare R3 concluído."
+}

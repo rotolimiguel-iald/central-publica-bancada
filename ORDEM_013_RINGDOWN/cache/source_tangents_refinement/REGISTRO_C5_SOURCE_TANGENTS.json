@@ -1,0 +1,94 @@
+{
+  "status": "REGISTERED_NONBLIND_LOCAL_SOURCE_DIAGNOSTIC",
+  "created_utc": "2026-09-22T03:58:12.955775+00:00",
+  "primary_parameters": {
+    "mass1": 39.0,
+    "mass2": 33.0,
+    "spin1z": 0.05,
+    "spin2z": -0.03,
+    "spin1x": 0.0,
+    "spin1y": 0.0,
+    "spin2x": 0.0,
+    "spin2y": 0.0,
+    "inclination": 0.6,
+    "coa_phase": 0.37,
+    "distance": 403.0,
+    "delta_t": 0.000244140625,
+    "f_lower": 20.0,
+    "f_ref": 20.0
+  },
+  "families": [
+    "SEOBNRv4HM",
+    "IMRPhenomXPHM"
+  ],
+  "axes": {
+    "log_total_mass": 0.0025,
+    "log_mass_ratio": 0.005,
+    "common_aligned_spin": 0.005,
+    "difference_aligned_spin": 0.005
+  },
+  "finite_difference_divisors": [
+    1,
+    2,
+    4
+  ],
+  "primary_generation_rate_hz": 8192,
+  "high_generation_rate_hz": 16384,
+  "high_resolution_control": "Central source and finest-step +/- for all four intrinsic axes",
+  "peak": "Continuous maximum of isolated-22 polarization amplitude from a cubic spline within two samples of its discrete maximum",
+  "epoch": "All harmonics share the original generator epoch; align to the same 22 peak, not their individual peaks",
+  "analysis_window": "410 samples at 2048 Hz, fixed start 10 tM of the nominal family remnant; do not move data window as source mass changes",
+  "readings": [
+    "R-B",
+    "R-RAIZ-0",
+    "R-LIN",
+    "R-MOD"
+  ],
+  "psds": [
+    "O4",
+    "O5"
+  ],
+  "snrs": [
+    40.0,
+    200.0,
+    600.0
+  ],
+  "nuisance": "12 independent harmonic-polarization amplitude columns, then shared peak time, then four physical source derivatives",
+  "rank_relative_thresholds": [
+    1e-06,
+    1e-08,
+    1e-10
+  ],
+  "primary_rank_threshold": 1e-08,
+  "stability_criterion": "Compare step-halving and doubled generation rate. Relative projected-sensitivity change >10% or normalized tangent change >5% is NUMERICAL_SENSITIVITY_UNRESOLVED, not a physical conclusion",
+  "gaussian_surrogate": "Means are exact a=0/1 at nominal source; covariance integrates centered Gaussian fluctuations in the local source and amplitude tangent. This is exact for the affine surrogate only, not nonlinear astrophysical PE.",
+  "source_prior_scenarios": {
+    "SOURCE_FIXED": 0.0,
+    "LOCAL_SIGMA_0_002": 0.002,
+    "LOCAL_SIGMA_0_02": 0.02
+  },
+  "prior_coordinates": "Independent equal sd in log total mass, log mass ratio, common spin shift and difference spin shift; chosen diagnostic priors, not event information. Time sd=1e-4 s; each normalized harmonic amplitude sd=10 in 1e-21 strain units, centered on the nominal signal.",
+  "noise_indices": [
+    50,
+    256
+  ],
+  "no_target_strain_read": true,
+  "not_claimed": [
+    "nonlinear source marginalization",
+    "calibrated source recovery",
+    "blind forecast",
+    "event significance",
+    "unique physical TGL mapping"
+  ],
+  "hashes": {
+    "prepare_source_tangents.py": "5d0be662e9595f1a42c5cb99f94e8f90400f809587771fb94282ba4debe029fa",
+    "analyze_source_tangents.py": "3b7b425e3f81f38b5c2cb5cafe182bf38daa46c89ef99cf1cd7c7b5647b5b77f",
+    "tgl_ringdown_prediction.py": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+    "QNM_GRID.json": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24",
+    "C5_IMR_CONTROLS.json": "1fe989525c3c9cff7059caa748eea541f94d01f9d416840117072c1f094fe2c1",
+    "C5_RECOLORED_NOISE.json": "088fe6927b17e8461df6a05c0d129da28654cf001e3833df24713cfe0d3ec477",
+    "REGISTRO_C6.json": "ded00f09b5010d622b67b4ea4e559a216818f578440a0f60772130174ececf14",
+    "cache/recolored_noise/O4_noise.npz": "03aa894405014ac2599ffa760b9b14d10410a68f60a962625dc4eaf4bffcd528",
+    "cache/recolored_noise/O5_noise.npz": "aaf09f21792c7fb42cd98a47aaa0e646894ce4ddb0b5ccb63d757da3de410c09"
+  }
+}

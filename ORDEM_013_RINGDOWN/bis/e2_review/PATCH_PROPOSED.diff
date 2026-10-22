@@ -1,0 +1,90 @@
+--- a/pseob_source.py
++++ b/pseob_source.py
+@@ -26,9 +26,23 @@
+                        ('DOmega220',domega220),('DOmega440',domega440)]:
+         getattr(ls,'SimInspiralWaveformParamsInsert'+name)(dictionary,float(value))
+     options=dict(kwargs,waveform_approximant='pSEOBNRv4HM_PA',lal_waveform_dictionary=dictionary)
+-    return lal_binary_black_hole(frequency_array,mass_1,mass_2,
++    result = lal_binary_black_hole(frequency_array,mass_1,mass_2,
+         luminosity_distance,abs(chi_1),0. if chi_1>=0 else np.pi,0.,
+         abs(chi_2),0. if chi_2>=0 else np.pi,0.,theta_jn,phase,**options)
++    if result is None:
++        return None
++    frequencies = np.asarray(frequency_array, dtype=float)
++    if frequencies.ndim != 1 or frequencies.size < 2 or not np.isfinite(frequencies).all() or not np.all(np.diff(frequencies)>0):
++        raise ValueError('Invalid frequency grid')
++    if not isinstance(result, dict) or not {'plus','cross'} <= set(result):
++        raise RuntimeError('Malformed waveform response')
++    polarizations = [np.asarray(result[k]) for k in ('plus','cross')]
++    if any(a.shape != frequencies.shape or not np.isfinite(a).all() for a in polarizations):
++        raise RuntimeError('Nonfinite or wrong-shape waveform')
++    band = (frequencies >= kwargs['minimum_frequency']) & (frequencies <= kwargs['maximum_frequency'])
++    if not np.any(band) or not any(np.any(a[band] != 0) for a in polarizations):
++        raise RuntimeError('Jointly zero waveform in active band')
++    return result
+ 
+ def parameter_conversion(parameters):
+     """Preserve source parameters; add only the mass-order constraint coordinate."""
+--- a/pe_runner.py
++++ b/pe_runner.py
+@@ -66,10 +66,11 @@
+       priors=priors,time_marginalization=False,distance_marginalization=False,phase_marginalization=False)
+     start=time.perf_counter()
+     np.random.seed(cfg['sampler']['seed'])
++    bilby.core.utils.random.seed(cfg['sampler']['seed'])
+     result=bilby.run_sampler(likelihood=likelihood,priors=priors,sampler='dynesty',label=cfg['label'],
+       outdir=str(outdir),save='hdf5',plot=False,npool=cfg['sampler']['workers'],
+       nlive=cfg['sampler']['nlive'],dlogz=cfg['sampler']['dlogz'],sample='rwalk',
+-      walks=cfg['sampler']['walks'],maxcall=cfg['sampler']['maxcall'],resume=False,check_point=True,
++      walks=cfg['sampler']['walks'],maxcall=cfg['sampler']['maxcall'],resume=False,check_point=False,check_point_plot=False,seed=cfg['sampler']['seed'],
+       check_point_delta_t=60,print_progress=False,meta_data={'registration_sha256':digest,'job':args.job,
+         'model_scope':'Aligned-spin pSEOBNRv4HM_PA, distinct from released precessing pSEOBNRv5PHM',
+         'mode':cfg['mode']})
+--- a/strain_io.py
++++ b/strain_io.py
+@@ -14,6 +14,8 @@
+ 
+ def quality_mask(handle,required_dq,required_no_injections):
+     def selected(group,field,namesfield,required):
++        if not required or len(set(required)) != len(required):
++            raise ValueError('Nonempty unique quality flags required')
+         names=[x.decode() if isinstance(x,bytes) else str(x) for x in handle[group+'/'+namesfield][()]]
+         if not set(required)<=set(names):raise ValueError('Required quality flag absent')
+         mask=sum(1<<names.index(x) for x in required)
+@@ -29,7 +31,11 @@
+     require_pin(path,expected)
+     with h5py.File(path,'r') as h:
+         raw=h['strain/Strain'];gps=float(h['meta/GPSstart'][()]);fs=1/float(raw.attrs['Xspacing'])
++        if not np.isfinite([start,duration,fs]).all() or duration <= 0 or fs <= 0 or fs != round(fs):
++            raise ValueError('Invalid time window or sample rate')
+         i=int(round((start-gps)*fs));n=int(round(duration*fs))
++        if n <= 0 or abs((start-gps)*fs-i) > 1e-6:
++            raise ValueError('Fractional start needs registered timing treatment')
+         if i<0 or i+n>len(raw) or abs(n/fs-duration)>1e-8:raise ValueError('Incomplete requested window')
+         q=quality_mask(h,required_dq,required_no_injections)
+         if len(q)!=round(len(raw)/fs):raise ValueError('Quality mask must be 1Hz for this reader')
+--- a/blinding.py
++++ b/blinding.py
+@@ -33,7 +33,9 @@
+ 
+ def unblinding_allowed(registration,information,systematic_gate,receipt):
+     if systematic_gate is not True:return False
+-    if not np.isfinite(information) or information<registration['blinding']['minimum_information_to_unblind']:return False
++    threshold=registration['blinding']['minimum_information_to_unblind']
++    if not np.isfinite(threshold) or threshold <= 0:return False
++    if not np.isfinite(information) or information<threshold:return False
+     # This implementation never makes an implicit release decision.
+     return bool(receipt and receipt.get('status')=='REGISTERED_UNBLINDING_GATE_MET' and
+                 receipt.get('independent_review_passed') is True)
+--- a/synthetic_null.py
++++ b/synthetic_null.py
+@@ -35,7 +35,8 @@
+ 
+ def simulate_projection(components,draws,seed,model,time_guard,chunk=1000000):
+     if model not in ('gaussian','elliptical_student5'):raise ValueError('Unregistered synthetic posterior model')
+-    if not isinstance(draws,int) or draws<=0:raise ValueError('Invalid draw count')
++    if type(draws) is not int or draws < 2:raise ValueError('At least two draws required')
++    if type(chunk) is not int or chunk < 1:raise ValueError('Positive integer chunk required')
+     noise=components['noise_variance_fraction'];nuisance=components['nuisance_variance_fraction']
+     if min(noise,nuisance)<0 or not np.isclose(noise+nuisance,1):raise ValueError('Invalid projection variance')
+     rng=np.random.default_rng(seed);k=0;used=0;sums=0.;squares=0.

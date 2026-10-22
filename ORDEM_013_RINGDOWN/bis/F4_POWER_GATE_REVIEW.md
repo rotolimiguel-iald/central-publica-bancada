@@ -1,0 +1,103 @@
+[REAL — revisão independente dos cálculos arquivados; transporte e evidências condicionais; sem mudança de gate]
+
+# Revisão adversarial leve de F4
+
+Data UTC: 2026-09-22T17:58:24.962856+00:00. Raiz dos caminhos: `C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN`.
+
+**Parecer: portão numérico corroborado no modelo declarado; C5_FISHER_v2 requer correção da tabela auxiliar antes de aprovação integral.** Há uma inconsistência concreta de convenção em `same_source_R_B` (P2, abaixo) e uma explicitação necessária no controle de PSD por detector. Nenhuma delas muda o resultado dos 50 registros do portão: todos ficam abaixo de 5; o maior z condicional é 0.713209021511. Permanece `INCONCLUSIVE_SYSTEMATICS`, com `FAILED_TWO_FAMILY_CALIBRATION`. Não é aprovação de toda F4, da calibração física ou da ordem inteira.
+
+C1 foi encerrado primeiro em `bis/C1_CLOSING_REVIEW.md`: controles positivos aceitos, dez mutações originais e quatro adicionais recusadas sob `-O`, divergência de bytes recusada antes de replace. Esta revisão F4 não reabre os achados C1 encerrados nem modifica produções.
+
+## Controles independentes executados
+
+Li os JSON, fontes dos dois builders e os insumos hasheados. Não executei builders, PE, injeções ou um.py. O script próprio `bis/c1_review/f4_independent_checks.py` reabriu apenas os segmentos necessários dos HDF5 e os whiteners; recalculou normas por einsum e soma compensada; refez Fisher com derivadas numéricas centrais de cinco pontos e projeção QR dos parâmetros nuisance; verificou transporte, momentos, limiar de N e todas as quadraturas livres.
+
+[REAL] Conferem os 17 hashes de dependências do portão, a origem de Fisher e o hash da abertura no túnel. O vínculo com C1 v3 é uma dependência congelada legítima: suas dez linhas são iguais às de v4. O manifesto próprio inclui também o builder anterior e as quatro PSDs. Conferi novamente os insumos de C1 e F4 ao redigir este parecer: todos os hashes monitorados permanecem iguais.
+
+| Controle | Resultado independente |
+|---|---|
+| Norma H1; índice inicial | 602,358607198691; 1299343; 407 graus de liberdade |
+| Norma L1; índice inicial | 576,440162194493; 1299333; 407 graus de liberdade |
+| Excesso de norma da rede | 364,798769393184 após subtrair 814 graus de liberdade |
+| Estimativa rho da rede | 19.0997060027945; erro-padrão aproximado 1.45453896069 sob as hipóteses do recibo |
+| Fisher | 384 registros; maior erro relativo de sigma 9.06493e-13 |
+| Cobertura do portão | Cinco bases × dez leituras = 50; nenhuma omitida ou duplicada |
+| Integral com amplitude livre | 48 registros; maior diferença absoluta de média 6.17284e-14, de desvio-padrão 4.26326e-14 |
+
+A janela é nominalmente 10 tM, com arredondamento documentado para a primeira amostra de 4096 Hz e retenção a 2048 Hz. rho vem de `sqrt(norm² − dof)`, com ruído gaussiano estacionário e covariância unitária após whitening. É estimativa de excesso de norma, não SNR medido por filtro casado nem significância de detecção. O erro aproximado não incorpora erro de PSD ou não estacionariedade. Essas restrições já aparecem no recibo e devem acompanhar seu uso.
+
+## SNR, leituras e identificabilidade
+
+[REAL] A versão v2 separa corretamente a referência GR (`a=0`) do SNR da injeção deformada (`a=1`) à mesma distância. As quatro referências GR, cruzadas com `C5_IMR_RECOVERY.json`, são:
+
+| PSD / família | rho GR a 403 Mpc | fator rho/40 | z de R-B |
+|---|---:|---:|---:|
+| O4 / Phenom | 10,0659128940 | 0,251647822350 | 0,101718465559 |
+| O4 / SEOB | 10,6535010891 | 0,266337527227 | 0,107656185288 |
+| O5 / Phenom | 17,0551438969 | 0,426378597423 | 0,172218212596 |
+| O5 / SEOB | 18,0652525512 | 0,451631313780 | 0,182418015542 |
+| Norma GW250114 / referência O4 | 19,0997060028 | 0,477492650070 | 0,193007112985 |
+
+Os SNR a=1 foram conferidos por leitura e família; os respectivos z à mesma distância também conferem. A tentativa anterior está preservada. Os trechos de cálculo da norma e de Fisher nos dois builders são idênticos; a nova rotina exige igualdade do JSON parseado antes de reutilizar os parciais. Isso verifica o mecanismo e os resultados atuais. A fonte, sozinha, não prova o log histórico da primeira execução nem identidade byte a byte entre serializações passadas.
+
+[DERIVED, condicional] Fisher escala como rho² quando forma, PSD e parametrização são mantidas; sigma escala como 1/rho e z como rho. O código transporta uma **forma 220 de referência**, não recalcula a geometria de Fisher de cada IMR observado. `z_max_local` é separação otimista com massa/spin fixos nessa forma; não é cota superior rigorosa sobre toda família IMR ou sobre o sinal real. `UNDERPOWERED` tem precisamente esse alcance. O nome do campo não dispensa sua cláusula `scope`.
+
+As dez leituras são R-A, R-B, R-MOD, R-RAIZ-0, R-RAIZ-EP4, R-RAIZ-REST, R-LIN, R-GLOBAL, R-PROP e R-RAIZ-COHERENT. Oito têm curvas Fisher; as duas últimas entram como equivalência numérica condicional, com `physical_exact_equality=false` no artefato Fisher. Seus zeros numéricos não viram identidade física universal nem nova taxa de decaimento. R-GLOBAL mantém a hipótese relacional distinta. A regra `abs(delta)<1e-6 → SUBRESOLUTION` foi respeitada: N não ganha precisão artificial nessas linhas.
+
+[DERIVED, local] Para um único modo 220, o mapa `(log M, chi) → (log f, log tau)` tem determinante −Q'/Q. Em chi=0,68, medi −1,2188018444728255; a tangente de deformação do decaimento pertence ao espaço gerado por massa/spin, com resíduo numérico zero. Assim, o z identificável após liberar esses parâmetros é zero nesse modelo; `sigma=null` significa não identificável, nunca erro zero. Isto **não** demonstra degenerescência do IMR completo, de multimodos resolvidos ou de análise com informação externa sobre a fonte. O JSON faz essa distinção. O diagnóstico multimodo existente foi lido, não reexecutado; a limitação numérica SEOB continua aberta.
+
+## Ponto fixo, amplitude livre e o valor aproximado 0,05
+
+[DERIVED] No modelo escalar gaussiano, com x fixo e sigma local, `z=log1p(x)/sigma`; para a razão entre dois pontos fixos, as médias de lnB são ±z²/2 e o desvio-padrão é z. Isso não é uma evidência já marginalizada em amplitude ou fonte. Os 384 registros atualizados satisfazem essas identidades.
+
+Para `a~Uniforme[0,1]`, reavaliei independentemente
+
+`B(y) = integral_0^1 exp(y log(1+a*x)/sigma − log(1+a*x)^2/(2 sigma²)) da`.
+
+Usei a primitiva analítica após `t=log(1+a*x)/sigma`, com diferenças estáveis de CDF normal, e integração adaptativa externa sobre o ruído em [−12,12]. É método diferente da quadratura Legendre/Hermite 64/128 do builder. As 48 linhas (quatro leituras apreciáveis, seis SNRs, duas amplitudes verdadeiras, O4 fixo) concordam nos erros da tabela. Não se estende essa cobertura a todas as PSDs ou a uma likelihood astrofísica.
+
+| R-B, SNR 40, amplitude verdadeira a=1 | sigma | média lnB | desvio-padrão | lnB sem ruído |
+|---|---:|---:|---:|---:|
+| Fisher de referência atual | 0,0497391332454 | 0,0616331532411 | 0,205706742672 | 0,0548928707908 |
+| Mesmo x, sigma aproximado da ordem | 0,058 | 0,0452830159450 | 0,175752237810 | 0,0403127433748 |
+
+O “≈0,05” é compatível com a incerteza aproximada anteriormente citada; não é igualdade numérica com 0,06163. Tampouco se deve substituir média sobre ruído pelo valor sem ruído de 0,05489 apenas por estar mais próximo de 0,05. Para a=0, a integral atual dá média −0,0203296072199 e desvio-padrão 0,200283366308. O resultado pontual com a=1 é outro objeto: média 0,0816927002788 e desvio-padrão 0,404209599784.
+
+Uniforme em tau_star produz a mesma integral apenas na lei quadrática com partição fixa, amplitude proporcional a tau_star e intervalo [0,tau_star_ref]. O JSON explicita isso. Não é prior independente, não estabelece limite observacional sem calibração e não autoriza a aproximação de Laplace fora de seu regime.
+
+## Correções exatas pendentes
+
+**F4-R1 — P2, bloqueante para declarar todo C5_FISHER_v2 consistente com a nova convenção.** Em `C5_FISHER_v2.json:9232`, `same_source_R_B` conserva z=x/sigma e momentos antigos, enquanto os registros usam log1p(x)/sigma. O builder atualiza `records` mas herda essa tabela sem marcador histórico. Correção em versão nova: preservar a tabela antiga explicitamente como histórica; acrescentar tabela logarítmica recalculada da linha R-B, SNR40, `FREQUENCY_FREE_TAU_GR_FIXED`, multiplicando pelo `snr_ratio_to_O4` da própria linha. Usar média z²/2 e desvio-padrão z. Valores:
+
+| PSD | z antigo | z log correto | média antiga | média log correta |
+|---|---:|---:|---:|---:|
+| O4 | 0.404773332556 | 0.400717975961 | 0.0819207253741 | 0.0802874481289 |
+| O5 | 0.80281538717 | 0.794772113532 | 0.322256272938 | 0.315831356224 |
+| ET | 3.85562633681 | 3.81699745878 | 7.43292722455 | 7.28473480016 |
+| CE | 7.02767798214 | 6.95726884705 | 24.6941289103 | 24.2017949051 |
+
+A mudança de z é −1,00188334284%. O desvio-padrão corrigido coincide com a coluna z log. Também é aceitável manter a tabela exclusivamente histórica, desde que seu nome/estatuto declare a convenção antiga e a interpretação global exclua explicitamente essa tabela da atualização. A inconsistência não contamina os 50 registros do portão, que leem `records` já corrigidos.
+
+**F4-R2 — explicitação de escopo do controle empírico.** Em `refeito/measure_power_gate_013bis_v2.py:184`, os 16 `measured_psd_control` transportam cada curva de detector separadamente usando o rho total da rede. A aritmética confere, mas isso representa dois cenários alternativos normalizados ao mesmo rho; não mede o z de H1 e L1, nem combina a informação da rede. A origem `C5_FISHER_EMPIRICAL.json` já diz “each a separate single-detector forecast”; essa qualificação se perde na lista resumida.
+
+Correção exata em versão nova: acrescentar à lista/cada entrada `rho_used`, `rho_kind=NETWORK_NORM_APPLIED_TO_EACH_PSD_SCENARIO` e `scope=Separate PSD-shape scenarios at common network rho; not detector-specific measured z or combined network Fisher`. Se a intenção for uma previsão de rede, ela exige Fisher de rede com normalizações por detector e nuisance comuns; não basta somar quadrados dos dois z aqui, pois ambos receberam todo o rho da rede. Esta ressalva não invalida a comparação de formas de PSD.
+
+Não restou divergência nos cálculos centrais examinados. A aprovação integral dos artefatos deve aguardar a resolução de F4-R1 e a explicitação de F4-R2. Não há fundamento nesta auditoria para elevar o veredito físico; PE, cobertura/calibração IMR, realização estocástica e limites livres continuam com seus escopos abertos já declarados.
+
+## Reprodução e integridade
+
+Controle principal executado em WSL com `/opt/lal_env/bin/python -B`, apenas lendo insumos e gravando sua evidência em `bis/c1_review`. Revisão final escrita com o Python bundled, também sem importar código de produção. Axiomas: N/A — sem execução Lean. Scripts recusam sobrescrita; para repetir, usar cópia isolada com estrutura relativa e insumos preservados.
+
+`f4_independent_results.json` contém erros por linha, quadraturas, hashes e limites. `f4_final_integrity.json` registra a conferência final dos insumos e os 16 controles empíricos. Nenhum PDF foi promovido a leitura integral nesta auditoria. Sem escrita em memória, canônico ou produções.
+
+| Arquivo | SHA256 lido por script |
+|---|---|
+| `PORTAO_DO_PODER_013.json` | `ec5e012bc40a3e005bc83533b4b5dab4af0d221c86ee92aa521a96b3f067cab0` |
+| `C5_FISHER_v2.json` | `ac36fe7eb92d6b315a368ba8ea43ee09ad2d52e4456a0c9bfc61ae06bffb5b6f` |
+| `refeito/measure_power_gate_013bis.py` | `d1cab3f69348f9fe169525e25eb18b750a6ffb5eebe095143471ecd0a1123f16` |
+| `refeito/measure_power_gate_013bis_v2.py` | `d18e47c7a183165c99d430b69aca8ac0e544dc2a6718842df8d96be477bcd349` |
+| `bis/F4_GW250114_WINDOW_POWER_NORM.json` | `6accdff1858d3a6a67298d231f4a3090f62ff735438359abfde70dcb01317b8a` |
+| `bis/c1_review/f4_independent_checks.py` | `6ff2790434dd3b8a58dffc650f749e67d891ba114015ca2264440437e0122680` |
+| `bis/c1_review/f4_independent_results.json` | `dab7dbde81c750eaf589dc906e2da9d939ef1c0bb7356fb0576b2e796202a093` |
+| `bis/c1_review/f4_final_integrity.json` | `f339b33a9552410513beb505867b068d1be659d596d0d5784c9f494889841cd3` |
+| `bis/c1_review/write_f4_review.py` | `6ee142ce3c3fdd1210daa25a6237aab541b9d0463d81a21d08d1512f255919d3` |

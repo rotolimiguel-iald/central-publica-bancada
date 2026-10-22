@@ -1,0 +1,2 @@
+registro_sha256: f4971500b025c9fbbb0bfe8ed6f0fe3dfab66fce9603221f55b84a2a2086ca3c
+registered_utc: 2026-09-26T11:12:08.666804+00:00

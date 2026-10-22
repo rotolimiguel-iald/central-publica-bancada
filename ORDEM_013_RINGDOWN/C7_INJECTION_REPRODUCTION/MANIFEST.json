@@ -1,0 +1,287 @@
+{
+  "status": "RAW_OFF_SOURCE_TO_FORECAST_REGENERATION",
+  "created_utc": "2026-09-22T02:07:42.126527+00:00",
+  "assets": [
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/fetch_public.py",
+      "destination": "ORDEM_013_RINGDOWN/fetch_public.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py",
+      "destination": "ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/tgl_ringdown_likelihood.py",
+      "destination": "ORDEM_013_RINGDOWN/tgl_ringdown_likelihood.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/diagnose_overtones.py",
+      "destination": "ORDEM_013_RINGDOWN/diagnose_overtones.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/prepare_imr_controls.py",
+      "destination": "ORDEM_013_RINGDOWN/prepare_imr_controls.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/prepare_empirical_noise.py",
+      "destination": "ORDEM_013_RINGDOWN/prepare_empirical_noise.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/prepare_recolored_noise.py",
+      "destination": "ORDEM_013_RINGDOWN/prepare_recolored_noise.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/forecast_recolored_imr.py",
+      "destination": "ORDEM_013_RINGDOWN/forecast_recolored_imr.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/verify_recolored_forecast.py",
+      "destination": "ORDEM_013_RINGDOWN/verify_recolored_forecast.py"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/QNM_GRID.json",
+      "destination": "ORDEM_013_RINGDOWN/QNM_GRID.json"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/C5_EXTRA_QNMS.json",
+      "destination": "ORDEM_013_RINGDOWN/C5_EXTRA_QNMS.json"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/FISHER_INPUTS.json",
+      "destination": "ORDEM_013_RINGDOWN/FISHER_INPUTS.json"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/aLIGO_O4_high_asd.txt",
+      "destination": "ORDEM_013_RINGDOWN/cache/psd/aLIGO_O4_high_asd.txt"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/Aplus_asd.txt",
+      "destination": "ORDEM_013_RINGDOWN/cache/psd/Aplus_asd.txt"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/ET_D_psd.txt",
+      "destination": "ORDEM_013_RINGDOWN/cache/psd/ET_D_psd.txt"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/CE_psd.txt",
+      "destination": "ORDEM_013_RINGDOWN/cache/psd/CE_psd.txt"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5.receipt.json",
+      "destination": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5.receipt.json"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5.receipt.json",
+      "destination": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5.receipt.json"
+    }
+  ],
+  "external_inputs": [
+    {
+      "path": "cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+      "bytes": 128636664,
+      "sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+      "url": "https://gwosc.org/archive/data/O4b_4KHZ_R1/1420820480/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+      "stages": [
+        "full"
+      ],
+      "attribution": "GWOSC / LVK, CC BY 4.0"
+    },
+    {
+      "path": "cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+      "bytes": 128717189,
+      "sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+      "url": "https://gwosc.org/archive/data/O4b_4KHZ_R1/1420820480/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+      "stages": [
+        "full"
+      ],
+      "attribution": "GWOSC / LVK, CC BY 4.0"
+    }
+  ],
+  "archives": [],
+  "stages": {
+    "full": {
+      "commands": [
+        [
+          "prepare_imr_controls.py"
+        ],
+        [
+          "prepare_empirical_noise.py"
+        ],
+        [
+          "prepare_recolored_noise.py"
+        ],
+        [
+          "forecast_recolored_imr.py"
+        ],
+        [
+          "verify_recolored_forecast.py"
+        ]
+      ],
+      "outputs": [
+        {
+          "name": "C5_IMR_CONTROLS.json",
+          "fields": [
+            "parameters",
+            "families"
+          ]
+        },
+        {
+          "name": "C5_EMPIRICAL_NOISE.json",
+          "fields": [
+            "detectors"
+          ]
+        },
+        {
+          "name": "C5_RECOLORED_NOISE.json",
+          "fields": [
+            "scenarios"
+          ]
+        },
+        {
+          "name": "C5_RECOLORED_FORECAST.json",
+          "fields": [
+            "number_of_cells",
+            "low_frequency_controls",
+            "results"
+          ]
+        },
+        {
+          "name": "C5_RECOLORED_VALIDATION.json",
+          "fields": [
+            "independent_SVD_controls",
+            "continuous_profile_refinement",
+            "noise_only_prior_volume"
+          ]
+        }
+      ]
+    }
+  },
+  "shipped_files": [
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/C5_EXTRA_QNMS.json",
+      "bytes": 4183,
+      "sha256": "be9f839dcb69814baca963f97c997dae259aa2a7bf2e83de004228869f9d1297"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5.receipt.json",
+      "bytes": 728,
+      "sha256": "f434d9e4f36675f19174387403ced8cea516467667fe884941e8a5a8797a5a6f"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5.receipt.json",
+      "bytes": 728,
+      "sha256": "b256edbb7c30b6a3118078fcc7c2bee7c52a7d6bdf4238d88f0f5698ec2b780b"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/aLIGO_O4_high_asd.txt",
+      "bytes": 71136,
+      "sha256": "eb5ec9b081c3d86d2f4257b9aff6a57566d168b8a95e5e57b7909eebad021780"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/Aplus_asd.txt",
+      "bytes": 84000,
+      "sha256": "ca415777c33b392495c40e7b5906548d80e054be2f241eec9338db9cfb144ab7"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/CE_psd.txt",
+      "bytes": 150000,
+      "sha256": "a8934610ae6395a86129a70bf913d2b3469a477f872fec18c626b49dc7aa3f49"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/cache/psd/ET_D_psd.txt",
+      "bytes": 150000,
+      "sha256": "92089fb91b5a22aec20a63114da84cf1e494b7507fb7c41e601e070c95792cd6"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/diagnose_overtones.py",
+      "bytes": 6101,
+      "sha256": "9702959b339ad292ff48d4420f575cc402bddf20d4f0fe2282b5a5cdc15c97f0"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/fetch_public.py",
+      "bytes": 3793,
+      "sha256": "ef32471eb12d59c326fca451568ca9c7400f11c2a03b4ad1f8f09f5c0967d7b5"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/FISHER_INPUTS.json",
+      "bytes": 3964,
+      "sha256": "4ae8f57dbd312590ea115ed7a38405953e0e37a4088b0eb19a13582235bfa097"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/forecast_recolored_imr.py",
+      "bytes": 12104,
+      "sha256": "02e09d1f8b29217b60ee8b72ef1b94e9fe3a2adba92972f8d6cfe2d9a6cabc6e"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/prepare_empirical_noise.py",
+      "bytes": 10924,
+      "sha256": "5683b5324c2d099060a1b236b6babd2c35be31e9a3a168f64740742bde7cdffd"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/prepare_imr_controls.py",
+      "bytes": 4252,
+      "sha256": "5139864946af88ee0f4f3c52f85edba0acd690ab1249489068bb4677004f3e19"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/prepare_recolored_noise.py",
+      "bytes": 6583,
+      "sha256": "c7a454a4faaa110ecd9cad3b2210736e779458a22577e62f655c31d740c9da06"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/QNM_GRID.json",
+      "bytes": 169231,
+      "sha256": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/tgl_ringdown_likelihood.py",
+      "bytes": 3289,
+      "sha256": "f16517e62fca96cc348aac17369e75e1fb9b07f1e95fef06f7630c8b94153bca"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py",
+      "bytes": 8382,
+      "sha256": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652"
+    },
+    {
+      "path": "assets/ORDEM_013_RINGDOWN/verify_recolored_forecast.py",
+      "bytes": 6489,
+      "sha256": "72454a50c6583cfa2e7ece7282f558ac4486b21b52e19c4bdbbc8d2520f2ca21"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2167,
+      "sha256": "98673d05fb02f083cccaca5605574ead1b21bfcaf26cd423265b266cea5a6a08"
+    },
+    {
+      "path": "reference/C5_EMPIRICAL_NOISE.json",
+      "bytes": 19296,
+      "sha256": "a748e279a04f08e0218bcda347ff9d2750068e53b2cefed35a6b36935199e3ef"
+    },
+    {
+      "path": "reference/C5_IMR_CONTROLS.json",
+      "bytes": 1864,
+      "sha256": "1fe989525c3c9cff7059caa748eea541f94d01f9d416840117072c1f094fe2c1"
+    },
+    {
+      "path": "reference/C5_RECOLORED_FORECAST.json",
+      "bytes": 4807377,
+      "sha256": "0825d9e83c57155496b552cb8e806c2245cc1f66dc86c27b4e68b3a551011a0c"
+    },
+    {
+      "path": "reference/C5_RECOLORED_NOISE.json",
+      "bytes": 9309,
+      "sha256": "088fe6927b17e8461df6a05c0d129da28654cf001e3833df24713cfe0d3ec477"
+    },
+    {
+      "path": "reference/C5_RECOLORED_VALIDATION.json",
+      "bytes": 42063,
+      "sha256": "cd4e58c2aecb3e374a3fdfcf5dd8877591db07e42a1b13e021cd1e7c18ce58a2"
+    },
+    {
+      "path": "reproduce.py",
+      "bytes": 10006,
+      "sha256": "0e6ac6e02af3d098219a58fa928051f7f93454b89b5e97d698fb74a72c848169"
+    }
+  ],
+  "generator_sha256": "7a78cd01e3186b432ba4a44fe2597e0ab33c3cdb555ae2d6b42d5bf4f8da60f7"
+}

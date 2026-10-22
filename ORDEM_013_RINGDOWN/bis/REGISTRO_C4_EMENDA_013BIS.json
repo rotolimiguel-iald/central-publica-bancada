@@ -1,0 +1,79 @@
+{
+  "status": "NONBLIND_TECHNICAL_AMENDMENT__NOT_NEW_BLIND_REGISTRATION",
+  "utc": "2026-09-22T17:57:33.490986+00:00",
+  "original_registration": {
+    "path": "REGISTRO_C4.json",
+    "sha256": "2bebc171ddbcef43d7b50b9076dd806b64829a05a769b6e4fe23b73ec121ac59"
+  },
+  "opening_sha256": "0118a54b7a806a0a5ef5572afc8349c223cc3da4bec62ff18a9cd1b07433f9f0",
+  "code_sha256": "fc21ed6cb3db03d11baa33905a0d4c871b1ce21068071b46522c3ebb8d8c4ffc",
+  "prior_knowledge": "Published posteriors, original free-clock ceiling tM, and auditor approximate lnB at 5/8/10 tM already known. No blind status is claimed.",
+  "technical_statuses": [
+    "OPEN_PHYSICAL_MAPPING",
+    "INCONCLUSIVE_DENSITY_SUPPORT",
+    "PENDING_*",
+    "PRELIMINARY_*"
+  ],
+  "technical_status_rule": "These are diagnostics/statuses, not physical verdicts or confirmation.",
+  "ESS": {
+    "threshold": 100,
+    "creation": "After original C4 registration; now explicitly documented NONBLIND",
+    "meaning": "Minimum local effective kernel samples for both restricted and GR point; no universal error guarantee"
+  },
+  "independent_density": {
+    "estimator": "Full-covariance Gaussian in (df220, dtau220-g(spin))",
+    "scope": "Independent density approximation, same released samples and physical curves; not statistically independent evidence",
+    "readings": [
+      "R-B",
+      "R-RAIZ-0",
+      "R-LIN",
+      "R-MOD"
+    ],
+    "checks": [
+      "Actual Uniform deformation priors and support",
+      "Finite samples and positive definite covariance",
+      "Direct formula versus scipy multivariate_normal at zero"
+    ]
+  },
+  "free_clock": {
+    "coordinate": "q=tau_source/tM_source conditional on each nuisance sample",
+    "retained_priors": [
+      "uniform source tau in [tP,tM_source]",
+      "log-uniform source tau in [tP,tM_source]"
+    ],
+    "new_prior_INPUT": "Uniform source tau in [tP,20*tM_source], conditional mass-normalization retained",
+    "ceiling_robustness_INPUT": [
+      10,
+      20,
+      40
+    ],
+    "grid": {
+      "q_max": 40,
+      "step": 0.05,
+      "coarse_step": 0.1
+    },
+    "reported_points": [
+      0,
+      1,
+      5,
+      8,
+      10,
+      20,
+      40
+    ],
+    "density_bandwidth_multipliers": [
+      0.7,
+      1,
+      1.4
+    ],
+    "curve_cut": "First crossing of lnB=-log(100) on q in [0,40], if bracketed. Relative density diagnostic, not a prior-free credible bound or calibrated exclusion.",
+    "posterior": "q quantiles conditional on each stated finite ceiling; original seconds bounds retained from original result",
+    "convergence": "Compare q95 and log-integral on .05 versus .10 grids; target relative q95 change<0.005 and absolute log-integral change<0.001, otherwise unresolved",
+    "limitations": [
+      "No universal shared clock catalog inference",
+      "No injection calibration",
+      "No claim of genuinely prior-free posterior upper bound",
+      "No inference outside measured q range"
+    ]
+  }
+}

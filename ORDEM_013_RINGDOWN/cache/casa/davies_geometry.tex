@@ -1,0 +1,402 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{geometry}
+\geometry{margin=2.6cm}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=teal!70!black}
+\usepackage{listings}
+\usepackage{enumitem}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!3},
+  columns=fullflexible,
+  keepspaces=true,
+}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{claim}{Claim}
+\newtheorem{remark}{Remark}
+
+\newcommand{\Kp}{K_{\partial}}
+\newcommand{\beTGL}{\beta_{\mathrm{TGL}}}
+\newcommand{\rhoKMS}{\rho_{\mathrm{KMS}}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\thetaM}{\theta_{\mathrm{M}}}
+\newcommand{\Heff}{H_{\mathrm{eff}}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\status}[1]{{\small\textsf{[#1]}}}
+
+\title{\textbf{$\Heff = 0$ and Geometry from the Dissipator}\\[4pt]
+\large What the Davies generator $L_k=\sqrt{\beTGL}\,\sqrt{\Kp}$\\
+establishes (and what it does not) in the finite TGL toy model}
+
+\author{Working manuscript --- internal\\
+\small companion code: \code{davies\_geometry\_derivation.py}\\
+\small (numbers below are emitted by that script; see \S\ref{sec:provenance})}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This is an \emph{internal working note}, not a publication draft. Its purpose
+is to give a clean, fully reproducible derivation of one specific claim of the
+Theory of Luminodynamic Gravitation (TGL): that on the modular boundary the
+effective Hamiltonian vanishes, $\Heff|_\partial = 0$, and the entire geometric
+content is carried by the canonical Davies dissipator with jump operators
+$L_k = \sqrt{\beTGL}\,\sqrt{\Kp}$. We prove, by direct construction in a
+finite-dimensional matrix algebra, four facts: (i) the Davies rates satisfy KMS
+detailed balance to machine precision; (ii) the dissipator alone drives any
+initial state to the KMS state; (iii) the coherent term $-i[\Kp,\rho]$ is
+\emph{dynamically redundant}---adding it changes nothing, in transient and in
+steady state, even when $\Kp$ is genuinely non-diagonal; and (iv) the steady
+state is \emph{unique} (one zero mode of the Liouvillian) and equals the KMS
+state. We then state, sharply and without hedging, the boundary of what this
+establishes: every computation lives in a finite type-I factor $M_d(\mathbb{C})$,
+so the results \emph{illustrate the mechanism} of TGL Theorem~1 but do
+\emph{not} establish the type-III$_1$ embedding, which remains the declared open
+conjecture of the program. The note is written so that its claims map one-to-one
+onto code blocks (\code{C1}--\code{C7}), to serve as an auditable bridge for
+extending the main pipeline.
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope and intent}\label{sec:scope}
+
+This note isolates a single load-bearing statement of TGL and subjects it to a
+self-contained numerical proof. It is deliberately narrow. We do \emph{not}
+re-derive the Lagrangian, the cosmological sector, or the multi-substrate
+program. We take as given the canonical generator
+\begin{equation}
+  L_k \;=\; \sqrt{\beTGL}\,\sqrt{\Kp(k)},
+  \qquad
+  \beTGL = \alpha\sqrt{e},
+  \label{eq:Lcompact}
+\end{equation}
+and ask one question with a yes/no answer: \emph{is the coherent Hamiltonian
+term needed for the geometry, or does the dissipator alone fix it?} The answer
+is that the dissipator alone fixes it, the coherent term is redundant, and we
+make this precise and reproducible.
+
+The intended use of this document is as a \emph{bridge}: a clean derivation that
+(a) a language model can read to ground the $\Heff=0$ claim in mechanism rather
+than assertion, and (b) the existing pipeline can re-ingest as a verified module.
+Accordingly every quantitative claim is tagged with the code block that emits it.
+
+\paragraph{Constants.}
+With $\alpha = 7.2973525693\times10^{-3}$ (CODATA 2018) and $e$ Euler's number,
+\begin{equation}
+  \beTGL = \alpha\sqrt{e} = 0.0120313004008031,
+  \qquad
+  \thetaM = \arcsin\sqrt{\beTGL} = 6.297289216^{\circ},
+\end{equation}
+with $\sin^2\thetaM = \beTGL$ and $\cos^2\thetaM = 1-\beTGL$ to machine
+precision \status{C0}.
+
+\section{The construction}\label{sec:construction}
+
+\subsection{Modular generator and KMS state}
+
+We work in $\mathcal{H}=\mathbb{C}^d$. The modular generator $\Kp$ is a
+Hermitian positive operator. In the flat Bisognano--Wichmann case it is (up to
+$2\pi$) the boost generator with continuous spectrum $[0,\infty)$; we discretize
+it to $d$ levels,
+\begin{equation}
+  \Kp = \operatorname{diag}(\omega_0,\dots,\omega_{d-1}),
+  \qquad \omega_i = \tfrac{i}{d-1}\,\omega_{\max},
+  \quad \omega_{\max}=4 .
+  \label{eq:Kdiag}
+\end{equation}
+The KMS state at modular temperature $T=1$ is
+\begin{equation}
+  \rhoKMS = \frac{e^{-\Kp}}{Z}, \qquad Z=\Tr e^{-\Kp},
+  \qquad [\Kp,\rhoKMS]=0 .
+  \label{eq:kms}
+\end{equation}
+
+\subsection{Davies jump operators}
+
+Following Davies (1974), weak coupling to a modular bath at $T=1$ yields a unique
+GKSL dissipator whose jumps, written in the $\Kp$-eigenbasis, are the transition
+operators $A_{ij}=\lvert i\rangle\langle j\rvert$ ($i\ne j$) with rates obeying
+quantum detailed balance:
+\begin{equation}
+  \gamma(i\!\leftarrow\! j)=
+  \begin{cases}
+    \beTGL\, n_{\mathrm{BE}}(\omega), & \omega = \omega_i-\omega_j > 0,\\[2pt]
+    \beTGL\, \bigl(n_{\mathrm{BE}}(\lvert\omega\rvert)+1\bigr), & \omega<0,
+  \end{cases}
+  \qquad n_{\mathrm{BE}}(x)=\frac{1}{e^{x/T}-1}.
+  \label{eq:rates}
+\end{equation}
+The single scalar $\beTGL$ multiplies every rate; there is no per-jump knob. The
+compact Lindblad operators are $L_k=\sqrt{\gamma_k}\,A_k$, and since
+$\gamma_k=\beTGL f(\omega_k)$ the scalar $\sqrt{\beTGL}$ factors out of every jump
+uniformly: $L_k=\sqrt{\beTGL}\,\sqrt{f(\omega_k)}\,A_k$, the compact form
+\eqref{eq:Lcompact}. Numerically the residual factors $\gamma_k/\beTGL$ are all
+$O(1)$ (range $[0.0187,\,2.2974]$, mean $0.9897$) \status{C7}, confirming the
+factorization is clean and uniform.
+
+\subsection{The GKSL equation and the role of $\Heff$}
+
+The full generator is
+\begin{equation}
+  \dot\rho \;=\; \underbrace{-\,i[\Heff,\rho]}_{\text{coherent}}
+  \;+\;
+  \underbrace{\sum_k \Bigl(L_k\rho L_k^\dagger - \tfrac12\{L_k^\dagger L_k,\rho\}\Bigr)}_{\mathcal{D}[\rho]\ \text{(dissipator)}} .
+  \label{eq:gksl}
+\end{equation}
+The TGL claim is that on the boundary $\Heff=0$, so that $\dot\rho=\mathcal{D}[\rho]$.
+The rest of this note tests whether this loses anything.
+
+\section{Results}\label{sec:results}
+
+\subsection{KMS detailed balance holds exactly}
+
+\begin{proposition}[Detailed balance]\label{prop:db}
+The rates \eqref{eq:rates} satisfy
+$\gamma(i\!\leftarrow\! j)/\gamma(j\!\leftarrow\! i)=e^{-(\omega_i-\omega_j)/T}$,
+hence $\rhoKMS$ is a fixed point of $\mathcal{D}$.
+\end{proposition}
+
+\noindent\emph{Numerical check} \status{C1}, $d=8$, $56$ jumps:
+\[
+  \frac{\gamma(1\!\leftarrow\!0)}{\gamma(0\!\leftarrow\!1)}
+  = 0.5647181220077592,
+  \qquad
+  e^{-(\omega_1-\omega_0)} = 0.5647181220077593,
+\]
+difference $1.1\times10^{-16}$ (machine precision).
+
+\subsection{The dissipator alone reaches the KMS state}
+
+\begin{proposition}[Convergence]\label{prop:conv}
+With $\Heff=0$, integrating \eqref{eq:gksl} from the maximally mixed state
+converges to $\rhoKMS$.
+\end{proposition}
+
+\noindent\emph{Numerical check} \status{C2}, diagonal $\Kp$, $d=8$, $20000$ RK4
+steps at $dt=0.02$:
+\[
+  \lVert\rho-\rhoKMS\rVert = 1.58\times10^{-8},
+  \quad
+  \Tr\rho = 1.0000000000,
+  \quad
+  \Tr[\rho^2]=0.2840002653,
+\]
+against the analytic $\Tr[\rhoKMS^2]=0.2840002751$ (10-digit agreement), with
+minimum eigenvalue $8.06\times10^{-3}>0$ (positivity preserved throughout).
+
+\subsection{The coherent term is dynamically redundant}\label{sec:redundant}
+
+This is the central result. We compare the evolution generated by $\Heff=0$ with
+that generated by $\Heff=\Kp$ (the strongest candidate ``geometry Hamiltonian'').
+
+\begin{theorem}[Coherent redundancy]\label{thm:redundant}
+For the canonical Davies generator built in the $\Kp$-eigenbasis, the coherent
+term $-i[\Kp,\rho]$ leaves the trajectory invariant: the evolution under
+$\Heff=0$ and under $\Heff=\Kp$ coincide for all $t$.
+\end{theorem}
+
+\begin{proof}[Structural reason]
+The Davies jumps are constructed in the eigenbasis of $\Kp$. Each
+$A_{ij}=\lvert i\rangle\langle j\rvert$ is an eigenoperator of the modular flow,
+$e^{-it\Kp}A_{ij}e^{it\Kp}=e^{-it(\omega_i-\omega_j)}A_{ij}$, so the dissipator
+$\mathcal{D}$ commutes with the modular automorphism generated by $\Kp$. The
+coherent term $-i[\Kp,\cdot]$ \emph{is} the generator of that automorphism.
+Hence the two terms generate commuting flows that share the same fixed-point
+manifold; the coherent flow is a pure phase rotation within the dissipator's
+symmetry, contributing no net displacement of the trajectory. (This is the
+operator-level content of the ``semiotic duality'' of TGL Theorem~1: the same
+$\Kp$ appears as dissipation and as Hamiltonian, and the two do not compete.)
+\end{proof}
+
+\noindent\emph{Numerical checks.}
+\begin{itemize}[leftmargin=1.4em]
+\item Diagonal $\Kp$, $d=8$ \status{C3}: mid-transient and endpoint
+  $\lVert\rho_{H=0}-\rho_{H=\Kp}\rVert = 0$ (exactly).
+\item \textbf{Non-diagonal $\Kp$}, $d=6$ \status{C4}: $\Kp$ rotated by a Haar
+  unitary, off-diagonal mass $\lVert\Kp-\operatorname{diag}\Kp\rVert_F=3.0390$
+  (genuinely non-diagonal, not a basis artifact). Even here,
+  \[
+    \lVert\rho_{H=0}-\rho_{H=\Kp}\rVert
+    = 4.3\times10^{-16}\ \text{(transient)},\quad
+    1.1\times10^{-15}\ \text{(endpoint)} .
+  \]
+\end{itemize}
+The non-diagonal case is the non-trivial test: $\Kp$ no longer commutes with a
+generic initial $\rho$, so the coherent term is \emph{not} trivially zero along
+the transient---yet the trajectories still coincide to machine precision. This
+is the strong form of the claim: the Hamiltonian modular term carries no
+dynamical information beyond what the Davies jumps already carry.
+
+\subsection{The steady state is unique and equals the KMS state}
+
+\begin{theorem}[Uniqueness]\label{thm:unique}
+For the non-diagonal $\Kp$ ($d=6$), the Liouvillian superoperator
+$\mathcal{L}$ of \eqref{eq:gksl} with $\Heff=0$ has exactly one zero mode; the
+corresponding steady state is $\rhoKMS$.
+\end{theorem}
+
+\noindent\emph{Numerical check} \status{C5,C6}. The dense $36\times36$
+Liouvillian spectrum has
+\[
+  \lvert\lambda_0\rvert = 2.39\times10^{-17}\ \text{(the zero mode)},
+  \qquad
+  \text{gap} = \lvert\lambda_1\rvert = 2.56\times10^{-2},
+\]
+and exactly one eigenvalue below $10^{-9}$: the steady state is \textbf{unique}
+(the dissipator is ergodic on this $\Kp$). The relaxation time is
+$1/\text{gap}\approx 39$ time units---which, incidentally, explains why a naive
+time integration truncated at $\sim160$ units reads the purity slightly early.
+Extracting the null state via SVD gives, for both $\Heff=0$ and $\Heff=\Kp$,
+\[
+  \Tr[\rho_{ss}^2] = 0.3862546240
+  \;=\;
+  \Tr[\rhoKMS^2] = 0.3862546240
+\]
+(10-digit agreement; purity is basis-invariant, so this equality is the reliable
+witness that $\rho_{ss}=\rhoKMS$ regardless of the SVD's gauge freedom).
+
+\begin{remark}[On a false alarm, kept for honesty]
+A direct dense-eigvector extraction of the null mode initially returned a state
+$0.636$ away from $\rhoKMS$ in Frobenius norm while reproducing the KMS purity to
+8 digits. The discrepancy was a gauge artifact of the degenerate-in-modulus
+eigenvector routine, not a physical second steady state. The basis-invariant
+purity and the single-zero-mode count of Theorem~\ref{thm:unique} together
+settle that the steady state is unique and is the KMS state. We record the false
+alarm because the discipline of this note is that numbers, not phrasing, decide.
+\end{remark}
+
+\section{What this establishes, and the boundary it does not cross}
+\label{sec:boundary}
+
+\paragraph{Established (within finite type-I).}
+\begin{enumerate}[leftmargin=1.6em]
+\item The canonical Davies operators $L_k=\sqrt{\gamma_k}A_k$ with
+  $\gamma_k\propto\beTGL$ exist and satisfy KMS detailed balance to $10^{-16}$.
+\item The dissipator alone drives any state to the KMS state ($10^{-8}$).
+\item \textbf{$\Heff$ is dynamically redundant}: $\Heff=0$ and $\Heff=\Kp$ give
+  identical dynamics ($10^{-15}$), in transient and steady state, for diagonal
+  \emph{and} non-diagonal $\Kp$.
+\item The steady state is unique (one Liouvillian zero mode) and equals the KMS
+  state.
+\end{enumerate}
+Together these make precise the claim ``\,$\Heff=0$, geometry from the
+dissipator\,'': the geometric object is the unique KMS state, it is fixed by the
+dissipator alone, the modular generator $\Kp$ enters \emph{through the jumps}
+$L_k=\sqrt{\beTGL}\sqrt{\Kp}$ and not through a Hamiltonian, and supplying a
+Hamiltonian copy of $\Kp$ adds nothing. The intuition ``geometry is an operator''
+is correct---the operator is $\Kp$, and its dynamical home is the dissipator.
+
+\paragraph{Not established (the type-III$_1$ bridge).}
+Every object above lives in $M_d(\mathbb{C})$, a finite type-I factor:
+\begin{itemize}[leftmargin=1.6em]
+\item $\Kp$ has $d$ normalizable eigenvectors (a continuous modular spectrum, the
+  defining feature of type III$_1$, is absent);
+\item $\rhoKMS$ has finite trace $\Tr=1$ (type III admits no normal trace);
+\item $M_d(\mathbb{C})$ is full of finite projectors, so the Connes (1973)
+  obstruction that \emph{forces} $\Heff=0$ in a type-III$_1$ factor does not even
+  apply to the toy.
+\end{itemize}
+Consequently the redundancy of $\Heff$ proven here is a \emph{theorem about the
+finite Davies construction}, not a manifestation of type-III$_1$ structure. In
+the toy, $\Heff=0$ is a modelling choice that happens to lose no dynamics; in a
+genuine type-III$_1$ factor, $\Heff=0$ would be structurally forced. These are
+different statements, and the gap between them is exactly the declared conjecture
+of the program. Closing it requires one of:
+\begin{description}[leftmargin=2.2em]
+\item[Route A (continuum limit).] Show the finite Davies generators
+  $\mathcal{L}_d$ converge (strong resolvent sense) to a generator on a
+  type-III$_1$ factor whose limit state has \emph{vanishing} normalizable purity.
+  The purity decay $\Tr[\rho^2]\to0$ as $d\to\infty$ is the right signal, but it
+  must become a theorem; and the linear Rindler grid \eqref{eq:Kdiag} has
+  \emph{purely point} spectrum at every $d$, so a discretization whose limit has
+  Lebesgue (continuous) spectrum is required. This is non-trivial and is the real
+  conceptual bottleneck.
+\item[Route B (build in III$_1$).] Work directly in the hyperfinite type-III$_1$
+  factor (Araki--Woods / wedge vacuum), where $\Kp=-\log\Delta$ is the genuine
+  modular generator and $\Heff=0$ follows from Connes. One then loses the finite
+  numerics: there is no $\Tr[\rho^2]$ to print. At present, numbers and III$_1$
+  structure are mutually exclusive in this setup.
+\end{description}
+
+\section{Mapping to code and provenance}\label{sec:provenance}
+
+Every number above is emitted by \code{davies\_geometry\_derivation.py}. The
+claim-to-block map:
+
+\begin{center}
+\begin{tabular}{@{}llp{7.4cm}@{}}
+\toprule
+Block & Section & Establishes \\
+\midrule
+\code{C0} & \S\ref{sec:scope} & constants $\beTGL,\thetaM$; $\sin^2\thetaM=\beTGL$ \\
+\code{C1} & \S\ref{sec:results} & KMS detailed balance to $10^{-16}$ \\
+\code{C2} & Prop.~\ref{prop:conv} & convergence to KMS ($10^{-8}$), positivity \\
+\code{C3} & Thm.~\ref{thm:redundant} & coherent redundancy, diagonal $\Kp$ \\
+\code{C4} & Thm.~\ref{thm:redundant} & coherent redundancy, non-diagonal $\Kp$ \\
+\code{C5} & Thm.~\ref{thm:unique} & unique steady state, dissipative gap \\
+\code{C6} & Thm.~\ref{thm:unique} & steady state $=$ KMS (basis-invariant purity) \\
+\code{C7} & \S\ref{sec:construction} & $\sqrt{\beTGL}$ factors uniformly from jumps \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Suggested bridges to add to the main pipeline.}
+For the stated purpose of enriching the code with more verified elements:
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{Redundancy assertion as a unit test.} Add a regression that builds
+  $\mathcal{L}(\Heff=0)$ and $\mathcal{L}(\Heff=\Kp)$ and asserts their action on
+  a random $\rho$ agrees to $<10^{-12}$. This converts Theorem~\ref{thm:redundant}
+  into a guard against future edits that silently reintroduce a coherent term.
+\item \textbf{Uniqueness/gap probe.} Expose the Liouvillian zero-mode count and
+  gap as a returned diagnostic; a gap collapse would signal loss of ergodicity
+  and is physically meaningful (non-unique steady state).
+\item \textbf{Continuum-limit spectral probe (Route A).} Add a scan that, for the
+  chosen $\Kp$ discretization, estimates whether the limiting spectral measure is
+  point or continuous (e.g.\ via level-spacing statistics vs.\ $d$). This is the
+  honest diagnostic for whether a given grid can reach type III$_1$, and would
+  let the pipeline distinguish ``mechanism illustrated'' from ``III$_1$
+  approached.''
+\end{enumerate}
+
+\section*{Honest summary}
+\addcontentsline{toc}{section}{Honest summary}
+The Davies-generator core of TGL is sound and the $\Heff=0$ / geometry-from-the-dissipator
+reading is correct in the precise sense proven here: the coherent Hamiltonian is
+dynamically redundant and the unique KMS steady state is fixed by the dissipator
+alone, even for non-diagonal modular generators. What remains open---and is not
+papered over---is that this is demonstrated in a finite type-I factor, while the
+theorem it instantiates is a statement about type-III$_1$. The mechanism is
+verified; the embedding is conjectured. The two should not be conflated, and this
+note is written so they are not.
+
+\appendix
+\section{The consolidated script}\label{app:code}
+The companion file \code{davies\_geometry\_derivation.py} is self-contained
+(NumPy only) and reproduces every figure of merit above in under a minute on a
+laptop. Its structure mirrors \S\ref{sec:provenance}: one function per claim,
+a single \code{main()} that prints a labelled block per claim and dumps
+\code{derivation\_results.json}.
+
+\end{document}

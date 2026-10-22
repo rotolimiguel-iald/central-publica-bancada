@@ -1,0 +1,60 @@
+{
+  "status": "SYNTHETIC_NULL_COMPLETED__NOT_PHYSICAL_CALIBRATION",
+  "registration_sha256": "e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416",
+  "cell_id": "GWTC5_33_R_MOD_T5M_GN",
+  "cell": {
+    "kind": "matched_projection",
+    "population": "GWTC5_33",
+    "reading": "R-MOD",
+    "N_target_balanced_catalog": 1082,
+    "model": "elliptical_t5_measurement_plus_gaussian_nuisance",
+    "draws": 100000000,
+    "chunk": 1000000,
+    "seed": 13220012,
+    "catalog_convention": "Fixed balanced cycles of original full sample std widths and paired E0 point predictions; no data selection by width",
+    "not_claimed": "Original target guarantees no power after nuisance addition; covariance/selection/waveform calibration remain OPEN"
+  },
+  "started_utc": "2026-09-22T21:51:23.570853+00:00",
+  "finished_utc": "2026-09-22T21:51:29.057860+00:00",
+  "wall_seconds": 5.487003861999995,
+  "cpu_seconds": 4.027711461999999,
+  "result": {
+    "false_positives": 9921,
+    "draws": 100000000,
+    "empirical_p": 9.921e-05,
+    "confidence_level": 0.95,
+    "one_sided_upper": 0.00010086400813392921,
+    "central_interval": [
+      9.726737594650504e-05,
+      0.00010118165960308444
+    ],
+    "seed": 13220012,
+    "model": "elliptical_t5_measurement_plus_gaussian_nuisance",
+    "mean": -7.41087687177968e-05,
+    "variance_ddof1": 0.9997474337628512,
+    "threshold_one_sided": 5.0,
+    "components": {
+      "noise_variance_fraction": 0.3739535201473226,
+      "nuisance_variance_fraction": 0.6260464798526713,
+      "signal_information_with_nuisance": 2.3807242405148332,
+      "max_squared_signal_fraction": 0.011021660708920456,
+      "N": 1082,
+      "source_events": 33,
+      "nuisance_mean_subtracted": [
+        -0.05227207565108091,
+        0.6394124477780356
+      ],
+      "mean_handling": "r = y - X*m; covariance V is fixed local E1 INPUT, not calibrated physical uncertainty",
+      "target_source": "ceil(E0 N90 fixed-effect mixture); not 90% power guaranteed after adding nuisance"
+    },
+    "scope": "Synthetic posterior and fixed estimated covariance only; not waveform/selection/null calibration of the real experiment",
+    "analytic_tail_control": {
+      "p": 9.963537184968511e-05,
+      "quadrature_absolute_error_estimate": 1.9992647403051234e-13,
+      "method": "chi2_5 integral of conditional normal tail; measurement shared t5 scale plus Gaussian nuisance"
+    }
+  },
+  "familywise": "Per-cell intervals; no multiplicity-adjusted discovery from these controls",
+  "physical_test_gate": "INCONCLUSIVE_SYSTEMATICS",
+  "null_runner_sha256": "1b6bf00beced255d45ac642de5209d32440e486f8a3af469e92a47c58fe1c561"
+}

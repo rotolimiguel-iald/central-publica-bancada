@@ -1,0 +1,103 @@
+{
+  "JSON": {
+    "CONTROLLER.json": [
+      "status",
+      "returncode",
+      "cleanup.group_absent",
+      "registration_sha256",
+      "job",
+      "wall_seconds",
+      "children_user_cpu_seconds",
+      "children_system_cpu_seconds",
+      "controller_code_sha256"
+    ],
+    "LAUNCH_CONTEXT.json": [
+      "registration_sha256",
+      "job",
+      "config_sha256",
+      "stop_utc"
+    ],
+    "PRIVATE_CONVERGENCE.json": [
+      "status",
+      "accepted_for_analysis",
+      "before_add_live",
+      "delta_logz",
+      "threshold",
+      "ncall",
+      "ncall_reported",
+      "ess",
+      "posterior_samples",
+      "log_evidence",
+      "log_evidence_err",
+      "cost"
+    ],
+    "ANALYST_OUTPUT.json": [
+      "status",
+      "columns",
+      "cost",
+      "PSD_receipts",
+      "remnant_conversion_receipt",
+      "raw_result_files",
+      "systematic_gate"
+    ],
+    "failure_paths": [
+      "FAILURE.json",
+      "ANALYST_STATUS.json"
+    ]
+  },
+  "HDF5_native_Bilby": {
+    "posterior_paths": [
+      "posterior/mass_1",
+      "posterior/mass_2",
+      "posterior/chi_1",
+      "posterior/chi_2",
+      "posterior/luminosity_distance",
+      "posterior/theta_jn",
+      "posterior/phase",
+      "posterior/ra",
+      "posterior/dec",
+      "posterior/psi",
+      "posterior/geocent_time",
+      "posterior/dtau220",
+      "posterior/dtau440",
+      "posterior/domega220",
+      "posterior/domega440"
+    ],
+    "nested_weights": "nested_samples/weights",
+    "terminal": [
+      "meta_data/e2_terminal/ncall",
+      "meta_data/e2_terminal/delta_logz",
+      "meta_data/e2_terminal/threshold",
+      "meta_data/e2_terminal/before_add_live"
+    ],
+    "num_likelihood_evaluations": "num_likelihood_evaluations",
+    "registration": "meta_data/registration_sha256",
+    "encoding": "DataFrame to dict-of-lists, recursive HDF5 groups per installed pinned Bilby serializer",
+    "status": "EXPECTED_FROM_SOURCE_NOT_OBSERVED_PILOT_RESULT"
+  },
+  "published_reference": {
+    "status": "PREPARED_FROM_EXISTING_SCHEMA_NO_POSTERIOR_OPENED",
+    "relative_to_B": "cache/public/21454847/extracted/pSEOB/metafiles/pSEOB_GW250114_082203_Prod0.h5",
+    "h5_sha256": "b9971bcd7d72fdd4a176483990854ae917992ad15cd793d15840dc2fe824a627",
+    "pin_status": "INHERITED_FROM_MATCHING_C4_SCHEMA_AND_EXTRACTION; rehash only on future activated review",
+    "dataset": "pSEOBNRv5PHM/posterior_samples",
+    "family": "precessing pSEOBNRv5PHM",
+    "fields": [
+      "dtau220",
+      "final_mass_non_evolved",
+      "final_mass_source_non_evolved",
+      "final_spin_non_evolved",
+      "redshift"
+    ],
+    "mass_frame_test": "Mf_det == Mf_source*(1+z), paired rows, rtol1e-6 atol1e-8; otherwise mass comparison OPEN",
+    "source_schema_sha256": "c4076fca98bcb544f3808a903d6d6005978435b79c4f9dee5371970881ab39d4",
+    "extraction_receipt_sha256": "bf741fd5dd47095601131e0106efeec0e5ac850dd387d64711aee7a52aaf45c8",
+    "no_new_download": true
+  },
+  "not_read": [
+    "strain datasets",
+    "new pilot HDF5",
+    "published posterior sample values",
+    "private seed"
+  ]
+}

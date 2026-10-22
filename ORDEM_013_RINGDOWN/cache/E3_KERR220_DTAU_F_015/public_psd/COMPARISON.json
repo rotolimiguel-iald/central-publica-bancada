@@ -1,0 +1,116 @@
+{
+  "status": "CALIBRATION_COMPARISON_REQUIRES_REVIEW",
+  "equivalent_reproduction_paid": false,
+  "dtau_identifiability": "SINGLE_220_FREE_MF_AF_NOT_IDENTIFIABLE",
+  "sigma_eligible": false,
+  "mass_frame": "Mf detector-frame solar masses; af dimensionless; no component masses, redshift or cosmology inferred",
+  "parameter_order": [
+    "psi",
+    "Mf",
+    "af",
+    "cosiota",
+    "A2220_1",
+    "A2220_2",
+    "phi2220_1",
+    "phi2220_2",
+    "dtau220"
+  ],
+  "posterior_sha256": "2d0f362c8c2c1a0e15dcb29cf050855083a1b58ac6dd21366dda1e59def611b3",
+  "samples": 2058,
+  "own_Mf_af_covariance_ddof1": [
+    [
+      78.16748090186351,
+      2.0133475492541297
+    ],
+    [
+      2.0133475492541297,
+      0.055627378145224685
+    ]
+  ],
+  "reference_Mf_af_covariance_ddof1": [
+    [
+      16.04214790032647,
+      0.24841990976473485
+    ],
+    [
+      0.24841990976473485,
+      0.004244514336251826
+    ]
+  ],
+  "comparison": {
+    "Mf": {
+      "own_05_50_95": [
+        49.400519684410504,
+        58.46585116269283,
+        76.41819984560873
+      ],
+      "released_05_50_95": [
+        66.73545203710316,
+        73.50528713232194,
+        79.90224052663321
+      ],
+      "own_std_ddof1": 8.841237520950532,
+      "released_std_ddof1": 4.0052650224830915,
+      "median_difference": -15.03943596962911,
+      "difference_over_quadrature_width": -1.5494726067591822,
+      "overlap_90pct": true,
+      "marginal_KS_distance": 0.7314554876575665
+    },
+    "af": {
+      "own_05_50_95": [
+        0.050033850042332406,
+        0.40790977513654536,
+        0.7930438635075165
+      ],
+      "released_05_50_95": [
+        0.6264694357546741,
+        0.7519521363178578,
+        0.8347185993169853
+      ],
+      "own_std_ddof1": 0.2358545699053226,
+      "released_std_ddof1": 0.06514993734649195,
+      "median_difference": -0.3440423611813125,
+      "difference_over_quadrature_width": -1.4060489053822698,
+      "overlap_90pct": true,
+      "marginal_KS_distance": 0.7377955710896956
+    }
+  },
+  "comparison_scope": "Same event. Descriptive overlap/KS/width ratio, no calibrated z, Bayes factor or independent evidence.",
+  "z_calibrated": null,
+  "reference_weighting": "Existing posterior.dat interpreted as equal-weight; merge provenance remains OPEN",
+  "limitations": [
+    "Exact released pyRing version unverified; 2.7.0 source and actual posterior header anchor model",
+    "GWOSC strain not shown identical to released C00_AR GWF",
+    "Off-source Welch PSD not released external PSD; public NRSur PSD identity also UNKNOWN",
+    "Data-only bandpass follows pyRing2.7; model-bandpass equivalence near edges unverified",
+    "512 live points versus published 4096; no claim of converged modes before execution/review",
+    "No posterior run in preparation; equal-weight released interpretation retains merge-provenance uncertainty",
+    "Single-mode free Mf/af makes dtau220 non-identifiable; diagnostic posterior only, no sigma",
+    "Same event, no independent evidence or calibrated significance"
+  ],
+  "cost": {
+    "wall_seconds": 640.778346536,
+    "parent_cpu_seconds": 638.744456403,
+    "likelihood_calls": 1693631,
+    "likelihood_calls_after_sampler_constructor": 101,
+    "sampler_ncall": 1692226,
+    "maxcall_nominal": 3000000,
+    "maxcall_scope": "Sampler iteration/batch limit, not exact likelihood ceiling",
+    "workers": 1,
+    "thread_caps_requested": 1
+  },
+  "convergence": {
+    "status": "CONVERGENCE_CRITERIA_MET_REQUIRES_INDEPENDENT_REVIEW",
+    "ncall": 1692226,
+    "delta_logz": 0.09997822135365081,
+    "threshold": 0.1,
+    "before_add_live": true,
+    "ess": 3051.7756961962286,
+    "minimum_ess": 100,
+    "posterior_samples": 2058,
+    "log_evidence": 78913.87812729762,
+    "log_evidence_err": 0.21483964195598265,
+    "ncall_reported": 1692226,
+    "accepted_for_analysis": true
+  }
+}

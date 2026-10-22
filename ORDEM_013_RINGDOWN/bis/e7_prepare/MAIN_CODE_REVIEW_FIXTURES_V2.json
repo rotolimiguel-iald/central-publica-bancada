@@ -1,0 +1,266 @@
+{
+  "status": "INDEPENDENT_NEGATIVE_FIXTURES_V2",
+  "snapshot": "MAIN_CODE_REVIEW_SNAPSHOT_V2.json",
+  "snapshot_sha256": "0e456af32d0d4e1e967fe4fe8b20ca6f560448425c24672bfe518c5e855cb552",
+  "fixtures": [
+    {
+      "name": "injection_label_cannot_move_real_GPS",
+      "passed": true,
+      "detail": "ValueError: Real-event GPS must match the witnessed metadata anchor"
+    },
+    {
+      "name": "injection_whole_window_real_event_overlap",
+      "passed": true,
+      "detail": "ValueError: Calibration noise window overlaps the protected real-event interval"
+    },
+    {
+      "name": "injection_missing_GPS_anchor",
+      "passed": true,
+      "detail": "ValueError: Real-event GPS must match the witnessed metadata anchor"
+    },
+    {
+      "name": "injection_nonpositive_exclusion",
+      "passed": true,
+      "detail": "ValueError: Invalid real-event exclusion interval"
+    },
+    {
+      "name": "injection_detector_arrival_inside_taper",
+      "passed": true,
+      "detail": "ValueError: Injection detector arrival inside tapered region"
+    },
+    {
+      "name": "second_family_non_GR_refused",
+      "passed": true,
+      "detail": "ValueError: No equivalent non-GR XPHM injection implemented; do not substitute an envelope"
+    },
+    {
+      "name": "injection_disjoint_valid_reaches_boundary",
+      "passed": true,
+      "detail": "No generator or waveform constructed"
+    },
+    {
+      "name": "remnant_named_cosmology_wrong_parameters",
+      "passed": true,
+      "detail": "ValueError: Parameters do not match the pinned named Planck18 input"
+    },
+    {
+      "name": "remnant_cosmology_bad_pin",
+      "passed": true,
+      "detail": "ValueError: Cosmology input changed"
+    },
+    {
+      "name": "remnant_unpaired_columns",
+      "passed": true,
+      "detail": "ValueError: Invalid paired conversion input"
+    },
+    {
+      "name": "fetch_HTTP_truncation_refused",
+      "passed": true,
+      "detail": {
+        "error": "Truncated or oversized HTTP response; partial retained",
+        "promoted": false,
+        "partial_retained": true,
+        "guard_calls": 1
+      }
+    },
+    {
+      "name": "fetch_metadata_size_mismatch_refused",
+      "passed": true,
+      "detail": {
+        "error": "Provider metadata size mismatch; partial retained",
+        "promoted": false,
+        "partial_retained": true,
+        "guard_calls": 1
+      }
+    },
+    {
+      "name": "fetch_wrong_checksum_refused",
+      "passed": true,
+      "detail": {
+        "error": "Provider checksum mismatch; partial retained",
+        "promoted": false,
+        "partial_retained": true,
+        "guard_calls": 1
+      }
+    },
+    {
+      "name": "fetch_no_completeness_check_keeps_partial",
+      "passed": true,
+      "detail": {
+        "error": "No provider completeness check; retain unvalidated partial",
+        "promoted": false,
+        "partial_retained": true,
+        "guard_calls": 1
+      }
+    },
+    {
+      "name": "fetch_encoded_payload_refused",
+      "passed": true,
+      "detail": {
+        "error": "Unexpected encoded response",
+        "promoted": false,
+        "partial_retained": true,
+        "guard_calls": 1
+      }
+    },
+    {
+      "name": "fetch_recipe_must_match_active_view",
+      "passed": true,
+      "detail": {
+        "error": "Recipe does not match active witnessed configuration",
+        "promoted": false,
+        "partial_retained": false,
+        "guard_calls": 1
+      }
+    },
+    {
+      "name": "fetch_allocation_changed_before_promotion",
+      "passed": true,
+      "detail": {
+        "error": "Download authorization changed before promotion",
+        "promoted": false,
+        "partial_retained": true,
+        "guard_calls": 2
+      }
+    },
+    {
+      "name": "fetch_recipe_changed_before_promotion",
+      "passed": true,
+      "detail": {
+        "error": "Download authorization changed before promotion",
+        "promoted": false,
+        "partial_retained": true,
+        "guard_calls": 2
+      }
+    },
+    {
+      "name": "fetch_size_and_dynamic_receipt_identity",
+      "passed": true,
+      "detail": {
+        "error": null,
+        "promoted": true,
+        "partial_retained": false,
+        "guard_calls": 2,
+        "receipt_identity_verified": true
+      }
+    },
+    {
+      "name": "fetch_checksum_only_complete_fallback",
+      "passed": true,
+      "detail": {
+        "error": null,
+        "promoted": true,
+        "partial_retained": false,
+        "guard_calls": 2,
+        "receipt_identity_verified": true
+      }
+    },
+    {
+      "name": "campaign_25_sequential_frozen_stub_receipts",
+      "passed": true,
+      "detail": {
+        "launched_stub_calls": 25,
+        "error": null,
+        "aggregate_receipt": true,
+        "aggregate_status": "SYNTHETIC_NULLS_COMPLETED_NOT_PHYSICAL_5SIGMA"
+      }
+    },
+    {
+      "name": "campaign_child_nonzero_failure_receipt",
+      "passed": true,
+      "detail": {
+        "launched_stub_calls": 1,
+        "error": "SystemExit: 2",
+        "aggregate_receipt": true,
+        "aggregate_status": "SYNTHETIC_NULL_CAMPAIGN_FAILED"
+      }
+    },
+    {
+      "name": "campaign_timeout_failure_receipt",
+      "passed": true,
+      "detail": {
+        "launched_stub_calls": 1,
+        "error": "SystemExit: 2",
+        "aggregate_receipt": true,
+        "aggregate_status": "SYNTHETIC_NULL_CAMPAIGN_FAILED"
+      }
+    },
+    {
+      "name": "campaign_deadline_guard_failure_receipt",
+      "passed": false,
+      "detail": {
+        "launched_stub_calls": 0,
+        "error": "TimeoutError: SYNTHETIC_DEADLINE",
+        "aggregate_receipt": false,
+        "aggregate_status": null
+      }
+    },
+    {
+      "name": "campaign_bad_cell_receipt_failure_receipt",
+      "passed": false,
+      "detail": {
+        "launched_stub_calls": 1,
+        "error": "ValueError: Null receipt does not match frozen cell",
+        "aggregate_receipt": false,
+        "aggregate_status": null
+      }
+    },
+    {
+      "name": "draft002_pilot_static_contract",
+      "passed": true,
+      "detail": "validate_config only; no PE"
+    },
+    {
+      "name": "draft002_census_counts",
+      "passed": true,
+      "detail": {
+        "calibration": 48,
+        "scoped": 14,
+        "quality_holds": 4,
+        "total_candidates": 44
+      }
+    },
+    {
+      "name": "quality_hold_admission_GW240515_005301",
+      "passed": false,
+      "detail": "Guard accepts held event; no job or data read"
+    },
+    {
+      "name": "quality_hold_admission_GW240615_160735",
+      "passed": false,
+      "detail": "Guard accepts held event; no job or data read"
+    },
+    {
+      "name": "quality_hold_admission_GW240930_035959",
+      "passed": false,
+      "detail": "Guard accepts held event; no job or data read"
+    },
+    {
+      "name": "quality_hold_admission_GW241102_144729",
+      "passed": false,
+      "detail": "Guard accepts held event; no job or data read"
+    },
+    {
+      "name": "draft002_census_pin",
+      "passed": true,
+      "detail": "505eb16a608070ab53c50869c89d89000727f49ac156f18b07b75f9bc399a3dd"
+    },
+    {
+      "name": "draft002_real_GPS_anchor_present",
+      "passed": false,
+      "detail": {
+        "present": false
+      }
+    },
+    {
+      "name": "E7_frozen_producers_unchanged",
+      "passed": true,
+      "detail": "Compared with existing final-v2 manifest"
+    }
+  ],
+  "passed": 27,
+  "failed": 7,
+  "changed_live_since_snapshot": [],
+  "no_real_MC_PE_waveform_strain_network": true,
+  "scope": "Modules compiled from snapshotted bytes; mock subprocess/HTTP/generator only. Failures are findings, never patched here."
+}

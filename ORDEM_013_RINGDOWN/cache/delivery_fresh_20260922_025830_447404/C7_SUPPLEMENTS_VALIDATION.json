@@ -1,0 +1,186 @@
+{
+  "status": "PASS",
+  "date_utc": "2026-09-22T02:16:20.037208+00:00",
+  "packages": [
+    {
+      "package": "C7_POSTERIOR_REPRODUCTION",
+      "status": "PASS",
+      "archive": "cache/C7_POSTERIOR_REPRODUCTION_v1.zip",
+      "bytes": 207792,
+      "sha256": "194a0a02b703d6ae49723d435a06fd73144bc1b9a138dbcb604c8cc3fbb8eecc",
+      "manifest_sha256": "6a5a1a0bc09e10ecfd966ae9a81c9833219345beba9f8e2642ee6ae982d6939f",
+      "shipped_files": 19,
+      "replays": [
+        {
+          "stage": "primary",
+          "path": "C7_POSTERIOR_REPRODUCTION/cache/run_primary_20260922_020318_128738/RESULT.json",
+          "sha256": "9f269f269a50983f3a37a71b52a0e657df47fa8308d8b73f2a0e2f6262f6eb57",
+          "comparisons": [
+            {
+              "output": "C4_220_INITIAL.json",
+              "numerical_leaves": 64,
+              "max_absolute_difference": 0,
+              "output_sha256": "f5550b7b1f129e83b4874f95b223e82ca973e0812bd98c150a6c04cd37747edc",
+              "checked_fields": [
+                "N",
+                "quantiles",
+                "rows"
+              ]
+            }
+          ]
+        },
+        {
+          "stage": "joint",
+          "path": "C7_POSTERIOR_REPRODUCTION/cache/run_joint_20260922_020309_445838/RESULT.json",
+          "sha256": "37f10e8535602b5aa11b6b64b2457b280a9225e79b2bf88b61efd6ccaab35426",
+          "comparisons": [
+            {
+              "output": "C4_JOINT_MODES.json",
+              "numerical_leaves": 152,
+              "max_absolute_difference": 0,
+              "output_sha256": "8b2e0fea734caed23f05c3a9f9a2f3f7aaa8f19ed71d2f9d9a841129739e742f",
+              "checked_fields": [
+                "N",
+                "GR_HPD_controls",
+                "rows",
+                "independent_five_dimensional_KDE_quadrature"
+              ]
+            }
+          ]
+        },
+        {
+          "stage": "free_clock",
+          "path": "C7_POSTERIOR_REPRODUCTION/cache/run_free_clock_20260922_020309_446171/RESULT.json",
+          "sha256": "b0e0b3a8b2f6b661bbd3559cbd92fc07d11b057fafb247c34dbcde891fdf468a",
+          "comparisons": [
+            {
+              "output": "C4_FREE_CLOCK.json",
+              "numerical_leaves": 2417,
+              "max_absolute_difference": 0,
+              "output_sha256": "e48c3d667a3d85d10b852d75a954b63ffd5c3f2555145287e259392e683eeb53",
+              "checked_fields": [
+                "N",
+                "rows"
+              ]
+            }
+          ]
+        },
+        {
+          "stage": "catalog",
+          "path": "C7_POSTERIOR_REPRODUCTION/cache/run_catalog_20260922_020404_699983/RESULT.json",
+          "sha256": "8216aa4b1cb89d6eb85aeb6a513a43c645a2801b5f379cb87d555172a0a7534b",
+          "comparisons": [
+            {
+              "output": "C4_CATALOG_220.json",
+              "numerical_leaves": 10866,
+              "max_absolute_difference": 0,
+              "output_sha256": "cd162bc5624018599c4bc22884720348d0be241e518ae3d62fb9a380b066281e",
+              "checked_fields": [
+                "N_events",
+                "N_posterior_draws",
+                "rows",
+                "catalog"
+              ]
+            },
+            {
+              "output": "C4_CATALOG_COMBINATION.json",
+              "numerical_leaves": 192,
+              "max_absolute_difference": 0,
+              "output_sha256": "f3d8c1959ded3efd15045923ce0cbafe7356ec888ced1934d8d0c183046d0d01",
+              "checked_fields": [
+                "common_deformation_GR_diagnostics",
+                "catalog"
+              ]
+            }
+          ]
+        }
+      ],
+      "adversarial": {
+        "mutated_file_refused": true,
+        "path_escapes_refused": [
+          "../escape",
+          "/absolute",
+          "bad\\path"
+        ]
+      }
+    },
+    {
+      "package": "C7_INJECTION_REPRODUCTION",
+      "status": "PASS",
+      "archive": "cache/C7_INJECTION_REPRODUCTION_v1.zip",
+      "bytes": 570982,
+      "sha256": "0e94898309569440f3aab339f3c2b1c2e1eac41a96ace904bb5d7d23c05a4492",
+      "manifest_sha256": "fe81800c5f40ad0ea450e299d623920ddb4f572786db7f191cab23793b424b24",
+      "shipped_files": 25,
+      "replays": [
+        {
+          "stage": "full",
+          "path": "C7_INJECTION_REPRODUCTION/cache/run_full_20260922_020759_269479/RESULT.json",
+          "sha256": "ff75e67994f18247183df6ed3c7f4e786241b201f326a7ba8c45d902b1838484",
+          "comparisons": [
+            {
+              "output": "C5_IMR_CONTROLS.json",
+              "numerical_leaves": 24,
+              "max_absolute_difference": 0.0,
+              "output_sha256": "a4214c275d2f110c5cf16014a136961f817acc451da2f1f9e29b071f93cb9e7a",
+              "checked_fields": [
+                "parameters",
+                "families"
+              ]
+            },
+            {
+              "output": "C5_EMPIRICAL_NOISE.json",
+              "numerical_leaves": 612,
+              "max_absolute_difference": 0.0,
+              "output_sha256": "72075dcae90165fd0885a7d7e4bd891846875133f2f93a358b18848b62c59bdf",
+              "checked_fields": [
+                "detectors"
+              ]
+            },
+            {
+              "output": "C5_RECOLORED_NOISE.json",
+              "numerical_leaves": 152,
+              "max_absolute_difference": 0,
+              "output_sha256": "088fe6927b17e8461df6a05c0d129da28654cf001e3833df24713cfe0d3ec477",
+              "checked_fields": [
+                "scenarios"
+              ]
+            },
+            {
+              "output": "C5_RECOLORED_FORECAST.json",
+              "numerical_leaves": 73412,
+              "max_absolute_difference": 0,
+              "output_sha256": "0825d9e83c57155496b552cb8e806c2245cc1f66dc86c27b4e68b3a551011a0c",
+              "checked_fields": [
+                "number_of_cells",
+                "low_frequency_controls",
+                "results"
+              ]
+            },
+            {
+              "output": "C5_RECOLORED_VALIDATION.json",
+              "numerical_leaves": 672,
+              "max_absolute_difference": 0.0,
+              "output_sha256": "cd4e58c2aecb3e374a3fdfcf5dd8877591db07e42a1b13e021cd1e7c18ce58a2",
+              "checked_fields": [
+                "independent_SVD_controls",
+                "continuous_profile_refinement",
+                "noise_only_prior_volume"
+              ]
+            }
+          ]
+        }
+      ],
+      "adversarial": {
+        "mutated_file_refused": true,
+        "path_escapes_refused": [
+          "../escape",
+          "/absolute",
+          "bad\\path"
+        ]
+      }
+    }
+  ],
+  "scope": "Fresh local scientific-environment replays and tamper/path controls; public download path not re-fetched, original LVK samplers not rerun",
+  "v1_independent_package_unchanged": true
+}

@@ -1,0 +1,69 @@
+{
+  "document_kind": "STATIC_CONTRACT_INVENTORY_NOT_JSON_SCHEMA_VALIDATOR",
+  "status": "PREPARATION_ONLY_NO_ALLOCATION",
+  "path_base": "Chatgpt",
+  "allocation_required": {
+    "parent_registration_sha256": "sha256 of effective original E2 bytes",
+    "registered_utc": "aware UTC ISO, not before E2",
+    "witness_relative_to_Chatgpt": "new witness under TUNEL/DO_CHATGPT",
+    "jobs_relative_to_Chatgpt": "new versioned jobs file",
+    "jobs_sha256": "sha256 of exact serialized jobs bytes"
+  },
+  "jobs_file_required": {
+    "schema_version": "E2_PE_JOBS_V2",
+    "parent_registration_sha256": "same effective E2 sha256",
+    "jobs": "object mapping new noncolliding job names to complete configs"
+  },
+  "jobs_file_optional": {"downloads": "consumer allows pinned per-file licensed downloads; this sidecar emits empty object only"},
+  "job_required": [
+    "event", "mode", "privacy_mode", "variant", "fixed_deformation_parameters",
+    "label", "output_directory_name", "event_GPS", "segment_start_GPS", "duration_s",
+    "sample_rate_hz", "minimum_frequency_hz", "maximum_frequency_hz", "reference_frequency_hz",
+    "onsource_roll_off_s", "psd_duration_s", "psd_segment_s", "offsource_exclusion_s",
+    "quality_required", "injection_flags_required", "detectors", "data", "priors",
+    "wall_budget_seconds", "sampler", "remnant_conversion_INPUT"
+  ],
+  "job_conditional": {
+    "blind_test": ["publication_metadata_review"],
+    "blind_test_with_data_quality_hold": ["data_quality_resolution"],
+    "calibration_injection": ["injection"]
+  },
+  "publication_metadata_review_required": ["review_passed", "scope", "relative_to_Chatgpt", "sha256", "reviewed_utc"],
+  "data_quality_resolution_required": ["review_passed", "method", "relative_to_Chatgpt", "sha256", "reviewed_utc"],
+  "review_contract": "review_passed must be true; nonempty scope/method; source hash checked at launch; E2.registered_utc <= reviewed_utc <= now",
+  "prior_names_exact": ["mass_1", "mass_2", "mass_ratio", "chi_1", "chi_2", "luminosity_distance", "theta_jn", "phase", "ra", "dec", "psi", "geocent_time", "dtau220", "dtau440", "domega220", "domega440"],
+  "free_prior_required": ["kind", "minimum", "maximum"],
+  "free_prior_optional": ["boundary"],
+  "prior_kind_overrides": {"theta_jn": "Sine", "dec": "Cosine", "mass_ratio": "Constraint"},
+  "other_prior_kind": "Uniform",
+  "sampler_required": ["nlive", "walks", "maxcall", "workers", "seed", "dlogz", "minimum_posterior_samples", "minimum_effective_samples"],
+  "sampler_optional_required_false_if_present": ["check_point", "check_point_plot"],
+  "data_per_detector_required": ["onsource_path", "onsource_sha256", "offsource_path", "offsource_sha256"],
+  "remnant_conversion_INPUT_required": ["remnant_fit", "cosmology_name", "cosmology_source_path", "cosmology_source_sha256", "cosmology_parameters"],
+  "cosmology_parameters_exact": ["H0_km_s_Mpc", "Om0", "Tcmb0_K", "Neff", "m_nu_eV", "Ob0"],
+  "injection_required": ["family", "noise_kind", "parameters", "target_network_optimal_SNR"],
+  "injection_families": ["pSEOBNRv4HM_PA", "IMRPhenomXPHM"],
+  "injection_noise_kind": "REAL_OFFSOURCE",
+  "injection_parameters": "all prior_names_exact except mass_ratio, which is optional and must equal mass_2/mass_1",
+  "injection_constraints": [
+    "calibration identity only; event_GPS equals registered real-event anchor",
+    "analysis noise interval outside protected real event",
+    "onsource_path and sha256 equal offsource_path and sha256 per detector",
+    "truth supported by recovery priors before and after distance rescaling",
+    "detector arrival times inside untapered analysis support",
+    "XPHM requires all four deformations exactly zero",
+    "full IMR optimal network SNR, not ringdown SNR"
+  ],
+  "sidecar_caps": {"wall_seconds_per_job": 28800, "workers_per_job": 24, "scheduling": "serial conservative accounting", "fixed_deformation_parameters": {}, "downloads": {}},
+  "open_dependencies": [
+    "effective activated E2 and independent review",
+    "real pilot cost, convergence and comparison review",
+    "remaining global deadline and other pending work",
+    "per-event SNR convention and expected information model",
+    "post-E2 publication review and applicable data-quality resolution",
+    "TGL per-reading mapping to injected parameters, frames and truth correlations",
+    "non-GR second-family injection NOT IMPLEMENTED",
+    "actual independent noise segments, repetition count, coverage and stop criteria",
+    "functional and independent review of optional candidate serializer"
+  ]
+}

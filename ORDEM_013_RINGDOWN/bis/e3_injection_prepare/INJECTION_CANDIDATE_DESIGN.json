@@ -1,0 +1,2348 @@
+{
+  "schema_version": "E3_INJECTION_PREPARATION_V1_NOT_ALLOCATION",
+  "status": "CANDIDATE_METADATA_DESIGN__NO_EXECUTION__BLOCKED_PENDING_PILOT_AND_ALLOCATION",
+  "created_utc": "2026-09-22T22:28:23.808657+00:00",
+  "parent_registration_sha256": "e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416",
+  "order_locators": [
+    "E3.2 lines194",
+    "E3.3 lines195",
+    "E2.6 lines183"
+  ],
+  "scope": "Read-only source/metadata preparation; writes only this folder; no producer/E2 edits, waveform, PE, MC, draws, strain, posterior samples, hidden seed or offset access. No historical campaign resurrection.",
+  "accepted_dynamic_job_schema_after_completion": "E2_PE_JOBS_V2",
+  "allocation_not_created": true,
+  "launchable": false,
+  "truth_statute": "INPUT_ARBITRARY_ALIGNED_SOURCE_NOT_LVK_REPRODUCTION",
+  "truth_reference": {
+    "mass_1": 40.0,
+    "mass_2": 30.0,
+    "chi_1": 0.2,
+    "chi_2": -0.1,
+    "luminosity_distance": 500.0,
+    "theta_jn": 1.0,
+    "phase": 0.3,
+    "ra": 1.0,
+    "dec": 0.2,
+    "psi": 0.4,
+    "geocent_time": 1420874252.2,
+    "dtau220": 0.0,
+    "dtau440": 0.0,
+    "domega220": 0.0,
+    "domega440": 0.0
+  },
+  "families": [
+    "pSEOBNRv4HM_PA",
+    "IMRPhenomXPHM"
+  ],
+  "recovery_family": "pSEOBNRv4HM_PA",
+  "bin_plan": [
+    {
+      "id": "B0",
+      "observed_network_GWOSC_bin": [
+        12.0,
+        14.0
+      ],
+      "interval": "[lower,upper)",
+      "target_network_optimal_SNR": 13.0,
+      "test_candidate_ids_metadata_only": [
+        "GW240515_005301",
+        "GW240615_160735",
+        "GW240923_204006",
+        "GW241102_144729",
+        "GW241130_034908",
+        "GW241210_060606",
+        "GW250104_015122",
+        "GW250109_010541",
+        "GW250118_170523"
+      ],
+      "count": 9,
+      "without_quality_hold": 6,
+      "quality_hold_count": 3,
+      "statute": "INPUT_BIN_EDGES_AND_TARGET; REAL_COUNTS_FROM_REGISTERED_METADATA",
+      "limit": "Published network detection SNR is not identical to the future optimal SNR in the frozen PSD/band. No equality or selection by recovered width."
+    },
+    {
+      "id": "B1",
+      "observed_network_GWOSC_bin": [
+        14.0,
+        20.0
+      ],
+      "interval": "[lower,upper)",
+      "target_network_optimal_SNR": 16.0,
+      "test_candidate_ids_metadata_only": [
+        "GW230919_215712",
+        "GW240513_183302",
+        "GW240920_073424",
+        "GW240930_035959",
+        "GW241111_111552"
+      ],
+      "count": 5,
+      "without_quality_hold": 4,
+      "quality_hold_count": 1,
+      "statute": "INPUT_BIN_EDGES_AND_TARGET; REAL_COUNTS_FROM_REGISTERED_METADATA",
+      "limit": "Published network detection SNR is not identical to the future optimal SNR in the frozen PSD/band. No equality or selection by recovered width."
+    },
+    {
+      "id": "B2",
+      "observed_network_GWOSC_bin": [
+        20.0,
+        30.0
+      ],
+      "interval": "[lower,upper)",
+      "target_network_optimal_SNR": 25.0,
+      "test_candidate_ids_metadata_only": [],
+      "count": 0,
+      "without_quality_hold": 0,
+      "quality_hold_count": 0,
+      "statute": "INPUT_BIN_EDGES_AND_TARGET; REAL_COUNTS_FROM_REGISTERED_METADATA",
+      "limit": "Published network detection SNR is not identical to the future optimal SNR in the frozen PSD/band. No equality or selection by recovered width."
+    },
+    {
+      "id": "B3",
+      "observed_network_GWOSC_bin": [
+        30.0,
+        60.0
+      ],
+      "interval": "[lower,upper)",
+      "target_network_optimal_SNR": 45.0,
+      "test_candidate_ids_metadata_only": [],
+      "count": 0,
+      "without_quality_hold": 0,
+      "quality_hold_count": 0,
+      "statute": "INPUT_BIN_EDGES_AND_TARGET; REAL_COUNTS_FROM_REGISTERED_METADATA",
+      "limit": "Published network detection SNR is not identical to the future optimal SNR in the frozen PSD/band. No equality or selection by recovered width."
+    },
+    {
+      "id": "B4",
+      "observed_network_GWOSC_bin": [
+        60.0,
+        100.0
+      ],
+      "interval": "[lower,upper)",
+      "target_network_optimal_SNR": 80.0,
+      "test_candidate_ids_metadata_only": [],
+      "count": 0,
+      "without_quality_hold": 0,
+      "quality_hold_count": 0,
+      "statute": "INPUT_BIN_EDGES_AND_TARGET; REAL_COUNTS_FROM_REGISTERED_METADATA",
+      "limit": "Published network detection SNR is not identical to the future optimal SNR in the frozen PSD/band. No equality or selection by recovered width."
+    }
+  ],
+  "minimum_grid": {
+    "bins": 5,
+    "families": 2,
+    "cells": 10,
+    "replicates_per_cell": null,
+    "candidate_templates_represent_first_replica_only": true
+  },
+  "noise_plan": {
+    "anchor_event": "GW250114_082203",
+    "event_reference_GPS": 1420878141.2,
+    "file_start_from_filename_only": 1420873728,
+    "file_duration_from_filename_only": 4096,
+    "first_analysis_start": 1420874240.0,
+    "analysis_duration_s": 16,
+    "window_stride_s": 32.0,
+    "replica_rule": "slot=5*replicate_index+bin_index; start=file_start+512+32*slot; both families share a paired noise window",
+    "geocent_time_rule": "start+12.2; translate full pilot time prior by truth_time minus real event_GPS",
+    "PSD_rule": "Frozen reader chooses first 256s all-flag/finiteness-passing block in same file; require common block end<=first analysis start before any allocated jobs",
+    "maximum_geometry_slots_ignoring_DQ": 112,
+    "maximum_complete_five_bin_replicas_ignoring_DQ": 22,
+    "scope": "Filename geometry only; common PSD and paired noise imply cross-job dependence, never count as independent exposure/time."
+  },
+  "distance_rescale": {
+    "formula": "Dnew=D0*rho0/target",
+    "reference_distance_Mpc": 500,
+    "strict_recovery_support_Mpc": [
+      100,
+      2000
+    ],
+    "rho0_interval_per_target": "0.2*target < rho0 < 4*target",
+    "rho0_intersection_for_all_five_targets_at_same_response": [
+      16.0,
+      52.0
+    ],
+    "scope": "Algebra only. rho0 unknown and changes with family, GPS, sky and PSD. Per-job checks remain mandatory."
+  },
+  "LVK_metadata_reuse": {
+    "NR_with_44": {
+      "physical_truth_present": false,
+      "injection_parameters": [
+        "None"
+      ],
+      "config_metadata": {
+        "waveform_approximant": [
+          "SEOBNRv5PHM"
+        ],
+        "duration": [
+          "8.0"
+        ],
+        "sampling_frequency": [
+          "2048.0"
+        ],
+        "minimum_frequency": [
+          "20"
+        ],
+        "maximum_frequency": [
+          "896.0"
+        ],
+        "reference_frequency": [
+          "20.0"
+        ],
+        "injection_file": [
+          "None"
+        ],
+        "injection_dict": [
+          "None"
+        ],
+        "zero_noise": [
+          "False"
+        ],
+        "gaussian_noise": [
+          "False"
+        ]
+      }
+    },
+    "NR_without_44": {
+      "physical_truth_present": false,
+      "injection_parameters": [
+        "None"
+      ],
+      "config_metadata": {
+        "waveform_approximant": [
+          "SEOBNRv5PHM"
+        ],
+        "duration": [
+          "8.0"
+        ],
+        "sampling_frequency": [
+          "2048.0"
+        ],
+        "minimum_frequency": [
+          "20"
+        ],
+        "maximum_frequency": [
+          "896.0"
+        ],
+        "reference_frequency": [
+          "20.0"
+        ],
+        "injection_file": [
+          "None"
+        ],
+        "injection_dict": [
+          "None"
+        ],
+        "zero_noise": [
+          "False"
+        ],
+        "gaussian_noise": [
+          "False"
+        ]
+      }
+    }
+  },
+  "TGL_a1_implementability": {
+    "R-A": {
+      "pseob_a1": "PSEOB_CONSTANT_ENSEMBLE_PARAMETER_MAPPABLE_BUT_SUBRESOLUTION_NOT_DISTINGUISHABLE",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-B": {
+      "pseob_a1": "PSEOB_CONSTANT_ENSEMBLE_DTau_CONDITIONAL_MAPPING_REQUIRED",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-MOD": {
+      "pseob_a1": "PSEOB_CONSTANT_ENSEMBLE_DTau_CONDITIONAL_MAPPING_REQUIRED",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-RAIZ-0": {
+      "pseob_a1": "PSEOB_CONSTANT_ENSEMBLE_DTau_CONDITIONAL_MAPPING_REQUIRED",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-RAIZ-EP4": {
+      "pseob_a1": "PSEOB_CONSTANT_ENSEMBLE_PARAMETER_MAPPABLE_BUT_SUBRESOLUTION_NOT_DISTINGUISHABLE",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-RAIZ-REST": {
+      "pseob_a1": "PSEOB_CONSTANT_ENSEMBLE_PARAMETER_MAPPABLE_BUT_SUBRESOLUTION_NOT_DISTINGUISHABLE",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-RAIZ-COHERENT": {
+      "pseob_a1": "NO_UNIQUE_CONSTANT_DTau_IN_THIS_SOURCE",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-LIN": {
+      "pseob_a1": "PSEOB_CONSTANT_ENSEMBLE_DTau_CONDITIONAL_MAPPING_REQUIRED",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-GLOBAL": {
+      "pseob_a1": "GR_EQUIVALENT_ZERO_DEFORMATION_NO_SEPARATE_TGL_POWER_CELL",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    },
+    "R-PROP": {
+      "pseob_a1": "NO_UNIQUE_CONSTANT_DTau_IN_THIS_SOURCE",
+      "XPHM_a1": "ONLY_IF_ALL_FOUR_DEFORMATIONS_EXACTLY_ZERO_THEN_GR_DUPLICATE; nonzero rejected",
+      "recovery": "all four QNM deviations free",
+      "scope": "Source-code implementability, not scientific acceptance or universal physical interpretation"
+    }
+  },
+  "missing_inputs": [
+    {
+      "id": "M1_PILOT",
+      "required": "After-pilot cost, terminal convergence/acceptance receipt and family/configuration comparison, with hashes. Do not read/assume new pilot posterior in this preparation.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M2_BUDGET",
+      "required": "E3.2 actual remaining 40h budget, N per family/bin, maxcall and wall per job, stopping precision, all five alternatives costed. Candidate carries null wall/maxcall deliberately.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M3_NOISE",
+      "required": "Future authorized metadata/DQ verification of pinned H1/L1 offsource file extents, common valid 16s windows and flags; PSD first valid 256s block must end before earliest planned analysis window. No strain read here.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M4_DISTANCE",
+      "required": "At execution, family/time/sky-specific reference optimal SNR at D0=500 Mpc and registered PSD/band; Dnew=D0*rho0/target strictly inside (100,2000). Freeze infeasible-bin disposition before results; never widen prior to obtain a pass.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M5_POPULATION",
+      "required": "Ratify arbitrary aligned source point and five SNR-bin targets as INPUT or provide a predeclared source grid; one source/one epoch is not population calibration. LVK metadata contains no recoverable physical truth vector.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M6_METRICS",
+      "required": "Independent analysis specification: per-family/bin bias, paired covariance, uncertainty on c, within/between-family df scatter, coverage levels and binomial intervals, failures counted, precision/stop criterion and systematic-gate computation. No such campaign results claimed.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M7_ALLOCATION",
+      "required": "Populate E2_PE_JOBS_V2 jobs, parent registration hash, unique names/output dirs/seeds, config SHA, ORCAMENTO_40H allocation and tunnel witness before jobs. Do not replace existing jobs or edit E2.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M8_TGL",
+      "required": "For nonzero a=1 candidates, per-reading/per-mode remnant/QNM/clock/redshift provenance, signed-spin admissibility, deformation convention and truth support, with 220-only versus 220+440 INPUT explicit. No values computed here.",
+      "status": "OPEN"
+    },
+    {
+      "id": "M9_IMPLEMENTATION_LIMITS",
+      "required": "Keep recovery all four deviations free. XPHM non-GR/precessing truths, stochastic unravelings, exact coherent/propagation signals, fixed-deformation recovery and new event GPS anchors are unsupported by this frozen path; separate reviewed/versioned implementation if later authorized.",
+      "status": "NOT_IMPLEMENTED_IN_FROZEN_PATH"
+    }
+  ],
+  "candidate_job_templates": {
+    "E3_GR_B0_PSEOB_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B0_PSEOB_R000_CANDIDATE",
+      "label": "E3_GR_B0_PSEOB_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874240.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874252.05,
+          "maximum": 1420874252.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231000,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "pSEOBNRv4HM_PA",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 13.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874252.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B0_XPHM_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B0_XPHM_R000_CANDIDATE",
+      "label": "E3_GR_B0_XPHM_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874240.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874252.05,
+          "maximum": 1420874252.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231001,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "IMRPhenomXPHM",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 13.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874252.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B1_PSEOB_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B1_PSEOB_R000_CANDIDATE",
+      "label": "E3_GR_B1_PSEOB_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874272.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874284.05,
+          "maximum": 1420874284.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231002,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "pSEOBNRv4HM_PA",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 16.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874284.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B1_XPHM_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B1_XPHM_R000_CANDIDATE",
+      "label": "E3_GR_B1_XPHM_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874272.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874284.05,
+          "maximum": 1420874284.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231003,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "IMRPhenomXPHM",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 16.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874284.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B2_PSEOB_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B2_PSEOB_R000_CANDIDATE",
+      "label": "E3_GR_B2_PSEOB_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874304.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874316.05,
+          "maximum": 1420874316.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231004,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "pSEOBNRv4HM_PA",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 25.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874316.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B2_XPHM_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B2_XPHM_R000_CANDIDATE",
+      "label": "E3_GR_B2_XPHM_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874304.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874316.05,
+          "maximum": 1420874316.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231005,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "IMRPhenomXPHM",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 25.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874316.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B3_PSEOB_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B3_PSEOB_R000_CANDIDATE",
+      "label": "E3_GR_B3_PSEOB_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874336.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874348.05,
+          "maximum": 1420874348.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231006,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "pSEOBNRv4HM_PA",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 45.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874348.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B3_XPHM_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B3_XPHM_R000_CANDIDATE",
+      "label": "E3_GR_B3_XPHM_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874336.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874348.05,
+          "maximum": 1420874348.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231007,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "IMRPhenomXPHM",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 45.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874348.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B4_PSEOB_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B4_PSEOB_R000_CANDIDATE",
+      "label": "E3_GR_B4_PSEOB_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874368.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874380.05,
+          "maximum": 1420874380.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231008,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "pSEOBNRv4HM_PA",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 80.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874380.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    },
+    "E3_GR_B4_XPHM_R000_CANDIDATE": {
+      "event": "GW250114_082203",
+      "mode": "calibration",
+      "variant": "220_plus_440_free",
+      "privacy_mode": "procedural_same_host",
+      "fixed_deformation_parameters": {},
+      "remnant_conversion_INPUT": {
+        "remnant_fit": "LAL_SEOBNRv4_aligned_NR_fit",
+        "cosmology_name": "Planck18_external_INPUT",
+        "cosmology_source_path": "/opt/lal_env/lib/python3.12/site-packages/astropy/cosmology/data/Planck18.ecsv",
+        "cosmology_source_sha256": "cb54925ee712fb46f9b820d6057a4cdc0c34414a4b4e3ca5c76aba98baa5e59d",
+        "cosmology_parameters": {
+          "H0_km_s_Mpc": 67.66,
+          "Om0": 0.30966,
+          "Tcmb0_K": 2.7255,
+          "Neff": 3.046,
+          "m_nu_eV": [
+            0.0,
+            0.0,
+            0.06
+          ],
+          "Ob0": 0.04897
+        },
+        "scope": "External Planck18 INPUT, not fitted by this program and not a TGL derived H0. GR aligned remnant fit, not independently measured inspiral-only parameters",
+        "primary_return_contract_source": "https://lscsoft.docs.ligo.org/pesummary/latest/_modules/pesummary/gw/conversions/remnant.html",
+        "contract_read": "SEOBNRv4 uses LAL SimIMREOBFinalMassSpin return indices1fraction/2spin; mass fraction multiplies total input mass",
+        "created_utc": "2026-09-22T20:35:47.646490+00:00",
+        "producer_sha256": "5e0d116dbc1ac80d65e851430775760fcb058e444b6a5a499d732998c92ca9a1"
+      },
+      "output_directory_name": "E3_GR_B4_XPHM_R000_CANDIDATE",
+      "label": "E3_GR_B4_XPHM_R000_CANDIDATE",
+      "event_GPS": 1420878141.2,
+      "segment_start_GPS": 1420874368.0,
+      "duration_s": 16,
+      "sample_rate_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "psd_duration_s": 256,
+      "psd_segment_s": 8,
+      "offsource_exclusion_s": 16.0,
+      "onsource_roll_off_s": 0.2,
+      "quality_required": [
+        "DATA",
+        "CBC_CAT1",
+        "CBC_CAT2",
+        "CBC_CAT3"
+      ],
+      "injection_flags_required": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "data": {
+        "H1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/H-H1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "41a258f8c1417615c26971b14d233bef1fdb4fca2a613f1e62fe040739182c93"
+        },
+        "L1": {
+          "onsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "onsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d",
+          "offsource_path": "ORDEM_013_RINGDOWN/cache/gwosc/offsource/L-L1_GWOSC_O4b_4KHZ_R1-1420873728-4096.hdf5",
+          "offsource_sha256": "dcb207dab2c0d21492b5d443f6ccc1a7ac28516a288abfd515dd5ba3e4ee581d"
+        }
+      },
+      "priors": {
+        "mass_1": {
+          "kind": "Uniform",
+          "minimum": 15,
+          "maximum": 100
+        },
+        "mass_2": {
+          "kind": "Uniform",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "mass_ratio": {
+          "kind": "Constraint",
+          "minimum": 0.125,
+          "maximum": 1
+        },
+        "chi_1": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "chi_2": {
+          "kind": "Uniform",
+          "minimum": -0.99,
+          "maximum": 0.99
+        },
+        "luminosity_distance": {
+          "kind": "Uniform",
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "theta_jn": {
+          "kind": "Sine",
+          "minimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "phase": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "ra": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 6.283185307179586,
+          "boundary": "periodic"
+        },
+        "dec": {
+          "kind": "Cosine",
+          "minimum": -1.5707963267948966,
+          "maximum": 1.5707963267948966
+        },
+        "psi": {
+          "kind": "Uniform",
+          "minimum": 0,
+          "maximum": 3.141592653589793,
+          "boundary": "periodic"
+        },
+        "geocent_time": {
+          "kind": "Uniform",
+          "minimum": 1420874380.05,
+          "maximum": 1420874380.3500001
+        },
+        "dtau220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "dtau440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 4
+        },
+        "domega220": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        },
+        "domega440": {
+          "kind": "Uniform",
+          "minimum": -0.8,
+          "maximum": 2
+        }
+      },
+      "wall_budget_seconds": null,
+      "sampler": {
+        "seed": 13231009,
+        "workers": 24,
+        "nlive": 512,
+        "dlogz": 0.1,
+        "walks": 50,
+        "maxcall": null,
+        "minimum_posterior_samples": 1000,
+        "minimum_effective_samples": 100
+      },
+      "prior_scope": "INPUT broad pilot priors, not a reproduction of every published prior; full source masses/spins/sky/distance/deformations free",
+      "family_scope": "Aligned-spin pSEOBNRv4HM_PA versus released precessing pSEOBNRv5PHM; difference not attributable without calibration",
+      "injection": {
+        "family": "IMRPhenomXPHM",
+        "noise_kind": "REAL_OFFSOURCE",
+        "target_network_optimal_SNR": 80.0,
+        "parameters": {
+          "mass_1": 40.0,
+          "mass_2": 30.0,
+          "chi_1": 0.2,
+          "chi_2": -0.1,
+          "luminosity_distance": 500.0,
+          "theta_jn": 1.0,
+          "phase": 0.3,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "geocent_time": 1420874380.2,
+          "dtau220": 0.0,
+          "dtau440": 0.0,
+          "domega220": 0.0,
+          "domega440": 0.0
+        }
+      }
+    }
+  },
+  "source_pins_relative_to_Chatgpt": {
+    "ORDEM_013_RINGDOWN/RINGDOWN_5SIGMA_V1.json": {
+      "sha256": "e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416",
+      "bytes": 183005
+    },
+    "TUNEL/PARA_CHATGPT/ORDEM_013BIS_fechamento_e_ampliacao_dos_eventos_ate_5sigma.md": {
+      "sha256": "a907d07bc484b53cc6db237dc5972f4dcc47be03ad084c832201bb648981454b",
+      "bytes": 91912
+    },
+    "ORDEM_013_RINGDOWN/bis/f2_injection/METADATA.json": {
+      "sha256": "b56c22e54d99b98d0693e915326f410f193063928248e859902df6692625f305",
+      "bytes": 68671
+    },
+    "ORDEM_013_RINGDOWN/bis/e4_e5_prepare/PE_R1_R2_R3_CLOSING_REVIEW.md": {
+      "sha256": "1da6c752d3313e18e2dd8e086d7254555d472a7aa8c0f9dcf14759d1569ef30f",
+      "bytes": 8908
+    },
+    "ORDEM_013_RINGDOWN/tgl_ringdown_prediction.py": {
+      "sha256": "fd0fc446e1c732f3d782210c6effa7cb7faeaeb7a51a434d4f397f1da89bd652",
+      "bytes": 8382
+    },
+    "ORDEM_013_RINGDOWN/bis/e3_injection_prepare/SCALAR_TIME_BOUND_OBSERVATION.json": {
+      "sha256": "ce9bb95c23abe12419a6fe700925cbc9e15209ef87932aa7ceff66cf87723115",
+      "bytes": 1368
+    },
+    "ORDEM_013_RINGDOWN/bis/e3_injection_prepare/build_candidate_checklist.py": {
+      "sha256": "198e4a83cf8938b8f736b6b7b9fe7917daf1ee0289a0f87fcc3c6f55c8a619d7",
+      "bytes": 24766
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/injection_design.py": {
+      "sha256": "12017563c123df76b856ddedecf9166ddc4c25fe26a5c8b773bc82086b6c842d",
+      "bytes": 7907
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/temporal_contract.py": {
+      "sha256": "c8f4ecbc28d4312e3885d61c14f174062c6055eee0bbd54897e725a18240b605",
+      "bytes": 1859
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/pseob_source.py": {
+      "sha256": "2c9a053177bd2671da1879f60343434b3605b3274994b42d68aa50cd68f4ff2f",
+      "bytes": 4358
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/pe_runner.py": {
+      "sha256": "6712610a0392abe629b6ea5b5f4fa5a45b2c8b9a3dfb123c952513f18cef68fa",
+      "bytes": 19622
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/strain_io.py": {
+      "sha256": "a52faf32e88088320c57d303987a31ec2b9b59c93e162923d603c2c96b21a5b6",
+      "bytes": 4560
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/registration_guard.py": {
+      "sha256": "3cb2d9ef0672ccdf9bbca8547102b9a1323ea9d51bbc780732bb78bad99b40d7",
+      "bytes": 15710
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/run_controlled.py": {
+      "sha256": "7b5dd6484014942ee5fdd9fc3e529eaf05f9dffe463f35cdd10a01bdcf86334d",
+      "bytes": 5991
+    },
+    "ORDEM_013_RINGDOWN/bis/e2_code/remnant_conversion.py": {
+      "sha256": "87604de5c8fa7139cd6aa4d0c4fde09476105769735e44d476f3b9a55aa11bc1",
+      "bytes": 3406
+    }
+  }
+}
