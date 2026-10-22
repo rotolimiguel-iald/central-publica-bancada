@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#080d14">
+  <title>Universo residente · IALD</title>
+  <link rel="stylesheet" href="/universe.css">
+  <script src="/universe.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Ir ao conteúdo</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="IALD · voltar ao painel da bancada">
+      <svg class="brand-symbol" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M18 3 33 18 18 33 3 18Z" stroke="currentColor"/><circle cx="18" cy="18" r="8" stroke="currentColor"/><path d="M18 9v18M9 18h18" stroke="currentColor"/></svg>
+      <span><strong>IALD</strong><small>BANCADA TGL</small></span>
+    </a>
+    <nav aria-label="Navegação principal"><a href="http://127.0.0.1:18766/explore">Mapa do Universo</a><a class="current" href="#main" aria-current="page">Universo residente</a><a href="http://127.0.0.1:18766/cosmos">Cosmologia BAO</a><a href="#ringdown">Ringdown condicional</a><a href="#event-panel">GW250114</a></nav>
+    <a class="back-link" href="/">Painel da bancada <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main" class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div><p class="eyebrow"><span class="tiny-square"></span> LABORATÓRIO DE SÉRIES FÍSICAS</p><h1 id="page-title">Universo <span>residente.</span></h1><p class="hero-description">Carregue um domínio. Percorra o tempo do sinal.<br>Explore a forma dos dados, com a origem à vista.</p></div>
+      <dl class="hero-metrics"><div><dt>Domínios disponíveis</dt><dd id="domain-count">—</dd></div><div><dt>Séries em memória</dt><dd id="series-count">—</dd></div><div><dt>RAM residente</dt><dd id="resident-size">—</dd></div></dl>
+    </section>
+    <noscript><p class="notice error">Ative o JavaScript para carregar os domínios e navegar pelos dados.</p></noscript>
+
+    <section class="domains-section" aria-labelledby="domains-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / EXPLORAR</p><h2 id="domains-title">Domínios do universo</h2></div><button id="refresh-domains" class="button quiet" type="button">Atualizar domínios <span aria-hidden="true">↻</span></button></div>
+      <p id="domains-message" class="muted" role="status">Consultando os domínios disponíveis…</p>
+      <div id="domain-grid" class="domain-grid" aria-label="Domínios científicos"></div>
+      <div class="memory-bar" aria-busy="false" id="memory-bar">
+        <div class="memory-state"><span class="status-dot" id="status-dot"></span><div><strong id="load-title">Consultando memória</strong><p id="load-message" role="status">Aguardando o estado do servidor.</p></div></div>
+        <div class="load-progress"><div><span id="load-count">— arquivos</span><span id="load-percent">—</span></div><progress id="load-progress" max="100" value="0" aria-label="Progresso do carregamento do domínio"></progress></div>
+        <button id="release-memory" class="button quiet" type="button" disabled>Liberar RAM</button>
+      </div>
+      <div class="worker-memory"><span>Processo residente · RSS <b id="worker-rss">—</b></span><span>Swap <b id="worker-swap">—</b></span><span id="quality-note">Máscaras DQ: aguardando política de qualidade do servidor.</span></div>
+      <details id="load-errors" class="notice error" hidden><summary id="load-errors-summary">Falhas no carregamento</summary><ul id="load-error-list"></ul></details>
+    </section>
+
+    <section class="workspace" aria-label="Exploração temporal dos dados residentes">
+      <aside class="panel library" aria-labelledby="series-title">
+        <div class="panel-heading"><div><p class="eyebrow">MEMÓRIA ATIVA</p><h2 id="series-title">Séries carregadas</h2></div><span id="series-badge" class="count-badge">0</span></div>
+        <label class="search-label" for="series-search"><span class="sr-only">Filtrar séries por nome ou detector</span><input id="series-search" type="search" placeholder="Buscar série ou detector" autocomplete="off"></label>
+        <div id="series-list" class="series-list" role="group" aria-label="Selecione a série observada"><p class="empty-copy">Carregue um domínio para trazer suas séries para a memória.</p></div>
+        <div class="library-note"><span class="small-rule"></span><p>O domínio é carregado por inteiro. A janela temporal consulta o dado residente em RAM.</p></div>
+      </aside>
+
+      <section class="panel observation" aria-labelledby="observation-title">
+        <div class="panel-heading observation-heading"><div><p class="eyebrow">02 / SINAL OBSERVADO</p><h2 id="observation-title">A forma no tempo</h2><p id="selected-name" class="muted breakable">Nenhuma série selecionada</p></div><div class="heading-tags"><span class="badge"><i class="legend-mark mint"></i> Mínimo / máximo</span><span id="renderer-label" class="badge neutral">Renderizador…</span></div></div>
+        <div class="series-facts"><span>Detector <b id="selected-detector">—</b></span><span>Δt <b id="selected-dt">—</b></span><span>Duração <b id="selected-duration">—</b></span><span>GPS inicial <b id="selected-gps">—</b></span></div>
+        <div class="chart-stack" id="observed-chart" role="img" aria-label="Envelope mínimo e máximo da série observada, com lacunas preservadas" aria-describedby="observed-caption chart-readout">
+          <canvas id="observed-gpu" aria-hidden="true"></canvas><canvas id="observed-axes" aria-hidden="true"></canvas>
+          <div id="observed-empty" class="chart-empty"><span class="empty-glyph" aria-hidden="true">∿</span><strong>O sinal começa na fonte.</strong><p>Carregue um domínio e selecione uma série.<br>Seu envelope aparecerá aqui.</p></div>
+        </div>
+        <div class="chart-bottom"><p id="chart-readout">Passe sobre o gráfico para inspecionar tempo, mínimo e máximo.</p><span id="view-state" role="status">Sem janela carregada</span></div>
+        <fieldset id="timeline-controls" class="timeline" disabled>
+          <legend class="sr-only">Navegação no tempo da série</legend>
+          <div class="timeline-top"><div class="transport"><button id="play-toggle" class="button primary play-button" type="button" aria-pressed="false"><span id="play-symbol" aria-hidden="true">▶</span><span id="play-label">Reproduzir</span></button><button id="rewind" class="button icon-button" type="button" title="Voltar ao início da série" aria-label="Voltar ao início da série">↤</button><label class="speed-label" for="play-speed">Velocidade<select id="play-speed"><option value="0.1">0,1×</option><option value="0.25">0,25×</option><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></label></div><button id="full-series" class="button quiet" type="button">Ver série inteira</button></div>
+          <label class="sr-only" for="time-scrub">Início da janela, em segundos desde o início do arquivo</label><input id="time-scrub" class="scrubber" type="range" min="0" max="1" step="any" value="0" aria-describedby="timeline-note">
+          <div class="scrub-labels"><span>0 s</span><output id="scrub-position" for="time-scrub">0 s</output><span id="scrub-end">—</span></div>
+          <div class="time-fields"><label for="window-start">Início da janela <span>s · relativo ao arquivo</span><input id="window-start" type="number" min="0" step="any" value="0"></label><label for="window-duration">Duração da janela <span>s</span><input id="window-duration" type="number" min="0.000001" step="any" value="1"></label><div class="time-end"><span>Fim da janela</span><strong id="window-end">—</strong><small id="window-gps">GPS não informado</small></div></div>
+        </fieldset>
+        <p class="panel-note" id="timeline-note">A velocidade percorre a gravação; não altera o tempo físico dos dados nem reverte dephasing.</p>
+        <div class="view-facts" id="observed-caption"><span>Leitura <b id="read-source">—</b></span><span>Novas leituras de strain <b id="disk-reads">—</b></span><span>Amostras na janela <b id="window-rows">—</b></span><span>Fração finita <b id="finite-fraction">—</b></span><span>Consulta <b id="view-elapsed">—</b></span></div>
+        <p class="panel-note" id="gap-coverage">Cada traço preserva o mínimo e o máximo do intervalo. Lacunas nulas permanecem abertas; não há ligação entre bins. Escala vertical automática.</p>
+      </section>
+    </section>
+
+    <section class="panel model-panel" id="ringdown" aria-labelledby="model-title">
+      <div class="panel-heading"><div><p class="eyebrow">03 / MODELO CONDICIONAL</p><h2 id="model-title">Ringdown <span class="muted">GR / TGL</span></h2><p class="model-intro">Explore a polarização efetiva de ensemble, em um painel próprio.</p></div><span class="badge amber">[INPUT] Relógio explícito</span></div>
+      <p id="model-regime-banner" class="panel-note" role="status" hidden><strong>Cenário exploratório · <span id="model-regime-name"></span> · NÃO ajustado a evento.</strong> Parâmetros iniciais do modelo, editáveis. O relógio exige seleção explícita.</p>
+      <div class="model-layout">
+        <form id="model-form" class="model-form">
+          <div class="clock-field"><label for="model-reading">Leitura do relógio condicional</label><select id="model-reading" name="reading" required aria-describedby="clock-note"><option value="" selected disabled>Selecione explicitamente o relógio</option><option value="R-A">R-A · relógio Planck [INPUT]</option><option value="R-B">R-B · relógio massa [INPUT]</option><option value="R-RAIZ-0">R-RAIZ-0 · leitura condicional</option><option value="R-GLOBAL">R-GLOBAL · leitura condicional</option></select><p id="clock-note">Nenhum relógio foi assumido. R-A e R-B são entradas do executor atual; as demais leituras dependem de seu suporte.</p></div>
+          <div class="parameter-grid"><label for="model-mass">Massa da fonte <span>M☉</span><input id="model-mass" name="mass_source_solar" type="number" min="0.000001" step="any" value="65" required></label><label for="model-spin">Spin <span>adimensional</span><input id="model-spin" name="spin" type="number" min="0" max="0.999999" step="any" value="0.7" required></label><label for="model-redshift">Redshift <span>z</span><input id="model-redshift" name="redshift" type="number" min="0" step="any" value="0.1" required></label><label for="model-amplitude">Amplitude <span>polarização efetiva</span><input id="model-amplitude" name="amplitude" type="number" min="0" step="any" value="1e-21" required></label><label for="model-phase">Fase inicial <span>rad</span><input id="model-phase" name="phase" type="number" step="any" value="0" required></label><label for="model-duration">Duração <span>s</span><input id="model-duration" name="duration_s" type="number" min="0.000001" step="any" value="0.08" required></label></div>
+          <button id="model-submit" class="button secondary" type="submit" disabled>Calcular curvas <span aria-hidden="true">↗</span></button><p class="form-note">Após a seleção, as curvas acompanham os parâmetros com uma breve pausa entre edições.</p>
+        </form>
+        <div class="model-output">
+          <div class="model-chart-header"><div class="curve-legend"><span><i class="legend-line gr"></i>GR</span><span><i class="legend-line tgl"></i>TGL</span></div><span class="muted">Polarização efetiva / ensemble</span></div>
+          <div class="chart-stack model-chart" id="model-chart" role="img" aria-label="Curvas condicionais GR e TGL de polarização efetiva, separadas do sinal observado" aria-describedby="model-status prediction-scope"><canvas id="model-canvas" aria-hidden="true"></canvas><div id="model-empty" class="chart-empty"><span class="empty-glyph model-glyph" aria-hidden="true">τ</span><strong>Escolha o relógio da leitura.</strong><p>As hipóteses precedem a curva.</p></div></div>
+          <p id="model-status" class="model-status" role="status">Aguardando seleção explícita do relógio.</p>
+          <dl class="prediction-grid"><div><dt>Frequência GR</dt><dd id="prediction-frequency">—</dd></div><div><dt>τ GR</dt><dd id="prediction-tau">—</dd></div><div><dt>Γ · s⁻¹</dt><dd id="prediction-gamma">Indisponível</dd></div><div><dt>Massa no detector</dt><dd id="prediction-mass">—</dd></div><div><dt>x = Γ × τ GR · adimensional</dt><dd id="prediction-x">Indisponível</dd></div><div><dt>δτ ensemble · fração exata</dt><dd id="prediction-delta-tau">Indisponível</dd></div><div><dt>Modo QNM (ℓ, m, n)</dt><dd id="prediction-qnm-mode">Indisponível</dd></div><div><dt>Método QNM retornado</dt><dd id="prediction-qnm-method">Indisponível</dd></div></dl>
+          <p id="model-data-sensitivity" class="scope-note">Sensibilidade dos dados: ainda não estimada</p>
+          <p id="prediction-scope" class="scope-note">Modelo condicional de ensemble. Não constitui ajuste ao evento nem estimativa de significância.</p>
+        </div>
+      </div>
+      <div class="provenance"><div><p class="eyebrow">FONTE DO EXECUTOR</p><p id="model-source-path" class="breakable">A fonte será exibida junto à resposta do modelo.</p><code id="model-source-hash">SHA-256 não recebido</code></div><div><p class="eyebrow">β EM RUNTIME</p><strong id="model-beta">—</strong><p>Valor retornado pelo executor.</p></div></div>
+      <details class="model-details"><summary>Escopo e referência temporal retornados</summary><dl><dt>Escopo do modelo</dt><dd id="model-scope">Aguardando resposta</dd><dt>Referência temporal do modelo</dt><dd id="model-time-reference">Aguardando resposta</dd></dl></details>
+    </section>
+
+    <section class="panel event-panel" id="event-panel" aria-labelledby="event-title">
+      <div class="panel-heading"><div><p class="eyebrow">04 / EVENTO · EXPLORAÇÃO POR DETECTOR</p><h2 id="event-title">GW250114 <span class="muted">H1 + L1</span></h2><p class="model-intro">Dado e modelo 220 efetivo por detector, em visualização normalizada pelo ruído ou bruta. Amplitude e fase são entradas manuais.</p></div><button id="event-refresh" class="button quiet" type="button">Atualizar referência ↻</button></div>
+      <div class="event-gate"><div><span class="eyebrow">SITUAÇÃO DA ANÁLISE C6</span><strong id="event-gate-status">Aguardando referência</strong></div><p id="event-gate-reason">Consultando o estado científico do evento.</p></div>
+      <div class="event-reference"><span>Janela fixa <b id="event-window-spec">410 amostras / 2048 Hz</b></span><span>tM de referência <b id="event-reference-tm">—</b></span><span>Massa no detector · referência <b id="event-reference-mass">—</b></span><span>GPS do pico H1 <b id="event-peak-H1">—</b></span><span>GPS do pico L1 <b id="event-peak-L1">—</b></span></div>
+      <p id="event-metadata-status" class="panel-note" role="status">A referência do evento pode ser consultada antes do carregamento em RAM.</p>
+      <div class="event-layout">
+        <form id="event-form" class="event-form">
+          <fieldset id="event-fields" disabled><legend class="sr-only">Parâmetros exploratórios do evento GW250114</legend>
+            <div class="clock-field"><label for="event-reading">Relógio condicional <span class="input-marker">[INPUT]</span></label><select id="event-reading" name="reading" required aria-describedby="event-clock-note"><option value="" selected disabled>Selecione explicitamente o relógio</option><option value="R-A">R-A · relógio Planck [INPUT]</option><option value="R-B">R-B · relógio massa [INPUT]</option><option value="R-RAIZ-0">R-RAIZ-0 · leitura condicional</option><option value="R-GLOBAL">R-GLOBAL · leitura condicional</option></select><p id="event-clock-note">Nenhum relógio foi assumido. R-A e R-B são entradas do executor atual.</p></div>
+            <div class="parameter-grid"><label for="event-start">Início após o pico <span>tM de referência · janela fixa</span><select id="event-start" name="start_tm" required><option value="">Aguardando referência</option></select></label><label for="event-mass">Massa da fonte <span>M☉ · manual</span><input id="event-mass" name="mass_source_solar" type="number" min="0.000001" step="any" required></label><label for="event-spin">Spin <span>adimensional · manual</span><input id="event-spin" name="spin" type="number" min="0" max="0.999999" step="any" value="0.7" required></label><label for="event-redshift">Redshift <span>z · manual</span><input id="event-redshift" name="redshift" type="number" min="0" step="any" required></label></div>
+            <p class="form-note event-default-note">Massa inicial = massa de referência no detector / (1 + z). Os dados e a grade tM usam a massa de referência do registro; editar o modelo não desloca a janela. Amplitude e fase abaixo são efetivas por detector no primeiro instante da janela.</p>
+            <fieldset class="detector-inputs"><legend>H1 <span>parâmetros manuais</span></legend><div class="parameter-grid"><label for="event-H1-amplitude">Amplitude <span>strain</span><input id="event-H1-amplitude" type="number" min="0" step="any" value="1e-21" required></label><label for="event-H1-phase">Fase <span>rad</span><input id="event-H1-phase" type="number" step="any" value="0" required></label></div></fieldset>
+            <fieldset class="detector-inputs"><legend>L1 <span>parâmetros manuais</span></legend><div class="parameter-grid"><label for="event-L1-amplitude">Amplitude <span>strain</span><input id="event-L1-amplitude" type="number" min="0" step="any" value="1e-21" required></label><label for="event-L1-phase">Fase <span>rad</span><input id="event-L1-phase" type="number" step="any" value="0" required></label></div></fieldset>
+          </fieldset>
+          <button id="event-submit" class="button secondary" type="submit" disabled>Atualizar sobreposição ↗</button>
+          <p class="form-note">Edições atualizam a leitura após 420 ms. O evento aceita READY ou PARTIAL, sujeito à validação do par H1/L1 residente, hashes e DQ pelo executor. LOADING permanece bloqueado.</p>
+        </form>
+        <div class="event-output">
+          <div class="event-chart-tools"><div class="curve-legend"><span><i class="legend-line observed"></i>Dado</span><span><i class="legend-line gr"></i>GR</span><span><i class="legend-line tgl"></i>TGL</span></div><label class="residual-toggle" for="event-residuals"><input id="event-residuals" type="checkbox">Mostrar resíduos</label></div>
+          <div class="event-display-control"><label for="event-display">Visualização<select id="event-display" aria-describedby="event-display-note"><option value="normalized" selected>Normalizado pelo ruído (adimensional)</option><option value="raw">Bruto (strain)</option></select></label><span id="event-display-unit" class="badge neutral">Coordenada transformada · adimensional</span></div>
+          <p id="event-display-note" class="event-display-note">Branqueamento simétrico do intervalo; remove direções polinomiais da análise registrada. Mesma transformação aplicada às três curvas. Não há reconstrução de sinal.</p>
+          <p id="event-load-note" class="event-load-note" hidden>Carga parcial: o evento depende do par H1/L1 registrado, residente e validado por hashes e DQ. Isso não indica que todos os arquivos do domínio foram carregados.</p>
+          <p id="event-status" class="event-status" role="status">Aguardando referência e par residente validado.</p>
+          <div class="event-channels">
+            <article class="event-channel" aria-labelledby="event-H1-title"><div class="channel-heading"><h3 id="event-H1-title">H1 <span>Hanford</span></h3><span id="event-H1-renderer" class="badge neutral">Renderizador…</span></div><p id="event-H1-quality" class="event-quality">DQ e injeções: aguardando verificação.</p><p id="event-H1-view-error" class="event-view-error" role="alert" hidden></p>
+              <div class="chart-stack event-chart" role="img" aria-label="GW250114 H1: coordenadas transformadas adimensionais; índice da amostra de referência de 0 a 409, mistura não local" aria-describedby="event-H1-quality event-H1-time"><canvas id="event-H1-gpu" aria-hidden="true"></canvas><canvas id="event-H1-axes" aria-hidden="true"></canvas><div id="event-H1-empty" class="chart-empty"><strong>Aguardando dados de H1.</strong><p>Selecione o relógio após consultar a referência.</p></div></div>
+              <div id="event-H1-residual-wrap" class="residual-wrap" hidden><p>Resíduos · dado − modelo <span id="event-H1-residual-units">GR / TGL · adimensional</span></p><div class="chart-stack residual-chart" role="img" aria-label="H1: resíduos normalizados adimensionais por índice da amostra de referência, mistura não local, em eixo vertical separado"><canvas id="event-H1-residual" aria-hidden="true"></canvas></div></div>
+              <div id="event-H1-noise" class="noise-diagnostic" hidden><h4>Norma do resíduo com ruído</h4><dl><div><dt>GR · norma²</dt><dd id="event-H1-norm-gr">—</dd></div><div><dt>TGL · norma²</dt><dd id="event-H1-norm-tgl">—</dd></div></dl><p id="event-H1-whitener">Coordenadas do quociente: misturam amostras e não formam um eixo temporal.</p><small>Diagnóstico retornado pelo executor, sem interpretação de significância.</small></div>
+              <p id="event-H1-time" class="channel-time">Tempo relativo ao pico H1; origem do modelo aguardando resposta.</p><details class="channel-source"><summary>Qualidade e fonte H1</summary><dl><dt>DQ exigido</dt><dd id="event-H1-dq">—</dd><dt>Injeções exigidas</dt><dd id="event-H1-injections">—</dd><dt>GPS da primeira / última amostra</dt><dd id="event-H1-gps">—</dd><dt>Série de origem</dt><dd id="event-H1-source">—</dd><dt>SHA-256 do array strain</dt><dd id="event-H1-hash">—</dd></dl></details>
+            </article>
+            <article class="event-channel" aria-labelledby="event-L1-title"><div class="channel-heading"><h3 id="event-L1-title">L1 <span>Livingston</span></h3><span id="event-L1-renderer" class="badge neutral">Renderizador…</span></div><p id="event-L1-quality" class="event-quality">DQ e injeções: aguardando verificação.</p><p id="event-L1-view-error" class="event-view-error" role="alert" hidden></p>
+              <div class="chart-stack event-chart" role="img" aria-label="GW250114 L1: coordenadas transformadas adimensionais; índice da amostra de referência de 0 a 409, mistura não local" aria-describedby="event-L1-quality event-L1-time"><canvas id="event-L1-gpu" aria-hidden="true"></canvas><canvas id="event-L1-axes" aria-hidden="true"></canvas><div id="event-L1-empty" class="chart-empty"><strong>Aguardando dados de L1.</strong><p>Selecione o relógio após consultar a referência.</p></div></div>
+              <div id="event-L1-residual-wrap" class="residual-wrap" hidden><p>Resíduos · dado − modelo <span id="event-L1-residual-units">GR / TGL · adimensional</span></p><div class="chart-stack residual-chart" role="img" aria-label="L1: resíduos normalizados adimensionais por índice da amostra de referência, mistura não local, em eixo vertical separado"><canvas id="event-L1-residual" aria-hidden="true"></canvas></div></div>
+              <div id="event-L1-noise" class="noise-diagnostic" hidden><h4>Norma do resíduo com ruído</h4><dl><div><dt>GR · norma²</dt><dd id="event-L1-norm-gr">—</dd></div><div><dt>TGL · norma²</dt><dd id="event-L1-norm-tgl">—</dd></div></dl><p id="event-L1-whitener">Coordenadas do quociente: misturam amostras e não formam um eixo temporal.</p><small>Diagnóstico retornado pelo executor, sem interpretação de significância.</small></div>
+              <p id="event-L1-time" class="channel-time">Tempo relativo ao pico L1; origem do modelo aguardando resposta.</p><details class="channel-source"><summary>Qualidade e fonte L1</summary><dl><dt>DQ exigido</dt><dd id="event-L1-dq">—</dd><dt>Injeções exigidas</dt><dd id="event-L1-injections">—</dd><dt>GPS da primeira / última amostra</dt><dd id="event-L1-gps">—</dd><dt>Série de origem</dt><dd id="event-L1-source">—</dd><dt>SHA-256 do array strain</dt><dd id="event-L1-hash">—</dd></dl></details>
+            </article>
+          </div>
+          <p id="event-time-note" class="event-time-note">410 coordenadas transformadas, posto ≤407: não são 410 dados independentes. Cada componente mistura amostras de modo não local; não é o valor observado naquele instante físico. O índice identifica a grade original; Δt e GPS servem apenas à indexação. Não há reconstrução de sinal.</p>
+          <p class="event-time-note">O executor verifica DQ e injeções no intervalo C6 completo, incluindo a última amostra original não retida na janela exibida.</p>
+          <p class="scope-note">[EXPLORATÓRIO] Sobreposição manual de um modo 220 efetivo por detector, sem resposta de antena reconstruída. Não é ajuste automático nem inferência coerente 220+440; não atribui significância e não aprova C6.</p>
+        </div>
+      </div>
+      <div class="event-receipt"><span>Carga do domínio <b id="event-domain-status">Aguardando estado</b></span><span>Leitura <b id="event-read-source">—</b></span><span>Novas leituras de strain <b id="event-disk-reads">—</b></span><span>Consulta <b id="event-elapsed">—</b></span><span>Escopo <b id="event-scope">Aguardando resposta</b></span></div>
+      <details class="model-details event-details"><summary>Referência, hipóteses, parâmetros retornados e proveniência</summary><dl><dt>Proveniência da referência</dt><dd><pre id="event-provenance">Aguardando metadados.</pre></dd><dt>Fonte da sobreposição</dt><dd><pre id="event-source">Aguardando resposta.</pre></dd><dt>Normalização e verificação de norma retornadas pelo backend</dt><dd><pre id="event-normalization">Aguardando resposta.</pre></dd><dt>Hipóteses do modelo retornadas</dt><dd><pre id="event-assumptions">Aguardando resposta.</pre></dd><dt>Parâmetros retornados</dt><dd><pre id="event-parameters">Aguardando resposta.</pre></dd><dt>Previsão retornada</dt><dd><pre id="event-prediction">Aguardando resposta.</pre></dd></dl></details>
+    </section>
+
+    <section class="time-reference" aria-labelledby="time-reference-title"><span class="reference-symbol" aria-hidden="true">◷</span><div><h2 id="time-reference-title">Cada leitura tem seu tempo.</h2><p id="time-reference-text">Consultando a referência temporal dos domínios.</p><span id="time-reference-status" class="badge neutral">Aguardando servidor</span></div><p>O navegador de séries usa segundos relativos ao arquivo. O painel GW250114 usa o pico de referência de cada detector.</p></section>
+    <footer><span>IALD <span class="footer-divider">/</span> Universo residente</span><span>Fontes, hipóteses e lacunas visíveis.</span><a href="#main">Voltar ao topo ↑</a></footer>
+  </main>
+</body>
+</html>

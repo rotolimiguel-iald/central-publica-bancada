@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark"><meta name="theme-color" content="#080f1a">
+  <title>Universo · TGL</title>
+  <link rel="icon" href="/TGL.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/universe-map.css">
+  <script src="/cosmos-teaching-model.js" defer></script>
+  <script src="/cosmos-lessons.js" defer></script>
+  <script src="/universe-map.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Ir ao conteúdo</a>
+  <header class="masthead">
+    <a class="brand" href="/explore"><img src="/TGL.svg" alt="" width="38" height="38"><span>TGL<small>LABORATÓRIO DO UNIVERSO</small></span></a>
+    <nav aria-label="Navegação da bancada"><a href="/explore" aria-current="page">Explorar</a><a href="#extreme-regimes">Regimes extremos</a><a href="/cosmos">Cosmologia e dados</a><a href="http://127.0.0.1:18765/universe">Ondas gravitacionais ↗</a></nav>
+    <span class="local-badge"><i></i> LOCAL</span>
+  </header>
+  <main id="main">
+    <section class="intro">
+      <div><p class="eyebrow">UM MAPA PARA PERGUNTAR MELHOR</p><h1>O Universo, <em>por dentro.</em></h1><p>Do que ele é feito. Como evolui. Como podemos observá-lo.<br>Escolha um tema, explore uma relação e leve sua pergunta aos dados.</p></div>
+      <div class="mode-box"><div class="mode-switch" role="group" aria-label="Modo de exploração"><button id="mode-free" aria-pressed="true">Mapa livre</button><button id="mode-guided" aria-pressed="false">Percurso guiado</button></div><p id="mode-description">Comece pelo que desperta sua curiosidade.</p><span id="reading-progress">0 de 8 temas marcados como lidos</span></div>
+    </section>
+    <noscript><p class="error">Ative o JavaScript para navegar pelos temas e calcular os cenários.</p></noscript>
+    <p id="app-error" class="error" role="alert" hidden></p>
+    <section id="extreme-regimes" class="extreme-section" aria-labelledby="extreme-title">
+      <div class="section-line"><div><p class="eyebrow">ONDE PROCURAR A DIFERENÇA</p><h2 id="extreme-title">Regimes extremos, à vista.</h2></div><span>AMBIENTES · EVENTOS · CENÁRIOS</span></div>
+      <p class="extreme-intro">Escolha um ambiente para chegar ao dado ou ao controle relevante. A intensidade do regime orienta a busca; o contraste com o ruído determina o que podemos distinguir.</p>
+      <div class="extreme-map" id="extreme-map" aria-label="Selecionar um regime para investigar"></div>
+      <article class="extreme-detail" aria-labelledby="extreme-detail-title">
+        <div class="extreme-description"><span id="extreme-status" class="pill"></span><h3 id="extreme-detail-title"></h3><p id="extreme-description"></p></div>
+        <dl class="extreme-criteria"><div><dt>O que variar ou observar</dt><dd id="extreme-controls"></dd></div><div><dt>Efeito TGL a comparar</dt><dd id="extreme-effect"></dd></div><div><dt>Sensibilidade dos dados</dt><dd id="extreme-sensitivity"></dd></div></dl>
+        <div class="extreme-actions"><a id="extreme-link" class="button primary" href="/cosmos">Abrir laboratório ↗</a><button id="extreme-teach" class="button" type="button">Explorar o tema</button></div>
+      </article>
+      <details class="sources"><summary>Como ler a prioridade da busca</summary><p>Estas são rotas de investigação, sem ranking de detecção. Um cenário com spin ou frequência elevados não é um ajuste do evento. No ringdown, o executor fornece Γ, Γτ<sub>GR</sub> e a mudança fracionária de amortecimento sob o relógio escolhido; a significância exige sinal, ruído, sistemáticas e calibração do teste. Na rota acústica D10, CMB/BAO ainda requerem a comparação global registrada. O mapa não atribui coordenadas no céu que os dados atuais não forneçam.</p></details>
+    </section>
+    <section aria-label="Mapa de temas" class="topic-section"><div class="section-line"><h2>Escolha uma porta de entrada</h2><span>CONTEÚDO → EVOLUÇÃO → OBSERVAÇÃO</span></div><div id="topic-map" class="topic-map"></div></section>
+
+    <section class="discovery" aria-label="Tema selecionado e laboratório didático">
+      <article class="lesson" aria-labelledby="lesson-title">
+        <p id="lesson-eyebrow" class="eyebrow"></p><h2 id="lesson-title" tabindex="-1">Carregando os temas…</h2><p id="lesson-summary" class="lesson-summary"></p>
+        <blockquote id="lesson-question"></blockquote>
+        <div class="lesson-part"><h3>O que observar</h3><p id="lesson-observe"></p></div>
+        <div class="lesson-part"><h3>Experimente</h3><p id="lesson-experiment"></p></div>
+        <div class="tgl-note"><h3>A pergunta para a TGL</h3><p id="lesson-tgl"></p></div>
+        <p id="lesson-capability" class="capability"></p>
+        <div class="lesson-actions"><button id="lesson-demo" class="button primary">Explorar neste diagrama</button><a id="lesson-lab" class="button" href="/cosmos">Abrir laboratório ↗</a></div>
+        <div id="guided-controls" class="guided-controls" hidden><p id="guided-position"></p><div><button id="previous-lesson" class="button">← Anterior</button><button id="next-lesson" class="button">Próximo →</button></div></div>
+        <label class="read-toggle"><input id="lesson-read" type="checkbox"> Marcar este tema como lido</label><p id="progress-storage" class="small"></p>
+        <details class="sources"><summary>Referências deste tema</summary><ul id="lesson-sources"></ul></details>
+      </article>
+
+      <section class="experiment" aria-labelledby="experiment-title">
+        <div class="experiment-head"><div><p class="eyebrow">LABORATÓRIO DE IDEIAS</p><h2 id="experiment-title">A composição muda com a época.</h2></div><span class="pill">MODELO DIDÁTICO</span></div>
+        <p class="experiment-description">Percorra o redshift e observe a participação de cada componente na densidade total deste cenário de referência.</p>
+        <div class="composition-stage">
+          <div class="ring-wrap"><svg id="composition-ring" viewBox="0 0 300 300" role="img" aria-labelledby="ring-title ring-desc"><title id="ring-title">Frações de densidade calculadas</title><desc id="ring-desc">Carregando.</desc><circle class="ring-track" cx="150" cy="150" r="113"/><g id="ring-segments" transform="rotate(-90 150 150)"></g><circle class="inner-guide" cx="150" cy="150" r="82"/></svg><div class="ring-center"><span>REDshift <b>z</b></span><strong id="redshift-display">0</strong><small id="scale-display">a = 1</small></div></div>
+          <div id="component-legend" class="component-legend"></div>
+        </div>
+        <p id="era-description" class="era-description" role="status"></p>
+        <div class="epoch-controls"><label for="epoch-slider">Época cosmológica <span>hoje → passado</span></label><input id="epoch-slider" type="range" min="0" max="5" step="0.001" value="0" aria-label="Época em escala logarítmica de 1 mais redshift"><div class="epoch-presets"><button data-z="0">Hoje</button><button data-z="1">z = 1</button><button data-z="10">z = 10</button><button data-z="1100">CMB · z ≈ 1100</button><button data-z="10000">z = 10.000</button></div><label class="exact-redshift" for="epoch-number">Redshift exato <input id="epoch-number" type="number" min="0" max="100000" step="any" value="0"></label></div>
+        <p id="model-error" class="error" role="alert" hidden></p>
+        <details class="assumptions"><summary>Alterar a composição do cenário</summary><p>Frações atuais em um modelo FLRW plano com constante cosmológica. Valores iniciais arredondados, para ensino; não são um ajuste aos dados nem uma previsão da TGL.</p><div class="density-inputs"><label>Matéria bariônica Ωb<input id="density-b" type="number" min="0" max="1" step="0.001" value="0.049"></label><label>Matéria escura fria Ωc<input id="density-c" type="number" min="0" max="1" step="0.001" value="0.266"></label><label>Radiação Ωr<input id="density-r" type="number" min="0" max="1" step="0.000001" value="0.000092"></label></div><p>ΩΛ = 1 − Ωb − Ωc − Ωr = <strong id="lambda-value">—</strong>. A radiação representa um fluido idealizado; transições de neutrinos massivos não são calculadas aqui.</p><button id="reset-composition" class="button">Restaurar cenário didático</button></details>
+        <p class="model-scope">O gráfico representa <strong>frações de densidade</strong>, não regiões do espaço. O redshift localiza uma época; o controle não calcula idade nem simula a formação de galáxias.</p>
+      </section>
+    </section>
+
+    <section class="history-section" aria-labelledby="history-title"><div class="section-line"><div><p class="eyebrow">UMA RELAÇÃO, MUITAS ÉPOCAS</p><h2 id="history-title">Quem domina a densidade?</h2></div><span>MESMO CENÁRIO DO DIAGRAMA</span></div><div class="history-wrap"><svg id="density-history" viewBox="0 0 1000 250" role="img" aria-labelledby="history-chart-title history-chart-desc"><title id="history-chart-title">Frações de densidade ao longo do redshift</title><desc id="history-chart-desc">Curvas calculadas no cenário didático. O gráfico tem escala horizontal logarítmica em 1 mais redshift e frações entre zero e um.</desc><g id="history-grid"></g><g id="history-lines"></g><line id="history-cursor" x1="48" y1="16" x2="48" y2="210"/></svg></div><div class="formula-strip"><span>Matéria: ρ ∝ a⁻³</span><span>Radiação: ρ ∝ a⁻⁴</span><span>Constante cosmológica: ρΛ constante</span></div><details class="sources"><summary>Modelo e fonte das relações</summary><p>Fundo FLRW plano: E²(z) = (Ωb + Ωc)(1+z)³ + Ωr(1+z)⁴ + ΩΛ, com E = H/H₀ e a = 1/(1+z). O ensino usa fluidos ideais com equações de estado fixas. No laboratório de pesquisa, a TGL V3 utiliza seu próprio executor e suas hipóteses.</p><ul id="model-sources"></ul></details></section>
+
+    <section class="lab-section" aria-labelledby="labs-title"><div class="section-line"><div><p class="eyebrow">DA PERGUNTA À INVESTIGAÇÃO</p><h2 id="labs-title">Entre nos dados.</h2></div><button id="refresh-labs" class="button subtle">Conferir disponibilidade</button></div><div class="lab-grid"><a class="lab-card" href="/cosmos"><span class="lab-number">01 / COSMOLOGIA</span><h3>Distâncias & expansão <span>↗</span></h3><p>Curvas de fundo, BAO, covariância e comparação TGL V3 com β fixo versus β zero.</p><span id="cosmology-availability" class="availability">Consultando o laboratório…</span></a><a class="lab-card" href="http://127.0.0.1:18765/universe"><span class="lab-number">02 / ONDAS GRAVITACIONAIS</span><h3>Sinais & buracos negros <span>↗</span></h3><p>Abra os sinais dos detectores e explore os cenários de ringdown e dephasing.</p><span class="availability">Ver carga e fontes no laboratório ↗</span></a><div class="lab-card planned"><span class="lab-number">PRÓXIMAS INTEGRAÇÕES</span><h3>Do fundo ao céu</h3><p>CMB em mapas e espectros, catálogos de estruturas, lentes, supernovas e partículas entram nesta mesma organização conforme seus executores e dados forem ligados.</p><span class="availability">Temas educativos disponíveis · dados ainda por integrar</span></div></div></section>
+    <footer><span>TGL · Aprender, explorar, investigar.</span><span>Modelo didático ≠ observação ≠ previsão TGL</span><a href="http://127.0.0.1:18765/">Painel técnico ↗</a></footer>
+  </main>
+</body>
+</html>

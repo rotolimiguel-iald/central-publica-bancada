@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090e18">
+  <title>Cosmos · Bancada IALD</title>
+  <link rel="stylesheet" href="/cosmos.css">
+  <script src="/cosmos.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Ir ao conteúdo</a>
+  <header class="topbar">
+    <a class="brand" href="http://127.0.0.1:18765/" aria-label="IALD, painel da bancada"><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="m18 3 14 8v15l-14 8-14-8V11Z M4 11l14 8 14-8M18 19v15M18 3v16" stroke="currentColor"/></svg><span><strong>IALD</strong><small>BANCADA VIVA</small></span></a>
+    <nav aria-label="Áreas da bancada"><a href="/explore">Mapa do Universo</a><a href="/cosmos" aria-current="page">Cosmologia</a><a href="http://127.0.0.1:18765/universe">Ondas gravitacionais ↗</a></nav>
+    <a class="back" href="http://127.0.0.1:18765/">Painel da bancada ↗</a>
+  </header>
+  <main id="main" class="page">
+    <section class="hero" aria-labelledby="title"><div><p class="eyebrow"><i></i> EXPLORAÇÃO COSMOLÓGICA</p><h1 id="title">Cosmos, <span>em perspectiva.</span></h1><p>Das distâncias observadas à geometria de fundo.<br>Explore os parâmetros, percorra o redshift e mantenha a fonte à vista.</p></div><dl class="hero-stats"><div><dt>Observações BAO</dt><dd id="point-count">—</dd></div><div><dt>Redshifts distintos</dt><dd id="redshift-count">—</dd></div><div><dt>Memória residente</dt><dd id="memory-size">—</dd></div></dl></section>
+    <noscript><p class="notice error">Ative o JavaScript para consultar o executor e explorar os dados.</p></noscript>
+    <div class="scope-strip"><span id="model-badge" class="badge amber">Fundo cosmológico</span><p id="model-scope">Carregando o modelo e suas hipóteses…</p><details><summary>Estatuto</summary><code id="model-statute">Aguardando modelo</code></details></div>
+    <div class="connection-bar"><span class="connection-dot" id="connection-dot"></span><p id="connection-status" role="status">Consultando o estado da cosmologia…</p><button id="refresh-status" class="button quiet" type="button">Atualizar fontes ↻</button></div>
+
+    <section class="workspace" aria-label="Parâmetros e visualização cosmológica">
+      <aside class="panel controls"><div class="panel-head"><p class="eyebrow">01 / EXPLORAR O BACKGROUND</p><h2>Explore, compare, retome.</h2><p>Parâmetros manuais; curvas calculadas pelo executor.</p></div>
+        <form id="parameter-form"><fieldset id="parameter-fields" disabled><legend class="sr-only">Parâmetros cosmológicos</legend>
+          <label class="model-field" for="model-choice">Modelo de fundo <select id="model-choice"><option value="TGL_V3_TOTAL_FIXED_BETA">TGL V3 · β fixo · condicional</option><option value="V3_TOTAL_BETA_ZERO">V3 · β = 0 · referência</option><option value="FLAT_MATTER_CPL_BACKGROUND">FLRW · CPL exploratório</option></select></label>
+          <label for="parameter-H0">H₀ <span>km s⁻¹ Mpc⁻¹</span><input id="parameter-H0" name="H0" type="number" min="1" step="any" required></label>
+          <label for="parameter-omega-m">Ω<sub>m</sub> <span>densidade relativa de matéria</span><input id="parameter-omega-m" name="omega_m" type="number" min="0" step="any" required></label>
+          <label for="parameter-rd">r<sub>d</sub> <span>Mpc · entrada independente</span><input id="parameter-rd" name="rd" type="number" min="0.001" step="any" required></label>
+          <div class="parameter-pair"><label for="parameter-w0">w₀ <span>equação de estado</span><input id="parameter-w0" name="w0" type="number" step="any" required></label><label for="parameter-wa">wₐ <span>variação em a</span><input id="parameter-wa" name="wa" type="number" step="any" required></label></div>
+        </fieldset><button id="evaluate" class="button primary" type="submit" disabled>Calcular background <span aria-hidden="true">↗</span></button><button id="reset-parameters" class="button quiet" type="button" disabled>Restaurar referência</button></form>
+        <div id="model-values" class="model-values" aria-live="polite"></div><p class="control-note">A edição atualiza a curva após uma breve pausa. Nenhum parâmetro é ajustado automaticamente aos dados.</p><p id="parameter-status" class="parameter-status" role="status">Aguardando parâmetros de referência.</p>
+        <div class="diagnostic"><p class="eyebrow">PARÂMETROS MANUAIS · COVARIÂNCIA COMPLETA</p><div><span>χ²</span><strong id="chi2-value">—</strong></div><p>rᵀ C⁻¹ r</p><small id="chi2-note">Aguardando diagnóstico do executor.</small></div>
+      </aside>
+
+      <section class="panel explorer" aria-labelledby="explorer-title"><div class="explorer-heading"><div><p class="eyebrow">02 / A GEOMETRIA DAS DISTÂNCIAS</p><h2 id="explorer-title">Dado, curva e escala.</h2></div><span class="badge" id="renderer-status">Renderizador…</span></div>
+        <section class="comparison-bar" aria-label="Comparação de cenários">
+          <div><strong>A · referência</strong><span id="reference-label">Nenhuma referência fixada</span><small id="reference-parameters">Fixe a curva atual e altere os controles para explorar B.</small></div>
+          <div><strong>B · exploração atual</strong><span id="comparison-readout">Aguardando cálculo</span><small id="comparison-scope">Δχ² descritivo; não é significância estatística.</small></div>
+          <div class="comparison-actions"><button id="pin-reference" class="button" type="button" disabled>Fixar atual como A</button><button id="clear-reference" class="button quiet" type="button" disabled>Limpar A</button><button id="export-comparison" class="button quiet" type="button" disabled>Exportar A + B</button></div>
+        </section>
+        <div class="view-tabs" role="tablist" aria-label="Visualização"><button id="tab-distances" role="tab" aria-selected="true" aria-controls="view-distances" type="button">Distâncias BAO</button><button id="tab-difference" role="tab" aria-selected="false" aria-controls="view-difference" tabindex="-1" type="button">Diferença B − A</button><button id="tab-expansion" role="tab" aria-selected="false" aria-controls="view-expansion" tabindex="-1" type="button">Diagrama de escala 3D</button></div>
+        <div id="view-distances" role="tabpanel" aria-labelledby="tab-distances"><div class="plot-tools"><div id="curve-filters" class="curve-filters" aria-label="Observáveis exibidos"></div><span>Pontos: dados · B contínua · A tracejada</span></div>
+          <div class="plot-stack" id="distance-plot" role="img" aria-label="Observações DESI BAO com barras de erro e curvas FLRW por redshift" aria-describedby="plot-readout"><canvas id="distance-gpu" aria-hidden="true"></canvas><canvas id="distance-axes" aria-hidden="true"></canvas><div id="distance-empty" class="plot-empty"><span aria-hidden="true">∿</span><strong>A distância começa no dado.</strong><p>Aguardando o vetor BAO e sua covariância.</p></div></div>
+          <p id="plot-readout" class="plot-readout">Clique no gráfico para mover o cursor de redshift. As barras usam a diagonal de C; o diagnóstico usa a matriz completa.</p>
+        </div>
+        <div id="view-difference" role="tabpanel" aria-labelledby="tab-difference" hidden>
+          <div class="plot-tools"><label for="difference-observable">Observável <select id="difference-observable"><option value="DM_over_rd">Dₘ/r_d</option><option value="DH_over_rd">Dₕ/r_d</option><option value="DV_over_rd">Dᵥ/r_d</option></select></label><span>Mesmos dados, mesma covariância · sem dupla contagem</span></div>
+          <div class="plot-stack" id="difference-plot" role="img" aria-label="Diferença das distâncias calculadas B menos A em função do redshift"><canvas id="difference-gpu" aria-hidden="true"></canvas><canvas id="difference-axes" aria-hidden="true"></canvas></div>
+          <p class="plot-readout" id="difference-readout">Fixe uma referência A para inspecionar a mudança do modelo.</p>
+        </div>
+        <div id="view-expansion" role="tabpanel" aria-labelledby="tab-expansion" hidden><div class="plot-tools"><span class="badge amber">DIAGRAMA COSMOLÓGICO · NÃO É IMAGEM OBSERVADA</span><button id="reset-orbit" class="button quiet" type="button">Recentrar ↺</button></div>
+          <div class="plot-stack diagram-stack" id="expansion-plot" role="img" aria-label="Diagrama tridimensional esquemático de uma grade expandindo com o fator de escala; eixos espaciais em unidades relativas"><canvas id="expansion-gpu" aria-hidden="true"></canvas><canvas id="expansion-axes" aria-hidden="true" tabindex="0" aria-label="Órbita: setas para girar, mais ou menos para zoom, Home para recentrar"></canvas><div class="diagram-tag"><span>ESCALA RELATIVA</span><strong id="diagram-scale">a = —</strong><small>Referência: a = 1</small></div></div>
+          <p class="plot-readout">Arraste para orbitar; roda para zoom. Teclado: setas, +, − e Home. A grade é esquemática, sem galáxias, posições de objetos ou filme observado.</p>
+        </div>
+        <fieldset id="redshift-controls" class="navigation" disabled><legend class="sr-only">Navegação pelo redshift e fator de escala</legend><div class="navigation-head"><label for="cursor-z">Redshift <span>z</span><input id="cursor-z" type="number" min="0" step="any" value="0"></label><div class="scale-readout"><span>Fator de escala</span><strong id="scale-factor">—</strong><small>a = 1 / (1 + z)</small></div><div class="playback"><button id="play-expansion" class="button primary" type="button" aria-pressed="false">▶ Expandir diagrama</button><label for="playback-speed"><span class="sr-only">Velocidade de reprodução</span><select id="playback-speed"><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div></div><label class="sr-only" for="redshift-scrub">Cursor de redshift</label><input id="redshift-scrub" type="range" min="0" max="3" step="any" value="0"><div class="ruler-labels"><span id="redshift-min">z = 0</span><span id="redshift-max">z = —</span></div><div id="redshift-stops" class="redshift-stops" aria-label="Navegar aos redshifts observados"></div></fieldset>
+        <p id="motion-note" class="motion-note">A animação percorre o fator de escala. Sua duração é tempo de reprodução, não tempo cosmológico nem uma lei temporal TGL.</p>
+        <div class="cursor-metrics" id="cursor-metrics"><span>Selecione um redshift após receber as curvas.</span></div>
+        <div class="execution-strip"><span id="evaluation-state" role="status">Sem avaliação</span><span id="evaluation-time">—</span></div>
+        <details class="data-details"><summary>Dispositivo de renderização</summary><p id="render-device">Aguardando identificação do navegador.</p></details>
+      </section>
+    </section>
+
+    <section class="panel scenario-panel" aria-labelledby="scenario-title">
+      <div class="panel-head"><p class="eyebrow">CADERNO DE INVESTIGAÇÃO</p><h2 id="scenario-title">Guarde uma pergunta. Retome a exploração.</h2><p>Cenários salvos neste computador, com parâmetros, resultados, hashes dos dados e versão do cálculo. Carregar como B recalcula os parâmetros no motor atual.</p></div>
+      <form id="scenario-form" class="scenario-form"><label for="scenario-label">Nome do cenário<input id="scenario-label" type="text" maxlength="120" required placeholder="Ex.: expansão com H₀ = 73"></label><button id="save-scenario" type="submit" class="button primary" disabled>Salvar B no computador</button><button id="refresh-scenarios" type="button" class="button quiet">Atualizar lista</button></form>
+      <p id="scenario-status" role="status" class="table-note">Consultando o caderno local…</p><div id="scenario-list" class="scenario-list"></div>
+    </section>
+    <section class="evidence-grid">
+      <section class="panel covariance-panel" aria-labelledby="covariance-title"><div class="panel-head"><p class="eyebrow">03 / OBSERVAÇÕES QUE SE RELACIONAM</p><h2 id="covariance-title">A matriz também é dado.</h2><p>Correlação calculada de C para visualização. A ordem acompanha o vetor observado.</p></div><div class="covariance-content"><canvas id="covariance-canvas" width="420" height="420" role="img" aria-label="Matriz de correlação das observações BAO" aria-describedby="covariance-readout"></canvas><div><span id="covariance-size" class="badge neutral">Matriz não recebida</span><p id="covariance-readout" role="status">Passe sobre uma célula para inspecionar o par de componentes.</p><div class="color-key"><span>−1</span><i></i><span>+1</span></div><p class="fine-print">Correlação não é uma nova observação. Nenhum ponto é duplicado para calcular χ².</p></div></div><details class="data-details"><summary>Ver vetor e valores da matriz</summary><div id="covariance-table-wrap" class="table-scroll"><p>Aguardando covariância.</p></div></details></section>
+      <section class="panel source-panel" aria-labelledby="source-title"><div class="panel-head"><p class="eyebrow">04 / PROVENIÊNCIA E ESTADO</p><h2 id="source-title">Uma leitura rastreável.</h2><p>Fontes, memória e hipóteses recebidas do executor.</p></div><dl class="source-facts"><div><dt>Estado do backend</dt><dd id="backend-status">—</dd></div><div><dt>Leitura dos dados</dt><dd id="read-source">—</dd></div><div><dt>Hipóteses do background</dt><dd id="background-assumptions">Aguardando fonte.</dd></div><div><dt>Tradução canônica D10</dt><dd id="canonical-status">[OPEN] Fundo V3 reutilizado; ramo e normalização explícitos. Solver de perturbações ainda não integrado.</dd></div><div><dt>Rota acústica / CMB</dt><dd id="acoustic-status">Planejada; sem execução CMB nesta interface.</dd></div></dl><details class="data-details" open><summary>Fontes e hashes recebidos</summary><div id="source-list" class="source-list">Aguardando fontes.</div></details><details class="data-details"><summary>Recibo da avaliação e memória</summary><pre id="evaluation-receipt">Aguardando avaliação.</pre></details></section>
+    </section>
+    <section class="panel observations" aria-labelledby="observations-title"><div class="observations-head"><div><p class="eyebrow">VETOR DE OBSERVAÇÕES</p><h2 id="observations-title">Cada ponto tem uma identidade.</h2></div><span id="observation-summary" class="badge neutral">Aguardando dados</span></div><div class="table-scroll"><table><caption class="sr-only">Observações BAO na ordem da matriz de covariância, com previsão para os parâmetros manuais</caption><thead><tr><th scope="col">#</th><th scope="col">Observável</th><th scope="col">Redshift</th><th scope="col">Medido</th><th scope="col">Erro marginal</th><th scope="col">Background</th><th scope="col">Modelo − medido</th></tr></thead><tbody id="observation-rows"><tr><td colspan="7">Aguardando o vetor residente.</td></tr></tbody></table></div><p class="table-note">Ordem original preservada. O erro marginal é √Cᵢᵢ; as correlações permanecem na avaliação com a covariância completa.</p></section>
+    <footer><span>IALD / Cosmos</span><span>EXPLORAÇÃO DE FUNDO · SEM AJUSTE GLOBAL OU SIGNIFICÂNCIA</span><a href="http://127.0.0.1:18765/universe">Explorar ondas gravitacionais ↗</a></footer>
+  </main>
+</body>
+</html>

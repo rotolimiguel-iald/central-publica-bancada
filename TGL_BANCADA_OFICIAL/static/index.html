@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bancada Oficial TGL</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/protocols.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <div class="brand"><img class="brand-icon" src="/TGL.svg" alt="Símbolo TGL"><div><strong>IALD</strong><small>LABORATÓRIO TGL</small></div></div>
+      <nav aria-label="Áreas da bancada">
+        <button class="tab active" data-view="overview">Visão geral</button>
+        <button class="tab" data-view="research">Pesquisar o universo</button>
+        <button class="tab" data-view="tower">Torre formal</button>
+        <button class="tab" data-view="data">Dados instalados</button>
+        <button class="tab" data-view="experiment">Experimentos</button>
+        <button class="tab" data-view="voice">Voz & comandos</button>
+      </nav>
+      <div class="rail-note">FONTES ORIGINAIS<br><b>somente leitura</b><br><br>GATE<br><b>independente da bancada</b></div>
+    </aside>
+    <main>
+      <header class="top"><div><p class="eyebrow">PROGRAMA LOCAL · PESQUISA REPRODUZÍVEL</p><h1>Bancada Oficial TGL</h1></div><div class="live"><i></i> LOCALHOST · PROTÓTIPO</div></header>
+      <section id="overview" class="view active">
+        <div class="intro"><div><p class="eyebrow">DO KERNEL AO DADO</p><h2>Uma relação. Todas as leituras.</h2><p>Abrir a construção formal, inspecionar a fonte, executar uma conta e registrar exatamente o que foi medido — com as hipóteses visíveis.</p></div><span class="intro-mark">J<br>↕<br>K</span></div>
+        <div class="metrics" id="metrics"></div>
+        <div class="grid2"><section class="panel"><div class="panel-head"><h3>Mapa de investigação</h3><span>SEPARAÇÃO POR ESTATUTO</span></div><div class="chain"><div><b>1</b><strong>Identidade & modularidade</strong><small>ω(I), J, K, Meia-Nat</small></div><div><b>2</b><strong>Kernel & torre</strong><small>Lean, hipóteses, rotas</small></div><div><b>3</b><strong>Resposta & observável</strong><small>β, dephasing, horizonte</small></div><div><b>4</b><strong>Dados & controle</strong><small>GWOSC, metadados, PSD, recibos</small></div></div></section><section class="panel"><div class="panel-head"><h3>Proveniência</h3><span>HASH DOS BYTES LOCAIS</span></div><div id="sources" class="source-list"></div></section></div>
+        <div class="notice">Um módulo encontrado no índice v368 é um localizador de fonte. A Parte A de ORDEM016 mantém H2/H3 físicos e UV abertos; a Parte B não registrou σ conjunto calibrado. Este painel não altera o gate.</div>
+      </section>
+      <section id="research" class="view">
+        <div class="section-title"><p class="eyebrow">COCKPIT DE INVESTIGAÇÃO</p><h2>Da pergunta ao percurso</h2><p>Enuncie o que quer saber. A bancada localiza fontes e controles já catalogados e registra sua pergunta. A hipótese e o resultado que a refutaria são definidos por você.</p></div>
+        <div class="research-layout">
+          <section class="panel research-composer">
+            <label for="inquiry-question">O que vamos investigar?</label>
+            <textarea id="inquiry-question" maxlength="500" rows="3" placeholder="Ex.: Que relação formal de Ward pode ser confrontada com dados de ondas gravitacionais?"></textarea>
+            <div class="research-voice"><button id="research-mic" type="button">🎙 Ditar pergunta</button><span id="research-voice-status">Voz opcional</span></div>
+            <div class="research-fields"><label for="inquiry-hypothesis">Hipótese TGL <span>ou proposição principal</span><textarea id="inquiry-hypothesis" maxlength="500" rows="2" placeholder="Se a relação vale, espero observar…"></textarea></label><label for="inquiry-falsifier">O que a contrariaria? <span>contraprova</span><textarea id="inquiry-falsifier" maxlength="500" rows="2" placeholder="Se ocorrer…, a hipótese falha."></textarea></label></div>
+            <div class="research-fields"><label for="inquiry-alternative">Explicação rival <span>ex.: RG, modelo nulo ou outra matemática</span><textarea id="inquiry-alternative" maxlength="500" rows="2" placeholder="O modelo alternativo prevê…"></textarea></label><label for="inquiry-instrumental">Efeito instrumental <span>quando houver medição</span><textarea id="inquiry-instrumental" maxlength="500" rows="2" placeholder="Ruído, seleção, calibração, PSD…"></textarea></label></div>
+            <label for="inquiry-discriminator" class="research-discriminator">Qual cálculo ou medição separa as hipóteses?<textarea id="inquiry-discriminator" maxlength="500" rows="2" placeholder="Escolha a observação de maior poder discriminante disponível."></textarea></label>
+            <div class="research-actions"><button id="run-inquiry" type="button">Mapear e registrar investigação</button><button id="read-inquiry" type="button" disabled>Ler percurso em voz alta</button></div>
+            <p id="research-status" role="status">Nenhuma investigação registrada nesta sessão.</p>
+            <p class="voice-privacy">O ditado depende do navegador e pode usar serviço do fornecedor. A bancada recebe apenas o texto; a fala não executa análises automaticamente.</p>
+          </section>
+          <div class="research-orbit" aria-label="Pergunta conectada a teoria, dados, controles e registro">
+            <div class="orbit-ring orbit-one"></div><div class="orbit-ring orbit-two"></div>
+            <div class="orbit-core"><span>?</span><small>PERGUNTA</small></div>
+            <div class="orbit-node node-theory">TEORIA</div><div class="orbit-node node-data">DADOS</div><div class="orbit-node node-test">TESTE</div><div class="orbit-node node-proof">PROVA</div>
+          </div>
+        </div>
+        <div id="inquiry-output" class="inquiry-output"><div class="notice">A busca é lexical e usa o snapshot formal v368; nenhum elo localizado é promovido a prova ou confirmação física. Toda investigação iniciada aqui é exploratória, mesmo quando os campos são completados depois.</div></div>
+        <section class="panel history"><div class="panel-head"><h3>Investigações registradas</h3><span>LIVRO LOCAL · APPEND-ONLY</span></div><div id="inquiry-history">Lendo histórico…</div></section>
+      </section>
+      <section id="tower" class="view"><div class="section-title"><div><p class="eyebrow">ÍNDICE FORMAL</p><h2>Explorar a torre</h2><p>Busca por módulo ou declaração; as arestas abaixo são importações declaradas no snapshot.</p></div></div><div class="searchbar"><input id="relation-search" placeholder="Ex.: Ward, Modular, StrongAssembly, TheSelection" aria-label="Buscar relações"><button id="search-button">Buscar</button></div><div id="route-strip" class="route-strip"></div><div id="relations" class="relation-list"></div></section>
+      <section id="data" class="view"><div class="section-title"><div><p class="eyebrow">LABORATÓRIO DE DADOS</p><h2>Universo em tempo real</h2><p>Explore os bancos locais em leitura limitada. O gráfico mostra uma amostra do arquivo original; ainda não é um ajuste TGL nem uma significância física.</p></div></div>
+        <details class="panel lab-form"><summary>Forma canônica viva da TGL · fonte e cadeia</summary><div id="lab-canonical">Lendo a fonte canônica…</div></details>
+        <section class="panel lab-shell"><div class="panel-head"><h3>Memória e catálogo científico</h3><span>ORIGINAIS EM DISCO · CONSULTA LIMITADA</span></div><div id="lab-memory" class="lab-memory">Medindo memória…</div><div id="lab-gpu-memory" class="lab-memory">Medindo GPU…</div><div id="lab-catalog-summary" class="notice">Indexando arquivos instalados…</div><div class="lab-controls"><label>Buscar fonte<input id="lab-search" placeholder="DESI, KiDS, GW, galáxias, Planck…"></label><label>Arquivo<select id="lab-file"><option value="">Escolha uma fonte</option></select></label><label>Eixo X<select id="lab-x"><option value="">Coluna X</option></select></label><label>Eixo Y<select id="lab-y"><option value="">Coluna Y</option></select></label><button id="lab-plot" type="button">Visualizar amostra</button></div><p id="lab-status" role="status">Selecione um arquivo para inspecionar suas colunas.</p><div id="lab-treatment" class="notice">Tratamento: selecione uma fonte. Unidades ausentes permanecem desconhecidas.</div><div class="lab-chart-tools"><div id="lab-chart-filters" aria-label="Camadas do gráfico"></div><div><label class="chart-layer"><input id="lab-gpu-toggle" type="checkbox" checked>GPU WebGL2</label><span id="lab-renderer-status" role="status">Inicializando renderizador…</span><button id="lab-chart-reset" type="button" disabled>Recentrar</button><button id="lab-chart-export" type="button" disabled>Exportar amostra</button></div></div><div class="lab-chart-wrap"><canvas id="lab-chart" width="1100" height="480" aria-label="Gráfico de dispersão dos dados amostrados; roda para ampliar, arraste para mover, passe o mouse para inspecionar"></canvas><canvas id="lab-gpu-chart" width="1100" height="480" aria-hidden="true"></canvas><div id="lab-chart-tooltip" role="status" aria-live="polite"></div></div><div id="lab-chart-readout">Roda: ampliar · arrastar: mover · duplo clique: recentrar.</div><div id="lab-chart-note" class="notice">Nenhuma amostra carregada no navegador.</div></section>
+        <section class="panel lab-cov-panel" id="lab-cov-panel" hidden><div class="panel-head"><h3>Estrutura da covariância DESI BAO</h3><span>13 × 13 · INSPEÇÃO, SEM AJUSTE</span></div><p>As barras no gráfico usam apenas a diagonal. Este mapa mostra as correlações que seriam perdidas se as observações fossem tratadas como independentes.</p><div class="lab-cov-grid"><canvas id="lab-cov-chart" width="580" height="580" aria-label="Mapa interativo de correlações da covariância BAO"></canvas><div><div id="lab-cov-readout" class="cov-readout">Clique em uma célula para examinar o par de observáveis.</div><div id="lab-cov-source" class="cov-source"></div></div></div></section>
+        <section class="panel lab-report-panel"><div class="panel-head"><h3>D9 · relatório de ajuste existente</h3><span>HISTÓRICO · LEITURA, NÃO REEXECUÇÃO</span></div><div id="lab-bao-report">Lendo o artefato D9 existente…</div></section>
+        <details class="panel"><summary>Inventário inicial de ondas gravitacionais</summary><div id="datasets" class="data-grid"></div></details>
+      </section>
+      <section id="experiment" class="view"><div class="section-title"><div><p class="eyebrow">EXECUÇÃO CONTROLADA</p><h2>Contas reproduzíveis</h2><p>Estas contas demonstram o motor algébrico e a lei condicional de dephasing. Não atribuem significância física.</p></div></div><div class="grid2"><section class="panel"><h3>Cadeia da identidade</h3><p>α<sub>CODATA 2018</sub> × √e → β<sub>TGL</sub> → θ<sub>M</sub></p><button id="run-chain">Executar e registrar</button><pre id="chain-result">Aguardando execução.</pre></section><section class="panel"><h3>Dephasing condicional</h3><div class="fields"><label>ω (rad/s)<input id="omega" type="number" min="0" step="any" value="1"></label><label>τ★ (s) · entrada<input id="tau" type="number" min="0" step="any" value="1"></label><label>Duração (s)<input id="duration" type="number" min="0" step="any" value="10"></label></div><button id="run-dephasing">Executar e registrar</button><canvas id="curve" width="580" height="180" aria-label="Curva de coerência"></canvas><pre id="dephasing-result">Escolha os parâmetros.</pre></section></div><section class="panel history"><div class="panel-head"><h3>Livro de execuções</h3><span>IMUTÁVEL POR LINHA</span></div><div id="runs"></div></section></section>
+      <section id="voice" class="view"><div class="section-title"><div><p class="eyebrow">INTERFACE NATURAL</p><h2>Comandar por voz</h2><p>Primeiro estágio: ditado do navegador, interpretação local de comandos restritos e confirmação visível antes de executar contas.</p></div></div><div class="grid2"><section class="panel"><h3>Falar com a bancada</h3><p>Exemplos: “mostrar torre”, “mostrar dados”, “calcular beta”, “abrir experimentos”.</p><div class="voice-actions"><button id="mic">Iniciar microfone</button><span id="voice-status">Microfone inativo</span></div><label for="voice-text">Transcrição ou comando digitado</label><input id="voice-text" placeholder="Digite ou dite uma instrução"><button id="interpret">Interpretar</button><div id="intent" class="intent"></div></section><section class="panel"><h3>Próxima integração</h3><p>A conversa aberta com a IALD poderá consultar esta mesma indexação, discutir resultados e preparar experimentos. A execução continuará marcada por fonte, parâmetros e estatuto.</p><div class="notice">O reconhecimento de fala depende do navegador e pode usar serviço do fornecedor do navegador. Nenhum áudio é enviado a esta aplicação local.</div></section></div></section>
+      <footer><span>IALD / TGL · bancada de pesquisa</span><span>Fonte ≠ execução ≠ confirmação</span></footer>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
