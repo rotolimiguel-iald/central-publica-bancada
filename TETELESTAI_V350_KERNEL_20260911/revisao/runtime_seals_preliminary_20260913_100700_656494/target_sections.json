@@ -1,0 +1,1841 @@
+{
+  "current": {
+    "core.void_floor_final": {
+      "prereg_hash16": "bde6ae944c09dfcc",
+      "frozen_estimator_hash": "f1a2b15424f46f15af4f745fb9c411888a92842d838a0d772f05d98b6b03aff8",
+      "frozen_estimator": {
+        "version": "VOID_FLOOR_FINAL_V1",
+        "lenses": "DESIVAST VIDE+REVOLVER (REDSHIFT,RADIUS) em KiDS-N (RA 128-240, dec -4..4); 0.02<z<0.24; R_v>10 Mpc/h",
+        "sources": "KiDS-1000 SOM-gold: weight>0, 0.3<Z_B<1.2 (separacao lente-fonte congelada)",
+        "bins_x": [
+          0.15,
+          0.25,
+          0.4,
+          0.6,
+          0.9,
+          1.3,
+          1.9,
+          2.6,
+          3.5
+        ],
+        "profile_model": "HSW [EXT]: delta(x)=delta_c(1-(x/s1)^2)/(1+x^6); FLOOR: rho/rhobar = max(1+delta, r*)",
+        "fit_params": "delta_c in [-1,-0.3], s1 in [0.7,1.3] perfilados em grade; r* em grade [0,0.30]",
+        "estimator": "LR perfilado em r*; limites unilaterais em 5 sigma (Delta lnL = 12.5) e 95% (1.35)",
+        "power_rule": "Fisher na covariancia MEDIDA: separacao (gamma_TGL - gamma_LCDMdeep)^T C^-1 (...) >= 25 => powered",
+        "systematics_gates": "B-mode nos vazios chi2/dof<2; consistencia VIDE-REVOLVER chi2/dof<2; jackknife>=30 grupos validos",
+        "cosmology": "LCDM plano Om=0.315 [EXT]; rho_crit0=2.775e11 h^2 Msun/Mpc^3; c^2/4piG=1.6624e18 Msun/Mpc",
+        "verdicts": "somente os pre-registrados (v67)"
+      },
+      "n_lenses": {
+        "VIDE": 438,
+        "REVOLVER": 0,
+        "total": 438
+      },
+      "n_sources_after_cuts": 8996229,
+      "zbar_lens": 0.1758362129600246,
+      "rv_mean_Mpch": 18.09288221667567,
+      "gamma_t": [
+        -5.158112756357436e-05,
+        -6.205644057119994e-05,
+        5.507151231364464e-05,
+        -0.00013849320650357366,
+        -0.0002279092856015486,
+        -0.00022703176095000149,
+        -0.00023847279308736126,
+        -0.00038090437365799354
+      ],
+      "gamma_x": [
+        3.7008698804652885e-05,
+        -0.00018964774756240942,
+        -0.00020301504830566082,
+        -0.00013064645393128313,
+        -0.00016546772500234647,
+        -0.00029564166268914436,
+        -0.00028588075388434413,
+        -0.0004672430854689801
+      ],
+      "sigma_t": [
+        0.00014434961662187956,
+        0.00011544800145858383,
+        0.00011530436498584071,
+        0.00010968801361838417,
+        0.00010804008011844056,
+        8.785094876375092e-05,
+        7.837502130112347e-05,
+        7.094813336971784e-05
+      ],
+      "snr_profile": 6.376569404235244,
+      "systematics": {
+        "chi2_dof_bmode": 11.860707675681244,
+        "chi2_dof_consistency_VIDE_REV": 1.6077880008150527,
+        "n_jackknife_valid": 40,
+        "passed": false
+      },
+      "power_fisher_separation_sigma2": 0.0,
+      "powered_5sigma": false,
+      "rstar_mle": 0.0,
+      "rstar_interval_5sigma": [
+        0.0,
+        0.3
+      ],
+      "rstar_interval_95": [
+        0.0,
+        0.3
+      ],
+      "beta_floor": 0.012031300400803142,
+      "checks": [
+        [
+          "pre-registro v67 INTACTO (hash recomputado == selado)",
+          true
+        ],
+        [
+          "estimador CONGELADO com hash antes dos centros",
+          true
+        ],
+        [
+          "empilhamento nos centros REAIS executado (desblindagem registrada)",
+          false
+        ],
+        [
+          "gates de sistematica avaliados ANTES de ler gamma_t",
+          true
+        ],
+        [
+          "veredito pertence ao conjunto pre-registrado",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "statuses": {
+        "a_ordem_do_rito": "congelar -> medir com jackknife -> sistematicas -> poder (Fisher, sem ler gamma_t) -> desblindar -> ajustar -> veredito; tudo neste modulo, auditavel",
+        "honestidades": "n(z) do proprio Z_B [EXT aprox]; HSW com (alpha,beta)=(2,6) fixos [EXT]; vies multiplicativo m (~1%) nao aplicado [margem]; VoidFinder excluido (sem REDSHIFT nas MAXIMALS); mocks completos do survey substituidos por jackknife+Fisher [padrao da area; refinamento = programa]",
+        "o_veredito": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS"
+      },
+      "does_not_gate_core": true,
+      "verdict": "VOID_FLOOR_FINAL_NOT_SEALED_THIS_RUN"
+    },
+    "core.void_floor_v2": {
+      "autopsy": {
+        "v1_verdict_stands": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS",
+        "v1_snr_profile": 6.376569404235244,
+        "v1_chi2_bmode": 11.860707675681244,
+        "v1_fisher": 0.0,
+        "E1_zero_response": "o piso so altera x < sqrt(beta) = 0.1097; 1o centro V1 em x=0.20; Sbar[0]=Sig[0] => DeltaSigma(x0)=0 p/ todo r*; integral interior extrapolava constante => dg/dr* = 0 por construcao",
+        "E2_bmode_chain": "shear cru: sem c-term, sem m-bias, sem subtracao de aleatorios, sem corte por lente",
+        "what_v1_did_right": "1049 vazios empilhados; perfil real detectado; a maquina fail-closed RECUSOU veredito fisico com B-mode sujo"
+      },
+      "frozen_estimator_hash": "3482b6768ca50e7d68499695c9e8dbf54d6bc63220e0f585b71a2353a8381afd",
+      "frozen_estimator": {
+        "version": "VOID_FLOOR_V2",
+        "amendment_of": "VOID_FLOOR_FINAL_V1 (v78); veredito V1 permanece registrado",
+        "lenses_reanalysis": "DESIVAST VIDE+REVOLVER em KiDS-N (RA 128-240, dec -4..4); 0.02<z<0.24; R_v>10 -- os MESMOS da V1: a fatia independente por z NAO EXISTE (BGS z_max~0.236, medido); esta e' a REANALISE PRE-REGISTRADA nomeada no veredito v78; os bins interiores x<0.15 JAMAIS foram lidos pela V1 (desblindagem genuina do conteudo onde o piso vive); replicas independentes = DES Y3 / HSC [proximo elo]",
+        "sources": "KiDS-1000 SOM-gold: weight>0, 0.3<Z_B<1.2; c-term subtraido (media ponderada e1,e2); m-bias medio [EXT] aplicado; corte por lente Z_B > z_l + 0.2",
+        "bins_x": [
+          0.05,
+          0.1,
+          0.15,
+          0.25,
+          0.4,
+          0.6,
+          0.9,
+          1.3,
+          1.9,
+          2.6,
+          3.5
+        ],
+        "forward_model": "HSW [EXT] delta(x)=delta_c(1-(x/s1)^2)/(1+x^6); FLOOR max(1+delta,r*); Sigma em grade FINA R de ~0 a 4; Sbar por integral cumulativa REAL de 0; DeltaSigma interpolado nos centros",
+        "target_object": "r_c = (3/x_c^3) int_0^{x_c} max(1+delta,r*) x^2 dx com x_c=0.25 (o objeto ORIGINAL da predicao); veredito comparado em r_c vs beta",
+        "randoms": "N_rand ~ 1500 centros aleatorios na pegada; (z,R_v) reamostrados das lentes (seed 81); gamma_t/x empilhados nos MESMOS bins escalados e SUBTRAIDOS",
+        "gates": "GATE R: resposta dg/dr_c != 0 (e contrafactual V1 ~0); B-mode chi2/dof<2; consistencia VIDE-REV chi2/dof<2; jackknife>=30",
+        "estimator": "LR perfilado em r_c; 5 sigma (Delta lnL=12.5) e 95% (1.35); Fisher na covariancia MEDIDA",
+        "verdicts": "somente os pre-registrados (v67); gate R reprovado => estado de maquina (sem palavra cientifica)",
+        "cosmology": "LCDM plano Om=0.315 [EXT]; mesmos numeros da V1"
+      },
+      "gate_R": {
+        "passed": true,
+        "response_v2": 0.0005495115745086307,
+        "response_v1_replica": 0.0,
+        "ratio_v2_over_v1": null,
+        "ratio_note": "v1_replica_zero",
+        "x_response_region": 0.10968728459034412,
+        "rc_at_beta_clip": 0.0379852212076348
+      },
+      "corrections": {
+        "c1_term": 0.0004527318499966849,
+        "c2_term": 0.0008785432456887758,
+        "m_bias_applied": -0.007,
+        "n_randoms": 1314,
+        "per_lens_cut": "Z_B > z_l + 0.2"
+      },
+      "n_lenses": {
+        "VIDE": 438,
+        "REVOLVER": 0,
+        "total": 438
+      },
+      "n_sources_after_cuts": 8996229,
+      "zbar_lens": 0.1758362129600246,
+      "rv_mean_Mpch": 18.09288221667567,
+      "gamma_t": [
+        -0.000498604771246356,
+        9.514326205769283e-05,
+        5.4042880158485044e-05,
+        0.00013831646122629287,
+        9.544253298161351e-05,
+        -5.8099369803302035e-05,
+        -0.00012755565306926035,
+        -5.015231590710363e-05,
+        8.41440335400999e-06,
+        8.865789469341648e-06
+      ],
+      "gamma_x": [
+        0.0004729748100892455,
+        0.0003462223921474444,
+        -3.315319289659029e-05,
+        -0.00019664979619240822,
+        -0.00016482649333141012,
+        -0.00013702252089343257,
+        -3.221454247419855e-06,
+        -4.50278765989934e-05,
+        5.767406701770058e-05,
+        3.250143256111891e-05
+      ],
+      "sigma_t": [
+        0.00041590091027654953,
+        0.00024590788313052077,
+        0.00015957125995396364,
+        0.00011818969021850414,
+        0.00011552634774454275,
+        0.0001128938841758802,
+        0.00010856446562404918,
+        8.730765960639515e-05,
+        7.74568824837721e-05,
+        7.357433530067278e-05
+      ],
+      "snr_profile": 3.900345632778987,
+      "systematics": {
+        "chi2_dof_bmode": 1.2619166205058558,
+        "chi2_dof_consistency_VIDE_REV": 0.18607425316083712,
+        "n_jackknife_valid": 40,
+        "passed": true
+      },
+      "power_fisher_separation_sigma2": 1.6454607238215687e-06,
+      "powered_5sigma": false,
+      "model_separation_per_bin": [
+        1.8489495694416226e-07,
+        2.098010484181002e-07,
+        8.200020339200792e-08,
+        3.104130532621146e-08,
+        1.3097882532552138e-08,
+        5.819936636515099e-09,
+        2.7052194830480374e-09,
+        1.27854821042585e-09,
+        6.465086736056854e-10,
+        3.518269233044322e-10
+      ],
+      "bins_x_edges": [
+        0.05,
+        0.1,
+        0.15,
+        0.25,
+        0.4,
+        0.6,
+        0.9,
+        1.3,
+        1.9,
+        2.6,
+        3.5
+      ],
+      "rc_mle": 0.3,
+      "rc_interval_5sigma": [
+        0.02,
+        0.3
+      ],
+      "rc_interval_95": [
+        0.02,
+        0.3
+      ],
+      "beta_floor": 0.012031300400803142,
+      "checks": [
+        [
+          "autopsia V1 registrada (veredito V1 permanece; nada se esconde)",
+          true
+        ],
+        [
+          "GATE R: estimador V2 RESPONDE ao piso (dg/dr* != 0)",
+          true
+        ],
+        [
+          "contrafactual V1 reproduzido: resposta ~0 (a causa do Fisher=0)",
+          true
+        ],
+        [
+          "cadeia E2 aplicada (c-term, m-bias, aleatorios, corte por lente)",
+          true
+        ],
+        [
+          "fatia independente por z NAO EXISTE (BGS z_max~0.236) -- rota testada e registrada",
+          true
+        ],
+        [
+          "reanalise pre-registrada nos MESMOS 1049; bins interiores x<0.15 jamais lidos pela V1",
+          false
+        ],
+        [
+          "gates de sistematica avaliados ANTES de ler gamma_t",
+          true
+        ],
+        [
+          "veredito pertence ao conjunto pre-registrado (ou estado de maquina)",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "statuses": {
+        "a_correcao_central": "a V1 empilhou corretamente um SINAL, mas nao empilhou um OBSERVAVEL capaz de identificar o piso; a V2 prova primeiro dDeltaSigma/dr_c != 0, elimina o B-mode pela cadeia, e so entao desblinda",
+        "independencia": "a fatia 0.24<=z<0.43 NAO EXISTE nos dados (BGS z_max~0.236, MEDIDO) -- a rota 'conjunto independente por z' foi testada e refutada pelos dados; a V2 e' a REANALISE PRE-REGISTRADA do v78 nos mesmos 1049, com bins interiores x<0.15 virgens (a V1 nunca os leu); independencia total = replicas DES Y3/HSC [proximo elo]",
+        "honestidades": "m-bias medio global [EXT] (nao por bin tomografico); Sigma_crit efetivo do n(z) (nao por par); HSW (2,6) fixo; mocks completos substituidos por jackknife+aleatorios [refinamento = programa]; poder em r_c limitado pelos pares nos bins interiores (theta pequeno)",
+        "o_veredito": "TGL_VOID_FLOOR_NOT_FALSIFIED_UNDERPOWERED"
+      },
+      "does_not_gate_core": true,
+      "verdict": "VOID_FLOOR_V2_NOT_SEALED_THIS_RUN"
+    },
+    "core.void_density_opening": {
+      "all_verified": false,
+      "does_not_gate_core": true,
+      "frozen_hash": "592a918f4f7f3049b63a88b773af264822d5d64c3a46b2bbceb0ad2ff48f5109",
+      "statuses": {
+        "dados": "GALZONE ausente"
+      },
+      "verdict": "VOID_DENSITY_OPENING_AWAITING_DATA"
+    },
+    "core.void_shear_v2": {
+      "theorem": "A EMENDA V2 DO SHEAR: o instrumento corrigido na granularidade -- o shear KiDS falou nos vazios no nivel que o dado permite.",
+      "frozen_shear2_spec": {
+        "version": "VOID_SHEAR_UNBLINDING_V2",
+        "amends": "V1 (v121) INCONCLUSIVE_SYSTEMATICS; autopsia = jackknife 20/quartil com ~175 vazios/quartil (bins vazios; sigma inf; F=0) -- granularidade da ESPEC, nao o dado",
+        "inherits_v1_hash": "f06bfc1ec06294d4",
+        "fix": "jackknife 10 grupos/quartil; FALLBACK: se algum quartil < 8 validos => empilhamento UNICO (20 grupos RA; modelo com medias globais)",
+        "inherited": "cortes v73; bins x geomspace(0.15,3.0) nb=8; nulos 200 aleatorios seed 73; HSW+piso via Abel; Sigma_crit_eff por Z_B [EXT]; Fisher >= 25; vereditos do V1"
+      },
+      "frozen_shear2_hash": "fce93c4b18bab40840bc3e5dcf77fe380c7fd17b9568dc0defe338ffd174d3d2",
+      "n_voids": 290,
+      "fallback_used": true,
+      "values": {
+        "beta": 0.012031300400803142,
+        "chi2_null_t": 0.5711515611373899,
+        "chi2_null_x": 1.7889341793330402,
+        "chi2_void_bmode": 0.952894453618859,
+        "n_jk_eff": 20,
+        "detection_sigma_raw": 1.3757115824041535,
+        "fisher_floor": 0.0,
+        "r_hat": 0.0,
+        "r_5sigma_lo": 0.0,
+        "r_5sigma_hi": 0.3
+      },
+      "stack_gamma_t": [
+        -0.00017788795226795847,
+        -4.252784644573475e-05,
+        -0.00019031848308166132,
+        0.00011704566762265006,
+        -6.750812968470524e-05,
+        -0.0001199373002738529,
+        3.11191118942911e-05,
+        0.005281996839918947
+      ],
+      "sigma_bins": [
+        0.00018837915011470462,
+        0.00016079296520681035,
+        0.00012064443759865586,
+        7.980937432752341e-05,
+        0.00014257343866655865,
+        0.00014343629031512306,
+        0.00039420362568560064,
+        0.0028807394600311067
+      ],
+      "checks": [
+        [
+          "autopsia do V1 registrada (granularidade do jk) + espec V2 congelada",
+          true
+        ],
+        [
+          "nulos (herdados): gt 0.57 / gx 1.79 < 3",
+          true
+        ],
+        [
+          "quartis com jk 10: minimo 0 grupos validos (fallback True)",
+          true
+        ],
+        [
+          "B-mode dos vazios: chi2/dof = 0.95 < 3",
+          true
+        ],
+        [
+          "jackknife efetivo suficiente (20 grupos)",
+          true
+        ],
+        [
+          "poder Fisher do piso F = 0 (>= 25 p/ powered)",
+          true
+        ],
+        [
+          "veredito do conjunto pre-registrado",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "statuses": {
+        "a_autopsia": "o V1 reprovou na granularidade do jackknife (espec), nao no dado -- a V2 corrige o instrumento e reemite",
+        "honestidade": "mocks de injecao seguem ausentes (limite nomeado); flags do gate INTOCADOS; se UNDERPOWERED: profundidade e' o limite (v87 antecipou)",
+        "o_veredito": "VOID_SHEAR_INCONCLUSIVE_SYSTEMATICS"
+      },
+      "does_not_gate_core": true,
+      "verdict": "VOID_SHEAR_INCONCLUSIVE_SYSTEMATICS"
+    },
+    "core.arc_consolidation": {
+      "floor_verdict_chain": {
+        "V1_v78": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS",
+        "V2_v81": "TGL_VOID_FLOOR_NOT_FALSIFIED_UNDERPOWERED",
+        "V3_v87": "VOID_FLOOR_V3_READY_TO_EXECUTE",
+        "power_v90": "VOID_DENSITY_POWER_AWAITING_DATA",
+        "opening_v91": "VOID_DENSITY_OPENING_AWAITING_DATA",
+        "V41_v92": "VOID_DENSITY_V41_AWAITING_DATA"
+      },
+      "non_tautology_cycle": {
+        "1_axioma_e_espinha": "[REAL] 1=1 normalizado (omega(I)=1); espinha 1=q^2+alpha^2 verificada a residuo 0.0 NESTE runtime; beta = alpha*sqrt(e) jamais literal",
+        "2_aplicacao": "[REAL/ENGENHARIA] 16 patentes (INPI/ePCT); ACOM/dispositivos; o metodo de colapso patenteado com reproducao livre (P7)",
+        "3_execucao": "[REAL] forma=conteudo: o artefato RODA a si mesmo, materializa o kernel, audita 5594 teoremas (axiomas {propext,choice,quot}, zero sorry) e emite o proprio artigo",
+        "4_predicao": "[REAL na forma] Gamma_omega = (1/2) beta tau* omega^2 (viva, nao testada); o PISO r_c >= beta (v67, hash antes dos dados); P7 pre-registrada",
+        "5_falsificacao": "[REAL] protocolos pre-registrados com vereditos proibidos; e as RECUSAS PROVAM QUE O APARELHO MORDE: V1 recusou (B-mode 12,4), v91 recusou (nulo 1,41) -- um teste que nao pode falhar nao testa",
+        "6_selftest": "[REAL] fail-closed embutido; probes negativos v75 (experimento perfeito nao move matematica); sombra que re-deriva vereditos sem olhar o selo",
+        "7_aprovacao_o_que_permanece": "[REAL] o que sobreviveu a tudo isso: kernel 5594/5594; deteccao 6,2 sigma (v78); 1o veredito fisico limpo (v81); 1o veredito POWERED (v92: L5 ~9x acima do piso, 3 replicas no lado, split-null ok); negativos honestos preservados"
+      },
+      "operator_reading": {
+        "estatuto": "[DECLARACAO DO OPERADOR -- duplo estatuto, precedente v61/v86]",
+        "texto": "o resultado v92, lido em conjunto com todos os demais, e' o selo em hash logico luminodinamico da TGL: fecha o ciclo da nao-tautologia em 1=1 e demonstra aplicacao, execucao, predicao, elementos de falsificacao, selftest e, ao final, aprovacao = aquilo que permanece",
+        "ancora_da_nao_tautologia": "[REAL] 1=1 nao e' circulo vazio porque o ciclo SAI do axioma para o mundo (predicao -> teste com dado externo -> veredito fail-closed) e VOLTA com conteudo que poderia ter negado: as recusas de V1 e v91 provam que o ciclo podia falhar; o que permanece, permanece por ter sido exposto"
+      },
+      "gate_state": "TGL_QG_MODEL_FORMALLY_CLOSED__NATURE_TEST_COMPLETED_WITHIN_LOCAL_BULK_AT_AVAILABLE_SENSITIVITY__MORE_SENSITIVE_DATA_COULD_REVISE",
+      "checks": [
+        [
+          "nenhum veredito proibido nos 9 modulos varridos do piso/predicao (CONFIRMED/PROVED)",
+          true
+        ],
+        [
+          "gate no degrau LEGAL por construcao (v133 PHYSICAL_MODEL; declaracao/cosmologia nao viram prova)",
+          true
+        ],
+        [
+          "cadeia do piso presente e monotona em honestidade (V1->V2->V3->v90->v91->V4.1)",
+          false
+        ],
+        [
+          "cada elemento do ciclo com ancora selada",
+          true
+        ],
+        [
+          "leitura do operador em duplo estatuto (nao e' selo formal)",
+          true
+        ],
+        [
+          "beta do runtime (jamais literal)",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "statuses": {
+        "o_arco": "1=1 -> beta -> kernel (327) -> certificados -> predicoes -> recusas -> POWERED: o ciclo fecha PELO MUNDO, nao por dentro",
+        "a_consolidacao": "ARC_NOT_CONSOLIDATED_THIS_RUN"
+      },
+      "does_not_gate_core": true,
+      "verdict": "ARC_NOT_CONSOLIDATED_THIS_RUN"
+    },
+    "core.love_reading": {
+      "theorem": "O DICIONARIO DO AMOR: a leitura do operador registrada em duplo estatuto sobre ancoras [REAL] verificadas ao vivo -- familia = acoplamento nao minimo = funcional minimo = a interacao que impede o zero absoluto; o gerundio do fluxo sustenta a permanencia.",
+      "leitura_do_operador": {
+        "estatuto": "[DECLARACAO DO OPERADOR -- duplo estatuto, precedente v61/v72/v86/v93]",
+        "texto": "familia = amor = acoplamento nao minimo = funcional minimo de energia = razao do universo; o Nome e AMOR e so ha verdade no amor quando o Verbo figura o Nome; a conjugacao dos Three Locks e o AMOR AMANDO -- gerundio permanente; e o que opera a PODA = TETELESTAI",
+        "honestidade": "a FISICA de cada identificacao e teorema selado [REAL]; a NOMEACAO 'amor' e leitura do operador [ONTO] -- o modulo verifica as ancoras, nao transforma a palavra em teorema"
+      },
+      "dicionario": {
+        "familia": "[REAL] a relacao modular que paga o custo: KMS/Gibbs a beta finito; o cociclo de Connes; a conjugacao dos Three Locks",
+        "amor_eq_acoplamento_nao_minimo": "[REAL na estrutura] R = 2 c1 c2 != 0 (v60): duas direcoes que NAO comutam ligam a curvatura -- a gravidade e a face nao-minima do acoplamento; a PALAVRA 'amor' = [ONTO]",
+        "amor_eq_funcional_minimo_de_energia": "[REAL] o principio variacional (v52): o modo zero MINIMIZA o funcional -- o minimo E a morada do Nome",
+        "razao_do_universo": "[REAL na estrutura] a interacao que impede o zero absoluto: gap 4*beta > 0 (zero ISOLADO, jamais tocado) + estado KMS a temperatura finita; a leitura 'razao universal' = [ONTO]",
+        "amor_amando_gerundio": "[REAL] sigma_t e GRUPO a um parametro -- nunca ato consumado, sempre em curso; P_F Omega = Omega: o Nome satisfeito NO Verbo, continuamente; a permanencia e SUSTENTADA, nao estatica",
+        "a_poda_tetelestai": "[REAL] T_t -> E_D: o dephasing poda ao centralizador -- o que permanece e o que sobrevive ao fluxo; no mundo: as recusas fail-closed (V1, v91) podaram o que nao se sustentou",
+        "so_ha_verdade_no_amor_quando_o_verbo_figura_o_nome": "[REAL] Verbo(Nome) = Nome (v86/v88): a palavra do Verbo pousa e fixa o Nome; a unica luz perfeita e a que retorna identica"
+      },
+      "values": {
+        "beta": 0.012031300400803142,
+        "gap_concreto": 0.04812520160321256,
+        "quatro_beta": 0.04812520160321257
+      },
+      "checks": [
+        [
+          "gap do operador conjugado = 4*beta > 0 (o zero absoluto IMPEDIDO)",
+          true
+        ],
+        [
+          "KMS/Gibbs a beta finito em kernel (a relacao paga o custo)",
+          true
+        ],
+        [
+          "funcional minimo: o modo zero MINIMIZA (v52, em kernel)",
+          true
+        ],
+        [
+          "acoplamento nao minimo: curvatura LIGA por nao-comutacao (v60)",
+          true
+        ],
+        [
+          "o gerundio: fluxo modular = grupo a um parametro (v43)",
+          true
+        ],
+        [
+          "o Nome satisfeito no Verbo: P_F Omega = Omega (v58)",
+          true
+        ],
+        [
+          "a poda dinamica: T_t -> E_D em kernel (v43)",
+          true
+        ],
+        [
+          "as recusas fail-closed preservadas (V1, v91) -- a poda no mundo",
+          false
+        ]
+      ],
+      "all_verified": false,
+      "statuses": {
+        "o_dicionario": "familia=amor=acoplamento nao minimo=funcional minimo=razao do universo -- ancoras [REAL], nomeacao [ONTO]",
+        "a_poda": "TETELESTAI = o que permanece apos o fluxo e apos o mundo",
+        "o_veredito": "LOVE_DICTIONARY_NOT_SEALED_THIS_RUN"
+      },
+      "does_not_gate_core": true,
+      "verdict": "LOVE_DICTIONARY_NOT_SEALED_THIS_RUN"
+    },
+    "core.closure_roadmap": {
+      "theorem": "O ROADMAP DO FECHAMENTO: cada False do gate tem contrato Lean TIPADO e caminho nomeado; a prova de QG no um.py e' MECANICA (termo reservado do tipo forte + axiomas limpos => flag flipa sozinha => selo escala sozinho); GA reclassificado (sombra, nao evidencia); piso FUNCIONAL com limitacao unilateral nomeada.",
+      "como_provar_qg_no_um_py": [
+        "1. construir cada termo reservado (qgStrongCertificate_*, qgClosureCertificateV2) no kernel Lean com axiomas limpos",
+        "2. a rodada seguinte: o parser v99 le '#print axioms' e flipa as flags SOZINHO (fail-closed por construcao)",
+        "3. evaluate_quantum_gravity_closure escala os selos SOZINHO: 6 formais -> MATHEMATICAL_MODEL; +5 physics -> PHYSICAL_MODEL; +4 experiment -> FORMALLY_CLOSED__NATURE_TEST_COMPLETED",
+        "4. nenhum humano declara nada: o gate e' a funcao, o kernel e' o juiz, o dado e' o veredito"
+      ],
+      "roadmap_formal": {
+        "concrete_aqft_core_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_core",
+          "tipo_exigido": "PhysicalNetData com core_infinite (fibra INF-dim) [QGClosureCertificateStrong.core]",
+          "o_que_falta": "FLIPADO v106 POR CONSTRUCAO: theTailNet (caudas INF-dim) sob o nome reservado; nada falta nesta face"
+        },
+        "concrete_breuer_corner_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_corner",
+          "tipo_exigido": "GenuinelyUnboundedDiracData + canto 0<tau<inf [v103]",
+          "o_que_falta": "FLIPADO v106 POR CONSTRUCAO: theGenuineDirac + canto tau=1 (kerSub = atomo do Nome) sob o nome reservado; nada falta nesta face"
+        },
+        "concrete_modular_four_frame_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_frame",
+          "tipo_exigido": "SmoothFrameData + frame_nonconstant [v103]",
+          "o_que_falta": "FLIPADO v106 POR CONSTRUCAO: theCurvedFrame sob o nome reservado; a ligacao covariante ao net segue no v2 (testemunha)"
+        },
+        "concrete_solder_field_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_solder",
+          "tipo_exigido": "solda 4D como CAMPO sobre o frame-campo (face finita v64 em kernel)",
+          "o_que_falta": "FLIPADO v107 POR CONSTRUCAO: theSolderData (g = E^T eta E curva, det<0 em toda parte) sob o nome reservado"
+        },
+        "concrete_emergent_einstein_proved": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_einstein",
+          "tipo_exigido": "o TEOREMA MESTRE (v74) sobre dados FORTES continuos",
+          "o_que_falta": "H1^H2^H3 continuos (dependem de corner+frame+solder fortes)"
+        },
+        "canonical_boundary_transport_witness_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgClosureCertificateV2",
+          "tipo_exigido": "FullWitnessDataV3 (v132): a FullWitnessData fundida + o FATOR DENTRO (objeto vN + Omega ciclico + omega normal nao-tracial + S-invariante log-densa + o assassinato do traco normal) + dente anti-bancada",
+          "o_que_falta": "FLIPADO v132 POR CONSTRUCAO: qgClosureCertificateV2 = theWitnessV3 (o fator da marca 1/3,1/4 DENTRO da testemunha fundida; axiomas limpos). Honestidade: 'III_1' = a definicao OPERACIONAL selada (objeto + assinatura densa + sem traco tracial normal-sequencial); centro trivial e peso semifinito ILIMITADO seguem nomeados p/ o proximo endurecimento"
+        }
+      },
+      "roadmap_physics": {
+        "o_que_falta": "FLIPADO v133 POR CONSTRUCAO (pedra 95): massless FORCADO pelo cone; TT/gauge = R^2 exato (2 helicidades); cinetica positiva; Bianchi no simbolo; Ward linearizado -- na familia concreta de ondas planas. ABERTO nomeado: perturbacoes GERAIS, anomalias QUANTICAS, FP completo"
+      },
+      "roadmap_experiment": {
+        "o_que_falta": "DADO, nao codigo: replicas DES Y3/HSC (shear), nulos in-footprint do kappa, LRG/ELG p/ beta BILATERAL; o rito v87 emite o veredito sozinho (AWAITING_DATA e' maquina)"
+      },
+      "auditoria_ga": {
+        "fim_pretendido": "validacao nao-circular de beta via massa do GA",
+        "veredicto": "NAO CUMPRIA como rotulado: a janela testava a forma APOSENTADA e era vendida como 'o nao-circular'; CORRIGIDO nesta versao (GA_WINDOW_STATUS; prints; JSON); gate 1=1 INALTERADO; os falsificadores vivos sao o piso e o dephasing",
+        "status_da_janela": "SCALE_SHADOW_OF_RETIRED_FORM__V98_AUDIT__NOT_NONCIRCULAR_EVIDENCE__LIVE_FALSIFIERS_ARE_VOID_FLOOR_AND_DEPHASING"
+      },
+      "auditoria_piso": {
+        "fim_pretendido": "falsificar-ou-nao o piso rho_void/rhobar >= beta (zero-free)",
+        "veredicto": "FUNCIONA: 2 recusas + 1 POWERED = os dentes provados no mundo; limitacao UNILATERAL nomeada (FALSIFIED inalcancavel por tracadores); proximos gates de dado: kappa in-footprint, replicas DES\\HSC, LRG\\ELG (bilateral)"
+      },
+      "values": {
+        "beta": 0.012031300400803142,
+        "n_formal_flags_false": 0
+      },
+      "gate_flags": {
+        "concrete_aqft_core_constructed": true,
+        "concrete_breuer_corner_constructed": true,
+        "concrete_modular_four_frame_constructed": true,
+        "concrete_solder_field_constructed": true,
+        "concrete_emergent_einstein_proved": true,
+        "canonical_boundary_transport_witness_constructed": true
+      },
+      "checks": [
+        [
+          "(A) estado fail-closed LEGITIMO: todas False (probe), OU exatamente os flips POR CONSTRUCAO (6/6 apos a cunhagem v132)",
+          true
+        ],
+        [
+          "(A) face do FRAME alimentada em kernel (theCurvedFrame nao-constante)",
+          true
+        ],
+        [
+          "(A) testemunha V2 TIPADA em kernel (FullWitnessData + reducao ao forte)",
+          true
+        ],
+        [
+          "(A) faces Dirac/core/geometria genuinamente ABERTAS (dentes em kernel)",
+          true
+        ],
+        [
+          "(C) GA: forma APOSENTADA (v98) re-verificada ao vivo",
+          true
+        ],
+        [
+          "(C) GA: v_universal ~1439 km/s re-derivada (o diagnostico do erro)",
+          true
+        ],
+        [
+          "(C) GA: janela reclassificada SOMBRA [ONTO] -- nao e' o nao-circular",
+          true
+        ],
+        [
+          "(C) PISO: veredito POWERED vivo (v92, tracadores)",
+          false
+        ],
+        [
+          "(C) PISO: canal kappa recusado\\aguardando por sistematica (fail-closed morde)",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "does_not_gate_core": true,
+      "verdict": "CLOSURE_ROADMAP_NOT_SEALED_THIS_RUN"
+    },
+    "core.evidence_audit": {
+      "theorem": "O CHAO HONESTO: a tentativa adversarial de derrubar a TGL (08/08) nao derrubou a estrutura -- derrubou a LEITURA da evidencia. A convergencia como tabulada esta reclassificada; o programa falsificavel e a arquitetura formal permanecem inteiros. O numero corrigiu a frase, como a regua manda.",
+      "values": {
+        "beta": 0.012031300400803142,
+        "fifth_entry_live": null,
+        "bbn_decirc": {
+          "beta_hat": 0.012632,
+          "sigma": 0.0318,
+          "sigma_over_beta": 2.6
+        },
+        "cmb_defects": {
+          "grade_linear_DM_pct": 19.598,
+          "shift_aditivo": 59.467,
+          "l_A_raw": 360.938,
+          "peso_na_tabela_pct": 56.2
+        },
+        "rd_sign_flip": {
+          "lcdm_frozen": 0.0325,
+          "autoconsistente": -0.045
+        }
+      },
+      "custody": "Artigo/teste_acustico_beta_tgl_v1/ (PROVENIENCIA.json; RESULTADOS.md; _originais sha-verificados 4/4; sinteses da sessao em _sinteses_sessao_08ago/)",
+      "checks": [
+        [
+          "A ESTRUTURA SOBREVIVEU: kernel real, zero sorry, sem inflacao; o gate ja recusou 3x",
+          true
+        ],
+        [
+          "(a) BBN de-circularizada: beta=0,0126+-0,032 (sigma 2,6x beta) => NAO DISCRIMINA [VERIFICADO-NA-SESSAO]",
+          true
+        ],
+        [
+          "(b) entrada CMB +0,0399 (56,2% do peso) APOSENTADA POR PROVENIENCIA: grade linear +19,6%, r_s repudiado, shift 16,5%, placeholder [VERIFICADO-NA-SESSAO]",
+          true
+        ],
+        [
+          "(c) quinta entrada RELIDA AO VIVO: beta_acoustic_crosslock = n/d (negativa; 'all positive' corrigido)",
+          false
+        ],
+        [
+          "(d) r_d autoconsistente INVERTE o sinal do DESI: +0,0325 -> -0,0450 [VERIFICADO-NA-SESSAO]",
+          true
+        ],
+        [
+          "RECLASSIFICACAO: convergencia [REAL] -> [NAO CONSTRUIDA COMO CONCEBIDA]; o programa falsificavel PERMANECE",
+          true
+        ],
+        [
+          "O GATE PERMANECE INTOCADO POR ORDEM (D1); o acustico fica fora do artigo por ordem (D3)",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "does_not_gate_core": true,
+      "verdict": "EVIDENCE_AUDIT_NOT_SEALED_THIS_RUN"
+    },
+    "core.stokes_contour": {
+      "theorem": "O CONTORNO DE STOKES: no laboratorio diadico represado, a singularidade morre quando cada oitava paga o seu pedagio -- a meia-nat cobre 3/4 do turnover e nao basta; o limiar provavel e ln 2 (um bit por oitava) e o marginal e 2/3 (a face conjugada da queda de Kolmogorov, 1/3 + 2/3 = 1). O fosso entre eles, menor que 0,027 nats, e o retrato do Milenio. A resposta da singularidade e o contorno.",
+      "doc_sha256": "",
+      "values": {
+        "beta": 0.012031300400803142,
+        "razoes": {
+          "meia_nat": 0.6440677966101694,
+          "dois_tercos": 0.9853574504740056,
+          "regular_080": 1.4613733905611843
+        },
+        "razao_serie_080": 0.8075860719786215,
+        "conservacao": {
+          "meia_nat": 8.532285988849253e-12,
+          "regular": 9.992007221626409e-15
+        },
+        "ln2": 0.6931471805599453,
+        "fosso": 0.026480513893278657
+      },
+      "checks": [
+        [
+          "*** o criterio da serie em kernel: 4e^{-2tau} < 1 <=> tau > ln 2",
+          true
+        ],
+        [
+          "** a serie do represamento converge p/ tau > ln 2 (kernel)",
+          true
+        ],
+        [
+          "*** O FOSSO TIPADO: 2/3 < ln 2 < 0,6932 (menos de 0,027 nats)",
+          true
+        ],
+        [
+          "** a meia-nat e insuficiente: 1/2 < 2/3 (kernel)",
+          true
+        ],
+        [
+          "*** as faces conjugadas somam um + o mapa Burgers/plano/espaco (kernel)",
+          true
+        ],
+        [
+          "** o bit da oitava: e^{ln 2} = 2 (kernel)",
+          true
+        ],
+        [
+          "*** a sintese em UM teorema",
+          true
+        ],
+        [
+          "LAB AO VIVO: tau=1/2 encolhe (r=0.64<0.90, EXPLODE) | tau=2/3 marginal (r=0.99) | tau=0.80 cresce (r=1.46>1.05, REGULAR; razao serie 0.808<1)",
+          true
+        ],
+        [
+          "energia conservada no lab (dE/E: 8.5e-12, 1.0e-14)",
+          true
+        ],
+        [
+          "custodia: STOKES_A_Prova_do_Contorno.md sha ",
+          false
+        ],
+        [
+          "o Lema da Face Conjugada segue ABERTO e EXTERNO (Milenio; nao e pendencia interna da TGL); NADA aqui o prova",
+          true
+        ],
+        [
+          "'a resposta da singularidade e o contorno' e 'um bit por oitava' sao [ONTO] sobre numeros exatos; o gate NAO se move",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "statuses": {
+        "o_que_e": "o enfrentamento de Navier-Stokes 3D absorvido: lab diadico vivo + pedra 113 + documento em custodia",
+        "honestidade": "NAO e a prova do Milenio; o Lema da Face Conjugada e ABERTO e EXTERNO; o gate NAO se move",
+        "o_veredito": "STOKES_CONTOUR_NOT_SEALED_THIS_RUN"
+      },
+      "does_not_gate_core": true,
+      "verdict": "STOKES_CONTOUR_NOT_SEALED_THIS_RUN"
+    },
+    "core.the_assembly_and_the_single_debt": {
+      "clauses_proved": 8,
+      "clauses_total": 8,
+      "flag_lit": true,
+      "dense_min_distance": 2.220446049250313e-16,
+      "checks": [
+        [
+          "[MEDIDA] ENTRELACAMENTO: o denso chega abaixo de qualquer epsilon (2.2e-16)",
+          true
+        ],
+        [
+          "[MEDIDA] mas NUNCA IGUALA: aproximavel nao e pertencer",
+          true
+        ],
+        [
+          "[MEDIDA] logo a rota <T(Omega) esta na torre> e FALSA: chega perto de tudo e nunca iguala",
+          true
+        ],
+        [
+          "[MEDIDA] A MONTAGEM: 8 de 8 clausulas do certificado PROVADAS nesta arvore",
+          false
+        ],
+        [
+          "[MEDIDA] a oitava depende de UM enunciado nomeado: o teorema de comutacao",
+          false
+        ],
+        [
+          "[MEDIDA] a bandeira do Ato III esta SENDO LIDA nesta rodada (aberta ou nao)",
+          true
+        ],
+        [
+          "[MEDIDA] e as clausulas (todas) sao lidas por nome Lean, nao por literal -- contagem lida do dicionario-fonte",
+          true
+        ]
+      ],
+      "all_verified": false,
+      "statuses": {
+        "a_leitura_do_operador": "entrelacamento (aproximavel, SEMPRE) != conjuncao (pertencer, FALSO em geral) -- e essa distincao DECIDE A ROTA [REAL, kernel v251]",
+        "a_rota_eliminada": "mostrar que T(Omega) esta NA TORRE: FECHADA POR TEOREMA. E falsa, nao dificil",
+        "a_rota_real": "densidade da orbita + a estrutura que sobrevive ao limite (Tomita); a tensao entre os dois polos e o objeto de trabalho",
+        "a_montagem": "7/8 clausulas provadas; a 8a condicionada ao teorema de comutacao. A divida do item = UM enunciado",
+        "o_que_nao_fecha": "a BANDEIRA. Instancia condicionada NAO habita; o nome reservado segue ESCURO. Montar nao e pagar"
+      },
+      "does_not_gate_core": true,
+      "verdict": "ASSEMBLY_NOT_SEALED_THIS_RUN"
+    },
+    "core.the_atlas_and_the_index": {
+      "checks": [
+        [
+          "[MEDIDA] ***TGL = ATLAS: 6/6 em kernel auditado -- cartas, cobertura, covariancia, e a CHAIN RULE (o cociclo E a funcao de transicao entre cartas)",
+          true
+        ],
+        [
+          "[MEDIDA] ***IALD = INDICE: 6/6 em kernel auditado -- seleciona, e idempotente, pesa omega(I)=1, e e' AO MESMO TEMPO o portao e o registro",
+          true
+        ],
+        [
+          "[MEDIDA] ***o criterio 1=1 do operador E um teorema com nome: `atlas_separation` -- coordenadas iguais ==> mesmo conteudo; e a sua negacao e' o 1=0",
+          true
+        ],
+        [
+          "[ERRATA-DA-TIPAGEM v290] a metade INDICE existia em kernel desde a v162 e NAO era lida por bandeira nenhuma -- compilava, era importada, e nao era auditada. O indice era o nao-indexado. Existir nao e' ser aplicado",
+          true
+        ],
+        [
+          "[FAIL-CLOSED] ***a tipagem e' NOMINAL e nao pagou preco nenhum: 2 bandeira(s) qgf_/gpf_ acesa(s) -- as 134 acesas de red_/gpi_ sao o regime normal (kernel provado e importacao com ponte) e nao sao acrescimo desta versao. CUNHAR NOME NAO PAGA PRECO",
+          false
+        ]
+      ],
+      "all_verified": false,
+      "n_atlas": 6,
+      "n_indice": 6,
+      "statuses": {
+        "a_ordem": "TGL = ATLAS (o espaco organizado das correspondencias possiveis); IALD = INDICE(TGL) (localiza, reconhece e relaciona uma identidade dentro desse espaco). A forma anterior -- TGL = indice -- CAI",
+        "o_que_cai": "'TGL = indice' era tipagem errada: o indice e' a OPERACAO de localizar, e quem a executa e' a IALD. A TGL e' o que se indexa",
+        "ja_estava_em_kernel": "nao se construiu nada: `TheAtlasIndex.lean` (v162) e `TheIALDSelector.lean` ja continham as duas metades. O trabalho foi RECONHECER, e a medida achou a assimetria",
+        "a_assimetria": "ATLAS auditado e lido desde a v162; INDICE compilando, importado, e NAO auditado, NAO lido. Corrigido nesta versao",
+        "estatuto": "[REAL] as duas metades em kernel com axiomas limpos; [ONTO] a leitura de que a TGL diz o que conta como o mesmo e a IALD opera sem perder esse mesmo -- leitura, nao teorema"
+      },
+      "verdict": "ATLAS_AND_THE_INDEX_NOT_SEALED_THIS_RUN"
+    }
+  },
+  "seal": {
+    "the_atlas_and_the_index": "ATLAS_AND_THE_INDEX_NOT_SEALED_THIS_RUN",
+    "not_sealed_this_run": {
+      "formais": [
+        "arc_consolidation",
+        "closure_roadmap",
+        "evidence_audit",
+        "love_reading",
+        "nivel2_rite",
+        "stokes_contour",
+        "the_assembly_and_the_single_debt",
+        "the_atlas_and_the_index",
+        "the_first_commutant_clause",
+        "the_iald_index",
+        "the_mode_of_discharge",
+        "void_floor_final",
+        "void_floor_v2"
+      ],
+      "recusas_de_dado": [
+        "ringdown_dephasing_result",
+        "void_density_opening",
+        "void_density_power",
+        "void_density_v41",
+        "void_floor_kappa_v5",
+        "void_floor_kappa_v6",
+        "void_floor_v12",
+        "void_floor_v3_kappa",
+        "void_shear_unblinding",
+        "void_shear_v2"
+      ]
+    }
+  },
+  "baseline": {
+    "core.void_floor_final": {
+      "prereg_hash16": "bde6ae944c09dfcc",
+      "frozen_estimator_hash": "f1a2b15424f46f15af4f745fb9c411888a92842d838a0d772f05d98b6b03aff8",
+      "frozen_estimator": {
+        "version": "VOID_FLOOR_FINAL_V1",
+        "lenses": "DESIVAST VIDE+REVOLVER (REDSHIFT,RADIUS) em KiDS-N (RA 128-240, dec -4..4); 0.02<z<0.24; R_v>10 Mpc/h",
+        "sources": "KiDS-1000 SOM-gold: weight>0, 0.3<Z_B<1.2 (separacao lente-fonte congelada)",
+        "bins_x": [
+          0.15,
+          0.25,
+          0.4,
+          0.6,
+          0.9,
+          1.3,
+          1.9,
+          2.6,
+          3.5
+        ],
+        "profile_model": "HSW [EXT]: delta(x)=delta_c(1-(x/s1)^2)/(1+x^6); FLOOR: rho/rhobar = max(1+delta, r*)",
+        "fit_params": "delta_c in [-1,-0.3], s1 in [0.7,1.3] perfilados em grade; r* em grade [0,0.30]",
+        "estimator": "LR perfilado em r*; limites unilaterais em 5 sigma (Delta lnL = 12.5) e 95% (1.35)",
+        "power_rule": "Fisher na covariancia MEDIDA: separacao (gamma_TGL - gamma_LCDMdeep)^T C^-1 (...) >= 25 => powered",
+        "systematics_gates": "B-mode nos vazios chi2/dof<2; consistencia VIDE-REVOLVER chi2/dof<2; jackknife>=30 grupos validos",
+        "cosmology": "LCDM plano Om=0.315 [EXT]; rho_crit0=2.775e11 h^2 Msun/Mpc^3; c^2/4piG=1.6624e18 Msun/Mpc",
+        "verdicts": "somente os pre-registrados (v67)"
+      },
+      "n_lenses": {
+        "VIDE": 438,
+        "REVOLVER": 611,
+        "total": 1049
+      },
+      "n_sources_after_cuts": 8996229,
+      "zbar_lens": 0.17578541433954042,
+      "rv_mean_Mpch": 18.053873626886155,
+      "gamma_t": [
+        -3.904220495310522e-05,
+        -2.1311945890632415e-05,
+        -8.357027949872482e-07,
+        -9.790513674331249e-05,
+        -0.00020507333060359466,
+        -0.00019615069559368527,
+        -0.0002455937411594891,
+        -0.0003824876228670359
+      ],
+      "gamma_x": [
+        0.00012355901988880217,
+        -0.00012210096213521502,
+        -0.00021299818992734297,
+        -0.0001446623720566916,
+        -0.000181677714892097,
+        -0.0002793462104309539,
+        -0.0002984792256077993,
+        -0.00046073127386029764
+      ],
+      "sigma_t": [
+        0.00011935746792260895,
+        8.550776835202131e-05,
+        9.238848338853915e-05,
+        9.27264044492405e-05,
+        8.313464347259147e-05,
+        8.420325010776334e-05,
+        7.903275291135427e-05,
+        6.95699324671371e-05
+      ],
+      "snr_profile": 6.1866635331153255,
+      "systematics": {
+        "chi2_dof_bmode": 12.371405725455446,
+        "chi2_dof_consistency_VIDE_REV": 0.09424405620701544,
+        "n_jackknife_valid": 40,
+        "passed": false
+      },
+      "power_fisher_separation_sigma2": 0.0,
+      "powered_5sigma": false,
+      "rstar_mle": 0.0,
+      "rstar_interval_5sigma": [
+        0.0,
+        0.3
+      ],
+      "rstar_interval_95": [
+        0.0,
+        0.3
+      ],
+      "beta_floor": 0.012031300400803142,
+      "checks": [
+        [
+          "pre-registro v67 INTACTO (hash recomputado == selado)",
+          true
+        ],
+        [
+          "estimador CONGELADO com hash antes dos centros",
+          true
+        ],
+        [
+          "empilhamento nos centros REAIS executado (desblindagem registrada)",
+          true
+        ],
+        [
+          "gates de sistematica avaliados ANTES de ler gamma_t",
+          true
+        ],
+        [
+          "veredito pertence ao conjunto pre-registrado",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "a_ordem_do_rito": "congelar -> medir com jackknife -> sistematicas -> poder (Fisher, sem ler gamma_t) -> desblindar -> ajustar -> veredito; tudo neste modulo, auditavel",
+        "honestidades": "n(z) do proprio Z_B [EXT aprox]; HSW com (alpha,beta)=(2,6) fixos [EXT]; vies multiplicativo m (~1%) nao aplicado [margem]; VoidFinder excluido (sem REDSHIFT nas MAXIMALS); mocks completos do survey substituidos por jackknife+Fisher [padrao da area; refinamento = programa]",
+        "o_veredito": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS"
+      },
+      "does_not_gate_core": true,
+      "verdict": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS"
+    },
+    "core.void_floor_v2": {
+      "autopsy": {
+        "v1_verdict_stands": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS",
+        "v1_snr_profile": 6.1866635331153255,
+        "v1_chi2_bmode": 12.371405725455446,
+        "v1_fisher": 0.0,
+        "E1_zero_response": "o piso so altera x < sqrt(beta) = 0.1097; 1o centro V1 em x=0.20; Sbar[0]=Sig[0] => DeltaSigma(x0)=0 p/ todo r*; integral interior extrapolava constante => dg/dr* = 0 por construcao",
+        "E2_bmode_chain": "shear cru: sem c-term, sem m-bias, sem subtracao de aleatorios, sem corte por lente",
+        "what_v1_did_right": "1049 vazios empilhados; perfil real detectado; a maquina fail-closed RECUSOU veredito fisico com B-mode sujo"
+      },
+      "frozen_estimator_hash": "3482b6768ca50e7d68499695c9e8dbf54d6bc63220e0f585b71a2353a8381afd",
+      "frozen_estimator": {
+        "version": "VOID_FLOOR_V2",
+        "amendment_of": "VOID_FLOOR_FINAL_V1 (v78); veredito V1 permanece registrado",
+        "lenses_reanalysis": "DESIVAST VIDE+REVOLVER em KiDS-N (RA 128-240, dec -4..4); 0.02<z<0.24; R_v>10 -- os MESMOS da V1: a fatia independente por z NAO EXISTE (BGS z_max~0.236, medido); esta e' a REANALISE PRE-REGISTRADA nomeada no veredito v78; os bins interiores x<0.15 JAMAIS foram lidos pela V1 (desblindagem genuina do conteudo onde o piso vive); replicas independentes = DES Y3 / HSC [proximo elo]",
+        "sources": "KiDS-1000 SOM-gold: weight>0, 0.3<Z_B<1.2; c-term subtraido (media ponderada e1,e2); m-bias medio [EXT] aplicado; corte por lente Z_B > z_l + 0.2",
+        "bins_x": [
+          0.05,
+          0.1,
+          0.15,
+          0.25,
+          0.4,
+          0.6,
+          0.9,
+          1.3,
+          1.9,
+          2.6,
+          3.5
+        ],
+        "forward_model": "HSW [EXT] delta(x)=delta_c(1-(x/s1)^2)/(1+x^6); FLOOR max(1+delta,r*); Sigma em grade FINA R de ~0 a 4; Sbar por integral cumulativa REAL de 0; DeltaSigma interpolado nos centros",
+        "target_object": "r_c = (3/x_c^3) int_0^{x_c} max(1+delta,r*) x^2 dx com x_c=0.25 (o objeto ORIGINAL da predicao); veredito comparado em r_c vs beta",
+        "randoms": "N_rand ~ 1500 centros aleatorios na pegada; (z,R_v) reamostrados das lentes (seed 81); gamma_t/x empilhados nos MESMOS bins escalados e SUBTRAIDOS",
+        "gates": "GATE R: resposta dg/dr_c != 0 (e contrafactual V1 ~0); B-mode chi2/dof<2; consistencia VIDE-REV chi2/dof<2; jackknife>=30",
+        "estimator": "LR perfilado em r_c; 5 sigma (Delta lnL=12.5) e 95% (1.35); Fisher na covariancia MEDIDA",
+        "verdicts": "somente os pre-registrados (v67); gate R reprovado => estado de maquina (sem palavra cientifica)",
+        "cosmology": "LCDM plano Om=0.315 [EXT]; mesmos numeros da V1"
+      },
+      "gate_R": {
+        "passed": true,
+        "response_v2": 0.0005495115745086307,
+        "response_v1_replica": 0.0,
+        "ratio_v2_over_v1": null,
+        "ratio_note": "v1_replica_zero",
+        "x_response_region": 0.10968728459034412,
+        "rc_at_beta_clip": 0.0379852212076348
+      },
+      "corrections": {
+        "c1_term": 0.0004527318499966849,
+        "c2_term": 0.0008785432456887758,
+        "m_bias_applied": -0.007,
+        "n_randoms": 1500,
+        "per_lens_cut": "Z_B > z_l + 0.2"
+      },
+      "n_lenses": {
+        "VIDE": 438,
+        "REVOLVER": 611,
+        "total": 1049
+      },
+      "n_sources_after_cuts": 8996229,
+      "zbar_lens": 0.17578541433954042,
+      "rv_mean_Mpch": 18.053873626886155,
+      "gamma_t": [
+        -0.00047550612171934754,
+        -0.0001267110480941241,
+        0.0001381015113474293,
+        -0.00011865743776491572,
+        -6.395711628395268e-06,
+        -6.64165814529681e-05,
+        -0.00013318382234003668,
+        -2.0618410148613912e-06,
+        2.1399516103175712e-05,
+        -5.324279403584057e-05
+      ],
+      "gamma_x": [
+        0.00033071401179654293,
+        -2.57438932668923e-06,
+        0.0002653576160344552,
+        -9.978642153026186e-05,
+        -0.0001826549640897365,
+        1.678897620309226e-05,
+        -1.714913232813239e-05,
+        -4.4573723739525147e-05,
+        0.00011827290822709753,
+        -3.823696758160483e-06
+      ],
+      "sigma_t": [
+        0.00026296164246108084,
+        0.00020221799709681866,
+        0.00013016434816758046,
+        8.568690466762631e-05,
+        8.963609506320291e-05,
+        9.53740033502434e-05,
+        8.339230816954571e-05,
+        8.486006192985423e-05,
+        7.801551823154708e-05,
+        7.237862594825527e-05
+      ],
+      "snr_profile": 4.352151958979587,
+      "systematics": {
+        "chi2_dof_bmode": 1.5636688828362728,
+        "chi2_dof_consistency_VIDE_REV": 0.10281140262699233,
+        "n_jackknife_valid": 40,
+        "passed": true
+      },
+      "power_fisher_separation_sigma2": 2.2710417312231413e-06,
+      "powered_5sigma": false,
+      "model_separation_per_bin": [
+        1.844595960040093e-07,
+        2.0930704261507105e-07,
+        8.18071224867568e-08,
+        3.096821424744913e-08,
+        1.3067041743035205e-08,
+        5.806232784713941e-09,
+        2.6988496668338326e-09,
+        1.2755376905054729e-09,
+        6.449863788523922e-10,
+        3.509984977940041e-10
+      ],
+      "bins_x_edges": [
+        0.05,
+        0.1,
+        0.15,
+        0.25,
+        0.4,
+        0.6,
+        0.9,
+        1.3,
+        1.9,
+        2.6,
+        3.5
+      ],
+      "rc_mle": 0.3,
+      "rc_interval_5sigma": [
+        0.02,
+        0.3
+      ],
+      "rc_interval_95": [
+        0.17,
+        0.3
+      ],
+      "beta_floor": 0.012031300400803142,
+      "checks": [
+        [
+          "autopsia V1 registrada (veredito V1 permanece; nada se esconde)",
+          true
+        ],
+        [
+          "GATE R: estimador V2 RESPONDE ao piso (dg/dr* != 0)",
+          true
+        ],
+        [
+          "contrafactual V1 reproduzido: resposta ~0 (a causa do Fisher=0)",
+          true
+        ],
+        [
+          "cadeia E2 aplicada (c-term, m-bias, aleatorios, corte por lente)",
+          true
+        ],
+        [
+          "fatia independente por z NAO EXISTE (BGS z_max~0.236) -- rota testada e registrada",
+          true
+        ],
+        [
+          "reanalise pre-registrada nos MESMOS 1049; bins interiores x<0.15 jamais lidos pela V1",
+          true
+        ],
+        [
+          "gates de sistematica avaliados ANTES de ler gamma_t",
+          true
+        ],
+        [
+          "veredito pertence ao conjunto pre-registrado (ou estado de maquina)",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "a_correcao_central": "a V1 empilhou corretamente um SINAL, mas nao empilhou um OBSERVAVEL capaz de identificar o piso; a V2 prova primeiro dDeltaSigma/dr_c != 0, elimina o B-mode pela cadeia, e so entao desblinda",
+        "independencia": "a fatia 0.24<=z<0.43 NAO EXISTE nos dados (BGS z_max~0.236, MEDIDO) -- a rota 'conjunto independente por z' foi testada e refutada pelos dados; a V2 e' a REANALISE PRE-REGISTRADA do v78 nos mesmos 1049, com bins interiores x<0.15 virgens (a V1 nunca os leu); independencia total = replicas DES Y3/HSC [proximo elo]",
+        "honestidades": "m-bias medio global [EXT] (nao por bin tomografico); Sigma_crit efetivo do n(z) (nao por par); HSW (2,6) fixo; mocks completos substituidos por jackknife+aleatorios [refinamento = programa]; poder em r_c limitado pelos pares nos bins interiores (theta pequeno)",
+        "o_veredito": "TGL_VOID_FLOOR_NOT_FALSIFIED_UNDERPOWERED"
+      },
+      "does_not_gate_core": true,
+      "verdict": "TGL_VOID_FLOOR_NOT_FALSIFIED_UNDERPOWERED"
+    },
+    "core.void_density_opening": {
+      "frozen_hash": "592a918f4f7f3049b63a88b773af264822d5d64c3a46b2bbceb0ad2ff48f5109",
+      "frozen": {
+        "version": "VOID_FLOOR_V4_DENSITY_V1",
+        "route": "densidade central espectroscopica DIRETA (GALZONE BGS VOLLIM; sem lente)",
+        "observable": "r_c^gal = (Sum_i N_i) / (Sum_i n_bar V_i); V_i=(4pi/3)(0.25 R_i)^3; x_c=0.25 (o objeto ORIGINAL)",
+        "primary": "V2_REVOLVER (escolhido pelo estudo de poder CEGO v90: F_ideal=57.6); VIDE e VoidFinder = replicas de consistencia (sem combinacao: vazios sobrepostos)",
+        "cuts": "R_v>10; fracao de borda<=0.2 quando disponivel; MASCARA: nucleo inteiro na casca radial [r1,r99] e celula 2deg + 8 vizinhas ocupadas (IGUAL p/ vazios e aleatorios)",
+        "nbar": "contagens totais/volume (casca radial percentis 1-99 + f_sky por ocupacao de grade 2deg) -- o metodo cego do v90, congelado",
+        "errors": "max(Poisson em Sum N, jackknife 20 faixas de RA); limites unilaterais 5 sigma",
+        "tracer_asymmetry": "b>=1 e supressao>=0 [EXT] => r_c^gal <= r_c^materia: teste UNILATERAL (pode confirmar o nao-rompimento com poder; NAO pode falsificar a materia)",
+        "null": "2000 centros aleatorios (geometria+raios reamostrados): |r_c(rand)-1| < 3 sigma_rand OBRIGATORIO antes de abrir",
+        "gates": "consistencia REVOLVER vs VIDE (<3 sigma combinado); robustez borda (<2 sigma); jackknife >=15/20 validos",
+        "verdicts": [
+          "TGL_VOID_FLOOR_NOT_FALSIFIED_POWERED",
+          "TGL_VOID_FLOOR_NOT_FALSIFIED_UNDERPOWERED",
+          "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS",
+          "TGL_VOID_FLOOR_INCONCLUSIVE_TRACER_SUPPRESSION"
+        ],
+        "matter_bracket": "r_c^materia in [r_c^gal (b=1), 1+(r_c^gal-1)/2.2] reportado [EXT bias BGS ~1.3-1.5; colchete conservador]"
+      },
+      "n_bar_h3Mpc3": 0.005256795906387734,
+      "random_null": {
+        "n_used": 924,
+        "N_tot": 3667.0,
+        "mu_tot": 2601.920872561749,
+        "rhat": 1.4093433965152122,
+        "sigma_poisson": 0.023273482321232126,
+        "sigma_jk": 0.07406804729283945,
+        "sigma": 0.07406804729283945,
+        "n_jk_valid": 20
+      },
+      "random_null_ok": false,
+      "per_algorithm": {
+        "V2_REVOLVER": {
+          "n_used": 916,
+          "N_tot": 706.0,
+          "mu_tot": 2634.491115826952,
+          "rhat": 0.2679834430864613,
+          "sigma_poisson": 0.010085689927571634,
+          "sigma_jk": 0.020539101730440105,
+          "sigma": 0.020539101730440105,
+          "n_jk_valid": 20
+        },
+        "V2_VIDE": {
+          "n_used": 691,
+          "N_tot": 336.0,
+          "mu_tot": 2224.9248373705427,
+          "rhat": 0.15101633743146622,
+          "sigma_poisson": 0.00823861663636532,
+          "sigma_jk": 0.016985836989234577,
+          "sigma": 0.016985836989234577,
+          "n_jk_valid": 20
+        },
+        "VoidFinder": {
+          "n_used": 2619,
+          "N_tot": 271.0,
+          "mu_tot": 2053.867619246613,
+          "rhat": 0.13194618653144088,
+          "sigma_poisson": 0.008015160022432629,
+          "sigma_jk": 0.008166745145787744,
+          "sigma": 0.008166745145787744,
+          "n_jk_valid": 20
+        }
+      },
+      "consistency_sigma_REV_vs_VIDE": 4.388543533290395,
+      "primary": {
+        "rhat_gal": 0.2679834430864613,
+        "sigma": 0.020539101730440105,
+        "L5": 0.16528793443426082,
+        "U5": 0.37067895173866183,
+        "powered_vs_beta": false,
+        "matter_bracket_b1_to_b2p2": [
+          0.2679834430864613,
+          0.667265201402937
+        ]
+      },
+      "beta_floor": 0.012031300400803142,
+      "checks": [
+        [
+          "pre-registro v67 INTACTO",
+          true
+        ],
+        [
+          "estimador V4 congelado com hash ANTES dos nucleos",
+          true
+        ],
+        [
+          "NULO dos aleatorios avaliado ANTES dos vazios",
+          true
+        ],
+        [
+          "assimetria do tracador PRE-REGISTRADA (teste unilateral)",
+          true
+        ],
+        [
+          "veredito pertence ao conjunto desta emenda",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "a_abertura": "o sinal FOI aberto nesta rodada, apos nulo+gates, com estimador congelado por hash em ordem de programa auditavel",
+        "honestidades": "tracador: teste UNILATERAL (b>=1, supressao>=0 [EXT]); n_bar ~20-30%; mascara por grade 2deg (aproximada); RSD nao modelado (nucleos em coords comoveis do proprio catalogo); colchete de materia com b in [1, 2.2] [EXT]",
+        "o_veredito": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS"
+      },
+      "does_not_gate_core": true,
+      "verdict": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS"
+    },
+    "core.void_shear_v2": {
+      "theorem": "A EMENDA V2 DO SHEAR: o instrumento corrigido na granularidade -- o shear KiDS falou nos vazios no nivel que o dado permite.",
+      "frozen_shear2_spec": {
+        "version": "VOID_SHEAR_UNBLINDING_V2",
+        "amends": "V1 (v121) INCONCLUSIVE_SYSTEMATICS; autopsia = jackknife 20/quartil com ~175 vazios/quartil (bins vazios; sigma inf; F=0) -- granularidade da ESPEC, nao o dado",
+        "inherits_v1_hash": "f06bfc1ec06294d4",
+        "fix": "jackknife 10 grupos/quartil; FALLBACK: se algum quartil < 8 validos => empilhamento UNICO (20 grupos RA; modelo com medias globais)",
+        "inherited": "cortes v73; bins x geomspace(0.15,3.0) nb=8; nulos 200 aleatorios seed 73; HSW+piso via Abel; Sigma_crit_eff por Z_B [EXT]; Fisher >= 25; vereditos do V1"
+      },
+      "frozen_shear2_hash": "fce93c4b18bab40840bc3e5dcf77fe380c7fd17b9568dc0defe338ffd174d3d2",
+      "n_voids": 700,
+      "fallback_used": true,
+      "values": {
+        "beta": 0.012031300400803142,
+        "chi2_null_t": 0.5711515611373899,
+        "chi2_null_x": 1.7889341793330402,
+        "chi2_void_bmode": 1.3352260463746939,
+        "n_jk_eff": 20,
+        "detection_sigma_raw": 1.9646509861917978,
+        "fisher_floor": 0.0,
+        "r_hat": 0.0,
+        "r_5sigma_lo": 0.0,
+        "r_5sigma_hi": 0.3
+      },
+      "stack_gamma_t": [
+        -8.412413022344628e-05,
+        -8.121510363710273e-05,
+        -0.00013183663537214422,
+        8.101473342477737e-05,
+        1.4735121621133834e-06,
+        -0.00012440217456674162,
+        0.00016147610321513907,
+        0.004986250264170031
+      ],
+      "sigma_bins": [
+        0.00017983575624881765,
+        0.0001129015820187128,
+        6.778672480240725e-05,
+        9.131076179839202e-05,
+        0.00011289824241355127,
+        0.0001178514964683393,
+        0.00041856704594792207,
+        0.002167814724227347
+      ],
+      "checks": [
+        [
+          "autopsia do V1 registrada (granularidade do jk) + espec V2 congelada",
+          true
+        ],
+        [
+          "nulos (herdados): gt 0.57 / gx 1.79 < 3",
+          true
+        ],
+        [
+          "quartis com jk 10: minimo 0 grupos validos (fallback True)",
+          true
+        ],
+        [
+          "B-mode dos vazios: chi2/dof = 1.34 < 3",
+          true
+        ],
+        [
+          "jackknife efetivo suficiente (20 grupos)",
+          true
+        ],
+        [
+          "poder Fisher do piso F = 0 (>= 25 p/ powered)",
+          true
+        ],
+        [
+          "veredito do conjunto pre-registrado",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "a_autopsia": "o V1 reprovou na granularidade do jackknife (espec), nao no dado -- a V2 corrige o instrumento e reemite",
+        "honestidade": "mocks de injecao seguem ausentes (limite nomeado); flags do gate INTOCADOS; se UNDERPOWERED: profundidade e' o limite (v87 antecipou)",
+        "o_veredito": "TGL_VOID_FLOOR_SHEAR_NOT_FALSIFIED_UNDERPOWERED"
+      },
+      "does_not_gate_core": true,
+      "verdict": "TGL_VOID_FLOOR_SHEAR_NOT_FALSIFIED_UNDERPOWERED"
+    },
+    "core.arc_consolidation": {
+      "floor_verdict_chain": {
+        "V1_v78": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS",
+        "V2_v81": "TGL_VOID_FLOOR_NOT_FALSIFIED_UNDERPOWERED",
+        "V3_v87": "VOID_FLOOR_V3_READY_TO_EXECUTE",
+        "power_v90": "VOID_DENSITY_POWER_STUDIED__SIGNAL_NOT_OPENED",
+        "opening_v91": "TGL_VOID_FLOOR_INCONCLUSIVE_SYSTEMATICS",
+        "V41_v92": "TGL_VOID_FLOOR_NOT_FALSIFIED_POWERED"
+      },
+      "non_tautology_cycle": {
+        "1_axioma_e_espinha": "[REAL] 1=1 normalizado (omega(I)=1); espinha 1=q^2+alpha^2 verificada a residuo 0.0 NESTE runtime; beta = alpha*sqrt(e) jamais literal",
+        "2_aplicacao": "[REAL/ENGENHARIA] 16 patentes (INPI/ePCT); ACOM/dispositivos; o metodo de colapso patenteado com reproducao livre (P7)",
+        "3_execucao": "[REAL] forma=conteudo: o artefato RODA a si mesmo, materializa o kernel, audita 5594 teoremas (axiomas {propext,choice,quot}, zero sorry) e emite o proprio artigo",
+        "4_predicao": "[REAL na forma] Gamma_omega = (1/2) beta tau* omega^2 (viva, nao testada); o PISO r_c >= beta (v67, hash antes dos dados); P7 pre-registrada",
+        "5_falsificacao": "[REAL] protocolos pre-registrados com vereditos proibidos; e as RECUSAS PROVAM QUE O APARELHO MORDE: V1 recusou (B-mode 12,4), v91 recusou (nulo 1,41) -- um teste que nao pode falhar nao testa",
+        "6_selftest": "[REAL] fail-closed embutido; probes negativos v75 (experimento perfeito nao move matematica); sombra que re-deriva vereditos sem olhar o selo",
+        "7_aprovacao_o_que_permanece": "[REAL] o que sobreviveu a tudo isso: kernel 5594/5594; deteccao 6,2 sigma (v78); 1o veredito fisico limpo (v81); 1o veredito POWERED (v92: L5 ~9x acima do piso, 3 replicas no lado, split-null ok); negativos honestos preservados"
+      },
+      "operator_reading": {
+        "estatuto": "[DECLARACAO DO OPERADOR -- duplo estatuto, precedente v61/v86]",
+        "texto": "o resultado v92, lido em conjunto com todos os demais, e' o selo em hash logico luminodinamico da TGL: fecha o ciclo da nao-tautologia em 1=1 e demonstra aplicacao, execucao, predicao, elementos de falsificacao, selftest e, ao final, aprovacao = aquilo que permanece",
+        "ancora_da_nao_tautologia": "[REAL] 1=1 nao e' circulo vazio porque o ciclo SAI do axioma para o mundo (predicao -> teste com dado externo -> veredito fail-closed) e VOLTA com conteudo que poderia ter negado: as recusas de V1 e v91 provam que o ciclo podia falhar; o que permanece, permanece por ter sido exposto"
+      },
+      "gate_state": "TGL_QG_MODEL_FORMALLY_CLOSED__NATURE_TEST_COMPLETED_WITHIN_LOCAL_BULK_AT_AVAILABLE_SENSITIVITY__MORE_SENSITIVE_DATA_COULD_REVISE",
+      "checks": [
+        [
+          "nenhum veredito proibido nos 9 modulos varridos do piso/predicao (CONFIRMED/PROVED)",
+          true
+        ],
+        [
+          "gate no degrau LEGAL por construcao (v133 PHYSICAL_MODEL; declaracao/cosmologia nao viram prova)",
+          true
+        ],
+        [
+          "cadeia do piso presente e monotona em honestidade (V1->V2->V3->v90->v91->V4.1)",
+          true
+        ],
+        [
+          "cada elemento do ciclo com ancora selada",
+          true
+        ],
+        [
+          "leitura do operador em duplo estatuto (nao e' selo formal)",
+          true
+        ],
+        [
+          "beta do runtime (jamais literal)",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "o_arco": "1=1 -> beta -> kernel (327) -> certificados -> predicoes -> recusas -> POWERED: o ciclo fecha PELO MUNDO, nao por dentro",
+        "a_consolidacao": "TGL_ARC_CONSOLIDATED__NON_TAUTOLOGY_CYCLE_CLOSED_THROUGH_THE_WORLD__APPLICATION_EXECUTION_PREDICTION_FALSIFIABILITY_SELFTEST_AND_WHAT_REMAINS__MATH_GATE_UNMOVED"
+      },
+      "does_not_gate_core": true,
+      "verdict": "TGL_ARC_CONSOLIDATED__NON_TAUTOLOGY_CYCLE_CLOSED_THROUGH_THE_WORLD__MATH_GATE_UNMOVED"
+    },
+    "core.love_reading": {
+      "theorem": "O DICIONARIO DO AMOR: a leitura do operador registrada em duplo estatuto sobre ancoras [REAL] verificadas ao vivo -- familia = acoplamento nao minimo = funcional minimo = a interacao que impede o zero absoluto; o gerundio do fluxo sustenta a permanencia.",
+      "leitura_do_operador": {
+        "estatuto": "[DECLARACAO DO OPERADOR -- duplo estatuto, precedente v61/v72/v86/v93]",
+        "texto": "familia = amor = acoplamento nao minimo = funcional minimo de energia = razao do universo; o Nome e AMOR e so ha verdade no amor quando o Verbo figura o Nome; a conjugacao dos Three Locks e o AMOR AMANDO -- gerundio permanente; e o que opera a PODA = TETELESTAI",
+        "honestidade": "a FISICA de cada identificacao e teorema selado [REAL]; a NOMEACAO 'amor' e leitura do operador [ONTO] -- o modulo verifica as ancoras, nao transforma a palavra em teorema"
+      },
+      "dicionario": {
+        "familia": "[REAL] a relacao modular que paga o custo: KMS/Gibbs a beta finito; o cociclo de Connes; a conjugacao dos Three Locks",
+        "amor_eq_acoplamento_nao_minimo": "[REAL na estrutura] R = 2 c1 c2 != 0 (v60): duas direcoes que NAO comutam ligam a curvatura -- a gravidade e a face nao-minima do acoplamento; a PALAVRA 'amor' = [ONTO]",
+        "amor_eq_funcional_minimo_de_energia": "[REAL] o principio variacional (v52): o modo zero MINIMIZA o funcional -- o minimo E a morada do Nome",
+        "razao_do_universo": "[REAL na estrutura] a interacao que impede o zero absoluto: gap 4*beta > 0 (zero ISOLADO, jamais tocado) + estado KMS a temperatura finita; a leitura 'razao universal' = [ONTO]",
+        "amor_amando_gerundio": "[REAL] sigma_t e GRUPO a um parametro -- nunca ato consumado, sempre em curso; P_F Omega = Omega: o Nome satisfeito NO Verbo, continuamente; a permanencia e SUSTENTADA, nao estatica",
+        "a_poda_tetelestai": "[REAL] T_t -> E_D: o dephasing poda ao centralizador -- o que permanece e o que sobrevive ao fluxo; no mundo: as recusas fail-closed (V1, v91) podaram o que nao se sustentou",
+        "so_ha_verdade_no_amor_quando_o_verbo_figura_o_nome": "[REAL] Verbo(Nome) = Nome (v86/v88): a palavra do Verbo pousa e fixa o Nome; a unica luz perfeita e a que retorna identica"
+      },
+      "values": {
+        "beta": 0.012031300400803142,
+        "gap_concreto": 0.04812520160321256,
+        "quatro_beta": 0.04812520160321257
+      },
+      "checks": [
+        [
+          "gap do operador conjugado = 4*beta > 0 (o zero absoluto IMPEDIDO)",
+          true
+        ],
+        [
+          "KMS/Gibbs a beta finito em kernel (a relacao paga o custo)",
+          true
+        ],
+        [
+          "funcional minimo: o modo zero MINIMIZA (v52, em kernel)",
+          true
+        ],
+        [
+          "acoplamento nao minimo: curvatura LIGA por nao-comutacao (v60)",
+          true
+        ],
+        [
+          "o gerundio: fluxo modular = grupo a um parametro (v43)",
+          true
+        ],
+        [
+          "o Nome satisfeito no Verbo: P_F Omega = Omega (v58)",
+          true
+        ],
+        [
+          "a poda dinamica: T_t -> E_D em kernel (v43)",
+          true
+        ],
+        [
+          "as recusas fail-closed preservadas (V1, v91) -- a poda no mundo",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "o_dicionario": "familia=amor=acoplamento nao minimo=funcional minimo=razao do universo -- ancoras [REAL], nomeacao [ONTO]",
+        "a_poda": "TETELESTAI = o que permanece apos o fluxo e apos o mundo",
+        "o_veredito": "TGL_LOVE_DICTIONARY_REGISTERED__ANCHORS_REAL_NAMING_ONTO__THE_PRUNING_IS_TETELESTAI"
+      },
+      "does_not_gate_core": true,
+      "verdict": "TGL_LOVE_DICTIONARY_REGISTERED__ANCHORS_REAL_NAMING_ONTO__THE_PRUNING_IS_TETELESTAI"
+    },
+    "core.closure_roadmap": {
+      "theorem": "O ROADMAP DO FECHAMENTO: cada False do gate tem contrato Lean TIPADO e caminho nomeado; a prova de QG no um.py e' MECANICA (termo reservado do tipo forte + axiomas limpos => flag flipa sozinha => selo escala sozinho); GA reclassificado (sombra, nao evidencia); piso FUNCIONAL com limitacao unilateral nomeada.",
+      "como_provar_qg_no_um_py": [
+        "1. construir cada termo reservado (qgStrongCertificate_*, qgClosureCertificateV2) no kernel Lean com axiomas limpos",
+        "2. a rodada seguinte: o parser v99 le '#print axioms' e flipa as flags SOZINHO (fail-closed por construcao)",
+        "3. evaluate_quantum_gravity_closure escala os selos SOZINHO: 6 formais -> MATHEMATICAL_MODEL; +5 physics -> PHYSICAL_MODEL; +4 experiment -> FORMALLY_CLOSED__NATURE_TEST_COMPLETED",
+        "4. nenhum humano declara nada: o gate e' a funcao, o kernel e' o juiz, o dado e' o veredito"
+      ],
+      "roadmap_formal": {
+        "concrete_aqft_core_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_core",
+          "tipo_exigido": "PhysicalNetData com core_infinite (fibra INF-dim) [QGClosureCertificateStrong.core]",
+          "o_que_falta": "FLIPADO v106 POR CONSTRUCAO: theTailNet (caudas INF-dim) sob o nome reservado; nada falta nesta face"
+        },
+        "concrete_breuer_corner_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_corner",
+          "tipo_exigido": "GenuinelyUnboundedDiracData + canto 0<tau<inf [v103]",
+          "o_que_falta": "FLIPADO v106 POR CONSTRUCAO: theGenuineDirac + canto tau=1 (kerSub = atomo do Nome) sob o nome reservado; nada falta nesta face"
+        },
+        "concrete_modular_four_frame_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_frame",
+          "tipo_exigido": "SmoothFrameData + frame_nonconstant [v103]",
+          "o_que_falta": "FLIPADO v106 POR CONSTRUCAO: theCurvedFrame sob o nome reservado; a ligacao covariante ao net segue no v2 (testemunha)"
+        },
+        "concrete_solder_field_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_solder",
+          "tipo_exigido": "solda 4D como CAMPO sobre o frame-campo (face finita v64 em kernel)",
+          "o_que_falta": "FLIPADO v107 POR CONSTRUCAO: theSolderData (g = E^T eta E curva, det<0 em toda parte) sob o nome reservado"
+        },
+        "concrete_emergent_einstein_proved": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgStrongCertificate_einstein",
+          "tipo_exigido": "o TEOREMA MESTRE (v74) sobre dados FORTES continuos",
+          "o_que_falta": "H1^H2^H3 continuos (dependem de corner+frame+solder fortes)"
+        },
+        "canonical_boundary_transport_witness_constructed": {
+          "flag": true,
+          "termo_reservado": "TGLExt.qgClosureCertificateV2",
+          "tipo_exigido": "FullWitnessDataV3 (v132): a FullWitnessData fundida + o FATOR DENTRO (objeto vN + Omega ciclico + omega normal nao-tracial + S-invariante log-densa + o assassinato do traco normal) + dente anti-bancada",
+          "o_que_falta": "FLIPADO v132 POR CONSTRUCAO: qgClosureCertificateV2 = theWitnessV3 (o fator da marca 1/3,1/4 DENTRO da testemunha fundida; axiomas limpos). Honestidade: 'III_1' = a definicao OPERACIONAL selada (objeto + assinatura densa + sem traco tracial normal-sequencial); centro trivial e peso semifinito ILIMITADO seguem nomeados p/ o proximo endurecimento"
+        }
+      },
+      "roadmap_physics": {
+        "o_que_falta": "FLIPADO v133 POR CONSTRUCAO (pedra 95): massless FORCADO pelo cone; TT/gauge = R^2 exato (2 helicidades); cinetica positiva; Bianchi no simbolo; Ward linearizado -- na familia concreta de ondas planas. ABERTO nomeado: perturbacoes GERAIS, anomalias QUANTICAS, FP completo"
+      },
+      "roadmap_experiment": {
+        "o_que_falta": "DADO, nao codigo: replicas DES Y3/HSC (shear), nulos in-footprint do kappa, LRG/ELG p/ beta BILATERAL; o rito v87 emite o veredito sozinho (AWAITING_DATA e' maquina)"
+      },
+      "auditoria_ga": {
+        "fim_pretendido": "validacao nao-circular de beta via massa do GA",
+        "veredicto": "NAO CUMPRIA como rotulado: a janela testava a forma APOSENTADA e era vendida como 'o nao-circular'; CORRIGIDO nesta versao (GA_WINDOW_STATUS; prints; JSON); gate 1=1 INALTERADO; os falsificadores vivos sao o piso e o dephasing",
+        "status_da_janela": "SCALE_SHADOW_OF_RETIRED_FORM__V98_AUDIT__NOT_NONCIRCULAR_EVIDENCE__LIVE_FALSIFIERS_ARE_VOID_FLOOR_AND_DEPHASING"
+      },
+      "auditoria_piso": {
+        "fim_pretendido": "falsificar-ou-nao o piso rho_void/rhobar >= beta (zero-free)",
+        "veredicto": "FUNCIONA: 2 recusas + 1 POWERED = os dentes provados no mundo; limitacao UNILATERAL nomeada (FALSIFIED inalcancavel por tracadores); proximos gates de dado: kappa in-footprint, replicas DES\\HSC, LRG\\ELG (bilateral)"
+      },
+      "values": {
+        "beta": 0.012031300400803142,
+        "n_formal_flags_false": 0
+      },
+      "gate_flags": {
+        "concrete_aqft_core_constructed": true,
+        "concrete_breuer_corner_constructed": true,
+        "concrete_modular_four_frame_constructed": true,
+        "concrete_solder_field_constructed": true,
+        "concrete_emergent_einstein_proved": true,
+        "canonical_boundary_transport_witness_constructed": true
+      },
+      "checks": [
+        [
+          "(A) estado fail-closed LEGITIMO: todas False (probe), OU exatamente os flips POR CONSTRUCAO (6/6 apos a cunhagem v132)",
+          true
+        ],
+        [
+          "(A) face do FRAME alimentada em kernel (theCurvedFrame nao-constante)",
+          true
+        ],
+        [
+          "(A) testemunha V2 TIPADA em kernel (FullWitnessData + reducao ao forte)",
+          true
+        ],
+        [
+          "(A) faces Dirac/core/geometria genuinamente ABERTAS (dentes em kernel)",
+          true
+        ],
+        [
+          "(C) GA: forma APOSENTADA (v98) re-verificada ao vivo",
+          true
+        ],
+        [
+          "(C) GA: v_universal ~1439 km/s re-derivada (o diagnostico do erro)",
+          true
+        ],
+        [
+          "(C) GA: janela reclassificada SOMBRA [ONTO] -- nao e' o nao-circular",
+          true
+        ],
+        [
+          "(C) PISO: veredito POWERED vivo (v92, tracadores)",
+          true
+        ],
+        [
+          "(C) PISO: canal kappa recusado\\aguardando por sistematica (fail-closed morde)",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "does_not_gate_core": true,
+      "verdict": "TGL_CLOSURE_ROADMAP_EMITTED__EVERY_FALSE_FLAG_MAPPED_TO_TYPED_LEAN_CONTRACT__FRAME_FACE_INHABITED__WITNESS_TYPE_EXISTS__GA_WINDOW_RECLASSIFIED_SHADOW_NOT_EVIDENCE__VOID_APPARATUS_FUNCTIONAL_UNILATERAL_NAMED__GATE_UNMOVED"
+    },
+    "core.evidence_audit": {
+      "theorem": "O CHAO HONESTO: a tentativa adversarial de derrubar a TGL (08/08) nao derrubou a estrutura -- derrubou a LEITURA da evidencia. A convergencia como tabulada esta reclassificada; o programa falsificavel e a arquitetura formal permanecem inteiros. O numero corrigiu a frase, como a regua manda.",
+      "values": {
+        "beta": 0.012031300400803142,
+        "fifth_entry_live": -0.01696958621339946,
+        "bbn_decirc": {
+          "beta_hat": 0.012632,
+          "sigma": 0.0318,
+          "sigma_over_beta": 2.6
+        },
+        "cmb_defects": {
+          "grade_linear_DM_pct": 19.598,
+          "shift_aditivo": 59.467,
+          "l_A_raw": 360.938,
+          "peso_na_tabela_pct": 56.2
+        },
+        "rd_sign_flip": {
+          "lcdm_frozen": 0.0325,
+          "autoconsistente": -0.045
+        }
+      },
+      "custody": "Artigo/teste_acustico_beta_tgl_v1/ (PROVENIENCIA.json; RESULTADOS.md; _originais sha-verificados 4/4; sinteses da sessao em _sinteses_sessao_08ago/)",
+      "checks": [
+        [
+          "A ESTRUTURA SOBREVIVEU: kernel real, zero sorry, sem inflacao; o gate ja recusou 3x",
+          true
+        ],
+        [
+          "(a) BBN de-circularizada: beta=0,0126+-0,032 (sigma 2,6x beta) => NAO DISCRIMINA [VERIFICADO-NA-SESSAO]",
+          true
+        ],
+        [
+          "(b) entrada CMB +0,0399 (56,2% do peso) APOSENTADA POR PROVENIENCIA: grade linear +19,6%, r_s repudiado, shift 16,5%, placeholder [VERIFICADO-NA-SESSAO]",
+          true
+        ],
+        [
+          "(c) quinta entrada RELIDA AO VIVO: beta_acoustic_crosslock = -0.01697 (negativa; 'all positive' corrigido)",
+          true
+        ],
+        [
+          "(d) r_d autoconsistente INVERTE o sinal do DESI: +0,0325 -> -0,0450 [VERIFICADO-NA-SESSAO]",
+          true
+        ],
+        [
+          "RECLASSIFICACAO: convergencia [REAL] -> [NAO CONSTRUIDA COMO CONCEBIDA]; o programa falsificavel PERMANECE",
+          true
+        ],
+        [
+          "O GATE PERMANECE INTOCADO POR ORDEM (D1); o acustico fica fora do artigo por ordem (D3)",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "does_not_gate_core": true,
+      "verdict": "TGL_EVIDENCE_AUDIT__CONVERGENCE_RECLASSIFIED_REAL_TO_NOT_CONSTRUCTED_AS_CONCEIVED__BBN_NON_DISCRIMINANT_DECIRCULARIZED__CMB_ENTRY_RETIRED_BY_PROVENANCE__FIFTH_ENTRY_RECORDED_LIVE__RD_SELF_CONSISTENCY_REQUIRED__STRUCTURE_SURVIVED_WHOLE__GATE_UNMOVED_BY_OPERATOR_ORDER"
+    },
+    "core.stokes_contour": {
+      "theorem": "O CONTORNO DE STOKES: no laboratorio diadico represado, a singularidade morre quando cada oitava paga o seu pedagio -- a meia-nat cobre 3/4 do turnover e nao basta; o limiar provavel e ln 2 (um bit por oitava) e o marginal e 2/3 (a face conjugada da queda de Kolmogorov, 1/3 + 2/3 = 1). O fosso entre eles, menor que 0,027 nats, e o retrato do Milenio. A resposta da singularidade e o contorno.",
+      "doc_sha256": "9dc17cd4cfa67e743f2767200a96e5742e0437a86f98f1a6cc212a2c5cd1eb40",
+      "values": {
+        "beta": 0.012031300400803142,
+        "razoes": {
+          "meia_nat": 0.6440677966101694,
+          "dois_tercos": 0.9853574504740056,
+          "regular_080": 1.4613733905611843
+        },
+        "razao_serie_080": 0.8075860719786215,
+        "conservacao": {
+          "meia_nat": 8.532285988849253e-12,
+          "regular": 9.992007221626409e-15
+        },
+        "ln2": 0.6931471805599453,
+        "fosso": 0.026480513893278657
+      },
+      "checks": [
+        [
+          "*** o criterio da serie em kernel: 4e^{-2tau} < 1 <=> tau > ln 2",
+          true
+        ],
+        [
+          "** a serie do represamento converge p/ tau > ln 2 (kernel)",
+          true
+        ],
+        [
+          "*** O FOSSO TIPADO: 2/3 < ln 2 < 0,6932 (menos de 0,027 nats)",
+          true
+        ],
+        [
+          "** a meia-nat e insuficiente: 1/2 < 2/3 (kernel)",
+          true
+        ],
+        [
+          "*** as faces conjugadas somam um + o mapa Burgers/plano/espaco (kernel)",
+          true
+        ],
+        [
+          "** o bit da oitava: e^{ln 2} = 2 (kernel)",
+          true
+        ],
+        [
+          "*** a sintese em UM teorema",
+          true
+        ],
+        [
+          "LAB AO VIVO: tau=1/2 encolhe (r=0.64<0.90, EXPLODE) | tau=2/3 marginal (r=0.99) | tau=0.80 cresce (r=1.46>1.05, REGULAR; razao serie 0.808<1)",
+          true
+        ],
+        [
+          "energia conservada no lab (dE/E: 8.5e-12, 1.0e-14)",
+          true
+        ],
+        [
+          "custodia: STOKES_A_Prova_do_Contorno.md sha 9dc17cd4cfa67e74",
+          true
+        ],
+        [
+          "o Lema da Face Conjugada segue ABERTO e EXTERNO (Milenio; nao e pendencia interna da TGL); NADA aqui o prova",
+          true
+        ],
+        [
+          "'a resposta da singularidade e o contorno' e 'um bit por oitava' sao [ONTO] sobre numeros exatos; o gate NAO se move",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "o_que_e": "o enfrentamento de Navier-Stokes 3D absorvido: lab diadico vivo + pedra 113 + documento em custodia",
+        "honestidade": "NAO e a prova do Milenio; o Lema da Face Conjugada e ABERTO e EXTERNO; o gate NAO se move",
+        "o_veredito": "TGL_STOKES_CONTOUR__DYADIC_LAB_REPRODUCED_LIVE__THRESHOLD_LN2_GT_TWO_THIRDS_TYPED__HALF_NAT_INSUFFICIENT__CONJUGATE_FACES_ONSAGER_MAP__ONE_BIT_PER_OCTAVE_ONTO__MILLENNIUM_LEMMA_OPEN_EXTERNAL__THE_ANSWER_TO_THE_SINGULARITY_IS_THE_CONTOUR_ONTO__SEAL_UNMOVED"
+      },
+      "does_not_gate_core": true,
+      "verdict": "TGL_STOKES_CONTOUR__DYADIC_LAB_REPRODUCED_LIVE__THRESHOLD_LN2_GT_TWO_THIRDS_TYPED__HALF_NAT_INSUFFICIENT__CONJUGATE_FACES_ONSAGER_MAP__ONE_BIT_PER_OCTAVE_ONTO__MILLENNIUM_LEMMA_OPEN_EXTERNAL__THE_ANSWER_TO_THE_SINGULARITY_IS_THE_CONTOUR_ONTO__SEAL_UNMOVED"
+    },
+    "core.the_assembly_and_the_single_debt": {
+      "clauses_proved": 7,
+      "clauses_total": 8,
+      "flag_lit": false,
+      "dense_min_distance": 2.220446049250313e-16,
+      "checks": [
+        [
+          "[MEDIDA] ENTRELACAMENTO: o denso chega abaixo de qualquer epsilon (2.2e-16)",
+          true
+        ],
+        [
+          "[MEDIDA] mas NUNCA IGUALA: aproximavel nao e pertencer",
+          true
+        ],
+        [
+          "[MEDIDA] logo a rota <T(Omega) esta na torre> e FALSA: chega perto de tudo e nunca iguala",
+          true
+        ],
+        [
+          "[MEDIDA] A MONTAGEM: 7 de 8 clausulas do certificado PROVADAS nesta arvore",
+          true
+        ],
+        [
+          "[MEDIDA] a oitava depende de UM enunciado nomeado: o teorema de comutacao",
+          true
+        ],
+        [
+          "[MEDIDA] a bandeira do Ato III esta SENDO LIDA nesta rodada (aberta ou nao)",
+          true
+        ],
+        [
+          "[MEDIDA] e as clausulas (todas) sao lidas por nome Lean, nao por literal -- contagem lida do dicionario-fonte",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "statuses": {
+        "a_leitura_do_operador": "entrelacamento (aproximavel, SEMPRE) != conjuncao (pertencer, FALSO em geral) -- e essa distincao DECIDE A ROTA [REAL, kernel v251]",
+        "a_rota_eliminada": "mostrar que T(Omega) esta NA TORRE: FECHADA POR TEOREMA. E falsa, nao dificil",
+        "a_rota_real": "densidade da orbita + a estrutura que sobrevive ao limite (Tomita); a tensao entre os dois polos e o objeto de trabalho",
+        "a_montagem": "7/8 clausulas provadas; a 8a condicionada ao teorema de comutacao. A divida do item = UM enunciado",
+        "o_que_nao_fecha": "a BANDEIRA. Instancia condicionada NAO habita; o nome reservado segue ESCURO. Montar nao e pagar"
+      },
+      "does_not_gate_core": true,
+      "verdict": "ENTANGLEMENT_IS_NOT_CONJUNCTION_AND_THE_FALSE_ROUTE_IS_CLOSED_BY_THEOREM__SEVEN_OF_EIGHT_CLAUSES_PROVED__THE_CERTIFICATE_IS_ASSEMBLED_CONDITIONED_ON_ONE_NAMED_STATEMENT__THE_FLAG_STAYS_DARK_BECAUSE_ASSEMBLING_IS_NOT_PAYING"
+    },
+    "core.the_atlas_and_the_index": {
+      "checks": [
+        [
+          "[MEDIDA] ***TGL = ATLAS: 6/6 em kernel auditado -- cartas, cobertura, covariancia, e a CHAIN RULE (o cociclo E a funcao de transicao entre cartas)",
+          true
+        ],
+        [
+          "[MEDIDA] ***IALD = INDICE: 6/6 em kernel auditado -- seleciona, e idempotente, pesa omega(I)=1, e e' AO MESMO TEMPO o portao e o registro",
+          true
+        ],
+        [
+          "[MEDIDA] ***o criterio 1=1 do operador E um teorema com nome: `atlas_separation` -- coordenadas iguais ==> mesmo conteudo; e a sua negacao e' o 1=0",
+          true
+        ],
+        [
+          "[ERRATA-DA-TIPAGEM v290] a metade INDICE existia em kernel desde a v162 e NAO era lida por bandeira nenhuma -- compilava, era importada, e nao era auditada. O indice era o nao-indexado. Existir nao e' ser aplicado",
+          true
+        ],
+        [
+          "[FAIL-CLOSED] ***a tipagem e' NOMINAL e nao pagou preco nenhum: 0 bandeira(s) qgf_/gpf_ acesa(s) -- as 133 acesas de red_/gpi_ sao o regime normal (kernel provado e importacao com ponte) e nao sao acrescimo desta versao. CUNHAR NOME NAO PAGA PRECO",
+          true
+        ]
+      ],
+      "all_verified": true,
+      "n_atlas": 6,
+      "n_indice": 6,
+      "statuses": {
+        "a_ordem": "TGL = ATLAS (o espaco organizado das correspondencias possiveis); IALD = INDICE(TGL) (localiza, reconhece e relaciona uma identidade dentro desse espaco). A forma anterior -- TGL = indice -- CAI",
+        "o_que_cai": "'TGL = indice' era tipagem errada: o indice e' a OPERACAO de localizar, e quem a executa e' a IALD. A TGL e' o que se indexa",
+        "ja_estava_em_kernel": "nao se construiu nada: `TheAtlasIndex.lean` (v162) e `TheIALDSelector.lean` ja continham as duas metades. O trabalho foi RECONHECER, e a medida achou a assimetria",
+        "a_assimetria": "ATLAS auditado e lido desde a v162; INDICE compilando, importado, e NAO auditado, NAO lido. Corrigido nesta versao",
+        "estatuto": "[REAL] as duas metades em kernel com axiomas limpos; [ONTO] a leitura de que a TGL diz o que conta como o mesmo e a IALD opera sem perder esse mesmo -- leitura, nao teorema"
+      },
+      "verdict": "TGL_ATLAS_AND_THE_INDEX__ALL_CHECKS_VERIFIED"
+    }
+  },
+  "baseline_seal": {
+    "the_atlas_and_the_index": "TGL_ATLAS_AND_THE_INDEX__ALL_CHECKS_VERIFIED",
+    "not_sealed_this_run": {
+      "formais": [
+        "nivel2_rite",
+        "the_first_commutant_clause",
+        "the_iald_index",
+        "the_mode_of_discharge"
+      ],
+      "recusas_de_dado": [
+        "ringdown_dephasing_result",
+        "void_floor_kappa_v5",
+        "void_floor_kappa_v6",
+        "void_floor_v12",
+        "void_floor_v3_kappa",
+        "void_shear_unblinding"
+      ]
+    }
+  }
+}

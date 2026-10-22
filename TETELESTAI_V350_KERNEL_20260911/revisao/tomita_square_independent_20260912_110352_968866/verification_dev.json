@@ -1,0 +1,2089 @@
+{
+  "timestamp": "2026-09-12T11:14:06.018185-03:00",
+  "status": "DEV_COMPLETE_NO_P0_P1_P2",
+  "runs": [
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866"
+  ],
+  "sources": {
+    "TGLV350/AntilinearAdjointGraph.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\kernel\\TGLV350\\AntilinearAdjointGraph.lean",
+      "snapshot": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\sources\\TGLV350\\AntilinearAdjointGraph.lean",
+      "sha256": "6a3cbe3ded292e347a885be00be565c6b030d6971a7ac035096966028a552e98",
+      "lines": 127,
+      "imports": [
+        "Mathlib.Analysis.InnerProductSpace.LinearPMap"
+      ],
+      "namespace": "TGLV350.Regular",
+      "declarations": [
+        "TGLV350.Regular.antilinearAdjointRelation",
+        "TGLV350.Regular.maximalAntilinearAdjointDomain",
+        "TGLV350.Regular.maximalAntilinearAdjointValue",
+        "TGLV350.Regular.maximalAntilinearAdjointValue_pairing",
+        "TGLV350.Regular.antilinearAdjointRelation_unique",
+        "TGLV350.Regular.maximalAntilinearAdjoint",
+        "TGLV350.Regular.maximalAntilinearAdjoint_pairing",
+        "TGLV350.Regular.maximalAntilinearAdjoint_maximal",
+        "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq",
+        "TGLV350.Regular.antilinearAdjointRelation_isClosed",
+        "TGLV350.Regular.maximalAntilinearAdjoint_isClosed"
+      ],
+      "all_named_declarations": [
+        "TGLV350.Regular.antilinearAdjointRelation",
+        "TGLV350.Regular.maximalAntilinearAdjointDomain",
+        "TGLV350.Regular.maximalAntilinearAdjointValue",
+        "TGLV350.Regular.maximalAntilinearAdjointValue_pairing",
+        "TGLV350.Regular.antilinearAdjointRelation_unique",
+        "TGLV350.Regular.maximalAntilinearAdjoint",
+        "TGLV350.Regular.maximalAntilinearAdjoint_pairing",
+        "TGLV350.Regular.maximalAntilinearAdjoint_maximal",
+        "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq",
+        "TGLV350.Regular.antilinearAdjointRelation_isClosed",
+        "TGLV350.Regular.maximalAntilinearAdjoint_isClosed"
+      ],
+      "author_log": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\logs\\AntilinearAdjointGraph_20260912_103611_347285.json",
+      "author_log_sha256": "5943e44fcd0d7ca222b1a34df9b19d67b33c7f53fe8e26c01fa205fcc8733a18",
+      "author_binary_sha256": "6a28461d1006fe9f9c206bbb87909e43e81fbfc332e13e41abffe32f9dc9002e",
+      "author_axioms": {
+        "TGLV350.Regular.antilinearAdjointRelation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_unique": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232",
+      "own_record": {
+        "module": "TGLV350/AntilinearAdjointGraph.lean",
+        "command": [
+          "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+          "-o",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\build\\TGLV350\\AntilinearAdjointGraph.olean",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\sources\\TGLV350\\AntilinearAdjointGraph.lean"
+        ],
+        "returncode": 0,
+        "seconds": 15.452,
+        "source_sha256": "6a3cbe3ded292e347a885be00be565c6b030d6971a7ac035096966028a552e98",
+        "output_sha256": "6a28461d1006fe9f9c206bbb87909e43e81fbfc332e13e41abffe32f9dc9002e",
+        "axioms": {
+          "TGLV350.Regular.antilinearAdjointRelation": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjointDomain": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjointValue": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjointValue_pairing": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearAdjointRelation_unique": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjoint": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjoint_pairing": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjoint_maximal": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearAdjointRelation_isClosed": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.maximalAntilinearAdjoint_isClosed": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "axioms_allowed": true,
+        "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\AntilinearAdjointGraph.stdout.txt",
+        "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\AntilinearAdjointGraph.stderr.txt",
+        "stdout_sha256": "ba18767611b431382d419f595a7f4783a27a2856a2b13f9dcf03c3ecf77f76e3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary_equals_author": true
+      },
+      "declaration_lines": {
+        "antilinearAdjointRelation": 13,
+        "maximalAntilinearAdjointDomain": 17,
+        "maximalAntilinearAdjointValue": 32,
+        "maximalAntilinearAdjointValue_pairing": 35,
+        "antilinearAdjointRelation_unique": 43,
+        "maximalAntilinearAdjoint": 51,
+        "maximalAntilinearAdjoint_pairing": 75,
+        "maximalAntilinearAdjoint_maximal": 80,
+        "maximalAntilinearAdjoint_graph_eq": 88,
+        "antilinearAdjointRelation_isClosed": 99,
+        "maximalAntilinearAdjoint_isClosed": 109
+      },
+      "local_instances": [],
+      "options": [
+        "set_option autoImplicit false",
+        "set_option linter.unusedSectionVars false",
+        "set_option maxHeartbeats 1000000"
+      ],
+      "forbidden_tokens": []
+    },
+    "TGLV350/ScalarTomitaAdjoint.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\kernel\\TGLV350\\ScalarTomitaAdjoint.lean",
+      "snapshot": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\sources\\TGLV350\\ScalarTomitaAdjoint.lean",
+      "sha256": "1ad4e1d9e475e8ee94b65a87f05033b26c06d46e1cd30a62eb63e07f685df139",
+      "lines": 133,
+      "imports": [
+        "TGLV350.AntilinearAdjointGraph",
+        "TGLV350.ScalarClosedTomita"
+      ],
+      "namespace": "TGLV350.Regular",
+      "declarations": [
+        "TGLV350.Regular.scalarTomitaAdjointDomain",
+        "TGLV350.Regular.scalarTomitaAdjoint",
+        "TGLV350.Regular.scalarTomitaAdjoint_pairing",
+        "TGLV350.Regular.scalarTomitaAdjoint_maximal",
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_iff",
+        "TGLV350.Regular.scalarTomitaAdjoint_isClosed",
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing",
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain",
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_dense",
+        "TGLV350.Regular.scalarTomitaAdjoint_swap",
+        "TGLV350.Regular.scalarTomitaAdjoint_maps_domain",
+        "TGLV350.Regular.scalarTomitaAdjoint_involutive"
+      ],
+      "all_named_declarations": [
+        "TGLV350.Regular.scalarTomitaAdjointDomain",
+        "TGLV350.Regular.scalarTomitaAdjoint",
+        "TGLV350.Regular.scalarTomitaAdjoint_pairing",
+        "TGLV350.Regular.scalarTomitaAdjoint_maximal",
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_iff",
+        "TGLV350.Regular.scalarTomitaAdjoint_isClosed",
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing",
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain",
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_dense",
+        "TGLV350.Regular.scalarTomitaAdjoint_swap",
+        "TGLV350.Regular.scalarTomitaAdjoint_maps_domain",
+        "TGLV350.Regular.scalarTomitaAdjoint_involutive"
+      ],
+      "author_log": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\logs\\ScalarTomitaAdjoint_20260912_104146_918776.json",
+      "author_log_sha256": "9d1ddfa794a8d57ff34db3882147146c8f5cf9606025763ceba994fd15fdf1fb",
+      "author_binary_sha256": "24d29ed253a9c3e7c54db77326c3d70df915cfb7b2126848bb7c38184f7b25da",
+      "author_axioms": {
+        "TGLV350.Regular.scalarTomitaAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_swap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maps_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_involutive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232",
+      "own_record": {
+        "module": "TGLV350/ScalarTomitaAdjoint.lean",
+        "command": [
+          "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+          "-o",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\build\\TGLV350\\ScalarTomitaAdjoint.olean",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\sources\\TGLV350\\ScalarTomitaAdjoint.lean"
+        ],
+        "returncode": 0,
+        "seconds": 66.884,
+        "source_sha256": "1ad4e1d9e475e8ee94b65a87f05033b26c06d46e1cd30a62eb63e07f685df139",
+        "output_sha256": "24d29ed253a9c3e7c54db77326c3d70df915cfb7b2126848bb7c38184f7b25da",
+        "axioms": {
+          "TGLV350.Regular.scalarTomitaAdjointDomain": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_pairing": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_maximal": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_domain_iff": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_isClosed": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_domain_dense": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_swap": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_maps_domain": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaAdjoint_involutive": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "axioms_allowed": true,
+        "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\ScalarTomitaAdjoint.stdout.txt",
+        "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\ScalarTomitaAdjoint.stderr.txt",
+        "stdout_sha256": "4ddab19c84044707775b36f0c26acb8e32f69ba44037c84294cdbc482976c697",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary_equals_author": true
+      },
+      "declaration_lines": {
+        "scalarTomitaAdjointDomain": 13,
+        "scalarTomitaAdjoint": 17,
+        "scalarTomitaAdjoint_pairing": 21,
+        "scalarTomitaAdjoint_maximal": 27,
+        "scalarTomitaAdjoint_domain_iff": 33,
+        "scalarTomitaAdjoint_isClosed": 38,
+        "scalarTomitaAdjoint_gaussian_pairing": 45,
+        "scalarTomitaAdjoint_gaussian_domain": 64,
+        "scalarTomitaAdjoint_domain_dense": 75,
+        "scalarTomitaAdjoint_swap": 93,
+        "scalarTomitaAdjoint_maps_domain": 108,
+        "scalarTomitaAdjoint_involutive": 112
+      },
+      "local_instances": [],
+      "options": [
+        "set_option autoImplicit false",
+        "set_option linter.unusedSectionVars false",
+        "set_option maxHeartbeats 1000000"
+      ],
+      "forbidden_tokens": []
+    },
+    "TGLV350/AntilinearComposition.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\kernel\\TGLV350\\AntilinearComposition.lean",
+      "snapshot": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\AntilinearComposition.lean",
+      "sha256": "68f3ef51e3ea0c8334a9b3d2ca20aeecc16286807d1ac6067795cfc1c3d7eae6",
+      "lines": 56,
+      "imports": [
+        "TGLV350.AntilinearAdjointGraph"
+      ],
+      "namespace": "TGLV350.Regular",
+      "declarations": [
+        "TGLV350.Regular.antilinearPreimageDomain",
+        "TGLV350.Regular.antilinearPreimageInput",
+        "TGLV350.Regular.antilinearPreimageInput_coe",
+        "TGLV350.Regular.antilinearPreimageInput_mem",
+        "TGLV350.Regular.antilinearPreimageMap",
+        "TGLV350.Regular.antilinearComposite"
+      ],
+      "all_named_declarations": [
+        "TGLV350.Regular.antilinearPreimageDomain",
+        "TGLV350.Regular.antilinearPreimageInput",
+        "TGLV350.Regular.antilinearPreimageInput_coe",
+        "TGLV350.Regular.antilinearPreimageInput_mem",
+        "TGLV350.Regular.antilinearPreimageMap",
+        "TGLV350.Regular.antilinearComposite"
+      ],
+      "author_log": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\logs\\AntilinearComposition_20260912_104911_690291.json",
+      "author_log_sha256": "a959cf4ae33fe5fae1557464c1d6ae6b8cc74fc1ad245553057e896fb6342335",
+      "author_binary_sha256": "75522b727ac319a06ac1b8371e6ea48909faf5520c7f74c486e1d98b872e1cca",
+      "author_axioms": {
+        "TGLV350.Regular.antilinearPreimageDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_coe": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_mem": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageMap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearComposite": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+      "own_record": {
+        "module": "TGLV350/AntilinearComposition.lean",
+        "command": [
+          "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+          "-o",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\build\\TGLV350\\AntilinearComposition.olean",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\AntilinearComposition.lean"
+        ],
+        "returncode": 0,
+        "seconds": 15.657,
+        "source_sha256": "68f3ef51e3ea0c8334a9b3d2ca20aeecc16286807d1ac6067795cfc1c3d7eae6",
+        "output_sha256": "75522b727ac319a06ac1b8371e6ea48909faf5520c7f74c486e1d98b872e1cca",
+        "axioms": {
+          "TGLV350.Regular.antilinearPreimageDomain": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearPreimageInput": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearPreimageInput_coe": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearPreimageInput_mem": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearPreimageMap": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearComposite": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "axioms_allowed": true,
+        "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\AntilinearComposition.stdout.txt",
+        "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\AntilinearComposition.stderr.txt",
+        "stdout_sha256": "307c2d00dd55c6a80e0e9bad4aff9aee4827d4752661334ddb4b02210a775167",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary_equals_author": true
+      },
+      "declaration_lines": {
+        "antilinearPreimageDomain": 12,
+        "antilinearPreimageInput": 32,
+        "antilinearPreimageInput_coe": 35,
+        "antilinearPreimageInput_mem": 38,
+        "antilinearPreimageMap": 41,
+        "antilinearComposite": 45
+      },
+      "local_instances": [],
+      "options": [
+        "set_option autoImplicit false",
+        "set_option linter.unusedSectionVars false",
+        "set_option maxHeartbeats 1000000"
+      ],
+      "forbidden_tokens": []
+    },
+    "TGLV350/ClosedAntilinearResolvent.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\kernel\\TGLV350\\ClosedAntilinearResolvent.lean",
+      "snapshot": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\ClosedAntilinearResolvent.lean",
+      "sha256": "78024edd14e15109b9c4587e512c70a8ae09dc5e796c8e793ce58e113972526e",
+      "lines": 91,
+      "imports": [
+        "TGLV350.AntilinearAdjointGraph",
+        "Mathlib.Analysis.InnerProductSpace.Projection.Submodule",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "TGLV350.Regular",
+      "declarations": [
+        "TGLV350.Regular.antilinearL2Graph",
+        "TGLV350.Regular.antilinearL2Graph_closed",
+        "TGLV350.Regular.closedAntilinear_weak_resolvent",
+        "TGLV350.Regular.closedAntilinear_complex_resolvent"
+      ],
+      "all_named_declarations": [
+        "TGLV350.Regular.antilinearL2Graph",
+        "TGLV350.Regular.antilinearL2Graph_closed",
+        "TGLV350.Regular.closedAntilinear_weak_resolvent",
+        "TGLV350.Regular.closedAntilinear_complex_resolvent"
+      ],
+      "author_log": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\logs\\ClosedAntilinearResolvent_20260912_105618_331202.json",
+      "author_log_sha256": "b677342dead94505d397578719c107b33a218c356dcd9de0e6c9772ba22c4b2b",
+      "author_binary_sha256": "1f25a2e15c722a30c98ea4e7713e78f16f9faa1d061e36fb1d71acd05c141b08",
+      "author_axioms": {
+        "TGLV350.Regular.antilinearL2Graph": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearL2Graph_closed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_weak_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_complex_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+      "own_record": {
+        "module": "TGLV350/ClosedAntilinearResolvent.lean",
+        "command": [
+          "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+          "-o",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\build\\TGLV350\\ClosedAntilinearResolvent.olean",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\ClosedAntilinearResolvent.lean"
+        ],
+        "returncode": 0,
+        "seconds": 18.29,
+        "source_sha256": "78024edd14e15109b9c4587e512c70a8ae09dc5e796c8e793ce58e113972526e",
+        "output_sha256": "1f25a2e15c722a30c98ea4e7713e78f16f9faa1d061e36fb1d71acd05c141b08",
+        "axioms": {
+          "TGLV350.Regular.antilinearL2Graph": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.antilinearL2Graph_closed": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.closedAntilinear_weak_resolvent": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.closedAntilinear_complex_resolvent": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "axioms_allowed": true,
+        "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\ClosedAntilinearResolvent.stdout.txt",
+        "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\ClosedAntilinearResolvent.stderr.txt",
+        "stdout_sha256": "fd046633ac0874c2f965c2984867b87ccf5cf24ad49492ea379e03d64d846889",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary_equals_author": true
+      },
+      "declaration_lines": {
+        "antilinearL2Graph": 18,
+        "antilinearL2Graph_closed": 34,
+        "closedAntilinear_weak_resolvent": 46,
+        "closedAntilinear_complex_resolvent": 68
+      },
+      "local_instances": [
+        "local instance realHilbert : InnerProductSpace ℝ H := InnerProductSpace.complexToReal"
+      ],
+      "options": [
+        "set_option autoImplicit false",
+        "set_option linter.unusedSectionVars false",
+        "set_option maxHeartbeats 1000000"
+      ],
+      "forbidden_tokens": []
+    },
+    "TGLV350/PositiveSurjectiveResolvent.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\kernel\\TGLV350\\PositiveSurjectiveResolvent.lean",
+      "snapshot": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\PositiveSurjectiveResolvent.lean",
+      "sha256": "e8fee08097f79b97e8d824d352c755983ae8b774a12fc37811c44a93b1883c89",
+      "lines": 75,
+      "imports": [
+        "TGLV350.AntilinearAdjointGraph",
+        "Mathlib.Analysis.InnerProductSpace.Projection.Submodule",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "TGLV350.Regular",
+      "declarations": [
+        "TGLV350.Regular.positive_surjective_resolvent_domain_dense",
+        "TGLV350.Regular.positive_surjective_resolvent_selfadjoint"
+      ],
+      "all_named_declarations": [
+        "TGLV350.Regular.positive_surjective_resolvent_domain_dense",
+        "TGLV350.Regular.positive_surjective_resolvent_selfadjoint"
+      ],
+      "author_log": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\logs\\PositiveSurjectiveResolvent_20260912_105619_781262.json",
+      "author_log_sha256": "72d971fd6265942142091a7f6e810414d0c6f8f899e1a60eec409bd8550baf9b",
+      "author_binary_sha256": "b9ed179a325244578ba468a2a2ac2541b7a155d7bbf98bdc83dd9702db4e8ee0",
+      "author_axioms": {
+        "TGLV350.Regular.positive_surjective_resolvent_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.positive_surjective_resolvent_selfadjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+      "own_record": {
+        "module": "TGLV350/PositiveSurjectiveResolvent.lean",
+        "command": [
+          "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+          "-o",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\build\\TGLV350\\PositiveSurjectiveResolvent.olean",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\PositiveSurjectiveResolvent.lean"
+        ],
+        "returncode": 0,
+        "seconds": 16.147,
+        "source_sha256": "e8fee08097f79b97e8d824d352c755983ae8b774a12fc37811c44a93b1883c89",
+        "output_sha256": "b9ed179a325244578ba468a2a2ac2541b7a155d7bbf98bdc83dd9702db4e8ee0",
+        "axioms": {
+          "TGLV350.Regular.positive_surjective_resolvent_domain_dense": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.positive_surjective_resolvent_selfadjoint": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "axioms_allowed": true,
+        "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\PositiveSurjectiveResolvent.stdout.txt",
+        "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\PositiveSurjectiveResolvent.stderr.txt",
+        "stdout_sha256": "de19d81794cf92e912789d9d7ed9546dd0e7b6096e7b54f1b2de3d617a117c17",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary_equals_author": true
+      },
+      "declaration_lines": {
+        "positive_surjective_resolvent_domain_dense": 17,
+        "positive_surjective_resolvent_selfadjoint": 43
+      },
+      "local_instances": [],
+      "options": [
+        "set_option autoImplicit false",
+        "set_option linter.unusedSectionVars false",
+        "set_option maxHeartbeats 1000000"
+      ],
+      "forbidden_tokens": []
+    },
+    "TGLV350/ScalarTomitaSquare.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\kernel\\TGLV350\\ScalarTomitaSquare.lean",
+      "snapshot": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\sources\\TGLV350\\ScalarTomitaSquare.lean",
+      "sha256": "a5fe02b5e2486cef5a3999bcfecffea33fd5bdb1a47a700880cfb2c50220dd31",
+      "lines": 105,
+      "imports": [
+        "TGLV350.ScalarTomitaAdjoint",
+        "TGLV350.AntilinearComposition"
+      ],
+      "namespace": "TGLV350.Regular",
+      "declarations": [
+        "TGLV350.Regular.scalarTomitaSquareDomain",
+        "TGLV350.Regular.scalarTomitaSquareInput",
+        "TGLV350.Regular.scalarTomitaSquareInput_coe",
+        "TGLV350.Regular.scalarTomitaSquareInput_image_mem",
+        "TGLV350.Regular.scalarTomitaSquareAdjointInput",
+        "TGLV350.Regular.scalarTomitaSquare",
+        "TGLV350.Regular.scalarTomitaSquare_domain_iff",
+        "TGLV350.Regular.scalarTomitaSquare_apply",
+        "TGLV350.Regular.scalarTomitaSquare_pairing",
+        "TGLV350.Regular.scalarTomitaSquare_symmetric",
+        "TGLV350.Regular.scalarTomitaSquare_quadratic",
+        "TGLV350.Regular.scalarTomitaSquare_positive"
+      ],
+      "all_named_declarations": [
+        "TGLV350.Regular.scalarTomitaSquareDomain",
+        "TGLV350.Regular.scalarTomitaSquareInput",
+        "TGLV350.Regular.scalarTomitaSquareInput_coe",
+        "TGLV350.Regular.scalarTomitaSquareInput_image_mem",
+        "TGLV350.Regular.scalarTomitaSquareAdjointInput",
+        "TGLV350.Regular.scalarTomitaSquare",
+        "TGLV350.Regular.scalarTomitaSquare_domain_iff",
+        "TGLV350.Regular.scalarTomitaSquare_apply",
+        "TGLV350.Regular.scalarTomitaSquare_pairing",
+        "TGLV350.Regular.scalarTomitaSquare_symmetric",
+        "TGLV350.Regular.scalarTomitaSquare_quadratic",
+        "TGLV350.Regular.scalarTomitaSquare_positive"
+      ],
+      "author_log": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\logs\\ScalarTomitaSquare_20260912_105822_725293.json",
+      "author_log_sha256": "ef04d6783278aa10f5ec776d7fd61150f4d7d8f7b3b0c417107592afa0cd1920",
+      "author_binary_sha256": "670b55c8a75e933aa184ccee905e843b23c4161a3f90f57874f2bdd03aa1459b",
+      "author_axioms": {
+        "TGLV350.Regular.scalarTomitaSquareDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput_coe": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput_image_mem": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareAdjointInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_domain_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_symmetric": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_quadratic": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_positive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866",
+      "own_record": {
+        "module": "TGLV350/ScalarTomitaSquare.lean",
+        "command": [
+          "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+          "-o",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\build\\TGLV350\\ScalarTomitaSquare.olean",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\sources\\TGLV350\\ScalarTomitaSquare.lean"
+        ],
+        "returncode": 0,
+        "seconds": 45.671,
+        "source_sha256": "a5fe02b5e2486cef5a3999bcfecffea33fd5bdb1a47a700880cfb2c50220dd31",
+        "output_sha256": "670b55c8a75e933aa184ccee905e843b23c4161a3f90f57874f2bdd03aa1459b",
+        "axioms": {
+          "TGLV350.Regular.scalarTomitaSquareDomain": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquareInput": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquareInput_coe": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquareInput_image_mem": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquareAdjointInput": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_domain_iff": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_apply": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_pairing": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_symmetric": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_quadratic": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_positive": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "axioms_allowed": true,
+        "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSquare.stdout.txt",
+        "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSquare.stderr.txt",
+        "stdout_sha256": "6aac5da3b4d0607a31e255e422fdeaa983c4772a7016319bd1a7ecfdfed46d97",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary_equals_author": true
+      },
+      "declaration_lines": {
+        "scalarTomitaSquareDomain": 14,
+        "scalarTomitaSquareInput": 18,
+        "scalarTomitaSquareInput_coe": 22,
+        "scalarTomitaSquareInput_image_mem": 25,
+        "scalarTomitaSquareAdjointInput": 29,
+        "scalarTomitaSquare": 35,
+        "scalarTomitaSquare_domain_iff": 40,
+        "scalarTomitaSquare_apply": 45,
+        "scalarTomitaSquare_pairing": 50,
+        "scalarTomitaSquare_symmetric": 57,
+        "scalarTomitaSquare_quadratic": 75,
+        "scalarTomitaSquare_positive": 87
+      },
+      "local_instances": [],
+      "options": [
+        "set_option autoImplicit false",
+        "set_option linter.unusedSectionVars false",
+        "set_option maxHeartbeats 1000000"
+      ],
+      "forbidden_tokens": []
+    },
+    "TGLV350/ScalarTomitaSelfAdjoint.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\kernel\\TGLV350\\ScalarTomitaSelfAdjoint.lean",
+      "snapshot": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\sources\\TGLV350\\ScalarTomitaSelfAdjoint.lean",
+      "sha256": "a36ada20b2a52ad6c3696abfa777fd8c708fb2b1d015d7e8632f447005a1b6f0",
+      "lines": 67,
+      "imports": [
+        "TGLV350.ScalarTomitaSquare",
+        "TGLV350.ClosedAntilinearResolvent",
+        "TGLV350.PositiveSurjectiveResolvent"
+      ],
+      "namespace": "TGLV350.Regular",
+      "declarations": [
+        "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective",
+        "TGLV350.Regular.scalarTomitaSquare_domain_dense",
+        "TGLV350.Regular.scalarTomitaSquare_selfadjoint",
+        "TGLV350.Regular.scalarTomitaSquare_isClosed",
+        "TGLV350.Regular.scalarClosedTomita_zero_only",
+        "TGLV350.Regular.scalarTomitaSquare_zero_only"
+      ],
+      "all_named_declarations": [
+        "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective",
+        "TGLV350.Regular.scalarTomitaSquare_domain_dense",
+        "TGLV350.Regular.scalarTomitaSquare_selfadjoint",
+        "TGLV350.Regular.scalarTomitaSquare_isClosed",
+        "TGLV350.Regular.scalarClosedTomita_zero_only",
+        "TGLV350.Regular.scalarTomitaSquare_zero_only"
+      ],
+      "author_log": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\logs\\ScalarTomitaSelfAdjoint_20260912_105946_717528.json",
+      "author_log_sha256": "f4f50fe0cecb73d12a1dc90d9760baa867f131ec5e5a8319113e5ca042708746",
+      "author_binary_sha256": "c25e688491d4afa663b020498e7a921c445e3293d51b0398f182c7a8d33eaea0",
+      "author_axioms": {
+        "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_selfadjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarClosedTomita_zero_only": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_zero_only": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866",
+      "own_record": {
+        "module": "TGLV350/ScalarTomitaSelfAdjoint.lean",
+        "command": [
+          "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+          "-o",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\build\\TGLV350\\ScalarTomitaSelfAdjoint.olean",
+          "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\sources\\TGLV350\\ScalarTomitaSelfAdjoint.lean"
+        ],
+        "returncode": 0,
+        "seconds": 40.253,
+        "source_sha256": "a36ada20b2a52ad6c3696abfa777fd8c708fb2b1d015d7e8632f447005a1b6f0",
+        "output_sha256": "c25e688491d4afa663b020498e7a921c445e3293d51b0398f182c7a8d33eaea0",
+        "axioms": {
+          "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_domain_dense": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_selfadjoint": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_isClosed": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarClosedTomita_zero_only": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "TGLV350.Regular.scalarTomitaSquare_zero_only": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "axioms_allowed": true,
+        "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSelfAdjoint.stdout.txt",
+        "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSelfAdjoint.stderr.txt",
+        "stdout_sha256": "273fd1eef76c8549347c20d386885f971ba9a629614a5d935b9664aa65f9a0bd",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary_equals_author": true
+      },
+      "declaration_lines": {
+        "scalarTomitaSquare_resolvent_surjective": 15,
+        "scalarTomitaSquare_domain_dense": 28,
+        "scalarTomitaSquare_selfadjoint": 34,
+        "scalarTomitaSquare_isClosed": 39,
+        "scalarClosedTomita_zero_only": 42,
+        "scalarTomitaSquare_zero_only": 52
+      },
+      "local_instances": [],
+      "options": [
+        "set_option autoImplicit false",
+        "set_option linter.unusedSectionVars false",
+        "set_option maxHeartbeats 1000000"
+      ],
+      "forbidden_tokens": []
+    }
+  },
+  "records": [
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232",
+      "module": "TGLV350/AntilinearAdjointGraph.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\build\\TGLV350\\AntilinearAdjointGraph.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\sources\\TGLV350\\AntilinearAdjointGraph.lean"
+      ],
+      "returncode": 0,
+      "seconds": 15.452,
+      "source_sha256": "6a3cbe3ded292e347a885be00be565c6b030d6971a7ac035096966028a552e98",
+      "output_sha256": "6a28461d1006fe9f9c206bbb87909e43e81fbfc332e13e41abffe32f9dc9002e",
+      "axioms": {
+        "TGLV350.Regular.antilinearAdjointRelation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_unique": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\AntilinearAdjointGraph.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\AntilinearAdjointGraph.stderr.txt",
+      "stdout_sha256": "ba18767611b431382d419f595a7f4783a27a2856a2b13f9dcf03c3ecf77f76e3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_equals_author": true
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232",
+      "module": "TGLV350/ScalarTomitaAdjoint.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\build\\TGLV350\\ScalarTomitaAdjoint.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\sources\\TGLV350\\ScalarTomitaAdjoint.lean"
+      ],
+      "returncode": 0,
+      "seconds": 66.884,
+      "source_sha256": "1ad4e1d9e475e8ee94b65a87f05033b26c06d46e1cd30a62eb63e07f685df139",
+      "output_sha256": "24d29ed253a9c3e7c54db77326c3d70df915cfb7b2126848bb7c38184f7b25da",
+      "axioms": {
+        "TGLV350.Regular.scalarTomitaAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_swap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maps_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_involutive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\ScalarTomitaAdjoint.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\ScalarTomitaAdjoint.stderr.txt",
+      "stdout_sha256": "4ddab19c84044707775b36f0c26acb8e32f69ba44037c84294cdbc482976c697",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_equals_author": true
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232",
+      "module": "ScalarTomitaAdjointAudit.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\build\\ScalarTomitaAdjointAudit.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\sources\\ScalarTomitaAdjointAudit.lean"
+      ],
+      "returncode": 0,
+      "seconds": 31.348,
+      "source_sha256": "81090ae356900969b636fc4ee7c5cb50afb4e2f39b2cd809c0731259e722ac79",
+      "output_sha256": "627cbf35bb87e005e357894c566d29eea1031a7aebf3ac2525a3586f7cd9a83a",
+      "axioms": {
+        "TGLV350.Regular.antilinearAdjointRelation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_unique": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_swap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maps_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_involutive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\ScalarTomitaAdjointAudit.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\scalar_tomita_adjoint_independent_20260912_104520_672232\\logs\\ScalarTomitaAdjointAudit.stderr.txt",
+      "stdout_sha256": "137158ccc3a6ad17e4fedafde590871ecacfd2f41f33103a39a673ac17ef147c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+      "module": "TGLV350/AntilinearComposition.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\build\\TGLV350\\AntilinearComposition.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\AntilinearComposition.lean"
+      ],
+      "returncode": 0,
+      "seconds": 15.657,
+      "source_sha256": "68f3ef51e3ea0c8334a9b3d2ca20aeecc16286807d1ac6067795cfc1c3d7eae6",
+      "output_sha256": "75522b727ac319a06ac1b8371e6ea48909faf5520c7f74c486e1d98b872e1cca",
+      "axioms": {
+        "TGLV350.Regular.antilinearPreimageDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_coe": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_mem": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageMap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearComposite": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\AntilinearComposition.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\AntilinearComposition.stderr.txt",
+      "stdout_sha256": "307c2d00dd55c6a80e0e9bad4aff9aee4827d4752661334ddb4b02210a775167",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_equals_author": true
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+      "module": "TGLV350/ClosedAntilinearResolvent.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\build\\TGLV350\\ClosedAntilinearResolvent.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\ClosedAntilinearResolvent.lean"
+      ],
+      "returncode": 0,
+      "seconds": 18.29,
+      "source_sha256": "78024edd14e15109b9c4587e512c70a8ae09dc5e796c8e793ce58e113972526e",
+      "output_sha256": "1f25a2e15c722a30c98ea4e7713e78f16f9faa1d061e36fb1d71acd05c141b08",
+      "axioms": {
+        "TGLV350.Regular.antilinearL2Graph": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearL2Graph_closed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_weak_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_complex_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\ClosedAntilinearResolvent.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\ClosedAntilinearResolvent.stderr.txt",
+      "stdout_sha256": "fd046633ac0874c2f965c2984867b87ccf5cf24ad49492ea379e03d64d846889",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_equals_author": true
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+      "module": "TGLV350/PositiveSurjectiveResolvent.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\build\\TGLV350\\PositiveSurjectiveResolvent.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\TGLV350\\PositiveSurjectiveResolvent.lean"
+      ],
+      "returncode": 0,
+      "seconds": 16.147,
+      "source_sha256": "e8fee08097f79b97e8d824d352c755983ae8b774a12fc37811c44a93b1883c89",
+      "output_sha256": "b9ed179a325244578ba468a2a2ac2541b7a155d7bbf98bdc83dd9702db4e8ee0",
+      "axioms": {
+        "TGLV350.Regular.positive_surjective_resolvent_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.positive_surjective_resolvent_selfadjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\PositiveSurjectiveResolvent.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\PositiveSurjectiveResolvent.stderr.txt",
+      "stdout_sha256": "de19d81794cf92e912789d9d7ed9546dd0e7b6096e7b54f1b2de3d617a117c17",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_equals_author": true
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044",
+      "module": "ResolventAuxAudit.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\build\\ResolventAuxAudit.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\sources\\ResolventAuxAudit.lean"
+      ],
+      "returncode": 0,
+      "seconds": 15.283,
+      "source_sha256": "0f736681599bec73bc8e37b7f5debbe4bfe040dbd481a9cce8387dfaabda680e",
+      "output_sha256": "5b140d351b02fc9977cbb53a7362186790141120ab8d66837b8b4a8a20715fde",
+      "axioms": {
+        "TGLV350.Regular.antilinearPreimageDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_coe": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_mem": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageMap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearComposite": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearL2Graph": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearL2Graph_closed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_weak_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_complex_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.positive_surjective_resolvent_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.positive_surjective_resolvent_selfadjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\ResolventAuxAudit.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\resolvent_aux_independent_20260912_105957_572044\\logs\\ResolventAuxAudit.stderr.txt",
+      "stdout_sha256": "77001cbd2009205c55462254bd1a318c037793cd17214c4cbe2cc199e97f88f4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866",
+      "module": "TGLV350/ScalarTomitaSquare.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\build\\TGLV350\\ScalarTomitaSquare.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\sources\\TGLV350\\ScalarTomitaSquare.lean"
+      ],
+      "returncode": 0,
+      "seconds": 45.671,
+      "source_sha256": "a5fe02b5e2486cef5a3999bcfecffea33fd5bdb1a47a700880cfb2c50220dd31",
+      "output_sha256": "670b55c8a75e933aa184ccee905e843b23c4161a3f90f57874f2bdd03aa1459b",
+      "axioms": {
+        "TGLV350.Regular.scalarTomitaSquareDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput_coe": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput_image_mem": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareAdjointInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_domain_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_symmetric": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_quadratic": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_positive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSquare.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSquare.stderr.txt",
+      "stdout_sha256": "6aac5da3b4d0607a31e255e422fdeaa983c4772a7016319bd1a7ecfdfed46d97",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_equals_author": true
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866",
+      "module": "TGLV350/ScalarTomitaSelfAdjoint.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\build\\TGLV350\\ScalarTomitaSelfAdjoint.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\sources\\TGLV350\\ScalarTomitaSelfAdjoint.lean"
+      ],
+      "returncode": 0,
+      "seconds": 40.253,
+      "source_sha256": "a36ada20b2a52ad6c3696abfa777fd8c708fb2b1d015d7e8632f447005a1b6f0",
+      "output_sha256": "c25e688491d4afa663b020498e7a921c445e3293d51b0398f182c7a8d33eaea0",
+      "axioms": {
+        "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_selfadjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarClosedTomita_zero_only": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_zero_only": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSelfAdjoint.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\ScalarTomitaSelfAdjoint.stderr.txt",
+      "stdout_sha256": "273fd1eef76c8549347c20d386885f971ba9a629614a5d935b9664aa65f9a0bd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_equals_author": true
+    },
+    {
+      "run": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866",
+      "module": "TomitaSquareFullAudit.lean",
+      "command": [
+        "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+        "-o",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\build\\TomitaSquareFullAudit.olean",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\sources\\TomitaSquareFullAudit.lean"
+      ],
+      "returncode": 0,
+      "seconds": 29.799,
+      "source_sha256": "82c55a7466de1fc69a13a3143b807db89e676e25433d3711b7e366e5dbbc5e67",
+      "output_sha256": "300eb330a755dcffe4a0819dbe93b3057b170c32debbbd0422c9db20c66e4d8b",
+      "axioms": {
+        "TGLV350.Regular.antilinearAdjointRelation": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjointValue_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_unique": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearAdjointRelation_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.maximalAntilinearAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjointDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maximal": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_swap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_maps_domain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaAdjoint_involutive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_coe": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageInput_mem": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearPreimageMap": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearComposite": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearL2Graph": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.antilinearL2Graph_closed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_weak_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.closedAntilinear_complex_resolvent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.positive_surjective_resolvent_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.positive_surjective_resolvent_selfadjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareDomain": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput_coe": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareInput_image_mem": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquareAdjointInput": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_domain_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_apply": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_pairing": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_symmetric": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_quadratic": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_positive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_domain_dense": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_selfadjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_isClosed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarClosedTomita_zero_only": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "TGLV350.Regular.scalarTomitaSquare_zero_only": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "axioms_allowed": true,
+      "stdout": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\TomitaSquareFullAudit.stdout.txt",
+      "stderr": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\logs\\TomitaSquareFullAudit.stderr.txt",
+      "stdout_sha256": "2ef8123c994197e57ae904b02c6a81e340538b9622ee44d536162bcc166de27d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "history_attempts": 18,
+  "history_rc0": 7,
+  "history_rc1": 11,
+  "all_history_logs_streams_preserved": true,
+  "all_7_sources_and_bins_match_status": true,
+  "all_7_own_bins_equal_author": true,
+  "all_53_types_exact": true,
+  "inherited_35_printed_types_unchanged": true,
+  "all_53_axioms_equal_author_and_allowed": true,
+  "printed_types": {
+    "TGLV350.Regular.antilinearAdjointRelation": "TGLV350.Regular.antilinearAdjointRelation {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) : Set.{0} (Prod.{0, 0} H H)",
+    "TGLV350.Regular.maximalAntilinearAdjointDomain": "TGLV350.Regular.maximalAntilinearAdjointDomain {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) : Submodule.{0, 0} ℂ H",
+    "TGLV350.Regular.maximalAntilinearAdjointValue": "TGLV350.Regular.maximalAntilinearAdjointValue {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (y : ↥(TGLV350.Regular.maximalAntilinearAdjointDomain D S)) : H",
+    "TGLV350.Regular.maximalAntilinearAdjointValue_pairing": "TGLV350.Regular.maximalAntilinearAdjointValue_pairing {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (y : ↥(TGLV350.Regular.maximalAntilinearAdjointDomain D S)) (x : ↥D) : Eq.{1} (inner.{0, 0} ℂ (S x) ↑y) (inner.{0, 0} ℂ (TGLV350.Regular.maximalAntilinearAdjointValue D S y) ↑x)",
+    "TGLV350.Regular.antilinearAdjointRelation_unique": "TGLV350.Regular.antilinearAdjointRelation_unique {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hD : Dense.{0} ↑D) {y z w : H} (hz : Membership.mem.{0, 0} (TGLV350.Regular.antilinearAdjointRelation D S) (Prod.mk.{0, 0} y z)) (hw : Membership.mem.{0, 0} (TGLV350.Regular.antilinearAdjointRelation D S) (Prod.mk.{0, 0} y w)) : Eq.{1} z w",
+    "TGLV350.Regular.maximalAntilinearAdjoint": "TGLV350.Regular.maximalAntilinearAdjoint {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hD : Dense.{0} ↑D) : LinearPMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) H H",
+    "TGLV350.Regular.maximalAntilinearAdjoint_pairing": "TGLV350.Regular.maximalAntilinearAdjoint_pairing {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hD : Dense.{0} ↑D) (y : ↥(TGLV350.Regular.maximalAntilinearAdjointDomain D S)) (x : ↥D) : Eq.{1} (inner.{0, 0} ℂ (S x) ↑y) (inner.{0, 0} ℂ (↑(TGLV350.Regular.maximalAntilinearAdjoint D S hD) y) ↑x)",
+    "TGLV350.Regular.maximalAntilinearAdjoint_maximal": "TGLV350.Regular.maximalAntilinearAdjoint_maximal {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hD : Dense.{0} ↑D) {y z : H} (h : Membership.mem.{0, 0} (TGLV350.Regular.antilinearAdjointRelation D S) (Prod.mk.{0, 0} y z)) : ∃ (hy : Membership.mem.{0, 0} (TGLV350.Regular.maximalAntilinearAdjointDomain D S) y), Eq.{1} (↑(TGLV350.Regular.maximalAntilinearAdjoint D S hD) (Subtype.mk.{1} y hy)) z",
+    "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq": "TGLV350.Regular.maximalAntilinearAdjoint_graph_eq {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hD : Dense.{0} ↑D) : Eq.{1} (Set.range.{0, 1} fun y => Prod.mk.{0, 0} (↑y) (↑(TGLV350.Regular.maximalAntilinearAdjoint D S hD) y)) (TGLV350.Regular.antilinearAdjointRelation D S)",
+    "TGLV350.Regular.antilinearAdjointRelation_isClosed": "TGLV350.Regular.antilinearAdjointRelation_isClosed {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) : IsClosed.{0} (TGLV350.Regular.antilinearAdjointRelation D S)",
+    "TGLV350.Regular.maximalAntilinearAdjoint_isClosed": "TGLV350.Regular.maximalAntilinearAdjoint_isClosed {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hD : Dense.{0} ↑D) : IsClosed.{0} (Set.range.{0, 1} fun y => Prod.mk.{0, 0} (↑y) (↑(TGLV350.Regular.maximalAntilinearAdjoint D S hD) y))",
+    "TGLV350.Regular.scalarTomitaAdjointDomain": "TGLV350.Regular.scalarTomitaAdjointDomain (P : TGLExt.SiteProfile) : Submodule.{0, 0} ℂ ↥(TGLV350.Regular.ScalarGNSHilbert P)",
+    "TGLV350.Regular.scalarTomitaAdjoint": "TGLV350.Regular.scalarTomitaAdjoint (P : TGLExt.SiteProfile) : LinearPMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) ↥(TGLV350.Regular.ScalarGNSHilbert P) ↥(TGLV350.Regular.ScalarGNSHilbert P)",
+    "TGLV350.Regular.scalarTomitaAdjoint_pairing": "TGLV350.Regular.scalarTomitaAdjoint_pairing (P : TGLExt.SiteProfile) (y : ↥(TGLV350.Regular.scalarTomitaAdjointDomain P)) (x : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)) : Eq.{1} (inner.{0, 0} ℂ ((TGLV350.Regular.scalarClosedTomita P) x) ↑y) (inner.{0, 0} ℂ (↑(TGLV350.Regular.scalarTomitaAdjoint P) y) ↑x)",
+    "TGLV350.Regular.scalarTomitaAdjoint_maximal": "TGLV350.Regular.scalarTomitaAdjoint_maximal (P : TGLExt.SiteProfile) {y z : ↥(TGLV350.Regular.ScalarGNSHilbert P)} (h : ∀ (x : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)), Eq.{1} (inner.{0, 0} ℂ ((TGLV350.Regular.scalarClosedTomita P) x) y) (inner.{0, 0} ℂ z ↑x)) : ∃ (hy : Membership.mem.{0, 0} (TGLV350.Regular.scalarTomitaAdjointDomain P) y), Eq.{1} (↑(TGLV350.Regular.scalarTomitaAdjoint P) (Subtype.mk.{1} y hy)) z",
+    "TGLV350.Regular.scalarTomitaAdjoint_domain_iff": "TGLV350.Regular.scalarTomitaAdjoint_domain_iff (P : TGLExt.SiteProfile) (y : ↥(TGLV350.Regular.ScalarGNSHilbert P)) : Membership.mem.{0, 0} (TGLV350.Regular.scalarTomitaAdjointDomain P) y ↔ ∃ z, ∀ (x : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)), Eq.{1} (inner.{0, 0} ℂ ((TGLV350.Regular.scalarClosedTomita P) x) y) (inner.{0, 0} ℂ z ↑x)",
+    "TGLV350.Regular.scalarTomitaAdjoint_isClosed": "TGLV350.Regular.scalarTomitaAdjoint_isClosed (P : TGLExt.SiteProfile) : IsClosed.{0} (Set.range.{0, 1} fun y => Prod.mk.{0, 0} (↑y) (↑(TGLV350.Regular.scalarTomitaAdjoint P) y))",
+    "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing": "TGLV350.Regular.scalarTomitaAdjoint_gaussian_pairing (P : TGLExt.SiteProfile) (B : ContinuousLinearMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) ↥(TGLV350.Regular.RegularHilbert ↥(TGLV350.Regular.RegularHilbert (TGLExt.TowerHilbert P))) ↥(TGLV350.Regular.RegularHilbert ↥(TGLV350.Regular.RegularHilbert (TGLExt.TowerHilbert P)))) (hB : Membership.mem.{0, 0} (VonNeumannAlgebra.commutant.{0} (TGLV350.Regular.dualOrbitVonNeumann (TGLV350.Regular.regularCoreAlgebra P))) B) (x : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)) : Eq.{1} (inner.{0, 0} ℂ ((TGLV350.Regular.scalarClosedTomita P) x) ((ContinuousLinearMap.adjoint.{0, 0, 0} (TGLV350.Regular.scalarGaussianGNSMap P)) (B (TGLV350.Regular.scalarGaussianVacuum P)))) (inner.{0, 0} ℂ ((ContinuousLinearMap.adjoint.{0, 0, 0} (TGLV350.Regular.scalarGaussianGNSMap P)) ((star.{0} B) (TGLV350.Regular.scalarGaussianVacuum P))) ↑x)",
+    "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain": "TGLV350.Regular.scalarTomitaAdjoint_gaussian_domain (P : TGLExt.SiteProfile) (B : ContinuousLinearMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) ↥(TGLV350.Regular.RegularHilbert ↥(TGLV350.Regular.RegularHilbert (TGLExt.TowerHilbert P))) ↥(TGLV350.Regular.RegularHilbert ↥(TGLV350.Regular.RegularHilbert (TGLExt.TowerHilbert P)))) (hB : Membership.mem.{0, 0} (VonNeumannAlgebra.commutant.{0} (TGLV350.Regular.dualOrbitVonNeumann (TGLV350.Regular.regularCoreAlgebra P))) B) : Membership.mem.{0, 0} (TGLV350.Regular.scalarTomitaAdjointDomain P) ((ContinuousLinearMap.adjoint.{0, 0, 0} (TGLV350.Regular.scalarGaussianGNSMap P)) (B (TGLV350.Regular.scalarGaussianVacuum P)))",
+    "TGLV350.Regular.scalarTomitaAdjoint_domain_dense": "TGLV350.Regular.scalarTomitaAdjoint_domain_dense (P : TGLExt.SiteProfile) : Dense.{0} ↑(TGLV350.Regular.scalarTomitaAdjointDomain P)",
+    "TGLV350.Regular.scalarTomitaAdjoint_swap": "TGLV350.Regular.scalarTomitaAdjoint_swap (P : TGLExt.SiteProfile) {y z : ↥(TGLV350.Regular.ScalarGNSHilbert P)} (h : ∀ (x : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)), Eq.{1} (inner.{0, 0} ℂ ((TGLV350.Regular.scalarClosedTomita P) x) y) (inner.{0, 0} ℂ z ↑x)) (x : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)) : Eq.{1} (inner.{0, 0} ℂ ((TGLV350.Regular.scalarClosedTomita P) x) z) (inner.{0, 0} ℂ y ↑x)",
+    "TGLV350.Regular.scalarTomitaAdjoint_maps_domain": "TGLV350.Regular.scalarTomitaAdjoint_maps_domain (P : TGLExt.SiteProfile) (y : ↥(TGLV350.Regular.scalarTomitaAdjointDomain P)) : Membership.mem.{0, 0} (TGLV350.Regular.scalarTomitaAdjointDomain P) (↑(TGLV350.Regular.scalarTomitaAdjoint P) y)",
+    "TGLV350.Regular.scalarTomitaAdjoint_involutive": "TGLV350.Regular.scalarTomitaAdjoint_involutive (P : TGLExt.SiteProfile) (y : ↥(TGLV350.Regular.scalarTomitaAdjointDomain P)) : Eq.{1} (↑(TGLV350.Regular.scalarTomitaAdjoint P) (Subtype.mk.{1} (↑(TGLV350.Regular.scalarTomitaAdjoint P) y) ⋯)) ↑y",
+    "TGLV350.Regular.antilinearPreimageDomain": "TGLV350.Regular.antilinearPreimageDomain {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D E : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) : Submodule.{0, 0} ℂ H",
+    "TGLV350.Regular.antilinearPreimageInput": "TGLV350.Regular.antilinearPreimageInput {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D E : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) : LinearMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) ↥(TGLV350.Regular.antilinearPreimageDomain D E S) ↥D",
+    "TGLV350.Regular.antilinearPreimageInput_coe": "TGLV350.Regular.antilinearPreimageInput_coe {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D E : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (x : ↥(TGLV350.Regular.antilinearPreimageDomain D E S)) : Eq.{1} ↑((TGLV350.Regular.antilinearPreimageInput D E S) x) ↑x",
+    "TGLV350.Regular.antilinearPreimageInput_mem": "TGLV350.Regular.antilinearPreimageInput_mem {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D E : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (x : ↥(TGLV350.Regular.antilinearPreimageDomain D E S)) : Membership.mem.{0, 0} E (S ((TGLV350.Regular.antilinearPreimageInput D E S) x))",
+    "TGLV350.Regular.antilinearPreimageMap": "TGLV350.Regular.antilinearPreimageMap {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D E : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) ↥(TGLV350.Regular.antilinearPreimageDomain D E S) ↥E",
+    "TGLV350.Regular.antilinearComposite": "TGLV350.Regular.antilinearComposite {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D E : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (A : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥E) H) : LinearPMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) H H",
+    "TGLV350.Regular.antilinearL2Graph": "TGLV350.Regular.antilinearL2Graph {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) : Submodule.{0, 0} ℝ (WithLp.{0} 2 (Prod.{0, 0} H H))",
+    "TGLV350.Regular.antilinearL2Graph_closed": "TGLV350.Regular.antilinearL2Graph_closed {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] [CompleteSpace.{0} H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hclosed : IsClosed.{0} (Set.range.{0, 1} fun x => Prod.mk.{0, 0} (↑x) (S x))) : IsClosed.{0} ↑(TGLV350.Regular.antilinearL2Graph D S)",
+    "TGLV350.Regular.closedAntilinear_weak_resolvent": "TGLV350.Regular.closedAntilinear_weak_resolvent {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] [CompleteSpace.{0} H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hclosed : IsClosed.{0} (Set.range.{0, 1} fun x => Prod.mk.{0, 0} (↑x) (S x))) (z : H) : ∃ x, ∀ (u : ↥D), Eq.{1} (inner.{0, 0} ℂ (HSub.hSub.{0, 0, 0} z ↑x) ↑u).re (inner.{0, 0} ℂ (S x) (S u)).re",
+    "TGLV350.Regular.closedAntilinear_complex_resolvent": "TGLV350.Regular.closedAntilinear_complex_resolvent {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] [CompleteSpace.{0} H] (D : Submodule.{0, 0} ℂ H) (S : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) (↥D) H) (hclosed : IsClosed.{0} (Set.range.{0, 1} fun x => Prod.mk.{0, 0} (↑x) (S x))) (z : H) : ∃ x, ∀ (u : ↥D), Eq.{1} (inner.{0, 0} ℂ (S u) (S x)) (inner.{0, 0} ℂ (HSub.hSub.{0, 0, 0} z ↑x) ↑u)",
+    "TGLV350.Regular.positive_surjective_resolvent_domain_dense": "TGLV350.Regular.positive_surjective_resolvent_domain_dense {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] [CompleteSpace.{0} H] (T : LinearPMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) H H) (hp : ∀ (x : ↥(LinearPMap.domain.{0, 0, 0, 0} T)), LE.le.{0} 0 (inner.{0, 0} ℂ (↑x) (↑T x)).re) (hr : ∀ (z : H), ∃ x, Eq.{1} (HAdd.hAdd.{0, 0, 0} (↑x) (↑T x)) z) : Dense.{0} ↑(LinearPMap.domain.{0, 0, 0, 0} T)",
+    "TGLV350.Regular.positive_surjective_resolvent_selfadjoint": "TGLV350.Regular.positive_surjective_resolvent_selfadjoint {H : Type} [NormedAddCommGroup.{0} H] [InnerProductSpace.{0, 0} ℂ H] [CompleteSpace.{0} H] (T : LinearPMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) H H) (hp : ∀ (x : ↥(LinearPMap.domain.{0, 0, 0, 0} T)), LE.le.{0} 0 (inner.{0, 0} ℂ (↑x) (↑T x)).re) (hr : ∀ (z : H), ∃ x, Eq.{1} (HAdd.hAdd.{0, 0, 0} (↑x) (↑T x)) z) (hs : LinearPMap.IsFormalAdjoint.{0, 0, 0} T T) : IsSelfAdjoint.{0} T",
+    "TGLV350.Regular.scalarTomitaSquareDomain": "TGLV350.Regular.scalarTomitaSquareDomain (P : TGLExt.SiteProfile) : Submodule.{0, 0} ℂ ↥(TGLV350.Regular.ScalarGNSHilbert P)",
+    "TGLV350.Regular.scalarTomitaSquareInput": "TGLV350.Regular.scalarTomitaSquareInput (P : TGLExt.SiteProfile) : LinearMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) ↥(TGLV350.Regular.scalarTomitaSquareDomain P) ↥(TGLV350.Regular.scalarClosedTomitaDomain P)",
+    "TGLV350.Regular.scalarTomitaSquareInput_coe": "TGLV350.Regular.scalarTomitaSquareInput_coe (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.scalarTomitaSquareDomain P)) : Eq.{1} ↑((TGLV350.Regular.scalarTomitaSquareInput P) x) ↑x",
+    "TGLV350.Regular.scalarTomitaSquareInput_image_mem": "TGLV350.Regular.scalarTomitaSquareInput_image_mem (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.scalarTomitaSquareDomain P)) : Membership.mem.{0, 0} (TGLV350.Regular.scalarTomitaAdjointDomain P) ((TGLV350.Regular.scalarClosedTomita P) ((TGLV350.Regular.scalarTomitaSquareInput P) x))",
+    "TGLV350.Regular.scalarTomitaSquareAdjointInput": "TGLV350.Regular.scalarTomitaSquareAdjointInput (P : TGLExt.SiteProfile) : LinearMap.{0, 0, 0, 0} (starRingEnd.{0} ℂ) ↥(TGLV350.Regular.scalarTomitaSquareDomain P) ↥(TGLV350.Regular.scalarTomitaAdjointDomain P)",
+    "TGLV350.Regular.scalarTomitaSquare": "TGLV350.Regular.scalarTomitaSquare (P : TGLExt.SiteProfile) : LinearPMap.{0, 0, 0, 0} (RingHom.id.{0} ℂ) ↥(TGLV350.Regular.ScalarGNSHilbert P) ↥(TGLV350.Regular.ScalarGNSHilbert P)",
+    "TGLV350.Regular.scalarTomitaSquare_domain_iff": "TGLV350.Regular.scalarTomitaSquare_domain_iff (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.ScalarGNSHilbert P)) : Membership.mem.{0, 0} (LinearPMap.domain.{0, 0, 0, 0} (TGLV350.Regular.scalarTomitaSquare P)) x ↔ ∃ (hx : Membership.mem.{0, 0} (TGLV350.Regular.scalarClosedTomitaDomain P) x), Membership.mem.{0, 0} (TGLV350.Regular.scalarTomitaAdjointDomain P) ((TGLV350.Regular.scalarClosedTomita P) (Subtype.mk.{1} x hx))",
+    "TGLV350.Regular.scalarTomitaSquare_apply": "TGLV350.Regular.scalarTomitaSquare_apply (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.scalarTomitaSquareDomain P)) : Eq.{1} (↑(TGLV350.Regular.scalarTomitaSquare P) x) (↑(TGLV350.Regular.scalarTomitaAdjoint P) (Subtype.mk.{1} ((TGLV350.Regular.scalarClosedTomita P) ((TGLV350.Regular.scalarTomitaSquareInput P) x)) ⋯))",
+    "TGLV350.Regular.scalarTomitaSquare_pairing": "TGLV350.Regular.scalarTomitaSquare_pairing (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.scalarTomitaSquareDomain P)) (y : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)) : Eq.{1} (inner.{0, 0} ℂ (↑(TGLV350.Regular.scalarTomitaSquare P) x) ↑y) (inner.{0, 0} ℂ ((TGLV350.Regular.scalarClosedTomita P) y) ((TGLV350.Regular.scalarClosedTomita P) ((TGLV350.Regular.scalarTomitaSquareInput P) x)))",
+    "TGLV350.Regular.scalarTomitaSquare_symmetric": "TGLV350.Regular.scalarTomitaSquare_symmetric (P : TGLExt.SiteProfile) : LinearPMap.IsFormalAdjoint.{0, 0, 0} (TGLV350.Regular.scalarTomitaSquare P) (TGLV350.Regular.scalarTomitaSquare P)",
+    "TGLV350.Regular.scalarTomitaSquare_quadratic": "TGLV350.Regular.scalarTomitaSquare_quadratic (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.scalarTomitaSquareDomain P)) : Eq.{1} (inner.{0, 0} ℂ (↑x) (↑(TGLV350.Regular.scalarTomitaSquare P) x)).re (HPow.hPow.{0, 0, 0} (norm.{0} ((TGLV350.Regular.scalarClosedTomita P) ((TGLV350.Regular.scalarTomitaSquareInput P) x))) 2)",
+    "TGLV350.Regular.scalarTomitaSquare_positive": "TGLV350.Regular.scalarTomitaSquare_positive (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.scalarTomitaSquareDomain P)) : LE.le.{0} 0 (inner.{0, 0} ℂ (↑x) (↑(TGLV350.Regular.scalarTomitaSquare P) x)).re",
+    "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective": "TGLV350.Regular.scalarTomitaSquare_resolvent_surjective (P : TGLExt.SiteProfile) (z : ↥(TGLV350.Regular.ScalarGNSHilbert P)) : ∃ x, Eq.{1} (HAdd.hAdd.{0, 0, 0} (↑x) (↑(TGLV350.Regular.scalarTomitaSquare P) x)) z",
+    "TGLV350.Regular.scalarTomitaSquare_domain_dense": "TGLV350.Regular.scalarTomitaSquare_domain_dense (P : TGLExt.SiteProfile) : Dense.{0} ↑(LinearPMap.domain.{0, 0, 0, 0} (TGLV350.Regular.scalarTomitaSquare P))",
+    "TGLV350.Regular.scalarTomitaSquare_selfadjoint": "TGLV350.Regular.scalarTomitaSquare_selfadjoint (P : TGLExt.SiteProfile) : IsSelfAdjoint.{0} (TGLV350.Regular.scalarTomitaSquare P)",
+    "TGLV350.Regular.scalarTomitaSquare_isClosed": "TGLV350.Regular.scalarTomitaSquare_isClosed (P : TGLExt.SiteProfile) : LinearPMap.IsClosed.{0, 0, 0} (TGLV350.Regular.scalarTomitaSquare P)",
+    "TGLV350.Regular.scalarClosedTomita_zero_only": "TGLV350.Regular.scalarClosedTomita_zero_only (P : TGLExt.SiteProfile) (x : ↥(TGLV350.Regular.scalarClosedTomitaDomain P)) (hz : Eq.{1} ((TGLV350.Regular.scalarClosedTomita P) x) 0) : Eq.{1} (↑x) 0",
+    "TGLV350.Regular.scalarTomitaSquare_zero_only": "TGLV350.Regular.scalarTomitaSquare_zero_only (P : TGLExt.SiteProfile) (x : ↥(LinearPMap.domain.{0, 0, 0, 0} (TGLV350.Regular.scalarTomitaSquare P))) (hz : Eq.{1} (↑(TGLV350.Regular.scalarTomitaSquare P) x) 0) : Eq.{1} (↑x) 0"
+  },
+  "findings": [],
+  "dependency_count": 404,
+  "project_graph_modules": 406,
+  "acyclic": true,
+  "old_dependencies_do_not_import_any_of_7_new_modules": true,
+  "dependencies_preserved": true,
+  "lean_path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TETELESTAI_V350_KERNEL_20260911\\revisao\\tomita_square_independent_20260912_110352_968866\\build;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean",
+  "no_author_project_build_in_lean_path": true,
+  "mathlib_references": {
+    "Analysis/InnerProductSpace/LinearPMap.lean": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\LinearPMap.lean",
+      "sha256": "f9c71b68a41677a7b5d5392745c165a26d9e2e7860d0c725f84d93667c184298"
+    },
+    "LinearAlgebra/LinearPMap.lean": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\LinearAlgebra\\LinearPMap.lean",
+      "sha256": "8d52684f5574dc3b2d8a3466a6fbade6b53c4b423ac96547f3c195425adf4a2f"
+    },
+    "Analysis/InnerProductSpace/Projection/Basic.lean": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\Projection\\Basic.lean",
+      "sha256": "833c7b4ef410230086bd5b879ee51234e0e359e2aca3c9233d75cec5162fa5b2"
+    },
+    "Analysis/InnerProductSpace/ProdL2.lean": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\ProdL2.lean",
+      "sha256": "b3a972428de5345a0c8f447c16571fde3a334a06bf4298a77ae74cfa70367a57"
+    },
+    "Analysis/InnerProductSpace/Basic.lean": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\Basic.lean",
+      "sha256": "4c8941b7256fd3f7b7124e22cf51f083960662ce2aa4ade75daca8777d630628"
+    }
+  },
+  "draft_status_sha256": "e46bfab305e6acd956ce268bd55f3944bcb81ddd2c9cad16b761af65735e016c",
+  "author_report_sha256": "ca29180ef7b6025361cc07337a8794a8f777dab92ee493d9a1e97a400769e2bf",
+  "report_matches_status": true,
+  "original_sha256": "c9fc7fa432c6cf16dadcb926ee44f6b70656122f53cb7336dba52863c070208c",
+  "working_sha256": "4309a3cc34b3e8360872e1c49ff78334c422359df1eb4cfa45890084abee15f8",
+  "original_review_sha256": "4250693ad95a4cd05b9662acf1589397dc1715678a7e38f2c8bbe9c27da57bf1",
+  "original_review_bytes": 11029,
+  "previous_reviews_preserved_before_append": true,
+  "new_integration_inspected": false,
+  "author_scripts_executed": false,
+  "necessary_DEV_analysis_remaining": false
+}
