@@ -1,0 +1,101 @@
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:19:8: warning: automatically included section variable(s) unused in theorem `_private.TGLExt.V354BoundedPolar.0.TGLV354.closedRangeMap_dense`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:39:24: error: Type mismatch: After simplification, term
+  Eq.le (hn x)
+ has type
+  @LE.le ℝ Real.instPreorder.toLE ‖T x‖ ‖a x‖
+but is expected to have type
+  @LE.le ℝ Real.instLE ‖↑T x‖ ‖(closedRangeMap a) x‖
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:46:10: error: failed to elaborate eliminator, expected type is not available
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:47:4: error: No goals to be solved
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:68:2: error: linarith failed to find a contradiction
+case h1
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+x : H
+a : H →L[ℂ] H := CFC.sqrt (star T * T)
+hs : star a = a
+ha : star a * a = star T * T
+hi : inner ℂ (a x) (a x) = inner ℂ (T x) (T x)
+hn : (↑‖(CFC.sqrt (star T * T)) x‖ ^ 2).re = (↑‖T x‖ ^ 2).re
+a✝ : ‖(CFC.sqrt (star T * T)) x‖ < ‖T x‖
+⊢ False
+failed
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:66:41: warning: This simp argument is unused:
+  Complex.ofReal_re
+
+Hint: Omit it from the simp argument list.
+  simp only [inner_self_eq_norm_sq_to_K,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵r̵e̵] at hn
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:82:13: error(lean.unknownIdentifier): Unknown constant `ContinuousLinearMap.mem_ker`
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:82:2: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:95:7: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => ‖(rangeFactor T (CFC.sqrt (star T * T))) x‖ = ‖_a.starProjection x‖
+Error: Application type mismatch: The argument
+  Submodule.topologicalClosure.completeSpace (↑(CFC.sqrt (star T * T))).range
+has type
+  CompleteSpace ↥(↑(CFC.sqrt (star T * T))).range.topologicalClosure
+but is expected to have type
+  CompleteSpace ↥_a
+in the application
+  @Submodule.HasOrthogonalProjection.ofCompleteSpace ℂ H Complex.instRCLike inst✝² inst✝¹ _a
+    (Submodule.topologicalClosure.completeSpace (↑(CFC.sqrt (star T * T))).range)
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+x : H
+h : ‖(rangeFactor T (CFC.sqrt (star T * T))) x‖ = ‖(↑(CFC.sqrt (star T * T))).range.topologicalClosure.starProjection x‖
+⊢ ‖(boundedPolar T) x‖ = ‖(↑T).kerᗮ.starProjection x‖
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:109:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  p
+in the target expression
+  star (boundedPolar T) * boundedPolar T = (↑T).kerᗮ.starProjection
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+p : H →L[ℂ] H := (↑T).kerᗮ.starProjection
+hp : star p * p = p
+⊢ star (boundedPolar T) * boundedPolar T = (↑T).kerᗮ.starProjection
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:134:10: error: failed to elaborate eliminator, expected type is not available
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:135:4: error: No goals to be solved
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:190:29: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T B : H →L[ℂ] H
+hT : Commute T B
+hstar : Commute (star T) B
+a : H →L[ℂ] H := CFC.sqrt (star T * T)
+u : H →L[ℂ] H := boundedPolar T
+C : H →L[ℂ] H := u * B - B * u
+ha : Commute a B
+⊢ C * a = u * (B * a) + -1 • (B * (u * a))
+'TGLV354.boundedAbsolute_norm' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mul_absolute' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_norm' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_apply_eq_zero_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_star_mul' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_initial_support' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mul_star' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_commutes' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mem' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

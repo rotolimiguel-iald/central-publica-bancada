@@ -1,0 +1,43 @@
+'TGLV354.boundedAbsolute_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mul_absolute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedAbsolute_range' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_apply_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_star_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_initial_support' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mul_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_commutes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.coreProjectionSpaces' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.operator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.operator_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.operator_le_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.ofOperator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.operator_ofOperator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.operator_bot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.sup_apply_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.CoreProjection.positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.coreProjectionTrace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.projection_join_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.coreProjectionTrace_subadd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.coreProjectionTraceSubadditive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.regularSupportProjection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.regularSusyData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.regularSusy_gives_breuer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.regularSusy_operator_identifications' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.susy_relative_gives_breuer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.scalarInverseLimitTraceData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.regularFiniteSupport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.regularMinimalLock_relative_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.positive_sqrt_intertwines' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem TGLV354.regularSusy_gives_breuer : ∀ (P : TGLExt.SiteProfile),
+  0 < (TGLV354.coreProjectionTraceSubadditive P).tau (TGLV354.regularSusyData P).ker ∧
+    (TGLV354.coreProjectionTraceSubadditive P).tau (TGLV354.regularSusyData P).ker < ⊤ :=
+fun P => TGLExt.susy_relative_gives_breuer (TGLV354.regularSusyData P)
+def TGLV354.coreProjectionTraceSubadditive : (P : TGLExt.SiteProfile) →
+  TGLExt.SubadditiveTraceData (TGLV354.CoreProjection (TGLV350.Regular.regularCoreAlgebra P)) :=
+fun P =>
+  let __SemifiniteTraceData := TGLV354.coreProjectionTrace P;
+  { toSemifiniteTraceData := __SemifiniteTraceData, subadd := ⋯ }

@@ -1,0 +1,25 @@
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354RegularSusy.lean:71:8: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => 0 = _a.starProjection
+Error: Application type mismatch: The argument
+  kerHasOrthogonalProjection 1
+has type
+  (↑1).ker.HasOrthogonalProjection
+but is expected to have type
+  _a.HasOrthogonalProjection
+in the application
+  @Submodule.starProjection ℂ (↥(RegularHilbert (TowerHilbert P))) Complex.instRCLike
+    MeasureTheory.Lp.instNormedAddCommGroup MeasureTheory.L2.innerProductSpace _a ⋯
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+case refine_1
+P : SiteProfile
+hs : (regularSupportProjection P).operator = (↑(regularMinimalLock P)).ker.starProjection
+hk : (↑1).ker = ⊥
+⊢ 0 = (↑1).ker.starProjection
+'TGLV354.regularSupportProjection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.regularSusyData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.regularSusy_gives_breuer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.regularSusy_operator_identifications' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

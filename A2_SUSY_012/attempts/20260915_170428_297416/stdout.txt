@@ -1,0 +1,61 @@
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:48:10: error: failed to elaborate eliminator, expected type is not available
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:49:4: error: No goals to be solved
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:70:2: error: linarith failed to find a contradiction
+case h1
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+x : H
+a : H →L[ℂ] H := CFC.sqrt (star T * T)
+hs : star a = a
+ha : star a * a = star T * T
+hi : inner ℂ (a x) (a x) = inner ℂ (T x) (T x)
+hn : (↑‖(CFC.sqrt (star T * T)) x‖ ^ 2).re = (↑‖T x‖ ^ 2).re
+a✝ : ‖(CFC.sqrt (star T * T)) x‖ < ‖T x‖
+⊢ False
+failed
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:68:41: warning: This simp argument is unused:
+  ← Complex.ofReal_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [inner_self_eq_norm_sq_to_K, ←̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵p̵o̵w̵,̵ ̵Complex.ofReal_re] at hn
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:68:63: warning: This simp argument is unused:
+  Complex.ofReal_re
+
+Hint: Omit it from the simp argument list.
+  simp only [inner_self_eq_norm_sq_to_K, ← Complex.ofReal_pow,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵r̵e̵] at hn
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:85:13: warning: Possibly looping simp theorem: `← norm_eq_zero`
+
+Hint: You can disable a simp theorem from the default simp set by passing `- theoremName` to `simp`.
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:85:2: error: Tactic `simp` failed with a nested error:
+maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:97:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Eq ℝ ‖(rangeFactor T (CFC.sqrt (star T * T))) x‖ ‖(↑T).kerᗮ.starProjection x‖
+but is expected to have type
+  @Eq ℝ ‖(boundedPolar T) x‖ ‖(↑T).kerᗮ.starProjection x‖
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:114:9: error(lean.unknownIdentifier): Unknown constant `LinearMap.ext_inner_map`
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:115:8: error: No goals to be solved
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:138:10: error: failed to elaborate eliminator, expected type is not available
+C:\IALD\Central de Patentes\Chatgpt\A2_SUSY_012\k\TGLExt\V354BoundedPolar.lean:139:4: error: No goals to be solved
+'TGLV354.boundedAbsolute_norm' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mul_absolute' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_norm' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_apply_eq_zero_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_star_mul' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_initial_support' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mul_star' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_commutes' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.boundedPolar_mem' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
