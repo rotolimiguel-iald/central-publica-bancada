@@ -1,0 +1,115 @@
+--- baseline/tgl_formula_completa.py
++++ stage/patents/_formula_completa/tgl_formula_completa.py
+@@ -283,6 +283,102 @@
+             "camada_v386_no_cofre": v386}
+ 
+ 
++V388_METADATA_SHA256 = "2e766fcf0d5d3934d600e38ecf9e37c12d08f099851d3b2c53792f83a1e81007"
++
++# ------------------------------------------------------------------ v388 additive information; legacy beta() stays unchanged.
++def _scale_nonnegative_float(value, name):
++    """Admit a finite nonnegative engineering float, never a physical scale choice."""
++    if isinstance(value, bool) or not isinstance(value, (int, float)):
++        raise TypeError(name + " must be a real scalar")
++    try:
++        value = float(value)
++    except (OverflowError, ValueError) as exc:
++        raise ValueError(name + " is outside the floating-point interface") from exc
++    if not math.isfinite(value) or value < 0:
++        raise ValueError(name + " must be finite and nonnegative")
++    return value
++
++
++def alpha_of_chi_v388(chi):
++    """sech(chi/2), engineering float only; identification with physical alpha is INPUT/ONTO."""
++    chi = _scale_nonnegative_float(chi, "chi")
++    t = math.exp(-chi / 2.0)
++    alpha = (2.0 * t) / (1.0 + t * t)
++    if not math.isfinite(alpha) or not (0.0 < alpha <= 1.0):
++        raise ArithmeticError("Positive sech is not representable; no false zero by underflow")
++    return alpha
++
++
++def beta_of_chi_v388(chi):
++    """The new bulk-coordinate reading; never substitutes beta() in existing calculations."""
++    return alpha_of_chi_v388(chi) * math.sqrt(math.e)
++
++
++def scale_reading_v388(chi, chi_sup):
++    """Conditional floor on 0 <= chi <= chi_sup; no implicit mu(chi) or Thomson identification."""
++    chi = _scale_nonnegative_float(chi, "chi")
++    chi_sup = _scale_nonnegative_float(chi_sup, "chi_sup")
++    if chi > chi_sup:
++        raise ValueError("Floor theorem requires chi <= chi_sup")
++    alpha = alpha_of_chi_v388(chi)
++    return {
++        "chi": chi,
++        "chi_sup": chi_sup,
++        "alpha_chi": alpha,
++        "beta_chi": alpha * math.sqrt(math.e),
++        "floor_at_chi_sup": beta_of_chi_v388(chi_sup),
++        "beta0_existing_runtime": beta(),
++        "mu": None,
++        "mu_status": "OPEN_NOT_ASSIGNED",
++        "floor_equals_beta0": "NOT_INFERRED_REQUIRES_IDENTIFICATION_OF_CHI_SUP",
++        "couplingOfAlpha_domain_float_diagnostic": alpha < math.exp(-0.5),
++        "precision": "BINARY64_APPROXIMATION_NOT_INTERVAL_CERTIFICATE",
++        "physical_identification": "INPUT_ONTO_NOT_DEDUCED_FROM_FORMULA",
++        "physical_verdict_allowed": False,
++    }
++
++
++def beta_of_mu_v388(mu):
++    """No mapping from a device/rite's physical scale to chi has been ratified."""
++    raise NotImplementedError("OPEN: mu per device/rite and chi(mu) are not assigned")
++
++
++def _adendo_v388_no_cofre(cf):
++    """Read pinned v388 information alongside legacy results; no new physical calculation."""
++    meta_path = Path(__file__).with_name("ADENDO_V388_METADATA.json")
++    if _sha(meta_path) != V388_METADATA_SHA256:
++        raise RuntimeError("v388 additive metadata pin mismatch")
++    meta = json.loads(meta_path.read_text(encoding="utf-8"))
++    version, cofre, kernel = _cofre_corrente()
++    if version != 388 or cf.get("cofre") != "um_unificado_v388":
++        raise RuntimeError("v388 additive package requires its exact reviewed custody version")
++    for pin in meta["custody_pins"]:
++        base = cofre if pin["base"] == "um" else kernel
++        path = base / pin["relative"]
++        if _sha(path) != pin["sha256"] or path.stat().st_size != pin["bytes"]:
++            raise RuntimeError("v388 custody pin mismatch: " + pin["relative"])
++    return {
++        "version": "v388",
++        "base_layer_preserved": VERSAO_DA_CAMADA,
++        "metadata_sha256": V388_METADATA_SHA256,
++        "source_um_sha256": meta["source_um_sha256"],
++        "source_core_key": "beta_runs_bounded_below_v388",
++        "source_statute": meta["source_statute"],
++        "source_reported_kernel_flags": meta["source_reported_kernel_flags"],
++        "kernel_recompiled_here": False,
++        "formula": "alpha(chi)=sech(chi/2); beta(chi)=alpha(chi)*sqrt(e)",
++        "floor_hypotheses": "0<=chi<=chi_sup; floor=beta(chi_sup), not automatically beta0",
++        "chi_zero": "alphaOfChi(0)=1 and betaOfChi(0)=sqrt(e); not the Thomson boundary value",
++        "beta0_used_by_existing_calculations": "beta() unchanged: ALPHA_FINE_CODATA_2018*sqrt(e)",
++        "physical_scale_mu": None,
++        "physical_scale_mu_status": "OPEN_PER_DEVICE_AND_RITE",
++        "legacy_results_recomputed": False,
++        "physical_verdict_allowed": False,
++        "available_additive_API": ["alpha_of_chi_v388", "beta_of_chi_v388", "scale_reading_v388"],
++        "forbidden_inference": "No empirical gain, patent implementation of variable beta, or physical confirmation inferred",
++    }
++
++
+ USOS = {
+     "beta_runtime_tgl_core": r"tgl_core\.beta\(\)|ALPHA_FINE_CODATA_2018\s*\*\s*(SQRT_E|math\.sqrt\(math\.e\))",
+     "angulo_de_Miguel_theta_M": r"theta_m\(|arcsin|asin\(",
+@@ -317,7 +413,8 @@
+     return {
+         "versao_da_camada": VERSAO_DA_CAMADA, "modulo": "patents/_formula_completa/tgl_formula_completa.py",
+         "modulo_sha256": _sha(Path(__file__)),
+-        "formula_runtime": rt, "axioma_e_verbo_runtime": av, "conferencia_no_cofre": cf,
++        "formula_runtime": rt, "axioma_e_verbo_runtime": av, "conferencia_no_cofre": cf,
++        "adendo_v388": _adendo_v388_no_cofre(cf),
+         "uso_medido_no_codigo_do_dispositivo": uso_no_dispositivo(runner_path),
+         "veredito": ("TGL_FORMULA_COMPLETA_%s__CADEIA_RAZAO_ELEMENTAR_MATRIZ_S_DEPHASING_LEIS_D1A_D1B_ASSINTOTA__AXIOMA_POSTO_DOIS_PONTOS_FIXOS__"
+                      "VERBO_PESO_BORN_POSTOS_NAO_COMUTAM_TRIADE_SU2_C_BETA__LIVRO_DE_COBRANCAS_PILAR_COMPUTED_RAMO_B_AWAITING__"

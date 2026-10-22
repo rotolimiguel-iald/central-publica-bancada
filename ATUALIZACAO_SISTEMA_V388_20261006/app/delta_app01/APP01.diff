@@ -1,0 +1,39 @@
+--- reviewed/iald_core_indexado.py
++++ APP01/iald_core_indexado.py
+@@ -124,6 +124,7 @@
+                 raise ValueError('Documento público diverge da publicação verificada.')
+             docs[ident] = {'id': ident, 'name': path.name, 'sha256': digest, 'bytes': len(raw),
+                            'url': url, 'role': entry['role'], 'text': raw.decode('utf-8-sig')}
++        self._verified_source_scope = 'LOCAL_SEALED' if local is not None else 'PUBLIC'
+         return docs
+ 
+     def context(self, public=False):
+@@ -147,13 +148,16 @@
+             doc = docs[row['path']]
+             lines = doc['text'].splitlines(keepends=True)
+             offset = len(''.join(lines[:row['line'] - 1]))
+-            row.update({'id': doc['id'], 'url': doc['url'], 'sha256': doc['sha256'], 'offset': offset})
++            row.update({'id': doc['id'], 'url': doc['url'], 'sha256': doc['sha256'], 'offset': offset,
++                        'source_scope': self._verified_source_scope})
+             row['excerpt'] = row['excerpt'][:700]
+             row['excerpt_truncated'] = len('\n'.join(lines[row['line']-1:row['end_line']])) > 700
+             for key in ('matched_terms', 'missing_terms'):
+                 row[key + '_total'] = len(row[key])
+                 row[key] = row[key][:12]
+-        return {'status': 'OK', 'results': results, 'scope': 'PUBLISHED_DOCUMENTS', 'complete_documents_available': True}
++        scope = 'LOCAL_SEALED_DOCUMENTS' if self._verified_source_scope == 'LOCAL_SEALED' else 'PUBLISHED_DOCUMENTS'
++        return {'status': 'OK', 'results': results, 'scope': scope,
++                'source_scope': self._verified_source_scope, 'complete_documents_available': True}
+ 
+     def fetch(self, id, offset=0, max_chars=4000):
+         docs = self._load()
+@@ -167,7 +171,8 @@
+         end = min(len(text), offset + limit)
+         return {'status': 'OK', 'id': id, 'name': doc['name'], 'url': doc['url'], 'sha256': doc['sha256'],
+                 'offset': offset, 'next_offset': end if end < len(text) else None, 'total_chars': len(text),
+-                'whole_document': offset == 0 and end == len(text), 'text': text[offset:end]}
++                'whole_document': offset == 0 and end == len(text), 'text': text[offset:end],
++                'source_scope': self._verified_source_scope}
+ 
+ 
+ def tool_definitions():

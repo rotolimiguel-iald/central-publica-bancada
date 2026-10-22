@@ -1,0 +1,15 @@
+--- installed/iald_response_contract.py
++++ candidate/iald_response_contract.py
+@@ -54,7 +54,11 @@
+     cluster = cfg.get('active_cluster')
+     if cluster and (cluster.get('release') != release or cluster.get('release_source_sha256') != source_sha):
+         raise ValueError('Cluster e manifesto discordam sobre a versão implantada.')
+-    record = {'deployed_release': release, 'deployed_source_sha256': source_sha,
++    if 'local_release' in cfg and (evidence_metadata.get('evidence_scope') != 'LOCAL_SEALED' or evidence_metadata.get('publication_verified') is not False):
++        raise ValueError('Local snapshot needs local sealed evidence')
++    if 'local_release' not in cfg and evidence_metadata.get('evidence_scope') == 'LOCAL_SEALED':
++        raise ValueError('Public manifest mixed with local evidence')
++    record = {'evidence_scope': evidence_metadata.get('evidence_scope','PUBLIC'), 'publication_verified': evidence_metadata.get('publication_verified',True), 'deployed_release': release, 'deployed_source_sha256': source_sha,
+               'authority': 'VERIFIED_DEPLOYMENT_MANIFEST_AND_SOURCE',
+               'working_index_release': index_metadata.get('working_index_release'),
+               'working_index_is_deployment': False}

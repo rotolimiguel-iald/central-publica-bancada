@@ -1,0 +1,15 @@
+--- production/iald_cluster.py
++++ candidate/iald_cluster.py
+@@ -11,7 +11,11 @@
+         return '', {}
+     if config.get('release_source_sha256') != source_sha:
+         raise ValueError('Cluster e kernel pertencem a versões diferentes.')
+-    if not re.fullmatch(r'v[0-9]+', str(config.get('release',''))) or not re.fullmatch(r'[0-9a-f]{40}',str(config.get('commit',''))):
++    if 'local_release' in config:
++        from iald_local_release import local_snapshot
++        local_snapshot(config['local_release'], source_sha, config['release'])
++        if config.get('commit') is not None: raise ValueError('Local release must not claim a public commit')
++    elif not re.fullmatch(r'v[0-9]+', str(config.get('release',''))) or not re.fullmatch(r'[0-9a-f]{40}',str(config.get('commit',''))):
+         raise ValueError('Cluster sem proveniência fixada.')
+     path = Path(config['path'])
+     if not path.is_absolute() or path.suffix != '.md':

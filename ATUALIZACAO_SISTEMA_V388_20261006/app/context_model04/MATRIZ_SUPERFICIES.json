@@ -1,0 +1,79 @@
+[
+  {
+    "surface": "Perfil/modelo",
+    "evidence": "claude_profiles.py:20; claude_server_selection.py:config_for_model",
+    "current": "Sonnet5.5/1M/128k/internal_only e preços declarados; alias Sonnet5 aceito.",
+    "required": "Fixar ID nos recibos/pacote, clamp de saída e janela efetiva verificada; sem fallback automático.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Público/interno",
+    "evidence": "claude_account_policy.py:available_models; claude_route_bridge.py:policy_flags; iald_web_server.py:6863",
+    "current": "Sonnet restrito a luiz; aprovação/bloqueio e trava de pesquisa preservados.",
+    "required": "Decisão explícita de audiência; sincronizar allowlists/default/bridge sem expor ferramentas internas.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Pacote científico",
+    "evidence": "claude_memory_package.py; claude_context_snapshot.py:MODEL",
+    "current": "Loader/snapshot medidos somente Haiku; v388 não ativada.",
+    "required": "Sucessor model/window/hash/receipt; preservar Haiku e regressões local/public; metadado novo reancorado.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Montagem",
+    "evidence": "iald_memoria_canonica.py:307,358,442,453; iald_web_server.py:6423",
+    "current": "Prefixo amplo existente e fontes recuperáveis; Sonnet monta contexto legado variável.",
+    "required": "Fixar montagem pública pinada sem Atlas privado. Proxy atual329581 já passa teto340k; não substituir medida nativa por esse guard.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Recontagem/transporte",
+    "evidence": "iald_web_server.py:6470,6595,6615; claude_guarded_transport.py; claude_request_guard.py",
+    "current": "Guard nativo Haiku; Sonnet usa post_como_openai.",
+    "required": "Ligar guard antes de reserva/envio, zero retries, identidade modelo/prefixo/tools e falha visível.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Ferramentas5.5",
+    "evidence": "iald_motor_claude.py:634,728; claude_native_counter.py",
+    "current": "Conversor pode produzir any/tool; Sonnet usa ferramentas variáveis.",
+    "required": "Sete schemas públicos pinados; recusar forced any/tool antes de count; adaptive/high, sem disabled.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Histórico/cache/stream",
+    "evidence": "iald_motor_claude.py:332,1010,1041,1104; iald_motores.py:969",
+    "current": "Final completo conserva blocos brutos; reconstrução interrompida não preserva display; estado sem binding explícito modelo/system/tools.",
+    "required": "Testar omitted/interrupção e identidade do loop; impedir reaproveitamento incompatível; contar histórico final, sem cortar núcleo.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Custos/quotas",
+    "evidence": "claude_native_account.py:68; claude_route_bridge.py:public_budget; iald_web_server.py:6480",
+    "current": "Public budget/conta nativa ligados a Haiku; Sonnet usa proxy; limites privados não lidos.",
+    "required": "Contagem real para reserva atômica e liquidação input/cache/output; decidir limites públicos; retenção conservadora do incerto.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Metadados/UI",
+    "evidence": "iald_web_server.py:7977; app/iald.js:1646,1750,1758",
+    "current": "Sonnet metadados legados; JS recorta CPT se flag nativa ausente.",
+    "required": "Retornar janela/modelo/recibo nativos; flag obrigatória e header anthropic-native-v1; conferir UI sem recorte local.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Web/iOS/Android",
+    "evidence": "iald-app/capacitor.config.json; iald-app/sincronizar_app.ps1",
+    "current": "Quatro iald.js locais idênticos; webDir=www; app/ é fonte.",
+    "required": "Se servidor/flag bastarem, verificar clientes sem build artificial. Se JS mudar, sincronizar e verificar web/iOS interno e externo/Android; nunca inferir instalação física.",
+    "activation": "NOT_AUTHORIZED"
+  },
+  {
+    "surface": "Implantação/rollback",
+    "evidence": "app/transaction.py; app/restart_web.ps1; app/delta_app01/install_plan_candidate.json",
+    "current": "Plano APP01 revisado existe; pacote nativo ainda pendente.",
+    "required": "Sucessor CAS/backups e pacote coerente, revisão ROOT, reload só web quieta autorizado, PID/source_sha e rollback exato.",
+    "activation": "NOT_AUTHORIZED"
+  }
+]

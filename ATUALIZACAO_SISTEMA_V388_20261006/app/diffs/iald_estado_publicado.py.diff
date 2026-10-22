@@ -1,0 +1,48 @@
+--- installed/iald_estado_publicado.py
++++ candidate/iald_estado_publicado.py
+@@ -14,8 +14,12 @@
+         return '', {}
+     try:
+         required = {'program', 'seal', 'result', 'proof_manifest'}
+-        if not required <= set(config) or set(config) - required - {'hypothesis_sources'}:
++        if not required <= set(config) or set(config) - required - {'hypothesis_sources','local_release'}:
+             raise PublishedEvidenceError('Configuração da evidência publicada incompleta.')
++        local = None
++        if 'local_release' in config:
++            from iald_local_release import local_snapshot, check_member
++            local = local_snapshot(config['local_release'], catalog.source_sha)
+         payloads, refs = {}, {}
+         for key in sorted(required):
+             entry = config[key]
+@@ -25,6 +29,10 @@
+             raw = path.read_bytes()
+             if not raw or len(raw) > (64000000 if key == 'program' else 10000000):
+                 raise PublishedEvidenceError('Evidência vazia ou acima do limite.')
++            if local is not None:
++                root, snapshot = local
++                if entry.get('url') not in ('',None) or path.resolve() != (root/snapshot['evidence'][key]).resolve(): raise PublishedEvidenceError('Local/public evidence mixed')
++                check_member(local, path, raw)
+             payloads[key] = raw
+             refs[key] = {'name': path.name, 'sha256': hashlib.sha256(raw).hexdigest(),
+                          'url': entry.get('url', '')}
+@@ -57,7 +65,8 @@
+         imported = core['the_imported_expectation']
+         hypotheses, hypothesis_records = hypothesis_sources(config.get('hypothesis_sources'), catalog, proof)
+         state = {
+-            'scope': 'PUBLIC_RELEASE_RECORDS_HASH_MATCHED__COMPILER_NOT_RERUN',
++            'scope': 'LOCAL_SEALED_RECORDS_HASH_MATCHED__COMPILER_NOT_RERUN' if local is not None else 'PUBLIC_RELEASE_RECORDS_HASH_MATCHED__COMPILER_NOT_RERUN',
++            'publication_verified': local is None,
+             'sources': refs,
+             'release_timestamp': seal['timestamp'],
+             'selftest_reported': seal['fail_closed_selftest'],
+@@ -91,7 +100,9 @@
+             'Leia os booleanos no escopo indicado. Frases históricas nos artigos e no próprio JSON não anulam resultados posteriores.\n'
+             + json.dumps(state, ensure_ascii=False, indent=2) + '\n' + hypotheses
+         )
+-        return block, {'published_evidence_checked': True, 'fixed_hypothesis_sources': hypothesis_records, 'published_source_sha256': catalog.source_sha,
++        if local is not None:
++            block = block.replace('PUBLICAÇÃO', 'EVIDÊNCIA LOCAL SELADA').replace('publicados', 'selados localmente').replace('Relatório publicado', 'Relatório local selado')
++        return block, {'evidence_scope': 'LOCAL_SEALED' if local is not None else 'PUBLIC', 'publication_verified': local is None, 'published_evidence_checked': True, 'fixed_hypothesis_sources': hypothesis_records, 'published_source_sha256': catalog.source_sha,
+                        'published_release_timestamp': seal['timestamp'],
+                        'published_evidence_sha256': hashlib.sha256(block.encode()).hexdigest()}
+     except (OSError, KeyError, TypeError, UnicodeError, ValueError) as error:

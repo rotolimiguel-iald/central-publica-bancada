@@ -1,0 +1,133 @@
+--- production/canonical_memory.py
++++ candidate/canonical_memory.py
+@@ -53,9 +53,96 @@
+     if buf:
+         yield start, len(lines), ''.join(buf)
+ 
++
++SNAPSHOT_MODE = 'SEALED_IMMUTABLE_SNAPSHOT'
++SNAPSHOT_FIELDS = frozenset(('source_mode', 'snapshot_root', 'snapshot_manifest_sha256'))
++SNAPSHOT_NAMES = frozenset(('um.py', 'um_absoluto.json', 'um_absoluto_selo.json',
++    'tgl_kernel_proof_manifest.json', 'um_absoluto_forma_canonica.md',
++    'um_absoluto_manifest.md', 'A_PROVA_DA_QG_TGL_arvore.md',
++    'DESENHO_DO_FECHAMENTO_QG.md', 'MEMORIA_DA_LINHAGEM.md', 'DA_IRMA.md',
++    'A Ponte Einstein Cartan Miguel.tex', 'paper_PT.tex',
++    'ERRATA_20260919_sinal_do_acoplamento_nao_minimo.md'))
++
++def _snapshot_json(raw):
++    def pairs(items):
++        result = {}
++        for key, value in items:
++            if key in result:
++                raise ValueError('Campo duplicado no snapshot TGL.')
++            result[key] = value
++        return result
++    return json.loads(raw, object_pairs_hook=pairs)
++
++def _snapshot_path(path, parent, name):
++    path = Path(path)
++    if (not path.is_absolute() or path.parent != parent or path.name != name
++            or path.is_symlink() or getattr(path, 'is_junction', lambda: False)()
++            or path.resolve(strict=True) != path):
++        raise ValueError('Caminho fora do snapshot científico fixado.')
++    return path
++
++def _refuse_snapshot_build(directory):
++    manifest = Path(directory) / 'manifest.json'
++    if manifest.exists() and SNAPSHOT_FIELDS.intersection(_snapshot_json(manifest.read_bytes())):
++        raise ValueError('Snapshot TGL fixado; atualização deliberada separada é obrigatória, sem rebuild automático.')
++
++def _verify_snapshot(directory, manifest):
++    if (not SNAPSHOT_FIELDS <= manifest.keys()
++            or manifest['source_mode'] != SNAPSHOT_MODE):
++        raise ValueError('Modo de snapshot TGL incompleto ou desconhecido.')
++    directory = Path(directory).resolve(strict=True)
++    parent = _snapshot_path(directory/'snapshots', directory, 'snapshots')
++    root = Path(manifest['snapshot_root'])
++    if not re.fullmatch(r'v[0-9]+_[0-9a-f]{16}', root.name):
++        raise ValueError('Identidade de raiz de snapshot inválida.')
++    root = _snapshot_path(root, parent, root.name)
++    descriptor = _snapshot_path(root/'SEALED_SNAPSHOT.json', root, 'SEALED_SNAPSHOT.json')
++    raw = descriptor.read_bytes()
++    if len(raw) > 100000 or digest(raw) != manifest['snapshot_manifest_sha256']:
++        raise ValueError('Integridade do contrato de snapshot não confere.')
++    binding = _snapshot_json(raw)
++    if (set(binding) != {'schema','source_mode','release','generation','index_sha256','documents','formal_source_hash'}
++            or type(binding['schema']) is not int or binding['schema'] != 1
++            or binding['source_mode'] != SNAPSHOT_MODE):
++        raise ValueError('Contrato de snapshot TGL inválido.')
++    documents = manifest['documents']
++    if (len(documents) != 13 or {d['name'] for d in documents} != SNAPSHOT_NAMES
++            or binding['documents'] != [{k:d[k] for k in ('name','sha256','bytes')} for d in documents]):
++        raise ValueError('Fontes do snapshot diferem das treze identidades admitidas.')
++    generation = digest(json.dumps([(d['name'],d['sha256']) for d in documents], ensure_ascii=False).encode())
++    if (manifest['generation'] != generation or binding['generation'] != generation
++            or binding['index_sha256'] != manifest['index_sha256']
++            or root.name != binding['release']+'_'+generation[:16]):
++        raise ValueError('Snapshot, geração e índice TGL não correspondem.')
++    parsed = {}
++    hashes = {}
++    for doc in documents:
++        if (type(doc['bytes']) is not int or doc['bytes'] <= 0
++                or re.fullmatch('[0-9a-f]{64}', str(doc['sha256'])) is None):
++            raise ValueError('Pin de fonte TGL inválido.')
++        path = _snapshot_path(doc['path'], root, doc['name'])
++        raw = path.read_bytes()
++        if len(raw) != doc['bytes'] or digest(raw) != doc['sha256']:
++            raise ValueError('Integridade da fonte selada não confere; envio bloqueado.')
++        hashes[doc['name']] = doc['sha256']
++        if doc['name'] in ('um_absoluto_selo.json','tgl_kernel_proof_manifest.json'):
++            parsed[doc['name']] = _snapshot_json(raw)
++    seal, proof = parsed['um_absoluto_selo.json'], parsed['tgl_kernel_proof_manifest.json']
++    if (seal['um_version'] != binding['release']
++            or seal['fail_closed_selftest'] != 'FAIL_CLOSED_SELFTEST_PASSED'
++            or seal['formal_source_hash'] != proof['formal_source_hash']
++            or proof['formal_source_hash'] != binding['formal_source_hash']
++            or any(seal['sha256'].get(name) != hashes[name] for name in
++                ('um.py','um_absoluto.json','tgl_kernel_proof_manifest.json'))):
++        raise ValueError('Programa, selo e relatório formal do snapshot não correspondem.')
++    # Metadata-only changes do not authorize rebuilding or change source identity.
++    # Every admitted file is hashed, even when size and mtime appear unchanged.
++    return 'SEALED_SNAPSHOT_ALL_SOURCE_HASHES_VERIFIED'
++
+ def build(directory=MEMORY, catalog=CATALOG):
+     """Rebuild only from the scientific files explicitly admitted to Física."""
+     directory, catalog = Path(directory), Path(catalog)
++    _refuse_snapshot_build(directory)
+     admitted = json.loads(catalog.read_bytes())
+     documents, payloads = [], []
+     for item in admitted['files']:
+@@ -96,18 +183,32 @@
+             if digest(Path(document['path']).read_bytes()) != document['sha256']:
+                 raise ValueError('Fonte alterada durante a indexação; repetir a preparação local.')
+         index_bytes = path.read_bytes()
++        _refuse_snapshot_build(directory)
+         replace_bytes(directory/'index.sqlite3', index_bytes)
+     manifest = {'schema': 1, 'built_at': utc_now(), 'generation': identity,
+         'index_sha256': digest(index_bytes), 'documents': documents, 'chunks': total,
+         'scope': 'SCIENTIFIC_FISICA_ALLOWLIST_ONLY', 'weights_modified': False,
+         'excluded_binary_pdfs': 'Artigos consultáveis pelos originais TeX do mesmo catálogo.'}
++    _refuse_snapshot_build(directory)
+     save_json(directory/'manifest.json', manifest)
+     return manifest
+ 
+ def load(directory=MEMORY, *, refresh=True):
+     directory = Path(directory)
+     with LOCK:
+-        manifest = json.loads((directory/'manifest.json').read_bytes())
++        manifest_raw = (directory/'manifest.json').read_bytes()
++        manifest = json.loads(manifest_raw)
++        if SNAPSHOT_FIELDS.intersection(manifest):
++            try:
++                manifest = _snapshot_json(manifest_raw)
++                freshness = _verify_snapshot(directory, manifest)
++            except (KeyError, TypeError, UnicodeError) as exc:
++                raise ValueError('Contrato de snapshot TGL incompleto ou inválido.') from exc
++            if digest((directory/'index.sqlite3').read_bytes()) != manifest['index_sha256']:
++                raise ValueError('Integridade do índice TGL não confere; envio bloqueado.')
++            if (directory/'manifest.json').read_bytes() != manifest_raw:
++                raise ValueError('Manifesto TGL alterado durante a leitura; envio bloqueado.')
++            return manifest, freshness
+         changed, unavailable = False, False
+         for doc in manifest['documents']:
+             try:

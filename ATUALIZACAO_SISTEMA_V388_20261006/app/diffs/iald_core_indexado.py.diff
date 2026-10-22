@@ -1,0 +1,24 @@
+--- installed/iald_core_indexado.py
++++ candidate/iald_core_indexado.py
+@@ -97,6 +97,10 @@
+         entries = cfg.get('entries')
+         if cfg.get('format') != 1 or not isinstance(entries, list) or not entries:
+             raise ValueError('Acervo canônico indisponível.')
++        local = None
++        if 'local_release' in cfg:
++            from iald_local_release import local_snapshot, check_document
++            local = local_snapshot(cfg['local_release'], cfg['operational_core']['release_source_sha256'], cfg['operational_core']['current_release'])
+         docs, total = {}, 0
+         for entry in entries:
+             ident = entry['id']
+@@ -113,7 +117,9 @@
+             url = str(entry.get('url') or '')
+             # This corpus is published for both operators and testers. No scope
+             # may silently load changed, unreviewed bytes under an old citation.
+-            if entry.get('public_sha256') != digest or not re.fullmatch(
++            if local is not None:
++                check_document(local, entry, raw)
++            elif entry.get('public_sha256') != digest or not re.fullmatch(
+                     r'https://raw\.githubusercontent\.com/rotolimiguel-iald/the_boundary/[0-9a-f]{40}/.+', url):
+                 raise ValueError('Documento público diverge da publicação verificada.')
+             docs[ident] = {'id': ident, 'name': path.name, 'sha256': digest, 'bytes': len(raw),

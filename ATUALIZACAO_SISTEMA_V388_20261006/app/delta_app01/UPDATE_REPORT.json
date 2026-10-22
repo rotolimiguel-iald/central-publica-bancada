@@ -1,0 +1,56 @@
+{
+  "status": "APP01_FIXED_STATIC_REVIEW_REQUIRED",
+  "utc": "2026-10-06T18:07:16.578122+00:00",
+  "finding": "search_tgl returned PUBLISHED_DOCUMENTS even for an admitted LOCAL_SEALED corpus",
+  "chosen_alternative": "A: keep the mode already validated by _load as internal provenance; report LOCAL_SEALED/PUBLIC in search/fetch and per search result; retain existing PUBLIC scope label",
+  "other_alternative": "B: use a neutral scope label for both modes; rejected because it would unnecessarily remove existing PUBLIC distinction",
+  "changes": [
+    "DocumentCorpus._load sets _verified_source_scope only after all members pass validation",
+    "search selects LOCAL_SEALED_DOCUMENTS or PUBLISHED_DOCUMENTS and emits source_scope at result and row level",
+    "fetch emits source_scope derived from the same successful _load"
+  ],
+  "unchanged": [
+    "DocumentCorpus.context bytes and metadata",
+    "All tool definitions, including seven-schema count payload",
+    "Haiku prefix bytes and COUNT_PLAN",
+    "Original1300reviewmembers",
+    "Scientific sources/core/cluster/catalog/Jev/prior/limits",
+    "Public retrieval integrity checks and URL rules",
+    "Production files and services"
+  ],
+  "tests": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\delta_app01\\TEST_REPORT.json",
+    "bytes": 476,
+    "sha256": "2bff9e1027c82763caf1bb8f347e8b2de7134f3df3338339470774ac0cb18d78"
+  },
+  "prefix": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\memory_stage\\haiku_prefix.md",
+    "bytes": 545550,
+    "sha256": "b201e454efa224b68634ebd55c700946ed7468fdd979317ed7da1fe8e21eb6d3"
+  },
+  "reviewed_original_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\REVIEW_MANIFEST.json",
+    "bytes": 352176,
+    "sha256": "95d2b804ff7c86f2c867c6bb18cd9cf3d562688774bea4b91ffe3ce113e7d7a9"
+  },
+  "delta_patch": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\delta_app01\\iald_core_indexado.py",
+    "bytes": 12171,
+    "sha256": "9493d6ad800cbcd5dbc7a165eb93455922261f011379951fbd460184ec1439bc"
+  },
+  "successor_install_plan": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\delta_app01\\install_plan_candidate.json",
+    "bytes": 555087,
+    "sha256": "0c01138251cdbfcfb3dd8566360653b0729e5c9cdd2b33348bb864a1644339d5"
+  },
+  "finalizer_to_use_after_count": "delta_app01/prepare_install.py; completes the successor plan and retains native budget/review gates",
+  "app02_documentary_note": "kernel_manifest.method retains historical generic wording; its specific supplemental source is LOCAL_SEALED with no public commit/URL. No source provenance is promoted by that label.",
+  "app03_projection_limit": "Historical lnB2.24 and recalculo_ao_lado reference remain in fixed compact projection; corrected1.9692166174194288 remains in exact retrievable source and labeled operational addendum. No claim that the full correction is inline in every projection.",
+  "pending": [
+    "Independent reviewer APP01 acceptance",
+    "Specific count egress approval and successful native receipt",
+    "ROOT final plan review/release and activation/reload proof"
+  ],
+  "production_changes": 0,
+  "remote_calls": 0
+}

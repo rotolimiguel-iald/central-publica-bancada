@@ -1,0 +1,11 @@
+--- production/iald_native_memory.py
++++ candidate/iald_native_memory.py
+@@ -29,6 +29,8 @@
+                 'Os enunciados, hipóteses e vereditos completos ficam nas fontes recuperáveis. '
+                 'Para esta janela, fontes chamadas carregadas pelo Core significam disponíveis '
+                 'no serviço; isso não afirma que o texto de todas elas esteja neste prompt.\n')
++    if metadata.get('evidence_scope') == 'LOCAL_SEALED':
++        evidence = evidence.replace('EVIDÊNCIA PUBLICADA', 'EVIDÊNCIA LOCAL SELADA')
+     contract, _ = deployment_contract(manifest, catalog.source_sha, metadata, {})
+     documents, _ = DocumentCorpus(manifest).context(public=True)
+     prefix = (

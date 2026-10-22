@@ -1,0 +1,66 @@
+{
+  "status": "READY_FOR_INDEPENDENT_ROOT_REVIEW_NOT_INSTALLED",
+  "utc": "2026-10-06T18:02:46.219291+00:00",
+  "mode": "SEALED_IMMUTABLE_SNAPSHOT",
+  "sources": 13,
+  "generation": "983c7f463cfb31f22d2f49dc9370e375b2431a998c60747787b389e810726c19",
+  "chunks": 20260,
+  "index_sha256": "197e40ef7fa6158f0939a265184e62a58443c421653102ddf29f2bfd0fd016aa",
+  "index_bytes": 101896192,
+  "source_identity": "Exactly the 13 ordered names/bytes/SHA in the cached generation; um.py recovered from the admitted e64b00f4 sealed app snapshot, other 12 copied only after byte identity checks",
+  "program_seal_proof": "Seal version v388 and program/result/proof hashes checked; formal_source_hash joins seal and proof; no compiler or program execution",
+  "runtime_guards": [
+    "Every admitted file hash/size verified on every load, even unchanged size/mtime",
+    "Root and flat source paths must resolve within directory/snapshots; symlinks/junction aliases refused",
+    "Descriptor pin, generation and index SHA joined to exactly13admitted names",
+    "Missing/tampered source, external path, malformed/mismatched seal, changed generation/index refuse without build",
+    "Mtime-only differences accepted by content identity, no rebuild",
+    "Explicit build refuses before reading catalog when snapshot fields present; legacy build guarded again before publishing index and manifest"
+  ],
+  "legacy_behavior": "Historical mode without snapshot fields retains its prior build/retrieval behavior; official v369 MANIFESTO_LOCAL untouched",
+  "validation": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\orchestrator\\snapshot_fix\\validation\\TEST_REPORT.json",
+    "bytes": 548,
+    "sha256": "4f15712f255f90e9a36b66e96cd5c5a3e24f937898a4812d5839f73acdb8cc22"
+  },
+  "tests_passed": 23,
+  "test_history": "First run had22fixture setup failures from Windows path length; shortened fixture paths, production patch unchanged by that repair; failing receipt retained as byte backup. Final23pass.",
+  "installation_plan": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\orchestrator\\snapshot_fix\\INSTALL_PLAN.json",
+    "bytes": 10151,
+    "sha256": "87e509f580fd313e692bb3365f677145226a52836e4a7587ce2c1332bfab594e"
+  },
+  "installed_files_proposed": 16,
+  "index_write_proposed": false,
+  "snapshot_mtime_condition": "Preserve exact mtime_ns in install manifest on the13copiedfiles and verify stat before manifest switch, because older MCP loaders still use size/mtime checks",
+  "long_lived_process_limit": "Already-running MCP modules do not gain new guard through a file patch. Do not claim hot reload or restart clients. Only a fresh process imports the patched implementation; use verify_installed_snapshot.py. Older processes can read unchanged copies but do not guarantee the new tamper/build behavior.",
+  "commands_prepared_not_executed": [
+    [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\orchestrator\\snapshot_fix\\install_snapshot.py",
+      "--review",
+      "<ROOT independent review JSON with actual REVIEW_MANIFEST SHA>"
+    ],
+    [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\orchestrator\\snapshot_fix\\verify_installed_snapshot.py"
+    ]
+  ],
+  "production_changes": 0,
+  "remote_calls": 0,
+  "executors_called": 0,
+  "queue_changes": 0,
+  "old_constraints": "Required memory_generation remains the exact same generation; no new unit or queue admission",
+  "separate_gates": "App Anthropic counting/device batch approval are separate; this package does not authorize or retry them",
+  "pending": [
+    "Independent ROOT review",
+    "Explicit release/application of this bounded local16fileplan",
+    "New-process verification; never assert old MCP hot reload"
+  ]
+}

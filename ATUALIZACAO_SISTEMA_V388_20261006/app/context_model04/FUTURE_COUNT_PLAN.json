@@ -1,0 +1,70 @@
+{
+  "status": "NOT_AUTHORIZED_NOT_SENT",
+  "model": "claude-sonnet-5-5",
+  "future_count_requests": 2,
+  "count_requests_sent": 0,
+  "generation_requests": 0,
+  "prefix": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\memory_stage\\public_prefix.md",
+    "bytes": 1029394,
+    "sha256": "a2a42ef56895d17b08ba1b433898bbb6e3160a9254b74f644f3f5a7fff39ef37"
+  },
+  "payloads": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\context_model04\\FUTURE_COUNT_MINIMAL.json",
+      "bytes": 1071958,
+      "sha256": "ec3aec5fb2b292f339becc171c1700d06aa294a372bad7716ec870ad107b625b"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\context_model04\\FUTURE_COUNT_REFERENCE.json",
+      "bytes": 1076154,
+      "sha256": "8f2abde7ffb73f18024f48654526356ddb936c745120382803b728ade01334ca"
+    }
+  ],
+  "source_identity": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\app\\memory_stage\\release\\um.py",
+    "bytes": 33801035,
+    "sha256": "e64b00f4df75059b6f6fa5c050d45032ae73cb0e4aea6ef88a3620cc85846739"
+  },
+  "native_wire_tools_sha256": "6953a27937199a528c492f50d0079baf69c4dd675500cb356465198ff1f75ee6",
+  "parameters": {
+    "thinking": {
+      "type": "adaptive"
+    },
+    "output_config": {
+      "effort": "high"
+    },
+    "tool_choice": "OMITTED_AUTO_DEFAULT",
+    "system_cache": "ephemeral_5m",
+    "reference_tail_cache": {
+      "type": "ephemeral"
+    }
+  },
+  "count_contract": "Count fields match the observed adapter; no max_tokens or metadata; eager_input_streaming stripped only from tools.",
+  "future_generation_reservation_proposal_INPUT": {
+    "output_tokens": 4096,
+    "margin_tokens": 1024,
+    "minimum_dynamic_remaining": 10000,
+    "minimum_permanent_tokens": 180000,
+    "window_tokens": 1000000
+  },
+  "acceptance_formula": "permanent >=180000 AND whole>=permanent AND 1000000-whole-4096-1024 >=10000; source/tool/model/receipt pins exact",
+  "native_counts": {
+    "permanent": null,
+    "reference": null,
+    "remaining": null
+  },
+  "previous_haiku_overhead_is_not_transferred": true,
+  "minimal_scope": "Exact public system + user dot + adaptive/high; excludes tool schemas. Provider overhead remains part of this measurement.",
+  "reference_scope": "Same public system + same seven ordered public schemas + fixed question, adaptive/high, automatic tail cache. No histories, images, tool results or user profile.",
+  "production_differences": [
+    "Current Sonnet route builds variable internal/public context and generic tools; proposed route must pin this public system and seven schemas.",
+    "Current Sonnet bypasses post_guarded/native request accounting and can crop by proxy; successor required.",
+    "Current package loader/snapshot binds Haiku only; measured Sonnet package does not exist.",
+    "Per-request variable system/history/profile/tool result content requires count of final wire; these two counts are not a certificate for arbitrary requests.",
+    "public_metadata has a stale local_release sub-pin; successor metadata must bind current manifest, prefix bytes currently contain neither sub-pin.",
+    "No live account/model access or SDK acceptance of this exact payload has been tested."
+  ],
+  "authorization_policy": "ROOT review then explicit authorization of these exact two files. No previous count approval transfers. Official existing client only; no retry after uncertain send.",
+  "reproduction": "This stdlib-only builder reads pinned sources and creates local files once; it contains no send function."
+}

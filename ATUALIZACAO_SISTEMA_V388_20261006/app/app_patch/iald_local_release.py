@@ -1,0 +1,87 @@
+"""Verify explicitly local sealed science; never imply public deployment or execute source."""
+import hashlib
+import json
+from pathlib import Path
+import re
+
+SCHEMA = 'iald.local-sealed-science.v1'
+MODE = 'LOCAL_SEALED'
+APP = Path(__file__).resolve().parent
+PRODUCTION = Path('C:/IALD/projetos_pyhton/IALD/canonical_releases').resolve()
+STAGING = Path('C:/IALD/Central de Patentes/Chatgpt/ATUALIZACAO_SISTEMA_V388_20261006/app/memory_stage').resolve()
+DOCUMENT_IDS = frozenset(('custo_geometrico_integral', 'ponte_integral', 'readme_publico_integral', 'indice_publico_dos_conceitos_integral', 'um_artigo_publicado_integral', 'um_forma_canonica_integral', 'um_selo_publicado_integral', 'resultado_publicado_integral'))
+EVIDENCE_KEYS = frozenset(('program', 'seal', 'result', 'proof_manifest'))
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def _load(raw):
+    def pairs(items):
+        out = {}
+        for key, value in items:
+            if key in out: raise ValueError('Duplicate local snapshot field')
+            out[key] = value
+        return out
+    return json.loads(raw, object_pairs_hook=pairs)
+
+def local_snapshot(reference, source_sha=None, release=None):
+    if type(reference) is not dict or set(reference) != {'mode', 'path', 'sha256'} or reference['mode'] != MODE:
+        raise ValueError('Malformed local sealed reference')
+    path = Path(reference['path'])
+    if not path.is_absolute() or path.name != 'LOCAL_SEALED_MANIFEST.json' or path.is_symlink():
+        raise ValueError('Invalid local snapshot manifest path')
+    root = path.parent.resolve(strict=True)
+    if root != STAGING and not (root.parent == PRODUCTION and re.fullmatch(r'v[0-9]+_local_[0-9a-f]{16}', root.name)):
+        raise ValueError('Local snapshot outside server owned science roots')
+    raw = path.read_bytes()
+    if not 0 < len(raw) <= 2000000 or _sha(raw) != reference['sha256']:
+        raise ValueError('Local snapshot manifest hash mismatch')
+    data = _load(raw)
+    if set(data) != {'schema','mode','release','source_sha256','seal_sha256','files','documents','evidence','historical_public_head'} or data['schema'] != SCHEMA or data['mode'] != MODE:
+        raise ValueError('Invalid local snapshot schema')
+    if not re.fullmatch(r'v[0-9]+', data['release']) or any(not re.fullmatch('[0-9a-f]{64}', str(data[k])) for k in ('source_sha256','seal_sha256')):
+        raise ValueError('Local snapshot identity missing')
+    if source_sha is not None and source_sha != data['source_sha256'] or release is not None and release != data['release']:
+        raise ValueError('Mixed local snapshot identity')
+    if set(data['documents']) != DOCUMENT_IDS or set(data['evidence']) != EVIDENCE_KEYS:
+        raise ValueError('Local snapshot scientific allowlist differs')
+    for name, item in data['files'].items():
+        rel = Path(name)
+        if rel.is_absolute() or '..' in rel.parts or rel.suffix not in {'.py','.json','.md','.txt','.tex','.lean','.toml',''} or any(x.casefold() in {'.env','iald_stack_v7.py','iald_psion_state.json','tgl_atlas.md','iald_users.json'} for x in rel.parts):
+            raise ValueError('Disallowed local scientific member')
+        if type(item) is not dict or set(item) != {'sha256','bytes'} or not re.fullmatch('[0-9a-f]{64}',str(item['sha256'])) or type(item['bytes']) is not int or not 0 < item['bytes'] <= 64000000:
+            raise ValueError('Malformed local member pin')
+    for role in ('documents','evidence'):
+        if any(name not in data['files'] for name in data[role].values()): raise ValueError('Unpinned local scientific reference')
+    # The manifest itself is pinned by server configuration; the seal then binds
+    # the selected program, result and formal report to the same actual bytes.
+    seal_path = root/data['evidence']['seal']
+    seal_raw = check_member((root,data),seal_path,seal_path.read_bytes())
+    seal = _load(seal_raw)
+    if _sha(seal_raw) != data['seal_sha256'] or seal['um_version'] != data['release'] or seal['fail_closed_selftest'] != 'FAIL_CLOSED_SELFTEST_PASSED':
+        raise ValueError('Local seal identity mismatch')
+    for key in ('program','result','proof_manifest'):
+        name = data['evidence'][key]
+        if seal['sha256'].get(Path(name).name) != data['files'][name]['sha256']: raise ValueError('Local seal member mismatch')
+    if data['files'][data['evidence']['program']]['sha256'] != data['source_sha256']: raise ValueError('Local source identity mismatch')
+    return root,data
+
+def check_member(snapshot, path, raw):
+    root,data = snapshot
+    path = Path(path)
+    if not path.is_absolute() or path.is_symlink(): raise ValueError('Invalid local member path')
+    resolved = path.resolve(strict=True)
+    if not resolved.is_relative_to(root): raise ValueError('Local member escaped snapshot')
+    name = resolved.relative_to(root).as_posix()
+    pin = data['files'].get(name)
+    if pin is None or pin['bytes'] != len(raw) or pin['sha256'] != _sha(raw): raise ValueError('Local member bytes mismatch')
+    return raw
+
+def check_document(snapshot, entry, raw):
+    root,data = snapshot
+    ident = entry['id']
+    if ident not in DOCUMENT_IDS or entry.get('url') not in ('',None) or entry.get('source_scope') != MODE:
+        raise ValueError('Local/public document provenance mixed')
+    if Path(entry['path']).resolve(strict=True) != (root/data['documents'][ident]).resolve(strict=True): raise ValueError('Local document identity mismatch')
+    if entry.get('public_sha256') != _sha(raw): raise ValueError('Legacy digest slot differs from local pin')
+    return check_member(snapshot,entry['path'],raw)
