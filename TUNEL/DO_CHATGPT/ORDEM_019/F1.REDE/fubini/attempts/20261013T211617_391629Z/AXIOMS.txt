@@ -1,0 +1,49 @@
+MeasureTheory.Lp.memLp.{u_1, u_4} {α : Type u_1} {E : Type u_4} {m : MeasurableSpace α} {p : ℝ≥0∞} {μ : Measure α}
+  [NormedAddCommGroup E] (f : ↥(Lp E p μ)) : MemLp (↑↑f) p μ
+MeasureTheory.memLp_two_iff_integrable_sq_norm.{u_1, u_2} {α : Type u_1} {F : Type u_2} {m : MeasurableSpace α}
+  {μ : Measure α} [NormedAddCommGroup F] {f : α → F} (hf : AEStronglyMeasurable f μ) :
+  MemLp f 2 μ ↔ Integrable (fun x => ‖f x‖ ^ 2) μ
+MeasureTheory.Integrable.prod_left_ae.{u_1, u_2, u_3} {α : Type u_1} {β : Type u_2} {E : Type u_3} [MeasurableSpace α]
+  [MeasurableSpace β] {μ : Measure α} {ν : Measure β} [NormedAddCommGroup E] [SFinite ν] [SFinite μ] ⦃f : α × β → E⦄
+  (hf : Integrable f (μ.prod ν)) : ∀ᵐ (y : β) ∂ν, Integrable (fun x => f (x, y)) μ
+MeasureTheory.Integrable.prod_right_ae.{u_1, u_2, u_3} {α : Type u_1} {β : Type u_2} {E : Type u_3} [MeasurableSpace α]
+  [MeasurableSpace β] {μ : Measure α} {ν : Measure β} [NormedAddCommGroup E] [SFinite ν] [SFinite μ] ⦃f : α × β → E⦄
+  (hf : Integrable f (μ.prod ν)) : ∀ᵐ (x : α) ∂μ, Integrable (fun y => f (x, y)) ν
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:16:7: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.StronglyMeasurable.prodMk_right`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:17:7: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.StronglyMeasurable.prodMk_left`
+MeasureTheory.integral_prod_symm.{u_1, u_2, u_3} {α : Type u_1} {β : Type u_2} {E : Type u_3} [MeasurableSpace α]
+  [MeasurableSpace β] {μ : Measure α} {ν : Measure β} [NormedAddCommGroup E] [SFinite ν] [NormedSpace ℝ E] [SFinite μ]
+  (f : α × β → E) (hf : Integrable f (μ.prod ν)) : ∫ (z : α × β), f z ∂μ.prod ν = ∫ (y : β), ∫ (x : α), f (x, y) ∂μ ∂ν
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:19:7: error(lean.unknownIdentifier): Unknown identifier `L2.norm_sq_eq_integral`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:20:7: error(lean.unknownIdentifier): Unknown identifier `L2.norm_sq_eq_integral_norm_sq`
+MeasureTheory.Lp.norm_def.{u_1, u_4} {α : Type u_1} {E : Type u_4} {m : MeasurableSpace α} {p : ℝ≥0∞} {μ : Measure α}
+  [NormedAddCommGroup E] (f : ↥(Lp E p μ)) : ‖f‖ = (eLpNorm (↑↑f) p μ).toReal
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:22:7: error(lean.unknownIdentifier): Unknown identifier `measurable_of_measurable_dist`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:23:7: error(lean.unknownIdentifier): Unknown identifier `measurable_of_measurable_dist_countable`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:24:7: error(lean.unknownIdentifier): Unknown identifier `measurable_of_measurable_edist`
+Measurable.stronglyMeasurable.{u_1, u_2} {α : Type u_1} {β : Type u_2} {f : α → β} {mα : MeasurableSpace α}
+  [MeasurableSpace β] [TopologicalSpace β] [TopologicalSpace.PseudoMetrizableSpace β] [SecondCountableTopology β]
+  [OpensMeasurableSpace β] (hf : Measurable f) : StronglyMeasurable f
+MeasureTheory.Lp.SecondCountableTopology.{u_1, u_2} {X : Type u_1} {E : Type u_2} [m : MeasurableSpace X]
+  [NormedAddCommGroup E] {μ : Measure X} {p : ℝ≥0∞} [one_le_p : Fact (1 ≤ p)] [p_ne_top : Fact (p ≠ ∞)]
+  [MeasureTheory.IsSeparable μ] [TopologicalSpace.SeparableSpace E] : SecondCountableTopology ↥(Lp E p μ)
+MeasureTheory.MemLp.toLp.{u_1, u_4} {α : Type u_1} {E : Type u_4} {m : MeasurableSpace α} {p : ℝ≥0∞} {μ : Measure α}
+  [NormedAddCommGroup E] (f : α → E) (h_mem_ℒp : MemLp f p μ) : ↥(Lp E p μ)
+MeasureTheory.MemLp.coeFn_toLp.{u_1, u_4} {α : Type u_1} {E : Type u_4} {m : MeasurableSpace α} {p : ℝ≥0∞}
+  {μ : Measure α} [NormedAddCommGroup E] {f : α → E} (hf : MemLp f p μ) : ↑↑(MemLp.toLp f hf) =ᵐ[μ] f
+MeasureTheory.lintegral_prod_symm.{u_1, u_2} {α : Type u_1} {β : Type u_2} [MeasurableSpace α] [MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] [SFinite μ] (f : α × β → ℝ≥0∞) (hf : AEMeasurable f (μ.prod ν)) :
+  ∫⁻ (z : α × β), f z ∂μ.prod ν = ∫⁻ (y : β), ∫⁻ (x : α), f (x, y) ∂μ ∂ν
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:30:7: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.AEStronglyMeasurable.integral_prod_left'`
+MeasureTheory.StronglyMeasurable.integral_prod_left'.{u_1, u_2, u_3} {α : Type u_1} {β : Type u_2} {E : Type u_3}
+  [MeasurableSpace α] [MeasurableSpace β] {μ : Measure α} [NormedAddCommGroup E] [NormedSpace ℝ E] [SFinite μ]
+  ⦃f : α × β → E⦄ (hf : StronglyMeasurable f) : StronglyMeasurable fun y => ∫ (x : α), f (x, y) ∂μ
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:40:18: error: Application type mismatch: The argument
+  Integrable.prod_right_ae hint
+has type
+  ∀ᵐ (x : α) ∂μ, Integrable (fun y => ‖↑↑f (x, y)‖ ^ 2) ν
+but is expected to have type
+  ?m.63 ∈ ae ν
+in the application
+  mp_mem (Integrable.prod_right_ae hint)
+'F1Rede.memLp_section_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

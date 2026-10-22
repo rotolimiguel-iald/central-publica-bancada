@@ -1,0 +1,83 @@
+{
+ "created_utc": "2026-09-23T09:36:52.372284Z",
+ "auditor": "Claude (gerencia) — frente E3.1/E3.2/E3.3 da ORDEM 013-bis",
+ "runtime": "/opt/lal_env read-only: python 3.12.3, lal 7.7.1, lalsimulation 6.2.1 (lalsuite 7.26.15), numpy 2.5.3, bilby 2.8.2, dynesty 3.1.0, WSL2 6.18.33.2; 48 cores, 125 GB RAM",
+ "measured": {
+  "waveform_dtau220_-0.02_ref_source(39+33,0.05/-0.03,403Mpc)": "FINITE at 4096 and 8192 Hz (direct LAL) and via bilby lal_binary_black_hole at fmax 1024/2048/4096; 0.06-0.08 s per call; dtau=0 and SEOBNRv4HM_PA also FINITE",
+  "bench_DRAW8_exact": "direct 4096/8192: abort rc-6; bilby fmax 2048/4096: abort rc-6; bilby fmax1024: EDOM (Nyquist check on GR 550 hides the abort). With dtau440=0 -> FINITE; dtau220=0 (dtau440 kept) -> abort; domega=0 -> abort; all deformations 0 -> FINITE",
+  "mechanism_source": "LALSimIMRSpinAlignedEOB.c:2060-2075 (buffer grows only if dtau220>0, by 20(1+dtau220)/Im w22/dt) + LALSimIMREOBHybridRingdown.c:1081,1263-1267,1393-1396 (Nrdwave of the 44 mode scales with (1+dtau440); write signal[i+indAmax] without bound check)",
+  "wall_rule_measured": "crash iff (1+dtau440) > c * max(1, 1+dtau220), c in (2.0,2.1] on REF, DRAW8, HIGHMASS(90+80), LOWMASS(20+12), HIGHSPIN(0.95/0.9); c in (2.1,2.2] on NEGSPIN(-0.9/-0.9); i.e. dtau440 <= 1.0 is safe for every dtau220 >= -0.8 tested",
+  "prior_scans_n120_seed132203": {
+   "registered_box_bilby_fmax1024": "37 crash / 3 EDOM / 80 finite (30.8% crash)",
+   "registered_box_direct_4096": "39 crash / 81 finite (32.5%)",
+   "narrow_box_|d|<=0.5_bilby": "0 crash / 3 EDOM / 117 finite",
+   "GR_only_bilby": "0 crash / 3 EDOM / 117",
+   "only220_variant(dtau440=domega440=0)_direct4096": "0 crash / 120 finite",
+   "dtau440<=1.0_box_direct4096": "0 crash / 120 finite"
+  },
+  "replay_exact_pilot_sequence_seed132203": "first 8 draws identical to bench PRIOR_REPLAY.json; draws 2 and 8 EDOM (the two logged warnings); draws 1-15 otherwise FINITE; draw 16 (m1 89.50, m2 55.60, chi -0.66/-0.81, dtau220 -0.7826, dtau440 2.6785, ratio 2.78) aborts rc-6 through the pilot path at fmax 1024 -> identifies the crash draw (pilot showed rc-11: same heap corruption, different manifestation [DERIVED])",
+  "P_no_crash_512_live_points": "0.69^512 ~ 1e-83: the pilot could not have initialised under the registered box regardless of retries"
+ },
+ "files": {
+  "REPRO_RESULTS.jsonl": {
+   "sha256": "8597689e39bc3fab5d5cc6afb7c9b3c25fb71755e2dc98e0764b2e60f67844b7",
+   "bytes": 16582
+  },
+  "REPRO_fine.jsonl": {
+   "sha256": "8891d52315b563cc4e8eb64e1ec7cfed3e463b131453ca1d6224724ca580d1cb",
+   "bytes": 31777
+  },
+  "REPRO_grid.jsonl": {
+   "sha256": "c99a8a5b36e9d001e74b38f54aa5ef2482f23310b13a982f720e756cb0dcd5db",
+   "bytes": 27596
+  },
+  "REPRO_replay.jsonl": {
+   "sha256": "493665e9d24ecb2de04426898bda2d61e42f4e8ecf31d96aff500efbf3116732",
+   "bytes": 3723
+  },
+  "REPRO_scan_220only.jsonl": {
+   "sha256": "58a7b523910567e947341ba4ef000da7d0eedd2a2399d5d05fa453b30b071b07",
+   "bytes": 44510
+  },
+  "REPRO_scan_d44le1.jsonl": {
+   "sha256": "8ef89427c1b13d046d8a2b37401c338d8856b19aafe3331817ca0d363cb8289f",
+   "bytes": 44362
+  },
+  "REPRO_scan_gr.jsonl": {
+   "sha256": "fee4f0d9d15efc2bc133b32b1af9b64582ea0df2bebc70cb56840f279c8850e9",
+   "bytes": 38697
+  },
+  "REPRO_scan_narrow.jsonl": {
+   "sha256": "2e347d18d3c332a898b8267aaa25044fdd28a642a4a3c9b36554ba282132016a",
+   "bytes": 38579
+  },
+  "REPRO_scan_registered.jsonl": {
+   "sha256": "1eddc1dd2f0c2d9d0ac64238ca46dbe5558f43ca5182d4674caf769c8dc04e75",
+   "bytes": 64005
+  },
+  "REPRO_scan_registered_direct4096.jsonl": {
+   "sha256": "58c1eef6caef619b0de6625d9efd794cdd3f3d539fa2e35ca98322a822b14baa",
+   "bytes": 68374
+  },
+  "run_repro.py": {
+   "sha256": "69f7178e281ebc5f32fc0d32bf1c90e91c3fe6077dece6c2f8e6dad94dcd883c",
+   "bytes": 9035
+  },
+  "wf_case.py": {
+   "sha256": "1e1cad6f34fa67e11dbee1f396ab0a1040381d6eed3de6549e3d2b0677a0daca",
+   "bytes": 3935
+  },
+  "grid_stage.py": {
+   "sha256": "208dc563abccfe004a1a1c68dc225e7d188ecc6058c72ae986012b2b02803c7e",
+   "bytes": 1721
+  },
+  "fine_stage.py": {
+   "sha256": "6173298e9fcc6f25d59ec723819e0895749c6dcfe148638867f2cf3e5585a995",
+   "bytes": 1732
+  },
+  "replay_stage.py": {
+   "sha256": "1fc848a5f2c236c60af838b96344a97671189bd49cf5b90af695e57694330cdc",
+   "bytes": 3340
+  }
+ }
+}

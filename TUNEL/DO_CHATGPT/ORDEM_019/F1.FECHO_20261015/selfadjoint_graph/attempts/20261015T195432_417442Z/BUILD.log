@@ -1,0 +1,56 @@
+{
+  "start_utc": "2026-10-15T19:54:32.477707+00:00",
+  "end_utc": "2026-10-15T19:54:48.325755+00:00",
+  "seconds": 15.848021800004062,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-R",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195432_417442Z",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195432_417442Z\\BoundedGraphSelfAdjointR3.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195432_417442Z\\BoundedGraphSelfAdjointR3.lean"
+  ],
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195432_417442Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1
+}
+STDOUT
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195432_417442Z\BoundedGraphSelfAdjointR3.lean:31:44: error: linarith failed to find a contradiction
+case h2
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A B : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hAB : A * B = B * A
+hAi : Function.Injective ⇑A
+u v : H
+h0 : A u + B v = 0
+h1 : A v = B u
+hc : ∀ (x : H), A (B x) = B (A x)
+hu : A u = -B v
+hdouble : A (A u) + B (B u) = 0
+hi : inner ℂ (A u) (A u) + inner ℂ (B u) (B u) = 0
+hr : (inner ℂ (A u) (A u)).re + (inner ℂ (B u) (B u)).re = 0
+a✝ : 0 < ‖A u‖
+⊢ False
+failed
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195432_417442Z\BoundedGraphSelfAdjointR3.lean:30:28: warning: This simp argument is unused:
+  inner_self_eq_norm_sq
+
+Hint: Omit it from the simp argument list.
+  simp only [̵C̵o̵m̵p̵l̵e̵x̵.̵a̵d̵d̵_̵r̵e̵,̵i̵n̵n̵e̵r̵_̵s̵e̵l̵f̵_̵e̵q̵_̵n̵o̵r̵m̵_̵s̵q̵,̵C̵o̵m̵p̵l̵e̵x̵.̵z̵e̵r̵o̵_̵r̵e̵]̵[̲C̲o̲m̲p̲l̲e̲x̲.̲a̲d̲d̲_̲r̲e̲,̲ ̲C̲o̲m̲p̲l̲e̲x̲.̲z̲e̲r̲o̲_̲r̲e̲]̲ at hr
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.BoundedGraphSelfAdjoint.adjoint_graph_le_of_bounded_pair' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.BoundedGraphSelfAdjoint.selfAdjoint_of_bounded_pair' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+
+STDERR

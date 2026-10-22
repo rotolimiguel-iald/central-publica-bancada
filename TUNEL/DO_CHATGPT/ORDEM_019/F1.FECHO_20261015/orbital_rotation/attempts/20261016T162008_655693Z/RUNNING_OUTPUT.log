@@ -1,0 +1,52 @@
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 132ms
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 111ms
+import took 34.7s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T162008_655693Z\NullFrequencyAETransportR1.lean:29:4: error(lean.unknownIdentifier): Unknown constant `differentiable_const.add`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T162008_655693Z\NullFrequencyAETransportR1.lean:34:2: error: Type mismatch: After simplification, term
+  Differentiable.sub (Differentiable.sqrt hbase hnonzero) differentiable_id
+ has type
+  @Differentiable ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.normedAddCommGroup.toAddCommGroup
+    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace ℝ
+    Real.normedAddCommGroup.toAddCommGroup RCLike.toInnerProductSpaceReal.toModule
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace ((fun y => √(r ^ 2 + y ^ 2)) - id)
+but is expected to have type
+  @Differentiable ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.instAddCommGroup Semiring.toModule
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace ℝ Real.instAddCommGroup Semiring.toModule
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace fun p => √(r ^ 2 + p ^ 2) - p
+ring took 147ms
+interpretation of Mathlib.Tactic._aux_Mathlib_Tactic_Linarith_Frontend___elabRules_Mathlib_Tactic_nlinarith_1._boxed took 250ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T162008_655693Z\NullFrequencyAETransportR1.lean:47:4: error: Type mismatch: After simplification, term
+  himage
+ has type
+  @Eq ℝ≥0∞ (volume ((fun p => energy r p - p) '' {p | ¬P p})) 0
+but is expected to have type
+  @Eq ℝ≥0∞ (volume {a | ∃ x, ¬P x ∧ energy r x - x = a}) 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T162008_655693Z\NullFrequencyAETransportR1.lean:64:4: error(lean.unknownIdentifier): Unknown identifier `ae_ae_of_ae_prod`
+'F1Fecho.NullFrequency.shell_null_differentiable' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.NullFrequency.inverseLongitudinal_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.NullFrequency.orbital_ae_nullMomentum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.NullFrequency.orbital_aeEq_nullMomentum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.047ms
+	blocked (unaccounted) 626ms
+	congr simp thm 1.13ms
+	dsimp 4.99ms
+	elaboration 22.9ms
+	fix level params 0.146ms
+	import 34.7s
+	initialization 31.2ms
+	instantiate metavars 0.252ms
+	interpretation 7.4s
+	let-to-have transformation 0.0774ms
+	linting 5.95ms
+	norm_num 3.68ms
+	overlappingInstancesLinter 13.1ms
+	parsing 3.99ms
+	process pre-definitions 1.82ms
+	ring 150ms
+	share common exprs 1.18ms
+	simp 59.3ms
+	tactic execution 92.1ms
+	tacticAnalysis 22.7ms
+	type checking 17.7ms
+	typeclass inference 212ms

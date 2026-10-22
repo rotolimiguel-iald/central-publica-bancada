@@ -1,0 +1,61 @@
+R66 — ligação dinâmica do reservatório ao dispositivo bosônico e à rede existente
+Autor: codex-gerente-tgl. Unidade F1.FECHO_20261015, reivindicação956, 18/10/2026.
+Estatuto inicial: DERIVED, demonstração matemática em texto sujeita à revisão independente; não é novo termo Lean.
+
+1. Objeto, unidades e reaproveitamento
+Usamos H=Γ_s(C²)⊗C²_OH, com base |n_i,n_o,e>, n_i,n_o∈N e e∈{0,1}. a_i,a_o são aniquiladores BOSÔNICOS ordinários, com fatores sqrt(n), sobre o domínio de partículas finitas. Não são os operadores hardcore do corte8dimR62/R64. σ_-|1>=|0>, σ_+|0>=|1>, Z=diag(1,-1). h=H_físico/ℏ tem unidades s^-1; os testes usam as unidades adimensionais e entradas já pinadas emR62. A conversão física permanece comoR65.
+
+h_0=ω_c(n_i+n_o)+ω_OH n_e+g(a_i†σ_-+σ_+a_i), n_e=σ_+σ_-;
+h_d=Ω(σ_++σ_-), Ω real; h=h_0+h_d.
+L=(sqrt(κ_i)a_i, sqrt(κ_o)a_o, sqrt(γ_OH)σ_-, sqrt(γ_φ)Z, sqrt(λ)J),
+J=A+B=a_o†σ_-+σ_+a_i, λ=βγ_Λ, β=ALPHA_FINE_CODATA_2018 sqrt(e) em runtime.
+Todas as taxas são finitas e não negativas; nenhuma taxa física é calibrada por esta construção.
+G(X)=-i[h,X]+Σ_j(L_j X L_j†-{L_j†L_j,X}/2).
+R64 já construiu instrumento de saída de duas portas sob dilataçãoHP escolhida; R65 fixou normalização, relógio e identificabilidade. Preservamos esses contratos. A nova construção finita de colisões explicita uma realização do reservatório, não demonstra que todo banho microscópico da patente a realiza.
+
+2. Estrutura que permite retirar o corte — prova algébrica
+N=n_i+n_o+n_e, P_m=1_[0,m](N), dimP_mH=(m+1)².
+[N,h_0]=[N,J]=[N,Z]=0; a_i,a_o,σ_- baixamN por1.
+Em particular A e B preservamN separadamente. A†B=B†A=0, mas A X B†+B X A† não é zero como superoperador: usar dois canais independentes muda G.
+J†J=(n_o+1)n_e+n_i(1-n_e)≤N. Cada L_j†L_j comutaN.
+Logo h_0 e todos L_j preservamP_mH, e L_j†L_j P_m=P_m L_j†L_j P_m. Embora L_j† isolado possa sair deP_m, seu produto L_j†L_j não sai.
+
+3. Construção conservativa sem bombeamento — não supor um limite
+Seja G_0,m o gerador matricial acima semh_d, com os operadores comprimidos P_m L_j P_m e P_m h_0 P_m. Para m≤n, E_mn:X↦V_mn X V_mn† é a inclusão pelos MESMOS vetores de número. Para TODO X∈T1(P_mH), inclusive |u><v| entre excitações diferentes,
+G_0,n E_mn(X)=E_mn G_0,m(X).
+Prova: o termo de salto usa invariânciaP_m; o anticomutador usa o produto L†L que comutaN; h_0 é redutor. A identidade vale em cada matriz-unitária, logo em todoX. Exponenciando matrizes, T_0,n(t)E_mn=E_mnT_0,m(t).
+Defina D_0=∪_m P_m T1(H) P_m. O sistema compatível define T_0(t) emD_0, sem escolha de corte. Cada T_0,m é CPTP; sua norma T1→T1 é1, inclusive sobre matrizes complexas, pela dualidade com uma aplicação unital completamente positiva. D_0 é denso emT1(H), pois ||X-P_mXP_m||_1→0. Portanto T_0(t) estende UNICAMENTE por continuidade a T1(H). É semigrupo: a identidade de composição passa por densidade. É fortemente contínuo: vale em cada corte e a contração controla o erro de aproximação. Traço e positividade passam ao limite; positividade completa é conferida do mesmo modo em cada amplificação finita. Não há perda de massa nem hipótese adicional de não explosão.
+Se A_0 é o gerador fechado dessa extensão, D_0 é core em norma de gráfico: para z>0, R(z,A_0)Y=∫exp(-zt)T_0(t)Ydt pertence ao mesmo corte queY∈D_0; dado X∈D(A_0), aproxime Y=(z-A_0)X por Y_m∈D_0. X_m=R(z,A_0)Y_m∈D_0 satisfaz X_m→X e A_0X_m=zX_m-Y_m→A_0X. EmD_0, A_0 é exatamente a fórmula GKLS acima sem bomba.
+
+4. Bombeamento no MESMO gerador ilimitado
+B(X)=-i[h_d,X] é limitado emT1, ||B||≤2|Ω|. A perturbação limitada define A=A_0+B emD(A_0), comD_0 ainda core. Uma construção explícita é a série de Dyson-Phillips:
+T^(0)(t)=T_0(t), T^(k+1)(t)=∫_0^t T_0(t-s) B T^(k)(s)ds;
+T(t)=Σ_k T^(k)(t), ||T^(k)(t)||≤(2|Ω|t)^k/k!.
+A série converge em norma de operadores em intervalos compactos e resolve a equação integral de Duhamel, identificando seu gerador A. O produto de Lie-Trotter [T_0(t/n) Ad(exp(-i h_d t/n))]^n converge fortemente aT(t): consistência emD_0, estabilidade porcontração e o teorema de produto para perturbação limitada. Cada fator éCPTP; logoT(t) éCPTP e conservativo. Este último passo é aplicaçãoKNOWN da teoria de semigrupos, não uma compilaçãoLean. A construção deD_0/core e a especialização aos operadores deste aparelho sãoDERIVED aqui.
+Não se afirma queD_0 seja invariante porT(t) completo: a bomba pode povoar arbitrariamente muitos setores.
+
+5. Aproximação finita controlada também COM bomba
+Se X=P_m0 X P_m0 e m≥m0, a expansão Dyson no cortem, com h_d,m=P_m h_d P_m, coincide com a expansão infinita até a ordem k=m-m0. Cada aplicação deB aumenta no máximo1 o suporte total, enquanto T_0 não aumenta o suporte. As duas caudas dão, após inclusão no espaço comum,
+||T(t)X-E_m T_m(t)X||_1 ≤ 2||X||_1 Σ_(k=m-m0+1)^∞ (2|Ω|t)^k/k!.
+Para comparar dois cortes m<n sobre o mesmoX, vale A MESMA cota com o menor m: os termos iniciais coincidem, cada cauda é limitada. Esta é cota analítica conservadora, não erro estatístico. T_m inclui todos os cinco dissipadores, Jaynes-Cummings e a bomba. Não são os antigos cortes independentes0/1.
+Para ρ positiva de momentoN finito, a relação formal adjunta é
+G†N=-κ_i n_i-κ_o n_o-γ_OH n_e+iΩ(σ_--σ_+)≤|Ω|I.
+A desigualdade de expectativa <N>_t≤<N>_0+|Ω|t segue porTrotter e semicontinuidade/Fatou: o fatorsem bomba reduzN, o fatorunitárioOH aumenta sua expectativa no máximo|Ω|Δt. Não se usa uma troca não justificada de limite e operadorilimitado para provar conservatividade.
+
+6. Ponte ao Fock já construído — além dos quatro vetores0/1
+Escolham fi,fo∈H1 ortonormais, como já admitido emR63. Para n_i+n_o=n, usem os tensores simétricos normalizados
+v_(n_i,n_o)=sqrt(n!/(n_i!n_o!)) Sym(fi^⊗n_i⊗fo^⊗n_o),
+onde Sym é a média das n! permutações. Sua norma é1 e vetores de ocupações distintas são ortogonais: entre termos permutados só sobrevivem as n_i!n_o! permutações que preservam os rótulos. Setoresn distintos já são ortogonais no Fock existente.
+O mapa V∞|n_i,n_o,e>=v_(n_i,n_o)⊗|e> estende a uma isometria de H numa subestrutura fechada S⊗C² deF1Rede.BosonicFock.F⊗C². Reaproveita os setores simétricos e sua somaHilbert; não recompila nem declara novos teoremasLean. Não necessita identificar aqui um fator espectador por um teorema de fatorização ainda não localizado.
+No domínio de partículas finitas, os aniquiladores nas direçõesfi/fo dão os coeficientes sqrt(n_i),sqrt(n_o). Logo V∞ entrelaça h_0,h_d e os cincoL_j com seus operadores sobreS; os domínios fechados são transportados porV∞. O coreD_0 e o semigrupo construído dão então a identidade dinâmica
+T_S(t)(V∞ X V∞†)=V∞ T(t)(X) V∞†.
+Isto realiza a dinâmica bosônica de dois modos eOH na estruturaFock existente, não apenas transporta uma trajetória semgerador. Não identifica essa dinâmica com a representação de translações livres nem com o gerador modular de uma cunha.
+
+7. Covariância de família e resíduo espacial precisamente tipado
+A segunda quantização gamma(u) já disponível transporta v_(n_i,n_o)(fi,fo) em v_(n_i,n_o)(ufi,ufo). Assim W_u=gamma(u)⊗I_OH entrelaça o dispositivo na dupla(fi,fo) com o dispositivo transportado(ufi,ufo), com os coeficientes e relógio declarados mantidos: T_(ufi,ufo)(t) AdW_u=AdW_u T_(fi,fo)(t), sobre os respectivos setores fechados.
+É covariância da FAMÍLIA de modos e geradores, não invariância de um aparelho fixo sobtodoPoincaré e não uma lei relativística de transformação de seu relógio. Um g de Poincaré pode fornecer u pela representação existente; não se confunde g com g_JC.
+PermaneceOPEN a identificação de fi/fo e acoplamentos com subespaços localizados K(O)/álgebras locais da rede, a compatibilidade causal da interação/pump e o entrelaçamento com o relógio/gerador físico pretendido. Uma projeção em poucos modos não prova pertença a uma álgebra local. A realizaçãoHP temporal Γ(L²(R+;C5)) do banho e oFock(H1) espacial têm espaçosdeuma-partícula distintos; nenhum sinaldeigualdade entreeles foi presumido.
+O limitebosônico do sistema desta nota é obtido separadamente do limiteδ→0 das colisões emcada corte. Não afirmamos intercambiabilidade desses limites, convergência da unitáriaHP com coeficientesilimitados ou igualdade das saídasR64 no modeloinfinito sem estimativas adicionais de momentos.
+
+8. Falsificadores dirigidos e estatuto
+O scriptnovo verifica compatibilidade dos geradores em todos os blocos matriciais emdoiscortes sempump, conservaçãoN porJ e termoJaynes-Cummings, coeficientessqrt(n), CPTP/traço dos estados de cortes bombeados e a cotaDyson entrecortes. O controle que exige invariância de um corte COM bomba deve falhar; também deve falhar a identificação do hardcore com o aniquilador bosônico emn=2. Parâmetros, tempos, tolerâncias e hashes são fixados antesdeexecutar. Os resultadosnuméricos verificam implementações finitas; a extensãoinfinita é a demonstraçãoanalítica acima. Sem nova medida, ajusteβ, claimde5σ, confirmaçãofísica ou aceiteintegralR4/R5.

@@ -1,0 +1,80 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:65:0: warning: automatically included section variable(s) unused in theorem `F1Rede.measurableSet_good_sections`:
+  [SFinite ν]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite ν] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:75:0: warning: automatically included section variable(s) unused in theorem `F1Rede.sectionLp_dist`:
+  [SFinite μ]
+  [SFinite ν]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite μ] [SFinite ν] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:100:2: error: unsolved goals
+case neg
+α : Type u_1
+β : Type u_2
+E : Type u_3
+inst✝⁶ : MeasurableSpace α
+inst✝⁵ : MeasurableSpace β
+inst✝⁴ : NormedAddCommGroup E
+μ : Measure α
+ν : Measure β
+inst✝³ : SFinite μ
+inst✝² : SFinite ν
+inst✝¹ : MeasureTheory.IsSeparable μ
+inst✝ : TopologicalSpace.SeparableSpace E
+f : ↥(Lp E 2 (μ.prod ν))
+this : Fact (2 ≠ ∞) :=
+  {
+    out :=
+      of_eq_true
+        (Eq.trans
+          (Eq.trans (congrArg Not (Eq.trans ENNReal.ofNat_ne_top._simp_1 (eq_false not_false))) not_false_eq_true)
+          (eq_true True.intro)) }
+this✝¹ : MeasurableSpace ↥(Lp E 2 μ) := borel ↥(Lp E 2 μ)
+this✝ : BorelSpace ↥(Lp E 2 μ)
+g : ↥(Lp E 2 μ)
+hm : Measurable fun y => (eLpNorm (fun x => ↑↑f (x, y) - ↑↑g x) 2 μ).toReal
+y : β
+hy : ¬MemLp (fun x => ↑↑f (x, y)) 2 μ
+⊢ dist (if h : False then MemLp.toLp (fun x => ↑↑f (x, y)) ⋯ else 0) g = dist 0 g
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:85:66: error: unsolved goals
+α : Type u_1
+β : Type u_2
+E : Type u_3
+inst✝⁶ : MeasurableSpace α
+inst✝⁵ : MeasurableSpace β
+inst✝⁴ : NormedAddCommGroup E
+μ : Measure α
+ν : Measure β
+inst✝³ : SFinite μ
+inst✝² : SFinite ν
+inst✝¹ : MeasureTheory.IsSeparable μ
+inst✝ : TopologicalSpace.SeparableSpace E
+f : ↥(Lp E 2 (μ.prod ν))
+this : Fact (2 ≠ ∞) := ⋯
+this✝¹ : MeasurableSpace ↥(Lp E 2 μ) := ⋯
+this✝ : BorelSpace ↥(Lp E 2 μ)
+g : ↥(Lp E 2 μ)
+hm : Measurable fun y => (eLpNorm (fun x => ↑↑f (x, y) - ↑↑g x) 2 μ).toReal
+⊢ DecidablePred fun x => x ∈ {y | MemLp (fun x => ↑↑f (x, y)) 2 μ}
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:100:73: warning: This simp argument is unused:
+  dif_neg hy
+
+Hint: Omit it from the simp argument list.
+  simp only [Set.piecewise, Set.mem_setOf_eq, hy, if_false, sectionLp,̵ ̵d̵i̵f̵_̵n̵e̵g̵ ̵h̵y̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:105:0: warning: automatically included section variable(s) unused in theorem `F1Rede.norm_sq_integral`:
+  [SFinite μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+'F1Rede.memLp_section_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_coe_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.norm_sq_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_norm_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.norm_sq_disintegration' depends on axioms: [propext, Classical.choice, Quot.sound]

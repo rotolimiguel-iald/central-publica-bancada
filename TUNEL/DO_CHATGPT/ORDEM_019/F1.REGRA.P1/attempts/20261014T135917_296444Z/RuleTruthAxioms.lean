@@ -1,0 +1,24 @@
+import RuleTruthContract
+
+#print axioms TGLExt.RuleTruthContract.incompatible_not_admissible
+#print axioms TGLExt.RuleTruthContract.sound_subset_admissible
+#print axioms TGLExt.RuleTruthContract.admissible_is_sound
+#print axioms TGLExt.RuleTruthContract.admissible_is_complete
+#print axioms TGLExt.RuleTruthContract.sound_complete_iff
+#print axioms TGLExt.RuleTruthContract.sound_complete_eq_admissible
+#print axioms TGLExt.RuleTruthContract.sound_complete_unique
+#print axioms TGLExt.RuleTruthContract.admissible_retract_iff
+#print axioms TGLExt.RuleTruthContract.reading_iterate
+#print axioms TGLExt.RuleTruthContract.admissible_iterate_iff
+#print axioms TGLExt.RuleTruthContract.retract_iterate
+#print axioms TGLExt.RuleTruthContract.fixed_iff_in_range
+#print axioms TGLExt.RuleTruthContract.same_reading_admissible_iff
+#print axioms TGLExt.RuleTruthContract.admissible_iff_eq_of_injective
+#print axioms TGLExt.RuleTruthContract.reading_injective_preserving_eq_id
+#print axioms TGLExt.RuleTruthContract.firstRetraction_contract
+#print axioms TGLExt.RuleTruthContract.firstRetraction_nonvacuous
+#print axioms TGLExt.RuleTruthContract.same_reading_not_equal
+#print axioms TGLExt.RuleTruthContract.same_reading_does_not_force_equality
+#print axioms TGLExt.RuleTruthContract.wrongConstant_idempotent
+#print axioms TGLExt.RuleTruthContract.wrongConstant_never_admissible
+#print axioms TGLExt.RuleTruthContract.idempotence_does_not_force_target

@@ -1,0 +1,33 @@
+{
+  "id": "F4.3_220_PLUS_440_SHARED_SOURCE_V1",
+  "date_local": "2026-10-08",
+  "status": "PRE_REGISTERED_DESIGN__AWAITING_POWER__NO_DATA_OPENED",
+  "origin": "ORDEM_019_ADENDO_003_sec1; corrected_by_ADENDO_004_where_applicable",
+  "prior_route": "ringdown.modo_unico.degenerescencia",
+  "prior_route_seqs": [58, 87, 91],
+  "primary_comparison": ["GR_KERR_SHARED_MASS_SPIN", "R_B_BOTH_220_440_DEFORMED_INPUT"],
+  "required_controls": ["R_B_ONLY_220_DEFORMED", "CANONICAL_PLANCK_CLOCK_GR_CORRESPONDENCE", "GR_NULL_INJECTIONS", "R_B_SIGNAL_INJECTIONS", "WAVEFORM_FAMILY", "START_TIME", "PSD_OFF_SOURCE", "CATALOG_UNCERTAINTY", "DETECTOR_COVARIANCE"],
+  "source_constraint": "one shared final mass and spin for 220 and 440; project free amplitude, phase, onset and source nuisance",
+  "target_group": "existing Ramo B V1 set D: 14 O4 candidates; admission remains gated",
+  "nonblind_groups": ["A", "B", "C_GW250114"],
+  "fixed_beta_runtime": "ALPHA_FINE_CODATA_2018 * sqrt(e)",
+  "mode_440_deformation_status": "INPUT_NOT_DERIVED_FROM_KERNEL",
+  "local_diagnostic": "SVD of whitened nuisance Jacobian and eta=norm((I-WJ(WJ)^+)W(mu_B-mu_GR))^2 for 220 and 220+440",
+  "final_statistic": "joint profiled log-likelihood difference on same events, calibrated under each hypothesis; do not multiply marginal posteriors",
+  "global_one_sided_p_threshold": 2.8665e-7,
+  "minimum_detection_power": 0.9,
+  "power_before_data": {
+    "gw250114_proxy_z_440": 0.06,
+    "gw250114_rho_440_status": "INPUT_NOT_MEASURED_MODE_SNR",
+    "b2_fixed_source_o4_r_b_z_local": 0.409281,
+    "b2_fixed_source_o4_r_b_n90": 235.554,
+    "set_d_joint_free_source_power": null,
+    "set_d_power_status": "NOT_MEASURED_NO_DATA_OPENING"
+  },
+  "data_opening_authority": "operator gate in F4.3 after pinned power and controls; this artifact does not grant it",
+  "ordered_verdicts": ["AWAITING_POWER", "UNDERPOWERED_OR_NONIDENTIFIABLE", "INCONCLUSIVE_SYSTEMATICS", "FALSIFIED_PAIR_B_220_440_AT_5SIGMA", "FAVORS_PAIR_B_220_440_AT_5SIGMA", "NOT_FALSIFIED_POWERED"],
+  "forbidden": ["CONFIRMED", "QG_CONFIRMED", "GATE_MOVED"],
+  "no_observational_data_opened": true,
+  "no_gate_change": true,
+  "notes": "Conditional preregistration of R-B clock and INPUT 440 deformation. Fixed-source Fisher and GW250114 proxy are not power for set D."
+}

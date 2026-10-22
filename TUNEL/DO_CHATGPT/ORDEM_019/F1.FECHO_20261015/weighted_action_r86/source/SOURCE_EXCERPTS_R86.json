@@ -1,0 +1,114 @@
+[
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SectorFluidClosure.lean",
+    "sha256": "49b2d283b37c532dfd3699ba53420234895be8f553122e3803a0df7cf106f2ab",
+    "excerpts": [
+      {
+        "start": 21,
+        "end": 25,
+        "text": "21:   rho : ι → ℝ → ℝ\n22:   w : ι → ℝ\n23:   rho_nonneg : ∀ i t, t ∈ I → 0 ≤ rho i t\n24:   H_sector_nonexchange : ∀ i t, t ∈ I → HasDerivAt (rho i) (-3*H t*(1+w i)*rho i t) t\n25: "
+      },
+      {
+        "start": 32,
+        "end": 41,
+        "text": "32: def totalRho (F : SectorFluid ι I H) (t : ℝ) : ℝ := ∑ i, F.rho i t\n33: def totalPressure (F : SectorFluid ι I H) (t : ℝ) : ℝ := ∑ i, F.w i*F.rho i t\n34: def enthalpy (F : SectorFluid ι I H) (t : ℝ) : ℝ := ∑ i, (1+F.w i)*F.rho i t\n35: def wEff (F : SectorFluid ι I H) (t : ℝ) : ℝ := F.totalPressure t/F.totalRho t\n36: def correctedRho (F : SectorFluid ι I H) (c : TGLCoupling) (i : ι) (t : ℝ) : ℝ :=\n37:   (1+c.beta*(1+F.w i))*F.rho i t\n38: def correctedTotalRho (F : SectorFluid ι I H) (c : TGLCoupling) (t : ℝ) : ℝ :=\n39:   ∑ i, F.correctedRho c i t\n40: def correctedTotalPressure (F : SectorFluid ι I H) (c : TGLCoupling) (t : ℝ) : ℝ :=\n41:   ∑ i, F.w i*F.correctedRho c i t"
+      },
+      {
+        "start": 47,
+        "end": 54,
+        "text": "47: /-- Constant rescaling of the supplied non-exchange law, with the same w. -/\n48: theorem sector_rescaling_preserves_continuity (F : SectorFluid ι I H)\n49:     (c : TGLCoupling) (i : ι) (t : ℝ) (ht : t∈I) :\n50:     HasDerivAt (F.correctedRho c i)\n51:       (-3*H t*(1+F.w i)*F.correctedRho c i t) t := by\n52:   convert! (F.H_sector_nonexchange i t ht).const_mul (1+c.beta*(1+F.w i)) using 1\n53:   dsimp [correctedRho]\n54:   ring"
+      },
+      {
+        "start": 85,
+        "end": 102,
+        "text": "85: theorem corrected_rho_deriv (F : SectorFluid ι I H) (c : TGLCoupling)\n86:     (t : ℝ) (ht : t∈I) :\n87:     HasDerivAt (F.correctedTotalRho c)\n88:       (-3*H t*(F.correctedTotalRho c t+F.correctedTotalPressure c t)) t :=\n89:   F.weighted_continuity (fun i => 1+c.beta*(1+F.w i)) t ht\n90: \n91: theorem corrected_pressure_differentiable (F : SectorFluid ι I H)\n92:     (c : TGLCoupling) (t : ℝ) (ht : t∈I) :\n93:     DifferentiableAt ℝ (F.correctedTotalPressure c) t := by\n94:   exact (HasDerivAt.fun_sum (u := Finset.univ)\n95:     (fun i _ => (F.sector_rescaling_preserves_continuity c i t ht).const_mul (F.w i))).differentiableAt\n96: \n97: theorem corrected_continuity (F : SectorFluid ι I H) (c : TGLCoupling)\n98:     (t : ℝ) (ht : t∈I) :\n99:     deriv (F.correctedTotalRho c) t+\n100:       3*H t*(F.correctedTotalRho c t+F.correctedTotalPressure c t) = 0 := by\n101:   rw [(F.corrected_rho_deriv c t ht).deriv]\n102:   ring"
+      },
+      {
+        "start": 104,
+        "end": 126,
+        "text": "104: /-- Total positivity and nonnegative enthalpy are the exact domain of this reading. -/\n105: theorem effective_enthalpy (F : SectorFluid ι I H) (t : ℝ)\n106:     (hr : 0 < F.totalRho t) (he : 0 ≤ F.enthalpy t) :\n107:     F.totalRho t*|1+F.wEff t| = F.enthalpy t := by\n108:   have hw : 1+F.wEff t = F.enthalpy t/F.totalRho t := by\n109:     rw [F.enthalpy_eq]\n110:     unfold wEff\n111:     field_simp\n112:   rw [hw, abs_of_nonneg (div_nonneg he hr.le)]\n113:   field_simp\n114: \n115: theorem multiplicative_closure (F : SectorFluid ι I H) (c : TGLCoupling)\n116:     (t : ℝ) (hr : 0 < F.totalRho t) (he : 0 ≤ F.enthalpy t) :\n117:     F.correctedTotalRho c t = F.totalRho t*(1+c.beta*|1+F.wEff t|) := by\n118:   rw [F.corrected_closure, ← F.effective_enthalpy t hr he]\n119:   ring\n120: \n121: /-- The original three-sector providers remain the algebraic source of this specialization. -/\n122: theorem three_sector_closure (c : TGLCoupling) (rhoR rhoM rhoL : ℝ) :\n123:     (rhoR+rhoM+rhoL)+c.beta*((rhoR+rhoR/3)+(rhoM+0)+(rhoL+(-rhoL))) =\n124:       (1+4*c.beta/3)*rhoR+(1+c.beta)*rhoM+rhoL := by\n125:   rw [TGLExt.closure_identity c.beta rhoR rhoM rhoL]\n126:   exact TGLExt.hubble_form c.beta rhoR rhoM rhoL"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SectorFriedmann.lean",
+    "sha256": "eb14b2580046c7f77c06dad1b163fd0b6166d261cd90f4b2413a06fbedbbf28e",
+    "excerpts": [
+      {
+        "start": 22,
+        "end": 33,
+        "text": "22: theorem sector_covariant_conservation (I : Set ℝ) (a : ℝ → ℝ)\n23:     (F : SectorFluid ι I (flrwHubble a)) (c : TGLCoupling)\n24:     (x : Coordinate4) (ht : x 0∈I) (hz : a (x 0) ≠ 0)\n25:     (ha : DifferentiableAt ℝ a (x 0)) :\n26:     tensorFieldDivergence (metricInverse (flrwMetric a))\n27:       (leviCivitaField (flrwMetric a) (metricInverse (flrwMetric a)))\n28:       (flrwStress a (F.correctedTotalRho c) (F.correctedTotalPressure c)) x = 0 := by\n29:   rw [flrw_stress_divergence a _ _ x hz ha\n30:     (F.corrected_rho_deriv c (x 0) ht).differentiableAt\n31:     (F.corrected_pressure_differentiable c (x 0) ht),\n32:     F.corrected_continuity c (x 0) ht]\n33:   ext j"
+      },
+      {
+        "start": 37,
+        "end": 62,
+        "text": "37: theorem tgl_friedmann_from_sector_closure\n38:     (U : Set Coordinate4) (hU : IsOpen U) (hconn : IsPreconnected U)\n39:     (I : Set ℝ) (a : ℝ → ℝ) (F : SectorFluid ι I (flrwHubble a))\n40:     (c : TGLCoupling) (G : ℝ) (hG : 0 < G)\n41:     (ha : ∀ x∈U, ContDiffAt ℝ ∞ a (x 0)) (hpos : ∀ x∈U, 0 < a (x 0))\n42:     (hI : ∀ x∈U, x 0∈I)\n43:     (hr : ∀ x∈U, 0 < F.totalRho (x 0))\n44:     (he : ∀ x∈U, 0 ≤ F.enthalpy (x 0))\n45:     (H_null : ∀ x∈U, ∀ v, tensorQuad (flrwMetric a x) v = 0 →\n46:       tensorQuad (coordinateRicci (leviCivitaField (flrwMetric a) (metricInverse (flrwMetric a))) x-\n47:         (2*Real.pi/(1/(4*G))) •\n48:           flrwStress a (F.correctedTotalRho c) (F.correctedTotalPressure c) x) v = 0) :\n49:     ∃ cosmological : ℝ, ∀ x∈U,\n50:       (flrwHubble a (x 0))^2 = (8*Real.pi*G/3)*\n51:         F.totalRho (x 0)*(1+c.beta*|1+F.wEff (x 0)|)-cosmological/3 ∧\n52:       deriv (flrwHubble a) (x 0) = -4*Real.pi*G*\n53:         (F.correctedTotalRho c (x 0)+F.correctedTotalPressure c (x 0)) ∧\n54:       deriv (F.correctedTotalRho c) (x 0)+3*flrwHubble a (x 0)*\n55:         (F.correctedTotalRho c (x 0)+F.correctedTotalPressure c (x 0)) = 0 := by\n56:   have hc := flrw_newton_coefficient G hG\n57:   obtain ⟨cosmological, hF⟩ := flrw_friedmann_from_general_metric U hU hconn a\n58:     (F.correctedTotalRho c) (F.correctedTotalPressure c) (1/(4*G)) ha hpos\n59:     (fun x hx => (F.corrected_rho_deriv c (x 0) (hI x hx)).differentiableAt)\n60:     (fun x hx => F.corrected_pressure_differentiable c (x 0) (hI x hx))\n61:     H_null (fun x hx j => congrFun (sector_covariant_conservation I a F c x\n62:       (hI x hx) (hpos x hx).ne' ((ha x hx).differentiableAt (by simp))) j)"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\FLRWFieldEquations.lean",
+    "sha256": "5db1052c8fad79e2858715de70b7f2aef9691825d26e1c5f208a951c6299f6c8",
+    "excerpts": [
+      {
+        "start": 68,
+        "end": 74,
+        "text": "68: def flrwStress (a rho pressure : ℝ → ℝ) : TensorField4 := fun x =>\n69:   Matrix.diagonal ![rho (x 0), pressure (x 0)*(a (x 0))^2,\n70:     pressure (x 0)*(a (x 0))^2, pressure (x 0)*(a (x 0))^2]\n71: \n72: theorem flrw_stress_symmetric (a rho pressure : ℝ → ℝ) (x : Coordinate4) :\n73:     (flrwStress a rho pressure x)ᵀ = flrwStress a rho pressure x := by\n74:   simp [flrwStress]"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ScalarMatterDensityVariation.lean",
+    "sha256": "83f515e8d9444894c213b814617602d49e2753f09e7373b5909b60e297158345",
+    "excerpts": [
+      {
+        "start": 97,
+        "end": 118,
+        "text": "97: def scalarMatterDensity {J : Type} [Fintype J] (g : Tensor4) (w : J → Coordinate4) (c : J → ℝ) : ℝ :=\n98:   metricVolumeDensity g/2 * ∑ j, c j * tensorQuad g⁻¹ (w j)\n99: \n100: theorem scalar_density_raw_first_variation {J : Type} [Fintype J]\n101:     (g h : Tensor4) (w : J → Coordinate4) (c : J → ℝ) (hg : IsUnit g) :\n102:     HasDerivAt (fun t : ℝ => scalarMatterDensity (g+t • h) w c)\n103:       (metricVolumeDensity g/2*((h*g⁻¹).trace/2*∑ j, c j*tensorQuad g⁻¹ (w j))-\n104:         metricVolumeDensity g/2*∑ j, c j*tensorQuad (g⁻¹*h*g⁻¹) (w j)) 0 := by\n105:   have Hv := (metric_volume_first_variation g h hg).div_const 2\n106:   have Hq := HasDerivAt.fun_sum fun j (_ : j∈(Finset.univ : Finset J)) =>\n107:     (quadratic_inverse_first_variation g h (w j) hg).const_mul (c j)\n108:   convert! Hv.mul Hq using 1\n109:   simp only [zero_smul,add_zero,mul_neg,Finset.sum_neg_distrib]\n110:   ring\n111: \n112: def scalarMatterStress {J : Type} [Fintype J] (g : Tensor4) (w : J → Coordinate4) (c : J → ℝ) : Tensor4 :=\n113:   finiteCovectorStressField (fun _ => g) (fun _ => g⁻¹) (fun j _ => w j) (fun _ => 1) c 0\n114: \n115: theorem scalar_matter_stress_formula {J : Type} [Fintype J]\n116:     (g : Tensor4) (w : J → Coordinate4) (c : J → ℝ) :\n117:     scalarMatterStress g w c =\n118:       ∑ j, c j • (Matrix.vecMulVec (w j) (w j)-(tensorQuad g⁻¹ (w j)/2) • g) := by"
+      },
+      {
+        "start": 141,
+        "end": 152,
+        "text": "141: theorem scalar_matter_density_first_variation {J : Type} [Fintype J]\n142:     (g h : Tensor4) (w : J → Coordinate4) (c : J → ℝ) (hg : IsUnit g) :\n143:     HasDerivAt (fun t : ℝ => scalarMatterDensity (g+t • h) w c)\n144:       (-metricVolumeDensity g/2*((g⁻¹*h*g⁻¹)*scalarMatterStress g w c).trace) 0 := by\n145:   convert! scalar_density_raw_first_variation g h w c hg using 1\n146:   rw [stress_trace_variation g h w c hg]\n147:   ring\n148: \n149: theorem scalar_matter_density_raised_trace {J : Type} [Fintype J]\n150:     (g h : Tensor4) (w : J → Coordinate4) (c : J → ℝ) (hg : IsUnit g) :\n151:     HasDerivAt (fun t : ℝ => scalarMatterDensity (g+t • h) w c)\n152:       (-metricVolumeDensity g/2*(h*(g⁻¹*scalarMatterStress g w c*g⁻¹)).trace) 0 := by"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+    "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+    "excerpts": [
+      {
+        "start": 10349,
+        "end": 10384,
+        "text": "10349: \\paragraph{Acoplamento gravitacional não-mínimo.}\n10350: A peça gravitacional acopla $\\Psi$ ao escalar de Ricci $R$ via\n10351: \\begin{equation}\n10352: \\mathcal{L}_{\\text{grav}} \\;=\\; \\frac{1}{2\\kappa^{2}}\\,R\n10353: \\;+\\; \\xi \\, R \\, |\\Psi|^{2},\n10354: \\qquad\n10355: \\xi \\;=\\; \\tfrac{1}{6} \\quad (\\text{acoplamento conforme}),\n10356: \\end{equation}\n10357: com $\\kappa^{2} = 8\\pi G/c^{4}$.  O acoplamento conforme $\\xi = 1/6$ é\n10358: selecionado porque garante invariância sob transformações de Weyl no limite\n10359: de Bisognano-Wichmann, identificando $\\Psi$ como portadora natural do\n10360: gerador modular discretizado.  Este acoplamento é o que conecta a\n10361: \\emph{geometria} (lado esquerdo das equações de Einstein) com o\n10362: \\emph{operador de fronteira} (lado direito da equação de Lindblad).\n10363: \n10364: \\paragraph{Termo modular --- a peça operacional.}\n10365: A modificação \\TGL{} concentra-se inteiramente em\n10366: \\begin{equation}\n10367: \\boxed{\\;\n10368: \\mathcal{L}_{\\text{modular}} \\;=\\;\n10369: \\mathcal{L}_{\\Lambda\\text{CDM}} \\cdot \\betatgl \\cdot |1 + w_{\\text{eff}}(z)|,\n10370: \\;}\n10371: \\label{eq:Lmodular}\n10372: \\end{equation}\n10373: onde $w_{\\text{eff}}(z)$ é a equação de estado efetiva do conteúdo cósmico\n10374: em redshift $z$, e\n10375: \\begin{equation}\n10376: \\boxed{\\;\\betatgl \\;=\\; \\alpha \\cdot \\sqrt{e} \\;=\\; \"\"\" + beta_val + r\"\"\"\\;}\n10377: \\label{eq:beta-definition}\n10378: \\end{equation}\n10379: é a única constante invariante adimensional do programa.  As duas entradas\n10380: são $\\alpha = 7{,}2973525693 \\times 10^{-3}$ (constante de estrutura fina,\n10381: CODATA 2018) e $\\sqrt{e} = 1{,}6487212707\\ldots$ (matemática pura, sem\n10382: ambiguidade dimensional).  O termo~\\eqref{eq:Lmodular} se anula em estado\n10383: puro $w_{\\text{eff}} = -1$ (constante cosmológica) e satura em\n10384: $\\betatgl \\cdot |1+w|$ longe desse ponto.  O ângulo de Miguel emerge de"
+      },
+      {
+        "start": 13832,
+        "end": 13865,
+        "text": "13832: A modificação Friedmann \\TGL{}, derivada de~\\eqref{eq:Lmodular},\n13833: \\begin{equation}\n13834: H_{\\text{TGL}}^{2}(z) \\;=\\; H_{\\Lambda\\text{CDM}}^{2}(z)\n13835: \\cdot \\bigl[1 + \\betatgl \\cdot |1 + w_{\\text{eff}}(z)|\\bigr],\n13836: \\label{eq:H-TGL}\n13837: \\end{equation}\n13838: gera predições falsificáveis em $9$ sondas independentes catalogadas D1-D9.\n13839: \n13840: \\paragraph{$\\Lambda$CDM como limite estacionário da \\TGL{} (a ordem lógica).}\n13841: A leitura correta de~\\eqref{eq:H-TGL} não é ``$\\Lambda$CDM assumido $+$ correção'';\n13842: é o inverso: \\emph{$\\Lambda$CDM é o limite estacionário de fronteira silenciosa da\n13843: \\TGL}.  No atrator, $\\rho=\\rhostar$, a resposta de fronteira anula-se identicamente:\n13844: $\\Phi_\\beta(\\rhostar)=\\rhostar$ (verificado a $10^{-16}$; canal de espelhamento,\n13845: Seção~\\ref{sec:smatrix}) e $w_{\\text{eff}}=-1 \\Rightarrow |1+w_{\\text{eff}}|=0\n13846: \\Rightarrow H_{\\text{TGL}}\\equiv H_{\\Lambda\\text{CDM}}$ \\emph{exatamente}.  E a forma\n13847: do acoplamento não é arbitrária: pela equação da continuidade,\n13848: $\\dot\\rho/\\rho=-3H(1+w)$ --- $(1+w)$ \\emph{é} a taxa de não-estacionariedade do\n13849: estado de bulk --- de modo que a resposta de fronteira é proporcional à taxa com que\n13850: o bulk \\emph{foge} do atrator, anulando-se exatamente onde ele permanece ($w=-1$).\n13851: O estatuto de cada peça do acoplamento $\\betatgl|1+w_{\\text{eff}}|$:\n13852: (i)~\\emph{linearidade em $\\betatgl$} \\textbf{[REAL]} --- toda taxa de salto do gerador\n13853: de Davies é proporcional a $\\betatgl$ ($L=\\sqrt{\\betatgl}\\sqrt{\\Kpartial}\\Rightarrow\n13854: \\gamma_k=\\betatgl\\times$fator; impresso ao vivo em B.11.5), de modo que\n13855: $\\delta\\langle\\Kpartial\\rangle=\\betatgl\\,\\Xi(\\rho)+\\mathcal O(\\betatgl^2)$ é a ordem\n13856: perturbativa mínima, não uma escolha; (ii)~\\emph{proporcionalidade a $(1+w)$}\n13857: \\textbf{[REAL --- primeira lei/Jacobson, camada~II da ponte contínua]} --- o fluxo de\n13858: matéria através de um horizonte causal local é $T_{\\mu\\nu}\\xi^\\mu\\xi^\\nu\\propto(\\rho+p)\n13859: =\\rho(1+w)$, \\emph{zero exato} para $w=-1$: o vácuo não atravessa horizontes;\n13860: (iii)~\\emph{o módulo} \\textbf{[INPUT motivado]} --- a fronteira responde à\n13861: \\emph{magnitude} da fuga da permanência (a distinguibilidade de $\\rhostar$ é\n13862: não-negativa), não à orientação termodinâmica do fluxo. Com isto o setor\n13863: cosmológico fecha como \\textbf{teorema local}: fluxo nulo modular $\\Rightarrow\\rho+p\n13864: \\Rightarrow\\Xi_H=(\\rho+p)/\\rho=1+w\\Rightarrow\\betatgl|1+w|$ --- e a resposta de\n13865: fronteira é uma \\emph{função nomeada no motor} (\\texttt{tgl\\_boundary\\_response}), não"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selection_variation_r85\\selection\\ADENDO_SIGMA_EFFECTIVE_SOURCE_R85.md",
+    "sha256": "d7b6f542fed3e881fae0a3a941d7d73344ce099b1eadf2f88655c109d3e43a17",
+    "excerpts": [
+      {
+        "start": 1,
+        "end": 30,
+        "text": "1: # Adendo material R85 — incompatibilidade sigma livre e fonte da ação composta\n2: \n3: 19/10/2026, /root/r69_locality_bridge. Claim996; revisão566, project/check ready.\n4: [DERIVED] Derivação analítica. Preserva integralmente a nota anterior pinada\n5: 6ae58c76573309d253691ece03716c06016af8009ba92ba91083060ad1f92128.\n6: Achado identificado pelo root e conferido por este autor e pelo revisor R68.\n7: Não executa novamente o controle de rank nem altera suas evidências.\n8: \n9: ## 1. Correção de alcance: P16 livre não é candidato sigma cinético on-shell\n10: \n11: A nota anterior provou o levantamento de campos métricos pela segunda forma\n12: fundamental M e registrou a condição adicional E_φ radial como via suficiente.\n13: Essa condição NÃO pode ser satisfeita simultaneamente com M livre no setor\n14: sigma cinético puro considerado. A condicional anterior é logicamente correta,\n15: mas, nesse setor, suas premissas conjuntas são impossíveis. Não a promover\n16: como rota habitada para H3.\n17: \n18: Com ψ_rest=rφ e normais N=(0,N_rest) de componente selecionada zero,\n19: N_rest é ortogonal a φ e a cada ∂_aφ. Logo os termos de Christoffel e as\n20: primeiras derivadas de r não contribuem à projeção normal, e\n21: \n22:     M_ab,N=〈N,II_ab(ψ)〉=r〈N_rest,∂_a∂_bφ〉,\n23:     〈N_rest,□_gφ〉=(1/r) g^{ab}M_ab,N.                 (1)\n24: \n25: Se □_gφ=λφ, o lado esquerdo é zero. Se as dez M_α formam base de Sym²,\n26: isso exigiria g^{ab}H_ab=0 para TODO tensor simétrico H, isto é, g⁻¹=0,\n27: contradizendo a não degenerescência. A soma usa os dois termos para índices\n28: fora da diagonal; esse fator2 não altera o argumento nem o rank.\n29: \n30: No P16 explicitamente construído, em0 e na base interna anterior a O,"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selection_variation_r85\\selection\\SELECTION_AND_NORMAL_VARIATIONS_R85.md",
+    "sha256": "6ae58c76573309d253691ece03716c06016af8009ba92ba91083060ad1f92128",
+    "excerpts": [
+      {
+        "start": 1,
+        "end": 20,
+        "text": "1: # R85 — Seleção dinâmica e alcance normal das variações de P\n2: \n3: 19/10/2026, /root/r69_locality_bridge. Claim996; R16_INTEGRATED_P_H3.\n4: Project/check da referência própria FECHO_MISSION_REFERENCE.json: revisão566,\n5: ready=true. [DERIVED] Demonstração analítica candidata; controle simbólico exato\n6: separado. Nenhum termo Lean novo, hipótese E=0 acrescentada, dado ou β ajustado.\n7: \n8: ## 1. O que a seleção existente realmente seleciona\n9: \n10: | Fonte lida | Enunciado efetivo | Ponte ainda necessária |\n11: |---|---|---|\n12: | TheVerbSelectsTheAction:149–176 | post a é projeção em span(a); select a ψ=〈a,ψ〉a, idempotência | Isso não é δ∫L/δg; a docstring:122–130 separa expressamente os objetos. |\n13: | TransportWitness:57–73 | S3L(v)=〈v,ΣD†D v〉=0 iff cada Dv=0 | Identificar os D e v com uma ação local e suas variações métricas; não fabricar essa identidade. |\n14: | VariationalInhabitant:93–100,136–143 | Se log p_i+h_i=c, a derivada de F(p)=S(p)−Σp_i h_i é zero nas direções Σδp_i=0; recíproca por direções elementares | h é fornecido; não aparecem Ricci, jets de P ou integração no espaço-tempo. |\n15: | DecisionCommutation:172–181,208–230 | Contraste quadrático ½Σβd_i x_i² e fluxo diagonal: gradiente/EDO/Lyapunov | Funcional finito distinto do gravitacional;:54–58 distingue GKLS externo. |\n16: | ModularRemainderAction:17–31,46–53 | Ad_u invisível iff comutação, incluindo corner invariante | 'Action' é ação de automorfismos, não ação lagrangiana. |\n17: | GibbsMatterBridge:28–38,109–122 | Resposta Gibbs é stress nulo; área-matching iff ηRic(ℓ,ℓ)=2πT(ℓ,ℓ) | A hipótese de área não sai da criticidade Gibbs;:125–156 ainda a recebe. |\n18: | SelectedFisherGibbsBridge:41–70,91–114 | Métrica e fonte do mesmo P; conservação sob onda; Einstein sob área | Mesma origem não deriva as equações adicionais. |\n19: | R66 BOSONIC_CONTINUUM:6–15,27–43 | Semigrupo GKLS do aparelho bosônico/OH construído, taxas/gerador declarados | Esse contrato não define um campo SelectedProbabilityData(x) nem sua ação integrada; localização posterior R71 não muda essa distinção. |\n20: "
+      }
+    ]
+  }
+]

@@ -1,0 +1,220 @@
+[
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheVerbSelectsTheAction.lean",
+    "sha256": "f47477ea466ad1cc64805b065f3d63ea99c224149a7c2af9691653ab06fb3805",
+    "excerpts": [
+      {
+        "start": 122,
+        "end": 130,
+        "text": "122: \n123: HONESTIDADE — o que esta pedra NÃO faz. «Verbo», «seleção», «nome», «posto», «tempo», «verdade», «custo», «luz», «gravidade»,\n124: «Constante de Miguel», «circuito ontológico», «fase de retorno» são leituras do operador [INPUT/ONTO]; os enunciados são\n125: sobre projeções, pesos, matrizes 2×2 e anéis. A tríade NÃO é derivada do axioma nem de β: é a HABITAÇÃO mais simples das\n126: relações de comutação que o operador escreveu (su(2) escalada); a identificação V_nome/V_tempo/V_verdade ↔ σ₁/σ₂/σ₃ é\n127: nomeação, não teorema. O texto do operador escreve a constante como «α²»; a régua do signo diz β_TGL = α·√e, NUNCA «α²» —\n128: aqui a constante é a variável real c, sem valor. «D_folds = 0,74», «g = √|L|», «−εΠ», a Lagrangiana como verbo e «δS = 0»\n129: NÃO estão tipados aqui (concordância plena do operador quanto à Lagrangiana: a face tipada é uma só — Euler–Lagrange\n130: seleciona o Nome, `action_locks_zero_iff`; S = ∫L d⁴x segue [OPEN]). Os J e K canônicos do kernel são `conjJ` (espaço"
+      },
+      {
+        "start": 149,
+        "end": 176,
+        "text": "149: noncomputable def post (a : H) : H →L[ℂ] H := (ℂ ∙ a).starProjection\n150: \n151: /-- O VERBO EM ATO: selecionar é pousar a inscrição no posto — `select a ψ = post a ψ` («O Verbo seleciona»). O GESTO\n152:     𝕍_t = exp(−t·β·H_3L) é outro registro, já no kernel (`TGL.VerbInhabitant`, v25) — não se redefine aqui. -/\n153: noncomputable def select (a : H) (ψ : H) : H := post a ψ\n154: \n155: /-- ★★★ O POSTO DE a: com ‖a‖ = 1, `post a ψ = ⟪a, ψ⟫ • a`. -/\n156: theorem post_apply {a : H} (ha : ‖a‖ = 1) (ψ : H) : post a ψ = ⟪a, ψ⟫_ℂ • a :=\n157:   Submodule.starProjection_unit_singleton ℂ ha ψ\n158: \n159: /-- ★★★ A SELEÇÃO É A ESCOLHA DE a: com ‖a‖ = 1, `select a ψ = ⟪a, ψ⟫ • a`. -/\n160: theorem select_apply {a : H} (ha : ‖a‖ = 1) (ψ : H) : select a ψ = ⟪a, ψ⟫_ℂ • a :=\n161:   post_apply ha ψ\n162: \n163: /-- ★★ P² = P: selecionar duas vezes é selecionar uma. -/\n164: theorem post_isIdempotent (a : H) : IsIdempotentElem (post a) :=\n165:   (ℂ ∙ a).isIdempotentElem_starProjection\n166: \n167: /-- ★★ P* = P: o posto é auto-adjunto (ortogonal, não oblíquo). -/\n168: theorem post_isSelfAdjoint (a : H) : IsSelfAdjoint (post a) :=\n169:   isSelfAdjoint_starProjection (ℂ ∙ a)\n170: \n171: /-- ★★ O POSTO FIXA A SUA AÇÃO: P a = a. -/\n172: theorem post_fixes_the_action (a : H) : post a a = a :=\n173:   Submodule.starProjection_eq_self_iff.mpr (Submodule.mem_span_singleton_self a)\n174: \n175: /-- ★★ A AÇÃO SELECIONADA É FIXADA: `select a a = a`. -/\n176: theorem select_fixes_the_selected_action (a : H) : select a a = a :="
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TransportWitness.lean",
+    "sha256": "f4219cc2c036999e19e41b006d4899a1a10cd2e8e3562c5a277370faae0364ed",
+    "excerpts": [
+      {
+        "start": 57,
+        "end": 73,
+        "text": "57: /-! ## A — o setor da ação: cada lock é um quadrado; EL seleciona o núcleo -/\n58: \n59: /-- [KERNEL] O PAREAMENTO DO LOCK: `⟨v, DᴴD v⟩ = ⟨Dv, Dv⟩` — cada setor da\n60:     ação dos Three Locks é um quadrado perfeito (a positividade é estrutural,\n61:     não postulada). -/\n62: theorem lock_pairing_eq (D : Matrix n n ℂ) (v : n → ℂ) :\n63:     star v ⬝ᵥ (Dᴴ * D).mulVec v = star (D.mulVec v) ⬝ᵥ D.mulVec v := by\n64:   rw [← Matrix.mulVec_mulVec, dotProduct_mulVec, Matrix.star_mulVec]\n65: \n66: /-- [KERNEL] ★ EULER–LAGRANGE SELECIONA O NÚCLEO: a ação dos três locks\n67:     `S_{3L}[v] = ⟨v, (D_cᴴD_c + D_bᴴD_b + D_zᴴD_z) v⟩` anula SSE cada lock\n68:     anula — `ker H_{3L} = ker D_c ∩ ker D_b ∩ ker D_z`. `P_F = 1_{{0}}(H_{3L})`\n69:     é o projetor sobre os MINIMIZADORES da ação (derivação do operador:\n70:     o canto não é escolhido depois da Lagrangiana; é o suporte do mínimo). -/\n71: theorem action_locks_zero_iff (Dc Db Dz : Matrix n n ℂ) (v : n → ℂ) :\n72:     star v ⬝ᵥ (Dcᴴ * Dc + Dbᴴ * Db + Dzᴴ * Dz).mulVec v = 0 ↔\n73:       Dc.mulVec v = 0 ∧ Db.mulVec v = 0 ∧ Dz.mulVec v = 0 := by"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\VariationalInhabitant.lean",
+    "sha256": "2af4afbc660fdd9c1ca9f8c66a8ad073fbea252949d64b503ed2e8cb81b6c27e",
+    "excerpts": [
+      {
+        "start": 87,
+        "end": 100,
+        "text": "87: /-- [KERNEL] ★ O GIBBS É CRÍTICO: para pesos `pᵢ` com\n88:     `log pᵢ + hᵢ = c` constante (a forma de Gibbs `pᵢ = e^{c−hᵢ}`), a\n89:     derivada da ENERGIA LIVRE `F(ε) = S(p+εq) − Σ(pᵢ+εqᵢ)hᵢ` em ε = 0 é\n90:     ZERO para TODA perturbação de traço zero: o habitante é o ponto\n91:     crítico da transformada de Legendre — caracterizado pelo MOVIMENTO,\n92:     não pelo léxico. -/\n93: theorem gibbs_is_critical (p q h : n → ℝ) (hp : ∀ i, 0 < p i)\n94:     (hq : ∑ i, q i = 0) (c : ℝ) (hgibbs : ∀ i, Real.log (p i) + h i = c) :\n95:     HasDerivAt\n96:       (fun ε : ℝ => (-∑ i, (p i + ε * q i) * Real.log (p i + ε * q i))\n97:         - ∑ i, (p i + ε * q i) * h i)\n98:       0 0 := by\n99:   have hS := first_law_diagonal p q hp hq\n100:   have hlin : HasDerivAt (fun ε : ℝ => ∑ i, (p i + ε * q i) * h i)"
+      },
+      {
+        "start": 132,
+        "end": 143,
+        "text": "132:     direcional da energia livre na direção elementar `eᵢ − eⱼ` anula —\n133:     isto é, `(−log pᵢ − hᵢ) − (−log pⱼ − hⱼ) = 0` — então existe uma\n134:     constante `c` com `log pᵢ + hᵢ = c` para todo `i`: os pesos são de\n135:     GIBBS (`pᵢ = e^{c−hᵢ}`). O crítico é único e é o KMS. -/\n136: theorem elementary_critical_implies_gibbs [Nonempty n] (p h : n → ℝ)\n137:     (hcrit : ∀ i j : n,\n138:       (-Real.log (p i) - h i) - (-Real.log (p j) - h j) = 0) :\n139:     ∃ c : ℝ, ∀ i : n, Real.log (p i) + h i = c := by\n140:   obtain ⟨i₀⟩ := ‹Nonempty n›\n141:   refine ⟨Real.log (p i₀) + h i₀, fun i => ?_⟩\n142:   have := hcrit i₀ i\n143:   linarith"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\DecisionCommutation.lean",
+    "sha256": "182ba6345586d5e81b8320caaff50c94e3ff796e6a947e54db5dd57c88e2472d",
+    "excerpts": [
+      {
+        "start": 42,
+        "end": 58,
+        "text": "42: * ★★★ `gradient_first_variation` — O GRADIENTE É O GERADOR: a variação\n43:   primeira de 𝓕(x) = ½Σ βd_i x_i² é EXATAMENTE ⟨βd·x, v⟩ — ∇𝓕(x) = βd·x,\n44:   a ação de K; identidade algébrica exata, sem resto além de h²;\n45: * ★★★ `flow_solves_gradient_ode` — O FLUXO RESOLVE ẏ = −∇𝓕(y): a derivada\n46:   do transporte diagonal em todo t é −(βd_i)·(fluxo) — HasDerivAt, cálculo\n47:   real, componente a componente;\n48: * ★★★ `lyapunov_decreases` — SPOHN FINITO: 𝓕 desce ao longo do fluxo\n49:   (monótona não-crescente) — o funcional de contraste é Lyapunov;\n50: * ★★★ `K_equals_neg_gradient_verified` — A SÍNTESE: variação ∧ EDO ∧\n51:   Lyapunov — a identidade K = −∇𝓕 fechada na face finita, nas três provas\n52:   que ela pede.\n53: \n54: Honestidades: a identidade K = −∇𝓕 é aqui VERIFICADA na face finita\n55: (quadrática, classe com balanço detalhado); o caso GKLS genuíno é\n56: gradiente-de-fluxo da entropia relativa [KNOWN: Spohn; Carlen–Maas] e\n57: segue EXTERNO; \"decisão\" = conservação-sob-o-fluxo ([K,A]=0), nenhum\n58: postulado de medição entra; a ressonância com einselection é registrada"
+      },
+      {
+        "start": 172,
+        "end": 181,
+        "text": "172: def contrastF {n : ℕ} (β : ℝ) (d : Fin n → ℝ) (x : Fin n → ℝ) : ℝ :=\n173:   (1 / 2) * ∑ i, β * d i * x i ^ 2\n174: \n175: /-- [KERNEL] ★★★ O GRADIENTE É O GERADOR: a variação primeira de 𝓕 é\n176:     exatamente ⟨βd·x, v⟩ — ∇𝓕(x) = βd·x, a ação de K. Identidade\n177:     algébrica exata (o resto é h²·𝓕(v), sem termo escondido). -/\n178: theorem gradient_first_variation {n : ℕ} (β : ℝ) (d : Fin n → ℝ)\n179:     (x v : Fin n → ℝ) (h : ℝ) :\n180:     contrastF β d (x + h • v)\n181:       = contrastF β d x + h * (∑ i, (β * d i * x i) * v i)"
+      },
+      {
+        "start": 208,
+        "end": 230,
+        "text": "208: theorem flow_solves_gradient_ode {n : ℕ} (β : ℝ) (d : Fin n → ℝ)\n209:     (x : Fin n → ℝ) (i : Fin n) (t₀ : ℝ) :\n210:     HasDerivAt (fun t : ℝ => diagFlow β d t x i)\n211:       (-(β * d i) * diagFlow β d t₀ x i) t₀ := by\n212:   unfold diagFlow\n213:   simp only [mul_assoc]\n214:   have h1 : HasDerivAt (fun t : ℝ => -(t * (β * d i))) (-(β * d i)) t₀ :=\n215:     (hasDerivAt_mul_const (β * d i)).neg\n216:   have h2 := (h1.exp).mul_const (x i)\n217:   have hval : Real.exp (-(t₀ * (β * d i))) * -(β * d i) * x i\n218:       = -(β * d i) * (Real.exp (-(t₀ * (β * d i))) * x i) := by ring\n219:   exact hval ▸ h2\n220: \n221: /-- [KERNEL] ★★★ SPOHN FINITO: o funcional de contraste DESCE ao longo do\n222:     fluxo — 𝓕 é Lyapunov do transporte. A entrega tem direção. -/\n223: theorem lyapunov_decreases {n : ℕ} {β : ℝ} (hβ : 0 < β) (d : Fin n → ℝ)\n224:     (hd : ∀ i, 0 ≤ d i) (x : Fin n → ℝ) {s t : ℝ} (hst : s ≤ t) :\n225:     contrastF β d (diagFlow β d t x) ≤ contrastF β d (diagFlow β d s x) := by\n226:   unfold contrastF diagFlow\n227:   have key : ∀ i : Fin n,\n228:       β * d i * (Real.exp (-(t * β * d i)) * x i) ^ 2\n229:         ≤ β * d i * (Real.exp (-(s * β * d i)) * x i) ^ 2 := by\n230:     intro i"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ModularRemainderAction.lean",
+    "sha256": "e7a412865eb4cc1ac2eff75b3231d354306844e533a931f4c8da1fa94ee81b32",
+    "excerpts": [
+      {
+        "start": 7,
+        "end": 10,
+        "text": "7: /-!\n8: Exact algebraic criteria for an invisible modular cocycle.\n9: These are implications about specified actions, not an assertion that a physical\n10: vacuum flow is geometric. No QFT, trace, or density matrix is assumed here."
+      },
+      {
+        "start": 17,
+        "end": 31,
+        "text": "17: theorem conjugation_eq_iff_commute (u x : A)\n18:     (hleft : star u * u = 1) (hright : u * star u = 1) :\n19:     u * x * star u = x ↔ Commute u x := by\n20:   constructor\n21:   · intro h\n22:     have h' := congrArg (fun y : A => y * u) h\n23:     show u * x = x * u\n24:     simpa only [mul_assoc, hleft, mul_one] using h'\n25:   · intro h\n26:     rw [h.eq, mul_assoc, hright, mul_one]\n27: \n28: theorem full_action_invisible_iff_central (u : A)\n29:     (hleft : star u * u = 1) (hright : u * star u = 1) :\n30:     (∀ x : A, u * x * star u = x) ↔ (∀ x : A, Commute u x) := by\n31:   exact forall_congr' fun x => conjugation_eq_iff_commute u x hleft hright"
+      },
+      {
+        "start": 46,
+        "end": 53,
+        "text": "46: /-- Equality on every corner observable is exactly trivial cocycle action there.\n47: The reference automorphism must preserve the corner. -/\n48: theorem corner_flow_equality_iff (p u : A) (alpha : A ≃+* A)\n49:     (hp : alpha p = p) (hleft : star u * u = 1)\n50:     (hright : u * star u = 1) :\n51:     (∀ x : A, p * x * p = x → u * alpha x * star u = alpha x) ↔\n52:       (∀ x : A, p * x * p = x → Commute u x) := by\n53:   constructor"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\GibbsMatterBridge.lean",
+    "sha256": "cb0d25363d8e6c2c0945db10bcbc24ca5e77a7c2620530ae71b081eead60ee98",
+    "excerpts": [
+      {
+        "start": 28,
+        "end": 38,
+        "text": "28: def gibbsCoupling (p : ι → ℝ) : ℝ := modularVariance p/Real.pi\n29: def gibbsResponse (p : ι → ℝ) (frequency : ℝ) : ℝ := -frequency^2*modularVariance p\n30: \n31: theorem gibbs_coupling_nonnegative (p : ι → ℝ) (hp : ∀ i, 0<p i) : 0 ≤ gibbsCoupling p :=\n32:   div_nonneg (modular_variance_nonnegative p hp) (le_of_lt Real.pi_pos)\n33: \n34: theorem gibbs_response_null_stress (p : ι → ℝ) (g gInv : Tensor4) (w d : Coordinate4)\n35:     (hn : tensorQuad g d=0) :\n36:     gibbsResponse p (covectorRead w d)= -Real.pi*tensorQuad (covectorStress g gInv w (gibbsCoupling p)) d := by\n37:   rw [covector_stress_null _ _ _ _ _ hn]\n38:   unfold gibbsResponse gibbsCoupling"
+      },
+      {
+        "start": 109,
+        "end": 122,
+        "text": "109: theorem gibbs_area_matching_iff_ricci\n110:     {U : Set Coordinate4} {g : TensorField4} {Gamma : ConnectionField4} {x d : Coordinate4}\n111:     (P : EquilibriumScreenData U g Gamma x d) (gInv : TensorField4) (w : CovectorField4)\n112:     (p : ι → ℝ) (hp : ∀ i, 0<p i) (hs : ∑ i, p i=1) (eta : ℝ)\n113:     (hU : IsOpen U) (hg : SmoothMatrixOn U g) (hG : SmoothConnectionOn U Gamma)\n114:     (ht : ∀ i j k, Gamma x i k j=Gamma x j k i) (hn : tensorQuad (g x) d=0) :\n115:     Tendsto (fun t => microscopicAreaError (quadraticGibbsCurve p hp hs (covectorRead (w x) d)) eta\n116:       (inducedArea g P.curve P.screen.vectors) t/t^2) (𝓝[<] 0) (𝓝 0) ↔\n117:       eta*tensorQuad (coordinateRicci Gamma x) d=\n118:         2*Real.pi*tensorQuad (covectorStressField g gInv w (gibbsCoupling p) x) d := by\n119:   rw [past_zero_limit_iff _ _ (gibbs_area_error_limit P p hp hs (covectorRead (w x) d) eta hU hg hG ht),\n120:     gibbs_response_null_stress p (g x) (gInv x) (w x) d hn]\n121:   change -Real.pi*tensorQuad (covectorStressField g gInv w (gibbsCoupling p) x) d+\n122:     eta*tensorQuad (coordinateRicci Gamma x) d/2=0 ↔ _"
+      },
+      {
+        "start": 125,
+        "end": 156,
+        "text": "125: theorem gibbs_matching_produces_clausius\n126:     {U : Set Coordinate4} {g : TensorField4} {Gamma : ConnectionField4} {x d : Coordinate4}\n127:     (P : EquilibriumScreenData U g Gamma x d) (gInv : TensorField4) (w : CovectorField4)\n128:     (p : ι → ℝ) (hp : ∀ i, 0<p i) (hs : ∑ i, p i=1) (rate eta : ℝ)\n129:     (hU : IsOpen U) (hg : SmoothMatrixOn U g)\n130:     (hT : ∀ i j, DifferentiableOn ℝ (fun y => covectorStressField g gInv w (gibbsCoupling p) y i j) U)\n131:     (hn : tensorQuad (g x) d=0)\n132:     (harea : Tendsto (fun t => microscopicAreaError (quadraticGibbsCurve p hp hs (covectorRead (w x) d)) eta\n133:       (inducedArea g P.curve P.screen.vectors) t/t^2) (𝓝[<] 0) (𝓝 0)) :\n134:     Tendsto (fun t => horizonBalancePrimitive rate eta (inducedArea g P.curve P.screen.vectors)\n135:       (constructedHeat P (covectorStressField g gInv w (gibbsCoupling p)) rate hU hg hT) t/t^2)\n136:       (𝓝[<] 0) (𝓝 0) := by\n137:   have hh := microscopic_residual_coefficient (quadraticGibbsCurve p hp hs (covectorRead (w x) d))\n138:     hp rate eta (inducedArea g P.curve P.screen.vectors)\n139:     (constructedHeat P (covectorStressField g gInv w (gibbsCoupling p)) rate hU hg hT)\n140:     (gibbs_heat_matching P gInv w p hp hs rate hU hg hT hn) harea\n141:   simpa [quadratic_gibbs_tangent_zero,diagonalFisher] using hh\n142: \n143: theorem einstein_from_gibbs_area_matching\n144:     (U : Set Coordinate4) (hU : IsOpen U) (hconn : IsPreconnected U)\n145:     (A B : TensorField4) (w : CovectorField4) (p : ι → ℝ) (hp : ∀ i, 0<p i) (hs : ∑ i, p i=1)\n146:     (rate eta : ℝ) (hrate : rate≠0) (heta : eta≠0)\n147:     (hAB : ∀ x∈U, A x*B x=1) (hBA : ∀ x∈U, B x*A x=1)\n148:     (hA : SmoothMatrixOn U A) (hB : SmoothMatrixOn U B) (hw : SmoothVectorOn U w)\n149:     (hclosed : ClosedCovectorOn U w)\n150:     (hwave : CovectorWaveOn U (inverseFrameMetricField B) (frameLeviCivita A B) w)\n151:     (harea : ∀ x (hx : x∈U) d (hd : d≠0) (hn : tensorQuad (frameMetricField A x) d=0),\n152:       let P := localEquilibriumScreen U hU A B hAB hBA hA hB x d hx hd hn\n153:       Tendsto (fun t => microscopicAreaError (quadraticGibbsCurve p hp hs (covectorRead (w x) d)) eta\n154:         (inducedArea (frameMetricField A) P.curve P.screen.vectors) t/t^2) (𝓝[<] 0) (𝓝 0)) :\n155:     ∃ cosmological : ℝ, ∀ x∈U, frameEinsteinTensor A B x+cosmological • frameMetricField A x=\n156:       (2*Real.pi/eta) • frameCovectorStress A B w (gibbsCoupling p) x := by"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedFisherGibbsBridge.lean",
+    "sha256": "c84db761541c7fec5cc7f4713305c315810a323a04827f819bfe3f2d4f7f4ff6",
+    "excerpts": [
+      {
+        "start": 41,
+        "end": 70,
+        "text": "41: /-- The source covectors are derivatives of the same input probability observations. -/\n42: def probabilityCovectors (P : SelectedProbabilityData ι U) : ι → CovectorField4 :=\n43:   fun i => potentialCovector (fun x => P.probabilities x i)\n44: \n45: theorem probability_covectors_smooth (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n46:     (i : ι) : SmoothVectorOn U (probabilityCovectors P i) :=\n47:   potential_covector_smooth U hU _ (P.smooth i)\n48: \n49: theorem probability_covectors_closed (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n50:     (i : ι) : ClosedCovectorOn U (probabilityCovectors P i) :=\n51:   potential_covector_closed U hU _ (P.smooth i)\n52: \n53: /-- Both metric and source probes are constructed from P before any balance law is imposed. -/\n54: def selectedGibbsRecord (P : SelectedProbabilityData ι U) (hU : IsOpen U) (k : ι → ℝ) :\n55:     GravitationalResponseRecord U :=\n56:   gibbsRecord (selectedLorentzRecord P hU) k (probabilityCovectors P)\n57:     (probability_covectors_smooth P hU)\n58: \n59: theorem selected_gibbs_metric (P : SelectedProbabilityData ι U) (hU : IsOpen U) (k : ι → ℝ) :\n60:     recordMetric (selectedGibbsRecord P hU k)=selectedMetric P :=\n61:   selected_record_decodes_derived_metric P hU\n62: \n63: theorem selected_gibbs_source (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n64:     (k : ι → ℝ) (hk : ∀ i, 0<k i) :\n65:     recordSource (selectedGibbsRecord P hU k)=\n66:       finiteCovectorStressField (selectedMetric P) (metricInverse (selectedMetric P))\n67:         (probabilityCovectors P) (fun _ => 1) (fun i => k i/(Real.pi*Real.cosh (k i)^2)) := by\n68:   have h := gibbs_record_source (selectedLorentzRecord P hU) k hk\n69:     (probabilityCovectors P) (probability_covectors_smooth P hU)\n70:   simpa only [selectedGibbsRecord,selected_record_decodes_derived_metric] using h"
+      },
+      {
+        "start": 91,
+        "end": 114,
+        "text": "91: theorem selected_gibbs_source_conserved (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n92:     (k : ι → ℝ)\n93:     (hwave : ∀ i, CovectorWaveOn U (metricInverse (selectedMetric P))\n94:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P))) (probabilityCovectors P i)) :\n95:     ∀ x∈U, ∀ j, tensorFieldDivergence (metricInverse (recordMetric (selectedGibbsRecord P hU k)))\n96:       (leviCivitaField (recordMetric (selectedGibbsRecord P hU k))\n97:         (metricInverse (recordMetric (selectedGibbsRecord P hU k))))\n98:       (recordSource (selectedGibbsRecord P hU k)) x j=0 := by\n99:   apply probe_record_conserved hU (selectedLorentzRecord P hU) (fun i => gibbsSlope (k i))\n100:     (probabilityCovectors P) (probability_covectors_smooth P hU) (probability_covectors_closed P hU)\n101:   simpa only [selected_record_decodes_derived_metric] using hwave\n102: \n103: /-- Conditional Einstein equation for data P. This is not variation of an action in P. -/\n104: theorem selected_gibbs_einstein_from_wave_area\n105:     (P : SelectedProbabilityData ι U) (hU : IsOpen U) (hconn : IsPreconnected U)\n106:     (k : ι → ℝ) (hk : ∀ i, 0<k i)\n107:     (hwave : ∀ i, CovectorWaveOn U (metricInverse (selectedMetric P))\n108:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P))) (probabilityCovectors P i))\n109:     (screens : MetricScreenFamily U (recordMetric (selectedGibbsRecord P hU k)))\n110:     (eta : ℝ) (heta : eta≠0)\n111:     (harea : ∀ x (hx : x∈U) v (hv : v≠0)\n112:       (hn : tensorQuad (recordMetric (selectedGibbsRecord P hU k) x) v=0),\n113:       Tendsto (fun t => (gibbsEntropyIncrement k (fun i => probabilityCovectors P i x) v t-eta*\n114:         (inducedArea (recordMetric (selectedGibbsRecord P hU k)) (screens x hx v hv hn).curve"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheAxiomAndTheFalseWitness.lean",
+    "sha256": "c0f4185a6279500237f9046feee336a50532a95781ebe80498cfa3b2f2ed4d80",
+    "excerpts": [
+      {
+        "start": 59,
+        "end": 63,
+        "text": "59: HONESTIDADE — o que esta pedra NÃO faz. O fluxo é o do LOCK MÍNIMO (H_min = 1 − P); a ligação com o sistema aberto GKLS da\n60: v384 é ANALOGIA DE FORMA, calculada [COMPUTED], não teorema sobre o gerador GKLS: V_t P_F = P_F é identidade do dephasing; o\n61: atrator ρ_ss do GKLS completo não é Π; os dois zeros (o do lock e o estado estacionário do sistema aberto) não se identificam aqui. «Posto», «Axioma», «testemunha falsa», «Verbo vivo», «escuro» são leituras do operador [INPUT/ONTO]; os\n62: enunciados são sobre reais, idempotentes e operadores. β jamais entra como número. PROVADA ≠ CONFIRMADA; o gate não se move.\n63: Sem sorry, sem axiom."
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ActionCouplingControls.lean",
+    "sha256": "7be4b6cf1726d3e068fa7bc515901ce8e6b4873de7f6775c05f5bb67cb6876e1",
+    "excerpts": [
+      {
+        "start": 41,
+        "end": 55,
+        "text": "41: \n42: /-- Same data shape and nonzero source, but a different box gain refutes EOM. -/\n43: theorem scalar_model_rejects_wrong_gain (c : TGLCoupling) (xi gain : ℝ)\n44:     (hg : gain ≠ c.beta) : ¬ (scalarModel xi gain).EOM c unitSection := by\n45:   intro h\n46:   have heq : gain • unitSection = c.beta • unitSection :=\n47:     (scalar_model_field xi gain).symm.trans h\n48:   exact hg (smul_left_injective ℝ unitSection_ne_zero heq)\n49: \n50: /-- In particular the three readings and the operator data do not supply EOM. -/\n51: theorem data_alone_does_not_supply_eom (c : TGLCoupling) (xi : ℝ) :\n52:     ¬ (scalarModel xi (-c.beta)).EOM c unitSection := by\n53:   apply scalar_model_rejects_wrong_gain\n54:   linarith [c.beta_pos]\n55: "
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedFisherLorentzMetric.lean",
+    "sha256": "346db9497cbebf1824b279972d2cc342abed90b9df13874d439ffd7737533a3d",
+    "excerpts": [
+      {
+        "start": 39,
+        "end": 43,
+        "text": "39: def reflectedMetric (F : Tensor4) (c : Coordinate4) : Tensor4 :=\n40:   (2 / tensorQuad F⁻¹ c) • vecMulVec c c - F\n41: \n42: def reflectedInverse (F : Tensor4) (c : Coordinate4) : Tensor4 :=\n43:   (2 / tensorQuad F⁻¹ c) • vecMulVec (F⁻¹ *ᵥ c) (F⁻¹ *ᵥ c) - F⁻¹"
+      },
+      {
+        "start": 243,
+        "end": 261,
+        "text": "243: structure SelectedProbabilityData (ι : Type) [Fintype ι] (U : Set Coordinate4) where\n244:   probabilities : Coordinate4 → ι → ℝ\n245:   normalized : ∀ x, ∑ i, probabilities x i=1\n246:   positive : ∀ x∈U, ∀ i, 0<probabilities x i\n247:   smooth : ∀ i, ContDiffOn ℝ ∞ (fun x => probabilities x i) U\n248:   differential_injective : ∀ x∈U, Function.Injective (directionalVariation probabilities x)\n249:   selected : ι\n250:   clock_nonzero : ∀ x∈U, probabilityDifferential probabilities x selected≠0\n251: \n252: variable {ι : Type} [Fintype ι] {U : Set Coordinate4}\n253: \n254: def selectedFisher (P : SelectedProbabilityData ι U) : TensorField4 :=\n255:   fisherTensorField P.probabilities\n256: \n257: def selectedClock (P : SelectedProbabilityData ι U) : CovectorField4 :=\n258:   fun x => probabilityDifferential P.probabilities x P.selected\n259: \n260: def selectedMetric (P : SelectedProbabilityData ι U) : TensorField4 :=\n261:   fun x => reflectedMetric (selectedFisher P x) (selectedClock P x)"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedProbabilitySigma.lean",
+    "sha256": "889e6c7dc0564ad7dcaf787e922b48744130d6b6b083e043bab661045bf167b7",
+    "excerpts": [
+      {
+        "start": 44,
+        "end": 51,
+        "text": "44: def conditionalProbability (P : SelectedProbabilityData (Option J) U) (j : J) (x : Coordinate4) : ℝ :=\n45:   P.probabilities x (some j)/selectedComplement P x\n46: \n47: def sigmaPotential (P : SelectedProbabilityData (Option J) U) (j : J) (x : Coordinate4) : ℝ :=\n48:   Real.sqrt (conditionalProbability P j x)\n49: \n50: def sigmaCovectors (P : SelectedProbabilityData (Option J) U) : J → CovectorField4 :=\n51:   potentialFamily (sigmaPotential P)"
+      },
+      {
+        "start": 104,
+        "end": 108,
+        "text": "104: theorem sigma_potential_normalized (P : SelectedProbabilityData (Option J) U)\n105:     (hsel : P.selected=none) (x : Coordinate4) (hx : x∈U) :\n106:     ∑ j, (sigmaPotential P j x)^2=1 := by\n107:   simp_rw [sigma_potential_square P hsel _ x hx]\n108:   exact conditional_probability_normalized P hsel x hx"
+      },
+      {
+        "start": 132,
+        "end": 150,
+        "text": "132: /-- Geometry and sigma probes are both derived from P before imposing field/area equations. -/\n133: def selectedSigmaRecord (P : SelectedProbabilityData (Option J) U)\n134:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) : GravitationalResponseRecord U :=\n135:   sigmaGibbsRecord hU (selectedLorentzRecord P hU)\n136:     (sigmaPotential P) (sigma_potential_smooth P hsel) k\n137: \n138: theorem selected_sigma_metric (P : SelectedProbabilityData (Option J) U)\n139:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) :\n140:     recordMetric (selectedSigmaRecord P hsel hU k)=selectedMetric P :=\n141:   selected_record_decodes_derived_metric P hU\n142: \n143: theorem selected_sigma_source (P : SelectedProbabilityData (Option J) U)\n144:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) (hk : 0<k) :\n145:     recordSource (selectedSigmaRecord P hsel hU k)=\n146:       finiteCovectorStressField (selectedMetric P) (metricInverse (selectedMetric P))\n147:         (sigmaCovectors P) (fun _ => 1) (fun _ => k/(Real.pi*Real.cosh k^2)) := by\n148:   have h := sigma_gibbs_source hU (selectedLorentzRecord P hU)\n149:     (sigmaPotential P) (sigma_potential_smooth P hsel) k hk\n150:   simpa only [selectedSigmaRecord,sigmaCovectors,selected_record_decodes_derived_metric] using h"
+      },
+      {
+        "start": 170,
+        "end": 189,
+        "text": "170: /-- The sigma equations are a condition on P; conservation is derived, not a second input. -/\n171: theorem selected_sigma_conserved (P : SelectedProbabilityData (Option J) U)\n172:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) (hk : 0<k)\n173:     (lambda : Coordinate4 → ℝ)\n174:     (heigen : ∀ j, ∀ x∈U, covectorDivergence (metricInverse (selectedMetric P))\n175:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P)))\n176:       (sigmaCovectors P j) x=lambda x*sigmaPotential P j x) :\n177:     ∀ x∈U, ∀ i, tensorFieldDivergence (metricInverse (selectedMetric P))\n178:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P)))\n179:       (recordSource (selectedSigmaRecord P hsel hU k)) x i=0 := by\n180:   have hh : ∀ j, ∀ x∈U, covectorDivergence\n181:       (metricInverse (decodeRecord (selectedLorentzRecord P hU).data))\n182:       (leviCivitaField (decodeRecord (selectedLorentzRecord P hU).data)\n183:         (metricInverse (decodeRecord (selectedLorentzRecord P hU).data)))\n184:       (potentialFamily (sigmaPotential P) j) x=lambda x*sigmaPotential P j x := by\n185:     simpa only [selected_record_decodes_derived_metric,sigmaCovectors] using heigen\n186:   have h := sigma_gibbs_conserved hU (selectedLorentzRecord P hU)\n187:     (sigmaPotential P) (sigma_potential_smooth P hsel)\n188:     (sigma_potential_normalized P hsel) lambda k hk hh\n189:   simpa only [selectedSigmaRecord,selected_record_decodes_derived_metric] using h"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\BOSONIC_CONTINUUM_R66.txt",
+    "sha256": "ce231991f651be507bb5ff33600208b22231e004729c903e25eac577cd64aace",
+    "excerpts": [
+      {
+        "start": 6,
+        "end": 15,
+        "text": "6: Usamos H=Γ_s(C²)⊗C²_OH, com base |n_i,n_o,e>, n_i,n_o∈N e e∈{0,1}. a_i,a_o são aniquiladores BOSÔNICOS ordinários, com fatores sqrt(n), sobre o domínio de partículas finitas. Não são os operadores hardcore do corte8dimR62/R64. σ_-|1>=|0>, σ_+|0>=|1>, Z=diag(1,-1). h=H_físico/ℏ tem unidades s^-1; os testes usam as unidades adimensionais e entradas já pinadas emR62. A conversão física permanece comoR65.\n7: \n8: h_0=ω_c(n_i+n_o)+ω_OH n_e+g(a_i†σ_-+σ_+a_i), n_e=σ_+σ_-;\n9: h_d=Ω(σ_++σ_-), Ω real; h=h_0+h_d.\n10: L=(sqrt(κ_i)a_i, sqrt(κ_o)a_o, sqrt(γ_OH)σ_-, sqrt(γ_φ)Z, sqrt(λ)J),\n11: J=A+B=a_o†σ_-+σ_+a_i, λ=βγ_Λ, β=ALPHA_FINE_CODATA_2018 sqrt(e) em runtime.\n12: Todas as taxas são finitas e não negativas; nenhuma taxa física é calibrada por esta construção.\n13: G(X)=-i[h,X]+Σ_j(L_j X L_j†-{L_j†L_j,X}/2).\n14: R64 já construiu instrumento de saída de duas portas sob dilataçãoHP escolhida; R65 fixou normalização, relógio e identificabilidade. Preservamos esses contratos. A nova construção finita de colisões explicita uma realização do reservatório, não demonstra que todo banho microscópico da patente a realiza.\n15: "
+      },
+      {
+        "start": 27,
+        "end": 43,
+        "text": "27: Defina D_0=∪_m P_m T1(H) P_m. O sistema compatível define T_0(t) emD_0, sem escolha de corte. Cada T_0,m é CPTP; sua norma T1→T1 é1, inclusive sobre matrizes complexas, pela dualidade com uma aplicação unital completamente positiva. D_0 é denso emT1(H), pois ||X-P_mXP_m||_1→0. Portanto T_0(t) estende UNICAMENTE por continuidade a T1(H). É semigrupo: a identidade de composição passa por densidade. É fortemente contínuo: vale em cada corte e a contração controla o erro de aproximação. Traço e positividade passam ao limite; positividade completa é conferida do mesmo modo em cada amplificação finita. Não há perda de massa nem hipótese adicional de não explosão.\n28: Se A_0 é o gerador fechado dessa extensão, D_0 é core em norma de gráfico: para z>0, R(z,A_0)Y=∫exp(-zt)T_0(t)Ydt pertence ao mesmo corte queY∈D_0; dado X∈D(A_0), aproxime Y=(z-A_0)X por Y_m∈D_0. X_m=R(z,A_0)Y_m∈D_0 satisfaz X_m→X e A_0X_m=zX_m-Y_m→A_0X. EmD_0, A_0 é exatamente a fórmula GKLS acima sem bomba.\n29: \n30: 4. Bombeamento no MESMO gerador ilimitado\n31: B(X)=-i[h_d,X] é limitado emT1, ||B||≤2|Ω|. A perturbação limitada define A=A_0+B emD(A_0), comD_0 ainda core. Uma construção explícita é a série de Dyson-Phillips:\n32: T^(0)(t)=T_0(t), T^(k+1)(t)=∫_0^t T_0(t-s) B T^(k)(s)ds;\n33: T(t)=Σ_k T^(k)(t), ||T^(k)(t)||≤(2|Ω|t)^k/k!.\n34: A série converge em norma de operadores em intervalos compactos e resolve a equação integral de Duhamel, identificando seu gerador A. O produto de Lie-Trotter [T_0(t/n) Ad(exp(-i h_d t/n))]^n converge fortemente aT(t): consistência emD_0, estabilidade porcontração e o teorema de produto para perturbação limitada. Cada fator éCPTP; logoT(t) éCPTP e conservativo. Este último passo é aplicaçãoKNOWN da teoria de semigrupos, não uma compilaçãoLean. A construção deD_0/core e a especialização aos operadores deste aparelho sãoDERIVED aqui.\n35: Não se afirma queD_0 seja invariante porT(t) completo: a bomba pode povoar arbitrariamente muitos setores.\n36: \n37: 5. Aproximação finita controlada também COM bomba\n38: Se X=P_m0 X P_m0 e m≥m0, a expansão Dyson no cortem, com h_d,m=P_m h_d P_m, coincide com a expansão infinita até a ordem k=m-m0. Cada aplicação deB aumenta no máximo1 o suporte total, enquanto T_0 não aumenta o suporte. As duas caudas dão, após inclusão no espaço comum,\n39: ||T(t)X-E_m T_m(t)X||_1 ≤ 2||X||_1 Σ_(k=m-m0+1)^∞ (2|Ω|t)^k/k!.\n40: Para comparar dois cortes m<n sobre o mesmoX, vale A MESMA cota com o menor m: os termos iniciais coincidem, cada cauda é limitada. Esta é cota analítica conservadora, não erro estatístico. T_m inclui todos os cinco dissipadores, Jaynes-Cummings e a bomba. Não são os antigos cortes independentes0/1.\n41: Para ρ positiva de momentoN finito, a relação formal adjunta é\n42: G†N=-κ_i n_i-κ_o n_o-γ_OH n_e+iΩ(σ_--σ_+)≤|Ω|I.\n43: A desigualdade de expectativa <N>_t≤<N>_0+|Ω|t segue porTrotter e semicontinuidade/Fatou: o fatorsem bomba reduzN, o fatorunitárioOH aumenta sua expectativa no máximo|Ω|Δt. Não se usa uma troca não justificada de limite e operadorilimitado para provar conservatividade."
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+    "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+    "excerpts": [
+      {
+        "start": 10319,
+        "end": 10362,
+        "text": "10319: \\mathcal{L}_{\\text{TGL}} \\;=\\;\n10320: \\mathcal{L}_{\\text{matéria}}\n10321: \\;+\\; \\mathcal{L}_{\\text{campo}}\n10322: \\;+\\; \\mathcal{L}_{\\text{grav}}\n10323: \\;+\\; \\mathcal{L}_{\\text{modular}}.\n10324: \\label{eq:lagrangian-total}\n10325: \\end{equation}\n10326: As quatro contribuições têm papéis disjuntos e complementares, descritos a seguir.\n10327: \n10328: \\paragraph{Conteúdo de matéria.}\n10329: $\\mathcal{L}_{\\text{matéria}}$ contém os termos cinéticos e potenciais usuais\n10330: do modelo padrão acoplados minimamente à métrica:\n10331: \\begin{equation}\n10332: \\mathcal{L}_{\\text{matéria}} \\;=\\; \\bar{\\psi}\\,(i\\gamma^{\\mu}D_{\\mu} - m)\\,\\psi\n10333: \\;-\\; \\tfrac{1}{4}F_{\\mu\\nu}^{a} F^{a\\,\\mu\\nu}\n10334: \\;-\\; \\tfrac{1}{2}|D_{\\mu}\\phi|^{2} - V(\\phi),\n10335: \\end{equation}\n10336: onde $D_{\\mu}$ é a derivada covariante de gauge e $V(\\phi)$ inclui o setor de\n10337: Higgs.  A \\TGL{} preserva esta estrutura intacta no bulk; toda a modificação\n10338: ocorre na fronteira modular através do termo $\\mathcal{L}_{\\text{modular}}$.\n10339: \n10340: \\paragraph{Campo luminodinâmico.}\n10341: $\\mathcal{L}_{\\text{campo}} = -\\tfrac{1}{4}\\Phi_{\\mu\\nu}\\Phi^{\\mu\\nu}$ com\n10342: $\\Phi_{\\mu\\nu} = \\partial_{\\mu}\\Psi_{\\nu} - \\partial_{\\nu}\\Psi_{\\mu}$ é o tensor\n10343: de campo luminodinâmico, conjugado canonicamente a $\\Psi^{*}$.  $\\Psi$ é o\n10344: \\emph{campo escalar de fronteira} cuja excitação coerente realiza o modo\n10345: \\emph{boundary} do operador modular $\\Kpartial$ (Seção~\\ref{sec:typeIII1}).\n10346: A escolha $-\\tfrac{1}{4}\\Phi^{2}$ garante invariância de gauge $U(1)$ e\n10347: energia positiva-definida ao longo da hipersuperfície de fronteira.\n10348: \n10349: \\paragraph{Acoplamento gravitacional não-mínimo.}\n10350: A peça gravitacional acopla $\\Psi$ ao escalar de Ricci $R$ via\n10351: \\begin{equation}\n10352: \\mathcal{L}_{\\text{grav}} \\;=\\; \\frac{1}{2\\kappa^{2}}\\,R\n10353: \\;+\\; \\xi \\, R \\, |\\Psi|^{2},\n10354: \\qquad\n10355: \\xi \\;=\\; \\tfrac{1}{6} \\quad (\\text{acoplamento conforme}),\n10356: \\end{equation}\n10357: com $\\kappa^{2} = 8\\pi G/c^{4}$.  O acoplamento conforme $\\xi = 1/6$ é\n10358: selecionado porque garante invariância sob transformações de Weyl no limite\n10359: de Bisognano-Wichmann, identificando $\\Psi$ como portadora natural do\n10360: gerador modular discretizado.  Este acoplamento é o que conecta a\n10361: \\emph{geometria} (lado esquerdo das equações de Einstein) com o\n10362: \\emph{operador de fronteira} (lado direito da equação de Lindblad)."
+      },
+      {
+        "start": 10418,
+        "end": 10460,
+        "text": "10418: \\paragraph{Equação de movimento.}\n10419: Da variação $\\delta S / \\delta \\Psi^{*} = 0$ obtém-se a equação modificada\n10420: para $\\Psi$:\n10421: \\begin{equation}\n10422: \\bigl(\\Box - m_{\\Psi}^{2} - \\xi R\\bigr) \\Psi\n10423: \\;=\\; \\betatgl \\, \\Kpartial \\, \\Psi,\n10424: \\label{eq:eom-Psi}\n10425: \\end{equation}\n10426: onde $\\Kpartial$ é o gerador modular discretizado pelo teorema de\n10427: Bisognano-Wichmann.  No bulk longe da fronteira, $\\Kpartial \\to 0$ e\n10428: recupera-se a equação de Klein-Gordon conforme padrão.  Na fronteira,\n10429: $\\Kpartial$ domina e estabelece a estrutura tipo III\\textsubscript{1}\n10430: demonstrada na Seção~\\ref{sec:typeIII1}.  A presença de $\\betatgl$ como\n10431: único acoplamento entre $\\Psi$ e $\\Kpartial$ é a marca operacional da \\TGL{}.\n10432: \n10433: \\paragraph{Status da ponte operador-modular $\\to$ termo de fonte (honestidade).}\n10434: A Eq.~\\eqref{eq:eom-Psi} acopla um campo $\\Psi(x)$ na variedade ao operador\n10435: $\\Kpartial = -\\log\\Delta$, que vive numa álgebra de von Neumann (Seção~\\ref{sec:typeIII1}).\n10436: A passagem do operador modular abstrato ao termo de fonte na variedade tem\n10437: \\emph{dois níveis de status distintos}, que declaramos abertamente:\n10438: \\begin{itemize}[leftmargin=*]\n10439: \\item \\textbf{Derivado.} A consequência \\emph{cosmológica} dessa ponte --- a\n10440: equação de Friedmann modificada\n10441: $H^2 = \\tfrac{8\\pi G}{3}\\rho\\,[1 + \\betatgl|1+w_{\\text{eff}}|]$\n10442: (Eq.~\\ref{eq:H-TGL}) --- é obtida termodinamicamente de primeiros\n10443: princípios via $dQ = T\\,dS$ na tela holográfica --- derivação do programa,\n10444: inscrita neste artigo nas camadas (I)--(III) da ponte contínua e no teorema\n10445: local do acoplamento (Seção~\\ref{sec:smatrix}) ---, e o\n10446: termo $\\betatgl|1+w|$ é o \\emph{resíduo observável da discretização} do gerador\n10447: modular.  A constante de proporcionalidade $-2\\pi/\\hbar$ é fixada pelo teorema de\n10448: Bisognano--Wichmann no caso de cunhas de Rindler.\n10449: \\item \\textbf{Conjectura declarada.} A identificação rigorosa do operador\n10450: apofático completo com $-2\\pi\\Kpartial/\\hbar$ \\emph{no limite contínuo}, estendida\n10451: de Rindler aos horizontes cosmológicos gerais, repousa sobre uma hipótese de\n10452: universalidade modular cujo fechamento --- o mergulho explícito da equação\n10453: mestra numa álgebra tipo III\\textsubscript{1} --- é problema técnico em\n10454: aberto, enunciado com precisão na Seção~\\ref{sec:smatrix}.  Não o\n10455: apresentamos como demonstrado: é o gargalo\n10456: conceitual identificado do programa, e seu fechamento é trabalho futuro.\n10457: \\end{itemize}\n10458: Esta distinção é deliberada: a face cosmológica testável da ponte está derivada\n10459: e validada (Seção~\\ref{sec:substrate-cosmo}); a identificação operatorial plena\n10460: permanece conjectura honesta, não resultado."
+      }
+    ]
+  }
+]

@@ -1,0 +1,169 @@
+{
+  "unit": "F1.REDE",
+  "status": "PASS_FORMAL_SCOPE__NO_MATERIAL_FINDING",
+  "created_utc": "2026-10-13T21:58:44.821143+00:00",
+  "reviewer": "codex-independent-modular-review",
+  "checks": [
+    {
+      "id": "M1",
+      "status": "PASS",
+      "claim": "spectralOutput is a closed term of AuditF13v31.D1a3OutputBGL on canonical H1; no new existence assumptions.",
+      "source": "CanonicalOutput.lean:spectralOutput"
+    },
+    {
+      "id": "M2",
+      "status": "PASS",
+      "claim": "TW is positive and self-adjoint; maximal graph multiplication by exp(2*pi^2*xi), not a restricted core.",
+      "source": "CanonicalWedge.lean:TW_multiplier,TW_positive,TW_selfadjoint; VectorWedge.lean:T_graph"
+    },
+    {
+      "id": "M3",
+      "status": "PASS",
+      "claim": "Full graph equivalence Delta=S-adjoint S, including both composition domains; the existing generic adjoint is maximal for self-adjoint T.",
+      "source": "CanonicalOutput.lean:delta_is_SdagS; VectorSquare.lean:T_double_graph_iff; GenericAntilinearAdjoint.lean:generic_adjoint_maximal"
+    },
+    {
+      "id": "M4",
+      "status": "PASS",
+      "claim": "S is a closed densely defined involution; Fix(S) is StandardSubspace H1 and contains a nonzero vector.",
+      "source": "CanonicalWedge.lean:SW_closed,SW_maps,SW_involutive; CanonicalOutput.lean:spectralOutput_nonzero"
+    },
+    {
+      "id": "M5",
+      "status": "PASS",
+      "claim": "The concrete canonical Fubini and partial Fourier intertwiner preserve the original H1 and B0; no arbitrary Hilbert-space replacement.",
+      "source": "FubiniL2.lean:canonicalFub,canonical_modularGroupIsBoost"
+    },
+    {
+      "id": "M6",
+      "status": "PASS",
+      "claim": "Jcandidate uses spectral and transverse reflections, complex conjugation and fiber exchange; involutivity is proved.",
+      "source": "CanonicalWedge.lean:Jcandidate; GeometricFiberConjugation.lean:transverseGeometricJ_coordinates"
+    },
+    {
+      "id": "M7",
+      "status": "PASS",
+      "claim": "Nine independently rebuilt modules exit zero; all 75 listed modular declarations have axioms within the trio; source has no sorry/admit/new axiom."
+    }
+  ],
+  "limitations": [
+    "The proved ModularGroupIsBoost is the explicit multiplicative phase identity after Fourier. No generic Mathlib imaginary-power functional-calculus API is asserted.",
+    "Geometric wedge covariance, all-direction localization and complete four-dimensional LightNetData are not delivered by these modules.",
+    "No FockCertificate/MaxwellCertificate inhabitant, device-to-continuum equivalence or derivation of H3 is inferred.",
+    "Independent technical review is not c1 acceptance or operator integration authorization."
+  ],
+  "checked_pins": 169,
+  "rebuilt_modules": 9,
+  "audited_modular_declarations": 75,
+  "total_compile_seconds": 274.0861488000228,
+  "olean_comparison": [
+    {
+      "module": "VectorWedge",
+      "original": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\attempts\\20261013T213951_215364Z\\VectorWedge.olean",
+        "sha256": "f032d64fb602192a480f84362a02f9a1afdf63cf63b1444e5491d0be03663453",
+        "bytes": 434016
+      },
+      "rebuilt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\20261013T215402_817152Z\\VectorWedge.olean",
+        "sha256": "f8aaf939b32dc4774734091445009b98564d16a799641538eba08377121a5464",
+        "bytes": 434040
+      },
+      "byte_identical": false
+    },
+    {
+      "module": "SpectralConjugation",
+      "original": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\attempts\\20261013T213929_050015Z\\SpectralConjugation.olean",
+        "sha256": "9d6c36696693d7d2e57856b79769a558f17bb4fc308e7c6bb9e4cc166b2ae268",
+        "bytes": 225144
+      },
+      "rebuilt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\20261013T215402_817152Z\\SpectralConjugation.olean",
+        "sha256": "e22dd227d5bebdf4ddb4135ea9fd484520eef794d48d6fd1a7c261999a5393ba",
+        "bytes": 225168
+      },
+      "byte_identical": false
+    },
+    {
+      "module": "VectorSquare",
+      "original": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\attempts\\20261013T214259_982971Z\\VectorSquare.olean",
+        "sha256": "b4066a3ca736e0a5472588d83f6563b7b92584ddf284e4f7d59b66228e879a23",
+        "bytes": 283608
+      },
+      "rebuilt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\20261013T215402_817152Z\\VectorSquare.olean",
+        "sha256": "21b32043368b05aa8db4b87f1500874df3b52930df3ef198dfd19c9554a3ab42",
+        "bytes": 283632
+      },
+      "byte_identical": false
+    },
+    {
+      "module": "CanonicalWedge",
+      "original": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\attempts\\20261013T214813_431261Z\\CanonicalWedge.olean",
+        "sha256": "9d3d8ab218bac640f4b586a4608c282ff8d07266cd239a927dd4d6841000d4c1",
+        "bytes": 399984
+      },
+      "rebuilt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\20261013T215402_817152Z\\CanonicalWedge.olean",
+        "sha256": "9d3d8ab218bac640f4b586a4608c282ff8d07266cd239a927dd4d6841000d4c1",
+        "bytes": 399984
+      },
+      "byte_identical": true
+    },
+    {
+      "module": "CanonicalOutput",
+      "original": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\attempts\\20261013T215105_011078Z\\CanonicalOutput.olean",
+        "sha256": "f077d34c9a60b1932977d33fff94e6df47348f13e9c8519461ba0d62af555dad",
+        "bytes": 180928
+      },
+      "rebuilt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\20261013T215402_817152Z\\CanonicalOutput.olean",
+        "sha256": "f077d34c9a60b1932977d33fff94e6df47348f13e9c8519461ba0d62af555dad",
+        "bytes": 180928
+      },
+      "byte_identical": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\RESULTADO_MODULAR_R1.json",
+      "sha256": "87b7894c059d37d09ad5793a0ce320d17bb155391a12d46833e4781feaed56c7",
+      "bytes": 25936
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\PIN_VERIFICATION_R1.json",
+      "sha256": "130c8361bd66ae870fe62c1d132da02448c0a72b127cb5db6deec2eee52cad1e",
+      "bytes": 67368
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\20261013T215402_817152Z\\RECOMPILE_RECEIPT.json",
+      "sha256": "23c29dd49c88ab09d0824e43355c85559015bd469da48dc886411e5297431fbb",
+      "bytes": 24577
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\review_build_r1.py",
+      "sha256": "42d4c1525198d75f1cd2270cb644f3374ffb134677148bbfa90d1093e6daf540",
+      "bytes": 3366
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\verify_pins_r1.py",
+      "sha256": "baf82c8e678fc7d509729073a806f8868e1761d5209e391f8f45af3b56fdb76e",
+      "bytes": 1648
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\finish_review_r1.py",
+      "sha256": "8034d81331ff3f8e2e6cae6b30a4f9ca652a6a5cf9c42ae2aa9985b31c5429ce",
+      "bytes": 6483
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\review_modular\\REVIEW_MODULAR_R1.md",
+      "sha256": "9ed8120eb96b82bee02a86f3abc718f7febed4a365e6a51d94fc0243b2f97b6a",
+      "bytes": 1648
+    }
+  ],
+  "production_writes": false
+}

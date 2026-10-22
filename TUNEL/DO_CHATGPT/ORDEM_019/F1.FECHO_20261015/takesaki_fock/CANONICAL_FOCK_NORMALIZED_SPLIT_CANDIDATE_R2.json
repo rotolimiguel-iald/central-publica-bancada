@@ -1,0 +1,95 @@
+{
+  "schema": "iald.lean-candidate.v1",
+  "created_utc": "2026-10-16T20:42:24.297252+00:00",
+  "actor": "codex-fock-r6-review",
+  "statute": "DECLARADO",
+  "compiled": false,
+  "requirement_satisfied": false,
+  "task_id": "R7",
+  "handle": "r51-fock-finite-projection",
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "revision": 369,
+  "projection_sha256": "ff2a419a8877fce8989d4555864d109b695071b76e1c1eec67f349471a6dd240",
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockNormalizedSplitR2.lean",
+    "sha256": "9b83197fe3c560d5236672c69dbcb35ad716e171fe2ca7fc4b7ae02cc1ce5a1b",
+    "bytes": 6336
+  },
+  "candidate_dependencies": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockFiniteProjectionR2.lean",
+      "sha256": "a268431e66439f51fcb34829615d3702dca3ee8b5d2fa5a610eb9285e693b634",
+      "bytes": 7086
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CANONICAL_FOCK_FINITE_PROJECTION_CANDIDATE_R2.json",
+      "sha256": "4071f2fe511c4313385fdda30defbf6710c2a8d27adda969e5a853dec68575e7",
+      "bytes": 5327
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockMatrixCornerR2.lean",
+      "sha256": "e14c54e97cf10a4ac62b189d2ee132e145528ce6a49516d8010943ecbf66d97e",
+      "bytes": 10037
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CANONICAL_FOCK_MATRIX_CORNER_CANDIDATE_R2.json",
+      "sha256": "8be8ee29fb0acdeb4d01f47b2030b06762ad1a1da5452e2707667a5cd916e7d3",
+      "bytes": 6036
+    }
+  ],
+  "existing_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockActualPositiveTracePackageR2.lean",
+      "sha256": "7715d8851cc476baf67440c7fc69d9fda857c58920b8a6f18a8d8eaada706f41",
+      "bytes": 7963
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockActualInverseAdditivityR2.lean",
+      "sha256": "70cc2e7eeaf46f56d39ac9f0861a68d10c3b2a8ac9281143687a1794447f6402",
+      "bytes": 13233
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V354FiniteEqualSplit.lean",
+      "sha256": "72876fa3cf13dbd947ab02f1f4bd378c8d0dc7b2ed9beb39d98d7bed8079552e",
+      "bytes": 3193
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V354NormalizedSplit.lean",
+      "sha256": "5e90a1c08de4dc4593e65d9b8dde4a4bd5a1e074b68f8be357d17d25bbebe91a",
+      "bytes": 2452
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\CanonicalModularCoreAssemblyR1.lean",
+      "sha256": "e7a0e056108c92237aa439b760cf8f4e8c03905762381fc3f92d8c984d0349aa",
+      "bytes": 5599
+    }
+  ],
+  "expected_axiom_reports": 3,
+  "heartbeat_limits": {
+    "maxHeartbeats": 400000,
+    "synthInstance.maxHeartbeats": 500000
+  },
+  "new_mathematical_premises": [],
+  "construction": "Choose finite q under actual corner e, let a=vq and r=aa*. Then a*a=q, qr=0 and actual square traciality gives value q=value r. Sum finite/positive by additivity, and actual positiveDual at log(value(q+r).toReal) normalizes the sum to1.",
+  "next_exact_obligation": "Compile/review both new R51 suppliers and this composition. Combine normalized_split_exists with the cyclic trace equality on PositiveInput to populate PF=positiveAsCore(add q r), Pp=positiveAsCore q, Pm=positiveAsCore r in the unchanged RemainingModularCoreInput. Full trace/PF package not asserted in this candidate.",
+  "build_order": [
+    "CanonicalFockFiniteProjectionR2",
+    "CanonicalFockMatrixCornerR2",
+    "CanonicalFockNormalizedSplitR2"
+  ],
+  "scope": "Same Fock core/value. No SiteProfile substituted, no type-II axiom, nilpotent premise, trace premise, normalization premise or equal-halves premise. Positive projection split only; total cyclic trace is separate.",
+  "author_builds": 0,
+  "provider_calls": 0,
+  "production_writes": false,
+  "mission_mutations": false,
+  "preserved_predecessor": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockNormalizedSplitR1.lean",
+    "sha256": "864eb2bc626a0bbf05b1cec682bf4e4b8ed0cacf483685d61d78716ea9bb818f",
+    "bytes": 6336
+  },
+  "repair": "Only import/open and own namespace version from R1 to R2. Mathematical construction and all three public statements unchanged. Both new R2 suppliers remain candidates until root build/review."
+}

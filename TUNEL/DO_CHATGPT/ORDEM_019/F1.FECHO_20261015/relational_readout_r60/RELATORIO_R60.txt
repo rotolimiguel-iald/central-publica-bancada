@@ -1,0 +1,59 @@
+R60 — LEITURA RELACIONAL: O QUE SE IDENTIFICA E SOB QUAIS HIPÓTESES
+17/10/2026 — codex-gerente-tgl — F1.FECHO_20261015, reivindicação 939, R5
+
+1. Reaproveitamento do acervo [REAL: localização; estatuto científico preservado]
+
+O levantamento R58 já encontrou receptor heteródino, tomografia homódina, pares comprimidos e leitura formal de fase relativa. R59 derivou a covariância e o limite de ocupação do mesmo par. Não se reconstruiu essa rede.
+
+SMatrix.lean:7–32 demonstra estrutura genérica de dois modos, com reflexão sin²(theta), sem selecionar beta. A Ponte Einstein Cartan Miguel.tex:711–729 escreve a identificação |R|²=beta=sin²(thetaM) e a matriz passiva com módulos sqrt(beta), sqrt(1-beta). A ligação documental existe. Nesse trecho, porém, os canais são H_obs e H_hid (linhas712–713); a existência dos operadores de Møller modulares permanece CONJ nas linhas707–709. O modelo de duas portas abaixo não demonstra que o canal oculto é experimentalmente acessível ou que ambos podem ser preparados.
+
+TheCompressionIsNotIdentifiable.lean:9–66 já distingue razões que cancelam uma escala comum de uma face que fornece informação adicional. R60 não refuta esse teorema: b altera a repartição entre canais, enquanto ganhos e intensidades são fatores multiplicativos distintos. No modelo de pares, a relação quântica de origem fornece informação adicional. Não se presume identidade entre o parâmetro de squeezing rho e chi/2, beta, fase ou ângulo passivo.
+
+2. Duas entradas e duas saídas: razão cruzada [DERIVED sob modelo INPUT]
+
+Hipóteses: transferência de potência simétrica e sem perda interna [[1-b,b],[b,1-b]], 0<b<1; mesma frequência e mesmo canal nas duas configurações; intensidades de entrada positivas IA e IB desconhecidas; ganhos efetivos por saída g1,g2 positivos, lineares e estáveis entre configurações; fundos removidos. Perdas separáveis por entrada/saída podem ser absorvidas nesses fatores, mas uma perda interna arbitrária não.
+
+Para iluminar a entrada A e depois a entrada B:
+ A1=g1 IA(1-b), A2=g2 IA b,
+ B1=g1 IB b,   B2=g2 IB(1-b).
+
+Logo Q=A2 B1/(A1 B2)=[b/(1-b)]² e
+ b=sqrt(Q)/(1+sqrt(Q)).
+
+Os quatro fatores desconhecidos cancelam. A função b/(1-b) é estritamente crescente no intervalo: o parâmetro de repartição é identificável nesse modelo. As fases da matriz não são determinadas por estas intensidades. Para theta em[0,pi/2], a leitura angular correspondente é theta=arcsin(sqrt(b)).
+
+Não há betaTGL na inversão. Sua previsão pode ser comparada depois, calculada em runtime segundo o cânone. A igualdade b=beta é a identificação física proposta na Ponte, que precisa valer para o canal efetivamente medido; um divisor óptico comum com refletividade ajustada ao alvo não testa a TGL. O modelo exige acesso a ambas entradas/saídas: não basta renomear uma porta acessível como H_hid.
+
+Controle negativo: numa configuração só, a razão A2/A1 confunde b com g2/g1. Com ganho que varia entre configurações, quatro leituras também não bastam: RESULT_R60.json exibe os mesmos dados (16,6,8,48) para b=1/5 com ganhos estáveis e b=1/3 com ganhos variáveis. A razão cruzada pode produzir um número plausível e ainda estar errada se a estabilidade não for verificada.
+
+3. Pares como referência: reconstrução sob perda pura [DERIVED sob modelo INPUT]
+
+Entrada: o estado puro comprimido de R59, média n>0 e |m|²=n(n+1). Modelo de perda a_out=sqrt(etaA)a+sqrt(1-etaA)vA e b_out=sqrt(etaB)b+sqrt(1-etaB)vB, ambientes independentes no vácuo, 0<etaA,etaB<=1. Exigem-se identificação dos mesmos modos, unidades de fóton/normalização de quadratura calibradas e referência de fase. Não se presume que qualquer detector ou preparo satisfaça isso.
+
+Defina x=<a_out† a_out>, y=<b_out† b_out>, z=|<a_out b_out>|² e d=z-xy.
+ Então x=etaA n, y=etaB n, z=etaA etaB n(n+1), d=etaA etaB n.
+ A inversão é n=xy/d, etaA=d/y, etaB=d/x.
+
+O determinante de d(x,y,z)/d(n,etaA,etaB) é -etaA etaB n², não nulo no interior. A relação de pares permite separar ocupação e eficiência sob essas hipóteses. A fase de m é preservada por perdas reais positivas e lida em relação à referência de quadratura. Isso não determina beta: determina parâmetros do estado e das perdas.
+
+O termo +1 da lei bosônica distingue esta inversão de uma razão que cancelaria tudo. Sua origem é a estrutura CCR/vácuo já usada na R59; não é uma nova medição nem uma prova da TGL. Para n grande, d resulta da diferença entre quantidades próximas em termos relativos; condicionamento e propagação de incerteza precisam entrar no teste. n=0, eficiência zero e d<=0 são fronteiras onde a fórmula não se aplica.
+
+Controle negativo material: fonte pura com n=2 e etaA=etaB=1/2 fornece x=y=1,z=3/2. Uma fonte gaussiana mista física com n=1,|m|²=3/2 e etaA=etaB=1 fornece os mesmos momentos. Sua covariância satisfaz (n+1/2)²-|m|²=3/4>=1/4. A inversão pura aceita os dados e devolve n=2,eta=1/2, embora a segunda preparação tenha n=1,eta=1. Portanto as guardas algébricas não certificam pureza nem história de preparo; a hipótese precisa de controle independente. Ruído térmico, modos extras e flutuação de fase também não estão cobertos.
+
+4. Literatura e novidade desta entrega
+
+[KNOWN, fonte primária consultada] A calibração por pares de fótons correlacionados já é uma técnica metrológica: NIST, Correlated photon radiometry, https://www.nist.gov/pml/quantum-measurement-division/quantum-optics/correlated-photon-radiometry . A página descreve uso de coincidências e contagens individuais para eficiência. Ela não afirma a identificação com betaTGL e não é a mesma fórmula de quadraturas acima.
+[KNOWN, fonte primária consultada] Polyakov–Migdall, High Accuracy Verification of a Correlated-Photon-Based Method for Determining Photon-Counting Detection Efficiency (2007), https://www.nist.gov/publications/high-accuracy-verification-correlated-photon-based-method-determining-photon-counting . A técnica foi comparada a calibração convencional. Essa referência mostra precedente de luz calibrando uma leitura de luz; não é evidência da TGL.
+As páginas foram consultadas pela ferramenta web; não há custódia do PDF original nesta entrega. As identidades de R60 estão derivadas explicitamente, com hipóteses e contramodelos próprios.
+
+5. Verificação e limite do resultado
+
+PREREG_R60.json foi gravado antes do cálculo. RESULT_R60.json registra34 verificações exatas em SymPy, incluindo reconstruções racionais, guardas de domínio e controles negativos. A fórmula de inversão vale para médias/momentos esperados: substituir contagens finitas não dá um estimador automaticamente sem viés. Não foi feita campanha estatística, medição real, cálculo de poder ou significância5sigma. Resultado simbólico não é novo termo Lean.
+
+Esta camada permite formular um teste, mas não o congela como teste físico: ainda precisam ser pinados aparelho/canal, portos acessíveis, preparo/normalização, fundos, estabilidade, alternativas e função de veredito. Ganhos e perdas não devem ser ajustados para aproximar b de beta. Controle com refletividade genérica tem de recuperar o valor genérico e poder discordar da TGL.
+
+R4 não foi recuperada nem usada para nova dinâmicaOH. A autorização administrativa anterior segue pendente. R5 permanece aberto: leitura condicional de um canal não demonstra localização, entrelaçamento dinâmico ou realização global da rede. Nenhum um.py, kernel, Bancada, dado observado ou gate foi alterado.
+
+6. Próximo elo preciso
+
+Reaproveitar a matriz da Ponte e o receptor já descrito; localizar o mapa físico que torna os dois setores e a referência de fase observáveis no mesmo dispositivo. Se só uma saída estiver acessível, a razão cruzada acima não é executável: será necessário outro observável independente, com contrato específico. A leitura de pares ajuda a calibrar o modelo de preparação/perda, mas não pode substituir silenciosamente a reflexão da matriz passiva. O próximo cálculo dinâmico depende da recuperação autorizada de R4; nenhuma nova execução foi escondida sob o rótulo de leitura.

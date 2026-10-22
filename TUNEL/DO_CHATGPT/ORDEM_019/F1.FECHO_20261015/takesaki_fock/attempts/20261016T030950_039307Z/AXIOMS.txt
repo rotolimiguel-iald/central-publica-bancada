@@ -1,0 +1,90 @@
+import took 365s
+typeclass inference of Algebra took 138ms
+typeclass inference of Algebra took 119ms
+typeclass inference of Algebra took 122ms
+typeclass inference of Algebra took 124ms
+typeclass inference of Algebra took 124ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T030950_039307Z\GeneralInverseFiniteMinorantsR2.lean:61:34: error: failed to synthesize
+  SMulPosMono ℝ (↥(RegularHilbert H) →L[ℂ] ↥(RegularHilbert H))
+(deterministic) timeout at `typeclass`, maximum number of heartbeats (20000) has been reached
+
+Note: Use `set_option synthInstance.maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T030950_039307Z\GeneralInverseFiniteMinorantsR2.lean:70:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inverseSupremum B zeta (↑r • ?X)
+in the target expression
+  inverseSupremum B zeta (↑(E n) * ↑a * star (↑(E n) * ↑a)) ≤ inverseSupremum B zeta (‖↑a‖ ^ 2 • (↑(E n) * star ↑(E n)))
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+B : RegularCovariantCore.UnitaryFlow H
+M : VonNeumannAlgebra H
+zeta : ↥(RegularHilbert H)
+htr :
+  ∀ (a : ↥(RegularCovariantCore.core B M).toStarSubalgebra),
+    inverseSupremum B zeta (star ↑a * ↑a) = inverseSupremum B zeta (↑a * star ↑a)
+E : ℕ → ↥(RegularCovariantCore.core B M).toStarSubalgebra
+hn : ∀ (n : ℕ), ‖↑(E n)‖ ≤ 1
+hf : ∀ (n : ℕ), inverseSupremum B zeta (star ↑(E n) * ↑(E n)) < ∞
+ht : ∀ (v : ↥(RegularHilbert H)), Tendsto (fun n => ↑(E n) v) atTop (𝓝 v)
+X : ↥(RegularCovariantCore.core B M).toStarSubalgebra
+hX : 0 ≤ ↑X
+a : ↥(RegularCovariantCore.core B M).toStarSubalgebra
+ha : star ↑a * ↑a = ↑X
+Y : ℕ → ↥(RegularCovariantCore.core B M).toStarSubalgebra := fun n => star (E n * a) * (E n * a)
+hy : ∀ (n : ℕ), ↑(Y n) ≤ ↑X
+n : ℕ
+r : ℝ≥0 := ⟨‖↑a‖ ^ 2, ⋯⟩
+ho : ↑(E n) * ↑a * star (↑(E n) * ↑a) ≤ ‖↑a‖ ^ 2 • (↑(E n) * star ↑(E n))
+hle :
+  inverseSupremum B zeta (↑(E n) * ↑a * star (↑(E n) * ↑a)) ≤ inverseSupremum B zeta (‖↑a‖ ^ 2 • (↑(E n) * star ↑(E n)))
+⊢ inverseSupremum B zeta ↑(Y n) < ∞
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T030950_039307Z\GeneralInverseFiniteMinorantsR2.lean:79:21: error: Application type mismatch: The argument
+  hy n
+has type
+  ↑(Y n) ≤ ↑X
+but is expected to have type
+  ↑(Y n) ≤ star ↑a * ↑a
+in the application
+  le_iSup_of_le (hy n)
+tactic execution of Lean.Parser.Tactic.obtain took 124ms
+interpretation of Mathlib.Tactic._aux_Mathlib_Tactic_Linarith_Frontend___elabRules_Mathlib_Tactic_nlinarith_1._boxed took 152ms
+typeclass inference of Module took 135ms
+typeclass inference of Module took 124ms
+typeclass inference of SMulWithZero took 131ms
+typeclass inference of Module took 128ms
+typeclass inference of SMulWithZero took 131ms
+typeclass inference of SMulPosMono took 194ms
+type checking took 102ms
+'F1Fecho.RegularInverseWeight.inverseSupremum_finite_minorants_of_contractions' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.0374ms
+	blocked (unaccounted) 3.66s
+	congr simp thm 3.41ms
+	elaboration 101ms
+	fix level params 0.688ms
+	import 365s
+	initialization 41ms
+	instantiate metavars 1.72ms
+	interpretation 6.28s
+	let-to-have transformation 0.455ms
+	linting 6.25ms
+	norm_num 2.7ms
+	overlappingInstancesLinter 19.3ms
+	parsing 3.9ms
+	process pre-definitions 4.44ms
+	ring 82.4ms
+	share common exprs 5.55ms
+	simp 41.6ms
+	tactic execution 684ms
+	tacticAnalysis 18.6ms
+	type checking 196ms
+	typeclass inference 4.38s

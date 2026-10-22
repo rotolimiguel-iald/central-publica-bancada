@@ -1,0 +1,41 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\CanonicalOutput.lean:52:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(genericTomitaAdjoint TW Jcandidate) ⟨↑(genericTomita TW Jcandidate) ⟨f, hf⟩, ⋯⟩
+in the target expression
+  ↑(genericTomitaAdjoint TW Jcandidate) ⟨↑(genericTomita TW Jcandidate) ⟨f, hf⟩, ⋯⟩ = g
+
+case mp
+f g : ↥H1
+m : ↥H1
+hfm : (f, m) ∈ (WT rootParameter).graph
+hmg : (m, g) ∈ (WT rootParameter).graph
+u : ↥TW.domain
+hu : (↑u, ↑TW u) = (f, m)
+v : ↥TW.domain
+hv : (↑v, ↑TW v) = (m, g)
+huf : ↑u = f
+hum : ↑TW u = m
+hvm : ↑v = m
+hvg : ↑TW v = g
+hf : f ∈ TW.domain
+hTu : ↑TW ⟨f, hf⟩ = m
+hm : m ∈ TW.domain
+hTf : ↑TW ⟨f, hf⟩ ∈ TW.domain
+⊢ ↑(genericTomitaAdjoint TW Jcandidate) ⟨↑(genericTomita TW Jcandidate) ⟨f, hf⟩, ⋯⟩ = g
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    hf
+  has type
+    @Membership.mem (↥H1) (Submodule ℂ ↥H1) SetLike.instMembership TW.domain f
+  but is expected to have type
+    @Membership.mem (↥H1) (Submodule ℂ ↥H1) SetLike.instMembership (genericTomita TW Jcandidate).domain f
+  in the application
+    ⟨f, hf⟩
+'F1Rede.CanonicalWedge.WT_double_graph_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.CanonicalWedge.delta_multiplier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.CanonicalWedge.delta_is_SdagS' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.CanonicalWedge.spectralOutput' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.CanonicalWedge.spectralOutput_positive' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.CanonicalWedge.spectralOutput_nonzero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.CanonicalWedge.spectralOutput_tomita' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,118 @@
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 148ms
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 108ms
+import took 68.3s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T161522_527783Z\MaxwellNullSchwartzCoreTransportR2.lean:69:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  screenAmplitudeOf g 0
+in the target expression
+  ContDiff ℝ ∞ (screenAmplitudeOf g ((fun i => i) ⟨0, ⋯⟩))
+
+case «0»
+g : MomentumCoordinates → Fib
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → g y = 0
+v : MomentumCoordinates → Fin 2 → ℂ := fun y => (g y).ofLp
+hv : ContDiff ℝ ∞ v
+hvcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → v y = 0
+h0 : ContDiff ℝ ∞ fun y => v y 0 / ↑(transverseMass 0 y.1)
+h1 : ContDiff ℝ ∞ fun y => v y 1 / ↑(transverseMass 0 y.1)
+hr0 : ContDiff ℝ ∞ fun y => y.1 0
+hr1 : ContDiff ℝ ∞ fun y => y.1 1
+hq0 : ContDiff ℝ ∞ fun y => ↑(y.1 0)
+hq1 : ContDiff ℝ ∞ fun y => ↑(y.1 1)
+he :
+  screenAmplitudeOf g 0 = fun y =>
+    -(↑(y.1 0) * (v y 0 / ↑(transverseMass 0 y.1))) + ↑(y.1 1) * (v y 1 / ↑(transverseMass 0 y.1))
+⊢ ContDiff ℝ ∞ (screenAmplitudeOf g ((fun i => i) ⟨0, ⋯⟩))
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    Nat.le_refl ({ len := 1 }.len + 1)
+  has type
+    { len := 1 }.len + 1 ≤ { len := 1 }.len + 1
+  but is expected to have type
+    1 < { len := 1 }.len + 1
+  in the application
+    Nat.le_of_lt (Nat.le_refl ({ len := 1 }.len + 1))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T161522_527783Z\MaxwellNullSchwartzCoreTransportR2.lean:77:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  screenAmplitudeOf g 1
+in the target expression
+  ContDiff ℝ ∞ (screenAmplitudeOf g ((fun i => i) ⟨1, ⋯⟩))
+
+case «1»
+g : MomentumCoordinates → Fib
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → g y = 0
+v : MomentumCoordinates → Fin 2 → ℂ := fun y => (g y).ofLp
+hv : ContDiff ℝ ∞ v
+hvcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → v y = 0
+h0 : ContDiff ℝ ∞ fun y => v y 0 / ↑(transverseMass 0 y.1)
+h1 : ContDiff ℝ ∞ fun y => v y 1 / ↑(transverseMass 0 y.1)
+hr0 : ContDiff ℝ ∞ fun y => y.1 0
+hr1 : ContDiff ℝ ∞ fun y => y.1 1
+hq0 : ContDiff ℝ ∞ fun y => ↑(y.1 0)
+hq1 : ContDiff ℝ ∞ fun y => ↑(y.1 1)
+he :
+  screenAmplitudeOf g 1 = fun y =>
+    -(↑(y.1 1) * (v y 0 / ↑(transverseMass 0 y.1))) - ↑(y.1 0) * (v y 1 / ↑(transverseMass 0 y.1))
+⊢ ContDiff ℝ ∞ (screenAmplitudeOf g ((fun i => i) ⟨1, ⋯⟩))
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    Nat.le_refl ({ len := 1 }.len + 1)
+  has type
+    { len := 1 }.len + 1 ≤ { len := 1 }.len + 1
+  but is expected to have type
+    1 < { len := 1 }.len + 1
+  in the application
+    ⟨1, ⋯⟩
+ring took 144ms
+'F1Fecho.MaxwellGlobal.screenAmplitudeOf_smooth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.screenAmplitudeOf_compact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCutoff_tsupport_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_uniform_null_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreMomentum_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreMomentum_smoothAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreMomentum_point_inverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreAmplitude_zero_below_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreAmplitude_smooth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreAmplitude_compact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile_nonpositive' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile_orbital' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile_null' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 1.59ms
+	blocked (unaccounted) 582ms
+	congr simp thm 1.99ms
+	dsimp 3.11ms
+	elaboration 132ms
+	fix level params 0.8ms
+	import 68.3s
+	initialization 29.7ms
+	instantiate metavars 2.69ms
+	interpretation 10.6s
+	let-to-have transformation 0.904ms
+	linting 23.4ms
+	norm_num 3.11ms
+	overlappingInstancesLinter 17ms
+	parsing 15.1ms
+	process pre-definitions 10.8ms
+	ring 158ms
+	share common exprs 5.88ms
+	simp 185ms
+	tactic execution 212ms
+	tacticAnalysis 60.8ms
+	type checking 153ms
+	typeclass inference 893ms

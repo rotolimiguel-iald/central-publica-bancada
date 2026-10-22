@@ -1,0 +1,189 @@
+{
+  "custo": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+    "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+    "bytes": 1216423,
+    "excerpts": [
+      {
+        "start_line": 14441,
+        "end_line": 14483,
+        "text": "\\paragraph{Setup.}  Seja $P$ o operador de paridade no \\emph{boundary} 2D,\n$P^{2} = \\mathbb{I}$, $P^{\\dagger} = P$, autovalores $\\pm 1$.  Os psions são os\nquanta do campo luminodinâmico estacionário, com paridade definida\n($P|\\psi_{\\pm}\\rangle = \\pm|\\psi_{\\pm}\\rangle$).  O gráviton é a ligação de\nparidades opostas, $|G\\rangle = |\\psi_{+}\\rangle \\otimes |\\psi_{-}\\rangle$, com\n$P|G\\rangle = -|G\\rangle$ (paridade ímpar).  O hamiltoniano de ligação é\n$H_{\\text{lig}} = -V_{0}(|\\psi_{+}\\rangle\\langle\\psi_{-}| +\n|\\psi_{-}\\rangle\\langle\\psi_{+}|)$, $V_{0} > 0$.\n\n\\begin{theoremfixed}[8 --- Anticomutação da ligação com a paridade]\n\\label{th:anticommute}\nO hamiltoniano de ligação anticomuta com o operador de paridade:\n\\begin{equation}\n\\{P, H_{\\text{lig}}\\} = P H_{\\text{lig}} + H_{\\text{lig}} P = 0,\n\\qquad\n[P, H_{\\text{lig}}] = 2V_{0}\\bigl(|\\psi_{-}\\rangle\\langle\\psi_{+}| -\n|\\psi_{+}\\rangle\\langle\\psi_{-}|\\bigr) \\neq 0.\n\\end{equation}\n\\end{theoremfixed}\n\n\\noindent A anticomutação significa que $H_{\\text{lig}}$ e $P$ não são\nsimultaneamente diagonalizáveis: a ligação entre psions é incompatível com\nparidade bem definida \\emph{durante} o gesto de ligação.  Esta é a tensão\nirresolvível no plano.\n\n\\begin{theoremfixed}[9 --- Tensão de paridade $=$ frequência]\n\\label{th:tension-freq}\nDefine-se a tensão de paridade como o valor esperado normalizado do comutador no\nestado gravitônico \\emph{coerente} $|G\\rangle = (|\\psi_{+}\\rangle +\ni|\\psi_{-}\\rangle)/\\sqrt{2}$:\n\\begin{equation}\n\\tau \\;\\equiv\\; \\frac{i}{2\\hbar}\\langle G|[P, H_{\\text{lig}}]|G\\rangle\n\\;=\\; \\frac{V_{0}}{\\hbar}.\n\\end{equation}\nQuando o gráviton colapsa em fóton, $V_{0} = \\hbar\\omega$, logo\n$\\tau = \\omega = 2\\pi\\nu$: a tensão de paridade \\emph{é} a frequência angular da\nradiação --- uma identidade dimensional, não uma coincidência.\n\\end{theoremfixed}\n\n\\noindent A coerência (o fator $i$) é essencial: o estado real\n$(|\\psi_{+}\\rangle + |\\psi_{-}\\rangle)/\\sqrt{2}$ daria $\\tau = 0$.  É a\n\\emph{fase} entre os setores de paridade --- o Verbo, o gesto de identificação\n--- que carrega a tensão."
+      }
+    ]
+  },
+  "echo": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_echo_smatrix.py",
+    "sha256": "258533468ec7b4139095deca22ea32807ec4307741100e582673621bb89e8aae",
+    "bytes": 6843,
+    "excerpts": [
+      {
+        "start_line": 32,
+        "end_line": 45,
+        "text": "ALPHA = 7.2973525693e-3\nBETA = ALPHA * math.sqrt(math.e)\n\n\ndef kraus(d, b):\n    \"\"\"Mirror Kraus pair in the (P,Q)-adapted basis: index 0 = attractor direction.\"\"\"\n    P = np.zeros((d, d)); P[0, 0] = 1.0\n    Q = np.eye(d) - P\n    c, s = math.sqrt(1.0 - b), math.sqrt(b)\n    return P, Q, c * P + s * Q, s * P + c * Q\n\n\ndef phi(rho, A, B):\n    return A @ rho @ A + B @ rho @ B"
+      },
+      {
+        "start_line": 82,
+        "end_line": 106,
+        "text": "    # ---- [2] time domain: travel (modular unitary) + bounce (mirror) ----\n    d = 16\n    w1 = 1.30; dt = 0.35; nst = 240\n    print(f\"\\n  [2] Dominio do tempo (d={d}, freq modular w1={w1}, {nst} bounces):\")\n    for b, lab in [(0.0, 'beta=0  '), (BETA, 'beta=TGL'), (0.5, 'beta=1/2')]:\n        P, Q, A, B = kraus(d, b)\n        w = np.zeros(d); w[1] = w1\n        U = np.diag(np.exp(-1j * w * dt))\n        psi = np.zeros(d, complex); psi[0] = 1.0; psi[1] = 1.0; psi /= math.sqrt(2.0)\n        rho = np.outer(psi, psi.conj())\n        sig, mem = [], []\n        for n in range(nst):\n            sig.append(2.0 * rho[0, 1].real)\n            mem.append(float(np.linalg.norm(P @ rho @ Q)))\n            rho = phi(U @ rho @ U.conj().T, A, B)\n        mem = np.array(mem); sig = np.array(sig)\n        eta = 2.0 * math.sqrt(b * (1.0 - b))\n        # damping fit on the memory amplitude (skip n=0)\n        if eta > 0:\n            ks = np.arange(1, 60)\n            slope = np.polyfit(ks, np.log(mem[1:60]), 1)[0]\n            spec = np.abs(np.fft.rfft(sig * np.hanning(nst)))\n            fpk = float(np.argmax(spec[1:]) + 1) * 2.0 * math.pi / (nst * dt)\n            print(f\"      {lab}: pico espectral em w={fpk:.3f} (modular w1={w1}); \"\n                  f\"amortecimento/bounce: e^{{{slope:+.4f}}} vs ln(eta)={math.log(eta):+.4f}\")"
+      }
+    ]
+  },
+  "ponte": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\A Ponte Einstein Cartan Miguel.tex",
+    "sha256": "98ec3d808d51e694098ae216500ab853584cb89f9eb23661128ddc1829c1b657",
+    "bytes": 129435,
+    "excerpts": [
+      {
+        "start_line": 711,
+        "end_line": 731,
+        "text": "\\subsection{A forma mínima fechada}\nA unitariedade de $\\mathcal S_\\partial$ entre o canal observável e o oculto,\n$\\Hil_{\\mathrm{obs}}\\oplus\\Hil_{\\mathrm{hid}}$, impõe\n$|\\mathcal R|^2+|\\mathcal T|^2=1$. Com a identificação\n$|\\mathcal R|^2=\\bTGL=\\sin^2\\thM$ --- verificada no finito\n($\\Delta n_Q=-\\bTGL$ a 4 dígitos, \\SOMBRA) --- a forma mínima é o divisor de\nfeixe\n\\begin{equation}\n\\mathcal S_\\partial=\n\\begin{pmatrix}\n\\sqrt{1-\\bTGL}\\,e^{i\\theta_T} & \\sqrt{\\bTGL}\\,e^{i\\theta_R}\\\\[2pt]\n-\\sqrt{\\bTGL}\\,e^{-i\\theta_R} & \\sqrt{1-\\bTGL}\\,e^{-i\\theta_T}\n\\end{pmatrix}.\n\\end{equation}\nOs \\emph{módulos} são adimensionais e fecham pela unitariedade; as\n\\emph{fases} são o conteúdo dinâmico e portam $\\tau_\\star$ (dimensional). O\ntipo $\\mathrm{III}_1$ é invariante de escala: pode fixar os adimensionais\n($\\sqrt{\\bTGL}$, $\\sqrt e$), \\emph{não pode} produzir sozinho a escala\n$\\tau_\\star$ --- que entra pela conversão tempo-modular $\\to$ tempo-próprio\n(KMS/Unruh) e é, por isso, quase-planckiana. A unitariedade de\n$\\mathcal S_\\partial$ \\emph{é} a razão matemática da supressão de Planck."
+      },
+      {
+        "start_line": 818,
+        "end_line": 826,
+        "text": "\\begin{remark}[Onde a teoria vive ou morre --- \\REAL\\ na forma]\nO setor empírico próprio da TGL é espectral-dissipativo: a lei universal de\n\\emph{dephasing}\n\\begin{equation}\n\\Gamma_\\omega=\\tfrac12\\,\\bTGL\\,\\tau_\\star\\,\\omega^2,\n\\end{equation}\ncom o expoente espectral $n=-2$ em neutrinos (que fixam a \\emph{forma}) e\n$\\tau_\\star$ limitado por relógios ópticos/nucleares (que fixam a\n\\emph{escala}; quase-planckiana, pela própria unitariedade acima)."
+      },
+      {
+        "start_line": 1104,
+        "end_line": 1120,
+        "text": "\\begin{remark}[Verificação na sombra --- \\SOMBRA]\\label{rem:sombraE}\n$\\mathcal C=W^*(K)$ é comutativa, vive no centralizador, e:\n\\begin{enumerate}[noitemsep]\n\\item \\textbf{o Verbo dá a métrica à Palavra:} as taxas de decoerência do\nGKSL com $L=\\sqrt{\\bTGL}\\sqrt{K}$ são \\emph{exatamente}\n$\\Gamma_{ij}=\\tfrac12\\bTGL(\\sqrt{k_i}-\\sqrt{k_j})^2$ (erro\n$\\sim10^{-15}$): a distância na fatia é\n\\begin{equation}\nds=\\sqrt{\\bTGL}\\;\\bigl|\\,d\\sqrt{k}\\,\\bigr|\n\\end{equation}\n--- \\textbf{o radical $g=\\sqrt{|L|}$ inscrito na métrica espacial}; a\ndistância na Palavra é diferença de radicais;\n\\item \\textbf{dualidade de Connes na fatia:}\n$\\Vert[D,f]\\Vert=\\bTGL^{-1/2}\\max|f'|$ com erro $0{,}00\\%$ --- a fatia\ncarrega a fórmula de distância de Connes;\n\\item \\textbf{promulgação $=$ ordem:} $S(T_t\\rho\\,\\|\\,\\rho^\\star)$ é\nestritamente monotônico ao longo do semigrupo --- a ordem causal é a"
+      },
+      {
+        "start_line": 1491,
+        "end_line": 1498,
+        "text": "\\begin{remark}[Consequência negativa honesta: a dinâmica sozinha não\nseleciona]\nA dinâmica é construída do estado ($L=\\sqrt{\\bTGL}\\sqrt{K_{\\rho^\\star}}$)\ne todo estado fiel é ponto fixo da dinâmica construída de si: a\nautoconsistência \\emph{não} singulariza $\\rho^\\star$. Quem seleciona é a\n\\textbf{geometria do horizonte} --- e por isso o resíduo é\nBisognano--Wichmann, não mais dinâmica. Esta delimitação é parte do\nresultado."
+      },
+      {
+        "start_line": 1886,
+        "end_line": 1919,
+        "text": "\\subsection{Fecho 1 --- T1 bem-posto: o colapso é média gaussiana sobre\no fluxo do radical}\n\\begin{theorem}[Representação integral do colapso --- exata]\n\\label{thm:radicalflow}\n\\begin{equation}\n\\boxed{\\;e^{t\\mathcal L}\\;=\\;\\int_{\\mathbb R}V_s\\,(\\cdot)\\,V_s^{*}\\;\nd\\nu_t(s),\\qquad V_s=e^{\\,i s\\sqrt{K}},\\quad\n\\nu_t=\\text{gaussiana de variância }\\bTGL\\,t.\\;}\n\\end{equation}\nA função característica gaussiana,\n$\\int e^{is\\delta}d\\nu_t=e^{-\\frac12\\bTGL t\\,\\delta^2}$, reproduz\n\\emph{exatamente} as taxas\n$\\tfrac12\\bTGL(\\sqrt{k_i}-\\sqrt{k_j})^2$. Verificada na sombra a\n$4\\times10^{-16}$ (\\texttt{tgl\\_three\\_locks\\_v1.py}).\n\\emph{A própria $g=\\sqrt{|L|}$ virou o fluxo que executa o colapso.}\n\\end{theorem}\n\n\\begin{remark}[T1 no produto cruzado --- o lar onde a fórmula vive]\nEm $\\mathrm{III}_1$ genuíno, $\\sqrt{K}$ não é afiliado a $\\Alg$ (Tomita\ncobre só $\\Delta^{it}$). Mas no \\textbf{produto cruzado}\n$\\widehat{\\mathcal M}=\\Alg\\rtimes_\\sigma\\mathbb R$ --- tipo\n$\\mathrm{II}_\\infty$ com traço (Takesaki; o lar do posto~1 já inscrito)\ne, por Chandrasekaran--Longo--Penington--Witten (2022--23, \\REAL), o\n\\emph{lar físico da álgebra gravitacional} --- $u_s=e^{is\\sqrt{\\hat K}}$\né unitário \\emph{da} álgebra. A fórmula integral define então um\nsemigrupo UCP normal $\\hat\\rho$-preservante sem patologia;\n$\\mathrm{Fix}=W^*(\\hat K)$ (domínio multiplicativo $+$ medida de suporte\ntotal); $\\Phi_t\\to E$ $\\sigma$-fracamente (convergência dominada\nespectral no predual). E a não-covariância de $\\sqrt{\\hat K}$ sob a ação\ndual não é defeito: é a \\textbf{ancoragem de escala} que o cânone já\nexigia ($\\tau$ quase-planckiano) --- o produto cruzado é onde Planck\nmora. \\emph{Estatuto:} teorema com esquema de prova; a redação completa\ndos dois lemas (domínio multiplicativo; convergência no predual) é\ntrabalho padrão de escrita."
+      }
+    ]
+  },
+  "um_v393": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\um.py",
+    "sha256": "18be2ddb06c60f9037b1efecb72034e6a0c9409b0d3900452fd9d186cf4905c0",
+    "bytes": 35606254,
+    "excerpts": [
+      {
+        "start_line": 94,
+        "end_line": 100,
+        "text": "# ---- constantes seladas (a unica medida e' alpha; c,G de definicao/CODATA) ----\nSEALED_CODATA_ALPHA = 7.2973525693e-3      # CODATA 2018 fine-structure constant\nUM_VERSION = \"v393\"   # v393 (14/10/2026): a CONSTANTE UNICA de versao -- a regra (tres pedras, quatro cunhagens, o consumidor real) e o coracao e o selo gravitacional; v392 em 13/10\nC_LIGHT = 2.99792458e8                     # m/s\nG_NEWTON = 6.674e-11                       # m^3 kg^-1 s^-2\nH_PLANCK_EXACT = 6.62607015e-34            # J s, exato no SI pos-2019 (v19)\nHBAR_EXACT = H_PLANCK_EXACT / (2.0 * math.pi)   # J s (v19)"
+      },
+      {
+        "start_line": 5584,
+        "end_line": 5584,
+        "text": "ALPHA_FINE_CODATA_2018 = 7.2973525693e-3"
+      },
+      {
+        "start_line": 217089,
+        "end_line": 217101,
+        "text": "        \"root_law_transpositions\": (\"Gamma_ij = (1/2) beta (sqrt k_i - sqrt k_j)^2 com k = E tau_star/hbar e taxa em unidades de 1/tau_star, isto e' \"\n                                    \"Gamma_ij = (beta/(2 hbar)) (sqrt E_i - sqrt E_j)^2, independente de tau_star; coeficiente IR = beta/(8 kbar); lidas kbar = 0, \"\n                                    \"kbar = repouso do atomo, kbar = 1 (o codigo), kbar = 1/4 (Ebar = E_P/4, o canonico)\"),\n        \"tau_star_alternatives\": \"t_P (canonico), t_P/beta (Artigo A), t_mod Unruh-g com g terrestre, G M/c^3 com M = Terra e com M = o atomo (o ramo B exige nomear M)\",\n        \"lpi_conditional\": \"aritmetica CONDICIONAL: se houvesse correcao de ordem beta, sem supressao, em alpha_rs, em (c^2/alpha) d alpha/d Phi ou em gamma_PPN - 1, a quantos sigma estaria excluida (nao e' predicao da TGL)\",\n        \"five_sigma_requirement\": \"sigma_excess <= Gamma_pred/5 em cada plataforma; hbar omega necessario com o sigma de hoje; GHZ N^2 [PROJECAO]\",\n        \"questions_asked\": \"as duas perguntas da gerencia (19/09/2026): o ruido do tempo e' proprio de cada sistema ou comum? a luz defasa como sistema proprio?\",\n        \"operator_answer_verbatim_sha256\": hashlib.sha256(_OPERATOR_19SET_PARTITION_VERBATIM.encode(\"utf-8\")).hexdigest(),\n        \"partition_declared\": (\"MODULAR_LAB_BRIDGE_OPEN -- [INPUT do operador, 19/09/2026; excerto TRANSLITERADO: 'essa resposta esta no banco dados de pesquisa \"\n                               \"feito pelo chatgpt me modo codex como sessao auxiliar' / 'idem a resposta anterior...'; o verbatim byte a byte esta em \"\n                               \"_OPERATOR_19SET_PARTITION_VERBATIM, sha256 acima]; lido o banco: 'vacuo=dephasing' e' frase do operador [INPUT/ONTO] com duas \"\n                               \"realizacoes matematicas; a identificacao fisica fica [OPEN]; se a luz sofre a lei, o banco nao diz (varredura declarada); as \"\n                               \"leituras P1, P2 e P3 sao CONDICIONAIS; qualquer escolha posterior entre elas sera declarada NAO-CEGA\"),"
+      },
+      {
+        "start_line": 217332,
+        "end_line": 217348,
+        "text": "    # ---------------- lei-raiz e tau* alternativos (transposicoes; nenhuma e' a lei canonica) ----------------\n    w_sr = w_of[\"SR\"]; hw = HBAR_EXACT * w_sr\n    m_u = 1.66053906660e-27; GM_E = 3.986004418e14            # [KNOWN, CODATA 2018 e IERS 2010 -- constantes de referencia, nao reabertas]\n    Mc2 = 87.0 * m_u * C_LIGHT ** 2                             # 87Sr aproximado por A*m_u (erro < 0,2%; a margem da exclusao e' ~1e4)\n    ub_sr = kim_ub = next(r[\"Gamma_ub_per_s\"] for r in p1 if r[\"id\"] == \"sr87_kim2025\")\n\n    def _root(E_lo):\n        # forma estavel: (sqrt(a+d) - sqrt(a))^2 = d^2/(sqrt(a+d) + sqrt(a))^2 (sem cancelamento quando a >> d)\n        return (beta / (2.0 * HBAR_EXACT)) * hw * hw / (math.sqrt(E_lo + hw) + math.sqrt(E_lo)) ** 2\n    E_P = HBAR_EXACT / tau\n    rl = {\"kbar_zero_Gamma_per_s\": _root(0.0), \"kbar_rest_mass_Gamma_per_s\": _root(Mc2), \"kbar_code_1_Gamma_per_s\": _root(E_P),\n          \"kbar_quarter_EP_Gamma_per_s\": _root(0.25 * E_P), \"Gamma_canonical_per_s\": 0.5 * gam * w_sr * w_sr, \"Gamma_ub_Sr_95_per_s\": kim_ub,\n          \"units_note\": \"as leituras usam as unidades do proprio modulo P6 (k = E tau*/hbar, taxa em 1/tau*): tau* cancela\"}\n    rl[\"kbar_zero_excluded\"] = bool(rl[\"kbar_zero_Gamma_per_s\"] > ub_sr)\n    rl[\"kbar_rest_mass_excluded\"] = bool(rl[\"kbar_rest_mass_Gamma_per_s\"] > ub_sr)\n    rl[\"code_over_canonical\"] = rl[\"kbar_code_1_Gamma_per_s\"] / rl[\"Gamma_canonical_per_s\"]\n    rl[\"quarter_EP_over_canonical\"] = rl[\"kbar_quarter_EP_Gamma_per_s\"] / rl[\"Gamma_canonical_per_s\"]"
+      }
+    ]
+  },
+  "calibration": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\ContractCalibrationReuse.lean",
+    "sha256": "f447d2de1f54774cb53b5808fa99b3095536606695d8c0efad36675dd80326c9",
+    "bytes": 6016,
+    "excerpts": [
+      {
+        "start_line": 18,
+        "end_line": 51,
+        "text": "/-- o raio de Rindler do relógio de N. -/\ndef refRadius (N : KillingNormalization) : ℝ := Real.sqrt (N.point 1 ^ 2 - N.point 0 ^ 2)\n\ntheorem refRadius_pos (N : KillingNormalization) : 0 < refRadius N := by\n  have hx : |N.point 0| < N.point 1 := N.point_in_wedge\n  obtain ⟨h1, h2⟩ := abs_lt.mp hx\n  unfold refRadius\n  apply Real.sqrt_pos.mpr\n  nlinarith\n\n/-- [DERIVED] κ·ρ(N) = 1. -/\ntheorem kappa_mul_radius (C : ContratoH2 W R N) : C.kappa * refRadius N = 1 := by\n  have h := C.observer_unit\n  simp [minkowskiSq, killingField] at h\n  have hk : C.kappa ^ 2 * (N.point 1 ^ 2 - N.point 0 ^ 2) = 1 := by\n    linear_combination h\n  unfold refRadius\n  rw [← Real.sqrt_sq C.kappa_pos.le, ← Real.sqrt_mul (sq_nonneg _), hk, Real.sqrt_one]\n\n/-- [DERIVED] ★ κ = 1/ρ(N): o VALOR de κ é o do relógio externo. -/\ntheorem kappa_eq_inv_radius (C : ContratoH2 W R N) : C.kappa = 1 / refRadius N := by\n  have h := kappa_mul_radius C\n  have hne := (refRadius_pos N).ne'\n  field_simp\n  linarith [h]\n\n/-- [DERIVED] ★★ κ FIXO DADO N: dois habitantes de `ContratoH2 W R N` têm o MESMO κ (o `rekappa` do cético 1 e\n    o `regauge` do cético 2 NÃO habitam o mesmo tipo indexado). -/\ntheorem kappa_fixed (C C' : ContratoH2 W R N) : C.kappa = C'.kappa := by\n  rw [kappa_eq_inv_radius C, kappa_eq_inv_radius C']\n\ntheorem no_rekappa (C : ContratoH2 W R N) {κ' : ℝ} (h : κ' ≠ C.kappa) :\n    ¬ ∃ C' : ContratoH2 W R N, C'.kappa = κ' :=\n  fun ⟨C', hC'⟩ => h (hC' ▸ kappa_fixed C' C)"
+      },
+      {
+        "start_line": 95,
+        "end_line": 114,
+        "text": "/-- [DERIVED] ★★ HONESTO: o par (W, R) NÃO fixa κ — se há habitante sobre algum N, há sobre TODO N'. O valor\n    de κ é o [INPUT] N; a v3.1 NÃO «fixa o parâmetro espectral» a partir do par. -/\ntheorem kappa_is_input (h : Nonempty (ContratoH2 W R N)) (N' : KillingNormalization) :\n    Nonempty (ContratoH2 W R N') :=\n  ⟨reindex h.some N'⟩\n\n\n/-- Bridge from the constructed angular quotient to the existing contract reading.\nThe H2 witness remains a hypothesis; none is manufactured here. -/\ntheorem polar_period_matches_contract (C : ContratoH2 W R N) {period : ℝ}\n    (hp : 0 < period) (h : AngularQuotientFaithful C.kappa period) :\n    1/period = C.unruhTemperature := by\n  exact reciprocal_temperature C.kappa_pos hp h\n\ntheorem same_normalization_same_angular_period (C C' : ContratoH2 W R N)\n    {period period' : ℝ} (hp : 0 < period) (hp' : 0 < period')\n    (h : AngularQuotientFaithful C.kappa period)\n    (h' : AngularQuotientFaithful C'.kappa period') : period = period' := by\n  rw [positive_faithful_period C.kappa_pos hp h,\n    positive_faithful_period C'.kappa_pos hp' h', kappa_fixed C C']"
+      }
+    ]
+  },
+  "h2_definitions": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ContratoQG_v31.lean",
+    "sha256": "2f2c6561a5a5d832b43f11f7bacccf4811eb4392f1832f78cf4a5838a72a4808",
+    "bytes": 24897,
+    "excerpts": [
+      {
+        "start_line": 207,
+        "end_line": 265,
+        "text": "    nada no par (W, R) escolhe esse ponto (teorema `kappa_is_input`); κ é a aceleração própria dele. Para o\n    κ_H de um buraco negro, a normalização é a assintótica (ξ → ∂_t no infinito) — FORA deste tipo plano\n    [OPEN]. -/\nstructure KillingNormalization where\n  point : Fin 4 → ℝ\n  point_in_wedge : point ∈ rightWedge\n\n/-! ## 3. CONTRATO H2 v3.1 -/\n\n/-- **ContratoH2 W R N** (v3.1) — igual à v3 (fidelidade, espectro contínuo, BW como campo, KMS), com o\n    observador fiducial substituído pelo ÍNDICE N: `observer_unit` pede |ξ_κ| = 1 NO PONTO DE REFERÊNCIA de N,\n    logo κ = 1/ρ(N) (teorema `kappa_eq_inv_radius`) — fixo dado N, livre como função de (W, R). -/\nstructure ContratoH2 (W : TGLSpecificAQFTWitness) (R : TGLModularRealization W)\n    (N : KillingNormalization) where\n  /-- (A) a normalização do campo de Killing — determinada por N (`observer_unit`). -/\n  kappa : ℝ\n  kappa_pos : 0 < kappa\n  /-- (Δ) o implementador do fluxo de R em vetores. -/\n  Δit : ℝ → (W.H ≃ₗᵢ[ℂ] W.H)\n  /-- (Δ) o fluxo da camada 1A de R É Ad(Δ^{it}). -/\n  flow_implemented : ∀ (t : ℝ) (a : R.modular.wedgeAlgebra.toStarSubalgebra),\n    ((R.modular.modularFlow t) a).val = (Δit t).conjStarAlgEquiv a.val\n  /-- (KMS) Δit é o grupo modular de (W.net rightWedge, W.vac): KMS a β = 1 para t ↦ Δit(−t). -/\n  kms : KMSAt W (fun t => Δit (-t)) 1\n  /-- (S) o grupo de boosts da cunha, representado em W.H. -/\n  boost : WedgeBoostRep W\n  /-- (S) BISOGNANO–WICHMANN COMO CAMPO: Δ^{it} = V(Λ(−2πt)). -/\n  bw : ∀ t : ℝ, Δit t = boost.V (-(2 * Real.pi * t))\n  /-- (P) translações fortemente contínuas. -/\n  translations_continuous : ∀ ψ : W.H, Continuous (fun a : Fin 4 → ℝ => W.U a ψ)\n  /-- (P) O DENTE DE FIDELIDADE: só a translação nula age trivialmente. -/\n  translations_faithful : ∀ a : Fin 4 → ℝ, W.U a = 1 → a = 0\n  /-- (P) energia positiva (condição espectral), forma analítica. -/\n  positive_energy : PositiveEnergy W\n  /-- (P) ergodicidade nula: os invariantes da translação nula são múltiplos do vácuo. -/\n  null_ergodic : ∀ ψ : W.H, (∀ l : ℝ, W.U (l • nullDir) ψ = ψ) → ψ ∈ (ℂ ∙ W.vac)\n  /-- (K) ★ NOVO: |ξ_κ| = 1 no ponto de referência de N — κ é a aceleração própria do relógio externo. -/\n  observer_unit : minkowskiSq (killingField kappa N.point) = 1\n  /-- (C) o campo de frames, REGIONAL. -/\n  E : (Fin 4 → ℝ) → Matrix (Fin 4) (Fin 4) ℝ\n  smooth_on : ∀ i j : Fin 4, ContDiffOn ℝ (⊤ : ℕ∞) (fun x => E x i j) rightWedge\n  det_unit_on : ∀ x ∈ rightWedge, IsUnit (E x).det\n  /-- (D) o jato: arrasto pelo diferencial da ação geométrica do boost. -/\n  dragged : ∀ (s : ℝ) (x : Fin 4 → ℝ), x ∈ rightWedge →\n    E (wedgeBoostMap s x) = boostMat s * E x\n  /-- (E) a fiducial é a direção do tempo modular, positivamente. -/\n  fiducial_is_modular : ∀ x ∈ rightWedge,\n    ∃ c : ℝ, 0 < c ∧ (fun i => E x i 0) = c • killingField kappa x\n\nnamespace ContratoH2\n\nvariable {W : TGLSpecificAQFTWitness} {R : TGLModularRealization W} {N : KillingNormalization}\n\n/-- a temperatura de Unruh em tempo de Killing: o NÚMERO κ/2π (que ela é a temperatura KMS do fluxo de\n    Killing é o teorema `unruh_is_kms`). -/\ndef unruhTemperature (C : ContratoH2 W R N) : ℝ := C.kappa / (2 * Real.pi)\n\n/-- o FLUXO DE KILLING do campo ξ_κ, em tempo de Killing τ: τ ↦ V(κτ). -/\ndef killingFlow (C : ContratoH2 W R N) (τ : ℝ) : W.H ≃ₗᵢ[ℂ] W.H := C.boost.V (C.kappa * τ)"
+      }
+    ]
+  },
+  "h2_kms": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ContratoQG_v31_Teoremas.lean",
+    "sha256": "4fa0eff792110ff5c076a83a60532636502e8c3335b5a7af2ab29994abee4ee1",
+    "bytes": 65168,
+    "excerpts": [
+      {
+        "start_line": 401,
+        "end_line": 438,
+        "text": "theorem modular_is_boost_at_two_pi (C : ContratoH2 W R N) :\n    (fun t => C.Δit (-t)) = (fun t => C.boost.V (2 * Real.pi * t)) := by\n  funext t\n  rw [C.bw]\n  ring_nf\n\n/-- [DERIVED] ★ UNRUH COMO RELAÇÃO KMS: o fluxo de Killing τ ↦ V(κτ) é KMS a β = 2π/κ. ⚠ (rodada 2) isto fixa\n    o PRODUTO β_Killing·κ = 2π — NÃO o valor de κ (cético 1, `kms_product_is_two_pi`). -/\ntheorem unruh_is_kms (C : ContratoH2 W R N) :\n    KMSAt W C.killingFlow (2 * Real.pi / C.kappa) := by\n  have h1 : KMSAt W (fun t => C.boost.V (2 * Real.pi * t)) 1 := by\n    have := C.kms\n    rwa [modular_is_boost_at_two_pi] at this\n  have hc : 0 < C.kappa / (2 * Real.pi) := div_pos C.kappa_pos (by positivity)\n  have h2 := KMSAt.rescale h1 hc\n  have hfun : (fun τ => (fun t => C.boost.V (2 * Real.pi * t)) (C.kappa / (2 * Real.pi) * τ))\n      = C.killingFlow := by\n    funext τ\n    unfold ContratoH2.killingFlow\n    field_simp\n  have hβ : (1 : ℝ) / (C.kappa / (2 * Real.pi)) = 2 * Real.pi / C.kappa := by\n    field_simp\n  rw [hfun, hβ] at h2\n  exact h2\n\ntheorem unruh_is_kms_temperature (C : ContratoH2 W R N) :\n    KMSAt W C.killingFlow (1 / C.unruhTemperature) := by\n  have h := unruh_is_kms C\n  have : (1 : ℝ) / C.unruhTemperature = 2 * Real.pi / C.kappa := by\n    unfold ContratoH2.unruhTemperature\n    have := C.kappa_pos.ne'\n    field_simp\n  rw [this]; exact h\n\n/-- [DERIVED] a relação que o tipo fixa: β_Killing·κ = 2π (a do cético 1). -/\ntheorem kms_product_is_two_pi (C : ContratoH2 W R N) :\n    (2 * Real.pi / C.kappa) * C.kappa = 2 * Real.pi := by\n  have := C.kappa_pos.ne'"
+      }
+    ]
+  },
+  "polar_period": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\PolarMinimalPeriod_v2.lean",
+    "sha256": "2112c0022287be0941a798f67e3f5d6f47251e26067ed7ba64516a38424364dc",
+    "bytes": 5137,
+    "excerpts": [
+      {
+        "start_line": 13,
+        "end_line": 15,
+        "text": "def AngularQuotientFaithful (kappa period : ℝ) : Prop :=\n  ∀ t u : ℝ, Circle.exp (kappa*t) = Circle.exp (kappa*u) ↔\n    ∃ n : ℤ, t = u + (n : ℝ)*period"
+      },
+      {
+        "start_line": 89,
+        "end_line": 108,
+        "text": "theorem faithful_period_iff {kappa period : ℝ} (hk : kappa ≠ 0) :\n    AngularQuotientFaithful kappa period ↔\n      kappa*period = 2*Real.pi ∨ kappa*period = -(2*Real.pi) :=\n  ⟨faithful_period_forces_one_turn hk, one_turn_gives_faithful_period hk⟩\n\ntheorem positive_faithful_period {kappa period : ℝ} (hk : 0 < kappa)\n    (hp : 0 < period) (h : AngularQuotientFaithful kappa period) :\n    period = 2*Real.pi/kappa := by\n  rcases faithful_period_forces_one_turn (ne_of_gt hk) h with hh | hh\n  · apply (eq_div_iff (ne_of_gt hk)).mpr\n    simpa [mul_comm] using hh\n  · have := mul_pos hk hp\n    have := Real.pi_pos\n    linarith\n\ntheorem reciprocal_temperature {kappa period : ℝ} (hk : 0 < kappa)\n    (hp : 0 < period) (h : AngularQuotientFaithful kappa period) :\n    1/period = kappa/(2*Real.pi) := by\n  rw [positive_faithful_period hk hp h]\n  field_simp"
+      }
+    ]
+  },
+  "finite_tomita": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\FiniteTomita.lean",
+    "sha256": "f845a71a81bb02585020f5da224a9407b4dd36b1408cccab37ea1b69cfb6647e",
+    "bytes": 9051,
+    "excerpts": [
+      {
+        "start_line": 33,
+        "end_line": 46,
+        "text": "/-- O vetor GNS do estado de Gibbs: `Ω = √ρ` (raiz psd via cálculo funcional). -/\ndef Omega : Matrix n n ℂ := CFC.sqrt ρ\n\n/-- O operador de Tomita `S y = Ω⁻¹ yᴴ Ω` (a extensão total de `xΩ ↦ xᴴΩ`). -/\ndef Sop (y : Matrix n n ℂ) : Matrix n n ℂ := (Omega ρ)⁻¹ * yᴴ * Omega ρ\n\n/-- A raiz do operador modular: `Δ^{1/2} y = Ω y Ω⁻¹`. -/\ndef DeltaHalf (y : Matrix n n ℂ) : Matrix n n ℂ := Omega ρ * y * (Omega ρ)⁻¹\n\n/-- O operador modular: `Δ y = ρ y ρ⁻¹`. -/\ndef Delta (y : Matrix n n ℂ) : Matrix n n ℂ := ρ * y * ρ⁻¹\n\n/-- O estado de Gibbs `ω(a) = Tr(ρ a)`. -/\ndef gibbs (a : Matrix n n ℂ) : ℂ := (ρ * a).trace"
+      },
+      {
+        "start_line": 174,
+        "end_line": 185,
+        "text": "/-! ## KMS na forma de Gibbs -/\n\n/-- [KERNEL] KMS: `ω(ab) = ω(b·Δ(a))` — a condição de equilíbrio modular\n    na forma algébrica (a continuação `t = −i` do fluxo, sem `ρ^{it}`).\n    Pura ciclicidade do traço + cancelamento não-singular. -/\ntheorem gibbs_kms (hρ : ρ.PosDef) (a b : Matrix n n ℂ) :\n    gibbs ρ (a * b) = gibbs ρ (b * Delta ρ a) := by\n  simp only [gibbs, Delta]\n  conv_rhs => rw [Matrix.trace_mul_comm]\n  simp only [mul_assoc]\n  rw [Matrix.nonsing_inv_mul _ (rho_det_isUnit ρ hρ), mul_one]\n  conv_rhs => rw [Matrix.trace_mul_comm]"
+      }
+    ]
+  },
+  "supercondutor": {
+    "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+    "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e",
+    "bytes": 76972,
+    "excerpts": [
+      {
+        "start_line": 338,
+        "end_line": 370,
+        "text": "\\subsubsection{Equação mestra do sistema}\n\nO dispositivo é descrito pela equação mestra de Lindblad para\nsistemas quânticos abertos:\n\\begin{equation}\n\\frac{d\\rho}{dt} = -\\frac{i}{\\hbar}[H_{\\text{eff}}, \\rho]\n  + \\mathcal{L}_{\\text{diss}}[\\rho]\n  + \\mathcal{L}_{\\text{holo}}[\\rho]\n\\label{eq:lindblad}\n\\end{equation}\nonde $\\rho$ é o operador densidade, $H_{\\text{eff}}$ é o\nHamiltoniano efetivo, $\\mathcal{L}_{\\text{diss}}[\\rho]$\nrepresenta os canais dissipativos convencionais, e\n$\\mathcal{L}_{\\text{holo}}[\\rho] = \\alphaii \\gamma_\\Lambda\n\\mathcal{D}[a^\\dagger_{\\text{out}} \\sigma_- +\n\\sigma_+ a_{\\text{in}}]\\rho$ é o termo de acoplamento\nholográfico que realiza a translação.\n\nO Hamiltoniano efetivo tem a forma:\n\\begin{equation}\nH_{\\text{eff}} = \\hbar\\omega_c(a^\\dagger_{\\text{in}}\n  a_{\\text{in}} + a^\\dagger_{\\text{out}} a_{\\text{out}})\n  + \\hbar\\omega_{\\text{OH}} \\sigma_+\\sigma_-\n  + \\hbar g_{\\text{JC}}(a^\\dagger_{\\text{in}} \\sigma_-\n  + \\sigma_+ a_{\\text{in}})\n  + \\hbar\\Omega(\\sigma_+ + \\sigma_-)\n\\label{eq:hamiltonian}\n\\end{equation}\nonde $\\omega_c$ é a frequência da cavidade, $\\omega_{\\text{OH}}\n= 2\\pi \\times 1.667{,}359$~MHz é a frequência de transição da\nhidroxila, $g_{\\text{JC}}$ é a constante de acoplamento\nJaynes-Cummings, e $\\Omega$ é a frequência de Rabi do\nbombeamento por micro-ondas."
+      }
+    ]
+  },
+  "device_prereg": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\PREREGISTRO_DEVICE_R1.json",
+    "sha256": "6e4e2ce553aea405878e967df9314be2af030b45e234dd35dbe1b30731d2560a",
+    "bytes": 6577,
+    "excerpts": [
+      {
+        "start_line": 84,
+        "end_line": 109,
+        "text": "    \"hbar\": 1.0,\n    \"omega_c\": 1.0,\n    \"omega_OH\": 1.2,\n    \"g_JC\": 0.15,\n    \"Omega\": 0.07,\n    \"gamma_Lambda_values\": [\n      0.0,\n      0.3,\n      1.0\n    ],\n    \"kappa_in\": 0.03,\n    \"kappa_out\": 0.04,\n    \"gamma_OH\": 0.02,\n    \"gamma_dephasing\": 0.01,\n    \"dephasing_convention\": \"rate*D[sigma_z]; off-diagonal damping is 2*rate\",\n    \"beta\": \"ALPHA_FINE_CODATA_2018 * sqrt(e), parsed from pinned source in runtime\",\n    \"holo_rate\": \"beta * gamma_Lambda\",\n    \"units\": \"all dimensionless INPUT; not physical calibration\",\n    \"truncation\": \"0/1 photon cutoff, OH two levels; excludes MQC third state |Psi> and full bosonic CCR\",\n    \"conventional_jumps\": [\n      \"a_in\",\n      \"a_out\",\n      \"sigma_minus\",\n      \"sigma_z\"\n    ],\n    \"holographic_jump\": \"a_out_dagger @ sigma_minus + sigma_plus @ a_in\""
+      }
+    ]
+  }
+}

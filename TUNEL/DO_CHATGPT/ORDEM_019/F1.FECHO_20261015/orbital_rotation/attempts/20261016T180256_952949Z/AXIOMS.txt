@@ -1,0 +1,95 @@
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 129ms
+import took 66.5s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T180256_952949Z\CompactBoostNullMomentLinkR1.lean:37:23: warning: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [nullScreenCLM,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+simp took 322ms
+ring took 172ms
+typeclass inference of ContinuousSMul took 112ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T180256_952949Z\CompactBoostNullMomentLinkR1.lean:113:2: error: Tactic `apply` failed: could not unify the conclusion of `Integrable.congr (L2.integrable_inner (f.toLp 2 ?m.44) ?m.46)`
+  Integrable ?m.54 ?m.44
+with the goal
+  Integrable (fun p => inner ℂ (f p) ((∂_{nullFrequencyDirection} f) p)) volume
+
+Note: The full type of `Integrable.congr (L2.integrable_inner (f.toLp 2 ?m.44) ?m.46)` is
+  (fun x => inner ℂ (↑↑(f.toLp 2 ?m.44) x) (↑↑?m.46 x)) =ᵐ[?m.44] ?m.54 → Integrable ?m.54 ?m.44
+
+f : 𝓢(NullFourierSpace, ℂ)
+⊢ Integrable (fun p => inner ℂ (f p) ((∂_{nullFrequencyDirection} f) p)) volume
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T180256_952949Z\CompactBoostNullMomentLinkR1.lean:120:83: error: unsolved goals
+F : NullFourierSpace → ℂ
+hF : Integrable F volume
+hz : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → F p = 0
+q : Transverse
+hi : ((Ioi 0).indicator fun u => F (nullFourierCoordinates q u)) = fun u => F (nullFourierCoordinates q u)
+⊢ ∫ (x : ℝ) in Ioi 0, F (nullFourierCoordinates q x) =
+    integral (volume.restrict (Ioi 0)) ((Ioi 0).indicator fun u => F (nullFourierCoordinates q u))
+simp took 185ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T180256_952949Z\CompactBoostNullMomentLinkR1.lean:202:2: error: 'change' tactic failed, pattern
+  (inner ℂ h d).re + (inner ℂ h d).re = 0
+is not definitionally equal to target
+  RCLike.re (inner ℂ h (compactBoostDerivative g hg hc)) + RCLike.re (inner ℂ (compactBoostDerivative g hg hc) h) = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T180256_952949Z\CompactBoostNullMomentLinkR1.lean:200:22: warning: This simp argument is unused:
+  inner_re_symm (𝕜 := ℂ) d h
+
+Hint: Omit it from the simp argument list.
+  simp only [map_add, i̵n̵n̵e̵r̵_̵r̵e̵_̵s̵y̵m̵m̵ ̵(̵𝕜̵ ̵:̵=̵ ̵ℂ̵)̵ ̵d̵ ̵h̵,̵ ̵map_zero] at hr
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T180256_952949Z\CompactBoostNullMomentLinkR1.lean:230:51: error(lean.unknownIdentifier): Unknown identifier `hh`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T180256_952949Z\CompactBoostNullMomentLinkR1.lean:228:92: error: unsolved goals
+h : ↥H1
+g : MomentumCoordinates → Fib
+he : ↑↑h =ᵐ[orbitalMeasure 0] g
+hc : HasCompactSupport g
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hcut : ∀ (x : MomentumCoordinates), ‖transverseProjection x‖ ≤ ε → g x = 0
+⊢ HasBoostEnergy B0 h (∫ (x : NullFourierSpace), x.ofLp 0 * unitaryFourierRealNullStress h x)
+'F1Fecho.MaxwellGlobal.nullScreenCLM_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullSchwartz_compact_generator_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_inner_profile_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_inner_null_integrals' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_expectation_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_inner_re_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_hasBoostEnergy' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_normalized_moment_eq_generator' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_hasBoostEnergy_normalized_moment' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.144ms
+	blocked (unaccounted) 1.53s
+	congr simp thm 4.65ms
+	dsimp 28.4ms
+	elaboration 217ms
+	fix level params 1.41ms
+	import 66.5s
+	initialization 35.1ms
+	instantiate metavars 2.35ms
+	interpretation 8.74s
+	let-to-have transformation 1.09ms
+	linting 31.5ms
+	norm_num 4.48ms
+	overlappingInstancesLinter 17.4ms
+	parsing 14ms
+	process pre-definitions 14.2ms
+	ring 172ms
+	share common exprs 15.9ms
+	simp 673ms
+	tactic execution 555ms
+	tacticAnalysis 54.1ms
+	type checking 363ms
+	typeclass inference 2.52s

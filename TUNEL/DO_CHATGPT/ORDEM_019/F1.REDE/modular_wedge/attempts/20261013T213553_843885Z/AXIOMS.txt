@@ -1,0 +1,88 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:35:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((realScalarMultiplier w hw h0 h1) f) x
+in the target expression
+  inner ℂ (↑↑(↑(realScalarMultiplier w hw h0 h1) f) x) (↑↑g x) =
+    inner ℂ (↑↑f x) (↑↑(↑(realScalarMultiplier w hw h0 h1) g) x)
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+w : ℝ → ℝ
+hw : Continuous w
+h0 : ∀ (x : ℝ), 0 ≤ w x
+h1 : ∀ (x : ℝ), w x ≤ 1
+f g : ↥(RegularHilbert H)
+x : ℝ
+hf : ↑↑((realScalarMultiplier w hw h0 h1) f) x = ↑(w x) • ↑↑f x
+hg : ↑↑((realScalarMultiplier w hw h0 h1) g) x = ↑(w x) • ↑↑g x
+⊢ inner ℂ (↑↑(↑(realScalarMultiplier w hw h0 h1) f) x) (↑↑g x) =
+    inner ℂ (↑↑f x) (↑↑(↑(realScalarMultiplier w hw h0 h1) g) x)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:73:61: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+c : ℝ
+f : ↥(VH H)
+x : ℝ
+ha : ↑↑((A c) f) x = ↑(spectralWeightA c x) • ↑↑f x
+hb : ↑↑((B c) f) x = ↑(spectralWeightB c x) • ↑↑f x
+⊢ spectralWeightB c x * (spectralWeightA c x * (↑‖↑↑f x‖ ^ 2).re) =
+    spectralWeightA c x * spectralWeightB c x * ‖↑↑f x‖ ^ 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:75:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (inner ℂ (↑(spectralWeightA c x) • ↑↑f x) (↑(spectralWeightB c x) • ↑↑f x)).re
+in the target expression
+  0 x ≤ RCLike.re (inner ℂ (↑(spectralWeightA c x) • ↑↑f x) (↑(spectralWeightB c x) • ↑↑f x))
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+c : ℝ
+f : ↥(VH H)
+x : ℝ
+ha : ↑↑((A c) f) x = ↑(spectralWeightA c x) • ↑↑f x
+hb : ↑↑((B c) f) x = ↑(spectralWeightB c x) • ↑↑f x
+heq :
+  (inner ℂ (↑(spectralWeightA c x) • ↑↑f x) (↑(spectralWeightB c x) • ↑↑f x)).re =
+    spectralWeightA c x * spectralWeightB c x * ‖↑↑f x‖ ^ 2
+⊢ 0 x ≤ RCLike.re (inner ℂ (↑(spectralWeightA c x) • ↑↑f x) (↑(spectralWeightB c x) • ↑↑f x))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:74:10: warning: This simp argument is unused:
+  inner_smul_left
+
+Hint: Omit it from the simp argument list.
+  simp [̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵l̵e̵f̵t̵,̵ ̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵,̵[̲i̲n̲n̲e̲r̲_̲s̲m̲u̲l̲_̲r̲i̲g̲h̲t̲,̲ inner_self_eq_norm_sq_to_K, Complex.mul_re]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:74:27: warning: This simp argument is unused:
+  inner_smul_right
+
+Hint: Omit it from the simp argument list.
+  simp [inner_smul_left, i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵,̵ ̵inner_self_eq_norm_sq_to_K, Complex.mul_re]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:79:0: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1800000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:81:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (1800000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:86:2: error: Type mismatch
+  bounded_graph_positive ?m.39 ?m.44 ?m.49 ?m.55 ?m.56
+has type
+  0 ≤ (inner ℂ (↑?m.56) (↑(boundedGraphOperator ?m.39 ?m.44 ?m.49) ?m.56)).re
+but is expected to have type
+  0 ≤ (inner ℂ (↑f) (↑(T c) f)).re
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:90:2: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (1800000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+'F1Rede.Wedge.T_selfadjoint' does not depend on any axioms
+'F1Rede.Wedge.T_positive' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.Wedge.T_graph' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

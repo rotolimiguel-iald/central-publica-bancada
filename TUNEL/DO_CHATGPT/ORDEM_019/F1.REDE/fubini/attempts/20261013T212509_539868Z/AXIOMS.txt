@@ -1,0 +1,110 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:65:0: warning: automatically included section variable(s) unused in theorem `F1Rede.measurableSet_good_sections`:
+  [SFinite ν]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite ν] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:75:0: warning: automatically included section variable(s) unused in theorem `F1Rede.sectionLp_dist`:
+  [SFinite μ]
+  [SFinite ν]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite μ] [SFinite ν] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:101:15: warning: This simp argument is unused:
+  Set.piecewise
+
+Hint: Omit it from the simp argument list.
+  simp only [Set.p̵i̵e̵c̵e̵w̵i̵s̵e̵,̵ ̵S̵e̵t̵.̵mem_setOf_eq, hy, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:101:30: warning: This simp argument is unused:
+  Set.mem_setOf_eq
+
+Hint: Omit it from the simp argument list.
+  simp only [Set.piecewise, S̵e̵t̵.̵m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵,̵ ̵hy, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:108:0: warning: automatically included section variable(s) unused in theorem `F1Rede.norm_sq_integral`:
+  [SFinite μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:151:8: error(lean.unknownIdentifier): Unknown identifier `ae_ae_of_ae_prod`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:161:19: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(↑↑(curryLp f) y + ↑↑(curryLp g) y) x
+in the target expression
+  ↑↑f (x, y) + ↑↑g (x, y) = ↑↑((↑↑(curryLp f) + ↑↑(curryLp g)) y) x
+
+α : Type u_1
+β : Type u_2
+E : Type u_3
+inst✝⁷ : MeasurableSpace α
+inst✝⁶ : MeasurableSpace β
+inst✝⁵ : NormedAddCommGroup E
+μ : Measure α
+ν : Measure β
+inst✝⁴ : SFinite μ
+inst✝³ : SFinite ν
+inst✝² : InnerProductSpace ℝ E
+inst✝¹ : MeasureTheory.IsSeparable μ
+inst✝ : TopologicalSpace.SeparableSpace E
+f g : ↥(Lp E 2 (μ.prod ν))
+y : β
+hfg : ↑↑(↑↑(curryLp (f + g)) y) =ᵐ[μ] fun x => ↑↑(f + g) (x, y)
+hf : ↑↑(↑↑(curryLp f) y) =ᵐ[μ] fun x => ↑↑f (x, y)
+hg : ↑↑(↑↑(curryLp g) y) =ᵐ[μ] fun x => ↑↑g (x, y)
+hadd : ∀ᵐ (x : α) ∂μ, ↑↑(f + g) (x, y) = (↑↑f + ↑↑g) (x, y)
+hout : ↑↑(curryLp f + curryLp g) y = (↑↑(curryLp f) + ↑↑(curryLp g)) y
+x : α
+hfgx : ↑↑(↑↑(curryLp (f + g)) y) x = ↑↑(f + g) (x, y)
+hfx : ↑↑(↑↑(curryLp f) y) x = ↑↑f (x, y)
+hgx : ↑↑(↑↑(curryLp g) y) x = ↑↑g (x, y)
+haddx : ↑↑(f + g) (x, y) = ↑↑f (x, y) + ↑↑g (x, y)
+hsum : ↑↑(↑↑(curryLp f) y + ↑↑(curryLp g) y) x = ↑↑(↑↑(curryLp f) y) x + ↑↑(↑↑(curryLp g) y) x
+⊢ ↑↑f (x, y) + ↑↑g (x, y) = ↑↑((↑↑(curryLp f) + ↑↑(curryLp g)) y) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:173:20: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(c • ↑↑(curryLp f) y) x
+in the target expression
+  c • ↑↑f (x, y) = ↑↑((c • ↑↑(curryLp f)) y) x
+
+α : Type u_1
+β : Type u_2
+E : Type u_3
+inst✝⁹ : MeasurableSpace α
+inst✝⁸ : MeasurableSpace β
+inst✝⁷ : NormedAddCommGroup E
+μ : Measure α
+ν : Measure β
+inst✝⁶ : SFinite μ
+inst✝⁵ : SFinite ν
+inst✝⁴ : InnerProductSpace ℝ E
+inst✝³ : MeasureTheory.IsSeparable μ
+inst✝² : TopologicalSpace.SeparableSpace E
+𝕜 : Type u_4
+inst✝¹ : NormedField 𝕜
+inst✝ : NormedSpace 𝕜 E
+c : 𝕜
+f : ↥(Lp E 2 (μ.prod ν))
+y : β
+hcf : ↑↑(↑↑(curryLp (c • f)) y) =ᵐ[μ] fun x => ↑↑(c • f) (x, y)
+hf : ↑↑(↑↑(curryLp f) y) =ᵐ[μ] fun x => ↑↑f (x, y)
+hsmul : ∀ᵐ (x : α) ∂μ, ↑↑(c • f) (x, y) = (c • ↑↑f) (x, y)
+hout : ↑↑(c • curryLp f) y = (c • ↑↑(curryLp f)) y
+x : α
+hcfx : ↑↑(↑↑(curryLp (c • f)) y) x = ↑↑(c • f) (x, y)
+hfx : ↑↑(↑↑(curryLp f) y) x = ↑↑f (x, y)
+hsmulx : ↑↑(c • f) (x, y) = c • ↑↑f (x, y)
+hsum : ↑↑(c • ↑↑(curryLp f) y) x = c • ↑↑(↑↑(curryLp f) y) x
+⊢ c • ↑↑f (x, y) = ↑↑((c • ↑↑(curryLp f)) y) x
+'F1Rede.memLp_section_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_coe_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.norm_sq_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_norm_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.norm_sq_disintegration' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_stronglyMeasurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.curryLp_coe_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.curryLp_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.curryLinearIsometry' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

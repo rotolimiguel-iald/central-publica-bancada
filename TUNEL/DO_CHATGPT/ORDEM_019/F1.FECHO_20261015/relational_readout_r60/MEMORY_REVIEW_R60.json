@@ -1,0 +1,52 @@
+{
+  "status": "PASS_WITH_SCOPE",
+  "reviewer": "codex-mission-memory-review",
+  "utc": "2026-10-17T18:13:46.265756+00:00",
+  "plan": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\MEMORY_PLAN_R60.json",
+    "sha256": "122fa3c03030e2d199d2a1d8cd334be9ec8f6485d23dbe588a4fd6dfe216fac2"
+  },
+  "applier": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\memory_r60.py",
+    "sha256": "6318d37238a0de242aeaf3d11bf0ced3c5e7cfabea1a5dbdca42c95575a661eb"
+  },
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\MEMORY_APPEND_R60.txt",
+      "sha256": "2319197e6cebfc8b870c0936d4d9492a4d4b893bebda1c7ecf440499000379cf"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\support_r60.py",
+      "sha256": "2b1a5edc2214f0baa3a38a1dabf9220b112a6b5279899a708364fb92c86e0bb8"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\FINAL_REVIEW_R60.json",
+      "sha256": "46fd732b8c83d53784f15f7a22c594bb2afdfb2c24023fef287d1d558dcd002b"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\independent_review\\INDEPENDENT_CHECKS_R60.json",
+      "sha256": "fa31369bf3f3caca4d49d70fdb4510e69208817bfed37afa9e3e2d28a5d9cbec"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\independent_review\\PROJECT_FINAL_R60.json",
+      "sha256": "08cf0096c80d526fd7bf2e98e8e839171d32fcc22b2651e5e121356f34d4e316"
+    }
+  ],
+  "checks": [
+    "Conteúdo do apêndice preserva INPUT, DERIVED, contramodelos, limite expectativa/estimador e acesso H_obs/H_hid; não aceita R4/R5 nem promove documentação a observação.",
+    "Oito destinos únicos são exatamente os do plano anterior sob claim939; Claude usa MEMORY_2.md. Baselines SHA/bytes, append de2504bytes e SHA final raw+extra conferidos em leitura novamente ao concluir.",
+    "Plan e applier pinados; apply exige status PASS de revisor distinto e pins exatos do plano/applier/relatório.",
+    "Preflight usa referência científica exata, revisão e projection_sha256 frescos, lease atual R5 e ator root; esta revisão não executou esse preflight nem assumiu a lease.",
+    "Intenção exclusiva antecede escrita; backups byte a byte na mesma pasta de TODOS os destinos são criados e verificados antes de qualquer substituição.",
+    "Append puro via temporário exclusivo, fsync, conferência raw+extra/prefixo e baseline antes de os.replace; recibos individuais e final exclusivos; nenhuma remoção de backups ou truncamento direto.",
+    "AST de applier/helper lido sem execução; nenhum accept, alteração de critério, provedor, compilação ou leitura de segredo no fluxo revisado."
+  ],
+  "findings": [],
+  "limits": [
+    "É parecer de plano/código/bytes; aplicação ainda não realizada ou verificada por este revisor. Revalidar baseline e preflight imediatamente antes do ato autorizado.",
+    "CAS cooperativo por conferência de bytes e missão; não há lock global dos oito arquivos. Corrida entre última conferência e replace não é eliminada; execução exige ausência de escritor concorrente conforme coordenação.",
+    "Não há transação global de filesystem. Falha parcial exige conciliação dos recibos, temporários e backups; não repetir cegamente.",
+    "support_r60.py é dependência lida e pinada neste parecer, mas o applier não verifica automaticamente seu pin; preservar esses bytes durante aplicação.",
+    "Sem autorização nova, aplicação, aceitação científica, gate ou promessa de conclusão integral de R4/R5."
+  ]
+}

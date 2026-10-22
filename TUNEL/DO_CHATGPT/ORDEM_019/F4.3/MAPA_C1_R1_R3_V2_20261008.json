@@ -1,0 +1,38 @@
+{
+  "tipo": "ERRATA",
+  "rota_id": "ringdown.modo_unico.degenerescencia",
+  "dominio": "RINGDOWN",
+  "titulo": "F4.3 — errata c1 R1–R3: relógio V1, IMR primário e veredito conjunto",
+  "pergunta": "Como ler o diagnóstico 220+440 no relógio V1 sem transportar poder de k=1 ou duplicar a decisão do V1 no conjunto D?",
+  "dados": [],
+  "metodo": "Consulta ao Nós Vivo F4.3, leitura da auditoria c1 e da sonda do relógio; append ao lado no plano com backup byte a byte e novo pré-registro V2. Nenhuma leitura de strain ou PE.",
+  "resultado": "As seq 58/87/91, C6, Fisher B2 e proxy 0,06σ do 440 são k=1 históricos. O V1 usa k=2π/κ̂: na grade prógrada o 220 não é absorvido; a gerência declara absorção no ramo contra-rotante só-220, resolvida pelo IMR completo. F4.3 permanece diagnóstico subordinado ao V1, com corroboração no mesmo sentido por interseção, SVD só como triagem e manifesto fail-closed.",
+  "veredito": "PRE_REGISTERED_DESIGN_V2__AWAITING_POWER__OPERATOR_REQUEST_SUSPENDED__NO_DATA_OPENED",
+  "estatuto": "INPUT",
+  "status": "EXAMINADA_COM_DEFEITO",
+  "olhou_dados": false,
+  "defeito": "Poder físico do conjunto D não medido; família contra-rotante consta como leitura DECLARADO da gerência nesta camada; manifesto de execução e revisão cética ainda pendentes.",
+  "nao_refazer": "Preservados o pré-registro V1, os diagnósticos k=1, a QNM_GRID e a auditoria c1. Nenhum dado observacional foi aberto.",
+  "proximo_passo": "Auditar a camada V2; preencher e pinar manifesto de eventos, PSD, janelas, priors, início e família antes de injeções exatas; medir poder sintético com IMR primário V1. Pedido de abertura ao operador permanece suspenso.",
+  "onde": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3",
+  "artefatos": [
+    {
+      "caminho": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\PLANO_E_PREREGISTRO.md",
+      "bytes": 13012,
+      "sha256": "f58e42b2e8c500c1315d212e9f3fdfc14d9f44485360fbccd57d78a7edc78612"
+    },
+    {
+      "caminho": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\PREREGISTRO_F4_3_V2.json",
+      "bytes": 7061,
+      "sha256": "cf39d2a2fe919827b9a2e9ca48796c622675f81b54eebc598af8441bc53eaadc"
+    },
+    {
+      "caminho": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\RESULTADO_C1_F43_V2_20261008.json",
+      "bytes": 2263,
+      "sha256": "28ec3cf68ff4dc6c3b2e981325b932e3ca73e287e56c38362555f2b14675f75d"
+    }
+  ],
+  "refs": ["ringdown.ramo_b_preregistro_v386"],
+  "corrige": 797,
+  "nota": "Errata ao lado da auditoria c1 seq 805. Poder e autorização ainda pendentes; nenhum gate alterado."
+}

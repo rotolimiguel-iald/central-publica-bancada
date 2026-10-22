@@ -1,0 +1,9 @@
+# F3.2 R3 — gate e runner V1.x
+
+[REAL — documental] O vínculo R3 aponta ao rascunho V2 R3 por bytes e SHA-256. O gate confere seis fontes documentais e mantém L1b/L6 como DECLARADO_UNVERIFIED; presença no rascunho não é verificação nem admissão D-H. A orientação ± dos masers e TDCOSMO é conferida contra sinais no trecho textual pinado da fonte e contra sigma_plus/sigma_minus quando presentes no draft_metadata. A âncora exige contexto; para o 1,33 do CCHP, exige também TRGB, H_0 e (sys).
+
+[REAL — controle sintético] Preflight e staged usam a mesma regra: n_alvos_declarados percorre o inventário V1.x inteiro e conta não verificado pelo gate E não admitido em registro pinado. Como não há registro D-H pinado, o conjunto atual é {L1b, L6} e n=2. Uma alegação de admissão não vazia é recusada nesta R3; futura admissão requer versão nova. A regra 1 da função proposta classifica o primário como INCONCLUSIVE_SYSTEMATICS, apenas no ensaio fabricado. O campo oficial verdict fica nulo.
+
+[REAL — controle sintético] A caixa de covariância cobre também R_r25 (L1bN com L2N/L3N) e S_com_sirenes (L6 independente na caixa atual; covariâncias reais com sirenes [OPEN]). O runner calcula estatísticas nas duas pontas de cinco famílias. O fundo livre usa a forma V1 r_d ~ U[130,160] Mpc, com uma função quadrática fabricada no lugar do likelihood cosmológico, e quadratura n=100/200; não é CAMB nem o motor real da Bancada. A função de veredito R3 é carregada da fonte textual exata no JSON pinado, conferida por hash e executada só com valores fabricados. Modo real é recusado antes da leitura documental.
+
+[OPEN/INPUT] V2 permanece rascunho não congelado; F3.4, X13/NAT-22, D-H, D-J e auditoria c1 são pendências. Nenhum dado observacional foi aberto ou composto, nenhum token final foi cunhado e nenhum gate foi movido. NOT_FALSIFIED nunca é confirmação.

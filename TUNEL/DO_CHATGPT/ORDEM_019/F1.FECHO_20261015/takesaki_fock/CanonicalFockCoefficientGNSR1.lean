@@ -1,0 +1,129 @@
+import CanonicalFockSpectralGNSR2
+import RegularIntervalVectorsR1
+import RegularScalarGNSActionR2
+/-! The actual normalized Fourier coefficient map is onto the dual-weight
+GNS completion. Surjectivity is proved from interval totality and the concrete
+cyclic wedge vacuum, without an abstract Hilbert-space identification. -/
+set_option autoImplicit false
+set_option maxErrors 3
+set_option maxHeartbeats 700000
+set_option synthInstance.maxHeartbeats 500000
+noncomputable section
+namespace F1Fecho.CanonicalFockCoefficientGNS
+open TGLExt.ImportedSQ F1Rede.BosonicFock TGLV350.Regular MeasureTheory Filter
+open F1Fecho.CanonicalFockRegular F1Fecho.CanonicalFockWeight
+open F1Fecho.CanonicalFockFiniteWeight F1Fecho.CanonicalFockGNS
+open F1Fecho.RegularNormalizedFourier F1Fecho.RegularSpectralAverage
+open F1Fecho.CanonicalFockSpectralGNS F1Fecho.LpIntervalTotality
+open F1Fecho.RegularIntervalVectors
+open scoped Topology ENNReal
+
+def coefficientGNS : Submodule ℂ (RegularHilbert F) :=
+  GNSSubspace.comap spectralCode.toLinearMap
+
+theorem coefficientGNS_closed : IsClosed (coefficientGNS : Set (RegularHilbert F)) :=
+  (Submodule.isClosed_topologicalClosure _).preimage spectralCode.continuous
+
+theorem coefficientGNS_mem (f : RegularHilbert F) :
+    f ∈ coefficientGNS ↔ spectralCode f ∈ GNSSubspace := Iff.rfl
+
+theorem average_coefficient_mem (h : ℝ) (hh : 0<h) :
+    (h⁻¹ : ℝ) • coefficient h vacuum ∈ coefficientGNS := by
+  let av : finiteLeftIdeal :=
+    ⟨⟨F1Fecho.RegularCoreAverage.regularAverage fockFlow h,
+        F1Fecho.RegularCoreAverage.regularAverage_mem fockFlow M h⟩,
+      F1Fecho.RegularCoreFiniteWeight.regularAverage_hasFiniteDualSquare fockFlow h hh⟩
+  have he : spectralCode ((h⁻¹ : ℝ) • coefficient h vacuum)=scalarGNSOrbit av := by
+    apply Lp.ext
+    exact (spectralCode_average_ae fockFlow vacuum fockFlow_vacuum h hh).trans
+      (scalarGNSOrbit_ae av).symm
+  change spectralCode ((h⁻¹ : ℝ) • coefficient h vacuum) ∈ closure (Set.range scalarGNSLinear)
+  exact subset_closure ⟨av,he.symm⟩
+
+theorem coefficient_mem (h : ℝ) (hh : 0<h) : coefficient h vacuum ∈ coefficientGNS := by
+  have hs := coefficientGNS.smul_of_tower_mem h (average_coefficient_mem h hh)
+  simpa only [smul_smul,mul_inv_cancel₀ hh.ne',one_smul] using hs
+
+theorem regular_preserves (t : ℝ) (f : RegularHilbert F) (hf : f∈coefficientGNS) :
+    regularUnitary t f ∈ coefficientGNS := by
+  change spectralCode (regularUnitary t f) ∈ GNSSubspace
+  rw [RegularSpectralCoreRange.spectralCode_regular]
+  exact F1Fecho.RegularScalarGNSAction.scalarGNSAmbientAction_preserves weightContext
+    ⟨regularUnitary t,regular_mem t⟩ (spectralCode f) hf
+
+theorem fibre_preserves (A : F →L[ℂ] F) (hA : A∈M)
+    (f : RegularHilbert F) (hf : f∈coefficientGNS) : fibre A f ∈ coefficientGNS := by
+  change spectralCode (fibre A f) ∈ GNSSubspace
+  rw [spectralCode_fibre,←RegularSpectralCoreRange.dualOrbit_fibre]
+  exact F1Fecho.RegularScalarGNSAction.scalarGNSAmbientAction_preserves weightContext
+    ⟨fibre A,fibre_mem A hA⟩ (spectralCode f) hf
+
+theorem interval_vacuum_mem (a b : ℝ) : intervalVector a b vacuum ∈ coefficientGNS := by
+  by_cases hab : a<b
+  · rw [←regular_coefficient fockFlow vacuum fockFlow_vacuum a b]
+    exact regular_preserves a _ (coefficient_mem (b-a) (sub_pos.mpr hab))
+  · rw [intervalVector_of_ge a b vacuum (le_of_not_gt hab)]
+    exact coefficientGNS.zero_mem
+
+theorem interval_orbit_mem (a b : ℝ) (A : F →L[ℂ] F) (hA : A∈M) :
+    intervalVector a b (A vacuum) ∈ coefficientGNS := by
+  rw [←fibre_interval]
+  exact fibre_preserves A hA _ (interval_vacuum_mem a b)
+
+theorem coefficientGNS_eq_top : coefficientGNS=⊤ := by
+  letI : CompleteSpace coefficientGNS := coefficientGNS_closed.completeSpace_coe
+  apply Submodule.orthogonal_eq_bot_iff.mp
+  apply le_antisymm ?_ bot_le
+  intro f hf
+  change f=0
+  have hi (a b : ℝ) : (∫ t in Set.Ioc a b, f t)=0 := by
+    apply F1Fecho.WedgeCyclic.orthogonal_vacuumOrbit_zero F1Rede.CanonicalWedge.spectralOutput.KWR
+    intro A hA
+    have hh := Submodule.inner_right_of_mem_orthogonal (interval_orbit_mem a b A hA) hf
+    rw [intervalVector_inner] at hh
+    exact inner_eq_zero_symm.mp hh
+  apply vector_eq_zero_of_intervals f
+  intro a b
+  simp only [intervalIntegral,hi,sub_self]
+
+theorem spectralCode_mem_GNS (f : RegularHilbert F) : spectralCode f ∈ GNSSubspace := by
+  apply (coefficientGNS_mem f).mp
+  rw [coefficientGNS_eq_top]
+  trivial
+
+theorem GNS_eq_spectralCode_range :
+    (GNSSubspace : Set (RegularHilbert (RegularHilbert F)))=Set.range (spectralCode (H:=F)) := by
+  apply Set.Subset.antisymm GNS_subset_spectralCode
+  rintro _ ⟨f,rfl⟩
+  exact spectralCode_mem_GNS f
+
+def coefficientToGNS : RegularHilbert F →ₗᵢ[ℂ] GNSHilbert where
+  toFun f := ⟨spectralCode f,spectralCode_mem_GNS f⟩
+  map_add' f g := Subtype.ext (spectralCode.map_add f g)
+  map_smul' c f := Subtype.ext (spectralCode.map_smul c f)
+  norm_map' f := spectralCode.norm_map f
+
+theorem coefficientToGNS_surjective : Function.Surjective coefficientToGNS := by
+  intro x
+  obtain ⟨f,hf⟩ := GNS_subset_spectralCode x.property
+  exact ⟨f,Subtype.ext hf⟩
+
+def coefficientUnitary : RegularHilbert F ≃ₗᵢ[ℂ] GNSHilbert :=
+  LinearIsometryEquiv.ofSurjective coefficientToGNS coefficientToGNS_surjective
+
+theorem coefficientUnitary_coe (f : RegularHilbert F) :
+    (coefficientUnitary f).val=spectralCode f := rfl
+
+end F1Fecho.CanonicalFockCoefficientGNS
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.coefficientGNS_closed
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.average_coefficient_mem
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.coefficient_mem
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.regular_preserves
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.fibre_preserves
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.interval_vacuum_mem
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.interval_orbit_mem
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.coefficientGNS_eq_top
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.spectralCode_mem_GNS
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.GNS_eq_spectralCode_range
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.coefficientToGNS_surjective
+#print axioms F1Fecho.CanonicalFockCoefficientGNS.coefficientUnitary_coe

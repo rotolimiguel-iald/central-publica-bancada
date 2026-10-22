@@ -1,0 +1,862 @@
+{
+  "schema": "r66-reuse-pins-v1",
+  "author": "/root/maxwell_covariance_review",
+  "source_count": 24,
+  "sources": [
+    {
+      "id": "finite_helpers",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\finite_device_functions_r62.py",
+      "sha256": "be3d3b21f7a5e8e0c8db812c44d6dd599b84613f5b5fcbd53cc054b01a54d069",
+      "bytes": 2361,
+      "line_count": 70,
+      "ranges": [
+        [
+          9,
+          12
+        ],
+        [
+          18,
+          23
+        ],
+        [
+          35,
+          68
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 9,
+          "line_end": 12,
+          "text": "def vec(a): return a.reshape(-1, order=\"F\")\n\n\ndef unvec(a, d): return a.reshape((d, d), order=\"F\")",
+          "excerpt_utf8_lf_sha256": "0fd71817d0020f75fda67df1a8317a5ecc870db5075ea9b4f069a629fcaf1875"
+        },
+        {
+          "line_start": 18,
+          "line_end": 23,
+          "text": "def rate(value):\n    if isinstance(value, bool) or not isinstance(value, (int, float)):\n        raise ValueError(\"Rate must be a finite real non-boolean number\")\n    if not math.isfinite(value) or value < 0:\n        raise ValueError(\"Rate must be finite and nonnegative\")\n    return float(value)",
+          "excerpt_utf8_lf_sha256": "02a852aa13e289e26b3f4a6053f184a3c0a6d37df2f4aa8ee7138baacc95ca0f"
+        },
+        {
+          "line_start": 35,
+          "line_end": 68,
+          "text": "def embed(a, region, dims):\n    \"\"\"Actual local matrix algebra embedding, identity on complementary factors.\"\"\"\n    region = tuple(region)\n    local_dims = tuple(dims[i] for i in region)\n    ld = math.prod(local_dims)\n    if a.shape != (ld, ld): raise ValueError(\"Local operator dimension mismatch\")\n    n = math.prod(dims)\n    tuples = list(itertools.product(*[range(d) for d in dims]))\n    out = np.zeros((n,n), complex)\n    for i, ii in enumerate(tuples):\n        li = int(np.ravel_multi_index(tuple(ii[k] for k in region), local_dims)) if region else 0\n        for j, jj in enumerate(tuples):\n            if all(ii[k] == jj[k] for k in range(len(dims)) if k not in region):\n                lj = int(np.ravel_multi_index(tuple(jj[k] for k in region), local_dims)) if region else 0\n                out[i,j] = a[li,lj]\n    return out\n\n\ndef liouvillian(h, jumps):\n    d = len(h); eye = np.eye(d)\n    out = -1j*(np.kron(eye,h)-np.kron(h.T,eye))\n    for raw_rate, j in jumps:\n        gamma = rate(raw_rate)\n        q = j.conj().T@j\n        out += gamma*(np.kron(j.conj(),j)-.5*np.kron(eye,q)-.5*np.kron(q.T,eye))\n    return out\n\n\ndef direct_generator(h,jumps,rho):\n    out = -1j*(h@rho-rho@h)\n    for gamma,j in jumps:\n        q = j.conj().T@j\n        out += gamma*(j@rho@j.conj().T-.5*(q@rho+rho@q))\n    return out",
+          "excerpt_utf8_lf_sha256": "0723a3e7a6f4c72427e39f755f5e7574b9100d339b6a27d08e8bcca8a0997d28"
+        }
+      ]
+    },
+    {
+      "id": "finite_model",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\run_finite_device.py",
+      "sha256": "89332d76e3fdcbf67f50e8328dfd9316196d7ef18ccf710666eb544426aa17be",
+      "bytes": 17373,
+      "line_count": 276,
+      "ranges": [
+        [
+          163,
+          172
+        ],
+        [
+          184,
+          191
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 163,
+          "line_end": 172,
+          "text": "    dims=tuple(m[\"factor_dims\"]); d=math.prod(dims)\n    algebra=algebra_measurements(dims)\n    checks += [check(\"local_algebra_\"+k,v,nm[\"algebra_tolerance\"]) for k,v in algebra[\"errors\"].items()]\n    lower=np.array([[0,1],[0,0]],complex); z=np.diag([1.,-1.]).astype(complex)\n    ai=embed(lower,(0,),dims); ao=embed(lower,(1,),dims); sm=embed(lower,(2,),dims); sp=sm.conj().T\n    h=m[\"omega_c\"]*(ai.conj().T@ai+ao.conj().T@ao)+m[\"omega_OH\"]*(sp@sm)\n    h+=m[\"g_JC\"]*(ai.conj().T@sm+sp@ai)+m[\"Omega\"]*(sp+sm)\n    jump=ao.conj().T@sm+sp@ai\n    conventional=[(m[\"kappa_in\"],ai),(m[\"kappa_out\"],ao),(m[\"gamma_OH\"],sm),\n                  (m[\"gamma_dephasing\"],embed(z,(2,),dims))]",
+          "excerpt_utf8_lf_sha256": "a3415e1d5e1fe384375993303122135d009144d1b3599c2160be0965bf9482ce"
+        },
+        {
+          "line_start": 184,
+          "line_end": 191,
+          "text": "    for gamma_lambda in m[\"gamma_Lambda_values\"]:\n        jumps=conventional+[(beta*rate(gamma_lambda),jump)]\n        gen=liouvillian(h,jumps); hd=heisenberg_energy(h,jumps)\n        trvec=vec(np.eye(d)); energyvec=vec(h.T)\n        direct_error=max(residual(unvec(gen@vec(r),d)-direct_generator(h,jumps,r)) for _,r in states)\n        trace_error=float(np.linalg.norm(trvec@gen))\n        dual_error=max(abs(np.trace(h@direct_generator(h,jumps,r))-np.trace(r@hd)) for _,r in states)\n        generator_rows.append({\"gamma_Lambda\":gamma_lambda,\"gamma_holo\":beta*gamma_lambda,",
+          "excerpt_utf8_lf_sha256": "21c43e2581186274df45f8d1cdf0d2414b12cdbfb5d5ca2250c63bb6cfc64037"
+        }
+      ]
+    },
+    {
+      "id": "frame_R57",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_clock_r57\\derive_polarization_r57.py",
+      "sha256": "2acbe17805e7b8c9adfecafa113c64e14fb6c73c8669be301b4d17084079b8fc",
+      "bytes": 15690,
+      "line_count": 264,
+      "ranges": [
+        [
+          182,
+          197
+        ],
+        [
+          243,
+          249
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 182,
+          "line_end": 197,
+          "text": "    wd = s.Symbol(\"omega_drive\", positive=True)\n    N = ni + no + ne\n    R = s.diag(*[s.exp(s.I * wd * t * N[k, k]) for k in range(8)])\n    Rdag = R.H\n    h0 = wc * (ni + no) + w * ne + g * (ai.H * sm + sp * ai)\n    h_lab = h0 + Om * (s.exp(-s.I * wd * t) * sp + s.exp(s.I * wd * t) * sm)\n    h_rot = (wc - wd) * (ni + no) + (w - wd) * ne + g * (ai.H * sm + sp * ai) + Om * (sp + sm)\n    zero(\"rotation_unitarity\", R * Rdag - s.eye(8))\n    zero(\"free_JC_total_number_covariance\", N * h0 - h0 * N)\n    zero(\"holographic_jump_total_number_covariance\", N * J - J * N)\n    zero(\"laboratory_to_rotating_generator\", R * h_lab * Rdag + s.I * R.diff(t) * Rdag - h_rot)\n    zero(\"rotating_OH_polarization_carrier\", R * sp * Rdag - s.exp(s.I * wd * t) * sp)\n    zero(\"rotating_holographic_jump\", R * J * Rdag - J)\n    for name, jump in [(\"in\", ai), (\"out\", ao), (\"OH\", sm)]:\n        zero(\"rotating_loss_phase_\" + name, R * jump * Rdag - s.exp(-s.I * wd * t) * jump)\n    zero(\"rotating_dephasing_invariant\", R * Z * Rdag - Z)",
+          "excerpt_utf8_lf_sha256": "13b56b2bc1d00fe52021ce964b2091600ab9494a6e4b60ac4805a1bcadda9b78"
+        },
+        {
+          "line_start": 243,
+          "line_end": 249,
+          "text": "            \"named_input\": \"LAB_PHASE_LOCKED_DRIVE: microwave drive has the explicit laboratory phases exp(+-i omega_drive t)\",\n            \"rotation\": \"R(t)=exp(i omega_drive t N_total); rho_rot=R rho_lab R_dagger\",\n            \"derived_h_rot\": \"(omega_c-omega_drive)*N_c+(omega_OH-omega_drive)*n_e+gJC+OmegaRabi*(sigma++sigma-)\",\n            \"all_dissipators_preserved\": \"J and Z invariant; lowering jumps gain only unit-modulus phases\",\n            \"derived_reading\": \"z_lab(t)=exp(i omega_drive t)*z_rot(t)\",\n            \"stationary_consequence_scope\": \"If a stationary rotating preparation is later constructed, z_rot is its computed constant; it has NOT been set to tanh(P/Pth).\",\n            \"not_source_reinterpretation\": \"The source constant Hamiltonian uses named absolute frequencies; the subtraction of omega_drive is additional explicit frame modeling, not a relabeling of that source.\"",
+          "excerpt_utf8_lf_sha256": "2602a8bfd1e2919144c973a2086adf10926d5516287d78b78de4131d320c5bb3"
+        }
+      ]
+    },
+    {
+      "id": "R7_clock",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.LEITURA_20261015\\DISPOSITIVO_E_ESPECTRO_R7\\CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt",
+      "sha256": "339c6f5a8bdb72f59f95fbefe4ac17e34830be7dd019ddd743955e6c4fed5be1",
+      "bytes": 10696,
+      "line_count": 168,
+      "ranges": [
+        [
+          22,
+          30
+        ],
+        [
+          44,
+          79
+        ],
+        [
+          82,
+          107
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 22,
+          "line_end": 30,
+          "text": "S:340–370 escreve, em unidades de frequência h=H_eff/hbar,\n  h=omega_c*(n_i+n_o)+omega_OH*sigma+*sigma-\n    +g_JC*(a_i†*sigma-+sigma+*a_i)+Omega_R*(sigma++sigma-),\n  J=a_o†*sigma-+sigma+*a_i,\n  L_beta(rho)=-i[h,rho]+L_conv(rho)+beta*gamma_Lambda*D[J](rho),\n  D[J](rho)=J*rho*J†-(J†J*rho+rho*J†J)/2.\nOmega_R é a frequência de Rabi do bombeamento por MICRO-ONDAS (S:369–370).\nNão é a frequência nu de fase do exemplo de dois níveis, nem o EOM óptico.\nO termo holo consome beta; gamma_Lambda e as perdas têm dimensão de taxa.",
+          "excerpt_utf8_lf_sha256": "531a5db19817cff03df664ea36644c96ebaf44d0c6a6cf89e3be859ef41b3200"
+        },
+        {
+          "line_start": 44,
+          "line_end": 79,
+          "text": "2. CONTRATO DE RESPOSTA DIRETAMENTE NO GERADOR DO DISPOSITIVO\nPara uma primeira pergunta calculável, escolhemos modular o bombeamento MICRO-ONDAS:\n  Omega_R(t)=Omega_R0+epsilon*f(t).\nEssa escolha reutiliza um termo existente. Não atribuímos ao EOM a função de Rabi.\nUm ensaio óptico EOM->APD requer adicionalmente o operador que injeta o campo no\nmodo a_i e a calibração eletro-óptica; ele não pode usar silenciosamente esta fonte.\n\nCONTRATO FINITO: usar a mesma ordem de fatores (entrada,saída,qubit), cutoff0/1\nde R, taxas não negativas e coeficientes mantidos fixos durante a perturbação.\nFixar rho_* positivo, traço1, L_beta(rho_*)=0, e delta_rho(0)=0.\nNão presumimos unicidade ou que o estado escolhido seja uma preparação real.\nDefina B(rho)=-i[sigma_x,rho], sigma_x=sigma++sigma-.\nO fator é1, porque S escreve Omega_R*sigma_x; não o padrão Omega_R*sigma_x/2.\n\nCONTRATO DO DETECTOR (INPUT): taxa média de contagem\n  I(t)=C*Tr[n_o*rho(t)]+I_escuro, C=eta_det*kappa_out>0,\nsem caminho direto adicional, e resposta eletrônica tratada separadamente.\nIsso modela médias; não cria uma série de cliques nem as incertezas instrumentais.\nÀ primeira ordem em epsilon, a solução de Duhamel é\n  delta_I(t)=epsilon*C*integral_0^t\n      Tr[n_o*exp((t-u)L_beta)*B(rho_*)]*f(u) du.\nPortanto o kernel é h_inst(tau)=C*Tr[n_o*exp(tau L_beta)*B(rho_*)] para tau>=0,\ne zero antes. Como [n_o,sigma_x]=0, h_inst(0)=0 por ciclicidade do traço.\nNão há termo direto na mesma amostra neste canal de bombeamento->população.\n\nPara Re(z)>0, a função de transferência é\n  H_inst(z)=C*Tr[n_o*(zI-L_beta)^(-1)*B(rho_*)].\nSeu limite z=0^+-i*omega só é usado quando existir no subespaço acessível à fonte\ne observável pelo detector. Modos fixos/persistentes não podem ser descartados\npor decreto. Se B(rho_*)=0 ou a resposta for identicamente nula, não há fase a medir.\nNo modelo bosônico sem cutoff seriam necessárias condições de domínio/momentos;\nesta derivação entrega o contrato finito já usado pela casa.\n\nFicam tipados: fonte, operador de injeção, gerador, preparação, receptor, relógio\ne suporte. Coeficientes de engenharia e resposta eletrônica são calibrações\nindependentes; beta permanece fixo pela regra atual, nunca ajustado ao sinal.",
+          "excerpt_utf8_lf_sha256": "2f0f97eb9d0f7962267ddbe6bb08b5c74508a59600e10ada2c31aff733088072"
+        },
+        {
+          "line_start": 82,
+          "line_end": 107,
+          "text": "O termo isolado D[J] não é o dephasing D[sqrt(K_+)] por simples mudança unitária.\nProva na subface invariante de uma excitação: a=|100>, b=|001>, c=|010>.\n  J=|b><a|+|c><b|;\n  D[J](I_3)=J J†-J† J=|c><c|-|a><a| !=0.\nJá sqrt(K_+) é auto-adjunto e D[sqrt(K_+)](I)=0. A propriedade unital é preservada\npor conjugação unitária. Portanto os DOIS dissipadores isolados não se identificam\ndessa maneira. Isso não proíbe uma redução efetiva, dilatação ou composição com\noutros canais; a ponte teria de construir e justificar tal operação.\nCompartilhar beta ou a palavra Lindblad não resolve essa diferença de tipos.\n\nCONTROLE ANALÍTICO, distinto do aparelho completo: desligue H e L_conv somente\nneste submodelo, mantenha lambda=beta*gamma_Lambda>0, prepare |100>.\nAs populações obedecem p_a'=-lambda*p_a, p_b'=lambda*(p_a-p_b), p_c'=lambda*p_b.\nLogo, para t>=0:\n  p_a=e^(-lambda*t), p_b=lambda*t*e^(-lambda*t),\n  p_saida=1-e^(-lambda*t)*(1+lambda*t).\nSeu início é lambda²*t²/2; não é salto determinístico instantâneo.\nNa representação por saltos deste submodelo, o tempo até a ocupação absorvente\ntem média2/lambda. Isso não é atraso de grupo, nem tempo médio de um clique APD,\npois retiramos o canal de saída detectável; tampouco demonstra transferência de\num qubit desconhecido. É uma solução analítica dos termos já escritos.\n\nS:431–444 declara tau~l_P/(beta*c)=t_P/beta, independente da distância.\nEssa declaração existe; o estado dela nesta leitura é DECLARADO/CONJECTURE físico.\nSe identificada com a média do submodelo acima, exigiria gamma_Lambda=2/t_P;\nessa igualdade não foi derivada pelo H/J consultado. Não a adotamos como entrada.",
+          "excerpt_utf8_lf_sha256": "7927fd0048e57d357a772d0490a5ce8ec44339b4f8e8fd370349d37cb1a6a5cb"
+        }
+      ]
+    },
+    {
+      "id": "output_contract",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\CONTRATO_OUTPUT_R64.md",
+      "sha256": "bb759be867d71b68b47154e46db2596e3e0b1926f01dfcc5128912cfee4767a1",
+      "bytes": 7447,
+      "line_count": 83,
+      "ranges": [
+        [
+          9,
+          56
+        ],
+        [
+          68,
+          83
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 9,
+          "line_end": 56,
+          "text": "## Hipótese nomeada do instrumento\n\n**[INPUT — H_MARKOV_VACUUM_PORTS]** Escolhe-se uma realização unitária/dilatação Markov de vácuo para os cinco operadores de colapso do modelo, com banhos independentes. Monitoram-se as portas\n\n\\[\nL_i=\\sqrt{\\kappa_i}\\,a_i,\\qquad L_o=\\sqrt{\\kappa_o}\\,a_o.\n\\]\n\nOs outros canais, `√γ σ−`, `√γφ Z` e `√(βγΛ)J`, permanecem no gerador e não são monitorados. O código original guarda pares `(taxa,operador)`: as raízes entram nas portas de leitura, sem aplicá-las duas vezes ao dissipador. Mantém-se a convenção `γφ D[Z]`, cujo amortecimento de coerência é `2γφ`.\n\nUm GKLS isolado não seleciona fisicamente essas portas, o estado do banho ou a realização instrumental. Esses dados adicionais, eficiência ideal, ganho e referência dos osciladores locais são hipóteses explícitas. A existência de uma representação Markov de uma dinâmica finita não prova que os terminais da patente realizem essa representação.\n\nPara a corrente normalizada como quadratura, defina\n\n\\[\n\\mathcal M_{j,\\theta}\\rho=\n\\frac{e^{-i\\theta}L_j\\rho+e^{i\\theta}\\rho L_j^\\dagger}{\\sqrt2}.\n\\]\n\nO incremento normalizado `dXj=dYj/√2` tem ruído de vácuo `dXj dXk=δjk dt/2`. Para `t>s`, a parte regular da correlação é\n\n\\[\nK_{jk}(t,s)=\\operatorname{Tr}\\!\\left[\n\\mathcal M_{j,\\theta_j(t)}e^{(t-s)\\mathcal L}\n\\mathcal M_{k,\\theta_k(s)}\\rho(s)\\right].\n\\]\n\nHá ainda `δjk δ(t−s)/2`. No triângulo temporal oposto trocam-se as etiquetas completas de tempo e detector. Não se usa ρ(t) no lugar de ρ(s) nem se substitui a inserção de superoperador por um produto de médias. Este é o contrato de um sinal de medida contínua, condicionado à dilatação nomeada.\n\n## Modos filtrados e ODE reutilizável\n\nPara filtros reais de norma L² um, `Qj=∫₀ᵀ fj(t)dXj(t)`. No banho de entrada, o incremento de Wiener tem dimensão √tempo; um filtro com dimensão tempo⁻¹/² fornece uma quadratura adimensional. Os tempos e taxas da instância computacional continuam adimensionais.\n\nTransportam-se matrizes auxiliares completas, com `u(0)=v(0)=0`:\n\n\\[\n\\dot\\rho=\\mathcal L\\rho,\\qquad\n\\dot u_j=\\mathcal Lu_j+f_j\\mathcal M_j\\rho,\n\\]\n\\[\n\\dot v_{jk}=\\mathcal Lv_{jk}\n +f_j\\mathcal M_ju_k+f_k\\mathcal M_ku_j\n +\\frac{\\delta_{jk}}2f_jf_k\\rho.\n\\]\n\nEntão `E Qj=Tr uj(T)` e `E QjQk=Tr vjk(T)`. A covariância subtrai o produto das médias. Cada bloco conserva a dimensão integral do sistema: OH e suas correlações não são fatorados. Os blocos auxiliares de momentos não são, em geral, estados positivos; positividade/traço unitário são exigidos de ρ. A matriz clássica de covariância das duas correntes compatíveis deve ser positiva.\n\nQuatro aquisições distintas, com o mesmo preparo, filtros e duração, usam as fases XX, PP, XP e PX. Suas correlações cruzadas permitem o mesmo decoder algébrico de R62 para `C_f=⟨B_i(f)B_o(f)⟩` e `B_f=⟨B_i(f)†B_o(f)⟩`. **São modos de saída temporais**, sob H_MARKOV_VACUUM_PORTS, e não os operadores instantâneos de cavidade. Não se atribuem simultaneamente X e P incompatíveis a uma mesma aquisição. A cinemática de Fock/POVM de R63 continua aplicável ao contrato de modos; não se conclui um entrelaçamento da dinâmica finita com o GKLS bosônico da patente.",
+          "excerpt_utf8_lf_sha256": "95153a687d41fa826816fb82bc0cfa67177c352b0c92ddf3c72dece7bdb9b53d"
+        },
+        {
+          "line_start": 68,
+          "line_end": 83,
+          "text": "## Quadro girante, oscilador local e unidades\n\nCom `R=e^{+iχN}` e `ρrot=RρlabR†`, um abaixador satisfaz `RLR†=e^{−iχ}L`. Logo\n\n\\[\nR\\,\\mathcal M_{\\theta_{lab}}(\\rho_{lab})R^\\dagger\n=\\mathcal M_{\\theta_{lab}+\\chi}(\\rho_{rot}).\n\\]\n\nPara `χ=ωd t`, a fase correta é `θrot=θlab+ωd t`. Um LO casado, `θlab=θ0−ωd t`, remove a portadora da leitura rotativa. Isso não transforma a portadora externa em relógio interno inferido. A implementação verifica a identidade de fase; não relabela as frequências constantes do modelo como detunings físicos.\n\nHá uma obstrução de sinal à tentativa de calibrar os números sintéticos antigos por simples troca de unidade/carrier. Se ambos fossem detunings do mesmo carrier, com escala temporal positiva t0, teríamos `ΔOH−Δc=t0(ωOH−ωc)`. Os números fixados dão `1,2−1>0`. Para a identificação proposta do modo de cavidade com a faixa óptica do dispositivo, na qual `ωOH<ωc`, o lado direito é negativo. Portanto essa identificação não se obtém por um carrier comum e unidade positiva. Uma nova instância com parâmetros físicos independentes pode ser construída; esta execução não faz tal calibração.\n\n## O que o resultado pode estabelecer\n\nUm PASS verifica a consistência numérica do instrumento condicional, sua normalização, ordem temporal e decodificação sobre o estado conjunto, com controles analíticos. Não demonstra que o aparelho possua o banho/portas escolhidos, que `G_OH` seja derivado, que `γΛ` esteja calibrado ou que β tenha sido inferido. R4, Poincaré, contínuo físico, creditação e gate não são encerrados por esta camada. O resultado e a revisão independente seguem em arquivos próprios, sem alterar as evidências anteriores.",
+          "excerpt_utf8_lf_sha256": "b9cfde2713a723c67200df0c6e4c02fce3d33930197eb2a140e793e2e8895e83"
+        }
+      ]
+    },
+    {
+      "id": "output_HP",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\ADENDO_DILATACAO_INICIAL_R64.md",
+      "sha256": "e9bc9b78354453b7c9ab7e30bff9c13c89304195bd7f49f065a0c2136bcada78",
+      "bytes": 1655,
+      "line_count": 17,
+      "ranges": [
+        [
+          3,
+          17
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 3,
+          "line_end": 17,
+          "text": "**[INPUT — H_MARKOV_VACUUM_PORTS, explicitação solicitada na revisão prévia]**\n\nO estado inicial é `ρS,OH(0) ⊗ |vac⟩⟨vac|` dos **cinco banhos**, com a preparação óptica–OH já fixada no plano. O vácuo dos banhos é produto entre canais distintos. Os incrementos futuros de entrada são independentes do sistema e do passado; os operadores de sistema são adaptados à filtragem temporal dessa dilatação.\n\nEscolhe-se uma dilatação de Hudson–Parthasarathy com matriz de espalhamento identidade e os cinco operadores de colapso explicitados no contrato. As duas portas ópticas monitoradas correspondem a canais distintos; os três canais restantes permanecem na dinâmica e não são monitorados. A relação de entrada–saída adotada é\n\n`dB_out,j(t) = dB_in,j(t) + L_j(t) dt`.\n\nA corrente homódina ideal, com a fase do oscilador local indicada por θj, é normalizada como\n\n`dX_j = [exp(−iθj) dB_out,j + exp(iθj) dB_out,j†]/√2`.\n\nNo vácuo de entrada, a tabela de Itô `dB_in,j dB_in,k† = δjk dt`, com os demais produtos de segunda ordem nulos, dá `dX_j dX_k = δjk dt/2`. Essa é a origem do termo diagonal de ruído no sistema de momentos filtrados, e não uma normalização acrescentada depois de ver o resultado.\n\nEste adendo especifica a **hipótese instrumental utilizada**; não afirma que o GKLS, sozinho, selecione esses banhos/portas ou que a patente implemente fisicamente esta dilatação. Não altera parâmetros, preparo sintético, fórmulas, runner, tolerâncias ou controles do plano. Nenhuma execução ocorreu antes deste adendo.",
+          "excerpt_utf8_lf_sha256": "8002d854d15bd51d6bb80b7558350c6ae49c47efb40fecba4f6a34c07d7ce4af"
+        }
+      ]
+    },
+    {
+      "id": "output_runner",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\run_filtered_output_r64.py",
+      "sha256": "ec2c5d2201f1246ab83fc291ebb306c50abcf3805fc1353445f82ffdd968344c",
+      "bytes": 11070,
+      "line_count": 153,
+      "ranges": [
+        [
+          34,
+          76
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 34,
+          "line_end": 76,
+          "text": "def calculate(plan):\n    import numpy as np\n    import scipy\n    from scipy.linalg import expm\n    from scipy.integrate import solve_ivp\n    helper=next(s['path'] for s in plan['sources'] if s['path'].endswith('finite_device_functions_r62.py'))\n    spec=importlib.util.spec_from_file_location('frozen_finite_r64',helper);old=importlib.util.module_from_spec(spec);spec.loader.exec_module(old)\n    checks=[]\n    def check(name,value,bound=1e-8,greater=False):\n        value=float(value);checks.append({'name':name,'value':value,'bound':bound,'relation':'gt' if greater else 'le',\n            'passed':bool(math.isfinite(value) and (value>bound if greater else value<=bound))})\n    def cj(z):return {'re':float(complex(z).real),'im':float(complex(z).imag)}\n    def M(l,theta):\n        d=l.shape[0]\n        return (np.exp(-1j*theta)*np.kron(np.eye(d),l)+np.exp(1j*theta)*np.kron(l.conj(),np.eye(d)))/math.sqrt(2)\n    def filtered(gen,ports,thetas,rho0,filters,label,shot=True):\n        d=len(rho0);d2=d*d;n=len(ports);pairs=[(j,k) for j in range(n) for k in range(j,n)]\n        maps=[M(l,th) for l,th in zip(ports,thetas)];blocks=1+n+len(pairs)\n        y0=np.zeros((blocks,d2),complex);y0[0]=old.vec(rho0)\n        for j,(l,th) in enumerate(zip(ports,thetas)):\n            direct=(np.exp(-1j*th)*l@rho0+np.exp(1j*th)*rho0@l.conj().T)/math.sqrt(2)\n            check(label+'_Mvec_'+str(j),old.residual(old.unvec(maps[j]@old.vec(rho0),d)-direct),1e-12)\n        def rhs(t,y):\n            v=y.reshape(blocks,d2);dv=v@gen.T\n            fs=[float(f(t)) for f in filters]\n            for j in range(n):dv[1+j]+=fs[j]*(maps[j]@v[0])\n            for z,(j,k) in enumerate(pairs):\n                dv[1+n+z]+=fs[j]*(maps[j]@v[1+k])+fs[k]*(maps[k]@v[1+j])\n                if shot and j==k:dv[1+n+z]+=.5*fs[j]*fs[k]*v[0]\n            return dv.reshape(-1)\n        sol=solve_ivp(rhs,(0.,1.),y0.reshape(-1),method='DOP853',rtol=1e-10,atol=1e-12,t_eval=[1.])\n        if not sol.success or not np.isfinite(sol.y).all():raise ValueError('ODE failed: '+sol.message)\n        v=sol.y[:,-1].reshape(blocks,d2);rho=old.unvec(v[0],d)\n        means=np.array([np.trace(old.unvec(v[1+j],d)) for j in range(n)])\n        second=np.zeros((n,n),complex)\n        for z,(j,k) in enumerate(pairs):second[j,k]=second[k,j]=np.trace(old.unvec(v[1+n+z],d))\n        check(label+'_rho_trace',abs(np.trace(rho)-1),1e-9)\n        check(label+'_rho_hermitian',old.residual(rho-rho.conj().T),1e-9)\n        check(label+'_rho_positive',max(0.,-float(np.linalg.eigvalsh((rho+rho.conj().T)/2).min())),1e-9)\n        check(label+'_imaginary',max(float(np.max(np.abs(means.imag))),float(np.max(np.abs(second.imag)))),1e-9)\n        cov=second.real-np.outer(means.real,means.real)\n        check(label+'_classical_covariance_positive',max(0.,-float(np.linalg.eigvalsh(cov).min())),1e-9)\n        return {'means':means.real.tolist(),'second':second.real.tolist(),'covariance':cov.tolist(),'nfev':sol.nfev},rho",
+          "excerpt_utf8_lf_sha256": "65bb60ace4b628475e917e807d0fc1aa1fc9fbb7d2b6dd1224171dad8ec79dae"
+        }
+      ]
+    },
+    {
+      "id": "output_literature",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\literature\\2212.00176v2.html",
+      "sha256": "a3942e07d4cd47425ed54bed9dec9cdde304d867f0c472f05f6736a507ff995b",
+      "bytes": 302619,
+      "line_count": 1607,
+      "ranges": [
+        [
+          377,
+          392
+        ],
+        [
+          395,
+          424
+        ],
+        [
+          475,
+          492
+        ],
+        [
+          584,
+          610
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 377,
+          "line_end": 392,
+          "text": "<p id=\"S2.SS3.p1.1\" class=\"ltx_p\">We can derive both SMEs by taking the limit of infinitely frequent and infinitely weak projective measurements <cite class=\"ltx_cite ltx_citemacro_cite\">[<a href=\"#bib.bibx22\" title=\"\" class=\"ltx_ref\">22</a>, <a href=\"#bib.bibx23\" title=\"\" class=\"ltx_ref\">23</a>]</cite>. We use such a discrete-time picture with a slightly different formulation as described in <cite class=\"ltx_cite ltx_citemacro_cite\">[<a href=\"#bib.bibx18\" title=\"\" class=\"ltx_ref\">18</a>]</cite>.</p>\n</div>\n<div id=\"S2.SS3.p2\" class=\"ltx_para ltx_noindent\">\n<p id=\"S2.SS3.p2.1\" class=\"ltx_p\">In this formulation, the measurement process is described by a <em id=\"S2.SS3.p2.1.1\" class=\"ltx_emph ltx_font_italic\">quantum instrument</em>, which combines a quantum measurement characterised by a <em id=\"S2.SS3.p2.1.2\" class=\"ltx_emph ltx_font_italic\">positive operator-valued measure</em> (POVM) and a classical uncertainty on the measurement result accounting for imperfections of the detector. A map depending on the measurement result is applied at each small time step <math id=\"S2.SS3.p2.m1\" class=\"ltx_Math\" alttext=\"\\mathrm{d}t\" display=\"inline\" intent=\":literal\"><semantics><mrow><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow><annotation encoding=\"application/x-tex\">\\mathrm{d}t</annotation></semantics></math>:</p>\n<table id=\"S2.E9\" class=\"ltx_equation ltx_eqn_table\">\n\n<tbody><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_eqn_cell ltx_align_center\"><math id=\"S2.E9.m1\" class=\"ltx_Math\" alttext=\"\\rho_{k+1}=\\frac{K_{r_{k+1}}(\\rho_{k})}{\\mathrm{Tr}\\left[K_{r_{k+1}}(\\rho_{k})\\right]},\" display=\"block\" intent=\":literal\"><semantics><mrow><mrow><msub><mi>ρ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>K</mi><msub><mi>r</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><msub><mi>ρ</mi><mi>k</mi></msub><mo stretchy=\"false\">)</mo></mrow></mrow><mrow><mi>Tr</mi><mo>⁡</mo><mrow><mo>[</mo><mrow><msub><mi>K</mi><msub><mi>r</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><msub><mi>ρ</mi><mi>k</mi></msub><mo stretchy=\"false\">)</mo></mrow></mrow><mo>]</mo></mrow></mrow></mfrac></mrow><mo>,</mo></mrow><annotation encoding=\"application/x-tex\">\\rho_{k+1}=\\frac{K_{r_{k+1}}(\\rho_{k})}{\\mathrm{Tr}\\left[K_{r_{k+1}}(\\rho_{k})\\right]},</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(9)</span></td></tr></tbody>\n</table>\n<p id=\"S2.SS3.p2.2\" class=\"ltx_p\">where <math id=\"S2.SS3.p2.m2\" class=\"ltx_Math\" alttext=\"\\rho_{k}\" display=\"inline\" intent=\":literal\"><semantics><msub><mi>ρ</mi><mi>k</mi></msub><annotation encoding=\"application/x-tex\">\\rho_{k}</annotation></semantics></math> is the state of the system at step <math id=\"S2.SS3.p2.m3\" class=\"ltx_Math\" alttext=\"k\" display=\"inline\" intent=\":literal\"><semantics><mi>k</mi><annotation encoding=\"application/x-tex\">k</annotation></semantics></math> (at time <math id=\"S2.SS3.p2.m4\" class=\"ltx_Math\" alttext=\"t=k\\mathrm{d}t\" display=\"inline\" intent=\":literal\"><semantics><mrow><mi>t</mi><mo>=</mo><mrow><mi>k</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow></mrow><annotation encoding=\"application/x-tex\">t=k\\mathrm{d}t</annotation></semantics></math>), and <math id=\"S2.SS3.p2.m5\" class=\"ltx_Math\" alttext=\"K_{r_{k+1}}\" display=\"inline\" intent=\":literal\"><semantics><msub><mi>K</mi><msub><mi>r</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></msub><annotation encoding=\"application/x-tex\">K_{r_{k+1}}</annotation></semantics></math> is a linear map depending on <math id=\"S2.SS3.p2.m6\" class=\"ltx_Math\" alttext=\"r_{k+1}\" display=\"inline\" intent=\":literal\"><semantics><msub><mi>r</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><annotation encoding=\"application/x-tex\">r_{k+1}</annotation></semantics></math>, the measurement result at step <math id=\"S2.SS3.p2.m7\" class=\"ltx_Math\" alttext=\"k+1\" display=\"inline\" intent=\":literal\"><semantics><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding=\"application/x-tex\">k+1</annotation></semantics></math>.</p>\n</div>\n<div id=\"S2.SS3.p3\" class=\"ltx_para ltx_noindent\">\n<p id=\"S2.SS3.p3.1\" class=\"ltx_p\">For both SMEs, we define the corresponding quantum instrument by specifying the linear map <math id=\"S2.SS3.p3.m1\" class=\"ltx_Math\" alttext=\"K_{r}\" display=\"inline\" intent=\":literal\"><semantics><msub><mi>K</mi><mi>r</mi></msub><annotation encoding=\"application/x-tex\">K_{r}</annotation></semantics></math> associated with each possible measurement result <math id=\"S2.SS3.p3.m2\" class=\"ltx_Math\" alttext=\"r\" display=\"inline\" intent=\":literal\"><semantics><mi>r</mi><annotation encoding=\"application/x-tex\">r</annotation></semantics></math>. The continuous-time formulations (<a href=\"#S2.E3\" title=\"In 2.1. Jump SME ‣ 2. The SME formalism\" class=\"ltx_ref\"><span class=\"ltx_text ltx_ref_tag\">3</span></a>) and (<a href=\"#S2.E6\" title=\"In 2.2. Diffusive SME ‣ 2. The SME formalism\" class=\"ltx_ref\"><span class=\"ltx_text ltx_ref_tag\">6</span></a>) are recovered by taking the limit of infinitesimally small time step, and expanding the expression <math id=\"S2.SS3.p3.m3\" class=\"ltx_Math\" alttext=\"\\rho_{k+1}-\\rho_{k}\\sim\\rho_{t+\\mathrm{d}t}-\\rho_{t}=\\mathrm{d}\\rho_{t}\" display=\"inline\" intent=\":literal\"><semantics><mrow><mrow><msub><mi>ρ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>ρ</mi><mi>k</mi></msub></mrow><mo>∼</mo><mrow><msub><mi>ρ</mi><mrow><mi>t</mi><mo>+</mo><mrow><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow></mrow></msub><mo>−</mo><msub><mi>ρ</mi><mi>t</mi></msub></mrow><mo>=</mo><mrow><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msub><mi>ρ</mi><mi>t</mi></msub></mrow></mrow><annotation encoding=\"application/x-tex\">\\rho_{k+1}-\\rho_{k}\\sim\\rho_{t+\\mathrm{d}t}-\\rho_{t}=\\mathrm{d}\\rho_{t}</annotation></semantics></math> to first order in <math id=\"S2.SS3.p3.m4\" class=\"ltx_Math\" alttext=\"\\mathrm{d}t\" display=\"inline\" intent=\":literal\"><semantics><mrow><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow><annotation encoding=\"application/x-tex\">\\mathrm{d}t</annotation></semantics></math>.</p>",
+          "excerpt_utf8_lf_sha256": "92e4b8782582022c2722aec567d6970a4a03495b5237f723b65da72c6adfe866"
+        },
+        {
+          "line_start": 395,
+          "line_end": 424,
+          "text": "<p id=\"S2.SS3.p4.1\" class=\"ltx_p\"><span id=\"S2.SS3.p4.1.1\" class=\"ltx_text ltx_font_bold\">Jump SME</span> – For the jump SME, the measurement result is either <math id=\"S2.SS3.p4.m1\" class=\"ltx_Math\" alttext=\"0\" display=\"inline\" intent=\":literal\"><semantics><mn>0</mn><annotation encoding=\"application/x-tex\">0</annotation></semantics></math> or <math id=\"S2.SS3.p4.m2\" class=\"ltx_Math\" alttext=\"1\" display=\"inline\" intent=\":literal\"><semantics><mn>1</mn><annotation encoding=\"application/x-tex\">1</annotation></semantics></math>, and the corresponding maps are:</p>\n<table id=\"S2.EGx4\" class=\"ltx_equationgroup ltx_eqn_align ltx_eqn_table\">\n\n<tbody id=\"S2.E10\"><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_td ltx_align_right ltx_eqn_cell\"><math id=\"S2.E10.m1\" class=\"ltx_Math\" alttext=\"\\displaystyle K_{0}(\\rho)\" display=\"inline\" intent=\":literal\"><semantics><mrow><msub><mi>K</mi><mn>0</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><mi>ρ</mi><mo stretchy=\"false\">)</mo></mrow></mrow><annotation encoding=\"application/x-tex\">\\displaystyle K_{0}(\\rho)</annotation></semantics></math></td>\n<td class=\"ltx_td ltx_align_left ltx_eqn_cell\"><math id=\"S2.E10.m2\" class=\"ltx_Math\" alttext=\"\\displaystyle=(1-\\theta\\mathrm{d}t)M_{0}\\rho M_{0}^{\\dagger}+(1-\\eta)M_{1}\\rho M_{1}^{\\dagger},\" display=\"inline\" intent=\":literal\"><semantics><mrow><mrow><mphantom></mphantom><mo>=</mo><mrow><mrow><mrow><mo stretchy=\"false\">(</mo><mrow><mn>1</mn><mo>−</mo><mrow><mi>θ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow></mrow><mo stretchy=\"false\">)</mo></mrow><mo lspace=\"0em\" rspace=\"0em\">​</mo><msub><mi>M</mi><mn>0</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>ρ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msubsup><mi>M</mi><mn>0</mn><mo>†</mo></msubsup></mrow><mo>+</mo><mrow><mrow><mo stretchy=\"false\">(</mo><mrow><mn>1</mn><mo>−</mo><mi>η</mi></mrow><mo stretchy=\"false\">)</mo></mrow><mo lspace=\"0em\" rspace=\"0em\">​</mo><msub><mi>M</mi><mn>1</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>ρ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msubsup><mi>M</mi><mn>1</mn><mo>†</mo></msubsup></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding=\"application/x-tex\">\\displaystyle=(1-\\theta\\mathrm{d}t)M_{0}\\rho M_{0}^{\\dagger}+(1-\\eta)M_{1}\\rho M_{1}^{\\dagger},</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(10)</span></td></tr></tbody>\n<tbody id=\"S2.E11\"><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_td ltx_align_right ltx_eqn_cell\"><math id=\"S2.E11.m1\" class=\"ltx_Math\" alttext=\"\\displaystyle K_{1}(\\rho)\" display=\"inline\" intent=\":literal\"><semantics><mrow><msub><mi>K</mi><mn>1</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><mi>ρ</mi><mo stretchy=\"false\">)</mo></mrow></mrow><annotation encoding=\"application/x-tex\">\\displaystyle K_{1}(\\rho)</annotation></semantics></math></td>\n<td class=\"ltx_td ltx_align_left ltx_eqn_cell\"><math id=\"S2.E11.m2\" class=\"ltx_Math\" alttext=\"\\displaystyle=\\theta\\mathrm{d}tM_{0}\\rho M_{0}^{\\dagger}+\\eta M_{1}\\rho M_{1}^{\\dagger},\" display=\"inline\" intent=\":literal\"><semantics><mrow><mrow><mphantom></mphantom><mo>=</mo><mrow><mrow><mi>θ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msub><mi>M</mi><mn>0</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>ρ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msubsup><mi>M</mi><mn>0</mn><mo>†</mo></msubsup></mrow><mo>+</mo><mrow><mi>η</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msub><mi>M</mi><mn>1</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>ρ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msubsup><mi>M</mi><mn>1</mn><mo>†</mo></msubsup></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding=\"application/x-tex\">\\displaystyle=\\theta\\mathrm{d}tM_{0}\\rho M_{0}^{\\dagger}+\\eta M_{1}\\rho M_{1}^{\\dagger},</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(11)</span></td></tr></tbody>\n<tbody><tr class=\"ltx_eqn_row ltx_align_baseline\"><td class=\"ltx_eqn_cell ltx_align_left\" style=\"white-space:normal;\" colspan=\"5\">with</td></tr></tbody>\n<tbody id=\"S2.E12\"><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_td ltx_align_right ltx_eqn_cell\"><math id=\"S2.E12.m1\" class=\"ltx_Math\" alttext=\"\\displaystyle M_{0}\" display=\"inline\" intent=\":literal\"><semantics><msub><mi>M</mi><mn>0</mn></msub><annotation encoding=\"application/x-tex\">\\displaystyle M_{0}</annotation></semantics></math></td>\n<td class=\"ltx_td ltx_align_left ltx_eqn_cell\"><math id=\"S2.E12.m2\" class=\"ltx_Math\" alttext=\"\\displaystyle=\\mathrm{I}-iH\\mathrm{d}t-\\frac{1}{2}L^{\\dagger}L\\mathrm{d}t,\" display=\"inline\" intent=\":literal\"><semantics><mrow><mrow><mphantom></mphantom><mo>=</mo><mrow><mi>I</mi><mo>−</mo><mrow><mi>i</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>H</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow><mo>−</mo><mrow><mstyle displaystyle=\"true\"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo lspace=\"0em\" rspace=\"0em\">​</mo><msup><mi>L</mi><mo>†</mo></msup><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>L</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding=\"application/x-tex\">\\displaystyle=\\mathrm{I}-iH\\mathrm{d}t-\\frac{1}{2}L^{\\dagger}L\\mathrm{d}t,</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(12)</span></td></tr></tbody>\n<tbody id=\"S2.E13\"><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_td ltx_align_right ltx_eqn_cell\"><math id=\"S2.E13.m1\" class=\"ltx_Math\" alttext=\"\\displaystyle M_{1}\" display=\"inline\" intent=\":literal\"><semantics><msub><mi>M</mi><mn>1</mn></msub><annotation encoding=\"application/x-tex\">\\displaystyle M_{1}</annotation></semantics></math></td>\n<td class=\"ltx_td ltx_align_left ltx_eqn_cell\"><math id=\"S2.E13.m2\" class=\"ltx_Math\" alttext=\"\\displaystyle=L\\sqrt{\\mathrm{d}t}.\" display=\"inline\" intent=\":literal\"><semantics><mrow><mrow><mphantom></mphantom><mo>=</mo><mrow><mi>L</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msqrt><mrow><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow></msqrt></mrow></mrow><mo lspace=\"0em\">.</mo></mrow><annotation encoding=\"application/x-tex\">\\displaystyle=L\\sqrt{\\mathrm{d}t}.</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(13)</span></td></tr></tbody>\n</table>\n</div>",
+          "excerpt_utf8_lf_sha256": "8b5fa60d891f500335c62fe024bc53ca58ed6ef20cc7285fb877bf92eb182fc2"
+        },
+        {
+          "line_start": 475,
+          "line_end": 492,
+          "text": "<p id=\"S2.SS3.p8.1\" class=\"ltx_p\"><span id=\"S2.SS3.p8.1.1\" class=\"ltx_text ltx_font_bold\">Diffusive SME</span> – For the diffusive SME, the measurement result takes a continuous range of values and the map corresponding to the measurement result <math id=\"S2.SS3.p8.m1\" class=\"ltx_Math\" alttext=\"r\" display=\"inline\" intent=\":literal\"><semantics><mi>r</mi><annotation encoding=\"application/x-tex\">r</annotation></semantics></math> is:</p>\n<table id=\"S2.EGx5\" class=\"ltx_equationgroup ltx_eqn_align ltx_eqn_table\">\n\n<tbody id=\"S2.E17\"><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_td ltx_align_right ltx_eqn_cell\"><math id=\"S2.E17.m1\" class=\"ltx_Math\" alttext=\"\\displaystyle K_{r}(\\rho)\" display=\"inline\" intent=\":literal\"><semantics><mrow><msub><mi>K</mi><mi>r</mi></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><mi>ρ</mi><mo stretchy=\"false\">)</mo></mrow></mrow><annotation encoding=\"application/x-tex\">\\displaystyle K_{r}(\\rho)</annotation></semantics></math></td>\n<td class=\"ltx_td ltx_align_left ltx_eqn_cell\"><math id=\"S2.E17.m2\" class=\"ltx_Math\" alttext=\"\\displaystyle=M_{r}\\rho M_{r}^{\\dagger}+(1-\\eta)L\\rho L^{\\dagger}\\mathrm{d}t,\" display=\"inline\" intent=\":literal\"><semantics><mrow><mrow><mphantom></mphantom><mo>=</mo><mrow><mrow><msub><mi>M</mi><mi>r</mi></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>ρ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msubsup><mi>M</mi><mi>r</mi><mo>†</mo></msubsup></mrow><mo>+</mo><mrow><mrow><mo stretchy=\"false\">(</mo><mrow><mn>1</mn><mo>−</mo><mi>η</mi></mrow><mo stretchy=\"false\">)</mo></mrow><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>L</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>ρ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><msup><mi>L</mi><mo>†</mo></msup><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding=\"application/x-tex\">\\displaystyle=M_{r}\\rho M_{r}^{\\dagger}+(1-\\eta)L\\rho L^{\\dagger}\\mathrm{d}t,</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(17)</span></td></tr></tbody>\n<tbody><tr class=\"ltx_eqn_row ltx_align_baseline\"><td class=\"ltx_eqn_cell ltx_align_left\" style=\"white-space:normal;\" colspan=\"5\">with</td></tr></tbody>\n<tbody id=\"S2.E18\"><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_td ltx_align_right ltx_eqn_cell\"><math id=\"S2.E18.m1\" class=\"ltx_Math\" alttext=\"\\displaystyle M_{r}\" display=\"inline\" intent=\":literal\"><semantics><msub><mi>M</mi><mi>r</mi></msub><annotation encoding=\"application/x-tex\">\\displaystyle M_{r}</annotation></semantics></math></td>\n<td class=\"ltx_td ltx_align_left ltx_eqn_cell\"><math id=\"S2.E18.m2\" class=\"ltx_Math\" alttext=\"\\displaystyle=\\mathrm{I}-iH\\mathrm{d}t-\\frac{1}{2}L^{\\dagger}L\\mathrm{d}t+\\sqrt{\\eta}Lr.\" display=\"inline\" intent=\":literal\"><semantics><mrow><mrow><mphantom></mphantom><mo>=</mo><mrow><mrow><mi>I</mi><mo>−</mo><mrow><mi>i</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>H</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow><mo>−</mo><mrow><mstyle displaystyle=\"true\"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo lspace=\"0em\" rspace=\"0em\">​</mo><msup><mi>L</mi><mo>†</mo></msup><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>L</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>t</mi></mrow></mrow><mo>+</mo><mrow><msqrt><mi>η</mi></msqrt><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>L</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>r</mi></mrow></mrow></mrow><mo lspace=\"0em\">.</mo></mrow><annotation encoding=\"application/x-tex\">\\displaystyle=\\mathrm{I}-iH\\mathrm{d}t-\\frac{1}{2}L^{\\dagger}L\\mathrm{d}t+\\sqrt{\\eta}Lr.</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(18)</span></td></tr></tbody>\n</table>\n</div>",
+          "excerpt_utf8_lf_sha256": "ed5ad6868158412ddf958876c60ef386a89b1ffc27d4805143036b931132a6d1"
+        },
+        {
+          "line_start": 584,
+          "line_end": 610,
+          "text": "<p id=\"S2.SS4.p4.1\" class=\"ltx_p\">In this discrete-time formulation, we also recover the unconditionned evolution by averaging over all possible measurement outcomes at each step:</p>\n<table id=\"S2.E27\" class=\"ltx_equation ltx_eqn_table\">\n\n<tbody><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_eqn_cell ltx_align_center\"><math id=\"S2.E27.m1\" class=\"ltx_Math\" alttext=\"\\overline{\\rho}_{k+1}=\\mathbb{E}\\left[\\rho_{k+1}\\&gt;|\\&gt;\\overline{\\rho}_{k}\\right].\" display=\"block\" intent=\":literal\"><semantics><mrow><mrow><msub><mover accent=\"true\"><mi>ρ</mi><mo stretchy=\"true\">¯</mo></mover><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mi>𝔼</mi><mo>⁡</mo><mrow><mo>[</mo><mrow><msub><mi>ρ</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo fence=\"false\" rspace=\"0.387em\" stretchy=\"false\">|</mo><msub><mover accent=\"true\"><mi>ρ</mi><mo stretchy=\"true\">¯</mo></mover><mi>k</mi></msub></mrow><mo>]</mo></mrow></mrow></mrow><mo lspace=\"0em\">.</mo></mrow><annotation encoding=\"application/x-tex\">\\overline{\\rho}_{k+1}=\\mathbb{E}\\left[\\rho_{k+1}\\&gt;|\\&gt;\\overline{\\rho}_{k}\\right].</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(27)</span></td></tr></tbody>\n</table>\n</div>\n<div id=\"S2.SS4.p5\" class=\"ltx_para ltx_noindent\">\n<p id=\"S2.SS4.p5.1\" class=\"ltx_p\">As in the continuum, we find the same CPTP map <math id=\"S2.SS4.p5.m1\" class=\"ltx_Math\" alttext=\"K\" display=\"inline\" intent=\":literal\"><semantics><mi>K</mi><annotation encoding=\"application/x-tex\">K</annotation></semantics></math>, that is the same unconditionned state dynamics, when averaging over either of the stochastic processes (jump or diffusive):</p>\n<table id=\"S2.E28\" class=\"ltx_equation ltx_eqn_table\">\n\n<tbody><tr class=\"ltx_equation ltx_eqn_row ltx_align_baseline\">\n<td class=\"ltx_eqn_cell ltx_eqn_center_padleft\"></td>\n<td class=\"ltx_eqn_cell ltx_align_center\"><math id=\"S2.E28.m1\" class=\"ltx_Math\" alttext=\"K(\\rho)=K_{0}(\\rho)+K_{1}(\\rho)=\\int_{-\\infty}^{\\infty}\\mathrm{d}\\mu(r)K_{r}(\\rho).\" display=\"block\" intent=\":literal\"><semantics><mrow><mrow><mrow><mi>K</mi><mo>⁡</mo><mrow><mo stretchy=\"false\">(</mo><mi>ρ</mi><mo stretchy=\"false\">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>K</mi><mn>0</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><mi>ρ</mi><mo stretchy=\"false\">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>K</mi><mn>1</mn></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><mi>ρ</mi><mo stretchy=\"false\">)</mo></mrow></mrow></mrow><mo rspace=\"0.111em\">=</mo><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant=\"normal\">∞</mi></mrow><mi mathvariant=\"normal\">∞</mi></msubsup><mrow><mi>d</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mi>μ</mi><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><mi>r</mi><mo stretchy=\"false\">)</mo></mrow><mo lspace=\"0em\" rspace=\"0em\">​</mo><msub><mi>K</mi><mi>r</mi></msub><mo lspace=\"0em\" rspace=\"0em\">​</mo><mrow><mo stretchy=\"false\">(</mo><mi>ρ</mi><mo stretchy=\"false\">)</mo></mrow></mrow></mrow></mrow><mo lspace=\"0em\">.</mo></mrow><annotation encoding=\"application/x-tex\">K(\\rho)=K_{0}(\\rho)+K_{1}(\\rho)=\\int_{-\\infty}^{\\infty}\\mathrm{d}\\mu(r)K_{r}(\\rho).</annotation></semantics></math></td>\n<td class=\"ltx_eqn_cell ltx_eqn_center_padright\"></td>\n<td rowspan=\"1\" class=\"ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right\"><span class=\"ltx_tag ltx_tag_equation ltx_align_right\">(28)</span></td></tr></tbody>\n</table>\n<p id=\"S2.SS4.p5.2\" class=\"ltx_p\">In the continuous-time limit we recover the evolution generated by the system Lindbladian <math id=\"S2.SS4.p5.m2\" class=\"ltx_Math\" alttext=\"\\mathcal{L}\" display=\"inline\" intent=\":literal\"><semantics><mi class=\"ltx_font_mathcaligraphic\">ℒ</mi><annotation encoding=\"application/x-tex\">\\mathcal{L}</annotation></semantics></math>.</p>\n</div>\n</section>\n</section>\n<section id=\"S3\" class=\"ltx_section\">\n<h2 class=\"ltx_title ltx_font_bold ltx_title_section\">3.  Correlation functions</h2>\n",
+          "excerpt_utf8_lf_sha256": "3912540fef36fdf236463f7bcf94c943aa2149ff3b154e6da04859a683436655"
+        }
+      ]
+    },
+    {
+      "id": "calibration",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\calibration\\CONTRATO_CALIBRACAO_R65.md",
+      "sha256": "245f97e48ad2da218ad4fe744e4a573c71e56b1aca72c12966ff2b50b58ff85f",
+      "bytes": 13544,
+      "line_count": 118,
+      "ranges": [
+        [
+          15,
+          60
+        ],
+        [
+          91,
+          108
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 15,
+          "line_end": 60,
+          "text": "## 2. O salto precisa de uma convenção antes da taxa\n\nFixe `J0=a_o† sigma_- + sigma_+ a_i`, com modos ortonormais, operadores bosônicos de matriz `<n-1|a|n>=sqrt(n)` e `sigma_-=|g><e|`. Coeficientes unitários de ambos termos e a fase relativa fazem parte desta convenção; uma fase relativa diferente não é a transformação escalar abaixo. A patente escreve essa forma em351–353. O vínculo do símbolo histórico `alphaii` à beta atual foi adotado no modelo finito; o número histórico da patente não é reutilizado como beta literal.\n\nPara qualquer escalar complexo `c != 0`,\n\n\\[\n D[cJ_0](\\rho)=|c|^2 D[J_0](\\rho),\\qquad\n \\lambda'={\\lambda\\over |c|^2}\n \\Longrightarrow \\lambda'D[cJ_0]=\\lambda D[J_0].\n\\]\n\n**Prova:** cada termo de `J rho J† - {J†J,rho}/2` adquire `c conjugate(c)`. No R64 o canal J é não monitorado; gerador, estado e portas ópticas permanecem idênticos sob essa transformação. Caso esse banho passe a ser monitorado, a fase do colapso e a fase LO precisam ser transportadas conjuntamente. Isto não enumera todas as liberdades de representação GKLS.\n\nSe o salto físico for `s J0`, `Gamma=gammaLambda_phys |s|²` e `lambda_phys=beta Gamma` são os coeficientes na **convenção J0**. É Gamma que a calibração independente deve fixar. Alterar a norma de J sem transportar a taxa altera o modelo.\n\nNo corte usado em R64, a ordem é `(n_i,n_o,n_OH)` em `{0,1}³`. As únicas ações não nulas de J0 são\n\n```\n|100> -> |001>, |001> -> |010>,\n|110> -> |011>, |101> -> |110>.\n```\n\nLogo `J0†J0` é a projeção sobre esses quatro estados de entrada: norma de operador1 e norma de Hilbert–Schmidt2. Isso é identidade algébrica da matriz comprimida. Não define a norma do salto bosônico inteiro: neste, a ação contém fatores `sqrt(n)` e é não limitada. A extensão requer domínio comum e uma relação dinâmica justificada; a compressão cinemática R63 não a fornece.\n\n## 3. Conversão completa de tempo, taxas, portas e filtros\n\nEm segundos, escreva `d rho/dt = L_phys rho`, `h_phys=H_phys/hbar` e taxas em `s^-1`. Para `tau=t/t0`, `t0>0`,\n\n\\[\n L_d=t_0 L_{phys},\\quad h_d=t_0 H_{phys}/\\hbar,\n \\quad r_d=t_0 r_{phys},\\quad L_{j,d}=\\sqrt{t_0}L_{j,phys}.\n\\]\n\nIsso se aplica a `omega_c, omega_OH, g_JC, Omega_Rabi, kappa_i, kappa_o, gamma_OH, gamma_phi, lambda`, conservando suas convenções. `Omega_Rabi sigma_x` não é `Omega_Rabi sigma_x/2`; o amortecimento de coerência de `gamma_phi D[Z]` é `2 gamma_phi`.\n\nO instrumento acompanha a mudança: `dB_d(tau)=dB_phys(t0 tau)/sqrt(t0)` e `dX_d=dX_phys/sqrt(t0)`, mantendo o ruído de vácuo `dX_d²=d tau/2`. Para filtro real normalizado,\n\n\\[\n T_d=T_{phys}/t_0,\\qquad f_d(\\tau)=\\sqrt{t_0}f_{phys}(t_0\\tau),\n \\quad\\int_0^{T_d}f_d\\,dX_d=\\int_0^{T_{phys}}f_{phys}\\,dX_{phys}.\n\\]\n\nA fase deve ser `theta_d(tau)=theta_phys(t0 tau)`. Ganho eletrônico, eficiência e função de transferência não nascem dessa mudança de unidade. No quadro girante, mantém-se a transformação R64 `theta_rot=theta_lab+omega_d t`.\n\n**gammaLambda_d=1 tem duas leituras distintas.** (a) Se `gammaLambda_phys>0` já foi identificado, pode-se escolher `t0=1/gammaLambda_phys`, na convenção do salto; todos os outros números passam a ser razões a essa taxa. Isso é escolha de unidade e não mede gammaLambda. (b) No registro R64, não há tal calibração; os números são explicitamente INPUT adimensionais (`PREREGISTRO_DEVICE_R1.json:84–102`). Fixar gammaLambda_d=1 e manter os demais números fixa uma instância sintética e razões entre parâmetros. Interpretá-la como aparelho é hipótese física adicional. Se `s != 1`, a escala relevante é Gamma, não gammaLambda isolada.",
+          "excerpt_utf8_lf_sha256": "67165cafe2a982d991e63bfe7f31fdce9e2e9c0324f58c4eaa167fde6e362f1b"
+        },
+        {
+          "line_start": 91,
+          "line_end": 108,
+          "text": "## 6. Preparo: o que o laser atenuado fornece\n\nO M1:254 escreve preparo de `|1>` por laser pulsado atenuado. **[DERIVED condicional]** Sob laser coerente e atenuador linear passivo com a porta auxiliar em vácuo, a transformação de divisor de feixe leva\n\n\\[\n |\\alpha\\rangle|0\\rangle\\longmapsto\n |\\sqrt{\\eta}\\alpha\\rangle|\\sqrt{1-\\eta}\\alpha\\rangle,\n\\]\n\naté fases convencionais. A saída reduzida é coerente, com `mu=eta|alpha|²` e `P(n)=exp(-mu) mu^n/n!`. Portanto `P(1)=mu exp(-mu)<=1/e<1`; quando mu tende a zero, predomina vácuo. Se a fase é aleatória, a mistura Poissoniana tem os mesmos pesos. Atenuação simples não prepara um Fock determinístico. Isto não exclui preparação condicionada/heralded ou uma fonte não linear não especificada nessa frase.\n\nO controle R64 de um fóton era um **estado de teste analítico**, não uma declaração de preparo real pelo laser. O preparo completo R64 `(00+0,5|11>)/sqrt(1,25) tensor I_OH/2` também é INPUT. Óptica linear passiva aplicada a produtos de estados coerentes preserva produto de coerentes; uma mistura clássica positiva preserva separabilidade. Já `|00>+q|11>`, `q!=0`, tem posto de Schmidt2. Assim essa cadeia passiva, sozinha, não produz o par puro utilizado.\n\nO operador de squeezing está escrito nos apêndices:110–121. Ele fornece uma família bosônica que pode orientar outra preparação, mas não justifica silenciosamente o corte exato0/1. Para a família com `t=tanh(r)=1/2`, o peso dos setores `n>=2` é `t^4=1/16`; o estado de corte R64 é o resultado **condicional** de projetar e renormalizar os setores0/1. Não foi alegada implementação dessa projeção. Tampouco o OH maximamente misto e sem correlação inicial resulta apenas da espera10 tau do M6.\n\n**[KNOWN — fonte primária]** Lvovsky et al., *Quantum state reconstruction of the single-photon Fock state*, relatam preparo por medidas condicionais de pares gerados em conversão paramétrica e reconstrução homódina. É uma rota conhecida para um protocolo futuro, não prova de implantação neste dispositivo. [arXiv:quant-ph/0101051v2](https://arxiv.org/abs/quant-ph/0101051v2). O resumo foi lido pela ferramenta web; a tentativa de custódia direta do HTML falhou por DNS, registrada. Não se alega PDF lido nem bytes originais custodiados.\n\nO laser coerente continua útil como referência de fase/ganho e controle da cadeia óptica. Se ele for uma **entrada contínua** no porto durante a leitura, o banho deixa de ser o vácuo de R64; uma transformação por deslocamento precisa incluir o Hamiltoniano de drive óptico correspondente. Não confundir esse drive com o bombeamento de micro-ondas `Omega_Rabi sigma_x` já existente.",
+          "excerpt_utf8_lf_sha256": "6cdfbc1ae5081454859753ee48fb52518c41becc9165c9bc1cabb6723c88bba0"
+        }
+      ]
+    },
+    {
+      "id": "bare_frequency",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\BARE_FREQUENCY_COVARIANCE_R65.txt",
+      "sha256": "31e04530030a8a3c8462e708f58bc2cb5b2d4269101f48b54d46174597efc250",
+      "bytes": 2401,
+      "line_count": 15,
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 1,
+          "line_end": 15,
+          "text": "R65 — sonda algébrica da rota térmica no mesmo salto\nEm nome de codex-gerente-tgl. DERIVED candidato; revisor distinto confere. Sem execução numérica.\n\nAlvo restrito: dissipadorD[J] do corte0/1 já usado, relativo SOMENTE ao Hamiltoniano livre h0=omega_c(ni+no)+omegaOH*nOH. Não é o Hamiltoniano completo com gJC/Omega, nem o gerador modular/Poincare da rede. Não se infere deste diagnóstico impossibilidade geral do dispositivo ou daTGL.\nDefina A=ao†sigma-, B=sigma+ai, J=A+B, delta=omega_c-omegaOH. Com números de excitação usuais, [h0,A]=delta*A e [h0,B]=-delta*B. Em Ad(exp(i*h0*t)), as duas parcelas recebem fases opostas. Para delta!=0, J não é um único autooperador de frequência deBohr. B†A=A†B=0, mas as inserções cruzadas A*rho*B† e B*rho*A† não são mapas nulos.\n\nProva explícita de falta de covariância livre no corte\nOrdene estados como (ni,no,nOH). Tome X=|001><100| e Y=|010><001|. Então D[J](X)=Y-X: J|001>=|010>, J|100>=|001> e J†J vale1 nos dois estados. Se U_t(X)=exp(i*h0*t)Xexp(-i*h0*t), U_t(X)=exp(-i*delta*t)X e U_t(Y)=exp(i*delta*t)Y.\nLogo (D[J] U_t - U_t D[J])(X) = -2i sin(delta*t)Y, não nulo para algumt se delta!=0. A matrizX não é estado: é teste de igualdade de mapas lineares; a igualdade em todos os estados também implicaria igualdade em sua extensão linear. Esta conta não usa ajuste nem o resultado numéricoR64.\n\nConsequência condicional para uma derivação por banho\nSe uma rota candidata exigir covariância temporal do dissipador em relação a h0 (por exemplo um modelo secular que separa frequências distintas), D[J] não a satisfaz fora da ressonância. Substituir D[J] por D[A]+D[B] apaga os termos cruzados e muda o modelo, portanto não é uma calibração silenciosa de gammaLambda.\nUma construção com drive/banho não estacionário, aproximação não secular, degenerescência, outro Hamiltoniano de referência ou reservatório correlacionado deve ser especificada e verificada; nenhuma foi construída aqui. Emdelta=0 a sonda perde a obstrução, mas não prova balanço térmico nem calibração de taxa.\nA rota de correlações de banho localizada noCusto precisa identificar h,J,banho/couplagens e as aproximações antes de transportargamma(omega) ao aparelho. R5 pode prosseguir matematicamente com hipóteses nomeadas; esta nota não converte a calibração experimental em gate da prova formal.\n",
+          "excerpt_utf8_lf_sha256": "6495d0bd649efba9a7c4290404c0666a5be4ed8af265e910eae972e7de1a69d0"
+        }
+      ]
+    },
+    {
+      "id": "Davies_source",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+      "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+      "bytes": 1216423,
+      "line_count": 21418,
+      "ranges": [
+        [
+          11190,
+          11237
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 11190,
+          "line_end": 11237,
+          "text": "A construção de Davies (1974, sistematizada em Davies-Spohn-Lebowitz)\ngera o dissipador GKSL como limite de acoplamento fraco com banho térmico\ne tempo coarse-grained $\\tau \\gg 1/\\omega_{\\min}$.  Para um sistema com\nHamiltoniano $H_S$ acoplado a um banho via $V = \\sum_{\\alpha} A_{\\alpha}\n\\otimes B_{\\alpha}$, o dissipador resultante tem a forma\n\\begin{equation}\n\\mathcal{D}[\\rho] \\;=\\;\n\\sum_{\\omega, \\alpha\\beta}\n\\gamma_{\\alpha\\beta}(\\omega) \\left[\nA_{\\beta}(\\omega) \\rho A_{\\alpha}^{\\dagger}(\\omega)\n- \\tfrac{1}{2} \\{ A_{\\alpha}^{\\dagger}(\\omega) A_{\\beta}(\\omega), \\rho \\}\n\\right],\n\\label{eq:dissipator-davies}\n\\end{equation}\nonde $A_{\\alpha}(\\omega)$ são as componentes de Fourier de $A_{\\alpha}$ sob\no fluxo de $H_S$, e $\\gamma_{\\alpha\\beta}(\\omega)$ é a transformada de\nFourier da função de correlação do banho.  A condição KMS no banho\n\\begin{equation}\n\\gamma_{\\alpha\\beta}(-\\omega) \\;=\\; e^{-\\beta_{\\text{KMS}}\\omega}\\,\n\\gamma_{\\beta\\alpha}(\\omega)\n\\label{eq:KMS-condition}\n\\end{equation}\ngarante que o dissipador preserva o estado de Gibbs como ponto fixo.  Esta\né a estrutura geral.  A \\TGL{} corresponde ao caso onde $H_S = \\Kpartial$\n(gerador modular substituindo o Hamiltoniano usual) e\n$\\beta_{\\text{KMS}} = 1$ (temperatura modular), com\n$\\gamma(\\omega) \\propto \\betatgl$ uniformemente em $\\omega$.\n\n\\subsection{A forma compacta $L = \\sqrt{\\betatgl}\\,\\sqrt{\\Kpartial}$}\n\\label{sec:Lcompact}\n\nSob a condição~\\eqref{eq:KMS-condition} com $\\beta_{\\text{KMS}} = 1$ e\nacoplamento uniforme $\\betatgl$, o dissipador~\\eqref{eq:dissipator-davies}\nadmite a forma canônica\n\\begin{equation}\n\\mathcal{D}[\\rho] \\;=\\;\nL \\rho L^{\\dagger}\n- \\tfrac{1}{2}\\{ L^{\\dagger} L, \\rho \\},\n\\qquad\nL \\;=\\; \\sqrt{\\betatgl} \\, \\sqrt{\\Kpartial}.\n\\label{eq:L-compact-form}\n\\end{equation}\nEsta forma compacta é o coração algébrico da \\TGL{}: o gerador completo da\ndinâmica é o produto de duas raízes quadradas.  A primeira ($\\sqrt{\\betatgl}$)\né \\emph{escalar} e dimensionalmente neutra; a segunda ($\\sqrt{\\Kpartial}$)\né \\emph{operacional} e carrega a estrutura modular.  A operação radical\n$g = \\sqrt{|\\Lphi|}$ apresentada na Seção~\\ref{sec:radicalization} é\nexatamente o conteúdo dimensional de $L$.",
+          "excerpt_utf8_lf_sha256": "bb4025892f9c616526953cbbe416022f3e9542005306dd016c9fb7bdf5f4f0db"
+        }
+      ]
+    },
+    {
+      "id": "Fock",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicFock.lean",
+      "sha256": "c7d24c14f9bb1c2a31c3b207a9f86e839577b6705c4b55b2aa6eab187450d3ec",
+      "bytes": 3270,
+      "line_count": 78,
+      "ranges": [
+        [
+          17,
+          55
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 17,
+          "line_end": 55,
+          "text": "abbrev Sectors (n : ℕ) : Type := Sector n\nabbrev F := SumSpace Sectors\ndef vacuum : F := sectorEmbedding (E := Sectors) 0 vacuumSector\ndef gamma (u : H1 ≃ₗᵢ[ℂ] H1) : F ≃ₗᵢ[ℂ] F :=\n  diagonal (E := Sectors) (gammaSector u)\ndef oneParticle : H1 →ₗᵢ[ℂ] F :=\n  (sectorEmbedding (E := Sectors) 1).comp oneParticleEmbedding\n\ntheorem vacuum_norm : ‖vacuum‖ = 1 := by\n  change ‖sectorEmbedding (E := Sectors) 0 vacuumSector‖ = 1\n  rw [(sectorEmbedding (E := Sectors) 0).norm_map, vacuumSector_norm]\n\ntheorem gamma_refl : gamma (.refl ℂ H1) = .refl ℂ F := by\n  change diagonal (E := Sectors) (fun n => gammaSector (.refl ℂ H1) n) = _\n  simp only [gammaSector_refl]\n  exact diagonal_refl (E := Sectors)\n\ntheorem gamma_trans (u v : H1 ≃ₗᵢ[ℂ] H1) :\n    gamma (u.trans v) = (gamma u).trans (gamma v) := by\n  change diagonal (E := Sectors) (fun n => gammaSector (u.trans v) n) = _\n  simp only [gammaSector_trans]\n  exact diagonal_trans (E := Sectors) (gammaSector u) (gammaSector v)\n\ntheorem gamma_vacuum (u : H1 ≃ₗᵢ[ℂ] H1) : gamma u vacuum = vacuum := by\n  exact F1Rede.SectorDirectSum.vacuum_fixed (E := Sectors) (gammaSector u)\n    vacuumSector (gammaSector_vacuum u)\n\ntheorem gamma_oneParticle (u : H1 ≃ₗᵢ[ℂ] H1) (x : H1) :\n    gamma u (oneParticle x) = oneParticle (u x) := by\n  change diagonal (gammaSector u) (sectorEmbedding 1 (oneParticleEmbedding x)) = _\n  rw [diagonal_single, gammaSector_oneParticle]\n  rfl\n\ntheorem oneParticle_isometric (x : H1) : ‖oneParticle x‖ = ‖x‖ :=\n  oneParticle.norm_map x\n\ntheorem vacuum_orthogonal_oneParticle (x : H1) : ⟪vacuum, oneParticle x⟫_ℂ = 0 := by\n  exact different_sectors_orthogonal (E := Sectors) 0 1 (by decide)\n    vacuumSector (oneParticleEmbedding x)",
+          "excerpt_utf8_lf_sha256": "6616da9529d0e86c49bc72d5b7069cf583d21afd52d3aeed5b8420b08899c019"
+        }
+      ]
+    },
+    {
+      "id": "Fock_actions",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicFockGroupActions.lean",
+      "sha256": "0de93539839cb2086245b1eb9949744c4777bb7f77d359ffb95ed2eb3aab3975",
+      "bytes": 3254,
+      "line_count": 83,
+      "ranges": [
+        [
+          16,
+          23
+        ],
+        [
+          47,
+          69
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 16,
+          "line_end": 23,
+          "text": "def UF (a : Fin 4 → ℝ) : F ≃ₗᵢ[ℂ] F := gamma (U1 a)\ndef VF (s : ℝ) : F ≃ₗᵢ[ℂ] F := gamma (B0 s)\n\ntheorem gamma_symm (u : H1 ≃ₗᵢ[ℂ] H1) : gamma u.symm = (gamma u).symm := by\n  have h := gamma_trans u u.symm\n  rw [LinearIsometryEquiv.self_trans_symm, gamma_refl] at h\n  apply LinearIsometryEquiv.ext\n  intro f",
+          "excerpt_utf8_lf_sha256": "99142fe4e5c113ffb72113cc8af58aede2b294509962c6a8c2b0ec80b324cf65"
+        },
+        {
+          "line_start": 47,
+          "line_end": 69,
+          "text": "theorem UF_vacuum (a : Fin 4 → ℝ) : UF a vacuum = vacuum := gamma_vacuum (U1 a)\ntheorem VF_vacuum (s : ℝ) : VF s vacuum = vacuum := gamma_vacuum (B0 s)\n\ntheorem UF_oneParticle (a : Fin 4 → ℝ) (x : H1) :\n    UF a (oneParticle x) = oneParticle (U1 a x) := gamma_oneParticle (U1 a) x\n\ntheorem VF_oneParticle (s : ℝ) (x : H1) :\n    VF s (oneParticle x) = oneParticle (B0 s x) := gamma_oneParticle (B0 s) x\n\ntheorem VF_conjugates_UF (s : ℝ) (a : Fin 4 → ℝ) :\n    ((VF s).symm.trans (UF a)).trans (VF s) = UF (wedgeBoostMap s a) := by\n  have hB : U1 (wedgeBoostMap s a) = (((B0 s).symm).trans (U1 a)).trans (B0 s) := by\n    apply LinearIsometryEquiv.ext\n    intro f\n    have h := congrArg (fun T : H1 →L[ℂ] H1 => T f) (B0_conj s a)\n    simp only [LinearIsometryEquiv.conjStarAlgEquiv_apply_apply] at h\n    exact h.symm\n  unfold UF VF\n  rw [hB, gamma_trans, gamma_trans, gamma_symm]\n\ntheorem VF_UF_VF_symm (s : ℝ) (a : Fin 4 → ℝ) (f : F) :\n    VF s (UF a ((VF s).symm f)) = UF (wedgeBoostMap s a) f := by\n  exact congrArg (fun e : F ≃ₗᵢ[ℂ] F => e f) (VF_conjugates_UF s a)",
+          "excerpt_utf8_lf_sha256": "2b5bb6f3dc56832fe9a22b5fbbe7268b3687c0703c6d7b1cf142e24613981bd1"
+        }
+      ]
+    },
+    {
+      "id": "Sectors",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicSectors.lean",
+      "sha256": "83c5660c0505774c6899c8837f9719fabbf232403ae4fb10bd74d702633ed69b",
+      "bytes": 10618,
+      "line_count": 233,
+      "ranges": [
+        [
+          22,
+          34
+        ],
+        [
+          93,
+          118
+        ],
+        [
+          154,
+          180
+        ],
+        [
+          188,
+          211
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 22,
+          "line_end": 34,
+          "text": "def powerData : ℕ → PreHilbert\n  | 0 => ⟨ℂ⟩\n  | n+1 => ⟨H1 ⊗[ℂ] (powerData n).carrier⟩\n\nabbrev Algebraic (n : ℕ) := (powerData n).carrier\n\ndef algebraicGamma (u : H1 ≃ₗᵢ[ℂ] H1) : (n : ℕ) → Algebraic n ≃ₗᵢ[ℂ] Algebraic n\n  | 0 => LinearIsometryEquiv.refl ℂ ℂ\n  | n+1 => TensorProduct.congrIsometry u (algebraicGamma u n)\n\ndef pureAlgebraic (x : H1) : (n : ℕ) → Algebraic n\n  | 0 => (1 : ℂ)\n  | n+1 => x ⊗ₜ[ℂ] pureAlgebraic x n",
+          "excerpt_utf8_lf_sha256": "745f33780906f82b54b6951e9116af4f2e16b9c5962ee600a08766bdb624d28f"
+        },
+        {
+          "line_start": 93,
+          "line_end": 118,
+          "text": "abbrev TensorHilbert (n : ℕ) := Completion (Algebraic n)\ndef tensorGamma (u : H1 ≃ₗᵢ[ℂ] H1) (n : ℕ) : TensorHilbert n ≃ₗᵢ[ℂ] TensorHilbert n :=\n  completionEquiv (algebraicGamma u n)\n\n@[simp] theorem tensorGamma_coe (u : H1 ≃ₗᵢ[ℂ] H1) (n : ℕ) (x : Algebraic n) :\n    tensorGamma u n (x : TensorHilbert n) = (algebraicGamma u n x : TensorHilbert n) :=\n  completionEquiv_coe _ _\n\ndef pureCompleted (n : ℕ) (x : H1) : TensorHilbert n := pureAlgebraic x n\ndef algebraicSymmetricSpan (n : ℕ) : Submodule ℂ (TensorHilbert n) :=\n  Submodule.span ℂ (Set.range (pureCompleted n))\n/-- Symmetric tensors are constructed as the closed span of diagonal tensor\npowers. No assumed symmetry, density, or unitary action is a field of a contract. -/\ndef symmetricSpace (n : ℕ) : Submodule ℂ (TensorHilbert n) :=\n  (algebraicSymmetricSpan n).topologicalClosure\nabbrev Sector (n : ℕ) := symmetricSpace n\ninstance sectorComplete (n : ℕ) : CompleteSpace (Sector n) :=\n  (algebraicSymmetricSpan n).isClosed_topologicalClosure.completeSpace_coe\n\ntheorem pureCompleted_mem (n : ℕ) (x : H1) : pureCompleted n x ∈ symmetricSpace n :=\n  (algebraicSymmetricSpan n).le_topologicalClosure (Submodule.subset_span ⟨x, rfl⟩)\n\ndef pureTensor (n : ℕ) (x : H1) : Sector n := ⟨pureCompleted n x, pureCompleted_mem n x⟩\n\n@[simp] theorem pureTensor_norm (n : ℕ) (x : H1) : ‖pureTensor n x‖ = ‖x‖ ^ n := by\n  change ‖(pureAlgebraic x n : Completion (Algebraic n))‖ = _",
+          "excerpt_utf8_lf_sha256": "867cdb40573c807a1009daf638918d09c160d118496b1c7105dc5a652fed1515"
+        },
+        {
+          "line_start": 154,
+          "line_end": 180,
+          "text": "def gammaSector (u : H1 ≃ₗᵢ[ℂ] H1) (n : ℕ) : Sector n ≃ₗᵢ[ℂ] Sector n where\n  toFun x := ⟨tensorGamma u n x, tensorGamma_mem u n x.property⟩\n  invFun x := ⟨tensorGamma u.symm n x, tensorGamma_mem u.symm n x.property⟩\n  left_inv x := by apply Subtype.ext; exact tensorGamma_inverse u n x\n  right_inv x := by apply Subtype.ext; simpa using tensorGamma_inverse u.symm n (x : TensorHilbert n)\n  map_add' x y := by apply Subtype.ext; exact (tensorGamma u n).map_add x y\n  map_smul' c x := by apply Subtype.ext; exact (tensorGamma u n).map_smul c x\n  norm_map' x := (tensorGamma u n).norm_map x\n\n@[simp] theorem gammaSector_pure (u : H1 ≃ₗᵢ[ℂ] H1) (n : ℕ) (x : H1) :\n    gammaSector u n (pureTensor n x) = pureTensor n (u x) := by\n  apply Subtype.ext\n  exact tensorGamma_pure u n x\n\ntheorem tensorGamma_trans (u v : H1 ≃ₗᵢ[ℂ] H1) (n : ℕ) (x : TensorHilbert n) :\n    tensorGamma (u.trans v) n x = tensorGamma v n (tensorGamma u n x) := by\n  refine Completion.induction_on x (isClosed_eq (tensorGamma (u.trans v) n).continuous\n    ((tensorGamma v n).continuous.comp (tensorGamma u n).continuous)) ?_\n  intro a\n  simp [algebraicGamma_trans]\n\ntheorem gammaSector_trans (u v : H1 ≃ₗᵢ[ℂ] H1) (n : ℕ) :\n    gammaSector (u.trans v) n = (gammaSector u n).trans (gammaSector v n) := by\n  ext x\n  exact tensorGamma_trans u v n x\n\ntheorem gammaSector_refl (n : ℕ) : gammaSector (.refl ℂ H1) n = .refl ℂ (Sector n) := by",
+          "excerpt_utf8_lf_sha256": "4e51ed4c6a52c3e5e0cd21cc34a353b04dbdfa89426b4d92b84a22e232350446"
+        },
+        {
+          "line_start": 188,
+          "line_end": 211,
+          "text": "def vacuumSector : Sector 0 := pureTensor 0 (0 : H1)\n@[simp] theorem vacuumSector_norm : ‖vacuumSector‖ = 1 := by\n  exact (pureTensor_norm 0 (0 : H1)).trans (pow_zero _)\n@[simp] theorem gammaSector_vacuum (u : H1 ≃ₗᵢ[ℂ] H1) :\n    gammaSector u 0 vacuumSector = vacuumSector := by simp [vacuumSector]\n\ndef oneParticleEmbedding : H1 →ₗᵢ[ℂ] Sector 1 where\n  toFun x := pureTensor 1 x\n  map_add' x y := by\n    apply Subtype.ext\n    change (Completion.toComplₗᵢ (𝕜 := ℂ)) ((x+y) ⊗ₜ[ℂ] (1:ℂ)) =\n      (Completion.toComplₗᵢ (𝕜 := ℂ)) (x ⊗ₜ[ℂ] (1:ℂ)) +\n      (Completion.toComplₗᵢ (𝕜 := ℂ)) (y ⊗ₜ[ℂ] (1:ℂ))\n    rw [TensorProduct.add_tmul, map_add]\n  map_smul' c x := by\n    apply Subtype.ext\n    change (Completion.toComplₗᵢ (𝕜 := ℂ)) ((c • x) ⊗ₜ[ℂ] (1:ℂ)) =\n      c • (Completion.toComplₗᵢ (𝕜 := ℂ)) (x ⊗ₜ[ℂ] (1:ℂ))\n    rw [← TensorProduct.smul_tmul', map_smul]\n  norm_map' x := by exact (pureTensor_norm 1 x).trans (pow_one _)\n\ntheorem gammaSector_oneParticle (u : H1 ≃ₗᵢ[ℂ] H1) (x : H1) :\n    gammaSector u 1 (oneParticleEmbedding x) = oneParticleEmbedding (u x) :=\n  gammaSector_pure u 1 x",
+          "excerpt_utf8_lf_sha256": "f56717cdd6bfc7157c3fabc4d8756683930c6f06b912dc0e45a629aded2b8468"
+        }
+      ]
+    },
+    {
+      "id": "DirectSum",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\SectorDirectSum.lean",
+      "sha256": "d7d6474ba95522ab1c381340abf0ec01a9a70333cebf5a684b9729f77269d0e3",
+      "bytes": 3630,
+      "line_count": 89,
+      "ranges": [
+        [
+          15,
+          18
+        ],
+        [
+          51,
+          75
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 15,
+          "line_end": 18,
+          "text": "abbrev SumSpace (E : ℕ → Type*) [∀ n, NormedAddCommGroup (E n)] := lp E 2\n\ndef diagonalFun (u : ∀ n, E n ≃ₗᵢ[ℂ] E n) (f : SumSpace E) : SumSpace E :=\n  ⟨fun n => u n (f n), Memℓp.mono (lp.memℓp f).norm (fun n => by simp)⟩",
+          "excerpt_utf8_lf_sha256": "28a3dc0756c1fa5991b72f11f7812aa4c8eac83fd718e2750dcf50b5f093a30e"
+        },
+        {
+          "line_start": 51,
+          "line_end": 75,
+          "text": "def sectorEmbedding (n : ℕ) : E n →ₗᵢ[ℂ] SumSpace E where\n  toLinearMap := lp.lsingle 2 n\n  norm_map' x := lp.norm_single (by norm_num) n x\n\n@[simp] theorem sectorEmbedding_apply (n : ℕ) (x : E n) :\n    sectorEmbedding n x = lp.single 2 n x := rfl\n\ntheorem diagonal_single (u : ∀ n, E n ≃ₗᵢ[ℂ] E n) (n : ℕ) (x : E n) :\n    diagonal u (sectorEmbedding n x) = sectorEmbedding n (u n x) := by\n  ext k\n  by_cases h : k = n\n  · subst k; simp\n  · simp [lp.single_apply_ne, h]\n\ntheorem vacuum_fixed (u : ∀ n, E n ≃ₗᵢ[ℂ] E n) (e : E 0)\n    (he : u 0 e = e) : diagonal u (sectorEmbedding 0 e) = sectorEmbedding 0 e := by\n  rw [diagonal_single, he]\n\ntheorem vacuum_norm (e : E 0) (he : ‖e‖ = 1) : ‖sectorEmbedding 0 e‖ = 1 := by\n  rw [(sectorEmbedding 0).norm_map, he]\n\ntheorem different_sectors_orthogonal (n m : ℕ) (hnm : n ≠ m) (x : E n) (y : E m) :\n    ⟪sectorEmbedding n x, sectorEmbedding m y⟫_ℂ = 0 := by\n  rw [sectorEmbedding_apply, sectorEmbedding_apply, lp.inner_single_left]\n  simp [lp.single_apply_ne, hnm]",
+          "excerpt_utf8_lf_sha256": "9421c473c77f6e0a8aea10dc0dee4ae607adc74f1f97dad08e6c7feb21c9dc2d"
+        }
+      ]
+    },
+    {
+      "id": "TwoParticle",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicTwoParticle.lean",
+      "sha256": "ecc54d0032d279cddd7ac84ede268f5ce9aabf2f03d7dff03181d0aeb5d29d61",
+      "bytes": 7423,
+      "line_count": 182,
+      "ranges": [
+        [
+          38,
+          69
+        ],
+        [
+          85,
+          128
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 38,
+          "line_end": 69,
+          "text": "abbrev AlgebraicTwo := H1 ⊗[ℂ] H1\nabbrev CompletedTwo := Completion AlgebraicTwo\n\ndef flip : CompletedTwo ≃ₗᵢ[ℂ] CompletedTwo :=\n  completionEquiv (TensorProduct.commIsometry ℂ H1 H1)\n\n@[simp] theorem flip_coe (x : AlgebraicTwo) :\n    flip (x : CompletedTwo) = (TensorProduct.comm ℂ H1 H1 x : CompletedTwo) := by\n  simp [flip]\n\n@[simp] theorem flip_flip (x : CompletedTwo) : flip (flip x) = x := by\n  refine Completion.induction_on x (isClosed_eq (flip.continuous.comp flip.continuous) continuous_id) ?_\n  intro a\n  simp\n\ndef symmetricSector : Submodule ℂ CompletedTwo where\n  carrier := {x | flip x = x}\n  zero_mem' := by simp\n  add_mem' := by intro x y hx hy; simp only [Set.mem_setOf_eq] at *; simp [hx, hy]\n  smul_mem' := by intro c x hx; simp only [Set.mem_setOf_eq] at *; simp [hx]\n\n@[simp] theorem mem_symmetricSector (x : CompletedTwo) :\n    x ∈ symmetricSector ↔ flip x = x := Iff.rfl\n\ntheorem symmetricSector_closed : IsClosed (symmetricSector : Set CompletedTwo) :=\n  isClosed_eq flip.continuous continuous_id\n\ninstance : CompleteSpace symmetricSector :=\n  symmetricSector_closed.completeSpace_coe\n\ndef pair (x : H1) : symmetricSector :=\n  ⟨((x ⊗ₜ[ℂ] x : AlgebraicTwo) : CompletedTwo), by simp⟩",
+          "excerpt_utf8_lf_sha256": "6d0dcc5af2304583c97165348664f514652a1b6e1aa633e35cd9d929d316df10"
+        },
+        {
+          "line_start": 85,
+          "line_end": 128,
+          "text": "def tensorSquare (u : H1 ≃ₗᵢ[ℂ] H1) : CompletedTwo ≃ₗᵢ[ℂ] CompletedTwo :=\n  completionEquiv (TensorProduct.congrIsometry u u)\n\n@[simp] theorem tensorSquare_coe (u : H1 ≃ₗᵢ[ℂ] H1) (x : AlgebraicTwo) :\n    tensorSquare u (x : CompletedTwo) =\n      (TensorProduct.congr u.toLinearEquiv u.toLinearEquiv x : CompletedTwo) := by\n  rw [tensorSquare, completionEquiv_coe]\n  rfl\n\ntheorem tensorSquare_flip (u : H1 ≃ₗᵢ[ℂ] H1) (x : CompletedTwo) :\n    tensorSquare u (flip x) = flip (tensorSquare u x) := by\n  refine Completion.induction_on x (isClosed_eq\n    ((tensorSquare u).continuous.comp flip.continuous)\n    (flip.continuous.comp (tensorSquare u).continuous)) ?_\n  intro a\n  simp only [flip_coe, tensorSquare_coe]\n  congr 1\n  induction a using TensorProduct.induction_on with\n  | zero => simp\n  | tmul x y => simp\n  | add x y hx hy => simp only [map_add, hx, hy]\n\ntheorem tensorSquare_mem (u : H1 ≃ₗᵢ[ℂ] H1) {x : CompletedTwo}\n    (hx : x ∈ symmetricSector) : tensorSquare u x ∈ symmetricSector := by\n  rw [mem_symmetricSector] at hx ⊢\n  rw [← tensorSquare_flip, hx]\n\ntheorem tensorSquare_inverse (u : H1 ≃ₗᵢ[ℂ] H1) (x : CompletedTwo) :\n    tensorSquare u.symm (tensorSquare u x) = x := by\n  refine Completion.induction_on x (isClosed_eq\n    ((tensorSquare u.symm).continuous.comp (tensorSquare u).continuous) continuous_id) ?_\n  intro a\n  simp only [tensorSquare_coe]\n  congr 1\n  induction a using TensorProduct.induction_on with\n  | zero => simp\n  | tmul x y => simp\n  | add x y hx hy => simp only [map_add, hx, hy]\n\ndef gammaTwo (u : H1 ≃ₗᵢ[ℂ] H1) : symmetricSector ≃ₗᵢ[ℂ] symmetricSector where\n  toFun x := ⟨tensorSquare u x, tensorSquare_mem u x.property⟩\n  invFun x := ⟨tensorSquare u.symm x, tensorSquare_mem u.symm x.property⟩\n  left_inv x := by apply Subtype.ext; exact tensorSquare_inverse u x\n  right_inv x := by apply Subtype.ext; simpa using tensorSquare_inverse u.symm (x : CompletedTwo)",
+          "excerpt_utf8_lf_sha256": "89de6de2266b69f8cbc6b4a2f9f35232c5a8fc3923a2ccc4f4947441e11c44b8"
+        }
+      ]
+    },
+    {
+      "id": "receiver_modes",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_receiver_r63\\receiver\\DERIVACAO_RECEPTOR_R63.md",
+      "sha256": "35982c445a98ab6cf28c1fe56e53a3269a921b4a3a01614ae787f17bab373f84",
+      "bytes": 8747,
+      "line_count": 109,
+      "ranges": [
+        [
+          78,
+          105
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 78,
+          "line_end": 105,
+          "text": "## 4. Isometria cinemática para modos da rede\n\n**[INPUT]** Escolham `fi,fo∈H1`, de norma um e ortogonais. Nas peças de Fock já existentes, defina a inclusão V pelos vetores\n\n\\[\n|00\\rangle\\mapsto\\Omega,\\quad |10\\rangle\\mapsto f_i,\\quad\n|01\\rangle\\mapsto f_o,\\quad\n|11\\rangle\\mapsto(f_i\\otimes f_o+f_o\\otimes f_i)/\\sqrt2.\n\\]\n\nOs quatro vetores têm norma um; os setores diferentes são ortogonais e `fi⊥fo`. Portanto V é isometria. Estenda por identidade no fator OH. Para qualquer estado conjunto finito ρ, `ρphys=VρV†` é positivo e tem traço um. A compressão dos efeitos físicos `V†E V` fornece exatamente a POVM acima e os momentos cruzados do decoder. **[DERIVED — cinemática]** Isso dá uma realização bosônica do contrato de leitura dos estados finitos, sem construir novamente Fock.\n\nO mesmo transporte pode ser aplicado à trajetória R62 como uma família matemática de estados `Vρfin(t)V†`. **Não foi provado que essa trajetória seja gerada pelo Hamiltoniano/GKLS bosônico da patente.** Uma isometria de estados não é automaticamente um entrelaçador dos geradores, nem identifica o pacote físico da luz observado com fi/fo. Permanecem distintos o mapa cinemático, a escolha dos modos e a dinâmica física.\n\n## 5. Campo de saída temporal: contrato que ainda precisa de instância\n\n**[INPUT — proposta explícita, não localizada pronta como realização]** Para um campo viajante com distribuição de operadores `bout(t)`, um modo detectado é\n\n\\[\nB_f=\\int \\overline{f(t)}b_{out}(t)dt,\\qquad \\int|f(t)|^2dt=1.\n\\]\n\nO contrato deve fornecer as relações de comutação, o domínio e os dois modos acessíveis, em portas distintas ou pacotes ortogonais. O filtro f, a fase do oscilador local e o ganho devem ser conhecidos. Sob esses dados, a corrente homódina filtrada lê a quadratura de Bf; duas configurações de fase em cada ponta produzem as quatro correlações do item 3. Uma única corrente, o HBT de intensidades ou a polarização OH `σ+` não são automaticamente essas quatro leituras.\n\nMesmo assumindo uma dilatação de entrada–saída com convenção escolhida\n`bout(t)=bin(t)+sqrt(κext) a(t)`, segue que Bf contém **campo incidente e integral temporal de a(t)**. Essa equação é aqui uma hipótese tipada de uma possível realização; não foi derivada do acervo nem do gerador finito. Não se identifica Bf com `aout(t0)` apenas pelo nome. O contrato precisa da porta externa, do filtro, do estado incidente/ruído, de eficiência/ganhos e da ligação entre os pacotes escolhidos e os operadores do dispositivo. Um lock-in de tensão relativa, incluindo atraso, também não é por definição o par anômalo C de tempos iguais.\n\n**[OPEN]** Nenhuma igualdade física `G_OH=⟨Bf⟩`, `G_OH=C`, `G_OH=B` ou identificação de β foi inferida. O resultado concreto desta camada é a POVM comprimida positiva e normalizada e a invariância do decoder cruzado sob a correção exata de segundo momento. A identificação instrumental e o entrelaçamento dinâmico seguem necessários para fechar o requisito físico R4.",
+          "excerpt_utf8_lf_sha256": "58e36a003deb329b78f1b3fdc174b6620da31707108cad511b50e31334e06c7b"
+        }
+      ]
+    },
+    {
+      "id": "packets",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\CompactPacketRefinementR1.lean",
+      "sha256": "5b9a972b796d4e5d9d31198d2d15123d988bdd868fa6c5b0f024c0675627eea8",
+      "bytes": 9139,
+      "line_count": 211,
+      "ranges": [
+        [
+          19,
+          63
+        ],
+        [
+          77,
+          102
+        ],
+        [
+          144,
+          189
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 19,
+          "line_end": 63,
+          "text": "abbrev CompactPacket (O : Set Spacetime) :=\n  {s : Finset H1 // (s : Set H1) ⊆ compactSupportedGenerators O}\n\ndef packetSpace {O : Set Spacetime} (S : CompactPacket O) : Submodule ℝ H1 :=\n  Submodule.span ℝ (S.val : Set H1)\n\ninstance packetSpace_finite {O : Set Spacetime} (S : CompactPacket O) :\n    FiniteDimensional ℝ (packetSpace S) :=\n  FiniteDimensional.span_finset ℝ S.val\n\ndef emptyPacket (O : Set Spacetime) : CompactPacket O :=\n  ⟨∅, by simp⟩\n\ninstance compactPacket_nonempty (O : Set Spacetime) : Nonempty (CompactPacket O) :=\n  ⟨emptyPacket O⟩\n\ndef joinPacket {O : Set Spacetime} (S T : CompactPacket O) : CompactPacket O := by\n  classical\n  exact ⟨S.val ∪ T.val, by\n    intro v hv\n    rcases Finset.mem_union.mp hv with h | h\n    · exact S.property h\n    · exact T.property h⟩\n\ntheorem packetSpace_mono {O : Set Spacetime} {S T : CompactPacket O}\n    (h : S.val ⊆ T.val) : packetSpace S ≤ packetSpace T :=\n  Submodule.span_mono h\n\ntheorem packetSpace_directed (O : Set Spacetime) :\n    Directed (· ≤ ·) (@packetSpace O) := by\n  classical\n  intro S T\n  exact ⟨joinPacket S T, packetSpace_mono Finset.subset_union_left,\n    packetSpace_mono Finset.subset_union_right⟩\n\ndef packetInclusion {O : Set Spacetime} {S T : CompactPacket O}\n    (h : S.val ⊆ T.val) : packetSpace S →ₗᵢ[ℝ] packetSpace T where\n  toLinearMap := Submodule.inclusion (packetSpace_mono h)\n  norm_map' _ := rfl\n\ntheorem packetInclusion_comp {O : Set Spacetime} {R S T : CompactPacket O}\n    (hRS : R.val ⊆ S.val) (hST : S.val ⊆ T.val) (x : packetSpace R) :\n    packetInclusion hST (packetInclusion hRS x) = packetInclusion (hRS.trans hST) x := rfl\n\ntheorem packetSpace_le_localized {O : Set Spacetime} (S : CompactPacket O) :",
+          "excerpt_utf8_lf_sha256": "35af030df8f2d4c62c6832c80a95da2534e531026293685f72a748d082fb2358"
+        },
+        {
+          "line_start": 77,
+          "line_end": 102,
+          "text": "theorem packetSpace_iSup (O : Set Spacetime) :\n    (⨆ S : CompactPacket O, packetSpace S) =\n      Submodule.span ℝ (compactSupportedGenerators O) := by\n  classical\n  apply le_antisymm\n  · exact iSup_le (fun S => Submodule.span_mono S.property)\n  · apply Submodule.span_le.mpr\n    intro v hv\n    let S : CompactPacket O := ⟨{v}, by simpa using hv⟩\n    exact (le_iSup (fun S : CompactPacket O => packetSpace S) S)\n      (Submodule.subset_span (by simp [S]))\n\ntheorem packet_union_closure (O : Set Spacetime) :\n    closure (⋃ S : CompactPacket O, (packetSpace S : Set H1)) =\n      (compactLocalized O : Set H1) := by\n  rw [← Submodule.coe_iSup_of_directed _ (packetSpace_directed O), packetSpace_iSup]\n  rfl\n\n/-- Dense global one-particle target, using complexification of the same\nreal wedge subspace. Real localization is not silently complexified. -/\ntheorem packet_wedge_complex_dense :\n    (Submodule.span ℂ (closure (⋃ S : CompactPacket physicalRightWedge,\n      (packetSpace S : Set H1)))).topologicalClosure = ⊤ := by\n  rw [packet_union_closure, compactLocalized_rightWedge_eq]\n  exact physical_right_wedge_complex_dense\n",
+          "excerpt_utf8_lf_sha256": "edcd2a8afd4448449231f2c773746c40d0f991cb7252767429b8c1bfcb52c298"
+        },
+        {
+          "line_start": 144,
+          "line_end": 189,
+          "text": "theorem packetMove_refinement {O P : Set Spacetime} (T : H1 →L[ℝ] H1)\n    (hT : ∀ v ∈ compactSupportedGenerators O, T v ∈ compactSupportedGenerators P)\n    (hn : ∀ v : H1, ‖T v‖ = ‖v‖) {S R : CompactPacket O}\n    (h : S.val ⊆ R.val) (x : packetSpace S) :\n    packetInclusion (movePacket_mono T hT h) (packetMoveIsometry T hT hn S x) =\n      packetMoveIsometry T hT hn R (packetInclusion h x) := rfl\n\ndef packetTranslation (a : Spacetime) : H1 →L[ℝ] H1 :=\n  (U1 (fun i => a i)).toLinearIsometry.toContinuousLinearMap.restrictScalars ℝ\n\ndef translatePacket (a : Spacetime) {O : Set Spacetime} (S : CompactPacket O) :\n    CompactPacket (translateRegion a O) :=\n  movePacket (packetTranslation a) (compact_translated_generator a O) S\n\ntheorem packet_translate (a : Spacetime) {O : Set Spacetime} (S : CompactPacket O) :\n    (packetSpace S).map (packetTranslation a).toLinearMap = packetSpace (translatePacket a S) :=\n  packetSpace_move _ _ S\n\ndef translatePacketIsometry (a : Spacetime) {O : Set Spacetime} (S : CompactPacket O) :\n    packetSpace S →ₗᵢ[ℝ] packetSpace (translatePacket a S) :=\n  packetMoveIsometry (packetTranslation a) (compact_translated_generator a O)\n    (fun v => (U1 (fun i => a i)).norm_map v) S\n\ndef packetLorentz (L : generatedLorentz) : H1 →L[ℝ] H1 :=\n  (helicityUnitary L).toLinearIsometry.toContinuousLinearMap.restrictScalars ℝ\n\ndef lorentzPacket (L : generatedLorentz) {O : Set Spacetime} (S : CompactPacket O) :\n    CompactPacket (lorentzRegion L O) :=\n  movePacket (packetLorentz L) (compact_lorentz_generator L O) S\n\ntheorem packet_lorentz (L : generatedLorentz) {O : Set Spacetime} (S : CompactPacket O) :\n    (packetSpace S).map (packetLorentz L).toLinearMap = packetSpace (lorentzPacket L S) :=\n  packetSpace_move _ _ S\n\ndef lorentzPacketIsometry (L : generatedLorentz) {O : Set Spacetime} (S : CompactPacket O) :\n    packetSpace S →ₗᵢ[ℝ] packetSpace (lorentzPacket L S) :=\n  packetMoveIsometry (packetLorentz L) (compact_lorentz_generator L O)\n    (fun v => (helicityUnitary L).norm_map v) S\n\ntheorem packet_boost_apply (s : ℝ) (v : H1) : packetLorentz (generatedBoost s) v = B0 s v :=\n  helicityUnitary_boost s v\n\ntheorem packet_future_lorentz (L : FutureLorentz) {O : Set Spacetime}\n    (S : CompactPacket O) :\n    (packetSpace S).map (packetLorentz (futureToGenerated L)).toLinearMap =\n      packetSpace (lorentzPacket (futureToGenerated L) S) := packet_lorentz _ _",
+          "excerpt_utf8_lf_sha256": "0fa86fed54bc8d34578be41605940d227128a7b51947cfa09077fcd1068ef03d"
+        }
+      ]
+    },
+    {
+      "id": "complex_packets",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\ComplexPacketLimitR1.lean",
+      "sha256": "50d41da1a4ebdd70adab47f824420f3d79f041be109bb1713f0b4a9ff9ecc9ca",
+      "bytes": 4528,
+      "line_count": 99,
+      "ranges": [
+        [
+          14,
+          44
+        ],
+        [
+          54,
+          78
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 14,
+          "line_end": 44,
+          "text": "def complexPacketSpace {O : Set Spacetime} (S : CompactPacket O) : Submodule ℂ H1 :=\n  Submodule.span ℂ (S.val : Set H1)\n\ninstance complexPacketSpace_finite {O : Set Spacetime} (S : CompactPacket O) :\n    FiniteDimensional ℂ (complexPacketSpace S) :=\n  FiniteDimensional.span_finset ℂ S.val\n\ntheorem complexPacketSpace_mono {O : Set Spacetime} {S T : CompactPacket O}\n    (h : S.val ⊆ T.val) : complexPacketSpace S ≤ complexPacketSpace T :=\n  Submodule.span_mono h\n\ntheorem complexPacketSpace_directed (O : Set Spacetime) :\n    Directed (· ≤ ·) (@complexPacketSpace O) := by\n  classical\n  intro S T\n  exact ⟨joinPacket S T, complexPacketSpace_mono Finset.subset_union_left,\n    complexPacketSpace_mono Finset.subset_union_right⟩\n\ndef complexPacketInclusion {O : Set Spacetime} {S T : CompactPacket O}\n    (h : S.val ⊆ T.val) : complexPacketSpace S →ₗᵢ[ℂ] complexPacketSpace T where\n  toLinearMap := Submodule.inclusion (complexPacketSpace_mono h)\n  norm_map' _ := rfl\n\ntheorem complexPacketInclusion_comp {O : Set Spacetime} {R S T : CompactPacket O}\n    (hRS : R.val ⊆ S.val) (hST : S.val ⊆ T.val) (x : complexPacketSpace R) :\n    complexPacketInclusion hST (complexPacketInclusion hRS x) =\n      complexPacketInclusion (hRS.trans hST) x := rfl\n\ntheorem complexPacketSpace_iSup (O : Set Spacetime) :\n    (⨆ S : CompactPacket O, complexPacketSpace S) =\n      Submodule.span ℂ (compactSupportedGenerators O) := by",
+          "excerpt_utf8_lf_sha256": "0788abf1f9ed3d4d4d2001c950df72411eb31f5fa204a9636da27dd8e2c1edf8"
+        },
+        {
+          "line_start": 54,
+          "line_end": 78,
+          "text": "theorem compact_wedge_generators_complex_dense :\n    (Submodule.span ℂ (compactSupportedGenerators physicalRightWedge)).topologicalClosure = ⊤ := by\n  let K := (Submodule.span ℂ (compactSupportedGenerators physicalRightWedge)).topologicalClosure\n  have hc : IsClosed (K : Set H1) := Submodule.isClosed_topologicalClosure _\n  have hr : Submodule.span ℝ (compactSupportedGenerators physicalRightWedge) ≤\n      K.restrictScalars ℝ := by\n    apply Submodule.span_le.mpr\n    intro v hv\n    exact (Submodule.le_topologicalClosure _) (Submodule.subset_span hv)\n  have hw : compactLocalized physicalRightWedge ≤ K.restrictScalars ℝ :=\n    Submodule.topologicalClosure_minimal _ hr hc\n  have hs : Submodule.span ℂ (compactLocalized physicalRightWedge : Set H1) ≤ K :=\n    Submodule.span_le.mpr hw\n  have ht := Submodule.topologicalClosure_minimal _ hs hc\n  rw [compactLocalized_rightWedge_eq, physical_right_wedge_complex_dense] at ht\n  exact le_antisymm le_top ht\n\ntheorem complexPacket_union_dense :\n    Dense (⋃ S : CompactPacket physicalRightWedge, (complexPacketSpace S : Set H1)) := by\n  apply dense_iff_closure_eq.mpr\n  rw [← Submodule.coe_iSup_of_directed _ (complexPacketSpace_directed _), complexPacketSpace_iSup]\n  change ((Submodule.span ℂ (compactSupportedGenerators physicalRightWedge)).topologicalClosure :\n    Set H1) = Set.univ\n  rw [compact_wedge_generators_complex_dense]\n  rfl",
+          "excerpt_utf8_lf_sha256": "bc8802a4a3ba2e83ab0a43e80b6db47897d8790e0dbff0e3e63f2136a2f7612e"
+        }
+      ]
+    },
+    {
+      "id": "packet_residual",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\RESIDUAL_TYPED_CONTRACT_R1.txt",
+      "sha256": "01c14d1b8bdc7d643535e67dd9e4a03284d2f060cca22116ead4a9ff2e75be14",
+      "bytes": 4877,
+      "line_count": 63,
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 1,
+          "line_end": 63,
+          "text": "R57 / R5 — resíduo tipado e alcance da construção\nEstatuto deste texto: DERIVED da leitura focal; compilações e revisões constam dos recibos próprios.\n\n1. Obstrução precisa, sem inversão do entrelaçamento\nPara P : TGLExt.SiteProfile, clock : ℝ → ℝ e\nV : TGLExt.TowerHilbert P →L[ℂ] TGLExt.ImportedSQ.H1,\n  (∀ s x, V (ChatgptAudit.modularFlow P (clock s) x) = TGLExt.ImportedSQ.B0 s (V x)) → V = 0.\nO domínio é o completamento GNS da torre PRODUTO já construída, com seu modularFlow.\nA prova usa a família total localEigenvector, suas fases de norma 1 e B0_no_eigen.\nNão conclui inexistência de qualquer limite de células, qualquer dinâmica de dispositivo,\nqualquer estado não produto, nem ausência de vácuo/ação no Fock. Não impõe essa torre ao MQC.\nSiteProfile usa sítios de dimensão 2; o MQC descreve três estados por sítio. Não são identificados.\n\n2. Família concreta oferecida como ALVO, sem renomear Hilberts\nCompactPacket O := {s : Finset H1 // ↑s ⊆ compactSupportedGenerators O}.\npacketSpace S := Submodule.span ℝ ↑S.val.\nRefinamento: S.val ⊆ T.val; inclusão é a inclusão literal isométrica no mesmo H1.\nA união dirigida, após fecho, recupera exatamente compactLocalized O.\nTranslações e Lorentz transportam S para sua imagem; não preservam cada nível finito.\nOs quadrados de refinamento com esse transporte comutam por construção e os mapas de H1\nsão os U1/helicityUnitary existentes, com helicityUnitary(generatedBoost s)=B0 s.\ncomplexPacketSpace usa span ℂ das mesmas listas; sua união na cunha direita é densa em H1.\nEssa complexificação é somente o alvo global de uma partícula. A localização continua real.\nNão foi construído um tensor celular, uma dinâmica microscópica ou um limite de estados físicos.\n\n3. Obrigação física que permanece OPEN\nAs fontes dão papéis complementares: MQC — geometria/célula e três estados; Supercondutor —\nmodos, H e geradores dissipativos; Psi-NET — protocolo. Nenhum papel é descartado nem substituído.\nFalta extrair dessas definições uma família direcionada de espaços de excitações físicas\nC_ε, regiões de suporte e mapas j_{δε}:C_ε→ₗᵢ[ℂ]C_δ, com j_{γε}=j_{γδ}∘j_{δε}.\nNão basta usar o Hilbert inteiro da célula ou seu GNS como o setor de uma partícula.\nPara cada rótulo físico a, construir uma função-teste tensorial f_{ε,a}:SchwartzTensor,\ncom suporte/realidade apropriados e ancoragem nos observáveis de campo efetivamente definidos.\nA associação a↦circularSmear(f_{ε,a}) precisa ser DERIVADA dos acoplamentos/observáveis,\nnão escolhida por uma isometria abstrata ou por igualdade de nomes.\n\nAlvos mínimos a provar, e não a adicionar como novas hipóteses de um certificado pronto:\n  (i) ⟪J_ε a,J_ε b⟫_H1 = C_ε(a,b), onde J_ε a=circularSmear(f_{ε,a}) e C_ε é a\n      forma positiva de duas pontas construída do estado do modelo microscópico;\n (ii) J_δ(j_{δε}a)=J_ε a, e densidade das imagens no H1 canônico;\n(iii) convergência das funções de correlação/estados à realização canônica escolhida;\n (iv) construção da ação física no limite e V U_dev(g)=U_can(g) V para o grupo pertinente,\n      incluindo a reflexão antiunitária, mais V K_dev(O)=compactLocalized O;\n  (v) mostrar que a dinâmica microscópica documentada induz essa ação/gerador no domínio correto.\nA hipótese (i) não está demonstrada pela norma de um vetor nem pela contagem de 27 sítios.\nA ausência de (i)–(v) impede promover estes pacotes a uma realização do dispositivo.\n\n4. Duas compatibilidades distintas, sem relaxamento silencioso\nQ6, seção Isotonia, exige D_{O2} ι_{21}=ι_{21} D_{O1} para O1⊆O2 e operadores definidos\nnos respectivos espaços. É uma condição exata por região, não a construção de refinamentos ε.\nOs pacotes provam inclusões e covariância entre IMAGENS de níveis finitos; não fornecem D_ε.\nUma eventual rota de convergência forte exige demonstrar, por exemplo,\n  ‖J_ε U_ε(g)a_ε - U_can(g)J_ε a_ε‖ → 0,\ncom domínios, ações e embeddings efetivamente construídos. Isso não equivale à condição Q6.\nSe Q6 for exigida no dispositivo, sua condição exata deve ser descarregada separadamente.\n\n5. Próxima etapa viável delimitada\nEscolher, a partir dos observáveis explícitos das fontes, UM tipo de excitação de campo do\nmodelo de célula; calcular sua forma de duas pontas no estado documentado e seu suporte.\nComparar essa forma, sem ajuste posterior, com a forma induzida por circularSmear nos pacotes.\nSe coincidirem ou convergirem com controle, construir J_ε por essa igualdade e prosseguir ao limite.\nSe falharem, preservar o resultado e localizar a divergência; os pacotes de Maxwell não a corrigem.\nOs documentos consultados não fornecem esse cálculo/construção. R5 integral permanece OPEN.",
+          "excerpt_utf8_lf_sha256": "a2430d4c12a921ff8f2c3d5bb8852a1bbc145838b9148f821fe839f8b91bb3a2"
+        }
+      ]
+    },
+    {
+      "id": "physical_net",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalFockNetRealizationR2.lean",
+      "sha256": "9e79a29edbe9f8db10c49e5f27c88770e01e14cfa0789ffe519ed74fead92516",
+      "bytes": 4100,
+      "line_count": 104,
+      "ranges": [
+        [
+          18,
+          49
+        ],
+        [
+          69,
+          89
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 18,
+          "line_end": 49,
+          "text": "def net (O : Set (Fin 4 → ℝ)) : VonNeumannAlgebra F :=\n  FieldWeyl.R (physicalCanonicalNet.K O)\n\ntheorem net_mono (O P : Set (Fin 4 → ℝ)) (h : O ⊆ P) :\n    (net O : Set (F →L[ℂ] F)) ⊆ net P :=\n  FieldWeyl.R_mono _ _ (physicalCanonicalNet.K_mono O P h)\n\ntheorem net_local (O P : Set (Fin 4 → ℝ)) (h : SpacelikeSep O P) :\n    ∀ A ∈ net O, ∀ B ∈ net P, Commute A B :=\n  FieldWeyl.R_local _ _ (physicalCanonicalNet.K_local O P h)\n\ntheorem net_wedge_eq :\n    net rightWedge = FieldWeyl.R KWR.toClosedSubmodule.toSubmodule := by\n  change FieldWeyl.R (compactPhysicalNet rightWedge) = _\n  exact congrArg FieldWeyl.R compactPhysicalNet_wedge_glue\n\ntheorem weyl_ccr (f g : H1) :\n    FieldWeyl.W f * FieldWeyl.W g =\n      F1Fecho.WeylCoefficients.phase f g • FieldWeyl.W (f+g) :=\n  FieldWeyl.W_ccr f g\n\ntheorem weyl_generator_mem (O : Set (Fin 4 → ℝ)) (f : H1)\n    (hf : f ∈ physicalCanonicalNet.K O) : FieldWeyl.W f ∈ net O :=\n  FieldWeyl.W_mem_R _ f hf\n\ntheorem weyl_regular (v : F) : Continuous (fun f : H1 => FieldWeyl.W f v) :=\n  FieldWeyl.W_strongly_continuous v\n\ntheorem net_covariant (u : H1 ≃ₗᵢ[ℂ] H1) (O P : Set (Fin 4 → ℝ))\n    (h : ∀ f, f ∈ physicalCanonicalNet.K O ↔ u f ∈ physicalCanonicalNet.K P)\n    (A : F →L[ℂ] F) :\n    A ∈ net O ↔ (gamma u).conjStarAlgEquiv A ∈ net P :=",
+          "excerpt_utf8_lf_sha256": "4fc9a3b5f80779c391bb21bcf65316b52de4823299dcf78c81af081b99b668c4"
+        },
+        {
+          "line_start": 69,
+          "line_end": 89,
+          "text": "theorem vacuum_bw_kms :\n    KMSBody (net rightWedge) vacuum (fun t => gamma (B0 (2*Real.pi*t))) 1 := by\n  rw [net_wedge_eq]\n  exact F1Fecho.CanonicalWedgeKMS.canonical_bw_kms\n\ntheorem pair_tomita :\n    ORDEM016.D6.PairTomitaAnalyticRealizationMeasured\n      (net rightWedge).toStarSubalgebra vacuum canonicalFockJ\n      (fun t => gamma (B0 (-(2*Real.pi*t)))) := by\n  rw [net_wedge_eq]\n  exact F1Fecho.CanonicalFockBW.canonical_pair_tomita\n\ntheorem modular_J_same_one_particle (x : H1) :\n    canonicalFockJ (oneParticle x) = oneParticle (Jcandidate x) :=\n  canonicalFockJ_oneParticle x\n\ntheorem modular_J_involutive : Function.Involutive canonicalFockJ :=\n  canonicalFockJ_involutive\n\ntheorem modular_J_vacuum : canonicalFockJ vacuum = vacuum :=\n  canonicalFockJ_vacuum",
+          "excerpt_utf8_lf_sha256": "13f556073b0504c8d350284eb5e114073a95d3b8940b69057d4ba35be06c5b43"
+        }
+      ]
+    },
+    {
+      "id": "net_covariance",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalFockSpacetimeCovarianceR2.lean",
+      "sha256": "031bf92269ea7c1dd8c3c8e5f4d2703627fb77b0ec0ff09655a2276ed28555be",
+      "bytes": 4722,
+      "line_count": 99,
+      "ranges": [
+        [
+          28,
+          87
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 28,
+          "line_end": 87,
+          "text": "def spacetimeNet (O : Set Spacetime) : VonNeumannAlgebra F :=\n  FieldWeyl.R (compactLocalized O)\n\ntheorem spacetimeNet_coordinate (O : Set (Fin 4 → ℝ)) :\n    spacetimeNet (coordinateRegion O) = PhysicalFockNet.net O := rfl\n\ntheorem spacetimeNet_translate (a : Spacetime) (O : Set Spacetime)\n    (A : F →L[ℂ] F) :\n    A ∈ spacetimeNet O ↔\n      (gamma (U1 (fun i => a i))).conjStarAlgEquiv A ∈ spacetimeNet (translateRegion a O) :=\n  FieldWeyl.R_covariance (U1 (fun i => a i)) _ _\n    (compactLocalized_translate_iff a O) A\n\ntheorem spacetimeNet_lorentz (L : generatedLorentz) (O : Set Spacetime)\n    (A : F →L[ℂ] F) :\n    A ∈ spacetimeNet O ↔\n      (gamma (helicityUnitary L)).conjStarAlgEquiv A ∈ spacetimeNet (lorentzRegion L O) :=\n  FieldWeyl.R_covariance (helicityUnitary L) _ _\n    (compactLocalized_lorentz_iff L O) A\n\ndef frameUnitary (L : generatedLorentz) (a : Spacetime) : H1 ≃ₗᵢ[ℂ] H1 :=\n  (helicityUnitary L).trans (U1 (fun i => a i))\n\ntheorem frameUnitary_eq_helicityPoincare (L : generatedLorentz) (a : Spacetime) :\n    frameUnitary L a = helicityPoincareH1 (fun i => a i) L := rfl\n\ndef frameRegion (L : generatedLorentz) (a : Spacetime) (O : Set Spacetime) : Set Spacetime :=\n  translateRegion a (lorentzRegion L O)\n\ntheorem compactLocalized_frame (L : generatedLorentz) (a : Spacetime)\n    (O : Set Spacetime) (f : H1) :\n    f ∈ compactLocalized O ↔ frameUnitary L a f ∈ compactLocalized (frameRegion L a O) :=\n  (compactLocalized_lorentz_iff L O f).trans\n    (compactLocalized_translate_iff a (lorentzRegion L O) (helicityUnitary L f))\n\ntheorem spacetimeNet_frame (L : generatedLorentz) (a : Spacetime)\n    (O : Set Spacetime) (A : F →L[ℂ] F) :\n    A ∈ spacetimeNet O ↔\n      (gamma (frameUnitary L a)).conjStarAlgEquiv A ∈ spacetimeNet (frameRegion L a O) :=\n  FieldWeyl.R_covariance (frameUnitary L a) _ _ (compactLocalized_frame L a O) A\n\ntheorem spacetimeNet_future_lorentz (L : FutureLorentz) (O : Set Spacetime)\n    (A : F →L[ℂ] F) :\n    A ∈ spacetimeNet O ↔\n      (gamma (helicityUnitary (futureToGenerated L))).conjStarAlgEquiv A ∈\n        spacetimeNet (lorentzRegion (futureToGenerated L) O) :=\n  spacetimeNet_lorentz (futureToGenerated L) O A\n\ntheorem physicalNet_translate (a : Fin 4 → ℝ) (O : Set (Fin 4 → ℝ))\n    (A : F →L[ℂ] F) :\n    A ∈ PhysicalFockNet.net O ↔\n      (gamma (U1 a)).conjStarAlgEquiv A ∈ PhysicalFockNet.net (TGL.SpecificAQFT.translate a O) :=\n  PhysicalFockNet.net_covariant (U1 a) O (TGL.SpecificAQFT.translate a O)\n    (compactPhysicalNet_translate a O) A\n\ntheorem physicalNet_boost (s : ℝ) (O : Set (Fin 4 → ℝ)) (A : F →L[ℂ] F) :\n    A ∈ PhysicalFockNet.net O ↔\n      (gamma (B0 s)).conjStarAlgEquiv A ∈\n        PhysicalFockNet.net (TGLExt.ContratoQGv31.wedgeBoostMap s '' O) :=\n  PhysicalFockNet.net_covariant (B0 s) O _ (compactPhysicalNet_boost s O) A",
+          "excerpt_utf8_lf_sha256": "5bdc571bc1f4ceab1379b7a63e3ac7748db26d3b0ab83025c94a04ac936f1f9e"
+        }
+      ]
+    },
+    {
+      "id": "Segal_transport",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\FockSegalUnitaryTransportR1.lean",
+      "sha256": "0831edc3cb43b2b7a23daa5a1dddff3216d54aca73140306de457e239a60c328",
+      "bytes": 6438,
+      "line_count": 132,
+      "ranges": [
+        [
+          19,
+          42
+        ],
+        [
+          58,
+          118
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 19,
+          "line_end": 42,
+          "text": "theorem synthesize_equivMapDomain (u : H1 ≃ₗᵢ[ℂ] H1) (c : H1 →₀ ℂ) :\n    synthesize (Finsupp.equivMapDomain u.toLinearEquiv.toEquiv c) =\n      gamma u (synthesize c) := by\n  simp only [synthesize, Finsupp.linearCombination_apply, Finsupp.sum_equivMapDomain]\n  change (∑ h ∈ c.support, c h • exponential (u h)) =\n    gamma u (∑ h ∈ c.support, c h • exponential h)\n  simp only [map_sum, map_smul, gamma_exponential]\n\ntheorem gamma_mem_exponentialDomain (u : H1 ≃ₗᵢ[ℂ] H1) (x : domain) :\n    gamma u x.val ∈ domain := by\n  refine ⟨Finsupp.equivMapDomain u.toLinearEquiv.toEquiv (preimage x), ?_⟩\n  rw [synthesize_equivMapDomain, preimage_spec]\n\ndef domainGamma (u : H1 ≃ₗᵢ[ℂ] H1) : domain →ₗ[ℂ] domain where\n  toFun x := ⟨gamma u x.val, gamma_mem_exponentialDomain u x⟩\n  map_add' x y := by\n    apply Subtype.ext\n    exact map_add (gamma u) x.val y.val\n  map_smul' c x := by\n    apply Subtype.ext\n    exact map_smul (gamma u) c x.val\n\ntheorem domainGamma_value (u : H1 ≃ₗᵢ[ℂ] H1) (x : domain) :\n    (domainGamma u x : F) = gamma u x.val := rfl",
+          "excerpt_utf8_lf_sha256": "c23c1cf0e60b2cae1f31fb10881fdec76354087b0b04c895068b579080688144"
+        },
+        {
+          "line_start": 58,
+          "line_end": 118,
+          "text": "theorem annihilation_gamma (u : H1 ≃ₗᵢ[ℂ] H1) (f : H1) (x : domain) :\n    annihilation (u f) (domainGamma u x) = gamma u (annihilation f x) := by\n  let c := Finsupp.equivMapDomain u.toLinearEquiv.toEquiv (preimage x)\n  have hc : synthesize c = (domainGamma u x : F) := by\n    change synthesize (Finsupp.equivMapDomain u.toLinearEquiv.toEquiv (preimage x)) =\n      gamma u x.val\n    rw [synthesize_equivMapDomain, preimage_spec]\n  change weighted (u f) (preimage (domainGamma u x)) = gamma u (weighted f (preimage x))\n  calc\n    _ = weighted (u f) c :=\n      weighted_eq_of_synthesize_eq (u f) _ _ ((preimage_spec _).trans hc.symm)\n    _ = _ := weighted_equivMapDomain u f (preimage x)\n\ntheorem creation_gamma (u : H1 ≃ₗᵢ[ℂ] H1) (f : H1) (x : domain) :\n    creation (u f) (domainGamma u x) = gamma u (creation f x) := by\n  apply sub_eq_zero.mp\n  apply exponential_orthogonal_zero\n  intro h\n  apply inner_eq_zero_symm.mp\n  rw [inner_sub_right]\n  apply sub_eq_zero.mpr\n  obtain ⟨k, rfl⟩ := u.surjective h\n  calc\n    inner ℂ (exponential (u k)) (creation (u f) (domainGamma u x)) =\n        inner ℂ (u k) (u f) *\n          inner ℂ (exponential (u k)) (gamma u x.val) :=\n      creation_inner_on_domain (u k) (u f) (domainGamma u x)\n    _ = inner ℂ k f * inner ℂ (exponential k) x.val := by\n      rw [← gamma_exponential u k, LinearIsometryEquiv.inner_map_map,\n        LinearIsometryEquiv.inner_map_map]\n    _ = inner ℂ (exponential k) (creation f x) :=\n      (creation_inner_on_domain k f x).symm\n    _ = inner ℂ (exponential (u k)) (gamma u (creation f x)) := by\n      rw [← gamma_exponential u k, LinearIsometryEquiv.inner_map_map]\n\ntheorem segal_gamma (u : H1 ≃ₗᵢ[ℂ] H1) (f : H1) (x : domain) :\n    segal (u f) (domainGamma u x) = gamma u (segal f x) := by\n  change ((Real.sqrt 2)⁻¹ : ℂ) •\n      (annihilation (u f) (domainGamma u x) + creation (u f) (domainGamma u x)) =\n    gamma u (((Real.sqrt 2)⁻¹ : ℂ) • (annihilation f x + creation f x))\n  rw [annihilation_gamma, creation_gamma, map_smul, map_add]\n\ntheorem invariant_annihilation_gamma (u : H1 ≃ₗᵢ[ℂ] H1) (f : H1) (x : domain) :\n    onInvariantDomain (u f) (domainGamma u x) =\n      domainGamma u (onInvariantDomain f x) := by\n  apply Subtype.ext\n  exact annihilation_gamma u f x\n\ntheorem doubleAnnihilate_gamma (u : H1 ≃ₗᵢ[ℂ] H1) (f g : H1) (x : domain) :\n    F1Fecho.WickForm.doubleAnnihilate (u f) (u g) (domainGamma u x) =\n      gamma u (F1Fecho.WickForm.doubleAnnihilate f g x) := by\n  unfold F1Fecho.WickForm.doubleAnnihilate\n  rw [invariant_annihilation_gamma, annihilation_gamma]\n\n/-- Bilocal smearing covariance on all finite exponential combinations.\nThis is not a restriction to coincident spacetime points. -/\ntheorem wick_quadratic_gamma (u : H1 ≃ₗᵢ[ℂ] H1) (f g : H1) (x y : domain) :\n    F1Fecho.WickForm.quadratic (u f) (u g) (domainGamma u x) (domainGamma u y) =\n      F1Fecho.WickForm.quadratic f g x y := by\n  simp only [F1Fecho.WickForm.quadratic, doubleAnnihilate_gamma,\n    annihilation_gamma, domainGamma_value, LinearIsometryEquiv.inner_map_map]",
+          "excerpt_utf8_lf_sha256": "d34e81345948a571a103c59a55c1779e8074e3086f8f9eacf024835ead816229"
+        }
+      ]
+    },
+    {
+      "id": "circular_field",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CircularPhysicalFieldTransportR1.lean",
+      "sha256": "e6d97d5a50da58ae4b8d4d6a904404f5ac045d3a93f92cd77733c23b59c71983",
+      "bytes": 9744,
+      "line_count": 203,
+      "ranges": [
+        [
+          24,
+          32
+        ],
+        [
+          90,
+          107
+        ],
+        [
+          110,
+          158
+        ]
+      ],
+      "excerpts": [
+        {
+          "line_start": 24,
+          "line_end": 32,
+          "text": "def circularSmearCLM : SchwartzTensor →L[ℂ] H1 :=\n  circularH1.symm.toLinearIsometry.toContinuousLinearMap.comp physicalSmearCLM\n\ntheorem circularSmearCLM_apply (f : SchwartzTensor) :\n    circularSmearCLM f = circularSmear f := rfl\n\ntheorem circularH1_circularSmear (f : SchwartzTensor) :\n    circularH1 (circularSmearCLM f) = physicalSmearCLM f :=\n  circularH1.apply_symm_apply (physicalSmearCLM f)",
+          "excerpt_utf8_lf_sha256": "cdb860c8d3a696ad8d67da6348cbca52b9dc1e3f0edbbb64e8120e1aebaf53fb"
+        },
+        {
+          "line_start": 90,
+          "line_end": 107,
+          "text": "def circularField (f : RealTest) : F →ₗ.[ℂ] F :=\n  segal (circularSmearCLM f.val)\n\ntheorem circularField_essentially_selfadjoint (f : RealTest) :\n    IsSelfAdjoint (circularField f).closure := segal_essentially_selfadjoint _\n\n/-- Field equality includes transport of the actual state and operator domain. -/\ntheorem circularField_intertwines (f : RealTest) (x : domain) :\n    gamma circularH1 (circularField f x) =\n      physicalField f (domainGamma circularH1 x) := by\n  have ht := segal_gamma circularH1 (circularSmearCLM f.val) x\n  rw [circularH1_circularSmear] at ht\n  exact ht.symm\n\ntheorem circularField_intertwines_regular (f : RealTest) (ψ : regularFockDomain) :\n    gamma circularH1 (circularField f (regularDomainInput ψ)) =\n      physicalField f (regularDomainInput (regularCircular ψ)) := by\n  rw [circularField_intertwines, domainGamma_regularCircular]",
+          "excerpt_utf8_lf_sha256": "522be43c93646acdb9a3242a2f424eec83accfb95fe68c60e4a54af3b1419db6"
+        },
+        {
+          "line_start": 110,
+          "line_end": 158,
+          "text": "def unitaryFourierFieldAmplitude : ℝ := Real.sqrt unitaryFourierStressScale\n\ntheorem unitaryFourierFieldAmplitude_pos : 0 < unitaryFourierFieldAmplitude :=\n  Real.sqrt_pos.mpr unitaryFourierStressScale_pos\n\ntheorem unitaryFourierFieldAmplitude_sq :\n    unitaryFourierFieldAmplitude ^ 2 = unitaryFourierStressScale :=\n  Real.sq_sqrt (le_of_lt unitaryFourierStressScale_pos)\n\ndef normalizedPhysicalSmearCLM : SchwartzTensor →L[ℂ] H1 :=\n  (unitaryFourierFieldAmplitude : ℂ) • physicalSmearCLM\n\ndef normalizedCircularSmearCLM : SchwartzTensor →L[ℂ] H1 :=\n  (unitaryFourierFieldAmplitude : ℂ) • circularSmearCLM\n\ntheorem circularH1_normalizedCircularSmear (f : SchwartzTensor) :\n    circularH1 (normalizedCircularSmearCLM f) = normalizedPhysicalSmearCLM f := by\n  change circularH1 ((unitaryFourierFieldAmplitude : ℂ) • circularSmearCLM f) =\n    (unitaryFourierFieldAmplitude : ℂ) • physicalSmearCLM f\n  rw [map_smul, circularH1_circularSmear]\n\ndef normalizedPhysicalField (f : RealTest) : F →ₗ.[ℂ] F :=\n  segal (normalizedPhysicalSmearCLM f.val)\n\ndef normalizedCircularField (f : RealTest) : F →ₗ.[ℂ] F :=\n  segal (normalizedCircularSmearCLM f.val)\n\ntheorem normalizedPhysicalField_eq_amplitude (f : RealTest) (x : domain) :\n    normalizedPhysicalField f x =\n      (unitaryFourierFieldAmplitude : ℂ) • physicalField f x :=\n  segal_parameter_real_smul unitaryFourierFieldAmplitude (physicalSmearCLM f.val) x\n\ntheorem normalizedCircularField_essentially_selfadjoint (f : RealTest) :\n    IsSelfAdjoint (normalizedCircularField f).closure := segal_essentially_selfadjoint _\n\ntheorem normalizedCircularField_intertwines_regular (f : RealTest) (ψ : regularFockDomain) :\n    gamma circularH1 (normalizedCircularField f (regularDomainInput ψ)) =\n      normalizedPhysicalField f (regularDomainInput (regularCircular ψ)) := by\n  have ht := segal_gamma circularH1 (normalizedCircularSmearCLM f.val) (regularDomainInput ψ)\n  rw [circularH1_normalizedCircularSmear, domainGamma_regularCircular] at ht\n  exact ht.symm\n\n/-- Transport of the bilocal Wick form on arbitrary regular finite coherent\nsums. This statement keeps both test functions; it is not local coincidence. -/\ntheorem normalizedCircularWick_transport (f g : SchwartzTensor) (ψ χ : regularFockDomain) :\n    F1Fecho.WickForm.quadratic (normalizedCircularSmearCLM f)\n      (normalizedCircularSmearCLM g) (regularDomainInput ψ) (regularDomainInput χ) =\n    F1Fecho.WickForm.quadratic (normalizedPhysicalSmearCLM f)\n      (normalizedPhysicalSmearCLM g)",
+          "excerpt_utf8_lf_sha256": "43c63e801d003b29b66ef02301e52060021ac8189e58f3d6c25d30ad3d97cd7e"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\DELIVERY_R57.json",
+      "sha256": "a26c517ae56883e9f37977f57935dda237d1d69a93425d7580dcc7ed66b627a2",
+      "bytes": 28266
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\continuity_r57\\FINAL_CUSTODY_REVIEW_R57.json",
+      "sha256": "c71d3fe2af12ef081caee023c942aadf693f5ba1060f58f1f21b231f447c6ccf",
+      "bytes": 24701
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\FINAL_REVIEW_R64.json",
+      "sha256": "f13f234d744b865d96a0b69733134777e04229b153e8c3d2ef92794b05ef3f1b",
+      "bytes": 11062
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\RESULT_OUTPUT_R64.json",
+      "sha256": "1cfd76ee90f6c442aaf2a5ab961aecc19513b3d051badf69df527cb2f0713306",
+      "bytes": 21667
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\FINAL_REVIEW_R65.json",
+      "sha256": "d959ed7c886cb2cb4a5049a8c3cda1c08d952ad1600fbf0d881d9feec0189992",
+      "bytes": 11270
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_review_20261016\\R50_FIELD_CORNER_REVIEW_R2.json",
+      "sha256": "83fc818cbbcf63392c357a3d4e110bd1d726d2b3cf2b1249ea6d3060b7cfbd07",
+      "bytes": 25522
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\HANDOFF_R66.json",
+      "sha256": "f5134988a3ec62ab31daf00cf2163779b35ad5440ef28902221f7030a8cd2012",
+      "bytes": 3302
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\START_R4_R66_CHECK_RESULT.json",
+      "sha256": "7707cb7fe74b1b5c8947ea99280903487750e221e5de36fe7a761a005bb1a44c",
+      "bytes": 1143
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\START_R5_R66_CHECK_RESULT.json",
+      "sha256": "7f96715ad88b85ab1da59d0bc28c8c44b38d18bead0cd23b347aac7d73dde309",
+      "bytes": 1149
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\NOS_VIVO_R66.json",
+      "sha256": "0d1feaf8c880b79abee8b5e782fdb6ed4874613c026a5dcbaf53a33361cd7653",
+      "bytes": 121
+    }
+  ],
+  "packet_integrity": [
+    {
+      "component": "CompactPacketRefinementR1",
+      "existing_exit_code": 0,
+      "existing_trio_only": true,
+      "pins_rechecked": [
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\CompactPacketRefinementR1.lean",
+          "sha256": "5b9a972b796d4e5d9d31198d2d15123d988bdd868fa6c5b0f024c0675627eea8",
+          "bytes": 9139
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\attempts\\20261017T092301_432915Z\\CompactPacketRefinementR1.lean",
+          "sha256": "5b9a972b796d4e5d9d31198d2d15123d988bdd868fa6c5b0f024c0675627eea8",
+          "bytes": 9139
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\attempts\\20261017T092301_432915Z\\RECEIPT.json",
+          "sha256": "d8c2a45ef7a4b3ef078bf0ea237a1986888da10de012c3f0e523ea6a62f4d7fd",
+          "bytes": 672347
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\attempts\\20261017T092301_432915Z\\AXIOMS.txt",
+          "sha256": "e172700049121de45ceb7c0f27ed4b6ead47e2278dc9f0b417ce725db274c792",
+          "bytes": 3366
+        }
+      ],
+      "new_build": false
+    },
+    {
+      "component": "ComplexPacketLimitR1",
+      "existing_exit_code": 0,
+      "existing_trio_only": true,
+      "pins_rechecked": [
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\ComplexPacketLimitR1.lean",
+          "sha256": "50d41da1a4ebdd70adab47f824420f3d79f041be109bb1713f0b4a9ff9ecc9ca",
+          "bytes": 4528
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\attempts\\20261017T155012_157918Z\\ComplexPacketLimitR1.lean",
+          "sha256": "50d41da1a4ebdd70adab47f824420f3d79f041be109bb1713f0b4a9ff9ecc9ca",
+          "bytes": 4528
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\attempts\\20261017T155012_157918Z\\RECEIPT.json",
+          "sha256": "02c5c439bc0ec488451a3563f06d7bbfb6372ff00604fb06738e99c9acdcbc10",
+          "bytes": 673657
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_continuum_r57\\attempts\\20261017T155012_157918Z\\AXIOMS.txt",
+          "sha256": "7c59d459a2bcc539afbab935a28c47cb504e9da3c1f0ef6246a13b097f4d4f8e",
+          "bytes": 2257
+        }
+      ],
+      "new_build": false
+    }
+  ],
+  "scope": "Leitura focal; não é reauditoria matemática integral. Recibos anteriores referenciados, sem builds, importações científicas ou reexecuções."
+}

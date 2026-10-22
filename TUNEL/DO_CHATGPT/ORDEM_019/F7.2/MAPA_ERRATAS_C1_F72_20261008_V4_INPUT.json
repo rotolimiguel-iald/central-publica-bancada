@@ -1,0 +1,57 @@
+[
+  {
+    "tipo": "ANOTACAO",
+    "rota_id": "dephasing.f7_2_revisao_fontes_neutrinos_materia",
+    "dominio": "DEPHASING",
+    "titulo": "F7.2: erratas V2/V3 e âncora JUNO ao lado; fontes copiadas sem ato da c1 ainda aguardam decisão",
+    "pergunta": "Os estados do staging e as âncoras do JUNO estão corretamente registrados sem alterar fontes pinadas ou Bancada?",
+    "dados": [
+      "V2 ratificada a posteriori pela c1, recibo 08541b69",
+      "Reauditoria c1 seq 841: cópia de 26 fontes sem ato, canal V3 só staging",
+      "Beccaria–Ternes PDF: Eq. (6) §III.B; Eq. (13) §IV.B",
+      "Esteban et al. arXiv:2605.13955 é ν-loss, anterior a junho"
+    ],
+    "metodo": "Nós Vivo consultado; fontes primárias e reauditoria lidas; README V2 recebeu append com backup byte a byte; recibo e tabelas pinadas ganharam erratas vizinhas; 26 dependências conferidas por SHA; nenhuma escrita na Bancada.",
+    "resultado": "README V2 6b744247... → cb4a2f6e... com backup idêntico; recibo V2 10fc874e... e tabela V2 f2376aea... intactos. Errata da Eq. (6) em §III.B e distinção ν-loss/dephasing registradas. V3 continua staging. O processo MCP não foi recarregado.",
+    "veredito": "F72_ERRATAS_C1_ENTREGUES__V2_DISCO_RATIFICADA__R8_FONTES_SEM_ATO_AGUARDA_C1__V3_STAGING__GATE_NONE",
+    "estatuto": "REAL documental; KNOWN limites publicados; OPEN ponte física TGL",
+    "status": "EXAMINADA_COM_DEFEITO",
+    "olhou_dados": false,
+    "defeito": "A cópia prévia de 26 fontes na Bancada permanece sem ratificação da c1. Sua errata ao lado na Bancada depende de ato explícito da c1. Nenhuma taxa publicada é limite de tau-star da TGL.",
+    "nao_refazer": "Não recopiar fontes, não refazer números R2/R3 ou 11 testes V2, não alterar PDFs, tabelas pinadas, scripts de junho ou o MCP.",
+    "proximo_passo": "Gerência decide ratificar ou retirar as 26 cópias e depois autoriza, se cabível, a errata na Bancada. Instalação V3 e recarga MCP seguem atos separados.",
+    "onde": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2",
+    "artefatos": [
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\RESULTADO_ERRATAS_C1_F72_20261008_V4.json",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\FREEZE_DEPENDENCIAS_V2_F72_20261008.json",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\ERRATA_ANCORAS_JUNO_REF72_E_ESTADO_F72_20261008.md",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\V2_STAGING\\STAGING_RECEIPT_V2_ERRATA_AO_LADO_20261008.json"
+    ],
+    "refs": ["dephasing.neutrinos_n_menos2_junho"],
+    "nota": "A primeira implantação V2 sem ato foi ratificada a posteriori. A segunda cópia R8 sem ato ainda não foi. Sem gate ou crédito físico."
+  },
+  {
+    "tipo": "ERRATA",
+    "rota_id": "dephasing.neutrinos_n_menos2_junho",
+    "corrige": 734,
+    "dominio": "DEPHASING",
+    "titulo": "Errata ao lado do literal de junho: 7,8e-10 s é entrada histórica, não cota calculada",
+    "pergunta": "O tau-star 7,8e-10 s do bloco J.4b é limite deduzido dos neutrinos?",
+    "dados": ["tgl_paper_unified.py linhas 18392–18393", "ERRATA_LITERAL_J4B_F72_20261008.md"],
+    "metodo": "Leitura do original e comparação com a fonte JUNO posterior; original científico preservado.",
+    "resultado": "Não. A linha 18393 atribui literalmente 7.8e-10 a tau_star_bound_neutrino_s; a linha 18392 também cita projeção JUNO/DUNE 8e-27 GeV. JUNO posterior publica limite de seu próprio modelo e o canal devolve tau_star_limit_s null.",
+    "veredito": "ERRATA_LITERAL_J4B__SEM_LIMITE_TGL",
+    "estatuto": "REAL documental; KNOWN limite JUNO; OPEN tradução TGL",
+    "status": "EXAMINADA_COM_DEFEITO",
+    "olhou_dados": false,
+    "defeito": "O registro histórico seq 734 descrevia tau-star como cota; a ponte operador/canal físico não está construída.",
+    "nao_refazer": "Não editar o original de junho, não converter a cota do modelo JUNO em cota TGL.",
+    "proximo_passo": "Preservar o literal como histórico e manter tau_star_limit_s nulo até uma ponte pré-registrada.",
+    "onde": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\ERRATA_LITERAL_J4B_F72_20261008.md",
+    "artefatos": [
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\ERRATA_LITERAL_J4B_F72_20261008.md"
+    ],
+    "refs": ["dephasing.f7_2_revisao_fontes_neutrinos_materia"],
+    "nota": "Correção aditiva, sem alteração do gate ou dos scripts de junho."
+  }
+]

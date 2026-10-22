@@ -1,0 +1,317 @@
+{
+  "unit": "F8.2.NU2",
+  "claim_event": 618,
+  "created_utc": "2026-10-09T12:52:31.367866+00:00",
+  "author": "codex-gerente-tgl / nu2_theory_sources",
+  "originals_modified": false,
+  "original_program_executed_or_imported": false,
+  "observed_dataset_opened": false,
+  "search_scope": "Atlas and live index pointers, Nos Vivo F7.2/F8.2, named v388 and related kernel files, TGLExt lexical search, six F7.2 June script copies, two Tratado chapters, canonical Ponte and Custo snapshot. This is not a proof of global absence.",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheCouplingRunsBoundedBelow.lean",
+      "sha256": "702d7352c053060ae3f2ba7602c0fcf75762b796ed7617ac6ea29248a4d3fa2f",
+      "size_bytes": 6375,
+      "line_count": 129,
+      "status": "KERNEL source; no new compilation; physical identification explicitly INPUT/ONTO",
+      "excerpts": [
+        {
+          "first_line": 5,
+          "last_line": 27,
+          "text": "5: # TheCouplingRunsBoundedBelow — o acoplamento corre com a escala, limitado inferiormente (v388, 06/10/2026)\n6: \n7: A cunhagem do operador de 06/10/2026 (13:27:52 UTC e 13:48:42 UTC; o texto embutido no runtime do `um.py` é conferido por\n8: sha256; a cópia em disco na memória `beta-escalar-limitado-inferiormente-06out.md` é só informativa): α como índice de escala da fronteira, β_TGL como a sua\n9: conjugação; β escalar, mas limitado inferiormente; e a operação da dicotomia (dividir pela metade sem nunca chegar ao limite).\n10: \n11: O que esta pedra PROVA é só matemática [KERNEL], sobre a forma fechada que o runtime do `um.py` já usa (o bloco\n12: `alpha = sech(kappa/2)`, `beta = sqrt(e) sech(kappa/2)`, `kappa_QED = 2 arcosh(1/alpha_QED)`):\n13: \n14: * `alphaOfChi χ := 1 / cosh(χ/2)` (a transmissão na profundidade χ); `alphaOfChi 0 = 1` (o Um absoluto); `0 < α ≤ 1`;\n15: * `alphaOfChi` é ESTRITAMENTE DECRESCENTE em `[0, ∞)`; logo `betaOfChi χ := alphaOfChi χ · exp(1/2)` também;\n16: * `the_floor_is_at_the_infrared`: para `0 ≤ χ ≤ χ_sup`, `β(χ_sup) ≤ β(χ)` — o PISO está no supremo da profundidade (o\n17:   infravermelho, Thomson, onde a corrida de α cessa); `the_floor_is_attained_only_at_the_infrared`: a igualdade só em χ = χ_sup;\n18: * `betaOfChi_eq_coupling`: no domínio de `couplingOfAlpha` (α < e^{-1/2}) o β desta pedra É o β do acoplamento selado (v376);\n19: * a dicotomia: `zeno_partial_sum` (Σ_{k<n} (1/2)^{k+1} = 1 − (1/2)^n), `zeno_never_reaches_the_one` (< 1 em todo n finito),\n20:   `zeno_tends_to_the_one` (o limite é o Um); `half_nat_fixed_point` (x = 1 − x ⟺ x = 1/2).\n21: \n22: O que NÃO prova (dito): que α físico seja `sech(χ/2)` de uma profundidade χ que cresce para o infravermelho — isso é a\n23: IDENTIFICAÇÃO do runtime [INPUT/ONTO]; que α(μ) cresça com μ — [KNOWN] (QED, congelamento infravermelho), não teorema da casa;\n24: qual μ cada rito usa — [OPEN]. A constante da fronteira segue β₀ = α_Thomson·√e, α no limite q → 0 (o Teorema da Escala do artigo; NÃO o\n25: `alphaOfChi 0` desta pedra, que vale 1 — o Um absoluto); β(χ) é a leitura\n26: de bulk. Axiomas: só o trio; zero sorry. PROVADA ≠ CONFIRMADA; o gate não se move.\n27: -/"
+        },
+        {
+          "first_line": 33,
+          "last_line": 37,
+          "text": "33: /-- a transmissão na profundidade χ: α(χ) = sech(χ/2). -/\n34: noncomputable def alphaOfChi (χ : ℝ) : ℝ := 1 / Real.cosh (χ / 2)\n35: \n36: /-- β(χ) := α(χ)·√e (√e escrito como exp(1/2), como em `couplingOfAlpha`). -/\n37: noncomputable def betaOfChi (χ : ℝ) : ℝ := alphaOfChi χ * Real.exp (1 / 2)"
+        },
+        {
+          "first_line": 65,
+          "last_line": 69,
+          "text": "65: \n66: theorem betaOfChi_le_sqrt_e (χ : ℝ) : betaOfChi χ ≤ Real.exp (1 / 2) := by\n67:   unfold betaOfChi\n68:   have h := alphaOfChi_le_one χ\n69:   have he := Real.exp_pos (1 / 2 : ℝ)"
+        },
+        {
+          "first_line": 96,
+          "last_line": 102,
+          "text": "96:     rw [he]\n97: \n98: /-- ★ no domínio do acoplamento selado (α < e^{-1/2}), o β desta pedra É o β de `couplingOfAlpha` (v376) — POR DEFINIÇÃO\n99: (a prova é `rfl`: desdobramento, não resultado; amarra os dois nomes). -/\n100: theorem betaOfChi_eq_coupling (χ : ℝ) (h1 : alphaOfChi χ < Real.exp (-(1 / 2))) :\n101:     (TGLExt.TheWholeIsOne.couplingOfAlpha (alphaOfChi χ) (alphaOfChi_pos χ) h1).beta = betaOfChi χ := by\n102:   rfl"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheWholeIsOne.lean",
+      "sha256": "097236427302ae42857b1cfc3e89711b45f7bc34fe02e5374bc0903a34d1a608",
+      "size_bytes": 12231,
+      "line_count": 169,
+      "status": "Contract restricts physical coupling to beta<1",
+      "excerpts": [
+        {
+          "first_line": 55,
+          "last_line": 62,
+          "text": "55: /-- (D2) A SETA FÍSICA: o dado único da TGL construído de α (a constante de redução da projeção holográfica, DADO [INPUT/KNOWN])\n56:     e do radical: β := α·e^{½}. O domínio 0 < α < e^{−½} é exatamente o que β < 1 exige. -/\n57: def couplingOfAlpha (α : ℝ) (h0 : 0 < α) (h1 : α < Real.exp (-(1 / 2))) : TGLExt.TGLCoupling :=\n58:   { beta := α * Real.exp (1 / 2)\n59:     beta_pos := mul_pos h0 (Real.exp_pos _)\n60:     beta_lt_one := by\n61:       have h := mul_lt_mul_of_pos_right h1 (Real.exp_pos (1 / 2))\n62:       rwa [← Real.exp_add, neg_add_cancel, Real.exp_zero] at h }"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\A Ponte Einstein Cartan Miguel.tex",
+      "sha256": "98ec3d808d51e694098ae216500ab853584cb89f9eb23661128ddc1829c1b657",
+      "size_bytes": 129435,
+      "line_count": 2371,
+      "status": "Canonical article; dephasing coefficient fixed at Thomson; historical empirical claims not revalidated",
+      "excerpts": [
+        {
+          "first_line": 1301,
+          "last_line": 1306,
+          "text": "1301: \\begin{theorem}[da Escala --- fecho condicional]\\label{thm:escala}\n1302: Condicional à identificação estrutural da TGL ---\n1303: \\emph{a fronteira modular é assintótica/infravermelha} (horizonte,\n1304: $q\\to0$) ---, o valor $\\alpha(0)$ não é uma escolha de escala: é a\n1305: \\textbf{ausência de escala}, e ``zero parâmetros livres'' não apenas\n1306: tolera $\\alpha(0)$ --- \\textbf{exige-o}. Quatro âncoras:"
+        },
+        {
+          "first_line": 1328,
+          "last_line": 1341,
+          "text": "1328: \\item \\textbf{O fluxo é semigrupo; $\\alpha(0)$ é a coisa julgada ---\n1329: \\REAL\\ $+$ estrutura TGL.} A renormalização wilsoniana rumo ao IV é\n1330: integração irreversível (perde informação: semigrupo, não grupo) --- a\n1331: \\emph{mesma} estrutura $T_t=e^{-t\\mathcal L}$ da teoria. $\\alpha(0)$ é o\n1332: valor de repouso desse fluxo: o ponto em que não há instância ulterior. A\n1333: corrida de $\\alpha$ é \\emph{bulk} (dinâmica de escala); a fronteira guarda\n1334: o invariante em que o fluxo descansou.\n1335: \\item \\textbf{A fronteira $\\mathrm{III}_1$ só inscreve o sem-escala ---\n1336: estrutura.} O tipo $\\mathrm{III}_1$ é invariante de escala (fluxo de pesos\n1337: trivial): só pode carregar números adimensionais e \\emph{livres de\n1338: escala}. O único valor livre de escala de $\\alpha$ é o limite $q\\to0$.\n1339: \\textbf{A objeção, invertida:} qualquer outro $\\alpha(\\mu)$\n1340: contrabandearia o parâmetro $\\mu$; $\\alpha(0)$ é precisamente o valor\n1341: \\emph{sem} parâmetro. Zero parâmetros livres \\emph{seleciona} Thomson."
+        },
+        {
+          "first_line": 1367,
+          "last_line": 1371,
+          "text": "1367: \\textbf{Predição pré-registrada (afiada por este fecho):} o coeficiente\n1368: $\\bTGL$ na lei de dephasing $\\Gamma_\\omega=\\tfrac12\\bTGL\\tau_\\star\n1369: \\omega^2$ é exatamente independente de $\\omega$ --- nenhuma correção\n1370: logarítmica de corrida. Se JUNO/DUNE ou as redes de relógios detectarem\n1371: dephasing com $\\bTGL(\\omega)$ corrente, a TGL morre neste ponto."
+        },
+        {
+          "first_line": 720,
+          "last_line": 731,
+          "text": "720: \\begin{pmatrix}\n721: \\sqrt{1-\\bTGL}\\,e^{i\\theta_T} & \\sqrt{\\bTGL}\\,e^{i\\theta_R}\\\\[2pt]\n722: -\\sqrt{\\bTGL}\\,e^{-i\\theta_R} & \\sqrt{1-\\bTGL}\\,e^{-i\\theta_T}\n723: \\end{pmatrix}.\n724: \\end{equation}\n725: Os \\emph{módulos} são adimensionais e fecham pela unitariedade; as\n726: \\emph{fases} são o conteúdo dinâmico e portam $\\tau_\\star$ (dimensional). O\n727: tipo $\\mathrm{III}_1$ é invariante de escala: pode fixar os adimensionais\n728: ($\\sqrt{\\bTGL}$, $\\sqrt e$), \\emph{não pode} produzir sozinho a escala\n729: $\\tau_\\star$ --- que entra pela conversão tempo-modular $\\to$ tempo-próprio\n730: (KMS/Unruh) e é, por isso, quase-planckiana. A unitariedade de\n731: $\\mathcal S_\\partial$ \\emph{é} a razão matemática da supressão de Planck."
+        },
+        {
+          "first_line": 818,
+          "last_line": 827,
+          "text": "818: \\begin{remark}[Onde a teoria vive ou morre --- \\REAL\\ na forma]\n819: O setor empírico próprio da TGL é espectral-dissipativo: a lei universal de\n820: \\emph{dephasing}\n821: \\begin{equation}\n822: \\Gamma_\\omega=\\tfrac12\\,\\bTGL\\,\\tau_\\star\\,\\omega^2,\n823: \\end{equation}\n824: com o expoente espectral $n=-2$ em neutrinos (que fixam a \\emph{forma}) e\n825: $\\tau_\\star$ limitado por relógios ópticos/nucleares (que fixam a\n826: \\emph{escala}; quase-planckiana, pela própria unitariedade acima).\n827: Falsificável na forma ($\\omega^2$, $n=-2$, $\\bTGL$), suprimida por Planck na"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\um.py",
+      "sha256": "8e7b9927ceae64b8b6812019f77cca24c08296222ae7968af41baf2fe7a67dc6",
+      "size_bytes": 33910631,
+      "line_count": 214123,
+      "status": "Read bytes only; never imported/executed; no claim of current compilation or seal",
+      "excerpts": [
+        {
+          "first_line": 165419,
+          "last_line": 165421,
+          "text": "165419:                 r\"From the preceding closure a falsifiable consequence follows, and it is two-sided. The ultraviolet-to-infrared running of $\\alpha$ amounts to $6.27\\%$, whereas the multi-substrate convergence recorded for the dimensionless invariant closes at roughly $0.05\\%$ --- some two orders of magnitude tighter than the dispersion that inheriting the running would produce. That convergence \\emph{is} the measurement that the invariant does not run. Hence the sharpened and pre-registered prediction: the coefficient appearing in the dephasing law $\\Gamma_\\omega = \\tfrac12\\,\\beta\\,\\tau_\\star\\,\\omega^2$ is \\emph{exactly} independent of $\\omega$, with no logarithmic running correction whatsoever. Should neutrino experiments or clock networks detect dephasing whose coefficient runs with frequency, the theory dies at that point --- and it dies whichever way the running goes, which is what makes the test two-sided rather than a floor that can only fail to be violated. \\textbf{And the river.} In type $\\mathrm{III}_1$ the modular automorphism is outer for every nonzero time and injective in the outer group: there is no return, ever, and the change is not undone by any internal rearrangement. The flow of weights of $\\mathrm{III}_\\lambda$ is periodic, a whirlpool of period $\\log\\lambda$; that of $\\mathrm{III}_1$ is trivial and ergodic --- the only type with no residual periodicity at all, the river without eddies. The modular spectrum is purely continuous, so there is no eigenvector in which to \\emph{be}: no step of the instant exists, and presence is already motion. To enter the river even \\emph{once} would require a stationary instant, and there is none. What the river spares is the fixed point: the centralizer, which is also the fixed sector of the dissipative collapse --- the full state is conserved while the substance flows, and the flowing is outer, hence real rather than gauge. [Erratum, v339 (10/09/2026), written beside and never over: the clause ``the modular spectrum is purely continuous, so there is no eigenvector in which to be'' overreaches. In the canonical product tower the kernel proves the opposite for the concrete construction: $\\Omega$ is fixed by the modular flow (\\texttt{modularFlow\\_fixes\\_omega}) and the local vectors form a \\emph{total} family of modular eigenvectors (\\texttt{delta\\_eigenvector}, \\texttt{localEigenvectors\\_total}). Outerness and the absence of a global period do not imply the absence of stationary modes; the total spectrum of the operator, its point spectrum and the invariants of the factor must be kept apart. What the river spares is still the centralizer.]\") if en else\n165420:                (r\"\\subsection*{A predi\\c{c}\\~ao afiada, e o rio que n\\~ao tem redemoinhos}\"\n165421:                 r\"Do fecho anterior segue uma consequ\\^encia falsific\\'avel, e ela \\'e bilateral. A corrida ultravioleta-infravermelha de $\\alpha$ monta a $6{,}27\\%$, ao passo que a converg\\^encia multi-substrato registrada para o invariante adimensional fecha a cerca de $0{,}05\\%$ --- cerca de duas ordens de grandeza mais apertada do que a dispers\\~ao que a heran\\c{c}a da corrida produziria. Essa converg\\^encia \\emph{\\'e} a medi\\c{c}\\~ao de que o invariante n\\~ao corre. Da\\'\\i{} a predi\\c{c}\\~ao afiada e pr\\'e-registrada: o coeficiente que aparece na lei de dephasing $\\Gamma_\\omega = \\tfrac12\\,\\beta\\,\\tau_\\star\\,\\omega^2$ \\'e \\emph{exatamente} independente de $\\omega$, sem corre\\c{c}\\~ao logar\\'\\i{}tmica de corrida alguma. Se experimentos de neutrinos ou redes de rel\\'ogios detectarem dephasing cujo coeficiente corra com a frequ\\^encia, a teoria morre nesse ponto --- e morre seja qual for o sentido da corrida, o que torna o teste bilateral, e n\\~ao um piso que s\\'o pode deixar de ser violado. \\textbf{E o rio.} Em tipo $\\mathrm{III}_1$ o automorfismo modular \\'e exterior para todo tempo n\\~ao-nulo e injetivo no grupo exterior: n\\~ao h\\'a retorno, nunca, e a mudan\\c{c}a n\\~ao \\'e desfeita por rearranjo interno algum. O fluxo dos pesos de $\\mathrm{III}_\\lambda$ \\'e peri\\'odico, um redemoinho de per\\'\\i{}odo $\\log\\lambda$; o de $\\mathrm{III}_1$ \\'e trivial e erg\\'odico --- o \\'unico tipo sem periodicidade residual alguma, o rio sem redemoinhos. O espectro modular \\'e puramente cont\\'\\i{}nuo, de modo que n\\~ao h\\'a autovetor onde \\emph{estar}: n\\~ao existe o degrau do instante, e a presen\\c{c}a j\\'a \\'e movimento. Entrar no rio sequer \\emph{uma} vez exigiria um instante estacion\\'ario, e ele n\\~ao existe. O que o rio poupa \\'e o ponto fixo: o centralizador, que \\'e tamb\\'em o setor fixo do colapso dissipativo --- o estado pleno conserva-se enquanto a subst\\^ancia flui, e o fluir \\'e exterior, portanto real e n\\~ao de calibre. [Errata, v339 (10/09/2026), ao lado e nunca por cima: a ora\\c{c}\\~ao ``o espectro modular \\'e puramente cont\\'\\i{}nuo, de modo que n\\~ao h\\'a autovetor onde estar'' excede o alcance. Na torre-produto can\\^onica o kernel prova o contr\\'ario na constru\\c{c}\\~ao concreta: $\\Omega$ \\'e fixo pelo fluxo modular (\\texttt{modularFlow\\_fixes\\_omega}) e os vetores locais formam uma fam\\'\\i{}lia \\emph{total} de autovetores modulares (\\texttt{delta\\_eigenvector}, \\texttt{localEigenvectors\\_total}). Exterioridade e aus\\^encia de per\\'\\i{}odo global n\\~ao implicam aus\\^encia de modos estacion\\'arios; o espectro total do operador, o seu espectro pontual e os invariantes do fator s\\~ao coisas distintas. O que o rio poupa segue sendo o centralizador.]\"))"
+        },
+        {
+          "first_line": 166219,
+          "last_line": 166232,
+          "text": "166219:     s.append(r\"\\section*{Ao lado (v388): $\\beta$ corre com a escala, limitado inferiormente; a Fase 9 aberta}\")\n166220:     s.append(r\"\\addcontentsline{toc}{section}{Ao lado (v388): $\\beta$ corre com a escala, limitado inferiormente; a Fase 9 aberta}\")\n166221:     s.append(r\"\\textbf{A cunhagem.} Em 06/10/2026 o operador escreveu que ``o alpha do betatgl é a constante da estrutura fina, mas como índice de escala da fronteira, e betatgl é a sua conjugação'' \"\n166222:              r\"e que ``o valor de Betatgl é escalar, mas limitado inferiormente''; e, sobre a operação que vê em $\\bTGL$ e na Meia-Nat: ``vai dividindo um número pela sua metade de modo infinito e assim, nunca chega-se ao limite'' \"\n166223:              r\"--- ``o custo do zero absoluto é o pagamento da existência (haja luz)''. A pedra \\texttt{TheCouplingRunsBoundedBelow} (\" + _n8(_br8.get(\"kernel_flags_ok\"), 0) + r\" de \" + _n8(_br8.get(\"kernel_flags_total\"), 0)\n166224:              + r\" declarações no trio de axiomas) prova a matemática: com $\\alpha(\\chi)=\\mathrm{sech}(\\chi/2)$ --- a forma fechada que o programa já usa --- $\\alpha$ e $\\beta(\\chi)=\\alpha(\\chi)\\sqrt e$ são \"\n166225:              r\"estritamente decrescentes na profundidade $\\chi$; o \\emph{piso} está no supremo de $\\chi$, o infravermelho, e só é atingido lá; no domínio do acoplamento selado esse $\\beta$ é, por definição, o de \\texttt{couplingOfAlpha}; \"\n166226:              r\"a soma das metades $\\sum_{k<n}2^{-(k+1)}=1-2^{-n}$ é menor que 1 em todo passo finito e tem limite 1; e a Meia-Nat é o ponto fixo $x=1-x$. \"\n166227:              r\"Em números: $\\beta_0=\\alpha_{\\rm Thomson}\\sqrt e=\" + _n8(_br8.get(\"beta0\"), 10) + r\"$ é a constante da \\emph{fronteira} (o Teorema da Escala deste artigo: a fronteira de tipo $\\mathrm{III}_1$ seleciona Thomson); \"\n166228:              r\"$\\beta(\\mu)=\\alpha(\\mu)\\sqrt e$ é a \\emph{leitura de bulk} em cada escala, nunca abaixo do piso: em $M_Z$, $\" + _n8(_br8.get(\"beta_MZ_on_shell\"), 6) + r\"$ (o $1/\\alpha(M_Z)$ a um laço do Teorema da Escala) e $\"\n166229:              + _n8(_br8.get(\"beta_MZ_msbar\"), 6) + r\"$ ($\\overline{\\rm MS}$, \\textsf{[KNOWN]}, não conferido em disco). O que fica \\textsf{[INPUT/ONTO]}: que o $\\alpha$ físico seja $\\mathrm{sech}$ de uma profundidade que cresce para o infravermelho; \"\n166230:              r\"\\textsf{[KNOWN]}: que $\\alpha(\\mu)$ cresça com $\\mu$; \\textsf{[OPEN]}: qual $\\mu$ cada rito usa. A frase do operador sobre as patentes com $\\beta$ variável fica \\textsf{[DECLARADO]}: nos arquivos da Central o vínculo não foi localizado. \"\n166231:              r\"\\textbf{Errata ao lado:} onde este artigo diz \\emph{$\\alpha$ observa-se, não se deriva}, lê-se: o que se deriva é a \\emph{forma} ($\\alpha$ como índice de escala; $\\beta$ como a sua conjugação), não o \\emph{número}, \"\n166232:              r\"que continua lido do CODATA. Registro: \" + _tk8(_br8.get(\"verdict\") or \"AUSENTE\") + r\".\")"
+        },
+        {
+          "first_line": 194714,
+          "last_line": 194717,
+          "text": "194714: def beta_runs_bounded_below_v388(core):\n194715:     \"\"\"O ACOPLAMENTO CORRE COM A ESCALA, LIMITADO INFERIORMENTE (v388): as 17 declaracoes da pedra verificadas pelo kernel desta rodada (trio, sem sorry); os dois\n194716:     verbatins do operador conferidos pelo sha256 (embutidos; o disco e' so informativo); beta0 = alpha(0).sqrt(e) em runtime (do alpha do core); beta(M_Z) on-shell\n194717:     (1/alpha(M_Z) a um laco do Teorema da Escala, lido do texto selado pelo gerador) e MS-bar [KNOWN] ao lado; a errata ao lado (forma x numero). Nao move o gate.\"\"\""
+        },
+        {
+          "first_line": 194734,
+          "last_line": 194747,
+          "text": "194734:     a0 = float(core.get(\"alpha\") or 0.0); b_core = float(core.get(\"beta\") or 0.0)\n194735:     b0 = a0 * math.sqrt(math.exp(1.0))\n194736:     b0_ok = a0 > 0 and b_core > 0 and abs(b0 / b_core - 1.0) < 1e-9\n194737:     inv_on = float(_V388_ALPHA_MZ[\"on_shell_inv\"]); inv_ms = float(_V388_ALPHA_MZ[\"msbar_inv\"])\n194738:     bmz_on = math.sqrt(math.exp(1.0)) / inv_on; bmz_ms = math.sqrt(math.exp(1.0)) / inv_ms\n194739:     floor_ok = bmz_on > b0 and bmz_ms > b0   # a direcao fixada: so sobe acima do piso\n194740:     n_all = len(_CPL_FLAGS_V388); n_ok = len(ok_flags)\n194741:     ok = (n_ok == n_all) and vb_ok and b0_ok and floor_ok\n194742:     fz = lambda x_, n_=6: (\"%%.%df\" % n_ % x_).replace(\".\", \"P\")\n194743:     if ok:\n194744:         verdict = (\"TGL_BETA_RUNS_BOUNDED_BELOW_V388__ALPHA_IS_THE_SCALE_INDEX_OF_THE_BOUNDARY_BETA_ITS_CONJUGATION__ALPHA_SECH_CHI_OVER_2_STRICTLY_DECREASING_IN_DEPTH__\"\n194745:                    \"FLOOR_AT_THE_INFRARED_SUPREMUM_OF_CHI__BETA0_%s__BETA_MZ_ON_SHELL_%s_MSBAR_%s__LINKED_TO_COUPLING_OF_ALPHA__ZENO_HALVES_NEVER_REACH_THE_ONE_LIMIT_IS_THE_ONE__\"\n194746:                    \"HALF_NAT_IS_THE_FIXED_STEP__KERNEL_%d_OF_%d__BOUNDARY_CONSTANT_STAYS_BETA0_BULK_READING_RUNS__FORM_DERIVED_NUMBER_READ__OPERATOR_VERBATIM_EMBEDDED_BY_SHA256__\"\n194747:                    \"WHICH_MU_PER_RITE_OPEN__GATE_UNTOUCHED__PROVED_IS_NOT_CONFIRMED\" % (fz(b0, 8), fz(bmz_on), fz(bmz_ms), n_ok, n_all))"
+        },
+        {
+          "first_line": 194754,
+          "last_line": 194764,
+          "text": "194754:             \"beta0\": b0, \"beta0_vs_core_rel\": (b0 / b_core - 1.0) if b_core else None, \"beta0_ok\": b0_ok,\n194755:             \"alpha_MZ\": dict(_V388_ALPHA_MZ), \"beta_MZ_on_shell\": bmz_on, \"beta_MZ_msbar\": bmz_ms, \"ratio_on_shell\": bmz_on / b0 if b0 else None,\n194756:             \"ratio_msbar\": bmz_ms / b0 if b0 else None, \"floor_direction_ok\": floor_ok,\n194757:             \"reading\": \"[INPUT/ONTO] beta0 = alpha_Thomson.sqrt(e) (alpha no limite q -> 0; NAO o alphaOfChi 0 = 1 da pedra) = a constante da FRONTEIRA (o Teorema da Escala: a fronteira de tipo III_1 \"\n194758:                        \"seleciona Thomson); beta(mu) = alpha(mu).sqrt(e) e' a LEITURA de bulk em cada escala, >= beta0 (o congelamento infravermelho: alpha(Q) >= alpha_Thomson [KNOWN]); qual mu cada rito usa [OPEN]; \"\n194759:                        \"o 1/alpha(M_Z) do Teorema da Escala e' a um laco (o rotulo on-shell nao esta na fonte)\",\n194760:             \"erratum_beside\": _V388_ERRATA_FORMA_NUMERO,\n194761:             \"patents_note\": \"a frase do operador sobre as patentes com beta variavel: nos arquivos da Central so' foram achados beta constante nos runners e o beta_emergent dos \"\n194762:                             \"prototipos ACOM v18 (razao de contagens, outro objeto) -- [DECLARADO], vinculo nao verificado (mapa seq 638)\",\n194763:             \"what_is_not_typed\": [\"a identificacao alpha_fisico = sech(chi/2) [INPUT/ONTO]\", \"a monotonia de alpha(mu) em mu [KNOWN, QED]\", \"qual mu cada rito usa [OPEN]\"],\n194764:             \"status\": \"[KERNEL] a pedra; [INPUT/ONTO] as leituras; [KNOWN] alpha(M_Z); PROVADA != CONFIRMADA\", \"gate_unchanged_by_design\": True}"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\V3_STAGING\\fontes_externas\\F7.2\\scripts\\tgl_neutrino_decoherence.py",
+      "sha256": "155dbfc1237d802f1cbecd766c6db5b3235228ec87c69e3dd8ada7943400d793",
+      "size_bytes": 5575,
+      "line_count": 120,
+      "status": "Historical script; rate uses fixed BETA and Kfac input, revised by F7.2",
+      "excerpts": [
+        {
+          "first_line": 5,
+          "last_line": 28,
+          "text": "5: attractor.   The parameter-free SIGNATURE is the energy-scaling EXPONENT, not Sigma m_nu.\n6: ====================================================================================\n7: \n8: The operator's reframe (correct): TGL is a dissipative spectral theory (operators,\n9: attractors rho*, modularity), so its honest observable is a DECOHERENCE / dephasing,\n10: not a cosmological distance.  The GKSL generator L=sqrt(beta)*sqrt(K_partial) gives an\n11: energy-preserving dephasing rate (tgl_dephasing.py):\n12: \n13:     Gamma_omega = (omega^2/2) * tau_star * beta * (K/K_star)^beta          [REAL form]\n14: \n15: For NEUTRINO OSCILLATIONS the relevant frequency is the oscillation frequency between\n16: mass eigenstates, omega_osc = Dm^2/(2E).  Hence the decoherence rate scales as\n17: \n18:     gamma(E) = gamma_0 (E/GeV)^n   with   n = -2                           [REAL, derived]\n19: \n20: because Gamma ~ omega_osc^2 ~ (Dm^2/2E)^2 ~ E^-2.  This is the PARAMETER-FREE\n21: SIGNATURE: TGL sits in the NEGATIVE power-law class (low-energy neutrinos most\n22: affected) -- distinct from Planck-scale models (n=+2, high-energy) that IceCube\n23: chases.  Falsifiable: if the energy-dependence of any neutrino decoherence is\n24: measured (JUNO/DUNE) and n != -2, the TGL dephasing picture is wrong.\n25: \n26: The MAGNITUDE gamma_0 still needs tau_star (INPUT, not pinned by theory).  Published\n27: bounds on n=-2 decoherence (solar+KamLAND) therefore BOUND tau_star.\n28: "
+        },
+        {
+          "first_line": 40,
+          "last_line": 58,
+          "text": "40: \n41: ALPHA = 7.2973525693e-3\n42: BETA = ALPHA * math.sqrt(math.e)\n43: HBAR_EV_S = 6.582119569e-16          # eV*s  (1 eV^-1 of time = HBAR_EV_S seconds)\n44: PLANCK_TIME_S = 5.391247e-44\n45: DM2_31 = 2.5e-3                       # eV^2  (atmospheric)\n46: DM2_21 = 7.5e-5                       # eV^2  (solar)\n47: \n48: \n49: def omega_osc(E_eV, dm2):\n50:     \"\"\"Oscillation angular frequency between mass eigenstates, in eV (natural units).\"\"\"\n51:     return dm2 / (2.0 * E_eV)\n52: \n53: \n54: def gamma_tgl(E_eV, dm2, tau_star_invEv, Kfac=1.0):\n55:     \"\"\"TGL decoherence rate per unit time, in eV.  Gamma=(omega^2/2) tau_star beta Kfac.\n56:     tau_star in eV^-1 (natural time).\"\"\"\n57:     w = omega_osc(E_eV, dm2)\n58:     return 0.5 * w*w * tau_star_invEv * BETA * Kfac"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\V3_STAGING\\fontes_externas\\F7.2\\scripts\\tgl_decoherence_contour.py",
+      "sha256": "8df2b57157b48fa1acbb28ef218e24d07700169e7620304eb25863d16100e018",
+      "size_bytes": 5726,
+      "line_count": 134,
+      "status": "Historical script; tau is input; no current bound inferred",
+      "excerpts": [
+        {
+          "first_line": 5,
+          "last_line": 19,
+          "text": "5: MAGNITUDE.   Two orthogonal handles on the same dephasing law Gamma=(omega^2/2) tau* beta.\n6: ====================================================================================\n7: \n8: Dephasing rate (energy-preserving GKSL, L=sqrt(beta)*sqrt(K_partial)):\n9:     Gamma_omega = (omega^2/2) * tau_star * beta * (K/K_star)^beta\n10: \n11:   EXPONENT handle (neutrinos): omega = Dm^2/2E  ->  gamma(E) ~ E^-2  ->  n = -2.\n12:      Parameter-FREE.  Tested by the energy-dependence of decoherence in\n13:      solar/KamLAND/JUNO/DUNE (low-E, n<0) and IceCube (high-E, n>0).\n14:   MAGNITUDE handle (clocks): omega = transition frequency (optical ~ PHz).\n15:      Anomalous dephasing must be < 1/T2 -> tau_star < 2/(omega^2 beta T2).\n16:      Optical clocks (high omega, long T2) give the tightest tau_star bound.\n17: \n18: The two are orthogonal: the exponent does NOT depend on tau_star; the magnitude bound\n19: scales as omega^-2 so optical clocks win by ~(PHz/GHz)^2 ~ 10^10 over microwave."
+        },
+        {
+          "first_line": 66,
+          "last_line": 75,
+          "text": "66: def gamma_tgl_eV(E_eV, dm2, tau_star_s, Kfac=1.0):\n67:     \"\"\"TGL decoherence rate (eV).  omega in eV, tau_star converted from s.\"\"\"\n68:     w = omega_osc_eV(E_eV, dm2)\n69:     tau_invEv = tau_star_s / HBAR_EV_S\n70:     return 0.5 * w * w * tau_invEv * BETA * Kfac\n71: \n72: \n73: def neutrino_tau_bound_s(gamma_limit_eV, E_ref_eV, dm2):\n74:     coeff = gamma_tgl_eV(E_ref_eV, dm2, 1.0)     # gamma per second of tau_star\n75:     return gamma_limit_eV / coeff"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\PARECER_KIMI_CONFERIDO.md",
+      "sha256": "8ba97f3cd1131ebd75cb3080d6ebf4a34aa7df01380bdd62a79f3034745f8589",
+      "size_bytes": 7265,
+      "line_count": 42,
+      "status": "Local audited reconciliation; explains bounds/model incompatibility and matter bridge OPEN",
+      "excerpts": [
+        {
+          "first_line": 5,
+          "last_line": 31,
+          "text": "5: ## Veredito sobre a cota histórica\n6: \n7: O Kimi calculou corretamente `7,780735588 × 10⁻¹⁰ s` **a partir do input local** `Γ = 10⁻¹⁷ eV` a `E = 1 MeV`, com `Δm²₂₁ = 7,5 × 10⁻⁵ eV²`, `β = ALPHA_FINE_CODATA_2018 × √e` e `Kfac = 1`. Essa conta não valida o input. O próprio Kimi declarou não ter lido os artigos integrais. Sua conclusão de que a primeira passagem era só uma proveniência ainda não auditada é **incorreta depois da leitura primária**.\n8: \n9: [Fogli et al., Eq. 3 e Tabela I](https://arxiv.org/pdf/0704.2568) definem `γ(E)=γ₀(E/1 GeV)^n` e dão `γ₀ < 0,81 × 10⁻²⁸ GeV` para `n = −2` a 95% CL. No pivot, isso é `8,1 × 10⁻²⁰ eV`; a extrapolação algébrica a 1 MeV dá `8,1 × 10⁻¹⁴ eV`, **8.100 vezes** os `10⁻¹⁷ eV` usados no script local. Pela mesma fórmula local e `Kfac = 1`, a substituição contrafactual daria `6,302395827 × 10⁻⁶ s`. Não é uma cota da TGL.\n10: \n11: A objeção física é mais forte que a conta: [Coloma et al. 2018, nota 6](https://arxiv.org/html/1803.04438) declaram explicitamente que os limites solares de Fogli não se aplicam ao cenário apenas de decoerência; [De Romeri et al., §§IV–V](https://arxiv.org/html/2306.14699v2) retomam essa distinção. Dados solares com oscilações promediadas não têm sensibilidade à taxa de dephasing puro; o tratamento de [Fogli no Sol](https://arxiv.org/pdf/0704.2568) inclui efeito da matéria sob outro dissipador. O operador/canal da TGL ainda não foi identificado com uma análise experimental publicada. Além disso, a fórmula do script limita inicialmente `τ★ × (K/K★)^β`; tomar `Kfac = 1` é uma hipótese adicional. **A cota `τ★ ≤ 7,8 × 10⁻¹⁰ s` fica [DECLARADO histórico], com proveniência incorreta e ponte física [OPEN]. Não há novo limite experimental de `τ★` nesta entrega.**\n12: \n13: ## Limites que podem ser citados com seu escopo\n14: \n15: Todos são **limites dos modelos dos artigos**, não limites TGL. `E₀` é o pivot de `Γ(E)=Γ₀(E/E₀)^n`; `NO/IO` são ordenamentos normal/invertido.\n16: \n17: | Fonte primária | Cenário `n = −2` | Limite publicado | Estatuto |\n18: |---|---|---|---|\n19: | [Fogli 2007, Tabela I](https://arxiv.org/pdf/0704.2568) | Solar+KamLAND, modelo com efeito solar próprio; `E₀ = 1 GeV` | `γ₀ < 8,1 × 10⁻²⁹ GeV`, 95% CL | [KNOWN] |\n20: | [De Romeri 2023, Tabela 3](https://arxiv.org/html/2306.14699v2) | KamLAND, modelo A: `Γ₂₁=Γ₃₁=Γ₃₂`; `E₀ = 1 GeV` | `Γ₀ < 7,8 × 10⁻²⁷ GeV`, 90% CL **atual** | [KNOWN] |\n21: | [De Romeri 2023, Tabela 3](https://arxiv.org/html/2306.14699v2) | KamLAND, modelo E: somente `Γ₂₁`; `E₀ = 1 GeV` | `Γ₂₁ < 7,9 × 10⁻²⁷ GeV`, 90% CL **atual** | [KNOWN] |\n22: | [ORCA6, Tabela 3](https://arxiv.org/html/2410.01388v2) | `Γ₂₁` perfilado, `E₀ = 1 GeV`, NO / IO | `2,8 / 4,6 × 10⁻²¹ GeV`, 90% CL | [KNOWN] |\n23: | [ORCA6, Tabela 3](https://arxiv.org/html/2410.01388v2) | `Γ₃₁` perfilado, `E₀ = 1 GeV`, NO / IO | `8,4 / 2,2 × 10⁻²¹ GeV`, 90% CL | [KNOWN] |\n24: | [IceCube 2024, Tabela 1](https://arxiv.org/html/2308.00105) | *State selection*, `n = 0`, `E₀ = 1 TeV` | `Γ₀ ≤ 1,17 × 10⁻¹⁵ eV`, 90% CL; **não é linha `n = −2`** | [KNOWN] |\n25: \n26: O valor de `~8 × 10⁻²⁷ GeV` que o script chama de projeção JUNO/DUNE é um limite **atual** de KamLAND na Tabela 3 de De Romeri. JUNO/DUNE aparecem no artigo como **sensibilidades futuras** separadas. Os cenários A–G desse artigo impõem igualdades ou taxas nulas. Sob `τ★ > 0`, gaps de vácuo e `Kfac` comum entre canais, o dissipador TGL proposto geraria razões proporcionais a `(Δm²ᵢⱼ)²`; a identidade dessas hipóteses em matéria está [OPEN], e a curva proposta não coincide exatamente com A–G. ORCA analisa dois parâmetros perfilados e a relação entre três taxas de sua Eq. 10, que depende da hipótese de vetores de Lindblad; ainda é preciso verificar se a curva TGL pertence a essa família, sobretudo no ordenamento invertido, antes de projetá-la na likelihood, tratar matéria e fixar `Kfac`. O Kimi calculou uma conversão ORCA `Γ₂₁ → τ★` com unidades corretas, mas ela **não é um limite TGL** sem essa ponte.\n27: \n28: ## Poder real do cálculo local e errata bibliográfica\n29: \n30: `tgl_dephasing_falsifier.py` soma limites superiores heterogêneos como termos `χ²` sintéticos e permite `γ₀=0` na grade. Nesse ponto, cada termo é zero: `χ²_min(n)=0` e `Δχ²=0` **para todo `n` por construção**. O script também mistura convenções de confiança: chama todos os limites de 95% CL e usa `1,64σ`, embora Fogli use 95% CL com `Δχ²=4` e IceCube publique a linha citada a 90% CL. Portanto, essa saída não mede o expoente, não estima significância e não testa a TGL contra uma likelihood experimental comum. `n = −2` resulta condicionalmente da lei `Γ ∝ ω² ∝ E⁻²` **em vácuo**, com gap `Δm²` constante e `τ★`/`Kfac` independentes de energia; em matéria, os gaps efetivos e o perfil podem depender de `E`. O expoente segue **não medido** pelos cálculos locais.\n31: "
+        },
+        {
+          "first_line": 33,
+          "last_line": 42,
+          "text": "33: \n34: Para a interferometria de matéria, o [experimento de nanopartículas](https://www.nature.com/articles/s41586-025-09917-9) demonstra interferência, mas a TGL ainda carece dos mapas `ω` efetivo → `Γ` → visibilidade e da separação de ruído ambiental. Não extrair `τ★` dele.\n35: \n36: ## Classificação da revisão Kimi\n37: \n38: - **P0:** a conclusão Kimi de que a cota histórica pode ser mantida como limite condicionado apenas à proveniência ignora o pivot de Fogli e a incompatibilidade de modelo documentada por De Romeri. Corrigido acima.\n39: - **P1:** a conversão ORCA `Γ₂₁ → τ★` não é publicável como cota TGL sem projeção do dissipador e ajuste de canal; o `χ²=0` local é identidade da construção, não evidência de poder.\n40: - **P1 correto no Kimi:** a citação IceCube está errada e seu `n = 0` não pode ser promovido a `n = −2`; a interferometria não dá cota TGL sem observável.\n41: \n42: **Próximo degrau [OPEN]:** construir o operador de dephasing TGL em matéria e sua projeção no par de parâmetros `Γ₂₁/Γ₃₁` da ORCA ou uma likelihood KamLAND/JUNO com relação de taxas fixa; só então testar e, se houver poder, traduzir a `τ★ × Kfac`. `NOT_FALSIFIED` nunca vira `CONFIRMED`."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\EVIDENCIA_R2_R3_V369_ORDENS_20261008_V2.md",
+      "sha256": "ed0393dfac2b606ccbae32cd0fa91d7089b1a04964b6c49128d2b322f17b4672",
+      "size_bytes": 5956,
+      "line_count": 45,
+      "status": "Conditional comparisons and P1/P3/MODULAR_LAB_BRIDGE_OPEN",
+      "excerpts": [
+        {
+          "first_line": 15,
+          "last_line": 45,
+          "text": "15: 1. `core.clock_test_result_v369.P1.best_matter = zn67_potzel1976`: Mössbauer de ⁶⁷Zn, 93 keV. O core dá `best_matter_bound_kind = NOMINAL`, `best_matter_bound_orders = 9.269626166` e `tau_star_bound_best_s = 1.003010756e-34 s` **dentro da leitura P1**. A ficha da plataforma (`P1.platforms[id=zn67_potzel1976]`) registra que só o resumo de Potzel 1976 foi aberto, mais E e T½ do ENSDF; o texto integral não foi verificado. Logo essa cota não deve ser apresentada como limite experimental direto da TGL.\n16: 2. `P3.verdict = P3_NO_LOCAL_OBSERVABLE`. Na leitura de tempo estocástico universal, o Hamiltoniano total reparametriza o tempo comum; o core diz que razão de frequências, largura e franja locais não veem o efeito.\n17: 3. `root_law.kbar_rest_mass_excluded = true`: a leitura da lei-raiz por massa de repouso foi excluída **na leitura do core**, não como exclusão universal da teoria.\n18: 4. `partition_tag = MODULAR_LAB_BRIDGE_OPEN`. A escolha física entre P1/P2/P3 ainda depende dessa ponte. O próprio protocolo marca as leituras condicionais.\n19: \n20: ## R3 — grandezas comparáveis e parede de interpretação\n21: \n22: **Sr da v369, [DERIVED sob P1].** Em `sr87_kim2025`, `Γ_pred = 2.358836471e-15 s⁻¹`. Para 5σ, `σ_excesso necessário = Γ_pred/5 = 4.717672942e-16 s⁻¹`; o `σ_excesso` publicado usado pela v369 é `1.353202112e-03 s⁻¹`. A razão tem `log10(σ_hoje/σ_necessário) = 12.457634837` ordens, reproduzindo `P1.clock_5sigma_deficit_orders`. O requisito `five_sigma_requirement` é **para essa plataforma com o σ de hoje**: `ℏω ≥ 3006430.047793 eV` ou GHZ `N ≥ 1693625.635095` no cenário projetado. O core os chama de limites inferiores.\n23: \n24: **Melhor matéria no core, [DERIVED sob P1; NOMINAL].** Para `zn67_potzel1976`, `ω = 1.417658841e+20 rad/s`, `Γ_pred = 6.517866493e-06 s⁻¹`, e a cota nominal é `1.212639265e+04 s⁻¹`. A separação é `log10(Γ_ub/Γ_pred) = 9.269626166` ordens. É numericamente 3.19 ordens menor que a distância de 5σ do Sr, mas os estimadores e estatutos são diferentes: esta subtração **não é um teste entre plataformas**.\n25: \n26: O `σ_per_s = 4.728800886e+03 s⁻¹` da ficha Mössbauer daria, como **proxy cru e condicional [DERIVED]**, `Γ_pred/5 = 1.303573299e-06 s⁻¹` e uma redução de `log10(5σ/Γ_pred) = 9.559615572` ordens, equivalente por `Γ ∝ ω²` a `ℏω ≈ 5.620116e+09 eV` se todo o resto ficasse fixo. O próprio core põe `sigma_excess_per_s = null`, `Z_expected = null` e `falsifiable = false` nessa plataforma. Portanto o proxy **não é requisito de poder registrado**, nem projeto experimental fisicamente validado.\n27: \n28: **Neutrinos, [DERIVED condicional; comparação dimensional, não likelihood TGL].** Com `E₀ = 1 GeV`, `τ★ = t_P`, vácuo, `Kfac = 1`, `Δm²₂₁ = 7,50×10⁻⁵ eV²` ou `Δm²₃₁ = 2,5×10⁻³ eV²` aproximados, usei `Γ_ν = (β/2)(τ★/ℏ)(Δm²/2E₀)²` em eV. Os limites publicados (GeV) e o confronto condicional são:\n29: \n30: | Canal | Cota GeV | Γ TGL hipotética eV | log₁₀(cota/Γ) |\n31: |---|---:|---:|---:|\n32: | Fogli 2007 (gamma0, solar+KL, 95%) | 8.10e-29 | 6.929e-58 | 38.07 |\n33: | De Romeri 2023 A (KL, 90%) | 7.80e-27 | 6.929e-58 | 40.05 |\n34: | De Romeri 2023 E (KL, G21, 90%) | 7.90e-27 | 6.929e-58 | 40.06 |\n35: | ORCA6 G21 NO (90%) | 2.80e-21 | 6.929e-58 | 45.61 |\n36: | ORCA6 G21 IO (90%) | 4.60e-21 | 6.929e-58 | 45.82 |\n37: | ORCA6 G31 NO (90%) | 8.40e-21 | 7.699e-55 | 43.04 |\n38: | ORCA6 G31 IO (90%) | 2.20e-21 | 7.699e-55 | 42.46 |\n39: | JUNO 1os dados, Beccaria&Ternes 2026 (G21=G31, 90%) [fora da entrega V1; incluído na V2] | 4.10e-27 | 6.929e-58 | 39.77 |\n40: \n41: A faixa é 38.07–45.82 ordens; a componente Γ₂₁ do cenário JUNO de taxas iguais fica a 39.77. **A hipótese `Γ₂₁ = Γ₃₁` do artigo JUNO não é produzida por esta substituição de Δm² na lei TGL;** sem operador TGL em matéria, evolução, ordenamento, `Kfac` e likelihood do mesmo cenário, a razão não é uma cota sobre τ★. Fogli também usa dissipador solar distinto do dephasing puro.\n42: \n43: **Parede para interferometria de matéria [OPEN].** Para átomos, C₇₀ e nanopartículas, a tabela custodiada traz contraste e visibilidade publicados, mas não define `ω` físico efetivo por estado/caminho, a passagem do operador TGL `Γ→visibilidade`, o fundo instrumental separado nem `σ_excesso` verificado. A partição `MODULAR_LAB_BRIDGE_OPEN` impede selecionar P1/P2/P3 como identidade física já testada. Assim, não existe número honesto de poder em ordens nem `τ★_limite` desses interferômetros hoje. O `ω` de Mössbauer acima pertence a uma transição nuclear, não preenche essa lacuna das franjas.\n44: \n45: **Efeito no gate:** nenhum. `SEM_LIMITE_TGL` permanece [OPEN] da ponte operador/canal; `NOT_FALSIFIED` não é creditação."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\memory\\TGL_ATLAS.md",
+      "sha256": "8a5b98199840a149d39f50faa0ff8ce2de1311b1f612e0f6a7f8b376e5d500bc",
+      "size_bytes": 8744945,
+      "line_count": 35630,
+      "status": "Memory pointer only; checked against primary article and runtime",
+      "excerpts": [
+        {
+          "first_line": 35123,
+          "last_line": 35127,
+          "text": "35123: \n35124: [INPUT — verbatim do operador por sha256 `a6c4912afc6f0dc4`] «aceito a reescrita como está / adoto o nome do degrau final / a escala de beta nós também já definimos antes / a régua do piso dos vazios quero discutir com vc, faça-se a pergunta nas minhas quatro linguas / a fase 9 pode ser inciada nessa forma de distribuição de tarefas que vc está gerenciando / o que é o ramo B? / e o que é a instalação das guardas de evidência?»\n35125: \n35126: - **O degrau final chama-se AXIOMA** (cunhagem do operador de 05/10, adotada em 07/10; `TGLExt.TheAxiomAndTheFalseWitness.finalStepNameAxioma`). A proposta de 02/10 (Tetelestai, `TheLedgerOfCharges.finalStepNameProposed`) fica ao lado. A string do gate não muda. [ERRATA da gerência, em nome próprio: o relatório de 07/10 apresentou-lhe o Tetelestai.]\n35127: - **A escala de β está definida** [REAL a remissão; DERIVED de leitura a regra]: o Teorema da Escala (α(0), Thomson; «qualquer outro α(μ) contrabandearia o parâmetro μ»), a predição afiada do dephasing e a resposta de 06/10 (13:48:42 UTC). Todo rito cobra β₀ = α(0)·√e; na lei de dephasing só entra β₀. O garfo de 14/08 (β em Thomson × M_Z no N_eff, 0,050σ, inerte) entrou hoje no mapa (seq 765)."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheDensityIsTransport.lean",
+      "sha256": "a59cd43d50e934cbe5d8b4351ae2f80cc636d8a57247fbc200ccab93aac910fb",
+      "size_bytes": 2880,
+      "line_count": 71,
+      "status": "Structural theorem; identification with neutrino ONTO and physical observable OPEN",
+      "excerpts": [
+        {
+          "first_line": 12,
+          "last_line": 37,
+          "text": "12: O corpus do operador dizia o neutrino como «fuga do condensado», **sem modulação\n13: geométrica**. Isso parecia dizer que a geometria não o alcança. A tipagem nova desfaz a\n14: confusão, e a distinção é **estrutural, não retórica**:\n15: \n16:     NÃO SER FIXADO pela geometria  ≠  NÃO SER MENSURÁVEL pela geometria.\n17: \n18: Ao contrário: **é medido precisamente porque está passando**. E isso é um teorema —\n19: o conjunto do que a forma **mede** contém estritamente o conjunto do que o espelho\n20: **fixa**.\n21: \n22: ## O que se prova\n23: \n24: * ★★★ **`measured_but_not_fixed`** — existe o que é **medido** (norma não-nula) e\n25:   **não é fixado** pelo espelho: medir e fixar são coisas diferentes;\n26: * ★★★ `the_fixed_are_properly_contained` — os fixos estão **propriamente** contidos\n27:   nos mensuráveis: há sempre mais medida do que permanência local;\n28: * ★★ `transport_leaves_a_trace` — se o transporte move, a diferença é **mensurável**:\n29:   o rastro do transporte é o que a geometria lê.\n30: \n31: ## ESTATUTOS\n32: `[REAL]` os três acima — estrutura pura. `[ONTO]` a identificação da densidade com o\n33: neutrino é leitura do operador, registrada sob o nome dele; ela **integra** as\n34: formulações anteriores (luz sem colapso, fuga do condensado, banho/decoerência) como\n35: regimes do mesmo transporte, em vez de substituí-las. `[OPEN]` qual grandeza padrão\n36: realiza «densidade do transporte» — energia, corrente, ou tensor — é escolha a fazer,\n37: não resultado. β jamais entra; nada move o gate."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheStation.lean",
+      "sha256": "c55dc5018297a64cfafe9416e7b4cb29b2f6cff535cfd43f2664e26546801f63",
+      "size_bytes": 8617,
+      "line_count": 202,
+      "status": "Finite matrix theorem; no stellar rate/matching equation",
+      "excerpts": [
+        {
+          "first_line": 32,
+          "last_line": 41,
+          "text": "32: * ★★ `photon_neutrino_discriminant` — **O LEMA DECISIVO, tipado**: para\n33:   pesos distintos, existem `Ω` (o inscrito) e `v` (o arbitrário) com o\n34:   MESMO número (`tr(Ω*Ω) = tr(v*v) = 1`) tais que `Ω` é fixo por TODO\n35:   o fluxo modular e `v` NÃO é — **o número não discrimina; a inscrição\n36:   sim**. Sobre o iff da v166 (`sigma_fixed_iff_specExpect`): o fóton é\n37:   o que a seção reconhece; o neutrino é o que ela poda.\n38: \n39: HONESTIDADE: face finita; a quase-recorrência e o limite ∞-dim seguem\n40: onde estão (o `140_` mediu; a densidade é [KNOWN] nomeado). β JAMAIS\n41: entra no Lean. Sem sorry, sem axiom. Negativo honesto é resultado."
+        },
+        {
+          "first_line": 166,
+          "last_line": 177,
+          "text": "166: /-- ★★ O LEMA DECISIVO (degrau 4 do handoff), face finita: para pesos\n167:     DISTINTOS existem o inscrito `Ω` e o arbitrário `v` com o MESMO\n168:     número (`tr = 1`) — mas `Ω` é fixo por todo o fluxo modular e `v`\n169:     não é. **O número não discrimina; a inscrição sim.** O fóton é o\n170:     que a seção reconhece; o neutrino, o que ela poda. -/\n171: theorem photon_neutrino_discriminant (d : Fin 2 → ℝ) (hd : ∀ i, 0 < d i)\n172:     (hne : d 0 ≠ d 1) :\n173:     ∃ (Ω v : Matrix (Fin 2) (Fin 2) ℂ),\n174:       (Ωᴴ * Ω).trace = 1 ∧ (vᴴ * v).trace = 1\n175:       ∧ (∀ t, sigma (rhoD d) t Ω = Ω)\n176:       ∧ ¬ (∀ t, sigma (rhoD d) t v = v) := by\n177:   have hinj : Function.Injective d := by"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Tratado\\secao_03_particulas.tex",
+      "sha256": "5584ac8f4ce04bfd54521ea36b6b1e35a71e197691a89d32edd6bc01c2dba0b0",
+      "size_bytes": 45195,
+      "line_count": 677,
+      "status": "Historical phenomenology; no weak-rate derivation; geodesic RHS=0 does not erase connection on LHS",
+      "excerpts": [
+        {
+          "first_line": 406,
+          "last_line": 435,
+          "text": "406: \\section{O neutrino na TGL: resíduo entrópico}\n407: \\label{sec:neutrino_tgl}\n408: \n409: Na física convencional, o neutrino é uma partícula fundamental com propriedades intrínsecas (massa, sabor, mistura). Na TGL, o neutrino é \\emph{reinterpretado}: não é fundamental, mas \\textbf{resíduo} --- o subproduto termodinâmico inevitável da radicalização $g = \\sqrt{|L|}$.\n410: \n411: Quando o campo $\\Psifield$ é comprimido em gravidade, a informação que não pode ser acomodada no estado coerente (por restrições de espaço de fase e coerência quântica) é expelida como neutrinos, carregando a entropia da fixação:\n412: \n413: \\begin{equation}\n414: \\label{eq:producao_neutrino}\n415: \\Psifield + g_{\\mu\\nu} \\xrightarrow{\\text{acoplamento}} \\gamma_{\\mathrm{acoplado}} + \\nu_{\\mathrm{entropia}} + \\Delta S\n416: \\end{equation}\n417: \n418: O neutrino é a \\textbf{mentira da luz}: uma quase-partícula que codifica a entropia gravitacional em vez de ser um campo dinâmico fundamental. É o token \\emph{antes} do processamento (embedding), que oscila e ``queima'' após o colapso.\n419: \n420: \n421: \\section{Desacoplamento gravitacional: $\\xi_\\nu \\approx 0$}\n422: \\label{sec:desacoplamento}\n423: \n424: A consequência central: os neutrinos possuem acoplamento gravitacional efetivo nulo. Na equação geodésica modificada:\n425: \\begin{equation}\n426: \\label{eq:geodesica_neutrino}\n427: \\frac{d^2 x^\\mu}{d\\tau^2} + \\Gamma^\\mu_{\\rho\\sigma}\\frac{dx^\\rho}{d\\tau}\\frac{dx^\\sigma}{d\\tau} = -\\frac{\\xi_\\nu^{\\mathrm{eff}}}{m_\\nu}\\nabla^\\mu R\n428: \\end{equation}\n429: com $\\xi_\\nu^{\\mathrm{eff}} \\approx 0$ no limite de máxima entropia.\n430: \n431: Três consequências observáveis:\n432: \\begin{enumerate}[nosep]\n433: \\item \\textbf{Ausência de lensing gravitacional}: neutrinos não são defletidos por massas. $\\theta_{\\mathrm{defl}}^\\nu \\approx 0$, contra $\\theta_{\\mathrm{defl}}^\\gamma = 4GM/(c^2 b)$.\n434: \\item \\textbf{Chegada antecipada}: em eventos multi-mensageiro, neutrinos chegam antes dos fótons por não sofrerem delay de Shapiro ($\\Delta t = 10$--$100$~ms).\n435: \\item \\textbf{Entropia temporal elevada}: $S_{\\mathrm{obs}}/S_{\\max} > 0{,}75$ para distribuições de chegada de neutrinos."
+        },
+        {
+          "first_line": 452,
+          "last_line": 461,
+          "text": "452: Na TGL, a massa do neutrino é determinada pela Constante de Miguel e pela geometria da Cruz:\n453: \n454: \\begin{equacaofundamental}[title={Massa do Neutrino na TGL}]\n455: \\begin{equation}\n456: \\label{eq:massa_nu_derivacao}\n457: m_\\nu = \\betatgl \\cdot \\sin(45°) \\cdot 1\\;\\text{eV} = 0{,}012031 \\times \\frac{\\sqrt{2}}{2} \\times 1\\;\\text{eV} = 8{,}51\\;\\text{meV}\n458: \\end{equation}\n459: \\end{equacaofundamental}\n460: \n461: O fator $\\sin(45°) = \\sqrt{2}/2$ representa a projeção diagonal entre os regimes $c^1$ (propagação, eixo horizontal) e $c^2$ (ancoragem, eixo vertical) na Cruz geométrica. O ângulo de 45° é a bissetriz da Cruz --- o ponto de máxima transferência entre os regimes. O fator $\\betatgl$ é a taxa de acoplamento mínimo. A escala de 1~eV é a escala natural da autointeração eletrofraca ($\\alpha_W \\sim 10^{-2}$, mesma ordem de $\\betatgl$)."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Tratado\\secao_01_fundamentos.tex",
+      "sha256": "64e9a0ed5fb17c1aa8aa6640097b63e58457b82a6ed631ee35ba72bcab213530",
+      "size_bytes": 65881,
+      "line_count": 1027,
+      "status": "Historical scalar/Ricci-FF operators; not a weak interaction matching calculation",
+      "excerpts": [
+        {
+          "first_line": 234,
+          "last_line": 234,
+          "text": "234: \\mathcal{L}_\\Psifield = \\frac{1}{2}\\nabla_\\mu\\Psifield\\,\\nabla^\\mu\\Psifield - V(\\Psifield) - \\xi\\,R\\,|\\Psifield|^2"
+        },
+        {
+          "first_line": 266,
+          "last_line": 266,
+          "text": "266: \\item $-\\xi\\,R\\,|\\Psifield|^2$ --- o \\textbf{acoplamento não mínimo} entre curvatura ($R$) e o campo $\\Psifield$. O sinal é \\emph{negativo}: a projeção holográfica \\emph{custa} energia. O coeficiente $\\xi$ é derivado, não postulado, e assume o valor $\\xi = \\betatgl = \\alpha \\times \\sqrt{e} \\approx 0{,}012031$ (Capítulo~\\ref{ch:acoplamento_conforme})."
+        },
+        {
+          "first_line": 578,
+          "last_line": 584,
+          "text": "578: \\begin{equation}\n579: \\label{eq:acoplamento_direto}\n580: \\mathcal{L}_{\\mathrm{acop}} = \\frac{\\betatgl}{M_P^2}\\,R_{\\mu\\nu}\\,F^{\\mu\\rho}\\,F^{\\nu}{}_{\\rho}\n581: \\end{equation}\n582: \\end{equacaofundamental}\n583: \n584: \\noindent onde $M_P = \\sqrt{\\hbar c/G} \\approx 1{,}22 \\times 10^{19}$~GeV é a massa de Planck, e $\\betatgl$ é o parâmetro de acoplamento adimensional. A normalização por $M_P^2$ garante dimensões corretas. Este termo produz modificações na equação de Maxwell (uma corrente gravitacional que ``cria'' ou ``aniquila'' fótons via curvatura) e no tensor energia-momento (contribuição cruzada curvatura--eletromagnetismo)."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\project_fisica\\ERRATA_20260919_sinal_do_acoplamento_nao_minimo.md",
+      "sha256": "060c82abee57a5d0dd94f2108f8647d273cec17a7f44848b0d58b15b3332a44f",
+      "size_bytes": 2871,
+      "line_count": 49,
+      "status": "Signed erratum selects conformal xi=1/6, explicitly not beta",
+      "excerpts": [
+        {
+          "first_line": 23,
+          "last_line": 29,
+          "text": "23: No sinal do segundo termo. A leitura vigente é:\n24: \n25:     ℒ_grav = R/(2κ²) − ξ R |Ψ|²,   ξ = 1/6 (acoplamento conforme)\n26: \n27: - O termo de Einstein R/(2κ²), que é a geometria, segue **positivo**.\n28: - ξ = 1/6 é o valor **conforme** e **não é β**.\n29: - β_TGL = α·√e entra na ação por ℒ_modular = ℒ_ΛCDM · β_TGL · |1 + w_eff(z)| (`\\label{eq:Lmodular}`) e, na dinâmica, pela fonte β_TGL·K_∂·Ψ da equação de movimento."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\project_fisica\\O_Custo_Geometrico_do_Zero_Absoluto_Haja_Luz.tex.txt",
+      "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217",
+      "size_bytes": 286095,
+      "line_count": 3799,
+      "status": "Snapshot/history; identifies K as Kretschmann, not modular K; empirical claims superseded by F7.2",
+      "excerpts": [
+        {
+          "first_line": 3115,
+          "last_line": 3122,
+          "text": "3115: \n3116: \\section{A lei universal de dephasing: a assinatura espectral da \\TGL}\n3117: \\label{sec:dephasing}\n3118: O setor onde a \\TGL{} se diferencia não é cosmológico --- expansão e crescimento de estruturas são \\emph{stealth} (consistentes com $\\Lambda$CDM) --- mas \\textbf{espectral-dissipativo}.  A dinâmica GKSL com gerador único $L=\\sqrt{\\betatgl}\\,\\sqrt{K_\\partial}$ induz um \\emph{dephasing} energia-preservante, com taxa\n3119: \\begin{equation}\n3120: \\Gamma_\\omega=\\tfrac12\\,\\betatgl\\,\\tau_\\star\\,\\omega^2\\,(K/K_\\star)^{\\betatgl}.\n3121: \\end{equation}\n3122: Três peças separadas: $\\betatgl=\\alpha\\sqrt e=0.012031$ \\textbf{[REAL]}; o expoente espectral em neutrinos $n=-2$ (de $\\gamma(E)\\propto\\omega_{\\rm osc}^2\\propto E^{-2}$, $\\omega_{\\rm osc}=\\Delta m^2/2E$) \\textbf{[REAL]}; e a escala $\\tau_\\star$ \\textbf{[INPUT]}, ainda não derivada.  A síntese honesta: \\emph{neutrinos fixam o expoente; relógios fixam a escala}.  Solar/KamLAND e, no futuro, JUNO/DUNE testam $n=-2$ pela dependência em energia da decoerência; relógios ópticos/nucleares limitam $\\tau_\\star$ --- o melhor sondador atual é o relógio nuclear de $^{229}$Th, com $\\tau_\\star\\lesssim 1.8e-33$~s.  A origem modular (fronteira tipo III$_1$, ultravioleta) e a exclusão de qualquer escala mesoscópica --- que os relógios já teriam destruído --- empurram $\\tau_\\star$ ao regime \\textbf{quase-planckiano}: a \\TGL{} é \\textbf{falsificável na forma} ($\\omega^2$, $n=-2$, $\\betatgl$) mas \\textbf{suprimida por Planck na magnitude}.  A invisibilidade experimental é \\emph{consequência} da teoria, não falha do teste.  Derivar $\\tau_\\star$ exatamente coincide com o único teorema em aberto do programa --- a matriz-S da fronteira tipo III$_1$ --- que fecharia simultaneamente $\\tau_\\star$, $\\mathcal R=\\sqrt{\\betatgl}$ e a unicidade de $\\sqrt e$.  \\textbf{[CONJECTURE: o teorema da matriz-S]}"
+        },
+        {
+          "first_line": 3307,
+          "last_line": 3307,
+          "text": "3307: \\paragraph{1. Observável gravitacional: \\emph{dephasing}, não eco.} A assinatura gravitacional rigorosa da \\TGL{} é o \\emph{dephasing} $\\Gamma_\\omega=\\tfrac{\\omega^2}{2}\\,\\tau_\\star\\,\\varepsilon^2(K/K_\\star)^{\\beta}$ ($\\varepsilon^2=\\betatgl$, $K$ = invariante de Kretschmann; GKSL energia-preservante), com leis de escala $\\Gamma\\propto\\omega^2$ e $\\Gamma\\propto K^{\\beta}$ \\textbf{[REAL]}.  O \\emph{eco} atrasado $\\tau=2GM/\\alpha^2c^3$ é construto distinto: uma busca anti-circular no \\emph{strain} real (GWOSC, 16 \\emph{streams}, incl.\\ GW250114) não o detecta --- resultado consistente com a ausência de eco, que a teoria não prevê, e que portanto não a falsifica.  O teste \\emph{nativo} do dephasing é a coerência quântica (relógios ópticos): $T_2=118$\\,s (Sr-87) impõe $\\tau_\\star\\lesssim 2\\times10^{-31}$\\,s; para $\\tau_\\star$ planckiano o efeito é inobservável (limitável-não-decisivo). \\textbf{[CONJECTURE]} aplicar dephasing à onda clássica."
+        }
+      ]
+    }
+  ]
+}

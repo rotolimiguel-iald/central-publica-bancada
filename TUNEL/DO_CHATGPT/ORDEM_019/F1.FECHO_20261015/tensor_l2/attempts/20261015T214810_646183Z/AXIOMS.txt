@@ -1,0 +1,71 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T214810_646183Z\CanonicalTensorResolventR2.lean:21:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a₁ • ?a₂ • ?b
+in the target expression
+  (fun x =>
+        (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p +
+            productWeight (weightB rootParameter) n p * productWeight (weightB rootParameter) n p) •
+          x)
+      (↑↑((Q n) (modularR x)) p) =
+    (fun x =>
+        (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p +
+            productWeight (weightB rootParameter) n p * productWeight (weightB rootParameter) n p) •
+          x)
+      (↑(-sumEnergy rootParameter n p).sigmoid • ↑↑((Q n) x) p)
+
+n : ℕ
+x : ↥F
+p : (data n).Index
+hp :
+  (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p +
+        productWeight (weightB rootParameter) n p * productWeight (weightB rootParameter) n p) •
+      ↑↑((Q n) (modularR x)) p =
+    (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p) • ↑↑((Q n) x) p
+hr : ↑↑((tensorR rootParameter n) ((Q n) x)) p = ↑(-sumEnergy rootParameter n p).sigmoid • ↑↑((Q n) x) p
+⊢ (fun x =>
+        (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p +
+            productWeight (weightB rootParameter) n p * productWeight (weightB rootParameter) n p) •
+          x)
+      (↑↑((Q n) (modularR x)) p) =
+    (fun x =>
+        (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p +
+            productWeight (weightB rootParameter) n p * productWeight (weightB rootParameter) n p) •
+          x)
+      (↑(-sumEnergy rootParameter n p).sigmoid • ↑↑((Q n) x) p)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T214810_646183Z\CanonicalTensorResolventR2.lean:27:2: error: Type mismatch
+  Q_resolvent n x
+has type
+  (Q n) (modularR x) = (tensorR rootParameter n) ((Q n) x)
+but is expected to have type
+  ↑↑((Q n ∘SL modularR) x) =ᵐ[(data n).measure] ↑↑((tensorR rootParameter n ∘SL Q n) x)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T214810_646183Z\CanonicalTensorResolventR2.lean:34:9: error(lean.unknownIdentifier): Unknown identifier `modularPhase`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T214810_646183Z\CanonicalTensorResolventR2.lean:50:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (resolventImaginaryPower (ScalarL2Spectral.R ?μ ?h ?hh) ⋯ ⋯ ⋯ ⋯ ?t) ?u
+in the target expression
+  (resolventImaginaryPower (tensorR rootParameter n) ⋯ ⋯ ⋯ ⋯ t) ((Q n) x) =
+    (spectralBoost n (-(2 * Real.pi * t))) ((Q n) x)
+
+n : ℕ
+t : ℝ
+x : ↥F
+h : (Q n) ((actualModularFlow t) x) = (resolventImaginaryPower (tensorR rootParameter n) ⋯ ⋯ ⋯ ⋯ t) ((Q n) x)
+⊢ (resolventImaginaryPower (tensorR rootParameter n) ⋯ ⋯ ⋯ ⋯ t) ((Q n) x) =
+    (spectralBoost n (-(2 * Real.pi * t))) ((Q n) x)
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    ScalarL2Spectral.R_nonneg (data n).measure (sumEnergy rootParameter n) (sumEnergy_measurable rootParameter n)
+  has type
+    @LE.le (↥(Lp (data n).Fiber 2 (data n).measure) →L[ℂ] ↥(Lp (data n).Fiber 2 (data n).measure))
+      ContinuousLinearMap.instLoewnerPartialOrder.toLE 0
+      (ScalarL2Spectral.R (data n).measure (sumEnergy rootParameter n) ⋯)
+  but is expected to have type
+    @LE.le (↥(Space n) →L[ℂ] ↥(Space n)) ContinuousLinearMap.instLoewnerPartialOrder.toLE 0 (tensorR rootParameter n)
+  in the application
+    resolventImaginaryPower (tensorR rootParameter n) ⋯
+'F1Fecho.TensorCoordinates.Q_resolvent' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.TensorCoordinates.Q_modularFlow' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.TensorCoordinates.positive_component_modularFlow' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

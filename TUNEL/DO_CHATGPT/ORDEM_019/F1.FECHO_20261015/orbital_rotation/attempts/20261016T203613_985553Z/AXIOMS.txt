@@ -1,0 +1,197 @@
+import took 49.7s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:62:2: error: Tactic `apply` failed: could not unify the conclusion of `Finset.sum_congr rfl`
+  Finset.sum ?m.51 ?m.48 = Finset.sum ?m.51 ?m.49
+with the goal
+  ∑ x ∈ (regularCoefficients χ).support,
+      ∑ i ∈ (regularCoefficients ψ).support,
+        (regularCoefficients χ) x *
+          ((starRingEnd ℂ) ((regularCoefficients ψ) i) *
+            inner ℂ (L (regularExponential i)) (M (regularExponential x))) =
+    ∑ x ∈ (regularCoefficients ψ).support,
+      ∑ x_1 ∈ (regularCoefficients χ).support,
+        (starRingEnd ℂ) ((regularCoefficients ψ) x) * (regularCoefficients χ) x_1 *
+          inner ℂ (L (regularExponential x)) (M (regularExponential x_1))
+
+Note: The full type of `Finset.sum_congr rfl` is
+  (∀ x ∈ ?m.51, ?m.48 x = ?m.49 x) → Finset.sum ?m.51 ?m.48 = Finset.sum ?m.51 ?m.49
+
+L M : ↥regularFockDomain →ₗ[ℂ] ↥F
+ψ χ : ↥regularFockDomain
+⊢ ∑ x ∈ (regularCoefficients χ).support,
+      ∑ i ∈ (regularCoefficients ψ).support,
+        (regularCoefficients χ) x *
+          ((starRingEnd ℂ) ((regularCoefficients ψ) i) *
+            inner ℂ (L (regularExponential i)) (M (regularExponential x))) =
+    ∑ x ∈ (regularCoefficients ψ).support,
+      ∑ x_1 ∈ (regularCoefficients χ).support,
+        (starRingEnd ℂ) ((regularCoefficients ψ) x) * (regularCoefficients χ) x_1 *
+          inner ℂ (L (regularExponential x)) (M (regularExponential x_1))
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 150ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:75:66: warning: This simp argument is unused:
+  Submodule.coe_smul
+
+Hint: Omit it from the simp argument list.
+  simp only [LinearMap.comp_apply, regularDiagonal_exponential,̵ ̵S̵u̵b̵m̵o̵d̵u̵l̵e̵.̵c̵o̵e̵_̵s̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:96:86: error: unsolved goals
+f g : ↥H1
+ψ χ : ↥regularFockDomain
+⊢ 1 / 2 *
+      (inner ℂ (↑ψ) (↑(annihilation f) ((onInvariantDomain g) (regularDomainInput χ))) +
+            inner ℂ (↑(annihilation g) (regularDomainInput ψ)) (↑(annihilation f) (regularDomainInput χ)) +
+          inner ℂ (↑(annihilation f) (regularDomainInput ψ)) (↑(annihilation g) (regularDomainInput χ)) +
+        inner ℂ (↑(annihilation g) ((onInvariantDomain f) (regularDomainInput ψ))) ↑χ) =
+    1 / 2 *
+      (inner ℂ (↑(regularDomainInput ψ)) (↑(annihilation f) ((onInvariantDomain g) (regularDomainInput χ))) +
+            inner ℂ (↑(annihilation g) (regularDomainInput ψ)) (↑(annihilation f) (regularDomainInput χ)) +
+          inner ℂ (↑(annihilation f) (regularDomainInput ψ)) (↑(annihilation g) (regularDomainInput χ)) +
+        inner ℂ (↑(annihilation g) ((onInvariantDomain f) (regularDomainInput ψ))) ↑(regularDomainInput χ))
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:103:77: error: unsolved goals
+v w : RegularLabel → ℂ
+h k : RegularLabel
+⊢ inner ℂ (exponential ↑h) ↑((regularDiagonal v) ((regularDiagonal w) ⟨exponential ↑k, ⋯⟩)) * (1 / 2) +
+          inner ℂ ↑((regularDiagonal w) ⟨exponential ↑h, ⋯⟩) ↑((regularDiagonal v) ⟨exponential ↑k, ⋯⟩) * (1 / 2) +
+        inner ℂ ↑((regularDiagonal v) ⟨exponential ↑h, ⋯⟩) ↑((regularDiagonal w) ⟨exponential ↑k, ⋯⟩) * (1 / 2) +
+      inner ℂ (↑((regularDiagonal w) ((regularDiagonal v) ⟨exponential ↑h, ⋯⟩))) (exponential ↑k) * (1 / 2) =
+    v k * w k * Complex.exp (inner ℂ ↑h ↑k) * (1 / 2) +
+          v k * (starRingEnd ℂ) (w h) * Complex.exp (inner ℂ ↑h ↑k) * (1 / 2) +
+        (starRingEnd ℂ) (v h) * w k * Complex.exp (inner ℂ ↑h ↑k) * (1 / 2) +
+      (starRingEnd ℂ) (v h) * (starRingEnd ℂ) (w h) * Complex.exp (inner ℂ ↑h ↑k) * (1 / 2)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:105:13: warning: This simp argument is unused:
+  regularDiagonal_exponential
+
+Hint: Omit it from the simp argument list.
+  simp only [̵r̵e̵g̵u̵l̵a̵r̵D̵i̵a̵g̵o̵n̵a̵l̵_̵e̵x̵p̵o̵n̵e̵n̵t̵i̵a̵l̵,̵ ̵m̵a̵p̵_̵s̵m̵u̵l̵,̵[̲m̲a̲p̲_̲s̲m̲u̲l̲,̲ Submodule.coe_smul, regularExponential, inner_smul_left, inner_smul_right,
+  ̲  ̲ ̲ ̲exponential_inner, map_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:105:42: warning: This simp argument is unused:
+  map_smul
+
+Hint: Omit it from the simp argument list.
+  simp only [regularDiagonal_exponential, m̵a̵p̵_̵s̵m̵u̵l̵,̵ ̵Submodule.coe_smul,
+  ̵  ̵ ̵ ̵regularExponential, inner_smul_left,
+  ̲  ̲ ̲ ̲inner_smul_right, exponential_inner, map_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:105:52: warning: This simp argument is unused:
+  Submodule.coe_smul
+
+Hint: Omit it from the simp argument list.
+  simp only [regularDiagonal_exponential, map_smul, S̵u̵b̵m̵o̵d̵u̵l̵e̵.̵c̵o̵e̵_̵s̵m̵u̵l̵,̵regularExponential, inner_smul_left,
+  ̲  ̲ ̲ ̲inner_smul_right, exponential_inner, map_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:106:24: warning: This simp argument is unused:
+  inner_smul_left
+
+Hint: Omit it from the simp argument list.
+  simp only [regularDiagonal_exponential, map_smul, Submodule.coe_smul,
+  ̵  ̵ ̵ ̵regularExponential,
+  ̲ i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵l̵e̵f̵t̵,̵  ̲ ̲inner_smul_right, exponential_inner, map_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:106:41: warning: This simp argument is unused:
+  inner_smul_right
+
+Hint: Omit it from the simp argument list.
+  simp only [regularDiagonal_exponential, map_smul, Submodule.coe_smul,
+  ̵  ̵ ̵ ̵regularExponential,
+  ̲  ̲ ̲ ̲inner_smul_left, i̵n̵n̵er̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵,̵ ̵e̵xponential_inner, map_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:106:59: warning: This simp argument is unused:
+  exponential_inner
+
+Hint: Omit it from the simp argument list.
+  simp only [regularDiagonal_exponential, map_smul, Submodule.coe_smul,
+  ̵  ̵ ̵ ̵regularExponential,
+  ̲  ̲ ̲ ̲inner_smul_left, inner_smul_right, e̵x̵p̵o̵n̵e̵n̵t̵i̵a̵l̵_̵i̵n̵n̵e̵r̵,̵ ̵map_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:106:78: warning: This simp argument is unused:
+  map_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [regularDiagonal_exponential, map_smul, Submodule.coe_smul,
+  ̵  ̵ ̵ ̵regularExponential,
+  ̲  ̲ ̲ ̲inner_smul_left, inner_smul_right, exponential_inner,̵ ̵m̵a̵p̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:138:2: error: Tactic `assumption` failed
+
+v w : RegularLabel → ℂ
+ψ χ : ↥regularFockDomain
+J : ↥regularFockDomain →ₗ[ℂ] ↥F := regularFockDomain.subtype
+V : ↥regularFockDomain →ₗ[ℂ] ↥regularFockDomain := regularDiagonal v
+W : ↥regularFockDomain →ₗ[ℂ] ↥regularFockDomain := regularDiagonal w
+⊢ finiteKernel
+      (fun h k =>
+        1 / 2 *
+          (inner ℂ (J (regularExponential h)) ((J ∘ₗ V ∘ₗ W) (regularExponential k)) +
+                inner ℂ ((J ∘ₗ W) (regularExponential h)) ((J ∘ₗ V) (regularExponential k)) +
+              inner ℂ ((J ∘ₗ V) (regularExponential h)) ((J ∘ₗ W) (regularExponential k)) +
+            inner ℂ ((J ∘ₗ W ∘ₗ V) (regularExponential h)) (J (regularExponential k))))
+      (regularCoefficients ψ) (regularCoefficients χ) =
+    finiteKernel (fun h k => regularWick v w (regularExponential h) (regularExponential k)) (regularCoefficients ψ)
+      (regularCoefficients χ)
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 726ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:165:2: error: `simp` made no progress
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    regularDomainInput ψ
+  has type
+    ↥domain
+  but is expected to have type
+    ↥(annihilation (physicalSmearCLM f)).domain
+  in the application
+    ↑(annihilation (physicalSmearCLM f)) (regularDomainInput ψ)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T203613_985553Z\RegularPointAnnihilationR1.lean:181:2: error: `simp` made no progress
+'F1Fecho.MaxwellGlobal.regularDiagonal_exponential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regular_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularLinearMap_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularLinearMap_ext' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularInner_expansion' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularDiagonal_annihilation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularDiagonal_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularWick_eq_existing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularWick_exponential' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularWick_finiteKernel' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.raise_lowerProfileWave' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.pointSmearEigenvalue_eq_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.pointSmear_annihilation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.normalizedPointSmearEigenvalue_eq_inner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.normalizedPointSmear_Wick' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.163ms
+	congr simp thm 5.42ms
+	elaboration 201ms
+	fix level params 1.36ms
+	import 49.7s
+	initialization 29.6ms
+	instantiate metavars 0.522ms
+	interpretation 6.46s
+	let-to-have transformation 0.412ms
+	linting 8.9ms
+	norm_num 3.31ms
+	overlappingInstancesLinter 26.8ms
+	parsing 9.1ms
+	process pre-definitions 34.2ms
+	ring 76.6ms
+	share common exprs 14.9ms
+	simp 220ms
+	tactic execution 1.22s
+	tacticAnalysis 26.7ms
+	type checking 505ms
+	typeclass inference 4.66s

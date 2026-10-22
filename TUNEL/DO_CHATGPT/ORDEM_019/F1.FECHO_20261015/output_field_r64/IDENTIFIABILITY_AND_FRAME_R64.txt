@@ -1,0 +1,20 @@
+R64 — duas consequências algébricas para a interpretação do receptor
+Em nome de codex-gerente-tgl. Candidato DERIVED, sujeito à revisão independente.
+Não houve novo ajuste, execução do gerador ou alteração dos INPUTs dos testes anteriores.
+
+1. Identificabilidade no canal desta entrega
+Hipóteses nomeadas: L=L0+lambda D[J], lambda=beta*gammaLambda; estado inicial, L0, J, portas monitoradas de perda, filtros, eficiência e calibração são independentes desses dois parâmetros. Não se afirma isso de todos os canais daTGL.
+Então qualquer estatística de saída calculada pela evolução e pelo instrumento desta entrega é F(lambda), possivelmente com outros parâmetros fixos. Para c>0 no domínio admissível, (beta,gammaLambda)->(c*beta,gammaLambda/c) conserva lambda e todo esse instrumento. É identidade algébrica, não tolerância ou ajuste.
+Quando as derivadas e a informação deFisher existem: d_beta F=gammaLambda*d_lambda F e d_gammaLambda F=beta*d_lambda F. A matriz de informação desse par é I_lambda vezes [[gammaLambda²,beta*gammaLambda],[beta*gammaLambda,beta²]], com determinante zero e posto no máximo1.
+Consequência: sem fixar gammaLambda por informação independente, esse canal pode identificar lambda, mas não discriminar valores não nulos de beta que possam ser compensados por gammaLambda. Não se infere daqui equivalência do caso beta=0 a lambda>0 com gammaLambda finito. O valor constitutivo betaTGL continua fixo e calculado em runtime; nenhuma estimação ou alteração dele foi realizada. Outros observáveis ou vínculos físicos que quebrem a degenerescência precisam ser demonstrados, não pressupostos.
+
+2. O quadro girante comum não calibra os INPUTs antigos por renomeação
+Considere tau=t/t0, t0>0, e o quadro com frequência portadora comum omega_d já construído emR57. As frequências adimensionais seriam Delta_c=t0*(omega_c-omega_d) e Delta_OH=t0*(omegaOH-omega_d). Subtrair elimina o carrier:
+  Delta_OH-Delta_c=t0*(omegaOH-omega_c).
+No projeto óptico780nm/OH1.667359GHz consultado emR63, omegaOH<omega_c. Logo a diferença é negativa, qualquer que seja o carrier comum. Os INPUTs do teste finito Delta_c=1,Delta_OH=1.2 têm diferença positiva. Portanto um carrier comum e uma escala positiva de tempo não tornam essa instância uma calibração simultânea das duas frequências absolutas documentadas.
+Isso não invalida a álgebra dos testes nem impede outra instância física. Impede apresentar a instância sintética antiga como calibrada só porque foi chamada de quadro girante. Quadros com carriers distintos mudam os fatores de fase dos acoplamentos/drive e exigem transformação explícita; nenhuma equivalência desse tipo é afirmada aqui.
+
+3. Referência de fase do receptor
+Com R(t)=exp(+i omega_d t N), rho_rot=R rho_lab R† e [N,a]=-a, segue <a>_lab=exp(-i omega_d t)<a>_rot. Para X_theta=(exp(-i theta)a+exp(i theta)a†)/sqrt2, a mesma leitura usa theta_rot=theta_lab+omega_d*t. Um teste que muda Hamiltoniano/estado e mantém uma faseLO incompatível mudou a leitura; não é apenas mudança de coordenadas.
+
+Fontes internas: R63/sources/PHYSICAL_RECEIVER_MAP_R1.json (fontes/valores/limites); R57/derive_polarization_r57.py e derivação correspondente (quadro); F1.REDE/finite_device (parametrização lambda e perdas). Pinos de origem ficam nos manifestos da entregaR64. As consequências acima são demonstrações escritas por substituição/diferença; não se reivindica nova pedraLean ou identificação física universal.

@@ -1,0 +1,46 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233147_669529Z\RegularSpectralTranslationR1.lean:14:55: error: unsolved goals
+c t s : ℝ
+hc : c ≠ 0
+⊢ -(↑c * ↑t * ↑s / ↑c) = -(↑t * ↑s)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233147_669529Z\RegularSpectralTranslationR1.lean:28:18: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  characterPhase (c * t) (s / c)
+in the target expression
+  (√c)⁻¹ • Complex.exp (-Complex.I * ↑(c * t) * ↑(s / c)) • ↑↑f (s / c) =
+    Complex.exp (-Complex.I * ↑t * ↑s) • (√c)⁻¹ • ↑↑f (s / c)
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+c : ℝ
+hc : 0 < c
+t : ℝ
+f : ↥(RegularHilbert H)
+s : ℝ
+h1 :
+  ↑↑(RegularL2Rescale.rescale c hc ((characterMultiplier (c * t)) f)) s =
+    (√c)⁻¹ • ↑↑((characterMultiplier (c * t)) f) (s / c)
+h2 : ↑↑((characterMultiplier (c * t)) f) (s / c) = Complex.exp (-Complex.I * ↑(c * t) * ↑(s / c)) • ↑↑f (s / c)
+h3 :
+  ↑↑((characterMultiplier t) (RegularL2Rescale.rescale c hc f)) s =
+    Complex.exp (-Complex.I * ↑t * ↑s) • ↑↑(RegularL2Rescale.rescale c hc f) s
+h4 : ↑↑(RegularL2Rescale.rescale c hc f) s = (√c)⁻¹ • ↑↑f (s / c)
+⊢ (√c)⁻¹ • Complex.exp (-Complex.I * ↑(c * t) * ↑(s / c)) • ↑↑f (s / c) =
+    Complex.exp (-Complex.I * ↑t * ↑s) • (√c)⁻¹ • ↑↑f (s / c)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233147_669529Z\RegularSpectralTranslationR1.lean:46:22: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+'F1Fecho.RegularSpectralTranslation.phase_rescale' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.RegularSpectralTranslation.rescale_character' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.RegularSpectralTranslation.normalizedFourier_shift' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.RegularSpectralTranslation.code_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RegularSpectralTranslation.spectralCode_shift' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

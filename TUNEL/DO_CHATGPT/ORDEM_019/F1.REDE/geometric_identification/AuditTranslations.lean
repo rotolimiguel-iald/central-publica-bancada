@@ -1,0 +1,9 @@
+import WedgeReflectionTranslations
+#print axioms F1Rede.WedgeReflectionTranslations.wedgeReflection
+#print axioms F1Rede.WedgeReflectionTranslations.wedgeReflection_involutive
+#print axioms F1Rede.WedgeReflectionTranslations.transverseMass_neg
+#print axioms F1Rede.WedgeReflectionTranslations.pairing_reflection
+#print axioms F1Rede.WedgeReflectionTranslations.phase_reflection
+#print axioms F1Rede.WedgeReflectionTranslations.toRapidity_U1_ae
+#print axioms F1Rede.WedgeReflectionTranslations.Jcandidate_translation_intertwines
+#print axioms F1Rede.WedgeReflectionTranslations.Jcandidate_conjugates_translations

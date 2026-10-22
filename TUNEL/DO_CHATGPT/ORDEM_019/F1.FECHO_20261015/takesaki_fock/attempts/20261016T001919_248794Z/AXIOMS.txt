@@ -1,0 +1,59 @@
+import took 84.4s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T001919_248794Z\RegularAverageAdjointR2.lean:47:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Regular.regularUnitary ?P ?s * Regular.regularUnitary ?P ?t
+in the target expression
+  (RegularCovariantCore.regularUnitary B (-h) * RegularCovariantCore.regularUnitary B t) x =
+    (RegularCovariantCore.regularUnitary B (t - h)) x
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+B : UnitaryFlow H
+h : ℝ
+x : ↥(RegularHilbert H)
+t : ℝ
+⊢ (RegularCovariantCore.regularUnitary B (-h) * RegularCovariantCore.regularUnitary B t) x =
+    (RegularCovariantCore.regularUnitary B (t - h)) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T001919_248794Z\RegularAverageAdjointR2.lean:50:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (x : ℝ) in ?m.177..?m.178, ?f (-x)
+in the target expression
+  ∫ (t : ℝ) in 0..h, (RegularCovariantCore.regularUnitary B (-t)) x =
+    ∫ (t : ℝ) in 0..h, (RegularCovariantCore.regularUnitary B (t - h)) x
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+B : UnitaryFlow H
+h : ℝ
+x : ↥(RegularHilbert H)
+he :
+  (fun t => (RegularCovariantCore.regularUnitary B (-h)) ((RegularCovariantCore.regularUnitary B t) x)) = fun t =>
+    (RegularCovariantCore.regularUnitary B (t - h)) x
+⊢ ∫ (t : ℝ) in 0..h, (RegularCovariantCore.regularUnitary B (-t)) x =
+    ∫ (t : ℝ) in 0..h, (RegularCovariantCore.regularUnitary B (t - h)) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T001919_248794Z\RegularAverageAdjointR2.lean:55:9: error: ambiguous term, use fully qualified name, possible interpretations [@RegularCoreAverage.regularAverage,
+ Regular.regularAverage]
+'F1Fecho.RegularAverageAdjoint.integral_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RegularAverageAdjoint.reverse_integral' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.RegularAverageAdjoint.regularAverage_star' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0308ms
+	blocked (unaccounted) 172ms
+	elaboration 47.2ms
+	fix level params 0.201ms
+	import 84.4s
+	initialization 32.2ms
+	instantiate metavars 0.488ms
+	interpretation 6.77s
+	let-to-have transformation 0.108ms
+	linting 3.73ms
+	overlappingInstancesLinter 43.9ms
+	parsing 2.45ms
+	process pre-definitions 4.07ms
+	share common exprs 1.35ms
+	tactic execution 118ms
+	tacticAnalysis 115ms
+	type checking 33.9ms
+	typeclass inference 384ms

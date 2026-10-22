@@ -1,0 +1,107 @@
+{
+  "created_utc": "2026-10-18T10:19:29.102324+00:00",
+  "author": "codex-device-clock-r57",
+  "status": "PREREGISTERED_PENDING_PREEXEC_REVIEW",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "mission_revision_start": 478,
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\finite_device_functions_r62.py",
+      "sha256": "be3d3b21f7a5e8e0c8db812c44d6dd599b84613f5b5fcbd53cc054b01a54d069",
+      "bytes": 2361,
+      "role": "pure_helper_R62"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\PREPARED_READOUT_PLAN_R62.json",
+      "sha256": "862458a7b7f8b8797a2a2f71aa5ed674abbef0488af6acb41bd0e3aa908f3bea",
+      "bytes": 15302,
+      "role": "R62_plan"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\RESULT_OUTPUT_R64.json",
+      "sha256": "1cfd76ee90f6c442aaf2a5ab961aecc19513b3d051badf69df527cb2f0713306",
+      "bytes": 21667,
+      "role": "reuse_result_not_rerun"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\calibration\\CONTRATO_CALIBRACAO_R65.md",
+      "sha256": "245f97e48ad2da218ad4fe744e4a573c71e56b1aca72c12966ff2b50b58ff85f",
+      "bytes": 13544,
+      "role": "normalization_units"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\BARE_FREQUENCY_COVARIANCE_R65.txt",
+      "sha256": "31e04530030a8a3c8462e708f58bc2cb5b2d4269101f48b54d46174597efc250",
+      "bytes": 2401,
+      "role": "secular_obstruction_scope"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\HANDOFF_R66.json",
+      "sha256": "f5134988a3ec62ab31daf00cf2163779b35ad5440ef28902221f7030a8cd2012",
+      "bytes": 3302,
+      "role": "scope_and_leases"
+    }
+  ],
+  "model": {
+    "reuse": "R62 parameters unchanged; cutoff0/1 in each optical factor, OH two levels",
+    "gamma_Lambda": 1.0,
+    "T": 1.0,
+    "beta": "ALPHA_FINE_CODATA_2018*sqrt(e), AST read from pinned ancestor",
+    "all_terms": "five channels, JC coupling and pump positive; pump supplied via coherent OH ancilla in primary branch",
+    "h_base": "omega_c*(ni+no)+omegaOH*ne+gJC*(ai_dagger*sm+sp*ai), includes JC, no pump",
+    "ancilla": "C6 vacuum+five channel labels; fresh independent each collision",
+    "coherent_bin": "(|0>+sqrt(delta)*alpha*|3>)/sqrt(1+delta*|alpha|²)",
+    "alpha": "i*Omega/sqrt(gammaOH), not fitted",
+    "comparison_branch": "vacuum ancilla, explicit full Hamiltonian including pump",
+    "initial_state_check": "R64 pair q=0.5 tensor OH I/2; all-channel comparison is superoperator, not restricted to this state"
+  },
+  "steps_N": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "tolerances": {
+    "matrix": 1e-11,
+    "cptp": 1e-11,
+    "state": 1e-09
+  },
+  "convergence": {
+    "local_ratio": [
+      3.2,
+      4.8
+    ],
+    "global_ratio": [
+      1.6,
+      2.4
+    ],
+    "ratio_use": "last two successive refinements only; local O(delta²), global/derivative O(delta)",
+    "global_relative_max": 0.01,
+    "derivative_relative_max": 0.05,
+    "norm": "Frobenius superoperator; not diamond norm measurement"
+  },
+  "negative_threshold": 0.0001,
+  "checks": [
+    "antihermitian exponent, unitary, Kraus completeness, Choi positivity and trace",
+    "joint epsilon/bath parity",
+    "coherent drive sign/factor and full reused generator",
+    "local channel vs exp(delta*L), derivative vs L, N-step channel vs exp(T*L)",
+    "same R64 state final trace/hermiticity/positivity",
+    "separate bath for A/B loses nonzero cross witness",
+    "pump absent and phase-opposite have distinct generators and final channels"
+  ],
+  "negative_models": "Separate analytic comparison generators only; no terms removed from primary full construction",
+  "limits": [
+    "No physical calibration or beta inference.",
+    "No Davies thermal identification of the selected reservoir.",
+    "Finite time-bin Fock embedding is explicit; strong continuous unitary/HP limit and infinite system are not asserted.",
+    "No R4/R5 global acceptance or original/memory/production changes."
+  ],
+  "execution_policy": {
+    "campaigns": 1,
+    "must_have_independent_PASS": true,
+    "freeze_before_start": true,
+    "no_automatic_retry": true,
+    "no_parameter_changes_after_result": true
+  }
+}

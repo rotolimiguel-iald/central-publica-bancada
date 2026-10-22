@@ -1,0 +1,37 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T194458_951226Z\WedgeNonisotropicR1.lean:22:21: error(lean.unknownIdentifier): Unknown identifier `TransverseFiber`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T194458_951226Z\WedgeNonisotropicR1.lean:40:44: error: Type mismatch: After simplification, term
+  tj
+ has type
+  ↑TW ⟨Jcandidate f, dj⟩ = Jcandidate (Jcandidate f)
+but is expected to have type
+  ↑TW ⟨Jcandidate f, dj⟩ = f
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T194458_951226Z\WedgeNonisotropicR1.lean:44:4: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Eq (↥H1) (↑TW (⟨f, df⟩ + ⟨Jcandidate f, dj⟩)) (f + Jcandidate f)
+but is expected to have type
+  @Eq (↥H1) (↑TW ⟨f + Jcandidate f, ⋯⟩) (f + Jcandidate f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T194458_951226Z\WedgeNonisotropicR1.lean:45:63: error: Application type mismatch: The argument
+  hsum
+has type
+  f + Jcandidate f = 0
+but is expected to have type
+  Jcandidate f + f = 0
+in the application
+  eq_neg_of_add_eq_zero_left hsum
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T194458_951226Z\WedgeNonisotropicR1.lean:49:35: error: Type mismatch: After simplification, term
+  hp
+ has type
+  (↑‖f‖ ^ 2).re ≤ 0
+but is expected to have type
+  f = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T194458_951226Z\WedgeNonisotropicR1.lean:56:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'F1Fecho.WedgeNonisotropic.TW_fixed_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WedgeNonisotropic.KWR_inter_JKWR_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WedgeNonisotropic.KWR_not_isotropic' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

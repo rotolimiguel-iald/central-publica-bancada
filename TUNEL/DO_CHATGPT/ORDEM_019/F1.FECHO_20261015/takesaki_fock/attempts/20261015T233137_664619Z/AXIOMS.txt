@@ -1,0 +1,115 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:21:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(𝓕 (MemLp.toLp f hf2)) (s / (2 * Real.pi))
+in the target expression
+  (√(2 * Real.pi))⁻¹ • ↑↑((Lp.fourierTransformₗᵢ ℝ H) (MemLp.toLp f hf2)) (s / (2 * Real.pi)) =
+    (√(2 * Real.pi))⁻¹ • 𝓕 f (s / (2 * Real.pi))
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+f : ℝ → H
+hf1 : Integrable f volume
+hf2 : MemLp f 2 volume
+s : ℝ
+hs :
+  ↑↑(normalizedFourier (MemLp.toLp f hf2)) s =
+    (√(2 * Real.pi))⁻¹ • ↑↑((Lp.fourierTransformₗᵢ ℝ H) (MemLp.toLp f hf2)) (s / (2 * Real.pi))
+ht : 𝓕 f (s / (2 * Real.pi)) = ↑↑(𝓕 (MemLp.toLp f hf2)) (s / (2 * Real.pi))
+⊢ (√(2 * Real.pi))⁻¹ • ↑↑((Lp.fourierTransformₗᵢ ℝ H) (MemLp.toLp f hf2)) (s / (2 * Real.pi)) =
+    (√(2 * Real.pi))⁻¹ • 𝓕 f (s / (2 * Real.pi))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:31:0: warning: automatically included section variable(s) unused in theorem `F1Fecho.RegularSpectralAverage.coefficient_ae`:
+  [InnerProductSpace ℂ H]
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℂ H] [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:39:8: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:39:60: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:55:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (Set.Ioc 0 h).indicator ?f a
+in the target expression
+  (shift a) (testVector Ω) = (RegularCovariantCore.regularUnitary B a) (testVector Ω)
+
+case pos
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+B : UnitaryFlow H
+Ω : H
+hΩ : ∀ (t : ℝ), (B.U t) Ω = Ω
+h a : ℝ
+h1 : ↑↑(RegularSpectralCode.code (coefficient h Ω)) a = (shift a) (testVector (↑↑(coefficient h Ω) a))
+h2 : ↑↑(coefficient h Ω) a = (Set.Ioc 0 h).indicator (fun x => Ω) a
+h3 :
+  ↑↑(MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯) a =
+    RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω) a
+ha : a ∈ Set.Ioc 0 h
+⊢ (shift a) (testVector Ω) = (RegularCovariantCore.regularUnitary B a) (testVector Ω)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:56:2: error: unsolved goals
+case neg
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+B : UnitaryFlow H
+Ω : H
+hΩ : ∀ (t : ℝ), (B.U t) Ω = Ω
+h a : ℝ
+h1 : ↑↑(RegularSpectralCode.code (coefficient h Ω)) a = (shift a) (testVector (↑↑(coefficient h Ω) a))
+h2 : ↑↑(coefficient h Ω) a = (Set.Ioc 0 h).indicator (fun x => Ω) a
+h3 :
+  ↑↑(MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯) a =
+    RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω) a
+ha : a ∉ Set.Ioc 0 h
+⊢ (shift a) (indicatorConstLp 2 testVector._proof_1 testVector._proof_2 0) = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:56:10: warning: This simp argument is unused:
+  Set.indicator_of_notMem ha
+
+Hint: Omit it from the simp argument list.
+  simp [̵S̵e̵t̵.̵i̵n̵d̵i̵c̵a̵t̵o̵r̵_̵o̵f̵_̵n̵o̵t̵M̵e̵m̵ ̵h̵a̵,̵R̵e̵g̵u̵l̵a̵r̵C̵o̵r̵e̵F̵i̵n̵i̵t̵e̵W̵e̵i̵g̵h̵t̵.̵r̵e̵g̵u̵l̵a̵r̵O̵r̵b̵i̵t̵C̵u̵t̵,̵h̵a̵,̵t̵e̵s̵t̵V̵e̵c̵t̵o̵r̵]̵[̲R̲e̲g̲u̲l̲a̲r̲C̲o̲r̲e̲F̲i̲n̲i̲t̲e̲W̲e̲i̲g̲h̲t̲.̲r̲e̲g̲u̲l̲a̲r̲O̲r̲b̲i̲t̲C̲u̲t̲,̲ ̲h̲a̲,̲ ̲t̲e̲s̲t̲V̲e̲c̲t̲o̲r̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261015T233137_664619Z\RegularSpectralAverageR2.lean:76:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯)) s
+in the target expression
+  (h⁻¹ • ↑↑(normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯))) s =
+    √dualHaarFactor • ((dualAmbient s) (RegularCoreAverage.regularAverage B h)) (testVector Ω)
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+B : UnitaryFlow H
+Ω : H
+hΩ : ∀ (t : ℝ), (B.U t) Ω = Ω
+h : ℝ
+hh : 0 < h
+hs : √dualHaarFactor = (√(2 * Real.pi))⁻¹
+hmap : spectralCode (h⁻¹ • coefficient h Ω) = h⁻¹ • normalizedFourier (RegularSpectralCode.code (coefficient h Ω))
+s : ℝ
+h1 :
+  ↑↑(h⁻¹ • normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯)) s =
+    (h⁻¹ • ↑↑(normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯))) s
+h2 :
+  ↑↑(normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯)) s =
+    (√(2 * Real.pi))⁻¹ • 𝓕 (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) (s / (2 * Real.pi))
+⊢ (h⁻¹ • ↑↑(normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector Ω)) ⋯))) s =
+    √dualHaarFactor • ((dualAmbient s) (RegularCoreAverage.regularAverage B h)) (testVector Ω)
+'F1Fecho.RegularSpectralAverage.normalizedFourier_toLp_ae' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.RegularSpectralAverage.coefficient_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RegularSpectralAverage.regularUnitary_testVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RegularSpectralAverage.code_coefficient' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.RegularSpectralAverage.spectralCode_average_ae' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

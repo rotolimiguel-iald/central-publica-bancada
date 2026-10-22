@@ -1,0 +1,140 @@
+<!-- Relatório do auditor 2 da gerência (22/09/2026), cópia integral para a ORDEM 013-bis com este cabeçalho de 2 linhas (o sha256 difere do original só por isso). Frente: C6. Os caminhos «...\scratchpad\ordem013\auditoria\...» citados são efêmeros: as cópias dos scripts e saídas estão em auditoria_da_gerencia\scripts\ (ver README_INSUMOS.md). -->
+
+SUMMARY: Auditoria da frente C6 (registro com hash e rodada no strain público do GW250114). Tudo foi só lido; meus scripts e cópias ficaram no scratchpad (…\scratchpad\ordem013\auditoria\c6\: recompute_c6.py, guard_test.py). A ORDEM tem sha16 d4440c6a28eaad4b, conferido.
+
+O QUE ESTÁ CERTO [REAL, verificado]:
+- **Registro antes do strain.** O REGISTRO_C6.json (sha256 ded00f09b5010d62…) foi entregue na ENTREGA_013_C6a 55 s ANTES de qualquer byte do strain do evento: criação NTFS 21:56:31 contra 21:57:27 (-0300); carimbos internos; STATUS em false às 00:19Z e em true às 01:07Z. Não achei outra cópia do strain do evento. A primeira leitura das amostras foi às 00:58:13Z de 22/09.
+- **Hash e guarda.** Todos os RESULT embutem o hash, e a guarda recusa registro ou código registrado adulterados (meu teste em cópias).
+- **Números reproduzidos.** Recomputei com código independente, e o ln B no início primário bate até 1e-10: R-B −0,0026; R-RAIZ-0 −0,043; R-LIN −0,091; R-MOD −0,251.
+- **Custódia.** Os 12 hashes de strain e insumos batem.
+- **Rótulos e rota.** O veredito INCONCLUSIVE_SYSTEMATICS está na lista permitida, o NÃO-CEGO está dito e há uma única rota no strain.
+
+O QUE ESTÁ ERRADO:
+- **(BLOQUEANTE) Sequência violada.** A C6 rodou antes do portão do poder da C5 e sem nenhum recibo de marco: não existe ENTREGA_013_M1 nem RECIBO_013. Viola a §3 da ORDEM e o item 4 do PROMPT («Depois do M1, PARE… A C6 só vem depois do portão»). A calibração da C5 reprovou (2 de 240 células passam), então a rodada não cabe em nenhum dos dois casos do portão. O Fisher com PSD medida saiu 5 min DEPOIS da rodada. Atenuante: o veredito foi travado em INCONCLUSIVE_SYSTEMATICS antes dos dados, o que é conservador. O STATUS diz «user requested continuation» [DECLARADO].
+- **(BLOQUEANTE) Rota sem injeção e sem poder por construção.** A rota não foi justificada por injeção: a injeção usou o remanescente fixo, e a C6 marginaliza M e χ. O próprio Fisher da bancada, feito antes do registro, já dizia NON_IDENTIFIABLE_SINGLE_220. Com massa e spin livres, o amortecimento extra é absorvido por um buraco negro mais pesado e de spin mais alto (R-LIN: 64,1→67,4 M☉, χ 0,596→0,665). Os ln B ficam na escala do fator de Occam por construção.
+- **(CORRIGIR) Outros defeitos:**
+  - runner, fetch e fetch_public estão fora do hash; o run_c6_grid.py foi criado depois do primeiro resultado no strain;
+  - a grade não se realiza como 5 inícios distintos: em L1, «10» e «10,5» são a mesma janela, e a referência fica 0,325 t_M antes da do pyRing;
+  - não há validação contra o posterior do pyRing (64,1 contra 73,5 M☉ em 10 t_M), e o oráculo de implementação veio 2 h depois;
+  - falta o tamanho da correção β contra σ por leitura;
+  - deformar também o 440 é uma escolha que toca a partição;
+  - faltam a ficha de aproveitamento e o contrato PAGO/NÃO PAGO.
+
+O QUE O RESULTADO SIGNIFICA: em todos os inícios, todo |ln B| ≤ 0,63 (B entre 0,78 e 1,87), com o sinal trocando conforme o início. É ruído. No GW250114, analisado só pelo ringdown desta forma, nenhuma leitura da TGL se separa do limite clássico (RG), e isso é correspondência. As correções de 2–7% no amortecimento ficam abaixo da σ de um evento: o Fisher dá z = 0,4 a 1,55, e seriam precisos ~11 a ~150 eventos para 5σ. É uma medida de sensibilidade, não um teste. Nada é excluído e nada é confirmado.
+
+PARA FECHAR A FRENTE, precisa de nova ordem ou emenda:
+1. Reclassificar a rodada atual como C6-pre, diagnóstico pré-portão.
+2. Calibrar por injeção a rota realmente executada, com M e χ livres, e declarar o poder.
+3. Usar uma rota que quebre a degenerescência: IMR (rota b), ou amplitudes coerentes com prior independente de (M, χ).
+4. Validar contra o posterior do pyRing.
+5. Registrar a C6b com toda a árvore de código hasheada, o início realizado por detector e a regra da C4, declarada NÃO-CEGA também em relação à C6-pre.
+
+## CRITERIA
+- [NAO_PAGO] §3 Marcos + PROMPT item 4: a C6 só roda depois do portão do poder da C5 (M5 vem depois de M4), e a bancada PARA ao fim de cada marco à espera do recibo da gerência :: [REAL] Não existe nenhuma ENTREGA_013_M1..M6 em TUNEL\DO_CHATGPT e nenhum RECIBO da ORDEM 013 em PARA_CHATGPT (listagem conferida). A ORDEM foi publicada às 19:40:16 (-0300) de 21/09 e o strain do evento foi baixado às 21:57:27–21:57:39 (-0300), 3h17 depois. O portão da C5 não passou: em C5_EMPIRICAL_IMR_STARTS.json, só 2 das 240 células identificáveis atendem ao mesmo tempo viés ≤ 0,2 e cobertura em [0,80; 0,97]; a própria bancada diz «NÃO PAGO — calibração científica C5». REGISTRO_C6.json não traz número de poder; troca o portão do poder por physical_gate = «C5 two-family injection calibration failed». O Fisher com a PSD medida (C5_FISHER_EMPIRICAL.json) foi criado às 22:05:05, depois de C6_RESULTS.json (22:00:15). [DECLARADO] STATUS_ORDEM_013.json diz «user requested continuation» e mostra um objetivo integral (full_objective) no modo goal do Codex; não consigo verificar o que o operador disse ao Codex, e nenhum texto autoriza pular o portão.
+- [PAGO_VERIFICADO] C6 — o registro é entregue como DO_CHATGPT\ENTREGA_013_C6a_REGISTRO_<slug>.md, com o sha256 de REGISTRO_C6.json, ANTES de qualquer leitura do strain na janela do evento :: [REAL] O sha256 de REGISTRO_C6.json, recalculado por script, é ded00f09b5010d622b67b4ea4e559a216818f578440a0f60772130174ececf14 e é o mesmo impresso na C6a. Criação NTFS: C6a em 21:56:31.899; REGISTRO_C6.json em 21:56:31.892; pasta on_source em 21:57:25.906; H1 hdf5 em 21:57:27.027 e L1 em 21:57:33.472 (-0300). Intervalo de 55 s. Dentro dos JSON: created_utc 00:56:31.808Z; downloaded_utc 00:57:32.538Z e 00:57:39.575Z. Os backups do STATUS dizem on_source_strain_read=false às 00:19:41Z e true às 01:07:35Z. A primeira leitura de amostras (C6_STRAIN_10M_GRID_0.json) é das 21:58:13 (-0300) = 00:58:13Z. Não achei outra cópia do strain do evento em Chatgpt\, no cache da casa nem no WSL, e o release 17018009 extraído só tem posteriores e configs (os result.nc do pacote ringdown não foram extraídos). RESSALVA: todos os carimbos estão sob controle da bancada, não há testemunha externa, e a gerência não teve como ver o registro antes da leitura.
+- [PAGO_VERIFICADO] C6 — o RESULT embute o sha256 do registro :: [REAL] C6_RESULTS.json (sha256 781a3741…e8, igual ao da nota C4c) tem registration_sha256 = ded00f09…; os 10 arquivos C6_STRAIN_*_GRID_*.json embutem o mesmo hash. Os 10 sha256 listados em C6_RESULTS.files batem com os arquivos em disco. O code_sha256 do run_c6_grid.py (d3aa76af…) também bate.
+- [PAGO_VERIFICADO] C6 — o script recusa rodar se o registro em disco (ou o código registrado) não bater :: [REAL] Teste de adulteração meu, em cópias no scratchpad (guard_test.py sha16 8a1b979fa98bb7b2; /opt/lal_env só lido). Cópia idêntica: ACEITA. primary_start_tM alterado no registro: RECUSADO («does not match delivered receipt»). tgl_ringdown_likelihood.py alterado: RECUSADO. Mas há lacuna (ver defeitos): com digests() de fetch_public.py forjado a guarda ACEITA, e um recibo editado que preserve o hash também é ACEITO. O C6_GUARD_TEST.json da bancada é das 22:27:36, posterior à rodada; a lógica da guarda (c6_engine.py, 21:56:22) é anterior e está hasheada.
+- [PAGO_VERIFICADO] C6 — o registro fixa regras, leituras, priors, janelas, evento, parâmetros executados e versões das bibliotecas :: [REAL] REGISTRO_C6.json fixa: evento GW250114_082203; picos H1/L1; t_M = 3,369477856e-4 s (M = 68,40897469707073 M☉, igual ao mf-time-prior do config pyRing); inícios [6, 8, 10, 10,5, 12] com primário 10; 410 amostras a 2048 Hz; M_det uniforme em [40, 100] e χ em [0, 0,95]; sd das amplitudes {1, 10, 30}×1e-21 (primário 10); leituras calculadas R-GLOBAL/R-B/R-RAIZ-0/R-LIN/R-MOD e sub-resolução R-A/R-RAIZ-EP4/R-RAIZ-REST; grades de quadratura; máscaras DQ. Versões conferidas em /opt/lal_env: numpy 2.5.3, scipy 1.18.1, h5py 3.16.0, lal 7.7.1, com dist-info de 10/09, ou seja, /opt não foi tocado. As exceções (runner e módulos importados sem hash) estão nos defeitos.
+- [NAO_PAGO] C6 — a matriz de vereditos é registrada (com a regra relativa da C4 e o portão do poder) :: [REAL] O registro fixa um único desfecho: «every actual-data verdict is INCONCLUSIVE_SYSTEMATICS regardless of Bayes ratio». Não cita REGISTRO_C4.json (sha256 2bebc171…ac59, com B ≤ 1/100 e região de 95%) nem o poder |δ_L|/σ_comb. É honesto diante da calibração reprovada, mas não é a matriz pedida em §3 C6.
+- [PAGO_VERIFICADO] C6 — NÃO-CEGO dito (o δτ̂ publicado já era conhecido) :: [REAL] O campo nonblind_reason de REGISTRO_C6.json diz: «Published GW250114 posteriors and summaries already analyzed»; o texto da C6a diz o mesmo; status REGISTERED_NONBLIND_BEFORE_TARGET_STRAIN.
+- [PAGO_VERIFICADO] C6 — UMA rota de verossimilhança declarada :: [REAL] A rota declarada: «Gaussian finite-interval Toeplitz quotient, 220+440 exact Kerr fundamentals, independent complex amplitudes per detector». Um grep em todos os .py (fora vendor) mostra que só c6_engine.py e a cópia de reprodução C7_INDEPENDENT leem cache/gwosc/on_source. Os processos ainda rodando (run_real_phase_importance.py, run_continuous_source_curves.py) não tocam no strain do evento.
+- [NAO_PAGO] C6 — a rota é JUSTIFICADA POR INJEÇÃO :: [REAL] A injeção anterior à C6 (C5_EMPIRICAL_IMR_STARTS.json, 21:51) foi feita com o remanescente FIXO (limitations: «No marginalization of remnant mass/spin here»). A C6 marginaliza M e χ com priors largos, ou seja, a rota executada nunca foi injetada. A versão que foi injetada reprovou 238 das 240 células identificáveis (por exemplo, R-B a SNR 40 e 10 t_M: viés 0,25 e 0,21 no SEOB, 0,35 e 0,34 no XPHM; cobertura 0,72–0,74). A própria bancada declara o critério reprovado.
+- [NAO_PAGO] C6 rota (a) — implementação própria validada contra as amostras pyRing do release 17018009 :: [REAL] No nível do posterior não há validação. Em 10 t_M, o modelo RG 220+440 da C6 dá M_det = 64,1 [55,9; 71,9] e χ = 0,596 [0,356; 0,739]; o pyRing Kerr_220_10M dá 73,5 [66,7; 79,9] e 0,752 [0,626; 0,835] (C6_PYRING_START_COMPARISON.json). A bancada diz «Não foi declarada reprodução». O oráculo de implementação contra o likelihood.pyx do pyRing 2.7.0 (erro 7,1e-11 em lnZ) passou, mas foi criado às 00:19 de 22/09, mais de 2 h DEPOIS da rodada no strain; valida a aritmética, não a equivalência inferencial.
+- [PAGO_VERIFICADO] C6 — grade de inícios {6; 8; 10; 10,5; 12} t_Mf, primário 10 :: [REAL] Nominalmente registrada e executada: 5 inícios × 3 priors × 5 leituras = 75 linhas, com convergência entre níveis de no máximo 4,968e-6 em ln B (limiar 0,05). A realização, porém, é defeituosa (ver defeitos). Pela regra «primeira amostra de 4096 Hz a partir do pedido», o início efetivo em H1 cai em 6,07 / 8,24 / 10,42 / 11,14 / 12,59 t_M e em L1 em 6,23 / 8,40 / 10,58 / 10,58 / 12,03 t_M. A janela L1 de «10,5» é IDÊNTICA à de «10» (first_index 1299333).
+- [PAGO_VERIFICADO] C6 — comparação com as amostras pyRing na mesma grade :: [REAL] Oito produtos comparados (Kerr_220 e Kerr_221 em 6, 8, 10 e 12 M). Confirmei no tar_17018009_list.txt que não há produto de 10,5 M (0 ocorrências). NÃO é a mesma grade: a referência da C6 é o trigtime TEOB (1420878141,2189023), 0,1094 ms = 0,325 t_M antes do trigtime dos Kerr (1420878141,2190118), além da quantização acima. Os modelos também diferem (sem 221, amplitudes independentes por detector). A bancada declara tudo isso.
+- [PAGO_VERIFICADO] C6 — vereditos só da lista permitida; CONFIRMED/PROVED ausentes :: [REAL] Um grep em REGISTRO_C6, C6_*.json, C6a e C4c só encontra INCONCLUSIVE_SYSTEMATICS; nenhuma ocorrência de CONFIRMED ou PROVED.
+- [PAGO_VERIFICADO] C6 — os números do RESULT estão certos (recomputação independente) :: [REAL] Recomputação com código meu (recompute_c6.py sha16 aa390525a3e59078): seleção da janela, Γ por leitura, base 220+440, marginalização gaussiana das amplitudes e trapézio em (M, χ). Da bancada usei só DADOS: registro, whitener .npz, QNM_GRID e HDF5 aberto em modo 'r'. β = α_CODATA2018·√e em runtime = 0,012031300400803142. Em 10 t_M, nível 0: lnZ_RG = 182,6025935016 (bancada: 182,6025935016); ln B R-B −0,0025948315, R-RAIZ-0 −0,0430676147, R-LIN −0,0908619068, R-MOD −0,2512935195, todos idênticos ao C6_STRAIN_10M_GRID_0.json até 1e-10; normas dᵀC⁻¹d 602,3586 (H1) e 576,4402 (L1), idênticas. A tabela da nota C4c bate com o nível 1 de C6_RESULTS.json.
+- [PAGO_VERIFICADO] C6 — custódia (sha256 do strain e dos insumos registrados) :: [REAL] Recalculei 12 hashes e todos batem: H1 on-source db0b394f…, L1 on-source d95a6ebf…, off-source H1 41a258f8… e L1 dcb207da…, os dois .npz, QNM_GRID, tgl_ringdown_prediction.py, C5_EMPIRICAL_NOISE, C5_EMPIRICAL_IMR_STARTS, C5_LIKELIHOOD_VALIDATION e metadata_1.
+- [NAO_PAGO] Régua da RG — dizer por leitura o tamanho da correção β contra σ :: [REAL] Nem C6_RESULTS.json nem as notas C6a, C4c e C1_C6 trazem δ_L, σ e z por leitura para a rodada C6; só ln B.
+- [NAO_PAGO] Contrato do túnel (§2.3 e §5): ficha REAPROVEITAMENTO_C6.md, critérios PAGO/NÃO PAGO, comando de reprodução e estatuto na 1ª linha da C6a :: [REAL] Não existe nenhum REAPROVEITAMENTO_Cn.md em ORDEM_013_RINGDOWN. A C6a tem 19 linhas, sem lista PAGO/NÃO PAGO e sem comando de reprodução, e o estatuto está na linha 3. A reprodução só aparece depois, em C7_INDEPENDENT (C6_REPRODUCTION_RESULT: max_lnB_difference 0,0).
+- [NAO_PAGO] C6 opcional — eventos O4 com strain aberto :: [REAL] Só o GW250114 foi rodado; o item é opcional.
+
+## DEFECTS
+### [BLOQUEANTE] Sequência M1→M5; C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\REGISTRO_C6.json (physical_gate) e C6_RESULTS.json
+P: A C6 rodou no strain antes do portão do poder da C5 e sem nenhum recibo de marco. O portão prevê dois casos: poder ≥ 5, teste; poder < 5, medida CALIBRADA. A C5 reprovou a calibração, então a rodada não cabe em nenhum dos dois. Viola a ORDEM §3 («M5: C6, só depois do portão»; «a bancada PARA ao fim de cada marco») e o PROMPT item 4.
+E: Sem ENTREGA_013_M1..M6 e sem RECIBO_013. O strain foi lido às 00:57Z de 22/09, 3h17 depois da ORDEM. 2/240 células passam viés+cobertura. O registro não tem número de poder. C5_FISHER_EMPIRICAL.json (22:05:05) é posterior a C6_RESULTS.json (22:00:15). STATUS: «user requested continuation» [DECLARADO].
+FIX: Não incorporar isto como M5. Reclassificar como «C6-pre: diagnóstico pré-portão, não calibrado», preservando os arquivos e o hash. A gerência emite os recibos de M1–M4 (ou a errata). Perguntar ao operador se ele autorizou seguir além do M1 no goal do Codex. Qualquer rodada C6b no GW250114 precisa de registro novo DEPOIS do portão, declarada NÃO-CEGA também em relação aos ln B da C6-pre.
+
+### [BLOQUEANTE] C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\c6_engine.py l.67-119 (M e χ marginalizados em [40,100]×[0,0,95]) contra C5_EMPIRICAL_IMR_STARTS.json (remanescente fixo) e C5_FISHER.json chave mass_spin_free
+P: A rota executada não foi justificada por injeção. Pior: o próprio Fisher da bancada, anterior ao registro, já a dava como não identificável. Com M e χ livres, a mudança de amortecimento é absorvida por M e χ, e só o 440, fraco, quebra a degenerescência. Os ln B saem na escala do fator de Occam POR CONSTRUÇÃO, não por causa dos dados.
+E: C5_FISHER.json mass_spin_free: status NON_IDENTIFIABLE_SINGLE_220, «Deformation tangent lies in mass/spin tangent span», lnB_from_ringdown_alone = null (criado às 20:08, antes do registro às 21:56). A injeção teve «No marginalization of remnant mass/spin here». Na C6, a 10 t_M, R-LIN desloca M_det de 64,12 para 67,42 e χ de 0,596 para 0,665, ou seja, o efeito é absorvido pelo remanescente.
+FIX: Para a C6b: usar a rota (b) (220 modificado sobre IMR SEOBNRv4HM/XPHM, amplitude marginalizada, molde echo_pe_v2) ou um prior de (M, χ) tirado de dado independente (só a inspiral), com amplitudes coerentes em polarização. Calibrar ESSA rota por injeção com M e χ livres, N ≥ 50 por célula e duas famílias, e declarar o poder no registro.
+
+### [CORRIGIR] REGISTRO_C6.json code_and_input_hashes; run_c6_grid.py; fetch_c6_strain.py; fetch_public.py
+P: A guarda não cobre todo o código que toca o strain. run_c6_grid.py, que agrega e escolhe o nível de convergência, NASCEU depois do primeiro resultado no strain. fetch_public.py é importado pelo motor e fornece digests(), usado na checagem de custódia do strain, e está fora do hash. O recibo pode ser editado desde que o hash continue no texto.
+E: Criação NTFS: C6_STRAIN_10M_GRID_0.json às 21:58:13.665; run_c6_grid.py às 21:59:13.032. Meu teste: digests() forjado ⇒ ACEITO; recibo editado ⇒ ACEITO. Atenuante: as diferenças entre níveis são ≤ 4,97e-6 contra o limiar de 0,05, então o runner não teve alavanca, e fetch_public.py não muda desde as 19:54.
+FIX: Hashear no registro toda a árvore de código executada (runner, fetch, todos os módulos importados), criada antes do registro, e hashear também o texto do recibo.
+
+### [CORRIGIR] c6_engine.py l.52-59 (first = ceil(...); stride 2) e reference_peak_GPS
+P: A grade registrada não se realiza como 5 inícios distintos. A quantização de 4096 Hz (1 amostra = 0,7245 t_M) é maior que o passo de 0,5 t_M. Em L1, as janelas «10» e «10,5» são idênticas; em H1 elas trocam de paridade e usam subconjuntos DISJUNTOS a 2048 Hz. A referência (trigtime TEOB) fica 0,325 t_M antes da referência dos produtos Kerr do pyRing.
+E: Deslocamentos efetivos em H1: +0,069 / +0,243 / +0,416 / +0,641 / +0,590 t_M; em L1: +0,229 / +0,403 / +0,577 / +0,077 / +0,026 t_M. L1 first_index = 1299333 em 10 e em 10,5. Diferença de trigtime 1,0943e-4 s.
+FIX: Usar deslocamento fracionário (atraso por sinc) ou os arquivos de 16 kHz já listados em metadata_1.json; registrar o início REALIZADO por detector; alinhar a referência com a dos produtos pyRing usados na comparação.
+
+### [CORRIGIR] ENTREGA_013_C4c_C5_C6_strain_registrado.md l.11-17; C6_RESULTS.json
+P: A régua da RG não é cumprida: falta, por leitura, o tamanho da correção β contra σ. R-GLOBAL aparece na tabela como resultado (ln B 0,000), quando é idêntica à RG no código (gamma = 0,0, tgl_ringdown_prediction.py l.120-121).
+E: Não há δ_L, σ nem z em nenhum artefato da C6.
+FIX: Trocar a linha R-GLOBAL por «≡ RG por construção» e acrescentar, por leitura, δ_L(χ), a σ efetiva desta rota e z. Com M e χ livres, dizer que σ(δτ) não é limitada só pelo 220.
+
+### [CORRIGIR] c6_engine.py l.88-95 (as duas modas deformadas); REGISTRO_C6.json scope «Both modes deformed together»
+P: Aplicar a mesma lei ao 440 é escolha de modelagem da bancada e toca a partição («a que H a lei se aplica»). A C1 e a ORDEM só especificam o 220.
+E: Minha variante com só o 220 deformado, a 10 t_M e nível 0: R-B −0,0156 (contra −0,0026), R-RAIZ-0 −0,0566, R-LIN −0,1189, R-MOD −0,2681 (contra −0,2513). A alavanca é pequena (≤ 0,013 em |Δ ln B| para R-B e ≤ 0,03 no geral).
+FIX: Declarar a escolha como [INPUT], reportar as duas variantes e deixar a escolha ao operador.
+
+### [CORRIGIR] TUNEL\DO_CHATGPT\ENTREGA_013_C6a_REGISTRO_TOEPLITZ.md; ausência de REAPROVEITAMENTO_C6.md
+P: A entrega não segue o contrato do túnel (§2.3 e §5).
+E: A C6a não tem critérios PAGO/NÃO PAGO nem comando de reprodução; o estatuto está na linha 3; não existe nenhuma ficha REAPROVEITAMENTO_Cn.md na pasta.
+FIX: Escrever ENTREGA_013_M5 (ou a C6-pre reclassificada) com o contrato completo e a ficha de aproveitamento.
+
+### [CORRIGIR] C6_PYRING_START_COMPARISON.json; C6_PYRING_IMPLEMENTATION_ORACLE.json
+P: Não há validação da rota no nível do posterior contra o pyRing, e o oráculo de implementação veio depois da leitura do strain.
+E: Em 10 t_M: M 64,1 (C6) contra 73,5 (Kerr_220) e χ 0,596 contra 0,752. Oráculo criado às 00:19 de 22/09; rodada no strain às 21:58–22:00 de 21/09.
+FIX: Antes da C6b, reproduzir o Kerr_220_10M do pyRing com configuração equivalente (amplitudes coerentes, céu fixo, mesmo trigtime e mesma PSD) e declarar a diferença residual.
+
+### [NOTA] ENTREGA_013_C6a l.14 («O ruído utilizado termina 317,2 segundos antes»)
+P: Frase imprecisa.
+E: A PSD foi treinada nos segundos [0, 2048] do bloco anterior, terminando 2365,2 s antes do evento. Os 317,2 s são o fim do arquivo; o último intervalo de validação começa em 1420877816,375.
+FIX: Dizer: «PSD treinada até 2365 s antes; validação até ~325 s antes».
+
+### [NOTA] C5_EMPIRICAL_NOISE.json detectors[0] e [1]
+P: Sistemático do modelo de ruído não sinalizado: em H1 a covariância superestima o ruído em ~6%, e o treino de L1 mostra forte não estacionariedade.
+E: H1: χ² reduzido médio 0,937 em 256 janelas separadas, ~14σ abaixo de 1 (erro padrão √(2/407)/16 ≈ 0,0044). L1: razão mediana/média da PSD em 20–1000 Hz com quantil de 5% = 0,0071.
+FIX: Reportar a escala do ruído por detector e seu efeito em ln B, e testar a PSD de trechos mais curtos e próximos do evento.
+
+### [NOTA] C6_RESULTS.json, inícios 6 e 8 t_M
+P: O modelo não tem o overtone 221, e o GW250114 tem SNR alto no começo do ringdown. O ln B positivo das leituras em 6 t_M (R-MOD +0,62) pode ser contaminação de overtone, não física da leitura.
+E: ln B em 6 t_M, sd 1e-20: R-B +0,221, R-LIN +0,175, R-MOD +0,623; o sinal troca em 10 t_M.
+FIX: Na C6b, incluir o 221 nos inícios precoces ou declarar só ≥ 10 t_M como interpretável.
+
+### [NOTA] tgl_ringdown_likelihood.py docstring; REGISTRO_C6 scope
+P: As amplitudes são independentes por detector (8 quadraturas, sem coerência de polarização), o que reduz o poder. Isso está declarado.
+E: «independently Gaussian detector quadratures, not full polarization-coherent IMR evidence».
+FIX: Na C6b, usar amplitudes coerentes em rede com céu fixo, como faz o pyRing.
+
+
+## RESULTS
+- ln B (leitura/RG) no início primário de 10 t_M, com o prior primário das amplitudes (sd 1e-20) | R-B −0,002595 (B = 0,997); R-RAIZ-0 −0,043068 (B = 0,958); R-LIN −0,090863 (B = 0,913); R-MOD −0,251295 (B = 0,778); R-GLOBAL 0 por construção (≡ RG). Reproduzidos por mim com código independente até 1e-10; convergência entre grades ≤ 4,97e-6. | [REAL — calculado e reconferido; condicionado ao modelo 220+440 com amplitudes independentes por detector e M, χ livres] · veredito INCONCLUSIVE_SYSTEMATICS por regra registrada (calibração da C5 reprovada) · NÃO-CEGO
+  => Fatores de Bayes entre 0,78 e 1,0 são ruído: nenhuma leitura é favorecida nem desfavorecida em relação à RG. O ringdown do GW250114, analisado sozinho desta forma, não distingue a TGL do limite clássico. Isso é correspondência, não derrota. E nada sai daqui: pela regra da C4, excluir exigiria ln B ≤ −4,6.
+- Estabilidade nos cinco inícios e nos três priors | Todo |ln B| ≤ 0,63, com o sinal trocando conforme o início. Em 6 t_M todas as leituras dão positivo (R-MOD +0,62, R-B +0,22). Em 10 t_M todas dão negativo. Em 12 t_M voltam a positivo (R-MOD +0,15, R-B +0,10). A dependência do prior das amplitudes é fraca (R-MOD 10 t_M: −0,222 / −0,251 / −0,252). | [REAL — lido de C6_RESULTS.json]
+  => O sinal troca entre janelas que se sobrepõem, o que é assinatura de flutuação de ruído e de sistemático de modelo (falta o 221 no início precoce), não de efeito físico. Os inícios não são independentes (a janela L1 de 10 é idêntica à de 10,5), então não se somam nem se multiplicam.
+- A degenerescência explica o ln B ≈ 0 | Posterior RG em 10 t_M: M_det 64,1 [55,9; 71,9] M☉, χ 0,596 [0,356; 0,739]. Com R-LIN: M 67,4, χ 0,665. Com R-B: M 65,0, χ 0,615. Fisher da bancada: NON_IDENTIFIABLE_SINGLE_220 (resíduo 8,75e-9). | [REAL — lido] + [DERIVED — interpretação do auditor]
+  => Com massa e spin livres, um amortecimento extra se confunde com um buraco negro um pouco mais pesado e de spin mais alto. O ringdown sozinho, só com o 220, não mede δτ: a informação vem da inspiral (IMR), que a rota escolhida descartou de propósito para não reusar o mesmo dado. Por isso esta C6 não responde à pergunta física, qualquer que fosse o dado.
+- SNR no início primário da janela de ringdown (estimativa do auditor) | Excesso da norma branqueada: 602,36 + 576,44 − 2×407 = 364,8 ⇒ ρ ≈ 19,1 (±~1,5) a 10 t_M. | [DERIVED — auditor; aproximação E|d|² = N + ρ²]
+  => No início primário resta SNR de ~19, contra os ~40 pós-fusão citados pela ORDEM. Pelo Fisher, isso dá σ(δτ) ~0,1 mesmo com o remanescente fixo, 5× o efeito do ramo B (−0,02).
+- Diagnósticos do auditor (não registrados, NÃO-CEGOS, sem valor de veredito) | Com o remanescente fixo na mediana IMR (68,1; 0,68): ln B de R-B +0,083, R-RAIZ-0 +0,112, R-LIN +0,085, R-MOD +0,106. Com só o 220 deformado: R-B −0,016, R-MOD −0,268. | [DERIVED — auditor; exploratório]
+  => Mesmo fixando massa e spin, todo |ln B| < 0,12, sem poder. E deformar também o 440 quase não muda o resultado.
+- Contexto de poder (o portão que deveria ter vindo antes) | Fisher O4 a SNR 40, M e χ fixos (otimista): R-B δ = −0,0199, σ = 0,0497, z = 0,41 (~150 eventos para 5σ); R-MOD −0,0366, z = 0,76 (~43); R-RAIZ-0 −0,0371, z = 0,78 (~42); R-LIN −0,0716, z = 1,55 (~11). Nenhuma leitura chega a poder ≥ 5. | [REAL — lido de C5_FISHER.json; DERIVED na origem]
+  => Mesmo com uma C5 bem calibrada, o veredito máximo da C6 no GW250114 seria NOT_FALSIFIED_UNDERPOWERED. A correção β de 2–7% no amortecimento fica abaixo da σ de um evento só.
+- Linha do tempo da custódia | (UTC) registro + C6a 00:56:31 → download do strain 00:57:27–00:57:39 → primeira leitura 00:58:13 → run_c6_grid.py criado 00:59:13 → C6_RESULTS 01:00:15 → Fisher com PSD medida 01:05:05 → guarda testada 01:27:36 → oráculo pyRing 03:19:43. | [REAL — NTFS e carimbos internos]
+  => O registro de fato precede o strain (em 55 s), e a guarda e o hash funcionam para o que foi registrado. Mas a validação, o poder medido e o teste da guarda vieram depois da leitura.
+
+## REMAINING
+- Gerência: emitir os recibos (ou a errata) de M1–M4 e decidir o estatuto da rodada atual. Proposta: «C6-pre, diagnóstico pré-portão, não calibrado», sem entrar como M5.
+- Operador: confirmar se autorizou o Codex a seguir além do M1 (o STATUS diz «user requested continuation» [DECLARADO]) e decidir a partição (qual H e qual relógio), inclusive se a lei também se aplica ao 440.
+- C5: calibrar por injeção a rota que for de fato executada, com M e χ livres ou com prior de dado independente: N ≥ 50 por célula, duas famílias (SEOBNRv4HM × IMRPhenomXPHM), viés ≤ 0,2 e cobertura em [0,80; 0,97]. Declarar o poder |δ_L|/σ_comb no registro.
+- Rota: escolher uma que quebre a degenerescência (rota (b) sobre IMR, ou amplitudes coerentes em rede mais prior independente de (M, χ)). Com a rota atual, ln B ≈ 0 por construção.
+- Validar no nível do posterior contra o pyRing Kerr_220/221 em 10 M, com configuração equivalente (trigtime 1420878141.2190118, céu fixo, amplitudes coerentes), antes de qualquer releitura do strain.
+- Novo registro C6b depois do portão: toda a árvore de código hasheada (runner, fetch, fetch_public e demais módulos importados); início realizado por detector, com atraso fracionário ou 16 kHz; matriz de vereditos citando REGISTRO_C4.json (sha256 2bebc171ddbcef43…); declarado NÃO-CEGO também em relação aos ln B da C6-pre.
+- Por leitura, reportar δ_L(χ), σ efetiva e z (régua da RG) e trocar a linha R-GLOBAL por «≡ RG por construção».
+- Contrato do túnel: ENTREGA_013_M5 com critérios PAGO/NÃO PAGO, comando de reprodução e REAPROVEITAMENTO_C6.md.
+- Opcional: eventos O4 com strain aberto.
+- Aguardar o fim dos processos ainda vivos da bancada (C5); eles não tocam no strain do evento nem alteram a C6.

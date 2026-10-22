@@ -1,0 +1,23 @@
+import GeometricIdentification
+#print axioms F1Rede.FourierConjugation.LH
+#print axioms F1Rede.FourierConjugation.realMap
+#print axioms F1Rede.FourierConjugation.pointwise
+#print axioms F1Rede.FourierConjugation.pointwise_ae
+#print axioms F1Rede.FourierConjugation.pointwise_schwartz
+#print axioms F1Rede.FourierConjugation.fourier_integral
+#print axioms F1Rede.FourierConjugation.fourier_pointwise_schwartz
+#print axioms F1Rede.FourierConjugation.fourier_pointwise
+#print axioms F1Rede.GeometricIdentification.curriedRapidity
+#print axioms F1Rede.GeometricIdentification.Jcandidate_curried
+#print axioms F1Rede.GeometricIdentification.reflectTransverse
+#print axioms F1Rede.GeometricIdentification.reflectTransverse_preserves
+#print axioms F1Rede.GeometricIdentification.productReflection
+#print axioms F1Rede.GeometricIdentification.productReflection_ae
+#print axioms F1Rede.GeometricIdentification.productJ
+#print axioms F1Rede.GeometricIdentification.productJ_ae
+#print axioms F1Rede.GeometricIdentification.canonicalFub_productJ
+#print axioms F1Rede.GeometricIdentification.Jcandidate_rapidity
+#print axioms F1Rede.GeometricIdentification.geometricJ
+#print axioms F1Rede.GeometricIdentification.Jcandidate_eq_geometricJ
+#print axioms F1Rede.GeometricIdentification.Jcandidate_rapidity_ae
+#print axioms F1Rede.GeometricIdentification.Jcandidate_rapidity_coordinates

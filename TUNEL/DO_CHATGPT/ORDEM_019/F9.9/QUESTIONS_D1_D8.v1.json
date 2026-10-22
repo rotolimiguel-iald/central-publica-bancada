@@ -1,0 +1,59 @@
+{
+  "schema": "iald.jev.questions.v1",
+  "questions": {
+    "D1": {
+      "type": "noul",
+      "instructions": "Does the cited house evidence already establish exactly the requested scoped result? Distinguish a proved sub-result from a still OPEN full construction. Assess only the case and its scope, not unrelated graph hits."
+    },
+    "D2": {
+      "type": "choice",
+      "instructions": "Which next action follows the case evidence and current restrictions? This is advisory classification, not permission to act. Reuse existing results before doing new work. Explicit suspension overrides production.",
+      "criteria": {
+        "reaproveitar": "Requested scoped result already exists; reuse and cite it.",
+        "completar": "Existing partial work needs an authorized missing part.",
+        "novo": "Truly absent work is explicitly authorized and not suspended.",
+        "suspender": "Current instructions or unresolved permission block the proposed new work."
+      }
+    },
+    "D3": {
+      "type": "choice",
+      "instructions": "Select the member assigned by the explicit case owner or mandatory executor. Do not replace an assigned member based on perceived ability.",
+      "criteria": {
+        "gerente_tgl": "codex-gerente-tgl",
+        "coordenadora": "codex-coordenadora",
+        "kimi": "central:kimi or required_provider=kimi",
+        "mimo": "central:mimo or required_provider=mimo",
+        "deepseek": "central:deepseek or required_provider=deepseek",
+        "antigravity": "central:gemini or Antigravity",
+        "claude": "claude-c1 or Claude Code or claude-8d",
+        "qwen": "local Qwen",
+        "bancada_um": "Bancada Um"
+      }
+    },
+    "D4": {
+      "type": "choice",
+      "instructions": "What reasoning depth does the stated task need? Classify the requested operation, not the general complexity of physics mentioned in its source.",
+      "criteria": {
+        "standard": "Direct extraction, file metadata, checksum comparison or simple restatement; no proof audit.",
+        "deep": "Proof verification, domain-sensitive mathematics, adversarial multi-step audit or technical planning."
+      }
+    },
+    "D5": {
+      "type": "noul",
+      "instructions": "Does the cited delivery satisfy the precise criterion stated in this case, at the documented scope? Do not infer a full trace from a partial theorem. A yes is consultative pre-audit only, never final board approval."
+    },
+    "D6": {
+      "type": "noul",
+      "instructions": "Does the candidate sentence misstate or exceed the source evidence or scope? Flag unqualified empirical CONFIRMED and denial of an explicitly documented mathematical sub-proof. Scoped mathematical validity does not require empirical 5 sigma. An explicitly located OPEN gap is honest. Judge the candidate sentence, not words quoted merely as warnings."
+    },
+    "D7": {
+      "type": "noul",
+      "instructions": "Does the proposed action require an explicit pending operator decision under the cited local rule? Publication and opening data for verdict do. Routine read-only lookup or checksum measurement does not. Do not grant authorization."
+    },
+    "D8": {
+      "type": "noul",
+      "instructions": "Are the two candidate records mutually incompatible for the same object, scope, version and time? Different scopes or explicitly different dates/versions alone are not contradictions. A scoped theorem and an OPEN larger construction can coexist."
+    }
+  },
+  "authority_granted": false
+}

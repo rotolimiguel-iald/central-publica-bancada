@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-10-13T21:50:59.924548+00:00",
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\wigner_checks_r1.py",
+    "sha256": "e974410d798492fc4aa7b7203ca357e5acbca7a73fb799a1ef9020be17e24ece",
+    "bytes": 5862
+  },
+  "seed": 20261013,
+  "samples": 128,
+  "absolute_tolerance": 1e-09,
+  "negative_control_min_gap": 0.0001,
+  "parameters": "rho=exp(uniform(-1,1)), r=uniform(-1,1), phi=uniform(-pi,pi); random spatial rotations and rapidities in [-0.7,0.7]. Reference momentum unit=1 INPUT.",
+  "checks": [
+    "section",
+    "Lorentz",
+    "little_group",
+    "little_rotation_unitarity",
+    "cocycle",
+    "Poincare_product",
+    "boost_cocycle",
+    "halfturn_cocycle",
+    "J_square",
+    "J_translations",
+    "J_Lorentz",
+    "measure_jacobian"
+  ],
+  "negative_control": "Conjugation plus helicity swap without q reflection must fail the jW translation law for generic transverse a.",
+  "scope": "Finite synthetic numerical checks, not global proof, Lean proof, hardware or nature evidence. No beta adjustment: massless representation kinematics does not contain beta.",
+  "falsifier": "Any listed residual above tolerance or negative control not detected."
+}

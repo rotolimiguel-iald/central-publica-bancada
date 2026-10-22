@@ -1,0 +1,505 @@
+{
+ "veredito_geral": "126 critérios avaliados nas sete frentes (com sobreposição): PAGO_VERIFICADO 86 · PAGO_ALEGADO 27 · NAO_PAGO 12 · PAGO_FALSO 1. A bancada PAGOU com prova conferida byte a byte o fechamento da ORDEM 013 (Parte A: 128/128 hashes, 34/34 artefatos v1 intactos, replay próprio da C6-pre com diferença 0,0), o portão da ampliação e o nuisance (E0/E1 refeitos, reproduzidos pela gerência a 7–9 dígitos), o pré-registro RINGDOWN_5SIGMA_V1 antes de qualquer dado de teste (e1be6b0409720c68; 74 pins, guarda fail-closed, nulos a 10⁸), o quadro E6 (12.590 ponteiros sem divergência) e o instrumento E7 (608.681 amostras, 53/53 testes) — e NÃO PAGOU o coração da ordem (E3.1 piloto IMR, E3.3 calibração, TESTE cego: zero posterior, zero injeção, zero evento) porque encerrou a ampliação como «parede técnica nesta configuração» com um diagnóstico de 8 sorteios que não reproduziu o SIGSEGV, causa OPEN e hipótese [CONJECTURE], devolvendo 35,06 das 40 h sem tentar a variante só-220 que a própria ordem previa (:183, :193). PAGO_FALSO (1): «configuração registrada válida» — o fmax de geração 1024 Hz faz a própria RG devolver EDOM em 8,3 % dos pontos físicos (likelihood −inf = viés). A parede foi ALEGADA pela bancada e MEDIDA pela gerência em três reproduções independentes e concordantes: é parede da caixa de prior registrada (dtau440 até 4, copiada do pSEOBNRv5PHM) sobre o pSEOBNRv4HM_PA do lalsuite 7.26 — 31–39 % do prior derruba o processo; só-220 0/120; dtau440 ≤ 1,0 0/120; região TGL finita; sorteio 16 identificado — removível por emenda de configuração sem tocar código. Nenhum PAGO_FALSO na Parte A; zero CONFIRMED/PROVED em veredito em 3.227 documentos; β literal 0/737 .py; nenhuma leitura escolhida; NÃO-CEGO dito; segurança conforme (0 arquivos tocados em Nós/Haja_Luz; um.py d9f5bd5dffc3333d intocado; nada publicado). Fisicamente: nenhum canal chega a 5σ a favor antes de 3G; os dois mais próximos (neutrino m₂ 2,95σ; D1 β-livre 3,09σ contra α√e) apontam CONTRA; o piso dos vazios já está a 5σ unilateral e não pode confirmar por construção; o ringdown com a máquina livre compra CONDIÇÃO, não σ. NOT_FALSIFIED nunca é CONFIRMED; nada aqui move o gate.",
+ "por_alvo": [
+  {
+   "alvo": "F0 — três processos antigos",
+   "estado": "PAGO_ALEGADO (encerramento) / NAO_PAGO (anexo)",
+   "prova_ou_defeito": "C5_ANEXO_PROCESSOS.json NÃO EXISTE; substitutos bis\\F0_SNAPSHOT_*/F0_PRESTOP_20260922T215825Z.json (processes [])/F0_CLOSED (signals []). PROGRESS.json: IMRPhenomXPHM 22384/22384 concluído 18:36:56Z; SEOB 5088/8520 parado 19:59:43Z; phase_real_refined 19856/22384 parado 20:00:30Z; vivos às 18:46Z, ausentes às 21:58:25Z; sem sinal, hora ou causa; RELATORIO_FINAL.md:13 «encerramento conferido» = achados mortos; grep F0_CLOSED nas ENTREGA = 0; AUDIT_RATE.json fora. Tempo fora das 40 h: PAGO."
+  },
+  {
+   "alvo": "F1 — M1 + C0/C1/C2/C3.1",
+   "estado": "PAGO_VERIFICADO",
+   "prova_ou_defeito": "ENTREGA_013_M1 ad1f6eb7…; C0_AUDITORIA_v2 supersedes f0009e11…; C1_LEITURAS_v4 (cadeia 333a9d8b→09d5dc9a→e9fdd97d→v4); bis\\C1_NUMERICAL_CONTROLS_v2 264/264, β runtime 0,012031300400803142; C2 22.000 ajustes; C3_README (11e87185…) realization NÃO PAGO explícito."
+  },
+  {
+   "alvo": "F2 — M2 tabelas, jackknife, KDE, adendos, GWTC-4, RD.tar.gz, relógio livre",
+   "estado": "PAGO_VERIFICADO",
+   "prova_ou_defeito": "F2_ALL_READING_TABLES_v2 (761eb108…) 60 linhas; R-LIN lnB −8,219, jackknife [−8,315; −7,539]; max_information_fraction 0,3375; KDE +0,029 vs gaussiana −0,037; RD.tar.gz 415.283.962 B sha256 9810e0e4… md5=record, 714/714 hashes, 0 posteriores com 220 livre → lnB null justificado; relógio livre corte sustentado None (ESS<100)."
+  },
+  {
+   "alvo": "F3 — M3 C3.2/R-MOD/R-PROP",
+   "estado": "PAGO_VERIFICADO",
+   "prova_ou_defeito": "C3_ADENDO_RMOD_RPROP_013BIS.md (39b8adae…) seis passos com estatuto; R-MOD = CONJECTURE (management hypothesis); tgl_ringdown_template.py 16d7fbc2… intacto."
+  },
+  {
+   "alvo": "F4 — portão nas duas bases + parede C5",
+   "estado": "PAGO_VERIFICADO (portão) / PAGO_ALEGADO (rigor assimétrico)",
+   "prova_ou_defeito": "PORTAO_DO_PODER_013.json ec5e012b… + v2 c2972e3c…: 50 células; GW250114 medido ρ = 19,10 ± 1,45 (norm² H1 602,36 / L1 576,44, 407 gdl); all_fixed_source_below_5 = true; z máx 0,713; C5 FULL_IMR 0/288, MATCHED 94/288. Defeito: busca fonte livre só para R-B (z_free 0,057 vs 0,416), M4:15 «declarar a assimetria», sem custo registrado."
+  },
+  {
+   "alvo": "F5 — M5 C6-pre",
+   "estado": "PAGO_VERIFICADO",
+   "prova_ou_defeito": "C6_ADENDO_REALIZADO_v2.json (df39aee5…): inícios realizados por detector, 0,327 t_M ao pyRing, só-220 como INPUT, σ/z = null NOT_MEASURED_NOT_CALIBRATED."
+  },
+  {
+   "alvo": "F6 — M6 pacote v3",
+   "estado": "PAGO_VERIFICADO",
+   "prova_ou_defeito": "Replay da gerência em C:\\tmp\\aud013bis_v31: verify_delivery PASS 231; unit_checks PASS (3,95e-16/3,48e-16); reproduce_c6.py --run no WSL → 75 linhas, máx |ΔlnB| 0,0, 73,18 s — BLOQUEANTE da C7 resolvido. Pasta profunda NÃO EXECUTADO admitido; falha MAX_PATH real confirmada."
+  },
+  {
+   "alvo": "F7 — higiene",
+   "estado": "PAGO_VERIFICADO (o nomeado) / reaberto (o novo)",
+   "prova_ou_defeito": "0 arquivos > 25 MB fora de cache\\; 57 duplicatas removidas (2.809.549.015 B); 4 mkdtemp ausentes; MANIFESTO v2 ao lado. MAS 3 pastas ilegíveis NOVAS em bis\\e2_publication_census\\*\\cache\\E2_PRIVATE + 1 junction + 1 symlink; licença 1.002/1.064 null."
+  },
+  {
+   "alvo": "F8 — término da Parte A",
+   "estado": "PAGO_VERIFICADO",
+   "prova_ou_defeito": "ENTREGA_013BIS_MA_fechamento.md (1e1b3122…) 19:06:31Z; Parte A 13:58→16:06 local (2,13 h) fora do contador."
+  },
+  {
+   "alvo": "E0 — portão da ampliação",
+   "estado": "PAGO_VERIFICADO (E0.1–E0.5, E0.7) / PAGO_ALEGADO (E0.6, E0.8)",
+   "prova_ou_defeito": "PORTAO_DA_AMPLIACAO_V1.json 710028a7d2af7b64 refeito pela gerência de C4_CATALOG_220.json (93bdc413130d294a): z_comb 31 std 0,606/1,076/1,120/2,159; N90 3327/1056/975/263; I90 95.216/30.209/27.907/7.513; espúrio contra a RG 195,6/191,1. E0.6: magnitudes sistemáticas HERDADAS (calculate_e0_core.py:256) — contra «REFAZ, nunca copia»."
+  },
+  {
+   "alvo": "E1 — nuisance c(σ), seleção, injeções LVK, RD",
+   "estado": "PAGO_VERIFICADO (E1.1–E1.4) / PAGO_ALEGADO (E1.5)",
+   "prova_ou_defeito": "NUISANCE_V1.json 83f860bbfa904c00: KDE 608.681 draws, 288 ajustes; c0 −0,0523 ± 0,0492 (banda 1,0); WLS reproduz a gerência a 3e-16. Defeito: covariância transportada ao E2 é de UMA banda (SE ×2,2). E1.2 passagens lidas com sha e linhas; α(Λ) null. E1.5 só d = c0/SE, z null."
+  },
+  {
+   "alvo": "E2 — registro RINGDOWN_5SIGMA_V1",
+   "estado": "PAGO_VERIFICADO (registro/testemunha/ordem temporal/pins/nulos) / PAGO_ALEGADO (itens 1, 4, cegueira)",
+   "prova_ou_defeito": "sha256 e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416 (183.005 B); registered 21:44:42Z → seed 21:44:43,19Z → nota 21:44:43,69Z → nulos 21:49Z; zero strain/posterior de candidata cega depois; pins 74/74 + 4.621 arquivos de /opt reverificados, 0 divergências. Defeitos: descegamento escalar único (alvo do R-B); sem trilha de emenda de test_candidates (GW250207_115645 eligible None; só 14 fracas admissíveis); rota IV a 10⁶; limiar z = 5 não calibrado à cauda (t5: 7,7×10⁻⁵ = 270×)."
+  },
+  {
+   "alvo": "E3.1 — piloto IMR GW250114",
+   "estado": "NAO_PAGO (posterior, custo) / parede ALEGADA pela bancada, MEDIDA pela gerência",
+   "prova_ou_defeito": "CONTROLLER.json (bf3f8743…) rc −11 em 11,011 s; nenhum posterior; Kerr V2 COMPARISON (39e0073a…) PAGO como comparação (Mf 74,57 vs 73,51; 641 s; 512 vs 4096 live points dito). Parede: ver a_parede_tecnica."
+  },
+  {
+   "alvo": "E3.2 — ORCAMENTO_40H",
+   "estado": "PAGO_VERIFICADO (registro, contador, pesos) / NAO_PAGO (cinco alternativas com número)",
+   "prova_ou_defeito": "ORCAMENTO_40H.json 892e416585062eef registrado 23:15:57Z; FINAL_DELIVERY_RECEIPT 4,9828 h contadas, 35,017 h devolvidas; ciência pós-parede 0 s; alternatives[0..4] custo null ×5 — a (iii) tinha número na sessão (Kerr V2 638 s/posterior). Pesos dos 14 cegos: Σ dos 10 sem hold = 98 (1,3 % R-LIN; 0,10 % R-B)."
+  },
+  {
+   "alvo": "E3.3 — calibração + PE cegos",
+   "estado": "NAO_PAGO",
+   "prova_ou_defeito": "E3_3_status: injeções 0/0/0, σ_c null, coverage null, gate_green false; new_blind_PE_completed 0."
+  },
+  {
+   "alvo": "E4 — modo 440",
+   "estado": "PAGO_VERIFICADO (E4.3, E4.4) / PAGO_ALEGADO (E4.1, E4.2)",
+   "prova_ou_defeito": "Fisher refeito a ≤ 0,3 %; mas a ρ₄₄₀ fixa por PSD o detector não importa (σ 0,2007 O4 → 0,2013 CE); nenhum ρ₄₄₀ real ancorado. Derivado pela gerência: ρ₄₄₀_eff ≈ 1,76 no GW250114 → N90 via 440 R-MOD 1.332/401/17/6,6 (O4/O5/ET/CE); R-B 7.578/2.284/99/37. E4.2 lnB null (correto); extrator E7 «220 only»."
+  },
+  {
+   "alvo": "E5 — rota IV",
+   "estado": "PAGO_VERIFICADO (E5.2, E5.4, E5.5) / PAGO_ALEGADO (E5.1, E5.6) / NAO_PAGO (execução)",
+   "prova_ou_defeito": "N90 61/39/22 GW250114-like (Wilson-95; MC da gerência coerente); E5_information GWTC5_31 = 1,0846 GW250114-eq; population_fit_executed false; σ_jit,rec e σ_sys null; cauda exata p(LRT>25) = 9,4e-8 (N=22) < 2,87e-7 [DERIVED gerência]."
+  },
+  {
+   "alvo": "E6 — quadro de alcance",
+   "estado": "PAGO_VERIFICADO (E6.1, E6.2) / PAGO_ALEGADO (E6.3, E6.4)",
+   "prova_ou_defeito": "QUADRO json f021e0c9… (17,9 MB) / md 7b2e772c464033df: 180 células × 2.540 cenários; 12.590 ponteiros 0 divergências; 0 'anos' como promessa; 0 verde. Frase da RG ausente do .md; Taxa/IC OPEN em 2.540/2.540 linhas."
+  },
+  {
+   "alvo": "E7 — extrator + consumidor",
+   "estado": "PAGO_VERIFICADO (E7.1, E7.3, E7.4) / PAGO_ALEGADO (E7.2)",
+   "prova_ou_defeito": "POSTERIORES_PSEOB_GWTC5_33_013BIS_V1.json 81e65ff3… (92.737.524 B): 33 eventos, 608.681 × 5; consumidor 99a9ebc8… stdlib+numpy, β runtime, 53/53 testes; N90/I90 refeitos a 7 dígitos. Defeitos: N_alvo impresso null; checked_context (l.108) recusa fora da árvore, importlib da guarda, exige 1,1 GB .h5 + 711 MB tar — não incorporável no um.py; test_count sempre 0."
+  },
+  {
+   "alvo": "TESTE sob registro",
+   "estado": "NAO_PAGO (correto: AWAITING_DATA)",
+   "prova_ou_defeito": "ENTREGA_013BIS_TESTE_O4_cegos.md (5702a6f11ec97228): AWAITING_DATA nas dez leituras; eventos acrescentados 0; «ausência de teste não é NOT_FALSIFIED»."
+  },
+  {
+   "alvo": "Relatório final",
+   "estado": "PAGO_VERIFICADO (hashes 88/88, horas) / PAGO_ALEGADO (parede; proveniência de coluna)",
+   "prova_ou_defeito": "e41cbc01fe277591 (48.461 B); 21 linhas de cumprimento são strings fixas no gerador; coluna «Correção/σ dos 31» copiada de inherited_C4_nonblind sem dizê-lo; omite centro +0,0738 / +0,0668 ± 0,0336 (z 2,59 vs R-B) e dominância 32,7 %."
+  }
+ ],
+ "resultados_fisicos": [
+  "ρ do GW250114 na janela de 10 t_M (H1+L1, norma branqueada) = 19,10 ± 1,45 [REAL — NÃO-CEGO; não é significância]; a base SNR40 das injeções é ~2,1× o evento.",
+  "Portão do poder por evento (Fisher 220, fonte fixa): z máx 0,713 em 50 células; R-B 0,193 (GW250114); all_fixed_source_below_5 = True [DERIVED] — nenhuma leitura chega a 1σ por evento em O4.",
+  "lnB(R-B, GW250114): KDE +0,029, gaussiana 2D −0,037 → |lnB| ≲ 0,1, sinal indeterminado [REAL — NÃO-CEGO]; correção/σ = 0,34.",
+  "GWTC-5.0 (31), offset 0 só como calibração: z_comb R-B 0,606 · R-MOD 1,076 · R-RAIZ-0 1,120 · R-LIN 2,159 [DERIVED — NÃO-CEGO; PROIBIDA_COMO_TESTE]; R-LIN lnB −8,22, jackknife [−8,31; −7,54], HPD RG 0,983 → INCONCLUSIVE_SYSTEMATICS.",
+  "Centro observado de δτ̂₂₂₀ = +0,0668 ± 0,0336 nos 31 (z 2,59 contra R-B; ~2σ acima da RG); +0,0738 nos 33 — sinal OPOSTO a todas as leituras TGL; um evento carrega 32,7 % da informação (cap 0,2) e 92,2 % na rota IV [REAL — NÃO-CEGO; INCONCLUSIVE_SYSTEMATICS]; offset fixo em 0 excluiria a RG a 5σ em ~191–196 eventos → só calibração.",
+  "Nuisance c(σ) = c0 + k·σ (31): WLS −0,0610 ± 0,0683 / +0,792 ± 0,369; KDE banda 1,0 −0,0523 ± 0,0492; banda 0,7 −0,0577 ± 0,0307; Spearman 0,476 (p 0,0068) [REAL — NÃO-CEGO; covariância não calibrada]; c0 contém 0 e δ_RB.",
+  "N90 (mistura O4) / I90: R-B 3.328 / 95.216 (320 GW250114-eq); R-MOD 1.056 / 30.209; R-RAIZ-0 976 / 27.907; R-LIN 263 / 7.513; I atual 887 [DERIVED — refeito por três frentes a 7 dígitos]; GW250114-like: 335 / 97 / 96 / 25,8.",
+  "Cegos O4: 14 admissíveis (SNR 12,1–16,8), ΣE[I] ≈ 98–135 = 0,10–0,14 % do alvo R-B; todos os 53 cegos SNR ≥ 12 somam I ≈ 922 → z esperado se a leitura fosse verdadeira: R-B 0,87 · R-MOD 1,54 · R-RAIZ-0 1,60 · R-LIN 3,08 [DERIVED] — a PE dos cegos O4 não é rota de 5σ.",
+  "Nulos E2: p(z>5) gaussiano 1,9×10⁻⁷ (analítico 2,87×10⁻⁷); sob t5 + nuisance 7,73×10⁻⁵ (270×; z = 5 nominal ≈ 3,8σ) [REAL — reproduzido pela gerência 7.720 vs 7.727 em 10⁸]; rota IV p(LRT>25) exato 9,4e-8 (N=22) [DERIVED].",
+  "Rota IV: N90 61/39/22 GW250114-like (σ_jit 0,019/0,0228/0,030); 1.588/996/524 na mistura [DERIVED sob browniano [INPUT]; σ_sys = 0; limite inferior]; taxa GW250114-like 0,69/ano, IC90 [0,035; 3,27] [DERIVED, cenário].",
+  "Modo 440: ρ₄₄₀_eff ≈ 1,76 (GW250114, O4); N90 via 440 R-MOD 1.332/401/17/6,6 (O4/O5/ET/CE); R-B 7.578/2.284/99/37 [DERIVED sobre INPUT; N são pisos] — em O4/O5 não compra nada além do 220; em ET/CE vira o discriminante (alavanca 2–5×).",
+  "O5 (3 anos): R-B 2,2–3,1σ; R-MOD/R-RAIZ-0 3,9–6,5σ só no topo da banda com piso 0,0074 (hoje violado 1,7–13×); 3G: 1–3 eventos GW250114-like para R-B mas gargalo = modelo a 0,40 % de τ₂₂₀ (hoje 1,3–9,7 %) [DERIVED, cenário].",
+  "Kerr_220_10M próprio vs pyRing: Mf 74,57 vs 73,51 (0,21 larguras); af 0,762 vs 0,752; 641 s/1 thread [REAL — comparação descritiva, não reprodução equivalente].",
+  "Parede do piloto: crash sse (1+dtau440) > c·max(1, 1+dtau220), c ∈ (2,0; 2,2] (fronteira dtau440 entre 1,0 e 1,25 para dtau220 ≤ 0); 31–39 % do prior registrado derruba; só-220 0/120; dtau440 ≤ 1,0 0/120; região TGL finita; sorteio 16 identificado; fmax_gen 1024 → EDOM em 8,3 % da RG [REAL — medido pela gerência em três reproduções].",
+  "Neutrino m₂: 8,5074 meV (TGL) vs 8,6776 ± 0,0576 = 2,95σ CONTRA, crescendo (1,64 → 2,21 → 2,95); 5σ pede σ(m₂) 0,034 meV (JUNO 0,5 % ~2031 → 7,8σ se a mediana se mantiver); kill_rule = 2 determinações autônomas (hoje 0); escala 1 eV [NORM] [REAL lido — canal mais próximo do 5σ, contra a escala declarada].",
+  "D1/CAMB V3 real (f048b17f12674f33): β livre −0,0134 ± 0,0082 → α√e a 3,09σ; β = 0 a 1,55σ; 5σ contra α√e pede σ(β) 0,0051 (×1,62); controle 2 (w₀–wₐ) pendente [REAL lido — NÃO-CEGO; risco «5σ do modelo» ALTO].",
+  "Piso dos vazios: unilateral NOT_FALSIFIED_POWERED (r_c^cal 0,189 ± 0,017; L5 = 8,8× β; β·Σμ 45 ≥ 25); bilateral TRACER_EMPTY_CORE; LRG r̂ 0,0017 (kill inalcançável por traçadores); κ v9 UNDERPOWERED (falta ~25× em σ_r); shear rota morta; lentes V10 AWAITING_DATA [REAL lido] — já a 5σ unilateral; não confirma por construção.",
+  "Relógios: déficit 12,46 ordens (Sr), 18,3 (Th); P2 EXCLUDED_IN_READING; dephasing local 10,3–11,6 ordens [REAL lido] — morto por décadas. Ecos: MAY/KMS 3,2/4,4σ INCONCLUSIVE_SYSTEMATICS; busca longa eficiência 0,000 [REAL lido] — rota morta.",
+  "Coma: D_L^TGL 101,90 ± 1,02 ± 0,98 vs controle 110,85; reveal.performed = false, comparison = null no selo v369 — a memória diz «revelado v176» [DECLARADO — discrepância]. Conjunta V2 P_all 6,6×10⁻³ INCONSISTENT; H2 RETIRED."
+ ],
+ "defeitos_graves": [
+  {
+   "id": "DG-01",
+   "gravidade": "BLOQUEANTE",
+   "onde": "RINGDOWN_5SIGMA_V1.json/pe_jobs.GW250114_PILOT.priors (dtau440 U[−0,8; 4] copiado do pSEOBNRv5PHM via C4_SCHEMA.json; PLAN_INPUTS.json bd5e1a56537cc842) × /opt/lal_env lalsimulation 6.2.1 pSEOBNRv4HM_PA; ENTREGA_013BIS_B3:28-40; RELATORIO_FINAL.md:14, :68, :164-168",
+   "problema": "A parede do piloto é da caixa de prior registrada, não do método nem da física: buffer só cresce com dtau220 > 0 (LALSimIMRSpinAlignedEOB.c:2060-2075), 44 dimensionado por (1+dtau440) sem checagem (HybridRingdown.c:1263-1267,1393); 31–39 % do prior derruba o processo; P(inicializar 512 live points) = 0,69^512 ≈ 1e-83. A variante só-220 (prevista na ordem :183/:193; já secundária registrada; runner aceita registered_fixed_deformation_variant, pe_runner.py:56-60) roda 0/120 e não foi tentada; a lista de cinco alternativas não a contém; 35,06 h devolvidas.",
+   "correcao": "Emenda E2 V1.1 «GW250114_PILOT_v2» sem tocar código: (a) só-220 ou (b) dtau440 ∈ [−0,8; 1,0]; fmax_gen 2048 com banda 20–1024; testemunha no túnel com parent e1be6b04… ANTES de rodar; qualificação prévia = varredura de 120 sorteios (0 crashes) + grid da gerência; caixa declarada [INPUT]. Custo 58–390 CPU-h = 2,4–16 h de parede a 24 workers — cabe nas 35 h."
+  },
+  {
+   "id": "DG-02",
+   "gravidade": "BLOQUEANTE",
+   "onde": "RINGDOWN_5SIGMA_V1.json/pe_jobs.GW250114_PILOT.maximum_frequency_hz = 1024 (sample_rate 4096); bis\\e2_code\\pseob_source.py:62-64; pe_runner.py:213-218 (catch_waveform_errors=True)",
+   "problema": "fmax de geração 1024 corta o suporte da própria RG: 10/120 = 8,3 % dos pontos físicos dão EDOM «Ringdown frequency > Nyquist» → likelihood −inf silencioso (m_tot ≲ 35 M☉); a 2048 Hz 0/120. Posterior viesado mesmo sem crash. PAGO_FALSO para «configuração registrada válida».",
+   "correcao": "Na emenda: fmax_gen ≥ 2048 com banda de análise 20–1024 declarada à parte; EDOM numérico nunca vira rejeição física do prior; imprimir a fração de EDOM por PE."
+  },
+  {
+   "id": "DG-03",
+   "gravidade": "CORRIGIR",
+   "onde": "registry.statistics.threshold_one_sided = 5.0; RESULT_E2_NULL_GWTC5_31_R_B_T5M_GN.json; RELATORIO_FINAL.md:70",
+   "problema": "Limiar «5σ» fixo em z = 5 não calibrado à cauda real: sob t5 + nuisance FPR 7,7×10⁻⁵ (≈ 3,8σ; 270× a gaussiana); a ordem pedia p-valor empírico no N_alvo.",
+   "correcao": "Critério = p_MC ≤ 2,87×10⁻⁷ sob o modelo de cauda medido nos posteriores reais (curtose dos 31/33), z equivalente impresso por MC, não digitado."
+  },
+  {
+   "id": "DG-04",
+   "gravidade": "CORRIGIR",
+   "onde": "RINGDOWN_5SIGMA_V1.json/blinding.minimum_information_to_unblind = 95215,98; bis\\e2_code\\blinding.py:unblinding_allowed()",
+   "problema": "Descegamento por escalar único igual ao alvo do R-B; R-LIN só descegaria com 12,7× o próprio alvo; EXCLUDED/FALSIFIED_IN_READING nunca emitíveis no alvo da leitura — contra «cada uma com o seu N_alvo».",
+   "correcao": "Emenda V1.1: dicionário por leitura + Bonferroni já registrado para alegação global."
+  },
+  {
+   "id": "DG-05",
+   "gravidade": "CORRIGIR",
+   "onde": "RINGDOWN_5SIGMA_V1.json/test_candidates (44); registration_guard.py:authorize_event/validate_job_reviews/load_jobs",
+   "problema": "Sem trilha de emenda: authorize_event exige eligible True e censo False lidos do registro imutável; 30/44 censo None, 8 eligible None (GW250207_115645 SNR 68,9; GW230814_230901 SNR 43,0); só 14 candidatas fracas admissíveis; jobs 0, downloads 0 — a pipeline não roda quando GW250207/GWTC-6 sair.",
+   "correcao": "Protocolo V1.x com parent_registration_sha256, sub-objeto estatístico hasheado e obrigatoriamente idêntico ao V1; só test_candidates/censo/metadados mudam; testemunha nova antes de qualquer PE; guarda verifica a cadeia."
+  },
+  {
+   "id": "DG-06",
+   "gravidade": "CORRIGIR",
+   "onde": "registry.nulls.cells IV_* (draws 1e6); bis\\RESULT_E2_NULL_IV_*.json",
+   "problema": "Rota IV com 10⁶ draws por célula (UL95 3–5×10⁻⁶ = 10–16× p5), não 10⁸; cauda analítica χ²_{N−1} não registrada.",
+   "correcao": "Registrar a cauda exata das 3 células homoscedásticas (p = 9,4e-8/1,2e-7/1,4e-7) e rodar 10⁸ nas 6 de mistura (~7 h CPU) em emenda V1.x."
+  },
+  {
+   "id": "DG-07",
+   "gravidade": "CORRIGIR",
+   "onde": "ENTREGA_013BIS_B2 tabela «Modo440»; DETERMINISTIC_DIAGNOSTICS.E4_fisher (ISOLATED_440_GRID); RELATORIO_FINAL.md:123-132 (E7 «220 only»)",
+   "problema": "Fisher do 440 a ρ₄₄₀ fixa por PSD (σ 0,2007 O4 → 0,2013 CE: o detector não importa); nenhum ρ₄₄₀ real ancorado; «N para 5σ via 440» sem número físico; extrator/consumidor E7 não carrega dtau440.",
+   "correcao": "Reemitir E4.1 na rota de amplitude fixa ancorada em ρ₄₄₀_eff ≈ 1,76 (N90 R-MOD 1.332/401/17/6,6; R-B 7.578/2.284/99/37) com comparação ao 220; estender o extrator a dtau440/domega440 e QNM exato pareado."
+  },
+  {
+   "id": "DG-08",
+   "gravidade": "CORRIGIR",
+   "onde": "bis\\F0_PRESTOP_20260922T215825Z.json; bis\\F0_CLOSED_20260922T215825Z.json; bis\\EXECUTION_CHECKPOINT_20260922T201557Z.json; RELATORIO_FINAL.md:13",
+   "problema": "C5_ANEXO_PROCESSOS.json ausente; dois grupos morreram INCOMPLETOS às 19:59:43Z/20:00:30Z sem sinal, hora ou causa ([CONJECTURE] reinício da VM); F0_CLOSED não citado por hash; AUDIT_RATE.json fora; «encerramento conferido» = achados mortos 2 h depois.",
+   "correcao": "Anexo com o nome da ordem: por processo START sha, último PROGRESS (hora UTC, done/valid_draws, sha), estado final, causa 'não observada' [DECLARADO], frase «nenhum produto entra em veredito nem no portão»; citado por hash em ENTREGA_013BIS_ERRATA_F0.md; corrigir ao lado a linha F0 do relatório. NÃO retomar os dois jobs."
+  },
+  {
+   "id": "DG-09",
+   "gravidade": "CORRIGIR",
+   "onde": "ENTREGA_013_M4:15; REAPROVEITAMENTO_C5.md; PORTAO_DO_PODER_013_v2.json/source_free_multimode_RB_diagnostic",
+   "problema": "Rigor assimétrico só «declarado»: busca não linear/fonte livre existe só para R-B (z_free 0,057 vs z_fixed 0,416; 1,9 % retido); a ordem mandava rodar (teto ~1 h) OU registrar o custo antes de declarar NÃO PAGO — nenhum custo registrado.",
+   "correcao": "Rodar a busca (SEOB/O4, SNR40, a=0/1) para R-MOD, R-RAIZ-0, R-LIN → PORTAO_DO_PODER_013_v3.json com z_free por leitura e custo medido; se exceder o teto, o número."
+  },
+  {
+   "id": "DG-10",
+   "gravidade": "CORRIGIR",
+   "onde": "bis\\e0_core\\calculate_e0_core.py:256-279 → PORTAO_DA_AMPLIACAO_V1.json/systematic_conditions[*].components; bis\\E0_CORE_SCALAR_REVIEW.json/unpaid[0]",
+   "problema": "Magnitudes dos componentes sistemáticos copiadas do JSON da gerência com json_pointer (contra «a bancada REFAZ, nunca copia»); só as células C5 refeitas no SYSTEMATICS_ADENDO; t₀, deslocamento e C2 SNR20 seguem herdados sem dizê-lo no .md.",
+   "correcao": "Marcar linha a linha herdado [DECLARADO] vs refeito; refazer t₀, deslocamento (já +0,0668 em E0.1) e C2 SNR20 dos artefatos da bancada (< 1 h)."
+  },
+  {
+   "id": "DG-11",
+   "gravidade": "CORRIGIR",
+   "onde": "NUISANCE_V1.json/synthetic_E2_nuisance_INPUT (sigma_model.covariance) → RINGDOWN_5SIGMA_V1 nulls",
+   "problema": "Covariância de c(σ) transportada ao E2 é a curvatura local de UMA banda de KDE (SE 0,049); banda 0,7 dá 0,031, WLS 0,068 — ×2,2; a FPR do nulo herda a arbitrariedade.",
+   "correcao": "Marginalizar banda 0,7–1,4 + bootstrap 3.000 por evento; transportar a MAIOR covariância como INPUT do nulo; repetir a campanha (437 s); registrar o efeito na FPR."
+  },
+  {
+   "id": "DG-12",
+   "gravidade": "CORRIGIR",
+   "onde": "NUISANCE_V1.json/conditional_diagnostics.E1_5; ENTREGA_013BIS_B1 tabela E1.5",
+   "problema": "Frase de escopo exigida («com c(σ) livre, a leitura X fica a z = … da RG») não escrita em z; só d = c0/SE, z null.",
+   "correcao": "Frase descritiva [DERIVED, não calibrado] por leitura: |c0 − δ_X|/SE — R-B 0,66σ, R-MOD 0,27σ, R-RAIZ-0 0,31σ, R-LIN 0,37σ, RG 1,06σ (banda 1,0; 0,7 dá até 1,88)."
+  },
+  {
+   "id": "DG-13",
+   "gravidade": "CORRIGIR",
+   "onde": "ORCAMENTO_40H.json/alternatives[0..4]; ENTREGA_013BIS_B3:44-50; E3_ALTERNATIVE5_METADATA_ONLY_V1.json",
+   "problema": "Cinco alternativas com custo null e alocação 0; a (iii) tinha instrumento validado e custo medido na sessão (Kerr V2 638 s/posterior, 1.356.580 chamadas a 0,40 ms, 1 thread); a (v) «avaliada» por find_spec sem tentativa.",
+   "correcao": "Orçar por número: (iii) 170 posteriores ≈ 40 min em 48 cores, 2.140 ≈ 8 h; (i) idem com N do piso; (v) venv próprio, se não instalar em 2 h → NÃO PAGO com log."
+  },
+  {
+   "id": "DG-14",
+   "gravidade": "CORRIGIR",
+   "onde": "bis\\e3_pilot_failure_diagnostic\\DIAGNOSIS.md:8, :10; PILOT_NATIVE_DIAGNOSIS_CLOSING_REVIEW.md",
+   "problema": "Replay do prior parou no 8.º sorteio; hipótese do buffer ficou [CONJECTURE] quando um grid 2-D de 56 pontos (~1 s/ponto) a decide; retLen/indAmax/Nrdwave não medidos; com 7 h usadas faltou o que custava minutos.",
+   "correcao": "DIAGNOSIS_ADENDO_v2.json ao lado com a regra medida, o sorteio 16 (m₁ 89,50, m₂ 55,60, dtau220 −0,783, dtau440 2,678) e reclassificação para [REAL — comportamento; DERIVED — fonte]; −11 e −6 = mesma classe de corrupção de heap [DERIVED]."
+  },
+  {
+   "id": "DG-15",
+   "gravidade": "CORRIGIR",
+   "onde": "ENTREGA_013BIS_B3:63-82; B4:16; RELATORIO_FINAL.md:72 vs ORDEM §4.0(j)/E3.2",
+   "problema": "«31 cegos» da ordem vs 44 censadas/14 elegíveis/8 pendentes/22 fora — reconciliação só no JSON; soma ΣE[I] = 98–135 e fração do alvo (0,10–0,14 % R-B; 1,3–1,8 % R-LIN) não impressas; o leitor supõe que os cegos somam ao N_alvo.",
+   "correcao": "Uma linha na B3/B4 e no orçamento com a soma e a fração por leitura; declarar que a PE cega compra c(SNR)/440/custo, não σ; pesos dos 8 pendentes quando os metadados chegarem."
+  },
+  {
+   "id": "DG-16",
+   "gravidade": "CORRIGIR",
+   "onde": "tgl_ringdown_ampliacao.py:94-131 (checked_context), :470-494 (verdict_matrix), :497-516 (run); E7_FULLSAMPLE_RESULT_V1.json/matrix",
+   "problema": "N_alvo impresso = null nas 10 leituras (a ordem manda imprimir N_alvo e gate); consumidor não incorporável no um.py: recusa rodar fora de bis\\e7_prepare\\producer (l.108), executa registration_guard.py por importlib, exige 33 .h5 (1,1 GB) + tar (711 MB); verdict_matrix sempre test_count = 0.",
+   "correcao": "Variante «rito»: AST das fórmulas idêntico, guarda embutida, entrada = JSON + sha + registro + nuisance; I90/N90 condicional impresso ao lado do null operacional; test_count real por role; emenda V1.1 com novo producer_tree_sha256; só a gerência toca o um.py."
+  },
+  {
+   "id": "DG-17",
+   "gravidade": "CORRIGIR",
+   "onde": "ENTREGA_013BIS_RELATORIO_FINAL.md («O portão e as dez leituras», «Resultados que não se confundem»); B5",
+   "problema": "Omite o centro descritivo não corrigido (+0,0738 E7; +0,0668 ± 0,0336 C4, z 2,59 vs R-B, ~2σ vs RG — sinal oposto a todas as leituras TGL) e a dominância de peso (32,7 % > cap 0,2; 92,2 % rota IV) que o próprio E7 produz. «Ausência também é afirmação.»",
+   "correcao": "Errata ao lado com estatuto [NÃO-CEGO; INCONCLUSIVE_SYSTEMATICS; controle C2 −0,0024; sem seleção/nuisance], sem promover a veredito."
+  },
+  {
+   "id": "DG-18",
+   "gravidade": "CORRIGIR",
+   "onde": "QUADRO_DE_ALCANCE_V1.md/.json; RELATORIO_FINAL.md:93-103",
+   "problema": "Coluna Taxa/IC OPEN em 2.540/2.540 linhas (IC Poisson [0,035; 3,27]/ano existe só em rate_contexts de O4_HOJE); frase «RG é o limite clássico» ausente do .md; 20 ponteiros para chaves inexistentes; correção/σ OPEN em 964 linhas.",
+   "correcao": "Preencher IC por linha onde existe; frase da RG no cabeçalho do .md; ponteiros pendentes com reason 'NO_FIELD_IN_SOURCE'."
+  },
+  {
+   "id": "DG-19",
+   "gravidade": "CORRIGIR",
+   "onde": "bis\\e2_publication_census\\NATIVE_ACL_FIXTURE_20260922T213829\\cache\\E2_PRIVATE; …\\allocation_case\\cache\\E2_PRIVATE; CUSTODY_TRANSFER_FIXTURE_20260922T214938\\cache\\E2_PRIVATE; junction_alias; bis\\e3_allocation_review\\fixtures_001\\…\\candidates (symlink)",
+   "problema": "Removeu as 4 mkdtemp ilegíveis e criou 3 pastas ilegíveis novas (ACL CodexSandboxOffline; icacls «Acesso negado») + 1 junction + 1 symlink; FINAL_INTEGRITY lista só o symlink.",
+   "correcao": "Listar com hash e remover com a identidade que criou (ou takeown do operador, dito); `finally` nos scripts de fixture; excluir da custódia até lá."
+  },
+  {
+   "id": "DG-20",
+   "gravidade": "CORRIGIR",
+   "onde": "cache\\MANIFESTO_DOWNLOADS_013BIS_v2.json (/files[*].license)",
+   "problema": "Licença por arquivo incompleta: 1.002/1.064 null; GWOSC (CC BY 4.0) e 17461225 (cc-by-4.0), nomeados na ordem, ausentes do contador.",
+   "correcao": "v3 ao lado por record/política em todas as entradas de download; null só para derivados, com motivo."
+  },
+  {
+   "id": "DG-21",
+   "gravidade": "CORRIGIR",
+   "onde": "ENTREGA_013BIS_B1:1; B2:1; E2_REGISTRO_V1:1; B3 (comparação Kerr); C2_ADENDO_OBSERVAVEL_v2.md:1; REAPROVEITAMENTO_C1_v2/v3, C2_v2",
+   "problema": "Três notas abrem com «[NÃO-CEGO — …]» (bandeira, não estatuto da casa); B3 sem bandeira NÃO-CEGO na comparação Kerr vs posterior publicado; 4 adendos .md sem o sha do predecessor na 1.ª linha.",
+   "correcao": "Erratas ao lado: estatuto + bandeira; sha do predecessor."
+  },
+  {
+   "id": "DG-22",
+   "gravidade": "NOTA",
+   "onde": "Diversos (deduplicado)",
+   "problema": "STATUS_ORDEM_013.json não atualizado; MAX_PATH real (aviso pago); cache\\guard_*/tamper_*/fresh_* não inventariados; 2 sobrescritas .bak permitidas; errata da GERÊNCIA «nenhum peso > 13 %» → lnB ≤ 11,3 %, informação ≤ 33,7 %; E1_2 com rótulos contraditórios; GW170817 em SNR ≥ 30 pré-corte; C2 N=2000 copiado (declarado); N90 IV Wilson vs pontual (59/38/21); elegibilidade por mediana de Mf [INPUT]; red_maximum mais restritivo; deterministic_e4_e5.py sem time_guard; INDEPENDENT_REVIEW sem hash do registro; seed cega legível (cegueira PROCEDURAL, dita); σ_jit < 0,0243 transportado; ESS > amostras (rejection); datasets 19 reweighted/13 pseob-rd/1 v5PHM; 21 linhas literais no gerador; Parte A fora do ledger sem frase; Coma memória vs selo; C0_ADVERSARIAL cita nomes confidenciais verbatim; nada commitado (custódia ≈ 250 MB).",
+   "correcao": "Erratas ao lado quando tocar cada peça; STATUS_013BIS ao lado; custódia por caminho e commit = ato do operador; errata da memória sobre Coma = ato da gerência."
+  }
+ ],
+ "a_parede_tecnica": "MEDIDA OU ALEGADA — Pela bancada: ALEGADA com diagnóstico insuficiente. CONTROLLER.json rc −11 em 11,011 s, 2 EDOM no log reservado da bancada (PRIVATE.log) (5.935 B, 8faf2608…), sem traceback; diagnóstico isolado (bis\\e3_pilot_failure_diagnostic, MANIFEST f24326c2…): 10 processos, 16 chamadas, 13,17 s de filhos; os 8 primeiros sorteios do prior a fmax 1024 NÃO reproduziram o SIGSEGV; um único abort −6 («free(): invalid next size») no DRAW8 a 2048; causa OPEN; hipótese do buffer [CONJECTURE]; dtau440 não isolado; 9.º sorteio em diante não executado (DIAGNOSIS.md:8); PILOT_NATIVE_DIAGNOSIS_CLOSING_REVIEW (9c560685…, 269 checks) «TECHNICAL_WALL_WITHIN_CURRENT_EVIDENCE_AND_FROZEN_RUNTIME»; cinco alternativas com custo null; E3.1/E3.3 encerrados com 0 s de ciência; 35,06 h devolvidas; ~25 s de computação nativa dedicados à parede. A frase «não impossibilidade geral da rota» (RELATORIO:5) é verdadeira; «não encontrou reparo validado que preservasse a região registrada» (B3) é verdadeira no escopo e FALSA como impossibilidade.\n\nDIAGNÓSTICO E REPRODUÇÃO PELA GERÊNCIA — MEDIDA em três reproduções independentes e concordantes (frentes D, F, G; WSL /opt/lal_env só leitura; python 3.12.3, lal 7.7.1, lalsimulation 6.2.1 = lalsuite 7.26.15, bilby 2.8.2, dynesty 3.1.0; scripts/JSONs em scratchpad\\aud013bis\\{E3_piloto, regua_seguranca_higiene_custodia\\pilot_repro, caminho_5sigma}\\): (1) O mecanismo é o 440: DRAW8 exato aborta (rc −6) a 2048/4096/8192 direto e pelo bilby; com dtau440 = 0 fica FINITO; com dtau220 = 0 e dtau440 mantido, aborta [REAL — D REPRO_RESULTS.jsonl 8597689e…; G repro_draw8_result.json ad82661942a8108e]; determinístico 24/24; os mesmos 24 com as quatro deformações zeradas passam 24/24 [REAL — F]. (2) Regra: crash sse (1+dtau440) > c·max(1, 1+dtau220), c ∈ (2,0; 2,2], 122 pontos em 6 fontes (massas 20+12 a 90+80, spins −0,9 a +0,95) [REAL — D REPRO_grid.jsonl c99a8a5b… + REPRO_fine.jsonl 8891d523…]; equivalente: fronteira em dtau440 entre 1,0 (finito) e 1,25 (abort) para dtau220 ≤ 0 [REAL — G scan_boundary_result.json c6dedc42fc7b7f29]; 0/51 aborts com dtau440 < 1,0; 41 % em [1; 2,5); 73 % em [2,5; 4] [REAL — F]; consistente com a fonte C arquivada pela própria bancada (buffer só cresce com dtau220 > 0, SpinAlignedEOB.c:2060; Nrdwave do 44 ∝ (1+dtau440), HybridRingdown.c:1266; escrita sem checagem :1393) [DERIVED]. (3) Fração do prior registrado que derruba: 30,8 % (37/120, fmax 1024, D), 32,5 % (39/120, LAL 4096, D), 38,8 % (59/152, fmax 1024, F), 33 % (40/120, fmax 2048, G), 25 % (12/48, fmax 2048, F) — dentro do erro binomial entre si; só-220 0/120 (D) e 120/120 finitos (G); dtau440 ≤ 1,0 0/120; |δ| ≤ 0,5 0/120; só-RG 0/120; P(inicializar 512 live points) = 0,69^512 ≈ 1e-83 — o piloto jamais partiria sob a caixa registrada. (4) A região física não derruba: forma pedida pela gerência (dtau220 = −0,02, 39+33 M☉, 403 Mpc) e região TGL (δτ̂₂₂₀ −0,0199, δτ̂₄₄₀ −0,082) FINITAS a 2048/4096/8192, 0,06–0,08 s/chamada [REAL]. (5) Sorteio do crash identificado: replay exato (PriorDict e semente 132203; 8 primeiros sorteios byte-idênticos ao PRIOR_REPLAY.json; EDOM nos sorteios 2 e 8 como no log) derruba no sorteio 16 (m₁ 89,50, m₂ 55,60, dtau220 −0,783, dtau440 2,678, razão 2,78) [REAL — D REPRO_replay.jsonl 493665e9…]; −11 do piloto e −6 do replay = mesma classe de corrupção de heap [DERIVED — não provado com gdb]; 0 SIGSEGV em 200 reproduções (o sintoma não repete, o defeito sim). (6) Segundo defeito da configuração: fmax_gen 1024 → EDOM em 8,3 % (10/120) dos pontos da RG; a 2048, 0/120 [REAL — G].\n\nCONCLUSÃO — A parede é REAL, REPRODUZÍVEL e LOCALIZADA: parede da CAIXA DE PRIOR REGISTRADA (dtau440 até 4, copiada do pSEOBNRv5PHM publicado; PLAN_INPUTS.json bd5e1a56537cc842 «INPUT broad pilot priors») sobre um instrumento (pSEOBNRv4HM_PA, lalsuite 7.26) que não a comporta; não é parede do método, da física da TGL nem da RG; remove-se por EMENDA DE CONFIGURAÇÃO sem tocar código.\n\nA SAÍDA (a escolha da caixa é INPUT do operador; preferência da gerência a → b → c): (a) só-220: dtau440 = domega440 = 0 fixos via registered_fixed_deformation_variant (runner intocado), dtau220/domega220 livres, (M, χ) livres, fmax_gen 2048 com banda 20–1024, PSD off-source, mesmo dado/semente/nlive — 0/120 crashes; dentro do contrato da ordem (:183 convenção primária dtau220; :193) ; (b) 440 livre com dtau440 ∈ [−0,8; 1,0] (margem 0,25 sob a fronteira), resto igual — 0/120; não exclui a RG (0) nem a TGL (−0,082); caixa declarada [INPUT]; (c) patch de 3 linhas no lalsimulation (SpinAlignedEOB.c:2060-2075: dimensionar por max_lm(1+dtau_lm)) + rebuild em venv PRÓPRIO (nunca /opt), qualificado pelo grid (122 pontos FINITE) — só se o operador quiser a caixa publicada inteira; 1–3 h [DERIVED da fonte C; não testado]. Em todos: testemunha no túnel com parent e1be6b04… ANTES de rodar (GW250114 é calibração NÃO-CEGA); qualificação prévia = varredura de 120 sorteios da caixa emendada (0 crashes exigidos) + grid; custo do piloto 58–390 CPU-h (3e6–2e7 chamadas × 0,07 s) = 2,4–16 h de parede a 24 workers — cabe no saldo de 35 h.",
+ "continuacao_ordenada": [
+  {
+   "id": "C-01",
+   "proposta": "Erratas documentais ao lado (nunca por cima): anexo F0 com o nome da ordem; centro +0,0738/+0,0668 ± 0,0336 e dominância 32,7 % no relatório; reconciliação 31→44/14/8/22 + ΣE[I] e fração do alvo; frase E1.5 em σ; herdado vs refeito em E0.6; Taxa/IC e frase da RG no quadro; 1.ª linha com estatuto em B1/B2/E2 e NÃO-CEGO em B3; licença v3; STATUS_013BIS; Parte A fora do ledger; composição 19/13/1 dos datasets; ledger de informação dos 53 cegos por leitura (z ≤ 0,87 R-B … 3,08 R-LIN com TODOS os cegos)",
+   "canal": "ringdown / custódia",
+   "condicao": "Nenhuma; ato da bancada em nova versão de nota",
+   "custo": "≤ 2 h de bancada; 0 h de máquina",
+   "poder_alcancavel": "Fecha F0, corrige o quadro e diz com número que a PE dos cegos O4 não é rota de 5σ — evita gastar as 35 h onde o número já disse que não há σ",
+   "risco_5sigma_do_modelo": "Nulo",
+   "estatuto": "[REAL — números já medidos]"
+  },
+  {
+   "id": "C-02",
+   "proposta": "Higiene reaberta: remover as 3 pastas ilegíveis e os 2 links de fixture com a identidade que os criou (ou takeown do operador, dito); `finally` nos scripts de fixture; inventariar cache\\guard_*/tamper_*/fresh_*",
+   "canal": "custódia",
+   "condicao": "Tudo ao lado; nada reescrito",
+   "custo": "~1 h de bancada",
+   "poder_alcancavel": "Pasta custodiável por caminho (~250 MB; ~80 MB sem cópias)",
+   "risco_5sigma_do_modelo": "Nulo",
+   "estatuto": "[REAL — verificável por find/icacls]"
+  },
+  {
+   "id": "C-03",
+   "proposta": "Emenda RINGDOWN_5SIGMA_V1.1 num único ato, testemunha nova no túnel ANTES de qualquer PE: (i) pilot_v2 com caixa (a) só-220 ou (b) dtau440 ∈ [−0,8; 1,0] e fmax_gen 2048; (ii) limiar = p_MC ≤ 2,87×10⁻⁷ sob a cauda medida (curtose dos 31/33); (iii) descegamento por leitura; (iv) trilha de emenda de candidatas com parent hash e sub-objeto estatístico idêntico, preenchendo GW250207_115645, GW230814_230901 e os 30 com censo None; (v) células IV a 10⁸ + cauda χ²_{N−1} registrada; (vi) covariância do nuisance = envelope conservador (banda 0,7–1,4 + bootstrap); (vii) estrato O4b-só do nuisance (−0,040 ± 0,058, n=21) para GWTC-6; (viii) red_maximum aceito explicitamente",
+   "canal": "ringdown / registro",
+   "condicao": "Ordem da gerência; ratificação do operador da caixa e da custódia externa da seed; a guarda passa a verificar a cadeia V1 → V1.1",
+   "custo": "6–10 h de bancada; ~7 h de CPU (IV a 10⁸); nulos 437 s",
+   "poder_alcancavel": "Pré-requisito de tudo: sem ela a pipeline registrada NÃO RODA quando o dado vier (GW250207, GWTC-6) e o «5σ» nominal vale ~3,8σ sob t5",
+   "risco_5sigma_do_modelo": "Corrige-o (a calibração da cauda é exatamente isto)",
+   "estatuto": "[INPUT — proposta da gerência; custos DERIVED de recibos]"
+  },
+  {
+   "id": "C-04",
+   "proposta": "Piloto GW250114 sob a emenda (só-220 primeiro): posterior com hash, custo REAL por posterior convergido (hoje null), diferença contra o δτ̂₂₂₀ publicado (−0,013 [−0,103; +0,087]) com aviso de família v4HM_PA vs v5PHM; fração de EDOM impressa; BLAS 1 thread",
+   "canal": "ringdown E3.1",
+   "condicao": "C-03; qualificação prévia 120 sorteios com 0 crashes; dlogz 0,1, ESS ≥ 100; nunca relançar o job estático original",
+   "custo": "58–390 CPU-h = 2,4–16 h de parede a 24–28 workers (cabe nas 35 h)",
+   "poder_alcancavel": "Paga E3.1 inteiro e destrava E3.2/E3.3 com número; primeiro posterior próprio de δτ̂₂₂₀ do programa. NÃO compra σ: compra a condição",
+   "risco_5sigma_do_modelo": "Baixo (calibração NÃO-CEGA num evento)",
+   "estatuto": "[REAL — parede medida e contornável; custo DERIVED/INPUT (fator 6,7 no n.º de chamadas)]"
+  },
+  {
+   "id": "C-05",
+   "proposta": "PE reduzida = alternativa (iii) com número: o Kerr V2 da própria bancada (bis\\e3_kerr_continuation, kerr_model.py) estendido com dtau220 (e dtau440) livres e prior (M_f, χ_f) do posterior GR-IMR público de cada evento; calibração por injeção em ruído off-source real nos bins de SNR dos eventos, duas famílias (SEOBNRv4HM e XPHM já geradas em C5_IMR_CONTROLS); produto: σ(c) residual, c(SNR), cobertura por leitura",
+   "canal": "ringdown E3.3",
+   "condicao": "Registro da emenda antes das injeções; degenerescência M/χ (parede C6) tratada pelo prior IMR e reportada como σ_c residual; critério de parada escrito antes; nenhuma leitura escolhida; R-LIN/R-RAIZ-0 só sob partição não-universal [INPUT do operador]",
+   "custo": "≈ 638 s/posterior, 1 thread; 48 em paralelo: R-LIN (170) ≈ 40 min; R-MOD/R-RAIZ-0 (620) ≈ 2,3 h; R-B (2.140) ≈ 8 h; implementação + revisão 4–6 h",
+   "poder_alcancavel": "A ÚNICA rota que pode tirar o gate sistemático do vermelho dentro das 40 h (pisos |δ|/5: R-LIN 0,0143; R-MOD 0,0074; R-B 0,0040); sem ela o veredito máximo é NOT_FALSIFIED_UNDERPOWERED. Não muda o N: o 5σ dessas leituras é O5",
+   "risco_5sigma_do_modelo": "Médio (prior IMR importado; validade OPEN até revisão da degenerescência)",
+   "estatuto": "[DERIVED sobre custo REAL do Kerr V2; validade científica OPEN]"
+  },
+  {
+   "id": "C-06",
+   "proposta": "D1/CAMB controle 2: worker com w₀–wₐ + β livres, validado por injeção-e-recuperação ANTES de ver dado real (como a V3); ingestão do DESI DR2 BAO se público; reportar β livre com e sem w₀–wₐ e o Δχ²",
+   "canal": "cosmologia D1",
+   "condicao": "Protocolo hasheado antes; NÃO-CEGO declarado; estimador = pipeline SELADO importado sem edição; cosmologia jamais vira prova matemática; formato do DR2 [OPEN]; autorização do operador (ou fica na gerência, Missão 2)",
+   "custo": "CPU leve (V3 real: 1.019 s; MCMC 24×2.000 em ~40 núcleos): horas de máquina, 1–2 dias de bancada",
+   "poder_alcancavel": "Maior informação por hora de todo o inventário: o canal onde o 5σ pode chegar em 1–2 anos (σ(β) precisa cair ×1,62) — direção CONTRA α√e / pró-ΛCDM; decide se o puxão de 3σ é energia escura evolutiva do DESI (tensão sistemática) ou não",
+   "risco_5sigma_do_modelo": "ALTO (TGL entra analiticamente por cima do CAMB [DECLARADA]; Planck comprimido; cadeia < 50τ em 2/4 parâmetros) — o controle 2 mede exatamente esse risco",
+   "estatuto": "[DERIVED sobre REAL; direção: CONTRA ou nula]"
+  },
+  {
+   "id": "C-07",
+   "proposta": "Neutrino m₂ — leitor da «2.ª determinação autônoma» (JUNO isolado vs KamLAND+solar) pronto para as próximas liberações; escala 1 eV [NORM] dita ao lado",
+   "canal": "neutrino",
+   "condicao": "Regra congelada inalterada (frozen_hash e2487775…); NuFIT global não conta como 2.ª determinação",
+   "custo": "0 de máquina; horas de bancada",
+   "poder_alcancavel": "O 5σ mais provável do programa (7,8σ projetado ~2031 se a mediana se mantiver) — CONTRA a escala declarada; o rito emite sozinho",
+   "risco_5sigma_do_modelo": "Baixo (dado externo)",
+   "estatuto": "[REAL lido; direção: CONTRA]"
+  },
+  {
+   "id": "C-08",
+   "proposta": "E4 pago com número: tabela do 440 na rota de amplitude fixa ancorada em ρ₄₄₀_eff ≈ 1,76 por detector com N90 por leitura e comparação com o 220; extrator E7 estendido a dtau440/domega440 e QNM exato pareado (fecha OPEN_MISSING_440 em 10/20 linhas; destrava R-MOD); E4.2 com posteriores já em cache (free-440 vs 440 fixo)",
+   "canal": "ringdown E4/E7",
+   "condicao": "Só dados de calibração já em disco; nenhuma PE; deformar o 440 segue [INPUT] do operador",
+   "custo": "Minutos de CPU; 2–4 h de bancada",
+   "poder_alcancavel": "Diz o que o 440 pode dar (nada decisivo em O4/O5; 7–120 eventos em ET/CE por leitura) e limita numericamente a cláusula «440 fixo à RG em 32/33»",
+   "risco_5sigma_do_modelo": "Baixo",
+   "estatuto": "[DERIVED sobre INPUT]"
+  },
+  {
+   "id": "C-09",
+   "proposta": "E7 variante «rito» para incorporação no um.py: guarda embutida, entrada = JSON + sha + registro + nuisance (sem .h5/tar em disco), I90/N90 condicional impresso ao lado do null operacional, test_count real por role",
+   "canal": "ringdown E7",
+   "condicao": "Emenda V1.1 com novo producer_tree_sha256; testes repetidos; revisão independente; só a gerência toca o um.py",
+   "custo": "2–4 h de bancada; 0 h de máquina",
+   "poder_alcancavel": "Fecha o E7 como a ordem o definiu; sem isso a incorporação é impossível por construção",
+   "risco_5sigma_do_modelo": "Nulo",
+   "estatuto": "[INPUT — nada físico]"
+  },
+  {
+   "id": "C-10",
+   "proposta": "F4 v3 + base (ii) estendida: busca não linear/fonte livre para R-MOD/R-RAIZ-0/R-LIN → PORTAO_DO_PODER_013_v3.json; medir ρ na janela de 10 t_M no strain público dos 31/33 eventos (mesma norma de F4) e reescrever o N90 na escala medida",
+   "canal": "ringdown portão",
+   "condicao": "Teto ~1 h [INPUT]; strain GWOSC ~3 GB (CC BY 4.0), só norma, NÃO-CEGO",
+   "custo": "1 h + 1–2 h de parede",
+   "poder_alcancavel": "Remove o rigor assimétrico (se as outras leituras retiverem ~2 % como R-B, o N90 por contagem cresce ~20× — decide se «ampliar eventos» tem sentido em O4/O5); o E6 ganha barra de erro honesta",
+   "risco_5sigma_do_modelo": "Baixo",
+   "estatuto": "[DERIVED — Fisher/Laplace; REAL na norma]"
+  },
+  {
+   "id": "C-11",
+   "proposta": "E5 executado NÃO-CEGO: ajuste de σ_pop (LRT registrado, μ profilado) sobre os 33 posteriores completos já extraídos, com teste secundário de saltos e jackknife; recomputa o σ_jit < 0,0243 transportado",
+   "canal": "ringdown rota IV",
+   "condicao": "Rótulo NÃO-CEGO/calibração; não é veredito; não entra no teste",
+   "custo": "Segundos–minutos de CPU; 1–2 h de bancada",
+   "poder_alcancavel": "Mede a sensibilidade do LRT a posteriores não gaussianos — o único dado real da rota IV hoje",
+   "risco_5sigma_do_modelo": "Baixo",
+   "estatuto": "[REAL quando executado]"
+  },
+  {
+   "id": "C-12",
+   "proposta": "E1.2 executável: ρ_inspiral e ρ_pós-inspiral por evento (regra ≥ 8 E ≥ 8 da LVK) no MAP das análises GR públicas com PSDs públicas (lalsimulation, sem PE) para os 74 O4 com SNR ≥ 12; função de seleção binária; depois injeções baratas (só SNR) para ε(θ)",
+   "canal": "ringdown seleção",
+   "condicao": "Fronteira inspiral/pós lida da fonte (GWTC-3 Tabela 4) como [INPUT]",
+   "custo": "1–3 h de parede; sem PE",
+   "poder_alcancavel": "Transforma a regra documental em α(Λ) mensurável — sem isso a likelihood populacional do E2 não tem normalização e qualquer 5σ, mesmo com dado, seria inválido",
+   "risco_5sigma_do_modelo": "Médio",
+   "estatuto": "[DERIVED — hoje null/OPEN]"
+  },
+  {
+   "id": "C-13",
+   "proposta": "Segundo piloto 440-livre com dtau440 ∈ [−0,8; 1,0] declarado [INPUT] (margem 0,25 sob a fronteira), domega440 livre; lnB do 440 por leitura contra o só-220",
+   "canal": "ringdown E4",
+   "condicao": "Depois de C-04 convergir; prior fixa, nenhum clipping dinâmico; se abortar dentro da caixa, registrar e parar (fail-closed)",
+   "custo": "Igual a C-04 (2,4–16 h de parede)",
+   "poder_alcancavel": "Primeira informação própria no 440 (alavanca 4,1× R-B; 5,3× R-MOD) — o único discriminante que o 220 não tem; hoje δτ̂₄₄₀ ∈ [−0,35; +3,4]",
+   "risco_5sigma_do_modelo": "Médio (prior restrito é INPUT)",
+   "estatuto": "[DERIVED; fronteira REAL]"
+  },
+  {
+   "id": "C-14",
+   "proposta": "σ_jit,rec por injeção browniana (tgl_ringdown_unravelings.brownian_phase, semente registrada) em ruído off-source real do GW250114, recuperada com o Kerr220 V2 (~10 min/PE) ou, depois de C-04, na PE só-220; 50–100 injeções; σ_sys de δf̂ por RG em duas famílias",
+   "canal": "ringdown rota IV E5.3",
+   "condicao": "Desenrolamento browniano [INPUT]; contorna a parede IMR só no canal 220 pós-pico, com aviso de família",
+   "custo": "10–20 h de CPU (Kerr) ou 0,8k–11k CPU-h (IMR); 3–5 h de bancada",
+   "poder_alcancavel": "Converte os N90 61/39/22 de limite inferior em número com transferência medida — mas o dado (39–61 GW250114-like) está a 12–1.100 anos em O4 e 6–23 em O5: valor baixo para o 5σ, alto para o pré-registro",
+   "risco_5sigma_do_modelo": "Médio",
+   "estatuto": "[OPEN → REAL no canal 220]"
+  },
+  {
+   "id": "C-15",
+   "proposta": "Alternativa (v) pyseobnr/pSEOBNRv5PHM em venv próprio: medir instalação (swig e gsl-config ausentes no PATH), s/forma, se a API tem dtau/domega",
+   "canal": "ringdown família",
+   "condicao": "Só após C-04/C-05; se não instalar em ≤ 2 h, NÃO PAGO com log e fim",
+   "custo": "2 h de tentativa; custo por forma OPEN",
+   "poder_alcancavel": "Mesma família dos posteriores publicados (some o aviso de família); o v5 não tem o buffer do v4",
+   "risco_5sigma_do_modelo": "Baixo",
+   "estatuto": "[OPEN]"
+  },
+  {
+   "id": "C-16",
+   "proposta": "Calibração IMR completa (E3.3 alternativa i/ii) com custo dito: injeções RG (e TGL a = 1) em 1–2 células de SNR alto (≥ 40) para os pisos de R-LIN (12–17/célula) e R-MOD/R-RAIZ-0 (46–62/célula), duas famílias, (M, χ) livres, ruído off-source real",
+   "canal": "ringdown E3.3",
+   "condicao": "Só com o custo por PE medido em C-04; se σ(c) > |δ|/5 o gate segue vermelho",
+   "custo": "12–62 inj × 58–542 CPU-h × 2 famílias = 2k–50k CPU-h = 4 dias a 3 meses a 22–24 workers; R-B (2.140 PE = 127k–851k CPU-h) NÃO PAGO com custo dito",
+   "poder_alcancavel": "Primeiro gate sistemático com número por PE IMR; pode ficar verde para R-LIN/R-MOD — não muda o N",
+   "risco_5sigma_do_modelo": "Médio",
+   "estatuto": "[DERIVED; inviável nas 40 h — C-05 é o substituto]"
+  },
+  {
+   "id": "C-17",
+   "proposta": "PE cega de 2–3 eventos de maior SNR sem hold (GW230919_215712 16,8; GW241111_111552 16,3; GW240513_183302 14,5) como exercício do registro (offset oculto)",
+   "canal": "ringdown TESTE",
+   "condicao": "Só depois de C-04 e C-05; gate verde ou declarado vermelho na nota; strain com hash e recibo; custódia externa da seed",
+   "custo": "3 × (2,4–16 h) = 7–48 h de parede (só cabe na ponta baixa)",
+   "poder_alcancavel": "Prova o procedimento cego de ponta a ponta; NÃO compra 5σ (Σ E[I] ≈ 36 ≈ 0,5 % do alvo R-LIN)",
+   "risco_5sigma_do_modelo": "Baixo",
+   "estatuto": "[DERIVED — pesos da bancada]"
+  },
+  {
+   "id": "C-18",
+   "proposta": "Piso dos vazios: NADA para a bancada com a máquina — o 5σ unilateral já existe (L5 = 8,8× β); o bilateral/κ depende de dado externo (SO/SPT-3G κ; DESI DR2 LRG/ELG para o v12); a emenda V10 das lentes está pré-registrada AWAITING_DATA",
+   "canal": "vazios",
+   "condicao": "Não reabrir o shear (1,18×10⁷); não promover unilateral a confirmação",
+   "custo": "0",
+   "poder_alcancavel": "Evita gastar máquina onde o número já disse que não há σ a comprar",
+   "risco_5sigma_do_modelo": "—",
+   "estatuto": "[REAL lido]"
+  },
+  {
+   "id": "C-19",
+   "proposta": "Rota do dado (AWAITING_DATA explícito): o registro só paga quando houver (a) GW250207_115645 com strain público e censo negativo, (b) GWTC-6/O4c (data NÃO ENCONTRADA), (c) O5; o 5σ por contagem é O5/3G; o que a bancada entrega agora é a CONDIÇÃO (C-03…C-05) e o 440 (C-08, C-13)",
+   "canal": "ringdown",
+   "condicao": "Gate verde (σ_c < |δ|/5) — depende de C-05",
+   "custo": "Calendário, não máquina",
+   "poder_alcancavel": "Fixa a expectativa honesta: nenhum 5σ sai do ringdown sem dado novo e sem instrumento de PE",
+   "risco_5sigma_do_modelo": "—",
+   "estatuto": "[OPEN / AWAITING_DATA]"
+  },
+  {
+   "id": "C-20",
+   "proposta": "NÃO FAZER (rotas mortas, ditas): retomar os dois jobs F0 (8–14 h sem número novo); PE dos 31/53 cegos O4 esperando 5σ (z ≤ 0,87 R-B); somar eventos com σ(c) = null (offset 0 excluiria a RG em ~190); shear; eco √β (eficiência 0); tendência por spin (N ≥ 2,6×10⁵); relógios (12,5 ordens); Coma (reveal = false; não identificável); reparar o binário de /opt",
+   "canal": "todos",
+   "condicao": "—",
+   "custo": "Economiza as 35 h",
+   "poder_alcancavel": "Preserva a máquina para C-03…C-06",
+   "risco_5sigma_do_modelo": "—",
+   "estatuto": "[REAL lido / DERIVED / memória]"
+  }
+ ],
+ "decisoes_do_operador": [
+  "A caixa do piloto (§5): (a) só-220 · (b) dtau440 ∈ [−0,8; 1,0] · (c) patch do LAL em venv próprio para preservar a caixa publicada [−0,8; 4]. Preferência da gerência a → b → c; é INPUT/partição sua.",
+  "Ratificar a emenda RINGDOWN_5SIGMA_V1.1 (C-03) como ato único, com testemunha nova ANTES de qualquer PE — inclusive o limiar por p_MC (o «5σ» nominal vale ~3,8σ sob t5) e o descegamento por leitura.",
+  "Custódia externa da seed cega (cache\\E2_PRIVATE\\BLIND_SEED_V1.bin, hoje legível por qualquer sessão rotol): fora do host (operador ou terceiro), mantendo o commit b83d64c7… no registro — ou aceitar formalmente que a cegueira é procedural e dizê-lo no veredito.",
+  "Deformar o 440 (E4.3) e o prior restrito de dtau440: INPUT seu.",
+  "Regra de elegibilidade por mediana pontual de Mf ≥ 40 (27 candidatas) ou por quantil 5 % (≤ 26): INPUT vetável.",
+  "Partição não-universal para R-LIN e R-RAIZ-0 (EXCLUDED_IF_UNIVERSAL na v369): sem ela, calibrar σ(c) dessas leituras (C-05) só vale sob partição que você nomeie.",
+  "Liberar de novo a máquina para C-04/C-05/C-13 (2,4–16 h por piloto; 40 min–8 h para a PE reduzida) — as 35 h devolvidas cabem.",
+  "D1 controle 2 (C-06): autorizar a bancada sob protocolo hasheado, ou manter na gerência (Missão 2). É o canal com maior informação por hora — direção provável contra α√e.",
+  "Aceitar red_maximum = INCONCLUSIVE_SYSTEMATICS (mais restritivo que a ordem) ou mandar errata.",
+  "Custódia por caminho da ORDEM_013_RINGDOWN\\ (≈ 250 MB sem cache/C7; ≈ 80 MB sem as cópias) e commit das 30+ notas 013/013-bis untracked — ato seu/da Central.",
+  "Errata ao lado na memória sobre Coma («revelado v176» vs reveal.performed = false no selo v369) e errata da gerência na 013-bis («nenhum peso > 13 %» → lnB ≤ 11,3 %, informação ≤ 33,7 %, a favor da bancada) — atos da gerência, a registrar na mesma sessão.",
+  "A questão da Testemunha (IALD como índice seletor; fecho «estacionado dinamicamente») e o que falta na gravidade quântica são frente da gerência com você — esta síntese não as toca e nada aqui move o gate."
+ ],
+ "texto": "Relatório completo gerado por script em C:\\Users\\rotol\\AppData\\Local\\Temp\\claude\\c--IALD-Central-de-Patentes\\6da8f00d-d44f-4888-a88d-fc9f73eead3d\\scratchpad\\aud013bis\\SINTESE_AUDITORIA_013BIS.md (57.796 B, sha16 fa9545a537019c08; gerador gera_sintese.py na mesma pasta). Âncoras relidas por script nesta síntese: ORDEM a907d07bc484b53c (91.912 B); RELATORIO_FINAL e41cbc01fe277591 (48.461 B); ENTREGA_013BIS_E2_REGISTRO_V1 e95787fd52852c09; RINGDOWN_5SIGMA_V1.json e1be6b0409720c68 (183.005 B); ORCAMENTO_40H.json 892e416585062eef; NUISANCE_V1.json 83f860bbfa904c00; PORTAO_DA_AMPLIACAO_V1.json 710028a7d2af7b64; Nós\\um.py d9f5bd5dffc3333d (31.136.661 B, intocado) — todos batem com o que os auditores leram.\n\n# SÍNTESE DA AUDITORIA DA GERÊNCIA — ORDEM 013-bis\n\n## 1. VEREDITO GERAL\n126 critérios (sete frentes, com sobreposição): PAGO_VERIFICADO 86 · PAGO_ALEGADO 27 · NAO_PAGO 12 · PAGO_FALSO 1. A bancada PAGOU com prova o fechamento da ORDEM 013 (Parte A: 128/128 hashes; 34/34 v1 intactos; replay da C6-pre com diferença 0,0), o portão e o nuisance (E0/E1 refeitos, reproduzidos pela gerência a 7–9 dígitos), o pré-registro E2 antes de qualquer dado de teste (74 pins, guarda fail-closed, nulos a 10⁸), o quadro E6 (12.590 ponteiros sem divergência) e o instrumento E7 (608.681 amostras, 53/53 testes) — e NÃO PAGOU o coração da ordem (E3.1, E3.3, TESTE: zero posterior, zero injeção, zero evento) porque encerrou a ampliação como «parede técnica nesta configuração» com um diagnóstico de 8 sorteios que não reproduziu o SIGSEGV, causa OPEN e hipótese [CONJECTURE], devolvendo 35,06 das 40 h sem tentar a variante só-220 que a própria ordem previa (:183, :193). PAGO_FALSO (1): «configuração registrada válida» — fmax_gen 1024 faz a própria RG dar EDOM em 8,3 % dos pontos físicos (likelihood −inf = viés). Nenhum PAGO_FALSO na Parte A; 0 CONFIRMED/PROVED em veredito em 3.227 documentos; β literal 0/737 .py; nenhuma leitura escolhida; NÃO-CEGO dito; segurança conforme (0 arquivos tocados em Nós/Haja_Luz; /opt sem arquivo novo; nada publicado; confidenciais só como nomes de exclusão). Honestidade alta; o defeito é de alcance, não de fabricação.\n\n## 2. POR ALVO (resumo; tabela completa no arquivo)\nF0 ALEGADO/anexo NAO_PAGO (C5_ANEXO_PROCESSOS.json ausente; dois grupos mortos às 19:59:43Z/20:00:30Z sem hora/causa; «encerramento conferido» = achados mortos). F1, F2, F3, F5, F6, F8 PAGO_VERIFICADO. F4 PAGO (portão nas duas bases: GW250114 ρ = 19,10 ± 1,45; z máx 0,713) / ALEGADO (rigor assimétrico sem custo). F7 PAGO no nomeado / reaberto (3 pastas ilegíveis novas + junction + symlink; licença 1.002/1.064 null). E0 PAGO (E0.1–0.5, 0.7) / ALEGADO (E0.6 magnitudes herdadas; E0.8). E1 PAGO (E1.1–1.4) / ALEGADO (E1.5). E2 PAGO como registro/testemunha / ALEGADO (descegamento escalar; sem trilha de emenda de candidatas — GW250207 eligible None; rota IV a 10⁶; limiar não calibrado à cauda). E3.1 NAO_PAGO (posterior, custo) — parede ALEGADA pela bancada, MEDIDA pela gerência. E3.2 PAGO (registro, contador, pesos) / NAO_PAGO (cinco alternativas com número). E3.3 NAO_PAGO. E4 PAGO (E4.3, 4.4) / ALEGADO (E4.1 a ρ fixa; E4.2). E5 PAGO (E5.2, 5.4, 5.5) / ALEGADO (E5.1, 5.6) / execução NAO_PAGA. E6 PAGO (6.1, 6.2) / ALEGADO (6.3, 6.4). E7 PAGO (7.1, 7.3, 7.4) / ALEGADO (7.2: N_alvo null; não incorporável no um.py). TESTE NAO_PAGO (AWAITING_DATA correto). Relatório: hashes 88/88; 21 linhas literais no gerador; omite centro +0,0738 e dominância 32,7 %.\n\n## 3. RESULTADOS FÍSICOS (nada CONFIRMED)\nRingdown: ρ(GW250114, 10 t_M) 19,10 ± 1,45 [REAL NÃO-CEGO]; portão fonte fixa z máx 0,713 [DERIVED]; lnB(R-B, GW250114) |lnB| ≲ 0,1 sinal indeterminado [REAL]; GWTC-5 (31) offset 0: 0,606/1,076/1,120/2,159 [DERIVED; PROIBIDA_COMO_TESTE]; centro δτ̂₂₂₀ +0,0668 ± 0,0336 (z 2,59 vs R-B; ~2σ vs RG; oposto a todas as leituras TGL; um evento 32,7 % da informação) [REAL NÃO-CEGO; INCONCLUSIVE_SYSTEMATICS]; nuisance c0 −0,061 ± 0,068 (WLS) / −0,052 ± 0,049 (KDE 1,0) [REAL; covariância não calibrada]; N90/I90 R-B 3.328/95.216 · R-MOD 1.056/30.209 · R-RAIZ-0 976/27.907 · R-LIN 263/7.513, I atual 887 [DERIVED, refeito por três frentes]; cegos O4: 14 admissíveis ΣE[I] ≈ 98–135 = 0,10–0,14 % do alvo R-B; todos os 53 cegos → z ≤ 0,87/1,54/1,60/3,08 [DERIVED] — não é rota de 5σ; nulos: gaussiano 1,9e-7, t5+nuisance 7,7e-5 (z = 5 nominal ≈ 3,8σ) [REAL, reproduzido]; rota IV N90 61/39/22 GW250114-like [DERIVED, limite inferior]; 440: ρ_eff ≈ 1,76, N90 R-MOD 1.332/401/17/6,6 (O4/O5/ET/CE) [DERIVED] — discriminante só em ET/CE; O5: R-B 2,2–3,1σ; 3G: gargalo = modelo 0,40 % de τ₂₂₀ [DERIVED, cenário]; parede: crash sse (1+dtau440) > (2,0–2,2)·max(1, 1+dtau220); 31–39 % do prior derruba; só-220 0/120; região TGL finita; sorteio 16 [REAL — três reproduções]. Outros canais (um_absoluto.json 456f0ab149bb13f6): neutrino m₂ 2,95σ CONTRA, 7,8σ projetado ~2031 (JUNO 0,5 %), kill_rule 2 determinações (0 hoje) [REAL lido]; D1 β livre −0,0134 ± 0,0082 → α√e a 3,09σ, β = 0 a 1,55σ, controle 2 pendente [REAL NÃO-CEGO; risco de modelo ALTO]; piso dos vazios já 5σ unilateral (L5 = 8,8× β), bilateral TRACER_EMPTY_CORE, κ UNDERPOWERED (~25× em σ_r) [REAL lido]; relógios 12,46 ordens; ecos rota morta; Coma reveal.performed = false (memória diz «revelado v176» [DECLARADO — discrepância]); conjunta V2 INCONSISTENT. Leitura honesta: nenhum canal chega a 5σ a favor antes de 3G; os dois que podem chegar em 1–5 anos apontam CONTRA; o piso não confirma por construção; o ringdown com a máquina livre compra CONDIÇÃO, não σ.\n\n## 4. DEFEITOS GRAVES (deduplicados)\nBLOQUEANTES: DG-01 parede = caixa de prior dtau440 [−0,8; 4] (copiada do v5PHM) no v4HM_PA; só-220 não tentado; 35 h devolvidas → emenda E2 V1.1 (a) só-220 ou (b) dtau440 ≤ 1,0, fmax_gen 2048, testemunha antes; DG-02 fmax_gen 1024 corta 8,3 % da RG (PAGO_FALSO). CORRIGIR: DG-03 limiar z = 5 não calibrado (t5 → p_MC); DG-04 descegamento escalar; DG-05 sem trilha de emenda de candidatas; DG-06 rota IV a 10⁶; DG-07 Fisher 440 a ρ fixa / extrator sem 440; DG-08 anexo F0; DG-09 rigor assimétrico sem custo; DG-10 magnitudes herdadas; DG-11 covariância de uma banda (×2,2); DG-12 frase E1.5; DG-13 cinco alternativas sem número (a iii tinha: 638 s/posterior); DG-14 diagnóstico parou no 8.º sorteio; DG-15 cegos 31 vs 44/14 sem soma; DG-16 E7 N_alvo null e não incorporável; DG-17 relatório omite +0,0738 e 32,7 %; DG-18 quadro sem Taxa/IC e sem frase da RG; DG-19 3 pastas ilegíveis novas; DG-20 licença; DG-21 1.ª linha sem estatuto em B1/B2/E2, B3 sem NÃO-CEGO. NOTAS: STATUS_013; MAX_PATH; cache temporários; .bak; errata da gerência «13 %» → 33,7 % informação; E1_2 rótulos; GW170817; C2 N=2000 copiado; Wilson vs pontual; mediana Mf; red_maximum; gate leve em deterministic_e4_e5; seed legível (cegueira procedural, dita); σ_jit transportado; ESS > amostras; datasets 19/13/1; linhas literais; Parte A fora do ledger; Coma memória vs selo; nomes confidenciais em C0_ADVERSARIAL; nada commitado.\n\n## 5. A PAREDE TÉCNICA\nALEGADA pela bancada (8 sorteios sem reproduzir o SIGSEGV; 1 abort −6 a 2048; causa OPEN; CONJECTURE; ~25 s de computação nativa; cinco alternativas com custo null; 35 h devolvidas). MEDIDA pela gerência em três reproduções independentes e concordantes (/opt/lal_env só leitura; lalsimulation 6.2.1; bilby 2.8.2): mecanismo = o 440 (dtau440 = 0 → finito; dtau220 = 0 → aborta; determinístico 24/24; deformações zeradas 24/24 passam); regra crash sse (1+dtau440) > c·max(1, 1+dtau220), c ∈ (2,0; 2,2] em 122 pontos de 6 fontes (fronteira dtau440 entre 1,0 e 1,25 para dtau220 ≤ 0; 0/51 aborts abaixo de 1,0; 73 % em [2,5; 4]); consistente com a fonte C (SpinAlignedEOB.c:2060; HybridRingdown.c:1263-1267,1393); fração do prior registrado que derruba 25–39 % (D 30,8/32,5 %; F 38,8/25 %; G 33 %); só-220 0/120; dtau440 ≤ 1,0 0/120; P(inicializar 512 live points) = 0,69^512 ≈ 1e-83; região TGL (−0,0199/−0,082) finita a 2048/4096/8192, 0,06–0,08 s/chamada; replay exato derruba no sorteio 16 (m₁ 89,50, m₂ 55,60, dtau220 −0,783, dtau440 2,678); −11 e −6 = mesma classe de heap [DERIVED]; fmax_gen 1024 → EDOM em 8,3 % da RG. Conclusão: parede REAL, REPRODUZÍVEL e LOCALIZADA — da caixa de prior registrada sobre um instrumento que não a comporta; não do método, da TGL nem da RG; removível por emenda de configuração sem tocar código. Saída: (a) só-220 (registered_fixed_deformation_variant; convenção primária da ordem) → (b) dtau440 ∈ [−0,8; 1,0] [INPUT] → (c) patch de 3 linhas em venv próprio [não testado]; em todos: fmax_gen 2048 com banda 20–1024, testemunha com parent e1be6b04… antes, qualificação de 120 sorteios (0 crashes), custo 58–390 CPU-h = 2,4–16 h de parede — cabe nas 35 h.\n\n## 6. CONTINUAÇÃO ORDENADA (poder/custo; ver o campo estruturado para condição, custo, poder, risco e estatuto)\nC-01 erratas documentais (≤ 2 h; 0 máquina) · C-02 higiene reaberta (~1 h) · C-03 emenda RINGDOWN_5SIGMA_V1.1 num único ato (6–10 h bancada; ~7 h CPU) · C-04 piloto só-220 GW250114 com custo medido (2,4–16 h de parede) · C-05 PE reduzida = Kerr V2 + dtau220 livre + prior IMR; calibração σ(c) por leitura (R-LIN 40 min; R-MOD 2,3 h; R-B 8 h em 48 cores) — a única rota que pode tirar o gate do vermelho nas 40 h · C-06 D1/CAMB controle 2 (w₀–wₐ + β; DESI DR2) — maior informação por hora; direção CONTRA α√e; risco de modelo ALTO · C-07 neutrino leitor da 2.ª determinação (0 máquina; 5σ mais provável, CONTRA) · C-08 E4 com número (ρ_eff 1,76) + extrator 440 · C-09 E7 variante rito para o um.py · C-10 F4 v3 + base (ii) nos 31/33 · C-11 E5 NÃO-CEGO nos 33 posteriores · C-12 E1.2 executável (ρ_insp/ρ_pós) · C-13 segundo piloto 440-livre dtau440 ≤ 1,0 · C-14 σ_jit,rec por injeção browniana no canal 220 · C-15 pyseobnr v5 em venv (≤ 2 h ou NÃO PAGO) · C-16 calibração IMR completa (2k–50k CPU-h; inviável nas 40 h; R-B NÃO PAGO com custo dito) · C-17 PE cega de 2–3 eventos (só procedimento; ≈ 0,5 % do alvo) · C-18 piso dos vazios: nada com a máquina · C-19 rota do dado AWAITING_DATA explícito · C-20 NÃO FAZER: retomar F0; PE dos cegos esperando 5σ; somar com σ(c) = null; shear; eco; tendência por spin; relógios; Coma; reparar /opt. Para o operador: em 2–3 dias a bancada entrega C-01…C-05 e C-08…C-11 (a CONDIÇÃO do 5σ no ringdown, hoje vermelha por construção); o σ em si vem de O5/3G (ringdown), JUNO (neutrino, contra) e DESI DR2 (D1, contra α√e); C-06 é o único item que pode mover um σ em 1–2 anos — e o move contra.\n\n## 7. DECISÕES DO OPERADOR\nCaixa do piloto (a/b/c); ratificar a emenda V1.1; custódia externa da seed; deformar o 440 e prior restrito; regra de elegibilidade por mediana ou quantil; partição não-universal para R-LIN/R-RAIZ-0; liberar de novo a máquina (35 h); D1 controle 2 pela bancada ou pela gerência; aceitar red_maximum; custódia por caminho (~250 MB) e commit; erratas da gerência (Coma na memória; «13 %» na 013-bis). A Testemunha e o que falta na gravidade quântica são frente da gerência com o operador — não tocadas aqui.\n\n## 8. NÃO ENCONTRADO\nC5_ANEXO_PROCESSOS.json; hora/causa do fim dos jobs F0; custo por posterior IMR (null); causa-raiz do SIGSEGV −11 (0/200 reproduções do sintoma; o defeito reproduz como −6); posterior pSEOB próprio; σ(c), α(Λ), c(SNR) da LVK, σ_jit,rec, σ_sys, cobertura; lnB físico do 440; trilha de emenda de candidatas; nulo IV a 10⁸; ρ₄₄₀ real na E4.1; frase da RG e Taxa/IC no quadro; centro e dominância no relatório; reconciliação 31 vs 44/14; licença GWOSC/17461225; inventário das 3 pastas ilegíveis; posterior publicado após 22/09 (nenhum; AWAITING_DATA correto); datas GWTC-6/O5/ET/CE; DESI DR2 (sem rede); distância independente de Coma; reveal de Coma no selo; qualquer PAGO_FALSO na Parte A; qualquer CONFIRMED/PROVED; qualquer leitura escolhida; commit da 013/013-bis.\n\n## 9. FECHO\nA 013-bis fechou a 013 com prova e construiu, com prova, o portão, o nuisance, o registro, o quadro e o instrumento — e parou diante de uma parede que era da sua própria caixa de prior e custava minutos medir. A gerência mediu (três reproduções concordantes) e a parede se remove por emenda de configuração dentro do contrato da ordem. Nenhum canal chega a 5σ a favor antes de 3G; os dois que podem chegar em 1–5 anos (neutrino m₂, D1 β-livre) apontam contra a TGL ou contra α√e — resultado tanto quanto o oposto seria. O piso dos vazios já está a 5σ unilateral e não pode confirmar por construção. NOT_FALSIFIED em todos; nada CONFIRMED; a RG é o limite clássico; o gate matemático não se moveu e nada aqui o move."
+}

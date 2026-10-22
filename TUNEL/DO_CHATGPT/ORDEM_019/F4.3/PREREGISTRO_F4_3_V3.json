@@ -1,0 +1,214 @@
+{
+  "id": "F4.3_220_PLUS_440_SHARED_SOURCE_V3_DESIGN_R4",
+  "unit": "F4.3",
+  "status": "PRE_REGISTERED_DESIGN__AWAITING_POWER__OPERATOR_REQUEST_SUSPENDED__NO_DATA_OPENED",
+  "corrects_for_reading_only": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\PREREGISTRO_F4_3_V2.json",
+    "bytes": 7061,
+    "sha256": "cf39d2a2fe919827b9a2e9ca48796c622675f81b54eebc598af8441bc53eaadc"
+  },
+  "sources": {
+    "v1_primary": {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\preregistro_ramo_b_05out\\PREREGISTRO_RAMO_B_RINGDOWN_V1.json",
+      "bytes": 138727,
+      "sha256": "86f98fcc124dd9cae04fdb06bd10c14175893253d5b139496bd4c05f109feee0"
+    },
+    "c1_audit": {
+      "path": "C:\\IALD\\PROGRAMA_IALD\\auditorias\\F3.6.E1\\AUDITORIA_F3_6_E1_C1_a4f6da3d.md",
+      "bytes": 8488,
+      "sha256": "8dd3a16090c02ca3a144f42ac95071670a49031ed39b2282551de0c3056d5361"
+    },
+    "analytic_screen": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\PODER_ANALITICO_F43_R4_20261008.json",
+      "bytes": 1862,
+      "sha256": "753f20d46d030b02b5abcc40cb67341fbf61831370cef74c118cd3ee1819abec"
+    }
+  },
+  "clock_and_hypotheses": {
+    "decision_formula": "tau_star = (2*pi/kappa_hat(chi_f))*G*M_f/c^3; one k and one M_f per event for 220 and 440",
+    "k_at_chi_0p6145_0p67847_0p70": [
+      28.49500882369727,
+      29.672138111493226,
+      30.162809114161146
+    ],
+    "delta_tau_220_exact": [
+      -0.3384833082411655,
+      -0.3747524878774464,
+      -0.3891508607501723
+    ],
+    "delta_tau_440_fixed_source": [
+      -0.6937071119717944,
+      -0.725884794467944,
+      -0.7376925123649588
+    ],
+    "q220_required": [
+      1.9785761292593038,
+      2.0058647913237992,
+      2.0134102652420824
+    ],
+    "prograde_grid_q_min": 2.100168377611806,
+    "prograde_only_conclusion": "no (M,chi) in pinned prograde grid absorbs 220 at V1 clock [DERIVED by c1]",
+    "counter_rotating_family": "220-only can be absorbed at chi~0.10..0.22 and M/M_f~0.58..0.72 [DECLARED by c1/skeptic; not recalculated here]",
+    "only_full_IMR_closes_counter_rotating_escape": true,
+    "legacy_k1_scope": "seq 58/87/91, C6 lnB~-0.0026, B2 Fisher and GW250114 proxy ~0.06 sigma; historical controls only, not V1 power"
+  },
+  "hypotheses": {
+    "GR": "Kerr 220 and 440, same final mass/spin, per-mode amplitudes/phases profiled",
+    "B_220_440": "V1 local KMS clock, exact additive-rate envelope for both modes; 440 deformation is INPUT",
+    "B_220_only": "control: 220 deformed, 440 Kerr",
+    "canonical": "Planck-clock correspondence control"
+  },
+  "primary_and_secondary": {
+    "primary": "V1 full IMR with C3; its official verdict is preserved as a separate field",
+    "secondary": "F4.3 ringdown-only; all DIAGNOSTIC_* tokens below are LOCAL, not V1 outputs",
+    "C8": "one k and one M_f per event; never credit 221 to 440",
+    "FWER": "same-direction corroboration requires V1 and F4.3 each to pass calibrated one-sided p <= alpha; intersection false claim <= alpha without independence",
+    "alpha_one_sided": 2.8665e-07
+  },
+  "v1_official_base_tokens": [
+    "AWAITING_DATA",
+    "INCONCLUSIVE_SYSTEMATICS",
+    "NOT_FALSIFIED_UNDERPOWERED",
+    "FALSIFIED_AT_5SIGMA",
+    "NOT_FALSIFIED_POWERED"
+  ],
+  "v1_official_suffix": "__GR_TENSION_REPORTED only on V1 NOT_FALSIFIED_POWERED when its own GR test meets V1 rule",
+  "local_diagnostic_ordered_output": [
+    "AWAITING_POWER",
+    "DIAGNOSTIC_UNDERPOWERED_OR_NONIDENTIFIABLE",
+    "DIAGNOSTIC_INCONCLUSIVE_SYSTEMATICS",
+    "DIAGNOSTIC_BOTH_MODELS_REJECTED",
+    "DIAGNOSTIC_CONFLICTS_V1",
+    "DIAGNOSTIC_CORROBORATES_V1_SAME_DIRECTION",
+    "DIAGNOSTIC_ONLY__NEITHER_REJECTED",
+    "DIAGNOSTIC_ONLY__NO_V1_DIRECTION"
+  ],
+  "local_aliases_retired": {
+    "INCONCLUSIVE_SYSTEMATICS__BOTH_MODELS_REJECTED": "DIAGNOSTIC_BOTH_MODELS_REJECTED; joint reading INCONCLUSIVE_SYSTEMATICS, V1 field unchanged",
+    "UNDERPOWERED_OR_NONIDENTIFIABLE": "DIAGNOSTIC_UNDERPOWERED_OR_NONIDENTIFIABLE; V1 NOT_FALSIFIED_UNDERPOWERED only if V1 itself fails its power gate",
+    "NOT_FALSIFIED_POWERED from neither_rejected": "DIAGNOSTIC_ONLY__NEITHER_REJECTED; only V1 can emit official NOT_FALSIFIED_POWERED"
+  },
+  "decision_table": [
+    {
+      "when": "manifest incomplete or exact injected power absent",
+      "diagnostic": "AWAITING_POWER",
+      "joint_reading": "none; operator request suspended"
+    },
+    {
+      "when": "exact injected recovery below 90% at one-sided 5 sigma, or 440 not identifiable",
+      "diagnostic": "DIAGNOSTIC_UNDERPOWERED_OR_NONIDENTIFIABLE",
+      "joint_reading": "no D opening from F4.3"
+    },
+    {
+      "when": "calibration, coverage, bias, PSD, family or rcond stability fails",
+      "diagnostic": "DIAGNOSTIC_INCONCLUSIVE_SYSTEMATICS",
+      "joint_reading": "INCONCLUSIVE_SYSTEMATICS; V1 official token still recorded independently"
+    },
+    {
+      "when": "F4.3 rejects both GR and pair B under their own calibrated nulls",
+      "diagnostic": "DIAGNOSTIC_BOTH_MODELS_REJECTED",
+      "joint_reading": "INCONCLUSIVE_SYSTEMATICS; do not choose either model"
+    },
+    {
+      "when": "powered F4.3 points opposite to V1 primary direction",
+      "diagnostic": "DIAGNOSTIC_CONFLICTS_V1",
+      "joint_reading": "INCONCLUSIVE_SYSTEMATICS; no joint claim; V1 official token retained in separate field"
+    },
+    {
+      "when": "powered F4.3 and V1 reject the same named null, each with calibrated one-sided p <= alpha",
+      "diagnostic": "DIAGNOSTIC_CORROBORATES_V1_SAME_DIRECTION",
+      "joint_reading": "corroboration of V1 only, never independent F4.3 credit"
+    },
+    {
+      "when": "powered F4.3 rejects neither null",
+      "diagnostic": "DIAGNOSTIC_ONLY__NEITHER_REJECTED",
+      "joint_reading": "no official NOT_FALSIFIED_POWERED from F4.3"
+    },
+    {
+      "when": "F4.3 directional signal but V1 has no compatible powered direction",
+      "diagnostic": "DIAGNOSTIC_ONLY__NO_V1_DIRECTION",
+      "joint_reading": "no joint claim"
+    }
+  ],
+  "synthetic_screen": {
+    "eta_formula": "eta=||[I-(WJ)(WJ)^+] W(mu_B-mu_GR)||^2; eta_increment_440=max(0,eta_joint-eta_220)",
+    "eta_joint_25": "necessary median 5-sigma distance in ideal simple Gaussian shift; not 90-percent power",
+    "eta_simple_90_percent": 39.45790335370152,
+    "eta_increment_440_1": "minimal relevance floor, 1-sigma incremental distance; cannot independently imply detection",
+    "rcond_reference": 1e-10,
+    "rcond_sweep": [
+      1e-12,
+      1e-10,
+      1e-08
+    ],
+    "rcond_rule": "rank, eta screening verdict and diagnostic direction must be stable across sweep; otherwise DIAGNOSTIC_INCONCLUSIVE_SYSTEMATICS",
+    "exact_required": "delta_tau = -x/(1+x), full IMR V1 C3 and common M_f,chi_f for 220+440",
+    "decisive_power": "calibrated >=90% recovery at one-sided 5 sigma under exact injections and null coverage; analytic screen never substitutes"
+  },
+  "manifest_from_v2": {
+    "status": "INCOMPLETE_FAIL_CLOSED__NO_POWER_RUN",
+    "event_universe_from_v1_not_new_data": [
+      "GW230919_215712",
+      "GW240513_183302",
+      "GW240515_005301",
+      "GW240615_160735",
+      "GW240920_073424",
+      "GW240923_204006",
+      "GW240930_035959",
+      "GW241102_144729",
+      "GW241111_111552",
+      "GW241130_034908",
+      "GW241210_060606",
+      "GW250104_015122",
+      "GW250109_010541",
+      "GW250118_170523"
+    ],
+    "data_quality_holds_from_v1": [
+      "GW240515_005301",
+      "GW240615_160735",
+      "GW240930_035959",
+      "GW241102_144729"
+    ],
+    "event_list_final_pinned": null,
+    "event_list_hash": null,
+    "psd_per_event_and_detector": null,
+    "psd_hashes": null,
+    "analysis_windows": null,
+    "window_hashes": null,
+    "priors_and_bounds": null,
+    "prior_hash": null,
+    "start_time_rule": null,
+    "waveform_family_and_version": null,
+    "waveform_hash": null,
+    "detector_covariance": null,
+    "injection_seed_and_null_repetitions": null,
+    "complete_before_power": [
+      "event_list_final_pinned",
+      "event_list_hash",
+      "psd_per_event_and_detector",
+      "psd_hashes",
+      "analysis_windows",
+      "window_hashes",
+      "priors_and_bounds",
+      "prior_hash",
+      "start_time_rule",
+      "waveform_family_and_version",
+      "waveform_hash",
+      "detector_covariance",
+      "injection_seed_and_null_repetitions"
+    ],
+    "complete_before_data_D": [
+      "power_result_hash",
+      "independent_audit_hash",
+      "operator_specific_opening_act"
+    ]
+  },
+  "power_status": {
+    "F43_D_exact_injection": "NOT_MEASURED_FAIL_CLOSED",
+    "reason": "V2 manifest leaves final event list, per-event PSD and hashes, windows, priors, start rule, waveform family/version/hash, covariance and injection seed/repetitions null. Existing O4 strain archive and older C7 injections do not specify this F4.3 joint 220+440 experiment.",
+    "analytic_screen": "MEASURED_CONDITIONAL_SIMPLE_GAUSSIAN_ONLY",
+    "operator_request": "SUSPENDED"
+  },
+  "no_observational_data_opened": true,
+  "no_gate_change": true
+}

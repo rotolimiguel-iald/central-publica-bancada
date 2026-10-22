@@ -1,0 +1,177 @@
+--- PREREGISTRO_FASE9_V2_R4_F34_DUAS_TESTEMUNHAS_20261008.json
++++ PREREGISTRO_FASE9_V2_R5_F31_20261008.json
+@@ -1,11 +1,11 @@
+ {
+   "derived_from": {
+-    "bytes": 63081,
+-    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F3.1\\PREREGISTRO_FASE9_RAZAO_DE_HUBBLE_V2_RASCUNHO_F31_20261008_R4.json",
+-    "sha256": "3f4017bf3229903106d2c85388bde9ebfd57e076428e48af5be33c873d5c2d00"
++    "bytes": 65228,
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F3.1\\PREREGISTRO_FASE9_V2_R4_F34_DUAS_TESTEMUNHAS_20261008.json",
++    "sha256": "ca59870c4e840bf6c87b7b5051cc1b4e6ff25a88d026fca38893291fdd14153f"
+   },
+-  "id": "PREREG_FASE9_RAZAO_DE_HUBBLE_V2_DRAFT_F31_20261008_R4",
+-  "integration_note": "Nova projecao documental: F3.2 R4 ainda pina a spec R4 original. Antes de composto real, c1 deve auditar e o runner/gate deve pinar a especificacao efetiva.",
++  "id": "PREREG_FASE9_RAZAO_DE_HUBBLE_V2_DRAFT_F31_20261008_R5",
++  "integration_note": "R5 corrigida para reauditoria c1. F3.2 ainda precisa pinar a especificacao e a funcao R5 auditadas antes de qualquer composto; X13 antes do congelamento e D-H antes da abertura.",
+   "spec": {
+     "D5_local_compression": "CCHP, SBF, TDCOSMO and five-maser sigmas are local symmetric Gaussian approximations; they neither recover the original likelihood nor prove independence (achado D5 da seq 696). Preserve published asymmetric sides in binding.",
+     "D5_sensitivities_from_c1_audit": {
+@@ -676,7 +676,7 @@
+         "nao emprestar poder, fonte admitida, congelamento ou abertura entre instrumentos",
+         "ler os dois depoimentos lado a lado, cada qual por sua funcao previamente pinada"
+       ],
+-      "token_D_J": "permanece D_J_PENDING na R4, sem cunhagem por este adendo",
++      "token_D_J": "permanece D_J_PENDING na R5, sem cunhagem por este adendo",
+       "verbo_fixo": "beta_TGL = ALPHA_FINE_CODATA_2018 * sqrt(e) em runtime, mu q->0 Thomson"
+     },
+     "familias": {
+@@ -761,7 +761,8 @@
+     "funcao_de_veredito": {
+       "estatuto": "PROPOSTA_SINTETICA_NAO_CONGELADA",
+       "final_token": "D_J_PENDING",
+-      "fonte": "def veredito_fase9_v2_r4_proposta(r):\n    \"\"\"Draft only: minimum for falsification, maximum for power and discrimination.\"\"\"\n    import math\n    def f(x): return (\"M\" if x < 0 else \"P\") + (\"%.1f\" % abs(x)).replace(\".\", \"P\")\n    base = \"TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__\"\n    suf = (\"__D1B__FUNDO_%s__NOT_BLIND_TO_DATA_STATED\"\n           \"__NOT_A_CONFIRMATION__GATE_UNTOUCHED\") % r[\"fundo\"]\n    if (r[\"n_alvos_declarados\"] > 0 or not r[\"required_sources_admitted\"]\n        or r[\"beta_livre_no_limite\"]\n        or (r[\"n_local\"] > 1 and\n            any(e[\"chi2_por_gl\"] > 2 or e[\"p\"] < 0.01\n                for e in r[\"dispersao_endpoints\"].values()))):\n        return base + \"INCONCLUSIVE_SYSTEMATICS\" + suf\n    low, high = r[\"minimum\"], r[\"maximum\"]\n    zd = abs(low[\"z_delta\"])\n    if zd >= 5 or any(s <= 1 and abs(z) >= 5 for s, z in low[\"sigma_z_por_alvo\"]):\n        return base + \"FALSIFIED_AT_5SIGMA\" + suf\n    if zd >= 3: return base + \"TENSION_3_TO_5_SIGMA\" + suf\n    if high[\"poder_previo\"] < 5:\n        return base + \"NOT_FALSIFIED_UNDERPOWERED__POWER_%s_OF_5_SIGMA\" % f(high[\"poder_previo\"]) + suf\n    if high[\"z_disc\"] >= 5 and zd < 3 and high[\"lnB_lcdm\"] >= 5 and high[\"lnB_livre\"] >= -1:\n        t = (base + \"NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_%dSIGMA\"\n             \"__ZERO_FREE_PARAMETERS\" % int(math.floor(high[\"z_disc\"])))\n        t += \"__USE_NOVEL\" if r[\"use_novel_parametros\"] else \"__USE_NOVELTY_PENDING\"\n        t += \"__VS_LADDER_SYSTEMATIC_LNB_%s__VS_FREE_BACKGROUND_LNB_%s\" % (\n            f(high[\"lnB_shift\"]), f(high[\"lnB_fundo_livre\"]))\n        if high[\"lnB_shift\"] < 0 and high[\"poder_nao_cefeida\"] >= 5:\n            t += \"__NOT_DISCRIMINATED_FROM_LADDER_SYSTEMATIC\"\n        if abs(high[\"lnB_fundo_livre\"]) < 1:\n            t += \"__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND\"\n        return t + suf\n    t = base + \"NOT_FALSIFIED_POWERED__\" + (\n        \"DEVIATION_CONSISTENT_WITHIN_1SIGMA\" if zd < 1 else \"DEVIATION_1_TO_3_SIGMA\")\n    if high[\"z_disc\"] < 5:\n        t += \"__NOT_DISCRIMINATED_FROM_LCDM_AT_AVAILABLE_SENSITIVITY\"\n    return t + suf\n",
++      "fonte": "def veredito_fase9_v2_r5_proposta(r):\n    \"\"\"Draft: minimum for falsification; maximum for power/discrimination.\"\"\"\n    import math\n    from decimal import Decimal, ROUND_DOWN\n\n    def label(x):\n        if not math.isfinite(x):\n            raise ValueError(\"non-finite verdict input\")\n        magnitude = Decimal(str(abs(x))).quantize(Decimal(\"0.1\"), rounding=ROUND_DOWN)\n        return (\"M\" if x < 0 else \"P\") + format(magnitude, \".1f\").replace(\".\", \"P\")\n\n    base = \"TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__\"\n    suffix = (\"__D1B__FUNDO_%s__NOT_BLIND_TO_DATA_STATED\"\n              \"__NOT_A_CONFIRMATION__GATE_UNTOUCHED\") % r[\"fundo\"]\n    if (r[\"n_alvos_declarados\"] > 0 or not r[\"required_sources_admitted\"]\n            or r[\"beta_livre_no_limite\"]):\n        return base + \"INCONCLUSIVE_SYSTEMATICS\" + suffix\n\n    if r[\"n_local\"] > 1:\n        endpoints = r.get(\"dispersao_endpoints\")\n        if not isinstance(endpoints, dict) or set(endpoints) != {\"minimum\", \"maximum\"}:\n            return base + \"INCONCLUSIVE_SYSTEMATICS\" + suffix\n        for point in (\"minimum\", \"maximum\"):\n            row = endpoints[point]\n            if not isinstance(row, dict) or \"chi2_por_gl\" not in row or \"p\" not in row:\n                return base + \"INCONCLUSIVE_SYSTEMATICS\" + suffix\n            chi2, p = row[\"chi2_por_gl\"], row[\"p\"]\n            if (not isinstance(chi2, (int, float)) or not isinstance(p, (int, float))\n                    or not math.isfinite(chi2) or not math.isfinite(p)\n                    or chi2 < 0 or not 0 <= p <= 1):\n                return base + \"INCONCLUSIVE_SYSTEMATICS\" + suffix\n            if chi2 > 2 or p < 0.01:\n                return base + \"INCONCLUSIVE_SYSTEMATICS\" + suffix\n\n    low, high = r[\"minimum\"], r[\"maximum\"]\n    zd = abs(low[\"z_delta\"])\n    if zd >= 5 or any(s <= 1 and abs(z) >= 5 for s, z in low[\"sigma_z_por_alvo\"]):\n        return base + \"FALSIFIED_AT_5SIGMA\" + suffix\n    if zd >= 3:\n        return base + \"TENSION_3_TO_5_SIGMA\" + suffix\n    if high[\"poder_previo\"] < 5:\n        return (base + \"NOT_FALSIFIED_UNDERPOWERED__POWER_%s_OF_5_SIGMA\"\n                % label(high[\"poder_previo\"]) + suffix)\n    if (high[\"z_disc\"] >= 5 and high[\"lnB_lcdm\"] >= 5\n            and high[\"lnB_livre\"] >= -1):\n        token = (base + \"NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_%dSIGMA\"\n                 \"__ZERO_FREE_PARAMETERS\" % int(math.floor(high[\"z_disc\"])))\n        token += \"__USE_NOVEL\" if r[\"use_novel_parametros\"] else \"__USE_NOVELTY_PENDING\"\n        token += \"__VS_LADDER_SYSTEMATIC_LNB_%s__VS_FREE_BACKGROUND_LNB_%s\" % (\n            label(high[\"lnB_shift\"]), label(high[\"lnB_fundo_livre\"]))\n        if high[\"lnB_shift\"] < 0 and high[\"poder_nao_cefeida\"] >= 5:\n            token += \"__NOT_DISCRIMINATED_FROM_LADDER_SYSTEMATIC\"\n        if abs(high[\"lnB_fundo_livre\"]) < 1:\n            token += \"__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND\"\n        return token + suffix\n\n    token = base + \"NOT_FALSIFIED_POWERED__\" + (\n        \"DEVIATION_CONSISTENT_WITHIN_1SIGMA\" if zd < 1 else \"DEVIATION_1_TO_3_SIGMA\")\n    if high[\"z_disc\"] < 5:\n        token += \"__NOT_DISCRIMINATED_FROM_LCDM_AT_AVAILABLE_SENSITIVITY\"\n    if high[\"lnB_lcdm\"] < 5:\n        token += \"__NOT_DISCRIMINATED_FROM_LCDM_LNB_BELOW_5\"\n    if high[\"lnB_livre\"] < -1:\n        token += \"__NOT_DISCRIMINATED_FROM_LCDM_BETA_FREE_LNB_BELOW_MINUS_1\"\n    return token + suffix\n",
++      "lnB_lcdm_guard": "z_disc>=5 with lnB_lcdm<5 is NOT_DISCRIMINATED_FROM_LCDM_LNB_BELOW_5",
+       "n_alvos_declarados_rule": {
+         "current_count": 2,
+         "current_ids": [
+@@ -776,28 +777,36 @@
+         ],
+         "universe": "whole V1.x inventory, not active family"
+       },
+-      "n_local_guard": "n_local>1 before dispersion chi2/(n-1) or p; strict greater-than thresholds",
+-      "nome": "veredito_fase9_v2_r4_proposta",
++      "n_local_guard": "n_local>1 requires exactly minimum and maximum dispersion endpoints, finite chi2/p; missing or malformed endpoints yield INCONCLUSIVE_SYSTEMATICS",
++      "nome": "veredito_fase9_v2_r5_proposta",
+       "regra": "The future runner must execute THIS exact UTF-8 source after checking sha256; no independently rewritten copy",
+       "se_abrir_hoje": {
+         "cause": "inventory count 2 (L1b and L6) and D-H admissions pending",
+         "real_opening_permitted": false,
+-        "token_counterfactual_synthetic": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED"
+-      },
+-      "sha256": "98ba17095fc8f84d053f8b7ab18f8c0125db323aba930e487bcb49bea924c14d",
++        "token_counterfactual_synthetic": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED"
++      },
++      "sha256": "49df51812162bcc0bb1168dec541517a6b11e18bd4cebb2346bbeb2200ef24d1",
+       "testes_sinteticos_de_ramo": {
+-        "D_H_guard": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "beta_prior_edge": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "dispersion_maximum": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "dispersion_p_minimum": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "falsified_minimum": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__FALSIFIED_AT_5SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "free_background_suffix": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_6SIGMA__ZERO_FREE_PARAMETERS__USE_NOVEL__VS_LADDER_SYSTEMATIC_LNB_P2P0__VS_FREE_BACKGROUND_LNB_P0P5__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "inventory_declared": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "n_local_one_ignores_dispersion": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_6SIGMA__ZERO_FREE_PARAMETERS__USE_NOVEL__VS_LADDER_SYSTEMATIC_LNB_P2P0__VS_FREE_BACKGROUND_LNB_P0P5__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "no_discrimination": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__NOT_FALSIFIED_POWERED__DEVIATION_CONSISTENT_WITHIN_1SIGMA__NOT_DISCRIMINATED_FROM_LCDM_AT_AVAILABLE_SENSITIVITY__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "single_reader_R25": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__FALSIFIED_AT_5SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "tension_minimum": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__TENSION_3_TO_5_SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
+-        "underpowered_maximum": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__NOT_FALSIFIED_UNDERPOWERED__POWER_P4P0_OF_5_SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED"
++        "beta_prior_edge": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "dispersion_empty": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "dispersion_high_chi2": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "dispersion_invalid_p": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "dispersion_low_p": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "dispersion_missing_p": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "dispersion_one_endpoint": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "falsification": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__FALSIFIED_AT_5SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "free_background_suffix": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_6SIGMA__ZERO_FREE_PARAMETERS__USE_NOVEL__VS_LADDER_SYSTEMATIC_LNB_P2P0__VS_FREE_BACKGROUND_LNB_P0P5__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "inventory_pending": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "lnB_below_5_at_z6": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_POWERED__DEVIATION_CONSISTENT_WITHIN_1SIGMA__NOT_DISCRIMINATED_FROM_LCDM_LNB_BELOW_5__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "lnB_free_below_minus_1": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_POWERED__DEVIATION_CONSISTENT_WITHIN_1SIGMA__NOT_DISCRIMINATED_FROM_LCDM_BETA_FREE_LNB_BELOW_MINUS_1__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "one_reader_no_dispersion": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_6SIGMA__ZERO_FREE_PARAMETERS__USE_NOVEL__VS_LADDER_SYSTEMATIC_LNB_P2P0__VS_FREE_BACKGROUND_LNB_P0P5__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "power_boundary_5": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_6SIGMA__ZERO_FREE_PARAMETERS__USE_NOVEL__VS_LADDER_SYSTEMATIC_LNB_P2P0__VS_FREE_BACKGROUND_LNB_P0P5__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "power_truncation_4.95": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_UNDERPOWERED__POWER_P4P9_OF_5_SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "power_truncation_4.999": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_UNDERPOWERED__POWER_P4P9_OF_5_SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "power_truncation_4.9999": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_UNDERPOWERED__POWER_P4P9_OF_5_SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "source_admission_pending": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__INCONCLUSIVE_SYSTEMATICS__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "tension": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__TENSION_3_TO_5_SIGMA__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED",
++        "z_below_5": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__NOT_FALSIFIED_POWERED__DEVIATION_CONSISTENT_WITHIN_1SIGMA__NOT_DISCRIMINATED_FROM_LCDM_AT_AVAILABLE_SENSITIVITY__D1B__FUNDO_BG1__NOT_BLIND_TO_DATA_STATED__NOT_A_CONFIRMATION__GATE_UNTOUCHED"
+       },
+       "thresholds": {
+         "beta_free_prior_edge": "INCONCLUSIVE_SYSTEMATICS",
+@@ -811,7 +820,8 @@
+         "power_ge": 5.0,
+         "single_reader_sigma_le": 1.0,
+         "tension_abs_z_ge": 3.0
+-      }
++      },
++      "truncamento_rotulos": "One decimal toward zero, never rounding: power 4.95..4.9999 -> POWER_P4P9_OF_5_SIGMA"
+     },
+     "funcao_de_veredito_proposta": {
+       "final_token_name": "OPERATOR_D_J_PENDING",
+@@ -834,7 +844,7 @@
+         ],
+         "universe": "whole V1.x inventory, not active family"
+       },
+-      "n_local_guard": "n_local>1 before both dispersion endpoint checks",
++      "n_local_guard": "n_local>1 requires exactly minimum and maximum dispersion endpoints, finite chi2/p; missing or malformed endpoints yield INCONCLUSIVE_SYSTEMATICS",
+       "not_falsified_never_confirmation": true,
+       "order": [
+         "INCONCLUSIVE if whole-inventory count>0, D-H missing, beta-free at prior edge, or dispersion fails either endpoint",
+@@ -842,7 +852,7 @@
+         "TENSION if abs(z_delta_min)>=3",
+         "UNDERPOWERED if power_max<5",
+         "DISCRIMINATES if z_disc_max>=5, abs(z_delta_min)<3, lnB_lcdm>=5 and lnB_beta_free>=-1; both diagnostic suffixes",
+-        "otherwise NOT_FALSIFIED_POWERED"
++        "otherwise NOT_FALSIFIED_POWERED with an explicit NOT_DISCRIMINATED_FROM_LCDM suffix for z_disc<5, lnB_lcdm<5 or lnB_beta_free<-1"
+       ],
+       "single_reader_trigger": {
+         "by_family": {
+@@ -912,6 +922,11 @@
+         "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\residual_systematics\\sources\\cchp_overview.txt",
+         "sha256": "e32d608358cc0f0dcc3def744beef4b9afea24a967c8f730c90027dc589b6dcc"
+       },
++      "F34_R4_projection": {
++        "bytes": 65228,
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F3.1\\PREREGISTRO_FASE9_V2_R4_F34_DUAS_TESTEMUNHAS_20261008.json",
++        "sha256": "ca59870c4e840bf6c87b7b5051cc1b4e6ff25a88d026fca38893291fdd14153f"
++      },
+       "Pesce_PDF": {
+         "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_maser_anchor_alternative\\sources\\masers_2001.09213v2.pdf",
+         "sha256": "c9f2d2b626fee60d77928856d217a2cbe546f06c69cd9e7ac804f4ab652e731a"
+@@ -935,6 +950,11 @@
+       "audit_a543370e": {
+         "path": "C:\\IALD\\PROGRAMA_IALD\\auditorias\\F3.1\\AUDITORIA_F3_1_C1_a543370e.md",
+         "sha256": "a80783503f79ee478ebc591606d9a07f8c1017686d5310bbfc209ea7c20cafb1"
++      },
++      "audit_aab519bd": {
++        "bytes": 6320,
++        "path": "C:\\IALD\\PROGRAMA_IALD\\auditorias\\F3.1\\AUDITORIA_F3_1_C1_aab519bd.md",
++        "sha256": "e135d7d3ada1c3d70c8b4ad02c538e65c0e8cdba5e57f47dc080549401ef0373"
+       },
+       "design": {
+         "path": "C:\\IALD\\Central de Patentes\\work\\scratch_6da8f00d\\fase9_hubble\\desenho\\FASE9_DESENHO_RESULTADO.json",
+@@ -952,7 +972,7 @@
+       "H_fundo_livre": "LCDM + r_d livre U[130; 160] Mpc (proxy de fundo precoce [INPUT da gerencia]); todos leem o mesmo H0",
+       "H_shift_cefeidas": "Only L1 or replacement L1b receives shift s~U[-0.15,0.15]; CCHP TRGB-only does not"
+     },
+-    "id": "PREREG_FASE9_RAZAO_DE_HUBBLE_V2_DRAFT_F31_20261008_R4",
++    "id": "PREREG_FASE9_RAZAO_DE_HUBBLE_V2_DRAFT_F31_20261008_R5",
+     "lei": {
+       "K_frozen_V1": 1.0838071748529643,
+       "K_recomputed": 1.0838071748529643,
+@@ -1184,7 +1204,8 @@
+       "NAT22 executor deviations",
+       "D_J final token name",
+       "D_H source admission before opening",
+-      "F3.3 opening after frozen audited V2"
++      "F3.3 opening after frozen audited V2",
++      "d72 qualification in Codex interface"
+     ],
+     "poder_previo": {
+       "BG1_power_lower_bound": 5.269334597167898,
+@@ -1378,9 +1399,9 @@
+       "V1_remains_frozen": true,
+       "draft_R2_only": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F3.1\\PREREGISTRO_FASE9_RAZAO_DE_HUBBLE_V2_RASCUNHO_F31_20261008_R2.json"
+     },
+-    "token_base_provisorio": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R4_DRAFT__LAW_D1B__BG1",
+-    "token_estado": "RASCUNHO_NAO_CONGELADO__F3_4_RESOLVED__X13_D_J_PENDING__GATE_UNTOUCHED"
++    "token_base_provisorio": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R5_DRAFT__LAW_D1B__BG1",
++    "token_estado": "RASCUNHO_R5_NAO_CONGELADO__F3_4_RESOLVED__X13_D_H_D72_PENDING__GATE_UNTOUCHED"
+   },
+-  "spec_sha256": "dbe01f4cef9e6d155d51cbf2930014289144761bb8b948a3b3195615bc609e1b",
+-  "state": "RASCUNHO_DOCUMENTAL_F34_NAO_CONGELADO"
++  "spec_sha256": "7ec56e49b1b7deb5c3225a3188fea18bb750fb345bfd1c7cd93a2ec6423aebed",
++  "state": "RASCUNHO_DOCUMENTAL_R5_NAO_CONGELADO"
+ }

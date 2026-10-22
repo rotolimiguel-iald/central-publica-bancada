@@ -1,0 +1,20 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T214435_638809Z\TensorResolventScalarsR3.lean:73:2: error: linarith failed to find a contradiction
+case h1
+c : ℝ
+n : ℕ
+p : (data n).Index
+hA : productWeight (weightA c) n p = ↑(realProduct (spectralWeightA c) n p)
+hB : productWeight (weightB c) n p = ↑(realProduct (spectralWeightB c) n p)
+he : Real.exp (-c * rapiditySum n p) * Real.exp (-c * rapiditySum n p) = Real.exp (- -(-2 * c * rapiditySum n p))
+hd : 1 + Real.exp (- -(-2 * c * rapiditySum n p)) ≠ 0
+a✝ :
+  realProduct (spectralWeightA c) n p ^ 2 * (1 + Real.exp (-(c * rapiditySum n p)) ^ 2) <
+    realProduct (spectralWeightA c) n p ^ 2 * (1 + Real.exp (-(c * rapiditySum n p * 2)))
+⊢ False
+failed
+'F1Fecho.TensorCoordinates.product_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.TensorCoordinates.scalar_resolvent_identity' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.TensorCoordinates.scalar_coefficient_nonzero' depends on axioms: [propext, Classical.choice, Quot.sound]

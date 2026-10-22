@@ -1,0 +1,89 @@
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 113ms
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 147ms
+import took 61.2s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T185008_702567Z\CompactFockNullStressMomentR3.lean:115:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (x : NullFourierSpace), ↑(x.ofLp 0) * unitaryFourierCoherentNullStress (↑h) (↑k) x
+in the target expression
+  (fun j b =>
+        (starRingEnd ℂ) ((regularCoefficients ψ) h) * b *
+          (fun h k => ∫ (x : NullFourierSpace), ↑(x.ofLp 0) * unitaryFourierCoherentNullStress (↑h) (↑k) x) h j)
+      k ((regularCoefficients χ) k) =
+    (fun j b => (starRingEnd ℂ) ((regularCoefficients ψ) h) * b * (fun h k => -Complex.I * coherentBoostPair ↑h ↑k) h j)
+      k ((regularCoefficients χ) k)
+
+ψ χ : ↥regularFockDomain
+hψ : AxisCompactFock ψ
+hχ : AxisCompactFock χ
+h : RegularLabel
+hh : h ∈ (regularCoefficients ψ).support
+k : RegularLabel
+hk : k ∈ (regularCoefficients χ).support
+⊢ (fun j b =>
+        (starRingEnd ℂ) ((regularCoefficients ψ) h) * b *
+          (fun h k => ∫ (x : NullFourierSpace), ↑(x.ofLp 0) * unitaryFourierCoherentNullStress (↑h) (↑k) x) h j)
+      k ((regularCoefficients χ) k) =
+    (fun j b => (starRingEnd ℂ) ((regularCoefficients ψ) h) * b * (fun h k => -Complex.I * coherentBoostPair ↑h ↑k) h j)
+      k ((regularCoefficients χ) k)
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    h
+  has type
+    RegularLabel
+  but is expected to have type
+    { h // StrongRegularProfile h }
+  in the application
+    ↑h
+'F1Fecho.CoherentKernel.finiteKernel_add_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CoherentKernel.finiteKernel_const_mul_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CoherentKernel.finiteKernel_integrable_on_support' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CoherentKernel.integral_finiteKernel_on_support' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.unitaryFourierPointStressForm_eq_finiteKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.unitaryFourierFockNullStress_eq_finiteKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_fockNullStress_moment_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_fockNullStress_moment' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_fockNullStress_real_moment_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_fockNullStress_real_moment' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_fock_hasBoostEnergy_null_moment' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.105ms
+	blocked (unaccounted) 311ms
+	congr simp thm 2.14ms
+	dsimp 2.1ms
+	elaboration 107ms
+	fix level params 0.985ms
+	import 61.2s
+	initialization 32.1ms
+	instantiate metavars 0.588ms
+	interpretation 9.99s
+	let-to-have transformation 0.915ms
+	linting 14.3ms
+	norm_num 1.91ms
+	overlappingInstancesLinter 29.6ms
+	parsing 7.61ms
+	process pre-definitions 8.42ms
+	ring 49.9ms
+	share common exprs 6.62ms
+	simp 116ms
+	tactic execution 166ms
+	tacticAnalysis 40.9ms
+	type checking 236ms
+	typeclass inference 598ms

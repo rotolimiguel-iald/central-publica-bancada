@@ -1,0 +1,27 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T195331_766880Z\WedgeNonisotropicR4.lean:50:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  RCLike.re (inner ℂ ?x ?x)
+in the target expression
+  0 ≤ -(inner ℂ (↑⟨f, df⟩) f).re
+
+f : ↥H1
+hf : f ∈ KWR.toClosedSubmodule
+hj : Jcandidate f ∈ KWR.toClosedSubmodule
+df : f ∈ TW.domain
+tf : ↑TW ⟨f, df⟩ = Jcandidate f
+dj : Jcandidate f ∈ TW.domain
+tj : ↑TW ⟨Jcandidate f, dj⟩ = Jcandidate (Jcandidate f)
+tj' : ↑TW ⟨Jcandidate f, dj⟩ = f
+hsum : f + Jcandidate f = 0
+hjneg : Jcandidate f = -f
+hp : 0 ≤ -(inner ℂ (↑⟨f, df⟩) f).re
+⊢ f = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T195331_766880Z\WedgeNonisotropicR4.lean:58:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'F1Fecho.WedgeNonisotropic.TW_fixed_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.WedgeNonisotropic.KWR_inter_JKWR_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WedgeNonisotropic.KWR_not_isotropic' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

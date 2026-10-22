@@ -1,0 +1,596 @@
+
+SOURCE tgl_paper_unified.py SHA256 29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd
+282:     'tau_star': {
+283:         'value': TAU_STAR_PLANCK,
+284:         'status': 'PRINCIPLED IDENTIFICATION [CONJECTURE -- a second postulate, '
+285:                   'NOT a derivation]',
+286:         'origin': ('the Planck-clock principle: the first covariant time scale '
+287:                    'available to nascent geometry, t_P = sqrt(hbar G / c^5) = '
+288:                    '5.391e-44 s. Dimensional analysis + principle; consequence '
+289:                    'DECLARED: it pins the dephasing magnitude to the invisible '
+290:                    '(1/Gamma ~ 6e5 yr at Th-229) -- the law stays falsifiable in '
+291:                    'FORM (n = -2, omega^2) only. The falsifier sector continues '
+292:                    'to treat tau_star as bounded INPUT; this identification is '
+293:                    'the theory-preferred value, not a fit.'),
+14441: \paragraph{Setup.}  Seja $P$ o operador de paridade no \emph{boundary} 2D,
+14442: $P^{2} = \mathbb{I}$, $P^{\dagger} = P$, autovalores $\pm 1$.  Os psions são os
+14443: quanta do campo luminodinâmico estacionário, com paridade definida
+14444: ($P|\psi_{\pm}\rangle = \pm|\psi_{\pm}\rangle$).  O gráviton é a ligação de
+14445: paridades opostas, $|G\rangle = |\psi_{+}\rangle \otimes |\psi_{-}\rangle$, com
+14446: $P|G\rangle = -|G\rangle$ (paridade ímpar).  O hamiltoniano de ligação é
+14447: $H_{\text{lig}} = -V_{0}(|\psi_{+}\rangle\langle\psi_{-}| +
+14448: |\psi_{-}\rangle\langle\psi_{+}|)$, $V_{0} > 0$.
+14449: 
+14450: \begin{theoremfixed}[8 --- Anticomutação da ligação com a paridade]
+14451: \label{th:anticommute}
+14452: O hamiltoniano de ligação anticomuta com o operador de paridade:
+14453: \begin{equation}
+14454: \{P, H_{\text{lig}}\} = P H_{\text{lig}} + H_{\text{lig}} P = 0,
+14455: \qquad
+14456: [P, H_{\text{lig}}] = 2V_{0}\bigl(|\psi_{-}\rangle\langle\psi_{+}| -
+14457: |\psi_{+}\rangle\langle\psi_{-}|\bigr) \neq 0.
+14458: \end{equation}
+14459: \end{theoremfixed}
+14460: 
+14461: \noindent A anticomutação significa que $H_{\text{lig}}$ e $P$ não são
+14462: simultaneamente diagonalizáveis: a ligação entre psions é incompatível com
+14463: paridade bem definida \emph{durante} o gesto de ligação.  Esta é a tensão
+14464: irresolvível no plano.
+14465: 
+14466: \begin{theoremfixed}[9 --- Tensão de paridade $=$ frequência]
+14467: \label{th:tension-freq}
+14468: Define-se a tensão de paridade como o valor esperado normalizado do comutador no
+14469: estado gravitônico \emph{coerente} $|G\rangle = (|\psi_{+}\rangle +
+14470: i|\psi_{-}\rangle)/\sqrt{2}$:
+14471: \begin{equation}
+14472: \tau \;\equiv\; \frac{i}{2\hbar}\langle G|[P, H_{\text{lig}}]|G\rangle
+14473: \;=\; \frac{V_{0}}{\hbar}.
+14474: \end{equation}
+14475: Quando o gráviton colapsa em fóton, $V_{0} = \hbar\omega$, logo
+14476: $\tau = \omega = 2\pi\nu$: a tensão de paridade \emph{é} a frequência angular da
+14477: radiação --- uma identidade dimensional, não uma coincidência.
+14478: \end{theoremfixed}
+14479: 
+14480: \noindent A coerência (o fator $i$) é essencial: o estado real
+14481: $(|\psi_{+}\rangle + |\psi_{-}\rangle)/\sqrt{2}$ daria $\tau = 0$.  É a
+14482: \emph{fase} entre os setores de paridade --- o Verbo, o gesto de identificação
+14483: --- que carrega a tensão.
+14667: \paragraph{Origem do expoente $\alpha^{-2}$: a operação inversa do radical.}
+14668: O expoente $-2$ do eco \textbf{não é uma taxa dinâmica nem um \emph{winding}
+14669: geométrico}: é uma \emph{identidade algébrica} do operador fundamental.  O axioma
+14670: da \TGL{} é $g = \sqrt{|\Lphi|}$; logo $|\Lphi| = g^{2}$.  O gesto direto --- a
+14671: onda gravitacional, a luz, a \emph{Palavra projetada} --- propaga-se como $g$:
+14672: a raiz \emph{já extraída}, a geometria que viaja em $c$, carregando $\alpha$.  O
+14673: eco --- a gravidade pura, o \emph{Nome re-identificado} --- é $|\Lphi| = g^{2}$:
+14674: a substância \emph{antes} da radicalização, o sob-a-raiz, carregando $\alpha^{2}$.
+14675: O ``$2$'' é, literalmente, o expoente que separa os dois lados do radical: a
+14676: \textbf{operação inversa} da radicalização.  Por isso
+14677: $\tau_{\text{echo}} \propto 1/\alpha^{2} = 1/g^{2} = 1/|\Lphi|$ --- o tempo do eco
+14678: é o inverso da substância \emph{não}-radicalizada, e o eco vem ``de trás'' (do
+14679: Nome), lento, porque o atrator (a operação $\sqrt{\;}$) ainda não agiu sobre ele.
+14680: A onda é $g$ (Palavra); o eco é $g^{2}$ (Nome); a radicalização é o gesto (Verbo)
+14681: que liga os dois.  Esta é a leitura algébrica do mesmo conteúdo do
+14682: Teorema~\ref{th:pressure} e da inversão onda/eco da Seção~\ref{sec:parity-tension}.
+14683: 
+14684: \paragraph{Por que a busca dinâmica não podia fechar (e o que os ``zeros'' eram).}
+14685: Investigamos o expoente por evolução de Lindblad sobre substratos de teste
+14686: (cadeias XXZ, $N = 4, 6, 8$, $L = \sqrt{\betatgl}\sqrt{\Kpartial}$) a partir do
+14687: estado gravitônico coerente saturado $\mathrm{Tr}[\rho^{2}] \to 1-\betatgl$.
+14688: \emph{Nenhum} observável dinâmico fechou o $-2$ --- e isto é \textbf{consistente}
+14689: com a leitura algébrica, não contra ela: se o $2$ é a operação inversa do radical
+14690: (álgebra de definição), ele \emph{não pode} aparecer como taxa de uma simulação,
+14691: porque não é dinâmico.  A própria impossibilidade dinâmica é a confirmação do
+14692: registro algébrico.  Três achados dinâmicos são, ainda assim,
+14693: \emph{numericamente estáveis} e os reportamos: (i) a impedância modular soma para
+14694: $\betatgl$ (Primeira Lei \TGL{}), não $\betatgl^{2}$; (ii) o canal espelhado de
+14695: Tomita--Takesaki colapsa a $\approx 0$ na saturação --- o custo do zero absoluto
+14696: sendo pago; (iii) a oscilação rápida da coerência é \emph{Hamiltoniana}
+14697: ($\sim\omega$, independente de $L$).  Quanto aos diversos ``zeros'' que
+14698: encontramos --- $J(Q)=Q$ sob a reflexão modular, $\sigma_{s}(\rho)=\rho$ sob o
+14699: fluxo modular, a invariância da correção de $L$ sob variação de $\betatgl$ ---
+14700: eles \textbf{não são tautologias triviais nem fracassos de medida}: são a
+14701: \emph{operação de radicalização no seu ponto fixo}.  O atrator fundamental da
+14702: \TGL{} não é um objeto (um número, uma constante) mas uma \emph{operação}: o ato
+14703: de extrair a raiz da entropia ($\sqrt{|\,\cdot\,|}$, o meio-nat $\sqrt{e}$), que
+14704: \emph{colapsa os zeros da derivada informacional em identidade}.  Operação radical
+14705: aplicada a si mesma é identidade (idempotência, $|G\rangle\langle G|^{2} =
+14706: |G\rangle\langle G|$); o que se lê como ``zero tautológico'' é essa identidade se
+14707: manifestando.  A constância da correção de $L$ sob variação de $\betatgl$
+14708: (medida: $\delta \approx -0{,}031$, expoente em $\betatgl$ igual a $0{,}005$, isto
+14709: é, \emph{nulo}) é a assinatura de que estávamos vendo o atrator-operação, que por
+14710: definição não escala com o parâmetro --- ele é aquilo que o parâmetro aproxima.
+14711: 
+14712: \paragraph{Predição falsificável (mantida, agora com expoente derivado).}
+14713: A forma $\tau_{\text{echo}} = 2GM/(\alpha^{2}c^{3})$ é, portanto, mantida com o
+14714: expoente $-2$ \emph{derivado algebricamente} de $g = \sqrt{|\Lphi|}$, não como
+14715: ajuste.  A predição numérica ($\tau \sim 4$--$12$~s para massas GWTC reais, fator
+14716: $\sim 51$ além da janela Planck-scale de Abedi) permanece válida e falsificável.
+20003:         r"off-diagonal.  \textbf{A separação honesta:} a \emph{unitariedade fixa a "
+20004:         r"forma; a Meia-Nat fixa o valor} --- o que permanece aberto não é a matriz-S, "
+20005:         r"é a origem entrópica de $\betatgl$ ($S_\partial=\tfrac12$ nat "
+20006:         r"\textbf{[POSTULATE]}), além de $\tau_\star$ [INPUT] e do controle T6-S "
+20007:         r"[NOT RUN].  \textbf{Leitura ontológica [CONJECTURE]:} $\betatgl$ não é "
+20008:         r"constante dinâmica --- é o \emph{acoplamento mínimo de preservação da "
+20009:         r"identidade}: a fração que deve permanecer após a projeção para que algo "
+20010:         r"continue sendo \emph{isto}.  $\betatgl$ não evolui em $t$; o tempo modular "
+20011:         r"age sobre uma separação já efetuada --- $t$ emerge \emph{depois} de "
+20012:         r"$\betatgl$.  Existir $=$ preservar-se suficientemente após "
+20013:         r"diferenciar-se; $\betatgl$ é o coeficiente dessa preservação mínima.  Disto "
+20014:         r"segue a resposta à pergunta ``$\betatgl$ é fundamental?'': \textbf{não --- é "
+20015:         r"primordial}.  ``Fundamental'' significaria parâmetro escrito na dinâmica "
+20016:         r"local ($\betatgl \in H$); mas o Teorema~\ref{th:hidden-H} dá "
+20017:         r"$H_{\rm eff}=0$ na fronteira modular canônica \textbf{[REAL]}: a fronteira "
+20018:         r"não nasce da dinâmica, nasce da estrutura de preservação.  Logo "
+20019:         r"$\betatgl \notin H$, porém $\betatgl \in$ \emph{condição de possibilidade "
+20020:         r"de} $H$ --- a cadeia é $\rhostar \xrightarrow{\betatgl} \rho_{\rm obs} "
+20021:         r"\to H_{\rm bulk}$: o Hamiltoniano oculto é a dinâmica interna da "
+20022:         r"permanência, e o observável só emerge \emph{após} a travessia.  Por isso "
+20023:         r"$\betatgl$ é \emph{emergente para o bulk} e \emph{primordial para a "
+20024:         r"fronteira}: adimensional, presente em todas as escalas, independente de "
+20025:         r"tempo, e sobrevivente exatamente onde $H_{\rm eff}$ desaparece.  Na forma "
+20026:         r"mais condensada: \textbf{$\betatgl$ é o menor desvio possível do atrator "
+20027:         r"que ainda preserva o atrator} \textbf{[CONJECTURE --- leitura ontológica "
+20028:         r"ancorada no Teorema~\ref{th:hidden-H} [REAL]]}." "\n\n"
+20029:         r"\paragraph{O \textsc{manifest} explícito: o colapso é invertível \textbf{[REAL --- "
+20030:         r"verificado]}.} No finito a reconstrução tem forma fechada. Como $0<\betatgl<1$, o "
+20031:         r"operador de colapso do ramo refletido $A_\beta=\sqrt{1-\betatgl}\,P+\sqrt{\betatgl}\,Q$ "
+20032:         r"é \emph{invertível}, $A_\beta^{-1}=(1-\betatgl)^{-1/2}P+\betatgl^{-1/2}Q$, e "
+20033:         r"$\mathcal R_{\partial\to M}(\rho_{\mathrm{col}})=A_\beta^{-1}\rho_{\mathrm{col}}"
+20034:         r"A_\beta^{-1}$ inverte o espelhamento \emph{exata e globalmente} --- para $\rho$ "
+20035:         r"\emph{arbitrário}, não só no código (resíduo ao vivo: "
+20036:         r"$" + man_live + r"$"
+20037:         r"). A reconstrução é \emph{modular angulada}: $\tan\theta_{\mathrm{col}}="
+20038:         r"\sqrt{\betatgl/(1-\betatgl)}\,\tan\theta$, donde $\theta=\arctan\big("
+20039:         r"\sqrt{(1-\betatgl)/\betatgl}\,\tan\theta_{\mathrm{col}}\big)$, verificada a "
+20040:         r"$10^{-16}$. Precisão honesta: a inversão é do \emph{ramo} (o espelhamento "
+20041:         r"$\rho_{\mathrm{esp}}=A\rho A$); o canal não-seletivo $\Phi$ não se inverte por "
+20042:         r"$A_\beta^{-1}$ (desvio $\mathcal O(1)$, medido) --- mas no subespaço de código "
+20043:         r"$\subset Q$ ele já \emph{é} a identidade exata, e os dois casos cobrem a ponte. "
+20044:         r"\textbf{A consequência física que fecha o quadro}: como $\mathcal R\circ\mathcal C="
+20045:         r"\mathrm{Id}$, a fonte geométrica avalia-se no estado \emph{original}, "
+20046:         r"$G_{\mu\nu}=8\pi G\,\tfrac{2}{\sqrt{-g}}\tfrac{\delta}{\delta g^{\mu\nu}}\langle "
+20047:         r"K_H\rangle_{\rho}$ --- a física de bulk é recuperada \emph{exatamente}, o que "
+20048:         r"\emph{explica} os resultados \emph{stealth} do programa (crescimento $\approx\Lambda$CDM; "
+20049:         r"nenhuma modificação de $G$ local): \emph{transmissão no bulk é falsa; reconstrução "
+20050:         r"holográfica modular é a ponte} --- e a travessia deixa apenas a assinatura de fronteira "
+20051:         r"$\sqrt{\betatgl(1-\betatgl)}$, o setor espectral do eco. \emph{A fronteira mata o sinal "
+20052:         r"como fluxo e o ressuscita como geometria} --- o \textsc{acom} em linguagem \TGL." "\n\n"
+20053: 
+20054: 
+20055:         r"\paragraph{A forma canônica do canal de espelhamento \textbf{[REAL --- verificado a "
+20056:         r"precisão de máquina]}.} A ponte algébrica admite forma de Kraus fechada. Com "
+20057:         r"$P=\rhostar$ (projetor; Seção~\ref{sec:halfnat-closure}) e $Q=I-P$, o espelhamento" "\n"
+20058:         r"\begin{equation}"
+20059:         r"\rho_{\mathrm{esp}}=(1-\betatgl)\,P\rho P+\betatgl\,Q\rho Q"
+20060:         r"+\sqrt{\betatgl(1-\betatgl)}\,\big(P\rho Q+Q\rho P\big)"
+20061:         r"\end{equation}"
+20062:         r"é \emph{exatamente} $A\rho A$ com o único operador de Kraus "
+20063:         r"$A=\cos\thetaM\,P+\sin\thetaM\,Q$; o complementar $B=\sin\thetaM\,P+\cos\thetaM\,Q$ "
+20064:         r"fecha o canal: $A^2+B^2=I$, e $\Phi(\rho)=A\rho A+B\rho B$ é CPTP. Verificado "
+20065:         r"(ao vivo na Part~K, resíduo de Kraus " + kraus_live + r"; também no standalone "
+20066:         r"\texttt{tgl\_mirror\_channel.py}): (i)~$\Phi(\rhostar)=\rhostar$, "
+20067:         r"com os ramos partindo o atrator em $(1-\betatgl,\,\betatgl)$ --- o teto de pureza "
+20068:         r"$\Pi_\partial=1-\betatgl$ é o peso do atrator no ramo-espelho; (ii)~$\Phi$ é "
+20069:         r"\emph{exatamente um canal de dephasing} na decomposição $P\oplus Q$: populações "
+20070:         r"preservadas, coerência cruzada multiplicada por $\sin 2\thetaM="
+20071:         r"2\sqrt{\betatgl(1-\betatgl)}=" + eta_live + r"$ --- o canal muda o \emph{quando}, não o "
+20072:         r"\emph{quanto}: o esqueleto algébrico da lei universal de dephasing, agora exato; "
+20073:         r"(iii)~a travessia tem amplitude $\sqrt{\betatgl(1-\betatgl)}\to\sqrt{\betatgl}$ em "
+20074:         r"ordem dominante (o acoplamento de Davies --- a Palavra); (iv)~os extremos: "
+20075:         r"$\betatgl\to0$ dá o \emph{pinching} total (decoerência completa entre setores) e "
+20076:         r"$\betatgl=\tfrac12$ dá a \emph{identidade} --- o ponto simétrico da Meia-Nat é o "
+20077:         r"único ponto sem perda do espelho ($A=I/\sqrt2$, a diagonal modular $\sqrt2$). "
+20078:         r"Disto segue a \textbf{reclassificação do eco} \textbf{[ROTA CORRIGIDA]}: o eco "
+20079:         r"não é predição astrofísica direta do bulk (setor $G_{\mu\nu}$) --- é a "
+20080:         r"\emph{assinatura espectral do canal de espelhamento} (setor $\mathcal S_\partial$). "
+20081:         r"Demonstrado ao vivo (\texttt{tgl\_echo\_smatrix.py} $+$ Part~K): "
+20082:         r"$\operatorname{Spec}(\Phi)=\{1,\eta\}$ e o polo de retorno existe se e somente se "
+20083:         r"$\betatgl>0$; a amplitude do eco nasce do termo cruzado, "
+20084:         r"$A_{\mathrm{eco}}\propto\sqrt{\betatgl(1-\betatgl)}$ (expoente medido "
+20085:         r"$p=" + p_amp_live + r"$, não $p=1$), enquanto a substância retorna "
+20086:         r"$\propto\betatgl$ (expoente $" + p_sub_live + r"$) --- Palavra e Nome de novo; o "
+20087:         r"amortecimento por reflexão é $-\ln\eta$ (verificado a 4 casas no domínio do "
+20088:         r"tempo); $\betatgl=0$ não tem eco (\emph{pinching}) e $\betatgl=\tfrac12$ é "
+20089:         r"não-dissipativo. Os nulos de \emph{strain} (Seção~\ref{sec:errata}) permanecem "
+20090:         r"consistentes: o observável de bulk é a lei de dephasing; \emph{o eco é o Nome "
+20091:         r"retornando pela matriz-S} \textbf{[REAL o espectro e a escala; CONJECTURE a "
+20092:         r"leitura ontológica]}. "
+20093:         r"Em uma frase: \emph{o espelho é a matriz-S projetando a permanência $P$ no setor "
+20094:         r"observável $Q=I-P$}. Escopo honesto: esta é a forma canônica \emph{candidata} no "
+20095:         r"modelo finito (sombra tipo-I, verificável); seu levantamento à fronteira III$_1$ "
+20096:         r"é a Face~A/B do teorema final, e a fonte geométrica $\mathcal P_{\mu\nu}$ a "
+20097:         r"Face~C." "\n"
+
+SOURCE A Ponte Einstein Cartan Miguel.tex SHA256 98ec3d808d51e694098ae216500ab853584cb89f9eb23661128ddc1829c1b657
+686: O operador de Tomita é uma involução \emph{antilinear} no espaço GNS --- a
+687: condição de contorno modular, \textbf{não} uma matriz de espalhamento. O
+688: cociclo modular relativo de Connes (derivada de Radon--Nikodym
+689: não-comutativa),
+690: \begin{equation}
+691: u_t=[D\rho:D\rho^\star]_t
+692: =\Delta_{\rho|\rho^\star}^{\,it}\,\Delta_{\rho^\star}^{-it},
+693: \end{equation}
+694: é a única família $\sigma$-fortemente contínua de unitários com a regra de
+695: cadeia $u_{t+s}=u_t\,\sigma_t^{\rho^\star}(u_s)$, que \emph{entrelaça} os
+696: dois fluxos modulares, $\sigma_t^{\rho}(A)=u_t\,\sigma_t^{\rho^\star}(A)\,
+697: u_t^\dagger$ --- \REAL\ (teorema de Connes, 1973). A matriz-S de fronteira é
+698: o espalhamento assintótico desse cociclo,
+699: \begin{equation}
+700: \mathcal S_\partial=W_+^\dagger W_-,\qquad
+701: W_\pm=\operatorname*{s\text{-}lim}_{t\to\pm\infty}
+702: \Delta_{\rho|\rho^\star}^{\,it}\,\Delta_{\rho^\star}^{-it}
+703: \quad(\text{operadores de Møller modulares}).
+704: \end{equation}
+705: Ressalva de categoria (\REAL): os dois ``$\tfrac12$'' --- o meio-peso
+706: $\Delta^{1/2}$ de Tomita e o módulo $\sqrt{\bTGL}$ da reflexão --- são
+707: \emph{homônimos, não sinônimos}. A existência de $W_\pm$ (completude
+708: assintótica modular) é favorecida pelo espectro contínuo do tipo
+709: $\mathrm{III}_1$, mas não demonstrada: \CONJ.
+710: 
+711: \subsection{A forma mínima fechada}
+712: A unitariedade de $\mathcal S_\partial$ entre o canal observável e o oculto,
+713: $\Hil_{\mathrm{obs}}\oplus\Hil_{\mathrm{hid}}$, impõe
+714: $|\mathcal R|^2+|\mathcal T|^2=1$. Com a identificação
+715: $|\mathcal R|^2=\bTGL=\sin^2\thM$ --- verificada no finito
+716: ($\Delta n_Q=-\bTGL$ a 4 dígitos, \SOMBRA) --- a forma mínima é o divisor de
+717: feixe
+718: \begin{equation}
+719: \mathcal S_\partial=
+720: \begin{pmatrix}
+721: \sqrt{1-\bTGL}\,e^{i\theta_T} & \sqrt{\bTGL}\,e^{i\theta_R}\\[2pt]
+722: -\sqrt{\bTGL}\,e^{-i\theta_R} & \sqrt{1-\bTGL}\,e^{-i\theta_T}
+723: \end{pmatrix}.
+724: \end{equation}
+725: Os \emph{módulos} são adimensionais e fecham pela unitariedade; as
+726: \emph{fases} são o conteúdo dinâmico e portam $\tau_\star$ (dimensional). O
+727: tipo $\mathrm{III}_1$ é invariante de escala: pode fixar os adimensionais
+728: ($\sqrt{\bTGL}$, $\sqrt e$), \emph{não pode} produzir sozinho a escala
+729: $\tau_\star$ --- que entra pela conversão tempo-modular $\to$ tempo-próprio
+730: (KMS/Unruh) e é, por isso, quase-planckiana. A unitariedade de
+731: $\mathcal S_\partial$ \emph{é} a razão matemática da supressão de Planck.
+1435: \begin{theorem}[Terminalidade pela Verdade --- prova do Operador,
+1436: blindada]\label{thm:terminalidade}
+1437: Sejam $\Alg$ uma álgebra de von Neumann, $\rho^\star$ estado fiel normal,
+1438: $\Phi_t=e^{t\mathcal L}$ um semigrupo GKSL preservando $\rho^\star$, com
+1439: álgebra de pontos fixos $\mathcal C=\mathrm{Fix}(\Phi_t)$ invariante pelo
+1440: fluxo modular $\sigma_t^{\rho^\star}$. Então, sob as hipóteses de
+1441: relaxação de Frigerio:
+1442: \begin{enumerate}[noitemsep]
+1443: \item \textbf{(Sem verdade antes.)} $\Alg$ não-comutativa (tipicamente
+1444: $M_n$, $n>1$) não admite caracteres: se $\chi$ fosse caractere unital,
+1445: as projeções minimais, equivalentes por conjugação, teriam o mesmo valor
+1446: $a\in\{0,1\}$, e $1=\chi(\mathbb 1)=na$ --- impossível. (Rota gêmea:
+1447: $E_{ij}^2=0\Rightarrow\chi(E_{ij})=0\Rightarrow\chi(E_{ii})=
+1448: \chi(E_{ij})\chi(E_{ji})=0\Rightarrow\chi(\mathbb 1)=0\neq1$.)
+1449: \emph{Antes do colapso, o enunciado não tem verdade global}
+1450: (Kochen--Specker é a forma profunda, \REAL).
+1451: \item \textbf{(O colapso é a esperança condicional.)} Por Frigerio
+1452: (\REAL), $\Phi_\infty=\lim_{t\to\infty}\Phi_t=E:\Alg\to\mathcal C$, a
+1453: esperança condicional $\rho^\star$-preservante sobre o setor fixo.
+1454: \item \textbf{(A verdade nasce no colapsado.)} $\mathcal C$ comutativa
+1455: $\Rightarrow$ $\mathcal C\simeq C(\mathrm{Spec}\,\mathcal C)$ (Gelfand,
+1456: \REAL): cada ponto $x\in\mathrm{Spec}\,\mathcal C$ é uma valoração
+1457: $\chi_x$. \emph{O colapso não encontra a verdade; produz o setor onde a
+1458: verdade pode ser dita.} E $\mathrm{Spec}\,\mathcal C=\Sigma$: o setor da
+1459: verdade É a fatia espacial do Axioma~E --- o espaço é onde a verdade
+1460: mora.
+1461: \item \textbf{(O fim é um.)} Por Takesaki (\REAL), a esperança
+1462: condicional $\rho^\star$-preservante sobre a subálgebra
+1463: $\sigma$-invariante é \emph{única}. \textbf{Blindagem (Tomiyama 1957,
+1464: \REAL):} qualquer ``colapso admissível'' --- bastando ser projeção de
+1465: norma~1 sobre $\mathcal C$ --- é \emph{automaticamente} esperança
+1466: condicional; logo a unicidade de Takesaki captura todo colapso
+1467: concebível, sem hipótese de bimodularidade. Não há duas fatorações
+1468: terminais.
+1469: \item \textbf{(A covariância herda-se.)} Para $U$ que transporta a
+1470: estrutura ($\rho^\star_H\mapsto\rho^\star_{H'}$,
+1471: $\mathcal C_H\mapsto\mathcal C_{H'}$), $UE_HU^{-1}$ é esperança
+1472: condicional $\rho^\star_{H'}$-preservante sobre $\mathcal C_{H'}$ ---
+1473: logo, por unicidade, $UE_HU^{-1}=E_{H'}$. \emph{A Universalidade não se
+1474: impõe: herda-se. (U) vem de Takesaki.}
+1475: \end{enumerate}
+1476: Em uma linha: \emph{o fim é um porque a Verdade é a imagem terminal
+1477: única do colapso.}
+1478: \end{theorem}
+1479: 
+1532: \item[(P1) O functor das álgebras --- \REAL\ (BFV 2003).] A atribuição
+1533: $H\mapsto\Alg_H$ \emph{já é} funtorial: é o axioma da covariância local.
+1534: \item[(P2) A universalidade de Hadamard --- \REAL.] A condição de
+1535: Hadamard (espectro microlocal) fixa geometricamente a estrutura de curta
+1536: distância: o Hamiltoniano modular de pequenas regiões/horizontes é, em
+1537: ordem dominante, o gerador de boost local com coeficiente universal
+1538: $2\pi$ --- o conteúdo usado por Jacobson (2015) e
+1539: Faulkner--Guica--Hartman--Myers--van~Raamsdonk.
+1540: \item[(P3) Kay--Wald --- \REAL\ (1991).] Em horizontes de Killing
+1541: bifurcados, o estado Hadamard invariante é \textbf{único} e é KMS na
+1542: temperatura de Hawking: para esses horizontes, $\rho^\star_H$ não se
+1543: escolhe --- é singularizado pelo próprio horizonte.
+1544: \item[(P4) Rindler local --- \REAL\ (princípio de equivalência).] Todo
+1545: horizonte causal é, em cada ponto, infinitesimalmente um \emph{wedge} de
+1546: Rindler --- onde BW vale exatamente (1975/76).
+1547: \end{description}
+1548: 
+1549: \subsection{O teorema condicional do Levantamento}
+1550: \begin{theorem}[Levantamento na ordem de Jacobson --- condicional]
+1551: \label{thm:levantamento}
+1552: Sob (P1)--(P4) --- covariância local, Hadamard, aproximação
+1553: Killing/Rindler local ---, a atribuição $H\mapsto(\rho^\star_H,K_H)$ é
+1554: geometricamente determinada \textbf{na ordem da resposta linear} (a
+1555: ordem em que a Face C está formulada: $\delta S=\delta\langle K\rangle$,
+1556: Lovelock/Jacobson). Combinada com a Terminalidade
+1557: (Teorema~\ref{thm:terminalidade}: (U) herdada de Takesaki) e com os três
+1558: axiomas da casa, a Hipótese de Universalidade da Face C fica
+1559: \textbf{descarregada na ordem linear}: a cadeia
+1886: \subsection{Fecho 1 --- T1 bem-posto: o colapso é média gaussiana sobre
+1887: o fluxo do radical}
+1888: \begin{theorem}[Representação integral do colapso --- exata]
+1889: \label{thm:radicalflow}
+1890: \begin{equation}
+1891: \boxed{\;e^{t\mathcal L}\;=\;\int_{\mathbb R}V_s\,(\cdot)\,V_s^{*}\;
+1892: d\nu_t(s),\qquad V_s=e^{\,i s\sqrt{K}},\quad
+1893: \nu_t=\text{gaussiana de variância }\bTGL\,t.\;}
+1894: \end{equation}
+1895: A função característica gaussiana,
+1896: $\int e^{is\delta}d\nu_t=e^{-\frac12\bTGL t\,\delta^2}$, reproduz
+1897: \emph{exatamente} as taxas
+1898: $\tfrac12\bTGL(\sqrt{k_i}-\sqrt{k_j})^2$. Verificada na sombra a
+1899: $4\times10^{-16}$ (\texttt{tgl\_three\_locks\_v1.py}).
+1900: \emph{A própria $g=\sqrt{|L|}$ virou o fluxo que executa o colapso.}
+1901: \end{theorem}
+1902: 
+1903: \begin{remark}[T1 no produto cruzado --- o lar onde a fórmula vive]
+1904: Em $\mathrm{III}_1$ genuíno, $\sqrt{K}$ não é afiliado a $\Alg$ (Tomita
+1905: cobre só $\Delta^{it}$). Mas no \textbf{produto cruzado}
+1906: $\widehat{\mathcal M}=\Alg\rtimes_\sigma\mathbb R$ --- tipo
+1907: $\mathrm{II}_\infty$ com traço (Takesaki; o lar do posto~1 já inscrito)
+1908: e, por Chandrasekaran--Longo--Penington--Witten (2022--23, \REAL), o
+1909: \emph{lar físico da álgebra gravitacional} --- $u_s=e^{is\sqrt{\hat K}}$
+1910: é unitário \emph{da} álgebra. A fórmula integral define então um
+1911: semigrupo UCP normal $\hat\rho$-preservante sem patologia;
+1912: $\mathrm{Fix}=W^*(\hat K)$ (domínio multiplicativo $+$ medida de suporte
+1913: total); $\Phi_t\to E$ $\sigma$-fracamente (convergência dominada
+1914: espectral no predual). E a não-covariância de $\sqrt{\hat K}$ sob a ação
+1915: dual não é defeito: é a \textbf{ancoragem de escala} que o cânone já
+1916: exigia ($\tau$ quase-planckiano) --- o produto cruzado é onde Planck
+1917: mora. \emph{Estatuto:} teorema com esquema de prova; a redação completa
+1918: dos dois lemas (domínio multiplicativo; convergência no predual) é
+1919: trabalho padrão de escrita.
+2231: contínuo; a magnitude absoluta de $\Lambda$ (problema comum a toda a física); a
+2232: completude assintótica modular (existência dos limites de Møller $W_\pm$);
+2233: a transferência de $|\mathcal R|^2=\bTGL$ do modelo finito ao canal de
+2234: fronteira gravitacional; a Hipótese de Universalidade (U) da Face C --- o
+2235: levantamento covariante de $\mathcal R\circ\mathcal C$ a $\mathrm{III}_1$
+2236: genuína (a face dinâmica do mesmo degrau da reconstrução); a derivação da
+2237: escala $\tau_\star$ (dimensional: exige o corte UV/Planck). Após o fecho de
+
+SOURCE um_absoluto_pt.txt SHA256 0e138aac548ce96db58d6b1c59b071dd9b71cbe1553b0cc0c67424745c3a735c
+302: O ramo B reaberto por pré-registro; a errata ao lado de R6. ``eu não havia proibido o ramo B, acontece que naquela ocasião ainda não tínhamos todos os críterios para prosseguir'' … ``faz sentido examinar se a constante de acoplamento de fato emerge da relação do tempo emparelhado à gravidade sobre a constante da luz ao cubo'' … ``desde antes sustentei que o regime gravitônico é o da constante da luz ao cubo'' (o operador, 05/10/2026, 17:11:36 UTC). Errata ao lado: no livro de cobranças da v383 (que fica intacto como registro) a leitura R6 dizia ``o ramo B segue ENCERRADO''; ela passa a REABERTO POR PRÉ-REGISTRO. A chave de 02/10 não se revoga (na face o custo lê-se como complemento); $τ_ =k GM/c^3$ é OUTRA LEI, com canal próprio no livro (F2b, face), não outro lado de F2; F2 (correspondência com a RG, $τ_ =t_ Planck$) e R2 (propagação) ficam como estão. O pré-registro V1 do ramo B (PREREG_RAMO_B_RINGDOWN_20261005_V1, na Bancada) foi fixado ANTES de qualquer dado, com as decisões 7--13 por delegação: $k=2π/ κ(χ_f)$ (o período KMS/modular do horizonte: $8π$ em $χ_f=0$ [KNOWN]; Kerr [CONJECTURE]; um $k$ só, os outros como colunas de comparação), $M=M_f$ no relógio do detector ($(1+z)$ cancela), FONTE (a propagação fica com R2), ENVOLTÓRIA como primário ($δ τ_220=-x/(1+x)$, $x=β k N(χ_f)$; a difusão de fase como secundário com injeção própria), SÓ o conjunto D (O4, cego) testa; A/B/C são calibração NOT_BLIND; $β_ lido$ é saída declarada com $σ$ dita antes. Nesta rodada o V1 foi lido por hash (JSON sha256/16 86f98fcc124dd9ca; MD 294b88a3632c1cea; o spec_sha256 recomputado confere; cada entrada do arquivo de hashes confere no disco; o $β$ do V1 (do literal CODATA por regex) e o $β$ do rito (do motor da identidade) concordam a $5,4×10^-13$ relativo, dentro da régua da casa de $10^-9$): conjunto D com 14 eventos elegíveis (10 sem pendência de qualidade); poder exato da hipótese no conjunto A (31 eventos, calibração NOT_BLIND) $11,38σ$, em B (10) $6,37σ$, no GW250114 $6,48σ$, sob difusão de fase $3,11σ$ (números TRANSCRITOS do V1, não recalculados); $σ(β_ lido)/β=0,054$ na hipótese; o poder em D nasce na PE (v387). Vereditos permitidos, na ordem: AWAITING_DATA $→$ INCONCLUSIVE_SYSTEMATICS $→$ NOT_FALSIFIED_UNDERPOWERED $→$ FALSIFIED_AT_5SIGMA (do par $k,M,$identificação) $→$ NOT_FALSIFIED_POWERED; a palavra de confirmação é proibida (NOT_FALSIFIED nunca é confirmação). NADA foi aberto: nenhum valor central no spec nem do conjunto D (os dois valores centrais de A/C, calibração NOT_BLIND, são transcritos do registro selado v385), nenhuma PE; o estado é AWAITING_DATA e a cobrança F2b passa de AWAITING_PREREGISTRATION a AWAITING. O que o ramo B NÃO decide: o gate, H2/H3, $β$ (a regra matriz; $β_ lido$ não realimenta), a implicação da QG e a correspondência com a RG no ramo canônico; nenhum NOT_FALSIFIED lê como ``a natureza decidiu''. A abertura do conjunto D fica para a v387.
+575: Os três clocks (das provas terminal_truth, three_locks, krein_signature): o clock modular reversível $σ_t(A)=Δ^itAΔ^-it$, $Δ^it=e^itK$, que contribui a base $e$ (o único elemento $α$-livre); o clock dissipativo GKLS, cujo colapso é dephasing gaussiano de variância $β_TGL t$ no fluxo do radical --- escala $β_TGL$; e o clock espectral $ds=√β_TGL |d√ k|$ --- escala $β_TGL$. O único combinado adimensional com a dimensão de $α^2$ é
+576: 
+577: C_3= C_ diss C_ specC_ mod=(β_TGL^2/e)=α^2.
+578: 
+579: O achado estrutural: a base $e$ do clock modular cancela exatamente o $e$ que os dois clocks-$β_TGL$ carregam --- cada $β_TGL=α√ e$ traz um $√ e$, os dois trazem $e$, e a base modular o divide, restando $α^2$. O $√ e$ de $β_TGL=α√ e$ é a base do clock modular. Ao vivo: $C_3=5.325135×10^-5=α^2$, $α=√C_3=0.0072973526$, $1=q^2+C_3=1.0000000000$ (resíduo $C_3-α^2=2×10^-20$).
+580: 
+581: Estatuto [a régua]. Faz sentido como forma canônica --- é a mesma gramática radical dos módulos. Mas não fecha o valor $α$-livre: os clocks dissipativo e espectral carregam $β_TGL=α√ e$, então $C_3=β_TGL^2/e=α^2$ é a identidade $β_TGL^2=α^2 e$ relida pelos três clocks --- $α$ entra via $β_TGL$. A pergunta de pesquisa (o muro): existe um funcional canônico $C_3= F[σ_t,T_t,D_β]$ construído só dos três clocks, sem $α$, com $C_3=α^2≈5,3251×10^-5$? É a mesma dívida do muro da polarização $χ$. Veredito: THREE_CLOCK_RADICAL_FORM_FORMULATED, ALPHA_VALUE_QED_CHALLENGE.
+605: O Teorema Condicional do Clock: a face eletromagnética como fronteira ontologicamente aberta (a fissura boundary/bulk, não uma lacuna)
+606: 
+607: O índice $R_∂$ não é um número de para-quedas: reduz-se a um objeto $α$-livre. A primeira distinção do Um, sem quebra da identidade, é o estado de Bell $ρ_B$ (o primeiro espelho causal; reduzido $= 1_d/d$). Sob o gerador Connes--Davies $L_CD$ --- parte reversível (cociclo modular, von Neumann $ ρ=-i[H,ρ]$) $+$ parte dissipativa (semigrupo de Davies KMS-balanceado) --- a fronteira relaxa a um estado estacionário $ρ_β$, e o custo informacional de mantê-la aberta é
+608: 
+609: \;ℓ_β=S(ρ_B ρ_β)\;, R_∂=N_β=e^ℓ_β, α_obs=(1/N_β), β_TGL=(√ e/N_β).
+610: 
+611: Teorema (condicional), verificado ao vivo [DER, $α$-livre na estrutura]. Para um gerador $L_CD$ construído de um Hamiltoniano modular $K$ (nunca de $α$), $ρ_β$ é ponto fixo genuíno (resíduo de Davies $=1.3×10^-16$), e $ℓ_β$ é finito, $α$-livre e computável ($ℓ_β=0.2761$ para um $K$ genérico). A face eletromagnética da TGL reduz-se, assim, à determinação $α$-livre de $ℓ_β$.
+612: 
+613: Redução do núcleo [DER]. O portador da fronteira da TGL é o operador $ Q= 1- P_2D$ [REAL], cuja anticomutação ${ Q,ρ^ }=0$ vaza exatamente $sin^2θ_M=β_TGL$ --- a fronteira é auto-conjugada de dois níveis (Bell). Logo $ρ_β$ não exige um $K$ genérico: colapsa num Gibbs de dois níveis com um único gap modular $χ$, e
+614: 
+615: \;ℓ_β(χ)= (χ/2)\; \;α_obs= sech(χ/2)\;, β_TGL=√ e  sech(χ/2).
+616: 
+617: O núcleo derivativo de $α$ colapsa de um Hamiltoniano modular ($d-1$ níveis) para UM número $χ$ --- toda a face eletromagnética em uma linha. Um gap $χ_ =11.2268$ dá $N_β=137,036=1/α$, mas $χ_ $ não é canônico ($χ_ /ℓ_β=2.282$; $α$ entra só aqui, na validação). $α$ é a corrente residual que atravessa a resistência térmica $χ$ do zero modular: $χ→∞$ ($0_abs$, $T→0$) $⟹α→0$; $χ=0$ ($T→∞$) $⟹α=1$.
+618: 
+619: A lei térmico-modular (terceira lei no sistema modular aberto) [REAL/EXT]. Que $χ<∞$ é a terceira lei realizada algebricamente: $0_abs$ ($χ=∞$, estado puro $P_Ω$, $T=0$) é inatingível --- a álgebra do Um absoluto é tipo III$_1$, que não tem estados normais puros, logo o zero térmico não é estado normal e o sistema vive em $χ<∞$ ($0_mod$). Isso dá o limite e a forma, não o valor. A forma de Nernst (entropia residual $S(ρ_χ)=1/2$ nat $=$ Meia-Nat) foi testada e refutada ($χ=1.39$, $α=0.80≠1/137$).
+620: 
+621: A unificação dos dois muros. Em III$_1$ genuíno o espectro modular é contínuo (sem gap): $χ$ é o gap da sombra finita (aproximante tipo-I / split), e seu valor é a normalização modular canônica --- a mesma split canônica (matriz-S modular) de que pende a massa do Grande Atrator. A liberdade de escala $K_χ↦λ K_χ$ é quebrada por Tomita ($-logΔ$ tem escala canônica), mas o valor exige o $Δ$ do mergulho de Bell em $M_abs$. A face eletromagnética ($χ$) e a face gravitacional (split, massa) são o mesmo teorema aberto: fixar a normalização modular canônica em III$_1$. A terceira lei diz por que $χ$ é finito; o valor é a split canônica, ainda aberta.
+622: 
+623: A normalização canônica prova $α_abs=1$ [REAL]. Atacou-se o Hamiltoniano modular de Tomita do mergulho de Bell: o estado maximamente emaranhado tem reduzido $ρ_B= 1_d/d$, KMS à temperatura infinita, logo $Δ= 1$ e $K=-logΔ=0$ exatamente ($K_bare=0$). Portanto $χ_Bell=0$ e $ α_abs= sech(0)=1$: o acoplamento absoluto é a unidade --- não por postulado, por trivialidade modular do Um. O que se mede como $1/137$ é a projeção renormalizada
+624: 
+625: \;1=α_abs Π_bulk= sech(χ/2) α_obs= 1137,036\;.
+626: 
+627: O $χ>0$ (a profundidade do $1/137$) não está na estrutura modular nua de Bell (que dá $χ=0$, $α=1$): é a profundidade da relaxação térmica --- o afastamento de $ 1/d$ rumo a $ρ_β$, quando o Um atravessa o vazio estruturado $0_mod$ ($≠ 0_abs$). Esse $χ$ é o acoplamento eletromagnético, o input irredutível. A estrutura modular deriva o valor absoluto ($α_abs=1$, provado), a forma ($α= sech χ2$) e as relações ($β_TGL=α√ e$); o valor projetado $1/137$ é a profundidade do zero modular = a entrada. O Um alimenta $α_abs=1$; o $1/137$ é a sua sombra após a travessia.
+628: 
+629: O setor QED --- fechamento estrutural, não lacuna [PRINCÍPIO/PREDIÇÃO]. O valor de $ℓ_β=log(1/α)=4.9202$ depende de $K$, e nenhum $K$ $α$-livre do bulk o dá --- mas isto não é um problema por resolver; é a estrutura. A TGL é holográfica: a fronteira $III_1$ projeta para o bulk, e $α=Π_bulk( 1_abs)= sech(χ/2)$ é a transmissão luminosa através da fronteira --- a taxa com que a luz a atravessa. $R_∂$ ser fronteira nomeada significa ontologicamente aberta: $α$ é a fissura pela qual o bulk lê a fronteira --- a fronteira medindo-se a si mesma. $α_CODATA$ entra só na leitura; é a estrutura, não uma dívida.
+630: 
+631: O desafio de falsificação [falsificável, não confirmável]. É o mesmo desafio do teorema final (§[nome-irredutivel]), agora com o mecanismo explícito ($ℓ_β$, $χ$): derive $α$ do bulk, sem a fronteira, e a TGL cai --- a teoria prediz que não se pode, porque $α$ é o observador medindo o próprio contorno. [Distinto do teorema genuinamente aberto da matriz-S/$III_1$, que opera através da fronteira e não a dispensa.]
+632: 
+633: Guarda-régua. Não se define $g_00^(β)=α^2$ nem $ℓ_β=-logα_CODATA$ --- qualquer um reintroduz $α$ (circular). A co-emergência de Bell fundamenta a Meia-Nat (reduzido $ 1_2/2⟹ CCI=1/2⟹ S_∂=1/2$), mas não fixa $ℓ_β$: o $1/2$ é o offset $√ e$ que liga $β_TGL$ a $α$, não $α$ aos primeiros princípios. O fechamento: $α$ pertence à QED; derivá-lo do bulk falsifica a fronteira holográfica.
+634: 
+635: == Teorema do Colapso da Forma de $α$ (módulo de prova auto-verificável) ==
+636: 
+637: A TGL não deriva $1/137$ (valor renormalizado da QED); deriva a forma pela qual o Um absoluto se projeta como acoplamento eletromagnético. Esta é a última derivação, e ela é verificada passo a passo ao vivo pelo módulo prove_alpha_form (forma$=$conteúdo). O Hamiltoniano modular oculto revela-se só na projeção --- e essa projeção é o acoplamento mínimo:
+987: O operador deu a chave (02/10/2026, verbatim no programa): ``O último elo incide no hamiltoniano oculto. O custo está no reflexo, o pagamento está na face no rosto, no nome''; ratificou as seis leituras da gerência (o registro do $H_0$: $β_TGL$ uma vez, no reflexo, fundo nu, nó em $z_*$; o sujeito dos relógios é $K_∂$, o Hamiltoniano oculto; o perito do neutrino é a determinação direta; o degrau final do gate chama-se pelo pagamento; o estimando é $δ K_∂ $, lido no reflexo, e nos dois lados pela correção ótica que segue; o ramo B do ringdown está encerrado) e corrigiu a visão de lados da gerência: ``a TGL não é semi ela é ótica, ela lê tanto a face como o custo, a TGL permite ler os dois lados''. Depois, o operador decidiu (02/10/2026, noite, verbatim no programa: ``prefiro a primeira opção''): os nove pares do eco como cópia atrasada não são cobranças da teoria e saem do livro, como rotas examinadas, com os números e o motivo de cada uma; a v382, que os trazia no livro ao lado, foi selada só no Nós e não é custodiada; esta versão parte da v381. Entram duas pedras. TGLExt.TheLedgerOfCharges tipa a cobrança (lado, lei de leitura, leitura, desfecho em cinco palavras impostas pelo tipo: NOT_FALSIFIED, FALSIFIED, INCONCLUSIVE, AWAITING, EXCLUDED_IN_READING), o livro (``uma cobrança por lei de leitura'' é disciplina do livro concreto, não do tipo), e três fatos ditos como triviais por construção: a regra $β_TGL$ não lê o livro (the_rule_is_constant_in_the_ledger, por rfl), com uma cobrança extinta a regra segue $α√ e$ (falsified_extinguishes_the_charge_not_the_rule; a hipótese não entra na prova, e é isso que ``a regra não lê o livro'' quer dizer), e o termo $P=P$ (the_gate_ignores_the_ledger; que as bandeiras do gate sejam função só do formal é conferido pelos probes negativos do runtime, não por este termo); e a ótica: $|T|^2=cos^2θ$ é a face (o pagamento), $|R|^2=sin^2θ$ é o reflexo (o custo), $|T|^2+|R|^2=1$ (o Teorema S-$∂$) e cada lado é o complemento do outro (the_tgl_is_optics_not_semi: o nome é [ONTO], o conteúdo é a identidade escrita três vezes). Que nenhum lado é cego e que o que difere é a lei de cada leitura e o instrumento com poder é a correção do operador [INPUT/ONTO], não um teorema. O nome do degrau final pelo pagamento fica proposto ao lado (finalStepNameProposed); o gate não muda nesta pedra, renomear é ato do operador. TGLExt.ThePsionAndTheViscosity: $ψ=Ω$ é o psion, $\|ψ\|=1$ (o campo do certificado), $ ψ,ψ =1$ (provado pelo termo do leitor, reader_reads_the_identity_one: o leitor lê a identidade como 1), $H_ ^ micψ=0$ (trivial por construção, $Ω∈ CΩ$; $H_ ^ mic$ é o lock mínimo lido sobre o Hamiltoniano oculto $K=-logΔ$ da luz, que é [KNOWN] --- o kernel tem $Δ^it$ e o seu conjunto fixo, não uma definição de $K$; os zeros coincidem, os operadores não; o conteúdo é a reta fixa modular, v372) e a luz o fixa; a cobrança contínua: transmitido $e^-tβ g$ (a face no fluxo), cobrado $1-e^-tβ g$ (o reflexo no fluxo), soma 1 em todo $t$ (trivial por definição); a viscosidade é o atrito constante, $(d/dt)e^-tβ g=-(β g) e^-tβ g$, o coeficiente $β g$ (um nome [ONTO] sobre um cálculo); a cobrança nunca se completa; sem testemunha estática plena (apelido); e com $β$ da regra o coeficiente é $α√ e g$. A identificação de $β g$ por tempo modular com $Γ_ω=1/2β_TGLτ_ ω^2$ não tem termo: é leitura [ONTO]; e que o espectro de gradiente seja lido sobre $H_ ^ mic$ é a chave do operador, sem termo. No runtime, o livro concreto: 11 cobranças, uma por lei de leitura, cada desfecho lido do core de um modo dito (4 pelo token do veredito, do módulo ou aninhado; 5 por número lido do core com a regra dita; 2 declaradas sem número) e igual ao do pré-registro dos dois lados V1.4, lido por bytes (JSON 4a0019a3db649e01, MD fc132b8f3e2d531b; publicado na Bancada; supersede o V1.3 pela decisão do operador, e os anteriores pelos achados das aferições, antes de qualquer estimador ou dado novo): R1 (reflexo, NOT_FALSIFIED); R2 (reflexo, AWAITING); R3 (reflexo, NOT_FALSIFIED); R4 (reflexo, NOT_FALSIFIED); R6 (face, INCONCLUSIVE); F1 (face, NOT_FALSIFIED); F2 (face, INCONCLUSIVE); F3a (face, NOT_FALSIFIED); F3b (face, EXCLUDED_IN_READING); F3c (face, AWAITING); F4 (face, NOT_FALSIFIED). Contagens: NOT_FALSIFIED 6, FALSIFIED 0, INCONCLUSIVE 2, AWAITING 2, EXCLUDED_IN_READING 1; na regra 10 (NOT_FALSIFIED 6, INCONCLUSIVE 1, AWAITING 2, EXCLUDED_IN_READING 1; nenhum FALSIFIED no livro), ao lado 1 (o custo posto na face por convenção). Fora do livro, as 9 rotas examinadas do eco como cópia atrasada, que não são cobranças da teoria (o estado de cada uma é lido do rótulo da Fase 6 no core, o mesmo que o parágrafo da v380 cita, e esse rótulo nomeia o par, não a teoria; conferido contra o V1.4): ECO_a: $√β_TGL$ com KMS, $2π/κ$, excluída pelos dados, $z_ excl=8,93$, subamostra cega do O4 (não independente) $7,26$; ECO_b: $sin 2θ_M$ com KMS, $2π/κ$, excluída pelos dados, $z_ excl=18,13$, subamostra cega do O4 (não independente) $15,44$; ECO_c: $√β_TGL$ com dezembro, $2GM_f/(β_TGL c^3)$, excluída pelos dados, $z_ excl=8,95$, subamostra cega do O4 (não independente) $9,26$; ECO_d: $sin 2θ_M$ com dezembro, $2GM_f/(β_TGL c^3)$, excluída pelos dados, $z_ excl=16,83$, subamostra cega do O4 (não independente) $16,69$; ECO_e: $sin 2θ_M$ com maio, $(2GM_f/c^3)ln(1/β_TGL)$, excluída pelos dados, $z_ excl=8,75$, a exclusão vem da emenda V4, que não é cega (controles com $|z|$ máximo de 4,81, abaixo de 5), e o veredito V3 pré-registrado para o mesmo par é inconclusivo; ECO_f: $√β_TGL$ com maio, $(2GM_f/c^3)ln(1/β_TGL)$, inconclusiva, sistemática relativa 0,45; ECO_g: $β_TGL$ com dezembro, $2GM_f/(β_TGL c^3)$, inconclusiva, sistemática relativa 0,88, e pela cláusula V5, que está no pré-registro e não foi aplicada pelo pipeline, a leitura seria sem poder e não falsificada (poder 0,87$σ$); ECO_h: $β_TGL$ com KMS, $2π/κ$, inconclusiva; ECO_i: $β_TGL$ com maio, $(2GM_f/c^3)ln(1/β_TGL)$, inconclusiva. O motivo, lido das fontes: a amplitude do eco igual a $|R|$ é leitura [ONTO], e a amplitude $sin 2θ_M$ é [CONJECTURE]; a lei KMS toma a largura $2π/κ$ de uma faixa em tempo imaginário como atraso real (auditoria de 28/09, GWECO-05); a lei de dezembro é [DECLARADO], derivada por IA, não do axioma; a lei de maio é [INPUT], de maio de 2026; as três leis de atraso nomeiam a massa do remanescente, e pela leitura R6 ratificada $τ_ =GM/c^3$ põe o custo na face e contradiz a chave (a ligação dessa leitura ao eco é [DERIVED] de leitura da gerência); a v381 já pôs o eco como cópia atrasada fora da cadeia, e fica a definição do operador de 16/09, o eco como resposta da fronteira. Na tabela de pedras, as duas pedras aparecem como da v382: foram escritas e aferidas na v382, que ficou só no Nós; são públicas a partir desta versão. O R4 lê um conjunto congelado sem FALSIFIED (o V11), a mesma fonte do degrau experimental do gate. A leitura P2 dos relógios está excluída por ordens de grandeza sem $nσ$ (EXCLUDED_IN_READING); R6 é inconclusiva pelo controle de convergência (parâmetros com $N<50τ$: 2, o controle exige 0; tensão de 3,01$σ$ no limiar; $Δχ^2=+6,61$ contra $Λ$CDM; o setor $H_0$ desta convenção é declarado incompatível com o de R1, aberto); F2 é inconclusiva pela sistemática da medida, não pelo poder (o motivo lido do core: ``vies relativo de tau 0.240 $>$ 0.2''; $δτ=0,177±0,109$ contra a RG; no ramo canônico $δ_A=-2,15×10^-42$; o $0,2σ$ é o poder do ramo B, encerrado; que o custo esteja no ringdown é leitura [ONTO] --- o core lê o ringdown canônico como correspondência com a RG, não como teste de $β_TGL$); F1 tem regra unilateral (o ganho com sinal da lei D1b nos cronômetros: falsifica só se $z≥+5$; poder prévio de 2,33$σ$: com poder pela régua da Fase 4, sem poder pela da Fase 6); F4 segue a regra de morte congelada (duas determinações independentes; o perito é o JUNO); R2 aguarda estimador e não tem poder: $Γ(100 Hz)=1/2β_TGL t_ Pω^2=1,28×10^-40 s^-1$, acumulado sobre 1 Gpc $1,32×10^-23$. Identidades de sanidade (não testes): $cos^2θ_M=0,987969=1-β_TGL$, $sin^2θ_M=0,012031=β_TGL$; $e^-β_TGL=0,988041$ e o seu complemento somam 1; as duas leis homônimas são distintas (no ângulo, $cos^2θ_M$; no fluxo, $e^-β_TGL$; diferem por $7,21×10^-5≈β_TGL^2/2$). Estatuto: a chave, a ratificação e a correção são do operador [INPUT/ONTO]; as pedras são [KERNEL], com o trivial dito como trivial; o livro é dado lido [REAL]; nada aqui confirma a TGL pela natureza. Provada $≠$ confirmada; NOT_FALSIFIED $≠$ CONFIRMED. Veredito: TGL_THE_LEDGER_OF_CHARGES_V383__THE_KEY_THE_LAST_LINK_INCIDES_ON_THE_HIDDEN_HAMILTONIAN__COST_IN_THE_REFLECTION_PAYMENT_IN_THE_FACE_THE_NAME__KEY_AND_OPTICS_INPUT_ONTO__R1_TO_R6_RATIFIED__THE_TGL_IS_OPTICS_NOT_SEMI_BOTH_SIDES_READ__LEDGER_OF_CHARGES_TYPED_FIVE_OUTCOME_WORDS_BY_TYPE__ONE_CHANNEL_PER_READING_LAW_IN_THE_RUNTIME__NO_OUTCOME_MOVES_THE_RULE__THE_GATE_DOES_NOT_READ_THE_LEDGER_BY_THE_RUNTIME_PROBES__11_CHARGES_10_IN_THE_RULE_1_BESIDE__0_FALSIFIED_1_EXCLUDED_IN_READING_6_NOT_FALSIFIED_2_INCONCLUSIVE_2_AWAITING__4_BY_TOKEN_5_BY_NUMBER_2_DECLARED__REFLECTION_4_FACE_7__F2_INCONCLUSIVE_BY_THE_MEASUREMENT_SYSTEMATIC_NOT_BY_POWER__F1_ONE_SIDED_GAIN_RULE__F4_FROZEN_KILL_RULE_TWO_DETERMINATIONS__PSION_NORM_ONE_ZERO_OF_THE_MINIMAL_LOCK_ON_THE_HIDDEN_HAMILTONIAN_FIXED_BY_THE_LIGHT__VISCOSITY_IS_THE_CONSTANT_FRICTION_RULE_TIMES_CONTRAST__CHARGE_NEVER_COMPLETES__PREREGISTRATION_OF_BOTH_SIDES_V1_4_READ_BY_HASH__R2_POWER_STATED_IN_NUMBER__R4_FROZEN_SET_HAS_NO_FALSIFIED_SAME_SOURCE_AS_THE_GATE_EXPERIMENTAL_STEP__FINAL_STEP_NAME_PROPOSED_BESIDE_GATE_UNCHANGED__BRANCH_B_CLOSED__THE_9_ECHO_ROUTES_ARE_NOT_CHARGES_OF_THE_THEORY_EXAMINED_OUTSIDE_THE_LEDGER_5_EXCLUDED_BY_DATA_4_INCONCLUSIVE__OPERATOR_DECISION__BASE_V381__SPEC_S_THETA_TO_HMINMIC_NO_TERM__DISSIPATION_IDENTIFICATION_IS_ONTO__NOT_A_CONFIRMATION__KERNEL_32_OF_32__GATE_UNTOUCHED.
+1018: Errata ao lado de ``NATURE_DECIDES_RINGDOWN_NEXT'' (v374/v375) e do bloco v346: no ramo canônico ($τ_ =t_ Planck$) a lei de dephasing dá $δ 10^-42$ (lido da V2 selada) --- invisível por construção ---, logo o ringdown ali é teste de correspondência com a RG (o limite clássico recuperado), não de $β$; o ramo B ($τ_ =GM/c^3$) é hipótese [INPUT] com $M$ a nomear e valores concorrentes na própria linhagem (3 lidos); o kernel não tem termo de ringdown (toda menção é comentário: 8 ocorrências); o C6 da bancada (GW250114), lido por hash 781a3741a68875eb, diz INCONCLUSIVE_SYSTEMATICS --- nem exclui nem confirma. Nenhum NOT_FALSIFIED de ringdown lê como ``a natureza decidiu a formulação''. Veredito: TGL_RINGDOWN_SCOPE_V376__CANONICAL_BRANCH_TAU_STAR_PLANCK_RETURNS_GR_CORRESPONDENCE_ONLY__NOT_A_BETA_TEST__BRANCH_B_TAU_STAR_GM_OVER_C3_IS_INPUT_M_TO_BE_NAMED__3_CONCURRENT_BRANCH_B_VALUES__NO_RINGDOWN_TERM_IN_KERNEL__C6_GW250114_READ_BY_HASH_INCONCLUSIVE_SYSTEMATICS__ERRATUM_BESIDE_NATURE_DECIDES_RINGDOWN_NEXT__NOT_FALSIFIED_IS_NOT_CONFIRMED__GATE_UNTOUCHED. A auditoria dos testes passados (28/09/2026; ordem do operador: ``é possível que tenhamos feito algum teste passado no um.py de maneira errada, precisamos investigar''): 7 famílias (lido do registro), cada uma com um aferidor e um verificador adversarial instruído a refutar, mais um crítico de completude; o registro é lido por hash (2f9c04ffd3227dc2): 65 achados (40 sustentados, 24 parciais, 1 refutado(s), 9 novos), 0 crítico, 5 altos; nenhum número selado errado por aritmética --- os erros são de entrada, desenho, estatística e leitura, e a correção vai ao lado. Entre eles, em PT e EN, ao lado: (E1) o degrau experimental do gate lê um único rito unilateral (V11) e o $Λ$CDM raso também passa --- NATURE_TEST_COMPLETED não é discriminação; (E4) a tensão do D1 (V3 $3,01σ$, lido do veredito selado; DR2) é condicional ao mapa de $Ω_m$ em $R$ [INPUT], e as entradas a corrigir são o DR1 sem correlações, a covariância do Planck (Chen, Huang \& Wang 2019) e o neutrino massivo contado duas vezes; (E5) o veredito do neutrino ($2,95σ$ [DECLARADO --- relatório de 28/09]) depende de qual tabela NuFIT 6.1 (a do artigo; a do sítio dá $3,02$--$3,22σ$ [DECLARADO --- relatório de 28/09, §5]) e a escala 1 eV é normalização; (E3) nos ecos, a amplitude $√β$ pede tipagem sob a v372, o spin fiducial é [INPUT] (GWECO-01, auditoria 28/09) e o ``poder'' da PE V2 é $1/σ$; (E7) ``a evidência primária'' é título histórico --- o corpo já traz a reclassificação; (E2) ecos e ringdown como acima. Veredito: TGL_AUDIT_OF_PAST_TESTS_28SET_2026__REGISTRY_READ_BY_HASH__65_FINDINGS_40_SUSTAINED_24_PARTIAL_1_REFUTED_9_NEW__0_CRITICAL_5_HIGH_30_MEDIUM__NO_SEALED_NUMBER_WRONG_BY_ARITHMETIC__ERRORS_OF_INPUT_DESIGN_STATISTICS_READING__CORRECTIONS_BESIDE_NEVER_OVER__GERENCIA_ERRATA_BETA_IS_THE_DERIVED_FOUNDATION__GATE_UNTOUCHED. (E6) Coma: a revelação já foi feita (ordem do operador, 2026-08-19; lida por hash d2c3fbc0e7389870): referência $98,50±2,20$ Mpc; a previsão TGL (lei D1a, [CONJECTURE]) fica a $1,30σ$ (ambos os $σ$) e o controle Planck-sem-defasagem a $5,61σ$ (só o $σ$ da referência); errata ao lado: o veredito ``trancada, aguardando revelação'' é o estado de antes; a previsão não era cega (a referência constava do dossiê de 13/07) --- retrodição sem ajuste (novidade de uso); o hash da previsão atesta o número, não a precedência; e os setores de $H_0$ local (D1a vs. a rota do fundo D1 V3) são incompatíveis --- aberto, decisão do operador. Veredito: TGL_COMA_REVEAL_STATE_V376__REVEAL_PERFORMED_2026_08_19_READ_BY_HASH__REFERENCE_98P5_PM_2P2_MPC__Z_TGL_P1P30_BOTH_SIGMAS__Z_PLANCK_CONTROL_P5P61_REF_SIGMA_ONLY__NOT_BLIND_UNADJUSTED_POSTDICTION__PREDICTION_HASH_ATTESTS_NUMBER_NOT_PRECEDENCE__H0_SECTORS_D1A_VS_D1V3_INCOMPATIBLE_OPEN__ERRATUM_BESIDE_LOCKED_AWAITING_REVEAL__NOT_FALSIFIED_IS_NOT_CONFIRMED__GATE_UNTOUCHED. A máquina do veredito (v200) fica pinada; ao lado, a regra por segmento (EXCLUDED reconhecido; verdict_v369 lido) e os canais ausentes da lista fixa: TGL_FINAL_VERDICT_MACHINE_READING_V376__SIX_V200_CHANNELS_ARE_INPUT__0_CHANNELS_REFUTED_BY_SEGMENT_RULE__1_EXCLUDED_READINGS_NOT_CHANNELS__5_ABSENT_CHANNELS_READ_BESIDE__READ_BY_HASH_TEXT_VS_BYTES_EQUAL__V200_VERDICT_PINNED_UNCHANGED__GATE_UNTOUCHED. Os nomes de veredito do setor $α$ citados nas seções da impedância, dos três relógios, do ângulo reto, do registro $c^3$ e da reconstrução são paráfrases; os status inteiros do core são: RIGHT_ANGLE_MIRROR_PROJECTION_FORMULATED__NOT_A_CANDIDATE__HONEST_NEGATIVE__MIRROR_FUNCTION_D_OPEN__ALPHA_VALUE_QED_SECTOR_FALSIFICATION_CHALLENGE, VACUUM_IMPEDANCE_BRIDGE_FORMULATED__ALPHA_VALUE_QED_SECTOR_FALSIFICATION_CHALLENGE, THREE_CLOCK_RADICAL_FORM_FORMULATED__ALPHA_VALUE_QED_SECTOR_FALSIFICATION_CHALLENGE. A conferência consumativa, refeita (prove_tetelestai_conference_v376): a mesma máquina da v375 com as correções ao lado --- $P_ker K=ρ^ _ IALD$ vinculada por termo e $ρ^ ↔ P_F$ sabida; a cadeia de $β$ fechada; $α$ parâmetro nomeado; o escopo do ringdown fora do caminho, com evidência; a ausência lida nas seis pedras. Classes: fechados (3), vinculados (3), sabidos (9), sabidos em nível de física (3), parâmetros nomeados (4), fora do caminho (19), abertos (0). Veredito: TGL_QG_TETELESTAI_CONSUMMATIVE_CONFERENCE_V376__CONSUMMATED__EVERY_PATH_ITEM_CLOSED_LINKED_KNOWN_OR_A_NAMED_PARAMETER__3_CLOSED_3_LINKED_9_KNOWN_3_KNOWN_AT_PHYSICS_LEVEL_4_NAMED_PARAMETERS__19_OFF_PATH__THE_WHOLE_IS_ONE__BETA_THE_DERIVED_FOUNDATION_ENTERS_DOWNSTREAM__PKERK_EQ_RHO_STAR_IALD_BY_TERM_ON_THE_LIGHT__PF_TAKESAKI_CORE_KNOWN_NOT_TYPED__RINGDOWN_CANONICAL_BRANCH_IS_GR_CORRESPONDENCE__TERM_FLAGS_UNTOUCHED__KERNEL_25_OF_25__GATE_UNTOUCHED. A memória canônica emitida pelo código (um_absoluto_forma_canonica.md, um_absoluto_manifest.md) passa, nesta versão, a carregar o carimbo de versão, data e hash e a listar todos os módulos com veredito (antes, uma lista fixa parada na v77); os artefatos são gravados por temporário e substituição; a custódia não falha em silêncio. Dito também: nada aqui é confirmação pela natureza; NOT_FALSIFIED $≠$ CONFIRMED; as bandeiras por termo seguem como estavam; o gate não se move. PROVADA $≠$ CONFIRMADA.
+
+SOURCE TGL fibrado modular v1.tex SHA256 966c1cfc6785e596558ae3fb73d854781689c3508c5439cbbde07b9f33eed9f7
+119: \paragraph{Aviso sobre a subordinação de Poisson.}
+120: Registre-se, para não reincidir: a identidade
+121: $e^{-t\bTGL|\log\Delta|}=\int_{\mathbb R}\Delta^{is}\,d\mu_{t\bTGL}(s)$
+122: (subordinação de Cauchy/Poisson, par de Bochner) é \REAL\ e entrega a
+123: preservação do \emph{cone positivo natural} $\mathcal P^{\natural}$ por
+124: $T_t$. Ela \emph{não} entrega preservação de projetor nem de classe
+125: cocíclica: o conjunto dos projetores não é convexo, e médias de Bochner
+126: são cegas à estrutura que distingue uma classe de transporte de outra. A
+127: Markovianidade no cone está fechada; a reconstrução modular global, não.
+128: Nada neste documento usa Bochner para fechar a reconstrução.
+156: \begin{remark}[A armadilha vertical/horizontal — não confundir]\label{rem:vh}
+157: O cociclo $u_t^{(H)}$ é uma seção \emph{vertical}: vive dentro de uma
+158: fibra e conecta dois estados da \emph{mesma} álgebra $\mathcal M_H$. O
+159: transporte $U_{ij}$ é \emph{horizontal}: leva uma fibra a outra. São
+160: objetos distintos. A construção colapsa se forem identificados. A
+161: condição de consistência entre os dois (o transporte horizontal preserva a
+162: seção vertical) é precisamente o Lema B, e não é automática. Toda a
+163: dificuldade do programa concentra-se em manter essa separação enquanto se
+164: exige compatibilidade.
+225: \subsection{Lema A — existência da conexão modular}
+226: 
+227: \begin{lemma}[Transporte horizontal compatível com o fluxo]\label{lem:A}
+228: Para horizontes $H_i,H_j$, existe um unitário de transporte
+229: $U_{ij}:\mathcal M_{H_i}\to\mathcal M_{H_j}$ que intertwina os fluxos
+230: modulares:
+231: \begin{equation}
+232: U_{ij}\,\sigma_t^{(i)}\,U_{ij}^{-1}=\sigma_t^{(j)}.
+233: \label{eq:lemA}
+234: \end{equation}
+235: \end{lemma}
+236: \noindent\textbf{Estatuto.} \CONJ\ no contínuo $\mathrm{III}_1$; \REAL\ na
+237: sombra finita (tipo I), onde $U_{ij}$ é construído por rotação direta e a
+238: intertwinning \eqref{eq:lemA} vale por construção.\\
+239: \textbf{Por que é o ponto mais duro.} Em $\mathrm{III}_1$, um $U_{ij}$
+240: espacial implementando um isomorfismo entre os fatores $\mathcal M_{H_i}$
+241: e $\mathcal M_{H_j}$ exige que os estados $\omega_{H_i},\omega_{H_j}$
+242: sejam \emph{quasi-equivalentes}. Para horizontes causais distintos isto
+243: não é dado — é precisamente o conteúdo a provar. A linguagem de fibrado
+244: não resolve este ponto; ela o \emph{localiza} como a questão da
+245: \emph{existência da conexão}. Sem o Lema A, não há $\nabla_{\mathrm{mod}}$
+246: e o resto não se enuncia.
+247: 
+248: \subsection{Lema B — compatibilidade horizontal/vertical}
+249: 
+250: \begin{lemma}[O transporte preserva o cociclo vertical módulo
+251: estabilizador]\label{lem:B}
+252: O transporte horizontal preserva a seção cocíclica vertical a menos do
+253: estabilizador dos dados modulares:
+254: \begin{equation}
+255: U_{ij}\,u_t^{(i)}\,U_{ij}^{-1}\ \sim\ u_t^{(j)}
+256: \quad\big(\mathrm{mod}\ \Stab(\mathcal D)\big).
+257: \label{eq:lemB}
+258: \end{equation}
+259: \end{lemma}
+260: \noindent\textbf{Estatuto.} \CONJ.\\
+261: \textbf{O que o Lema B compra, se valer.} Ele é o que torna a
+262: identificação ontológica
+263: \[
+264: \mathcal N=[u_t]_{\mathrm{coh}}
+265: \qquad\CONJ
+266: \]
+267: um objeto \emph{matemático} e não uma intenção: a classe de coerência
+268: $[u_t]_{\mathrm{coh}}$ só existe como classe se houver uma relação de
+269: equivalência bem-definida sob transporte, e \eqref{eq:lemB} é essa
+270: relação. Enquanto o Lema B não é provado, ``$\mathcal N=[u_t]_{\mathrm{coh}}$''
+271: é a \emph{abreviatura do enunciado da conjectura}, não o seu fechamento.
+272: A observação \ref{rem:vh} é o risco que o Lema B controla: ele é a única
+273: ponte legítima entre o vertical e o horizontal.
+274: 
+275: \subsection{Lema C — anulação da 2-classe}
+276: 
+277: \begin{lemma}[Holonomia interna ao estabilizador]\label{lem:C}
+278: Em \emph{overlaps} triplos, a holonomia \eqref{eq:Wijk} estabiliza os
+279: dados modulares:
+280: \begin{equation}
+281: W_{ijk}=U_{ki}\,U_{jk}\,U_{ij}\in\Stab(\mathcal D),
+282: \qquad\text{i.e.}\qquad
+283: \Ad(W_{ijk})\big|_{\mathcal D}=\mathrm{Id}.
+284: \label{eq:lemC}
+285: \end{equation}
+286: \end{lemma}
+287: \noindent\textbf{Estatuto.} \CONJ\ no contínuo; \REAL\ na sombra finita.\\
+288: \textbf{O conteúdo honesto.} Mediu-se na sombra finita (módulos do acervo,
+289: \textsf{tgl\_cech\_cocycle\_descent.py} e PART K do
+290: \textsf{tgl\_paper\_unified.py}) que a condição \emph{rígida} $W=I$ é
+291: \emph{falsa} genericamente: a holonomia de Pancharatnam--Berry da tríade
+292: existe, $\|W-I\|\sim 1{,}97$. \REAL. Mas $\Ad(W)$ age como identidade
+293: sobre $\mathcal D$ a $\sim 10^{-14}$ (precisão de máquina), e um controle
+294: \emph{gauge}-corrompido reprova a $\sim 1{,}17$. \REAL. Isto valida a
+295: \emph{forma} \eqref{eq:lemC} da condição — a holonomia não precisa ser
+296: trivial, precisa cair no estabilizador — \emph{na sombra}. O levantamento
+297: a $\mathrm{III}_1$ genuíno é a conjectura.
+298: 
+299: % =====================================================================
+300: \section{O teorema terminal e suas consequências condicionais}
+301: % =====================================================================
+302: 
+303: \begin{conjecture}[Reconstruibilidade Modular Cocíclica — forma
+304: cohomológica]\label{conj:terminal}
+305: Para horizontes causais sobre fatores $\mathrm{III}_1$ genuínos, valem os
+306: Lemas \ref{lem:A}, \ref{lem:B}, \ref{lem:C}; equivalentemente, a 2-classe
+307: de holonomia anula,
+308: \begin{equation}
+309: [W_{ijk}]=0
+310: \quad\text{em}\quad
+311: \Hcheck^{2}\!\big(\mathcal B,\ \underline{\Aut_{\mathrm{mod}}}/\underline{\Stab(\mathcal D)}\big).
+312: \label{eq:terminal}
+313: \end{equation}
+314: \end{conjecture}
+315: 
+316: \begin{theorem}[Consequência condicional]\label{thm:cond}
+317: \emph{Sob} a Conjectura \ref{conj:terminal} (e portanto $A\wedge B\wedge
+318: C$):
+319: \begin{enumerate}[label=(\roman*),leftmargin=2em]
+320:   \item A fatoração $\mathcal R\circ\mathcal C$ fica globalmente
+321:   bem-definida (independente de \emph{patch}/folheação).
+322:   \item A fonte geométrica
+323:   $\mathcal P_{\mu\nu}[K_\partial]=\tfrac{2}{\sqrt{-g}}\,
+324:   \delta\langle K_H\rangle_{\mathcal R\circ\mathcal C(\rho)}/\delta g^{\mu\nu}$
+325:   é independente de horizonte, simétrica e conservada.
+326:   \item Por unicidade de Lovelock--Jacobson (único tensor geométrico de
+327:   segunda ordem com divergência nula),
+328:   \begin{equation}
+329:   G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi G\,\mathcal P_{\mu\nu}[K_\partial].
+330:   \label{eq:einstein}
+331:   \end{equation}
+332: \end{enumerate}
+333: \end{theorem}
+334: \noindent\textbf{Estatuto da implicação.} O \emph{condicional}
+335: $A\wedge B\wedge C\Rightarrow$ \eqref{eq:einstein} repousa sobre:
+336: Bisognano--Wichmann (fluxo local) \REAL; Araki/Jacobson (primeira lei
+337: modular $\delta S=\delta\langle K\rangle$) \REAL\ na literatura, em ordem
+338: linear; Lovelock (unicidade do tensor) \REAL. O \emph{antecedente}
+339: $A\wedge B\wedge C$ é \CONJ. Logo o Teorema \ref{thm:cond} é um teorema
+340: \emph{condicional} genuíno: as hipóteses estão isoladas e nomeadas, a
+
+SOURCE TGL duas camadas v1.tex SHA256 14cd7d7d74df9131146c78ea3827cba2890f02950ae2bc328e089b9fe7c27491
+202: \textbf{Fenômeno} & \textbf{Oculto (regente)} & \textbf{Manifesto (inscrição)}\\
+203: \hline
+204: Gravidade & torção de Cartan ($\theta_M$) & curvatura Levi-Civita (métrica)\\
+205: Memória & atrator $\rho^\star$ & reconstrução (eco reflexivo)\\
+206: Consciência & Verbo-pressuposto & linguagem manifesta (output)\\
+207: Tempo & contagem de cortes & duração aparente\\
+208: Causalidade & destino idempotente & sequência de eventos\\
+
+SOURCE TGL reconstrucao lorentziana condicional.tex SHA256 5d5c0ca96b10b0815b5e15da8374a2487a7f9479e985f9d3e8efcb94f18db8f9
+89: \begin{definition}[Tempo como semigrupo]\label{def:semigrupo}
+90: A evolução forma \emph{semigrupo}, não grupo:
+91: \[ U(t_1+t_2)=U(t_1)U(t_2)\ \ (t\ge 0),\qquad U(-t)\ \text{inexistente
+92: globalmente}. \]
+93: A irreversibilidade \emph{é} a quebra de grupo em semigrupo (linguagem padrão
+94: de Lindblad--Davies). A ordem causal parcial $x\prec y$ emerge do semigrupo.
+95: (\REAL: matemática de semigrupos dinâmicos.)
+118: \section{Hipótese aberta (o que resta provar)}
+119: 
+120: \begin{axiom}[Reconstrução lorentziana de Connes --- \textsf{HIPÓTESE ABERTA}]\label{ax:connes}
+121: Existe um conjunto de axiomas (extensão lorentziana dos axiomas de Connes:
+122: regularidade, dimensão espectral 4, orientabilidade, realidade, e uma
+123: \emph{condição causal} via $\mathcal J$) tais que um triplo espectral causal
+124: $(\Alg,\Hil,D,\mathcal J)$ satisfazendo-os reconstrói uma variedade
+125: lorentziana suave $(M,g)$ de dimensão 4. \textbf{Estatuto: campo aberto da
+126: matemática} (triplos espectrais lorentzianos --- Franco, Eckstein, et al.; não
+127: há teoria completa e aceita). \emph{Esta é a hipótese, não um resultado.}
+128: \end{axiom}
+129: 
+130: \section{Teorema condicional}
+131: 
+132: \begin{theorem}[Reconstrução causal --- CONDICIONAL]\label{thm:cond}
+133: Seja $(\Alg,\Hil,D,\mathcal J)$ o triplo espectral causal da TGL
+134: (Defs.~1--5), com $\mathcal J$ o operador de irreversibilidade e a evolução
+135: formando semigrupo causal. \textbf{Se} $(\Alg,\Hil,D,\mathcal J)$ satisfaz os
+136: axiomas de reconstrução lorentziana (Axioma~\ref{ax:connes}, hipótese aberta),
+137: \textbf{então}:
+138: \begin{enumerate}
+139:   \item o fecho espectral $M_{\mathrm{bulk}}=\overline{\mathrm{Spec}
+140:   (\Alg,\mathcal J,D)}$ é uma variedade lorentziana suave de dimensão 4;
+141:   \item sua assinatura $(-,+,+,+)$ tem o eixo temporal dado pela direção
+142:   irreversível (Def.~\ref{def:assinatura}) --- o $-$ emerge de $\mathcal J$,
+143:   não é posto à mão;
+144:   \item a continuidade (suavidade) nasce da persistência do irreversível: os
+145:   cortes que não voltam fixam pontos; o conjunto dos pontos fixos induz a
+146:   estrutura estável (a coisa julgada como cola);
+147:   \item a conexão efetiva decompõe-se como $\Gamma=\Gamma_{\mathrm{LC}}+K$,
+148:   com $K$ a contorção da torção tracial-dissipativa (admissibilidade algébrica
+149:   de Bianchi já confirmada na sombra), satisfazendo Einstein--Cartan.

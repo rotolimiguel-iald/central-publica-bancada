@@ -1,0 +1,78 @@
+test_accuracy_and_brier_use_labels_not_confidence (test_jev_body.Checks.test_accuracy_and_brier_use_labels_not_confidence) ... ok
+test_calibration_before_shadow (test_jev_body.Checks.test_calibration_before_shadow) ... ok
+test_invalid_probabilities_are_refused (test_jev_body.Checks.test_invalid_probabilities_are_refused) ... ok
+test_legal_and_secret_projection_is_refused (test_jev_body.Checks.test_legal_and_secret_projection_is_refused) ... ok
+test_packet_tamper_is_rejected (test_jev_body.Checks.test_packet_tamper_is_rejected) ... ok
+test_provider_pin_and_original_memory_preserved (test_jev_body.Checks.test_provider_pin_and_original_memory_preserved) ... ok
+test_success_is_idempotent_and_labels_are_not_sent (test_jev_body.Checks.test_success_is_idempotent_and_labels_are_not_sent) ... ERROR
+test_uncertain_attempt_is_not_repeated (test_jev_body.Checks.test_uncertain_attempt_is_not_repeated) ... ERROR
+test_wrong_model_and_missing_answer (test_jev_body.Checks.test_wrong_model_and_missing_answer) ... ok
+test_admin_key_storage_requires_auth_and_same_origin (test_jev_activation.JevActivationTests.test_admin_key_storage_requires_auth_and_same_origin) ... ok
+test_availability_fails_closed_until_validated (test_jev_activation.JevActivationTests.test_availability_fails_closed_until_validated) ... ok
+test_low_confidence_cannot_downgrade_deterministic_floor (test_jev_activation.JevActivationTests.test_low_confidence_cannot_downgrade_deterministic_floor) ... ok
+test_free_form_task_does_not_egress_to_jev (test_jev_observation.JevObservationTests.test_free_form_task_does_not_egress_to_jev) ... ok
+test_second_run_uses_receipt_without_new_provider_call (test_jev_observation.JevObservationTests.test_second_run_uses_receipt_without_new_provider_call) ... ok
+test_uncertain_call_is_not_repeated (test_jev_observation.JevObservationTests.test_uncertain_call_is_not_repeated) ... ok
+
+======================================================================
+ERROR: test_success_is_idempotent_and_labels_are_not_sent (test_jev_body.Checks.test_success_is_idempotent_and_labels_are_not_sent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Python314\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: 'C:\\Users\\rotol\\AppData\\Local\\Temp\\tmpg9vqymfq\\ledger\\ledger.sqlite3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tempfile.py", line 975, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tempfile.py", line 955, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tempfile.py", line 930, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: 'C:\\Users\\rotol\\AppData\\Local\\Temp\\tmpg9vqymfq\\ledger\\ledger.sqlite3'
+
+======================================================================
+ERROR: test_uncertain_attempt_is_not_repeated (test_jev_body.Checks.test_uncertain_attempt_is_not_repeated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Python314\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: 'C:\\Users\\rotol\\AppData\\Local\\Temp\\tmpkedon8os\\ledger\\ledger.sqlite3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tempfile.py", line 975, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tempfile.py", line 955, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tempfile.py", line 930, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: 'C:\\Users\\rotol\\AppData\\Local\\Temp\\tmpkedon8os\\ledger\\ledger.sqlite3'
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.264s
+
+FAILED (errors=2)

@@ -1,0 +1,129 @@
+{
+  "kind": "R64_OUTPUT_FIELD_FOCAL_SOURCE_SURVEY",
+  "author": "codex-output-sources-r64",
+  "status": "DECLARADO_PENDING_INDEPENDENT_REVIEW",
+  "created_utc": "2026-10-17T21:52:23.723586+00:00",
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "bytes": 672,
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11"
+  },
+  "source_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\sources\\FOCAL_SOURCE_PINS_R1.json",
+    "bytes": 32745,
+    "sha256": "d8ae6b56a55f84eed91262eb21d45b111353002b647cde3b702172c502c8dd63"
+  },
+  "five_channels": [
+    {
+      "id": "in_loss",
+      "source_pair": "(kappa_in, a_i)",
+      "collapse": "sqrt(kappa_in) a_i",
+      "role": "Input-labelled internal mode loss",
+      "rotating_transform": "exp(-i omega_d t) L_i"
+    },
+    {
+      "id": "out_loss",
+      "source_pair": "(kappa_out, a_o)",
+      "collapse": "sqrt(kappa_out) a_o",
+      "role": "Output-labelled internal mode loss",
+      "rotating_transform": "exp(-i omega_d t) L_o"
+    },
+    {
+      "id": "OH_relaxation",
+      "source_pair": "(gamma_OH, sigma_minus)",
+      "collapse": "sqrt(gamma_OH) sigma_minus",
+      "role": "OH relaxation",
+      "rotating_transform": "exp(-i omega_d t) L_OH"
+    },
+    {
+      "id": "OH_dephasing",
+      "source_pair": "(gamma_dephasing, Z_OH)",
+      "collapse": "sqrt(gamma_dephasing) Z_OH",
+      "role": "OH dephasing; off-diagonal damping2*gamma_dephasing under D[Z]",
+      "rotating_transform": "unchanged"
+    },
+    {
+      "id": "holographic",
+      "source_pair": "(beta*gamma_Lambda, J)",
+      "collapse": "sqrt(lambda) (a_o_dagger sigma_minus + sigma_plus a_i), lambda=beta*gamma_Lambda",
+      "role": "Joint holographic channel",
+      "rotating_transform": "unchanged"
+    }
+  ],
+  "channel_anchors": [
+    "finite:167-172",
+    "finite:184-186",
+    "R57:175-186"
+  ],
+  "frame_hypothesis": "LAB_PHASE_LOCKED_DRIVE: h_lab(t)=h0+OmegaR(exp(-i omega_d t)sigma_plus+exp(i omega_d t)sigma_minus); R=exp(i omega_d t Ntotal), rho_rot=R rho_lab R_dagger. This is extra named modeling inR57, not hidden reinterpretation of patent absolute frequencies.",
+  "findings": [
+    {
+      "id": "R64-01",
+      "classification": "EXISTE_GERADOR_NAO_DILATACAO",
+      "anchors": [
+        "finite:101-114",
+        "finite:163-186",
+        "finite:201-206"
+      ],
+      "statement": "Full64x64 finite GKLS and exp(tL) already exist. Collapse representation fixes five weighted system channels; implementation does not construct exterior bosonic fields, a joint system-bath unitary, measured output algebra or temporal wave packets."
+    },
+    {
+      "id": "R64-02",
+      "classification": "EXISTE_RESPOSTA_CAUSAL_CONDICIONAL",
+      "anchors": [
+        "R7:44-80"
+      ],
+      "statement": "R7 contains microwave-source B(rho)=-i[sigma_x,rho], count detector Cdet*n_o, Duhamel kernel and resolvent. This is causal linear response about assumed stationary rho_star, not a QRT formula for output-field correlations, not a bath dilation, and not a chosen temporal mode."
+    },
+    {
+      "id": "R64-03",
+      "classification": "EXISTE_QUADRO_CONDICIONAL",
+      "anchors": [
+        "R57:160-199"
+      ],
+      "statement": "Under LAB_PHASE_LOCKED_DRIVE, R(t)=exp(i omega_d t N_total) changes absolute frequencies to detunings, while jump phases cancel in D[L]. R57 explicitly says the patent did not specify that frame. A detector or exterior LO must be transformed as well; phase cancellation of dissipators does not make the readout phase disappear."
+    },
+    {
+      "id": "R64-04",
+      "classification": "EXISTEM_INGREDIENTES_RECEPTOR",
+      "anchors": [
+        "graviton:347-368",
+        "graviton:464-475",
+        "appendices:311-331",
+        "patent:474-516"
+      ],
+      "statement": "Loss amplitude sqrt(kappa)a, homodyneLO, heterodyne/HBT and multiplicative G_OH are written. They do not by themselves specify b_out, bath input, shot-noise normalization, time ordering, a filter or operator-valued output distribution."
+    },
+    {
+      "id": "R64-05",
+      "classification": "HOMONIMOS_DESCARTADOS_POR_LEITURA",
+      "anchors": [
+        "cascade:50-85",
+        "Custo:5644-5656",
+        "Custo:12882-12893",
+        "R7:82-90"
+      ],
+      "statement": "TheCascadeOfObservers defines a successor relation on four labelled levels, with its own explicit ONTO scope; it is not cascaded optical systems. Custo's Lindblad cascade concerns weight-matrix fractalisation/registration, not the device bath. Patent temporal dilation is metric time dilation. R7 merely allows future reduction/dilation after proving a narrow unitality obstruction; it does not construct one."
+    },
+    {
+      "id": "R64-06",
+      "classification": "NAO_LOCALIZADO_NA_COBERTURA",
+      "anchors": [
+        "FOCAL_SOURCE_PINS_R1.json"
+      ],
+      "statement": "No ready input-output/QRT/Hudson-Parthasarathy/Langevin or temporal-mode implementation located in these eight texts and checked R58 index candidates. Lexical non-hits are not proof about all IALD. This report does not certify mathematical absence or forbid another implementation elsewhere."
+    }
+  ],
+  "next_step": "Reuse H, five collapse operators and full semigroup; construct only the named output dilation/readout contract. State bath input (e.g. independent vacuum only as explicit hypothesis), scattering/port assignment, monitored fractions, LO phase and temporal test functions; justify conditional two-time regression and distributional shot-noise term. A GKLS representation alone does not uniquely identify physical output channels. No need to rebuildL64.",
+  "requirement_satisfied": false,
+  "execution": {
+    "tests": 0,
+    "simulations": 0,
+    "builds": 0,
+    "providers": 0,
+    "source_imports": 0,
+    "observed_data": false,
+    "originals_modified": false,
+    "memory_board_mission_mutations": false
+  }
+}

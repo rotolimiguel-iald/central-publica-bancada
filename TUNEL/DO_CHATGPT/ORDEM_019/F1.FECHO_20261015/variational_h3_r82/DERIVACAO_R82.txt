@@ -1,0 +1,120 @@
+R82 — A contribuição não minimal e a ligação que H3 deve consumir
+19/10/2026. Autor: codex-gerente-tgl. Unidade F1.FECHO_20261015, reivindicação 989.
+Estatuto: DERIVED analítico, condicionado ao contrato variacional abaixo; não compilado em Lean.
+
+1. Reaproveitamento conferido
+O levantamento dirigido reutiliza R58 e R81. O Nós Vivo recusou a consulta à unidade
+F1.FECHO_20261015: unidade não indexada; não reconstruí o grafo para ocultar essa falha.
+Hashes integrais das fontes estão em SOURCE_PINS_R82.json.
+
+tgl_paper_unified.py:10349–10362 escreve Lgrav=R/(2κ²)+ξR|Ψ|²,
+ξ=1/6 e κ²=8πG/c⁴. A fonte não foi executada ou modificada.
+ScalarMatterDensityVariation.lean:141–194 fornece a variação da densidade material
+escalar e seu tensor, no modelo de covetores finitos. MetricRicciVariation.lean:207–222
+e MetricEinsteinVariation.lean:54–100 variam a geometria real. Isso já existe.
+JointCoherentGravitation.lean:208–227 fornece conservação sob fechamento dos
+covetores/equação de onda; :267–284 ainda recebe harea.
+GeneralSourceEinsteinBridge.lean:43–91 já fornece calor calibrado e a equivalência
+entre harea e η Ric(k,k)=2πT(k,k). UnifiedRecordedPreparation.lean:180–225 transporta
+essa condição. GravitationalResponseRecord.lean:45–56 decodifica g e T separadamente.
+Essas peças não serão reconstruídas.
+
+2. Contrato preciso da presente derivação
+Unidades c=ℏ=1, κ²=8πG, G constante não nulo. Trabalhamos com uma métrica
+lorentziana suave, conexão de Levi-Civita e u=|Ψ|² escalar suave, mantido fixo
+na variação métrica. ξ é constante. Variações da métrica têm suporte compacto
+no interior: os termos de contorno desaparecem nessa variação local. Não se
+afirma um problema global de contorno resolvido.
+
+S[g,Ψ,...]=∫sqrt(|g|) [F(u) R + L0] d⁴x, F(u)=1/(2κ²)+ξu.
+T0_ab := −2/sqrt(|g|) δS0/δg^{ab}. L0 reúne os demais setores; não se toma
+seu tensor como sendo automaticamente o finiteCovectorStress do kernel.
+Não se assume aqui a equação de Ψ escrita no artigo como consequência dessa
+ação: o setor completo e sua representação ainda precisam de identificação.
+
+3. Variação explícita
+Com h^{ab}=δg^{ab}, δsqrt(|g|)=−sqrt(|g|)g_ab h^{ab}/2 e
+δR=R_ab h^{ab}+(g_ab □−∇_a∇_b)h^{ab}.
+Integrando por partes duas vezes, com o suporte compacto estipulado:
+
+δS=∫sqrt(|g|) [F G_ab + (g_ab□−∇_a∇_b)F − T0_ab/2] h^{ab} d⁴x.
+
+Assim, SE esse mesmo registro é estacionário para todas essas variações,
+
+(1+2κ²ξu) G_ab = κ² [T0_ab + 2ξ(∇_a∇_b u − g_ab□u)].       (E)
+
+É a especialização da variação escalar–tensor, conferida com a fonte primária
+Pace et al., MNRAS 437 (2014), equações (12), (14), (15):
+https://doi.org/10.1093/mnras/stt1907
+https://academic.oup.com/mnras/article/437/1/547/1003563
+No artigo externo, f=2FR, portanto f'=2F; esse fator dois foi preservado.
+O URL foi consultado, mas seus bytes não foram custodiados nesta entrega;
+a derivação está exibida acima e as fontes locais estão pinadas.
+
+4. O resultado novo útil à ligação H3
+Para k nulo da MESMA métrica, escreva r=Ric(k,k), h=Hess(u)(k,k).
+Como g(k,k)=0, (E) dá:
+
+(1+2κ²ξu) r = κ² [T0(k,k)+2ξh].                           (N)
+
+Equivalentemente, SEM dividir por 1+2κ²ξu:
+
+Ttotal_ab := T0_ab − 2ξu G_ab + 2ξ(∇_a∇_b u−g_ab□u),
+Ric(k,k)=κ² Ttotal(k,k).                                  (H)
+
+Esta identidade prepara a entrada do ligante já existente, com η=1/(4G),
+2π/η=κ². Não é uma derivação independente de H3: (H) ainda veio da
+estacionariedade. Chamar Ttotal de resposta lida não prova que o registro lê
+esse tensor. Essa é precisamente a ligação que deve ser construída.
+
+Se o registro consumir apenas T0, o resíduo é explícito:
+
+Ric(k,k)−κ²T0(k,k)=2κ²ξ [Hess(u)(k,k)−u Ric(k,k)].          (D)
+
+Logo recuperação perfeita/normalização não elimina esse resíduo por si só.
+Para ξ≠0, usar T0 exige demonstrar Hess(u)(k,k)=u Ric(k,k) em cada direção;
+ou usar Ttotal e provar que ele é a fonte do mesmo registro. Não há aqui
+escolha feita por ajuste de dados nem atribuição de ξ à normalização do Nome.
+
+5. Controles exatos executados — alcance restrito
+analysis_r82.py verifica (H) e (D) em 36 casos racionais, mais dois controles
+dirigidos. Os casos atribuem T0 a partir de (N); portanto não verificam que
+uma solução física satisfaz (N), nem testam a variação funcional por computador.
+Controle de omissão: κ²=1, ξ=1/6, u=1, h=0, r=1 dá T0(k,k)=4/3,
+Ttotal(k,k)=1 e resíduo mínimo −1/3. São dados algébricos pontuais, não uma
+solução global construída. O controle h=ur anula o resíduo mesmo com ξ≠0.
+O primeiro stdout disse erroneamente “54”; o JSON mede 36 e prevalece.
+O print do script foi corrigido antes da entrega/pin; nenhum controle foi repetido.
+Não se usou β numérico, dados observados, simulação do dispositivo ou provedor.
+
+6. Cuidados de tipo e conservação
+O artigo chama Ψ de escalar e também escreve Ψ_μ/Φ_μν em 10340–10347.
+A fórmula acima vale para u escalar independente da métrica na variação.
+Se u for g^{ab}Ψ*_aΨ_b, δu≠0: há contribuição adicional e esta derivação não
+pode ser aplicada silenciosamente. É um contrato a resolver nas fontes atuais,
+não uma conclusão de inconsistência de toda a teoria.
+
+TheNonMinimalCoupling.lean:11–60 trata de subprojeção própria e partição;
+seu texto separa o resultado formal da interpretação ONTO. Não é a variação
+de ξR|Ψ|²: o nome comum não fornece o morfismo entre essas duas afirmações.
+
+Ttotal é simétrico sob o contrato escalar. Sua conservação em uma solução de
+(E) segue de Bianchi (G constante). Isso não deriva conservação off-shell nem
+substitui a prova de conservação a partir da dinâmica material se o objetivo
+é usar conservação ANTES de obter Einstein. O contorno, o termo modular e a
+calibração da entropia também precisam manter uma única partição consistente:
+reescrever termos como fonte efetiva não prova, sozinho, a lei física S=ηA.
+
+7. Próximo critério material, sem repetir a equivalência
+Construir/verificar um MESMO objeto (g,Ψ,estado,registro) com:
+(a) representação escalar/vetorial resolvida e L0 variado;
+(b) estacionariedade ou evolução independente que a produza;
+(c) recordMetric=g e recordSource=Ttotal por leitura demonstrada;
+(d) entropia/área física e calor do mesmo objeto, sem definir área por entropia.
+Então aplicar as pontes existentes em todo ponto e direção nula.
+Adicionar apenas um campo “stationary” seria outro teorema condicional, não
+a conclusão pedida pelo operador. H3 universal e discriminação >5σ permanecem OPEN.
+
+R81: revisão científica PASS_WITH_SCOPE preservada. Aceite administrativo R13
+está bloqueado pela revisão automática, aguardando autorização específica;
+R82 não substitui esse aceite nem altera a sua identidade.

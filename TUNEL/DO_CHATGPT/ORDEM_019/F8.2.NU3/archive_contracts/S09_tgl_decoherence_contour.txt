@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+TGL DECOHERENCE -- the full contour:  neutrinos test the EXPONENT, clocks test the
+MAGNITUDE.   Two orthogonal handles on the same dephasing law Gamma=(omega^2/2) tau* beta.
+====================================================================================
+
+Dephasing rate (energy-preserving GKSL, L=sqrt(beta)*sqrt(K_partial)):
+    Gamma_omega = (omega^2/2) * tau_star * beta * (K/K_star)^beta
+
+  EXPONENT handle (neutrinos): omega = Dm^2/2E  ->  gamma(E) ~ E^-2  ->  n = -2.
+     Parameter-FREE.  Tested by the energy-dependence of decoherence in
+     solar/KamLAND/JUNO/DUNE (low-E, n<0) and IceCube (high-E, n>0).
+  MAGNITUDE handle (clocks): omega = transition frequency (optical ~ PHz).
+     Anomalous dephasing must be < 1/T2 -> tau_star < 2/(omega^2 beta T2).
+     Optical clocks (high omega, long T2) give the tightest tau_star bound.
+
+The two are orthogonal: the exponent does NOT depend on tau_star; the magnitude bound
+scales as omega^-2 so optical clocks win by ~(PHz/GHz)^2 ~ 10^10 over microwave.
+
+Published bounds used (REAL):
+  n=0 (IceCube 10.7yr):        Gamma_0 <= 1.17e-15 eV
+  n=-1 (solar+KamLAND, 95%):   gamma_0 < 0.78e-26 GeV
+  future DUNE/JUNO (proj.):    Gamma_ij <~ 8e-27 GeV
+  Sr-87 optical coherence:     T2 = 118 s (JILA 2025)
+(arXiv 2503.13061, 1803.04438, 0704.2568, 2306.14699)
+
+beta NEVER hardcoded: beta = ALPHA*sqrt(e).
+
+Run:  python tgl_decoherence_contour.py
+"""
+import math
+
+ALPHA = 7.2973525693e-3
+BETA = ALPHA * math.sqrt(math.e)
+HBAR_EV_S = 6.582119569e-16
+PLANCK_TIME_S = 5.391247e-44
+DM2_21 = 7.5e-5   # eV^2
+DM2_31 = 2.5e-3   # eV^2
+TWO_PI = 2.0 * math.pi
+
+
+# --- MAGNITUDE handle: clocks --------------------------------------------------
+def clock_tau_bound_s(freq_hz, T2_s, Kfac=1.0):
+    """tau_star upper bound (s) from a clock: anomalous dephasing < 1/T2.
+    tau_star < 2 / (omega^2 beta T2)."""
+    omega = TWO_PI * freq_hz                     # rad/s
+    return 2.0 / (omega * omega * BETA * T2_s * Kfac)
+
+
+CLOCKS = [
+    ("Sr-87 optical",   429.228e12, 118.0),
+    ("Yb-171 optical",  518.295e12, 100.0),
+    ("Al+ optical",     1121.0e12,   30.0),
+    ("Yb+ E3 octupole", 642.121e12,  100.0),
+    ("Cs fountain (uW)", 9.192631770e9, 1.0),
+    ("H maser (uW)",     1.420405e9,   10.0),
+]
+
+
+# --- EXPONENT handle: neutrinos ------------------------------------------------
+def omega_osc_eV(E_eV, dm2):
+    return dm2 / (2.0 * E_eV)
+
+
+def gamma_tgl_eV(E_eV, dm2, tau_star_s, Kfac=1.0):
+    """TGL decoherence rate (eV).  omega in eV, tau_star converted from s."""
+    w = omega_osc_eV(E_eV, dm2)
+    tau_invEv = tau_star_s / HBAR_EV_S
+    return 0.5 * w * w * tau_invEv * BETA * Kfac
+
+
+def neutrino_tau_bound_s(gamma_limit_eV, E_ref_eV, dm2):
+    coeff = gamma_tgl_eV(E_ref_eV, dm2, 1.0)     # gamma per second of tau_star
+    return gamma_limit_eV / coeff
+
+
+EXPONENTS = [
+    (-2, "TGL prediction", "solar+KamLAND (low-E)", "~1e-26 GeV"),
+    (-1, "Lorentz-inv", "solar+KamLAND", "<0.78e-26 GeV"),
+    ( 0, "constant", "IceCube 10.7yr", "<1.17e-15 eV"),
+    (+1, "linear", "IceCube high-E", "tight"),
+    (+2, "Planck-scale", "IceCube high-E", "tightest"),
+]
+
+
+def main():
+    print("=" * 80)
+    print("  TGL DECOHERENCE CONTOUR -- neutrinos test n, clocks test tau_star")
+    print("=" * 80)
+    print(f"  beta = {BETA:.7f}")
+
+    print("\n  [EXPONENT handle -- NEUTRINOS]  TGL predicts n = -2 (parameter-free).")
+    print(f"  {'n':>3s}  {'model':16s} {'best probe':22s} {'gamma_0 bound':>13s}  TGL?")
+    for n, model, probe, bound in EXPONENTS:
+        tag = " <== TGL" if n == -2 else ""
+        print(f"  {n:>+3d}  {model:16s} {probe:22s} {bound:>13s}{tag}")
+    print("  -> current data: NO decoherence detected -> n not yet measured; n=-2 ALLOWED.")
+    print("     Discriminating test is FUTURE: a detection's energy-slope picks n.")
+
+    print("\n  [MAGNITUDE handle -- CLOCKS]  tau_star < 2/(omega^2 beta T2):")
+    print(f"  {'clock':18s} {'freq':>12s} {'T2[s]':>7s} {'tau_star <=':>13s}")
+    best = None
+    for name, f, T2 in CLOCKS:
+        b = clock_tau_bound_s(f, T2)
+        if best is None or b < best[1]:
+            best = (name, b)
+        print(f"  {name:18s} {f/1e12:>9.1f}THz {T2:>7.0f} {b:>11.2e} s")
+    print(f"  -> tightest: {best[0]} at tau_star <= {best[1]:.2e} s "
+          f"(optical beats microwave by ~(PHz/GHz)^2 ~ 1e10).")
+
+    print("\n  [NEUTRINO magnitude bound, for contrast]:")
+    tn = neutrino_tau_bound_s(1e-17, 1e6, DM2_21)   # ~1e-17 eV @ 1 MeV (solar n=-2 scale)
+    print(f"    solar+KamLAND (n=-2): tau_star <= {tn:.2e} s  (WEAK: omega_osc tiny)")
+
+    print("\n  --- THE FULL CONTOUR (tau_star axis, seconds) ---")
+    print(f"    Planck time          {PLANCK_TIME_S:.1e} s   (natural value -> ALL blind)")
+    print(f"    optical-clock bound  {best[1]:.1e} s   (tightest magnitude probe)")
+    print(f"    neutrino bound       {tn:.1e} s   (weak magnitude, but clean exponent)")
+    gap = best[1] / PLANCK_TIME_S
+    print(f"    gap clock-bound / Planck = {gap:.1e}  -> if tau_star ~ Planck, invisible to all.")
+
+    print("\n  VERDICT [honest]:")
+    print("   * EXPONENT (neutrinos): n=-2 is parameter-free + falsifiable (JUNO/DUNE).")
+    print("     Not unique to TGL (other negative-n models exist) -> consistent, not proof.")
+    print("   * MAGNITUDE (clocks): optical clocks bound tau_star <~ 1e-31 s, ~1e13 x Planck.")
+    print("   * If tau_star is Planckian (natural), BOTH handles see nothing -> the honest")
+    print("     asymmetry: the dephasing law is real & falsifiable, the magnitude may be")
+    print("     forever invisible.  Strongest TGL evidence remains the beta convergence.")
+    print("=" * 80)
+
+
+if __name__ == "__main__":
+    main()

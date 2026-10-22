@@ -1,0 +1,96 @@
+{
+  "unit": "F1.REDE",
+  "reviewer": "codex-memory_scope",
+  "created_utc": "2026-10-13T21:32:40.703593+00:00",
+  "status": "INDEPENDENT_REVIEW_TWO_ADDITIVE_OBLIGATIONS_NOT_C1_APPROVAL",
+  "reviewed": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R1.json",
+      "sha256": "2e22e203bb3329f757353b7fab0297b1ff00e441973c2af33f178ff7ba9fb4cf",
+      "bytes": 19785
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R1.md",
+      "sha256": "2d6b93f9ce014533c672a1b959e4b210e61c13f828e50cea4a514648dc8d5a11",
+      "bytes": 9109
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R1_PINS.json",
+      "sha256": "3d79203c666c9e1be89dc9de245497c05b75ec02750f3720221284e9cb1e7532",
+      "bytes": 1342
+    }
+  ],
+  "hash_check": {
+    "distinct_pinned_paths": 21,
+    "mismatches": []
+  },
+  "findings": [
+    {
+      "id": "RC1",
+      "severity": "MATERIAL_CONTRACT_OBLIGATION",
+      "at": [
+        "CONTRATO_REDE_R1.json:345-351",
+        "CONTRATO_REDE_R1.md:127-131"
+      ],
+      "issue": "Intertwining U1 and the single B0 subgroup alone does not identify the device limit with the canonical localized network. The source explicitly warns that this subgroup does not distinguish helicity. N7 constructs a full representation separately, but N6 does not yet tie the device representation and localized spaces to that full representation.",
+      "required_addendum": "Type V as a unitary from the identified physical one-particle sector onto canonical H1; require V U_device(g)=U_can(g) V for the full relevant Poincare group, including antiunitary wedge reflection, and V K_device(W)=K_can(W). If device localization is defined by BGL from that same representation, prove this last equality functorially rather than assuming it.",
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\work\\cadeia_de_selo\\v392\\kb_stub_v392\\TGLExt\\TheImportedSecondQuantization.lean",
+        "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+        "bytes": 35835
+      },
+      "source_anchor": "TheImportedSecondQuantization.lean:57-60,110-115"
+    },
+    {
+      "id": "RC2",
+      "severity": "MATERIAL_CONTRACT_OBLIGATION",
+      "at": [
+        "CONTRATO_REDE_R1.json:369-376",
+        "CONTRATO_REDE_R1.md:106-117"
+      ],
+      "issue": "Calling T the positive square root of Delta requires more than the self-adjoint field in D1a3OutputBGL. That interface does not require T positive or identify the supplied J with the polar conjugation of S.",
+      "countermodel_mechanism": "For any such T,J,S=JT, replacing T by -T gives S_new=-S, preserves self-adjointness, domain, closedness, involution, SdagS and its modular multiplier, but Fix(S_new)=i Fix(S). Thus those fields alone do not certify T=Delta^(1/2) or J as the canonical modular conjugation. This is an algebraic conditional sign ambiguity, not a claimed new Lean inhabitant.",
+      "required_addendum": "Require T nonnegative and prove T^2=Delta on the correct graph/domain, or construct T through the positive multiplier exp(sigma/2) after partial Fourier and prove its identification with the positive square root. Then identify J with the polar modular conjugation. No change to the already pinned type is needed for this contract addition.",
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\work\\cadeia_de_selo\\v392\\kb_stub_v392\\TGLExt\\LightNetStandardWedgeDataBGL.lean",
+        "sha256": "e4da9e865d00bdcb1c112fade347fe4a169e7e9d0e80227c81267861e6b9e540",
+        "bytes": 11776
+      },
+      "source_anchor": "LightNetStandardWedgeDataBGL.lean:173-187"
+    }
+  ],
+  "verified_scope": [
+    "Finite tensor-factor net gives isotony and disjoint-support commutation; no physical implementation is inferred.",
+    "The stated finite GKLS generator with self-adjoint H and nonnegative rates is distinct from the modular automorphism group. The text preserves the extra domain obligations without bosonic truncation.",
+    "Root-code is classical encoding; the separate Kraus condition and measure-prepare entanglement warning are correct.",
+    "Finite Hilbert-space dimension obstruction is correct.",
+    "BGL use is restricted to positive-energy Poincare data; wedge standardness, covariance, duality and isotony have the cited scope.",
+    "Fewster-Verch natural-state qualification correctly includes dynamical locality, faithful Reeh-Schlieder GNS on a noncompact-Cauchy spacetime, and extended locality for full triviality."
+  ],
+  "web_primary_consulted": [
+    {
+      "url": "https://arxiv.org/pdf/math-ph/0203021",
+      "anchors": [
+        "Prop.2.1-2.5",
+        "Thm.3.4",
+        "Cor.3.5",
+        "Remark 3.6"
+      ],
+      "verification": "Primary PDF text read; no local-byte custody claimed."
+    },
+    {
+      "url": "https://arxiv.org/pdf/1106.4785",
+      "anchors": [
+        "Def.6.12",
+        "Thm.6.13"
+      ],
+      "verification": "Primary PDF text read; no local-byte custody claimed."
+    }
+  ],
+  "excluded_from_findings": [
+    "Fubini progress after R1: parent reports independent completion; expected to enter one evidence addendum.",
+    "Editorial block count and other low-impact wording."
+  ],
+  "scope": "Scientific contract review, no new provider execution or experiment; no requirement of empirical confirmation for mathematical validity.",
+  "writes": "This new review_contract/REVIEW_CONTRACT_R1.json only; no previously pinned artifact changed."
+}

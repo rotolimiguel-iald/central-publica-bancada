@@ -1,0 +1,67 @@
+R59 — FASE NOS PARES, COVARIÂNCIA E LIMITE DE OCUPAÇÃO
+17/10/2026 — codex-gerente-tgl — F1.FECHO_20261015, reivindicação939
+
+1. Resultado material [DERIVED, verificações simbólicas locais]
+
+Partimos do estado de dois modos já escrito em graviton_paper.tex, linhas252–260:
+ S(rho,phi)|0>, S=exp[rho(exp(i phi)a†b†-exp(-i phi)ab)].
+rho é o coeficiente do gerador. Na convenção do artigo rho=r; no trecho do Tratado com fator1/2, rho=r/2. Não se alterou o original nem se identificou rho com betaTGL.
+
+O cálculo fornece:
+ <a>=<b>=0,
+ n=<a†a>=<b†b>=sinh²rho,
+ m=<ab>=exp(i phi)sinh(rho)cosh(rho).
+
+Para rho>0, m não se anula e m/|m|=exp(i phi). Assim a fase permanece na correlação de pares embora as médias de uma ponta sejam zero. Em rho=0 a leitura não determina phi; o algoritmo deve recusar a extração de fase nesse caso. A fase é relativa e definida módulo2pi; não é tempo absoluto nem desenrolamento temporal automático.
+
+Com X=(a+a†)/sqrt2 e P=(a-a†)/(i sqrt2),
+ <Xa Xb>=Re(m), <Xa Pb>=Im(m).
+A variância de Xa(theta)-Xb(eta) é
+ cosh(2rho)-sinh(2rho)cos(phi-theta-eta).
+Quando theta+eta=phi, ela vale exp(-2rho). Isso produz exp(-r) para o gerador rho=r/2; não é permitido copiar exp(-2r) entre as duas convenções sem redefinir r.
+
+2. Ponte finita de covariância [DERIVED]
+
+A matriz de covariância V e a forma de comutação Omega satisfazem
+ C=V+iOmega/2=K†K/2,
+com K explícito no componente squeezing. A positividade decorre da forma de Gram; os comutadores são preservados pela transformação real simplética correspondente. Para dois perfis ortonormais fornecidos no H1 de Maxwell, essa construção realiza a covariância do par usando os mesmos modos escolhidos e a mistura de criação/aniquilação de Bogoliubov.
+
+Não é um unitário complexo de uma partícula que preserve somente aniquiladores: no vácuo, <a(u)a(v)>=0 para quaisquer u,v; o m não nulo exige mudar o estado ou misturar criação e aniquilação. A implementação finita por squeezing é coerente com isso. Nenhum perfil físico da cavidade foi escolhido por arbitrariedade e chamado de circularSmear.
+
+Também não se deve confundir m=<ab> com <a†b>. O primeiro tem fase de soma dos modos e requer referência adequada de quadratura; o segundo é uma correlação de fase relativa diferente. A evolução livre do par, quando esse Hamiltoniano livre for a hipótese, depende da soma das frequências. Isso não fornece a frequênciaOH sob o gerador bombeado completo.
+
+3. Passagem do corte ao estado bosônico [DERIVED]
+
+Foi construída uma aproximação no MESMO espaço de Fock de dois modos:
+ psi_N=P_N psi/||P_N psi||, com q=tanh²rho<1.
+O erro é explícito:
+ |<psi,psi_N>|²=1-q^(N+1),
+ ||psi-psi_N||²=2(1-sqrt(1-q^(N+1))).
+
+O número médio e a correlação de pares convergem com erros fechados:
+ n-n_N=(N+1)q^(N+1)/(1-q^(N+1)),
+ m-m_N=exp(i phi)(N+1)q^(N+1/2)/(1-q^(N+1)).
+
+São convergência de vetor e de momentos para cada rho finito, no mesmo par. As caudas geométricas também controlam potências finitas do número. A convergência não é uniforme quando rho cresce sem limite. Não se afirmou pertencimento ao domínio regular específico da R8 sem prova.
+
+O corte de ocupação tem defeito de borda:
+ [a_N,a_N†]=I-(N+1)|N><N|.
+Ele afeta quadraturas quadráticas e desaparece no limite apropriado. Em dois níveis, |m_1|²=n_1(1-n_1); no estado bosônico infinito, |m|²=n(n+1). A mesma fase não autoriza equiparar as covariâncias. A nota CUTOFF_DERIVATION_R59.txt demonstra esses passos e distingue projeção normalizada de consistência exata de marginais.
+
+4. Verificação e estatuto
+
+O componente squeezing fornece o script, as fontes pinadas e os resultados em SYMBOLIC_RESULTS_R1.json; distingue identidades simbólicas de casos numéricos sintéticos. O corte fornece37 verificações e cinco controles negativos em CUTOFF_RESULT_R59.json. A revisão independente usa outro cálculo esparso, não importa o script construtor, e registra suas verificações em independent_review/.
+
+Esses são resultados matemáticos locais e verificações computacionais, não um novo buildLean nem medidas de natureza. Nenhum parâmetro da teoria foi ajustado a dado observado. O resultado não muda o gate.
+
+5. O que este passo resolve e o que preserva
+
+Resolvido nesta camada: a fórmula da covariância e sua leitura de fase para a família de pares existente; sua forma de Gram/CCR; e o limite de ocupação desse mesmo par com erros controlados. A hipótese de que média unilateral zero necessariamente elimina a informação de fase não vale para essa família.
+
+Permanece aberto: identificar a preparação física e os modos de saída do dispositivo com esses modos; ligar a referência de quadratura; demonstrar evolução sob o geradorOH completo; passar de dois modos a refinamentos espaciais da rede, com localização e entrelaçamento dinâmico; fornecer H3 universal se esse for o alcance reivindicado. A construção de Hadamard/Einstein–sigma067/073 permanece disponível, com seu fundo e sua ação, sem ser identificada por nome com Maxwell.
+
+R4 está com recuperação administrativa pendente de autorização específica: a revisão automática rejeitou a invalidação do lease vencido, pois ela também afeta dependentes. Nenhum reset foi executado. A unidade F1.FECHO.R4_LEASE_R59 registra essa pendência. O agente havia produzido uma exploração local antes de receber a suspensão; seus bytes foram preservados, mas essa exploração não é usada aqui como resultado científico revisado ou como satisfação de R4. Depois do aviso, a atividade R4 limitou-se à leitura/preparação documental. R5 continuou com seu lease válido.
+
+6. Próximo elo concreto
+
+Usar os observáveis de pares e quadraturas como entradas do contrato de receptor. Conferir a fase em relação ao oscilador/bomba declarado, sem converter uma portadora externa em relógio interno. Comparar a covariância física daí obtida com a forma de Gram construída aqui. Só depois transportar os consumidores existentes da rede. A retomada dos cálculos dependentes de R4 aguarda a resposta ao pedido administrativo já apresentado; a matemática de R5 fica custodiada sem novo aceite integral.

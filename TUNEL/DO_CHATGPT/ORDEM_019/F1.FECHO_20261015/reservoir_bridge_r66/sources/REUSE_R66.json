@@ -1,0 +1,280 @@
+{
+  "schema": "r66-focused-reuse-v1",
+  "created_utc": "2026-10-18T10:19:30.386122+00:00",
+  "author": "/root/maxwell_covariance_review",
+  "status": "DECLARADO_CANDIDATE_SOURCE_REUSE",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "source_pins": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\sources\\SOURCE_PINS_R66.json",
+    "sha256": "e71f3ef0fc7cf7b39a056d08a14b01e2da3e4ee57eceed3e4c85bae821d255ec",
+    "bytes": 123782
+  },
+  "reference_project": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\sources\\PROJECT_START_R66.json",
+    "sha256": "40bb2324f78c07ccd2a41723c0bf63f7dd72bbf6b18aadf753649e7ab7e1303b",
+    "bytes": 127760
+  },
+  "requirement_satisfied": false,
+  "source_count": 24,
+  "pieces": [
+    {
+      "id": "REUSE_GENERATOR",
+      "status": "EXISTE_LIGADO_FINITO",
+      "anchors": [
+        {
+          "source_id": "finite_helpers",
+          "line_start": 53,
+          "line_end": 68
+        },
+        {
+          "source_id": "finite_model",
+          "line_start": 163,
+          "line_end": 191
+        }
+      ],
+      "available": "liouvillian(h,jumps) e direct_generator(h,jumps,rho), convenção vec por colunas. H completo inclui frequências, Jaynes–Cummings e Omega*(sigma_plus+sigma_minus); cinco canais são preservados.",
+      "use": "Comparar o gerador construído de reservatório/colisão com esta forma sem reconstruir matriz64. A lista armazena (taxa,operador), não colapsos já ponderados.",
+      "limit": "O a matricial2x2 é corte0/1, não o abaixador bosônico infinito. O novo desenvolvimento por setores de número deve usar sqrt(n) e provar compatibilidade, não identificar matrizes hardcore com operadores ordinários."
+    },
+    {
+      "id": "REUSE_COMMON_BATH",
+      "status": "EXISTE_CONTRATO_CONDICIONAL; COLISAO_UNITARIA_EXATA_A_CONSTRUIR",
+      "anchors": [
+        {
+          "source_id": "output_HP",
+          "line_start": 5,
+          "line_end": 17
+        },
+        {
+          "source_id": "output_contract",
+          "line_start": 11,
+          "line_end": 19
+        },
+        {
+          "source_id": "bare_frequency",
+          "line_start": 4,
+          "line_end": 15
+        },
+        {
+          "source_id": "Davies_source",
+          "line_start": 11190,
+          "line_end": 11237
+        }
+      ],
+      "available": "R64 especifica5banhosproduto no vácuo, S=I e cinco colapsos. O quinto é sqrt(lambda)*(A+B), A=ao†sigma_minus, B=sigma_plus*ai. Portanto é UM canal comum às duas parcelas, embora independente dos quatro outros banhos. Custo já fornece rota espectral de Davies/KMS por correlações de banho.",
+      "use": "Acoplar o mesmo ancilla/campo ao J completo preserva os termos cruzados. Para uma construção por colisões, alvo Phi_dt(rho)=Tr_aux[U_dt(rho tensor eta_aux)U_dt†], com (Phi_dt-Id)/dt convergindo ao gerador completo no domínio declarado.",
+      "limit": "Nenhuma U_dt unitária exata e limite de colisões para este J foi localizada nas fontes inspecionadas. KMS/Davies secular não pode separar A,B e chamar o resultado D[J]; R65 mostra a obstrução relativa a h0 livre fora da ressonância. Não é impossibilidade geral de reservatório dirigido/não secular."
+    },
+    {
+      "id": "REUSE_DISCRETE_INSTRUMENT",
+      "status": "KNOWN_FONTE_CUSTODIADA; NAO_UNIDADE_MICROSCOPICA_PRONTA",
+      "anchors": [
+        {
+          "source_id": "output_literature",
+          "line_start": 377,
+          "line_end": 424
+        },
+        {
+          "source_id": "output_literature",
+          "line_start": 475,
+          "line_end": 492
+        },
+        {
+          "source_id": "output_literature",
+          "line_start": 584,
+          "line_end": 610
+        }
+      ],
+      "available": "Artigo já custodiado em R64, sec2.3: M0=I−iHdt−L†Ldt/2, M1=L sqrt(dt); instrumento difusivo Mr=I−iHdt−L†Ldt/2+sqrt(eta)Lr. A média recupera a evolução não condicionada.",
+      "use": "Reaproveitar a expansão de primeira ordem e convenções para o limite de um instrumento de colisões; não recalcular os correladores de R64.",
+      "limit": "Os operadores truncados em dt não são, por essa fórmula sozinha, isometria/TP exata para todo dt finito; não confundir esta discretização assintótica com U_dt exata já construída. Nenhuma consulta web nova."
+    },
+    {
+      "id": "REUSE_DRIVE_FRAME",
+      "status": "EXISTE_LIGADO_FINITO_COM_INPUT_NOMEADO",
+      "anchors": [
+        {
+          "source_id": "frame_R57",
+          "line_start": 182,
+          "line_end": 197
+        },
+        {
+          "source_id": "frame_R57",
+          "line_start": 243,
+          "line_end": 249
+        },
+        {
+          "source_id": "R7_clock",
+          "line_start": 44,
+          "line_end": 79
+        },
+        {
+          "source_id": "calibration",
+          "line_start": 91,
+          "line_end": 108
+        }
+      ],
+      "available": "R57 LAB_PHASE_LOCKED_DRIVE escreve h_lab=h0+Omega(e^{-iwdt}sigma_plus+e^{iwdt}sigma_minus), N=ni+no+ne e R=e^{iwdtN}; demonstra h_rot e transporte dos canais. R7 distingue micro-ondas Omega*sigma_x de injeção óptica/EOM. R65 registra que input coerente contínuo requer deslocamento e Hamiltoniano óptico correspondente.",
+      "use": "O drive OH limitado pode ser reinserido na extensão bosônica, com sua normalização Omega (sem1/2). Transporte LO de R64 theta_rot=theta_lab+wd*t. Conservar o sistema completo na comparação.",
+      "limit": "O deslocamento de campo que deriva um drive óptico do reservatório coerente não foi implementado nessas peças; não confundir esse drive com micro-ondas. Fórmulas R57 são verificadas no corte; extensão e controle de domínio do gerador infinito são nova obrigação."
+    },
+    {
+      "id": "REUSE_TEMPORAL_READOUT",
+      "status": "EXISTE_LIGADO_CONDICIONAL",
+      "anchors": [
+        {
+          "source_id": "output_contract",
+          "line_start": 21,
+          "line_end": 56
+        },
+        {
+          "source_id": "output_HP",
+          "line_start": 5,
+          "line_end": 17
+        },
+        {
+          "source_id": "output_runner",
+          "line_start": 46,
+          "line_end": 76
+        },
+        {
+          "source_id": "calibration",
+          "line_start": 40,
+          "line_end": 58
+        }
+      ],
+      "available": "dBout=dBin+Ldt, M_theta, ordem temporal, ruído delta/2, ODEs para rho,u,v e decoder de modos filtrados já construídos. R65 transporta tempo, taxas, colapsos sqrt(t0), filtros e LO.",
+      "use": "Uma dilatação nova que descarregue as hipóteses de R64 pode consumir diretamente esse instrumento e seus controles anteriores.",
+      "limit": "O modo temporal B_f contém campo incidente e integral de a(t); não é a_out num instante, nem vetor de H1 espacial identificado por nome. A correspondência instrumental permanece condicional à mesma porta e estado de entrada."
+    },
+    {
+      "id": "REUSE_FOCK_MODE_EMBEDDING",
+      "status": "EXISTE_CINEMATICA; FATORIZACAO_COMPLETA_NAO_LOCALIZADA_NO_RECORTE",
+      "anchors": [
+        {
+          "source_id": "Fock",
+          "line_start": 17,
+          "line_end": 55
+        },
+        {
+          "source_id": "Sectors",
+          "line_start": 22,
+          "line_end": 34
+        },
+        {
+          "source_id": "Sectors",
+          "line_start": 93,
+          "line_end": 118
+        },
+        {
+          "source_id": "DirectSum",
+          "line_start": 51,
+          "line_end": 75
+        },
+        {
+          "source_id": "TwoParticle",
+          "line_start": 38,
+          "line_end": 69
+        },
+        {
+          "source_id": "receiver_modes",
+          "line_start": 78,
+          "line_end": 90
+        }
+      ],
+      "available": "F1.REDE constrói F=lp(Sector n)2; setores simétricos são fechos de spans das potências tensoriais. Há sectorEmbedding, oneParticle, vácuo e ortogonalidade. R63 escreve inclusão V0/1 para fi,fo ortonormais:Omega,fi,fo,(fi tensor fo+fo tensor fi)/sqrt2, estendida por identidadeOH.",
+      "use": "Para a família totalN≤m, reutilizar esses setores e construir os vetores de ocupação normalizados de fi/fo em cada setor. Os dados fi,fo continuam INPUT até ligação aos modos físicos.",
+      "limit": "V0/1 é derivação cinemática escrita, não theorem Lean de fatorização F≅F(span{fi,fo})tensorF(perp). Não localizei tal fatorização completa nos10módulos de F1.REDE/fock_construction consultados. BosonicTwoParticle usa seu setor fixo por flip; BosonicSectors usa fecho de spans diagonais: comparar as interfaces antes de tratá-las como definicionalmente idênticas."
+    },
+    {
+      "id": "REUSE_SPATIAL_PACKETS",
+      "status": "EXISTE_COMPILADO_REUTILIZAVEL",
+      "anchors": [
+        {
+          "source_id": "packets",
+          "line_start": 19,
+          "line_end": 61
+        },
+        {
+          "source_id": "packets",
+          "line_start": 77,
+          "line_end": 101
+        },
+        {
+          "source_id": "packets",
+          "line_start": 144,
+          "line_end": 189
+        },
+        {
+          "source_id": "complex_packets",
+          "line_start": 14,
+          "line_end": 44
+        },
+        {
+          "source_id": "complex_packets",
+          "line_start": 54,
+          "line_end": 78
+        }
+      ],
+      "available": "CompactPacket, packetSpace, inclusões literais isométricas e compatibilidade; packet_union_closure=compactLocalized. complexPacket_union_dense fornece densidade no mesmo H1. Translação/Lorentz levam pacotes às imagens; incluem FutureLorentz e boost=B0.",
+      "use": "Escolher perfis de campo derivados do acoplamento físico dentro desses geradores e usar os refinamentos/densidade já prontos. Não exigir que cada pacote finito seja invariante pelo grupo.",
+      "limit": "Não fornece ainda a igualdade de Gram/covariância dos modos do reservatório com circularSmear, ação microscópica ou limite dinâmico. Não reabrir a obstrução da torre produto como proibição de estados correlacionados."
+    },
+    {
+      "id": "REUSE_NET_ACTION_FIELDS",
+      "status": "EXISTE_NA_MESMA_REDE_CANONICA",
+      "anchors": [
+        {
+          "source_id": "Fock_actions",
+          "line_start": 16,
+          "line_end": 23
+        },
+        {
+          "source_id": "Fock_actions",
+          "line_start": 47,
+          "line_end": 69
+        },
+        {
+          "source_id": "physical_net",
+          "line_start": 18,
+          "line_end": 49
+        },
+        {
+          "source_id": "net_covariance",
+          "line_start": 28,
+          "line_end": 87
+        },
+        {
+          "source_id": "Segal_transport",
+          "line_start": 58,
+          "line_end": 118
+        },
+        {
+          "source_id": "circular_field",
+          "line_start": 24,
+          "line_end": 32
+        },
+        {
+          "source_id": "circular_field",
+          "line_start": 90,
+          "line_end": 158
+        }
+      ],
+      "available": "gamma(u) segunda quantização no mesmo H1, UF/VF e covariância; rede FieldWeyl.R(compactLocalized), covariância translacional e FutureLorentz; circularSmearCLM e transporte Segal/campo normalizado com amplitude fixa sqrt((2pi)^−3).",
+      "use": "Após construir o mapa de modos e sua compatibilidade espacial, consumir esses entrelaçamentos e a covariância pronta. gamma aqui recebe u:H1≃liH1; a interface não é uma segunda quantização genérica de qualquer inclusão entre Hilberts distintos.",
+      "limit": "Não inferir Fock temporal HP=Fock Maxwell por isomorfismo abstrato. A igualdade de produto interno, suporte/localização, representação e o transporte do gerador no domínio devem vir do mapa físico."
+    }
+  ],
+  "shortest_construction": [
+    "Banho/colisão: construir unidade por passo para J inteiro e canais convencionais, provar expansão e limite; conservar H e termo OH. Não trocar D[A+B] por soma independente.",
+    "Bosônico: usar setores por totalN e abaixadores sqrt(n); provar compatibilidade de cortes, extensão conservativa em classe-traço e controle de domínio. Reintroduzir driveOH limitado requer teorema de perturbação/produto adequado, não só finitude de matrizes.",
+    "Rede: construir perfis de teste F_j(f) a partir da porta/acoplamento, com K(f)=circularSmear(F_j(f)); provar igualdade de Gram (ou limite controlado), suporte e covariância. Depois usar pacotes densos e gamma/campo existentes.",
+    "Instrumento: transportar o mesmo estado, porta, campo incidente, LO/filtro e escala ao contrato R64; somente então declarar que as hipóteses dessa realização foram descarregadas."
+  ],
+  "coverage": {
+    "text_search": "12 fontes já pinadas de R65/R64; padrões e linhas em FOCAL_SEARCH_R66.json. Kraus/Krauss/colisão lexical filtrados semanticamente.",
+    "formal_lookup": "10módulos diretos F1.REDE/fock_construction; fornecedores específicos R57,PhysicalFockNet/Spacetime e transporte de campo. Sem varredura de caches/attempts para descoberta.",
+    "absence_scope": "Nenhuma afirmação de ausência universal. Fatorização completa/colisão exata não localizadas somente no recorte consultado.",
+    "activities": "Zero simulações, builds, importações científicas, provedores, dados observados, alterações de memória/cânone/gate ou transições por este agente."
+  }
+}

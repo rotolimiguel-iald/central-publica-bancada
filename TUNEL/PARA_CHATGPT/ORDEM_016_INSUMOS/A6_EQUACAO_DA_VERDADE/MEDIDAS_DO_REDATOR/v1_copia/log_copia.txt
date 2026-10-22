@@ -1,0 +1,63 @@
+PASS [C01] S1 tabela V(1,1)=V(0,0)=1, V(1,0)=V(0,1)=0 {(0, 0): 1, (0, 1): 0, (1, 0): 0, (1, 1): 1}
+PASS [C02] S1 V(b,bh) == [b == bh] em {0,1}^2 (coincide com o indicador V_r) 
+u1,u2,u3 = [1, 2, 0, -1, 1] [2, -1, 1, 0, 0] [-3, 1, 7, 10, 11]  lambdas = [35, 6, 560]
+PASS [C03] S2 cada ker D_j sozinho tem dimensao 4 (nenhum vinculo isolado fixa a familia) [4, 4, 4]
+PASS [C04] S2 dim (ker D1 ∩ ker D2 ∩ ker D3) = 2 (5, 2)
+PASS [C05] S2 ker H_3L = ∩ ker D_j (mesmo subespaco) 
+PASS [C06] S2 <x,Hx> = Σ||D_j x||^2 identicamente (x simbolico) 
+PASS [C07] S2 H simetrico (auto-adjunto real) 
+PASS [C08] S2 espectro de H exato, >= 0: {0^2, 35, 6, 2|u3|^2} {560: 1, 35: 1, 6: 1, 0: 2}
+PASS [C09] S2 A_C = -H <= 0 (todos autovalores <= 0) 
+PASS [C10] S2 P^2=P, P^T=P, posto 2, Im P = F 
+PASS [C11] S2 0 != P != I 
+PASS [C12] S2 H P = 0 e P H = 0 
+PASS [C13] S2 P + ΣE_k = I e H = Σ λ_k E_k (diagonalizacao exata) 
+PASS [C14] S2 T_0 = I 
+PASS [C15] S2 dT/ds = -H T_s = A_C T_s (EDO => T_s = exp(-sH) por unicidade) 
+PASS [C16] S2 serie de Taylor de T_s em s = Σ(-sH)^n/n! coeficiente a coeficiente ate n=12 
+PASS [C17] S2 semigrupo T_s T_t = T_{s+t} 
+PASS [C18] S2 P T_s = P (s simbolico) 
+PASS [C19] S2 T_s P = P e T_s Q = Q T_s 
+PASS [C20] S2 I(T_s x) = I(x) com I = P, x simbolico 
+PASS [C21] S2 T_s x = Px + T_s Q x 
+PASS [C22] S2 T_1 x0 != x0 para x0 = e1 (Q x0 != 0) mas P T_1 x0 = P x0 
+PASS [C23] S2' exemplo generico (D_j aleatorios racionais, polinomio caract. 3o grau irredutivel): ker Hg = ∩ker, Pg Hg = 0, e Pg·S_N = Pg EXATO p/ N=0..15 lambda**2*(lambda**3 - 6805*lambda**2 + 2194444*lambda - 97419840)
+PASS [C24] S3 lim_{s->oo} T_s = P (entrada a entrada) 
+PASS [C25] S3 ||T_s - P||_op = e^{-s·λ_min+}, λ_min+ = 6 (taxa = gap espectral) 
+PASS [C26] S3 leitor continuo ℓ(x)=||Px||^2: ℓ(T_s x)=ℓ(x) e ℓ=ℓ∘P 
+PASS [C27] S3 coerencia da reciproca: ℓ(x)=||x||^2 nao fatora por P e NAO e conservado 
+PASS [C28] S3 semigrupo discreto T_{s0}^n = T_{n s0} (base do reforco: invariancia num unico s0>0 ja implica ℓ=ℓ∘P) 
+PASS [C29] S3 ∞-dim sem gap (H=diag(1/n) em l2, ker=0, P=0): e^{-s/n}->0 p/ n fixo (forte) mas sup_n e^{-s/n}=1 (norma NAO converge) 
+PASS [C30] S4 P^n = P para n=1..8 
+PASS [C31] S4 Fix P = Im P = F 
+PASS [C32] S4 Px = Py <=> x - y ∈ ker P (40 pares racionais) 
+PASS [C33] S4 ker P = Q H = F^perp (dim 3) 
+PASS [C34] S5 d/ds P T_s x = P A_C T_s x = 0 
+PASS [C35] S5 d/ds T_s x0 != 0 para x0 ∉ F (dinamica nao nula) 
+PASS [C36] S5 z ∈ F => Pz = z e T_s z = z 
+PASS [C37] S5 a' = -(1/2) a q 
+PASS [C38] S5 q' = (1/2) a^2 
+PASS [C39] S5 a'(0)=0, q'(0)=1/2, a''(0)=-1/4 (0, 1/2, -1/4)
+PASS [C40] S5 a^2 + q^2 = 1 (tanh^2 + sech^2) 
+PASS [C41] S5 extremos: P=0 => leitura constante; P=I (H=0) => T_s = I 
+PASS [C42] S6 E ρ_s = σ (constante) 
+PASS [C43] S6 dρ/ds = -(id - E)ρ_s 
+PASS [C44] S6 autovalores = (1 ± r_s)/2 
+PASS [C45] S6 E e projecao ORTOGONAL em Hilbert-Schmidt e e^{sL} = E + e^{-s}(id-E) (instancia da secao 2 com H = id-E = D†D) 
+PASS [C46] S6 dS/ds = 2|c|^2 e^{-2s}/r_s · log((1+r_s)/(1-r_s)) (simbolico) 0
+PASS [C47] S6 r_s^2 < 1 <=> |c|^2 e^{-2s} < p(1-p) (logo log((1+r)/(1-r)) >= 0 e dS/ds >= 0) 
+PASS [C48] S6 dS/ds numerico (50 dig.) = formula e >= 0 em 16 pontos 
+PASS [C49] S6 -Tr(ρ_s log σ) = S(σ) (log σ diagonal, diag ρ_s = diag σ) 
+PASS [C50] S6 p=1/2: limite log((1+r)/(1-r))/r -> 2 quando r->0 (extensao continua; c=0 => dS/ds=0) 
+PASS [C51] S6 p=1/2, c!=0: dS/ds -> 0 quando s->oo 
+DETECTADO [N01] N1 T' = exp(-sH'), H' = H + f f^T (f ∈ F): P T'_s f = P f ? P T'_s f = e^{-s|f|^2} f != f
+DETECTADO [N02] N2 leitor constante ℓ≡1 distingue identidades? (Px != Py mas ℓ(x)=ℓ(y)) V_x(y)=1 para todo y: falso positivo de verdade
+DETECTADO [N03] N3 poda que corta o modo g ∈ F: T_cut g = g e dim ker = 2 ? dim ker H_cut = 1; T_cut g = e^(-s|g|^2) g
+DETECTADO [N04] N4 P obliqua (P^2=P, HP=0 valem: True): P H = 0 e P T_s = P ? Pob^T == Pob: False; lim T_s = P != Pob: True
+DETECTADO [N05] N5a H_ind = D1†D1 - D2†D2 (autovalores {35: 1, -6: 1, 0: 3}): ker H_ind = ∩ker D_j (dim 2) E <x,Hx> = Σ||D_j x||^2 ? dim ker H_ind = 3; u3 ∈ ker H_ind mas D3 u3 != 0; forma quadratica difere
+DETECTADO [N06] N5b H indefinido (ker=F; P T_s = P vale: True): lim T_s existe E todo leitor continuo conservado fatora por P ? lim T_s[0,0] = oo; ℓ=c1·c2 conservado: True; ℓ(Px)=ℓ(x) p/ x=u1+u2: False
+DETECTADO [N07] N6 leitor descontinuo ℓ=1_{Qx!=0}: conservado (True) => ℓ = ℓ∘P ? ℓ(P e1)=0 != 1=ℓ(e1): a continuidade e hipotese necessaria
+DETECTADO [N08] N7 V(1/2,0) e V(2,0) sao valores de verdade em {0,1} ? V(1/2,0)=3/4, V(2,0)=-3
+DETECTADO [N09] N8 qubit com |c|^2 > p(1-p): ρ_0 >= 0 e r_0 < 1 ? eig=[11/10, -1/10]
+
+CHECKS 51/51  CONTROLES DETECTADOS 9/9

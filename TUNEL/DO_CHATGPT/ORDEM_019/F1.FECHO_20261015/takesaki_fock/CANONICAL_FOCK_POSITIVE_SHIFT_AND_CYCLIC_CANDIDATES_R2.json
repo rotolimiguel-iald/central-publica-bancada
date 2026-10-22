@@ -1,0 +1,102 @@
+{
+  "created_utc": "2026-10-16T20:15:13.631675+00:00",
+  "author": "codex-mission-memory-review",
+  "role": "constructor",
+  "status": "DECLARADO_UNCOMPILED",
+  "requirement": "R7",
+  "handle": "r50-shift-r2",
+  "requirement_satisfied": false,
+  "mission": {
+    "reference": {
+      "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+      "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+      "bytes": 672
+    },
+    "initial_project": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R50_SHIFT_R2_INITIAL_20261016T201405_848495Z_d35b1eea_RECEIPT.json",
+      "sha256": "862106a7b40b03e272e67d384fae00f0d2da4db247d944aae8f55119752f2c06",
+      "bytes": 129262
+    },
+    "final_project": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R50_SHIFT_R2_FINAL_20261016T201507_465436Z_b087a31d_RECEIPT.json",
+      "sha256": "3083ae4b98ceaa8e98e1dc3ab921eb8f71a05ff7ca3b0afdcc9c823cec7acd98",
+      "bytes": 128237
+    },
+    "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+    "revision": 343,
+    "state_sha256": "07a6b417c67a7af3dc5aba2170a5c5eeb7bb1ee518e7533a4d05b6632d557ca3",
+    "preflight": "A lease continua de codex-gerente-tgl. Edição explicitamente delegada; não foi simulado seu ator para executar check. Root fará preflight fresco antes de integrar/compilar.",
+    "mutation_performed": false
+  },
+  "candidates": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockPositiveShiftTransportR2.lean",
+        "sha256": "52d4bdf5e9ae4d22fb28818bfae279420bc0a96a26a3f74363f8eba07302c066",
+        "bytes": 6084
+      },
+      "prior_source_preserved": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockPositiveShiftTransportR1.lean",
+        "sha256": "69ab9f2683c67503acac2d5c3c7de03d1a5a551c30f31a2f7e4f7043d8cd2f64",
+        "bytes": 5979
+      },
+      "expected_axiom_reports": 4,
+      "diff": "--- CanonicalFockPositiveShiftTransportR1.lean\n+++ CanonicalFockPositiveShiftTransportR2.lean\n@@ -4,6 +4,7 @@\n import TGLExt.V354TraceShiftEquivalence\n \n /-! DECLARADO / UNCOMPILED CANDIDATE, R50, 2026-10-16.\n+R2 unfolds positiveAsCore explicitly in the two power-coercion proofs.\n The square-pair proof from V354PositiveTraceTransport is reused at a generic\n von Neumann algebra. Its quadratic-value premise is discharged in the concrete\n Fock consumer by R49, rather than assumed as a trace on the final interface.\n@@ -17,7 +18,7 @@\n set_option synthInstance.maxHeartbeats 500000\n set_option maxErrors 8\n noncomputable section\n-namespace F1Fecho.CanonicalFockPositiveShiftTransportR1\n+namespace F1Fecho.CanonicalFockPositiveShiftTransportR2\n open TGLV350.Regular (positive_sqrt_intertwines vonNeumann_norm_closed RegularHilbert)\n open TGLV354 (boundedPolar boundedPolar_mem)\n open TGLV354.TraceCompletion (ShiftRelated boundedPolar_transports_shift_factors)\n@@ -108,9 +109,9 @@\n   have hr' : p.val * r.val = r.val * q.val :=\n     congrArg (fun x : core.toStarSubalgebra => x.val) hr\n   have hp' : p.val ^ n = r.val * s.val := by\n-    simpa using congrArg (fun x : core.toStarSubalgebra => x.val) hp\n+    simpa [positiveAsCore] using congrArg (fun x : core.toStarSubalgebra => x.val) hp\n   have hq' : q.val ^ n = s.val * r.val := by\n-    simpa using congrArg (fun x : core.toStarSubalgebra => x.val) hq\n+    simpa [positiveAsCore] using congrArg (fun x : core.toStarSubalgebra => x.val) hq\n   have hpol := boundedPolar_transports_shift_factors\n     (H := RegularHilbert F1Rede.BosonicFock.F) p.val q.val r.val s.val\n     p.property.2.isSelfAdjoint q.property.2.isSelfAdjoint n hn hr' hp' hq'\n@@ -119,4 +120,4 @@\n   exact value_transport_of_support p q u hpol.1 hpol.2\n #print axioms positiveShift_value_compatible\n \n-end F1Fecho.CanonicalFockPositiveShiftTransportR1\n+end F1Fecho.CanonicalFockPositiveShiftTransportR2\n"
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockCyclicTraceCompletionR2.lean",
+        "sha256": "e867979686e583091098ef171f5db37eee2752908621944355343fafb4b111e1",
+        "bytes": 6587
+      },
+      "prior_source_preserved": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockCyclicTraceCompletionR1.lean",
+        "sha256": "1bb34e7d6db84d340aaf204dde27ff9292307607f1de32310c1f9f5eede80610",
+        "bytes": 6526
+      },
+      "expected_axiom_reports": 8,
+      "diff": "--- CanonicalFockCyclicTraceCompletionR1.lean\n+++ CanonicalFockCyclicTraceCompletionR2.lean\n@@ -1,6 +1,7 @@\n-import CanonicalFockPositiveShiftTransportR1\n+import CanonicalFockPositiveShiftTransportR2\n \n /-! DECLARADO / UNCOMPILED CANDIDATE, R50, 2026-10-16.\n+R2 changes the imported transport module and namespace only.\n The ShiftRelated completion from V354CyclicTraceCompletion is instantiated on\n the SAME represented Fock core and the EXISTING PositiveInput/value. It takes\n all shift-related positive readings, including infinite values; it does not\n@@ -15,11 +16,11 @@\n set_option synthInstance.maxHeartbeats 500000\n set_option maxErrors 8\n noncomputable section\n-namespace F1Fecho.CanonicalFockCyclicTraceCompletionR1\n+namespace F1Fecho.CanonicalFockCyclicTraceCompletionR2\n open F1Fecho.CanonicalFockRegular (core dualAction)\n open F1Fecho.CanonicalFockWeight (PositiveInput positiveDual)\n open F1Fecho.CanonicalFockInverseSupremum (value value_dual value_faithful value_zero)\n-open F1Fecho.CanonicalFockPositiveShiftTransportR1\n+open F1Fecho.CanonicalFockPositiveShiftTransportR2\n   (positiveAsCore positiveShift_value_compatible)\n open TGLV350.Regular (dualAmbient dualAmbient_symm)\n open TGLV354.TraceCompletion (ShiftRelated)\n@@ -135,4 +136,4 @@\n   exact value_faithful p\n #print axioms cyclicTraceCandidate_positive_faithful\n \n-end F1Fecho.CanonicalFockCyclicTraceCompletionR1\n+end F1Fecho.CanonicalFockCyclicTraceCompletionR2\n"
+    }
+  ],
+  "failed_attempt": {
+    "receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T201130_958727Z\\RECEIPT.json",
+      "sha256": "4d5dfdc43ff77fb9e8c0c51e931e7c246154c6f7c8e0c25827807474114db232",
+      "bytes": 245562
+    },
+    "running_output": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T201130_958727Z\\RUNNING_OUTPUT.log",
+      "sha256": "3f3fd76ec661e5db3d63763101ac2ed1c69693da955653755b4523154caadf10",
+      "bytes": 3090
+    },
+    "source": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T201130_958727Z\\CanonicalFockPositiveShiftTransportR1.lean",
+      "sha256": "69ab9f2683c67503acac2d5c3c7de03d1a5a551c30f31a2f7e4f7043d8cd2f64",
+      "bytes": 5979
+    },
+    "exit_code": 1,
+    "seconds": 70.2809561000031,
+    "diagnosis": "A coerção de positiveAsCore p/q permaneceu nas potências produzidas por congrArg Subtype.val. R2 explicita seu desdobramento em ambas as provas com simpa [positiveAsCore].",
+    "valid_reports_in_failed_build": 3,
+    "invalid_fourth_report": "positiveShift_value_compatible contém sorryAx por causa dos erros; não é prova válida."
+  },
+  "prior_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CANONICAL_FOCK_POSITIVE_SHIFT_AND_CYCLIC_CANDIDATES_R1.json",
+    "sha256": "a9aca0647f90afa8ad7410134549fbc149a1c6c1a32020ae3eb1a362f0210274",
+    "bytes": 14174
+  },
+  "changes": [
+    "PositiveShiftR2: somente nomes de módulo/namespace, comentário R2 e desdobramento positiveAsCore nas duas conversões.",
+    "CyclicTraceCompletionR2: somente import/namespace da R2 e comentário de proveniência; enunciados/provas preservados."
+  ],
+  "limits": [
+    "Nenhuma hipótese nova, aumento de heartbeat ou mudança de objeto/peso/core.",
+    "R1 e recibo falho preservados.",
+    "Compilação e revisão independente pendentes; R7 integral/PF continuam abertos."
+  ],
+  "own_builds": 0,
+  "expected_total_axiom_reports": 12,
+  "production_modified": false,
+  "kernel_modified": false,
+  "gate_moved": false
+}

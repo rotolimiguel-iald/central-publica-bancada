@@ -1,0 +1,76 @@
+import took 692s
+typeclass inference of CoeT took 225ms
+elaboration took 158ms
+typeclass inference of InnerProductSpace took 692ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 778ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 1.04s
+typeclass inference of InnerProductSpace took 646ms
+type checking took 166ms
+typeclass inference of InnerProductSpace took 667ms
+typeclass inference of InnerProductSpace took 636ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T094028_835941Z\CanonicalFockModularIdentificationR16.lean:79:4: error: Type mismatch
+  ModularTransportTarget.imaginary_target coefficientUnitary coefficientR
+    CanonicalFockWeightModularOperator.scalarTomitaResolvent hR h1 hi hj
+    CanonicalFockWeightModularOperator.scalarTomitaResolvent_nonneg
+    CanonicalFockWeightModularOperator.scalarTomitaResolvent_le_one
+    CanonicalFockWeightModularOperator.scalarTomitaResolvent_injective
+    (ClosedTomitaFlow.scalarTomitaResolvent_complement_injective actualClosedInput) transported_resolvent_eq t x
+has type
+  @Eq (↥GNSHilbert) (coefficientUnitary ((resolventImaginaryPower coefficientR hR h1 hi hj t) x))
+    ((resolventImaginaryPower CanonicalFockWeightModularOperator.scalarTomitaResolvent
+        CanonicalFockWeightModularOperator.scalarTomitaResolvent_nonneg
+        CanonicalFockWeightModularOperator.scalarTomitaResolvent_le_one
+        CanonicalFockWeightModularOperator.scalarTomitaResolvent_injective ⋯ t)
+      (coefficientUnitary x))
+but is expected to have type
+  @Eq (↥GNSHilbert)
+    (coefficientUnitary
+      ((FibreModularCalculus.liftedFlow CanonicalFockPolar.modularR CanonicalFockPolar.modularR_nonneg
+          CanonicalFockPolar.modularR_le_one CanonicalFockPolar.modularR_injective
+          CanonicalFockPolar.modularR_complement_injective t)
+        x))
+    ((CanonicalFockWeightModularFlow.scalarTomitaImaginaryPower t) (coefficientUnitary x))
+typeclass inference of InnerProductSpace took 681ms
+tactic execution of Lean.Parser.Tactic.exact took 138ms
+'F1Fecho.CanonicalFockModularIdentification.unitary_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.resolvent_intertwines' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.transported_resolvent_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.imaginary_intertwines' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.actual_modular_implementation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.actual_regular_conjugation_norm' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.actual_regular_conjugation_group' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 5.21ms
+	blocked (unaccounted) 3.23s
+	elaboration 523ms
+	fix level params 0.605ms
+	import 692s
+	initialization 30.3ms
+	instantiate metavars 0.145ms
+	interpretation 6.18s
+	let-to-have transformation 5.6ms
+	linting 4.64ms
+	overlappingInstancesLinter 9.3ms
+	parsing 4.06ms
+	process pre-definitions 7.04ms
+	share common exprs 7.52ms
+	tactic execution 2.17s
+	tacticAnalysis 23.3ms
+	type checking 463ms
+	typeclass inference 7.98s

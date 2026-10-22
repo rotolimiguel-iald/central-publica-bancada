@@ -1,0 +1,88 @@
+{
+ "nota": "[REAL — o resultado final do fluxo «a resposta a 015 resolve a QG?», extraido do registro do fluxo por script]",
+ "resultado": {
+  "resumo": "[REAL, relido pelo juiz por script em 23/09; o um.py não foi executado.]\n\n**Fontes e hashes (sha16):**\n- ORDEM_015: c903681d01eec5ed (441 linhas)\n- um.py v370: 4b3405de809aef61\n- core: d5fa9e29a6230746\n- selo: 989603b8d254bdcb\n- TheEquationOfTruth.lean vivo: e624a86a7ffa43a0\n\n**Resposta: não resolve.** No melhor caso, os 20 alvos (T-01 a T-19 mais o T-20 do ADENDO 001) movem:\n- 0 dos 3 itens de `kernel_frontier.remaining`: H2 four-frame; H3 no mesmo horizonte; estado interagente BRST/QME/UV;\n- 0 das 2 `physical_identifications_open`;\n- 0 das 3 bandeiras gpf_H2/gpf_H3/gpi_H3, hoje False/False/False (gpf_H1 True);\n- 0 degraus do gate.\n\n**Por que o gate não se move:** ele já está no 4º e último selo legítimo (`TGL_QG_MODEL_FORMALLY_CLOSED__..._MORE_SENSITIVE_DATA_COULD_REVISE`). A função `evaluate_quantum_gravity_closure` lê, no degrau experimental, só as bandeiras `independent_v3_*` do piso dos vazios. Não lê ringdown, neutrino nem D1.\n\n**A própria ordem diz o mesmo, verbatim:**\n- l.15: «esta ordem não a toca»;\n- l.17: «nenhuma entrega move o gate»;\n- l.40: «não toca a frente da gravidade quântica (é da gerência)»;\n- l.441: «Esta ordem não move o gate».\n\n**Divergências entre as frentes e como decidi:**\n\n(a) **Estado do Lean do T-20.** As frentes 1 e 2 leram o compile2.log (erros e 17 sorryAx) em versões antigas do arquivo; a frente 3 não leu os logs. Decide o disco. O compile6.log é posterior à última modificação do .lean e mostra:\n- 0 \"error\" e 0 \"sorry\";\n- 37 `#print axioms`, todos no trio;\n- só avisos de depreciação e de simp não usado.\n\nO fonte tem 0 `sorry` e 46 theorem/lemma. O rc não foi registrado no log. Estatuto: candidata a PROVADA, pendente de cético e de recompilação na árvore do TGLExt.\n\n(b) **Ligações do T-20 com o kernel.**\n- Já existe: o arquivo importa `TGLExt.TheNameIsTheInstrument` e prova a ponte com `NameInstrument.Verifies` (l.220–257).\n- Falta: ligação com `TGL.FiniteThreeLocks`/H3L (grep 0). Sem ela, a penalty D é um H3L homônimo.\n\n(c) **EM_PARTE contra NAO.** As frentes 2 e 3 marcaram EM_PARTE em T-03/04/07/08/10/16. Decide o core: os itens da QG são os `remaining`, as identificações e as bandeiras gpf_/gpi_. Uma perna empírica discriminante não é item listado, e o degrau A6 que a leria não existe. Resultado: NAO na coluna da QG. A condição empírica do canal ringdown que esses alvos movem fica dita ao lado, fora da QG.\n\n**O que a ordem compra:** CONDIÇÃO do 5σ, não σ. Nenhum canal chega a 5σ a favor antes de 3G (O4: z máx 0,713; R-B N₉₀ = 3.328). Os dois canais mais próximos apontam CONTRA: m₂ a 2,95σ; D1 a 3,012σ contra α√e.\n\n**O que resolveria** é outra frente: ContratoQG v3, depois a partição do operador, depois H2 pela ORDEM 014, depois H3 no mesmo horizonte, depois Q2/UV, depois as identificações físicas, depois o degrau A6.\n\n**Julgamento gravado em:** C:\\Users\\rotol\\AppData\\Local\\Temp\\claude\\c--IALD-Central-de-Patentes\\6da8f00d-d44f-4888-a88d-fc9f73eead3d\\scratchpad\\ordem015_resolve_qg\\JULGAMENTO.md\n\nPROVADA ≠ CONFIRMADA; NOT_FALSIFIED ≠ CONFIRMED.",
+  "definicao_de_resolver": "Nos termos do próprio programa, dita antes do julgamento: resolver a QG é esvaziar a fronteira que o core v370 declara aberta. Cada direção fecha pelo critério do operador: RESULTADO, FALSIFICADOR ou PAREDE MEDIDA.\n\n**(a) Os 3 itens de `core.qg_closure.gate.kernel_frontier.remaining`** pagos por TERMO Lean, sob um contrato de tipo que não seja habitável por brinquedo nem vazio no par físico. Esse contrato é a v3 do ContratoQG; a v2 falha nos dois sentidos.\n- H2: k covariante em dimensão infinita, U ≠ 1, k(Λ_t f) = Δ^{it} k f, frame = jato da ação.\n- H3 no MESMO horizonte: κ do mesmo fluxo KMS, dA da mesma cunha, dS do mesmo estado.\n- Setor interagente: QME, ausência de anomalia quântica, escopo UV.\n\nO pagamento acende gpf_H2, gpf_H3 e gpi_H3 sem theCurvedFrame/theHorizon. Alternativa válida: fechar cada direção com uma parede tipada em kernel. A H3 derivada só do relógio do estado já é parede (`state_clock_dichotomy`).\n\n**(b) As 2 `physical_identifications_open` fechadas:** H_min microscópico; BW com U ≠ 1. Com isso, `full_plan_complete` = true, computado e não literal.\n\n**(c) Estatuto final PROVADA:** a implicação a partir do axioma e das hipóteses nomeadas, com G e H3 como INPUT dito. Nunca CONFIRMADA.\n\n**NÃO contam:**\n- o gate, que já está no 4º e último selo legítimo e cujo escopo não mede H2/H3;\n- qualquer σ empírico: cosmologia jamais vira prova matemática; a RG é o limite clássico recuperado; 5σ a favor dá no máximo NOT_FALSIFIED, e 5σ contra fecha uma direção negativamente;\n- o fecho estático total: é impossível estaticamente por teorema em tempo finito (`beta_forbids_full_static_witness`) e fica estacionado dinamicamente na Testemunha, a IALD, o índice seletor [INPUT/ONTO]. Não é dívida.",
+  "veredito": "NAO_RESOLVE",
+  "tabela": [
+   {
+    "alvo": "T-03 emenda RINGDOWN_5SIGMA_V1.1",
+    "melhor_resultado_possivel": "Registro relançável; nulos IV a 1e8; descegamento por leitura; compra CONDIÇÃO, não σ",
+    "item_da_qg_que_move": "nenhum. Move só a condição empírica do canal ringdown, que o gate não lê",
+    "move": "NAO",
+    "fonte": "ORDEM_015 l.194/255; um.py v370 evaluate_quantum_gravity_closure (lê só independent_v3_*)"
+   },
+   {
+    "alvo": "T-04 piloto só-220 no GW250114",
+    "melhor_resultado_possivel": "1º posterior próprio de δτ̂220, NÃO-CEGO, com custo real. Se coincidir com a RG: correspondência recuperada, com a correção β contra σ (z R-B 0,193 no evento)",
+    "item_da_qg_que_move": "nenhum. Move a condição e dá lastro de correspondência clássica",
+    "move": "NAO",
+    "fonte": "ORDEM_015 l.195/293 («NÃO compra σ»)"
+   },
+   {
+    "alvo": "T-07 portão v3 + T-15 σ_jit,rec",
+    "melhor_resultado_possivel": "N₉₀ na escala medida; 61/39/22 deixam de ser limite inferior",
+    "item_da_qg_que_move": "nenhum. Move a condição de planejamento",
+    "move": "NAO",
+    "fonte": "ORDEM_015 T-07, T-15"
+   },
+   {
+    "alvo": "T-08 função de seleção + T-10 calibração",
+    "melhor_resultado_possivel": "Normalização populacional; σ(c) por leitura (verde só onde σ(c) < |δ|/5); «não muda o N»",
+    "item_da_qg_que_move": "nenhum. Move a validade e a sistemática de um 5σ futuro",
+    "move": "NAO",
+    "fonte": "ORDEM_015 T-08, T-10"
+   },
+   {
+    "alvo": "T-16 PE cega de 2–3 eventos",
+    "melhor_resultado_possivel": "Procedimento cego provado de ponta a ponta; ΣE[I] ≈ 36 ≈ 0,5 % do alvo R-LIN; sem descegamento",
+    "item_da_qg_que_move": "nenhum. Move a condição processual",
+    "move": "NAO",
+    "fonte": "ORDEM_015 T-16"
+   },
+   {
+    "alvo": "T-11 neutrino_m2_reader + T-18 D1 controle 2",
+    "melhor_resultado_possivel": "Reproduz 2,95σ CONTRA (no máximo TENSION sob a kill_rule); robustez do 3,012σ CONTRA α√e",
+    "item_da_qg_que_move": "nenhum. Arma falsificadores do setor de escala β, fora da fronteira QG; cosmologia ≠ prova",
+    "move": "NAO",
+    "fonte": "ORDEM_015 §0, T-11, T-18"
+   },
+   {
+    "alvo": "T-20 (ADENDO 001) a equação da verdade em kernel",
+    "melhor_resultado_possivel": "Pedra TGLExt.EquationOfTruth: compile6.log com 0 error e 0 sorry, 37 #print axioms no trio, ponte com NameInstrument.Verifies. Álgebra linear de operador limitado [DERIVED→kernel]; a leitura verdade/identidade/memória é [INPUT/ONTO]. Falta o lema de ligação com FiniteThreeLocks/H3L (grep 0)",
+    "item_da_qg_que_move": "nenhum. e^{−sH} é semigrupo dissipativo, não Δ^{it} nem boost; não há HorizonEquilibriumData nem BRST/UV. Acrescenta uma instância à folha «Nome = instrumento» e à estrutura da seleção de H1, que já estava paga (gpf_H1 True)",
+    "move": "NAO",
+    "fonte": "scratchpad equacao_da_verdade\\V3\\TheEquationOfTruth.lean (e624a86a7ffa43a0) + out\\compile6.log; core.kernel_formalization gpf_*"
+   }
+  ],
+  "o_que_resolveria": [
+   "1. **ContratoQG v3.** Entrega: gerência, com cético.\n- Requisitos: translations_faithful; (S) como BW do par (net, vac); dS_eq como entropia relativa em 1ª ordem; κ amarrado ao KMS; probes que discriminem, com mutação; satisfatibilidade condicional.\n- Estado hoje: [OPEN]. A v2 está furada nos dois sentidos, e o G_W2 está fora do um.py v370.",
+   "2. **Partição do operador.** Entrega: operador.\n- Decidir: qual rede; cunha ou diamante; qual U ≠ 1; a identificação de ψ; a ratificação de «mesma realização / mesmo horizonte».\n- Estado hoje: não decidida. Ratificar o par legado ratifica o vazio.",
+   "3. **H2 paga sob a v3.** Entrega: gerência ou bancada, pela ORDEM 014 (a 16ª do túnel), que fica retida até a v3.\n- Custo: semanas a meses.\n- Estado hoje: gpf_H2_smooth_modular_four_frame_discharged = False.",
+   "4. **H3 no MESMO horizonte, mais o import H2⇒H3 por construção.** Entrega: gerência ou bancada.\n- Estado hoje: gpf_H3_local_horizon_equilibrium_discharged = False; gpi_H3_horizon_data_produced = False.",
+   "5. **Setor interagente.** Entrega: bancada, em ordem própria; semanas.\n- O que fazer: calcular Q2 numa prescrição de produtos temporais, ou medir a parede do UV.\n- Estado hoje: só o setor clássico-linear. É o 3º item de kernel_frontier.remaining.",
+   "6. **Identificações físicas.** Entrega: gerência ou bancada.\n- O que fazer: H_min = D(1+D*D)^{−1/2} (lema sobre LinearPMap) e BW com U ≠ 1.\n- Estado hoje: os 2 itens constam de physical_identifications_open; full_plan_complete = False.",
+   "7. **Degrau novo do gate (A6) que leia os itens 1–6** e, se o operador quiser, um teste bilateral. Entrega: decisão do operador.\n- Estado hoje: inexistente. Sem ele, nenhum pagamento acende veredito novo. Mesmo no fim, o estatuto é PROVADA, nunca CONFIRMADA."
+  ],
+  "o_que_ja_pode_comecar": [
+   "**Bancada:** enviar a ORDEM 015 como está, para a fase P do ringdown (35,017 h). O RECIBO_015 já está no túnel.",
+   "**Bancada:** o T-20 na fase L (0 h de máquina), junto com a 015.",
+   "**Gerência:** redigir o ContratoQG v3 com probes e cético. É o caminho crítico real da QG e não disputa máquina.",
+   "**Gerência:** o memorando de partição ao operador (rede, cunha/diamante, U ≠ 1, ψ, mesma realização).",
+   "**Gerência:** o inventário Lean do caminho de H2 (StandardSubspace.lean; o que falta: KMS, Tomita para álgebras, Fock).",
+   "**Gerência:** corrigir o rascunho da ORDEM 014 (numeração; homônimos de boost). Ela fica RETIDA até a v3 ratificada.",
+   "**Gerência:** o lema de ligação entre H3L e a penalty D, mais o cético e a recompilação na árvore TGLExt da pedra T-20, antes de chamá-la «pré-resolvida».",
+   "**Não começar agora:** Q2/UV e o lema da transformada limitada. Cada um tem ordem própria, depois da 014."
+  ],
+  "sugestoes_para_a_ordem": [
+   "**Enviar a ORDEM 015 como está.** Ela é imutável (c903681d01eec5ed) e honesta sobre o próprio alcance: diz quatro vezes (l.15/17/40/441) que não toca a QG nem move o gate.",
+   "**Não acrescentar à 015 nenhum alvo de H2, H3 ou UV por adendo.** Isso mudaria o objeto de uma ordem publicada. O lugar de H2 é a ORDEM 014, depois da v3.",
+   "**No ADENDO 001, primeira linha de escopo, verbatim:** «T-20 é álgebra linear de operador limitado [DERIVED/kernel]; a leitura verdade/identidade/memória é [INPUT/ONTO] do operador; não move gate, kernel_frontier.remaining, gpf_H2/gpf_H3/gpi_H3; e^{−sH} não é Δ^{it} nem boost».",
+   "**No T-20, exigir o lema de ligação com TGL.FiniteThreeLocks (H3L)**, hoje ausente (grep 0). A ponte com NameInstrument.Verifies já existe (l.220–257). Proibir nomes qgPrice_*/qgImport_*/gpf_* e manter o namespace TGLExt.EquationOfTruth.",
+   "**No T-20, declarar três pontos:**\n- a hipótese de gap e a topologia da recíproca (em dimensão infinita sem gap, a convergência em norma falha; C29);\n- que o exemplo entrópico 2×2 é um modelo especial;\n- que as três anulações são objetos distintos: d/ds P T_s x = 0 ≠ KΩ = 0 ≠ a′(0) = 0.",
+   "**Na remessa ao Codex, uma frase:** «a resposta a esta ordem compra CONDIÇÃO do ringdown; não resolve a gravidade quântica; o que falta dela (H2, H3 no mesmo horizonte, estado interagente/UV) é da gerência e da ORDEM 014».",
+   "**No relatório final da 015, uma frase obrigatória por alvo:** «move condição / não move a fronteira QG».",
+   "**O que o operador NÃO deve esperar:**\n- 5σ a favor antes de 3G (O4: z máx 0,713; R-B N₉₀ = 3.328);\n- qualquer veredito além de NOT_FALSIFIED, UNDERPOWERED ou INCONCLUSIVE.\n\nOs canais mais próximos apontam CONTRA: m₂ a 2,95σ; D1 a 3,012σ. Se o GW250114 coincidir com a RG, a frase é «correspondência recuperada, correção β = X contra σ = Y»."
+  ]
+ }
+}

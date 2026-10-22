@@ -1,0 +1,157 @@
+{
+  "unit": "F1.REDE",
+  "created_utc": "2026-10-13T21:29:11.457086+00:00",
+  "statute": "INPUT parameters; synthetic structural test, no fit and no observed data",
+  "source_pins": {
+    "superconductor": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+      "bytes": 76972,
+      "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e"
+    },
+    "mqc_extract": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\sources\\MQC_DESCRITIVO_EXTRACT_R1.txt",
+      "bytes": 21428,
+      "sha256": "e7f07be74236fae4fea0e708fb70de7925b7183bc38270c68c3cee5596d4acb8"
+    },
+    "mqc_source_manifest": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\sources\\PRIMARY_SOURCES_R1.json",
+      "bytes": 1333,
+      "sha256": "77b2eac2019dfda5bf7eede050a9b83e27bd471c4c0a8479b7ca23dfd972f1ba"
+    },
+    "alpha_source": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\Skygrid\\SkyGrid_Piloto\\skygrid_sim\\tgl_core.py",
+      "bytes": 5530,
+      "sha256": "a1e103cd08eb3f45144200b0c6c588589d267868cd85101c527138e3bce81f3f"
+    },
+    "prior_mqc_gkls": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003460-6_MQC\\runner\\one_mqc.py",
+      "bytes": 66751,
+      "sha256": "38d0e6343c37b17b21f20949fe85e811579fc2f8bd2c21070721a720b1e3a282"
+    },
+    "prior_mqc_geometry": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003460-6_MQC\\prototype_src\\mqc_simulacao_celula_elementar.py",
+      "bytes": 51769,
+      "sha256": "b11589f04f272fef5a9d4362e7df6e1bb713500965ccb8da35499fbc71c63b52"
+    },
+    "prior_mqc_run": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003460-6_MQC\\results\\2026-10-07T19-52-51\\results.json",
+      "bytes": 27309,
+      "sha256": "ff47e53b961642cafabd87ab62b171f7b768aab45a251034215941af8807752a"
+    },
+    "prior_superconductor_runner": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003450-9_SUPERCONDUTOR\\runner\\one_supercondutor.py",
+      "bytes": 60540,
+      "sha256": "1cc2e3923a072c052ca88ba753b2e813e21e37b9ca6a11f442e9c70f56c9331c"
+    },
+    "nos_survey": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\NOS_CONSULTA_R1.json",
+      "bytes": 30783,
+      "sha256": "9cf03e83907c571afbd89c829542710abaa8eae4e73c71522fce3702576f4c14"
+    }
+  },
+  "anchors": {
+    "superconductor": "lines 340-389: GKLS equation, H_eff and a_out_dagger sigma_minus + sigma_plus a_in",
+    "mqc_extract": "PDF pages 4-7: 27-site geometry, three-level claim, master equation and root code",
+    "prior_mqc_gkls": "deepening_v2_gkls_fixed_point, 29/07: qutrit reset model and C=2|rho01|; cited, not re-run"
+  },
+  "geometry": {
+    "coordinates": [
+      -1,
+      0,
+      1
+    ],
+    "counts": {
+      "vertex": 8,
+      "edge": 12,
+      "face": 6,
+      "center": 1
+    },
+    "edge_rule": "INPUT: nearest-neighbour Manhattan distance 1 on 3x3x3 grid",
+    "expected_edges": 54,
+    "quantum_27_site_hilbert_allocated": false
+  },
+  "model": {
+    "factor_labels": [
+      "in_mode_truncated",
+      "out_mode_truncated",
+      "OH_two_level"
+    ],
+    "factor_dims": [
+      2,
+      2,
+      2
+    ],
+    "hbar": 1.0,
+    "omega_c": 1.0,
+    "omega_OH": 1.2,
+    "g_JC": 0.15,
+    "Omega": 0.07,
+    "gamma_Lambda_values": [
+      0.0,
+      0.3,
+      1.0
+    ],
+    "kappa_in": 0.03,
+    "kappa_out": 0.04,
+    "gamma_OH": 0.02,
+    "gamma_dephasing": 0.01,
+    "dephasing_convention": "rate*D[sigma_z]; off-diagonal damping is 2*rate",
+    "beta": "ALPHA_FINE_CODATA_2018 * sqrt(e), parsed from pinned source in runtime",
+    "holo_rate": "beta * gamma_Lambda",
+    "units": "all dimensionless INPUT; not physical calibration",
+    "truncation": "0/1 photon cutoff, OH two levels; excludes MQC third state |Psi> and full bosonic CCR",
+    "conventional_jumps": [
+      "a_in",
+      "a_out",
+      "sigma_minus",
+      "sigma_z"
+    ],
+    "holographic_jump": "a_out_dagger @ sigma_minus + sigma_plus @ a_in"
+  },
+  "numerics": {
+    "seed": 2026101327,
+    "random_mixed_states": 12,
+    "random_pure_states": 8,
+    "times": [
+      0.0,
+      0.05,
+      0.2,
+      1.0,
+      5.0
+    ],
+    "finite_difference_step": 1e-05,
+    "algebra_tolerance": 1e-12,
+    "channel_tolerance": 1e-10,
+    "state_tolerance": 1e-10,
+    "energy_identity_tolerance": 1e-11,
+    "energy_derivative_tolerance": 1e-07,
+    "negative_witness_threshold": 1e-06
+  },
+  "tests": {
+    "geometry": "FAIL unless 27 distinct sites, categories 8/12/6/1 and 54 declared graph edges",
+    "local_algebras": "FAIL if any matrix-unit product, adjoint, unit, isotony embedding or disjoint commutator violates tolerance",
+    "gkls": "FAIL if H non-Hermitian, trace generator not zero or action differs from direct formula",
+    "cptp": "FAIL if exp(tL) Choi non-Hermitian, eigenvalue below -tol, output partial trace differs from identity",
+    "states": "FAIL if evolved registered pure/mixed states lose trace/Hermiticity/positivity",
+    "energy": "FAIL if Tr(H Lrho) differs from Tr(rho LdagH), finite-difference derivative or integrated ledger",
+    "rates_negative_control": "PASS only when negative/nonfinite/bool rates visibly refused before exponentiation",
+    "literal_coherence_negative_control": "PASS only when diag(1/2), offdiag(1-beta) rejected as not PSD",
+    "normalized_coherence": "PASS if C=2|rho01|=1-beta with offdiag=(1-beta)/2 is PSD; no plateau generation claim",
+    "root_code": "PASS negative control if phase-preserving amplitude square-root+normalization gives ensemble-dependent output for the same density; classical square-root/square decode remains exact",
+    "truncation_control": "record [a,a_dagger]!=I; do not silently transfer full bosonic CCR"
+  },
+  "root_control": {
+    "ensemble": "one half |0><0| plus one half |+><+| versus its spectral decomposition",
+    "map": "INPUT proposed quantum interpretation: psi_j -> phase(psi_j)*sqrt(abs(psi_j)), then normalize; source gives real sign/root code",
+    "claim_tested": "No single linear CPTP map can implement this normalized pure-state transformation for all inputs"
+  },
+  "stop_rule": "Record failures without parameter/tolerance adjustment; any repair gets a separately named addendum and new run",
+  "no_claims": [
+    "physical device realized",
+    "information transport speed",
+    "fidelity target",
+    "5 sigma",
+    "4D field net",
+    "TGL confirmation"
+  ]
+}

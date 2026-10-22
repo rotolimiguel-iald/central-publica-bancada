@@ -1,0 +1,22 @@
+# REVISÃO ADVERSARIAL — ORDEM 013-bis · lente: EXECUTABILIDADE PELA BANCADA E CONTRATO DO TÚNEL
+Revisor: subagente da gerência · 22/09/2026 ~12:10 -03 · só leitura na pasta da bancada · nada tocado fora desta pasta.
+Arquivo revisado: scratchpad\ordem013\bis\ORDEM_013BIS_fechamento_e_ampliacao_dos_eventos_ate_5sigma.md (65.268 B, sha16 dbc5e7f2c2bc5698, 287 linhas). Prompt: PROMPT_CODEX_ORDEM_013BIS.txt (5.721 B, sha16 d665b3b0268e470c).
+
+## 0. Resumo
+Nenhum BLOQUEANTE. A ordem é executável no essencial; 14 achados IMPORTANTES são de contrato e de executabilidade: PIDs que não são PIDs (l.41); o padrão «encerrar os três processos» sem ganho para a Parte A e sem ratificação (F0); a convenção de deformação nomeia um modelo (pSEOBNRv4HM_PA) que NÃO é o dos posteriores publicados (pSEOBNRv5PHM / pSEOBNRv4HM) e o piloto compara famílias diferentes sem dizer (E2.6/E3.1); «nenhum ambiente tem tudo» é falso para o piloto (/opt/lal_env tem tudo o que E3.1 pede); E4.4 sem marco; E3.1 com «PARA» dentro de MB3; E2.5 pede 1.500 injeções que §5 proíbe antes de E3.2; E7 «numpy puro» lendo .h5; ESTADO_AUDITADO inclui arquivo vivo sem regra de divergência; nomes «v2 ao lado» não fixados; 3.250 vs 2.100×1,578; 31 vs 30 notas; RD.tar.gz/QNMRF.tar.gz não estão em disco; «fora de cache\» ambíguo (os 53 estão em `cache\` aninhadas).
+
+## 1. Medições feitas (só leitura; comandos leves)
+- §7: 31/31 caminhos existem; bytes e sha16 conferem por script (inclui ORDEM 013 `d4440c6a28eaad4b`, um.py `d9f5bd5dffc3333d`, TUNEL_PROTOCOLO `4234902dc6f5e03c`).
+- WSL Ubuntu-24.04 (12:04 -03): `/opt/pycbc_env` lalsimulation 6.2.1, DTau220/DTau440/DOmega220 True, pSEOBNRv4HM_PA True, pycbc 2.11.0, sem bilby; `/opt/lal_env` lalsimulation 6.2.1 com pSEOBNRv4HM_PA True, bilby 2.8.2, dynesty 3.1.0, gwpy, h5py, lalinference; sem pycbc/pesummary. `bilby.gw.source` aceita `lal_waveform_dictionary`. Forma TD pSEOBNRv4HM_PA (60 M☉, dtau220=−0,02) gerada em 0,08 s; segunda chamada 0,06 s. Sem pPhenomX (só IMRPhenomXAS/XHM/XO4a…).
+- `ps` no WSL: grupos run_real_phase_importance (5 proc., pai PID 1261), run_continuous_source_curves XPHM (13 proc., pai 1449), SEOBNRv4HM (3 proc., pai 1413); audit_phase_source ausente; RAM 82/125 GB usada. Os números 34860/43367/19681/58182 são `session_id` em `STATUS_ORDEM_013.json.active_processes`, não PIDs.
+- `cache/public/17018009/archive_index.json`: `pseobnr_injection/` com 4 membros (README.md, kde_data_injection_no44.dat, kde_data_injection_44.dat, posterior_samples.h5); NÃO extraído; tarball 1.671.496.586 B em disco. `C4_SCHEMA.json`: approximant `pSEOBNRv5PHM` (695 ocorrências); `C4_GWTC3_SCHEMA.json`: `pSEOBNRv4HM_tgr_20200402_…`.
+- `cache/public/21454847`: só `pSEOB.tar.gz` (711 MB); `record.json` lista pSEOB, FTI_TIGER, QNMRF, POL, README, RD, RES. Licenças nos record.json: 17018009 `mit-license`; 21454847 `cc-by-4.0`; 17461225 `cc-by-4.0`.
+- 53 arquivos > 25 MiB fora de `ORDEM_013_RINGDOWN\cache\` (2,71 GB): todos em `C7_GWTC3_REPRODUCTION\`, `C7_INDEPENDENT\`, `C7_INJECTION_REPRODUCTION\`, `C7_POSTERIOR_REPRODUCTION\` dentro de subpastas `…\cache\…\ORDEM_013_RINGDOWN\cache\…`; 49 são duplicatas byte a byte de `cache\public`, 4 são cópias de strain de `cache\gwosc`.
+- As 4 pastas mkdtemp existem em `cache\`; `refeito\` existe; `bis\` não existe (a bancada cria); `C5_RECOLORED_NOISE.json` existe; `C7_INDEPENDENT/reproduce_c6.py` e `verify_delivery.py` (nas extrações em cache) existem; arXiv 2607.19293 está em `cache/MANIFESTO_DOWNLOADS.json`.
+- DO_CHATGPT: 31 `ENTREGA_013_*.md`, dos quais `ENTREGA_013_ESPONTANEA_…` tem mtime 05/09 23:51 (não responde à ordem, ORDEM 013 §5) → 30 respondem. 23 notas `_C5_`.
+- `MEDICAO_E.json` date_utc 2026-09-22T14:16:14Z (= 11:16 -03); STATUS date_utc 13:04Z (= 10:04 -03, como na l.4).
+- `FONTES_DA_CASA.json`: 31 fontes, campos {caminho, bytes, sha16} apenas; nenhuma mudou.
+- Insumos montados: aud_1..6 (6 frentes), scripts\ {C0C1C2, C3_C7_codigo_pacote, c4, c5, c6, protocolo}, medicao_da_ampliacao\ {A,B,C,D,E,S,CRITICO_completude, SINTESE.md, CRITICO.md}, ESTADO_AUDITADO.json (34 artefatos, inclui STATUS_ORDEM_013.json), README, PROMPT, RELATORIO, VERBATIM. `gwosc_catalogs_raw.json` tem GWTC-4.0/4.1/5.0 → E0.3 contável.
+- Aritmética: limiar 25,0 (½δ₀+½χ²₁, p=2,87e-7) e 1,578 = (5+1,28)²/25 conferem; 212×1,578 = 335; 2.062×1,578 = 3.253; 2.100×1,578 = 3.314.
+
+## 2. Achados (ver JSON estruturado; ids A1–A23)

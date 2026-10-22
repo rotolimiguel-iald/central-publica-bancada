@@ -1,0 +1,212 @@
+{
+  "status": "PASS_EXACT_IDENTITIES_WITH_SCOPE",
+  "started_utc": "2026-10-17T17:43:37.215729+00:00",
+  "ended_utc": "2026-10-17T17:43:38.173474+00:00",
+  "seconds": 0.9577355000074022,
+  "python": "3.14.3",
+  "sympy": "1.14.0",
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\derive_cutoff_r59.py",
+    "sha256": "811a15ab4544bcd82759d3c7e7a8ac2c389b121b2bddc6ca833f91f787f4600c"
+  },
+  "checks": [
+    {
+      "name": "general_geometric_derivative",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "general_occupation_error",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "general_pair_error",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N0_vacuum",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N1_hardcore_occupation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N1_hardcore_pair_squared",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N1_matrix_CCR_boundary",
+      "pass": true
+    },
+    {
+      "name": "N1_normalization",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N1_occupation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N1_pair",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N1_quadrature_boundary",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N1_commutator_expectation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N2_matrix_CCR_boundary",
+      "pass": true
+    },
+    {
+      "name": "N2_normalization",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N2_occupation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N2_pair",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N2_quadrature_boundary",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N2_commutator_expectation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N3_matrix_CCR_boundary",
+      "pass": true
+    },
+    {
+      "name": "N3_normalization",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N3_occupation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N3_pair",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N3_quadrature_boundary",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N3_commutator_expectation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N4_matrix_CCR_boundary",
+      "pass": true
+    },
+    {
+      "name": "N4_normalization",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N4_occupation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N4_pair",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N4_quadrature_boundary",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N4_commutator_expectation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N5_matrix_CCR_boundary",
+      "pass": true
+    },
+    {
+      "name": "N5_normalization",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N5_occupation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N5_pair",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N5_quadrature_boundary",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "N5_commutator_expectation",
+      "pass": true,
+      "residual": "0"
+    },
+    {
+      "name": "normalized_projection_distance",
+      "pass": true,
+      "residual": "0"
+    }
+  ],
+  "negative_controls": {
+    "wrong_CCR_identity_refused_N1": true,
+    "hardcore_not_bosonic_saturation": true,
+    "boundary_cannot_be_omitted": true,
+    "normalized_cutoff_state_not_exact_projective_state": true,
+    "q1_not_normalizable": true
+  },
+  "exact_identity_count": 37,
+  "formulas": {
+    "normalizer_squared": "(1-q)/(1-q^(N+1))",
+    "n_N": "(N*q**(N + 2) + q - q**(N + 1)*(N + 1))/((1 - q)*(1 - q**(N + 1)))",
+    "m_N": "exp(i phi) n_N / sqrt(q)",
+    "occupation_error": "q**(N + 1)*(N + 1)/(1 - q**(N + 1))",
+    "fidelity": "1-q^(N+1)",
+    "vector_distance_squared": "2*(1-sqrt(1-q^(N+1)))",
+    "CCR_expectation": "1-(N+1)*(1-q)*q^N/(1-q^(N+1))"
+  },
+  "proof_boundary": "Symbolic checks verify identities; convergence for each fixed q<1 is established in CUTOFF_DERIVATION_R59.txt by geometric tails. No Lean build or experimental verification."
+}

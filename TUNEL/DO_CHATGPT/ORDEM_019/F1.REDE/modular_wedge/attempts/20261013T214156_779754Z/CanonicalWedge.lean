@@ -1,0 +1,132 @@
+import VectorWedge
+import SpectralConjugation
+import FiberConjugation
+set_option autoImplicit false
+set_option maxHeartbeats 600000
+noncomputable section
+open MeasureTheory Filter
+namespace F1Rede.Wedge
+open ChatgptAudit.Continuous049 ChatgptAudit.Continuous050
+variable {H : Type} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+variable (jc : H ≃ₛₗᵢ[starRingEnd ℂ] H) (hJ : Function.Involutive jc)
+theorem JA_eq_BJ (c : ℝ) (f : VH H) :
+    SpectralConjugation.J jc hJ (A c f) = B c (SpectralConjugation.J jc hJ f) := by
+  apply Lp.ext
+  have hr := (Measure.measurePreserving_neg (volume : Measure ℝ)).quasiMeasurePreserving.ae (A_ae c f)
+  filter_upwards [SpectralConjugation.J_ae jc hJ (A c f), B_ae c (SpectralConjugation.J jc hJ f),
+    SpectralConjugation.J_ae jc hJ f,hr] with x hj hb hf ha
+  rw [hj,hb,hf,ha,spectral_weight_reflection,map_smulₛₗ]
+  simp
+theorem JB_eq_AJ (c : ℝ) (f : VH H) :
+    SpectralConjugation.J jc hJ (B c f) = A c (SpectralConjugation.J jc hJ f) := by
+  have h := JA_eq_BJ jc hJ c (SpectralConjugation.J jc hJ f)
+  apply (SpectralConjugation.J jc hJ).injective
+  simpa only [SpectralConjugation.J_involutive jc hJ f,
+    SpectralConjugation.J_involutive jc hJ (B c f)] using h.symm
+end F1Rede.Wedge
+
+namespace F1Rede.CanonicalWedge
+open TGLExt.ImportedSQ AuditF13v31 F1Rede.Canonical F1Rede.FiberConjugation
+open ChatgptAudit.Continuous049 ChatgptAudit.Continuous050
+abbrev RH := RapidityHilbert
+abbrev Phi := canonicalPartialFourier
+def Js : RH ≃ₛₗᵢ[starRingEnd ℂ] RH := SpectralConjugation.J transverseJ transverseJ_involutive
+theorem Js_involutive : Function.Involutive Js :=
+  SpectralConjugation.J_involutive transverseJ transverseJ_involutive
+/-- An actual conjugation on H1, transported through the fixed partial Fourier transform. -/
+def JW : H1 ≃ₛₗᵢ[starRingEnd ℂ] H1 := (Phi.trans Js).trans Phi.symm
+theorem JW_apply (f : H1) : JW f = Phi.symm (Js (Phi f)) := rfl
+theorem JW_involutive : Function.Involutive JW := by
+  intro f
+  simp only [JW_apply, LinearIsometryEquiv.apply_symm_apply, Js_involutive,
+    LinearIsometryEquiv.symm_apply_apply]
+
+def pull : (RH →L[ℂ] RH) ≃⋆ₐ[ℂ] (H1 →L[ℂ] H1) := Phi.symm.conjStarAlgEquiv
+theorem pull_apply (L : RH →L[ℂ] RH) (f : H1) : pull L f = Phi.symm (L (Phi f)) := rfl
+theorem Phi_pull (L : RH →L[ℂ] RH) (f : H1) : Phi (pull L f) = L (Phi f) := by
+  rw [pull_apply,LinearIsometryEquiv.apply_symm_apply]
+def WA (c : ℝ) : H1 →L[ℂ] H1 := pull (Wedge.A (H := TransverseFiber) c)
+def WB (c : ℝ) : H1 →L[ℂ] H1 := pull (Wedge.B (H := TransverseFiber) c)
+theorem WA_injective (c : ℝ) : Function.Injective (WA c) := by
+  intro f g h
+  apply Phi.injective
+  apply Wedge.A_injective (H := TransverseFiber) c
+  simpa only [WA,Phi_pull] using congrArg Phi h
+theorem WA_selfadjoint (c : ℝ) : IsSelfAdjoint (WA c) := by
+  change star (pull (Wedge.A (H := TransverseFiber) c)) = _
+  rw [← map_star, (Wedge.A_selfadjoint (H := TransverseFiber) c).star_eq]
+theorem WB_selfadjoint (c : ℝ) : IsSelfAdjoint (WB c) := by
+  change star (pull (Wedge.B (H := TransverseFiber) c)) = _
+  rw [← map_star, (Wedge.B_selfadjoint (H := TransverseFiber) c).star_eq]
+theorem WAB_commute (c : ℝ) : WA c * WB c = WB c * WA c := by
+  change pull (Wedge.A c) * pull (Wedge.B c) = pull (Wedge.B c) * pull (Wedge.A c)
+  rw [← map_mul,← map_mul,Wedge.AB_commute]
+theorem WAB_square_sum (c : ℝ) : WA c * WA c + WB c * WB c = 1 := by
+  change pull (Wedge.A c) * pull (Wedge.A c) + pull (Wedge.B c) * pull (Wedge.B c) = 1
+  rw [← map_mul,← map_mul,← map_add,Wedge.AB_square_sum,map_one]
+theorem WAB_positive (c : ℝ) (f : H1) : 0 ≤ (inner ℂ (WA c f) (WB c f)).re := by
+  change 0 ≤ (inner ℂ (pull (Wedge.A c) f) (pull (Wedge.B c) f)).re
+  rw [pull_apply,pull_apply,Phi.symm.inner_map_map]
+  exact Wedge.AB_positive c (Phi f)
+theorem JW_WB (c : ℝ) (f : H1) : JW (WB c f) = WA c (JW f) := by
+  apply Phi.injective
+  simp only [JW_apply,WB,WA,Phi_pull,LinearIsometryEquiv.apply_symm_apply]
+  exact Wedge.JB_eq_AJ transverseJ transverseJ_involutive c (Phi f)
+
+/-- Parameterized positive self-adjoint multiplier, represented on the unchanged H1. -/
+def WT (c : ℝ) : H1 →ₗ.[ℂ] H1 := boundedGraphOperator (WA c) (WB c) (WA_injective c)
+theorem WT_selfadjoint (c : ℝ) : IsSelfAdjoint (WT c) :=
+  bounded_graph_selfadjoint (WA c) (WB c) (WA_injective c) (WA_selfadjoint c) (WB_selfadjoint c)
+    (WAB_commute c) (WAB_square_sum c)
+theorem WT_positive (c : ℝ) (f : (WT c).domain) : 0 ≤ (inner ℂ (f:H1) (WT c f)).re :=
+  bounded_graph_positive (WA c) (WB c) (WA_injective c) (WAB_positive c) f
+theorem WT_dense (c : ℝ) : Dense ((WT c).domain : Set H1) :=
+  bounded_graph_domain_dense (WA c) (WB c) (WA_injective c) (WA_selfadjoint c)
+theorem WT_graph (c : ℝ) (f g : H1) : (f,g) ∈ (WT c).graph ↔
+    (Phi f,Phi g) ∈ (Wedge.T c).graph := by
+  change (f,g) ∈ (boundedGraphOperator (WA c) (WB c) (WA_injective c)).graph ↔ _
+  rw [bounded_graph_equation_iff (WA c) (WB c) (WA_injective c) (WAB_commute c) (WAB_square_sum c)]
+  change WB c f = WA c g ↔ (Phi f,Phi g) ∈
+    (boundedGraphOperator (Wedge.A c) (Wedge.B c) (Wedge.A_injective c)).graph
+  rw [bounded_graph_equation_iff (Wedge.A (H := TransverseFiber) c) (Wedge.B c)
+    (Wedge.A_injective c) (Wedge.AB_commute c) (Wedge.AB_square_sum c)]
+  constructor
+  · intro h
+    simpa only [WB,WA,Phi_pull] using congrArg Phi h
+  · intro h
+    apply Phi.injective
+    simpa only [WB,WA,Phi_pull] using h
+
+def rootParameter : ℝ := -(2 * Real.pi ^ 2)
+def TW : H1 →ₗ.[ℂ] H1 := WT rootParameter
+/-- Positive half-modular multiplier exp(2*pi^2*xi), including its full graph/domain. -/
+theorem TW_multiplier (f g : H1) : (f,g) ∈ TW.graph ↔
+    (Phi g : ℝ → TransverseFiber) =ᵐ[volume]
+      fun ξ => (Real.exp (2 * Real.pi ^ 2 * ξ) : ℂ) • Phi f ξ := by
+  rw [TW,WT_graph,Wedge.T_graph]
+  simp only [rootParameter,neg_neg]
+theorem TW_positive (f : TW.domain) : 0 ≤ (inner ℂ (f:H1) (TW f)).re := WT_positive rootParameter f
+theorem TW_selfadjoint : IsSelfAdjoint TW := WT_selfadjoint rootParameter
+
+theorem SW_closed : IsClosed (Set.range (fun x : TW.domain => ((x:H1),SW TW JW x))) :=
+  bounded_graph_tomita_closed (WA rootParameter) (WB rootParameter) (WA_injective rootParameter)
+    (WAB_commute rootParameter) (WAB_square_sum rootParameter) JW JW_involutive
+theorem SW_maps (x : TW.domain) : SW TW JW x ∈ TW.domain :=
+  bounded_graph_tomita_maps_domain (WA rootParameter) (WB rootParameter) (WA_injective rootParameter)
+    JW (JW_WB rootParameter) x
+theorem SW_involutive (x : TW.domain) : SW TW JW ⟨SW TW JW x, SW_maps x⟩ = (x:H1) :=
+  bounded_graph_tomita_involutive (WA rootParameter) (WB rootParameter) (WA_injective rootParameter)
+    JW JW_involutive (JW_WB rootParameter) x
+/-- A concrete standard real subspace on canonical H1, built as Fix(JW*TW). -/
+def KWR : StandardSubspace H1 := closedAntilinearStandardSubspace TW.domain (SW TW JW)
+  SW_closed SW_maps SW_involutive (WT_dense rootParameter)
+theorem KWR_mem (f : H1) : f ∈ KWR.toClosedSubmodule ↔ ∃ hf : f ∈ TW.domain, SW TW JW ⟨f,hf⟩ = f := Iff.rfl
+
+#print axioms JW
+#print axioms JW_involutive
+#print axioms TW_selfadjoint
+#print axioms TW_positive
+#print axioms TW_multiplier
+#print axioms SW_involutive
+#print axioms KWR
+end F1Rede.CanonicalWedge

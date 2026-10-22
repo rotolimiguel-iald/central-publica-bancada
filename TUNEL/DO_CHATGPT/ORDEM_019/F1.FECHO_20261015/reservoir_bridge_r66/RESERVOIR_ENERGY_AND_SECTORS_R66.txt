@@ -1,0 +1,20 @@
+R66 — complemento da realização: energia, setor simétrico e portas
+Autor codex-gerente-tgl, 18/10/2026, reivindicação956. DERIVED sob as hipóteses declaradas.
+
+1. O banho construído é um recurso engenheirado, com preparação e chaveamento explícitos.
+A ancila de seis níveis representa cinco canais de ruído ortogonais. A e B usam O MESMO nível/canal número5, com L5=sqrt(lambda)(A+B). Ortogonalidade entre os cinco canais não significa independência entre A e B.
+A preparação coerente do canalOH produz h_d=Omega sigma_x no limite; não é o bombeamento óptico da porta de entrada. No referencial deslocado desse canal, as flutuações são de vácuo e o hamiltoniano do sistema contém h_d. As portas ópticas continuam de vácuo neste modelo. Assim o instrumentoR64 sobre essas portas é reutilizável no mesmo corte e com os mesmos coeficientes. A média coerente do campoOH não pode ser omitida caso se meça sua própria saída.
+
+2. Quem fornece energia e fase não é apagado pelo nome 'reservatório'.
+Para o diagnóstico livreR65, [h_bare,A]=delta A, [h_bare,B]=-delta B, delta=omega_c-omega_OH. Se a transição da ancila comum |5><0| tiver frequência nu, o acoplamento G5=(A+B)⊗|5><0|−(A†+B†)⊗|0><5| só comuta com h_bare+h_anc se delta+nu=0 e -delta+nu=0 simultaneamente. Fora de delta=0, uma única transição estacionária de ancila não conserva essa energia livre mantendo ambas as parcelas. Este é diagnóstico com h_bare, não uma prova de impossibilidade para o hamiltoniano vestido.
+No modelo de colisões, preparar ancila, manter sua fase e chavear interação são recursos externos INPUT. Para qualquer Hamiltoniano livre total F, numa colisão com estado inicial Xi e unitáriaU, Delta<E_F>=Tr[Xi(U† F U-F)]. Essa mudança é contabilizada como trabalho de chaveamento/controle junto com a energia carregada na preparação das ancilas; não há afirmação de banho térmico passivo ou ciclo de custo zero. Para um protocolo unitário com F+V(t), o balanço total envolve integral Tr[rho(t) dV(t)/dt] e os custos de preparação/reposição. Não se atribui automaticamente tudo isso ao termoOmega doOH.
+Portanto há uma realização matemática explícita do gerador completo, sem retirar os cruzados por uma secularização injustificada. A realização microscópica e calibração no dispositivo nomeado continuam uma identificação física adicional, sem impedir a construção do semigrupo.
+
+3. Os vetores mistos realmente pertencem aos setores existentes.
+O setorLean existente é o fecho do span das potências diagonais. Para n fixo,
+(fi+z fo)^⊗n = Σ_(k=0)^n binom(n,k) z^k Sym(fi^⊗(n-k)⊗fo^⊗k).
+Avaliando em n+1 números complexos distintos, a matrizVandermonde é invertível; cada coeficiente misto é combinação linear finita das potências diagonais. Logo os vetores de ocupação usados emBOSONIC_CONTINUUM_R66 pertencem ao setor definido pela casa, não a um espaço simétrico alheio meramente homônimo. Sua normalização/ortogonalidade vem da contagem de permutações ali dada. Este argumento não declara uma nova compilaçãoLean.
+
+4. O que esta ponte resolve e o que não transporta.
+Ela fornece colisõesCPTP convergindo ao mesmo geradorfinito, bombeamento como entrada coerente, e uma construção conservativa do geradorbosônico de dois modos maisOH por limites de cortes totais e perturbação limitada. A inclusão emFock(H1) agora entrelaça a dinâmica construída sobre o subespaço de modos, além da cinemática0/1 anterior.
+Nenhuma identificação é feita entre o Fock temporal do ruído, o Fock espacialH1 e o gerador modular. Faltam a localização dos modos/acoplamentos na rede relativística e a compatibilidade do relógio de interação com essa representação. Conservam-se as realizações anteriores deFock/modular/Takesaki/Maxwell; não se reabrem essas construções como ausentes.

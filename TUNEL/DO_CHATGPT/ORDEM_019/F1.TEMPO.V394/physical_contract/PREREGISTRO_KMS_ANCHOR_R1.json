@@ -1,0 +1,20 @@
+{
+  "unit": "F1.TEMPO.V394",
+  "parent_preregistration": "PREREGISTRO_PHYSICAL_R1.json",
+  "purpose": "Instanciar a raiz positiva por K_rho=-log rho do Gibbs finito, com relógio especificado; não pelo gerador modular -log Delta.",
+  "reference": {"Omega_rad_s": 1.0, "kappa_s_inv": 2.0},
+  "additional_kappa_s_inv": [1.0, 2.0, 4.0],
+  "clock_rescalings": [0.5, 1.0, 2.0, 10.0],
+  "relative_tolerance": 1e-10,
+  "assertions": [
+    "Hpos=(hbar/P)(-log rho) has positive eigenvalues, and Eref>V0.",
+    "Physical root rate equals modular density-root rate divided by P.",
+    "The derived offset, Omega and gamma scale by lambda; P and echo_dt scale by 1/lambda.",
+    "K_rho eigenvalues and Gibbs weights are invariant under the joint clock rescaling.",
+    "A positive density surprise is not a positive -log Delta: the latter has opposite nonzero eigenvalues on off-diagonal matrix units.",
+    "Lost floating-point resolution of the strict Gibbs energy offset is refused visibly."
+  ],
+  "statute": "INPUT reference and Gibbs identification; DERIVED identities; numerical verification to follow",
+  "no_observed_data": true,
+  "no_production_or_original_execution": true
+}

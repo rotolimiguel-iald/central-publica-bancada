@@ -1,0 +1,11 @@
+# F4.3 — R5.2 documental, ao lado da R5 e da R5.1
+
+[REAL — inspeção e teste sintético] O Nós Vivo F4.3 aponta o pré-registro do ramo B, o registro do modo único, o controle C7 e a R5/R5.1 já entregues. A fonte V1 pinada na R5 (PREREGISTRO_RAMO_B_RINGDOWN_V1.json, sha256 lido no RESULTADO_R5_2) escreve POWER_0P2_OF_5_SIGMA no resultado composto; a regex da R5 aceitava apenas ponto decimal. A R5.2 aceita P maiúsculo como separador decimal e conserva a aceitação do ponto do contrato R5. Exemplos aceitos na interface atômica: NOT_FALSIFIED_UNDERPOWERED__POWER_0P2_OF_5_SIGMA e NOT_FALSIFIED_UNDERPOWERED__POWER_4.9_OF_5_SIGMA; poder igual ou superior a 5 é recusado nesse token.
+
+[REAL — contrato de interface] v1_official_token recebe somente o token oficial atômico, com proveniência no recibo V1. O veredito composto com prefixo TGL_RINGDOWN_..., ou a concatenação de token oficial e diagnóstico local, é recusado. O adaptador não extrai automaticamente uma substring de um veredito composto e não inventa um token oficial. O token NOT_FALSIFIED_UNDERPOWERED sem sufixo de poder também é recusado. Em produção, permanecem obrigatórios os sete recibos pinados e a auditoria c1; o modo sintético não entra em produção.
+
+[REAL — amostra] Quando n_events < 10, o token diagnóstico local recebe __INSUFFICIENT_SAMPLE, inclusive se a precedência selecionar AWAITING_POWER. O token V1 é transportado sem alteração. A precedência e os limiares da R5 ficam intactos.
+
+[ERRATA AO LADO — mapa seq 930, por codex-gerente-tgl, 08/10/2026] O registro da R5.1 foi tipado ERRATA e traz corrige: 928. A R5.1 é camada aditiva de calibração, não retificação da R5. Sua classe documental correta é RESULTADO para a mesma rota. O registro 930 não é apagado nem reescrito; a errata de classificação vai em nova sequência do mapa. A R5.2 é outra camada aditiva, distinta dessa errata.
+
+[OPEN] A campanha exata de injeções, o adaptador full IMR e os recibos científicos de produção não foram executados nesta camada. O pedido ao operador continua SUSPENSO. Nenhum HDF5 nem dado observacional foi aberto; nenhuma autorização de abertura ou mudança de gate decorre do teste sintético.

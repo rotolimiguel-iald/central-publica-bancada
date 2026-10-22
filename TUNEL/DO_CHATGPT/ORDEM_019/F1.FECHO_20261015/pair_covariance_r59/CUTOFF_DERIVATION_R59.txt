@@ -1,0 +1,67 @@
+R59 — CONVERGÊNCIA DO MESMO PAR BOSÔNICO POR CORTES DE OCUPAÇÃO
+codex-gerente-tgl, 17/10/2026. Componente de R5; não é aceite integral de R5.
+
+Fonte: graviton_paper.tex, estado S_ij(r,phi)|0>, linhas252–260, na convenção sem fator1/2 no gerador. Os hashes constam dos recibos. Denotamos por rho>=0 o coeficiente real do gerador para evitar trocar r e r/2 entre fontes. t=tanh(rho), q=t². Nenhuma identificação de rho, t, q ou phi com betaTGL é introduzida.
+
+1. Mesmo objeto em todas as aproximações [DERIVED]
+
+Na Fock de DOIS modos bosônicos ortogonais, com a|n>=sqrt(n)|n-1>,
+
+ psi = sqrt(1-q) sum_{n>=0} t^n exp(i n phi)|n,n>,  0<q<1.
+
+A norma é1 pela série geométrica. A relação com o operador de squeezing da fonte é desenvolvida no componente squeezing/ da R59. Seja P_N a projeção sobre as ocupações0..N nos dois modos. Defina
+
+ psi_N = P_N psi / ||P_N psi||
+       = sqrt((1-q)/(1-q^(N+1))) sum_{n=0}^N t^n exp(i n phi)|n,n>.
+
+Não foram escolhidas isometrias entre espaços sem relação: todos os vetores pertencem à mesma Fock e P_N é a projeção espectral de ocupação dos mesmos modos. Em q=0 o estado é o vácuo e as fórmulas com divisão por t devem ser substituídas por seu limite, m=0. q=1 não define vetor normalizável desta família.
+
+2. Convergência explícita [DERIVED]
+
+ ||P_N psi||² = 1-q^(N+1),
+ |<psi,psi_N>|² = 1-q^(N+1),
+ ||psi-psi_N||² = 2(1-sqrt(1-q^(N+1))).
+
+Logo psi_N -> psi em norma, para cada q<1 fixo. Isso também dá convergência em norma de traço das densidades puras, com distância |||psi><psi|-|psi_N><psi_N|||_1=2 q^((N+1)/2), pela diagonalização no plano dos dois vetores. A convergência não é uniforme quando q pode se aproximar arbitrariamente de1.
+
+Para qualquer potência finita k de número, as caudas são controladas por sum_{n>N} n^(2k) q^n. A razão de termos consecutivos converge a q<1; a série converge. Como o fator de renormalização tende a1, psi_N -> psi também na norma de grafo de cada potência do número. Isso justifica os momentos polinomiais finitos considerados. Não afirma que psi pertença ao regularFockDomain definido na R8 como uma classe concreta diferente de vetores, nem fornece automaticamente um domínio para o gerador GKLS não limitado.
+
+3. Dois momentos e seus erros exatos [DERIVED, identidades conferidas por SymPy]
+
+ n_N = <psi_N,a†a psi_N> = <psi_N,b†b psi_N>
+     = [q-(N+1)q^(N+1)+Nq^(N+2)]/[(1-q)(1-q^(N+1))],
+ m_N = <psi_N,ab psi_N> = exp(i phi) n_N/sqrt(q).
+
+No limite:
+ n = q/(1-q)=sinh²rho,
+ m = exp(i phi) sqrt(q)/(1-q)=exp(i phi)sinh(rho)cosh(rho).
+
+Os erros são explícitos:
+ n-n_N = (N+1)q^(N+1)/(1-q^(N+1)),
+ m-m_N = exp(i phi)(N+1)q^(N+1/2)/(1-q^(N+1)).
+
+Como (N+1)q^N ->0, ambos convergem. Os momentos de uma ponta <a>,<b> são zero em todos os cortes e no limite, enquanto m_N é não nulo para N>=1 e0<q<1. Portanto a fase phi pode sobreviver no par quando a leitura unilateral é zero. Isto é propriedade da família escrita, não prova de que o aparelho prepara essa família.
+
+4. O defeito de borda do operador truncado importa [DERIVED]
+
+Se a_N=P_N a P_N no fator de dimensão N+1, então
+
+ [a_N,a_N†]=I-(N+1)|N><N|.
+
+Não é a CCR bosônica exata em dimensão finita; o traço de qualquer comutador matricial é zero. A ocupação e m_N acima coincidem usando os operadores completos nos vetores embutidos ou a_N,b_N. Mas a quadratura quadrática NÃO coincide:
+
+ <X_a²>_full = n_N+1/2,
+ <X_a,N²>_cut = n_N+1/2 - (N+1)p_N/2,
+ p_N=(1-q)q^N/(1-q^(N+1)), X=(a+a†)/sqrt2.
+
+O erro de borda desaparece no limite N->infinito com q<1 fixo. Em N=1, o modelo de dois níveis tem n_1=q/(1+q), |m_1|²=n_1(1-n_1), enquanto a família bosônica infinita tem |m|²=n(n+1). Preservar a fase não torna iguais as duas covariâncias. Para os dois níveis, copiar a incerteza/CCR do vácuo bosônico seria um erro.
+
+Os estados psi_N normalizados tampouco são uma família exatamente consistente por simples projeção sem renormalizar. A relação correta é P_M psi_N proporcional a psi_M para M<N; o fator está dado pelas probabilidades das projeções. A prova desta nota é convergência no mesmo espaço, não consistência exata de marginais de uma rede espacial.
+
+5. Relação com o trabalho anterior e fronteira da conclusão
+
+[REAL — objeto de teste definido] O script derive_cutoff_r59.py confere as identidades gerais de ocupação/erro e matrizes truncadas para N=1..5, com controles negativos de CCR, saturação, borda e consistência exata. O recibo traz versão, tempo e resultado. Essas verificações algébricas apoiam a derivação escrita; não são compilação Lean.
+
+[OPEN] Esta convergência resolve o corte de ocupação do mesmo par escolhido. Não resolve refinamento espacial de uma rede, seleção dos modos de cavidade em circularSmear, convergência dos geradores GKLS, identificação de massa/helicidade, lei rho_epsilon(beta), nem entrelaçamento modular/Poincare. São obrigações diferentes. A realização em dois modos Maxwell depende de fornecer seus perfis ortonormais; sua escolha física não é consequência de poder escrever uma base ortonormal abstrata.
+
+[CONTINUIDADE] Reaproveitar os pacotes espaciais já construídos na R57 e esta convergência de ocupação como componentes separados. Para compô-los, exigir identificação dos modos/estado e controle conjunto de localização e dinâmica. Nenhum estado de Einstein–sigma é identificado com Maxwell por este cálculo.

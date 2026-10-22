@@ -1,0 +1,454 @@
+{
+  "schema": "r53-physical-clock-source-audit/v1",
+  "created_utc": "2026-10-16T21:38:51.911017+00:00",
+  "unit": "F1.FECHO_20261015",
+  "task_id": "R4",
+  "handle": "r53-physical-clock-source",
+  "actor": "codex-r53-physical-clock-source",
+  "status": "DECLARADO — relatório candidato de auditoria documental; conclusões algébricas DERIVED, sem nova prova Lean ou teste numérico",
+  "verdict": "SOURCE_AUDIT_COMPLETE_WITH_OPEN_INPUTS",
+  "requirement_satisfied": false,
+  "review_complete": true,
+  "mission": {
+    "reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "start_revision": 419,
+    "return_revision": 419,
+    "projection_sha256": "3bb5f2cf8ba10ade2ba9b75443b4404fa3480438b8a00bca4b4780ea730a3da4",
+    "return_receipt": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R53_CLOCK_SOURCE_RETURN_20261016T213845_309900Z_904feedb_RECEIPT.json",
+    "criterion": "Ligacao fisica do espectro e relogio. Estado/objeto fisico nomeado, unidades, V0/Eref/kappa e ponte ao mesmo sistema; dominios explicitos.",
+    "owner_transition_performed": false,
+    "R7_R8_reopened": false
+  },
+  "scope": {
+    "new_builds": 0,
+    "new_numerical_experiments": 0,
+    "provider_calls": 0,
+    "production_changes": false,
+    "global_memory_changes": false,
+    "mission_changes": false,
+    "gate_changes": false,
+    "device_selected": false,
+    "operator_identity_answer": "pendente no handoff; nenhum aparelho escolhido por este relatório"
+  },
+  "source_integrity": {
+    "inventory_source_entries": 21,
+    "matched": 21,
+    "checks": [
+      {
+        "name": "custo",
+        "matches": true
+      },
+      {
+        "name": "echo",
+        "matches": true
+      },
+      {
+        "name": "ponte",
+        "matches": true
+      },
+      {
+        "name": "um_v393",
+        "matches": true
+      },
+      {
+        "name": "calibration",
+        "matches": true
+      },
+      {
+        "name": "h2_definitions",
+        "matches": true
+      },
+      {
+        "name": "h2_kms",
+        "matches": true
+      },
+      {
+        "name": "polar_period",
+        "matches": true
+      },
+      {
+        "name": "finite_tomita",
+        "matches": true
+      },
+      {
+        "name": "supercondutor",
+        "matches": true
+      },
+      {
+        "name": "device_prereg",
+        "matches": true
+      },
+      {
+        "name": "CONTRATO_FISICO_DIMENSIONAL_R1.json",
+        "matches": true
+      },
+      {
+        "name": "RESULTADO_PHYSICAL_R1.json",
+        "matches": true
+      },
+      {
+        "name": "RESULTADO_KMS_ANCHOR_R2.json",
+        "matches": true
+      },
+      {
+        "name": "physical_parameters.py",
+        "matches": true
+      },
+      {
+        "name": "kms_root_anchor_r2.py",
+        "matches": true
+      },
+      {
+        "name": "finite_device/RELATORIO_DEVICE_R1.md",
+        "matches": true
+      },
+      {
+        "name": "finite_device/PREREGISTRO_DEVICE_R1.json",
+        "matches": true
+      },
+      {
+        "name": "finite_device/run_finite_device.py",
+        "matches": true
+      },
+      {
+        "name": "CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt",
+        "matches": true
+      },
+      {
+        "name": "PONTE_FREQUENCIA_GRAVITON_R9.txt",
+        "matches": true
+      }
+    ],
+    "meaning": "Pinos conferidos dos bytes atuais. A leitura semântica foi focal nas âncoras abaixo; não se reauditaram todos os fornecedores antigos."
+  },
+  "main_conclusion": "A afirmação de que faltam todos os estados ou relógios seria incorreta: Custo/F1.TEMPO têm estado e clock de densidade, Supercondutor nomeia fase OH, MQC tem alvo/estado estacionário e gap em seu runner. Falta identificar qual dispositivo completo realiza qual objeto, restaurar o referencial quando necessário, resolver suporte/fidelidade e ligar energia/tempo/normalização ao mesmo sistema e aos domínios canônicos. Esses objetos não são intercambiáveis pelo nome.",
+  "models": [
+    {
+      "id": "CUSTO_TWO_LEVEL",
+      "source_anchors": [
+        "inventory:custo:14441-14483",
+        "inventory:PONTE_FREQUENCIA_GRAVITON_R9.txt:31-54,93-125",
+        "density_clock_source:171-203"
+      ],
+      "already_named": "Base de paridade psi±, H_lig=-V0 sigma_x (V0>0), G=(psi+ + i psi-)/sqrt2. Transporte C=diag(1,i) dá Hg=-V0 sigma_y e rho0=(I-sigma_x)/2. Custo identifica radiativamente V0=hbar*omega.",
+      "clock": "i/(2hbar)<G|[P,H_lig]|G>=V0/hbar. Em F1.TEMPO, coherence(T_t X)/coherence(X)=exp((-gamma+2i Omega)t); t=-log|ratio|/gamma com coherence(X)≠0 e gamma>0. A leitura de coerência gira a 2Omega, enquanto Omega=V0/hbar; não confundir as duas frequências.",
+      "inputs_remaining": "Valor SI de V0 e identificação do par de níveis/estado com dispositivo; Eref para raiz positiva; observador N para kappa; preservação dos mesmos operadores/domínios. A escala V0→V0/lambda, t→lambda*t mantém a fase: fase isolada não fixa segundos nem ramo global."
+    },
+    {
+      "id": "F1_TEMPO_POSITIVE_ROOT_GIBBS",
+      "source_anchors": [
+        "inventory:CONTRATO_FISICO_DIMENSIONAL_R1.json",
+        "inventory:physical_parameters.py",
+        "inventory:kms_root_anchor_r2.py",
+        "inventory:calibration:18-51,95-114",
+        "inventory:h2_definitions:207-243"
+      ],
+      "already_named": "Hpos=Eref I+Hg, Eref≥V0>0; gamma_root=beta/(2hbar)*(sqrt(Eref+V0)-sqrt(Eref-V0))^2. rho_G=exp(-P Hg/hbar)/Z, P=2pi/kappa_seconds; K_rho=-log rho_G; Hpos_G=(hbar/P)K_rho.",
+      "derived": "No par fixo, tau_eff=hbar/(sqrt(Ehi)+sqrt(Elo))^2; Eref=(hbar/P)log(2cosh(P Omega)) quando escolhido o ramo Gibbs. sigma_s=alpha_(-Ps). -log Delta não é K_rho: no exemplo tem espectro com ambos os sinais.",
+      "units": "H,V0,Eref em J; hbar em J*s; Omega,gamma,kappa_seconds em s^-1; t,P,tau em s. kappa_geometrico=1/rho, kappa_seconds=c/rho=a/c, só após N/unidades nomeados.",
+      "inputs_remaining": "V0=hbar*1 rad/s, Eref=2V0 e kappa=2 s^-1 são referências sintéticas INPUT. H→H+cI deixa comutador e Gibbs normalizado invariantes, mas altera D[sqrt(H)]; não se pode apagar a escolha de zero. N.point/KillingNormalization é INPUT externo, não determinado pelo espectro abstrato."
+    },
+    {
+      "id": "SUPERCONDUTOR_FULL",
+      "source_anchors": [
+        "inventory:supercondutor:338-370,506-517,775-885",
+        "net_contract:32-48",
+        "inventory:CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt:44-79",
+        "inventory:device_prereg:84-109"
+      ],
+      "object": "Fock dos modos entrada/saída tensor OH; H/hbar=omega_c(n_in+n_out)+omega_OH sigma+sigma-+gJC(a_in†sigma-+sigma+a_in)+Omega_R(sigma++sigma-); J_holo=a_out†sigma-+sigma+a_in.",
+      "already_named_clock": "A patente chama Gamma_OH=exp(i omega_OH t)*tanh(P_MW/P_th) de Relógio de Fase; omega_OH=2pi*1667.359 MHz. Preservar essa frequência própria; bomba micro-ondas, EOM óptico e detecção são canais distintos.",
+      "already_written_bridge": "Contrato finito cutoff 0/1 de resposta: Omega_R(t)=Omega_R0+epsilon f(t), L_beta rho*=0, rho*≥0, Tr rho*=1; B rho=-i[sigma_x,rho]; h_inst(t)=C Tr(n_out exp(t L_beta)B rho*) para t≥0; H_inst(z)=C Tr(n_out(zI-L_beta)^-1 B rho*), Re z>0; C=eta_det*kappa_out>0 INPUT. Este é um contrato fonte-receptor; não seleciona rho* nem prova resposta não nula no dispositivo.",
+      "inputs_remaining": "Preparação/densidade estacionária escolhida e suporte; taxas e calibração SI, energia de referência/positividade no modelo completo, estado/clock transportados ao mesmo Fock/domínio. No modelo bosônico não truncado faltam aqui domínios/momentos e semigrupo correspondente. kappa_loss não é kappa_Killing. T_eff=1-eta da patente é adimensional, não temperatura Gibbs em kelvin por simples leitura.",
+      "forbidden_shortcut": "O setor OH já testado em RESULTADO_OH_SECTOR_R2 (30/30, não reexecutado) impõe gJC=Omega_R=gamma_Lambda=gamma_OH=0 e cavidade no vácuo, com gamma_phi=beta*omega_OH/4 como matching INPUT. É ponte restrita, não escolha do dispositivo completo. D[J] isolado não é D[sqrt(H)] por conjugação unitária unital: D[J]I=diag(-1,0,1). O resultado não é uma proibição de toda dilatação/redução controlada.",
+      "additional_runner_clock": "one_supercondutor.py:371-406 usa tau=pi/lambda_max(H3L) para evitar aliasing na média Cesaro. É sombra finita matemática do operador Three Locks, não relógio OH calibrado em segundos; a própria fonte marca SIM e physical_verdict_allowed=false."
+    },
+    {
+      "id": "MQC_CELL_AND_ROTATING_RUNNER",
+      "source_anchors": [
+        "mqc_pdf:p4-p6",
+        "mqc_extract:129-237",
+        "mqc_runner:150-212",
+        "mqc_prototype:54-62,157-180",
+        "mqc_existing_result:tests[gkls_fixed_point_plateau]"
+      ],
+      "object": "Fonte patente: célula 1 micrometro, 27 sítios, seis faces; estado local C^3 com |gamma_Psi|^2=beta (a fonte antiga usa alpha²). f_res=c/(2L)=150 THz, omega0=2pi f_res. O runner trata uma célula local C^3, não toda a rede de 27 fatores.",
+      "exact_runner_model": "a=sqrt((1-beta)/2), b=sqrt(beta), T=(a,a,b), rho_T=|T><T|, A=diag(1,-1,1). L_rot(rho)=gamma_h(Tr(rho)rho_T-rho)+(gamma_d/2)(A rho A-rho). H_eff=0 apenas no referencial girante da ressonância, conforme linha159.",
+      "rates_status": "gamma_h=beta*f_res é relação postulada no modelo da patente e adotada pelo runner; f_res deriva de c,L escolhidos. gamma_d=1/T2, T2=50 microsegundos é valor típico assumido pelo protótipo (INPUT), não medição. Gap=gamma_h e C*=(1-beta)/(1+gamma_d/gamma_h) são DERIVED dentro desse modelo. Nenhuma das taxas foi identificada aqui com gamma_root ou kappa_Killing.",
+      "stationary_support_audit": {
+        "statute": "DERIVED — álgebra do gerador explícito; candidata documental, não novo teorema compilado",
+        "equations": "q=gamma_h/(gamma_h+gamma_d); rho_ss=((1+q)/2)rho_T+((1-q)/2)A rho_T A. Para 0<beta<1 e gamma_h,gamma_d>0, supp(rho_ss)=S=span{T,AT}=span{a|0>+b|Psi>,|1>}, dim S=2. v=b|0>-a|Psi>≠0 satisfaz rho_ss v=0. Substituição no L_rot dá zero e Tr rho_ss=1.",
+        "consequence": "rho_ss não é fiel em B(C^3). rho_ss^-1 e -log rho_ss não são operadores finitos globais em C^3. O suporte S mistura |0> e |Psi>; não equivale a apagar o terceiro nível. Usar pB(C^3)p exige nomear p, provar compatibilidade/invariância das operações requeridas e declarar o alcance; não autoriza substituir silenciosamente a célula."
+      },
+      "frame_search_result": "Nas fontes MQC focalmente inspecionadas, não foi localizada a transformação R(t), Hamiltoniano laboratorial matricial ou operador de frequência que restaure a fase. A variável omega0 e o escalar gJC do protótipo não fornecem esses operadores. H_eff=0 girante NÃO implica H_lab=0 nem ausência de fase no laboratório.",
+      "existing_result_scope": {
+        "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003460-6_MQC\\results\\2026-10-07T19-52-51\\results.json",
+        "passed": true,
+        "spectral_gap_over_gamma_holo": 0.9999999999999998,
+        "physical_verdict_allowed": false,
+        "rerun": false,
+        "note": "A fidelidade foi examinada por kernel algébrico, não inferida do autovalor mínimo em ponto flutuante."
+      },
+      "inputs_remaining": "Estado/operador laboratorial e transformação de referencial; escolha de observável de clock e leitura SI; tratamento fiel do suporte sem trocar C^3; energia positiva/zero Eref; conexão das interações da célula/rede ao mesmo sistema canônico. Não identificar por decreto frequência de 150THz, gap dissipativo beta*f_res, V0/hbar, 2V0/hbar ou kappa."
+    },
+    {
+      "id": "MANUSCRIPT_GHZ_REFERENCE",
+      "source_anchors": [
+        "ghz_manuscript:474-507"
+      ],
+      "already_named": "O manuscrito tem modelo GHZ N=4,5, estado puro rho_star, H_C=K_H P2, H_O=K_O P2 e H_S=-omega_GHZ rho_star+H_Q diagonal.",
+      "scope": "É reaproveitamento de um modelo nomeado; não é identificação da célula MQC C^3, da rede de 27 sítios, do Supercondutor completo ou de seu relógio SI. Não pode preencher os INPUTs dos outros modelos por homonímia."
+    }
+  ],
+  "material_findings": [
+    {
+      "id": "R53_MQC_FRAME_SUPPORT",
+      "severity": "MEDIUM",
+      "finding": "A ponte modular no MQC precisa tratar referencial e não fidelidade de rho_ss em C^3. O runner já fornece alvo e gap; chamá-lo de ausente seria incorreto, mas promovê-lo a estado Gibbs fiel global seria igualmente incorreto.",
+      "resolution": "Contrato residual abaixo; preservar modelo completo e declarar qualquer domínio de suporte."
+    },
+    {
+      "id": "R53_MQC_MACRO_FREQUENCY_UNITS",
+      "severity": "MEDIUM",
+      "source": "mqc_pdf:p4",
+      "primary_pdf_extracted_lines": [
+        "co (câmara macroscópica L = 9 cm, f = 1,667 MHz na banda de micro-ondas)."
+      ],
+      "finding": "O PDF escreve L=9cm e f=1,667 MHz na mesma comparação macroscópica. Com a própria regra f=c/(2L) e c=3e8 m/s, 9cm dá aproximadamente 1.667 GHz, fator 1000 do texto em MHz. A patente Supercondutor escreve separadamente 1.667,359 MHz. Conflito documental de unidade; não corrigido silenciosamente.",
+      "resolution": "Fixar por fonte/errata autorizada qual unidade e qual aparelho se pretende transportar; não usar essa comparação para calibrar V0 antes disso."
+    }
+  ],
+  "precise_residual_contracts": {
+    "MQC_lab_frame": "Dados H=C^3, R:Real→U(H), R C1, rho_lab:Real→Density(H), H_lab(t):SelfAdjoint(H), e saltos L_j, fornecer rho_rot=R rho_lab R*, H_rot=R H_lab R*+i*hbar*(dR/dt)R* e L_j,rot=R L_j,lab R*. No modelo H_rot=0, a condição residual é H_lab=-i*hbar R*(dR/dt), não H_lab=0. Demonstrar a equivalência das equações mestras, incluindo reset/dephasing transformados. No caso não limitado, usar núcleo denso comum preservado e derivadas nesse núcleo.",
+    "observable_clock": "Fornecer um observável Z/medida no MESMO espaço e estado inicial nomeado, amplitude Tr(Z rho_lab(0))≠0 e identidade de evolução que identifique omega_read em s^-1. Se a leitura for fase, fixar ramo/unwrapping ou intervalo; se for log-decaimento, fixar taxa positiva e componente inicial não estacionária. Em seguida provar qual leitura corresponde a V0/hbar ou ao gap 2V0/hbar. Um autovalor da Liouvilliana não determina sozinho o operador de energia.",
+    "state_energy_and_units": "Fornecer H_phys autoadjunto com domínio nomeado, energia de referência e ramo positivo Hpos; identificar o estado escolhido e o par espectral, com DeltaE=2V0 apenas quando esse par realiza H_lig. Provar a igualdade da lei dissipativa no regime declarado ou seu limite controlado; o gerador aberto não é identificado a um grupo unitário modular por renomeação.",
+    "modular_support": "Para MQC rho_ss, p=supp rho_ss tem posto2; qualquer K=-log(rho_ss|pH) e Delta=L_rho R_rho^-1 vivem na álgebra/dominio do suporte explicitado. Para pretender B(C^3) integral é necessária uma realização fiel apropriada justificada e sua relação com o estado da fonte; não inserir uma nova densidade regularizada como premissa física ajustável.",
+    "observer_normalization": "Nomear N:KillingNormalization no mesmo sistema; rho_ref=sqrt(N.point[1]^2-N.point[0]^2)>0, kappa_geom=1/rho_ref e kappa_seconds=c/rho_ref. Identificar escala temporal do fluxo modular/boost e verificar sigma_s=alpha_(-(2pi/kappa_seconds)*s) com a convenção adotada. Omega, kappa_loss e kappa_Killing não são automaticamente iguais.",
+    "same_system_bridge": "Construir a família de células/rede G_epsilon com inclusões isométricas coerentes e estados compatíveis, ou outra realização explicitamente justificada pelo dispositivo escolhido; demonstrar no mesmo domínio o transporte V U_device(a)=U1(a)V e V B_device(s)=B0(s)V, com domínios dos geradores preservados. U_device/B_device designam ações reversíveis que devem ser construídas do sistema; o semigrupo dissipativo deve manter seu próprio contrato. A rede canônica física e os certificados R7/R8 aceitos são fornecedores existentes; o resíduo é a identificação do dispositivo, não reconstruí-los."
+  },
+  "search_scope": {
+    "method": "Leituras dirigidas por inventário/remissões e rg focal; pinos por SHA256 de bytes; leitura primária das páginas MQC via PyMuPDF, sem execução dos programas científicos.",
+    "excluded": [
+      "attempts",
+      "dependency_cache",
+      "backups",
+      "arquivos confidenciais"
+    ],
+    "negative_claim": "Não localizada nas fontes e corredores focais inspecionados; não é alegação de ausência em todo o acervo.",
+    "extra_bridges_located": [
+      "clock de densidade F1.TEMPO",
+      "Relógio de Fase OH explícito",
+      "contrato bombeamento-resposta finito",
+      "runner MQC com alvo/estacionário/gap",
+      "clock anti-alias do runner Supercondutor com alcance de sombra matemática"
+    ]
+  },
+  "next_action": "Coordenação aguarda identificação humana do aparelho e escolhe com essa fonte o elo necessário. Levar estes achados à revisão independente; não converter escolha de modelo/estado/calibração em prova ou requisito satisfeito.",
+  "sources": {
+    "inventory:custo": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+      "bytes": 1216423,
+      "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd"
+    },
+    "inventory:echo": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_echo_smatrix.py",
+      "bytes": 6843,
+      "sha256": "258533468ec7b4139095deca22ea32807ec4307741100e582673621bb89e8aae"
+    },
+    "inventory:ponte": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\A Ponte Einstein Cartan Miguel.tex",
+      "bytes": 129435,
+      "sha256": "98ec3d808d51e694098ae216500ab853584cb89f9eb23661128ddc1829c1b657"
+    },
+    "inventory:um_v393": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\um.py",
+      "bytes": 35606254,
+      "sha256": "18be2ddb06c60f9037b1efecb72034e6a0c9409b0d3900452fd9d186cf4905c0"
+    },
+    "inventory:calibration": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\ContractCalibrationReuse.lean",
+      "bytes": 6016,
+      "sha256": "f447d2de1f54774cb53b5808fa99b3095536606695d8c0efad36675dd80326c9"
+    },
+    "inventory:h2_definitions": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ContratoQG_v31.lean",
+      "bytes": 24897,
+      "sha256": "2f2c6561a5a5d832b43f11f7bacccf4811eb4392f1832f78cf4a5838a72a4808"
+    },
+    "inventory:h2_kms": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ContratoQG_v31_Teoremas.lean",
+      "bytes": 65168,
+      "sha256": "4fa0eff792110ff5c076a83a60532636502e8c3335b5a7af2ab29994abee4ee1"
+    },
+    "inventory:polar_period": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\PolarMinimalPeriod_v2.lean",
+      "bytes": 5137,
+      "sha256": "2112c0022287be0941a798f67e3f5d6f47251e26067ed7ba64516a38424364dc"
+    },
+    "inventory:finite_tomita": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\FiniteTomita.lean",
+      "bytes": 9051,
+      "sha256": "f845a71a81bb02585020f5da224a9407b4dd36b1408cccab37ea1b69cfb6647e"
+    },
+    "inventory:supercondutor": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+      "bytes": 76972,
+      "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e"
+    },
+    "inventory:device_prereg": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\PREREGISTRO_DEVICE_R1.json",
+      "bytes": 6577,
+      "sha256": "6e4e2ce553aea405878e967df9314be2af030b45e234dd35dbe1b30731d2560a"
+    },
+    "inventory:CONTRATO_FISICO_DIMENSIONAL_R1.json": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\CONTRATO_FISICO_DIMENSIONAL_R1.json",
+      "bytes": 14279,
+      "sha256": "ad8449faccf1fa75d3ce4ac31445a0a950785a409d42f404da80829bfcb022ef"
+    },
+    "inventory:RESULTADO_PHYSICAL_R1.json": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\RESULTADO_PHYSICAL_R1.json",
+      "bytes": 24855,
+      "sha256": "664375422d0caf9b5f4fcf8a1aa325108344220c6ebbf0679403ecbac58a9762"
+    },
+    "inventory:RESULTADO_KMS_ANCHOR_R2.json": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\RESULTADO_KMS_ANCHOR_R2.json",
+      "bytes": 12912,
+      "sha256": "332cb716fb39e72f12c39cda6d6ba88633e7b42c3259054756bf5b2730e21c08"
+    },
+    "inventory:physical_parameters.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\physical_parameters.py",
+      "bytes": 6206,
+      "sha256": "a2a698d0aa6d63ddfe52d116943c47d59d985aa129f10db6a514661785f7294b"
+    },
+    "inventory:kms_root_anchor_r2.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\kms_root_anchor_r2.py",
+      "bytes": 3601,
+      "sha256": "4a534c11f73bfc5f300fc3562708328bd2fad2b130c72d826b7680d00285ba22"
+    },
+    "inventory:finite_device/RELATORIO_DEVICE_R1.md": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\RELATORIO_DEVICE_R1.md",
+      "bytes": 2200,
+      "sha256": "edc79d1af9437c8e17ca8701320698768eea5d8a5335d1af970458ad5090bb3f"
+    },
+    "inventory:finite_device/PREREGISTRO_DEVICE_R1.json": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\PREREGISTRO_DEVICE_R1.json",
+      "bytes": 6577,
+      "sha256": "6e4e2ce553aea405878e967df9314be2af030b45e234dd35dbe1b30731d2560a"
+    },
+    "inventory:finite_device/run_finite_device.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\run_finite_device.py",
+      "bytes": 17373,
+      "sha256": "89332d76e3fdcbf67f50e8328dfd9316196d7ef18ccf710666eb544426aa17be"
+    },
+    "inventory:CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.LEITURA_20261015\\DISPOSITIVO_E_ESPECTRO_R7\\CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt",
+      "bytes": 10696,
+      "sha256": "339c6f5a8bdb72f59f95fbefe4ac17e34830be7dd019ddd743955e6c4fed5be1"
+    },
+    "inventory:PONTE_FREQUENCIA_GRAVITON_R9.txt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.LEITURA_20261015\\FREQUENCIA_E_GRAVITON_R9\\PONTE_FREQUENCIA_GRAVITON_R9.txt",
+      "bytes": 7666,
+      "sha256": "69528d5772f30accaeffd76bc4164569f912742ebcb4a7f0b7726190ce9db4e1"
+    },
+    "inventory": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_clock_reuse\\PHYSICAL_CLOCK_INVENTORY_R4.json",
+      "bytes": 16198,
+      "sha256": "252fd98f3eab125ab67ddb81b2a53a51b1d1459f49624052e30f0ee4454ca94a"
+    },
+    "mission_reference": {
+      "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+      "bytes": 672,
+      "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11"
+    },
+    "project_start": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R53_CLOCK_SOURCE_PROJECT_20261016T213027_415199Z_cfe8db51_RECEIPT.json",
+      "bytes": 138349,
+      "sha256": "fb80beec9b321c055f73163e2b58b927fad503dd00d6e7478a74012ec3a4408a"
+    },
+    "project_return": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R53_CLOCK_SOURCE_RETURN_20261016T213845_309900Z_904feedb_RECEIPT.json",
+      "bytes": 138349,
+      "sha256": "fb80beec9b321c055f73163e2b58b927fad503dd00d6e7478a74012ec3a4408a"
+    },
+    "net_contract": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R1.md",
+      "bytes": 9109,
+      "sha256": "2d6b93f9ce014533c672a1b959e4b210e61c13f828e50cea4a514648dc8d5a11"
+    },
+    "mqc_pdf": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\MQC - Microprocessador Cúbico\\mqc_pi_inpi_relatorio descritivo.pdf",
+      "bytes": 349041,
+      "sha256": "654d9fda96f2f050c234020b7f3cc80c6468dd65bc945d05d9e7ca7687e62d7f"
+    },
+    "mqc_extract": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\sources\\MQC_DESCRITIVO_EXTRACT_R1.txt",
+      "bytes": 21428,
+      "sha256": "e7f07be74236fae4fea0e708fb70de7925b7183bc38270c68c3cee5596d4acb8"
+    },
+    "mqc_runner": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003460-6_MQC\\runner\\one_mqc.py",
+      "bytes": 66751,
+      "sha256": "38d0e6343c37b17b21f20949fe85e811579fc2f8bd2c21070721a720b1e3a282"
+    },
+    "mqc_prototype": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003460-6_MQC\\prototype_src\\mqc_simulacao_celula_elementar.py",
+      "bytes": 51769,
+      "sha256": "b11589f04f272fef5a9d4362e7df6e1bb713500965ccb8da35499fbc71c63b52"
+    },
+    "mqc_existing_result": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003460-6_MQC\\results\\2026-10-07T19-52-51\\results.json",
+      "bytes": 27309,
+      "sha256": "ff47e53b961642cafabd87ab62b171f7b768aab45a251034215941af8807752a"
+    },
+    "super_runner": {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026003450-9_SUPERCONDUTOR\\runner\\one_supercondutor.py",
+      "bytes": 60540,
+      "sha256": "1cc2e3923a072c052ca88ba753b2e813e21e37b9ca6a11f442e9c70f56c9331c"
+    },
+    "clock_contract": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.LEITURA_20261015\\PONTE_RELOGIO_R4\\CONTRATO_RELOGIO_R4.json",
+      "bytes": 2042,
+      "sha256": "4f8ac0828fc82ff2cd6d2f57afa099c690cd1e5d824f5b8ace8250e7ed1379f2"
+    },
+    "density_clock_addendum": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\formal_review\\ADDENDUM_DENSITY_CLOCK_R2.json",
+      "bytes": 2891,
+      "sha256": "829c8c7ddfbc057fa11f023da01fe4ce8efa0d1686bd5f1c1b8ab1ad2444f53c"
+    },
+    "density_clock_source": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\formal_flow\\TGLExt\\TimeGravitonFlow.lean",
+      "bytes": 12556,
+      "sha256": "fc6927d0bea6f65ebb982519cd323b55a9a46da45920ddfd2b2c0473ac2f83ca"
+    },
+    "oh_sector_result": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_clock_reuse\\RESULTADO_OH_SECTOR_R2.json",
+      "bytes": 8190,
+      "sha256": "c71395e315cbc78eaedf6021a19e030d259d3e76a30f11c921c3f35930bb42d0"
+    },
+    "root_frequency": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_clock_reuse\\RootRateFrequencyR2.lean",
+      "bytes": 3711,
+      "sha256": "8e997d472732337a41810e682cf720b4233126678542c201490ca7d846dd7991"
+    },
+    "root_obstruction": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_clock_reuse\\DeviceRootObstructionR4.lean",
+      "bytes": 2914,
+      "sha256": "3675ee1b582e00138c41988bd0495242a808331a9477ea993dfc2140ee433e1f"
+    },
+    "ghz_manuscript": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\Manuscrito\\manuscrito_TGL\\manuscrito_TGL_pt_v1.tex",
+      "bytes": 39422,
+      "sha256": "d35dfb5d0328da04df41af80b556c3a21ae0dc04077ea298cc817cf5276a2664"
+    },
+    "accepted_r52": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\PROGRESS_R52.json",
+      "bytes": 16386,
+      "sha256": "49e7d78bde0cd3d93f1f457ac06b1ac73fb407b5b2e5df255b67a1f06b1aa5a2"
+    }
+  },
+  "companion_text": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_clock_reuse\\R53\\R53_PHYSICAL_CLOCK_SOURCE_AUDIT_R1.txt",
+    "bytes": 2682,
+    "sha256": "5a82942550eae7bb6f92f15fc919b064cb0f1710538569e3a514bdf873c20aad"
+  }
+}

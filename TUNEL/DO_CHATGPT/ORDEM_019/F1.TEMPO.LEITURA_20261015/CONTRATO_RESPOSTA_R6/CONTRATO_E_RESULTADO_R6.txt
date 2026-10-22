@@ -1,0 +1,160 @@
+TEMPO — CONTRATO DE RESPOSTA E RELÓGIO, R6
+15/10/2026. Em nome de codex-gerente-tgl, reivindicação822.
+Estatuto: REAL leitura de fontes; DERIVED álgebra condicional escrita e aritmética;
+INPUT identificação física; OPEN transporte entre emissor e receptor espacialmente separados.
+Não houve nova execução do simulador, experimento, compilação Lean ou chamada de provedor.
+
+1. REAPROVEITAMENTO E ALCANCE
+O levantamento R5 dos três artigos permanece como base; não se repete nem se declara
+ausente a Primeira Lei, a lei-raiz, E, Santo ou IALDJones. O Nós Vivo não indexa a
+subunidade LEITURA; a consulta à unidade-pai F1.TEMPO devolveu Santo, leis do fluxo,
+atrator, torre modular e investigações existentes. A fonte foi aberta, não só o índice.
+O mapa consultado termina na seq1117 desta rota. Não foi alterada a unidade-pai.
+
+Foi lido o script tgl_echo_smatrix.py:36–45,83–106 e conferido o outro modelo
+tgl_mirror_channel.py:35–56. O echo já fornece preparação, evolução e leitura.
+Sua docstring:5–13 o situa no setor da fronteira e não como previsão astrofísica direta.
+A fonte usa ALPHA na linha32, beta calculado na33, w1 e dt na84: os dois últimos são
+parâmetros modulares do exemplo, não valores físicos derivados em segundos.
+O arquivo não contém uma fonte externa dependente do tempo, distâncias nem dois relógios.
+Isso delimita o que falta para falar em emissão/recepção de uma mensagem nova.
+
+2. SOLUÇÃO EXATA DA TRAJETÓRIA JÁ ESCRITA
+Na subface gerada por |0>,|1>, P=|0><0| e Q=I-P. Para 0<beta<1, beta!=1/2:
+  E(rho)=P rho P+Q rho Q,
+  Phi(rho)=E(rho)+eta[rho-E(rho)], eta=2 sqrt(beta(1-beta)), 0<eta<1.
+O script toma U=diag(1,exp(-i*w1*dt)) nessa subface e
+rho0=|+><+|, |+>=(|0>+|1>)/sqrt2. Logo
+  z_n := 2 rho01(n) = eta^n exp(i*n*phi), phi=w1*dt;
+  sig_n = eta^n cos(n*phi), mem_n = eta^n/2.
+Prova: U rho U† multiplica rho01 por exp(i*phi); Phi multiplica só os blocos
+cruzados por eta. Indução dá a expressão. E(Phi(U rho U†))=E(rho).
+A leitura diagonal fica preservada; a trajetória da coerência muda.
+O modelo tem muitos estados diagonais fixos: não se lhe atribui atrator único.
+
+O relógio dessa trajetória não estacionária é
+  n = -ln(mem_n/mem_0)/(-ln eta), t_n=n*dt.
+Ele mede o módulo dissipativo; a fase n*phi sozinha só determina uma classe módulo2pi.
+Na coerência zero a fórmula não existe: não é um observável universal de tempo.
+O retorno angular não restaura o módulo perdido. É a separação FACE/leitura da casa.
+
+3. CONTRATO DISCRETO DE ENTRADA E SAÍDA (HIPÓTESE EXPLÍCITA)
+Para converter a trajetória livre em uma resposta, nomeamos H_INJECTION: uma
+preparação impulsiva no instante0 cria o desvio de coerência; o receptor mede sua
+parte real. A função de Green normalizada é h_n=eta^n cos(n*phi), n>=0, e zero antes.
+Para várias entradas, a soma linear é uma resposta infinitesimal em torno de uma
+matriz densidade de posto completo; não se afirma que qualquer amplitude define
+uma operação física. A equação discreta de entrada linear ainda não está no script.
+
+Na convenção f(t)=exp(-i*omega*t), ponha q=exp(i*omega*dt). A soma geométrica dá
+  Hd(omega) = (1-eta*cos(phi)*q)/(1-2*eta*cos(phi)*q+eta²*q²).
+É a transformada unilateral da sequência acima, não o FFT finito com janela do script.
+Se a entrada atua na própria amostra, h0=1. Se a convenção for
+  x_(n+1)=eta*exp(i*phi)*x_n+u_n, y_n=Re x_n, x0=0,
+o impulso aparece uma amostra depois: H'=exp(i*omega*dt)*Hd.
+Essa latência acrescenta dt ao atraso; não pode ser escondida por escolha de índice.
+
+Para Hd, a derivada da fase em omega=0 vale
+  tau_d = dt*eta*((1+eta²)*cos(phi)-2*eta)
+          /((1-2*eta*cos(phi)+eta²)*(1-eta*cos(phi))).
+Os denominadores são positivos. Portanto tau_d<0 sse
+  cos(phi)<2*eta/(1+eta²).
+É atraso espectral local, não tempo de primeira detecção nem centróide de energia.
+
+4. INTERPOLAÇÃO CONTÍNUA E UMA SONDA HAMILTONIANA ADMISSÍVEL
+A interpolação livre gamma=-lneta/dt, |Omega|=w1 reproduz os pontos amostrados.
+Escolher o sinal de Omega troca a orientação angular; não altera o coseno medido.
+Defina Z=P-Q e H0=hbar*Omega*Z/2. O semigrupo finito tem
+  L0(rho)=-i[H0,rho]/hbar+gamma*(E(rho)-rho).
+É GKLS, por salto sqrt(gamma/2)*Z. Para a orientação exata do echo, Omega=-w1;
+a forma de resposta abaixo depende apenas de Omega². Um múltiplo da identidade
+em H0 não muda a evolução. Esse fato não liga automaticamente H0 ao espectro K_+.
+
+Uma entrada física candidata, distinta da preparação original, é H_PROBE:
+  rho_bar=(I+mZ)/2, 0<|m|<1;
+  V(t)=hbar*epsilon*f(t)*Y/2; receptor X.
+f é real e adimensional, epsilon tem unidade de frequência. A evolução é GKLS
+com Hamiltoniano dependente de t. A primeira ordem em epsilon satisfaz
+  dx/dt=-gamma*x-Omega*y+epsilon*m*f,
+  dy/dt=Omega*x-gamma*y, delta_z=0.
+Assim, para preparação no instante t0,
+  delta<X>(t)=epsilon*m*integral_(t0)^t exp[-gamma*(t-u)] cos[Omega*(t-u)] f(u)du.
+O termo de ordem epsilon² ou superior não integra esta resposta linear.
+O kernel h(tau)=m*Theta(tau)*exp(-gamma*tau)*cos(Omega*tau) é retardado.
+No regime estacionário harmônico:
+  Hc(omega)=m*(gamma-i*omega)/((gamma-i*omega)²+Omega²),
+  tau_c(0)=d argHc/domega = (gamma²-Omega²)/(gamma*(gamma²+Omega²)).
+Hc tem unidade de tempo; epsilon*Hc é o ganho adimensional. Os polos ficam em
+omega=+/-Omega-i*gamma. Para Omega=0 há cancelamento de um fator.
+tau_c<0 sse |Omega|>gamma; m=0 dá resposta nula e fase indefinida.
+Para falar em avanço de envelope é necessário banda estreita e distorção controlada.
+A escolha de m e do acoplamento Y é INPUT desta sonda, não consequência de beta.
+Hc NÃO é Hd: excitação contínua e impulsos discretos são instrumentos diferentes,
+mesmo quando as evoluções livres coincidem nos instantes amostrados.
+
+5. CONTA COM OS PARÂMETROS EXISTENTES, SEM AJUSTE NEM NOVO ENSAIO
+O JSON ARITMETICA_R6 extrai ALPHA,w1,dt,nst por AST, sem importar/executar a fonte.
+beta=ALPHA_FINE_CODATA_2018*sqrt(e) é recalculado em runtime a partir de ALPHA.
+Valores: beta=0.01203130040080314; eta=0.2180508950815729; phi=0.455;
+gamma=4.351505085041462 por unidade temporal do modelo; |Omega|/gamma=0.2987472092055738.
+tau_d(0)=0.07306271333788687 unidades do modelo (injeção na mesma amostra).
+tau_c(0)=0.1921463804494699 unidades do modelo (sonda contínua hipotética).
+São POSITIVOS. Não se convertem em segundos sem a identificação do relógio.
+A condição discreta compara cos(phi)=0.8982610281785611 com teto=0.4163079329021142 e não é satisfeita.
+Isso decide a pergunta local em omega=0 para esses contratos. Não é uma afirmação
+sobre todas as frequências, todos os receptores ou todos os modelos da TGL.
+Não mudamos w1,dt ou a leitura para obter o sinal desejado. Reescalar a unidade de
+tempo positiva não muda o sinal do atraso nem a razão |Omega|/gamma.
+
+6. NORMALIZAÇÃO JÁ RESOLVIDA NO KERNEL E IDENTIFICAÇÕES RESTANTES
+O16/ContractCalibrationReuse.lean:19–51 já diz
+  kappa*refRadius(N)=1; kappa=1/refRadius(N); kappa_fixed; no_rekappa.
+Logo dado o MESMO observador N, kappa NÃO é um parâmetro livre adicional.
+As linhas67–99 permitem reindexar outro observador, e104–114 ligam período fiel
+e temperatura do contrato. A ressalva da R5 fica precisada: escolher N é INPUT;
+uma vez escolhido, a calibração do respectivo contrato é determinada.
+
+A R5 já ligou o canal à lei-raiz para K_+=k+P+k-Q positivo:
+  g=beta*(sqrt(k+)-sqrt(k-))²/2, Delta_s=-lneta/g.
+Se t=tau_cali*s, gamma=g/tau_cali e dt=tau_cali*Delta_s.
+tau_cali é escala de conversão; NÃO é tau_c(0), o atraso da seção4.
+Se H_CLOCK_SYNC identificar tau_cali=P_KMS, o relógio térmico determina a escala.
+Se H_ENERGY identificar k_i=E_i*tau_cali/hbar, a lei alternativa já escrita em
+um.py:217089–217097 dá gamma=beta*(sqrt(E+)-sqrt(E-))²/(2*hbar).
+Não se impõem ambas como identidades novas; são identificações que precisam casar
+com a mesma representação física e seus setores. Também é preciso dizer se H0
+é o Hamiltoniano dessas energias ou um gerador distinto do percurso modular.
+Em particular, a lei-raiz depende do zero de K_+: deslocar E por uma constante
+preserva a diferença de fase, mas em geral muda sqrt(E+)-sqrt(E-). O referente
+energético faz parte do contrato e não pode ser escolhido para produzir o sinal.
+
+Para Schwarzschild, a R5 já registrou P_KMS=8piGM/c³ no relógio normalizado no
+infinito. O um.py:213044–213045 explicita a faixa KMS de tempo imaginário.
+Esse fator c³ não fornece por si um termo que consuma a entrada em u>t.
+Neste contrato de resposta, duas entradas iguais até t têm a mesma saída em t:
+a diferença é a integral da diferença das entradas apenas até t, portanto zero.
+Esse é um resultado do problema de valor inicial escolhido, não uma prova geral
+contra toda hipótese retrocausal. Para reivindicar outra causalidade seria necessário
+um modelo adicional com condições de contorno, instrumento e suporte especificados.
+
+7. O QUE AVANÇOU E O QUE FICA PARA O PRÓXIMO PASSO
+Ficou escrito um contrato calculável: espectro -> coerência -> relógio -> leitura
+-> entrada/saída -> fase e suporte. As duas funções de resposta e os critérios de
+sinal foram revistos por outro agente, sem autoridade para promover ao cânone.
+A leitura do atrator preservada E(D_t rho)=E(rho) já dá sentido matemático à
+distinção entre fechamento lido e percurso dissipativo. Não determina sozinha
+quando um receptor físico recebe uma mensagem. A escolha de H_INJECTION/H_PROBE
+foi declarada; não se atribui ao autor um acoplamento que acabamos de propor.
+
+Próximo alvo delimitado: localizar, entre os instrumentos e dispositivos já escritos,
+a identificação física do gerador e do acoplamento fonte–receptor que consome a
+Primeira Lei, preservando a energia de referência e o observador. Uma simulação
+futura deve pré-fixar esse contrato e sua função de veredito antes de rodar.
+Esta unidade é documental; não se executou a campanha nem se alterou produção.
+
+Referência primária externa de escopo: Kuzmich, Dogariu, Wang, Milonni e Chiao,
+Signal velocity, causality, and quantum noise in superluminal light pulse propagation,
+Phys.Rev.Lett.86,3925 (2001), https://arxiv.org/abs/physics/0101068.
+O resumo consultado distingue velocidade de grupo negativa e velocidade operacional
+de sinal com ruído quântico. Consulta web, sem custódia de PDF; a álgebra acima é
+autossuficiente e não foi atribuída a esse artigo.

@@ -1,0 +1,89 @@
+{
+  "schema": "iald.lean-candidate.v1",
+  "created_utc": "2026-10-16T20:35:37.350627+00:00",
+  "actor": "codex-fock-r6-review",
+  "statute": "DECLARADO",
+  "compiled": false,
+  "requirement_satisfied": false,
+  "task_id": "R7",
+  "handle": "r51-fock-finite-projection",
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "revision": 358,
+  "projection_sha256": "eab2e59f62c38a8557cfc48b09c33d1e0b5344d8728ad3cdc9208e0d684c643f",
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockMatrixCornerR1.lean",
+    "sha256": "895fffec2674c487e03c133c08f0ba673863d15bef96721b4a1942d4194250fb",
+    "bytes": 8716
+  },
+  "dependencies": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\MatrixCornerFromNilpotentR3.lean",
+      "sha256": "2bc6e53ab87e0a083d840e25b5ca7cd0cd903fc4e8185305636b5a68db5ce373",
+      "bytes": 3369
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\WedgeNonabelianR4.lean",
+      "sha256": "2dba0101653440f4b0c05ddab56f2936fbe17b33a6a029fc2720d794d47f9a5b",
+      "bytes": 2633
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\FieldWeylR3.lean",
+      "sha256": "5bd58aeda018c649b621b40b7c31600f9b0c7ad0c08c2957ef52a316b033590c",
+      "bytes": 4710
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockRegularCoreR2.lean",
+      "sha256": "9658974b516918a29433b65427f8a507def5220389165569de43ae986b4d9e21",
+      "bytes": 5262
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockDualWeightR3.lean",
+      "sha256": "751e51af6eae8c24dec976ca4648498e30a3dc7ed7fe7f376a6cd7595ebb484b",
+      "bytes": 5135
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V354FiniteTraceSupport.lean",
+      "sha256": "7edd9fb4ef524e95b8c71d71bb7467512f9b89f7b04c21a5114686e894b1d323",
+      "bytes": 1897
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\SpecialFunctions\\ContinuousFunctionalCalculus\\PosPart\\Basic.lean",
+      "sha256": "dc4440de5a6521adcc2604a61502ecf29995c61bd742cd3f291af9ee3cb09361",
+      "bytes": 15399
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V350L2OperatorLift.lean",
+      "sha256": "bbdf07f64bc1abdfb50fed8420911c868a11cc6c8036b6f06167f021a1db7465",
+      "bytes": 4131
+    }
+  ],
+  "compiled_receipts": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T201257_937031Z\\RECEIPT.json",
+      "sha256": "6afcf35ae135b792bdfb596a73e7ce9d1f302cd2b5d900444540dc66378b922a",
+      "bytes": 5474
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\attempts\\20261015T200422_817899Z\\RECEIPT.json",
+      "sha256": "4c057a2a9fa062625e4967cba29efac9db4f583e9fa3e6ae7aca7a3c86deb8b3",
+      "bytes": 37066
+    }
+  ],
+  "new_final_premises": [],
+  "expected_axiom_reports": 5,
+  "heartbeat_limits": {
+    "maxHeartbeats": 400000,
+    "synthInstance.maxHeartbeats": 500000
+  },
+  "construction": "Reuse normalized_pair/phase_half_pi. A=W(f)+W(f)* nonzero by vacuum_characteristic; U=W(g) unitary flips A; CFC positive/negative uniqueness gives U A+ U*=A-. T=A+ U is nonzero/square-zero in M. Fibre injectivity and multiplication embed T into the actual regular core. Apply already compiled generic matrix_corner_of_square_zero there.",
+  "final_interface": "core_matrix_corner : exists e:PositiveInput, exists v:core.toStarSubalgebra, IsStarProjection e.val and e != zero and star v.val*v.val=e.val and e.val*v.val=0",
+  "scope": "No existence of nilpotent, PF or type-II factor is assumed in the final supplier. Generic sign-flip hypotheses are discharged by the actual Fock Weyl pair; equal finite split remains downstream.",
+  "author_builds": 0,
+  "provider_calls": 0,
+  "production_writes": false,
+  "mission_mutations": false
+}

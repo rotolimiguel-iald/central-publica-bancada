@@ -1,0 +1,146 @@
+{
+  "schema": "iald.r59.cutoff-independent-review.v1",
+  "created_utc": "2026-10-17T17:47:22.635962+00:00",
+  "reviewer": "codex-mission-memory-review",
+  "author_distinct": true,
+  "status": "PASS_COMPONENT_WITH_SCOPE",
+  "requirement_satisfied": false,
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "start_revision": 457,
+  "start_project": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\independent_review\\PROJECT_START_R59.json",
+    "sha256": "b5be67708871a60ca5e16f78e8ccfbb830afcda34c67ce43478bf9ba46728aca",
+    "bytes": 160305
+  },
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\CUTOFF_DERIVATION_R59.txt",
+      "sha256": "45efff928e3ab2e2f021da93115a6f138047512d10c0ec8a1a0121d6182b56b0",
+      "bytes": 5484
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\derive_cutoff_r59.py",
+      "sha256": "811a15ab4544bcd82759d3c7e7a8ac2c389b121b2bddc6ca833f91f787f4600c",
+      "bytes": 4443
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\CUTOFF_RESULT_R59.json",
+      "sha256": "f6369877eb8c03013b05ac6618bb36a82226445315c6dc9a5c93c921153ba193",
+      "bytes": 4633
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\CUTOFF_START_R59.json",
+      "sha256": "7548bce3f8549a0f6212fc22a09ab41177ce73aafa8f1e0e733dc07c40bb1571",
+      "bytes": 905
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\SCOPE_R59.json",
+      "sha256": "715c1aa874bebd110a86a27b14a7318626708ed36dc02ef1912353694fd8fc9a",
+      "bytes": 1012
+    },
+    {
+      "path": "C:\\IALD\\papers_latex\\graviton_paper\\graviton_paper.tex",
+      "sha256": "3795d68e864c5a7bdeb9329e7ac097c40aabc9e733859068a343f988c83c1847",
+      "bytes": 67424
+    }
+  ],
+  "independent_computation": {
+    "script": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\independent_review\\check_cutoff_independent_r59.py",
+      "sha256": "2890420bbc8008f60bc7530b8d675362497d295a662674b0e48403425d457ef0",
+      "bytes": 4739
+    },
+    "result": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\independent_review\\CUTOFF_INDEPENDENT_CHECKS_R59.json",
+      "sha256": "7232bd831b8116f2e7df5aeb92ba3c4daebfc74efca501127ad32d5e1541fbeb",
+      "bytes": 4821
+    },
+    "checks": 39,
+    "author_code_imported_or_run": false
+  },
+  "findings": [],
+  "checks": [
+    {
+      "clause": "Mesmo objeto e projeção",
+      "lines": [
+        8,
+        17
+      ],
+      "pass": true,
+      "reason": "Todos os vetores são somas na mesma base |n,n> do Fock de dois modos fixos. P_N é a projeção de ocupação; normalização geométrica é exata. Não são isometrias arbitrárias entre modelos distintos."
+    },
+    {
+      "clause": "Fidelidade, norma vetorial e norma de traço",
+      "lines": [
+        21,
+        25
+      ],
+      "pass": true,
+      "reason": "A cauda ortogonal tem massa Q=q^(N+1); o overlap positivo é sqrt(1-Q). No plano de psi/psi_N, a diferença dos projetores é traceless com quadrado Q I, portanto autovalores ±sqrt(Q) e norma de traço 2sqrt(Q). A distância vetorial quadrada é 2(1-sqrt(1-Q))."
+    },
+    {
+      "clause": "Domínio de número e polinômios",
+      "lines": [
+        27,
+        27
+      ],
+      "pass": true,
+      "reason": "Para K=Na+Nb e Z_N=1-q^(N+1), a norma ao quadrado de K^k(psi_N-psi) é (Z_N^(-1/2)-1)^2*(1-q)*sum_(n<=N)(2n)^(2k)q^n+(1-q)*sum_(n>N)(2n)^(2k)q^n. A série completa é finita por razão tendendo a q<1; ambas parcelas tendem a zero. Palavras finitas em a,b,a†,b† têm controle por potências de K+1. Não prova regularFockDomain da R8 ou domínio de GKLS."
+    },
+    {
+      "clause": "Momentos e erros",
+      "lines": [
+        31,
+        43
+      ],
+      "pass": true,
+      "reason": "Ação esparsa independente em N=0/1/3 e fase pi/2 confirma n_N e m_N, inclusive sinal complexo. Por diferença da série geométrica ponderada, n-n_N=(N+1)q^(N+1)/(1-q^(N+1)); o erro do par é exp(i phi)/sqrt(q) vezes esse erro. q=0 tratado pelo vácuo; q=1 não normalizável."
+    },
+    {
+      "clause": "Borda de corte duro",
+      "lines": [
+        47,
+        59
+      ],
+      "pass": true,
+      "reason": "CCR I-(N+1)|N><N| confirmada vetor a vetor. A quadratura completa ganha a componente |N+1>, ausente no corte; a diferença é (N+1)p_N/2. N=1 tem |m_1|²=n_1(1-n_1), distinta da saturação bosônica n(n+1)."
+    },
+    {
+      "clause": "Consistência e uniforme",
+      "lines": [
+        25,
+        27,
+        59,
+        59
+      ],
+      "pass": true,
+      "reason": "Para M<N, P_M psi_N=sqrt((1-q^(M+1))/(1-q^(N+1)))*psi_M. É convergência no mesmo Fock; não consistência exata de marginais espaciais. Para N fixo e q→1 a norma de traço tende a2: não há uniformidade no intervalo inteiro q<1."
+    },
+    {
+      "clause": "Fonte e limite físico",
+      "lines": [
+        4,
+        4,
+        65,
+        67
+      ],
+      "pass": true,
+      "reason": "graviton_paper.tex:252 usa gerador sem fator1/2 e fase positiva no termo de criação. A relação unitária completa é deixada ao componente squeezing; o corte não identifica parâmetros com beta nem escolhe perfis físicos Maxwell."
+    }
+  ],
+  "nonblocking_test_scope": "O check normalized_projection_distance do autor é uma simplificação tautológica; a conclusão foi conferida aqui independentemente pela decomposição ortogonal e matriz de projetores, sem exigir nova bateria do autor.",
+  "limits": [
+    "Parecer sobre corte de ocupação e seus domínios, não refinamento espacial, GKLS, dispositivo, equivalência Einstein–sigma/Maxwell ou fechamento R5.",
+    "Perfis ortonormais abstratos permitem uma realização de dois modos, mas não selecionam fisicamente cavidade/circularSmear.",
+    "Squeezing/output ainda não revisados neste artefato; revisão combinada poderá acrescentá-los depois de entrega pinada.",
+    "R4 bloqueado administrativamente permanece intocado; nenhum reset, claim, aceite ou transição."
+  ],
+  "provider_calls": 0,
+  "scientific_builds": 0,
+  "source_edits": 0,
+  "mission_mutations": 0
+}

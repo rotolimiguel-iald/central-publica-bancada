@@ -1,0 +1,81 @@
+{
+  "kind": "R59_FINITE_PAIR_AND_PHYSICAL_RESIDUAL",
+  "status": "DERIVED_WRITTEN_CANDIDATE",
+  "author": "codex-pair-covariance-r59",
+  "proved_written": [
+    {
+      "name": "normalized_source_state",
+      "inputs": "rho real finite; phi real; standard two-distinct-mode bosonic Fock with cross CCR zero",
+      "conclusion": "psi=sech(rho) sum_(k>=0)(exp(i phi)tanh(rho))^k |k,k>=S(rho,phi)|0>; norm=1"
+    },
+    {
+      "name": "pair_covariance",
+      "conclusion": "n=sinh(rho)^2; m=exp(i phi)sinh(rho)cosh(rho); centered quasi-free C=V+i Omega/2=K* K/2 >=0; |m|^2=n(n+1)"
+    },
+    {
+      "name": "quadrature_phase_reading",
+      "conclusion": "D(theta,eta)=cosh(2rho)-sinh(2rho)cos(phi-theta-eta); minimum exp(-2rho) with aligned axes for rho>=0"
+    },
+    {
+      "name": "phase_recovery",
+      "inputs": "rho>0 and two phase-referenced quadrature correlations",
+      "conclusion": "phi=arg(m) mod2pi; rho=asinh(2|m|)/2; rho=0 has no identifiable phase"
+    },
+    {
+      "name": "finite_GNS_Bogoliubov",
+      "conclusion": "k(z)=cosh(rho)z+exp(i phi)sinh(rho)P_swap conj(z), real symplectic; canonical Weyl-vacuum realization with covariance half inner(kz,kw)"
+    },
+    {
+      "name": "finite_H1_composition",
+      "inputs": "h1,h2 actually orthonormal in canonical H1; V_pair(z)=z1 h1+z2 h2",
+      "conclusion": "half inner(V_pair k Z(u),V_pair k Z(v))=u^T C v; exact conditional composition, no physical assignment of h_j supplied"
+    }
+  ],
+  "source_convention_difference": {
+    "graviton": "rho=r_G",
+    "tratado": "rho=r_T/2",
+    "same_state": "r_T=2r_G with same phase",
+    "aligned_variances": "exp(-2r_G) versus exp(-r_T)",
+    "issue": "Tratado line239 says ~exp(-2r_T); this does not follow from its line236 generator under the same quadratures. Original preserved."
+  },
+  "physical_obligations_not_assumed_or_discharged": [
+    {
+      "name": "actual_test_assignment",
+      "type": "F_rho: R^4 ->_R RealTest; for all u, circularSmear(F_rho(u).val)=V_pair(k_rho(Z(u)))",
+      "additional": "F_rho must come from named cavity/device modes, with support/units and the actual prepared state; no arbitrary relabeling."
+    },
+    {
+      "name": "normalized_field",
+      "type": "alpha*circularSmear(F_rho(u).val)=V_pair(k_rho(Z(u))), alpha=sqrt((2pi)^(-3)) fixed",
+      "additional": "alpha is not fitted. Covariance is the vacuum quadratic form, without an unproved operator product domain."
+    },
+    {
+      "name": "physical_type_match",
+      "type": "scalar cavity Psi with mass/curvature/Dirichlet versus massless helicity +/-1 Maxwell orbital H1",
+      "additional": "No supplied equality of field equation, polarization, observables or dynamics."
+    },
+    {
+      "name": "refinement_limit",
+      "type": "C_epsilon(a,b)=omega_epsilon(A_epsilon(a)*A_epsilon(b)); compatible physical embeddings and dense limit",
+      "additional": "State/moment convergence of two modes alone does not supply a cell network or continuum."
+    },
+    {
+      "name": "full_covariance_localization",
+      "type": "V U_device(g)=U_canonical(g)V, including stated reflection; V K_device(W)=K_canonical(W)",
+      "additional": "May act on the limit rather than each finite level. No such V is asserted here."
+    },
+    {
+      "name": "existing_regular_domain",
+      "type": "Squeezed vector membership and relevant strong-generator domains in the named regularFockDomain",
+      "additional": "All number moments finite do not prove membership in the finite coherent-span domain or energy-generator domains."
+    }
+  ],
+  "not_inferred": [
+    "No r/phi equals beta",
+    "No a_i equals sigma+ of OH",
+    "No mean zero implies no pair phase or clock",
+    "No one-particle complex unitary equals a nonzero Bogoliubov squeeze",
+    "No R5 satisfaction"
+  ],
+  "delegation_boundary": "Cutoff normalization/tails/fidelity and finite boundary CCR are the separate root component; not duplicated here."
+}

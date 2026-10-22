@@ -1,0 +1,43 @@
+import took 146s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T002358_489846Z\RegularFiniteFibreRightR2.lean:24:6: error: Tactic `apply` failed: could not unify the conclusion of `@mul_le_mul_left`
+  ?b * ?a ≤ ?c * ?a
+with the goal
+  ↑C * ENNReal.ofReal (‖(fibre B) v‖ ^ 2) ≤ ↑C * ENNReal.ofReal (‖fibre B‖ ^ 2 * ‖v‖ ^ 2)
+
+Note: The full type of `@mul_le_mul_left` is
+  ∀ {α : Type ?u.150} [inst : Mul α] [inst_1 : LE α] [i : MulRightMono α] {b c : α}, b ≤ c → ∀ (a : α), b * a ≤ c * a
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A : ↥(RegularHilbert H) →L[ℂ] ↥(RegularHilbert H)
+B : H →L[ℂ] H
+C : ℝ≥0
+hC : ∀ (v : ↥(RegularHilbert H)), dualQuadraticIntegral (star A * A) v ≤ ↑C * ENNReal.ofReal (‖v‖ ^ 2)
+v : ↥(RegularHilbert H)
+he : star (A * fibre B) * (A * fibre B) = star (fibre B) * (star A * A) * fibre B
+⊢ ↑C * ENNReal.ofReal (‖(fibre B) v‖ ^ 2) ≤ ↑C * ENNReal.ofReal (‖fibre B‖ ^ 2 * ‖v‖ ^ 2)
+simp took 132ms
+'F1Fecho.RegularFiniteFibreRight.right_fibre' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0131ms
+	blocked (unaccounted) 498ms
+	congr simp thm 0.567ms
+	elaboration 13.3ms
+	fix level params 0.105ms
+	import 146s
+	initialization 35.3ms
+	instantiate metavars 0.293ms
+	interpretation 6.85s
+	let-to-have transformation 0.0432ms
+	linting 3.1ms
+	overlappingInstancesLinter 41.6ms
+	parsing 1.27ms
+	process pre-definitions 0.902ms
+	share common exprs 0.752ms
+	simp 138ms
+	tactic execution 54.9ms
+	tacticAnalysis 124ms
+	type checking 16.9ms
+	typeclass inference 325ms

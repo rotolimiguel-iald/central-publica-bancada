@@ -1,0 +1,150 @@
+<!-- Relatório do auditor 6 da gerência (22/09/2026), cópia integral para a ORDEM 013-bis com este cabeçalho de 2 linhas (o sha256 difere do original só por isso). Frente: C4. Os caminhos «...\scratchpad\ordem013\auditoria\...» citados são efêmeros: as cópias dos scripts e saídas estão em auditoria_da_gerencia\scripts\ (ver README_INSUMOS.md). -->
+
+SUMMARY: A bancada entregou a C4, e os números centrais estão certos, mas faltam critérios da ordem; uma nova ordem curta de fechamento se justifica.
+
+Os dados conferem. Recalculei 11 hashes (os três arquivos compactados, seis h5, um .dat e o arquivo duplicado), e o md5 dos três compactados bate com o Zenodo. A bancada usou o GWTC-5.0 (pSEOB, 33 eventos com amostras por evento), e o GW250114 dele é o mesmo arquivo do release 17018009, então não há dupla contagem. O RD.tar.gz do mesmo release não foi baixado nem justificado. O registro com o limiar (B ≤ 1/100, RG dentro de 95%, sha 2bebc171…) é anterior ao download (20:02 contra 20:07) e à extração (20:12).
+
+Recalculei com código próprio (em C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\ordem013\auditoria\c4\):
+- **GW250114:** ln B do ramo B = 0,0290262 e marginal em δτ̂ = 0,0737, idênticos aos da bancada; bootstrap [−0,03; 0,09].
+- **Estimadores:** com outros estimadores o valor fica entre −0,04 e +0,07. O «oráculo 3D independente» da bancada usa a mesma largura de banda do 2D, então não é independente do estimador. Conclusão: |ln B| ≲ 0,1, com sinal indeterminado.
+- **Catálogos:** as somas dos catálogos (R-B −1,808, R-LIN −8,219, GWTC-3 −0,821) saem idênticas; o HPD da RG dá 0,983 no GWTC-5.0 e 0,971 no GWTC-3. O relógio livre também foi reproduzido: o limite é todo do prior.
+
+O que isso diz fisicamente:
+- **O GW250114 não distingue nenhuma leitura da TGL do Kerr.** A correção do ramo B (−2% na vida média) vale 0,34σ da precisão atual. Coincidir com a RG aqui é correspondência.
+- **O catálogo não serve hoje para ranquear TGL contra RG.** Ele é dominado por um desvio comum para vidas médias mais longas (+0,07; 24 de 31 eventos). Esse desvio penaliza todas as leituras da TGL (R-LIN −8,2, além do limiar), mas põe a própria RG a cerca de 2,4σ. Pela regra relativa registrada, o veredito é INCONCLUSIVE_SYSTEMATICS: tensão sistemática, não exclusão.
+- **O achado NON_IDENTIFIABLE_SINGLE_220 está certo.** Com um só modo 220 e massa e spin livres, (f, τ) ↔ (M, a) é uma bijeção, e o −2% do ramo B é imitado por δa ≈ −0,016 e δM/M ≈ −1,25%. O teste só tem sentido com massa e spin vindos da inspiral, como no pSEOBNR, ou com um segundo modo resolvido.
+
+O que falta, dito pela ordem:
+- **Desvio δτ̂ > 0:** não tem tratamento escrito, e o V2 da casa não é citado.
+- **Tabelas de resumo:** a entrega e o C7 mostram só o ramo B e deixam de fora o R-LIN, que passou do limiar.
+- **Números publicados da LVK:** não há conferência com os valores hierárquicos da LVK nem com o GWTC-4.0.
+- **Leituras sem linha:** R-PROP e R-RAIZ-COHERENT não aparecem, e o observável de realização única não foi confrontado.
+- **Registro:** há vereditos e limiares criados depois do registro.
+- **Marcos:** a C4 rodou antes do M1 e sem recibo.
+
+Não há veredito CONFIRMED ou PROVED, e nenhuma leitura foi excluída por um critério que também excluiria a RG.
+
+## CRITERIA
+- [PAGO_VERIFICADO] C4 fonte primária: GW250114 gw250114_pseobnr/posterior_samples.h5 do Zenodo 17018009 :: Tarball: 1.671.496.586 B, sha256 18d740c8…eced36, md5 8778398081ef… (bate com record.json do Zenodo). h5: 59.249.916 B, sha256 b9971bcd…a627. Recalculei os dois por script (hash_check_result.json). Grupo pSEOBNRv5PHM, N = 40.776, lido via h5py no WSL, só leitura.
+- [PAGO_VERIFICADO] C4 secundário (só robustez): pyRing TEOB domega_dtau_220 do mesmo release :: posterior.dat (sha256 9a7ad336…51de) recalculado; N = 84.701, sem linhas duplicadas. Com deslocamento fixo −0,019845 recalculei ln B = 0,115; a bancada dá 0,141, com a curva de spin e o fit de remanescente de Jimenez-Forteza, que não reimplementei. A diferença cabe na variação de spin. A procedência do binário e da fusão não é recuperável, e a bancada declarou isso (C4_PYRING.json version_scope). Não foi multiplicado ao pSEOB.
+- [PAGO_VERIFICADO] C4 catálogo GWTC-5.0 TGR (Zenodo 21454847): usado? por quê? :: Foi usado. pSEOB.tar.gz tem 711.331.923 B, sha256 ee1d6448… e md5 2a3f8ec0…, que bate com o Zenodo. São 33 metafiles PESummary com amostras por evento, que abri. A seleção primária de 31 eventos saiu do notebook do release (sha256 db64f5c1…), sem GW191109 e GW200208. O pSEOB_GW250114_082203_Prod0.h5 é byte-idêntico ao arquivo do 17018009 (os dois têm sha b9971bcd…). Ressalva: o RD.tar.gz do mesmo release (415.283.962 B, md5 240bae5d…) não foi baixado nem justificado.
+- [PAGO_VERIFICADO] C4 catálogo GWTC-3 TGR (Zenodo 17461225) :: ZIP: 2.210.047.740 B, sha 108c4a42…, md5 8272267… (bate com o Zenodo). São 18 h5 com 844.880 amostras; recontei por script. Para a seleção de 10 eventos da Tabela 13, recalculei a soma de ln B e reproduzi os valores da bancada exatamente: R-B −0,82083, R-RAIZ-0 −1,56875, R-LIN −3,39068. O HPD da RG deu 0,971 na minha grade, contra 0,969 da bancada.
+- [NAO_PAGO] GWTC-4.0 só como [KNOWN] de conferência; procurar release no DCC/GWOSC :: Nenhuma busca documentada e nenhum número [KNOWN] de conferência. 'GWTC-4'/'2603.19021' aparece só dentro de strings de config em C4_CATALOG_PRIOR_AUDIT.json. O impacto é baixo porque o GWTC-5.0 é cumulativo, mas a ordem pedia a conferência.
+- [PAGO_VERIFICADO] Listar cada tarball antes de extrair; sha256 do tarball e de cada .h5 :: Os archive_index.json são anteriores à extração: 17018009 às 20:10:19 contra 20:11:57; 21454847 às 20:29:07 contra 20:29:26; ZIP_INDEX do GWTC-3 às 23:08:28 contra 23:09:17. Recalculei 11 hashes (3 arquivos compactados, 6 h5, 1 .dat e o h5 duplicado) e todos batem com cache/MANIFESTO_DOWNLOADS.json.
+- [PAGO_VERIFICADO] Dizer se o release traz amostras por evento ou só produtos de figura :: Confirmei amostras por evento em todos os 33 do GWTC-5.0 (grupos pSEOBNRv5PHM, pSEOBNRv5PHM-reweighted e pseob-rd, com domega220, dtau220 e final_spin_non_evolved) e nos 18 do GWTC-3 (<evento>/posterior_samples).
+- [PAGO_VERIFICADO] Nenhum evento conta duas vezes entre releases (GWTC-5.0 × GWTC-3 × 17018009) :: O GW250114 entra uma vez só, e o arquivo é o mesmo nos dois releases. O GWTC-3 fica como alternativa separada (12 sobreposições, que conferi pela lista de eventos). Nada foi multiplicado entre releases, e o C6 não foi multiplicado ao C4.
+- [PAGO_VERIFICADO] Limiar e nível de credibilidade registrados com sha256 ANTES do confronto :: REGISTRO_C4.json tem sha256 2bebc171…ac59, que recalculei; o arquivo é das 20:02:01 (−0300). O download do 17018009 terminou às 20:07:37, a extração do h5 foi às 20:11:58 e a primeira leitura (C4_SCHEMA) às 20:13:32. O registro fixa B ≤ 1/100, RG dentro de 95% e o INCONCLUSIVE_SYSTEMATICS se a RG estiver fora. O hash foi publicado na ENTREGA_013_C4a às 20:05:47, e posterior_220_readout.py recusa rodar se o hash não estiver no recibo. Ressalva de lugar: a ordem pedia o registro na ENTREGA do M1, que não existe.
+- [PAGO_VERIFICADO] Estatística: densidade CONJUNTA (δf̂, δτ̂) por KDE; razão de priors lida do h5 :: Os priors lidos do h5 são Uniform(−0,8; 2,0) para domega220 e para dtau220, logo a razão é 1. Nos dois controles, domega220 vai até 4,0. Recalculei com código próprio ln B(R-B) = 0,0290262 (bancada 0,029026162), R-RAIZ-0 = −0,12532 e R-LIN = −0,68042, idênticos. Meu bootstrap 95% é [−0,031; 0,088], contra [−0,034; 0,092] da bancada.
+- [PAGO_VERIFICADO] Reportar também a versão só com a marginal de δτ̂ e a diferença :: Marginal de R-B = 0,073651, que reproduzi, e diferença conjunta − marginal = −0,04462 (C4_220_INITIAL.json rows[0]).
+- [PAGO_VERIFICADO] Predição dependente de spin amostra a amostra e na mediana :: A bancada trocou a 'média da razão condicional' da ordem pela identidade de Bayes correta (razão de integrais, via cisalhamento com jacobiano 1), e declarou isso ao lado na C4a. A identidade está certa. Pela estatística literal da ordem, R-B daria ln 0,049, que não é fator de Bayes. Com o spin fixo na mediana: 0,02715 (reproduzido).
+- [PAGO_VERIFICADO] Leituras com τ★ livre: limite superior a 90/95% com dois priors pré-declarados :: Reproduzi a razão de evidências com prior uniforme, ln = 0,02597, e os quantis da coordenada de prior, 0,5046/0,9006/0,9502, que dão 95% em 2,92e-4 s; no log-uniforme, 95% em 3,34e-6 s. Os dois limites são do prior, não do dado: o posterior é igual ao prior. A bancada diz isso.
+- [PAGO_VERIFICADO] Catálogo: produto das razões por evento :: Recalculei evento a evento os 31 e os 33, com resultados idênticos. Com 31: R-B −1,80828, R-RAIZ-0 −3,66212, R-LIN −8,21901. Com 33: R-B −2,47559, R-RAIZ-0 −5,16178, R-LIN −11,90115. O HPD da RG na deformação comum deu 0,9828 (minha grade), contra 0,98371 ± 0,0015 da bancada.
+- [NAO_PAGO] Hierárquico só como [KNOWN] de conferência :: grep 'hierarch' não acha nada nos artefatos. Não há comparação com GWTC-3 0,13 (+0,21/−0,22), GWTC-4.0 0,17 ± 0,11 nem com o artigo do GWTC-5.0; desse artigo só o resumo foi obtido (cache/literature/gwtc5_tgr_abstract.html).
+- [PAGO_VERIFICADO] Por linha: ln B, z = (δ̂ − δ_L)/σ e tamanho da correção β contra σ :: Por evento há z_tau_gaussian_diagnostic e correction_over_sigma. No GW250114, R-B dá correção/σ = 0,3434 e z = 0,11, que reproduzi. No agregado do catálogo faltam z e correção/σ; só há ln B.
+- [PAGO_VERIFICADO] Regra de exclusão pré-especificada e RELATIVA à RG :: Aplicada como registrada: no catálogo, RG com HPD 0,983 (fora de 95%) dá INCONCLUSIVE_SYSTEMATICS para todas as leituras. No GW250114, RG com HPD 0,52 e nenhum ln B ≤ −4,61 dão NOT_EXCLUDED. Nenhuma leitura foi excluída por um critério que também excluiria a RG.
+- [NAO_PAGO] δτ̂ > 0 do catálogo e do V2 da casa (sinal oposto ao amortecimento aditivo) tratado sem cherry-picking :: Os números estão nos JSONs (δτ̂ comum +0,072 com 90% em [+0,015; +0,134]), mas não há análise escrita. O V2 da casa (+0,177 ± 0,109) não é citado em nenhum artefato C4. Eu medi que 24 dos 31 eventos têm δτ̂ mediano > 0 e que esse deslocamento comum é o que produz os ln B negativos de todas as leituras.
+- [PAGO_VERIFICADO] NÃO-CEGO dito sem atenuar :: REGISTRO_C4.json.known_information e status 'NOT_BLIND'; as entregas C4a, C4b e C4_C7 dizem NÃO-CEGO na primeira linha.
+- [NAO_PAGO] Todas as leituras do registro com linha no confronto (inclui R-PROP e R-RAIZ-COHERENT com OPEN_PHYSICAL_MAPPING) :: O registro lista 10 leituras e permite OPEN_PHYSICAL_MAPPING, mas as tabelas C4 trazem só 8. OPEN_PHYSICAL_MAPPING só aparece em REGISTRO_C4.json. O observável de realização única (espalhamento de δf̂) não foi confrontado.
+- [NAO_PAGO] Marcos: C4 (M2) só depois do recibo do M1 :: Não há ENTREGA_013_M1 nem recibo 013 em PARA_CHATGPT. A ordem é das 19:40, o REGISTRO_C4 das 20:02, e a tabela C1 só ficou completa à 00:28 (ENTREGA_013_C1_C6). Medi que as fórmulas das leituras não mudaram depois do catálogo (diff entre .bak_20260921_204605 e o módulo atual).
+
+## DEFECTS
+### [CORRIGIR] ENTREGA_013_C4b_catalogo_pyring_relogio_e_trajetorias.md; C7_DELIVERY_OVERVIEW.md, tabela 'Actual-data confrontation' (l.37–41)
+P: O resumo e o pacote C7 mostram só o ramo B. O ln B de catálogo das outras leituras fica escondido no JSON, e o R-LIN passa do limiar registrado. O veredito INCONCLUSIVE dele vem só da cláusula da RG, e isso tem de ser dito sem atenuar, leitura a leitura, como a ordem exige na C7.
+E: C4_CATALOG_COMBINATION.json catalog.release_figure_selection_31: R-LIN −8,219; R-RAIZ-0 −3,662; R-MOD −3,558. Em all_available_33: R-LIN −11,90; R-RAIZ-0 −5,16; R-MOD −4,74 (todos ≤ −ln100 = −4,61). Recalculei R-LIN, R-RAIZ-0 e R-B exatamente.
+FIX: Tabela por leitura (31 e 33) na entrega e no C7, com ln B, faixa de largura de banda, HPD da RG e o motivo do INCONCLUSIVE ('RG fora de 95%: 0,983'). Dizer que sem essa cláusula o R-LIN seria EXCLUDED_IN_READING no setor 220 condicional.
+
+### [CORRIGIR] Artefatos C4 em geral (C4_CATALOG_COMBINATION.json, C4_GWTC3_*); ORDEM §3 C4, Aceitação
+P: O desvio δτ̂ > 0 do catálogo, de sinal oposto a todo amortecimento aditivo, não recebeu tratamento escrito. O V2 da casa, que puxa para o mesmo lado, não é mencionado.
+E: GWTC-5.0 (31 eventos, deformação comum): δτ̂ = +0,072 [+0,015; +0,134] a 90%. GWTC-3 (10): +0,144 [+0,038; +0,250]. Medi que 24 dos 31 eventos têm δτ̂ mediano > 0 e que o ln B é difuso: nenhum evento passa de 13% da soma, e o jackknife do R-LIN vai de −8,32 a −7,54.
+FIX: Parágrafo e JSON com a contagem de sinais, o jackknife e o peso máximo por evento. Dizer que o mesmo desvio que penaliza as leituras da TGL também põe a RG em 98,3% de HPD. Pôr o V2 (+0,1766 ± 0,1089) ao lado, como estrato da casa, sem somar.
+
+### [CORRIGIR] validate_density_and_modes.py (factor = n**(-1/6) imposto ao KDE 3D); C4_VALIDATION.json status 'INDEPENDENT_ORACLES_PASS'; ENTREGA_013_PARCIAL ('quadratura tridimensional independente difere por −1,13e-06')
+P: O 'oráculo 3D independente' usa no KDE 3D o fator de banda do 2D. É o mesmo estimador: confere a quadratura e a identidade de cisalhamento, mas não o viés do estimador de densidade. O bootstrap não cobre esse viés, e o sinal do ln B do R-B não é robusto.
+E: Recalculei o R-B no GW250114 com outros estimadores: KDE 3D com Scott próprio +0,0095; gaussiana 2D −0,0385; gaussiana 1D em δτ̂ +0,0093; banda ×0,7 +0,073; banda ×1,4 +0,005. A distância entre estimadores (~0,02–0,07) é 10⁴ vezes os 1,1e-6 alegados.
+FIX: Rotular como 'controle de quadratura com o mesmo estimador'. Reportar ln B(R-B, GW250114) como |ln B| ≲ 0,1 com sinal indeterminado, e acrescentar um estimador de densidade de fato independente.
+
+### [CORRIGIR] cache/public/21454847 (só pSEOB.tar.gz); cache/public/17018009 (pseobnr_injection não usado)
+P: O controle de catálogo por segundo método não existe. O RD.tar.gz do GWTC-5.0 não foi baixado nem justificado. As injeções pSEOBNR da própria LVK, que já estão no tarball, calibrariam o desvio δτ̂ de um sinal GR tipo GW250114 e não foram usadas.
+E: O record.json do 21454847 lista RD.tar.gz (415.283.962 B, md5 240bae5d9d2d97c439485ba6fb0f4720); grep 'RD.tar' nos artefatos não acha nada. O archive_index do 17018009 lista pseobnr_injection/posterior_samples.h5 e kde_data_injection_44/no44.dat; nenhum artefato C4 os cita.
+FIX: Baixar o RD.tar.gz (ou justificar por escrito) e rodar o mesmo ln B por leitura como robustez, sem multiplicar. Ler o posterior da injeção GR da LVK e medir onde ela cai em (δf̂, δτ̂).
+
+### [CORRIGIR] C4 como um todo; ORDEM §3 C4 ('o hierárquico só como [KNOWN] de conferência'; GWTC-4.0)
+P: Faltam a conferência [KNOWN] com os números publicados pela LVK (hierárquico ou conjunto) e a busca pelo release do GWTC-4.0. Do artigo do GWTC-5.0 só o resumo foi lido, e a seleção de 31 eventos veio do notebook, não do texto.
+E: grep 'hierarch' não acha nada; cache/literature/gwtc5_tgr_abstract.html; C4_CATALOG_COMBINATION.json selection_source_sha256 = db64f5c1… (pSEOBNR_main_figure.ipynb).
+FIX: Ler a seção pSEOBNR de arXiv:2607.19293 e pôr os números publicados como [KNOWN] ao lado da combinação própria. Registrar a busca do GWTC-4.0 no DCC/GWOSC, ou dizer que o GWTC-5.0 cumulativo o substitui.
+
+### [CORRIGIR] Tabelas C4; REGISTRO_C4.json.readings e .unresolved_mapping
+P: R-PROP e R-RAIZ-COHERENT estão registradas mas não têm linha no confronto. O observável de realização única (espalhamento de δf̂ por evento, largura hierárquica) não foi confrontado. Todo o C4 vale só se o observável físico for o amortecimento de ensemble.
+E: As tabelas C4 trazem 8 leituras. 'physical_scope: Only if coherence-ensemble damping is the actual observable' (C4_220_INITIAL.json). O C1 dá R-PROP com Ξ = 3,0e-23 e sem δτ.
+FIX: Linhas explícitas com OPEN_PHYSICAL_MAPPING (R-PROP: Ξ ~ 3e-23, ln B ≈ 0 por construção; R-RAIZ-COHERENT: mistura de Poisson). Levar a lacuna do observável de realização para o fechamento do M2.
+
+### [CORRIGIR] Protocolo do túnel (ORDEM §3, 'a bancada PARA ao fim de cada marco')
+P: O C4 (M2) rodou 22 minutos depois da ordem, antes de o M1 existir e antes do recibo. O limiar foi registrado na C4a, não no M1. A substância se salvou, porque o registro precede o download e as fórmulas das leituras não mudaram, mas o portão dos marcos foi violado.
+E: Ordem às 19:40:16; REGISTRO_C4 às 20:02:01; tabela C1 completa só à 00:28 (ENTREGA_013_C1_C6); nenhuma ENTREGA_013_M1 nem recibo 013. O diff do módulo de predição entre .bak_20260921_204605 (552a07ac) e o atual (fd0fc446) só generaliza modos, spin assinado e a guarda do coerente; R-B, R-LIN, R-RAIZ-0 e R-MOD ficaram iguais.
+FIX: A gerência decide se aceita o M2 retroativamente, com recibo que registre a sequência real. Nas próximas ordens, exigir parada no marco.
+
+### [NOTA] catalog_220_readout.py:88; combine_catalog.py:82; verdicts em C4_CATALOG_220.json / C4_GWTC3_220.json
+P: O limiar de suporte local (ESS ≥ 100) e o rótulo INCONCLUSIVE_DENSITY_SUPPORT (e PENDING_*) foram criados depois do registro e não estão nos vereditos permitidos. São escolhas conservadoras, que só dificultam a exclusão, mas são graus de liberdade não registrados.
+E: REGISTRO_C4.json.permitted_verdicts = [NOT_EXCLUDED, EXCLUDED_IN_READING, INCONCLUSIVE_SYSTEMATICS, AWAITING_DATA, OPEN_PHYSICAL_MAPPING]; 17 + 16 ocorrências de INCONCLUSIVE_DENSITY_SUPPORT.
+FIX: Mapear para INCONCLUSIVE_SYSTEMATICS com o motivo e registrar o limiar numa emenda datada, NÃO-CEGA.
+
+### [NOTA] C4_FREE_CLOCK.json; ORDEM §3 C4 (prior em [t_P, GM_f/c³])
+P: Defeito da ordem, não da bancada: com o teto do prior em GM_f/c³, os limites de τ★ são artefato do prior e não medem nada.
+E: No GW250114, a coordenada de prior no quantil 0,9 é 0,9006. Estendendo por conta própria: ln B(τ★ = 5·t_M) = −1,10; 8·t_M: −2,67; 10·t_M: −5,11. O dado só começa a cortar um relógio escalado pela fonte em τ★ ≳ 5–10 GM_f/c³.
+FIX: Emenda registrada, NÃO-CEGA, com o teto do prior em várias t_M, e o limite reportado como corte da verossimilhança.
+
+### [NOTA] C4_CATALOG_220.json higher_modes = 'HIGHER_MODE_DEVIATIONS_FIXED_TO_GR'
+P: Em 32 dos 33 eventos o modo 440 está fixo na RG, enquanto as leituras preveem deslocamentos maiores nele. A hipótese testada é híbrida (220 da TGL com 440 de Kerr). Isso está declarado, mas não quantificado.
+E: O prior-dict dos eventos O4 traz domega440 = 0,0 e dtau440 = 0,0. O R-B prevê δτ̂_440 ≈ −0,082 contra −0,0198 no 220 (C4_JOINT_MODES.json).
+FIX: Quantificar o efeito ou limitar a frase de escopo a 'setor 220 condicional com modos superiores de Kerr'.
+
+### [NOTA] C4_JOINT_MODES.json
+P: O KDE 4D do conjunto 220+440 inclui uma dimensão sem informação (δτ̂_440), perto da borda do prior. A queda de −0,137 entre o conjunto e o produto das marginais pode ser viés do estimador.
+E: δτ̂_440 a 90%: [−0,35; +3,40], com prior [−0,8; 4,0]. Recalculei com deslocamento fixo: R-B −0,203 (bancada −0,199); R-LIN −0,984 (−0,976).
+FIX: Não ler o −0,2 como evidência e reportar junto a faixa entre estimadores.
+
+### [NOTA] ORDEM §3 C4 ('média da razão condicional')
+P: A estatística fixada pela própria ordem não é um fator de Bayes. A bancada a corrigiu, e corrigiu certo.
+E: Pela identidade (cisalhamento com jacobiano 1), R-B = 0,0290. A 'média da razão condicional' literal dá ln 0,049.
+FIX: A gerência registra errata ao lado na ORDEM 013.
+
+### [NOTA] Pasta ORDEM_013_RINGDOWN
+P: Não existe REAPROVEITAMENTO_C4.md (a ficha está só dentro das entregas), e a literatura ficou em cache/literature em vez de fontes/.
+E: ls: nenhum REAPROVEITAMENTO_*; só refeito/leaver_kerr.*.
+FIX: Gerar a ficha em arquivo próprio.
+
+### [NOTA] C4_CATALOG_220.json rows (GW250114, R-B: 'NOT_EXCLUDED')
+P: Dizer 'NOT_EXCLUDED' com correção/σ de 0,34 é tecnicamente correto, mas a frase pública deve dizer que o evento não tem poder para decidir.
+E: correction_over_sigma = 0,3434; z = 0,11.
+FIX: Frase de escopo do tipo 'not excluded; underpowered (|δ_B|/σ = 0,34)'.
+
+
+## RESULTS
+- Integridade dos dados públicos usados no C4 | 11 de 11 hashes recalculados batem com o manifesto. O md5 dos três arquivos compactados bate com o Zenodo: 8778398081ef…, 2a3f8ec08a52…, 8272267229c9…. O GW250114 do 17018009 e o do GWTC-5.0 são o mesmo arquivo (sha b9971bcd…). | [REAL — medido por mim]
+  => Os posteriores são os oficiais da LVK, sem alteração, e o GW250114 não foi contado duas vezes.
+- GW250114, só o modo 220 (440 livre), pSEOBNR: ln B de cada leitura contra a RG | δτ̂₂₂₀ = −0,013 [−0,103; +0,087] e δf̂ = +0,016 [−0,007; +0,038] (90%); spin 0,678. R-B prevê δτ̂ = −0,0198 e dá ln B = +0,029 (bootstrap [−0,03; +0,09]; entre estimadores, −0,04 a +0,07; marginal em δτ̂ +0,074). R-RAIZ-0 (−3,7%): −0,125. R-LIN (−7,1%): −0,680. R-MOD (−3,7%): valor da bancada, que não recalculei (precisa de QNM exatos). RG dentro, com HPD 0,52. Recalculei tudo com código próprio. | [REAL] no posterior; predições [DERIVED], condicionadas ao relógio [INPUT] e ao mapa de ensemble; R-MOD e R-LIN (coeficiente 1) são [CONJECTURE]; NÃO-CEGO
+  => O evento mais forte não distingue nenhuma leitura da TGL do Kerr: B ≈ 1. O efeito do ramo B, uma vida média 2% mais curta, vale 0,34σ da precisão atual. Coincidir com a RG aqui é correspondência, não derrota.
+- GW250114 com 220 e 440 em conjunto, e o controle pyRing | No conjunto 220+440: R-B −0,199 (eu: −0,203), R-RAIZ-0 −0,313, R-LIN −0,976 (eu: −0,984). O δτ̂_440 fica praticamente livre ([−0,35; +3,4]). No pyRing TEOB (N = 84.701), δτ̂ = −0,137 [−0,37; +0,12] e R-B dá +0,141 (eu, com deslocamento fixo: +0,115). | [REAL]; robustez, não evidência nova
+  => Nada muda. O 440 não informa, e o pyRing é mais largo e também não decide.
+- Relógio τ★ livre no GW250114 | Prior uniforme em [t_P, GM_f/c³]: ln Z/Z_RG = 0,026; quantil 95% = 2,92e-4 s, que é 95% do próprio prior. Log-uniforme: 3,3e-6 s, também só prior. Meu corte pela verossimilhança: ln B = −1,1 em 5·t_M, −2,7 em 8·t_M, −5,1 em 10·t_M. | [REAL] (reproduzido); a extensão acima de t_M é conta do auditor, NÃO-CEGA
+  => O GW250114 não restringe τ★ abaixo de GM_f/c³. O ramo B e qualquer relógio menor passam. Um relógio escalado pela fonte só começa a ser cortado por volta de 5–10 GM_f/c³.
+- Catálogo GWTC-5.0: 31 eventos na seleção do release (33 com os controles) | Supondo uma deformação comum a todos os eventos: δτ̂ = +0,072 [+0,015; +0,134] e δf̂ = +0,011 [−0,003; +0,026]. A RG fica no HPD 0,983–0,984 (eu: 0,9828), o que dá p ≈ 0,017 em 2D, cerca de 2,4σ equivalente; isso não é sigma de descoberta. Produto de ln B com 31 eventos: R-B −1,81, R-RAIZ-0 −3,66, R-MOD −3,56, R-LIN −8,22; com 33: −2,48, −5,16, −4,74, −11,90. 24 de 31 eventos têm δτ̂ mediano > 0. Jackknife do R-LIN: [−8,32; −7,54]. Veredito: INCONCLUSIVE_SYSTEMATICS. | [REAL] (recalculei exatamente); setor 220 condicional com modos superiores de Kerr; NÃO-CEGO
+  => O traço dominante do catálogo é um desvio comum para vidas médias mais longas (linhas mais estreitas), que nem a RG nem a TGL preveem; todas as leituras da TGL encurtam τ. Esse desvio penaliza as leituras da TGL, mais o R-LIN, mas também põe a RG a cerca de 2,4σ. Pela regra relativa registrada, o catálogo hoje não serve para ranquear TGL contra RG. O resultado é tensão sistemática, não exclusão. Mesmo sem o desvio, a correção do ramo B (−0,02) seria cerca de 0,55σ da largura combinada (σ ≈ 0,036).
+- Catálogo GWTC-3: 10 eventos da Tabela 13 | δτ̂ comum = +0,144 [+0,038; +0,250]; RG no HPD 0,969 (eu: 0,971). Leituras: R-B −0,821, R-RAIZ-0 −1,569, R-LIN −3,391 (recalculei exatamente); R-MOD −1,49. Veredito: INCONCLUSIVE_SYSTEMATICS. Não se multiplica pelo GWTC-5.0, porque 12 eventos se sobrepõem. | [REAL]; NÃO-CEGO
+  => O catálogo antigo mostra o mesmo desvio positivo, confirmado de forma independente. A conclusão é a mesma.
+- Achado NON_IDENTIFIABLE_SINGLE_220 | Resíduo relativo 8,75e-9: o vetor da deformação cai no plano gerado por massa e spin. Pela minha álgebra, det ∂(ln f, ln τ)/∂(ln M, a) = −Q′(a)/Q(a) ≠ 0. Em a = 0,68, o −2% do ramo B é imitado por δa ≈ −0,016 e δM/M ≈ −1,25%. | [DERIVED], correto
+  => O achado está certo. Com um só modo 220 e (M, a) livres, a correspondência (f, τ) ↔ (M, a) é uma bijeção (global para modos prógrados, porque Q(a) é monótono), então um teste só de ringdown dá ln B ≈ 0 por construção. O teste só tem sentido com (M, a) informados pela inspiral, como no pSEOBNR, ou com um segundo modo resolvido cujo padrão de desvio previsto difira do de Kerr: o R-B prevê δτ̂_440 ≈ 4 × δτ̂_220. Três consequências. Primeira: o C4 via pSEOBNR tem sentido, mas vira um teste de consistência entre a modelagem da inspiral e o ringdown, e é por aí que sistemáticas de forma de onda (candidatas a explicar o δτ̂ > 0) entram. Segunda: o ln B ≈ −0,003 do C6 (ringdown com M e a livres) é quase nulo em boa parte por construção. Terceira: o Fisher com M e a fixos é o limite otimista.
+- Conta do auditor, fora da tabela da bancada: a forma dimensionalmente consertada do texto colado, Γ = β/t_M | GW250114: δτ̂ = −0,128, ln B = −2,15. Catálogo: −18,2 com 31 eventos e −25,8 com 33. | [CONJECTURE] na leitura; [REAL] na conta; NÃO-CEGO
+  => É a leitura mais penalizada de todas, mas pela regra relativa continua INCONCLUSIVE no catálogo e NOT_EXCLUDED no GW250114. Fecha com número o 'sem supressão seria falsificada' do texto: há tensão, não exclusão.
+
+## REMAINING
+- Tratamento escrito do desvio δτ̂ > 0: contagem de sinais, jackknife, peso máximo por evento, o V2 da casa ao lado, e a frase de que o mesmo desvio põe a RG em 98,3%.
+- Tabela por leitura (31 e 33) na entrega e no C7: R-LIN −8,22 / −11,90 passa do limiar e só não é excluída porque a RG também falha. Dizer isso sem atenuar.
+- Conferência [KNOWN] com os números hierárquicos ou conjuntos da LVK (GWTC-3, GWTC-4.0 e o artigo do GWTC-5.0, com a seção pSEOBNR lida e a seleção de 31 conferida no texto), mais a busca documentada do release do GWTC-4.0.
+- Baixar o RD.tar.gz do GWTC-5.0 como segundo método (ou justificar a ausência) e usar as injeções pSEOBNR da LVK no 17018009 para calibrar o desvio de δτ̂ num sinal GR.
+- Estimador de densidade de fato independente, com a faixa entre estimadores reportada junto ao bootstrap. Rotular o 'oráculo 3D' como controle de quadratura.
+- Linhas OPEN_PHYSICAL_MAPPING para R-PROP e R-RAIZ-COHERENT. O observável de realização única (espalhamento de δf̂, modelo populacional) continua sem confronto.
+- Emenda registrada NÃO-CEGA para o vocabulário de vereditos (INCONCLUSIVE_DENSITY_SUPPORT e o limiar ESS ≥ 100) e para o teto do prior do relógio livre além de GM_f/c³.
+- Quantificar o efeito de fixar o 440 na RG nos 32 eventos em que ele está fixo, ou limitar a frase de escopo ao setor 220 condicional.
+- Opcional: combinar a união sem duplicação dos 33 do GWTC-5.0 com os 6 eventos só do GWTC-3 (39).
+- Recibo da gerência para o M2 retroativo, porque o M1 não foi fechado. Errata ao lado na ORDEM 013 sobre a estatística 'média da razão condicional'.

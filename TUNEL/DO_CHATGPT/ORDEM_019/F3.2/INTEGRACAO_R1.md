@@ -1,0 +1,9 @@
+# F3.2 — checagem R1 por bytes, em sandbox
+
+[REAL] O executor congelado `rodar_fase9_v1.py` usa apenas a presença da chave em `ALVOS_FASE9_LIDOS.json` para escrever `[REAL por hash]` nas linhas 64–66 e 175. Esse arquivo está ausente; a saída V1 histórica continua com cinco leitores `[DECLARADO]` e `INCONCLUSIVE_SYSTEMATICS`. O executor original não foi editado nem executado nesta entrega.
+
+O candidato `f9_reader_gate.py` só devolve `REAL_DOCUMENTARY_HASH_ONLY` depois de conferir: pin SHA-256 do vínculo; bytes e SHA-256 do V1 congelado; conjunto exato dos cinco IDs; bytes, tamanho, SHA-256 e âncora literal de cada resumo arquivado; H0 e sigma reconstruídos contra os metadados V1. Arquivo ausente, alterado, vínculo não pinado, âncora falsa e transcrição numérica divergente interrompem o rito. O pin embutido foi lido dos bytes do vínculo local por script. O verificador não usa presença de chave como prova.
+
+**Integração proposta em um futuro runner V1.x, após congelamento próprio:** chamar `official_archive_check()` em R1 e usar somente `verified_readers` para o rótulo documental. O campo `statistical_admission` permanece `OPEN`; não alimentar a função decisória com `n_alvos_declarados=0` por esse vínculo. Um novo composto exige antes a decisão F3.1 sobre dependências/covariância e pré-registro congelado. Também substituir os textos estáticos R1 da saída futura pelo recibo do verificador. Não aplicar esta mudança ao V1 congelado nem apagar a indicação `[DECLARADO]` histórica.
+
+[REAL — teste isolado] Seis testes locais passaram: arquivo íntegro, bytes adulterados, fonte ausente, âncora falsa, H0 falsificado e pin incorreto. Nenhum composto, `um.py`, modelo ou provedor foi executado. Os cinco resumos continuam [KNOWN] como resultados publicados; seus números são documentalmente vinculados por hash, sem medi-los de novo. `[REAL_DOCUMENTARY_HASH_ONLY]` não implica independência estatística, confirmação física ou mudança de gate.

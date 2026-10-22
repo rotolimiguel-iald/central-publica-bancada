@@ -1,0 +1,51 @@
+[
+  {
+    "tipo": "ROTA",
+    "rota_id": "formal.f1_2.dual_scaling_reuse_011",
+    "dominio": "FORMAL",
+    "titulo": "A escala dual do mesmo peso limite ja existe na A1 e no nucleo regular v351",
+    "pergunta": "A F1.2 precisa refazer a lei exp(-s) ou ligar o nucleo matricial continuo ao fornecedor existente?",
+    "dados": ["ORDEM 011 A1", "V351InverseLimitScaling", "V351RegularCoreTraceConstruction", "FiniteCrossedProduct"],
+    "metodo": "Consulta ao Nos vivo, leitura das entregas e dos enunciados canonicos; separacao entre grupo finito, nucleo regular e M_n cruzado pela reta.",
+    "resultado": "Lei de escala e contrato completo do traco regular existentes; equivalencia Lean explicita M_n cruzado por R para o nucleo regular ainda nao localizada.",
+    "veredito": "REAPROVEITAR_A1_PONTE_MATRICIAL_ABERTA",
+    "estatuto": "REAL",
+    "status": "EXAMINADA",
+    "olhou_dados": false,
+    "defeito": "A existencia do traco regular nao constroi a equivalencia matricial continua nem o certificado fisico da luz.",
+    "nao_refazer": "Os termos scalarInverseLimitWeight_dual e scalarInverseLimitTraceData ja foram entregues; novo trabalho com o mesmo alvo duplicaria A1.",
+    "proximo_passo": "Formalizar representacao covariante M_n cruzado por R e equivalencia que entrelaca acao dual, depois transportar o traco em sandbox.",
+    "onde": "ORDEM_019/F1.2/REAPROVEITAMENTO.md",
+    "artefatos": [
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.2\\RESULTADO.json",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.2\\PONTE_MATRICIAL_CONTRATO.md"
+    ],
+    "refs": [],
+    "nota": "Sem execucao Lean nova nesta inspecao; o elo explicito permanece OPEN."
+  },
+  {
+    "tipo": "ROTA",
+    "rota_id": "infra.ordem018.estado_encadeado",
+    "dominio": "INFRA",
+    "titulo": "Estado curto da ORDEM 018 e indice encadeado dos recibos legados",
+    "pergunta": "Como achar o estado corrente e os recibos da ORDEM 018 sem ampliar o relatorio historico?",
+    "dados": ["Quadro IALD", "117 recibos JSON correntes na raiz da ORDEM 018"],
+    "metodo": "Script gera ESTADO.md e INDICE.md com backup atomico; verifica livro JSONL por cadeia sha256 e detecta adulteracao.",
+    "resultado": "117 recibos indexados; um arquivo RECIBO_*.json.bak_* explica a contagem historica 118.",
+    "veredito": "ESTADO_GERADO_RECIBOS_INTEGROS",
+    "estatuto": "REAL",
+    "status": "EXAMINADA",
+    "olhou_dados": false,
+    "defeito": "O indice confere integridade de bytes, nao valida o conteudo cientifico de cada recibo; backups do transporte nao foram arquivados.",
+    "nao_refazer": "Reexecutar o gerador idempotente quando o quadro mudar; preservar relatorio e recibos originais.",
+    "proximo_passo": "Auditoria da gerencia; arquivar backups de sessoes comprovadamente encerradas com manifesto antes/depois, em coordenacao com F9.2.",
+    "onde": "ORDEM_019/F9.5/build_order18_state.py",
+    "artefatos": [
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F9.5\\RESULTADO.json",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\ESTADO.md",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\recibos.jsonl"
+    ],
+    "refs": [],
+    "nota": "Nenhum recibo legado movido ou apagado."
+  }
+]

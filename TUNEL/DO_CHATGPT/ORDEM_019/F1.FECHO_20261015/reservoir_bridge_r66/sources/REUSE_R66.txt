@@ -1,0 +1,83 @@
+R66 — reaproveitamento focal; candidato documental
+Referência: C:\IALD\Central de Patentes\work\memoria_missao_20261016\FECHO_MISSION_REFERENCE.json
+Fonte/pinos: SOURCE_PINS_R66.json;12fontes na busca lexical e fornecedores diretos identificados abaixo.
+
+REUSE_GENERATOR — EXISTE_LIGADO_FINITO
+liouvillian(h,jumps) e direct_generator(h,jumps,rho), convenção vec por colunas. H completo inclui frequências, Jaynes–Cummings e Omega*(sigma_plus+sigma_minus); cinco canais são preservados.
+Uso: Comparar o gerador construído de reservatório/colisão com esta forma sem reconstruir matriz64. A lista armazena (taxa,operador), não colapsos já ponderados.
+Limite: O a matricial2x2 é corte0/1, não o abaixador bosônico infinito. O novo desenvolvimento por setores de número deve usar sqrt(n) e provar compatibilidade, não identificar matrizes hardcore com operadores ordinários.
+Âncoras: finite_helpers:53–68; finite_model:163–191
+
+REUSE_COMMON_BATH — EXISTE_CONTRATO_CONDICIONAL; COLISAO_UNITARIA_EXATA_A_CONSTRUIR
+R64 especifica5banhosproduto no vácuo, S=I e cinco colapsos. O quinto é sqrt(lambda)*(A+B), A=ao†sigma_minus, B=sigma_plus*ai. Portanto é UM canal comum às duas parcelas, embora independente dos quatro outros banhos. Custo já fornece rota espectral de Davies/KMS por correlações de banho.
+Uso: Acoplar o mesmo ancilla/campo ao J completo preserva os termos cruzados. Para uma construção por colisões, alvo Phi_dt(rho)=Tr_aux[U_dt(rho tensor eta_aux)U_dt†], com (Phi_dt-Id)/dt convergindo ao gerador completo no domínio declarado.
+Limite: Nenhuma U_dt unitária exata e limite de colisões para este J foi localizada nas fontes inspecionadas. KMS/Davies secular não pode separar A,B e chamar o resultado D[J]; R65 mostra a obstrução relativa a h0 livre fora da ressonância. Não é impossibilidade geral de reservatório dirigido/não secular.
+Âncoras: output_HP:5–17; output_contract:11–19; bare_frequency:4–15; Davies_source:11190–11237
+
+REUSE_DISCRETE_INSTRUMENT — KNOWN_FONTE_CUSTODIADA; NAO_UNIDADE_MICROSCOPICA_PRONTA
+Artigo já custodiado em R64, sec2.3: M0=I−iHdt−L†Ldt/2, M1=L sqrt(dt); instrumento difusivo Mr=I−iHdt−L†Ldt/2+sqrt(eta)Lr. A média recupera a evolução não condicionada.
+Uso: Reaproveitar a expansão de primeira ordem e convenções para o limite de um instrumento de colisões; não recalcular os correladores de R64.
+Limite: Os operadores truncados em dt não são, por essa fórmula sozinha, isometria/TP exata para todo dt finito; não confundir esta discretização assintótica com U_dt exata já construída. Nenhuma consulta web nova.
+Âncoras: output_literature:377–424; output_literature:475–492; output_literature:584–610
+
+REUSE_DRIVE_FRAME — EXISTE_LIGADO_FINITO_COM_INPUT_NOMEADO
+R57 LAB_PHASE_LOCKED_DRIVE escreve h_lab=h0+Omega(e^{-iwdt}sigma_plus+e^{iwdt}sigma_minus), N=ni+no+ne e R=e^{iwdtN}; demonstra h_rot e transporte dos canais. R7 distingue micro-ondas Omega*sigma_x de injeção óptica/EOM. R65 registra que input coerente contínuo requer deslocamento e Hamiltoniano óptico correspondente.
+Uso: O drive OH limitado pode ser reinserido na extensão bosônica, com sua normalização Omega (sem1/2). Transporte LO de R64 theta_rot=theta_lab+wd*t. Conservar o sistema completo na comparação.
+Limite: O deslocamento de campo que deriva um drive óptico do reservatório coerente não foi implementado nessas peças; não confundir esse drive com micro-ondas. Fórmulas R57 são verificadas no corte; extensão e controle de domínio do gerador infinito são nova obrigação.
+Âncoras: frame_R57:182–197; frame_R57:243–249; R7_clock:44–79; calibration:91–108
+
+REUSE_TEMPORAL_READOUT — EXISTE_LIGADO_CONDICIONAL
+dBout=dBin+Ldt, M_theta, ordem temporal, ruído delta/2, ODEs para rho,u,v e decoder de modos filtrados já construídos. R65 transporta tempo, taxas, colapsos sqrt(t0), filtros e LO.
+Uso: Uma dilatação nova que descarregue as hipóteses de R64 pode consumir diretamente esse instrumento e seus controles anteriores.
+Limite: O modo temporal B_f contém campo incidente e integral de a(t); não é a_out num instante, nem vetor de H1 espacial identificado por nome. A correspondência instrumental permanece condicional à mesma porta e estado de entrada.
+Âncoras: output_contract:21–56; output_HP:5–17; output_runner:46–76; calibration:40–58
+
+REUSE_FOCK_MODE_EMBEDDING — EXISTE_CINEMATICA; FATORIZACAO_COMPLETA_NAO_LOCALIZADA_NO_RECORTE
+F1.REDE constrói F=lp(Sector n)2; setores simétricos são fechos de spans das potências tensoriais. Há sectorEmbedding, oneParticle, vácuo e ortogonalidade. R63 escreve inclusão V0/1 para fi,fo ortonormais:Omega,fi,fo,(fi tensor fo+fo tensor fi)/sqrt2, estendida por identidadeOH.
+Uso: Para a família totalN≤m, reutilizar esses setores e construir os vetores de ocupação normalizados de fi/fo em cada setor. Os dados fi,fo continuam INPUT até ligação aos modos físicos.
+Limite: V0/1 é derivação cinemática escrita, não theorem Lean de fatorização F≅F(span{fi,fo})tensorF(perp). Não localizei tal fatorização completa nos10módulos de F1.REDE/fock_construction consultados. BosonicTwoParticle usa seu setor fixo por flip; BosonicSectors usa fecho de spans diagonais: comparar as interfaces antes de tratá-las como definicionalmente idênticas.
+Âncoras: Fock:17–55; Sectors:22–34; Sectors:93–118; DirectSum:51–75; TwoParticle:38–69; receiver_modes:78–90
+
+REUSE_SPATIAL_PACKETS — EXISTE_COMPILADO_REUTILIZAVEL
+CompactPacket, packetSpace, inclusões literais isométricas e compatibilidade; packet_union_closure=compactLocalized. complexPacket_union_dense fornece densidade no mesmo H1. Translação/Lorentz levam pacotes às imagens; incluem FutureLorentz e boost=B0.
+Uso: Escolher perfis de campo derivados do acoplamento físico dentro desses geradores e usar os refinamentos/densidade já prontos. Não exigir que cada pacote finito seja invariante pelo grupo.
+Limite: Não fornece ainda a igualdade de Gram/covariância dos modos do reservatório com circularSmear, ação microscópica ou limite dinâmico. Não reabrir a obstrução da torre produto como proibição de estados correlacionados.
+Âncoras: packets:19–61; packets:77–101; packets:144–189; complex_packets:14–44; complex_packets:54–78
+
+REUSE_NET_ACTION_FIELDS — EXISTE_NA_MESMA_REDE_CANONICA
+gamma(u) segunda quantização no mesmo H1, UF/VF e covariância; rede FieldWeyl.R(compactLocalized), covariância translacional e FutureLorentz; circularSmearCLM e transporte Segal/campo normalizado com amplitude fixa sqrt((2pi)^−3).
+Uso: Após construir o mapa de modos e sua compatibilidade espacial, consumir esses entrelaçamentos e a covariância pronta. gamma aqui recebe u:H1≃liH1; a interface não é uma segunda quantização genérica de qualquer inclusão entre Hilberts distintos.
+Limite: Não inferir Fock temporal HP=Fock Maxwell por isomorfismo abstrato. A igualdade de produto interno, suporte/localização, representação e o transporte do gerador no domínio devem vir do mapa físico.
+Âncoras: Fock_actions:16–23; Fock_actions:47–69; physical_net:18–49; net_covariance:28–87; Segal_transport:58–118; circular_field:24–32; circular_field:90–158
+
+Próxima composição (não executada nesta revisão):
+Banho/colisão: construir unidade por passo para J inteiro e canais convencionais, provar expansão e limite; conservar H e termo OH. Não trocar D[A+B] por soma independente.
+Bosônico: usar setores por totalN e abaixadores sqrt(n); provar compatibilidade de cortes, extensão conservativa em classe-traço e controle de domínio. Reintroduzir driveOH limitado requer teorema de perturbação/produto adequado, não só finitude de matrizes.
+Rede: construir perfis de teste F_j(f) a partir da porta/acoplamento, com K(f)=circularSmear(F_j(f)); provar igualdade de Gram (ou limite controlado), suporte e covariância. Depois usar pacotes densos e gamma/campo existentes.
+Instrumento: transportar o mesmo estado, porta, campo incidente, LO/filtro e escala ao contrato R64; somente então declarar que as hipóteses dessa realização foram descarregadas.
+
+Caminhos e hashes completos:
+finite_helpers | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\mission_audit_r62\finite_device_functions_r62.py | be3d3b21f7a5e8e0c8db812c44d6dd599b84613f5b5fcbd53cc054b01a54d069
+finite_model | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\finite_device\run_finite_device.py | 89332d76e3fdcbf67f50e8328dfd9316196d7ef18ccf710666eb544426aa17be
+frame_R57 | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\device_clock_r57\derive_polarization_r57.py | 2acbe17805e7b8c9adfecafa113c64e14fb6c73c8669be301b4d17084079b8fc
+R7_clock | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.TEMPO.LEITURA_20261015\DISPOSITIVO_E_ESPECTRO_R7\CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt | 339c6f5a8bdb72f59f95fbefe4ac17e34830be7dd019ddd743955e6c4fed5be1
+output_contract | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\output_field_r64\output\CONTRATO_OUTPUT_R64.md | bb759be867d71b68b47154e46db2596e3e0b1926f01dfcc5128912cfee4767a1
+output_HP | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\output_field_r64\output\ADENDO_DILATACAO_INICIAL_R64.md | e9bc9b78354453b7c9ab7e30bff9c13c89304195bd7f49f065a0c2136bcada78
+output_runner | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\output_field_r64\output\run_filtered_output_r64.py | ec2c5d2201f1246ab83fc291ebb306c50abcf3805fc1353445f82ffdd968344c
+output_literature | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\output_field_r64\literature\2212.00176v2.html | a3942e07d4cd47425ed54bed9dec9cdde304d867f0c472f05f6736a507ff995b
+calibration | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\calibration_r65\calibration\CONTRATO_CALIBRACAO_R65.md | 245f97e48ad2da218ad4fe744e4a573c71e56b1aca72c12966ff2b50b58ff85f
+bare_frequency | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\calibration_r65\BARE_FREQUENCY_COVARIANCE_R65.txt | 31e04530030a8a3c8462e708f58bc2cb5b2d4269101f48b54d46174597efc250
+Davies_source | C:\IALD\Artigo\Haja_Luz\tgl_paper_unified.py | 29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd
+Fock | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicFock.lean | c7d24c14f9bb1c2a31c3b207a9f86e839577b6705c4b55b2aa6eab187450d3ec
+Fock_actions | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicFockGroupActions.lean | 0de93539839cb2086245b1eb9949744c4777bb7f77d359ffb95ed2eb3aab3975
+Sectors | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean | 83c5660c0505774c6899c8837f9719fabbf232403ae4fb10bd74d702633ed69b
+DirectSum | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\SectorDirectSum.lean | d7d6474ba95522ab1c381340abf0ec01a9a70333cebf5a684b9729f77269d0e3
+TwoParticle | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicTwoParticle.lean | ecc54d0032d279cddd7ac84ede268f5ce9aabf2f03d7dff03181d0aeb5d29d61
+receiver_modes | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\physical_receiver_r63\receiver\DERIVACAO_RECEPTOR_R63.md | 35982c445a98ab6cf28c1fe56e53a3269a921b4a3a01614ae787f17bab373f84
+packets | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\device_continuum_r57\CompactPacketRefinementR1.lean | 5b9a972b796d4e5d9d31198d2d15123d988bdd868fa6c5b0f024c0675627eea8
+complex_packets | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\device_continuum_r57\ComplexPacketLimitR1.lean | 50d41da1a4ebdd70adab47f824420f3d79f041be109bb1713f0b4a9ff9ecc9ca
+packet_residual | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\device_continuum_r57\RESIDUAL_TYPED_CONTRACT_R1.txt | 01c14d1b8bdc7d643535e67dd9e4a03284d2f060cca22116ead4a9ff2e75be14
+physical_net | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\PhysicalFockNetRealizationR2.lean | 9e79a29edbe9f8db10c49e5f27c88770e01e14cfa0789ffe519ed74fead92516
+net_covariance | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\PhysicalFockSpacetimeCovarianceR2.lean | 031bf92269ea7c1dd8c3c8e5f4d2703627fb77b0ec0ff09655a2276ed28555be
+Segal_transport | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\maxwell_global\FockSegalUnitaryTransportR1.lean | 0831edc3cb43b2b7a23daa5a1dddff3216d54aca73140306de457e239a60c328
+circular_field | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\maxwell_global\CircularPhysicalFieldTransportR1.lean | e6d97d5a50da58ae4b8d4d6a904404f5ac045d3a93f92cd77733c23b59c71983

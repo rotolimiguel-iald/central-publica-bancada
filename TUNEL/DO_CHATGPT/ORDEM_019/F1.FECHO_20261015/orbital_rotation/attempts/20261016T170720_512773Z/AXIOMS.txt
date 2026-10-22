@@ -1,0 +1,119 @@
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 131ms
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 118ms
+import took 60.7s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:42:8: error: typeclass instance problem is stuck
+  SMulZeroClass ?m.22 Fib
+
+Note: Lean will not try to resolve this typeclass instance problem because the first type argument to `SMulZeroClass` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+tactic execution of Lean.Parser.Tactic.exact took 46.2s
+elaboration took 410ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:71:16: error: Application type mismatch: The argument
+  Real.hasDerivAt_cosh 0
+has type
+  HasDerivAt Real.cosh (Real.sinh 0) 0
+but is expected to have type
+  HasDerivAt ?m.48 ?m.50 ((-id) 0)
+in the application
+  HasDerivAt.comp 0 (Real.hasDerivAt_cosh 0)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:73:16: error: Application type mismatch: The argument
+  Real.hasDerivAt_sinh 0
+has type
+  HasDerivAt Real.sinh (Real.cosh 0) 0
+but is expected to have type
+  HasDerivAt ?m.102 ?m.104 ((-id) 0)
+in the application
+  HasDerivAt.comp 0 (Real.hasDerivAt_sinh 0)
+interpretation of Mathlib.Tactic._aux_Mathlib_Tactic_Convert___elabRules_Mathlib_Tactic_convert_1._boxed took 126ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:76:10: warning: This simp argument is unused:
+  coordinateBoost
+
+Hint: Omit it from the simp argument list.
+  simp [̵c̵o̵o̵r̵d̵i̵n̵a̵t̵e̵B̵o̵o̵s̵t̵,̵ ̵s̵h̵e̵l̵l̵E̵n̵e̵r̵g̵y̵,̵[̲s̲h̲e̲l̲l̲E̲n̲e̲r̲g̲y̲,̲ momentumLongitudinalDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:116:50: error: Application type mismatch: The argument
+  sq_nonneg ?m.260
+has type
+  @OfNat.ofNat ?m.254 0 (@Zero.toOfNat0 ?m.254 instMulZeroClassOfSemiring.toZero) ≤ ?m.260 ^ 2
+but is expected to have type
+  @OfNat.ofNat ?m.249 0 (@Zero.toOfNat0 ?m.249 SubtractionMonoid.toSubNegZeroMonoid.toNegZeroClass.toZero) ≤ ?m.252
+in the application
+  abs_of_nonneg (sq_nonneg ?m.260)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:116:6: error: Type mismatch: After simplification, term
+  hy
+ has type
+  ‖r i y - d y‖ ^ 2 ≤ bound y
+but is expected to have type
+  |‖r i y - d y‖ ^ 2| ≤ bound y
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:123:10: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NoAtoms (orbitalMeasure 0)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:169:33: error(lean.unknownIdentifier): Unknown constant `LinearIsometryEquiv.refl_apply`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170720_512773Z\CompactBoostStrongDerivativeReductionR1.lean:169:2: error: Type mismatch: After simplification, term
+  ht
+ has type
+  @Tendsto ℝ (↥H1) (fun s => s⁻¹ • ((B0 s) h - h)) (𝓝[≠] 0) (𝓝 (compactBoostDerivative g hg hc))
+but is expected to have type
+  @Tendsto ℝ (↥H1) (fun t => t⁻¹ • ((B0 t) h - (LinearIsometryEquiv.refl ℂ ↥H1) h)) (𝓝[≠] 0)
+    (𝓝 (compactBoostDerivative g hg hc))
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_compact' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_memLp' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_square_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostDerivative_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.coordinateBoost_negative_hasDerivAt_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_profile_hasDerivAt_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_boost_generator_exists' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.orbitalL2_tendsto_of_square_majorant' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_hasDerivAt_of_square_majorant' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.125ms
+	blocked (unaccounted) 77.6s
+	compilation (IR) 0.0958ms
+	compilation (LCNF base) 1.41ms
+	compilation (LCNF impure) 0.373ms
+	compilation (LCNF mono) 0.611ms
+	congr simp thm 5.31ms
+	dsimp 15.9ms
+	elaboration 554ms
+	fix level params 0.8ms
+	import 60.7s
+	initialization 31.4ms
+	instantiate metavars 1.12ms
+	interpretation 8.46s
+	let-to-have transformation 2.4ms
+	linting 19.7ms
+	norm_num 26.2ms
+	overlappingInstancesLinter 35ms
+	parsing 10.7ms
+	process pre-definitions 8.76ms
+	share common exprs 7.38ms
+	simp 110ms
+	tactic execution 46.7s
+	tacticAnalysis 42.8ms
+	type checking 214ms
+	typeclass inference 34s

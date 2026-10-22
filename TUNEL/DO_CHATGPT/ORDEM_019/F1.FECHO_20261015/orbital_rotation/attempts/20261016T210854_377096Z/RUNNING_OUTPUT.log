@@ -1,0 +1,152 @@
+import took 47.9s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T210854_377096Z\CircularMaxwellCertificateR1.lean:52:95: error: unsolved goals
+D : CanonicalNetInput
+A : RemainingModularCoreInput D
+ψ : ↥F
+⊢ (ψ ∈ ↑axisCompactFockDomain ∧
+      (∀ (x : Fin 4 → ℝ),
+          Integrable
+            (fun p =>
+              p.1 *
+                pairing
+                  ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ)
+                    (x + (p.1 • nullDir + screenEmbed p.2)))
+                  nullDir nullDir)
+            volume) ∧
+        ‖ψ‖ = 1 ∧
+          (∀ (x : Fin 4 → ℝ),
+              Continuous fun u =>
+                pairing ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ) (x + u • nullDir)) nullDir
+                  nullDir) ∧
+            (∀ (x : Fin 4 → ℝ) (l : ℝ),
+                IntegrableOn
+                  (fun u =>
+                    pairing ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ) (x + u • nullDir))
+                      nullDir nullDir)
+                  (Ioi l) volume) ∧
+              ∀ (x : Fin 4 → ℝ) (l : ℝ),
+                IntegrableOn
+                  (fun u =>
+                    u *
+                      pairing ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ) (x + u • nullDir))
+                        nullDir nullDir)
+                  (Ioi l) volume) ↔
+    (gamma circularH1) ψ ∈ ↑axisCompactFockDomain ∧
+      (∀ (x : Fin 4 → ℝ),
+          Integrable
+            (fun p =>
+              p.1 *
+                pairing
+                  ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ)
+                    (x + (p.1 • nullDir + screenEmbed p.2)))
+                  nullDir nullDir)
+            volume) ∧
+        ‖(gamma circularH1) ψ‖ = 1 ∧
+          (∀ (x : Fin 4 → ℝ),
+              Continuous fun u =>
+                pairing ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ) (x + u • nullDir)) nullDir
+                  nullDir) ∧
+            (∀ (x : Fin 4 → ℝ) (l : ℝ),
+                IntegrableOn
+                  (fun u =>
+                    pairing ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ) (x + u • nullDir))
+                      nullDir nullDir)
+                  (Ioi l) volume) ∧
+              ∀ (x : Fin 4 → ℝ) (l : ℝ),
+                IntegrableOn
+                  (fun u =>
+                    u *
+                      pairing ((toStress (regularMaxwellCalibratedForm A)).T ((gamma circularH1) ψ) (x + u • nullDir))
+                        nullDir nullDir)
+                  (Ioi l) volume
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T210854_377096Z\CircularMaxwellCertificateR1.lean:54:4: warning: This simp argument is unused:
+  axisCompactFockDomain_circular
+
+Hint: Omit it from the simp argument list.
+  simp only [Regular, nullEnergy, circularCalibratedStress, a̵x̵i̵s̵C̵o̵m̵p̵a̵c̵t̵F̵o̵c̵k̵D̵o̵m̵a̵i̵n̵_̵c̵i̵r̵c̵u̵l̵a̵r̵,̵ ̵LinearIsometryEquiv.norm_map]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T210854_377096Z\CircularMaxwellCertificateR1.lean:54:36: warning: This simp argument is unused:
+  LinearIsometryEquiv.norm_map
+
+Hint: Omit it from the simp argument list.
+  simp only [Regular, nullEnergy, circularCalibratedStress, a̵x̵i̵s̵C̵o̵m̵p̵a̵c̵t̵F̵o̵c̵k̵D̵o̵m̵a̵i̵n̵_̵c̵i̵r̵c̵u̵l̵a̵r̵,̵ ̵L̵i̵n̵e̵a̵r̵I̵s̵o̵m̵e̵t̵r̵y̵E̵q̵u̵i̵v̵.̵n̵o̵r̵m̵_̵m̵a̵p̵]̵a̲x̲i̲s̲C̲o̲m̲p̲a̲c̲t̲F̲o̲c̲k̲D̲o̲m̲a̲i̲n̲_̲c̲i̲r̲c̲u̲l̲a̲r̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T210854_377096Z\CircularMaxwellCertificateR1.lean:69:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  fun t => inner ℂ ((gamma circularH1) ψ) ((lightDelta A.toCertificate t) ((gamma circularH1) ψ))
+in the target expression
+  HasDerivAt (fun t => inner ℂ ((gamma circularH1) ψ) ((lightDelta A.toCertificate t) ((gamma circularH1) ψ)))
+      (-(Complex.I * ↑k)) 0 ↔
+    HasDerivAt (fun t => inner ℂ ψ ((lightDelta A.toCertificate t) ψ)) (-(Complex.I * ↑k)) 0
+
+D : CanonicalNetInput
+A : RemainingModularCoreInput D
+ψ : ↥F
+k : ℝ
+he :
+  (fun t => inner ℂ ((gamma circularH1) ψ) ((lightDelta A.toCertificate t) ((gamma circularH1) ψ))) = fun t =>
+    inner ℂ ψ ((lightDelta A.toCertificate t) ψ)
+⊢ HasDerivAt (fun t => inner ℂ ((gamma circularH1) ψ) ((lightDelta A.toCertificate t) ((gamma circularH1) ψ)))
+      (-(Complex.I * ↑k)) 0 ↔
+    HasDerivAt (fun t => inner ℂ ψ ((lightDelta A.toCertificate t) ψ)) (-(Complex.I * ↑k)) 0
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    (gamma circularH1) ψ
+  has type
+    ↥F
+  but is expected to have type
+    A.toCertificate.F
+  in the application
+    inner ℂ ((gamma circularH1) ψ)
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 172ms
+'F1Fecho.MaxwellGlobal.circularCalibratedStress' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.circularCalibratedStress_regular_iff' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.circular_modularEnergy_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.circularCalibratedStress_charge_link' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.circularCalibratedStress_nontrivial' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.circularMaxwellCertificate' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.circularMaxwellCertificate_dense' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.circularLocalWickStress_eq_certificate' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.normalizedCircular_annihilation_point_integral' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.circular_point_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0846ms
+	blocked (unaccounted) 8.85ms
+	congr simp thm 4.55ms
+	elaboration 177ms
+	fix level params 0.527ms
+	import 47.9s
+	initialization 29.8ms
+	instantiate metavars 0.326ms
+	interpretation 6.31s
+	let-to-have transformation 0.744ms
+	linting 7.17ms
+	overlappingInstancesLinter 11.6ms
+	parsing 7.19ms
+	process pre-definitions 18.9ms
+	share common exprs 6.31ms
+	simp 11.9ms
+	tactic execution 437ms
+	tacticAnalysis 24.9ms
+	type checking 294ms
+	typeclass inference 1.98s

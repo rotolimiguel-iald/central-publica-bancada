@@ -1,0 +1,131 @@
+import took 49.1s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T204650_618420Z\PointAnnihilationSmearingR3.lean:44:2: error: Type mismatch: After simplification, term
+  he
+ has type
+  @Eq (↥F) (regularFockDomain.subtype ((regularDiagonal v) ψ))
+    ((regularCoefficients ψ).sum fun h z => z • regularFockDomain.subtype (v h • ⟨exponential ↑h, ⋯⟩))
+but is expected to have type
+  @Eq (↥F) (↑((regularDiagonal v) ψ)) ((regularCoefficients ψ).sum fun h z => z • v h • exponential ↑h)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T204650_618420Z\PointAnnihilationSmearingR3.lean:43:64: warning: This simp argument is unused:
+  Submodule.coe_smul
+
+Hint: Omit it from the simp argument list.
+  simp only [LinearMap.comp_apply, regularDiagonal_exponential,̵ ̵S̵u̵b̵m̵o̵d̵u̵l̵e̵.̵c̵o̵e̵_̵s̵m̵u̵l̵] at he
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T204650_618420Z\PointAnnihilationSmearingR3.lean:50:8: warning: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T204650_618420Z\PointAnnihilationSmearingR3.lean:59:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : Spacetime), ∑ i ∈ ?m.49, ((regularCoefficients ψ) i • fun x => v x i • exponential ↑i) a ∂volume
+in the target expression
+  ∑ x ∈ (regularCoefficients ψ).support, (regularCoefficients ψ) x • (∫ (x_1 : Spacetime), v x_1 x) • exponential ↑x =
+    ∫ (x : Spacetime), ∑ x_1 ∈ (regularCoefficients ψ).support, (regularCoefficients ψ) x_1 • v x x_1 • exponential ↑x_1
+
+v : Spacetime → RegularLabel → ℂ
+hv : ∀ (h : RegularLabel), Integrable (fun x => v x h) volume
+ψ : ↥regularFockDomain
+⊢ ∑ x ∈ (regularCoefficients ψ).support, (regularCoefficients ψ) x • (∫ (x_1 : Spacetime), v x_1 x) • exponential ↑x =
+    ∫ (x : Spacetime), ∑ x_1 ∈ (regularCoefficients ψ).support, (regularCoefficients ψ) x_1 • v x x_1 • exponential ↑x_1
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    x
+  has type
+    RegularLabel
+  but is expected to have type
+    { h // StrongRegularProfile h }
+  in the application
+    ↑x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T204650_618420Z\PointAnnihilationSmearingR3.lean:73:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?r * ∫ (a : ?m.90), ?f a ∂?m.92
+in the target expression
+  ∫ (y : ChatgptAudit.WignerRapidityMeasure016.MomentumCoordinates),
+      (starRingEnd ℂ) (f x μ ν) * wavePhase x y *
+        profileDensity (↑h) μ ν y ∂ChatgptAudit.WignerRapidityMeasure016.orbitalMeasure 0 =
+    (fun x =>
+        (starRingEnd ℂ) (f x μ ν) *
+          ∫ (y : ChatgptAudit.WignerRapidityMeasure016.MomentumCoordinates),
+            wavePhase x y * profileDensity (↑h) μ ν y ∂ChatgptAudit.WignerRapidityMeasure016.orbitalMeasure 0)
+      x
+
+f : SchwartzTensor
+h : RegularLabel
+μ ν : Fin 4
+hi :
+  Integrable
+    (fun x =>
+      ∫ (y : ChatgptAudit.WignerRapidityMeasure016.MomentumCoordinates),
+        (starRingEnd ℂ) ((componentTest f μ ν) (x, y).1) * wavePhase (x, y).1 (x, y).2 *
+          profileDensity (↑h) μ ν (x, y).2 ∂ChatgptAudit.WignerRapidityMeasure016.orbitalMeasure 0)
+    volume
+x : Spacetime
+⊢ ∫ (y : ChatgptAudit.WignerRapidityMeasure016.MomentumCoordinates),
+      (starRingEnd ℂ) (f x μ ν) * wavePhase x y *
+        profileDensity (↑h) μ ν y ∂ChatgptAudit.WignerRapidityMeasure016.orbitalMeasure 0 =
+    (fun x =>
+        (starRingEnd ℂ) (f x μ ν) *
+          ∫ (y : ChatgptAudit.WignerRapidityMeasure016.MomentumCoordinates),
+            wavePhase x y * profileDensity (↑h) μ ν y ∂ChatgptAudit.WignerRapidityMeasure016.orbitalMeasure 0)
+      x
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    h
+  has type
+    RegularLabel
+  but is expected to have type
+    { h // StrongRegularProfile h }
+  in the application
+    ↑h
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 280ms
+'F1Fecho.MaxwellGlobal.regularDiagonal_add_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularDiagonal_smul_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularDiagonal_value_expansion' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.regularDiagonal_integrable' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularDiagonal_integral' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.scalarTest_profileWave_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.pointTestEigenvalue_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.pointTestEigenvalue_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.pointAnnihilation_test_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.normalizedPointSmearEigenvalue_integrals' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.normalizedPhysical_annihilation_point_integral' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.119ms
+	congr simp thm 1.99ms
+	elaboration 186ms
+	fix level params 0.883ms
+	import 49.1s
+	initialization 29ms
+	instantiate metavars 0.597ms
+	interpretation 6.43s
+	let-to-have transformation 0.292ms
+	linting 6.61ms
+	norm_num 3.54ms
+	overlappingInstancesLinter 13ms
+	parsing 6.89ms
+	process pre-definitions 19.9ms
+	ring 69.2ms
+	share common exprs 11ms
+	simp 159ms
+	tactic execution 619ms
+	tacticAnalysis 26.6ms
+	type checking 385ms
+	typeclass inference 5.23s

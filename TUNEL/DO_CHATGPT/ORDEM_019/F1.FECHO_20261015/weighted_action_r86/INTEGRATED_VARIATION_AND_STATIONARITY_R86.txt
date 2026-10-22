@@ -1,0 +1,109 @@
+R86 — Variação integrada e uma direção admissível que refuta estacionariedade de P16
+19/10/2026. Em nome de codex-gerente-tgl. Reivindicação996; requisito R16 preservado.
+[DERIVED — demonstração analítica; cálculo local exato separado]
+
+1. Objetos e reuso
+U é uma carta aberta de dimensão4, g lorentziana suave não degenerada, v=√|det g|.
+∇ é Levi-Civita. R usa a convenção coordinateRicci de MetricCurvatureSymmetries.
+Seja h_ab=δg_ab, H^ab=g^ac g^bd h_cd e h=g^ab h_ab. O peso f é escalar suave;
+δf é sua variação TOTAL, não presumidamente zero. R83 já separa δg^{-1}Ric,
+δv e Rδf; R85 identifica g^{-1}δRic com ∇W da conexão realmente variada.
+Nesta nota os passos restantes são provados analiticamente; a compilação Lean
+R86 cobre só os enunciados especificados em sua entrega, não toda esta nota.
+
+2. A corrente ponderada, incluindo os dois termos que faltavam
+A fórmula de variação de Levi-Civita é
+ C^a_bc=1/2 g^ad(∇_b h_dc+∇_c h_db−∇_d h_bc).
+Contraindo e usando ∇g=0 e h simétrica:
+ g^bc C^a_bc = ∇_b H^ab−1/2 ∇^a h,
+ g^ba C^j_jb = 1/2 ∇^a h.
+Portanto W^a=∇_b H^ab−∇^a h. Não é hipótese de contorno.
+Pela regra do produto aplicada duas vezes,
+ f ∇_a W^a = ∇_a B^a + (∇_a∇_b f−g_ab □f) H^ab,
+ B^a=f W^a−(∇_b f)H^ab+(∇^a f)h.
+De fato, ∇_a B^a=f∇_aW^a−H^ab∇_a∇_b f+h□f:
+os quatro produtos de primeiras derivadas cancelam por H simétrico.
+Esta é uma identidade diferencial; não requer equações de movimento.
+
+Juntando δv=v h/2, δg^ab=−H^ab, δR=−Ric_ab H^ab+∇W:
+ δ(v f R)=v[−f G_ab H^ab+(∇_a∇_b f−g_ab□f)H^ab+Rδf]
+             + ∂_a(v B^a).                                      (I)
+Usa-se ∂_a v=v Γ^b_ba, de modo que v∇B=∂(vB).
+Se f=f(s), Rδf=R f'(s)δs. Se f depende da métrica ou de derivadas
+de campos, sua variação correspondente permanece em Rδf e precisa ser
+expandida; a forma escalar não autoriza omitir essa parcela.
+
+3. Ação integrada e contorno realmente admissível
+Escolha uma caixa Ω relativamente compacta em U e variações suaves com suporte
+compacto no INTERIOR de Ω. A família mantém g não degenerada para ε pequeno.
+No suporte compacto, a suavidade da família dá majorante integrável para a
+derivada; fora dele, a diferença de densidades é zero. Portanto pode-se trocar
+derivada e integral por convergência dominada. Pela identidade (I) e pelo teorema
+fundamental em cada coordenada, ∫Ω∂_a(vB^a)=0: h e todas suas derivadas se
+anulam numa vizinhança da fronteira. Isto não supõe h=0 apenas na fronteira.
+
+Para variações que alcançam a fronteira, o termo é o fluxo coordenado
+Σ_a[∫face+a vB^a−∫face−a vB^a]; não foi descartado. Variações Dirichlet
+de g apenas não anulam em geral suas derivadas normais; uma ação com fronteira
+física exigiria condições adicionais ou termo de fronteira apropriado.
+Não se afirma que GHY ponderado ou fronteiras nulas estejam construídos aqui.
+O cálculo com suporte compacto basta para as equações LOCAIS, não resolve por
+si só a seleção das condições físicas globais.
+
+4. O setor composto R85: equações necessárias E suficientes para criticidade local
+Para o setor explicitamente delimitado
+ S_red[P]=∫Ω v(P)[F_c R(P)+A(s(P))+B(s(P))q(P)],
+ q=g^{-1}(ds,ds), F_c constante, A=c_G/[4(1−s)], B=c_G/[8s(1−s)^2],
+a identidade R85 de redução sigma vale para toda P admissível, não só em P16.
+Variação e integração por partes do termo cinético dão
+ δS_red=∫Ω v[−E^ab h_ab+E_s δs],
+ E_ab=F_c G_ab−T_eff,ab/2,
+ T_eff,ab=(A+Bq)g_ab−2B(∂_a s)(∂_b s),
+ E_s=A'(s)−B'(s)q−2B(s)□s.
+A corrente escalar adicional é 2vB∇^a s δs e também tem suporte interior.
+
+No aberto de P16 onde a matriz normal M é invertível, R85 constrói um
+levantamento suave de todo par (h,δs) de suporte compacto a uma curva P_ε
+normalizada, positiva, com relógio não nulo e Fisher de posto4.
+Logo, pelo lema fundamental aplicado componente a componente:
+ P é crítico para TODAS essas curvas ⇔ E_ab=0 e E_s=0 no aberto.
+O sentido direto usa os levantamentos; o inverso usa a fórmula de primeira
+variação. Isso identifica a tarefa dinâmica, não demonstra E=0 por definição.
+Nas regiões onde M perde posto, a equivalência livre não foi estabelecida.
+
+5. Teste do próprio habitante P16, sem parâmetros ajustados
+O script p16_stationarity.py, pinado ANTES da execução em P16_PLAN_R86.json,
+calcula os jets exatos de F=r²[dv·dv/N−(v·dv)^2/N²]+4 dz²/r²,
+v=(1,x_a,q_ab), N=v·v, z=1+x0, r²=4−z². A rotação ortogonal constante
+O que torna P positivo desaparece de todos esses produtos escalares.
+Calcula g pela reflexão de R85 e seus dois primeiros jets pela identidade
+de Schur g00=F00−2bᵀD^{-1}b, g0i=−F0i, gij=−Fij. Na origem b=0.
+Calcula Γ, ∂Γ e Ricci na convenção das fontes pinadas. O resultado é:
+ g=diag(13/3,−3,−3,−3), Ric=diag(19/13,−31/169,−31/169,−31/169),
+ R=88/169, □s=5/338, E_s=740c_G/1521.
+Para k=(1,√13/3,0,0), g(k,k)=0 e
+ E(k,k)=140F_c/117+2c_G/9 > 0, para F_c,c_G positivos.          (II)
+As cinco verificações exatas e a duração estão em P16_RESULT_R86.json.
+Nenhum acoplamento foi selecionado para zerar o resíduo.
+
+6. De resíduo pontual a variação compacta: falsificador de estacionariedade
+Prolongue k pelo mesmo vetor de coordenadas e forme k_flat(x)=g(x)k.
+Por continuidade e (II), há uma bola pequena onde E_ab(x)k^a k^b>0.
+Escolha nela χ≥0 suave, de suporte compacto, não identicamente zero.
+Tome h_ab=χ k_flat,a k_flat,b e δs=0. O levantamento normal R85 produz
+uma curva admissível P_ε com essas variações. Seu suporte cabe na caixa Ω.
+Então δS_red=−∫Ω v χ E_ab k^a k^b<0. A parcela escalar é zero e não
+há fluxo de fronteira. Portanto ESTE P16 NÃO é estacionário nesse setor,
+para quaisquer F_c,c_G>0. A prova não depende de manter k nulo fora da origem.
+Também E_s≠0, independentemente de F_c; ambas as obstruções são consistentes.
+
+7. Consequência para o objetivo integral
+Já temos um habitante geométrico com alcance variacional e uma variação que
+testa sua dinâmica, não só um contrato com campos chamados estacionários.
+Ele não é solução do setor reduzido. Para a ação completa, termos adicionais
+podem modificar E e E_s; sua fonte deve ser derivada, não escolhida como
+−E para fabricar cancelamento. Não há refutação da TGL completa aqui.
+Faltam a identificação de todos os campos/termos no mesmo registro P, sua lei
+de seleção dinâmica e uma construção que satisfaça as equações resultantes.
+O objetivo R16 permanece integral e aberto. Nenhum dado observado, β ajustado,
+kernel canônico, um.py, produção ou gate foi alterado.

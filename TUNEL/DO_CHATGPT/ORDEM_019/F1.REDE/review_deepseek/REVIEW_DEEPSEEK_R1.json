@@ -1,0 +1,200 @@
+{
+  "unit": "F1.REDE",
+  "reviewer": "codex-memory_scope",
+  "created_utc": "2026-10-13T21:39:37.797447+00:00",
+  "status": "REVIEWED_DECLARADO_SELECTIVE_REUSE_NOT_C1_APPROVAL",
+  "response": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\provider\\DEEPSEEK_RESULT_R1.json",
+    "sha256": "5751c88e87cead6ded9670419eba9db6442a7796335c6bdbb664b225f57824c0",
+    "bytes": 138181
+  },
+  "response_text_sha256": "2452e6676b53b439b242cd823fcf0780204e3581c25922ee99c996b5f55ffabc",
+  "response_text_chars": 43961,
+  "response_text_lines": 713,
+  "response_json_parsed": true,
+  "contract": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R1.json",
+    "sha256": "2e22e203bb3329f757353b7fab0297b1ff00e441973c2af33f178ff7ba9fb4cf",
+    "bytes": 19785
+  },
+  "deliverable_class": "Roadmap plus named hypotheses; no new Lean code, compiled inhabitant, 4D representation, or 4D local network supplied.",
+  "reusable": [
+    "Four-layer decomposition: cell, finite network, protocol, continuous localized network; most already present in R1.",
+    "Correct raw qubit coherence bound abs(rho01)<=1/2; preserve the chosen normalization and its domain.",
+    "Correct distinction between classical root/sign encoding and a CPTP channel.",
+    "Correct distinction between dissipative GKLS evolution and modular automorphisms, after removing the unsupported shared-generator claims.",
+    "Useful proposal for a small nontrivial finite model with independently checkable local algebras and channel, under explicit hypotheses."
+  ],
+  "findings": [
+    {
+      "id": "DS1",
+      "severity": "MATERIAL_TYPE_ERROR",
+      "provider_text_lines": [
+        113,
+        282,
+        331,
+        684
+      ],
+      "finding": "A(O) subset B(H1) conflates the one-particle standard-subspace network with its Weyl algebra network; literal reuse of H1/U1/B0 on one finite site is invalid.",
+      "correction": "Keep K(O) in canonical H1; represent local Weyl algebras on Gamma_s(H1). A finite cell uses its own finite Hilbert space. Any relation to H1 needs the controlled limit and intertwiner already required by R2.",
+      "evidence": "TheImportedSecondQuantization.lean:89-95,132-134,168-214 separates H1, F, the injection and R."
+    },
+    {
+      "id": "DS2",
+      "severity": "MATERIAL_UNJUSTIFIED_IDENTIFICATION",
+      "provider_text_lines": [
+        140,
+        141,
+        335,
+        336,
+        376,
+        562
+      ],
+      "finding": "Shared K_boundary=-log Delta is asserted for the patented GKLS and the modular flow without a derivation; the jump sqrt(beta)*sqrt(K_boundary) is not justified on the full modular space. Also beta is incorrectly made the coupling of every jump.",
+      "correction": "Keep the explicit patented jump and conventional dissipative rates distinct. Prove any GKLS/modular identification with an explicit positive operator and domain. In the existing continuous model deltaSymbol=exp(-2*c*x), so -log Delta is multiplication by 2*c*x and has both signs for c>0. It cannot serve as a nonnegative jump intensity without an additional construction.",
+      "evidence": "FourierLightRayBridge.lean:47-58; Supercondutor.tex:348-354."
+    },
+    {
+      "id": "DS3",
+      "severity": "MATERIAL_UNTYPED_NORMALIZATION",
+      "provider_text_lines": [
+        128,
+        129,
+        289,
+        290,
+        298,
+        299,
+        340
+      ],
+      "finding": "tau(P_F)=1, reflected/transmitted trace weights, one Planck area per face and the Three-Locks identification are carried into the device/net without defining the receiving algebra, trace and projection.",
+      "correction": "Preserve those as historical/model-specific statements until the maps are supplied. A nonzero finite semifinite trace belongs on the appropriate continuous core/corner, not automatically on a type III1 local algebra; name that core and the embedding of P_F. No assertion of a fixed physical cell face area follows from the geometry alone.",
+      "evidence": "Contract R1 N4,N6,N8; TheImportedSecondQuantization.lean:61-62,231 onward distinguishes the core."
+    },
+    {
+      "id": "DS4",
+      "severity": "MATERIAL_MISSING_CONDITIONS",
+      "provider_text_lines": [
+        216,
+        232,
+        373,
+        375,
+        624,
+        684
+      ],
+      "finding": "A unique stationary state and non-CP inverse are not consequences of an arbitrary finite GKLS generator. Purely Hamiltonian evolution is a GKLS counterexample to the generic irreversibility claim; zero/dephasing generators need not be primitive.",
+      "correction": "Name and verify primitivity/irreducibility or strict contraction, plus fidelity when needed for modular inversion. Apply the inverse-Choi control only to a demonstrably nonunitary dissipative channel. Treat the historical negative eigenvalue as a result for its original channel, not a universal theorem."
+    },
+    {
+      "id": "DS5",
+      "severity": "MATERIAL_CAUSALITY_CRITERION",
+      "provider_text_lines": [
+        359,
+        362,
+        363,
+        400,
+        694
+      ],
+      "finding": "The scalar root representation is not a Lorentzian metric, and a bound on group velocity d omega/dk is not by itself the relativistic no-signalling/front-velocity criterion.",
+      "correction": "State what is transported and its operational support. Use metric null cones/front response or commutator/propagation bounds, with units and continuum limit; graph locality alone is insufficient. Keep information/correlation/inscription distinct from physical propagation. The parent has independently checked MQC Eq.18 and will add the metric calculation in R2; no new result is asserted here."
+    },
+    {
+      "id": "DS6",
+      "severity": "LOCAL_NUMERIC_CORRECTION",
+      "provider_text_lines": [
+        9,
+        35,
+        118,
+        159,
+        366,
+        538
+      ],
+      "finding": "The printed beta is a historical literal and differs from the requested runtime formula; OH frequency is mistranscribed by a factor 1000 at line 159.",
+      "correction": "Recompute beta from the pinned ALPHA constant. Source 1.667{,}359 MHz means 1667.359 MHz = 1.667359 GHz, not 1.667359 MHz. Keep MQC optical resonance and Supercondutor OH transition separate.",
+      "computed_beta": 0.012031300400803142,
+      "remote_beta": 0.012031300400796606,
+      "difference": -6.536438057480609e-15,
+      "evidence": "Current um.py ALPHA assignment, read only; Supercondutor.tex:366-370."
+    },
+    {
+      "id": "DS7",
+      "severity": "CONDITION_AND_TYPING",
+      "provider_text_lines": [
+        125,
+        130,
+        170,
+        243,
+        249,
+        348,
+        355
+      ],
+      "finding": "Normalized coherence divides by sqrt(rho00*rho11), g_max requires a bounded nonzero domain, and the proposed superposition falsifier is not a well-typed channel-affinity test.",
+      "correction": "Require rho00*rho11>0 or define boundary convention; use 2*abs(rho01) when that is the chosen normalization. Require 0<g_max<infinity with a specified bound or attained maximum. If someone claims a density-operator channel, specify it and test affine mixtures/Choi; do not apply a scalar encoding to ket expressions."
+    },
+    {
+      "id": "DS8",
+      "severity": "PROVENANCE_SCOPE",
+      "provider_text_lines": [
+        388,
+        498,
+        501,
+        515,
+        704
+      ],
+      "finding": "Several current-status claims come from the supplied v391 snapshot/historical text, including the purported no-go evasion and a single global open theorem. They do not re-audit the authorized v392 contract.",
+      "correction": "Retain the response as DECLARADO and attach contemporary evidence rather than importing historic statuses. The Fewster-Verch qualification and two contract obligations are already being added in R2. Fubini progress after R1 is not counted as a defect of this response.",
+      "memory_generation": "f9096efaabee6edfa3c4fe9f90cdf95fc64df34242b1d6e363f62b441238a276",
+      "snapshot_built_at": "2026-10-07T23:40:00.476337+00:00"
+    }
+  ],
+  "immediately_implementable": {
+    "scope": "Finite synthetic diagnostic/habitant; not a 4D realization or a nature test.",
+    "recipe": [
+      "Reuse the existing finite GKLS/unique-attractor work before writing new code.",
+      "Choose two finite cells and define tensor-factor local algebras explicitly; prove isotony and disjoint-support commutation.",
+      "Use a self-adjoint coupled Hamiltonian and explicit jump operators with nonnegative independently named rates; beta multiplies only the prescribed holographic term.",
+      "Either prove a named primitivity criterion or include an explicitly declared positive depolarizing control that makes the stationary state unique and faithful. The latter is a control model, not an inferred feature of the patent.",
+      "Check trace preservation, channel Choi positivity, stationary residual, spectral gap and dependency on cutoffs in the synthetic instance; report model-specific results.",
+      "Keep the canonical H1/BGL construction on its separate current path; completion of vector Fubini enables the partial Fourier and positive modular multiplier work already assigned."
+    ],
+    "not_useful_to_repeat": [
+      "Random-state tests for the already elementary coherence inequality.",
+      "Re-executing the provider call.",
+      "Retyping all proposed structures verbatim, which would preserve the errors above."
+    ]
+  },
+  "source_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+      "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e",
+      "bytes": 76972
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\cadeia_de_selo\\v392\\kb_stub_v392\\TGLExt\\TheImportedSecondQuantization.lean",
+      "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+      "bytes": 35835
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\FourierLightRayBridge.lean",
+      "sha256": "33b41225e02c5b6c023bc501477c3ef1d754aba9f3f4c365b9f6e69d289d52d1",
+      "bytes": 4252
+    }
+  ],
+  "alpha_check": {
+    "source": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\um.py",
+      "sha256": "b590c0aa80055e2a6916692f0808544093e79c0631e29cc15e376d5b07773e26",
+      "bytes": 35399393
+    },
+    "line": 5584,
+    "identifier": "ALPHA_FINE_CODATA_2018",
+    "value": 0.0072973525693,
+    "formula": "alpha*sqrt(e)",
+    "beta": 0.012031300400803142,
+    "um_imported_or_executed": false,
+    "note": "The current file hash is recorded only for this read-only constant check; no transfer of version-specific scientific results is made."
+  },
+  "previous_review_findings": "RC1/RC2 already accepted for R2; not re-audited or reopened here.",
+  "writes": "Only this new review_deepseek/REVIEW_DEEPSEEK_R1.json; no previous artifact or production changed.",
+  "provider_calls": 0,
+  "experiments_executed": 0
+}

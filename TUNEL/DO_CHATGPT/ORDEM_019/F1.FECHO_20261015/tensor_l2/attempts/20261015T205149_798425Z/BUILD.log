@@ -1,0 +1,54 @@
+{
+  "start_utc": "2026-10-15T20:51:49.933422+00:00",
+  "end_utc": "2026-10-15T20:53:57.450744+00:00",
+  "seconds": 127.51731969999673,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T205149_798425Z\\L2UnitaryMapR1.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T205149_798425Z\\L2UnitaryMapR1.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T205149_798425Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T205149_798425Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T205149_798425Z\\L2UnitaryMapR1.lean",
+    "sha256": "809dfacf343c46d3a9ad70f05f3764a49e7363cf9314cf4c267e3cc095f393b8",
+    "bytes": 1561
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205149_798425Z\L2UnitaryMapR1.lean:22:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((ContinuousLinearMap.compLpL 2 μ U.toLinearIsometry.toContinuousLinearMap) f) x
+in the target expression
+  ‖↑↑(↑(ContinuousLinearMap.compLpL 2 μ U.toLinearIsometry.toContinuousLinearMap) f) x‖ = ‖↑↑f x‖
+
+X : Type u_1
+E : Type u_2
+F : Type u_3
+inst✝⁴ : MeasurableSpace X
+inst✝³ : NormedAddCommGroup E
+inst✝² : InnerProductSpace ℂ E
+inst✝¹ : NormedAddCommGroup F
+inst✝ : InnerProductSpace ℂ F
+μ : Measure X
+U : E ≃ₗᵢ[ℂ] F
+f : ↥(Lp E 2 μ)
+x : X
+hx :
+  ↑↑((ContinuousLinearMap.compLpL 2 μ U.toLinearIsometry.toContinuousLinearMap) f) x =
+    U.toLinearIsometry.toContinuousLinearMap (↑↑f x)
+⊢ ‖↑↑(↑(ContinuousLinearMap.compLpL 2 μ U.toLinearIsometry.toContinuousLinearMap) f) x‖ = ‖↑↑f x‖
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205149_798425Z\L2UnitaryMapR1.lean:33:2: error: `toLinearIsometry` is not a field of structure `LinearIsometryEquiv`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205149_798425Z\L2UnitaryMapR1.lean:32:37: error: Fields missing: `toFun`, `map_add'`, `map_smul'`, `norm_map'`
+
+Field `toFun` must be explicitly provided; its synthesized value is
+  ⇑(map μ U)
+'F1Fecho.L2UnitaryMap.inverse' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.L2UnitaryMap.unitary_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,97 @@
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 154ms
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 151ms
+import took 68.7s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:28:39: warning: `SchwartzMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:33:39: warning: `SchwartzMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:74:4: warning: Try `simp at hz` instead of `simpa using hz`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:81:31: error: unsolved goals
+f : 𝓢(NullFourierSpace, ℂ)
+v : NullFourierSpace := (2 * Real.pi)⁻¹ • nullFrequencyDirection
+hv0 : v ≠ 0
+hv : ‖v‖ ≠ 0
+ht : Function.HasTemperateGrowth fun u => u • v
+u : ℝ
+⊢ ‖u‖ * ‖1 / (2 * Real.pi)‖ = ‖u • v‖ / ‖nullFrequencyDirection‖
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:67:84: error: unsolved goals
+case e_6.«2»
+f : 𝓢(NullFourierSpace, ℂ)
+v : NullFourierSpace := (2 * Real.pi)⁻¹ • nullFrequencyDirection
+hv0 : v ≠ 0
+hv : ‖v‖ ≠ 0
+ht : Function.HasTemperateGrowth fun u => u • v
+hb : ∃ k C, ∀ (u : ℝ), ‖u‖ ≤ C * (1 + ‖u • v‖) ^ k
+u : ℝ
+⊢ u * Real.pi⁻¹ * Fin.cons 1 0 2 * (1 / 2) = Real.pi⁻¹ * Fin.cons u 0 2 * (1 / 2)
+tactic execution of Mathlib.Tactic.FieldSimp.fieldSimp took 272ms
+tactic execution of Mathlib.Tactic.linarith took 185ms
+typeclass inference of CharZero took 185ms
+typeclass inference of CharZero took 182ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:116:2: error: Type mismatch: After simplification, term
+  ht
+ has type
+  RaySchwartz fun u =>
+    finiteKernel (fun h k => unitaryFourierCoherentNullStress (↑h) (↑k) (nullContractCoordinateEquiv (u, 0)))
+      (regularCoefficients ψ) (regularCoefficients χ)
+but is expected to have type
+  ∃ s,
+    ∀ (u : ℝ),
+      s u =
+        finiteKernel (fun h k => unitaryFourierCoherentNullStress (↑h) (↑k) (nullContractCoordinateEquiv (u, 0)))
+          (regularCoefficients ψ) (regularCoefficients χ)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:137:13: error: typeclass instance problem is stuck
+  Measure.HasTemperateGrowth ?m.644
+
+Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `Measure.HasTemperateGrowth` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T191226_371630Z\AxisCompactRegularR1.lean:160:41: error(lean.unknownIdentifier): Unknown identifier `F`
+
+Note: It is not possible to treat `F` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+'F1Fecho.MaxwellGlobal.axisCompact_nullStress_ray_schwartz' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_calibrated_nullRay_regular' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.calibrated_nullEnergy_translate_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_calibrated_regular' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.132ms
+	blocked (unaccounted) 2.18s
+	congr simp thm 3.97ms
+	elaboration 90ms
+	fix level params 0.92ms
+	import 68.7s
+	initialization 30.5ms
+	instantiate metavars 2.75ms
+	interpretation 11.9s
+	let-to-have transformation 0.611ms
+	linting 13.5ms
+	norm_num 123ms
+	overlappingInstancesLinter 26.4ms
+	parsing 10.8ms
+	process pre-definitions 8.69ms
+	ring 150ms
+	share common exprs 10.2ms
+	simp 213ms
+	tactic execution 822ms
+	tacticAnalysis 38.8ms
+	type checking 194ms
+	typeclass inference 1.3s

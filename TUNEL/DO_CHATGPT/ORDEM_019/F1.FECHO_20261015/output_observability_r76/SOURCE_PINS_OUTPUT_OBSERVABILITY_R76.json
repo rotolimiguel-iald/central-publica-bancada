@@ -1,0 +1,149 @@
+{
+  "schema": "IALD_R76_OUTPUT_OBSERVABILITY_SOURCES_V1",
+  "status": "DERIVED_ANALYTIC_NOT_LEAN",
+  "created_utc": "2026-10-18T23:44:18.645234+00:00",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "mission_revision": 522,
+  "preflight": {
+    "R4": true,
+    "R5": true
+  },
+  "report": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_observability_r76\\OUTPUT_TO_INITIAL_OCCUPATION_R76.md",
+    "sha256": "1070c33bd8ccc75bfc6fe8b52b1f596b31a0d313e749e3c61775322962b84960",
+    "bytes": 10976
+  },
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_profiles_r72\\PREPARATION_WITNESS_R72.md",
+      "sha256": "aca4f18cb497cf98c3d6c6f35f1f423f77b516c1b7cd0e08eb84eb13acce7024",
+      "bytes": 5624,
+      "anchors": [
+        {
+          "marker": "## Objeto e normalização",
+          "line": 5,
+          "through": 20,
+          "excerpt": "## Objeto e normalização\n\nOs dois pares q_r,p_r são os mesmos pares canônicos da realização R71, com [q_r,p_s]=i delta_rs, b_r=(q_r+i p_r)/sqrt(2). Quadraturas adimensionais; domínio de forma de N_b; rho positivo de traço1 com segundos momentos finitos. O espectador e o OH permanecem no estado conjunto, inclusive se entrelaçados. Não se assume estado gaussiano, pureza ou produto inicial.\n\nCom X=(q_i,p_i,q_o,p_o), d_a=Tr rho X_a e V_aa=Tr rho (X_a-d_a)^2,\n\n    epsilon_field = Tr rho N_b = (Tr V + ||d||² - 2)/2 >= 0.\n\nSão necessárias quatro medidas de segundo momento e suas médias, em configurações separadas no MESMO preparo. A soma dos momentos brutos também serve. Correlações cruzadas não são necessárias para esta testemunha, mas continuam necessárias para reconstruir a forma simplética/identificar os modos. Remover médias subestima a ocupação de estados deslocados. Preservar ganho, fase, bandas e normalização de comutador; não ajustar estes parâmetros para obter epsilon pequeno.\n\n## Prova do certificado sem hipótese gaussiana\n\nSeja P0=|00><00| no fator dos dois osciladores, tensor identidade no resto. Pelo espectro inteiro não negativo de N_b, I-P0 <= N_b como formas. Logo\n\n    p0=Tr rho P0 >= 1-epsilon_field.\n"
+        },
+        {
+          "marker": "## Prova do certificado sem hipótese gaussiana",
+          "line": 15,
+          "through": 30,
+          "excerpt": "## Prova do certificado sem hipótese gaussiana\n\nSeja P0=|00><00| no fator dos dois osciladores, tensor identidade no resto. Pelo espectro inteiro não negativo de N_b, I-P0 <= N_b como formas. Logo\n\n    p0=Tr rho P0 >= 1-epsilon_field.\n\nPara a REDUÇÃO rho_b dos dois modos,\n\n    ||rho_b - |00><00|||_1 <= 2 sqrt(1-p0) <= 2 sqrt(epsilon_field).\n\nA prova da primeira desigualdade pode ser dada por purificação: projete uma purificação de rho em P0 e normalize. O módulo do produto interno é sqrt(p0), e a distância-traço dos projetores puros é 2sqrt(1-p0). A contração da norma-traço sob traço parcial conclui. Para p0>0, o mesmo argumento ANTES de descartar o espectador mostra\n\n    ||rho - |00><00| tensor sigma_rest,conditional||_1 <= 2 sqrt(1-p0).\n\nA preparação assim certificada não determina sigma_rest,conditional, nem o identifica com Omega_spec. Portanto não certifica o vetor global particular Omega_b de R71. Certifica a redução local e proximidade a um produto com o restante condicionado. Essa distinção é necessária à referência física.\n"
+        },
+        {
+          "marker": "## Porta e cavidade: a ponte ainda exigida",
+          "line": 45,
+          "through": 53,
+          "excerpt": "## Porta e cavidade: a ponte ainda exigida\n\nO R64 fornece momentos de modos TEMPORAIS de saída filtrados, não de b_r instantâneo da cavidade. A mesma testemunha pode certificar o vácuo desses modos de saída, mas não transporta o certificado à cavidade sem inversão/estimativa de observabilidade do instrumento. Contraexemplo simples: uma porta desacoplada (kappa_ext=0) tem saída de vácuo com cavidade ocupada. Ganho conhecido sozinho não elimina a diferença temporal. Mesmo kappa_ext>0 requer o mapa temporal completo e os outros canais, sem desligar termos do gerador para fabricar a identificação.\n\nEste critério usa o espectro de número e quadraturas, sem beta de entrada. Isso evita circularidade no preparo; não mede beta e não fornece Gamma independente.\n\n## Verificação sintética proposta, não experimento\n\nO script adjunto avaliará estados de suporte finito no Fock infinito, com espaço ampliado suficiente para aplicar uma quadratura antes de tirar sua norma. Testará a identidade de segundos momentos, a desigualdade de gap, as distâncias da redução e do produto condicionado, a necessidade das médias e o ramo sem certificado (epsilon>=1). Estados com espectador entrelaçado serão incluídos. O pré-registro e a revisão precedem qualquer execução; não se repetem os controles R71."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\bosonic_readout_r75\\BOSONIC_FILTERED_MOMENTS_R75.md",
+      "sha256": "c2f4478c502f651f6b9d1f4fd9fe7e360acf5193260823d9239cb6d7136aadc6",
+      "bytes": 10095,
+      "anchors": [
+        {
+          "marker": "## 4. Limites funcionais e cotas prontas",
+          "line": 54,
+          "through": 69,
+          "excerpt": "## 4. Limites funcionais e cotas prontas\n\nEscreva\n\n\\[\nq=2|\\Omega|T,\\quad d=m-m_0\\ge0,\\quad\nA_j=\\sqrt{2\\kappa_j}\\int_0^T|c_j(t)|dt,\n\\]\n\\[\nE_d(q)=\\sum_{n>d}\\frac{q^n}{n!},\\qquad\nT_k(d)=\\sum_{n>d}(m_0+n)^{k/2}\\frac{q^n}{n!}\\quad(k=1,2).\n\\tag{5}\n\\]\n\nAs somas começam em n=d+1. Quando q=0, são zero; o termo n=0 das somas completas usa q⁰=1, inclusive em q=0. Não há potência 0⁰ nos pesos k/2 porque k≥1.\n"
+        },
+        {
+          "marker": "## 5. Covariâncias e decoder, com propagação do erro",
+          "line": 124,
+          "through": 139,
+          "excerpt": "## 5. Covariâncias e decoder, com propagação do erro\n\nPara V_{jk}=r_{jk}−μ_jμ_k, a decomposição do produto de médias e (10) dão\n\n\\[\n\\boxed{|V_{jk}-V_{jk}^{(m)}|\n\\le2A_jA_kT_2(d)+4A_jA_kS_1T_1(d).}\n\\tag{11}\n\\]\n\nAlternativamente, usando as médias do corte medido, vale\n`ε_jk+|μ_j^(m)| ε_k+|μ_k^(m)| ε_j+ε_j ε_k`.\nEstas estimativas também comparam dois cortes. Cada matriz de covariância finita das correntes compatíveis é positiva semidefinida; o limite entrada a entrada conserva essa propriedade. Isso não prova convergência em norma-traço de um estado de campo de saída, nem fornece uma taxa em tal norma.\n\nReaproveite literalmente o decoder R64, aplicado aos segundos momentos cruzados de quatro aquisições:\n"
+        },
+        {
+          "marker": "## 6. Fases R74 e o alcance do resultado",
+          "line": 152,
+          "through": 158,
+          "excerpt": "## 6. Fases R74 e o alcance do resultado\n\nR(t)=exp(iΣχ_j(t)n_j) comuta com N e P_r. A conjugação não altera as normas de M, B, nem |c_j|. O T₀ transportado preserva os mesmos suportes; a conexão −Σ dot(χ)n permanece no Hamiltoniano conservador de N. Logo a prova dos §§2–5 e todas as cotas são invariantes sob o transporte conjunto R74, com a fase dentro do filtro. Isso permite comparar o mesmo instrumento nos quadros lab/girante sem criar um cutoff diferente.\n\n**O que fica obtido:** primeiros e segundos momentos, covariâncias e decoder do instrumento bosônico como limites únicos das expressões/instrumentos finitos, com erro controlado para entrada de suporte finito e T finito. A positividade quadrática é herdada. Trata-se de um funcional de momentos, não de uma construção já feita da distribuição completa de trajetórias, da unitária HP ilimitada, do campo de saída global ou de uma identificação da cavidade patenteada.\n\nNão se estende o resultado a estados iniciais arbitrários apenas por densidade em norma-traço: para observáveis ilimitados, isso exige controle de caudas/momentos inicial adicional. Não se afirma uniformidade quando T→∞. As hipóteses instrumentais R64, a realização R66, a calibração física, a escala γ_Λ e os critérios integrais R4/R5 continuam os mesmos. Nenhuma taxa, ganho ou β foi ajustado por esta derivação."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\CONTRATO_OUTPUT_R64.md",
+      "sha256": "bb759be867d71b68b47154e46db2596e3e0b1926f01dfcc5128912cfee4767a1",
+      "bytes": 7447,
+      "anchors": [
+        {
+          "marker": "## Hipótese nomeada do instrumento",
+          "line": 9,
+          "through": 24,
+          "excerpt": "## Hipótese nomeada do instrumento\n\n**[INPUT — H_MARKOV_VACUUM_PORTS]** Escolhe-se uma realização unitária/dilatação Markov de vácuo para os cinco operadores de colapso do modelo, com banhos independentes. Monitoram-se as portas\n\n\\[\nL_i=\\sqrt{\\kappa_i}\\,a_i,\\qquad L_o=\\sqrt{\\kappa_o}\\,a_o.\n\\]\n\nOs outros canais, `√γ σ−`, `√γφ Z` e `√(βγΛ)J`, permanecem no gerador e não são monitorados. O código original guarda pares `(taxa,operador)`: as raízes entram nas portas de leitura, sem aplicá-las duas vezes ao dissipador. Mantém-se a convenção `γφ D[Z]`, cujo amortecimento de coerência é `2γφ`.\n\nUm GKLS isolado não seleciona fisicamente essas portas, o estado do banho ou a realização instrumental. Esses dados adicionais, eficiência ideal, ganho e referência dos osciladores locais são hipóteses explícitas. A existência de uma representação Markov de uma dinâmica finita não prova que os terminais da patente realizem essa representação.\n\nPara a corrente normalizada como quadratura, defina\n\n\\[\n\\mathcal M_{j,\\theta}\\rho="
+        },
+        {
+          "marker": "## Modos filtrados e ODE reutilizável",
+          "line": 38,
+          "through": 53,
+          "excerpt": "## Modos filtrados e ODE reutilizável\n\nPara filtros reais de norma L² um, `Qj=∫₀ᵀ fj(t)dXj(t)`. No banho de entrada, o incremento de Wiener tem dimensão √tempo; um filtro com dimensão tempo⁻¹/² fornece uma quadratura adimensional. Os tempos e taxas da instância computacional continuam adimensionais.\n\nTransportam-se matrizes auxiliares completas, com `u(0)=v(0)=0`:\n\n\\[\n\\dot\\rho=\\mathcal L\\rho,\\qquad\n\\dot u_j=\\mathcal Lu_j+f_j\\mathcal M_j\\rho,\n\\]\n\\[\n\\dot v_{jk}=\\mathcal Lv_{jk}\n +f_j\\mathcal M_ju_k+f_k\\mathcal M_ku_j\n +\\frac{\\delta_{jk}}2f_jf_k\\rho.\n\\]\n"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\run_filtered_output_r64.py",
+      "sha256": "ec2c5d2201f1246ab83fc291ebb306c50abcf3805fc1353445f82ffdd968344c",
+      "bytes": 11070,
+      "anchors": [
+        {
+          "marker": "    def filtered(gen,ports,thetas,rho0,filters,label,shot=True):",
+          "line": 49,
+          "through": 64,
+          "excerpt": "    def filtered(gen,ports,thetas,rho0,filters,label,shot=True):\n        d=len(rho0);d2=d*d;n=len(ports);pairs=[(j,k) for j in range(n) for k in range(j,n)]\n        maps=[M(l,th) for l,th in zip(ports,thetas)];blocks=1+n+len(pairs)\n        y0=np.zeros((blocks,d2),complex);y0[0]=old.vec(rho0)\n        for j,(l,th) in enumerate(zip(ports,thetas)):\n            direct=(np.exp(-1j*th)*l@rho0+np.exp(1j*th)*rho0@l.conj().T)/math.sqrt(2)\n            check(label+'_Mvec_'+str(j),old.residual(old.unvec(maps[j]@old.vec(rho0),d)-direct),1e-12)\n        def rhs(t,y):\n            v=y.reshape(blocks,d2);dv=v@gen.T\n            fs=[float(f(t)) for f in filters]\n            for j in range(n):dv[1+j]+=fs[j]*(maps[j]@v[0])\n            for z,(j,k) in enumerate(pairs):\n                dv[1+n+z]+=fs[j]*(maps[j]@v[1+k])+fs[k]*(maps[k]@v[1+j])\n                if shot and j==k:dv[1+n+z]+=.5*fs[j]*fs[k]*v[0]\n            return dv.reshape(-1)\n        sol=solve_ivp(rhs,(0.,1.),y0.reshape(-1),method='DOP853',rtol=1e-10,atol=1e-12,t_eval=[1.])"
+        },
+        {
+          "marker": "    def decode(rows,key='second'):",
+          "line": 108,
+          "through": 123,
+          "excerpt": "    def decode(rows,key='second'):\n        q={name:row[key][0][1] for name,row in rows.items()}\n        return (q['XX']-q['PP']+1j*(q['XP']+q['PX']))/2,(q['XX']+q['PP']+1j*(q['XP']-q['PX']))/2\n    cpair,bpair=decode(pair_rows);target=p*np.exp(1j*math.pi/4)/2\n    check('two_port_emitted_pair_C',abs(cpair-target))\n    check('two_port_emitted_pair_B',abs(bpair))\n    check('negative_wrong_LO_sign',abs(cpair.conjugate()-target),1e-5,True)\n    original_plan_path=next(row['path'] for row in plan['sources'] if row['path'].endswith('PREPARED_READOUT_PLAN_R62.json'))\n    original=json.loads(Path(original_plan_path).read_text(encoding='utf8'))\n    for row in original['source_pins']:\n        if pin(row['path'])['sha256']!=row['sha256']:raise ValueError('Full model ancestor changed')\n    alpha_file=next(row['path'] for row in original['source_pins'] if 'ALPHA_FINE_CODATA_2018' in row['role'])\n    constants={}\n    for node in ast.parse(Path(alpha_file).read_text(encoding='utf8')).body:\n        if isinstance(node,ast.Assign) and len(node.targets)==1 and isinstance(node.targets[0],ast.Name) and node.targets[0].id in {'ALPHA_FINE_CODATA_2018','_SEALED_ALPHA_CODATA_2018'}:\n            constants[node.targets[0].id]=ast.literal_eval(node.value)"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\instrument_phase_r74\\PHASE_INSTRUMENT_BRIDGE_R74.md",
+      "sha256": "fe9f2caa6481d3e28b4255b977daf95b5a15531d0240671b4b2b0596f0548b9a",
+      "bytes": 9608,
+      "anchors": [
+        {
+          "marker": "## 1. Quadro por canal e gerador completo",
+          "line": 5,
+          "through": 20,
+          "excerpt": "## 1. Quadro por canal e gerador completo\n\nSejam n_i,n_o,n_e os números dos dois modos e da excitação OH. Para fases reais C¹ no intervalo observado,\n\n\\[\nR(t)=e^{i(\\chi_i(t)n_i+\\chi_o(t)n_o+\\chi_e(t)n_e)},\\quad\n\\mathcal S_t(X)=R(t)XR(t)^\\dagger,\\quad \\rho'=\\mathcal S_t\\rho.\n\\]\n\nOs números comutam. Logo i dot(R)R†=−Σ_j dot(χ_j)n_j e\n\n\\[\nh'(t)=R(t)h(t)R(t)^\\dagger-\\sum_j\\dot\\chi_j(t)n_j,\n\\quad L_j'(t)=R(t)L_j(t)R(t)^\\dagger.\n\\tag{1}\n\\]"
+        },
+        {
+          "marker": "## 2. Instrumento R64: equivalência antes da integração",
+          "line": 43,
+          "through": 58,
+          "excerpt": "## 2. Instrumento R64: equivalência antes da integração\n\nA inserção de quadratura de R64 é\n\n\\[\n\\mathcal M_{L,\\theta}(X)=\n\\frac{e^{-i\\theta}LX+e^{i\\theta}XL^\\dagger}{\\sqrt2}.\n\\]\n\nHá duas escritas equivalentes do **mesmo** instrumento:\n\n1. Portas transportadas `L_j'=R L_j R†`, mantendo a fase LO θ_j do laboratório.\n2. Portas-base `L_j`, com fase `θ_j'=θ_j+χ_j`, para as portas ópticas de abaixamento.\n\nEm ambos os casos `M'_j(t)=S_t M_j(t) S_t^{-1}`. Isso vale para a fase de cada canal, não só uma portadora comum. O estado, propagador e as inserções têm de usar a mesma convenção.\n"
+        },
+        {
+          "marker": "## 3. Decoder C/B e a releitura R57",
+          "line": 74,
+          "through": 89,
+          "excerpt": "## 3. Decoder C/B e a releitura R57\n\nNo modelo finito, para operadores-base e ρ'=RρR†,\n\n\\[\nC'=\\operatorname{Tr}(\\rho'a_i a_o)=e^{i(\\chi_i+\\chi_o)}C,\n\\quad B'=\\operatorname{Tr}(\\rho'a_i^\\dagger a_o)=e^{i(\\chi_o-\\chi_i)}B.\n\\tag{3}\n\\]\n\nSe também se transportam os operadores, as expectativas originais são invariantes. O decoder cruzado de R64 obedece à mesma álgebra para os **modos temporais de saída**; eles não são identificados com operadores instantâneos da cavidade. Para uma mudança constante de referência de cada modo temporal, valem os fatores (3). Para referência variável, valem os filtros transformados do §2, não a multiplicação do resultado final por (3) em um instante escolhido.\n\nO leitor escalar R57 conserva a abertura da fronteira:\n`A_β(z)=z S(θ_M)`, `read(A_β(z))=z exp(iθ_M)` e\n`D_β(w)=[w exp(−iθ_M)]S(θ_M)`.\nA releitura satisfaz `read(D_β(w))=w` na mesma família. Como `z=2 Tr(ρσ₊)`, o quadro OH dá `z'=e^{-iχ_e}z`. Logo `A_β(z')=e^{-iχ_e}A_β(z)` e o resultado lido também recebe esse fator; aplicar D_β ao resultado transformado devolve a matriz transformada. As proporções β e 1−β são preservadas para z≠0; em z=0 não há fase normalizada. Nada exige mudar θ_M."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\IDENTIFIABILITY_AND_FRAME_R64.txt",
+      "sha256": "2d9ae6b30ffe5fcfc9222de69e355bb122960d10e5abaed88de04ba9f534d68d",
+      "bytes": 3538,
+      "anchors": [
+        {
+          "marker": "1. Identificabilidade no canal desta entrega",
+          "line": 5,
+          "through": 20,
+          "excerpt": "1. Identificabilidade no canal desta entrega\nHipóteses nomeadas: L=L0+lambda D[J], lambda=beta*gammaLambda; estado inicial, L0, J, portas monitoradas de perda, filtros, eficiência e calibração são independentes desses dois parâmetros. Não se afirma isso de todos os canais daTGL.\nEntão qualquer estatística de saída calculada pela evolução e pelo instrumento desta entrega é F(lambda), possivelmente com outros parâmetros fixos. Para c>0 no domínio admissível, (beta,gammaLambda)->(c*beta,gammaLambda/c) conserva lambda e todo esse instrumento. É identidade algébrica, não tolerância ou ajuste.\nQuando as derivadas e a informação deFisher existem: d_beta F=gammaLambda*d_lambda F e d_gammaLambda F=beta*d_lambda F. A matriz de informação desse par é I_lambda vezes [[gammaLambda²,beta*gammaLambda],[beta*gammaLambda,beta²]], com determinante zero e posto no máximo1.\nConsequência: sem fixar gammaLambda por informação independente, esse canal pode identificar lambda, mas não discriminar valores não nulos de beta que possam ser compensados por gammaLambda. Não se infere daqui equivalência do caso beta=0 a lambda>0 com gammaLambda finito. O valor constitutivo betaTGL continua fixo e calculado em runtime; nenhuma estimação ou alteração dele foi realizada. Outros observáveis ou vínculos físicos que quebrem a degenerescência precisam ser demonstrados, não pressupostos.\n\n2. O quadro girante comum não calibra os INPUTs antigos por renomeação\nConsidere tau=t/t0, t0>0, e o quadro com frequência portadora comum omega_d já construído emR57. As frequências adimensionais seriam Delta_c=t0*(omega_c-omega_d) e Delta_OH=t0*(omegaOH-omega_d). Subtrair elimina o carrier:\n  Delta_OH-Delta_c=t0*(omegaOH-omega_c).\nNo projeto óptico780nm/OH1.667359GHz consultado emR63, omegaOH<omega_c. Logo a diferença é negativa, qualquer que seja o carrier comum. Os INPUTs do teste finito Delta_c=1,Delta_OH=1.2 têm diferença positiva. Portanto um carrier comum e uma escala positiva de tempo não tornam essa instância uma calibração simultânea das duas frequências absolutas documentadas.\nIsso não invalida a álgebra dos testes nem impede outra instância física. Impede apresentar a instância sintética antiga como calibrada só porque foi chamada de quadro girante. Quadros com carriers distintos mudam os fatores de fase dos acoplamentos/drive e exigem transformação explícita; nenhuma equivalência desse tipo é afirmada aqui.\n\n3. Referência de fase do receptor\nCom R(t)=exp(+i omega_d t N), rho_rot=R rho_lab R† e [N,a]=-a, segue <a>_lab=exp(-i omega_d t)<a>_rot. Para X_theta=(exp(-i theta)a+exp(i theta)a†)/sqrt2, a mesma leitura usa theta_rot=theta_lab+omega_d*t. Um teste que muda Hamiltoniano/estado e mantém uma faseLO incompatível mudou a leitura; não é apenas mudança de coordenadas.\n\nFontes internas: R63/sources/PHYSICAL_RECEIVER_MAP_R1.json (fontes/valores/limites); R57/derive_polarization_r57.py e derivação correspondente (quadro); F1.REDE/finite_device (parametrização lambda e perdas). Pinos de origem ficam nos manifestos da entregaR64. As consequências acima são demonstrações escritas por substituição/diferença; não se reivindica nova pedraLean ou identificação física universal."
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "No experiment or numerical campaign executed by this author",
+    "No memory, production, kernel or gate mutation",
+    "Rates and physical instrument calibration are separate inputs"
+  ]
+}

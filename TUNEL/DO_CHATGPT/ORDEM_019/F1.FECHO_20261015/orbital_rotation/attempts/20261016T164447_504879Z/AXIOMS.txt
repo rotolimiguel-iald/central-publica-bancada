@@ -1,0 +1,163 @@
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 140ms
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 140ms
+import took 83.9s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:28:5: error: typeclass instance problem is stuck
+  FourierPair 𝓢(NullFourierSpace, ℂ) ?m.32
+
+Note: Lean will not try to resolve this typeclass instance problem because the second, third, and fourth type arguments to `FourierPair` are metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:68:4: error: unsolved goals
+case pos
+f g : 𝓢(NullFourierSpace, ℂ)
+hf : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → f p = 0
+hg : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → g p = 0
+p : NullFourierSpace
+hpos : p.ofLp 0 ≤ 0
+⊢ 0 = 0 p
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:69:4: error: unsolved goals
+case neg
+f g : 𝓢(NullFourierSpace, ℂ)
+hf : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → f p = 0
+hg : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → g p = 0
+p : NullFourierSpace
+hpos : ¬p.ofLp 0 ≤ 0
+hn : (-p).ofLp 0 < 0
+⊢ 0 = 0 p
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:81:15: warning: `SchwartzMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:79:65: error: unsolved goals
+f g : 𝓢(NullFourierSpace, ℂ)
+hf : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → f p = 0
+hg : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → g p = 0
+hp : ∫ (x : NullFourierSpace), (𝓕 f) x * (𝓕 (∂_{nullFrequencyDirection} g)) x = 0
+ht : Function.HasTemperateGrowth fun x => inner ℝ x nullFrequencyDirection
+x : NullFourierSpace
+⊢ (𝓕 f) x * ↑Real.pi * Complex.I * ((smulLeftCLM ℂ fun x => x.ofLp 0) (𝓕 g)) x * 2 =
+    (𝓕 f) x * ↑Real.pi * Complex.I * ↑(x.ofLp 0) * (𝓕 g) x * 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:81:39: warning: This simp argument is unused:
+  SchwartzMap.smulLeftCLM_apply_apply ht
+
+Hint: Omit it from the simp argument list.
+  simp only [SchwartzMap.smul_apply, S̵c̵h̵w̵a̵r̵t̵z̵M̵a̵p̵.̵s̵m̵u̵l̵L̵e̵f̵t̵C̵L̵M̵_̵a̵p̵p̵l̵y̵_̵a̵p̵p̵l̵y̵ ̵h̵t̵,̵nullFrequencyDirection_inner, ← Complex.coe_smul,
+  ̲  ̲ ̲ ̲ ̲ ̲smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:82:36: warning: This simp argument is unused:
+  ← Complex.coe_smul
+
+Hint: Omit it from the simp argument list.
+  simp only [SchwartzMap.smul_apply, SchwartzMap.smulLeftCLM_apply_apply ht,
+        nullFrequencyDirection_inner, ←̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵c̵o̵e̵_̵smul,̵ ̵s̵m̵u̵l̵_eq_mul]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+interpretation of Mathlib.Tactic.FieldSimp._aux_Mathlib_Tactic_FieldSimp___elabRules_Mathlib_Tactic_FieldSimp_fieldSimp_1._boxed took 251ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:115:35: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:115:35: warning: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:126:2: error: unsolved goals
+case h
+f g : 𝓢(NullFourierSpace, ℂ)
+x : NullFourierSpace
+⊢ |x.ofLp 0| * (‖angularForward g x‖ * ‖angularForward f x‖) ≤
+    |x.ofLp 0| * (‖angularForward f x‖ * ‖angularForward g x‖)
+interpretation of Mathlib.Meta.FunProp.funPropTac._boxed took 102ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:127:10: warning: This simp argument is unused:
+  RCLike.inner_apply'
+
+Hint: Omit it from the simp argument list.
+  simp [̵R̵C̵L̵i̵k̵e̵.̵i̵n̵n̵e̵r̵_̵a̵p̵p̵l̵y̵'̵,̵ ̵n̵o̵r̵m̵_̵m̵u̵l̵,̵[̲n̲o̲r̲m̲_̲m̲u̲l̲,̲ mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:127:31: warning: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  simp [RCLike.inner_apply', n̵o̵r̵m̵_̵m̵u̵l̵,̵ ̵mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T164447_504879Z\NullSchwartzSameSignR1.lean:157:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : NullFourierSpace),
+    RCLike.re (↑(a.ofLp 0) * angularForward f a * angularForward g a) +
+      RCLike.re (↑(a.ofLp 0) * inner ℂ (angularForward f a) (angularForward g a))
+in the target expression
+  ∫ (a : NullFourierSpace),
+      (↑(a.ofLp 0) * angularForward f a * angularForward g a).re +
+        (↑(a.ofLp 0) * inner ℂ (angularForward f a) (angularForward g a)).re =
+    (∫ (x : NullFourierSpace), ↑(x.ofLp 0) * inner ℂ (angularForward f x) (angularForward g x)).re
+
+f g : 𝓢(NullFourierSpace, ℂ)
+hf : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → f p = 0
+hg : ∀ (p : NullFourierSpace), p.ofLp 0 ≤ 0 → g p = 0
+⊢ ∫ (a : NullFourierSpace),
+      (↑(a.ofLp 0) * angularForward f a * angularForward g a).re +
+        (↑(a.ofLp 0) * inner ℂ (angularForward f a) (angularForward g a)).re =
+    (∫ (x : NullFourierSpace), ↑(x.ofLp 0) * inner ℂ (angularForward f x) (angularForward g x)).re
+'F1Fecho.MaxwellGlobal.nullSchwartz_fourier_twice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullSchwartz_lineDeriv_zero_negative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullFourier_weighted_product_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullFourier_weighted_same_sign_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullAngular_weighted_same_sign_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullAngular_weighted_product_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullAngular_weighted_mixed_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullAngular_real_product_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullAngular_real_product_eq_mixed' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullAngular_real_product_weighted_parseval' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.118ms
+	blocked (unaccounted) 2.47s
+	congr simp thm 4.76ms
+	dsimp 11.7ms
+	elaboration 180ms
+	fix level params 0.926ms
+	import 83.9s
+	initialization 30.8ms
+	instantiate metavars 1.25ms
+	interpretation 11.4s
+	let-to-have transformation 0.651ms
+	linting 16.1ms
+	norm_num 53.8ms
+	overlappingInstancesLinter 15ms
+	parsing 9.94ms
+	process pre-definitions 8.84ms
+	ring 187ms
+	share common exprs 11.5ms
+	simp 244ms
+	tactic execution 616ms
+	tacticAnalysis 41.8ms
+	type checking 241ms
+	typeclass inference 3.22s

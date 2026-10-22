@@ -1,0 +1,138 @@
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v31\ContratoQG_v31_Teoremas.lean:921:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v31\ContratoQG_v31_Teoremas.lean:934:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v31\ContratoQG_v31_Teoremas.lean:956:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  fun l => areaDensity (C.response ψ) (y + l • nullDir)
+in the target expression
+  HasDerivAt (fun l => areaDensity (C.propagator (T.T ψ)) (y + l • nullDir)) (C.theta ψ y) 0
+
+W : TGLSpecificAQFTWitness
+R : TGLModularRealization W
+N : KillingNormalization
+T : StressTensorData W
+C : ContratoH3 W R N T
+h0 : ∀ ψ ∈ C.admissible, C.response ψ = 0
+ψ : W.H
+hψ : ψ ∈ C.admissible
+x : Fin 4 → ℝ
+l : ℝ
+hne : C.theta ψ (x + l • nullDir) ≠ C.theta ψ (x + 0 • nullDir)
+y : Fin 4 → ℝ
+h : HasDerivAt (fun l => areaDensity (C.propagator (T.T ψ)) (y + l • nullDir)) (C.theta ψ y) 0
+hfun : (fun l => areaDensity (C.response ψ) (y + l • nullDir)) = fun x => 0
+⊢ C.theta ψ y = 0
+'TGLExt.ContratoQGv31.U_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.Δit_vac' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.bw_covariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.poincare_relation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.translates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.eigen_null_correlation_dilation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.no_point_spectrum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.trivial_boost_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.boost_moves_null_eigen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.null_eigen_orth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.null_point_spectrum_excluded' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.transverse_U_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.discrete_null_momentum_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.translate_null_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.halfsided_inclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.contract_borchers_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.positiveEnergy_orientation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.KMSAt.rescale' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.modular_is_boost_at_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.unruh_is_kms' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.unruh_is_kms_temperature' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.kms_product_is_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.refRadius_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.kappa_mul_radius' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.kappa_eq_inv_radius' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.kappa_fixed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.no_rekappa' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.observer_unit_of_index' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.reindex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.kappa_is_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.killingFlow_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.killingFlow_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.modularEnergy_of_boostEnergy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.modularEnergy_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.vac_modularEnergy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.vac_boostEnergy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.inner_vac_Δit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.bilateral_no_first_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.implementer_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.tower_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.Δit_determined' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.Δit_index_free' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.boostMat_det_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.feeds_finite_face' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.det_unit_along_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.curvedFrame_not_dragged' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.curvedFrame_fiducial_not_modular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.frame_ne_curvedFrame_by_drag' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.frame_ne_curvedFrame_by_fiducial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.shift_point' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.nullPlaneCharge_of_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.nullEnergy_vac' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.nullEnergy_covariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.areaDensity_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.response_vac' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.response_covariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.same_source_same_geometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.theta_along' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.theta_deriv_along' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.first_law_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.bekenstein_hawking_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.clausius_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.einstein_coefficient_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.kappa_cancels_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.nontrivial_null_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.expansion_not_constant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.response_not_identically_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.slope_response_excluded' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.exp_response_excluded' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.rescaleG' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.G_not_predicted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.toHorizonData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH3.feeds_the_master' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.contratoH2_empty_of_unfaithful' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.contratoH2_empty_on_legacy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.contratoH3_empty_on_legacy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.commuting_translations_excluded' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv31.ContratoH2.bw_sign_matters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoImportH3.nonvacuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.ContratoImportH3.same_horizon_data' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv31.no_import_on_legacy' depends on axioms: [propext, Classical.choice, Quot.sound]
+rc=1 elapsed=27s
+kernel_files_newer_than_stamp=0 kernel_files_newer_than_R2_start=0

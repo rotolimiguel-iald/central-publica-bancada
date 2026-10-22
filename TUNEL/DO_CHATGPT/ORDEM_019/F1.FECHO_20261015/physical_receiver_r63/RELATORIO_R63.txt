@@ -1,0 +1,40 @@
+R63 — PONTE DO RECEPTOR: DO CORTE FINITO À LEITURA BOSÔNICA
+17/10/2026 — em nome de codex-gerente-tgl — F1.FECHO_20261015.
+Reivindicação inicial939, renovada pelo mesmo titular no evento952. Fonte original e evidências anteriores preservadas.
+
+1. ANCORAGEM E REAPROVEITAMENTO
+A própria missão foi recuperada na revisão467 e sincronizada durante o trabalho. Os cinco pinos canônicos da auditoriaR62 continuam íntegros: v393, distinta do pacote científico v392 do app. Nenhuma nova versão foi instalada. O inventárioR58 e o mapa dirigidoR62 foram reutilizados; o NósVivo ainda não indexa esta unidade (consulta negativa preservada). O gerador conjunto64×64, a trajetóriaR62 e o decoder de quatro quadraturas não foram reconstruídos nem reexecutados.
+A reivindicação temporáriaR5 foi liberada explicitamente, preservando critério/evidências; o trabalho presente usaR4. R5 continua OPEN; não é um requisito satisfeito. R3/R10 permanecem dependentes das pontes completas.
+
+2. RESULTADO NOVO [DERIVED — RECEPTOR MATEMÁTICO]
+Foi construída a POVM homódina ideal comprimida aos estados de zero/um fóton. Ela é positiva, normalizada e contínua. O primeiro momento coincide com a quadratura comprimida; o segundo não é o quadrado dela:
+  P01 X_theta² P01 = (P01 X_theta P01)² + |1><1|.
+No estado de um fóton, os valores são3/2 e1/2, respectivamente. Logo não se podem tratar os dois autovalores da matriz de Pauli como resultados de um detector homódino.
+Para dois modos, os segundos momentos da soma e diferença recebem o MESMO excesso n_i+n_o. Esse excesso cancela:
+  (Q_+ − Q_-)/4 = X_i(theta_i) X_o(theta_o).
+Assim o decoderR62 para C=<a_i a_o> e B=<a_i† a_o> permanece correto para a POVM bosônica ideal, sob a mesma preparação, fases e normalização. Vale também para estados correlacionados comOH: a igualdade é de operadores, com identidade no fatorOH. Variâncias individuais não recebem essa dispensa.
+Plano e script foram pinados antes do cálculo. Uma execução simbólica verificou18identidades exatas, sem tolerância numérica, sem evolução temporal e sem amostras de detector. O controle que igualaria os dois segundos momentos é refutado pela diferença exata1 no estado|1>. Esta é uma derivação matemática com verificação algébrica; não foi emitida nova pedraLean.
+
+3. LIGAÇÃO CINEMÁTICA COM A FOCK EXISTENTE [DERIVED SOB INPUT NOMEADO]
+Dados dois pacotes f_i,f_o normalizados e ortogonais emH1, a inclusão envia |00> ao vácuo, |10> af_i, |01> af_o e |11> ao vetor simétrico (f_i tensor f_o+f_o tensor f_i)/sqrt2. Os quatro vetores são ortonormais. Estendida por identidadeOH, essa isometria transporta qualquer densidade conjunta finita para uma densidade bosônica e transporta a leitura por compressão dos efeitos.
+Isso resolve o problema cinemático de realizar a leitura do corte como uma POVM bosônica. Não identifica fisicamente os dois pacotes, não constrói uma seleção localizada/covariante deles e não prova que o Hamiltoniano/GKLS bosônico da patente gere a família transportada V rho_fin(t) V†. A compatibilidade dinâmica e espacial continua sendo a obrigaçãoR5; Fock não precisa ser reconstruída.
+
+4. RECEPTOR E UNIDADES JÁ ESCRITOS — NÃO SÃO LACUNAS GENÉRICAS
+O contratoR7 já fornece, como INPUT, I(t)=eta_det*kappa_out*Tr(n_o rho(t))+I_escuro e sua resposta ao bombeamento de micro-ondas. O artigo já escreve modos de cavidade, salto de perda sqrt(kappa)a, homódino50/50 e faseLO. O mapa sources/PHYSICAL_RECEIVER_MAP_R1.json traz as fontes e as linhas.
+Para a contribuição do sistema s_j=sqrt(kappa_j)a_j, C_s e B_s são sqrt(kappa_i*kappa_o) vezes C eB. kappa tem unidade s^-1 e s_j tem s^-1/2. Essa mudança de escala é algébrica; não identifica s_j com o campo exterior completo. Um modo temporal detectado requer porta, campo incidente, filtro, ganho, eficiência e referênciaLO. A relação de entrada/saída e o preparo não surgem por renomear a_i/a_o.
+V0/hbar e2V0/hbar já estão escritos; V0 é energia, não volts. A origem energéticaEref e kappaKilling não são o ganhoAPD nem a taxa de perda. A conversão tau=t/t0 dá L_phys=L_dim/t0 e H_phys=hbar*h_dim/t0; t0 não foi calibrado nesta entrega.
+
+5. DUAS PRECISÕES MATERIAIS AO LADO DAS FONTES
+(a) graviton_appendices:253–255 usa preparo|1> e I=|<a>|². Para esse estado, <a>=0 e<n>=1. A primeira expressão é contribuição coerente, não intensidade total de contagem. O contrato populacionalR7 evita essa confusão sob suas hipóteses. O original não foi alterado.
+(b) Os parâmetros sintéticos omega_c=1 e omegaOH=1.2 não se convertem simultaneamente, por uma única unidade de tempo, nas frequências absolutas do projeto780nm/OH1.667359GHz. A razão documental é cerca de4.34e-6, não1.2. O quadro girante já derivado emR57 sob LAB_PHASE_LOCKED_DRIVE pode ser reaproveitado, mas exige transformar drive, estado e receptor/LO. Não é uma nova calibração nem uma licença para ajustar parâmetros ao resultado.
+O lock-in JAN09 lê uma correlação de tensões em duas épocas; não deve ser identificado automaticamente com C/B em tempos iguais. Ganhos constantes podem cancelar na razão ideal, enquanto offsets, filtros, ruído e atrasos exigem tratamento próprio.
+
+6. O QUE FALTA, AGORA DELIMITADO
+R4: instanciar o preparo conjunto e o canal exterior detectado com portos, modos, fases/filtros e calibrações; manter frequências absolutas/detunings, relógio físico e referência energética no mesmo sistema. A POVM matemática e o contrato de contagem podem ser reutilizados.
+R5: provar a compatibilidade de estados, dinâmica e localização entre esse dispositivo e a rede contínua já construída. A isometria de leitura não basta para entrelaçar os geradores.
+Depois: composição e rito integralR3, revisão conjuntaR10 e ratificação da gerência. Os aceites anteriores de Fock/Takesaki/Maxwell e o alcance explicitamente condicional deH3 são preservados.
+Próxima construção útil: relação do campo temporal coletado com os modos da cavidade no quadro girante já disponível, com preparo e calibrações explícitos. Não repetir o decoder, os18checks ou o Liouvilliano como se fossem nova passagem.
+
+7. CUSTÓDIA E ALCANCE
+receiver/PLAN_R63.json, RESULT_R63.json e DERIVACAO_RECEPTOR_R63.md documentam a derivação. sources/DELIVERY_R1.json documenta o levantamento focal. A revisão independente é FINAL_REVIEW_R63.json; entrega, memória e mapa/quadro ficam em arquivos novos.
+Não se mediu beta nem significância5sigma. Nenhum dado observado, provedor remoto, programa canônico, kernel doNós, Bancada de produção, publicação ou gate foi alterado. Os resultados são componentes matemáticos com hipóteses explícitas, sem aceite integralR4/R5.

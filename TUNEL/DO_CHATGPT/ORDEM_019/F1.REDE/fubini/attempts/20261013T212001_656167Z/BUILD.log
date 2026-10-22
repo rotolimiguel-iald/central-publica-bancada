@@ -1,0 +1,95 @@
+{
+  "start_utc": "2026-10-13T21:20:01.719958+00:00",
+  "end_utc": "2026-10-13T21:20:14.082509+00:00",
+  "seconds": 12.362527899997076,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fubini\\attempts\\20261013T212001_656167Z\\FubiniL2.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fubini\\FubiniL2.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fubini",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source_sha256": "0ade03428380c643fe6b9136740f87c7ef76801e72b6a9791f140c234becbece",
+  "source_bytes": 5658,
+  "attempt": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fubini\\attempts\\20261013T212001_656167Z",
+  "read_only_dependency_paths": [
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean",
+    "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean",
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean"
+  ],
+  "no_kernel_writes": true,
+  "no_junction_created": true
+}
+
+STDOUT+STDERR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:33:2: error: Tactic `apply` failed: could not unify the conclusion of `MeasurableSet.sUnion (Set.Countable.image hC ?m.230)`
+  MeasurableSet (⋃₀ (?m.230 '' C))
+with the goal
+  MeasurableSet (⋃ t ∈ C, f ⁻¹' t)
+
+Note: The full type of `MeasurableSet.sUnion (Set.Countable.image hC ?m.230)` is
+  (∀ t ∈ ?m.230 '' C, MeasurableSet t) → MeasurableSet (⋃₀ (?m.230 '' C))
+
+X : Type u_1
+Y : Type u_2
+inst✝⁴ : MeasurableSpace X
+inst✝³ : MetricSpace Y
+inst✝² : SecondCountableTopology Y
+inst✝¹ : MeasurableSpace Y
+inst✝ : BorelSpace Y
+f : X → Y
+hf : ∀ (y : Y), Measurable fun x => dist (f x) y
+s : Set Y
+hs : IsOpen[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] s
+B : Set (Set Y) := {b | ∃ y r, b = Metric.ball y r ∧ b ⊆ s}
+hB : ∀ b ∈ B, IsOpen[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] b
+hBs : ⋃₀ B = s
+C : Set (Set Y)
+hC : C.Countable
+hCB : C ⊆ B
+hCover : ⋃₀ C = ⋃₀ B
+⊢ MeasurableSet (⋃ t ∈ C, f ⁻¹' t)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:63:19: error(lean.invalidField): Invalid field `measurable`: The environment does not contain `Function.measurable`, so it is not possible to project the field `measurable` from an expression
+  StronglyMeasurable.enorm hf
+of type
+  MeasurableSet ?m.34 → MeasurableSet ((fun x => ‖f x‖ₑ) ⁻¹' ?m.34)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:65:0: warning: automatically included section variable(s) unused in theorem `F1Rede.measurableSet_good_sections`:
+  [SFinite ν]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite ν] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:75:0: warning: automatically included section variable(s) unused in theorem `F1Rede.sectionLp_dist`:
+  [SFinite μ]
+  [SFinite ν]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite μ] [SFinite ν] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:88:2: error: Type mismatch
+  Lp E 2 μ
+has type
+  AddSubgroup (α →ₘ[μ] E)
+but is expected to have type
+  Type ?u.43
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fubini\FubiniL2.lean:105:0: warning: automatically included section variable(s) unused in theorem `F1Rede.norm_sq_integral`:
+  [SFinite μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SFinite μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+'F1Rede.memLp_section_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_coe_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.norm_sq_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.sectionLp_norm_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.norm_sq_disintegration' depends on axioms: [propext, Classical.choice, Quot.sound]

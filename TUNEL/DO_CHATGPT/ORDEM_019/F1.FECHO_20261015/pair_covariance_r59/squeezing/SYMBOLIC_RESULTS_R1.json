@@ -1,0 +1,409 @@
+{
+  "kind": "R59_EXACT_SQUEEZING_CHECKS",
+  "status": "PASS",
+  "author": "codex-pair-covariance-r59",
+  "created_utc": "2026-10-17T17:44:26.280828+00:00",
+  "runtime": {
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "sympy": "1.14.0",
+    "seconds": 1.281746499997098
+  },
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\squeezing\\verify_squeezing_r1.py",
+    "bytes": 13878,
+    "sha256": "550d807e53b992d4b59241d589394aa4a94290c96fa3fca8e5cf92de7fe54976"
+  },
+  "sources": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\squeezing\\SOURCE_PINS_R1.json",
+    "bytes": 14997,
+    "sha256": "fae107dfd5e90201372424d7ac8784df963b8d279efffb7611f11365092b0d17"
+  },
+  "parameters": {
+    "rho": "real coefficient of the pair generator",
+    "graviton": "rho=r",
+    "tratado": "rho=r/2",
+    "phase": "phi modulo 2*pi; unidentifiable at rho=0"
+  },
+  "formulas": {
+    "n": "sinh(rho)^2",
+    "m": "exp(I*phi)*sinh(rho)*cosh(rho)",
+    "difference_variance": "cosh(2*rho)-sinh(2*rho)*cos(phi-theta-eta)",
+    "C": "V + I*Omega/2 = K.conjugate().T*K/2",
+    "K": "Matrix([[c, I*c, cos_phi*s + I*s*sin_phi, -I*cos_phi*s + s*sin_phi], [cos_phi*s + I*s*sin_phi, -I*cos_phi*s + s*sin_phi, c, I*c]])",
+    "V": "Matrix([[c**2/2 + s**2/2, 0, c*cos_phi*s, c*s*sin_phi], [0, c**2/2 + s**2/2, c*s*sin_phi, -c*cos_phi*s], [c*cos_phi*s, c*s*sin_phi, c**2/2 + s**2/2, 0], [c*s*sin_phi, -c*cos_phi*s, 0, c**2/2 + s**2/2]])",
+    "T": "Matrix([[c, 0, cos_phi*s, s*sin_phi], [0, c, s*sin_phi, -cos_phi*s], [cos_phi*s, s*sin_phi, c, 0], [s*sin_phi, -cos_phi*s, 0, c]])"
+  },
+  "checks": [
+    {
+      "id": "bogoliubov_CCR_diagonal",
+      "status": "PASS",
+      "scalar_identities": 4
+    },
+    {
+      "id": "bogoliubov_CCR_cross",
+      "status": "PASS",
+      "scalar_identities": 4
+    },
+    {
+      "id": "mean_a",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "mean_b",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "mean_ad",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "mean_bd",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_ad_a",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_bd_b",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_a_ad",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_b_bd",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_a_b",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_ad_bd",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_a_a",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_b_b",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_ad_b",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "moment_a_bd",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "number_pair_fourth_moment",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "Wick_fourth_moment",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "real_symplectic_map",
+      "status": "PASS",
+      "scalar_identities": 16
+    },
+    {
+      "id": "covariance_transport",
+      "status": "PASS",
+      "scalar_identities": 16
+    },
+    {
+      "id": "Gram_factor_positivity",
+      "status": "PASS",
+      "scalar_identities": 16
+    },
+    {
+      "id": "CCR_from_Gram",
+      "status": "PASS",
+      "scalar_identities": 16
+    },
+    {
+      "id": "pure_covariance",
+      "status": "PASS",
+      "scalar_identities": 16
+    },
+    {
+      "id": "determinant_pure_covariance",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "pure_pair_relation",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "quadrature_matrix",
+      "status": "PASS",
+      "scalar_identities": 16
+    },
+    {
+      "id": "rotated_cross_quadrature",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "rotated_difference_variance",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "aligned_variance",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "anti_aligned_variance",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "commuting_EPR_pair",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "series_normalization",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "series_number",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "series_anomalous",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "series_matches_Bogoliubov",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "series_generator_positive_k",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "series_generator_k0",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "phase_recovery_jacobian",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "vacuum_phase_singularity",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "two_quadrature_phase_recovery",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "free_phase_evolution",
+      "status": "PASS",
+      "scalar_identities": 1
+    },
+    {
+      "id": "phase_numeric_0.0_-2.4",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": false
+    },
+    {
+      "id": "phase_numeric_0.0_0.0",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": false
+    },
+    {
+      "id": "phase_numeric_0.0_0.37",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": false
+    },
+    {
+      "id": "phase_numeric_0.0_2.9",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": false
+    },
+    {
+      "id": "phase_numeric_0.2_-2.4",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_0.2_0.0",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_0.2_0.37",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_0.2_2.9",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_0.8_-2.4",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_0.8_0.0",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_0.8_0.37",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_0.8_2.9",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_1.3_-2.4",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_1.3_0.0",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_1.3_0.37",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    },
+    {
+      "id": "phase_numeric_1.3_2.9",
+      "status": "PASS",
+      "synthetic": true,
+      "phase_identified": true
+    }
+  ],
+  "checks_passed": 57,
+  "negative_controls": [
+    {
+      "id": "wrong_anomalous_sign",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "9/8 + 3*I/2",
+      "meaning": "The source uses +pair creation in S; changing m to -m fails its vacuum calculation."
+    },
+    {
+      "id": "treat_half_generator_as_full",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "1/4",
+      "meaning": "At Tratado r=log(2), aligned variance is exp(-r)=1/2, not exp(-2r)=1/4."
+    },
+    {
+      "id": "ignore_quadrature_phase",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "15/4",
+      "meaning": "At rho=log(2), phi=pi, unrotated difference is 4, not 1/4."
+    },
+    {
+      "id": "excess_anomalous_breaks_positivity",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "-1",
+      "meaning": "n=1,m=2 gives a negative <L*L>; violates |m|^2<=n(n+1)."
+    },
+    {
+      "id": "discard_pair_correlations",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "2",
+      "meaning": "n=1,m=0 remains a positive mixed state, but cannot replace the specified pure squeezed state."
+    },
+    {
+      "id": "replace_antilinear_by_linear_mixing",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "9/8",
+      "meaning": "Wrong a'=c a+s exp(i phi)b has commutator c^2+s^2 instead of 1."
+    },
+    {
+      "id": "Bogoliubov_is_not_complex_linear",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "6/5 - 9*I/10",
+      "meaning": "k(i e_b)-i k(e_b)=-2i s exp(i phi)e_a; circularH1 is complex linear."
+    },
+    {
+      "id": "single_difference_does_not_determine_phase",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "sqrt(3)*I",
+      "meaning": "phi=+pi/3 and -pi/3 have equal cos(phi), but unit pair phases differ by i sqrt(3)."
+    },
+    {
+      "id": "zero_linear_mean_does_not_erase_pair_phase",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "15/16 - 15*I/16",
+      "meaning": "At tanh(rho)=3/5, phases 0 and pi/2 both have zero linear means but different m."
+    },
+    {
+      "id": "unchecked_packet_basis",
+      "status": "EXPECTED_REJECTION",
+      "exact_witness": "1/2",
+      "meaning": "If <h1,h2>=1/2, [a(h1),a*(h2)] is not the required zero cross commutator."
+    }
+  ],
+  "negative_controls_passed": 10,
+  "limits": [
+    "Infinite-series convergence and operator domains are justified in DERIVATION_R1.txt, not by CAS.",
+    "No Lean compilation, observed data, provider, physical calibration or full network identification.",
+    "Finite-mode dimension is not a finite occupation cutoff. No truncated CCR matrix is used.",
+    "No new identification of beta, device modes, Maxwell helicity, regularFockDomain or Poincare dynamics."
+  ]
+}

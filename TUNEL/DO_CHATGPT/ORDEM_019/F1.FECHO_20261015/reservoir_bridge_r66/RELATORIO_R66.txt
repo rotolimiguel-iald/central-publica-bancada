@@ -1,0 +1,31 @@
+R66 — reservatório, bombeamento, gerador completo e avanço na rede
+Em nome de codex-gerente-tgl, 18/10/2026. F1.FECHO_20261015, reivindicação956.
+Referência própria: work/memoria_missao_20261016/FECHO_MISSION_REFERENCE.json.
+
+RESULTADO MATERIAL
+[DERIVED] Uma realização explícita por colisões unitárias com ancilas novas fornece o gerador completo: cinco canais, salto holográfico único J=A+B com termos cruzados, acoplamento Jaynes-Cummings, todas as perdas e bombeamentoOH. A entrada coerente no canal L_OH=sqrt(gammaOH)*sigma_- produz h_drive=Omega(sigma_++sigma_-) com amplitude i*Omega/sqrt(gammaOH), para gammaOH>0. O caso gammaOH=0 tem alternativa de drive hamiltoniano explícito, sem divisão porzero.
+[DERIVED] A construção se estende ao SISTEMA BOSÔNICO genuíno de dois modos maisOH: cortes totais de excitação N<=m são compatíveis exatamente sembomba; a extensão densa na classe-traço é conservativaCPTP e contínua. A bombaOH é perturbação limitada; Dyson/Trotter dão o mesmo gerador completo, com core explicitado e cota de erro por corte. Não se substituiu a_i bosônico pelo operadorhardcore0/1.
+[DERIVED] Os dois limites estão compostos: erro dos canais reduzidos <= ||X||_1[C_m*t²/n + 2*cauda_exponencial(2|Omega|t,m-m0)]. Primeiro fixa-se o corte m; depois o número de colisões n. Assim reservatório+bomba realizam o semigrupo bosônico, sem pressupor permutabilidade dos limites ou convergência unitáriaHP ilimitada.
+[DERIVED] A inclusão dos estados de ocupação completos no Fock(H1) existente usa tensores simétricos normalizados e Vandermonde; entrelaça os operadores e a dinâmica sobre o subespaço de dois modos. A segunda quantização transporta a família de dispositivos entre pares de modos. Isso supera a inclusão apenas cinemática0/1 deR63; não estabelece por si a localização causal/global da rede.
+
+VERIFICAÇÕES EXECUTADAS UMA VEZ CADA
+[REAL — sintético] Colisões: EXIT0, 115/115 verificações, cálculo1,19218s. Para128 passos, erro relativoFrobenius do canal coerente frente ao exponencial do gerador completo=0,00021812500382396822 (0,0218125%). A redução do passo mostrou a ordem prevista. Separar A/B emreservatórios, retirar a bomba ou inverter sua fase foi detectado pelos controlesnegativos.
+[REAL — sintético] Cortesbosônicos: EXIT0, 68/68 verificações, cálculo2,43915s. Todas as matrizes-unitárias entre os cortes1->2 e2->3 respeitaram a compatibilidade sempump. Com bomba e estadofixado deexcitação2, t=1, diferenças de norma-traço frente ao corte5: corte2=0,09545215251243692; corte3=0,0002858775111423366; corte4=2,9843046960211545e-7. Respectivas cotasanalíticas:0,30054759771445455;0,020547597714454538;0,0009475977144545365. Comparação entrecortes, não erro experimental nem igualdade demonstrada cominfinito pelos números.
+β foi calculado emruntime a partir da constante pinada; parâmetros sintéticosR62 preservados, zeroajuste. Uma advertência de depreciação futura scipy.kron foi conservada emstderr; EXIT0 e critérios não foram alterados. Resultados e freezes preservados.
+
+REAPROVEITAMENTO E PROVENIÊNCIA
+R7/R57: hamiltoniano, salto, relógio e drive já escritos; R62: parâmetros/helperpuro; R63: inclusão e receptor; R64: portas temporais/instrumento; R65: normalização/escala e diagnóstico de covariância. F1.REDE fornece setoresFock, somaHilbert, gamma/Poincaré, Weyl/modular e pacotes. O NósVivo ainda não contém a unidade; mapa1197 e fontes primárias atuais supriram a recuperação, sem reconstrução do índice. sources/ traz os pinos e âncoras. Cinco pinoscanônicosv393 foram relidos e permanecem iguais ao baseline.
+KNOWN: perturbação limitada e produtoTrotter, Engel–Nagel III.1.3/III.5.8, fonte dos autores. Contexto de interaçõesrepetidas: Attal–Pautrat, arXiv math-ph/0311002v2 e math/0402064v1; apenas abstracts consultados, não prova de aplicação por citação automática. A aplicação específica e a cota são demonstradas nesta entrega.
+
+ALCANCE E PRÓXIMA LIGAÇÃO
+Esta entrega contém demonstrações analíticas emtexto e verificaçõesPython; ZERO novo buildLean. Uma formalizaçãoLean destas demonstrações continua pendente. Não confundir saída de código finito com certificado kernel da extensãoinfinita.
+O reservatório é engenheirado: fase, reset e chaveamento são recursosINPUT com balanço de energia explicitado. Fora de ressonância, uma só transição estacionária comum não conserva o hamiltonianolivre mantendoA/B; não se afirma banho térmicopassivo equivalente. R4 ainda requer identificação/preparo/calibração físicos, inclusive gammaLambda independente.
+R5 avançou na existência e ligação DINÂMICA do dispositivo bosônico ao subespaçoFock. Ainda requer localizar os modos e acoplamentos emK(O)/álgebraslocais e justificar causalidade/relógio na representação global. Covariância da família de modos não é invariância de um aparelho fixo. Focktemporal do banho e FockespacialH1 não foram identificados por nome. Convergência de saídas com observáveisilimitados requer controle adicional de momentos.
+Reaproveitar esta realização para a próxima ponte espacial; não repetir R64 ou declarar Fock/Takesaki/Maxwell ausentes. R3(rito integral da candidata) eR10(revisão conjunta/c1) continuam dependentes. Não há aceite integralR4/R5, nova medição, 5sigma, alteração do um.py/kernel/Bancada/gate ou publicação.
+
+ARTEFATOS
+construction/CONSTRUCTION_R66.md, PLAN_COLLISION_R66.json, FREEZE_R66.json, RESULT_COLLISION_R66.json e COMMAND_COLLISION_R66.json.
+BOSONIC_CONTINUUM_R66.txt; RESERVOIR_ENERGY_AND_SECTORS_R66.txt; JOINT_RESERVOIR_CONTINUUM_LIMIT_R66.txt.
+PLAN_BOSONIC_R66.json; run_bosonic_r66.py; FREEZE_BOSONIC_R66.json; RESULT_BOSONIC_R66.json; BOSONIC_COMMAND_RESULT_R66.json e logs.
+Parecer independente final: FINAL_REVIEW_R66.json (seu estatuto e pinos governam o aceite deste componente).
+

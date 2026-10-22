@@ -1,0 +1,48 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:25:0: warning: automatically included section variable(s) unused in theorem `F1Fecho.ScalarL2.mem`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:72:2: error: Type mismatch: After simplification, term
+  hx
+ has type
+  @Eq E (↑↑((op μ d) f) x) (↑↑f x)
+but is expected to have type
+  @Eq E (↑↑((op μ d) f) x) (↑↑(1 f) x)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:81:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((op μ d) f) x
+in the target expression
+  k.value x • ↑↑f x = (↑↑((op μ d) f) + ↑↑((op μ e) f)) x
+
+X : Type u_1
+E : Type u_2
+inst✝³ : MeasurableSpace X
+inst✝² : NormedAddCommGroup E
+inst✝¹ : InnerProductSpace ℂ E
+inst✝ : CompleteSpace E
+μ : Measure X
+d e k : Data μ
+h : ∀ (x : X), k.value x = d.value x + e.value x
+f : ↥(Lp E 2 μ)
+x : X
+hk : ↑↑((op μ k) f) x = k.value x • ↑↑f x
+hd : ↑↑((op μ d) f) x = d.value x • ↑↑f x
+he : ↑↑((op μ e) f) x = e.value x • ↑↑f x
+ha : ↑↑((op μ d) f + (op μ e) f) x = (↑↑((op μ d) f) + ↑↑((op μ e) f)) x
+⊢ k.value x • ↑↑f x = (↑↑((op μ d) f) + ↑↑((op μ e) f)) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:92:18: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Star (↥(Lp ?m.27 2 μ) →L[ℂ] ↥(Lp ?m.27 2 μ))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:93:8: error(lean.unknownIdentifier): Unknown constant `ContinuousLinearMap.ext_inner_right`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:94:8: error: No goals to be solved
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:102:17: error(lean.invalidField): Invalid field `injective_iff_map_eq_zero`: The environment does not contain `ContinuousLinearMap.injective_iff_map_eq_zero`, so it is not possible to project the field `injective_iff_map_eq_zero` from an expression
+  op μ d
+of type
+  ↥(Lp ?m.24 2 μ) →L[ℂ] ↥(Lp ?m.24 2 μ)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T205951_651599Z\ScalarL2MultiplierR1.lean:103:8: error: No goals to be solved
+'F1Fecho.ScalarL2.norm_op' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.ScalarL2.op_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.ScalarL2.op_star' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.ScalarL2.op_injective' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

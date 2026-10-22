@@ -1,0 +1,338 @@
+import took 2.23e+03s
+typeclass inference of InnerProductSpace took 622ms
+typeclass inference of InnerProductSpace took 655ms
+typeclass inference of InnerProductSpace took 615ms
+typeclass inference of InnerProductSpace took 594ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 361ms
+type checking took 163ms
+'F1Fecho.GenericStarConjugation.regular_conjugation_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.GenericStarConjugation.starCoreOfLeft' depends on axioms: [propext, Classical.choice, Quot.sound]
+type checking took 420ms
+type checking took 391ms
+tactic execution of Lean.Parser.Tactic.change took 117ms
+elaboration took 158ms
+type checking took 463ms
+type checking took 558ms
+elaboration took 141ms
+type checking took 124ms
+type checking took 118ms
+tactic execution of Lean.Parser.Tactic.exact took 126ms
+type checking took 666ms
+typeclass inference of Membership took 158ms
+elaboration took 121ms
+tactic execution of Lean.Parser.Tactic.refine took 221ms
+'F1Fecho.CanonicalFockGNSCovariance.conjugateLeft_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockGNSCovariance.conjugateStar_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockGNSCovariance.conjugate_embedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockGNSCovariance.conjugate_raw_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockGNSCovariance.conjugate_closed_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:130:2: error: Type mismatch
+  UnitaryAntiunitaryTransport.conjugate ?m.20 coefficientJ
+has type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (starRingEnd ℂ) (starRingEnd ℂ) ⋯ ⋯ ?m.15 ?m.15
+    NormedAddCommGroup.toSeminormedAddCommGroup NormedAddCommGroup.toSeminormedAddCommGroup
+    InnerProductSpace.toNormedSpace.toModule InnerProductSpace.toNormedSpace.toModule
+but is expected to have type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (starRingEnd ℂ) (starRingEnd ℂ) ⋯ ⋯ (↥GNSHilbert)
+    (↥GNSHilbert) GNSHilbert.seminormedAddCommGroup GNSHilbert.seminormedAddCommGroup GNSHilbert.module
+    GNSHilbert.module
+typeclass inference of InnerProductSpace took 612ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:132:0: error: Not a definitional equality: the left-hand side
+  scalarTomitaPolarFactor x
+is not definitionally equal to the right-hand side
+  coefficientUnitary (coefficientJ (coefficientUnitary.symm x))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:134:71: error: Type mismatch
+  rfl
+has type
+  ?m.22 = ?m.22
+but is expected to have type
+  scalarTomitaPolarFactor x = coefficientUnitary (coefficientJ (coefficientUnitary.symm x))
+elaboration took 132ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:138:2: error: Type mismatch
+  UnitaryAntiunitaryTransport.on_unitary ?m.14 coefficientJ x
+has type
+  (UnitaryAntiunitaryTransport.conjugate ?m.14 coefficientJ) (?m.14 x) = ?m.14 (coefficientJ x)
+but is expected to have type
+  scalarTomitaPolarFactor (coefficientUnitary x) = coefficientUnitary (coefficientJ x)
+typeclass inference of InnerProductSpace took 630ms
+let-to-have transformation took 216ms
+elaboration took 9.61s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:141:2: error: Type mismatch
+  UnitaryAntiunitaryTransport.involutive ?m.9 coefficientJ coefficientJ_involutive
+has type
+  Function.Involutive ⇑(UnitaryAntiunitaryTransport.conjugate ?m.9 coefficientJ)
+but is expected to have type
+  Function.Involutive ⇑scalarTomitaPolarFactor
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:141:41: error: Application type mismatch: The argument
+  coefficientUnitary
+has type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (RingHom.id ℂ) (RingHom.id ℂ) ⋯ ⋯
+    (↥(RegularHilbert ↥F)) (↥GNSHilbert) NormedAddCommGroup.toSeminormedAddCommGroup GNSHilbert.seminormedAddCommGroup
+    MeasureTheory.Lp.instModule GNSHilbert.module
+but is expected to have type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (RingHom.id ℂ) (RingHom.id ℂ) ⋯ ⋯
+    ↥(RegularHilbert ↥F) ?m.4 NormedAddCommGroup.toSeminormedAddCommGroup NormedAddCommGroup.toSeminormedAddCommGroup
+    MeasureTheory.L2.innerProductSpace.toModule InnerProductSpace.toNormedSpace.toModule
+in the application
+  UnitaryAntiunitaryTransport.involutive coefficientUnitary
+typeclass inference of InnerProductSpace took 615ms
+let-to-have transformation took 150ms
+elaboration took 6.34s
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaPolarFactor_coefficient' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaPolarFactor_involutive' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaPolarFactor_norm' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+tactic execution of Lean.Parser.Tactic.exact took 108ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:177:6: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1000000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 35.5s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:190:5: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1000000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.exact took 53.6s
+elaboration took 1.12s
+'F1Fecho.CanonicalFockCoefficientFlow.intertwines' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockCoefficientFlow.cfc_intertwines' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockCoefficientFlow.graph_invariant' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+typeclass inference took 117ms
+typeclass inference of CoeT took 608ms
+typeclass inference took 127ms
+typeclass inference took 160ms
+typeclass inference of Module took 107ms
+typeclass inference took 125ms
+typeclass inference took 158ms
+typeclass inference took 128ms
+typeclass inference took 159ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 1.92s
+type checking took 127ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:257:2: error: Type mismatch: After simplification, term
+  hy
+ has type
+  ((GaussianResolventAverage.average coefficientR hR h1 hi hj (scale n)) x, y) ∈
+    (resolventSquareRoot coefficientR hR hi).graph
+but is expected to have type
+  ((coefficientAverage n) x, coefficientJ (coefficientJ y)) ∈ coefficientRoot.graph
+tactic execution of Lean.Parser.Tactic.obtain took 693ms
+'F1Fecho.CanonicalFockCoefficientGraphEquality.average_preserves' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockCoefficientGraphEquality.average_range' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockCoefficientGraphEqualtypeclass inference of InnerProductSpace took 599ms
+ity.coefficient_graph_eq_GNS' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+typeclass inference of CoeT took 149ms
+elaboration took 125ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:304:8: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:297:1: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 46.3s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:321:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (?x, ?y) ∈ (resolventGraphOperator ?R ?hi).graph
+in the target expression
+  (coefficientR x, x - coefficientR x) ∈ ↑(resolventGraphOperator (fibre CanonicalFockPolar.modularR) ⋯).graph
+
+x : ↥(RegularHilbert ↥F)
+⊢ (coefficientR x, x - coefficientR x) ∈ ↑(resolventGraphOperator (fibre CanonicalFockPolar.modularR) ⋯).graph
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 762ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 1.44s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:325:1: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+typeclass inference of InnerProductSpace took 641ms
+elaboration took 85.6s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:332:66: error: Ambiguous term
+  scalarTomitaResolvent
+Possible interpretations:
+  CanonicalFockWeightModularOperator.scalarTomitaResolvent : ↥GNSHilbert →L[ℂ] ↥GNSHilbert
+  
+  TGLV350.Regular.scalarTomitaResolvent : (P : TGLExt.SiteProfile) → ↥(ScalarGNSHilbert P) →L[ℂ] ↥(ScalarGNSHilbert P)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:333:2: error: No applicable extensionality theorem found for type
+  ?m.2 →L[ℂ] ?m.2
+
+Note: Extensionality theorems can be registered by marking them with the `[ext]` attribute
+typeclass inference of InnerProductSpace took 646ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:345:44: error: Application type mismatch: The argument
+  coefficientUnitary
+has type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (RingHom.id ℂ) (RingHom.id ℂ) ⋯ ⋯
+    (↥(RegularHilbert ↥F)) (↥GNSHilbert) NormedAddCommGroup.toSeminormedAddCommGroup GNSHilbert.seminormedAddCommGroup
+    Lp.instModule GNSHilbert.module
+but is expected to have type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (RingHom.id ℂ) (RingHom.id ℂ) ⋯ ⋯
+    ↥(RegularHilbert ↥F) ?m.15 NormedAddCommGroup.toSeminormedAddCommGroup NormedAddCommGroup.toSeminormedAddCommGroup
+    L2.innerProductSpace.toModule InnerProductSpace.toNormedSpace.toModule
+in the application
+  SpectralTransport.imatypeclass inference of InnerProductSpace took 110ms
+typeclass inference of InnerProductSpace took 616ms
+ginaryPower coefficientUnitary
+typeclass inference of InnerProductSpace took 691ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:351:2: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.obtain took 431s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:356:6: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 15.3s
+'F1Fecho.CanonicalFockModularIdentification.unitary_graph' does not depend on any axioms
+'F1Fecho.CanonicalFockModularIdentification.resolvent_intertwines' does not depend on any axioms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:367:14: error(lean.unknownIdentifier): Unknown constant `F1Fecho.CanonicalFockModularIdentification.transported_resolvent_eq`
+'F1Fecho.CanonicalFockModularIdentification.imaginary_intertwines' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.actual_modular_implementation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.actual_regular_conjugation_norm' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockModularIdentification.actual_regular_conjugation_group' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+typeclass inference of InnerProductSpace took 626ms
+elaboration took 121ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:401:53: error: Application type mismatch: The argument
+  coefficientUnitary
+has type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (RingHom.id ℂ) (RingHom.id ℂ) ⋯ ⋯
+    (↥(RegularHilbert ↥F)) (↥GNSHilbert) NormedAddCommGroup.toSeminormedAddCommGroup GNSHilbert.seminormedAddCommGroup
+    Lp.instModule GNSHilbert.module
+but is expected to have type
+  @LinearIsometryEquiv ℂ ℂ Complex.instSemiring Complex.instSemiring (RingHom.id ℂ) (RingHom.id ℂ) ⋯ ⋯
+    ↥(RegularHilbert ↥F) ?m.36 NormedAddCommGroup.toSeminormedAddCommGroup NormedAddCommGroup.toSeminormedAddCommGroup
+    L2.innerProductSpace.toModule InnerProductSpace.toNormedSpace.toModule
+in the application
+  UnitaryRootGraphTransport.root_graph_iff coefficientUnitary
+typeclass inference of InnerProductSpace took 667ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:407:2: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.obtain took 168s
+elaboration took 126ms
+typeclass inference of CoeFun took 126ms
+elaboration took 533ms
+tactic execution of Lean.Parser.Tactic.obtain took 341ms
+typeclass inference of CoeFun took 117ms
+tactic execution of Lean.Parser.Tactic.change took 443ms
+tactic execution of Lean.Parser.Tactic.exact took 609ms
+elaboration took 118ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:438:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.refine took 477ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 47.7s
+elaboration took 121ms
+elaboration took 101ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:454:8: error: (kernel) unknown constant 'F1Fecho.CanonicalFockWeightPolar.scalarClosedTomitaDomain_le_root'
+typeclass inference of InnerProductSpace took 629ms
+typeclass inference of InnerProductSpace took 616ms
+elaboration took 248ms
+typeclass inference of InnerProductSpace took 655ms
+elaboration took 181ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T025101_208377Z\CanonicalFockModularBridgeR4.lean:467:6: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 143s
+typeclass inference of InnerProductSpace took 673ms
+'F1Fecho.CanonicalFockWeightPolar.root_coefficient_graph_iff' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.polar_graph' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaRootDomain_le_closed' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaPolarFactor_root' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.scalarClosedTomitaDomain_le_root' does not depend on any axioms
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaRootDomain_eq_closed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ F1Fecho.CanonicalFockWeightPolar.scalarTomitaRootDomain_eq_closed]
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaPositiveRoot_selfadjoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaPositiveRoot_zero_only' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockWeightPolar.scalarTomitaPositiveRoot_denseRange' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 60.7ms
+	blocked (unaccounted) 744s
+	compilation (IR) 0.145ms
+	compilation (LCNF base) 2.47ms
+	compilation (LCNF impure) 0.661ms
+	compilation (LCNF mono) 2.5ms
+	congr simp thm 2.48ms
+	elaboration 106s
+	fix level params 2.61ms
+	import 2.23e+03s
+	initialization 31.4ms
+	instantiate metavars 0.826ms
+	interpretation 6.31s
+	let-to-have transformation 492ms
+	linting 24.6ms
+	overlappingInstancesLinter 28.4ms
+	parsing 17.2ms
+	process pre-definitions 186ms
+	share common exprs 28.1ms
+	simp 17.2ms
+	tactic execution 949s
+	tacticAnalysis 42.9ms
+	type checking 4.89s
+	typeclass inference 30.4s

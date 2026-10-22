@@ -1,0 +1,80 @@
+{
+  "unit": "F1.TEMPO.V394",
+  "operator": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\OPERADOR_VERBATIM.txt",
+    "sha256": "54a173d8a87b5c32d3703036a9f69acd0b754af9991b01c1a99d017e99cddb25",
+    "bytes": 113
+  },
+  "baseline": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\SOURCE_BASELINE.json",
+    "sha256": "a800d4460476d77b3186e0eecdb5f96c43b8738ffae0669043464f930696ac2b",
+    "bytes": 494759
+  },
+  "kind": "Synthetic finite-model construction and integration, no observed data",
+  "reference_omega_rad_s": [
+    0.25,
+    1,
+    3,
+    10
+  ],
+  "energy_offset_over_V0": [
+    1,
+    2,
+    100
+  ],
+  "V0": "hbar*omega_ref",
+  "hbar": "H_PLANCK_EXACT/(2*pi), from pinned program",
+  "beta": "ALPHA_FINE_CODATA_2018*sqrt(e) in runtime; program alias SEALED_CODATA_ALPHA",
+  "primary_rate": "beta*(sqrt(Eref+V0)-sqrt(Eref-V0))**2/(2*hbar)",
+  "echo_bridge": "eta=2sqrt(beta*(1-beta)); dt_echo=-log(eta)/gamma_root",
+  "state": "C*(1,i)/sqrt(2); rho0=(I-sigma_x)/2",
+  "target": "I/2, before evolution",
+  "exposure_times_in_Omega_t": [
+    0,
+    0.2,
+    1,
+    "2*pi",
+    10,
+    40
+  ],
+  "long_time": "12/gamma",
+  "random_state_seed": 20261015,
+  "random_state_count": 8,
+  "algebra_tolerance": 2e-10,
+  "clock_normalized_tolerance": 1e-08,
+  "rule_tolerance": 1e-10,
+  "eigenvalue_tolerance": 1e-10,
+  "checks": [
+    "explicit matrices and state transport",
+    "root GKLS exponential against continuous formula",
+    "semigroup and continuity laws compiled",
+    "energy and reading preservation",
+    "trace/positivity/Choi",
+    "fixed-space dimension2",
+    "root-to-echo exact rate",
+    "time reconstructed from coherence modulus and lifted phase",
+    "rescaling covariance",
+    "existing rule acceptance and incompatible target rejection",
+    "source/axiom failclosed",
+    "all old embedded sources preserved except aggregator/import/audit glue"
+  ],
+  "negative_controls": [
+    "bool NaN inf negative rate/time",
+    "zero coherence clock",
+    "zero rate modulus clock",
+    "increasing coherence",
+    "nonfixed target",
+    "zero rate no convergence",
+    "discrete alias different between samples",
+    "channel is not multiplicative",
+    "missing or corrupt formal evidence and source refuse"
+  ],
+  "formal_criteria": "Lean4.31 exit0, new statements no sorry/custom axioms, concrete M2 inhabitant, root imports and Audit checked; no assumption merely restating desired conclusion",
+  "integration_criteria": "one-file candidate v394 embeds source and inscriptions, actual main consumer path plus outputs; source bytes in baseline immutable; candidate files only",
+  "scope": "Eref=V0 is a model example, not an atomic reinterpretation; units and system correspondence explicit; not empirical creditation",
+  "runtime_source_preregistered": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime\\time_runtime_v394.py",
+    "sha256": "2762ce2edd92d6ecf5d2652e7a186f26b51a6e8f4fc37233a357d8b7ce7651f2",
+    "bytes": 15317
+  }
+}

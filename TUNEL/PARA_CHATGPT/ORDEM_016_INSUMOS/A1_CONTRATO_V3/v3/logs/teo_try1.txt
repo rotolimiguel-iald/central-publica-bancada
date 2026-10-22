@@ -1,0 +1,199 @@
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:107:8: error(lean.unknownIdentifier): Unknown constant `LinearIsometryEquiv.symm_apply_eq`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:116:4: error: Type mismatch
+  LinearIsometryEquiv.inner_map_map (C.Δit t) ?m.277 ?m.278
+has type
+  ⟪(C.Δit t) ?m.277, (C.Δit t) ?m.278⟫_ℂ = ⟪?m.277, ?m.278⟫_ℂ
+but is expected to have type
+  ⟪(C.Δit t) ((C.Δit t).symm ψ), (C.Δit t) ((W.U (l • nullDir)) ((C.Δit t).symm ((C.Δit t) ((C.Δit t).symm ψ))))⟫_ℂ =
+    ⟪(C.Δit t).symm ψ, (W.U (l • nullDir)) ((C.Δit t).symm ψ)⟫_ℂ
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:151:8: error: Type mismatch: After simplification, term
+  Tendsto.mono_left h nhdsWithin_le_nhds
+ has type
+  @Tendsto ℝ ℝ ((fun x => l) * fun μ => μ) (𝓝[>] 0) (𝓝 0)
+but is expected to have type
+  @Tendsto ℝ ℝ (fun μ => l * μ) (𝓝[>] 0) (𝓝 0)
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:159:40: warning: `ContinuousLinearMap.one_apply` has been deprecated: Use `one_apply_eq_self` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.one_apply` to `one_apply_eq_self x`).
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:172:12: error(lean.unknownIdentifier): Unknown identifier `sq_eq_zero'.mp`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:213:97: error: unsolved goals
+W : TGLSpecificAQFTWitness
+α : ℝ → W.H ≃ₗᵢ[ℂ] W.H
+β : ℝ
+h : KMSAt W α β
+c : ℝ
+hc : 0 < c
+A : W.H →L[ℂ] W.H
+hA : A ∈ W.net rightWedge
+B : W.H →L[ℂ] W.H
+hB : B ∈ W.net rightWedge
+F : ℂ → ℂ
+hF : DiffContOnCl ℂ F (kmsStrip β)
+M : ℝ
+hM : ∀ (z : ℂ), 0 ≤ z.im → z.im ≤ β → ‖F z‖ ≤ M
+h1 : ∀ (t : ℝ), F ↑t = ⟪(star A) W.vac, (α t) (B W.vac)⟫_ℂ
+h2 : ∀ (t : ℝ), F (↑t + ↑β * I) = ⟪(star B) W.vac, (α (-t)) (A W.vac)⟫_ℂ
+him : ∀ (w : ℂ), (↑c * w).im = c * w.im
+t : ℝ
+this : F (↑(c * t) + ↑β * I) = ⟪(star B) W.vac, (α (-(c * t))) (A W.vac)⟫_ℂ
+⊢ ↑c * (↑t + ↑β * I / ↑c) = ↑c * ↑t + ↑β * I
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:247:4: warning: 'congr 1' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:274:4: error: linarith failed to find a contradiction
+case h2
+W : TGLSpecificAQFTWitness
+R : TGLModularRealization W
+C : ContratoH2 W R
+h :
+  (C.kappa * C.observer 1) ^ 2 - (C.kappa * C.observer 0) ^ 2 -
+        (C.kappa * vecHead (vecTail ![C.observer 0, 0, 0])) ^ 2 -
+      (C.kappa * vecHead (vecTail (vecTail ![C.observer 0, 0, 0]))) ^ 2 =
+    1
+hx : |C.observer 0| < C.observer 1
+a✝ : 1 < C.kappa ^ 2 * (C.observer 1 ^ 2 - C.observer 0 ^ 2)
+⊢ False
+failed
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:271:69: warning: This simp argument is unused:
+  Matrix.head_cons
+
+Hint: Omit it from the simp argument list.
+  simp only [minkowskiSq, killingField, Pi.smul_apply, smul_eq_mul, Matrix.cons_val_zero,
+      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three, Matrix.h̵e̵a̵d̵_̵cons,̵
+  ̵ ̵ ̵ ̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_val_succ] at h
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:272:4: warning: This simp argument is unused:
+  Matrix.cons_val_succ
+
+Hint: Omit it from the simp argument list.
+  simp only [minkowskiSq, killingField, Pi.smul_apply, smul_eq_mul, Matrix.cons_val_zero,
+      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_three, Matrix.head_cons,̵
+  ̵ ̵ ̵ ̵ ̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵s̵u̵c̵c̵] at h
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:330:4: error: Type mismatch: After simplification, term
+  HasDerivAt.neg (HasDerivAt.const_mul (2 * Real.pi) (hasDerivAt_id 0))
+ has type
+  @HasDerivAt ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.normedAddCommGroup.toAddCommGroup
+    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace ⋯
+    (-fun y => 2 * Real.pi * y) (-(2 * Real.pi)) 0
+but is expected to have type
+  @HasDerivAt ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.instAddCommGroup Semiring.toModule
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace ⋯ (fun t => -(2 * Real.pi * t)) (-(2 * Real.pi)) 0
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:340:6: error(lean.unknownIdentifier): Unknown identifier `real_smul_eq_coe_mul`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:326:87: error: unsolved goals
+case e'_4
+W : TGLSpecificAQFTWitness
+R : TGLModularRealization W
+C : ContratoH2 W R
+ψ : W.H
+b : ℝ
+h : HasDerivAt (fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) (I * ↑b) 0
+hg : HasDerivAt (fun t => -(2 * Real.pi * t)) (-(2 * Real.pi)) 0
+h' : HasDerivAt (fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) (I * ↑b) (-(2 * Real.pi * 0))
+hc : HasDerivAt ((fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) ∘ fun t => -(2 * Real.pi * t)) (-(2 * Real.pi) • (I * ↑b)) 0
+hfun : (fun t => ⟪ψ, (C.Δit t) ψ⟫_ℂ) = (fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) ∘ fun t => -(2 * Real.pi * t)
+⊢ Complex.addCommGroup = instNormedAddCommGroup.toAddCommGroup
+
+case e'_9
+W : TGLSpecificAQFTWitness
+R : TGLModularRealization W
+C : ContratoH2 W R
+ψ : W.H
+b : ℝ
+h : HasDerivAt (fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) (I * ↑b) 0
+hg : HasDerivAt (fun t => -(2 * Real.pi * t)) (-(2 * Real.pi)) 0
+h' : HasDerivAt (fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) (I * ↑b) (-(2 * Real.pi * 0))
+hc : HasDerivAt ((fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) ∘ fun t => -(2 * Real.pi * t)) (-(2 * Real.pi) • (I * ↑b)) 0
+hfun : (fun t => ⟪ψ, (C.Δit t) ψ⟫_ℂ) = (fun s => ⟪ψ, (C.boost.V s) ψ⟫_ℂ) ∘ fun t => -(2 * Real.pi * t)
+⊢ -(I * ↑(2 * Real.pi * b)) = -(2 * Real.pi) • (I * ↑b)
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:392:10: error(lean.unknownIdentifier): Unknown constant `LinearIsometryEquiv.symm_apply_eq`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:394:10: error(lean.unknownIdentifier): Unknown constant `LinearIsometryEquiv.symm_apply_eq`
+C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\contrato_v3\v3\ContratoQG_v3_Teoremas.lean:698:4: error: linarith failed to find a contradiction
+W : TGLSpecificAQFTWitness
+R : TGLModularRealization W
+C : ContratoH2 W R
+hcomm : ∀ (t : ℝ) (a : Fin 4 → ℝ), (C.Δit t).conjStarAlgEquiv (W.U a) = W.U a
+m : Fin 4 → ℝ := (Real.exp (-(2 * Real.pi * 1)) - 1) • nullDir
+hm : m = (Real.exp (-(2 * Real.pi * 1)) - 1) • nullDir
+h0 : m = 0
+hlt : Real.exp (-(2 * Real.pi * 1)) < 1
+h : Real.exp (-(2 * Real.pi)) - 1 = 0
+⊢ False
+failed
+'TGLExt.ContratoQGv3.U_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.Δit_vac' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.bw_covariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.poincare_relation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.translates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.eigen_null_correlation_dilation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.no_point_spectrum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.KMSAt.rescale' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.modular_is_boost_at_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.unruh_is_kms' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.unruh_is_kms_temperature' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.kappa_mul_radius' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.kappa_eq_inv_radius' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.killingFlow_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.killingFlow_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.killingField_is_the_jet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.modularEnergy_of_boostEnergy' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.modularEnergy_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.vac_modularEnergy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.vac_boostEnergy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.implementer_unique' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.Δit_determined' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.boostMat_det_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.feeds_finite_face' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.det_unit_along_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.curvedFrame_not_dragged' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.curvedFrame_fiducial_not_modular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.frame_ne_curvedFrame_by_drag' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.frame_ne_curvedFrame_by_fiducial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.first_law_value' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.clausius' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.bekenstein_hawking' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.einstein_coefficient' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.area_response_proportional' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.nontrivial_area_response' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.vacuum_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.kappa_cancels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.segment_in_wedge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.toHorizonData_dA_ne' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH3.feeds_the_master' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.contratoH2_empty_of_unfaithful' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.contratoH2_empty_on_legacy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ratifying_the_legacy_pair_ratifies_the_void' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.contratoH3_empty_on_legacy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoH2.commuting_translations_excluded' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.ContratoQGv3.ContratoImportH3.nonvacuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.ContratoImportH3.makes_the_trio_H1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.ContratoQGv3.no_import_on_legacy' depends on axioms: [propext, Classical.choice, Quot.sound]
+rc=1 elapsed=28s
+kernel_files_newer_than_stamp=0

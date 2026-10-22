@@ -1,0 +1,92 @@
+{
+  "schema": "iald.f36.lambda_gate.v1",
+  "created_at_utc": "2026-10-08T06:33:54.944778+00:00",
+  "status": "UNDERPOWERED_DO_NOT_OPEN_DATA__LOCAL_LAMBDA_FISHER__PRECISION_LIMITED",
+  "statutes": {
+    "local_fisher": "REAL_NUMERICAL",
+    "physical_cpl_off_lambda": "OPEN",
+    "observed_fit": "NOT_RUN"
+  },
+  "scope": "Lambda tangent beta=0,w0=-1,wa=0; 6 free parameters; Planck compressed + DESI DR1; no SH0ES",
+  "fiducial": [
+    67.5,
+    0.02237,
+    0.12,
+    0.0,
+    -1.0,
+    0.0
+  ],
+  "beta_runtime": 0.012031300400803142,
+  "sigma_beta_primary": 0.018043478961412125,
+  "sigma_over_beta_primary": 1.4997114493299197,
+  "sigma_interval_from_steps": {
+    "min": 0.017900697955500013,
+    "max": 0.018362134653132307,
+    "steps_scaled": [
+      0.005,
+      0.01,
+      0.02
+    ],
+    "min_over_beta": 1.487843986864883,
+    "all_ge_beta": true
+  },
+  "fisher": {
+    "rank": 6,
+    "whitened_jacobian_condition": 743.8979716496397,
+    "corr_beta_w0": 0.6922706423831193,
+    "corr_beta_wa": -0.8027666290438665
+  },
+  "composition": {
+    "A_equals_Bprime_beta_jacobian_max_abs": 0.0,
+    "same_primary_sigma": true
+  },
+  "map_bases": {
+    "bare": "historical V3 diagnostic, primary for C16 comparison",
+    "effective": "operator choice for current map; local Fisher nearly degenerate, numeric sigma outside useful local regime"
+  },
+  "source_corrections": {
+    "D1F-01": "five DESI DM-DH correlations applied",
+    "D1F-03": "Planck Chen 2019 inverse covariance applied",
+    "D1F-V1": "massive-neutrino beta tangent from CAMB E(a), not V3 double-counted fluid"
+  },
+  "controls": {
+    "v3_cov_sigma": 0.021790786017556053,
+    "massless_nu_corrected_sigma": 0.018142392201907786,
+    "effective_map_sigma_numeric_outside_local_range": 24.38574889630036
+  },
+  "checks": {
+    "beta_is_runtime_alpha_sqrt_e": true,
+    "A_Bprime_same_beta_derivative": true,
+    "closure_E0": true,
+    "fisher_full_rank": true,
+    "covariances_positive_definite": true,
+    "all_gate_variants_underpowered": true,
+    "beta0_exact_camb_baseline": true,
+    "parameter_step_convergence": false,
+    "beta_step_convergence": true
+  },
+  "precision_0p5pct_passed": false,
+  "precision_note": "0.5% step convergence failed; step sensitivity 0.79%-1.77%. Report interval, not subpercent digits.",
+  "observed_means_processed_or_fitted": false,
+  "observed_means_incidentally_visible": true,
+  "literal_exposure": "V3 _dados_reais() source slice and DESI Table 1 displayed published means; no means copied into or used by this calculation",
+  "synthetic_noise_injection_recovery_run": false,
+  "other_limits": [
+    "No off-Lambda CPL worker or phantom/anchor choice",
+    "No full CMB likelihood",
+    "D1F-04 lA distance-prior convention not separately implemented",
+    "No data opening or gate change"
+  ],
+  "sha256": {
+    "freeze_pre_run": "349e8acf4407bfe9ac9642cce3d0ec3ae340f192e5e953387c8e7b843e40aaa2",
+    "script_frozen": "86bae1f6a9cd31a271dc409b0b009e26cc2025e071f2182624db82aa84e60ddb",
+    "result_final": "d6fe92487ac667d0e59288df0aa6e7cc594fb0e6c9e257031741ef065af16912",
+    "build_log": "668f57ba0f65e8b18e347580deb0dcd0ca69e5d3dde64c8a7e3173af200c4a05",
+    "selftest_json": "c09d015d516cb3a6b6646d18dfa878efa8470de1f208f8b996307bbc9b090e6a",
+    "selftest_log": "5e37a133b1b06f5ae8edbb8408347ffb7eb072abfc08dc8f785fdc063d91388a"
+  },
+  "source_urls": [
+    "https://arxiv.org/html/2404.03002",
+    "https://arxiv.org/html/1808.05724"
+  ]
+}

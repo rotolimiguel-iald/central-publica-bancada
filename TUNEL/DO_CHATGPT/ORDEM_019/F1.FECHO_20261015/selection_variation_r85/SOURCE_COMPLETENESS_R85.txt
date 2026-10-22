@@ -1,0 +1,72 @@
+R85 — A fonte completa exige a resposta fora do fundo cosmológico
+Em nome de codex-gerente-tgl; reivindicação996. [DERIVED analítico; controle simbólico exato separado]
+
+Reuso e alcance documental
+tgl_paper_unified.py:10315–10468 fornece ação em quatro setores, ξR|Ψ|²,
+Lmod=β L_LCDM |1+w_eff(z)| e uma equação de movimento para Ψ. A função
+w_eff_LCDM:3283–3299 calcula p_total/rho_total no fundo cosmológico. Não
+fornece, nesses trechos, a derivada funcional de w_eff em relação a uma
+métrica espaço-temporal arbitrária, mantendo os campos independentes fixos.
+Isso não é afirmação de ausência em todo o acervo. A busca desta rodada
+incluiu os artigos A Ponte Einstein Cartan Miguel.tex e O Um e o Grande
+Atrator.tex e os módulos formais indicados pelos nomes de fonte/ação.
+
+ActionCouplingControls já prova que os dados do operador não bastam para
+EOM: data_alone_does_not_supply_eom. Seu modelo não nulo para todo ξ
+também não seleciona ξ. Reusar esses resultados, não reconstruí-los.
+SectorFluidClosure define wEff como razão pressão/densidade e deriva a
+correção de entalpia. Isso é fechamento de setores cosmológicos; não é,
+por identificação nominal, variação da ação geral com respeito à métrica.
+
+1. Fórmula que pode ser estabelecida sem escolher uma conclusão
+Na convenção Hilbert T_ab=−2/√|g| δS_m/δg^{ab}, escreva
+Lmod=β L0 F, F=|1+w|. Se L0 e F dependem localmente de g^{ab} mas não
+de suas derivadas, e β é fixo nessa variação,
+ Tmod_ab=β[F T0_ab−2 L0 (∂F/∂g^{ab})].
+Para 1+w≠0, ∂F=sgn(1+w) ∂w. Derivadas de g, dependência não local,
+integração de campos auxiliares ou β variável exigem termos adicionais.
+Não se aplica esta fórmula de forma silenciosa a tais casos.
+
+A presença de F multiplicando T0 não determina o segundo termo. Logo
+conhecer o valor de F(z), mesmo exatamente, não identifica Tmod(k,k)
+para todas as direções nulas. Tampouco a conservação, isoladamente,
+seleciona essa extensão fora do fundo.
+
+2. Controle explícito de não unicidade local da extensão
+Seja n_a um covetor material mantido fixo e I=g^{ab}n_a n_b. Em um ponto
+de comparação I=I0, as duas extensões
+ L_A=β L0 F0,       L_B=L_A+βεL0(I−I0)
+coincidem em valor. Na mesma configuração e sob a mesma convenção,
+ (T_B−T_A)_ab=−2βεL0 n_a n_b.
+Portanto a contração nula difere quando n_a k^a≠0 e βεL0≠0.
+É um controle de informação insuficiente, não escolha de outra ação
+física, ajuste de ε ou proposta de novo parâmetro para a TGL.
+
+source_offshell_control.py verifica exatamente, por SymPy, o exemplo
+g0^{-1}=diag(1,−1,−1,−1), k=(1,1,0,0), n=(0,1,0,0),
+g^{-1}(t)=g0^{-1}+t k⊗k, I0=−1. A diferença de densidades é zero em t=0,
+mas sua derivada é βεL0. Não há dado observado nem valor numérico de β.
+
+3. Ponto de não diferenciabilidade
+Em w=−1, uma variação com δw=a≠0 produz |a t|: derivadas laterais −|a|
+e +|a|. Uma ação clássica diferenciável precisa declarar o domínio,
+provar que esse cruzamento não ocorre nas variações admitidas, mostrar
+cancelamento por outros fatores ou especificar outra noção variacional.
+Nada autoriza escolher sinal por conveniência. Se L0=0 no ponto ou δw=0,
+o diagnóstico exige examinar a ordem seguinte e não é automaticamente
+uma obstrução. O controle usa a>0 e L0 não anulado.
+
+4. Como isso entra no objetivo integral
+Para identificar a fonte completa são necessárias as identificações dos
+campos do mesmo registro (inclusive escalar Ψ versus covetor Ψ_mu), a
+resposta métrica de cada setor e a interpretação de L_LCDM e w fora do
+fundo. O setor σ(P) e o termo não minimal tratados em R83/R84 cobrem
+parte disso. Maxwell/Yang–Mills/Dirac/potencial/termo modular não podem
+ser omitidos sem prova de truncamento consistente do mesmo sistema.
+
+A próxima construção deve usar a lei de seleção encontrada no acervo
+para fixar esses dados. Se ela só fornece a trajetória cosmológica, a
+extensão covariante permanece requisito próprio. A intenção é resolver
+o requisito; não declarar que o diagnóstico substitui sua solução.
+H3 universal não foi provado. Nenhum original, um.py, gate ou produção
+foi alterado.

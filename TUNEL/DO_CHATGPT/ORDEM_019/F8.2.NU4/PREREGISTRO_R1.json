@@ -1,0 +1,111 @@
+{
+  "unit": "F8.2.NU4",
+  "claim": 642,
+  "scope": "First installed-Bench numerical pilot of existing contracts; synthetic/reference inputs, no observed likelihood",
+  "reused_units": [
+    "F8.2.NU2",
+    "F8.2.NU3",
+    "F7.2",
+    "F0.3.B2"
+  ],
+  "source_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F8.2.NU2\\PLANO_R1.json",
+      "sha256": "1b51bbfb32fa816b491759a3a71c3625d0c4adca63d95f2382c98865c1b8cd7c",
+      "bytes": 2408
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F8.2.NU3\\archive_contracts\\CONTRACTS_API_R2.json",
+      "sha256": "498763d81e19815151cda2e0be74f4485155b6b569a46a0bad14b86f6ca2d818",
+      "bytes": 30921
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\neutrino_contract.py",
+      "sha256": "8a77fb69d7a1e898a10688783aca0a080f11362b313f6f9f3accf322cfa3ba37",
+      "bytes": 6274
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\canonical_contracts.json",
+      "sha256": "54fc9e27e4599c49990adb9587a45a8858393f2d8f5d66ec3e022b8140757c1b",
+      "bytes": 25917
+    }
+  ],
+  "canonical_manifest_sha256": "54fc9e27e4599c49990adb9587a45a8858393f2d8f5d66ec3e022b8140757c1b",
+  "reference_inputs": {
+    "dm21_eV2": 7.5e-05,
+    "dm31_eV2": 0.0025,
+    "sin2theta12": 0.307,
+    "sin2theta13": 0.022,
+    "sin2theta23": 0.5,
+    "deltaCP_rad": 0.0,
+    "Kfac": 1.0,
+    "reactor_baseline_km": 52.5,
+    "supernova_baseline_kpc": 50.0,
+    "parsec_m": 3.085677581491367e+16,
+    "energies_MeV": [
+      2.0,
+      4.0,
+      8.0,
+      10.0
+    ]
+  },
+  "constants": {
+    "h_J_s": 6.62607015e-34,
+    "eV_J": 1.602176634e-19,
+    "c_m_s": 299792458.0,
+    "G_SI": 6.6743e-11
+  },
+  "hbar_implementation_eV_s": 6.582119569e-16,
+  "tau_star_policy": "t_P=sqrt((h/(2*pi))*G/c^5), conditional; not derived value of tau_star",
+  "protocol": {
+    "parity_s": [
+      0,
+      0.5,
+      1
+    ],
+    "modular_eigenvalues": [
+      0,
+      1,
+      4
+    ],
+    "modular_s": 1,
+    "energies_MeV": [
+      2,
+      4,
+      8
+    ],
+    "reactor_baseline_km": 52.5,
+    "Kfac": 1,
+    "positive_control": "Choose tau_ctrl analytically so Gamma31*t=0.1 at E=4MeV; instrument-control INPUT, not physical inference",
+    "diagonal_populations": [
+      0.2,
+      0.3,
+      0.5
+    ],
+    "beta_scale": "Evaluate at chi=0 and chi_frontier=2acosh(1/alpha); do not substitute beta_bulk into physical dissipator",
+    "stable_spectral_delta": "Use returned -expm1(-Gamma*t), never subtract two nearly equal probabilities"
+  },
+  "checks": {
+    "trace_abs_tolerance": 2e-12,
+    "positivity_tolerance": 2e-12,
+    "relative_rate_tolerance": 2e-12,
+    "energy_abs_tolerance_eV": 1e-22,
+    "zero_tau_stationary_diagonal": true,
+    "all_request_receipts_same_manifest": true
+  },
+  "outputs": [
+    "trace/positivity/energy/control errors",
+    "Gammaij and coherence_loss at2,4,8MeV",
+    "Pee difference computed stably conditional tP/Kfac1",
+    "channel-positive control",
+    "density diagonal stationarity",
+    "observed_sigma=NULL"
+  ],
+  "no": [
+    "observed fit",
+    "reuse published bound as likelihood",
+    "choose tau or chi to attain5sigma",
+    "reinterpret dimensionless parity probability as particle yield",
+    "derive Chandrasekhar/luminosity from dephasing only"
+  ]
+}

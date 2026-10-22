@@ -1,0 +1,104 @@
+import took 495s
+typeclass inference of NormedAddCommGroup took 129ms
+typeclass inference of NonUnitalNonAssocSemiring took 274ms
+elaboration took 155ms
+tactic execution of Lean.Parser.Tactic.change took 344ms
+typeclass inference took 124ms
+typeclass inference of T2Space took 204ms
+tactic execution of Lean.Parser.Tactic.refine took 684ms
+typeclass inference of Trans took 141ms
+typeclass inference of Trans took 162ms
+interpretation of Lean.Elab.Tactic._aux_Mathlib_Tactic_Widget_Calc___elabRules_Lean_calcTactic_1._boxed took 461ms
+type checking took 152ms
+typeclass inference of HMul took 207ms
+elaboration took 204ms
+type checking took 361ms
+tactic execution of Lean.Parser.Tactic.change took 179ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T011808_378600Z\CanonicalFockRegularGNSR8.lean:70:6: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (800000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+typeclass inference of HMul took 138ms
+tactic execution of Lean.Parser.Tactic.change took 480ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 1.42e+03s
+typeclass inference of MulHomClass took 115ms
+elaboration took 1.15s
+type checking took 213ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T011808_378600Z\CanonicalFockRegularGNSR8.lean:105:2: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  StarMul (↥(RegularScalarGNS.GNSHilbert weightContext) →L[ℂ] ↥(RegularScalarGNS.GNSHilbert weightContext))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T011808_378600Z\CanonicalFockRegularGNSR8.lean:108:4: error: Application type mismatch: The argument
+  regularRightGNS_star
+has type
+  ∀ (t : ℝ),
+    @star (↥GNSHilbert →L[ℂ] ↥GNSHilbert)
+        instStarContinuousLinearMapComplexIdSubtypeAEEqFunRealPreLpNatSectorsMemAddSubgroupFVolumeRegularHilbertSubmoduleGNSHilbert_canonicalFockRegularRightGNSR11
+        (regularRightGNS t) =
+      regularRightGNS (-t)
+but is expected to have type
+  ∀ (t : ℝ),
+    @star (↥(RegularScalarGNS.GNSHilbert weightContext) →L[ℂ] ↥(RegularScalarGNS.GNSHilbert weightContext))
+        StarMul.toInvolutiveStar.toStar (regularRightGNS t) =
+      regularRightGNS (-t)
+in the application
+  group_product_star (fun a => scalarGNSRepresentation (regularRightCoreElement a)) regularRightGNS (fun a => ?m.31)
+    regularRightGNS_star
+typeclass inference of NormedAddCommGroup took 133ms
+typeclass inference of Monoid took 297ms
+typeclass inference of NonUnitalNonAssocSemiring took 286ms
+let-to-have transformation took 296ms
+elaboration took 12s
+typeclass inference of CoeFun took 254ms
+'F1Fecho.CanonicalFockRegularGNS.regularRightGNS_commutes_left' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularRightGNS_strongly_continuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS_intertwines' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularRightCoreElement_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS_star' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS_unitary' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS_ambient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.CanonicalFockRegularGNS.regularConjugationGNS_strongly_continuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 5.46ms
+	blocked (unaccounted) 1.42e+03s
+	congr simp thm 0.119ms
+	elaboration 13.8s
+	fix level params 0.953ms
+	import 495s
+	initialization 29.2ms
+	instantiate metavars 0.336ms
+	interpretation 6.65s
+	let-to-have transformation 352ms
+	linting 7.98ms
+	overlappingInstancesLinter 20.9ms
+	parsing 7.27ms
+	process pre-definitions 40.3ms
+	share common exprs 9.58ms
+	simp 2.18ms
+	tactic execution 1.42e+03s
+	tacticAnalysis 26.4ms
+	type checking 1.42s
+	typeclass inference 8.67s

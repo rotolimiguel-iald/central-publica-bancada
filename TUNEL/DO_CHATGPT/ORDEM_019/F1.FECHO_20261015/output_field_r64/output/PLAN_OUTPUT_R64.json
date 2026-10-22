@@ -1,0 +1,126 @@
+{
+  "status": "PREPARED_REQUIRES_INDEPENDENT_PREEXEC_REVIEW",
+  "created_utc": "2026-10-17T21:51:48.655969+00:00",
+  "actor": "codex-output-field-r64",
+  "unit": "F1.FECHO_20261015",
+  "claim": 952,
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\finite_device_functions_r62.py",
+      "sha256": "be3d3b21f7a5e8e0c8db812c44d6dd599b84613f5b5fcbd53cc054b01a54d069",
+      "bytes": 2361
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\PREPARED_READOUT_PLAN_R62.json",
+      "sha256": "862458a7b7f8b8797a2a2f71aa5ed674abbef0488af6acb41bd0e3aa908f3bea",
+      "bytes": 15302
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_receiver_r63\\receiver\\DERIVACAO_RECEPTOR_R63.md",
+      "sha256": "35982c445a98ab6cf28c1fe56e53a3269a921b4a3a01614ae787f17bab373f84",
+      "bytes": 8747
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_clock_r57\\derive_polarization_r57.py",
+      "sha256": "2acbe17805e7b8c9adfecafa113c64e14fb6c73c8669be301b4d17084079b8fc",
+      "bytes": 15690
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.LEITURA_20261015\\DISPOSITIVO_E_ESPECTRO_R7\\CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt",
+      "sha256": "339c6f5a8bdb72f59f95fbefe4ac17e34830be7dd019ddd743955e6c4fed5be1",
+      "bytes": 10696
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\literature\\2212.00176v2.html",
+      "sha256": "a3942e07d4cd47425ed54bed9dec9cdde304d867f0c472f05f6736a507ff995b",
+      "bytes": 302619
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\literature\\CUSTODY_R64.json",
+      "sha256": "d56de31ebffd9de2dfd796e368885cbed9edb79b10eaa06ee16ca27e935ae9a4",
+      "bytes": 1311
+    }
+  ],
+  "literature": "Guilmin/Rouchon/Tilloy arXiv2212.00176v2, Eqs46,50,57,63–66; general tilted-generator method KNOWN, application here DERIVED conditional.",
+  "assumptions": {
+    "status": "INPUT",
+    "bath": "Independent bosonic Markov vacuum input channels and a chosen unitary/dilation realization; not inferred solely from generator L.",
+    "monitored_ports": "Li=sqrt(kappa_in) ai and Lo=sqrt(kappa_out) ao; ideal efficiency=1, calibrated common phase references. Other3dissipators unmonitored but retained.",
+    "output": "homodyne dY_j normalized as quadrature dX_j=dY_j/sqrt2; shot noise dX_j dX_k=delta_jk dt/2.",
+    "preparation": "Same finite2x2x2 state and fullGKLS; no identification of actual physical wave packets/patent hardware claimed."
+  },
+  "formulas": {
+    "M": "M_j_theta(rho)=(exp(-i theta)Lj rho+exp(i theta)rho Lj†)/sqrt2",
+    "ordered": "t>s: E[I_j(t)I_k(s)]regular=Tr M_j exp((t-s)L) M_k rho(s). Reverse time by exchanging detector/time labels; same-time singular part delta_jk delta(t-s)/2.",
+    "filtered": "Qj=integral_0^T f_j(t)dX_j(t); real L2-normalized filters. Two times, not instantaneous cavity C/B.",
+    "rho": "rho_dot=L rho",
+    "u": "u_j_dot=L u_j+f_j M_j rho, u_j(0)=0",
+    "v": "v_jk_dot=L v_jk+f_j M_j u_k+f_k M_k u_j+delta_jk*f_j*f_k*rho/2, v_jk(0)=0",
+    "moments": "E Qj=Tr uj; E QjQk=Tr vjk; centered covariance subtracts means. Keep rho,u,v as full matrices, no factorization.",
+    "LO_frame": "If R L R†=exp(-i chi)L and rho_rot=R rho_lab R†, R M_theta_lab(rho_lab)R†=M_(theta_lab+chi)(rho_rot). Thus matched LO theta_lab=theta0-omega_d*t gives constant theta_rot; no silent frequency relabel or internal clock inference."
+  },
+  "reuse": {
+    "helper": "finite_device_functions_r62.py unchanged",
+    "liouvillian": "Call existing liouvillian(h,jumps). No new generator or64-moment closure. Augment only known filtered momentODE.",
+    "source_execution": "Never execute/import original main; import only the previously AST-extracted pure helper file."
+  },
+  "numerics": {
+    "solver": "scipy.integrate.solve_ivp DOP853",
+    "rtol": 1e-10,
+    "atol": 1e-12,
+    "T": 1.0,
+    "quadrature_phases": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "pi/2",
+        "pi/2"
+      ],
+      [
+        "0",
+        "pi/2"
+      ],
+      [
+        "pi/2",
+        "0"
+      ]
+    ],
+    "same_initial_state_each_phase": true,
+    "analytic_tolerance": 1e-08,
+    "algebra_tolerance": 1e-12,
+    "state_and_imag_tolerance": 1e-09,
+    "negative_difference_threshold": 1e-05,
+    "no_parameter_sweep": true
+  },
+  "analytic_controls": {
+    "single_emission": "Separate2level model H=0,L=sqrt(kappa)a,kappa=1,T=1,initial|1>; normalized matched filter f=sqrt(kappa)*exp(-kappa*t/2)/sqrt(p),p=1-exp(-kappa*T). E Q=0,E Q²=1/2+p.",
+    "vacuum": "Same control initial|0>; E Q²=1/2.",
+    "two_ports": "Separate two-mode independent damping kappa=1 each, initial(|00>+exp(i*pi/4)|11>)/sqrt2; same matched filters. Reconstruct output C=p*exp(i*pi/4)/2,B=0 from four distinct phase settings.",
+    "ordering": "Single-emission t=.8,s=.2,theta=0: regular correlation=kappa exp[-kappa(t+s)/2]. Wrong rho(t) in place rho(s) must differ>1e-5.",
+    "noise_mutation": "Vacuum control with shotnoise term omitted gives0, must differ from1/2 by>1e-5.",
+    "LO_mutation": "Wrong imaginary sign in decoder on two-port control must differ from expected C by>1e-5."
+  },
+  "full_case": {
+    "status": "INPUT same parameter set fromR62; no fitting",
+    "parameters_from": "PREPARED_READOUT_PLAN_R62.json model parameters; gammaLambda=1; beta computed from pinned ALPHA_FINE_CODATA_2018*sqrt(e) at runtime.",
+    "state": "(|00>+.5|11>)/sqrt(1+.5²) tensor OH maximally mixed",
+    "filters": "Both rectangular f(t)=1/sqrt(T) on[0,T],T=1.",
+    "channels": "Four phase settings in separate identical preparations; never X/P simultaneous outcomes in one run.",
+    "outputs": [
+      "Mean andraw/centeredsecondmoments perphase",
+      "C_filtered andB_filtered byR62algebra; no equality toinstantaneoussystemC/B",
+      "Densitytrace/Hermiticity/positivity and selectedclassicalcovariance positivity",
+      "Generator andnormalizedM direct/vectored consistency"
+    ],
+    "pass": "All analytical controls within1e-8; matrixidentities1e-12; states/imaginary parts1e-9; negativecontrols recognized>1e-5. Fixed before run."
+  },
+  "limits": [
+    "0observeddata,0provider,0shots,0beta inference.",
+    "No bosonic GKLS intertwining, Poincare covariance or physical detector installation.",
+    "Bath/dilation, ports, efficiency, filters andLO reference are named INPUT.",
+    "No repeatedR62/R63campaign and no removal of fullcase pump/losses."
+  ]
+}

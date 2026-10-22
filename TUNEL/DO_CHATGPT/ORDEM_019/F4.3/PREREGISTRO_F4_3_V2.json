@@ -1,0 +1,171 @@
+{
+  "id": "F4.3_220_PLUS_440_SHARED_SOURCE_V2_DESIGN",
+  "unit": "F4.3",
+  "status": "PRE_REGISTERED_DESIGN__AWAITING_POWER__OPERATOR_REQUEST_SUSPENDED__NO_DATA_OPENED",
+  "supersedes_for_reading_only": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\PREREGISTRO_F4_3.json",
+    "bytes": 2305,
+    "sha256": "4f60c14d3bffe5faeae67578900c4e605341fbc6a0e1481c4ca23fb98cf0c437"
+  },
+  "plan_with_addendum": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\PLANO_E_PREREGISTRO.md",
+    "bytes": 13012,
+    "sha256": "f58e42b2e8c500c1315d212e9f3fdfc14d9f44485360fbccd57d78a7edc78612"
+  },
+  "sources": {
+    "audit_c1": {
+      "path": "C:\\IALD\\PROGRAMA_IALD\\auditorias\\F4.3_F5.2\\AUDITORIA_F4_3_F5_2_C1_20261007.md",
+      "bytes": 12619,
+      "sha256": "c0bb3c964c8af74e23d033c0dc85e93102edd5507359500f4640084a7f177dde"
+    },
+    "clock_sonda": {
+      "path": "C:\\IALD\\PROGRAMA_IALD\\auditorias\\F4.3_F5.2\\f43_clock_check.out.json",
+      "bytes": 3200,
+      "sha256": "dc2c9bbe71e1a71d02f84f946f2ddcbf12a71e7593e8a1d6c2c345b5803a0818"
+    },
+    "ramo_b_v1": {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\preregistro_ramo_b_05out\\PREREGISTRO_RAMO_B_RINGDOWN_V1.json",
+      "bytes": 138727,
+      "sha256": "86f98fcc124dd9cae04fdb06bd10c14175893253d5b139496bd4c05f109feee0"
+    },
+    "qnm_grid": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\QNM_GRID.json",
+      "bytes": 169231,
+      "sha256": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24"
+    }
+  },
+  "clock": {
+    "decision_formula": "tau_star = (2*pi/kappa_hat(chi_f))*G*M_f/c^3; one k and one M_f per event for 220 and 440",
+    "k_at_chi_0p6145_0p67847_0p70": [
+      28.49500882369727,
+      29.672138111493226,
+      30.162809114161146
+    ],
+    "delta_tau_220_exact": [
+      -0.3384833082411655,
+      -0.3747524878774464,
+      -0.3891508607501723
+    ],
+    "delta_tau_440_fixed_source": [
+      -0.6937071119717944,
+      -0.725884794467944,
+      -0.7376925123649588
+    ],
+    "q220_required": [
+      1.9785761292593038,
+      2.0058647913237992,
+      2.0134102652420824
+    ],
+    "prograde_grid_q_min": 2.100168377611806,
+    "prograde_only_conclusion": "no (M,chi) in pinned prograde grid absorbs 220 at V1 clock [DERIVED by c1]",
+    "counter_rotating_family": "220-only can be absorbed at chi~0.10..0.22 and M/M_f~0.58..0.72 [DECLARED by c1/skeptic; not recalculated here]",
+    "only_full_IMR_closes_counter_rotating_escape": true,
+    "legacy_k1_scope": "seq 58/87/91, C6 lnB~-0.0026, B2 Fisher and GW250114 proxy ~0.06 sigma; historical controls only, not V1 power"
+  },
+  "hypotheses": {
+    "GR": "Kerr 220 and 440, same final mass/spin, per-mode amplitudes/phases profiled",
+    "B_220_440": "V1 local KMS clock, exact additive-rate envelope for both modes; 440 deformation is INPUT",
+    "B_220_only": "control: 220 deformed, 440 Kerr",
+    "canonical": "Planck-clock correspondence control"
+  },
+  "v1_reconciliation_and_fwer": {
+    "primary": "sealed Ramo B V1 full IMR on D; control C3",
+    "secondary": "F4.3 ringdown-only diagnostic on same D; no independent claim",
+    "control_C8": "one k and one M_f; 221 never credited to 440",
+    "alpha_one_sided_per_relevant_null": 2.8665e-07,
+    "rule": "V1 verdict first; F4.3 can corroborate only the same direction if V1 and F4.3 each have calibrated one-sided p <= alpha. Intersection controls false joint claim at <= primary V1 alpha without independence. F4.3 alone remains diagnostic.",
+    "two_tails": {
+      "under_B_null": "p_B for evidence excluding the named B pair; calibrated under B injections",
+      "under_GR_null": "p_GR for evidence reporting GR tension; calibrated under GR injections",
+      "both_rejected": "INCONCLUSIVE_SYSTEMATICS__BOTH_MODELS_REJECTED",
+      "neither_rejected": "NOT_FALSIFIED_POWERED if exact injected power passed; otherwise UNDERPOWERED_OR_NONIDENTIFIABLE",
+      "single_threshold_note": "same alpha per relevant null; never combine two one-sided p values into a two-sided 5-sigma claim"
+    },
+    "official_vocabulary": [
+      "FALSIFIED_AT_5SIGMA",
+      "NOT_FALSIFIED_POWERED__GR_TENSION_REPORTED",
+      "NOT_FALSIFIED_POWERED",
+      "NOT_FALSIFIED_UNDERPOWERED",
+      "INCONCLUSIVE_SYSTEMATICS"
+    ],
+    "retired_v1_draft_token": "FAVORS_PAIR_B_220_440_AT_5SIGMA"
+  },
+  "synthetic_identifiability_screen_INPUT": {
+    "svd_relative_cutoff_rcond": 1e-10,
+    "eta_joint_min": 25.0,
+    "eta_increment_440_min": 1.0,
+    "eta_formula": "eta=||[I-(WJ)(WJ)^+] W(mu_B-mu_GR)||^2; eta_increment_440=max(0,eta_joint-eta_220)",
+    "limits": "design choices for synthetic screening only; do not imply 5 sigma, physical power or permission to open D",
+    "x_around_0p6": "linear SVD is outside perturbative regime; use exact delta_tau=-x/(1+x) in injections",
+    "exact_injection_power_gate": "calibrated >=90% recovery at one-sided 5 sigma, plus null coverage, bias/systematics and waveform/start/PSD checks",
+    "failed_or_missing": "UNDERPOWERED_OR_NONIDENTIFIABLE or INCONCLUSIVE_SYSTEMATICS; no D opening"
+  },
+  "execution_manifest": {
+    "status": "INCOMPLETE_FAIL_CLOSED__NO_POWER_RUN",
+    "event_universe_from_v1_not_new_data": [
+      "GW230919_215712",
+      "GW240513_183302",
+      "GW240515_005301",
+      "GW240615_160735",
+      "GW240920_073424",
+      "GW240923_204006",
+      "GW240930_035959",
+      "GW241102_144729",
+      "GW241111_111552",
+      "GW241130_034908",
+      "GW241210_060606",
+      "GW250104_015122",
+      "GW250109_010541",
+      "GW250118_170523"
+    ],
+    "data_quality_holds_from_v1": [
+      "GW240515_005301",
+      "GW240615_160735",
+      "GW240930_035959",
+      "GW241102_144729"
+    ],
+    "event_list_final_pinned": null,
+    "event_list_hash": null,
+    "psd_per_event_and_detector": null,
+    "psd_hashes": null,
+    "analysis_windows": null,
+    "window_hashes": null,
+    "priors_and_bounds": null,
+    "prior_hash": null,
+    "start_time_rule": null,
+    "waveform_family_and_version": null,
+    "waveform_hash": null,
+    "detector_covariance": null,
+    "injection_seed_and_null_repetitions": null,
+    "complete_before_power": [
+      "event_list_final_pinned",
+      "event_list_hash",
+      "psd_per_event_and_detector",
+      "psd_hashes",
+      "analysis_windows",
+      "window_hashes",
+      "priors_and_bounds",
+      "prior_hash",
+      "start_time_rule",
+      "waveform_family_and_version",
+      "waveform_hash",
+      "detector_covariance",
+      "injection_seed_and_null_repetitions"
+    ],
+    "complete_before_data_D": [
+      "power_result_hash",
+      "independent_audit_hash",
+      "operator_specific_opening_act"
+    ]
+  },
+  "ordered_output": [
+    "AWAITING_POWER",
+    "UNDERPOWERED_OR_NONIDENTIFIABLE",
+    "INCONCLUSIVE_SYSTEMATICS",
+    "DIAGNOSTIC_CORROBORATES_V1_SAME_DIRECTION",
+    "DIAGNOSTIC_ONLY"
+  ],
+  "no_observational_data_opened": true,
+  "no_gate_change": true,
+  "not_construction_of_physical_solution": true
+}

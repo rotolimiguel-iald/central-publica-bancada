@@ -1,0 +1,85 @@
+import took 85.3s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T001531_128016Z\RegularSpectralBoostedAverageR1.lean:32:7: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T001531_128016Z\RegularSpectralBoostedAverageR1.lean:33:4: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T001531_128016Z\RegularSpectralBoostedAverageR1.lean:50:6: warning: This simp argument is unused:
+  Pi.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [̵R̵e̵g̵u̵l̵a̵r̵C̵o̵r̵e̵F̵i̵n̵i̵t̵e̵W̵e̵i̵g̵h̵t̵.̵r̵e̵g̵u̵l̵a̵r̵O̵r̵b̵i̵t̵C̵u̵t̵,̵S̵e̵t̵.̵i̵n̵d̵i̵c̵a̵t̵o̵r̵_̵o̵f̵_̵n̵o̵t̵M̵e̵m̵ ̵h̵t̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵P̵i̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]̵[̲R̲e̲g̲u̲l̲a̲r̲C̲o̲r̲e̲F̲i̲n̲i̲t̲e̲W̲e̲i̲g̲h̲t̲.̲r̲e̲g̲u̲l̲a̲r̲O̲r̲b̲i̲t̲C̲u̲t̲,̲ ̲S̲e̲t̲.̲i̲n̲d̲i̲c̲a̲t̲o̲r̲_̲o̲f̲_̲n̲o̲t̲M̲e̲m̲ ̲h̲t̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T001531_128016Z\RegularSpectralBoostedAverageR1.lean:77:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a₁ • ?a₂ • ?b
+in the target expression
+  h⁻¹ •
+      (√(2 * Real.pi))⁻¹ •
+        FourierTransform.fourier (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) (s / (2 * Real.pi)) =
+    ((√(2 * Real.pi))⁻¹ * h⁻¹) •
+      FourierTransform.fourier (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) (s / (2 * Real.pi))
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+B : UnitaryFlow H
+v : H
+h : ℝ
+hh : 0 < h
+hs : √dualHaarFactor = (√(2 * Real.pi))⁻¹
+hmap :
+  spectralCode (h⁻¹ • boostedCoefficient B h v) =
+    h⁻¹ • normalizedFourier (RegularSpectralCode.code (boostedCoefficient B h v))
+s : ℝ
+h1 :
+  ↑↑(h⁻¹ • normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) ⋯)) s =
+    h⁻¹ • ↑↑(normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) ⋯)) s
+h2 :
+  ↑↑(normalizedFourier (MemLp.toLp (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) ⋯)) s =
+    (√(2 * Real.pi))⁻¹ •
+      FourierTransform.fourier (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) (s / (2 * Real.pi))
+⊢ h⁻¹ •
+      (√(2 * Real.pi))⁻¹ •
+        FourierTransform.fourier (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) (s / (2 * Real.pi)) =
+    ((√(2 * Real.pi))⁻¹ * h⁻¹) •
+      FourierTransform.fourier (RegularCoreFiniteWeight.regularOrbitCut B h (testVector v)) (s / (2 * Real.pi))
+typeclass inference of AddCommMonoid took 119ms
+typeclass inference of AddCommMonoid took 124ms
+typeclass inference of LinearMap.CompatibleSMul took 104ms
+'F1Fecho.RegularSpectralBoostedAverage.boostedCoefficient_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RegularSpectralBoostedAverage.regularUnitary_testVector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.RegularSpectralBoostedAverage.code_boostedCoefficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.RegularSpectralBoostedAverage.spectralCode_boostedAverage_ae' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.0397ms
+	blocked (unaccounted) 3.59s
+	congr simp thm 0.823ms
+	dsimp 15ms
+	elaboration 44.7ms
+	fix level params 0.454ms
+	import 85.3s
+	initialization 30ms
+	instantiate metavars 0.956ms
+	interpretation 7.16s
+	let-to-have transformation 0.221ms
+	linting 5.3ms
+	overlappingInstancesLinter 85.2ms
+	parsing 3.33ms
+	process pre-definitions 4.56ms
+	share common exprs 3.56ms
+	simp 14.5ms
+	tactic execution 303ms
+	tacticAnalysis 182ms
+	type checking 45.1ms
+	typeclass inference 3.87s

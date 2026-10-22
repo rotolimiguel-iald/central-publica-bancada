@@ -1,0 +1,13 @@
+# Revisão independente do runtime v394
+
+[REAL] O runtime R1 passou 5.713 checks sintéticos; três defeitos de fronteira foram reproduzidos e comunicados antes da integração: overflow/underflow no relógio de fase, ausência de conferência da escada formal e exceção não encapsulada em axiomas malformados. O integrador repetido regravava a cópia antes de recusar o recibo existente. Não foi executado o um.py canônico nem a integração real.
+
+[REAL] A fonte runtime R2 passou 5.716 checks e 19 controles adicionais, incluindo contagens ausentes, divergentes, booleanas, float e NaN; mutações da fonte/inscrição; axiomas malformados; relógio extremo representável e recusas de extremos não representáveis. Máximo resíduo contra a exponencial GKLS independente: 4,2987410278529964e-13. O preflight corrigido recusou recibo existente, candidata alterada e módulo parcial, sem alterar bytes ou mtimes das três fixtures.
+
+[REAL] Os sinais dos modos, positividade/Choi, conservação de traço/energia, semigrupo, leitura, reconstrução de tempo, alias e não multiplicatividade foram conferidos pelo harness sintético. A taxa racionalizada e a tau efetiva reproduzem a mesma lei quadrática para o gap especificado. A referência direta pela diferença de raízes perde precisão em Eref/V0 muito grande; a fórmula estável evita essa subtração. Não é nova calibração física.
+
+[REAL] ARTICLE foi extraído pela AST e executado como Python: há quebras de linha reais, comandos LaTeX e escapes corretos; uma inscrição contendo barra/end-document não quebra a fronteira. Os quatro verbatims atuais preservam bytes ao roundtrip UTF-8. A fixture confirma ambos os consumidores PT/EN envolvidos e baseline intacto. Isto não substitui renderização/compilação do artigo integrado.
+
+[ESCOPO] Os testes de admissão usam relatórios formais simulados, identificados como mocks; não provam os teoremas nem substituem a auditoria Lean. As matrizes que este revisor construiu não foram reauditadas por ele. A aceitação aqui cobre runtime R2, contrato físico lido e preflight do integrador; o diff final, consumidor principal e artigos da candidata real aguardam a integração e a conferência separada. Nenhuma escrita de produção, abertura de dado ou gate.
+
+[PROCESSO] O primeiro harness encontrou a infinity real do relógio, mas seu serializador JSON estrito recusou gravá-la. O arquivo incompleto RESULTADO_RUNTIME_REVIEW_R1.json foi preservado e não é evidência válida. O harness R2 apenas serializa retornos não finitos como descrição explícita; RESULTADO_RUNTIME_REVIEW_R2.json é a evidência completa da versão runtime R1. Nenhum fonte testado foi modificado pelo revisor.

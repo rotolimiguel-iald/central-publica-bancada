@@ -1,0 +1,187 @@
+{
+  "start_utc": "2026-10-15T19:50:20.756995+00:00",
+  "end_utc": "2026-10-15T19:50:36.689646+00:00",
+  "seconds": 15.932624499997473,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-R",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195020_698503Z",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195020_698503Z\\BoundedGraphSelfAdjointR1.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195020_698503Z\\BoundedGraphSelfAdjointR1.lean"
+  ],
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\selfadjoint_graph\\attempts\\20261015T195020_698503Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1
+}
+STDOUT
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:25:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ℂ (↑A u) (A u)
+in the target expression
+  inner ℂ (A u) (A u) + inner ℂ (B u) (B u) = 0
+
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A B : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hAB : A * B = B * A
+hAi : Function.Injective ⇑A
+u v : H
+h0 : A u + B v = 0
+h1 : A v = B u
+hc : ∀ (x : H), A (B x) = B (A x)
+hu : A u = -B v
+hdouble : A (A u) + B (B u) = 0
+⊢ inner ℂ (A u) (A u) + inner ℂ (B u) (B u) = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:28:44: error: linarith failed to find a contradiction
+case h1
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A B : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hAB : A * B = B * A
+hAi : Function.Injective ⇑A
+u v : H
+h0 : A u + B v = 0
+h1 : A v = B u
+hc : ∀ (x : H), A (B x) = B (A x)
+hu : A u = -B v
+hdouble : A (A u) + B (B u) = 0
+hi : inner ℂ (A u) (A u) + inner ℂ (B u) (B u) = 0
+hr : (↑‖A u‖ ^ 2).re + (↑‖B u‖ ^ 2).re = 0
+a✝ : ‖A u‖ < 0
+⊢ False
+failed
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:27:55: warning: This simp argument is unused:
+  Complex.ofReal_re
+
+Hint: Omit it from the simp argument list.
+  simp only [̵C̵o̵m̵p̵l̵e̵x̵.̵a̵d̵d̵_̵r̵e̵,̵i̵n̵n̵e̵r̵_̵s̵e̵l̵f̵_̵e̵q̵_̵n̵o̵r̵m̵_̵s̵q̵_̵t̵o̵_̵K̵,̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵r̵e̵,̵C̵o̵m̵p̵l̵e̵x̵.̵z̵e̵r̵o̵_̵r̵e̵]̵[̲C̲o̲m̲p̲l̲e̲x̲.̲a̲d̲d̲_̲r̲e̲,̲ ̲i̲n̲n̲e̲r̲_̲s̲e̲l̲f̲_̲e̲q̲_̲n̲o̲r̲m̲_̲s̲q̲_̲t̲o̲_̲K̲,̲ ̲C̲o̲m̲p̲l̲e̲x̲.̲z̲e̲r̲o̲_̲r̲e̲]̲ at hr
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:45:14: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ℂ (↑B x) ↑y
+in the target expression
+  inner ℂ (B x) ↑y = inner ℂ (A x) (↑G y)
+
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+G : H →ₗ.[ℂ] H
+hs : G.IsFormalAdjoint G
+A B : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hgraph : ∀ (x : H), (A x, B x) ∈ G.graph
+y : ↥G.domain
+hp : (↑y, ↑G y) ∈ G.graph
+x : H
+z : ↥G.domain
+hz : (↑z, ↑G z) = (A x, B x)
+hz1 : ↑z = A x
+hz2 : ↑G z = B x
+h : inner ℂ (B x) ↑y = inner ℂ (A x) (↑G y)
+⊢ inner ℂ x (A (↑y, ↑G y).2) = inner ℂ x (B (↑y, ↑G y).1)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:54:13: error(lean.unknownIdentifier): Unknown constant `Submodule.mem_adjoint_iff.mp`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:52:62: error: unsolved goals
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+G : H →ₗ.[ℂ] H
+hd : Dense ↑G.domain
+A B : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hgraph : ∀ (x : H), (A x, B x) ∈ G.graph
+p : H × H
+hp : p ∈ G.graph.adjoint
+⊢ A p.2 = B p.1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:84:23: error(lean.unknownIdentifier): Unknown constant `Prod.sub_fst`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:84:36: error(lean.unknownIdentifier): Unknown constant `Prod.sub_snd`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:85:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  A (e w).2
+in the target expression
+  A (e w - e q).2 = B (e w - e q).1
+
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+G : H →ₗ.[ℂ] H
+hc : G.IsClosed
+hs : G.IsFormalAdjoint G
+hd : Dense ↑G.domain
+A B : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hAB : A * B = B * A
+hAi : Function.Injective ⇑A
+hgraph : ∀ (x : H), (A x, B x) ∈ G.graph
+E : Type u_1 := WithLp 2 (H × H)
+e : E ≃L[ℂ] H × H := WithLp.prodContinuousLinearEquiv 2 ℂ H H
+L : Submodule ℂ E := Submodule.comap (↑↑e) G.graph
+hL : IsClosed ↑L
+this : CompleteSpace ↥L := IsClosed.completeSpace_coe
+p : H × H
+hp : p ∈ G.adjoint.graph
+w : E := e.symm p
+q : E := L.starProjection w
+r : E := w - q
+hq : e q ∈ G.graph
+hwrel : A (e w).2 = B (e w).1
+hqrel : A (e q).2 = B (e q).1
+⊢ A (e w - e q).2 = B (e w - e q).1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selfadjoint_graph\attempts\20261015T195020_698503Z\BoundedGraphSelfAdjointR1.lean:95:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ℂ (e r).1 (↑A ?m.523)
+in the target expression
+  inner ℂ (e r).1 (A (A (e r).1 + B (e r).2)) + inner ℂ (e r).2 (B (A (e r).1 + B (e r).2)) = 0
+
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+G : H →ₗ.[ℂ] H
+hc : G.IsClosed
+hs : G.IsFormalAdjoint G
+hd : Dense ↑G.domain
+A B : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hAB : A * B = B * A
+hAi : Function.Injective ⇑A
+hgraph : ∀ (x : H), (A x, B x) ∈ G.graph
+E : Type u_1 := WithLp 2 (H × H)
+e : E ≃L[ℂ] H × H := WithLp.prodContinuousLinearEquiv 2 ℂ H H
+L : Submodule ℂ E := Submodule.comap (↑↑e) G.graph
+hL : IsClosed ↑L
+this : CompleteSpace ↥L := IsClosed.completeSpace_coe
+p : H × H
+hp : p ∈ G.adjoint.graph
+w : E := e.symm p
+q : E := L.starProjection w
+r : E := w - q
+hq : e q ∈ G.graph
+hwrel : A (e w).2 = B (e w).1
+hqrel : A (e q).2 = B (e q).1
+hrrel : A (e r).2 = B (e r).1
+horth : ∀ (x : H), inner ℂ r (e.symm (A x, B x)) = 0
+h : inner ℂ (e r).1 (A (A (e r).1 + B (e r).2)) + inner ℂ (e r).2 (B (A (e r).1 + B (e r).2)) = 0
+⊢ inner ?m.442 (A (e r).1 + B (e r).2) (A (e r).1 + B (e r).2) = 0
+'F1Fecho.BoundedGraphSelfAdjoint.adjoint_graph_le_of_bounded_pair' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.BoundedGraphSelfAdjoint.selfAdjoint_of_bounded_pair' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+
+STDERR

@@ -1,0 +1,117 @@
+{
+  "theorem": "O TESTE DO NEUTRINO REESPECIFICADO: o discriminante e m_2, nao Sigma. m_2(TGL) = 8.5074 meV contra 8.6776 +- 0.0576 meV (NuFIT global pos-JUNO (dados ate fim 2025)) => 2.95 sigma. A tensao cresce com a precisao e a linha de morte de 5 sigma e alcancada quando Dm2_21 chegar a 0.78% — dentro da meta de projeto do JUNO.",
+  "frozen": {
+    "version": "NEUTRINO_M2_V2",
+    "supersedes": "NEUTRINO_SUM_V1 (um.py:3929, v147) como TESTE DE beta_TGL",
+    "data_do_congelamento": "2026-08-08",
+    "observavel": "m_2 = sqrt(Dm2_21), a massa do 2o autoestado no ordenamento normal",
+    "predicao": "m_2 = beta_TGL * sin(45 graus) * 1 eV, com beta_TGL = alpha_fine*sqrt(e) em runtime [derivacao publicada 2025, Zenodo 10.5281/zenodo.17526619]",
+    "escala_dimensional": "1 eV — [NORM] DECLARADA, NAO DERIVADA. A escala que zeraria a tensao contra o NuFIT pos-JUNO seria 1,0200 eV (+2,00%). Esta e a unica liberdade da formula e ela esta fixada por declaracao, nao por ajuste.",
+    "kill_rule": "FALSIFIED sse |m_2_obs - m_2_TGL| / sigma_obs >= 5 em DUAS determinacoes independentes de Dm2_21 (robustez de experimento, nao so de modelo)",
+    "tension_rule": "TENSION sse a mesma razao ficar em [3, 5) na determinacao global mais recente",
+    "matched_rule": "MATCHED_PROSPECTIVELY sse duas determinacoes independentes pousarem dentro de 1 sigma de m_2_TGL — e mesmo entao NAO e CONFIRMED",
+    "allowed_verdicts": [
+      "TGL_NU_M2_ARMED_CONSISTENT",
+      "TGL_NU_M2_TENSION",
+      "TGL_NU_M2_FALSIFIED",
+      "TGL_NU_M2_MATCHED_PROSPECTIVELY"
+    ],
+    "forbidden_verdicts": [
+      "CONFIRMED"
+    ],
+    "custody": "(i) a derivacao de m_2 antecede o dado de JUNO (Zenodo 2025 vs JUNO nov/2025); (ii) a reespecificacao de Sigma para m_2 foi decidida por NAO-DISCRIMINACAO, medida ANTES de consultar limites novos de Sigma; (iii) a escala de 1 eV e anterior a esta rodada e nao foi tocada.",
+    "NAO_E_CEGO_NESTA_EMISSAO": "DECLARACAO OBRIGATORIA PELA REGUA DA CASA. Os limiares desta regra (5 sigma para FALSIFIED, 3 sigma para TENSION) foram fixados na MESMA sessao em que a tensao corrente (2,95 sigma) ja havia sido calculada. Portanto a emissao de HOJE nao e um veredito cego: e uma REESPECIFICACAO. A cegueira vale a partir de agora — as proximas determinacoes de Dm2_21 serao julgadas por uma regra ja hasheada. Registrar isto e o que impede a reespecificacao de virar ajuste.",
+    "does_not_gate_core": true
+  },
+  "frozen_hash": "4bdae22a277aa393094a1bf416db12a5e782b673e9e9b3ddd6a2fb8c7a64075c",
+  "values": {
+    "beta_TGL": 0.012031300400803142,
+    "m2_pred_eV": 0.008507414099900329,
+    "m2_pred_meV": 8.507414099900329,
+    "escala_que_zeraria_a_tensao_eV": 1.019999397944943,
+    "precisao_Dm2_21_que_mata_pct": 0.784290578415527,
+    "sigma_m2_que_mata_meV": 0.03402863201326552
+  },
+  "tensoes_datadas": [
+    {
+      "fonte": "PDG 2023 (a base do modulo v141)",
+      "data": "2023",
+      "independente": false,
+      "Dm2_21_1e5": 7.53,
+      "sigma_1e5": 0.18,
+      "m2_obs_meV": 8.677557259966656,
+      "sigma_m2_meV": 0.10371582382430264,
+      "tensao_sigma": 1.6404744598524776
+    },
+    {
+      "fonte": "JUNO, primeiros resultados (59 dias)",
+      "data": "2025-11",
+      "independente": true,
+      "Dm2_21_1e5": 7.5,
+      "sigma_1e5": 0.12,
+      "m2_obs_meV": 8.660254037844387,
+      "sigma_m2_meV": 0.06928203230275509,
+      "tensao_sigma": 2.2060544828731836
+    },
+    {
+      "fonte": "NuFIT global pos-JUNO (dados ate fim 2025)",
+      "data": "2025-12",
+      "independente": true,
+      "Dm2_21_1e5": 7.53,
+      "sigma_1e5": 0.1,
+      "m2_obs_meV": 8.677557259966656,
+      "sigma_m2_meV": 0.05761990212461258,
+      "tensao_sigma": 2.9528540277344595
+    }
+  ],
+  "projecao": {
+    "fonte": "JUNO, meta de projeto 0,5%",
+    "data": "~2031",
+    "estatuto": "[PROJECAO]",
+    "sigma_m2_meV": 0.02172270310097894,
+    "tensao_projetada_sigma": 7.832504052346047
+  },
+  "aposentadoria_do_Sigma": {
+    "observavel_aposentado": "Sigma m_nu (frozen NEUTRINO_SUM_V1, um.py:3929, v147)",
+    "Sigma_TGL_meV": 58.60108729988819,
+    "Sigma_NH_padrao_m1zero_meV": 58.80040634099955,
+    "separacao_meV": 0.1993190411113538,
+    "sigma_da_predicao_meV": 0.2794764110052004,
+    "separacao_em_sigmas_da_predicao": 0.7131873505690788,
+    "motivo": "a predicao TGL em Sigma dista 0.199 meV do ordenamento normal minimo (m_1=0), o que e 0.71 sigma da propria barra da predicao. Todo limite que cruza a linha de morte do V1 tambem exclui o NH padrao. Portanto Sigma m_nu nao distingue a TGL do minimo permitido pela oscilacao.",
+    "estatuto": "NAO_DISCRIMINANTE — aposentado como teste de beta_TGL"
+  },
+  "checks": [
+    [
+      "beta_TGL calculado em runtime, jamais literal: 0.0120313004",
+      true
+    ],
+    [
+      "m_2 predito = 8.5074 meV (escala 1 eV [NORM])",
+      true
+    ],
+    [
+      "Sigma m_nu APOSENTADO como discriminante: separacao 0.199 meV = 0.71 sigma",
+      true
+    ],
+    [
+      "tensao corrente (NuFIT global pos-JUNO (dados ate fim 2025)): 2.95 sigma",
+      true
+    ],
+    [
+      "a tensao CRESCEU com a precisao: 1.64 -> 2.21 -> 2.95 sigma",
+      true
+    ],
+    [
+      "linha de morte alcancada quando Dm2_21 for medido a 0.78% (JUNO projeta 0,5%)",
+      true
+    ],
+    [
+      "CONFIRMED proibido; o gate NAO se move por este canal",
+      true
+    ]
+  ],
+  "all_verified": true,
+  "does_not_gate_core": true,
+  "verdict": "TGL_NU_M2_ARMED_CONSISTENT"
+}

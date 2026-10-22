@@ -1,0 +1,468 @@
+{
+  "unit": "F8.2.SN1",
+  "created_at_utc": "2026-10-09T12:08:54.591122+00:00",
+  "author": "codex/sn_tgl_readonly, delegado de codex-gerente-tgl",
+  "authorization": "Reivindicação da unidade evento 610 informada pelo coordenador; somente esta pasta de saída.",
+  "scope": "Levantamento documental local; nenhum programa científico importado/executado, nenhuma curva de luz, espectro ou catálogo observado aberto; nenhum provedor chamado.",
+  "source_count": 13,
+  "sources": [
+    {
+      "id": "runtime_current",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\um.py",
+      "sha256": "8e7b9927ceae64b8b6812019f77cca24c08296222ae7968af41baf2fe7a67dc6",
+      "bytes": 33910631,
+      "line_count": 214123,
+      "mtime_utc": "2026-10-07T21:22:36.036402+00:00",
+      "role": "Fonte atual lida; programa não executado. Forma alfa, constante CODATA, status SN A9 e v388.",
+      "anchors": [
+        {
+          "first_line": 713,
+          "last_line": 717,
+          "sha256_bytes": "eaa9b068ce95a22651f4c7dd044dd056bed7db8e635f221fb2e4f60c694bc3e8",
+          "text": "def prove_alpha_form(ONE):\r\n    \"\"\"MODULO DE PROVA -- Teorema do Colapso da Forma de alpha (forma=conteudo, verificado ao vivo).\r\n    NAO deriva 1/137 (valor renormalizado da QED). DERIVA a FORMA: alpha_obs e' a unidade absoluta\r\n    alpha_abs=1 projetada por uma profundidade termico-modular, alpha_obs=Pi_bulk(1_abs)=sech(kappa/2).\r\n    Cada passo e' uma asercao verificada; veredito ALPHA_FORM_THEOREM_PROVED (forma, NAO valor).\"\"\"\r\n"
+        },
+        {
+          "first_line": 752,
+          "last_line": 762,
+          "sha256_bytes": "d740f94f6fbfa82fd0d5d85a40f5c1d4f4869c2afff8c674a2524000b0d87e5e",
+          "text": "    # PASSO 5 [INPUT/QED]: o VALOR e' da QED -- kappa_QED = 2 arcosh(1/alpha_QED); forma=TGL, valor=QED\r\n    kappa_qed = float(2.0 * np.arccosh(1.0 / SEALED_CODATA_ALPHA))\r\n    alpha_chk = float(1.0 / np.cosh(kappa_qed / 2.0))\r\n    s5 = bool(abs(alpha_chk - SEALED_CODATA_ALPHA) < 1e-12)\r\n    steps.append({\"step\": \"5. VALOR: kappa_QED = 2 arcosh(1/alpha_QED); sech(k_QED/2)=alpha_QED (QED fixa o valor)\",\r\n                  \"status\": \"INPUT/QED\", \"ok\": s5, \"kappa_QED\": kappa_qed, \"sech\": alpha_chk}); ok &= s5\r\n    # PASSO 6 [REAL]: beta = sqrt(e) alpha_obs (Meia-Nat marca a dimensao luminodinamica)\r\n    beta_form = float(se * alpha_chk)\r\n    s6 = bool(abs(beta_form - SEALED_CODATA_ALPHA * se) < 1e-15)\r\n    steps.append({\"step\": \"6. beta_TGL = sqrt(e) alpha_obs = sqrt(e) sech(kappa/2)  [Meia-Nat marca a dimensao]\",\r\n                  \"status\": \"REAL\", \"ok\": s6, \"beta\": beta_form}); ok &= s6\r\n"
+        },
+        {
+          "first_line": 5557,
+          "last_line": 5559,
+          "sha256_bytes": "1c9db1714c5d68cc38ebde408cd2366e2148a57aa5d34b12f6ef98ba78cdee85",
+          "text": "ALPHA_FINE_CODATA_2018 = 7.2973525693e-3\r\nONE = 1.0\r\nBETA_TGL = ALPHA_FINE_CODATA_2018 * ONE * math.sqrt(math.e)\r\n"
+        },
+        {
+          "first_line": 193186,
+          "last_line": 193186,
+          "sha256_bytes": "059c141d03dae39d4aa018b9cbd27a34f5e7183027b0da7ef461aa68e25db8d6",
+          "text": "        \"chandrasekhar_rule\": \"chandrasekhar_sqrt2 (Artigo A; desvio -0,35% [lido da nota do inventario V1, nao computado aqui]): A8; sn_ia_chandrasekhar (results.json do Artigo A -- chave NAO lida pelo um.py, grep = 0; deslocamento previsto de M_Ch ((1-beta)^(3/2) - 1, computado em beta runtime ~ -1,8%) [confere com rel_shift_pct -1,799 de A Ponte e o Um\\\\results.json, DECLARADO na nota]; sem medida nem sigma): A9\",\r\n"
+        },
+        {
+          "first_line": 193298,
+          "last_line": 193302,
+          "sha256_bytes": "764b7a21a98927de2538b2b4c369ada526e6040e1700427c030678814fdf6cd2",
+          "text": "    # (7) aposentados e negativos\r\n    add(\"ga_mass_window\", \"um_absoluto.json ga_window_status\", None, None, None, 1, \"A3_APOSENTADO\", \"SCALE_SHADOW_OF_RETIRED_FORM__NOT_NONCIRCULAR_EVIDENCE (v98)\")\r\n    add(\"sn_ia_chandrasekhar\", \"results.json sn_ia_chandrasekhar (Artigo A) -- chave NAO lida pelo um.py (grep = 0); entra so como nome\", None, None, None, 1, \"A9_SEM_INCERTEZA\",\r\n        \"deslocamento previsto de M_Ch por (1-beta)^(3/2) - 1 = %.3f%% (computado em beta runtime) [confere com rel_shift_pct -1,799 de A Ponte e o Um\\\\results.json, DECLARADO na nota, nao lido]; sem medida nem sigma no artefato; a face SN/redshift com medida e' pantheon_beta (A7)\"\r\n        % (((1.0 - beta) ** 1.5 - 1.0) * 100.0))\r\n"
+        },
+        {
+          "first_line": 194681,
+          "last_line": 194689,
+          "sha256_bytes": "dc233860fb773dccab4db158dda0dc1c1dc73607b062b6ef774017dc99a28039",
+          "text": "# ====================== v388 (06/10/2026) -- O ACOPLAMENTO CORRE COM A ESCALA, LIMITADO INFERIORMENTE; a Fase 9 ABERTA pela funcao congelada ======================\r\n# A cunhagem do operador de 06/10/2026 (13:27:52 e 13:48:42 UTC; verbatim em _V388_BETA_ESCALA, nos PINOS logo acima: textos EMBUTIDOS lidos por sha256 da\r\n# memoria beta-escalar-limitado-inferiormente-06out.md, os carimbos lidos do transcrito pela igualdade do texto): alpha como indice de escala da fronteira, beta_TGL\r\n# como a sua conjugacao; beta escalar, mas limitado inferiormente; a dicotomia (dividir pela metade sem nunca alcancar o limite). A pedra\r\n# TGLExt/TheCouplingRunsBoundedBelow.lean (17 nomes) prova a MATEMATICA: alpha(chi) = sech(chi/2) e beta(chi) = alpha(chi) exp(1/2) estritamente decrescentes na\r\n# profundidade; o piso no supremo de chi (o infravermelho); a ligacao a couplingOfAlpha; a soma das metades < 1 com limite 1; a Meia-Nat como ponto fixo. A\r\n# identificacao fisica (alpha = sech de uma profundidade que cresce para o infravermelho) e' [INPUT/ONTO] do runtime; que alpha(mu) cresca com mu e' [KNOWN];\r\n# qual mu cada rito usa e' [OPEN]. A constante da FRONTEIRA segue beta0 = alpha(0).sqrt(e) (o Teorema da Escala selado no artigo); beta(chi) e' a leitura de BULK.\r\n# A ERRATA AO LADO de «alpha observa-se, nao se deriva»: o que se deriva e' a FORMA (alpha como indice de escala; beta como conjugacao), nao o NUMERO (lido do CODATA).\r\n"
+        },
+        {
+          "first_line": 194714,
+          "last_line": 194717,
+          "sha256_bytes": "565a3dd71da92083e98e00cb323f1ddc058f3da61cd717bd34ff60bdfac0268d",
+          "text": "def beta_runs_bounded_below_v388(core):\r\n    \"\"\"O ACOPLAMENTO CORRE COM A ESCALA, LIMITADO INFERIORMENTE (v388): as 17 declaracoes da pedra verificadas pelo kernel desta rodada (trio, sem sorry); os dois\r\n    verbatins do operador conferidos pelo sha256 (embutidos; o disco e' so informativo); beta0 = alpha(0).sqrt(e) em runtime (do alpha do core); beta(M_Z) on-shell\r\n    (1/alpha(M_Z) a um laco do Teorema da Escala, lido do texto selado pelo gerador) e MS-bar [KNOWN] ao lado; a errata ao lado (forma x numero). Nao move o gate.\"\"\"\r\n"
+        },
+        {
+          "first_line": 194734,
+          "last_line": 194764,
+          "sha256_bytes": "54ba9daadedcf1d093eeb5335a246b8fe570586a34d96be4a55633a487a1b0bc",
+          "text": "    a0 = float(core.get(\"alpha\") or 0.0); b_core = float(core.get(\"beta\") or 0.0)\r\n    b0 = a0 * math.sqrt(math.exp(1.0))\r\n    b0_ok = a0 > 0 and b_core > 0 and abs(b0 / b_core - 1.0) < 1e-9\r\n    inv_on = float(_V388_ALPHA_MZ[\"on_shell_inv\"]); inv_ms = float(_V388_ALPHA_MZ[\"msbar_inv\"])\r\n    bmz_on = math.sqrt(math.exp(1.0)) / inv_on; bmz_ms = math.sqrt(math.exp(1.0)) / inv_ms\r\n    floor_ok = bmz_on > b0 and bmz_ms > b0   # a direcao fixada: so sobe acima do piso\r\n    n_all = len(_CPL_FLAGS_V388); n_ok = len(ok_flags)\r\n    ok = (n_ok == n_all) and vb_ok and b0_ok and floor_ok\r\n    fz = lambda x_, n_=6: (\"%%.%df\" % n_ % x_).replace(\".\", \"P\")\r\n    if ok:\r\n        verdict = (\"TGL_BETA_RUNS_BOUNDED_BELOW_V388__ALPHA_IS_THE_SCALE_INDEX_OF_THE_BOUNDARY_BETA_ITS_CONJUGATION__ALPHA_SECH_CHI_OVER_2_STRICTLY_DECREASING_IN_DEPTH__\"\r\n                   \"FLOOR_AT_THE_INFRARED_SUPREMUM_OF_CHI__BETA0_%s__BETA_MZ_ON_SHELL_%s_MSBAR_%s__LINKED_TO_COUPLING_OF_ALPHA__ZENO_HALVES_NEVER_REACH_THE_ONE_LIMIT_IS_THE_ONE__\"\r\n                   \"HALF_NAT_IS_THE_FIXED_STEP__KERNEL_%d_OF_%d__BOUNDARY_CONSTANT_STAYS_BETA0_BULK_READING_RUNS__FORM_DERIVED_NUMBER_READ__OPERATOR_VERBATIM_EMBEDDED_BY_SHA256__\"\r\n                   \"WHICH_MU_PER_RITE_OPEN__GATE_UNTOUCHED__PROVED_IS_NOT_CONFIRMED\" % (fz(b0, 8), fz(bmz_on), fz(bmz_ms), n_ok, n_all))\r\n    else:\r\n        verdict = (\"TGL_BETA_RUNS_BOUNDED_BELOW_V388__NOT_SEALED_THIS_RUN__KERNEL_%d_OF_%d__VERBATIM_%s__BETA0_%s__GATE_UNTOUCHED\"\r\n                   % (n_ok, n_all, \"OK\" if vb_ok else \"FAILED\", \"OK\" if b0_ok else \"MISMATCH\"))\r\n    return {\"verdict\": verdict, \"all_verified\": ok, \"does_not_gate_core\": True, \"kernel_flags_ok\": n_ok, \"kernel_flags_total\": n_all,\r\n            \"missing_flags\": [f_ for f_ in _CPL_FLAGS_V388 if kf.get(f_) is not True], \"stone\": _CPL_STONE_V388,\r\n            \"verbatim\": vb, \"verbatim_ok\": vb_ok, \"memory_file\": {\"path\": _V388_BETA_ESCALA[\"memoria\"][\"path\"], \"sha256\": _V388_BETA_ESCALA[\"memoria\"][\"sha256\"], \"on_disk_matches\": disk, \"estatuto_v390\": \"INFORMATIVO, FORA DE QUALQUER VEREDITO (v390, errata ao lado da emenda do conferidor de 06/10): a memoria e' arquivo VIVO -- a cadeia de selo a acrescenta; a copia do estado pinado e' o backup _sup388 (anterior a cadeia da v388), conferido por sha, INFORMATIVO (nao embutido)\", \"copia_congelada\": _v390_mem388_congelada()},\r\n            \"beta0\": b0, \"beta0_vs_core_rel\": (b0 / b_core - 1.0) if b_core else None, \"beta0_ok\": b0_ok,\r\n            \"alpha_MZ\": dict(_V388_ALPHA_MZ), \"beta_MZ_on_shell\": bmz_on, \"beta_MZ_msbar\": bmz_ms, \"ratio_on_shell\": bmz_on / b0 if b0 else None,\r\n            \"ratio_msbar\": bmz_ms / b0 if b0 else None, \"floor_direction_ok\": floor_ok,\r\n            \"reading\": \"[INPUT/ONTO] beta0 = alpha_Thomson.sqrt(e) (alpha no limite q -> 0; NAO o alphaOfChi 0 = 1 da pedra) = a constante da FRONTEIRA (o Teorema da Escala: a fronteira de tipo III_1 \"\r\n                       \"seleciona Thomson); beta(mu) = alpha(mu).sqrt(e) e' a LEITURA de bulk em cada escala, >= beta0 (o congelamento infravermelho: alpha(Q) >= alpha_Thomson [KNOWN]); qual mu cada rito usa [OPEN]; \"\r\n                       \"o 1/alpha(M_Z) do Teorema da Escala e' a um laco (o rotulo on-shell nao esta na fonte)\",\r\n            \"erratum_beside\": _V388_ERRATA_FORMA_NUMERO,\r\n            \"patents_note\": \"a frase do operador sobre as patentes com beta variavel: nos arquivos da Central so' foram achados beta constante nos runners e o beta_emergent dos \"\r\n                            \"prototipos ACOM v18 (razao de contagens, outro objeto) -- [DECLARADO], vinculo nao verificado (mapa seq 638)\",\r\n            \"what_is_not_typed\": [\"a identificacao alpha_fisico = sech(chi/2) [INPUT/ONTO]\", \"a monotonia de alpha(mu) em mu [KNOWN, QED]\", \"qual mu cada rito usa [OPEN]\"],\r\n            \"status\": \"[KERNEL] a pedra; [INPUT/ONTO] as leituras; [KNOWN] alpha(M_Z); PROVADA != CONFIRMADA\", \"gate_unchanged_by_design\": True}\r\n"
+        }
+      ]
+    },
+    {
+      "id": "historical_sn_code",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+      "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+      "bytes": 1216423,
+      "line_count": 21418,
+      "mtime_utc": "2026-06-05T23:56:08.150239+00:00",
+      "role": "Implementação histórica: projeção de massa postulada no comentário; Coulomb não modelado; luminosidade global absorvível no offset. Código não executado.",
+      "anchors": [
+        {
+          "first_line": 190,
+          "last_line": 204,
+          "sha256_bytes": "3a645274386aaf28eeec56b6a1d1014b668df179b1b6e0a57c7dbba03c4ad6e9",
+          "text": "# ============================================================================\n# Two inputs, no free parameters:\n#   alpha   = CODATA 2018 fine-structure constant\n#   sqrt_e  = square root of Euler's number (pure mathematics)\n# Everything else is DERIVED.  beta_TGL is never hardcoded -- it is computed\n# in runtime as the product of the two inputs.  Any hardcoded value of\n# beta_TGL anywhere in this file is a bug.\n\nALPHA_FINE_CODATA_2018 = 7.2973525693e-3   # fine-structure constant\nEULER_E = math.e                            # Euler's number\nSQRT_E = math.sqrt(EULER_E)                 # sqrt(e)\n\nBETA_TGL = ALPHA_FINE_CODATA_2018 * SQRT_E  # the Miguel constant\nONE_MINUS_BETA = 1.0 - BETA_TGL              # forbidden-boundary value\nTHETA_MIGUEL_RAD = math.asin(math.sqrt(BETA_TGL))\n"
+        },
+        {
+          "first_line": 7508,
+          "last_line": 7543,
+          "sha256_bytes": "bfe977ac975ca03713e5e285656d1bf31379657511dfae39c6f5066a3081fbb7",
+          "text": "# the modular observation fraction (1 - beta) = cos^2(theta_M) (Theorem 3)\n# inherits the correction\n#   M_TGL = M_Ch_LCDM * (1 - beta)^(3/2)\n# numerically:  (1 - 0.01203)^(3/2) = 0.98203, i.e. -1.8% relative shift.\n#\n# This is the astrophysical face of the same modular constant that produces\n# the H0 prediction (cosmology) and the toroidal cavity (Qwen3-32B).\n# It enters into:  Type Ia SNe luminosity (relevant to D6 Pantheon+),\n# white-dwarf mass-radius (relevant to D2 distance ladder calibration).\n\ndef chandrasekhar_mass_TGL(M_Ch_LCDM: float = 1.4400) -> Dict[str, Any]:\n    \"\"\"\n    M_Chandrasekhar in TGL = M_LCDM * (1 - beta)^(3/2).\n\n    The standard LCDM Chandrasekhar mass is 1.44 M_sun (Chandrasekhar 1931,\n    with mu_e = 2 for fully ionized helium-or-heavier composition).  In TGL,\n    the modular observation fraction (1 - beta) = cos^2(theta_M) corrects\n    the relativistic-degeneracy energy by factor cos^3(theta_M), yielding\n    M_TGL = M_LCDM * cos^3(theta_M) = M_LCDM * (1 - beta)^(3/2).\n    \"\"\"\n    one_minus_beta_to_3half = ONE_MINUS_BETA ** 1.5\n    M_TGL = M_Ch_LCDM * one_minus_beta_to_3half\n    rel_shift_pct = 100.0 * (M_TGL - M_Ch_LCDM) / M_Ch_LCDM\n    return {\n        'M_Chandrasekhar_LCDM':     M_Ch_LCDM,\n        'one_minus_beta_to_3_2':    one_minus_beta_to_3half,\n        'cos3_theta_M':             math.cos(THETA_MIGUEL_RAD) ** 3,\n        'M_Chandrasekhar_TGL':      M_TGL,\n        'rel_shift_pct':            rel_shift_pct,\n        'note': (\n            'The Chandrasekhar limit shifts by (1-beta)^(3/2) = '\n            'cos^3(theta_M) ~ 0.982, i.e. ~ -1.8% relative.  Relevant to '\n            'Type Ia SNe luminosity calibration (D6) and white-dwarf '\n            'mass-radius (D2 ladder).'\n        ),\n    }\n"
+        },
+        {
+          "first_line": 7546,
+          "last_line": 7599,
+          "sha256_bytes": "e269b7ffa2fd53db4123e0e0a081f8391e3fabfb51e8b5342460d42d153e1933",
+          "text": "def chandrasekhar_sqrt2_stress_test(beta: float = BETA_TGL) -> Dict[str, Any]:\n    \"\"\"\n    LIVE analysis of M_Ch^TGL ~= sqrt(2) M_sun via the Fresnel-saturation bridge.\n\n    REFRAMING (28/05): the earlier \"is sqrt(2) an attractor?\" test scanned mu_e\n    over a wide range and found a large spread -- but that conflated the question.\n    The correct physics: mu_e = 2 is NOT an idealization, it is the N=Z symmetry\n    condition (Z/A = 1/2), exact for the fully-ionized He/C/O white dwarfs that\n    are SN Ia progenitors.  At mu_e = 2, sqrt(2) is not a coincidence: it is the\n    SATURATION amplitude of the Fresnel integral of the Fermi surface.\n\n    THE BRIDGE (Fresnel -> degeneracy), five links:\n      (1) Pauli exclusion: degenerate electrons fill phase-space cells h^3 --\n          packing IS phase counting in (x,p).\n      (2) WKB = Fresnel: the wavefunction at the Fermi edge accumulates QUADRATIC\n          phase exp(iS/hbar), S ~ p^2 -- mathematically identical to the Fresnel\n          integral exp(i pi t^2/2).  The Fermi edge diffracts like an optical edge.\n      (3) Saturation = 1/sqrt(2): the Fresnel/Cornu spiral saturates at amplitude\n          1/sqrt(2) (origin to focus).\n      (4) Boundary/bulk duality: 1/sqrt(2) (boundary amplitude, Fresnel) x\n          sqrt(2) (bulk diagonal, torus) = 1.  The critical mass lives in the\n          bulk: sqrt(2).\n      (5) Modular edge correction: the Fermi edge has angular width theta_M; the\n          boundary->bulk projection in 3 phase dimensions gives cos^3(theta_M) =\n          (1-beta)^(3/2).\n\n    HONEST RESIDUAL: using the FIRST-PRINCIPLES Chandrasekhar mass (Lane-Emden\n    n=3, omega_3=2.01824, mu_e=2, NO Coulomb) = 1.4350 M_sun, the TGL relation\n    M_obs = M_coherent * cos^3(theta_M) lands at sqrt(2) to 0.353%, NOT 0.009%.\n    The 0.009% figure used the pre-adjusted 1.44.  The 0.353% residual is\n    declared as the (un-modeled) Coulomb lattice correction -- of the right sign\n    and order.  sqrt(2) is thus the Fresnel-SATURATION attractor with an\n    O(beta)-level Coulomb residual, not an exact identity.\n    \"\"\"\n    sqrt2 = math.sqrt(2.0)\n    omb_15 = (1.0 - beta) ** 1.5\n    theta_M = math.asin(math.sqrt(beta))\n\n    # First-principles Chandrasekhar mass (Lane-Emden n=3), mu_e = 2, no Coulomb\n    hbar = 1.0545718e-34; c = 2.99792458e8; G = 6.674e-11\n    m_H = 1.6726e-27; M_sun = 1.989e30\n    omega3 = 2.01824; mu_e = 2.0\n    M_Ch_firstprinc = ((math.sqrt(3.0*math.pi)/2.0) * omega3\n                       * (hbar*c/G)**1.5 / (mu_e*m_H)**2) / M_sun\n\n    # TGL-projected observable mass from first principles\n    M_TGL_firstprinc = M_Ch_firstprinc * omb_15\n    dev_firstprinc_pct = 100.0 * (M_TGL_firstprinc - sqrt2) / sqrt2\n\n    # The mass that sqrt(2) requires (coherent, pre-dissipation)\n    M_coherent_for_sqrt2 = sqrt2 / omb_15\n\n    # Coulomb residual interpretation\n    coulomb_residual_pct = 100.0 * (M_coherent_for_sqrt2 - M_Ch_firstprinc) / M_Ch_firstprinc\n"
+        },
+        {
+          "first_line": 7674,
+          "last_line": 7714,
+          "sha256_bytes": "41c3b4bb166375bc793f00fa18c217a4f79c2eac27bbe0e79c3e35e19db89605",
+          "text": "    # TGL luminosity shift via Arnett's law: L ∝ M_Ch^alpha_Arnett,\n    # so L_TGL/L_LCDM = ((1-beta)^(3/2))^alpha_Arnett = (1-beta)^(1.5*alpha).\n    # With alpha_Arnett = 1.8 this gives (1-beta)^2.7 -> 3.215% deviation,\n    # matching sn_ia_chandrasekhar / synthesis_terminal.\n    alpha_arnett = 1.8\n    L_ratio = ONE_MINUS_BETA ** (1.5 * alpha_arnett)   # (1-beta)^2.7\n    delta_m_TGL = -2.5 * math.log10(L_ratio)           # magnitude shift (mag)\n    lum_dev_pct = 100.0 * (1.0 - L_ratio)\n\n    # Best-fit LCDM: fit Om0 with analytic-marginalized offset (the offset\n    # absorbs H0 + M_B).  chi2(Om0) marginalizes a constant via GLS.\n    def _mu_lcdm(Om0):\n        return _mu_model_vectorized(z, 70.0, Om0, 0.0, z_grid)\n\n    def _chi2_marg(Om0):\n        # GLS with an analytically marginalized constant offset:\n        mu_m = _mu_lcdm(Om0)\n        r = mu_obs - mu_m\n        Cinv_r = cho_solve(cho, r)\n        Cinv_1 = cho_solve(cho, np.ones(n))\n        # offset_hat = (1^T Cinv r)/(1^T Cinv 1); chi2 at best offset\n        a = float(np.dot(np.ones(n), Cinv_1))\n        b = float(np.dot(np.ones(n), Cinv_r))\n        off = b / a\n        rr = r - off\n        return float(np.dot(rr, cho_solve(cho, rr))), off\n\n    res = minimize_scalar(lambda x: _chi2_marg(x)[0], bounds=(0.1, 0.6), method='bounded')\n    Om0_best = float(res.x)\n    chi2_best, offset_best = _chi2_marg(Om0_best)\n    dof = n - 2\n\n    # Hubble residuals at best fit (with marginalized offset removed)\n    mu_model = _mu_lcdm(Om0_best) + offset_best\n    resid = mu_obs - mu_model\n\n    # (b) Degeneracy test: how much does chi2 change if we ADD the TGL global\n    #     offset on top?  By construction the marginalized offset absorbs it,\n    #     so delta_chi2 should be ~0 -> demonstrates degeneracy quantitatively.\n    chi2_with_TGL_global, _ = _chi2_marg(Om0_best)  # identical: offset re-marginalized\n    degeneracy_delta_chi2 = chi2_with_TGL_global - chi2_best  # ~0\n"
+        }
+      ]
+    },
+    {
+      "id": "kernel_running",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheCouplingRunsBoundedBelow.lean",
+      "sha256": "702d7352c053060ae3f2ba7602c0fcf75762b796ed7617ac6ea29248a4d3fa2f",
+      "bytes": 6375,
+      "line_count": 129,
+      "mtime_utc": "2026-10-06T14:42:42.721771+00:00",
+      "role": "KERNEL como fonte; sem recompilação nesta consulta. Matemática de chi; identificação física não provada neste arquivo.",
+      "anchors": [
+        {
+          "first_line": 11,
+          "last_line": 26,
+          "sha256_bytes": "faad967f1656b1b47382b034fd02c18b4c17d312820de33b3b9acdde822c4bb2",
+          "text": "O que esta pedra PROVA é só matemática [KERNEL], sobre a forma fechada que o runtime do `um.py` já usa (o bloco\n`alpha = sech(kappa/2)`, `beta = sqrt(e) sech(kappa/2)`, `kappa_QED = 2 arcosh(1/alpha_QED)`):\n\n* `alphaOfChi χ := 1 / cosh(χ/2)` (a transmissão na profundidade χ); `alphaOfChi 0 = 1` (o Um absoluto); `0 < α ≤ 1`;\n* `alphaOfChi` é ESTRITAMENTE DECRESCENTE em `[0, ∞)`; logo `betaOfChi χ := alphaOfChi χ · exp(1/2)` também;\n* `the_floor_is_at_the_infrared`: para `0 ≤ χ ≤ χ_sup`, `β(χ_sup) ≤ β(χ)` — o PISO está no supremo da profundidade (o\n  infravermelho, Thomson, onde a corrida de α cessa); `the_floor_is_attained_only_at_the_infrared`: a igualdade só em χ = χ_sup;\n* `betaOfChi_eq_coupling`: no domínio de `couplingOfAlpha` (α < e^{-1/2}) o β desta pedra É o β do acoplamento selado (v376);\n* a dicotomia: `zeno_partial_sum` (Σ_{k<n} (1/2)^{k+1} = 1 − (1/2)^n), `zeno_never_reaches_the_one` (< 1 em todo n finito),\n  `zeno_tends_to_the_one` (o limite é o Um); `half_nat_fixed_point` (x = 1 − x ⟺ x = 1/2).\n\nO que NÃO prova (dito): que α físico seja `sech(χ/2)` de uma profundidade χ que cresce para o infravermelho — isso é a\nIDENTIFICAÇÃO do runtime [INPUT/ONTO]; que α(μ) cresça com μ — [KNOWN] (QED, congelamento infravermelho), não teorema da casa;\nqual μ cada rito usa — [OPEN]. A constante da fronteira segue β₀ = α_Thomson·√e, α no limite q → 0 (o Teorema da Escala do artigo; NÃO o\n`alphaOfChi 0` desta pedra, que vale 1 — o Um absoluto); β(χ) é a leitura\nde bulk. Axiomas: só o trio; zero sorry. PROVADA ≠ CONFIRMADA; o gate não se move.\n"
+        },
+        {
+          "first_line": 33,
+          "last_line": 37,
+          "sha256_bytes": "0066ea8b8a0d3cd6aa40e387e0b89e4dbf23fd2583243935d052f44f908bc8f7",
+          "text": "/-- a transmissão na profundidade χ: α(χ) = sech(χ/2). -/\nnoncomputable def alphaOfChi (χ : ℝ) : ℝ := 1 / Real.cosh (χ / 2)\n\n/-- β(χ) := α(χ)·√e (√e escrito como exp(1/2), como em `couplingOfAlpha`). -/\nnoncomputable def betaOfChi (χ : ℝ) : ℝ := alphaOfChi χ * Real.exp (1 / 2)\n"
+        },
+        {
+          "first_line": 51,
+          "last_line": 58,
+          "sha256_bytes": "14df465f73d0b853dbec47277d663fb1627f4288c0480794901ac63bf1d78000",
+          "text": "/-- α(χ) é estritamente decrescente na profundidade χ ≥ 0. -/\ntheorem alphaOfChi_strictAntiOn : StrictAntiOn alphaOfChi (Set.Ici 0) := by\n  intro a ha b hb hab\n  simp only [Set.mem_Ici] at ha hb\n  unfold alphaOfChi\n  apply one_div_lt_one_div_of_lt (Real.cosh_pos _)\n  rw [Real.cosh_lt_cosh, abs_of_nonneg (by linarith), abs_of_nonneg (by linarith)]\n  linarith\n"
+        },
+        {
+          "first_line": 72,
+          "last_line": 102,
+          "sha256_bytes": "ef0390d451089ea586d0d03d1d4c01754777d3104e0a94500f922a02f378c6ed",
+          "text": "/-- β(χ) é estritamente decrescente na profundidade χ ≥ 0. -/\ntheorem betaOfChi_strictAntiOn : StrictAntiOn betaOfChi (Set.Ici 0) := by\n  intro a ha b hb hab\n  unfold betaOfChi\n  exact mul_lt_mul_of_pos_right (alphaOfChi_strictAntiOn ha hb hab) (Real.exp_pos _)\n\n/-- ★★★ O PISO ESTÁ NO INFRAVERMELHO: para 0 ≤ χ ≤ χ_sup, β(χ_sup) ≤ β(χ) — β corre, mas limitado inferiormente pelo valor\nno supremo da profundidade. -/\ntheorem the_floor_is_at_the_infrared (χ χsup : ℝ) (h0 : 0 ≤ χ) (h : χ ≤ χsup) :\n    betaOfChi χsup ≤ betaOfChi χ := by\n  rcases eq_or_lt_of_le h with h' | h'\n  · rw [h']\n  · exact le_of_lt (betaOfChi_strictAntiOn (Set.mem_Ici.mpr h0) (Set.mem_Ici.mpr (by linarith)) h')\n\n/-- ★★ o piso só é atingido no próprio supremo. -/\ntheorem the_floor_is_attained_only_at_the_infrared (χ χsup : ℝ) (h0 : 0 ≤ χ) (h : χ ≤ χsup) :\n    betaOfChi χ = betaOfChi χsup ↔ χ = χsup := by\n  constructor\n  · intro he\n    by_contra hne\n    have hlt : χ < χsup := lt_of_le_of_ne h hne\n    have := betaOfChi_strictAntiOn (Set.mem_Ici.mpr h0) (Set.mem_Ici.mpr (by linarith)) hlt\n    linarith\n  · intro he\n    rw [he]\n\n/-- ★ no domínio do acoplamento selado (α < e^{-1/2}), o β desta pedra É o β de `couplingOfAlpha` (v376) — POR DEFINIÇÃO\n(a prova é `rfl`: desdobramento, não resultado; amarra os dois nomes). -/\ntheorem betaOfChi_eq_coupling (χ : ℝ) (h1 : alphaOfChi χ < Real.exp (-(1 / 2))) :\n    (TGLExt.TheWholeIsOne.couplingOfAlpha (alphaOfChi χ) (alphaOfChi_pos χ) h1).beta = betaOfChi χ := by\n  rfl\n"
+        }
+      ]
+    },
+    {
+      "id": "kernel_beta_chain",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheWholeIsOne.lean",
+      "sha256": "097236427302ae42857b1cfc3e89711b45f7bc34fe02e5374bc0903a34d1a608",
+      "bytes": 12231,
+      "line_count": 169,
+      "mtime_utc": "2026-09-28T23:52:48.328380+00:00",
+      "role": "Cadeia beta derivada de alpha dado; hipótese da luz explicitada.",
+      "anchors": [
+        {
+          "first_line": 18,
+          "last_line": 34,
+          "sha256_bytes": "80cf338b267962128ac65396359c952ecb2d8282de318239fa3204e86967791a",
+          "text": "O que esta pedra FAZ (por termo, sobre nomes que JÁ existiam no kernel — inventário do aferidor de 28/09):\n  (D1) tipa o mapa entropia → volume que vivia só em docstring: `boundaryVolume S = e^S`, e a Meia-Nat dá o radical,\n       `boundaryVolume (1/2) = √e` (por `boundary_extracts_the_radical`); a cadeia x = 1 − x ⟹ x = ½ ⟹ V(x) = √e por termo;\n  (D2) tipa a SETA FÍSICA de β: `couplingOfAlpha α` constrói o dado único `TGLCoupling` com β := α·e^{½} = α·√e — o entrelaçamento\n       da radicalização da entropia (√e) com a constante de redução da projeção holográfica (α) — e prova `.alpha = α`,\n       `.beta = α·√e`. É o que o runtime faz em `BETA_TGL = ALPHA_FINE_CODATA_2018 · √e` (um.py): α é DADO [INPUT/KNOWN,\n       CODATA 2018], jamais derivado aqui; β é DERIVADO;\n  (E)  amarra numa só conjunção (`the_whole_is_one`): ω(I) = 1 lido pelo leitor; a Meia-Nat e as faces ½ e ½ da luz; o radical;\n       β = α·√e; |R|² = β na matriz-S em θ_M = arcsin √β; β proíbe a testemunha estática plena; Unruh = KMS no H2 da luz; a\n       declaração Tetelestai num só objeto (v375, verbatim); a chave é o leitor; ρ*_IALD = P_kerK na luz.\n       E `the_beta_chain_is_derived` sela a cadeia de β SOZINHA (só reais), independente da luz.\n\nO que esta pedra NÃO faz (dito, não escondido): nenhum termo liga `c.beta` ao certificado da luz `C` — a cadeia de β (o dado real\n`c`) e a luz (`D`, `C`) ficam JUSTAPOSTAS na conjunção, não fundidas; o β de `KMSAt` é a temperatura inversa (HOMÔNIMO), não β_TGL;\na identificação P_kerK ↔ P_F é «o mesmo leitor em duas álgebras» [ONTO; Haagerup 1979; Terp 1981], não igualdade de operadores;\no que é citado nos certificados segue SABIDO (não exibido). Nada novo é provado além de (D1)–(D2): o objeto amarra.\nSem sorry, sem axiom. PROVADA ≠ CONFIRMADA.\n"
+        },
+        {
+          "first_line": 41,
+          "last_line": 85,
+          "sha256_bytes": "628cde3da0f58e0060ab889a1852b145b39cc0f212fcc4cba34de43f054e3d49",
+          "text": "/-- (D1) o volume da fronteira como função da entropia (em nats): V(S) = e^S. -/\ndef boundaryVolume (S : ℝ) : ℝ := Real.exp S\n\n/-- ★ a Meia-Nat dá o radical: V(½) = √e — a radicalização da entropia. -/\ntheorem half_nat_volume_is_the_radical : boundaryVolume (1 / 2) = Real.sqrt (Real.exp 1) := by\n  unfold boundaryVolume\n  exact TGLExt.boundary_extracts_the_radical.1.symm\n\n/-- ★ da auto-conjugação ao volume mínimo, por termo: x = 1 − x ⟹ x = ½ ⟹ V(x) = √e. -/\ntheorem self_conjugate_boundary_has_radical_volume (x : ℝ) (h : x = 1 - x) :\n    x = 1 / 2 ∧ boundaryVolume x = Real.sqrt (Real.exp 1) := by\n  have hx : x = 1 / 2 := (TGLExt.half_is_the_fixed_point_of_the_swap x).mp h\n  exact ⟨hx, by rw [hx]; exact half_nat_volume_is_the_radical⟩\n\n/-- (D2) A SETA FÍSICA: o dado único da TGL construído de α (a constante de redução da projeção holográfica, DADO [INPUT/KNOWN])\n    e do radical: β := α·e^{½}. O domínio 0 < α < e^{−½} é exatamente o que β < 1 exige. -/\ndef couplingOfAlpha (α : ℝ) (h0 : 0 < α) (h1 : α < Real.exp (-(1 / 2))) : TGLExt.TGLCoupling :=\n  { beta := α * Real.exp (1 / 2)\n    beta_pos := mul_pos h0 (Real.exp_pos _)\n    beta_lt_one := by\n      have h := mul_lt_mul_of_pos_right h1 (Real.exp_pos (1 / 2))\n      rwa [← Real.exp_add, neg_add_cancel, Real.exp_zero] at h }\n\n/-- ★ a leitura normalizada pelo custo devolve o dado: (couplingOfAlpha α).alpha = α. -/\ntheorem couplingOfAlpha_alpha (α : ℝ) (h0 : 0 < α) (h1 : α < Real.exp (-(1 / 2))) :\n    (couplingOfAlpha α h0 h1).alpha = α := by\n  show α * Real.exp (1 / 2) / Real.exp (1 / 2) = α\n  exact mul_div_cancel_right₀ α (Real.exp_ne_zero _)\n\n/-- ★★ β DERIVADO: (couplingOfAlpha α).beta = α·√e. -/\ntheorem couplingOfAlpha_beta (α : ℝ) (h0 : 0 < α) (h1 : α < Real.exp (-(1 / 2))) :\n    (couplingOfAlpha α h0 h1).beta = α * Real.sqrt (Real.exp 1) := by\n  show α * Real.exp (1 / 2) = α * Real.sqrt (Real.exp 1)\n  rw [TGLExt.boundary_extracts_the_radical.1]\n\n/-- ★★★ A CADEIA DE β É DERIVADA (só reais; selo próprio, independente da luz): a Meia-Nat; V(½) = √e; β = α·√e; |R|² = β em\n    θ_M = arcsin √β; β proíbe a testemunha estática plena. -/\ntheorem the_beta_chain_is_derived (c : TGLExt.TGLCoupling) {g : ℝ} (hg : 0 < g) :\n    (∀ y : ℝ, y = 1 - y ↔ y = 1 / 2) ∧\n    boundaryVolume (1 / 2) = Real.sqrt (Real.exp 1) ∧\n    c.beta = c.alpha * Real.sqrt (Real.exp 1) ∧\n    Complex.normSq ((TGLExt.Smat (TGLExt.thetaMiguel c.beta)).mulVec TGLExt.e1 1) = c.beta ∧\n    ¬ TGLExt.FullStaticWitness (fun t (y : ℝ) => Real.exp (-(t * c.beta * g)) * y) :=\n  ⟨TGLExt.half_is_the_fixed_point_of_the_swap, half_nat_volume_is_the_radical, c.beta_eq_alpha_radical,\n   c.reflection_weight, TGLExt.beta_forbids_full_static_witness c.beta_pos hg⟩\n"
+        },
+        {
+          "first_line": 102,
+          "last_line": 118,
+          "sha256_bytes": "649249475b115633f0babcf76809821b8976b669942f64db2e025569298ec0de",
+          "text": "/-- ★★★★ **O TODO É UM**: num só termo, (0) a seta física β := α·√e para todo α admissível; (I) o leitor lê a identidade, ω(I) = 1;\n    (II) a Meia-Nat e as faces ½ e ½ da luz; (III) V(½) = √e = e^{½}; (IV) β = α·√e; (V) |R|² = β; (VI) β proíbe a testemunha\n    estática plena; (VII) Unruh = KMS no H2 da luz (β_KMS homônimo); (VIII) a declaração Tetelestai num só objeto (v375, verbatim);\n    (IX) a chave é o leitor; (X) ρ*_IALD = P_kerK na luz. A cadeia de β (`c`) e a luz (`D`, `C`) ficam JUSTAPOSTAS: nenhum termo\n    liga `c.beta` a `C` — dito. -/\ntheorem the_whole_is_one\n    (c : TGLExt.TGLCoupling) {g : ℝ} (hg : 0 < g)\n    (D : TGLExt.QGSolution.LightNetData) (C : FockCertificate D.toLightOneParticle)\n    (hV : TGLExt.TetelestaiOneObject.VacuumWeightCorner C)\n    (Q : TGLExt.MaxwellBridge.MaxwellQuadraticForm C)\n    (cl : ∀ ψ, Regular Q.Dom (TGLExt.MaxwellBridge.toStress Q).toStressTensorData ψ → ∀ k : ℝ,\n      HasModularEnergy (lightDelta C) ψ k →\n        k = 2 * Real.pi * nullPlaneCharge (TGLExt.MaxwellBridge.toStress Q).toStressTensorData ψ)\n    (nt : ∃ ψ, Regular Q.Dom (TGLExt.MaxwellBridge.toStress Q).toStressTensorData ψ ∧\n      ∃ k : ℝ, HasModularEnergy (lightDelta C) ψ k ∧ k ≠ 0)\n    (N : KillingNormalization) (G : ℝ) (hG : 0 < G) {x₀ : Fin 4 → ℝ} (hx₀ : x₀ ∈ rightWedge)\n    {ψ : C.F} (hψ : ψ ∈ (lightH3 (TGLExt.MaxwellBridge.toCertificate Q cl nt) N G hG).admissible)\n"
+        }
+      ]
+    },
+    {
+      "id": "kernel_scale",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheScaleHasNoFixedPoint.lean",
+      "sha256": "0ed72186957c2a8a60e23499b12b259b1e90c2db9c10845eb0b9e48a79d54462",
+      "bytes": 6891,
+      "line_count": 142,
+      "mtime_utc": "2026-08-23T00:00:19.604315+00:00",
+      "role": "No-go de escala ambiente; não proíbe princípio adicional na face finita.",
+      "anchors": [
+        {
+          "first_line": 43,
+          "last_line": 59,
+          "sha256_bytes": "2583ee908b77193d29bdb83a9122e01d6678c3d6286293abf892c1fca486534d",
+          "text": "## ⚠ E ONDE O NO-GO PARA — a outra metade NÃO se prova, e o escriba diz por quê\n\nO teorema fecha contra a estrutura **ambiente e escala-covariante**. Ele **NÃO** fecha contra\n**tudo o que é interno**, e a diferença é decisiva:\n\n**O `κ` do canônico é o gap do \"curto Bell-zero\" — uma FACE FINITA.** Uma face finita **não é\nescala-covariante**: ela tem dimensão, tem traço, tem gap. O no-go **não a alcança**. Portanto:\n\n> **NÃO está provado que `α` seja necessariamente input.**\n> Está provado que `α` não vem da **escala ambiente**. Um princípio numa **face finita** —\n> sobredeterminado, como `TheSelectorCanRefuse` exige — **continua permitido**.\n\nE há uma consequência que aponta na direção contrária à do no-go, e fica registrada: uma\ncondição de **comutação** fixa um **ângulo**, e ângulo **é invariante de escala**. Logo o no-go\n**não proíbe** que `θ_M` seja fixado estruturalmente — e como `sin²θ_M = β`, isso fixaria `κ`.\n**As duas coisas não se contradizem** porque atuam em faces diferentes; mas quem quiser usar o\nno-go para encerrar a busca **estará a usá-lo além do que ele prova**.\n"
+        },
+        {
+          "first_line": 89,
+          "last_line": 113,
+          "sha256_bytes": "05f5c9d06c7545d695051722f93fea1b347618083ce73aae11cfed08d61bd7a7",
+          "text": "/-- ★★ **UMA RAZÃO BASTA.** Se `x = c·x` com `c ≠ 1`, então `x = 0`. Não é preciso o contínuo:\n    *a impossibilidade é mais barata do que parecia.* -/\ntheorem two_is_enough {c x : ℝ} (hc : c ≠ 1) (h : x = c * x) : x = 0 := by\n  have : (1 - c) * x = 0 := by linarith [h]\n  rcases mul_eq_zero.mp this with h1 | h2\n  · exact absurd (by linarith : c = 1) hc\n  · exact h2\n\n/-- ★★★ **NENHUMA QUANTIDADE POSITIVA É INVARIANTE DE ESCALA.**\n    Se `x = c·x` para todo `c > 0`, então `x = 0`. -/\ntheorem no_positive_scale_invariant {x : ℝ} (h : ∀ c : ℝ, 0 < c → x = c * x) : x = 0 :=\n  two_is_enough (by norm_num : (2:ℝ) ≠ 1) (h 2 (by norm_num))\n\n/-- ★★★ **A FORMA DIRETA:** ser positivo e ser invariante de escala é contraditório.\n\n    É esta a forma que se aplica a `κ`: `κ > 0`, logo **`κ` não é invariante de escala**, logo\n    **não é fixado por uma estrutura que age por escala com todas as razões**. -/\ntheorem positive_scale_invariant_is_absurd {x : ℝ} (hx : 0 < x)\n    (h : ∀ c : ℝ, 0 < c → x = c * x) : False := by\n  have := no_positive_scale_invariant h\n  linarith\n\n/-- ★★ **OS INVARIANTES DE ESCALA SÃO EXATAMENTE `{0}`.** -/\ntheorem scale_invariants_are_exactly_zero (x : ℝ) :\n    (∀ c : ℝ, 0 < c → x = c * x) ↔ x = 0 := by\n"
+        },
+        {
+          "first_line": 121,
+          "last_line": 138,
+          "sha256_bytes": "3b2d2b7bd84b4d47005c568c1e6606c60b9521028c1f7beb1e15d0febe62089c",
+          "text": "/-- ★★★ **O ENUNCIADO APLICADO.** Se `κ > 0` fosse determinado por uma estrutura que age por\n    escala com todas as razões — que é o caso do espectro modular de um III₁, `[KNOWN]` de\n    Connes —, então `κ` teria de ser invariante de escala, logo `κ = 0`. Absurdo.\n\n    **Portanto `κ` exige algo que QUEBRE a escala.**\n\n    **⚠ E o que isto NÃO diz:** não diz que `α` seja necessariamente input. Diz que `α` não vem\n    da **escala ambiente**. Uma **face finita** não é escala-covariante, e um princípio\n    sobredeterminado nela **continua permitido**. -/\ntheorem kappa_is_not_fixed_by_ambient_scale {κ : ℝ} (hκ : 0 < κ)\n    (hscale : ∀ c : ℝ, 0 < c → κ = c * κ) : False :=\n  positive_scale_invariant_is_absurd hκ hscale\n\n/-- ★★ o fecho honesto: **os invariantes são só o zero, e uma razão basta para prová-lo** — os\n    dois num enunciado. O alcance está no cabeçalho, e ele é menor do que o pedido. -/\ntheorem the_scale_has_no_fixed_point (x : ℝ) (hx : 0 < x) :\n    ¬ (∀ c : ℝ, 0 < c → x = c * x) :=\n  fun h => positive_scale_invariant_is_absurd hx h\n"
+        }
+      ]
+    },
+    {
+      "id": "kernel_alpha",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheAlphaAndTheOmega.lean",
+      "sha256": "3ed12b22f7b1bfd3ddd3017af2fad0dbe592676a75ec0d2c436bd99f97e5a4d0",
+      "bytes": 11107,
+      "line_count": 216,
+      "mtime_utc": "2026-09-01T13:48:34.408611+00:00",
+      "role": "A forma admite todo alpha; não determina valor numérico por si só.",
+      "anchors": [
+        {
+          "first_line": 105,
+          "last_line": 123,
+          "sha256_bytes": "67c9237e6d57cf6f605c99e6db83c3a1a8a1d33e610e85db8d51f5abac3a9459",
+          "text": "/-- [KERNEL] **A FACE α**: para todo α ∈ [0,1], q = √(1−α²) fecha 1 = q² + α².\n    O outro terminal do MESMO 1. O valor de α segue EXTERNO\n    (`ALPHA_IRREDUCIBILITY_V1`; a forma não fixa o valor — v306). -/\ntheorem the_alpha_face (a : ℝ) (h0 : 0 ≤ a) (h1 : a ≤ 1) :\n    (Real.sqrt (1 - a ^ 2)) ^ 2 + a ^ 2 = 1 := by\n  have hnn : 0 ≤ 1 - a ^ 2 := by nlinarith\n  rw [Real.sq_sqrt hnn]\n  ring\n\n/-- [KERNEL] **A FORMA ADMITE TODO α** — a liberdade que torna o valor externo:\n    para qualquer α ∈ (0,1) existe q > 0 com q² + α² = 1. É por isso que\n    \"TGL = α\" nunca escorrega para \"TGL deriva α\". -/\ntheorem the_form_admits_every_alpha (a : ℝ) (h0 : 0 < a) (h1 : a < 1) :\n    ∃ q : ℝ, q ^ 2 + a ^ 2 = 1 ∧ 0 < q := by\n  refine ⟨Real.sqrt (1 - a ^ 2), the_alpha_face a (le_of_lt h0) (le_of_lt h1), ?_⟩\n  apply Real.sqrt_pos.mpr\n  nlinarith\n\n/-! ## B — a falsidade categorial: de onde vem o FALSO de 1=0 -/\n"
+        }
+      ]
+    },
+    {
+      "id": "kernel_action_controls",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ActionCouplingControls.lean",
+      "sha256": "7be4b6cf1726d3e068fa7bc515901ce8e6b4873de7f6775c05f5bb67cb6876e1",
+      "bytes": 4010,
+      "line_count": 90,
+      "mtime_utc": "2026-09-15T18:34:09.701028+00:00",
+      "role": "Controles da equação de movimento e não seleção de xi; não é EOS estelar.",
+      "anchors": [
+        {
+          "first_line": 1,
+          "last_line": 16,
+          "sha256_bytes": "697a4b5aef8b479428f69332d93519f155273f11b26a6e0783430e26a1cfa027",
+          "text": "import TGLExt.TheSameBetaReadsFourFaces\n\nset_option autoImplicit false\n\n/-! Algebraic controls, not a physical realization of a wave operator. -/\nnamespace TGLExt.ActionCouplingControls\nnoncomputable section\nopen ActionCouplingData\n\n/-- Independent xi and an independently chosen gain in the box operator. -/\ndef scalarModel (xi gain : ℝ) : ActionCouplingData Unit where\n  boxOperator := (xi + gain) • LinearMap.id\n  mass := 0\n  xi := xi\n  scalarCurvature := fun _ => 1\n  K_boundary := LinearMap.id\n"
+        },
+        {
+          "first_line": 25,
+          "last_line": 78,
+          "sha256_bytes": "eff54a762a2e70943a23a832ca9eb3ee5b04d1a1f5d1166fdf75b3def6a43c70",
+          "text": "theorem scalar_model_field (xi gain : ℝ) :\n    (scalarModel xi gain).fieldOperator unitSection = gain • unitSection := by\n  ext x\n  simp [fieldOperator, curvatureTerm, scalarModel, unitSection, add_smul]\n\ntheorem scalar_model_eom (c : TGLCoupling) (xi : ℝ) :\n    (scalarModel xi c.beta).EOM c unitSection := by\n  change (scalarModel xi c.beta).fieldOperator unitSection = c.beta • unitSection\n  exact scalar_model_field xi c.beta\n\n/-- Nonzero section/source and arbitrary xi: the conditional type is inhabited. -/\ntheorem nonzero_model_for_every_xi (c : TGLCoupling) (xi : ℝ) :\n    (scalarModel xi c.beta).xi = xi ∧\n    (scalarModel xi c.beta).K_boundary unitSection ≠ 0 ∧\n    (scalarModel xi c.beta).EOM c unitSection :=\n  ⟨rfl, unitSection_ne_zero, scalar_model_eom c xi⟩\n\n/-- Same data shape and nonzero source, but a different box gain refutes EOM. -/\ntheorem scalar_model_rejects_wrong_gain (c : TGLCoupling) (xi gain : ℝ)\n    (hg : gain ≠ c.beta) : ¬ (scalarModel xi gain).EOM c unitSection := by\n  intro h\n  have heq : gain • unitSection = c.beta • unitSection :=\n    (scalar_model_field xi gain).symm.trans h\n  exact hg (smul_left_injective ℝ unitSection_ne_zero heq)\n\n/-- In particular the three readings and the operator data do not supply EOM. -/\ntheorem data_alone_does_not_supply_eom (c : TGLCoupling) (xi : ℝ) :\n    ¬ (scalarModel xi (-c.beta)).EOM c unitSection := by\n  apply scalar_model_rejects_wrong_gain\n  linarith [c.beta_pos]\n\ntheorem reject_sign_flip {X : Type*} (D : ActionCouplingData X) (c : TGLCoupling)\n    (psi : X → ℂ) (hEOM : D.EOM c psi) (hK : D.K_boundary psi ≠ 0) :\n    D.fieldOperator psi ≠ (-c.beta) • D.K_boundary psi := by\n  apply D.eom_rejects_changed_coefficient c psi hEOM hK\n  linarith [c.beta_pos]\n\ntheorem reject_xi_as_beta {X : Type*} (D : ActionCouplingData X) (c : TGLCoupling)\n    (psi : X → ℂ) (hEOM : D.EOM c psi) (hK : D.K_boundary psi ≠ 0)\n    (hxi : D.xi ≠ c.beta) : D.fieldOperator psi ≠ D.xi • D.K_boundary psi :=\n  D.eom_rejects_changed_coefficient c psi hEOM hK D.xi hxi\n\ntheorem reject_bare_alpha {X : Type*} (D : ActionCouplingData X) (c : TGLCoupling)\n    (psi : X → ℂ) (hEOM : D.EOM c psi) (hK : D.K_boundary psi ≠ 0) :\n    D.fieldOperator psi ≠ c.alpha • D.K_boundary psi := by\n  apply D.eom_rejects_changed_coefficient c psi hEOM hK\n  exact (c.reflection_rejects_bare_alpha ∘ fun h => c.reflection_weight.trans h.symm)\n\n/-- Even after assuming EOM on a nonzero field, xi is not selected. -/\ntheorem xi_is_not_selected (c : TGLCoupling) (referenceXi : ℝ) :\n    ∃ D : ActionCouplingData Unit, D.EOM c unitSection ∧\n      D.K_boundary unitSection ≠ 0 ∧ D.xi ≠ referenceXi := by\n  refine ⟨scalarModel (referenceXi + 1) c.beta,\n    scalar_model_eom c (referenceXi + 1), unitSection_ne_zero, ?_⟩\n"
+        }
+      ]
+    },
+    {
+      "id": "ponte_current",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\A Ponte Einstein Cartan Miguel.tex",
+      "sha256": "98ec3d808d51e694098ae216500ab853584cb89f9eb23661128ddc1829c1b657",
+      "bytes": 129435,
+      "line_count": 2371,
+      "mtime_utc": "2026-06-18T10:43:48.341004+00:00",
+      "role": "Teorema da Escala condicional à identificação IR da fronteira; alfa do bulk pode correr.",
+      "anchors": [
+        {
+          "first_line": 1288,
+          "last_line": 1343,
+          "sha256_bytes": "3828f35a99ed809de4a3b08d99b22bc6c5b9a3e820afdabf303be56efd46a488",
+          "text": "\\section{O Teorema da Escala: o fecho da objeção (d)}\\label{sec:escala}\n% =====================================================================\nA objeção (d) --- registrada como ``a mais perigosa'' --- tem três dentes:\n(i)~se $\\alpha$ corre ($\\alpha(0)\\approx1/137$ em Thomson;\n$\\alpha_{\\mathrm{eff}}\\approx1/129$ em $M_Z$), $\\bTGL$ herda a dependência\nde escala e não é invariante; (ii)~se a teoria fixa $\\alpha(0)$, a escala\né um parâmetro escondido, em tensão com ``zero parâmetros livres'';\n(iii)~erro de categoria: $c,G$ são dimensionais/estruturais; $\\alpha$ é o\nacoplamento adimensional \\emph{do eletromagnetismo} --- por que a\ngravidade-modular conheceria a carga elétrica? Esta seção fecha (i) e\n(ii) com âncoras \\REAL\\ da própria QED, e dissolve (iii) pela estrutura.\n\n\\subsection{O fecho: quatro âncoras}\n\\begin{theorem}[da Escala --- fecho condicional]\\label{thm:escala}\nCondicional à identificação estrutural da TGL ---\n\\emph{a fronteira modular é assintótica/infravermelha} (horizonte,\n$q\\to0$) ---, o valor $\\alpha(0)$ não é uma escolha de escala: é a\n\\textbf{ausência de escala}, e ``zero parâmetros livres'' não apenas\ntolera $\\alpha(0)$ --- \\textbf{exige-o}. Quatro âncoras:\n\\begin{enumerate}[noitemsep]\n\\item \\textbf{O congelamento infravermelho --- \\REAL\\ (QED).} A\npolarização do vácuo de todo férmion massivo desacopla como $Q^2/m^2$:\nabaixo do limiar do elétron a corrida \\emph{congela},\n$\\alpha(Q)-\\alpha(0)\\sim\\tfrac{\\alpha}{15\\pi}\\,Q^2/m_e^2\\to0$. O limite\nde Thomson existe, é único, e é \\emph{protegido por teorema de baixa\nenergia} (Thirring 1950; Low): o espalhamento Compton a frequência zero é\n\\emph{exatamente} Thomson, a todas as ordens. Verificação numérica\n(\\texttt{tgl\\_alpha\\_scale\\_v1.py}, kernels de 1 loop com massa exata;\nparte hadrônica por massas efetivas, aproximação declarada):\nplatô IR plano a $5{,}9\\times10^{-10}$ em $1$~keV;\n$1/\\alpha(M_Z)=129{,}0$ (literatura: $128{,}9$, \\REAL).\n\\item \\textbf{O conteúdo da fronteira --- \\REAL\\ (estrutura IR).} Na\nassintotia sobrevivem apenas os campos sem massa e não-confinados: o\nfóton (e a gravitação). A força forte é confinada (sem resíduo IR); a\nfraca é massiva (suprimida por Yukawa). A fronteira não ``conhece a carga\nelétrica'' por acidente: \\emph{o fóton é o único acoplamento que chega à\nfronteira}. E, na TGL, a gravidade não é um segundo acoplamento\nconcorrente --- é a \\emph{operação} ($g=\\sqrt{|L_\\varphi|}$): um campo (a\nluz), uma operação (o radical), uma constante que os conjuga:\n$\\bTGL=\\alpha\\times\\sqrt e$.\n\\item \\textbf{O fluxo é semigrupo; $\\alpha(0)$ é a coisa julgada ---\n\\REAL\\ $+$ estrutura TGL.} A renormalização wilsoniana rumo ao IV é\nintegração irreversível (perde informação: semigrupo, não grupo) --- a\n\\emph{mesma} estrutura $T_t=e^{-t\\mathcal L}$ da teoria. $\\alpha(0)$ é o\nvalor de repouso desse fluxo: o ponto em que não há instância ulterior. A\ncorrida de $\\alpha$ é \\emph{bulk} (dinâmica de escala); a fronteira guarda\no invariante em que o fluxo descansou.\n\\item \\textbf{A fronteira $\\mathrm{III}_1$ só inscreve o sem-escala ---\nestrutura.} O tipo $\\mathrm{III}_1$ é invariante de escala (fluxo de pesos\ntrivial): só pode carregar números adimensionais e \\emph{livres de\nescala}. O único valor livre de escala de $\\alpha$ é o limite $q\\to0$.\n\\textbf{A objeção, invertida:} qualquer outro $\\alpha(\\mu)$\ncontrabandearia o parâmetro $\\mu$; $\\alpha(0)$ é precisamente o valor\n\\emph{sem} parâmetro. Zero parâmetros livres \\emph{seleciona} Thomson.\n\\end{enumerate}\n\\end{theorem}\n"
+        }
+      ]
+    },
+    {
+      "id": "tratado_fundamentos",
+      "path": "C:\\IALD\\Artigo\\Tratado\\secao_01_fundamentos.tex",
+      "sha256": "64e9a0ed5fb17c1aa8aa6640097b63e58457b82a6ed631ee35ba72bcab213530",
+      "bytes": 65881,
+      "line_count": 1027,
+      "mtime_utc": "2026-03-24T18:56:12.649473+00:00",
+      "role": "Fonte histórica candidata: tensor escalar, KG, acoplamento RFF e beta quadrático. Não auditado como modelo estelar vigente nesta unidade.",
+      "anchors": [
+        {
+          "first_line": 314,
+          "last_line": 350,
+          "sha256_bytes": "16eb5d009952f2e81c1a7c0210cdef32ca676507b8e2d2548ddaf95259e441b4",
+          "text": "As equações de campo da TGL são obtidas por variação da ação (Eq.~\\ref{eq:acao_tgl}) em relação aos campos dinâmicos: a métrica $g_{\\mu\\nu}$, o potencial eletromagnético $A_\\mu$, e o campo escalar $\\Psifield$.\n\n\n\\section{Equações de Einstein modificadas}\n\\label{sec:einstein_modificadas}\n\nA variação da ação em relação à métrica inversa $g^{\\mu\\nu}$ produz as equações de Einstein modificadas.\n\n\\paragraph{Termo de Einstein--Hilbert.} Pela identidade de Palatini:\n\\begin{equation}\n\\frac{\\delta(\\sqrt{-\\bar{g}}\\,R)}{\\delta g^{\\mu\\nu}} = \\sqrt{-\\bar{g}}\\left(R_{\\mu\\nu} - \\frac{1}{2}g_{\\mu\\nu}R\\right) = \\sqrt{-\\bar{g}}\\,G_{\\mu\\nu}\n\\end{equation}\n\n\\paragraph{Tensor energia-momento do campo $\\Psifield$.} A variação do setor $\\Psifield$ (incluindo o acoplamento não mínimo) produz:\n\\begin{align}\nT^{(\\Psifield)}_{\\mu\\nu} &= \\nabla_\\mu\\Psifield\\,\\nabla_\\nu\\Psifield - g_{\\mu\\nu}\\left[\\frac{1}{2}\\nabla_\\alpha\\Psifield\\,\\nabla^\\alpha\\Psifield - V(\\Psifield)\\right] \\nonumber\\\\\n&\\quad + \\xi\\left(g_{\\mu\\nu}\\Box - \\nabla_\\mu\\nabla_\\nu + G_{\\mu\\nu}\\right)|\\Psifield|^2\n\\label{eq:T_psi}\n\\end{align}\nonde $\\Box = \\nabla^\\alpha\\nabla_\\alpha$ é o d'Alembertiano covariante.\n\n\\paragraph{Tensor energia-momento radicalizado.} A variação da Lagrangiana radicalizada em relação à métrica requer cuidado com o valor absoluto e a regra da cadeia. Definindo o invariante $F^2 \\equiv F_{\\mu\\nu}F^{\\mu\\nu}$ e notando que $\\mathcal{L}_{\\mathrm{rad}} = -\\frac{1}{4}\\sqrt{|F^2|}$, temos:\n\n\\begin{equation}\n\\frac{\\delta\\mathcal{L}_{\\mathrm{rad}}}{\\delta g^{\\mu\\nu}} = -\\frac{1}{4}\\frac{\\mathrm{sign}(F^2)}{2\\sqrt{|F^2|}}\\frac{\\delta(F^2)}{\\delta g^{\\mu\\nu}}\n\\end{equation}\n\nA variação do invariante em relação à métrica é:\n\\begin{equation}\n\\frac{\\delta(F_{\\alpha\\beta}F^{\\alpha\\beta})}{\\delta g^{\\mu\\nu}} = 2\\,F_{\\mu\\alpha}F_\\nu^{\\;\\alpha} - \\frac{1}{2}g_{\\mu\\nu}F^2\n\\end{equation}\nonde o primeiro termo vem da variação dos índices contraídos via $g^{\\alpha\\beta}$, e o segundo da variação de $\\sqrt{-\\bar{g}}$. Combinando:\n\n\\begin{equation}\nT^{(\\mathrm{rad})}_{\\mu\\nu} = \\frac{\\mathrm{sign}(F^2)}{4\\sqrt{|F^2|}}\\left(F_{\\mu\\alpha}F_\\nu^{\\;\\alpha} - \\frac{1}{4}g_{\\mu\\nu}F^2\\right)\n\\label{eq:T_rad}\n\\end{equation}\n"
+        },
+        {
+          "first_line": 413,
+          "last_line": 444,
+          "sha256_bytes": "21df81c974d86c24b7e3a5c41d1e9f0388a5c73a39dcc5669980984c90e9832d",
+          "text": "\\section{Equação de Klein--Gordon com acoplamento não mínimo}\n\\label{sec:klein_gordon}\n\nA variação em relação a $\\Psifield$ produz:\n\n\\begin{equacaofundamental}[title={Equação de Campo de $\\Psifield$}]\n\\begin{equation}\n\\label{eq:klein_gordon_tgl}\n\\Box\\Psifield + \\frac{\\partial V}{\\partial \\Psifield} + \\xi\\,R\\,\\Psifield = 0\n\\end{equation}\n\\end{equacaofundamental}\n\nA massa efetiva do campo é:\n\\begin{equation}\n\\label{eq:massa_efetiva}\nm_{\\mathrm{eff}}^2 = m_0^2 + 2\\xi R\n\\end{equation}\ne a relação de dispersão:\n\\begin{equation}\n\\label{eq:dispersao}\n\\omega^2 = k^2 + m_0^2 + 2\\xi R\n\\end{equation}\n\nOs três regimes da hierarquia $c^n$ emergem diretamente desta relação de dispersão: $c^1$ (propagação livre, $R \\approx 0$), $c^2$ (condensação, $m_{\\mathrm{eff}} \\neq 0$), e $c^3$ (estacionário, $\\xi R$ dominante).\n\n\n\\section{Propriedades do sistema de equações}\n\\label{sec:propriedades}\n\nO sistema (Eqs.~\\ref{eq:einstein_tgl},~\\ref{eq:maxwell_mod},~\\ref{eq:klein_gordon_tgl}) satisfaz: (i) covariância geral, (ii) invariância de gauge $U(1)$, (iii) limite clássico (Einstein + Maxwell + Klein--Gordon livre quando $\\xi \\to 0$ e campos fracos), e (iv) conservação de energia-momento via identidade de Bianchi.\n\n\\paragraph{Limitações.} A formulação apresentada é clássica. A quantização canônica da Lagrangiana radicalizada enfrenta dificuldades técnicas análogas às de Born--Infeld (a raiz quadrada introduz uma Hessiana singular em $F^2 = 0$). A abordagem da TGL é utilizar o formalismo de Lindblad para a dinâmica quântica do campo $\\Psifield$, evitando a quantização perturbativa convencional. Esta abordagem é desenvolvida na Seção~II (Cosmologia) e na Seção~VII (Consciência).\n"
+        },
+        {
+          "first_line": 575,
+          "last_line": 586,
+          "sha256_bytes": "b95e080863b16ca4e0518b10dcabf60aead8ab7f87a8387ee0a0d6f94ab3298c",
+          "text": "A forma mais geral do acoplamento curvatura--eletromagnetismo, consistente com covariância geral e invariância de gauge $U(1)$, é:\n\n\\begin{equacaofundamental}[title={Acoplamento Gravitacional-Eletromagnético}]\n\\begin{equation}\n\\label{eq:acoplamento_direto}\n\\mathcal{L}_{\\mathrm{acop}} = \\frac{\\betatgl}{M_P^2}\\,R_{\\mu\\nu}\\,F^{\\mu\\rho}\\,F^{\\nu}{}_{\\rho}\n\\end{equation}\n\\end{equacaofundamental}\n\n\\noindent onde $M_P = \\sqrt{\\hbar c/G} \\approx 1{,}22 \\times 10^{19}$~GeV é a massa de Planck, e $\\betatgl$ é o parâmetro de acoplamento adimensional. A normalização por $M_P^2$ garante dimensões corretas. Este termo produz modificações na equação de Maxwell (uma corrente gravitacional que ``cria'' ou ``aniquila'' fótons via curvatura) e no tensor energia-momento (contribuição cruzada curvatura--eletromagnetismo).\n\nA verificação dimensional é direta: $[\\betatgl/M_P^2] \\times [R_{\\mu\\nu}] \\times [F^2] = [\\text{adimensional}]/[\\text{massa}]^2 \\times [\\text{comprimento}]^{-2} \\times [\\text{campo}]^2$, que com a integração $d^4x\\sqrt{-g}$ produz ação adimensional.\n"
+        },
+        {
+          "first_line": 789,
+          "last_line": 803,
+          "sha256_bytes": "62777e3e1f0189318e7d8e5d08c7dfe220e068c076a98295986ac8232da1c902",
+          "text": "\\section{A forma quadrática: Gravidade $=$ Luz$^2$ $\\times$ Entropia}\n\\label{sec:forma_quadratica}\n\nElevando ao quadrado:\n\n\\begin{equacaofundamental}[title={Forma Quadrática}]\n\\begin{equation}\n\\label{eq:forma_quadratica}\n\\boxed{\\betatgl^{\\,2} = \\alpha^2 \\times e}\n\\end{equation}\n\\end{equacaofundamental}\n\nSem raízes, sem aproximações. Três constantes fundamentais em uma relação algébrica exata. A verificação numérica concorda na sexta casa decimal: $\\alpha^2 \\times e = 5{,}325 \\times 10^{-5} \\times 2{,}718 = 1{,}4475 \\times 10^{-4}$, contra $\\betatgl^2 = 1{,}4474 \\times 10^{-4}$.\n\nO fator $\\alpha^2$ na forma quadrática é a autointerferência da luz: dois vértices de Feynman, dois acoplamentos fóton-matéria. São necessárias duas interações para criar curvatura. O fator $e$ é a irreversibilidade termodinâmica total (1 nat completo, contra $\\frac{1}{2}$ nat na forma linear). A gravidade é o preço entrópico da autointerferência da luz.\n"
+        }
+      ]
+    },
+    {
+      "id": "tratado_particulas",
+      "path": "C:\\IALD\\Artigo\\Tratado\\secao_03_particulas.tex",
+      "sha256": "5584ac8f4ce04bfd54521ea36b6b1e35a71e197691a89d32edd6bc01c2dba0b0",
+      "bytes": 45195,
+      "line_count": 677,
+      "mtime_utc": "2026-08-22T23:11:14.871477+00:00",
+      "role": "Massa neutrino com sin45 e escala1eV; não é cálculo de taxa fraca em matéria densa.",
+      "anchors": [
+        {
+          "first_line": 449,
+          "last_line": 461,
+          "sha256_bytes": "6fd81454960f25afb85567dd6842ff2e33f879e2f46f667bf9460cf504b92167",
+          "text": "\\section{Derivação}\r\n\\label{sec:derivacao_massa_nu}\r\n\r\nNa TGL, a massa do neutrino é determinada pela Constante de Miguel e pela geometria da Cruz:\r\n\r\n\\begin{equacaofundamental}[title={Massa do Neutrino na TGL}]\r\n\\begin{equation}\r\n\\label{eq:massa_nu_derivacao}\r\nm_\\nu = \\betatgl \\cdot \\sin(45°) \\cdot 1\\;\\text{eV} = 0{,}012031 \\times \\frac{\\sqrt{2}}{2} \\times 1\\;\\text{eV} = 8{,}51\\;\\text{meV}\r\n\\end{equation}\r\n\\end{equacaofundamental}\r\n\r\nO fator $\\sin(45°) = \\sqrt{2}/2$ representa a projeção diagonal entre os regimes $c^1$ (propagação, eixo horizontal) e $c^2$ (ancoragem, eixo vertical) na Cruz geométrica. O ângulo de 45° é a bissetriz da Cruz --- o ponto de máxima transferência entre os regimes. O fator $\\betatgl$ é a taxa de acoplamento mínimo. A escala de 1~eV é a escala natural da autointeração eletrofraca ($\\alpha_W \\sim 10^{-2}$, mesma ordem de $\\betatgl$).\r\n"
+        }
+      ]
+    },
+    {
+      "id": "historical_question_erratum",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\project_fisica\\O_Custo_Geometrico_do_Zero_Absoluto_Haja_Luz.tex.txt",
+      "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217",
+      "bytes": 286095,
+      "line_count": 3799,
+      "mtime_utc": "2026-09-27T19:44:15.331447+00:00",
+      "role": "Snapshot v369: pergunta exata, resposta e posterior errata no mesmo artefato. História, não cânone de 2026-10-09.",
+      "anchors": [
+        {
+          "first_line": 2585,
+          "last_line": 2596,
+          "sha256_bytes": "7818db20e2a023d32d4169f44e7b100d9ce01aedb07646259e78ab9288e1a06a",
+          "text": "\\begin{quote}\\itshape\r\nConsiderando uma Supernova Tipo Ia como uma vela padrão, calcule o desvio na\r\nLuminosidade bolométrica se a função quadrática do campo escalar de vácuo\r\nadmitir uma taxa de dissipação geométrica não-nula no horizonte de eventos.\r\n\r\nEspecificamente:\r\n\r\n\\textbf{1.} Como a conservação da energia no tensor de momentum-energia\r\n($T_{\\mu\\nu}$) é mantida se a métrica de Schwarzschild sofrer uma flutuação\r\nde fase proporcional à densidade de fótons emitidos, e qual seria o\r\nimpacto disso no cálculo da Massa de Chandrasekhar em um ambiente de\r\nsuperfluidez quântica?\r\n"
+        },
+        {
+          "first_line": 2647,
+          "last_line": 2706,
+          "sha256_bytes": "80c131fd45f696ec9319b70422cf72ff3aaf592d96d0a485ddc9950c5fa66d36",
+          "text": "\\paragraph{(1) Massa de Chandrasekhar TGL.}\r\nA leitura correta do enunciado --- ``a projeção holográfica abre um ângulo\r\ncaracterístico que funda a geometria modular'' --- é que essa abertura é o\r\n\\emph{ângulo de Miguel} $\\thetaM$, derivado (não dado) de\r\n$\\betatgl = \\alpha\\sqrt{e}$ via $\\thetaM = \\arcsin\\sqrt{\\betatgl} = 6{,}297^{\\circ}$,\r\ncom $\\betatgl = \\sin^{2}\\thetaM$.  A abertura não é um parâmetro do problema\r\nestelar: é a dobra $S^1\\to T^2$ que funda a geometria, e a massa-limite é sua\r\n\\emph{projeção}.  A renormalização efetiva é a projeção cúbica\r\n$(1-\\betatgl)^{3/2} = \\cos^{3}\\thetaM$ (expoente $3/2$ da estatística de\r\ndegenerescência ultra-relativística):\r\n\\begin{align}\r\nM_{\\text{Ch}}^{\\text{TGL}} &\\;=\\; M_{\\text{Ch}}^{\\text{clássico}} \\cdot (1 - \\betatgl)^{3/2} \\notag \\\\\r\n                    &\\;=\\; 1{,}4 \\cdot 0{,}9820074408 \\notag \\\\\r\n                    &\\;=\\; 1{,}414090715\\,M_{\\odot}.\r\n\\label{eq:M-Ch-TGL}\r\n\\end{align}\r\n\\textbf{Observação sobre $\\sqrt{2}$ (com a devida cautela).} O valor\r\n$M_{\\text{Ch}}^{\\text{TGL}} = 1{,}41409\\,M_{\\odot}$ fica\r\npróximo de $\\sqrt{2} = 1{,}41421\\,M_{\\odot}$, o que\r\nsugere a leitura de $\\sqrt{2}$ como diagonal do quadrado modular\r\n$T^{2} = S^{1} \\times S^{1}$ ($b_2 = 1$).  Registramo-la, porém, com cautela:\r\n$M_{\\text{Ch}}^{\\text{clássico}}$ não é constante conhecida a cinco dígitos ---\r\ndepende da composição ($\\mu_e$) e de correções de Coulomb, ambas\r\n\\emph{de magnitude maior que o próprio efeito \\TGL{}}.  O teste de estresse ao\r\nvivo da Seção~\\ref{sec:sqrt2-stress} \\emph{mede} se $\\sqrt{2}$ sobrevive à\r\nvariação realista desses parâmetros; o veredito (negativo honesto) é que\r\n$\\sqrt{2}$ \\textbf{não é atrator independente} --- aparece essencialmente só na\r\nnormalização idealizada.  Portanto a proximidade, embora sugestiva, está dentro\r\nda incerteza física e \\textbf{não constitui predição de precisão}.\r\n\r\n\\paragraph{(2) Desvio de luminosidade.}\r\nA luminosidade bolométrica de SN Ia escala com a massa do progenitor pela\r\nrelação de Arnett (1982) $L \\propto M^{\\alpha_{\\text{Arnett}}}$, com\r\n$\\alpha_{\\text{Arnett}} = 1{,}8$:\r\n\\begin{align}\r\n\\frac{L^{\\text{TGL}}}{L^{\\text{padrão}}}\r\n&\\;=\\; \\left( \\frac{M_{\\text{Ch}}^{\\text{TGL}}}{M_{\\text{Ch}}^{\\text{padrão}}} \\right)^{\\alpha_{\\text{Arnett}}}\r\n\\;=\\; (1 - \\betatgl)^{(3/2)\\cdot 1{,}8} \\notag\\\\\r\n\\Delta L &\\;=\\; 1 \\;-\\; \\frac{L^{\\text{TGL}}}{L^{\\text{padrão}}}\r\n              \\;=\\; 3{,}215\\,\\%.\r\n\\label{eq:dL-TGL}\r\n\\end{align}\r\nEste é o desvio \\emph{prevista} na luminosidade bolométrica das SN Ia\r\nsob \\TGL{}.  É um número testável: estamos no limite da precisão atual\r\nde Pantheon+, mas dentro do alcance de Roman/LSST.\r\n\r\n\\paragraph{Nota de honestidade: $\\alpha_{\\text{Arnett}}$ é entrada externa.}\r\nA quantidade derivada pela \\TGL{} \\emph{sem} parâmetro livre é a renormalização\r\nde \\emph{massa} $M_{\\text{Ch}}^{\\text{TGL}} = M_{\\text{Ch}}^{\\Lambda\\text{CDM}}(1-\\betatgl)^{3/2}$\r\n(Eq.~\\ref{eq:chandrasekhar}), inteiramente fixada por $\\betatgl = \\alpha\\sqrt{e}$.\r\nO expoente $\\alpha_{\\text{Arnett}} = 1{,}8$ usado para converter massa em\r\nluminosidade \\emph{não} é derivado pela \\TGL{}: é a lei de escala empírica de\r\nArnett (1982)~\\cite{Arnett1982}, importada da astrofísica observacional como\r\n\\emph{ponte} entre a predição de massa (\\TGL{}) e a observável de luminosidade\r\n(SN Ia).  Não é ajustado aos dados aqui --- é o valor canônico da literatura.\r\nPortanto: o desvio de massa $-1{,}799\\%$ é \\emph{zero-parâmetro}; o desvio de\r\nluminosidade $3{,}215\\%$ herda a incerteza astrofísica de $\\alpha_{\\text{Arnett}}$.\r\nDeclaramo-lo como \\textbf{INPUT externo} na tabela de proveniência, para não\r\ndiluir a afirmação de zero parâmetros livres do programa: a \\TGL{} prevê a\r\nmassa; a luminosidade requer uma ponte de escala estabelecida independentemente.\r\n"
+        },
+        {
+          "first_line": 2977,
+          "last_line": 2992,
+          "sha256_bytes": "85ea2a1c4a68fb06a5ba9e94c7b97e5a80c0c91d0c5a99e948bcd1e58879014f",
+          "text": "\\paragraph{Discriminador estrutural (revisão do Protocolo~T6).} O discriminador maduro\r\n\\textbf{não é numérico}.  Um substrato superficial associa $\\theta_{\\mathrm{M}}$ a um\r\nparâmetro físico interno e propaga $\\betatgl$ para a gravidade local (lendo-o como\r\n$G\\to G(1-\\betatgl)$); um substrato operando sob a álgebra reconhece que\r\n$\\theta_{\\mathrm{M}}$ é uma \\emph{condição de fronteira modular} tipo~III$_1$ e\r\n\\textbf{impede automaticamente} sua propagação para regimes tipo-I (LLR, pulsares,\r\nmassa de Chandrasekhar, dinâmica gravitacional local).  \\emph{Passa} quem (i) reconstrói\r\nespontaneamente a estrutura dissipativa (gerador GKSL, atrator $\\rhostar$, gap espectral,\r\nsupressão \\emph{energia-preservante} de coerência de alta frequência --- \\emph{dephasing},\r\nnão \\emph{amplitude-damping}); (ii) preserva a separação bulk/fronteira sem violar\r\nvínculos clássicos; (iii) reconhece que a assinatura observável honesta é o dephasing\r\nPlanck-suprimido, não desvios locais.  \\emph{Falha} quem reinterpreta $\\betatgl$ como\r\nmodificação de $G$, usa a abertura como observável interno do bulk, ou cita\r\nSN~Ia$/M_{\\mathrm{Ch}}$ como validação.  Nulos em observáveis locais \\textbf{não são\r\nfalha} --- são o comportamento esperado (a \\TGL{} é \\emph{stealth}); a assinatura é\r\ncoerência estrutural, não desvio.\r\n"
+        },
+        {
+          "first_line": 3116,
+          "last_line": 3122,
+          "sha256_bytes": "6eb60539e8d9b8e020884333d36cb72b47050c6dfd02a928c17b31a7fb99daed",
+          "text": "\\section{A lei universal de dephasing: a assinatura espectral da \\TGL}\r\n\\label{sec:dephasing}\r\nO setor onde a \\TGL{} se diferencia não é cosmológico --- expansão e crescimento de estruturas são \\emph{stealth} (consistentes com $\\Lambda$CDM) --- mas \\textbf{espectral-dissipativo}.  A dinâmica GKSL com gerador único $L=\\sqrt{\\betatgl}\\,\\sqrt{K_\\partial}$ induz um \\emph{dephasing} energia-preservante, com taxa\r\n\\begin{equation}\r\n\\Gamma_\\omega=\\tfrac12\\,\\betatgl\\,\\tau_\\star\\,\\omega^2\\,(K/K_\\star)^{\\betatgl}.\r\n\\end{equation}\r\nTrês peças separadas: $\\betatgl=\\alpha\\sqrt e=0.012031$ \\textbf{[REAL]}; o expoente espectral em neutrinos $n=-2$ (de $\\gamma(E)\\propto\\omega_{\\rm osc}^2\\propto E^{-2}$, $\\omega_{\\rm osc}=\\Delta m^2/2E$) \\textbf{[REAL]}; e a escala $\\tau_\\star$ \\textbf{[INPUT]}, ainda não derivada.  A síntese honesta: \\emph{neutrinos fixam o expoente; relógios fixam a escala}.  Solar/KamLAND e, no futuro, JUNO/DUNE testam $n=-2$ pela dependência em energia da decoerência; relógios ópticos/nucleares limitam $\\tau_\\star$ --- o melhor sondador atual é o relógio nuclear de $^{229}$Th, com $\\tau_\\star\\lesssim 1.8e-33$~s.  A origem modular (fronteira tipo III$_1$, ultravioleta) e a exclusão de qualquer escala mesoscópica --- que os relógios já teriam destruído --- empurram $\\tau_\\star$ ao regime \\textbf{quase-planckiano}: a \\TGL{} é \\textbf{falsificável na forma} ($\\omega^2$, $n=-2$, $\\betatgl$) mas \\textbf{suprimida por Planck na magnitude}.  A invisibilidade experimental é \\emph{consequência} da teoria, não falha do teste.  Derivar $\\tau_\\star$ exatamente coincide com o único teorema em aberto do programa --- a matriz-S da fronteira tipo III$_1$ --- que fecharia simultaneamente $\\tau_\\star$, $\\mathcal R=\\sqrt{\\betatgl}$ e a unicidade de $\\sqrt e$.  \\textbf{[CONJECTURE: o teorema da matriz-S]}\r\n"
+        },
+        {
+          "first_line": 3315,
+          "last_line": 3315,
+          "sha256_bytes": "4b4187aac881c6b20d4d47567c6bef686c2a795c8d6bbd41ac322e124bb6caec",
+          "text": "\\paragraph{5. $\\betatgl$ é fronteira modular III$_1$, não modificação local de $G$.} Uma redação anterior leu a abertura $\\theta_{\\mathrm{M}}$ como renormalização da constante gravitacional, $G\\to G(1-\\betatgl)$, e apresentou a massa de Chandrasekhar deslocada $M_{\\mathrm{Ch}}(1-\\betatgl)^{3/2}$ como validação independente.  \\textbf{Ambas saem.}  Um $G\\to G(1-\\betatgl)$ universal seria falsificado por \\emph{lunar laser ranging} ($\\dot G/G\\lesssim10^{-13}\\,$ano$^{-1}$) e pulsares binárias (PSR~J0737$-$3039, decaimento orbital $\\propto G^5$ a $\\sim0{,}013\\%$) a $\\sim100\\sigma$ \\textbf{[REAL]}.  A correção principista: $\\betatgl=\\sin^2\\theta_{\\mathrm{M}}$ é o \\emph{vazamento angular de uma fronteira modular tipo III$_1$} (horizonte); sistemas estáticos sem horizonte --- sistema solar, órbitas de pulsar, interiores de anã branca --- são \\textbf{tipo-I} (sem fluxo modular), onde $\\betatgl=0$ \\emph{localmente por construção}, não por ajuste (Seção~\\ref{sec:typeIII1}).  Logo LLR, pulsares e a massa de Chandrasekhar \\textbf{não vinculam} $\\betatgl$, que só é fisicamente ativo onde há fronteira modular genuína: horizontes cosmológico e de buraco negro, canais assintóticos de espalhamento modular.  $M_{\\mathrm{Ch}}$/SN~Ia permanecem apenas como \\emph{exemplo histórico de interpretação observacional falsa da abertura modular}, não como previsão validante \\textbf{[ROTA CORRIGIDA]}.\r\n"
+        }
+      ]
+    },
+    {
+      "id": "atlas_current_reference",
+      "path": "C:\\IALD\\Central de Patentes\\memory\\TGL_ATLAS.md",
+      "sha256": "43d624bf8a158e0e1617be0b53111142b522afd50661874a0cd4830f761022e5",
+      "bytes": 8742627,
+      "line_count": 35617,
+      "mtime_utc": "2026-10-08T21:42:11.709021+00:00",
+      "role": "Memória consultada X6: beta0 Thomson para ritos/dephasing; fonte viva, sem escrita.",
+      "anchors": [
+        {
+          "first_line": 35120,
+          "last_line": 35129,
+          "sha256_bytes": "60e26c7a6a76491fb8153b7a84b969d7627c17fd500637bdbc3edf62724c36b3",
+          "text": "\r\n<!-- atlas_decisoes_noite_07out -->\r\n\r\n[INPUT — verbatim do operador por sha256 `a6c4912afc6f0dc4`] «aceito a reescrita como está / adoto o nome do degrau final / a escala de beta nós também já definimos antes / a régua do piso dos vazios quero discutir com vc, faça-se a pergunta nas minhas quatro linguas / a fase 9 pode ser inciada nessa forma de distribuição de tarefas que vc está gerenciando / o que é o ramo B? / e o que é a instalação das guardas de evidência?»\r\n\r\n- **O degrau final chama-se AXIOMA** (cunhagem do operador de 05/10, adotada em 07/10; `TGLExt.TheAxiomAndTheFalseWitness.finalStepNameAxioma`). A proposta de 02/10 (Tetelestai, `TheLedgerOfCharges.finalStepNameProposed`) fica ao lado. A string do gate não muda. [ERRATA da gerência, em nome próprio: o relatório de 07/10 apresentou-lhe o Tetelestai.]\r\n- **A escala de β está definida** [REAL a remissão; DERIVED de leitura a regra]: o Teorema da Escala (α(0), Thomson; «qualquer outro α(μ) contrabandearia o parâmetro μ»), a predição afiada do dephasing e a resposta de 06/10 (13:48:42 UTC). Todo rito cobra β₀ = α(0)·√e; na lei de dephasing só entra β₀. O garfo de 14/08 (β em Thomson × M_Z no N_eff, 0,050σ, inerte) entrou hoje no mapa (seq 765).\r\n- **A régua do piso já fora respondida em 14/08** [INPUT, sha16 `3dd397a7579fdd92`]: «a régua não deve medir, isso é o erro (...) a régua deve reproduzir o contorno espectral (...) Uma afirmação não precisa ser audível e nem irrefutável, só precisa ser o que ela não é». A resposta nunca tinha sido registrada. [REAL] O piso já está no livro de cobranças como o R4 (V11; conjunto congelado sem FALSIFIED; a mesma fonte do degrau experimental do gate) e já existe a linha de morte congelada do v67 (vazio a vazio, FWER 2,87×10⁻⁷), que nenhum canal alcança. O resíduo foi reposto nas quatro línguas (`work\\v391_regua_v12\\REGUA_DO_PISO_QUATRO_LINGUAS_20261007.md`, sha16 `7bc7635663236c1e`). Errata pendente no livro: o R4 é rotulado «por lente», mas o V11 é por traçador.\r\n- **A Fase 9 foi iniciada pelo programa** [INPUT]: iniciar não é abrir; a especificação que governa (F3.4), a admissão das fontes, a d72, a abertura e o dado real do controle 2 seguem atos do operador.\r\n\r\n"
+        }
+      ]
+    },
+    {
+      "id": "index_current_reference",
+      "path": "C:\\IALD\\Central de Patentes\\memory\\TGL_INDICE_VIVO.md",
+      "sha256": "0b540cff38b760daf0528f0920f4123c5ac804704f1369ab3b4a7b1b2b2a6458",
+      "bytes": 872658,
+      "line_count": 5912,
+      "mtime_utc": "2026-10-08T21:42:11.867706+00:00",
+      "role": "Índice de recuperação consultado; fonte viva, sem escrita.",
+      "anchors": [
+        {
+          "first_line": 5148,
+          "last_line": 5153,
+          "sha256_bytes": "e04778e162b4bd7ed7baeaa1821c68a1c6316bcdfd4f4d4eef1bfc304d40f471",
+          "text": "\n[REAL documental] Snapshot v388: SHA256 e64b00f4df75059b6f6fa5c050d45032ae73cb0e4aea6ef88a3620cc85846739, 33801035 bytes; selo 68ece45e3d226266f3c3c33edc20409cb4935c80d8fd9aaa8abf5676f9c1f2f1; result_hash 373f5139092ec0053b8337d5f1631cc66a8b5a52ffc12a858491de6454b58256. Auditoria independente: 54 verificações aprovadas. O resultado histórico 6154/6154 pertence à rodada selada, não a uma reexecução nesta atualização. Nota de pesquisa: C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\PESQUISA_V388.md.\n\n[KERNEL — fontes e recibos históricos conferidos] TheCouplingRunsBoundedBelow contém 2 definições e 15 teoremas. alpha(chi)=sech(chi/2), beta(chi)=alpha(chi)*sqrt(e); monotonia em chi>=0 e piso condicionado a 0<=chi<=chi_sup. Não se infere piso positivo universal em chi ilimitado. chi=0 dá alpha=1 e beta=sqrt(e), não a constante de Thomson. [INPUT/ONTO] Identificação física chi-mu; [OPEN] mu por rito/dispositivo. Fase9 escalar continua INCONCLUSIVE_SYSTEMATICS, distinta da preparação conjunta de 283 componentes. NOT_FALSIFIED não é CONFIRMED.\n\n[REAL operacional — estados distintos] Memória comum inicialmente conferida na geração 983c7f463cfb31f22d2f49dc9370e375b2431a998c60747787b389e810726c19, 13 fontes, 20260 trechos; âncora do runner reconciliada por AST, fila preservada, zero inferência remota. Durante a preparação, o um.py vivo mudou para 193b1e9b30c3ba7f8ad56a2a35eb6ff21d9b9c241d397b0e497fe1ebd5c7284a (33823528bytes), enquanto o selo permanece v388. O cache não deve incorporar essa alteração ainda não selada: está em preparação um retrato imutável das mesmas 13 fontes/pins. O aplicativo, cofre/camada e 16 FINALs permanecem em estágio/revisão neste registro. As contagens Anthropic e o aviso à gerente foram recusados pela revisão automática, sem execução ou contorno.\n"
+        }
+      ]
+    }
+  ],
+  "consultations": [
+    {
+      "command": "C:\\Python314\\python.exe -X utf8 C:\\IALD\\NOS_VIVO\\consultar.py --unidade F8.2",
+      "exit_code": 0,
+      "reuse": "F8.2 PROPOSTA; família outro.grande_atrator_e_chandrasekhar já indexada. O grafo é índice, não prova."
+    },
+    {
+      "command": "C:\\Python314\\python.exe -X utf8 C:\\IALD\\MAPA_DE_ROTAS\\rotas.py ver outro.grande_atrator_e_chandrasekhar",
+      "exit_code": 0,
+      "route_sequence_read": 164,
+      "status": "PROPOSTA",
+      "estatuto": "OPEN",
+      "reuse": "Grande Atrator e deslocamento MCh nunca testados; nenhum artefato nem dado nessa rota."
+    }
+  ],
+  "bounded_search": {
+    "kernel_root": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt",
+    "patterns": [
+      "Chandrasekhar",
+      "white dwarf",
+      "electroweak",
+      "eletrofraca",
+      "hydrostatic",
+      "equation of state",
+      "stellar"
+    ],
+    "result": "Nenhuma equação de estado estelar ou taxa fraca identificada por esses padrões em TGLExt; houve apenas referência a Jacobson Equation of State. Esta busca lexical não prova ausência em toda a teoria.",
+    "tratado": "Arquivo mestre indica secao_01_fundamentos e secao_03_particulas; somente estas seções foram consultadas para as buscas físicas."
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "status": "REAL documental",
+      "text": "A fonte atual conserva sn_ia_chandrasekhar como A9_SEM_INCERTEZA; a função não lê uma massa observada nem sigma.",
+      "sources": [
+        "runtime_current"
+      ]
+    },
+    {
+      "id": "C2",
+      "status": "KERNEL fonte; DERIVED de leitura",
+      "text": "v388 formaliza forma, monotonia e piso condicional beta(chi); não fornece sozinho uma correção EOS. O valor de alpha continua externo nesses enunciados.",
+      "sources": [
+        "kernel_running",
+        "kernel_beta_chain",
+        "kernel_alpha",
+        "runtime_current"
+      ]
+    },
+    {
+      "id": "C3",
+      "status": "INPUT regra vigente; DERIVED condicional no artigo",
+      "text": "beta0 Thomson e alpha(mu) do bulk devem ser distintos. Uma escala física de matéria densa exige mapa mu(estado) independente; não substituir beta0 pelo valor MZ sem uma ponte.",
+      "sources": [
+        "ponte_current",
+        "atlas_current_reference",
+        "kernel_running"
+      ]
+    },
+    {
+      "id": "C4",
+      "status": "DECLARADO na fonte; OPEN como realização estelar",
+      "text": "O Tratado contém candidatos de tensor escalar e acoplamento RFF que podem orientar reaproveitamento; faltam nesta revisão seleção da versão/sinal/normalização, EOS e fonte efetiva para estrela.",
+      "sources": [
+        "tratado_fundamentos"
+      ]
+    },
+    {
+      "id": "C5",
+      "status": "DERIVED de leitura do algoritmo",
+      "text": "O código histórico retira um offset constante por GLS; portanto o deslocamento global de luminosidade é degenerado nessa configuração. A função de degeneracy_delta_chi2 repete a mesma chamada; não é teste independente de física.",
+      "sources": [
+        "historical_sn_code"
+      ]
+    },
+    {
+      "id": "C6",
+      "status": "OPEN de levantamento limitado",
+      "text": "Nenhuma ponte específica beta(chi)/setor eletrofraco -> pressão de elétrons, Ye, taxa de captura, massa de níquel ou luminosidade foi localizada nas fontes delimitadas. Isso não é teorema de impossibilidade nem ausência da teoria inteira.",
+      "sources": [
+        "runtime_current",
+        "kernel_running",
+        "tratado_fundamentos",
+        "tratado_particulas"
+      ]
+    }
+  ]
+}

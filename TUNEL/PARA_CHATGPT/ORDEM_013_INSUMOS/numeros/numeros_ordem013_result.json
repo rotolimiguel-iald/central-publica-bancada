@@ -1,0 +1,899 @@
+{
+ "script": "C:\\Users\\rotol\\AppData\\Local\\Temp\\claude\\c--IALD-Central-de-Patentes\\6da8f00d-d44f-4888-a88d-fc9f73eead3d\\scratchpad\\ordem013\\agentes\\numeros\\numeros_ordem013.py",
+ "scipy": "1.18.0",
+ "python": "3.14.3",
+ "sha256": {
+  "um.py": "d9f5bd5dffc3333df707fb44ad0a859448a5042c38711479108c7f4b37538aeb",
+  "um_absoluto.json": "456f0ab149bb13f6997972dbfaf9c72a2891d744c22f04241eefa619e4953a95",
+  "ringdown_dephasing_v2.py": "0793c58d6995194b8b119bd54be3883718c2b51bb6f4b5c8b71fe9720544302b",
+  "RINGDOWN_DEPHASING_V2_RESULT.json": "ff15f023dd91d8c77fb003b2efd10c91b22d5bcb5047dc2101885fbb634e15c5",
+  "RINGDOWN_DEPHASING_V1_RESULT.json": "502c80fe2a37427e66723dabc43e50765062f703b3a69db5af5cc6a596e2be7b",
+  "gwtc_full_catalog.csv": "895250e9d404a2406af7ec677b59db321216f2594c628201678c288154107fdf",
+  "tgl_paper_unified.py": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+  "TEXTO_CONFRONTACAO": "6600f4e99c79845e7a2e7676cfb3e5772b61907e4c4e2fd810bee876e3c8afa8"
+ },
+ "constants": {
+  "alpha_CODATA2018": 0.0072973525693,
+  "alpha_scipy": 0.0072973525643,
+  "beta": 0.012031300400803142,
+  "G": 6.6743e-11,
+  "hbar": 1.0545718176461565e-34,
+  "c": 299792458.0,
+  "kB": 1.380649e-23,
+  "GM_sun_IAU": 1.3271244e+20,
+  "M_sun_kg": 1.988409870698051e+30,
+  "M_Pl_kg": 2.1764343427178984e-08,
+  "t_P_s": 5.391246448313605e-44,
+  "E_P_J": 1956081636.6983728,
+  "Mpc_m": 3.085677581491367e+22
+ },
+ "read_from_program": {
+  "GW150914_Mf_det": 67.73752907959711,
+  "GW150914_a_f": 0.6712194217379245,
+  "GW150914_f_gr": 249.50674752029795,
+  "GW150914_tau_gr_ms": 4.0460169981454595,
+  "GW150914_delta_pred_B": -0.019962060309612117,
+  "GW150914_delta_pred_A": -3.2248834885292296e-42,
+  "V2_stack_3ms": {
+   "n_used": 15,
+   "delta_tau": 0.1766470552326263,
+   "sigma": 0.10889389325116323,
+   "z_vs_GR": 1.6221943210827325,
+   "delta_pred_B": -0.019366930169705913,
+   "delta_pred_A": -2.153334673399951e-42,
+   "z_vs_B": 1.800045710095303,
+   "power_B": 0.17785138901257008,
+   "delta_f": -0.03247217939468836,
+   "sigma_f": 0.012662074582706592,
+   "mean_snr": 7.553594669590416,
+   "mean_bias_rel": 0.23995248111572381,
+   "mean_anchor_snr": 11.05286174607327,
+   "chi2_dof": 0.8661447617142709,
+   "n_on_edge_excluded": 84,
+   "max_weight_share": 0.30552611111124434
+  },
+  "V2_verdict": "TGL_RINGDOWN_DEPHASING_V2__RESULT_READ_BY_HASH__INCONCLUSIVE_SYSTEMATICS__DELTA_TAU_0P1766__BRANCH_B_PRED_M0P0194__POWER_0P2_OF_5_SIGMA__BRANCH_A_INVISIBLE__GATE_UNTOUCHED",
+  "V2_reasons": [
+   "vies relativo de tau 0.240 > 0.2"
+  ],
+  "clock_tau_star_bound_95_s": 2.585701911772075e-31,
+  "clock_tau_star_bound_95_in_tP": 4796219297849.137,
+  "clock_root_law": {
+   "kbar_zero_Gamma_per_s": 16223721861861.957,
+   "kbar_rest_mass_Gamma_per_s": 88.84332899537758,
+   "kbar_code_1_Gamma_per_s": 5.897091177105283e-16,
+   "kbar_quarter_EP_Gamma_per_s": 2.358836470842113e-15,
+   "Gamma_canonical_per_s": 2.3588364708421127e-15,
+   "Gamma_ub_Sr_95_per_s": 0.011313497001923294,
+   "units_note": "as leituras usam as unidades do proprio modulo P6 (k = E tau*/hbar, taxa em 1/tau*): tau* cancela",
+   "kbar_zero_excluded": true,
+   "kbar_rest_mass_excluded": true,
+   "code_over_canonical": 0.25000000000000006,
+   "quarter_EP_over_canonical": 1.0000000000000002
+  },
+  "clock_verdict": "TGL_CLOCKS_V1__P1_NOT_FALSIFIED_UNDERPOWERED__P2_EXCLUDED_IN_READING__P3_NO_LOCAL_OBSERVABLE__PARTITION_MODULAR_LAB_BRIDGE_OPEN__CLOCK_5SIGMA_DEFICIT_GE_12P5_ORDERS__TH229_TODAY_BOUND_18P3__BEST_MATTER_9P3_NOMINAL_MOSSBAUER_ABSTRACT_ONLY__TAU_STAR_LE_4P8e12_TP_CLOCK_95CL__1P9e09_TP_NOMINAL__GATE_UNTOUCHED"
+ },
+ "catalog_GW150914": {
+  "version": "4",
+  "catalog.shortName": "GWTC-2.1-confident",
+  "redshift": "0.1",
+  "luminosity_distance": "470.0",
+  "luminosity_distance_lower": "-160.0",
+  "luminosity_distance_upper": "140.0",
+  "final_mass_source": "61.5",
+  "mass_1_source": "34.6",
+  "mass_2_source": "30.0",
+  "chi_eff": "-0.04"
+ },
+ "catalog_has_GW250114": false,
+ "catalog_n_events": 89,
+ "eventos": {
+  "M60_Schw": {
+   "status": "[INPUT do texto colado: M ~ 60 Msun; a=0 para S_BH de Schwarzschild]",
+   "M_src": 60.0,
+   "M_det": 60.0,
+   "a": 0.0,
+   "z": 0.0,
+   "M_over_MPl": 5.481653634122373e+39,
+   "M_over_MPl_sq": 3.004852656448702e+79,
+   "S_BH_Schw_4pi_MMPl2": 3.7760092122476067e+80,
+   "S_BH_Kerr": 3.7760092122476067e+80,
+   "GM_over_c3_s_src": 0.00029552945685847607,
+   "GM_over_c3_in_tP": 5.481653634122373e+39,
+   "M_over_MPl2_natural": {
+    "valor_em_unidades_de_Planck": 5.481653634122373e+39,
+    "dimensao": "1/massa = tempo (hbar=c=1); em SI: M/M_Pl^2 [kg^-1] x hbar/c^2 = GM/c^3 [s]",
+    "em_s": 0.00029552945685847607,
+    "em_eV^-1": 448988283694.33344,
+    "em_GeV^-1": 4.489882836943334e+20
+   },
+   "T_H_K_src": 1.0283767351608293e-09,
+   "K_BH_total_Mc2_over_kTH": 7.552018424495213e+80,
+   "QNM": {
+    "f220_Hz": 198.3449168277516,
+    "omega220_rad_s": 1246.237867165886,
+    "tau220_ms": 3.4001534631879085,
+    "Q220": 2.1187,
+    "M_omega_geom": 0.36829999999999985,
+    "omega_tau": 4.2374
+   },
+   "lei_da_casa": {
+    "A_tP": {
+     "tau_star_s": 5.391246448313605e-44,
+     "tau_star_in_tP": 1.0,
+     "Gamma_per_s": 5.037019664776399e-40,
+     "Gamma_over_omega": 4.041780303331069e-43,
+     "Gamma_tau220": 1.7126639857335073e-42,
+     "delta_lin_programa": -1.7126639857335073e-42,
+     "delta_exato": -1.7126639857335073e-42,
+     "tau_deph_s": 1.9853009647608582e+39
+    },
+    "tP_over_beta": {
+     "tau_star_s": 4.48101723730023e-42,
+     "tau_star_in_tP": 83.11653492861383,
+     "Gamma_per_s": 4.1865962090350234e-38,
+     "Gamma_over_omega": 3.359387737556002e-41,
+     "Gamma_tau220": 1.4235069599119804e-40,
+     "delta_lin_programa": -1.4235069599119804e-40,
+     "delta_exato": -1.4235069599119804e-40,
+     "tau_deph_s": 2.388575229304218e+37
+    },
+    "B_GMf_c3_det": {
+     "tau_star_s": 0.000295529456858476,
+     "tau_star_in_tP": 5.481653634122372e+39,
+     "Gamma_per_s": 2.7611197150567404,
+     "Gamma_over_omega": 0.002215563968807898,
+     "Gamma_tau220": 0.009388230761426588,
+     "delta_lin_programa": -0.009388230761426588,
+     "delta_exato": -0.009300911656503688,
+     "tau_deph_s": 0.3621719096592848
+    },
+    "clock95_bound": {
+     "tau_star_s": 2.585701911772075e-31,
+     "tau_star_in_tP": 4796111505124.922,
+     "Gamma_per_s": 2.4158107965774568e-27,
+     "Gamma_over_omega": 1.938482901399344e-30,
+     "Gamma_tau220": 8.21412744638958e-30,
+     "delta_lin_programa": -8.21412744638958e-30,
+     "delta_exato": -8.21412744638958e-30,
+     "tau_deph_s": 4.139397014934806e+26
+    }
+   },
+   "delta_B_forma_fechada": -0.009388230761426586,
+   "K_mode_omega_over_TH": 9.256388594536965,
+   "K_mode_superrad_(omega-2OmegaH)_over_TH": 9.256388594536965,
+   "Omega_H_det_rad_s": 0.0,
+   "T_H_K_det": 1.0283767351608293e-09,
+   "lei_raiz_do_programa": {
+    "E_lo=0 (vacuo; linear)": {
+     "Gamma_per_s": 7.49693107536449,
+     "Gamma_over_omega": 0.006015650200401572,
+     "Gamma_tau220": 0.025490716159181623,
+     "delta_lin": -0.025490716159181623
+    },
+    "E_lo=E_P/4 (canonica, tau*=t_P)": {
+     "Gamma_per_s": 5.037019664776401e-40,
+     "Gamma_over_omega": 4.041780303331071e-43,
+     "Gamma_tau220": 1.712663985733508e-42,
+     "delta_lin": -1.712663985733508e-42
+    },
+    "E_lo=E_P (k1=1 do modulo P6)": {
+     "Gamma_per_s": 1.2592549161941002e-40,
+     "Gamma_over_omega": 1.0104450758327677e-43,
+     "Gamma_tau220": 4.28165996433377e-43,
+     "delta_lin": -4.28165996433377e-43
+    },
+    "E_lo=M_f c^2 (fundo = massa do BH)": {
+     "Gamma_per_s": 2.29721722721671e-80,
+     "Gamma_over_omega": 1.8433216384612783e-83,
+     "Gamma_tau220": 7.81089111081582e-83,
+     "delta_lin": -7.81089111081582e-83
+    }
+   },
+   "propagacao": {}
+  },
+  "GW150914_programa": {
+   "status": "[REAL lido] Mf_det e a_f do RINGDOWN_DEPHASING_V2_RESULT.json (EOB SEOBNRv4 de m1,m2,chi_eff do catalogo); z e D_L=470 do catalogo GWTC-2.1 do programa; D_L=410 = valor GWTC-1 [KNOWN, a conferir]",
+   "M_src": 61.57957189054282,
+   "M_det": 67.73752907959711,
+   "a": 0.6712194217379245,
+   "z": 0.1,
+   "M_over_MPl": 5.6259647340249e+39,
+   "M_over_MPl_sq": 3.1651479188491864e+79,
+   "S_BH_Schw_4pi_MMPl2": 3.977442179752651e+80,
+   "S_BH_Kerr": 3.4628779365857507e+80,
+   "GM_over_c3_s_src": 0.00030330962390649334,
+   "GM_over_c3_in_tP": 5.6259647340249e+39,
+   "M_over_MPl2_natural": {
+    "valor_em_unidades_de_Planck": 5.6259647340249e+39,
+    "dimensao": "1/massa = tempo (hbar=c=1); em SI: M/M_Pl^2 [kg^-1] x hbar/c^2 = GM/c^3 [s]",
+    "em_s": 0.0003033096239064933,
+    "em_eV^-1": 460808438229.444,
+    "em_GeV^-1": 4.60808438229444e+20
+   },
+   "T_H_K_src": 8.53106663876386e-10,
+   "K_BH_total_Mc2_over_kTH": 9.343236982588121e+80,
+   "QNM": {
+    "f220_Hz": 249.5595409816778,
+    "omega220_rad_s": 1568.0288411625597,
+    "tau220_ms": 4.0451610771845,
+    "Q220": 3.171464618086751,
+    "M_omega_geom": 0.5231580618963056,
+    "omega_tau": 6.342929236173503
+   },
+   "lei_da_casa": {
+    "A_tP": {
+     "tau_star_s": 5.391246448313605e-44,
+     "tau_star_in_tP": 1.0,
+     "Gamma_per_s": 7.974066495714945e-40,
+     "Gamma_over_omega": 5.085408052700647e-43,
+     "Gamma_tau220": 3.2256383415347095e-42,
+     "delta_lin_programa": -3.2256383415347095e-42,
+     "delta_exato": -3.2256383415347095e-42,
+     "tau_deph_s": 1.2540652884414419e+39
+    },
+    "tP_over_beta": {
+     "tau_star_s": 4.48101723730023e-42,
+     "tau_star_in_tP": 83.11653492861383,
+     "Gamma_per_s": 6.627767764141805e-38,
+     "Gamma_over_omega": 4.226814960385474e-41,
+     "Gamma_tau220": 2.6810388188124565e-40,
+     "delta_lin_programa": -2.6810388188124565e-40,
+     "delta_exato": -2.6810388188124565e-40,
+     "tau_deph_s": 1.508803620745883e+37
+    },
+    "B_GMf_c3_det": {
+     "tau_star_s": 0.0003336405862971427,
+     "tau_star_in_tP": 6.18856120742739e+39,
+     "Gamma_per_s": 4.934799858082798,
+     "Gamma_over_omega": 0.0031471358998882088,
+     "Gamma_tau220": 0.019962060309612124,
+     "delta_lin_programa": -0.019962060309612124,
+     "delta_exato": -0.01957137533483607,
+     "tau_deph_s": 0.20264246347540965
+    },
+    "clock95_bound": {
+     "tau_star_s": 2.585701911772075e-31,
+     "tau_star_in_tP": 4796111505124.922,
+     "Gamma_per_s": 3.824451206272962e-27,
+     "Gamma_over_omega": 2.4390184069812497e-30,
+     "Gamma_tau220": 1.5470521161206693e-29,
+     "delta_lin_programa": -1.5470521161206693e-29,
+     "delta_exato": -1.5470521161206693e-29,
+     "tau_deph_s": 2.614754238097677e+26
+    }
+   },
+   "delta_B_forma_fechada": -0.019962060309612124,
+   "K_mode_omega_over_TH": 15.443163722426943,
+   "K_mode_superrad_(omega-2OmegaH)_over_TH": 4.0641515022552595,
+   "Omega_H_det_rad_s": 577.6866601258303,
+   "T_H_K_det": 7.755515126148963e-10,
+   "lei_raiz_do_programa": {
+    "E_lo=0 (vacuo; linear)": {
+     "Gamma_per_s": 9.432713012574995,
+     "Gamma_over_omega": 0.00601565020040157,
+     "Gamma_tau220": 0.03815684353072011,
+     "delta_lin": -0.03815684353072011
+    },
+    "E_lo=E_P/4 (canonica, tau*=t_P)": {
+     "Gamma_per_s": 7.974066495714947e-40,
+     "Gamma_over_omega": 5.085408052700648e-43,
+     "Gamma_tau220": 3.22563834153471e-42,
+     "delta_lin": -3.22563834153471e-42
+    },
+    "E_lo=E_P (k1=1 do modulo P6)": {
+     "Gamma_per_s": 1.9935166239287366e-40,
+     "Gamma_over_omega": 1.271352013175162e-43,
+     "Gamma_tau220": 8.064095853836775e-43,
+     "delta_lin": -8.064095853836775e-43
+    },
+    "E_lo=M_f c^2 (fundo = massa do BH)": {
+     "Gamma_per_s": 3.22129257045427e-80,
+     "Gamma_over_omega": 2.05435798493729e-83,
+     "Gamma_tau220": 1.303064732422522e-82,
+     "delta_lin": -1.303064732422522e-82
+    }
+   },
+   "propagacao": {
+    "410": {
+     "D_L_Mpc": 410.0,
+     "D_over_c_s": 4.2200121272278984e+16,
+     "A_tP": {
+      "Gamma_D_over_c": 3.365065731523874e-23,
+      "exp_minus": 1.0,
+      "log10_exp": -1.4614294784425476e-23
+     },
+     "tP_over_beta": {
+      "Gamma_D_over_c": 2.796926034112855e-21,
+      "exp_minus": 1.0,
+      "log10_exp": -1.2146895429067591e-21
+     },
+     "B_GMf_c3_det": {
+      "Gamma_D_over_c": 2.0824915246551917e+17,
+      "exp_minus": 0.0,
+      "log10_exp": -9.044145777680394e+16
+     },
+     "clock95_bound": {
+      "Gamma_D_over_c": 1.6139230470463263e-10,
+      "exp_minus": 0.9999999998386077,
+      "log10_exp": -7.009178735487017e-11
+     },
+     "tau_star_para_GammaD_c_igual_1_s": 1.602122180796799e-21,
+     "tau_star_para_GammaD_c_igual_1_in_tP": 2.9717101530351055e+22
+    },
+    "470": {
+     "D_L_Mpc": 470.0,
+     "D_over_c_s": 4.837574877553933e+16,
+     "A_tP": {
+      "Gamma_D_over_c": 3.857514375161514e-23,
+      "exp_minus": 1.0,
+      "log10_exp": -1.6752972069951158e-23
+     },
+     "tP_over_beta": {
+      "Gamma_D_over_c": 3.2062322830074196e-21,
+      "exp_minus": 1.0,
+      "log10_exp": -1.3924489882101875e-21
+     },
+     "B_GMf_c3_det": {
+      "Gamma_D_over_c": 2.3872463819218054e+17,
+      "exp_minus": 0.0,
+      "log10_exp": -1.0367679306121429e+17
+     },
+     "clock95_bound": {
+      "Gamma_D_over_c": 1.8501069075896914e-10,
+      "exp_minus": 0.9999999998149893,
+      "log10_exp": -8.034912208972924e-11
+     },
+     "tau_star_para_GammaD_c_igual_1_s": 1.397595944950399e-21,
+     "tau_star_para_GammaD_c_igual_1_in_tP": 2.5923428994561555e+22
+    }
+   },
+   "leitura_coerente": {
+    "E_rad_Msun": 3.0,
+    "E_rad_status": "[KNOWN, Abbott+2016 PRL 116 061102: E_rad = 3,0 +- 0,5 Msun c^2]",
+    "N_quanta_a_omega220": 3.242189263959678e+78,
+    "Gamma_coerente_per_s": 7.273413305501209e-79,
+    "Gamma_coerente_tau220": 2.9422128401689346e-81,
+    "nota": "leitura modular (K = hbar w n/(k_B T_H), tempo modular -> fisico por k_B T_H/hbar): Gamma_<a> = (beta w/2)(sqrt(N+1)-sqrt(N))^2 ~ beta w/(8N) [DERIVED aqui; nao esta no programa]"
+   }
+  },
+  "GW150914_texto": {
+   "status": "[INPUT da ordem: M_f~62, a~0,67 (fonte)]",
+   "M_src": 62.0,
+   "M_det": 68.2,
+   "a": 0.67,
+   "z": 0.1,
+   "M_over_MPl": 5.664375421926452e+39,
+   "M_over_MPl_sq": 3.208514892052447e+79,
+   "S_BH_Schw_4pi_MMPl2": 4.0319387255221666e+80,
+   "S_BH_Kerr": 3.512546592674054e+80,
+   "GM_over_c3_s_src": 0.00030538043875375854,
+   "GM_over_c3_in_tP": 5.664375421926451e+39,
+   "M_over_MPl2_natural": {
+    "valor_em_unidades_de_Planck": 5.664375421926452e+39,
+    "dimensao": "1/massa = tempo (hbar=c=1); em SI: M/M_Pl^2 [kg^-1] x hbar/c^2 = GM/c^3 [s]",
+    "em_s": 0.0003053804387537586,
+    "em_eV^-1": 463954559817.4778,
+    "em_GeV^-1": 4.639545598174778e+20
+   },
+   "T_H_K_src": 8.480448852603811e-10,
+   "K_BH_total_Mc2_over_kTH": 9.463175270297963e+80,
+   "QNM": {
+    "f220_Hz": 247.64014181053955,
+    "omega220_rad_s": 1555.9689004918512,
+    "tau220_ms": 4.07065105736015,
+    "Q220": 3.166903225003332,
+    "M_omega_geom": 0.5226787120713454,
+    "omega_tau": 6.333806450006664
+   },
+   "lei_da_casa": {
+    "A_tP": {
+     "tau_star_s": 5.391246448313605e-44,
+     "tau_star_in_tP": 1.0,
+     "Gamma_per_s": 7.851878752812317e-40,
+     "Gamma_over_omega": 5.046295430667214e-43,
+     "Gamma_tau220": 3.1962258547399154e-42,
+     "delta_lin_programa": -3.1962258547399154e-42,
+     "delta_exato": -3.1962258547399154e-42,
+     "tau_deph_s": 1.2735805422897402e+39
+    },
+    "tP_over_beta": {
+     "tau_star_s": 4.48101723730023e-42,
+     "tau_star_in_tP": 83.11653492861383,
+     "Gamma_per_s": 6.526209546133658e-38,
+     "Gamma_over_omega": 4.1943059042315587e-41,
+     "Gamma_tau220": 2.656592178952288e-40,
+     "delta_lin_programa": -2.656592178952288e-40,
+     "delta_exato": -2.656592178952288e-40,
+     "tau_deph_s": 1.5322830088905634e+37
+    },
+    "B_GMf_c3_det": {
+     "tau_star_s": 0.00033591848262913446,
+     "tau_star_in_tP": 6.230812964119097e+39,
+     "Gamma_per_s": 4.892358792571427,
+     "Gamma_over_omega": 0.0031442522990176233,
+     "Gamma_tau220": 0.019915085491966106,
+     "delta_lin_programa": -0.019915085491966106,
+     "delta_exato": -0.01952621916790246,
+     "tau_deph_s": 0.2044003807567023
+    },
+    "clock95_bound": {
+     "tau_star_s": 2.585701911772075e-31,
+     "tau_star_in_tP": 4796111505124.922,
+     "Gamma_per_s": 3.765848602320908e-27,
+     "Gamma_over_omega": 2.420259557328235e-30,
+     "Gamma_tau220": 1.532945559489585e-29,
+     "delta_lin_programa": -1.532945559489585e-29,
+     "delta_exato": -1.532945559489585e-29,
+     "tau_deph_s": 2.6554439798341757e+26
+    }
+   },
+   "delta_B_forma_fechada": -0.01991508549196611,
+   "K_mode_omega_over_TH": 15.41585571142767,
+   "K_mode_superrad_(omega-2OmegaH)_over_TH": 4.074382763885866,
+   "Omega_H_det_rad_s": 572.3645680941055,
+   "T_H_K_det": 7.709498956912555e-10,
+   "lei_raiz_do_programa": {
+    "E_lo=0 (vacuo; linear)": {
+     "Gamma_per_s": 9.360164628062417,
+     "Gamma_over_omega": 0.006015650200401571,
+     "Gamma_tau220": 0.03810196404028736,
+     "delta_lin": -0.03810196404028736
+    },
+    "E_lo=E_P/4 (canonica, tau*=t_P)": {
+     "Gamma_per_s": 7.851878752812319e-40,
+     "Gamma_over_omega": 5.0462954306672145e-43,
+     "Gamma_tau220": 3.196225854739916e-42,
+     "delta_lin": -3.196225854739916e-42
+    },
+    "E_lo=E_P (k1=1 do modulo P6)": {
+     "Gamma_per_s": 1.9629696882030796e-40,
+     "Gamma_over_omega": 1.2615738576668036e-43,
+     "Gamma_tau220": 7.99056463684979e-43,
+     "delta_lin": -7.99056463684979e-43
+    },
+    "E_lo=M_f c^2 (fundo = massa do BH)": {
+     "Gamma_per_s": 3.1504230659900748e-80,
+     "Gamma_over_omega": 2.024733955154378e-83,
+     "Gamma_tau220": 1.2824272984704304e-82,
+     "delta_lin": -1.2824272984704304e-82
+    }
+   },
+   "propagacao": {
+    "410": {
+     "D_L_Mpc": 410.0,
+     "D_over_c_s": 4.2200121272278984e+16,
+     "A_tP": {
+      "Gamma_D_over_c": 3.3135023558391046e-23,
+      "exp_minus": 1.0,
+      "log10_exp": -1.4390357889143482e-23
+     },
+     "tP_over_beta": {
+      "Gamma_D_over_c": 2.7540683429514517e-21,
+      "exp_minus": 1.0,
+      "log10_exp": -1.1960766841282478e-21
+     },
+     "B_GMf_c3_det": {
+      "Gamma_D_over_c": 2.064581343540146e+17,
+      "exp_minus": 0.0,
+      "log10_exp": -8.966362849398872e+16
+     },
+     "clock95_bound": {
+      "Gamma_D_over_c": 1.5891926771098464e-10,
+      "exp_minus": 0.9999999998410807,
+      "log10_exp": -6.901776103498624e-11
+     },
+     "tau_star_para_GammaD_c_igual_1_s": 1.6270537544097617e-21,
+     "tau_star_para_GammaD_c_igual_1_in_tP": 3.01795469750545e+22
+    }
+   }
+  },
+  "GW250114_lit": {
+   "status": "[KNOWN via fonte secundaria (Wikipedia 'GW250114', cita o suplemento Abac+ PRL 10.1103/kw5g-d732): M_f=62,7(+1,0/-1,1), chi_f=0,68(+-0,01), z=0,09; D_L~440 Mpc; a conferir na primaria]. O programa NAO tem GW250114 no catalogo nem no um.py",
+   "M_src": 62.7,
+   "M_det": 68.343,
+   "a": 0.68,
+   "z": 0.09,
+   "M_over_MPl": 5.72832804765788e+39,
+   "M_over_MPl_sq": 3.281374222158393e+79,
+   "S_BH_Schw_4pi_MMPl2": 4.123496460004692e+80,
+   "S_BH_Kerr": 3.573447002470662e+80,
+   "GM_over_c3_s_src": 0.0003088282824171075,
+   "GM_over_c3_in_tP": 5.72832804765788e+39,
+   "M_over_MPl2_natural": {
+    "valor_em_unidades_de_Planck": 5.72832804765788e+39,
+    "dimensao": "1/massa = tempo (hbar=c=1); em SI: M/M_Pl^2 [kg^-1] x hbar/c^2 = GM/c^3 [s]",
+    "em_s": 0.0003088282824171075,
+    "em_eV^-1": 469192756460.57837,
+    "em_GeV^-1": 4.691927564605784e+20
+   },
+   "T_H_K_src": 8.326142955683971e-10,
+   "K_BH_total_Mc2_over_kTH": 9.747375821865987e+80,
+   "QNM": {
+    "f220_Hz": 249.00249972319503,
+    "omega220_rad_s": 1564.528847711768,
+    "tau220_ms": 4.0971759462860415,
+    "Q220": 3.2050749810576367,
+    "M_omega_geom": 0.5266561249456173,
+    "omega_tau": 6.410149962115273
+   },
+   "lei_da_casa": {
+    "A_tP": {
+     "tau_star_s": 5.391246448313605e-44,
+     "tau_star_in_tP": 1.0,
+     "Gamma_per_s": 7.938508434827803e-40,
+     "Gamma_over_omega": 5.074056925468918e-43,
+     "Gamma_tau220": 3.2525465808565326e-42,
+     "delta_lin_programa": -3.2525465808565326e-42,
+     "delta_exato": -3.2525465808565326e-42,
+     "tau_deph_s": 1.2596824809214822e+39
+    },
+    "tP_over_beta": {
+     "tau_star_s": 4.48101723730023e-42,
+     "tau_star_in_tP": 83.11653492861383,
+     "Gamma_per_s": 6.598213136044607e-38,
+     "Gamma_over_omega": 4.217380296755123e-41,
+     "Gamma_tau220": 2.7034040149470554e-40,
+     "delta_lin_programa": -2.7034040149470554e-40,
+     "delta_exato": -2.7034040149470554e-40,
+     "tau_deph_s": 1.5155618337595325e+37
+    },
+    "B_GMf_c3_det": {
+     "tau_star_s": 0.00033662282783464715,
+     "tau_star_in_tP": 6.243877571947089e+39,
+     "Gamma_per_s": 4.956707477093412,
+     "Gamma_over_omega": 0.0031681790235718182,
+     "Gamma_tau220": 0.020308502647923297,
+     "delta_lin_programa": -0.020308502647923297,
+     "delta_exato": -0.019904276594008872,
+     "tau_deph_s": 0.20174682581559059
+    },
+    "clock95_bound": {
+     "tau_star_s": 2.585701911772075e-31,
+     "tau_star_in_tP": 4796111505124.922,
+     "Gamma_per_s": 3.807397163780887e-27,
+     "Gamma_over_omega": 2.433574279790027e-30,
+     "Gamma_tau220": 1.5599576077400747e-29,
+     "delta_lin_programa": -1.5599576077400747e-29,
+     "delta_exato": -1.5599576077400747e-29,
+     "tau_deph_s": 2.6264662103360994e+26
+    }
+   },
+   "delta_B_forma_fechada": -0.02030850264792329,
+   "K_mode_omega_over_TH": 15.644406371169291,
+   "K_mode_superrad_(omega-2OmegaH)_over_TH": 3.9900271167659063,
+   "Omega_H_det_rad_s": 582.7518191834354,
+   "T_H_K_det": 7.638663262095385e-10,
+   "lei_raiz_do_programa": {
+    "E_lo=0 (vacuo; linear)": {
+     "Gamma_per_s": 9.41165827627134,
+     "Gamma_over_omega": 0.006015650200401573,
+     "Gamma_tau220": 0.03856121990420288,
+     "delta_lin": -0.03856121990420288
+    },
+    "E_lo=E_P/4 (canonica, tau*=t_P)": {
+     "Gamma_per_s": 7.938508434827806e-40,
+     "Gamma_over_omega": 5.07405692546892e-43,
+     "Gamma_tau220": 3.252546580856534e-42,
+     "delta_lin": -3.252546580856534e-42
+    },
+    "E_lo=E_P (k1=1 do modulo P6)": {
+     "Gamma_per_s": 1.9846271087069516e-40,
+     "Gamma_over_omega": 1.26851423136723e-43,
+     "Gamma_tau220": 8.131366452141335e-43,
+     "delta_lin": -8.131366452141335e-43
+    },
+    "E_lo=M_f c^2 (fundo = massa do BH)": {
+     "Gamma_per_s": 3.178517012607064e-80,
+     "Gamma_over_omega": 2.0316129148119356e-83,
+     "Gamma_tau220": 1.302294344891463e-82,
+     "delta_lin": -1.302294344891463e-82
+    }
+   },
+   "propagacao": {
+    "440": {
+     "D_L_Mpc": 440.0,
+     "D_over_c_s": 4.528793502390916e+16,
+     "A_tP": {
+      "Gamma_D_over_c": 3.5951865418323635e-23,
+      "exp_minus": 1.0,
+      "log10_exp": -1.56136967653063e-23
+     },
+     "tP_over_beta": {
+      "Gamma_D_over_c": 2.9881944777909205e-21,
+      "exp_minus": 1.0,
+      "log10_exp": -1.2977563725583659e-21
+     },
+     "B_GMf_c3_det": {
+      "Gamma_D_over_c": 2.2447904615513114e+17,
+      "exp_minus": 0.0,
+      "log10_exp": -9.749001104807882e+16
+     },
+     "clock95_bound": {
+      "Gamma_D_over_c": 1.7242915536352484e-10,
+      "exp_minus": 0.9999999998275708,
+      "log10_exp": -7.488503069361734e-11
+     },
+     "tau_star_para_GammaD_c_igual_1_s": 1.4995734951671912e-21,
+     "tau_star_para_GammaD_c_igual_1_in_tP": 2.7814968385210094e+22
+    }
+   },
+   "leitura_coerente": {
+    "E_rad_Msun": 3.1000000000000085,
+    "E_rad_status": "[DERIVED de m1=33,6, m2=32,2, M_f=62,7 (fonte secundaria, a conferir)]",
+    "N_quanta_a_omega220": 3.3577570810276885e+78,
+    "Gamma_coerente_per_s": 7.007399619116258e-79,
+    "Gamma_coerente_tau220": 2.87105491654571e-81,
+    "nota": "leitura modular (K = hbar w n/(k_B T_H), tempo modular -> fisico por k_B T_H/hbar): Gamma_<a> = (beta w/2)(sqrt(N+1)-sqrt(N))^2 ~ beta w/(8N) [DERIVED aqui; nao esta no programa]"
+   }
+  }
+ },
+ "reproducao_GW150914_constantes_do_programa": {
+  "f_gr": 249.50674752029795,
+  "tau_gr_ms": 4.0460169981454595,
+  "delta_B": -0.019962060309612117,
+  "delta_B_json": -0.019962060309612117,
+  "diff": 0.0
+ },
+ "delta_B_vs_spin": {
+  "a=0.00": -0.009388230761426586,
+  "a=0.30": -0.012114102110548537,
+  "a=0.50": -0.015210908146168201,
+  "a=0.60": -0.017602506185575535,
+  "a=0.67": -0.01991508549196611,
+  "a=0.68": -0.02030850264792329,
+  "a=0.70": -0.021155891408761375,
+  "a=0.80": -0.027241035860280653,
+  "a=0.90": -0.04147273802800135
+ },
+ "delta_rootvacuo_vs_spin_(-beta*Q)": {
+  "a=0.00": -0.02549071615918162,
+  "a=0.67": -0.03810196404028735,
+  "a=0.68": -0.038561219904202866,
+  "a=0.90": -0.062274071743090485
+ },
+ "candidatos_10e76": {
+  "M/M_Pl (60 Msun)": {
+   "valor": 5.481653634122373e+39,
+   "log10": 39.738911590572016,
+   "distancia_de_76_em_decadas": -36.261088409427984
+  },
+  "(M/M_Pl)^2 (60 Msun)": {
+   "valor": 3.004852656448702e+79,
+   "log10": 79.47782318114403,
+   "distancia_de_76_em_decadas": 3.477823181144032
+  },
+  "S_BH=4pi(M/M_Pl)^2 (60 Msun)": {
+   "valor": 3.7760092122476067e+80,
+   "log10": 80.57703304516613,
+   "distancia_de_76_em_decadas": 4.577033045166132
+  },
+  "K_BH=Mc^2/kT_H=8pi(M/M_Pl)^2 (60 Msun, Schw)": {
+   "valor": 7.552018424495213e+80,
+   "log10": 80.87806304083011,
+   "distancia_de_76_em_decadas": 4.8780630408301136
+  },
+  "S_BH (1 Msun)": {
+   "valor": 1.0488914478465575e+77,
+   "log10": 77.02073054439884,
+   "distancia_de_76_em_decadas": 1.0207305443988446
+  },
+  "M/M_Pl^2 em GeV^-1": {
+   "valor": 4.489882836943334e+20,
+   "log10": 20.65223500827885,
+   "distancia_de_76_em_decadas": -55.34776499172115
+  },
+  "M/M_Pl^2 em eV^-1": {
+   "valor": 448988283694.33344,
+   "log10": 11.65223500827885,
+   "distancia_de_76_em_decadas": -64.34776499172115
+  },
+  "M/M_Pl^2 em kg^-1 (SI cru)": {
+   "valor": 2.518639559453453e+47,
+   "log10": 47.40116602039972,
+   "distancia_de_76_em_decadas": -28.59883397960028
+  },
+  "GM/c^3 em s": {
+   "valor": 0.00029552945685847607,
+   "log10": -3.529399224381706,
+   "distancia_de_76_em_decadas": -79.5293992243817
+  },
+  "numero de nucleons": {
+   "valor": 7.132788969875639e+58,
+   "log10": 58.85325937520892,
+   "distancia_de_76_em_decadas": -17.14674062479108
+  },
+  "Mc^2/(hbar w220) (a=0.67)": {
+   "valor": 5.7489478470256527e+79,
+   "log10": 79.75958836885614,
+   "distancia_de_76_em_decadas": 3.759588368856143
+  },
+  "beta*Mc^2/hbar em s^-1 (jump rate da leitura modular)": {
+   "valor": 1.223305634375336e+81,
+   "log10": 81.08753497603858,
+   "distancia_de_76_em_decadas": 5.087534976038583
+  }
+ },
+ "dimensoes": {
+  "beta_K": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "Gamma": [
+   0.0,
+   0.0,
+   -1.0
+  ],
+  "beta_K_e_taxa": false,
+  "M_over_MPl2_SI_kg": [
+   -1.0,
+   0.0,
+   0.0
+  ],
+  "M_over_MPl2_x_hbar_over_c2": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "beta_M_over_MPl2_e_taxa": false,
+  "nota": "beta*<K> tem dimensao [M^0 L^0 T^0]: e numero puro, nao taxa. M/M_Pl^2 (hbar=c=1) tem dimensao de TEMPO ([T^1] apos x hbar/c^2 = GM/c^3), logo beta*M/M_Pl^2 seria um tempo, nunca uma taxa. Para virar taxa, beta*<K> precisa de uma escala: Gamma = beta*<K>/t_unit."
+ },
+ "gksl_finito": [
+  {
+   "N": 4.0,
+   "nmax": 68,
+   "taxa_de_decaimento_de_<a>": 0.0005121214677822673,
+   "previsto_raiz_(beta c/2)(sqrt(N+1)-sqrt(N))^2": 0.0003352406957815576,
+   "previsto_assintotico_beta_c/(8N)": 0.0003759781375250982,
+   "taxa_de_saltos_Tr(LdL rho)": 0.048125201603212577,
+   "beta_c_N": 0.04812520160321257,
+   "razao_saltos_sobre_decoerencia": 93.97224024139798
+  },
+  {
+   "N": 16.0,
+   "nmax": 104,
+   "taxa_de_decaimento_de_<a>": 9.729695846992513e-05,
+   "previsto_raiz_(beta c/2)(sqrt(N+1)-sqrt(N))^2": 9.116714906204738e-05,
+   "previsto_assintotico_beta_c/(8N)": 9.399453438127455e-05,
+   "taxa_de_saltos_Tr(LdL rho)": 0.19250080641285036,
+   "beta_c_N": 0.19250080641285028,
+   "razao_saltos_sobre_decoerencia": 1978.487400223853
+  },
+  {
+   "N": 64.0,
+   "nmax": 200,
+   "taxa_de_decaimento_de_<a>": 2.3687083222106075e-05,
+   "previsto_raiz_(beta c/2)(sqrt(N+1)-sqrt(N))^2": 2.3316823942038094e-05,
+   "previsto_assintotico_beta_c/(8N)": 2.3498633595318637e-05,
+   "taxa_de_saltos_Tr(LdL rho)": 0.7700032256514009,
+   "beta_c_N": 0.7700032256514011,
+   "razao_saltos_sobre_decoerencia": 32507.30444231276
+  },
+  {
+   "N": 256.0,
+   "nmax": 488,
+   "taxa_de_decaimento_de_<a>": 5.88620593966222e-06,
+   "previsto_raiz_(beta c/2)(sqrt(N+1)-sqrt(N))^2": 5.863212392825935e-06,
+   "previsto_assintotico_beta_c/(8N)": 5.874658398829659e-06,
+   "taxa_de_saltos_Tr(LdL rho)": 3.0800129026056036,
+   "beta_c_N": 3.0800129026056045,
+   "razao_saltos_sobre_decoerencia": 523259.4534030779
+  }
+ ],
+ "sensibilidade": {
+  "0.30 (cenario)": {
+   "sigma": 0.3,
+   "ramoB_a068": {
+    "delta": -0.020308502647923297,
+    "z": 0.067695008826411,
+    "lnB_meio_z2": 0.0022913071100039316,
+    "N_eventos_para_5sigma": 5455.401393128202
+   },
+   "raiz_vacuo_a068": {
+    "delta": -0.03856121990420288,
+    "z": 0.12853739968067626,
+    "lnB_meio_z2": 0.008260931558334957,
+    "N_eventos_para_5sigma": 1513.1465394345248
+   }
+  },
+  "0.20 (cenario)": {
+   "sigma": 0.2,
+   "ramoB_a068": {
+    "delta": -0.020308502647923297,
+    "z": 0.10154251323961648,
+    "lnB_meio_z2": 0.0051554409975088445,
+    "N_eventos_para_5sigma": 2424.622841390312
+   },
+   "raiz_vacuo_a068": {
+    "delta": -0.03856121990420288,
+    "z": 0.19280609952101438,
+    "lnB_meio_z2": 0.01858709600625365,
+    "N_eventos_para_5sigma": 672.5095730820111
+   }
+  },
+  "0.10 (cenario)": {
+   "sigma": 0.1,
+   "ramoB_a068": {
+    "delta": -0.020308502647923297,
+    "z": 0.20308502647923296,
+    "lnB_meio_z2": 0.020621763990035378,
+    "N_eventos_para_5sigma": 606.155710347578
+   },
+   "raiz_vacuo_a068": {
+    "delta": -0.03856121990420288,
+    "z": 0.38561219904202876,
+    "lnB_meio_z2": 0.0743483840250146,
+    "N_eventos_para_5sigma": 168.12739327050278
+   }
+  },
+  "V2 do programa, 15 series empilhadas (1 sigma, REAL lido)": {
+   "sigma": 0.10889389325116323,
+   "ramoB_a068": {
+    "delta": -0.020308502647923297,
+    "z": 0.1864980858116794,
+    "lnB_meio_z2": 0.017390768005710266,
+    "N_eventos_para_5sigma": 718.7721666976189
+   },
+   "raiz_vacuo_a068": {
+    "delta": -0.03856121990420288,
+    "z": 0.35411737750308564,
+    "lnB_meio_z2": 0.06269955852483143,
+    "N_eventos_para_5sigma": 199.36344519953073
+   }
+  },
+  "GWTC-4.0 hierarquico: dtau220 = 0.16 +0.18/-0.16 (90%) -> 1 sigma ~ 0.17/1.645 [KNOWN via arXiv:2509.08099, a conferir]": {
+   "sigma": 0.1033434650455927,
+   "ramoB_a068": {
+    "delta": -0.020308502647923297,
+    "z": 0.19651462856372837,
+    "lnB_meio_z2": 0.019308999619770062,
+    "N_eventos_para_5sigma": 647.366525772859
+   },
+   "raiz_vacuo_a068": {
+    "delta": -0.03856121990420288,
+    "z": 0.37313651024949257,
+    "lnB_meio_z2": 0.06961542764058484,
+    "N_eventos_para_5sigma": 179.5579000754809
+   }
+  },
+  "GW250114 pSEOBNR: dtau220 = -0.01 +0.10/-0.09 (90%) -> 1 sigma ~ 0.095/1.645 [KNOWN via arXiv:2509.08099, a conferir]": {
+   "sigma": 0.057750759878419454,
+   "ramoB_a068": {
+    "delta": -0.020308502647923297,
+    "z": 0.35165775637719815,
+    "lnB_meio_z2": 0.06183158881012242,
+    "N_eventos_para_5sigma": 202.16203789273536
+   },
+   "raiz_vacuo_a068": {
+    "delta": -0.03856121990420288,
+    "z": 0.6677179657096183,
+    "lnB_meio_z2": 0.2229236408656955,
+    "N_eventos_para_5sigma": 56.07301204779291
+   }
+  }
+ },
+ "sigma_necessario": {
+  "ramoB_5sigma": 0.00406170052958466,
+  "ramoB_3sigma": 0.0067695008826410994,
+  "ramoB_lnB_5": 0.006422112423499822,
+  "ramoB_lnB_8": 0.005077125661980824,
+  "raizvacuo_5sigma": 0.007712243980840576,
+  "SNR_rd_equivalente_ramoB_5sigma_se_sigma_prop_1_sobre_SNR": 1137.4695787200228,
+  "nota": "escala sigma ~ 1/SNR a partir de GW250114 (SNR de rede ~80, sigma ~0,058): estimativa grosseira [DERIVED]"
+ },
+ "GW250114_central_vs_ramos": {
+  "delta_obs": -0.01,
+  "sigma": 0.057750759878419454,
+  "z_vs_GR": -0.1731578947368421,
+  "z_vs_B": 0.17849986164035603,
+  "z_vs_raizvacuo": 0.49456007097277616
+ },
+ "GWTC4_central_vs_ramos": {
+  "delta_obs": 0.16,
+  "sigma": 0.1033434650455927,
+  "z_vs_GR": 1.5482352941176472,
+  "z_vs_B": 1.741397583584188,
+  "z_vs_raizvacuo": 1.9213718043671397
+ }
+}

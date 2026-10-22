@@ -1,0 +1,38 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T214059_321188Z\CanonicalTensorResolventEquationR1.lean:63:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((aMultiplier n) ((aMultiplier n) y)) p
+in the target expression
+  (↑↑((aMultiplier n) ((aMultiplier n) y)) + ↑↑((bMultiplier n) ((bMultiplier n) y))) p =
+    ↑↑((aMultiplier n) ((aMultiplier n) z)) p
+
+n : ℕ
+x : ↥F
+h :
+  (aMultiplier n) ((aMultiplier n) ((Q n) (modularR x))) + (bMultiplier n) ((bMultiplier n) ((Q n) (modularR x))) =
+    (aMultiplier n) ((aMultiplier n) ((Q n) x))
+y : ↥(Space n) := (Q n) (modularR x)
+z : ↥(Space n) := (Q n) x
+ha :
+  ∀ (v : ↥(Space n)),
+    ↑↑((aMultiplier n) v) =ᵐ[(data n).measure] fun p => productWeight (weightA rootParameter) n p • ↑↑v p
+hb :
+  ∀ (v : ↥(Space n)),
+    ↑↑((bMultiplier n) v) =ᵐ[(data n).measure] fun p => productWeight (weightB rootParameter) n p • ↑↑v p
+p : (data n).Index
+ha1 : ↑↑((aMultiplier n) y) p = productWeight (weightA rootParameter) n p • ↑↑y p
+ha2 : ↑↑((aMultiplier n) ((aMultiplier n) y)) p = productWeight (weightA rootParameter) n p • ↑↑((aMultiplier n) y) p
+hb1 : ↑↑((bMultiplier n) y) p = productWeight (weightB rootParameter) n p • ↑↑y p
+hb2 : ↑↑((bMultiplier n) ((bMultiplier n) y)) p = productWeight (weightB rootParameter) n p • ↑↑((bMultiplier n) y) p
+hz1 : ↑↑((aMultiplier n) z) p = productWeight (weightA rootParameter) n p • ↑↑z p
+hz2 : ↑↑((aMultiplier n) ((aMultiplier n) z)) p = productWeight (weightA rootParameter) n p • ↑↑((aMultiplier n) z) p
+hs :
+  ↑↑((aMultiplier n) ((aMultiplier n) y) + (bMultiplier n) ((bMultiplier n) y)) p =
+    (↑↑((aMultiplier n) ((aMultiplier n) y)) + ↑↑((bMultiplier n) ((bMultiplier n) y))) p
+he :
+  (↑↑((aMultiplier n) ((aMultiplier n) y)) + ↑↑((bMultiplier n) ((bMultiplier n) y))) p =
+    ↑↑((aMultiplier n) ((aMultiplier n) z)) p
+⊢ (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p +
+        productWeight (weightB rootParameter) n p * productWeight (weightB rootParameter) n p) •
+      ↑↑((Q n) (modularR x)) p =
+    (productWeight (weightA rootParameter) n p * productWeight (weightA rootParameter) n p) • ↑↑((Q n) x) p
+'F1Fecho.TensorCoordinates.Q_resolvent_equation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.TensorCoordinates.Q_resolvent_equation_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

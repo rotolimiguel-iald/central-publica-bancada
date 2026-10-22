@@ -1,0 +1,42 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:37:8: warning: This simp argument is unused:
+  inner_smul_left
+
+Hint: Omit it from the simp argument list.
+  simp [̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵l̵e̵f̵t̵,̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵]̵[̲i̲n̲n̲e̲r̲_̲s̲m̲u̲l̲_̲r̲i̲g̲h̲t̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:37:24: warning: This simp argument is unused:
+  inner_smul_right
+
+Hint: Omit it from the simp argument list.
+  simp [inner_smul_left,̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:77:4: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:102:95: error(lean.invalidField): Invalid field `mp`: The environment does not contain `Function.mp`, so it is not possible to project the field `mp` from an expression
+  smul_right_injective H (Complex.ofReal_ne_zero.mpr (LT.lt.ne' (spectral_weightA_pos c x)))
+of type
+  (fun x_1 => ↑(spectralWeightA c x) • x_1) ?m.206 = (fun x_1 => ↑(spectralWeightA c x) • x_1) ?m.207 → ?m.206 = ?m.207
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\modular_wedge\VectorWedge.lean:106:30: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a₁ • ?a₂ • ?b
+in the target expression
+  (↑(Real.exp (-c * x)) * ↑(spectralWeightA c x)) • ↑↑f x = (↑(spectralWeightA c x) * ↑(Real.exp (-c * x))) • ↑↑f x
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+c : ℝ
+f g : ↥(VH H)
+hr : ∀ (x : ℝ), ↑(spectralWeightB c x) = ↑(Real.exp (-c * x)) * ↑(spectralWeightA c x)
+hfg : ↑↑g =ᵐ[volume] fun x => ↑(Real.exp (-c * x)) • ↑↑f x
+x : ℝ
+hb : ↑↑((B c) f) x = ↑(spectralWeightB c x) • ↑↑f x
+ha : ↑↑((A c) g) x = ↑(spectralWeightA c x) • ↑↑g x
+hg : ↑↑g x = ↑(Real.exp (-c * x)) • ↑↑f x
+⊢ (↑(Real.exp (-c * x)) * ↑(spectralWeightA c x)) • ↑↑f x = (↑(spectralWeightA c x) * ↑(Real.exp (-c * x))) • ↑↑f x
+'F1Rede.Wedge.T_selfadjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.Wedge.T_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Rede.Wedge.T_graph' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

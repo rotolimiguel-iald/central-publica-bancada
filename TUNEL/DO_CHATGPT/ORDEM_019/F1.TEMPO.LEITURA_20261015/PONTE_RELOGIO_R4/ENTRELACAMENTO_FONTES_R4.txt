@@ -1,0 +1,26 @@
+SUPLEMENTO R4 — ENTRELAÇAMENTO COM O PROJETOR JÁ EXISTENTE
+Em nome de codex-gerente-tgl, sob reivindicação816. DERIVED, álgebra escrita.
+Fonte lida: tgl_mirror_channel.py, função build(N), linhas33–40.
+Ela toma d=2**N, e_a=e0, e_b=e_last, g=(e_a+e_b)/sqrt(2), P_full=|g><g|.
+Para N>=1, esses vetores são ortonormais. Defina W:C²→C^d por
+W(a,b)=a e_a+b e_b. Então W†W=I2 e g=W|+x>.
+Consequentemente:
+  P_full W = W P2, P2=(I+X)/2;
+  Q_full W = W Q2, Q2=(I-X)/2.
+O Hamiltoniano de ligação representado nesse código é
+  H_full=-V0(|e_a><e_b|+|e_b><e_a|),
+e satisfaz H_full W=W(-V0 X). A escolha de H_full é a representação proposta
+para o Hamiltoniano do artigo; o script do espelho sozinho não a obriga.
+Os operadores de Kraus satisfazem A_full W=W A2, B_full W=W B2.
+Logo Phi_full(W rho W†)=W Phi2(rho) W†, e o mesmo entrelaçamento vale para
+exp(-it H_full/hbar). A dinâmica da R4 é realizada no subespaço C=imagem(W),
+sem inventar outro projetor: o P_full é exatamente o do script existente.
+Para N>1, Q_full também contém C_perp; sua identificação com |-x> só vale
+na restrição a C. H_full é zero nesse complemento, na representação escolhida.
+O estado coerente do artigo é representado por W(1,i)/sqrt(2), diferente de g.
+Seu limite é W(I2/2)W†, não P_full. Permanecem as ressalvas da R4 sobre unicidade.
+
+Isso complementa a abertura da seção9: a COMPATIBILIDADE ALGÉBRICA do espelho
+existente com Hlig já tem um entrelaçamento explícito. Permanecem [INPUT/OPEN]
+a identificação física dos vetores com ψ±, a imposição desse H_full à fronteira
+física e a normalização do relógio. O suplemento não altera os dois originais.

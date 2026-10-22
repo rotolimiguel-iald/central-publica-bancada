@@ -1,0 +1,97 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:37:9: error: unsolved goals
+case zero
+x : ↥H1
+⊢ ‖1‖ = 1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:38:17: error: Type mismatch: After simplification, term
+  congrArg (fun y => ‖x‖ * y) ih
+ has type
+  ‖pureAlgebraic x n‖ * ‖x‖ = ‖x‖ * ‖x‖ ^ n
+but is expected to have type
+  ‖x ⊗ₜ[ℂ] pureAlgebraic x n‖ = ‖x‖ * ‖x‖ ^ n
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:44:17: error: Type mismatch: After simplification, term
+  congrArg (fun y => u x ⊗ₜ[ℂ] y) ih
+ has type
+  @Eq (↥H1 ⊗[ℂ] Algebraic n) (u x ⊗ₜ[ℂ] (algebraicGamma u n) (pureAlgebraic x n)) (u x ⊗ₜ[ℂ] pureAlgebraic (u x) n)
+but is expected to have type
+  @Eq (Algebraic (n + 1)) ((TensorProduct.congrIsometry u (algebraicGamma u n)) (x ⊗ₜ[ℂ] pureAlgebraic x n))
+    (u x ⊗ₜ[ℂ] pureAlgebraic (u x) n)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:52:14: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:53:15: error: unsolved goals
+case succ.tmul
+n : ℕ
+ih : ∀ (x : Algebraic n), (algebraicGamma (LinearIsometryEquiv.refl ℂ ↥H1) n) x = x
+x : ↥H1
+y : (powerData n).carrier
+⊢ (TensorProduct.congrIsometry (LinearIsometryEquiv.refl ℂ ↥H1) (algebraicGamma (LinearIsometryEquiv.refl ℂ ↥H1) n))
+      (x ⊗ₜ[ℂ] y) =
+    x ⊗ₜ[ℂ] y
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:54:23: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:53:40: warning: This simp argument is unused:
+  ih
+
+Hint: Omit it from the simp argument list.
+  simp [algebraicGamma,̵ ̵i̵h̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:62:14: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:63:15: error: unsolved goals
+case succ.tmul
+u v : ↥H1 ≃ₗᵢ[ℂ] ↥H1
+n : ℕ
+ih : ∀ (x : Algebraic n), (algebraicGamma (u.trans v) n) x = (algebraicGamma v n) ((algebraicGamma u n) x)
+x : ↥H1
+y : (powerData n).carrier
+⊢ (TensorProduct.congrIsometry (u.trans v) (algebraicGamma (u.trans v) n)) (x ⊗ₜ[ℂ] y) =
+    (TensorProduct.congrIsometry v (algebraicGamma v n))
+      ((TensorProduct.congrIsometry u (algebraicGamma u n)) (x ⊗ₜ[ℂ] y))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:64:23: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:63:40: warning: This simp argument is unused:
+  ih
+
+Hint: Omit it from the simp argument list.
+  simp [algebraicGamma,̵ ̵i̵h̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:72:14: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:73:15: error: unsolved goals
+case succ.tmul
+u : ↥H1 ≃ₗᵢ[ℂ] ↥H1
+n : ℕ
+ih : ∀ (x : Algebraic n), (algebraicGamma u.symm n) ((algebraicGamma u n) x) = x
+x : ↥H1
+y : (powerData n).carrier
+⊢ (TensorProduct.congrIsometry u.symm (algebraicGamma u.symm n))
+      ((TensorProduct.congrIsometry u (algebraicGamma u n)) (x ⊗ₜ[ℂ] y)) =
+    x ⊗ₜ[ℂ] y
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:74:23: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:73:40: warning: This simp argument is unused:
+  ih
+
+Hint: Omit it from the simp argument list.
+  simp [algebraicGamma,̵ ̵i̵h̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:172:58: error: unsolved goals
+⊢ ‖↑(pureTensor 0 0)‖ = 1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:180:11: error: Type mismatch
+  (x + y) ⊗ₜ[ℂ] 1
+has type
+  ↥H1 ⊗[ℂ] (powerData 0).carrier
+but is expected to have type
+  TensorHilbert 1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:184:11: error: Type mismatch
+  (c • x) ⊗ₜ[ℂ] 1
+has type
+  ↥H1 ⊗[ℂ] (powerData 0).carrier
+but is expected to have type
+  TensorHilbert 1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\fock_construction\BosonicSectors.lean:186:17: error: unsolved goals
+x : ↥H1
+⊢ ‖↑(pureTensor 1 x)‖ = ‖x‖
+'F1Rede.BosonicSectors.gammaSector' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.BosonicSectors.gammaSector_trans' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.BosonicSectors.gammaSector_refl' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.BosonicSectors.sector_nontrivial' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.BosonicSectors.oneParticleEmbedding' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.BosonicSectors.gammaSector_oneParticle' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Rede.BosonicSectors.gammaSector_vacuum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

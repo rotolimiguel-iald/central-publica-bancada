@@ -1,0 +1,66 @@
+{
+  "start_utc": "2026-10-16T00:21:05.554236+00:00",
+  "end_utc": "2026-10-16T00:23:25.651418+00:00",
+  "seconds": 140.09717620000447,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "--profile",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\attempts\\20261016T002105_464100Z\\RegularFiniteFibreRightR1.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\attempts\\20261016T002105_464100Z\\RegularFiniteFibreRightR1.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\attempts\\20261016T002105_464100Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\attempts\\20261016T002105_464100Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\attempts\\20261016T002105_464100Z\\RegularFiniteFibreRightR1.lean",
+    "sha256": "4ae711d379295fe4784cb19b01f89e3f1958350abbe5ccd9dda823df160428ab",
+    "bytes": 1427
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+import took 133s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\takesaki_fock\attempts\20261016T002105_464100Z\RegularFiniteFibreRightR1.lean:20:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  dualQuadraticIntegral (star ↑?B * ↑?A * ↑?B) ?v
+in the target expression
+  dualQuadraticIntegral (star (fibre B) * (star A * A) * fibre B) v ≤ ↑(C * ‖fibre B‖₊ ^ 2) * ENNReal.ofReal (‖v‖ ^ 2)
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A : ↥(RegularHilbert H) →L[ℂ] ↥(RegularHilbert H)
+B : H →L[ℂ] H
+C : ℝ≥0
+hC : ∀ (v : ↥(RegularHilbert H)), dualQuadraticIntegral (star A * A) v ≤ ↑C * ENNReal.ofReal (‖v‖ ^ 2)
+v : ↥(RegularHilbert H)
+he : star (A * fibre B) * (A * fibre B) = star (fibre B) * (star A * A) * fibre B
+⊢ dualQuadraticIntegral (star (fibre B) * (star A * A) * fibre B) v ≤ ↑(C * ‖fibre B‖₊ ^ 2) * ENNReal.ofReal (‖v‖ ^ 2)
+'F1Fecho.RegularFiniteFibreRight.right_fibre' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0133ms
+	blocked (unaccounted) 179ms
+	congr simp thm 0.175ms
+	elaboration 13.4ms
+	fix level params 0.0377ms
+	import 133s
+	initialization 33.1ms
+	instantiate metavars 0.0091ms
+	interpretation 6.7s
+	let-to-have transformation 0.0423ms
+	linting 2.73ms
+	overlappingInstancesLinter 40.2ms
+	parsing 1.34ms
+	process pre-definitions 0.424ms
+	share common exprs 0.223ms
+	simp 6.29ms
+	tactic execution 39.9ms
+	tacticAnalysis 129ms
+	type checking 3.35ms
+	typeclass inference 199ms

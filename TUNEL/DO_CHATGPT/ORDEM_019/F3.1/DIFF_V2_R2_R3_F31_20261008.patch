@@ -1,0 +1,675 @@
+--- R2_spec_sha256_4a6a927fb13ad2e3efbaeea92dd67f1953ff33675a73fd865993203c8b8c15b9
++++ R3_spec_sha256_34ee2e2004e72a83cb52dd40b38dc5faa4d1940baa429d3278a2f72ce5f30e50
+@@ -3,23 +3,64 @@
+   "D5_sensitivities_from_c1_audit": {
+     "SBF_total_only_BG1": 5.718,
+     "TDCOSMO_sigma_3p9_BG1_six_diagnostic": 5.439,
++    "five_sigma3p9_R3": 5.694997507399164,
++    "five_sigma3p9_c1_R2": 5.695,
++    "note": "5.695 is five decisory, 5.439 six diagnostic in R2 audit; R3 is recalculated.",
+     "status": "DECLARADO_AUDIT_NOT_RECALCULATED_HERE"
+   },
+   "achados": "achados D1 a D6 da seq 696",
++  "base": {
++    "R2_sha256": "4a6a927fb13ad2e3efbaeea92dd67f1953ff33675a73fd865993203c8b8c15b9",
++    "V1_sha256": "1893261e730994b3508d14dd2105f8aae3a764d3d217e28bd5939cb58f865273",
++    "gate": "UNTOUCHED",
++    "state": "RASCUNHO_NAO_CONGELADO"
++  },
+   "beta": {
+     "alpha_read": 0.0072973525693,
+     "beta_runtime": 0.012031300400803142,
+     "rule": "ALPHA_FINE_CODATA_2018 × sqrt(e) at runtime",
+     "status": "DERIVED_WITH_ALPHA_INPUT"
+   },
++  "contaminacao_declarada": {
++    "R3": "non-blind; no target opened or real composite run",
++    "consequencia": "a novidade e de USO e de RIGOR (fontes por hash, covariancia, cinco hipoteses, funcao fixada antes do composto), nao de cegueira: todo token leva __NOT_BLIND_TO_DATA_STATED",
++    "ja_lido_pela_casa": "Fases 3-5 (ensaio nao-cego da Fase 9 e o desenho: TGL -1,4 sigma, LCDM +4,5 sigma com BG1/R22, lido de FASE9_DESENHO_RESULTADO.json)",
++    "validacao_F14": "o alvo de validacao 73,6 +- 1,1 (Brout+22) segue [DECLARADO]; estimador de V = LCDM plano, SNe + 77 calibradores Cefeida, M perfilado — fixado aqui"
++  },
+   "covariancia": {
++    "NGC4258_conversion_scale": {
++      "replaces": "K*BG1, which was the TGL prediction",
++      "source": "BG1 bare background",
++      "status": "INPUT_NOT_PREDICTION_NOT_LOCAL_CENTER",
++      "value": 68.531
++    },
++    "R2_independent_box_c1": {
++      "independent_four_terms_sigma_max": 0.94946,
++      "independent_power_BG1": 5.7208,
++      "shared_power_BG1": 5.7218,
++      "shared_sigma_max": 0.94929,
++      "status": "DERIVED_C1_FOR_R2_NOT_R3"
++    },
++    "R_r25_L1b_NGC4258_coupling": {
++      "amplitude_key": "L1bN",
++      "links": [
++        "L2N",
++        "L3N"
++      ],
++      "sigma_cap": 0.93
++    },
++    "S_com_sirenes": {
++      "L6_cross_terms": 0.0,
++      "status": "BOX_ASSUMPTION_OTHER_CROSS_TERMS_OPEN"
++    },
+     "amplitudes_km_s_Mpc": {
+-      "L1N": 1.04,
++      "L1N": 1.0275091218127275,
++      "L1bN": 0.93,
+       "L2N": 1.054883795476287,
+       "L2T": 0.8100124554854344,
+       "L3N": 1.0933565344797533,
+       "L3T": 1.1275239261822456,
+-      "L4N": 1.113621758447502
++      "L4N": 1.0275091218127275
+     },
+     "components": {
+       "CCHP_NGC4258_mag": [
+@@ -27,9 +68,23 @@
+         0.022
+       ],
+       "CCHP_TRGB_anchor_mag": 0.025,
++      "CCHP_Table6_note_a": {
++        "HST_anchor_count": 4,
++        "decisory_row": "TRGB (HST+JWST) 1.9%; note a absent",
++        "marked_row": "TRGB (JWST) 1.9%",
++        "source_path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\residual_systematics\\sources\\cchp_overview.txt",
++        "source_sha256": "e32d608358cc0f0dcc3def744beef4b9afea24a967c8f730c90027dc589b6dcc",
++        "split_1p33_into_N_T": "DERIVED_INFERENTIAL_CEILING_NOT_PUBLISHED"
++      },
+       "CCHP_sys": 1.33,
+       "HST_LMC_MW_SMC": "secondary dependency, coefficient OPEN",
+       "Pantheon_L1_L5": "OPEN, not in main box",
++      "SBF_0p031": {
++        "R2_amplitudes_retained": true,
++        "meaning": "Operational 3.1%; implied H0=2.3/0.031=74.193548",
++        "status": "INPUT_DECLARADO_NOT_VERIFIED_IN_SBF_SECTION_III_3",
++        "value": 0.031
++      },
+       "SBF_NGC4258_mag_DECLARADO_web": 0.032,
+       "SBF_TRGB_mag_DECLARADO_web": 0.033,
+       "SBF_sys": 2.3,
+@@ -50,21 +105,21 @@
+         "covariance": [
+           [
+             1.0816000000000001,
+-            1.0422251899305717,
+-            1.0802362560659964,
+-            0.0,
+-            0.0
+-          ],
+-          [
+-            1.0422251899305717,
++            1.0839027223043165,
++            1.1234338125714984,
++            0.0,
++            0.0
++          ],
++          [
++            1.0839027223043165,
+             3.7473,
+-            1.141361307559035,
+-            0.0,
+-            0.0
+-          ],
+-          [
+-            1.0802362560659964,
+-            1.141361307559035,
++            1.3816911969171666,
++            0.0,
++            0.0
++          ],
++          [
++            1.1234338125714984,
++            1.3816911969171666,
+             5.7799999999999985,
+             0.0,
+             0.0
+@@ -85,24 +140,24 @@
+           ]
+         ],
+         "gls_weights": {
+-          "L1_sh0es_r22": 0.8216494138667694,
+-          "L2_cchp": 0.011960163551212573,
+-          "L3_sbf": -1.386554307420301e-05,
+-          "L4_masers_5": 0.09687140141948106,
+-          "L5_tdcosmo": 0.06953288670561131
+-        },
+-        "lambda_N": 0.95,
+-        "lambda_T": 0.05,
+-        "minimum_eigenvalue": 0.6300011077835299,
++          "L1_sh0es_r22": 0.8411232160203266,
++          "L2_cchp": 5.535354580823611e-06,
++          "L3_sbf": -0.00755686441831933,
++          "L4_masers_5": 0.0968852709732788,
++          "L5_tdcosmo": 0.06954284207013317
++        },
++        "lambda_N": 1.0,
++        "lambda_T": 0.25,
++        "minimum_eigenvalue": 0.615103524457463,
+         "negative_weights": [
+           "L3_sbf"
+         ],
+         "power_only_sigma": {
+-          "BG1": 5.721774587340219,
+-          "BG2": 5.062098442138278,
+-          "BG3": 4.9891340608808115
+-        },
+-        "sigma_comb": 0.9492872124413783
++          "BG1": 5.721408279546075,
++          "BG2": 5.061835885148723,
++          "BG3": 4.988890990293536
++        },
++        "sigma_comb": 0.9493551670628468
+       },
+       "minimum": {
+         "covariance": [
+@@ -216,36 +271,37 @@
+       "tie_rule": "first point in iteration order",
+       "tie_tolerance_sigma": 1e-12
+     },
+-    "matrix_rule": "C12=lambda_N*L1N*L2N; C13=lambda_N*L1N*L3N; C23=lambda_N*L2N*L3N+lambda_T*L2T*L3T; six-maser diagnostic adds lambda_N*LiN*L4N for i=1..3; five-maser L4 has zero NGC4258 coupling by construction",
++    "matrix_rule": "One shared lambda_N: C12=L1N*L2N, C13=L1N*L3N, C23_N=L2N*L3N; lambda_T multiplies C23_T=L2T*L3T. Five masers have zero NGC4258 coupling. Six-maser diagnostic adds lambda_N*LiN*L4N for i=1..3. R_r25 substitutes L1bN for L1N and adds L1bN-L2N and L1bN-L3N NGC4258 cross terms; L1bN capped at sigma=0.93. L6 sirens independent in this sensitivity box; unknown cross terms OPEN.",
++    "shared_lambda_N_rule": "One common lambda_N for L1N-L2N, L1N-L3N and L2N-L3N, also six-maser diagnostic.",
+     "six_masers_diagnostic": {
+       "accepted": 441,
+       "maximum": {
+         "covariance": [
+           [
+             1.0816000000000001,
+-            1.0422251899305717,
+-            1.0802362560659964,
+-            1.1002582973461321,
+-            0.0
+-          ],
+-          [
+-            1.0422251899305717,
++            1.0839027223043165,
++            1.1234338125714984,
++            1.0557749954083624,
++            0.0
++          ],
++          [
++            1.0839027223043165,
+             3.7473,
+-            1.141361307559035,
+-            1.1160044699122742,
+-            0.0
+-          ],
+-          [
+-            1.0802362560659964,
+-            1.141361307559035,
++            1.3816911969171666,
++            1.0839027223043165,
++            0.0
++          ],
++          [
++            1.1234338125714984,
++            1.3816911969171666,
+             5.7799999999999985,
+-            1.1567063452105393,
+-            0.0
+-          ],
+-          [
+-            1.1002582973461321,
+-            1.1160044699122742,
+-            1.1567063452105393,
++            1.1234338125714984,
++            0.0
++          ],
++          [
++            1.0557749954083624,
++            1.0839027223043165,
++            1.1234338125714984,
+             9.0,
+             0.0
+           ],
+@@ -258,24 +314,25 @@
+           ]
+         ],
+         "gls_weights": {
+-          "L1_sh0es_r22": 0.9119907111823001,
+-          "L2_cchp": 0.013287846531406368,
+-          "L3_sbf": 1.1706571783129874e-05,
+-          "L4_masers_6": -0.002278233579749319,
+-          "L5_tdcosmo": 0.07698796929425943
+-        },
+-        "lambda_N": 0.95,
+-        "lambda_T": 0.05,
+-        "minimum_eigenvalue": 0.5855427831703954,
++          "L1_sh0es_r22": 0.92838891165199,
++          "L2_cchp": -2.1683291827312914e-05,
++          "L3_sbf": -0.00838295499964466,
++          "L4_masers_6": 0.0030179970849743927,
++          "L5_tdcosmo": 0.07699772955450752
++        },
++        "lambda_N": 1.0,
++        "lambda_T": 0.25,
++        "minimum_eigenvalue": 0.5748982209832951,
+         "negative_weights": [
+-          "L4_masers_6"
++          "L2_cchp",
++          "L3_sbf"
+         ],
+         "power_only_sigma": {
+-          "BG1": 5.465713519204234,
+-          "BG2": 4.876229419217009,
+-          "BG3": 4.816490487270793
+-        },
+-        "sigma_comb": 0.9988814154110598
++          "BG1": 5.465400476817195,
++          "BG2": 4.875999332526827,
++          "BG3": 4.816276071868675
++        },
++        "sigma_comb": 0.9989447307165785
+       },
+       "minimum": {
+         "covariance": [
+@@ -429,6 +486,41 @@
+       "rejected": 0
+     }
+   },
++  "decisoes_padrao_da_gerencia": {
++    "D-A": "fundo primario BG1 = LCDM nu Planck-comp + DESI DR2 SEM escada (68.531 +- 0.301); BG2 Planck 2018 replica; BG3 DESI+BBN replica [DECLARADO]; o 68,4298 da Fase 4 (ajuste COM a escada) NAO e fundo de previsao (F2)",
++    "D-B": "leitor primario da escada R22 (73.04 +- 1.04); R25 replica ao lado; nunca somados",
++    "D-C": "CCHP TRGB/JAGB (70.39 +- 1.936) e TESTE dentro do composto; gatilho FALSIFIED por leitor unico so com sigma_i <= 1,0 e |z_i| >= 5",
++    "D-D": "UMA funcao de veredito (secao funcao_de_veredito), estatisticas do pre-registro + o degrau TENSION do desenho; FALSIFIED/TENSION antes de UNDERPOWERED (a exclusao da previsao nao precisa de poder discriminante; esconde-la atras de UNDERPOWERED seria fail-open) — desvio da ordem do rascunho, dito",
++    "D-E": "__USE_NOVEL pelos PARAMETROS (Worrall [KNOWN]); a selecao da FORMA dita ao lado, nao decisoria (lei de 05/10)",
++    "D-F": "sirenes = diagnostico fora do composto",
++    "D-G": "shift so nos leitores de Cefeidas do SH0ES (s em U[-0,15; 0,15]); fundo-livre = r_d em U[130; 160] Mpc; beta-livre U[-0,05; 0,05]; lnB sempre com a largura ao lado (Occam ~ ln 2 por fator 2)",
++    "D-H": "Six sources pinned documentally, L1b/L6 declared; all D-H admissions pending",
++    "D-I": "canal do livro de cobrancas: R1 v2 (mesma lei, mesma cobranca, funcao nova); R1b so se o objeto mudar",
++    "D-J": "Final token name operator decision, pending",
++    "D-K": "registro no mapa de rotas (lentes, critica e este V1) feito pela gerencia no mesmo passo",
++    "NAT22_X13": "Observed executor deviations stated, operator decision pending",
++    "fonte_da_delegacao": "operador 05/10: «o resto vc consegue responder tudo agroa»; «prossiga» (memorias proximo-passo-06out, handoff-sessao-nova-06out)"
++  },
++  "especificacao_do_runner": [
++    "R0 pin V2 R3 spec/function/runner before real composite, no freeze now",
++    "R1 inventory-wide n_alvos with the same predicate in preflight and staged",
++    "R2 recompute BG1 and beta/K at runtime, fail on mismatch",
++    "R3 power from sigmas at both covariance endpoints before local centers",
++    "R4 real opening only after F3.4, NAT22/X13, D-H, c1 audit and operator act",
++    "R5 five hypotheses, GLS/dispersion both endpoints, four lnB incl free background, pinned verdict",
++    "R6 R_r25 and S_com_sirenes diagnostics, their own covariance; never sum replacements",
++    "R7 subsequent changes new version beside, no overwrite"
++  ],
++  "estado": "RASCUNHO_NAO_CONGELADO; F3.4/NAT22 before freeze; D-H before opening",
++  "estatisticas": {
++    "background": "marginalized by observed executor; NAT22 pending",
++    "dispersao": "chi2/(n-1)>2 OR p<0.01 at EITHER endpoint gives INCONCLUSIVE",
++    "lnB": "n>=100 quadrature, check n=100/200; compare LCDM, beta-free, shift, free background",
++    "sigma_beta": "mean asymmetric sides, local Gaussian",
++    "z_delta": "profile -2lnL including log determinant at minimum-sigma endpoint",
++    "z_disc": "quadratic form at maximum-sigma endpoint",
++    "z_i": "active family; sigma<=1 and |z_i|>=5; R25 L1b has sigma 0.93"
++  },
+   "estatisticas_executor_observado_sujeito_NAT22": {
+     "V1_lnB_TGL_vs_beta_free_erratum": {
+       "converged": 1.97,
+@@ -500,28 +592,108 @@
+       "papel": "diagnostico: o que pode doer (gatilho de leitor unico so com sigma <= 1,0)"
+     }
+   },
++  "fontes_lidas_sha256": {
++    "CCHP_Table6": "e32d608358cc0f0dcc3def744beef4b9afea24a967c8f730c90027dc589b6dcc",
++    "R2": "4a6a927fb13ad2e3efbaeea92dd67f1953ff33675a73fd865993203c8b8c15b9",
++    "V1": "1893261e730994b3508d14dd2105f8aae3a764d3d217e28bd5939cb58f865273",
++    "V1x_binding": "885efb944728efb41b62b47fa653c6d3a3956bd1cb086cb8595b958b6a410c52",
++    "status": "DOCUMENTARY_ONLY_D_H_PENDING_NO_TARGET_OPENED"
++  },
++  "funcao_de_veredito": {
++    "estatuto": "PROPOSTA_SINTETICA_NAO_CONGELADA",
++    "final_token": "D_J_PENDING",
++    "fonte": "def veredito_fase9_v2_r3_proposta(r):\n    \"\"\"Draft only. D-J names final token; use minimum and maximum covariance endpoints.\"\"\"\n    import math\n    def f(x): return (\"M\" if x<0 else \"P\")+(\"%.1f\"%abs(x)).replace(\".\",\"P\")\n    base=\"TGL_FASE9_RAZAO_DE_HUBBLE_V2_R3_DRAFT__\"\n    suf=(\"__D1B__FUNDO_%s__NOT_BLIND_TO_DATA_STATED\"\n         \"__NOT_A_CONFIRMATION__GATE_UNTOUCHED\")%r[\"fundo\"]\n    if (r[\"n_alvos_declarados\"]>0 or not r[\"required_sources_admitted\"]\n        or r[\"beta_livre_no_limite\"]\n        or any(e[\"chi2_por_gl\"]>2 or e[\"p\"]<0.01\n               for e in r[\"dispersao_endpoints\"].values())):\n        return base+\"INCONCLUSIVE_SYSTEMATICS\"+suf\n    low,high=r[\"minimum\"],r[\"maximum\"]\n    zd=abs(low[\"z_delta\"])\n    if zd>=5 or any(s<=1 and abs(z)>=5 for s,z in low[\"sigma_z_por_alvo\"]):\n        return base+\"FALSIFIED_AT_5SIGMA\"+suf\n    if zd>=3: return base+\"TENSION_3_TO_5_SIGMA\"+suf\n    if high[\"poder_previo\"]<5:\n        return base+\"NOT_FALSIFIED_UNDERPOWERED__POWER_%s_OF_5_SIGMA\"%f(high[\"poder_previo\"])+suf\n    if high[\"z_disc\"]>=5 and zd<3 and high[\"lnB_lcdm\"]>=5 and high[\"lnB_livre\"]>=-1:\n        t=(base+\"NOT_FALSIFIED_POWERED__DISCRIMINATES_FROM_LCDM_AT_%dSIGMA\"\n           \"__ZERO_FREE_PARAMETERS\"%int(math.floor(high[\"z_disc\"])))\n        t+=\"__USE_NOVEL\" if r[\"use_novel_parametros\"] else \"__USE_NOVELTY_PENDING\"\n        t+=\"__VS_LADDER_SYSTEMATIC_LNB_%s__VS_FREE_BACKGROUND_LNB_%s\"%(f(high[\"lnB_shift\"]),f(high[\"lnB_fundo_livre\"]))\n        if high[\"lnB_shift\"]<0 and high[\"poder_nao_cefeida\"]>=5:\n            t+=\"__NOT_DISCRIMINATED_FROM_LADDER_SYSTEMATIC\"\n        if abs(high[\"lnB_fundo_livre\"])<1:\n            t+=\"__NOT_DISCRIMINATED_FROM_FREE_BACKGROUND\"\n        return t+suf\n    t=base+\"NOT_FALSIFIED_POWERED__\"+(\"DEVIATION_CONSISTENT_WITHIN_1SIGMA\" if zd<1 else \"DEVIATION_1_TO_3_SIGMA\")\n    if high[\"z_disc\"]<5: t+=\"__NOT_DISCRIMINATED_FROM_LCDM_AT_AVAILABLE_SENSITIVITY\"\n    return t+suf\n",
++    "n_alvos_declarados_rule": {
++      "current_count": 2,
++      "current_ids": [
++        "L1b_sh0es_r25",
++        "L6_sirenes"
++      ],
++      "predicate": "NOT gate_verified AND NOT operator_admitted_in_pinned_D_H_register",
++      "primary_result": "INCONCLUSIVE_SYSTEMATICS until L1b/L6 gate verification/admission; D-H separately blocks opening",
++      "same_in": [
++        "preflight",
++        "staged_runner"
++      ],
++      "universe": "whole V1.x inventory, not active family"
++    },
++    "nome": "veredito_fase9_v2_r3_proposta",
++    "sha256": "a497c29bc60211080388fedfb2872686e30a0d924799fa53e8896347514384f9",
++    "thresholds": {
++      "beta_free_prior_edge": "INCONCLUSIVE_SYSTEMATICS",
++      "discrimination_z_ge": 5.0,
++      "dispersion_chi2_per_dof_gt": 2.0,
++      "dispersion_p_lt": 0.01,
++      "falsification_abs_z_ge": 5.0,
++      "free_background_abs_lnB_lt": 1.0,
++      "lnB_beta_free_ge": -1.0,
++      "lnB_lcdm_ge": 5.0,
++      "power_ge": 5.0,
++      "single_reader_sigma_le": 1.0,
++      "tension_abs_z_ge": 3.0
++    }
++  },
+   "funcao_de_veredito_proposta": {
+     "final_token_name": "OPERATOR_D_J_PENDING",
+     "ladder_systematic_suffix": {
+       "condition": "lnB_shift<0 and power_without_Cepheids>=5",
+       "status": "FAIL_CLOSED_INACTIVE_WHEN_POWER_LT_5"
+     },
+-    "n_alvos_declarados": "count readers with gate_verified=False AND operator_admitted=False in a pinned register; missing admission separately blocks opening",
++    "n_alvos_declarados": "NOT gate_verified AND NOT operator_admitted_in_pinned_D_H_register over whole V1.x inventory, not active family",
++    "n_alvos_declarados_rule": {
++      "current_count": 2,
++      "current_ids": [
++        "L1b_sh0es_r25",
++        "L6_sirenes"
++      ],
++      "predicate": "NOT gate_verified AND NOT operator_admitted_in_pinned_D_H_register",
++      "primary_result": "INCONCLUSIVE_SYSTEMATICS until L1b/L6 gate verification/admission; D-H separately blocks opening",
++      "same_in": [
++        "preflight",
++        "staged_runner"
++      ],
++      "universe": "whole V1.x inventory, not active family"
++    },
+     "not_falsified_never_confirmation": true,
+     "order": [
+-      "INCONCLUSIVE_SYSTEMATICS if n_alvos_declarados>0 OR any required source lacks pinned operator admission OR dispersion fails at either endpoint",
+-      "FALSIFIED_AT_5SIGMA at minimum-sigma endpoint using V1 thresholds",
+-      "TENSION_3_TO_5_SIGMA at minimum-sigma endpoint",
+-      "NOT_FALSIFIED_UNDERPOWERED if power at maximum-sigma endpoint <5",
+-      "DISCRIMINATION only if all V1 thresholds hold at maximum-sigma endpoint",
++      "INCONCLUSIVE if whole-inventory count>0, D-H missing, beta-free at prior edge, or dispersion fails either endpoint",
++      "FALSIFIED if abs(z_delta_min)>=5 or active reader sigma<=1 and abs(z_i_min)>=5",
++      "TENSION if abs(z_delta_min)>=3",
++      "UNDERPOWERED if power_max<5",
++      "DISCRIMINATES if z_disc_max>=5, abs(z_delta_min)<3, lnB_lcdm>=5 and lnB_beta_free>=-1; both diagnostic suffixes",
+       "otherwise NOT_FALSIFIED_POWERED"
+     ],
+     "single_reader_trigger": {
++      "by_family": {
++        "P_primaria": {
++          "active": false,
++          "min_sigma": 1.04
++        },
++        "R_r25": {
++          "active": true,
++          "diagnostic_only": true,
++          "reader_id": "L1b_sh0es_r25",
++          "sigma": 0.93
++        }
++      },
+       "minimum_primary_sigma": 1.04,
+       "primary_active": false,
+       "threshold_sigma": 1.0
+     },
+-    "status": "NOT_EXECUTABLE_UNTIL_F3_4_NAT22_D_J_AND_C1_AUDIT"
++    "status": "NOT_EXECUTABLE_UNTIL_F3_4_NAT22_D_J_AND_C1_AUDIT",
++    "thresholds": {
++      "beta_free_prior_edge": "INCONCLUSIVE_SYSTEMATICS",
++      "discrimination_z_ge": 5.0,
++      "dispersion_chi2_per_dof_gt": 2.0,
++      "dispersion_p_lt": 0.01,
++      "falsification_abs_z_ge": 5.0,
++      "free_background_abs_lnB_lt": 1.0,
++      "lnB_beta_free_ge": -1.0,
++      "lnB_lcdm_ge": 5.0,
++      "power_ge": 5.0,
++      "single_reader_sigma_le": 1.0,
++      "tension_abs_z_ge": 3.0
++    }
+   },
+   "fundos": {
+     "BG1": {
+@@ -555,13 +727,25 @@
+   },
+   "gate": "UNTOUCHED",
+   "generated_from": {
++    "CCHP_Table6": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\residual_systematics\\sources\\cchp_overview.txt",
++      "sha256": "e32d608358cc0f0dcc3def744beef4b9afea24a967c8f730c90027dc589b6dcc"
++    },
+     "Pesce_PDF": {
+       "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_maser_anchor_alternative\\sources\\masers_2001.09213v2.pdf",
+       "sha256": "c9f2d2b626fee60d77928856d217a2cbe546f06c69cd9e7ac804f4ab652e731a"
+     },
++    "R2_registered": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F3.1\\PREREGISTRO_FASE9_RAZAO_DE_HUBBLE_V2_RASCUNHO_F31_20261008_R2.json",
++      "sha256": "4a6a927fb13ad2e3efbaeea92dd67f1953ff33675a73fd865993203c8b8c15b9"
++    },
+     "V1_generated": {
+       "path": "C:\\IALD\\Bancada_Um\\investigacao\\preregistro_fase9_hubble\\PREREGISTRO_FASE9_RAZAO_DE_HUBBLE_V1.json",
+       "sha256": "1893261e730994b3508d14dd2105f8aae3a764d3d217e28bd5939cb58f865273"
++    },
++    "V1x_binding_R2": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F3.2\\VINCULO_DOCUMENTAL_V1X_R2_20261008.json",
++      "sha256": "885efb944728efb41b62b47fa653c6d3a3956bd1cb086cb8595b958b6a410c52"
+     },
+     "design": {
+       "path": "C:\\IALD\\Central de Patentes\\work\\scratch_6da8f00d\\fase9_hubble\\desenho\\FASE9_DESENHO_RESULTADO.json",
+@@ -572,7 +756,14 @@
+       "sha256": "8e7b9927ceae64b8b6812019f77cca24c08296222ae7968af41baf2fe7a67dc6"
+     }
+   },
+-  "id": "PREREG_FASE9_RAZAO_DE_HUBBLE_V2_DRAFT_F31_20261008_R2",
++  "hipoteses": {
++    "H_LCDM": "todos leem H0_bg (beta = 0)",
++    "H_TGL": "bare BG1 plus fixed K=E(z*)^(2beta/3), beta=ALPHA_FINE_CODATA_2018*sqrt(e) at runtime",
++    "H_beta_livre": "K(beta), beta em U[-0,05; 0,05]; fitted beta at prior edge => INCONCLUSIVE_SYSTEMATICS",
++    "H_fundo_livre": "LCDM + r_d livre U[130; 160] Mpc (proxy de fundo precoce [INPUT da gerencia]); todos leem o mesmo H0",
++    "H_shift_cefeidas": "Only L1 or replacement L1b receives shift s~U[-0.15,0.15]; CCHP TRGB-only does not"
++  },
++  "id": "PREREG_FASE9_RAZAO_DE_HUBBLE_V2_DRAFT_F31_20261008_R3",
+   "lei": {
+     "K_frozen_V1": 1.0838071748529643,
+     "K_recomputed": 1.0838071748529643,
+@@ -586,7 +777,12 @@
+   "leitores": {
+     "L1_sh0es_r22": {
+       "H0": 73.04,
+-      "estatuto_hoje": "[DECLARADO ate D-H — valor transcrito pela casa (abstract lido 30/09), fonte primaria NAO guardada por hash]",
++      "documentary_gate_status": "REAL_DOCUMENTARY_HASH_ONLY",
++      "documentary_source": {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\fontes_publicas\\sh0es_2022.html",
++        "sha256": "df9136da862ef625ce692d6a6813b069ccdc9d7ce93537256fedcc9457c2d7d0"
++      },
++      "estatuto_hoje": "[REAL documental por hash no vínculo; admissão D-H PENDENTE]",
+       "fonte": "Riess et al. 2022, ApJL 934, L7 (arXiv:2112.04510)",
+       "origem": "C:\\IALD\\Bancada_Um\\investigacao\\fase4_desvio_30set\\RESULTADO_FASE4_DESVIO_20260930.json :: sh0es",
+       "papel": "TESTE primario da escada (D-B)",
+@@ -602,7 +798,8 @@
+     },
+     "L1b_sh0es_r25": {
+       "H0": 73.49,
+-      "estatuto_hoje": "[DECLARADO ate D-H — valor transcrito pela casa (abstract lido 30/09), fonte primaria NAO guardada por hash]",
++      "documentary_gate_status": "DECLARADO_UNVERIFIED",
++      "estatuto_hoje": "[DECLARADO: fonte sem bytes pinados; admissão D-H PENDENTE]",
+       "fonte": "Riess et al. 2025, arXiv:2509.01667 (abstract lido 30/09) [KNOWN]",
+       "origem": "C:\\IALD\\Bancada_Um\\investigacao\\fase3_leitores_h0\\PREREGISTRO_FASE3_LEITORES_20260930.json :: leitores_de_sombra.S1",
+       "papel": "REPLICA ao lado (D-B); nunca somado com L1",
+@@ -619,7 +816,12 @@
+     "L2_cchp": {
+       "H0": 70.39,
+       "compression": "sqrt(stat^2+sys^2+SN^2), local Gaussian",
+-      "estatuto_hoje": "[DECLARADO ate D-H — valor transcrito pela casa (abstract lido 30/09), fonte primaria NAO guardada por hash]",
++      "documentary_gate_status": "REAL_DOCUMENTARY_HASH_ONLY",
++      "documentary_source": {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\fontes_publicas\\cchp_2025_v3.html",
++        "sha256": "eb1b6689f13dbceaaa9e919ad68682bc75cf8f8cd4bf78ced3180a39b8207fa6"
++      },
++      "estatuto_hoje": "[REAL documental por hash no vínculo; admissão D-H PENDENTE]",
+       "fonte": "Freedman et al. 2025, arXiv:2408.06153v3 (abstract lido 30/09) [KNOWN]",
+       "origem": "C:\\IALD\\Bancada_Um\\investigacao\\fase3_leitores_h0\\PREREGISTRO_FASE3_LEITORES_20260930.json :: leitores_de_sombra.S2",
+       "papel": "TESTE dentro do composto (D-C, «o TRGB inclusive»)",
+@@ -643,7 +845,12 @@
+     "L3_sbf": {
+       "H0": 73.8,
+       "compression": "sqrt(stat^2+sys^2), local Gaussian",
+-      "estatuto_hoje": "[DECLARADO ate D-H — valor transcrito pela casa (abstract lido 30/09), fonte primaria NAO guardada por hash]",
++      "documentary_gate_status": "REAL_DOCUMENTARY_HASH_ONLY",
++      "documentary_source": {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_scalar_reader_sources\\sbf_2502.15935v2.html",
++        "sha256": "b61012efc5238c0e701baf9a442bb697deaec041fb3f1016b91365bb164d4946"
++      },
++      "estatuto_hoje": "[REAL documental por hash no vínculo; admissão D-H PENDENTE]",
+       "fonte": "Jensen et al. 2025, arXiv:2502.15935 (abstract lido 30/09) [KNOWN]",
+       "origem": "C:\\IALD\\Bancada_Um\\investigacao\\fase3_leitores_h0\\PREREGISTRO_FASE3_LEITORES_20260930.json :: leitores_de_sombra.S3",
+       "papel": "TESTE",
+@@ -665,6 +872,12 @@
+       "H0": 73.6,
+       "NGC4258_in_sample": false,
+       "compression": "mean asymmetric sides, local Gaussian",
++      "documentary_gate_status": "REAL_DOCUMENTARY_HASH_ONLY",
++      "documentary_source": {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_maser_anchor_alternative\\sources\\masers_2001.09213v2.pdf",
++        "sha256": "c9f2d2b626fee60d77928856d217a2cbe546f06c69cd9e7ac804f4ab652e731a"
++      },
++      "estatuto_hoje": "[REAL documental por hash no vínculo; admissão D-H PENDENTE]",
+       "reader_id": "L4_masers_5",
+       "shared_components": [],
+       "sigma": 3.05,
+@@ -682,7 +895,12 @@
+       "H0": 73.9,
+       "NGC4258_in_sample": true,
+       "compression": "published symmetric sigma; never combined with five-maser reader",
+-      "estatuto_hoje": "[DECLARADO ate D-H — valor transcrito pela casa (abstract lido 30/09), fonte primaria NAO guardada por hash]",
++      "documentary_gate_status": "REAL_DOCUMENTARY_HASH_ONLY",
++      "documentary_source": {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_maser_anchor_alternative\\sources\\masers_2001.09213v2.pdf",
++        "sha256": "c9f2d2b626fee60d77928856d217a2cbe546f06c69cd9e7ac804f4ab652e731a"
++      },
++      "estatuto_hoje": "[REAL documental por hash no vínculo; admissão D-H PENDENTE]",
+       "fonte": "Pesce et al. 2020, arXiv:2001.09213 (abstract lido 30/09) [KNOWN]",
+       "origem": "C:\\IALD\\Bancada_Um\\investigacao\\fase3_leitores_h0\\PREREGISTRO_FASE3_LEITORES_20260930.json :: leitores_de_sombra.S4",
+       "papel": "TESTE",
+@@ -701,7 +919,12 @@
+     "L5_tdcosmo": {
+       "H0": 71.6,
+       "compression": "mean asymmetric sides, local Gaussian",
+-      "estatuto_hoje": "[DECLARADO ate D-H — valor transcrito pela casa (abstract lido 30/09), fonte primaria NAO guardada por hash]",
++      "documentary_gate_status": "REAL_DOCUMENTARY_HASH_ONLY",
++      "documentary_source": {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\fontes_publicas\\tdcosmo_2025_v4.html",
++        "sha256": "b04dfc911acb4ad357224a3f2b432b407a109254277993f90a68a0e56137bf02"
++      },
++      "estatuto_hoje": "[REAL documental por hash no vínculo; admissão D-H PENDENTE]",
+       "fonte": "TDCOSMO 2025, arXiv:2506.03023 (abstract lido 30/09) [KNOWN]",
+       "origem": "C:\\IALD\\Bancada_Um\\investigacao\\fase3_leitores_h0\\PREREGISTRO_FASE3_LEITORES_20260930.json :: leitores_de_sombra.S5",
+       "papel": "TESTE",
+@@ -718,7 +941,8 @@
+     },
+     "L6_sirenes": {
+       "H0": 76.6,
+-      "estatuto_hoje": "[DECLARADO ate D-H — valor transcrito pela casa (abstract lido 30/09), fonte primaria NAO guardada por hash]",
++      "documentary_gate_status": "DECLARADO_UNVERIFIED",
++      "estatuto_hoje": "[DECLARADO: fonte sem bytes pinados; admissão D-H PENDENTE]",
+       "fonte": "LVK O4a cosmology summary (ligo.org, PDF lido 30/09) [KNOWN]",
+       "origem": "C:\\IALD\\Bancada_Um\\investigacao\\fase3_leitores_h0\\PREREGISTRO_FASE3_LEITORES_20260930.json :: leitores_de_sombra.S6",
+       "papel": "DIAGNOSTICO fora do composto (D-F)",
+@@ -731,6 +955,28 @@
+     }
+   },
+   "mu_do_rito": "q→0 (Thomson; Teorema da Escala)",
++  "nao_decide": [
++    "o gate (18 bandeiras, funcao so do formal)",
++    "a implicacao da QG e a correspondencia com a RG",
++    "beta (a regra matriz)",
++    "qual fundo e o da natureza (aqui so o primario do registro)",
++    "o mecanismo [CONJECTURE]",
++    "a dependencia em z de K (<= 0,9 % em z = 2, abaixo do poder)",
++    "D-H admission",
++    "F3.4 governing specification",
++    "NAT22/X13"
++  ],
++  "novidade_de_uso": {
++    "ao_lado_nao_decisorio": "a FORMA D1a foi escrita «exatamente a relacao observacional» (17/05/2026) e a classe do fluxo retida porque a Friedmann «nao resolve» (05/06/2026): selecao de hipotese, nao ajuste de parametro; pela lei de 05/10 nao e demerito",
++    "clausula_D-E": "o teste e use-novel se nenhum PARAMETRO numerico da lei foi ajustado a razao local/fundo: beta (valor 0,012 em 13/11/2025; forma alpha.sqrt(e) publicada 03/03/2026; lei de 17/05/2026), z* [KNOWN Planck], o expoente 2/3 (Raychaudhuri/FRW), o fundo nu do CMB+BAO",
++    "cronologia_por_hash": {
++      "arquivo": "evidencias/CRONOLOGIA_NOVIDADE_DE_USO.json",
++      "sha256": "8c13eb249b104564d8e97134126846cde96a7b35a68276f22b989973316a8023"
++    },
++    "etiqueta": "retrodição sem ajuste; no theory parameter fit to local H0",
++    "literatura": "Worrall, J. (1985/1989/2014) sobre use-novelty; Le Verrier 1859 (excesso do perielio de Mercurio) e Einstein 1915 [KNOWN — nao conferido em disco (F12)]",
++    "use_novel_parametros": true
++  },
+   "observable_TGL_H0_map": {
+     "readers": {
+       "L1_sh0es_r22": "Published SN/Cepheid local H0; TGL flow likelihood map OPEN.",
+@@ -786,9 +1032,9 @@
+     "primary_BG1_covariance_underpowered": false,
+     "primary_five": {
+       "maximum": {
+-        "BG1": 5.721774587340219,
+-        "BG2": 5.062098442138278,
+-        "BG3": 4.9891340608808115
++        "BG1": 5.721408279546075,
++        "BG2": 5.061835885148723,
++        "BG3": 4.988890990293536
+       },
+       "minimum": {
+         "BG1": 6.6232188561058924,
+@@ -798,9 +1044,9 @@
+     },
+     "six_diagnostic": {
+       "maximum": {
+-        "BG1": 5.465713519204234,
+-        "BG2": 4.876229419217009,
+-        "BG3": 4.816490487270793
++        "BG1": 5.465400476817195,
++        "BG2": 4.875999332526827,
++        "BG3": 4.816276071868675
+       },
+       "minimum": {
+         "BG1": 6.62984427898912,
+@@ -811,10 +1057,33 @@
+     "uses_only": "sigmas and background, no local reader H0 centers"
+   },
+   "runner_contract": {
++    "n_alvos_declarados_rule": {
++      "current_count": 2,
++      "current_ids": [
++        "L1b_sh0es_r25",
++        "L6_sirenes"
++      ],
++      "predicate": "NOT gate_verified AND NOT operator_admitted_in_pinned_D_H_register",
++      "primary_result": "INCONCLUSIVE_SYSTEMATICS until L1b/L6 gate verification/admission; D-H separately blocks opening",
++      "same_in": [
++        "preflight",
++        "staged_runner"
++      ],
++      "universe": "whole V1.x inventory, not active family"
++    },
+     "new_V1x_binding_and_gate": "REQUIRED; old official_archive_check pins V1 semantics and must not be used",
+     "no_target_ledger_write": true,
+     "read_source_bytes_once": true,
+     "real_data_opened": false
++  },
++  "sistematicas": {
++    "calibradores": "Cefeidas x TRGB/JAGB entram como estao; a dispersao interna decide INCONCLUSIVE",
++    "covariancia": "Cauchy-Schwarz sensitivity box, common lambda_N and lambda_T; SN/Pantheon cross terms OPEN",
++    "free_background": "NOT_DISCRIMINATED_FROM_FREE_BACKGROUND if abs(lnB_TGL_vs_free)<1",
++    "fundo": "BG1 preselected, BG2/BG3 diagnostic; executor marginalizes background",
++    "ladder": "ladder suffix requires lnB_shift<0 AND no-Cepheid power>=5",
++    "local": "velocidades peculiares / vazio local nao modelados (declarado)",
++    "multiplicidade": "familia entra no livro da Bancada (Sidak); local ao lado da corrigida"
+   },
+   "source_admission": {
+     "L4_new_source": "Pesce PDF pinned; F3.2 must require Table 2 numeric anchor and both asymmetric sides",
+@@ -823,5 +1092,12 @@
+     "opening_guard": "BLOCK_IF_ANY_REQUIRED_SOURCE_NOT_OPERATOR_ADMITTED_IN_PINNED_REGISTER",
+     "status": "D_H_PENDING_BEFORE_OPENING"
+   },
+-  "state": "RASCUNHO_NAO_CONGELADO"
++  "state": "RASCUNHO_NAO_CONGELADO",
++  "supersede": {
++    "R2_sha256": "4a6a927fb13ad2e3efbaeea92dd67f1953ff33675a73fd865993203c8b8c15b9",
++    "V1_remains_frozen": true,
++    "draft_R2_only": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F3.1\\PREREGISTRO_FASE9_RAZAO_DE_HUBBLE_V2_RASCUNHO_F31_20261008_R2.json"
++  },
++  "token_base_provisorio": "TGL_FASE9_RAZAO_DE_HUBBLE_V2_R3_DRAFT__LAW_D1B__BG1",
++  "token_estado": "RASCUNHO_NAO_CONGELADO__F3_4_NAT22_D_J_PENDING__GATE_UNTOUCHED"
+ }

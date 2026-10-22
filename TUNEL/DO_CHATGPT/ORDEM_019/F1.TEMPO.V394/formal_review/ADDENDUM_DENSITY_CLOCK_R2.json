@@ -1,0 +1,44 @@
+{
+  "schema": "f1-tempo-independent-lean-review-addendum/v1",
+  "created_utc": "2026-10-15T15:59:53.745633+00:00",
+  "unit": "F1.TEMPO.V394",
+  "claim_event": 839,
+  "verdict": "PASS_SOURCE_SEMANTICS_WITH_EXPLICIT_SCOPE",
+  "corrects": "R1 observation S7 was incomplete about the density-level clock, not a defect in the Lean statement. The R1 frozen source already contained the five density coherence lemmas.",
+  "parent_review": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\formal_review\\REVIEW_LEAN_SEMANTICS_R1.json",
+    "sha256": "99d50ff46e0a2753810300302c445752deba30ffb2096ffa7a4b23daf9470e20"
+  },
+  "inputs": {
+    "matrix": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\formal_matrix\\TimeGravitonMatrix.lean",
+      "sha256": "c3663a500e3a2d1746b827d3d739e489fc1feb7d1fdd5079618b96b55108cf46",
+      "unchanged_from_R1": true
+    },
+    "scalar": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\formal_flow\\TGLExt\\TimeGravitonScalar.lean",
+      "sha256": "7c175efa02569a677828470e25251d20a7d8f45a27c72e6fa5572e76d6900ff6",
+      "unchanged_from_R1": true
+    },
+    "flow": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\formal_flow\\TGLExt\\TimeGravitonFlow.lean",
+      "sha256": "fc6927d0bea6f65ebb982519cd323b55a9a46da45920ddfd2b2c0473ac2f83ca",
+      "unchanged_from_R1": true
+    },
+    "kraus": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\formal_flow\\TGLExt\\TimeGravitonKraus.lean",
+      "sha256": "5e6eb434e54db1e3ccd53924dffcf020f6b633fc77dfc7e7f86b27db11ff819c",
+      "unchanged_from_R1": true
+    }
+  },
+  "density_clock": {
+    "anchors": "TimeGravitonFlow.lean:171-203",
+    "identity": "coherence(T(t)X)/coherence(X)=exp((-gamma+2*i*Omega)*t), provided coherence(X) != 0",
+    "clock": "t=-log(abs(coherence(T(t)X)/coherence(X)))/gamma, provided gamma != 0",
+    "witness": "transportedRho = PxMinus is the transported normalized source pure density; coherence(transportedRho)=i/4 != 0",
+    "meaning": "The clock is realized on a concrete density and normalization uses the initial nonzero coherence. gamma>0 and SI units come from the physical contract. It is not an elapsed-time measurement from the invariant reading Eg(X) nor an inverse of a single periodic phase."
+  },
+  "proof_body_check": "Current Kraus includes Complex.star_def and smul_add fixes. Current bytes match the R1 reviewed snapshot exactly; no theorem changed by this note.",
+  "build_boundary": "Source semantics only; parent performs the combined prefixed-import build and global axiom audit.",
+  "scope": "M2 with specified Hamiltonian, jump, source and clock; no global4D or universal calibration."
+}

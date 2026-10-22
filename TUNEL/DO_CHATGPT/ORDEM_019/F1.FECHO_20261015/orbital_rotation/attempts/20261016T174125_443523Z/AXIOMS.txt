@@ -1,0 +1,86 @@
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 129ms
+import took 62.8s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T174125_443523Z\CompactBoostStrongDerivativeReductionR2.lean:42:2: error: Type mismatch: After simplification, term
+  HasCompactSupport.smul_left (HasCompactSupport.fderiv_apply ℝ hc momentumLongitudinalDirection)
+ has type
+  @HasCompactSupport MomentumCoordinates Fib instTopologicalSpaceProd
+    SubtractionMonoid.toSubNegZeroMonoid.toNegZeroClass.toZero
+    ((fun y => -shellEnergy y) • fun x => (fderiv ℝ g x) momentumLongitudinalDirection)
+but is expected to have type
+  @HasCompactSupport MomentumCoordinates Fib instTopologicalSpaceProd
+    SubtractionMonoid.toSubNegZeroMonoid.toNegZeroClass.toZero (compactBoostGenerator g)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T174125_443523Z\CompactBoostStrongDerivativeReductionR2.lean:73:4: error: Type mismatch: After simplification, term
+  HasDerivAt.comp 0 (Real.hasDerivAt_cosh (-0)) (HasDerivAt.neg (hasDerivAt_id 0))
+ has type
+  HasDerivAt (Real.cosh ∘ Neg.neg) 0 0
+but is expected to have type
+  HasDerivAt (fun s => Real.cosh s) 0 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T174125_443523Z\CompactBoostStrongDerivativeReductionR2.lean:75:4: error: Type mismatch: After simplification, term
+  HasDerivAt.comp 0 (Real.hasDerivAt_sinh (-0)) (HasDerivAt.neg (hasDerivAt_id 0))
+ has type
+  HasDerivAt (Real.sinh ∘ Neg.neg) (-1) 0
+but is expected to have type
+  HasDerivAt (fun s => -Real.sinh s) (-1) 0
+interpretation of Mathlib.Tactic._aux_Mathlib_Tactic_Convert___elabRules_Mathlib_Tactic_convert_1._boxed took 122ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T174125_443523Z\CompactBoostStrongDerivativeReductionR2.lean:78:10: warning: This simp argument is unused:
+  coordinateBoost
+
+Hint: Omit it from the simp argument list.
+  simp [̵c̵o̵o̵r̵d̵i̵n̵a̵t̵e̵B̵o̵o̵s̵t̵,̵ ̵s̵h̵e̵l̵l̵E̵n̵e̵r̵g̵y̵,̵[̲s̲h̲e̲l̲l̲E̲n̲e̲r̲g̲y̲,̲ momentumLongitudinalDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_compact' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_memLp' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostGenerator_square_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoostDerivative_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.coordinateBoost_negative_hasDerivAt_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_profile_hasDerivAt_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_boost_generator_exists' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.orbitalL2_tendsto_of_square_majorant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.compactBoost_hasDerivAt_of_square_majorant' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.118ms
+	blocked (unaccounted) 830ms
+	compilation (IR) 0.0959ms
+	compilation (LCNF base) 1.09ms
+	compilation (LCNF impure) 0.376ms
+	compilation (LCNF mono) 0.572ms
+	congr simp thm 4.29ms
+	dsimp 15.6ms
+	elaboration 152ms
+	fix level params 0.918ms
+	import 62.8s
+	initialization 30.4ms
+	instantiate metavars 1.23ms
+	interpretation 8.21s
+	let-to-have transformation 3.32ms
+	linting 18.7ms
+	norm_num 24.1ms
+	overlappingInstancesLinter 25.7ms
+	parsing 11.2ms
+	process pre-definitions 9.3ms
+	share common exprs 7.56ms
+	simp 111ms
+	tactic execution 371ms
+	tacticAnalysis 54.5ms
+	type checking 207ms
+	typeclass inference 2.35s

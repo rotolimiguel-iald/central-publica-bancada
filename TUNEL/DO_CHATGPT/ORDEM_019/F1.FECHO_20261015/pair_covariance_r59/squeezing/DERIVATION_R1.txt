@@ -1,0 +1,286 @@
+R59 — COVARIÂNCIA EXATA DE UM PAR BOSÔNICO COMPRIMIDO
+Autor: codex-pair-covariance-r59
+Estatuto: DERIVED, demonstração escrita e controles simbólicos; candidata à revisão independente.
+Não é uma compilação Lean, identificação do dispositivo, limite de rede ou aceite de R5.
+
+1. Fontes e convenções que permanecem distintas
+
+SOURCE_PINS_R1.json conserva os bytes, SHA256 e trechos numerados das fontes.
+graviton_paper.tex:202–216 prescreve modos de cavidade, condições de Dirichlet e
+[a_n,a_m†]=δ_nm. Em 252, S=exp[r(e^{iφ}a†b†−e^{-iφ}ab)]; em 255–257,
+a leitura é a redução de variância entre quadraturas. O Tratado, secao_03_particulas.tex:
+236, escreve o mesmo gerador multiplicado por r/2; a linha239 mantém ~e^{-2r}.
+Essas duas convenções de r não podem ser fundidas. Nenhum original foi alterado.
+
+Usamos dois modos DISTINTOS ortonormais a,b, com [a,a†]=[b,b†]=1 e demais
+comutadores entre modos nulos. Seu espaço é a Fock bosônica Γ_s(C²), infinita
+em número de ocupação. Não é C², C³, nem um truncamento do número de partículas.
+As fórmulas não se aplicam a i=j sem recalcular o gerador de um modo.
+
+Escreva ρ para o coeficiente real efetivo do gerador:
+  G_φ=e^{iφ}a†b†−e^{-iφ}ab,       S_ρ,φ=exp(ρ G_φ).
+No artigo de cavidades ρ=r_G; no Tratado ρ=r_T/2. A mesma transformação exige
+r_T=2r_G, não r_T=r_G. Pode-se tomar ρ≥0, pois S_{−ρ,φ}=S_{ρ,φ+π}; φ é módulo2π.
+A fonte não determina r ou φ em função de β, nem uma família r_ε,φ_ε de rede.
+
+Quadraturas dimensionais precisam de escalas adicionais do modelo físico.
+Aqui x_a=(a+a†)/√2, p_a=(a−a†)/(i√2), analogamente para b: [x_a,p_a]=i.
+Esta normalização é compatível com a normalização Segal do alvo canônico (§8).
+Não se fixa uma massa de oscilador, unidade de comprimento, E_ref, κ ou relógio.
+
+2. Existência unitária, domínio e identificação com a exponencial escrita
+
+Não tratamos a exponencial de um operador ilimitado como uma série formal sem domínio.
+Na representação de Schrödinger L²(R²), sobre Schwartz(R²), a=(x+∂_x)/√2 e
+b=(y+∂_y)/√2. Logo G_0=−y∂_x−x∂_y. Seja
+  M_ρ=[[coshρ,sinhρ],[sinhρ,coshρ]],   (S_ρ,0 f)(X)=f(M_{−ρ}X).
+det M_ρ=1 prova unitariedade por mudança de variáveis. M_{ρ+σ}=M_ρ M_σ
+prova a lei de grupo. A continuidade forte segue primeiro em C_c^∞ por
+convergência dominada numa vizinhança compacta de ρ=0, e então em todo L²
+por densidade e unitariedade. A derivada sobre Schwartz é G_0.
+
+O núcleo de Hermite finito, equivalente aos vetores de ocupação finita, é denso.
+Se v está nos setores de número total≤N, ||G_0 v||≤(N+2)||v||, e cada aplicação
+aumenta o limite de número em no máximo2. Assim ||G_0^k v|| é limitado por
+2^k (N+k+1)!/(N+1)! ||v||. A série de vetores analíticos converge para |t|<1/2.
+O teorema de vetores analíticos para operadores simétricos, aplicado a iG_0,
+identifica o gerador do grupo acima com o fecho essencialmente antiadjunto
+de G_0 nesse núcleo. Este passo funcional padrão é KNOWN e explicitado; não é CAS.
+
+Para φ geral, R_φ=exp[iφ(N_a+N_b)/2] é unitário diagonal e
+  G_φ=R_φ G_0 R_φ†,   S_ρ,φ=R_φ S_ρ,0 R_φ†.
+Isto constrói a exponencial do gerador da fonte, com sua fase e seu sinal.
+
+3. Vetor normalizado, derivada e momentos exatos
+
+Para todo ρ real finito, ponha t=tanhρ e z=e^{iφ}. Então
+  ψ_ρ,φ = sechρ Σ_{k=0}^∞ (z t)^k |k,k>.
+A norma quadrada é sech²ρ/(1−t²)=1. A série converge em norma, pois |t|<1.
+Todas as somas Σ k^j |t|^{2k} são finitas: o vetor pertence aos domínios
+necessários aos polinômios finitos em a,b,a†,b† usados abaixo.
+
+O coeficiente da derivada é
+  d/dρ[sechρ t^k] = sechρ[k t^{k−1}−(k+1)t^{k+1}],
+com k=0 interpretado separadamente como −sechρ tanhρ.
+É exatamente o coeficiente de G_φ ψ, porque a†b†|k−1,k−1>=k|k,k>
+e ab|k+1,k+1>=(k+1)|k,k>. Num intervalo compacto de ρ finito, |t|≤q<1
+dá majorantes geométricos para a série e sua derivada em norma. Assim
+ψ'=G_φ ψ, ψ(0)=|0,0>. Unicidade da equação do grupo unitário da seção2
+prova ψ_ρ,φ=S_ρ,φ|0,0>, sem introduzir uma hipótese de igualdade de estados.
+Esta prova da norma é no espaço infinito; cutoffs são uma entrega separada da raiz.
+
+Por comutadores no núcleo analítico, ou diferenciando S†aS e S†b†S:
+  S†aS=c a+z s b†,       S†bS=c b+z s a†,
+  c=coshρ, s=sinhρ, c²−s²=1.
+O sinal de m abaixo é positivo para a exponencial da fonte. Usar S†|0>
+em vez de S|0> daria outro estado, equivalente a inverter ρ/fase.
+
+No estado ψ, todas as médias lineares são zero. Os segundos momentos são
+  n=<a†a>=<b†b>=s²,
+  <aa†>=<bb†>=n+1=c²,
+  m=<ab>=z sc=½ z sinh(2ρ),       <a†b†>=conj(m),
+  <aa>=<bb>=<a†b>=<ab†>=0.
+Os adjuntos e a comutação completam a tabela. Há duas verificações independentes:
+(i) transformação de operadores e ação exata de palavras sobre o vácuo;
+(ii) séries geométricas: n=t²/(1−t²), m=z t/(1−t²).
+Como controle de quarta ordem, <N_a N_b>=n+2n² e
+<ab a†b†>=(n+1)²+|m|². A paridade explica por que a média linear zero
+não apaga a fase da correlação anômala m.
+
+4. Covariância, positividade, CCR e caráter quasi-free
+
+Ordene R=(x_a,p_a,x_b,p_b)^T e Ω=diag(J,J), J=[[0,1],[-1,0]].
+Para u real, Q(u)=u^T R. Seja V_ij=½< R_i R_j+R_j R_i >.
+Com h=cosh(2ρ) e d=sinh(2ρ),
+             [ h       0       d cosφ    d sinφ ]
+  V = ½      [ 0       h       d sinφ   −d cosφ ] .
+             [ d cosφ  d sinφ  h          0    ]
+             [ d sinφ −d cosφ  0          h    ]
+O núcleo não simetrizado é C=V+iΩ/2, portanto
+  <Q(u)Q(v)>=u^T C v,   [Q(u),Q(v)]=i u^T Ω v.
+
+A matriz real da transformação S†RS=T R é
+      [ c  0  s cosφ   s sinφ ]
+  T = [ 0  c  s sinφ  −s cosφ ].
+      [ s cosφ  s sinφ  c  0 ]
+      [ s sinφ −s cosφ  0  c ]
+Ela satisfaz TΩT^T=Ω, é invertível e V=TT^T/2.
+Defina Z(u)=(u1+i u2,u3+i u4) e K_ρ u=Z(T^T u). Então
+  C_ij=½< K_ρ e_i,K_ρ e_j >_{C²},
+  u^T C v=½< K_ρ u,K_ρ v >,   Im< K_ρ u,K_ρ v >=u^TΩv.
+Esta fatoração prova C≥0 para coeficientes complexos; não é somente V≥0.
+O script verifica a fatoração inteira, CCR, VΩV=Ω/4 e det V=1/16.
+Os autovalores ordinários de V são e^{2ρ}/2 e e^{−2ρ}/2, cada um duas vezes.
+Os autovalores simpléticos são1/2: o estado Gaussiano é puro.
+
+Outra apresentação positiva é a Gram das palavras (a,b,a†,b†):
+  H=[[n I₂,conj(m) P_swap],[m P_swap,(n+1)I₂]],   P_swap=[[0,1],[1,0]].
+Em geral H≥0 equivale a n≥0 e |m|²≤n(n+1), pela decomposição em dois
+blocos Hermitianos2×2. Aqui há igualdade |m|²=n(n+1), incluindo n=m=0.
+Positividade do estado em TODA a álgebra Weyl não é inferida apenas dessa matriz:
+ela já segue do vetor normalizado S|0> construído na seção2–3.
+
+Para W(u)=exp(iQ(u)), a CCR dá
+  W(u)W(v)=exp[−i u^TΩv/2]W(u+v).
+O vácuo possui <W(u)>_0=exp(−||u||²/4), pela fórmula de deslocamento
+ou pela integral Gaussiana em Schrödinger. O transporte por T dá exatamente
+  ω_ρ,φ(W(u))=exp[−u^T V u/2].
+Logo o estado é centrado quasi-free; seus n-pontos seguem Wick. O cálculo
+de quarta ordem é um controle dessa cadeia, não uma prova por amostragem.
+
+5. Leituras de quadratura, alinhamento e convenção do Tratado
+
+Defina X_a(θ)=(e^{−iθ}a+e^{iθ}a†)/√2 e X_b(η) analogamente. Então
+  Var X_a(θ)=Var X_b(η)=n+1/2,
+  Cov(X_a(θ),X_b(η))=Re[e^{−i(θ+η)}m],
+  D(θ,η):=Var[X_a(θ)−X_b(η)]
+         =cosh(2ρ)−sinh(2ρ)cos[φ−θ−η].
+Para ρ≥0, D_min=e^{−2ρ} quando θ+η=φ; D_max=e^{2ρ} no antialinhamento.
+As quadraturas P_a(θ)=X_a(θ+π/2), P_b(η)=X_b(η+π/2) satisfazem
+Var[P_a(θ)+P_b(η)]=D(θ,η); o par EPR de diferença/soma comuta.
+
+Portanto o ~e^{−2r_G} da fonte de cavidades é compatível com o estado escrito
+para quadraturas alinhadas e a normalização acima. Não vale para φ arbitrário
+com eixos de leitura fixos. Para φ=π e eixos zero há e^{+2ρ}, não squeezing.
+No Tratado, o gerador r_T/2 dá D_min=e^{−r_T}. O ~e^{−2r_T} escrito na linha239
+não é a mesma lei sob essas definições. Um prefator constante não corrige a
+dependência exponencial; seria preciso explicitar outra convenção de parâmetro
+ou observável. A discrepância fica ao lado, sem alterar o texto do autor.
+
+Se a leitura física for ℓ_a X_a−ℓ_b X_b, com escalas reais positivas,
+  Var=(ℓ_a²+ℓ_b²)(n+1/2)−2ℓ_aℓ_b Re[e^{−i(θ+η)}m].
+No alinhamento isto é
+  ¼[(ℓ_a−ℓ_b)² e^{2ρ}+(ℓ_a+ℓ_b)² e^{−2ρ}].
+Logo unidades e equivalência dos dois canais não podem ser suprimidas para
+declarar redução física de ruído. O cálculo atual é adimensional e exato.
+
+6. Recuperação de fase e sua singularidade
+
+Como os modos distintos comutam,
+  Re m=<x_a x_b>=−<p_a p_b>,
+  Im m=<x_a p_b>=<p_a x_b>.
+Equivalentemente, medindo a variância local n+1/2 e as diferenças com
+θ+η=0 e π/2, respectivamente D_0,D_{π/2}, obtém-se
+  Re m=(2n+1−D_0)/2,  Im m=(2n+1−D_{π/2})/2.
+Para ρ>0,
+  φ=atan2(Im m,Re m) mod2π,
+  ρ=arsinh(√n)=½ arsinh(2|m|).
+Uma única diferença mede apenas cosφ e não distingue, por exemplo, φ de −φ.
+
+O Jacobiano de (ρ,φ)↦(Re m,Im m) tem determinante sinh(4ρ)/4.
+Para ρ=0, n=m=0 e ψ é o mesmo vácuo para TODA φ: a fase é não identificável,
+não zero por convenção. Perto do vácuo, ||∇_m φ||=1/|m| diverge; a inversão
+é mal condicionada. Não se promete recuperação estatística exata com ruído.
+
+φ é relativa a eixos de quadratura/pump nomeados. Refasar os modos também
+refasa m; a combinação φ−θ−η é invariante. Não se extrai uma fase absoluta
+sem referência de leitura, nem se iguala a_i a σ+ do modelo OH.
+
+7. Dinâmica mínima condicional, sem escolher um relógio físico
+
+Se, e somente se, a dinâmica considerada for a componente livre
+H=ℏω_a(N_a+1/2)+ℏω_b(N_b+1/2), com frequências positivas nomeadas,
+e o estado evoluir por exp(−iHt/ℏ), então
+  φ(t)=φ(0)−(ω_a+ω_b)t,
+  m(t)=m(0) exp[−i(ω_a+ω_b)t],
+  <H>−<H>_vac=ℏ(ω_a+ω_b)sinh²ρ.
+A frequência de fase do par é a SOMA, não a frequência de um modo por nome.
+O fator global de fase do vácuo não modifica as covariâncias. Estas fórmulas
+são uma consequência do Hamiltoniano EXPLÍCITO acima, não a afirmação de que
+a preparação/dinâmica dissipativa do dispositivo já é essa. O artigo contém
+saltos de par e outros termos de Lindblad, que requerem o gerador completo.
+Em particular β, E_ref e κ não são determinados por este cálculo de covariância.
+
+8. GNS/Bogoliubov e comparação exata com circularSmear
+
+Identificando Z(u)=z∈C², o mapa da seção4 é
+  k_ρ,φ(z)=c z+s e^{iφ} P_swap conj(z).
+Ele é real linear, simplético, invertível, com inversa c z−s e^{iφ}P_swap conj(z).
+Para ρ≠0 NÃO é complexo linear e NÃO é um unitário de uma partícula:
+  k(i z)−i k(z)=−2i s e^{iφ}P_swap conj(z).
+Sua implementação é o squeezing S na Fock, que mistura criação/aniquilação;
+não é a segunda quantização Γ(U) de um unitário complexo U.
+
+Uma realização GNS concreta do estado sobre Weyl(R⁴,Ω) é
+  (Γ_s(C²), π_ρ(W(u))=W_0(k_ρ(Z(u))), |0>).
+k_ρ é sobrejetor como mapa real, então os vetores Weyl sobre o vácuo são
+totais; esta representação é cíclica. A identidade da função característica
+prova que realiza o MESMO estado. O unitário S leva essa realização à
+representação original com vetor ψ=S|0>. Não se assume uma igualdade GNS.
+
+As fontes canônicas efetivamente lidas dizem:
+  circularSmear f = circularH1.symm(physicalSmearCLM f);
+  physicalSmearCLM = momentumSmearCLM ∘ physicalFourierCLM;
+  physicalTestPairing f g = Im<circularSmear f,circularSmear g>;
+  physicalField f Ω = (√2)^{-1} oneParticle(physicalSmearCLM f).
+CircularPhysicalFieldTransportR1:24–32,90–107 transporta campo e domínio por
+Γ(circularH1), um unitário COMPLEXO. PhysicalCircularRapidityR1:14–30 fornece
+o representante a.e. a partir do coeficiente Maxwell. PhysicalCanonicalWedgeEqualityR3:
+19–29 fornece densidade e a igualdade localizada da cunha já construída.
+São o alvo existente; não foram recompilados nem substituídos nesta rodada.
+
+Para deixar explícito o alcance finito, escolha h1,h2∈H1 realmente ortonormais
+e ponha V_pair(z)=z1 h1+z2 h2. Então V_pair é uma isometria complexa, e
+  ½<V_pair k_ρ(Z(u)),V_pair k_ρ(Z(v))>=u^T C v,
+  Im<V_pair k_ρ(Z(u)),V_pair k_ρ(Z(v))>=u^T Ω v.
+Isto é uma composição matemática exata no MESMO H1, para um par escolhido.
+A inclusão Γ_s(C²)→Γ_s(H1) envia |n,m> ao vetor de ocupação em h1,h2,
+mantendo o vácuo do complemento ortogonal; envia ψ ao par comprimido nesse
+subespaço. Alternativamente, transporta-se o squeeze aos observáveis e usa-se
+o vácuo. Essas duas apresentações são unitariamente equivalentes; não se
+deve mudar estado/observável sem declarar a transformação.
+
+Se h_j vier de smears g_j independentes, o Gram G_ij=<g_i,g_j> é positivo
+definido e V_pair=H G^{-1/2}, H(z)=z1g1+z2g2, dá ortonormalização explícita.
+Isto pode misturar os canais de leitura e o suporte; a origem física desses
+g_j e a preservação da localização continuam obrigações. DenseRange não
+significa que todo perfil desejado seja imagem exata de um teste, nem nomeia
+automaticamente os modos das duas cavidades.
+
+Para uma identificação por testes reais concretos F_j, a equação finita a
+demonstrar é h_j=circularSmear(F_j) junto com a Gram apropriada; para realizar
+a apresentação GNS no vácuo, ela é
+  circularSmear(F_ρ(u))=V_pair k_ρ(Z(u))    para todo u∈R⁴,
+com F_ρ real linear e suas condições de suporte verificadas. A fonte e este
+cálculo NÃO fornecem F_ρ a partir do aparelho. A complexa linearidade de
+circularSmear não impede um F_ρ real linear; tampouco o constrói.
+
+No campo normalizado, a amplitude já fixa α=sqrt((2π)^{-3}) multiplica o
+smear, e a forma de covariância no vácuo é α²<circularSmear f,circularSmear g>/2.
+Esta comparação usa <Φ(f)Ω,Φ(g)Ω>; não pressupõe um produto de operadores
+fora de seu domínio comum.
+Para esse campo, a equação anterior usa α circularSmear(F_ρ(u)) no lado
+esquerdo. α não é um parâmetro ajustável para fazer coincidir covariâncias.
+
+O vetor squeezed tem número esperado finito e todos os momentos de número,
+mas soma INFINITA de setores. Não foi provada sua pertença ao regularFockDomain
+nomeado das somas coerentes finitas da cadeia R8. Tampouco se infere domínio
+de geradores espaciais de finitude dos momentos do número: os perfis importam.
+
+9. Resíduo R5 integral e controles executados
+
+O modelo de cavidade da fonte é Ψ escalar, com ω²=k²+m_eff²+2ξR e contorno.
+O alvo é H1 orbital Maxwell, sem massa, helicidades±1 em Minkowski. Dois
+modos bosônicos admitem a realização abstrata finita da seção8, mas isso
+não identifica campos, equações, polarizações, estados preparados ou unidades.
+Não se impõe um subespaço finito invariante sob todos os boosts: a eventual
+ação pode mover perfis entre descrições e existir no limite, como em R57.
+
+Continuam necessários: mapas físicos das excitações/testes; covariâncias
+C_ε, inclusões compatíveis, limite denso e controle da dinâmica; depois o
+entrelaçamento Poincaré/reflexão/localização do contrato integral. As igualdades
+de refinamento e de grupo não foram assumidas para declarar resultado físico.
+A obstrução R57 vale para sua torre produto, não exclui o estado correlacionado.
+
+verify_squeezing_r1.py produziu SYMBOLIC_RESULTS_R1.json: 57 verificações
+(incluindo16 recuperações sintéticas de fase) e10 controles negativos.
+Os controles rejeitam: sinal errado de m; confusão r versus r/2; fase não alinhada;
+|m| excessivo que viola positividade; apagar correlações mudando pureza;
+trocar mistura antilinear por linear; chamar k unitário complexo; recuperar
+φ de uma só diferença; negar fase por média linear zero; Gram de perfis não
+ortonormal ignorada. Em ρ=0, os casos de recuperação retornam fase não
+identificável. Dados sintéticos não são dados observados nem calibração.
+
+As identidades infinitas e os domínios têm a prova escrita acima; SymPy
+verifica álgebra exata, não substitui análise funcional. Não houve provedor,
+build Lean, execução de um.py, alteração de memória/kernel/original ou aceite.

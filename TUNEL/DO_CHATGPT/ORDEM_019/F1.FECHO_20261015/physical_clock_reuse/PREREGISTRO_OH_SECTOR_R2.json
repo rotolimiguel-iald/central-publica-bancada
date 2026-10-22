@@ -1,0 +1,83 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "created_utc": "2026-10-15T17:59:34.153988+00:00",
+  "status": "INPUT test fixed before execution; DERIVED configured finite model, not physical measurement",
+  "source_pins": {
+    "superconductor": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+      "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e",
+      "bytes": 76972
+    },
+    "alpha_source": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\Skygrid\\SkyGrid_Piloto\\skygrid_sim\\tgl_core.py",
+      "sha256": "a1e103cd08eb3f45144200b0c6c588589d267868cd85101c527138e3bce81f3f",
+      "bytes": 5530
+    },
+    "old_device_spec": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\PREREGISTRO_DEVICE_R1.json",
+      "sha256": "6e4e2ce553aea405878e967df9314be2af030b45e234dd35dbe1b30731d2560a",
+      "bytes": 6577
+    },
+    "old_device_runner": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\run_finite_device.py",
+      "sha256": "89332d76e3fdcbf67f50e8328dfd9316196d7ef18ccf710666eb544426aa17be",
+      "bytes": 17373
+    },
+    "physical_parameters": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\physical_parameters.py",
+      "sha256": "a2a698d0aa6d63ddfe52d116943c47d59d985aa129f10db6a514661785f7294b",
+      "bytes": 6206
+    }
+  },
+  "runner": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_clock_reuse\\verify_oh_sector_r2.py",
+    "sha256": "37af91f7af13407f6fa1f33cce83d303dc971421fc1696471fa708829a1a7f0c",
+    "bytes": 11286
+  },
+  "units": {
+    "primary": "SI: H and V0,Eref in J, omega,gamma in s^-1, t in s",
+    "old_rate_control": "Original dimensionless finite_device clock, omega_OH and gamma_dephasing retained together; never relabeled as SI"
+  },
+  "parameters": {
+    "alpha": "AST ALPHA_FINE_CODATA_2018, checked against _SEALED_ALPHA_CODATA_2018; beta=alpha*sqrt(e) at runtime",
+    "omega_OH": "Parse source equation line367, Portuguese MHz formatting; omega=2pi*f_MHz*1e6",
+    "hbar": "6.62607015e-34/(2pi), exact SI Planck definition; same constant as pinned physical_parameters.py",
+    "V0_and_Eref": "hbar*omega_OH/2",
+    "gamma_phi": "beta*omega_OH/4"
+  },
+  "restrictions": [
+    "g_JC=Omega_Rabi=gamma_Lambda=gamma_OH=0",
+    "cavity vacuum spectator sector",
+    "bare effective OH Hamiltonian H=hbar*omega_OH*|e><e|",
+    "only sigma_z conventional dephasing remains",
+    "The bare excitation zero belongs to this effective Hamiltonian, not a proof of absolute energy in nature"
+  ],
+  "tests": [
+    "Compare complete 4x4 Liouvillians and separate dissipators for root(H) and gamma_phi D[Z]",
+    "Verify unitary basis map into Hg=-V0 sigma_y and covariance of both operators",
+    "Verify coherent eigenvalue, reading preservation and CPTP channel identities at gamma*t in [0,0.1,1,5]",
+    "Negative: old finite_device rate with its old omega must mismatch",
+    "Negative: Rabi H proportional sigma_x with sigma_z jump must mismatch root(H)",
+    "Negative: H+cI leaves commutator unchanged but changes root rate; centered indefinite Hg cannot be used as positive H"
+  ],
+  "numeric_policy": {
+    "relative_tolerance": 1e-12,
+    "negative_min_relative_residual": 0.1,
+    "channel_scaled_times": [
+      0.0,
+      0.1,
+      1.0,
+      5.0
+    ],
+    "no_fit_or_parameter_search": true
+  },
+  "forbidden_claims": [
+    "hardware measurement",
+    "full nonunital holographic J equals root dephasing",
+    "gamma_phi independently measured or predicted by source",
+    "universal energy zero or kappa clock calibration",
+    "nature confirmation or gate movement"
+  ],
+  "new_observed_data": false
+}

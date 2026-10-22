@@ -1,0 +1,25 @@
+{
+  "status": "INPUT_SYNTHETIC_DESIGN",
+  "common_source": {
+    "Mf_det_msun": "Uniform(0.5,2.0)*V1_blind_median_per_event",
+    "chi_f": "Uniform(0,0.98)",
+    "shared_extrinsic_parameters": "same source in H1/L1 and 220/440"
+  },
+  "mode_nuisance": {
+    "A220": "log_uniform(1e-3,1)*reference_IMR_amplitude",
+    "A440_over_A220": "Uniform(0,1)",
+    "phase220_rad": "Uniform(0,2*pi)",
+    "phase440_rad": "Uniform(0,2*pi)"
+  },
+  "nulls": [
+    "Kerr_220_440_GR",
+    "B_220_440_V1_clock"
+  ],
+  "B_deformation": {
+    "delta_tau_220": "fixed -x220/(1+x220)",
+    "delta_tau_440": "fixed -x440/(1+x440)",
+    "x": "beta_runtime*(2*pi/kappa_hat(chi_f))*N_mode(chi_f); no fit of beta"
+  },
+  "nuisance_reference": "c(sigma)=c0+kc*sigma profiled under both nulls per V1 C6",
+  "boundary_rule": "if prior clips either prediction, stop with INCONCLUSIVE_SYSTEMATICS"
+}

@@ -1,0 +1,62 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selection_variation_r85\boundary_builder\PalatiniBoundaryR85_2.lean:68:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  coordinatePartial
+    (fun y => ∑ k, (((fun y => q y b k) * fun y => C y k a b) - (fun y => q y b a) * fun y => C y k k b) y) x k
+in the target expression
+  coordinatePartial (fun y => ∑ j, (q y b j * C y j a b - q y b a * C y j j b)) x k =
+    ∑ j,
+      (tensorFieldJet q x k b j * C x j a b + q x b j * connectionFirstJet C x k j a b -
+        (tensorFieldJet q x k b a * C x j j b + q x b a * connectionFirstJet C x k j j b))
+
+q : TensorField4
+C : ConnectionField4
+x : Coordinate4
+hq : ∀ (b j : Fin 4), DifferentiableAt ℝ (fun y => q y b j) x
+hC : ∀ (j a b : Fin 4), DifferentiableAt ℝ (fun y => C y j a b) x
+k a : Fin 4
+hb : ∀ (b : Fin 4), DifferentiableAt ℝ (fun y => ∑ j, (q y b j * C y j a b - q y b a * C y j j b)) x
+b : Fin 4
+a✝ : b ∈ Finset.univ
+⊢ coordinatePartial (fun y => ∑ j, (q y b j * C y j a b - q y b a * C y j j b)) x k =
+    ∑ j,
+      (tensorFieldJet q x k b j * C x j a b + q x b j * connectionFirstJet C x k j a b -
+        (tensorFieldJet q x k b a * C x j j b + q x b a * connectionFirstJet C x k j j b))
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  function expected
+    q y b
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\selection_variation_r85\boundary_builder\PalatiniBoundaryR85_2.lean:94:4: warning: This simp argument is unused:
+  Matrix.sum_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [directionCovariantDerivative, mixedCovariantDerivative, connectionFirstJet,
+      palatiniCurrent, Matrix.mulVec, dotProduct, Matrix.mul_apply, Matrix.sub_apply,
+      Matrix.add_apply, Matrix.neg_apply, Matrix.transpose_apply, Matrix.smul_apply,
+  ̵  ̵ ̵ ̵M̵a̵t̵r̵i̵x̵.̵su̵m_̵a̵p̵p̵l̵y̵,̵ ̵s̵m̵ul_eq_mul,
+  ̲  ̲ ̲ ̲Fin.sum_univ_four]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'ChatgptAudit.PalatiniBoundaryR85.directionCovariantDerivative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.PalatiniBoundaryR85.curvature_variation_full_covariant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.PalatiniBoundaryR85.ricci_variation_palatini' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.PalatiniBoundaryR85.palatiniCurrent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.PalatiniBoundaryR85.current_partial' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.PalatiniBoundaryR85.current_covariant_derivative' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.PalatiniBoundaryR85.contracted_ricci_is_current_divergence' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.PalatiniBoundaryR85.actual_metric_ricci_boundary_derivative' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+
+STDERR:
+

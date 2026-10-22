@@ -1,0 +1,173 @@
+<!-- Relatório do auditor 1 da gerência (22/09/2026), cópia integral para a ORDEM 013-bis com este cabeçalho de 2 linhas (o sha256 difere do original só por isso). Frente: C0–C2. Os caminhos «...\scratchpad\ordem013\auditoria\...» citados são efêmeros: as cópias dos scripts e saídas estão em auditoria_da_gerencia\scripts\ (ver README_INSUMOS.md). -->
+
+SUMMARY: Auditei C0, C1 e C2 da ORDEM 013 (sha16 conferido d4440c6a28eaad4b; manifesto dos insumos com 37 arquivos e zero divergência; custódia da bancada com frozen_integrity_ok). Trabalhei só em leitura, com scripts próprios em ...\scratchpad\ordem013\auditoria\C0C1C2\ (leaver.py, recompute.py, realization.py, gksl_oracle.py).
+
+**Os números estão certos.** Refiz de forma independente:
+- a cobertura 38/38 das linhas, byte a byte;
+- a álgebra GKSL, com resíduo 8e-17 e a taxa de saltos não invariante;
+- as unidades do 10⁷⁶: (M☉/m_P)² = 8,35e75, e GM/c³ é um tempo;
+- os QNM, por um solver de Leaver próprio, que bate com o `qnm` da bancada a 1e-13;
+- δ_B(0,68) = −0,0203;
+- R-MOD no GW250114 = −0,0368;
+- a raiz k̄ = 0 em Sr = 1,62e13 s⁻¹;
+- a realização única, com δτ̂ ≈ 0,29 do ensemble e dp(δf̂) ≈ 2,3%.
+
+**A entrega não está completa, e a bancada não diz que está** (goal_status WORK_RESUMED_NOT_COMPLETE). Na minha frente:
+- **PAGO_FALSO (1):** a bandeira EXCLUÍDA_SE_UNIVERSAL da R-MOD está null, contra a v369 (unruh_g_excluded = true) e o texto da própria bancada. R-A e R-RAIZ-EP4 têm taxas idênticas e bandeiras diferentes.
+- **NAO_PAGO (6):**
+  - passo 5 da R-MOD: a coincidência com a raiz k̄ = 0 é numérica, e o spin separa as duas;
+  - passo 1 da R-MOD: Kay–Wald só pelo abstract; Bisognano–Wichmann e Sewell nunca conferidos; rotas a ≠ 0 não discutidas;
+  - teorema citado na questão de tipo;
+  - 'qual observável é o físico' na C2;
+  - fichas de REAPROVEITAMENTO;
+  - fechamento do M1 com parada.
+- **Defeitos de conteúdo:** a C0 omite a tensão D1 V3 (β livre a 3,01σ de α√e) e o sinal δτ̂ > 0 dos catálogos. Cita um template (sha ef1b4d69) que foi sobrescrito sem backup e já não existe em disco.
+- **Fora da frente:** a bancada não parou no M1 e rodou a C6 antes do portão do poder.
+
+**O que contribui para o progresso:**
+- o texto colado fica auditado linha a linha: o alarme do 10⁷⁶ é dimensionalmente falso, e as quatro exigências dele eram legítimas e agora têm resposta;
+- existe a tabela de 10 leituras com Γ(M, a), relógio e estatuto; nenhuma leitura escolhida, e a coluna das falas do operador em branco;
+- as leituras com efeito visível no GW250114 ficam entre ~0,3σ e 1,2σ (R-B 0,34σ; R-MOD/RAIZ-0 ~0,64σ; R-LIN ~1,2σ), e todo relógio universal já é decidido pelos relógios de laboratório;
+- o achado físico mais novo: numa realização única, a assinatura prevista é sobretudo um espalhamento de ~2% em δf̂ por evento, e não um amortecimento limpo, o que muda o observável certo para a largura populacional de δf̂;
+- há ainda um indício de viés positivo do estimador em δτ̂ quando o ruído é baixo (+0,03 com efeito nulo, em ruído sintético).
+
+**É preciso uma nova ordem, curta e corretiva** (emenda do M1), não uma refação: corrigir as bandeiras, fechar os passos 1 e 5 da R-MOD, completar as frases da C0, decidir na C2 qual observável é o físico e levar isso à C4/C5, e entregar o M1 formal com as fichas. Nenhum veredito proibido; o gate não foi tocado; NOT_FALSIFIED ≠ CONFIRMED em todo o material conferido.
+
+## CRITERIA
+- [PAGO_VERIFICADO] C0(a) — segmentação T01…Tnn cobrindo toda linha não vazia 3–65 do verbatim :: Script próprio: o verbatim (sha16 6600f4e99c79845e, 65 linhas, LF) tem 38 linhas não vazias em 3–65. C0_AUDITORIA.json (sha16 f0009e1194282434) tem 24 Tnn cobrindo 38/38, com zero linha faltando e zero divergência byte a byte entre o campo 'verbatim' e a linha do arquivo. T01 junta 12 linhas de título/transição como NÃO_APLICÁVEL.
+- [PAGO_VERIFICADO] C0 — vereditos dentro do conjunto fechado + coluna «o que o texto acerta» + frase corrigida + evidência :: Os 24 vereditos estão todos no conjunto da ORDEM §3 C0 e nenhum campo está vazio (conferido por script). O conteúdo tem lacunas, listadas nos defeitos: T11 omite a tensão do D1, T10 omite o sinal, T19/T02 ficam rasos e T20/T21 não trazem β contra σ.
+- [PAGO_VERIFICADO] C0(b) — auditoria dimensional por script próprio, CODATA 2018, origem do 10⁷⁶ como hipótese :: verify_c0_c3.py:61-75 usa expoentes SI [M,L,T] com assert, e o resultado está em C0_C3_checks.json 'units'. Recalculei com G e ħ CODATA 2018 e GM☉ IAU: GM/c³ para 60 M☉ = 2,9553e-4 s = 5,4817e39 t_P, e (M☉/m_P)² = 8,3468e75. Os números batem. A origem do 10⁷⁶ vem rotulada 'CONJECTURE'.
+- [PAGO_VERIFICADO] C0(c) — oráculo GKSL independente: Liouvilliano construído e diagonalizado, saltos × decoerência, não invariância sob L→L+c :: verify_c0_c3.py:13-34: resíduo dos autovalores 1,4e-17 e gerador invariante sob L+1,7·I (7,3e-16), enquanto Tr(L†Lρ) vai de 0,02196 a 3,303. Refiz o oráculo com outra construção (ação nos elementos de base, vec por linhas, d = 5): resíduo 8,3e-17, e invariância para c real ∈ {0,3; 1,7; −2,2} (≤ 2,5e-15) com a taxa de saltos indo de 0,0241 a 0,189, 3,34 e 4,31. Um c complexo quebra a invariância (0,32), o que é coerente com a ORDEM, que diz 'c real'.
+- [PAGO_VERIFICADO] C0(d) — questão de tipo: Γ nas duas escolhas principais de parte positiva :: C0_C3_checks.json 'signed_modular_extensions' dá as taxas para K₊ e |K| no espectro [−3,−1,0,1,3], com selection_status = INPUT_NOT_FIXED_BY_TOMITA_CONJUGATION. Recalculei: K₊ dá rate(0,1) = β/2 = 0,0060157 e rate(+3,−3) = 0,018047; com |K|, rate(+3,−3) = 0, ou seja, |K| nunca defasa o par ±k. Isto a bancada não disse no texto.
+- [NAO_PAGO] C0(d) — 'com teorema citado': qual operador positivo substitui √K e a não existência do −log ρ unilateral em III₁ :: Cita-se só ContinuousModularZero.lean:80-94 (JKJ = −K, KΩ = 0, face finita). ModularFirstLaw.lean (o K unilateral, que está nos insumos com sha16 aee3eb49a6d0544e) não aparece em C0, C1 nem C2. A ausência de matriz densidade/traço em III₁ é afirmada em C2_MAPEAMENTO_ANALITICO.md:19 sem teorema nem fonte.
+- [PAGO_VERIFICADO] C0(e) — nenhuma frase atribuída à TGL sem fonte :: Toda afirmação sobre a TGL cita um.py (cópia congelada sha16 d9f5bd5dffc3333d) com linha, e conferi as âncoras 2311, 2831, 2838, 190961, 190966 e 191013, além de v2.py:139-141 (sha16 0793c58d6995194b). Ressalva: a referência 'template' (sha ef1b4d69…) não é recuperável; ver os defeitos.
+- [PAGO_VERIFICADO] §2.2 — literatura primária arquivada com sha256 e escopo de leitura (integral × abstract) declarado :: LITERATURE_MANIFEST.json arquiva o HTML do GW250114 2509.08099 (sha 9efcdea9…), 2406.00874, Simon–Jaksch (quant-ph/0406007, DOI 10.1103/PhysRevA.70.052104, conferido no HTML) e o abstract do GWTC-5. Kay–Wald e Milburn 1991 falharam (403), o e-print do GW250114 também (406); isso está declarado e corrigido ao lado em C0_ADENDO_ESCOPO_LITERATURA.md. Porém C0_AUDITORIA.json nunca foi regenerado: segue com status '…PRIMARY_SOURCE_ARCHIVING_PENDING' e cita 'lvk' por URL, não pela cópia local com sha.
+- [PAGO_VERIFICADO] C1 — todas as leituras pedidas (R-A, R-B, R-MOD, R-PROP, R-GLOBAL, R-RAIZ com k̄ ∈ {0, repouso, E_P/4, coerente}, R-LIN) :: C1_LEITURAS.json (sha16 333a9d8b7d650aff, igual ao da nota) tem 10 linhas: R-A, R-B, R-MOD, R-RAIZ-0, R-RAIZ-EP4, R-RAIZ-REST, R-RAIZ-COHERENT, R-LIN, R-GLOBAL e R-PROP.
+- [PAGO_VERIFICADO] C1 — colunas pedidas (operador, relógio + estatuto, FP-5, Γ(M_f,a_f), dependência em D, x e Γ/ω nos dois eventos, estatuto, canon arquivo:linha ou nova) :: Os campos operator, clock, clock_status, compatible_with_FP5, rate_or_spectral_exponent, distance_dependence, measurements (GW150914 = per_series[2], M = 67,7375, χ = 0,67122; GW250114 = medianas do pSEOB, M = 68,287, χ = 0,67847, z = 0,08425), canonical_scope e sources estão presentes nas 10 linhas. As âncoras conferem nas cópias congeladas, cujo hash é igual ao da tabela §6.
+- [PAGO_VERIFICADO] C1 — coluna «relação com as falas do operador» EM BRANCO :: relation_to_operator_16Sep = null e physical_selection = null nas 10 linhas (script).
+- [PAGO_VERIFICADO] C1 — nenhuma leitura escolhida, preferida ou descartada :: hypothesis_selected = false e C1_TABLES.hypothesis_selection = 'NONE'. O grep de prefer/descart/favor/recommend/CONFIRMED/PROVED em C0–C2 não dá nenhuma ocorrência normativa.
+- [PAGO_VERIFICADO] C1 — R-MOD rotulada [CONJECTURE] (hipótese da gerência, não cânone) :: canonical_scope = NEW_MANAGEMENT_HYPOTHESIS__NOT_TGL_CANON e clock_status = CONJECTURE_KMS_OSCILLATOR_IDENTIFICATION.
+- [NAO_PAGO] C1 R-MOD passo 1 — Kay–Wald: o que provam para Kerr; a = 0 (Hartle–Hawking/Sewell) × a ≠ 0 (restrição de região/modo ou estado de Unruh sem KMS) e o que se perde :: Kay–Wald só pelo abstract (declarado). Bisognano–Wichmann e Sewell nunca foram conferidos (zero ocorrência em C0–C2). A bancada escolhe um único modo co-rotante com ν > 0 sem discutir a superfície de velocidade da luz, o caso superradiante ν < 0 (KMS não normalizável) nem o estado de Unruh, e não diz o que se perde. C1_LEITURAS_E_RELOGIOS.md:43 só afirma que o teorema 'não proíbe todo estado'.
+- [PAGO_VERIFICADO] C1 R-MOD passo 2 — conversão do tempo modular ao tempo de Killing :: ds/dt = κ/2π dá Γ = πβν²/κ (C1_LEITURAS_E_RELOGIOS.md:32-39). Recalculei com Leaver próprio: GW250114 tem ν·t_M = 0,13220, x = 0,03825 e δ = −0,03684, igual ao da bancada (−0,036840). No oráculo KMS finito o resíduo é 2,2e-16.
+- [PAGO_VERIFICADO] C1 R-MOD passo 3 — sinal de ω − mΩ_H :: positive_gap = 393,06 rad/s (GW250114) e 404,24 rad/s (GW150914). Meu recálculo dá ν·t_M = 0,1322 e 0,1349, ambos > 0. O caso ν < 0 não é tratado; ver passo 1.
+- [PAGO_FALSO] C1 R-MOD passo 4 + bandeira EXCLUÍDA_SE_UNIVERSAL coerente com os relógios v369 (Unruh-g) :: A nota C1_C6 declara 'PAGO — … universalidade', mas R-MOD.excluded_if_universal = null. A ORDEM l.111 diz que o mesmo relógio aplicado ao laboratório é o Unruh-g, EXCLUÍDO se a lei for universal, e o próprio C1_LEITURAS.json clock_evidence.alternatives traz unruh_g_excluded = true (Γ_Sr = 8,40e36 s⁻¹ contra a cota de 0,0113 s⁻¹). O exclusion_scope da própria bancada admite: 'v369 excludes its terrestrial-clock analogue'. Além disso, R-A = null e R-RAIZ-EP4 = false, embora as duas tenham Γ idênticos (8,601e-40 s⁻¹ no GW250114); a P2 da v369 exclui τ★ = t_P na leitura em que a luz sofre a lei (τ★ ≤ 0,0147 t_P).
+- [NAO_PAGO] C1 R-MOD passo 5 — o −0,037 no GW250114 é a mesma leitura que a lei-raiz k̄ = 0 ou coincidência numérica? :: Não é respondido (grep 'coincid' não acha nada sobre R-MOD × R-RAIZ-0). Meu recálculo (Leaver) mostra coincidência numérica perto de χ ≈ 0,68 entre leis diferentes: em a = 0, R-MOD dá −0,192 e RAIZ-0 −0,025; em χ = 0,6785, −0,0368 e −0,0372; em a = 0,9, −0,0077 e −0,059.
+- [PAGO_VERIFICADO] C1 R-MOD passo 6 — separar [KNOWN] com fonte lida de [CONJECTURE] :: C1_LEITURAS.json limits: 'Kerr KMS identification is conditional; primary Kay-Wald full text has not been read'. O status FINITE_CONDITIONAL_CONSTRUCTION__NOT_PHYSICAL_KERR_STATE_PROOF está nos oráculos.
+- [PAGO_VERIFICADO] C1 R-PROP — derivada com o mesmo rigor; dizer SE o ramo B aplicado à viagem é erro de tipo :: Ξ = ½βτ★ω²∫(1+z)/H dz = 3,01e-23 (H0 = 70, Ωm = 0,3, z = 0,0843); minha estimativa de ordem de grandeza dá ≈ 3,1e-23. A resposta sobre o tipo existe (C2_MAPEAMENTO_ANALITICO.md:79: 'nova hipótese não local … não consequência dimensionalmente proibida'), mas contradiz a LEITURA_03 (erro de tipo) sem dizer que a contradiz.
+- [PAGO_VERIFICADO] C1 R-GLOBAL — Simon & Jaksch conferido na fonte :: cache/literature/simon_jaksch_abstract.html (sha e5549ac3…) tem título 'Could Energy Decoherence due to Quantum Gravity be observed?' e DOI 10.1103/PhysRevA.70.052104, que confere. Leitura só do abstract, declarada.
+- [PAGO_VERIFICADO] C1 R-LIN — tensão linear × quadrática dita, não resolvida por preferência :: C1_LEITURAS.md:49 ('A distinção das leis permanece explícita'); R-LIN com coeficiente 1 = CONJECTURE; exclusão condicional DERIVED (βω = 2 × a taxa raiz-vácuo já excluída em Sr).
+- [PAGO_VERIFICADO] C1 — unidades conferidas por script em toda linha :: complete_c1_contract.py:98-107 confere 10 expoentes de segundo, mas os expoentes foram digitados à mão, sem sair das fórmulas (checagem fraca). Cobri a lacuna com recálculo independente em unidades geométricas (δ_B, R-MOD e RAIZ-0 batem com a bancada).
+- [PAGO_VERIFICADO] C1/C3.1 — QNM exato (Leaver/qnm) para leituras com ω − mΩ_H, BCW só como controle, com o desvio impresso :: QNM_GRID.json vem do pacote qnm 0.4.4 (validação com 150 pontos). Meu solver de Leaver independente dá Mω = 0,5233370199564 em χ = 0,6784704, contra 0,523337019956283 da bancada (≈1e-13). Mas a linha R-MOD fica rotulada 'EXTERNALLY_SUPPLIED_QNM__PROVENANCE_REQUIRED', e o controle BCW não está impresso na C1 (meu cálculo: BCW −0,0380 contra Leaver −0,0368; em a = 0,9, −0,0059 contra −0,0077).
+- [PAGO_VERIFICADO] C2(i) — média de ensemble ⟨h⟩: decaimento de amplitude, δf̂ = 0 :: C2_MAPEAMENTO_ANALITICO.md:23-39. Meu ajuste do template de ensemble (ramo B, 68,1 M☉, χ = 0,68) dá δτ̂ = −0,0199043 = −x/(1+x) exato e δf̂ = −3e-18, igual ao ens_fit de C2_TRAJECTORY_RECOVERY.json.
+- [PAGO_VERIFICADO] C2(ii) — realização única: δτ̂ médio e espalhamento de δf̂ por evento, sem ruído :: Bancada (N = 50): ramo B com δτ̂ médio −0,0075 e dp(δf̂) = 0,0192. Minha simulação independente (N = 1500, fase browniana, ajuste por projeção variável): δτ̂ médio −0,0057 ± 0,0006 (0,29 do ensemble) e dp(δf̂) = 0,0226, contra 0,0220 da estimativa da gerência. É compatível dentro do erro amostral da bancada (EP ≈ 0,003).
+- [NAO_PAGO] C2 — dizer qual dos dois observáveis é o físico :: A bancada deixa em aberto ('O gerador GKSL não escolhe sozinho qual dessas descrições corresponde ao strain observado', C2_MAPEAMENTO_ANALITICO.md:53; remaining: 'Physical choice of classical unraveling'). Não diz que o detector registra a realização, e a C4 compara só o ensemble (C1_LEITURAS_E_RELOGIOS.md:57).
+- [PAGO_VERIFICADO] C2 — modelo de desenrolamento declarado (Milburn = jitter de tempo) :: O jitter gaussiano é declarado. O Poisson exato de Milburn (taxa 2sin²(νω/2)/ν) é separado do limite quadrático em C0_MILBURN_FONTE_COMPLEMENTAR.md, com o HTML gr-qc/0308021 arquivado. Milburn 1991 declarado como não lido.
+- [PAGO_VERIFICADO] C2 — ⟨h²⟩: energia conservada, potência incoerente, perda de SNR do filtro casado :: C2_MAPEAMENTO_ANALITICO.md:47-51 (E|z|² − |Ez|² = A²e^{−2t/τ}(1 − e^{−2Γt})). Resíduo de energia por realização 2,2e-16 em C2_TEMPLATE_CHECKS.json. A perda de SNR aparece só como overlap no JSON (ramo B, mediana 0,994), não é dita no texto.
+- [PAGO_VERIFICADO] C2 — quantização do QNM não autoadjunto e definição de N, com sensibilidade; afirmação explícita para N ~ 1e78 :: Oscilador efetivo declarado como [INPUT] 'não quantização de QNM' (tgl_ringdown_prediction.py:5; C2 §2). N = E_mode/ħω condicional e Γ_inicial/ω ≈ β/(8N) ≈ 1,5e-81 para N = 1e78 (C2 §4; C1 R-RAIZ-COHERENT). A razão contra a assíntota tende a 1 (1,0020 em N = 256).
+- [PAGO_VERIFICADO] C2 — convenção de Γ fixada numa linha que o módulo C3 cita; δτ̂ = −x/(1+x); δf̂ = 0 à luz do δf do V2 :: C2 l.31 'CONVENÇÃO: Gamma amortece a amplitude média; a potência coerente cai com 2 Gamma'. Na docstring de tgl_ringdown_prediction.py:3-4 o δf do V2 aparece como artefato do estimador, a calibrar (C2 l.39). β é calculado em runtime a partir de ALPHA_FINE_CODATA_2018.
+- [PAGO_VERIFICADO] C2 — oráculos: Liouvilliano, estado coerente até N = 256 com extrapolação, trajetórias com e sem ruído colorido, resíduos impressos :: Estão em C0_C3_checks.json e C2_TRAJECTORY_RECOVERY.json (sha16 do código a5648ee2303159fb). O ruído 'colorido' é OU sintético (0,4I + 0,6e^{−|dt|/1ms}), não uma PSD de detector; a própria bancada escreve 'not off-source GWOSC strain'. N = 50 por célula.
+- [NAO_PAGO] §2.3 — ficha REAPROVEITAMENTO_Cn.md por alvo :: Não existe nenhum REAPROVEITAMENTO_*.md em ORDEM_013_RINGDOWN (find). Há apenas seções '## Aproveitamento' dentro das notas.
+- [NAO_PAGO] §3/§5 — entregar o M1 (ENTREGA_013_M1_…) e PARAR à espera do recibo da gerência :: Não há ENTREGA_013_M1 em DO_CHATGPT. A bancada seguiu para C4, C5, C6 e C7 sem recibo: REGISTRO_C6.json às 21:56 e C6_RESULTS.json às 22:00 de 21/09, antes do portão de poder (a nota C1_C6 diz 'NÃO PAGO — calibração científica C5'). STATUS goal_status = WORK_RESUMED_NOT_COMPLETE. Fora da minha frente, dito por afetar o conjunto.
+
+## DEFECTS
+### [CORRIGIR] C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\C1_LEITURAS.json rows[R-MOD].excluded_if_universal
+P: A bandeira EXCLUÍDA_SE_UNIVERSAL da R-MOD está null, quando a ORDEM e a v369 a dão como excluída se universal (o relógio KMS local aplicado ao laboratório é o Unruh-g). Um null deixa a hipótese da gerência com aparência de menos excluída do que ela é.
+E: ORDEM l.111; C1_LEITURAS.json clock_evidence.alternatives.unruh_g_excluded = true, Γ_Sr = 8,404e36 s⁻¹ contra a cota de 0,01131 s⁻¹; o exclusion_scope da própria linha diz 'v369 excludes its terrestrial-clock analogue'.
+FIX: Pôr true, com o escopo 'se o período KMS do horizonte local vale para relógios de laboratório (Unruh-g)', e escrever que a R-MOD só sobrevive com uma regra de não universalidade, que é partição e cabe ao operador.
+
+### [CORRIGIR] C1_LEITURAS.json rows[R-A] (null) × rows[R-RAIZ-EP4] (false)
+P: Duas leituras com Γ idênticos recebem bandeiras diferentes. A P2 da v369 (a luz dos braços sofre a lei) exclui τ★ = t_P, com cota τ★ ≤ 0,0147 t_P. A P1 (Sr, matéria) não exclui.
+E: C1_RESULTADOS_NUMERICOS.md:18,21: R-A e R-RAIZ-EP4 ambos com Γ = 8,601258e-40 s⁻¹ no GW250114. um_absoluto.json (sha16 456f0ab149bb13f6) core.clock_test_result_v369.P2.tau_star_bound_if_reading_in_tP = 0,01473.
+FIX: Separar a bandeira em dois campos, universal-na-matéria (P1: false para ambas) e universal-incluindo-luz (P2: true para ambas), aplicando o mesmo critério às duas linhas.
+
+### [CORRIGIR] C1_LEITURAS_E_RELOGIOS.md (seção R-MOD) / C1_LEITURAS.json
+P: O passo 5 da R-MOD não foi respondido: o −0,037 do GW250114 é a mesma leitura que a lei-raiz k̄ = 0 ou coincidência numérica?
+E: Não há texto sobre isso (grep). Recálculo do auditor (Leaver próprio): R-MOD × RAIZ-0 dá −0,192 × −0,025 (a = 0), −0,0368 × −0,0372 (χ = 0,6785) e −0,0077 × −0,059 (a = 0,9). São leis distintas que se cruzam perto de χ ≈ 0,68.
+FIX: Acrescentar a linha 'coincidência numérica, não identidade', com a tabela em spin como discriminante para a C4 por bins de spin.
+
+### [CORRIGIR] C1_LEITURAS_E_RELOGIOS.md:43 e C0_ADENDO_ESCOPO_LITERATURA.md:22-27
+P: O passo 1 da R-MOD está incompleto. Kay–Wald foi lido só pelo abstract; Bisognano–Wichmann (1975/76) e Sewell (1982) nunca foram conferidos. As opções para a ≠ 0 não são discutidas (região dentro da superfície de velocidade da luz, modos co-rotantes, caso superradiante ν < 0 com KMS não normalizável, estado de Unruh sem KMS), nem o que cada uma perde.
+E: Zero ocorrência de Sewell, Bisognano, superradi ou 'Unruh state' em C0_*, C1_* e C2_*. A construção usa um único modo com ν > 0 escolhido pela bancada.
+FIX: Obter os textos integrais ou declarar a parede com estatuto; listar as três rotas a ≠ 0 com o que se perde em cada uma; manter [CONJECTURE].
+
+### [CORRIGIR] C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\C0_AUDITORIA.json claims[T11]
+P: A frase pública corrigida para 'β não medido' omite o negativo honesto da casa: β foi medido livre na cosmologia (D1 V3) e está em tensão com α√e a 3,01σ.
+E: ORDEM l.41 (MEMORIA_DA_LINHAGEM.md l.8200: β = −0,01275 (+0,00795/−0,00850), D1_BETA_TENSION). A corrected_public_sentence de T11 fala apenas do produto βτ★.
+FIX: Acrescentar: 'em GW, β não foi medido (poder 0,18σ); fora de GW, a medida livre D1 V3 está em tensão com α√e a 3,01σ'.
+
+### [CORRIGIR] C0_AUDITORIA.json references.template e ENTREGA_013_PARCIAL_220_E_FORECAST_20260921.md (lista de artefatos)
+P: O artefato citado como evidência, tgl_ringdown_template.py com sha256 ef1b4d69…, não existe mais em disco: foi sobrescrito às 20:41 sem backup, o que viola a regra do backup imediato e a custódia. A nota PARCIAL também lista tgl_ringdown_prediction.py 552a07ac, que só sobrevive como .bak.
+E: Varredura por hash de toda a árvore: só há 16d7fbc25e94b035 (atual e cópias C7) e ce34645e8b34416b (.bak_20260921_212150_MULTIMODE). A verificação das 14 linhas da nota deu 12 OK e 2 DIFF.
+FIX: Regenerar C0_AUDITORIA contra os artefatos atuais, com erratas ao lado, e declarar a versão perdida como tentativa não preservada; conferir que todo script que reescreve código grava antes o .bak de bytes.
+
+### [NOTA] C0_AUDITORIA.json status / remaining; references.lvk
+P: A C0 ficou congelada no estado das 20:10. O status diz 'PRIMARY_SOURCE_ARCHIVING_PENDING' e 'lvk' é citado por URL, quando a cópia local com sha (9efcdea9…) já existia às 23:29. Um leitor da C0 não vê que parte da pendência foi paga.
+E: C0_AUDITORIA.json mtime 21/09 20:10; LITERATURE_MANIFEST.json de 23:29.
+FIX: Anexar à C0 um adendo por script que aponte a cópia local com sha256 e o escopo de leitura.
+
+### [NOTA] C0_AUDITORIA.json claims[T10], [T19], [T02], [T20], [T21]
+P: As frases corrigidas e as colunas 'o que acerta' estão rasas em pontos que a própria ORDEM levantou. T10 omite o sinal: os catálogos e o V2 puxam δτ̂ > 0, e todo amortecimento aditivo dá δτ̂ < 0. T19 omite que Γ = β/t_M daria δτ̂ ≈ −0,13 no GW250114 (≈ 2σ, recalculado −0,1285), que a supressão já é canônica ('UV-suprimida', τ★ = t_P) e que o buraco real é que nada deriva τ★. T02 não refaz o rastro de origem (Davies_geometry.tex, Artigo A fig02/Teorema 1 × código de Davies, proxy 4×4 aleatório seed 11 [FINITE_DIM_SANITY_NOT_III1_PROOF], família L_k inexistente) e cita só o um.py. T20/T21 não dizem o tamanho da correção β contra σ (régua §0; ex.: ramo B −0,020 contra σ ≈ 0,058, cerca de 0,35σ).
+E: Textos de T02, T10, T19, T20 e T21 em C0_AUDITORIA.md:20-30, 116-126, 224-258; ORDEM l.36-45.
+FIX: Acrescentar, ao lado, essas quatro informações às frases públicas.
+
+### [NOTA] C0_C3_checks.json / C2_MAPEAMENTO_ANALITICO.md:19
+P: Na questão de tipo falta teorema citado para 'não há −log ρ/matriz densidade em III₁' (ausência de traço semifinito normal, [KNOWN]), ModularFirstLaw.lean não é citado, e não se diz que |K| deixa sem decair a coerência entre +k e −k (as duas faces).
+E: Recálculo do auditor: com |K|, rate(+3,−3) = 0; com K₊, 0,01805. Grep: zero ocorrência de ModularFirstLaw em C0–C2.
+FIX: Citar a fonte do no-trace em III₁ e o ModularFirstLaw.lean (homônimo unilateral), e dizer a consequência física de cada escolha.
+
+### [NOTA] C1_TABLES.json rows[R-MOD].prediction.qnm_method
+P: O rótulo 'EXTERNALLY_SUPPLIED_QNM__PROVENANCE_REQUIRED' esconde que o QNM vem do pacote qnm 0.4.4 (QNM_GRID.json), e o desvio contra o BCW, que a ORDEM pede impresso, não está na C1.
+E: prepare_qnm_grid.py; recálculo: BCW −0,0380 contra exato −0,0368 (GW250114), −0,0059 contra −0,0077 (a = 0,9).
+FIX: Rotular 'qnm 0.4.4 (Leaver/Cook–Zalutskiy), grade validada' e imprimir a coluna de controle BCW.
+
+### [NOTA] C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\complete_c1_contract.py:98-107
+P: A 'conferência de unidades por script' é uma tabela de expoentes digitada à mão e comparada com o valor esperado, o que é tautológico e não sai das fórmulas.
+E: unit_exponents = {'R-A': F(1)+2*F(-1), …}.
+FIX: Derivar as dimensões das expressões, por exemplo com sympy.physics.units ou com uma avaliação por análise de escala.
+
+### [NOTA] C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\C2_TRAJECTORY_RECOVERY.json
+P: N = 50 trajetórias por célula dá erro padrão ≈ 0,003 no δτ̂ médio da realização, comparável ao próprio efeito (−0,0075). O 'ruído colorido' é OU sintético, não uma PSD de detector.
+E: Com N = 1500, o auditor obtém −0,0057 ± 0,0006 (ramo B) e −0,0094 ± 0,0008 (RAIZ-0); a bancada dá −0,0075 e −0,0136.
+FIX: Subir N para ≥ 1000 no caso sem ruído e repetir com ruído recolorido pela PSD fora da fonte (já existente em C5_RECOLORED_NOISE).
+
+### [CORRIGIR] C2_MAPEAMENTO_ANALITICO.md §3 e C1_LEITURAS_E_RELOGIOS.md:57
+P: A C2 não diz qual observável é o físico. Com isso, a confrontação da C4 (ramo B ln B = +0,029) fica implicitamente amarrada à identificação com o ensemble, embora a própria C2 mostre que uma realização única prevê sobretudo espalhamento de δf̂ (~2%) e só ~0,3× do deslocamento em δτ̂.
+E: C2 l.53 ('O gerador GKSL não escolhe sozinho…'); ENTREGA_013_PARCIAL: 'sob hipótese de amortecimento de ensemble'.
+FIX: Escrever: 'o detector registra uma realização; o desenrolamento que a produz é [OPEN]'. Levar à C4/C5 a leitura de realização como observável populacional (largura hierárquica de δf̂), ou declarar explicitamente que a C4 cobre só o ensemble.
+
+### [CORRIGIR] C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT (ausência de ENTREGA_013_M1_*) e ORDEM_013_RINGDOWN (ausência de REAPROVEITAMENTO_Cn.md)
+P: Protocolo dos marcos não cumprido: não há fechamento do M1 nem parada à espera do recibo, e as C4, C5, C6 e C7 foram executadas em sequência. A C6 (strain do evento) rodou às 21:56–22:00 de 21/09, antes do portão do poder. Faltam as fichas de aproveitamento exigidas em §2.3. Fora da minha frente; dito porque altera a resposta a 'entregou tudo?'.
+E: REGISTRO_C6.json e C6_RESULTS.json com mtime de 21/09 21:56 e 22:00; a nota C1_C6 diz 'NÃO PAGO — calibração científica C5'; STATUS goal_status = WORK_RESUMED_NOT_COMPLETE.
+FIX: Pedir uma ENTREGA_013_M1 que feche formalmente C0+C1+C2+C3.1+C5-Fisher com as correções acima e as fichas REAPROVEITAMENTO_C0..C2. Tratar a C6 como medida calibrada NÃO-CEGA (veredito máximo sem poder), como já está.
+
+
+## RESULTS
+- O alarme central do texto colado ('K_∂ ~ M/M_Pl² ~ 10⁷⁶ ⟹ falsificada por O4') não fecha em unidades | GM/c³(60 M☉) = 2,9553e-4 s = 5,4817e39 t_P (é um tempo, não uma taxa); o 10⁷⁶ mais próximo é (M☉/m_P)² = 8,3468e75, de uma massa solar e não de 60; (60 M☉/m_P)² = 3,005e79 | [REAL] (recalculado pelo auditor, CODATA 2018); a origem do 10⁷⁶ é [CONJECTURE]
+  => O 'número astronômico' não é uma taxa de decoerência de buraco negro nenhum. O texto erra a conta, mas acerta que a TGL precisava entregar uma taxa em (M, a), um template e um ln B.
+- Na lei de L = √β√K, a decoerência depende de DIFERENÇAS de raízes, não de β⟨K⟩ | Γ_ij = ½β(√k_i − √k_j)², resíduo 8e-17 no Liouvilliano do auditor; a 'taxa' β⟨K⟩ = Tr(L†Lρ) vai de 0,024 a 3,34 com L → L + 1,7 enquanto o gerador fica idêntico (1,6e-15) | [REAL] (oráculo independente do auditor e da bancada)
+  => 'Γ ~ β⟨K⟩' confunde contar saltos com perder coerência. A contagem de saltos depende de representação; a decoerência não.
+- A escolha da parte positiva de K não é fixada por Tomita e muda a física | Espectro [−3,−1,0,1,3]: com K₊, rate(0,1) = β/2 = 0,0060 e rate(+3,−3) = 0,0180; com |K|, rate(+3,−3) = 0 (a coerência entre as duas faces nunca decai) | [REAL] numérico; a escolha é [INPUT], do operador
+  => O √K do texto está mal tipado para o K bilateral. Cada escolha dá uma lei diferente, e isso é partição.
+- Predição por leitura no GW250114 (ensemble, δτ̂₂₂₀), com σ(δτ̂) ≈ 0,058 (1σ, da ORDEM) | R-A −3,5e-42; R-B −0,0198 (linear −0,0203) ≈ 0,34σ; R-MOD −0,0368 (Leaver) ≈ 0,63σ; R-RAIZ-0 −0,0371 ≈ 0,64σ; R-LIN −0,0715 ≈ 1,2σ; R-RAIZ-EP4 −3,5e-42; R-RAIZ-REST −1,5e-82; R-RAIZ-COHERENT Γ/ω = 1,5e-81; R-GLOBAL 0; R-PROP Ξ = 3,0e-23. Todas com Γ/ω ≤ β ≈ 0,012 (com co-rotação) | [DERIVED] condicional por leitura; relógios [INPUT]; R-MOD e R-LIN [CONJECTURE]; δ_B, R-MOD e RAIZ-0 reproduzidos pelo auditor (δ_B(0,68) = −0,02031 BCW, R-MOD = −0,03684)
+  => A exigência 'Γ ≪ ω' está cumprida em todas as leituras, mas não decide nada. O que decide é a correção contra σ, e hoje nenhuma leitura tem mais de ~1,2σ num evento. Coincidir com Kerr é correspondência com o limite clássico, não derrota.
+- R-MOD e lei-raiz k̄ = 0 coincidem no GW250114 só por acaso numérico; o spin as separa | a = 0: −0,192 × −0,025; χ = 0,6785: −0,0368 × −0,0372; a = 0,9: −0,0077 × −0,059. Sem co-rotação, a R-MOD daria −0,375 no GW250114 (~6σ) | [DERIVED] (Leaver próprio do auditor; a bancada não fez esta comparação)
+  => Um evento sozinho não separa as duas leis, mas bins de spin no catálogo podem. A tendência em spin das duas é oposta.
+- Os relógios de laboratório já decidem qualquer τ★ universal | Raiz k̄ = 0 em Sr: Γ = 1,6224e13 s⁻¹ contra a cota de 0,0113 s⁻¹, excluída (reconferido); Unruh-g: Γ_Sr = 8,4e36 s⁻¹, excluída; P2 (luz nos braços) exige τ★ ≤ 0,0147 t_P | [REAL] (v369, lido por hash 456f0ab149bb13f6); a aplicação às leituras de OG é condicional à universalidade
+  => O ringdown só testa relógios escalados pela própria fonte (R-B, R-MOD). Uma lei universal já foi decidida no laboratório.
+- Ensemble × realização única: dois observáveis diferentes | Ensemble: δτ̂ = −x/(1+x) exato (−0,01990 no ramo B), δf̂ = 0. Realização sem ruído: δτ̂ médio −0,0057 ± 0,0006, cerca de 0,29 do ensemble (auditor, N = 1500; bancada −0,0075, N = 50), e dp(δf̂) ≈ 2,3% (auditor 0,0226; bancada 0,0192). Perda de overlap mediana ≈ 0,6% | [DERIVED] sob o desenrolamento browniano [INPUT]; qual observável é o físico ficou [OPEN] na bancada
+  => Se o que o detector vê é uma realização, a assinatura da TGL no ramo B não é um amortecimento limpo. É sobretudo um tremor de frequência de ~2% por evento, da ordem da precisão atual em δf̂. O observável certo passa a ser a largura populacional de δf̂, não só a média de δτ̂.
+- O estimador da bancada, em ruído sintético SNR 20 e efeito nulo, puxa δτ̂ para cima | R-A (efeito ~0): δτ̂ médio +0,030, mediana +0,015, faixa 5–95% [−0,10; +0,21], N = 50 (≈ 2σ) | [REAL] no escopo sintético; não é ruído de detector nem estimador da LVK
+  => O δτ̂ > 0 dos catálogos e do V2 pode ter parte de viés de estimação em baixo SNR. Isso tem de ser medido por injeção (C5) antes de ser lido como física.
+- A lei-raiz em estado coerente macroscópico é invisível | Γ_inicial/ω ≈ β/(8N); razão contra a assíntota 1,0020 em N = 256; para N = 1e78, Γ/ω ≈ 1,5e-81 | [DERIVED]; N = E_mode/ħω é cenário [CONJECTURE]
+  => Aplicada a um campo clássico enorme, a lei-raiz some. Não é a mesma coisa que a coerência 0↔1 testada nos relógios.
+
+## REMAINING
+- C1: corrigir a bandeira EXCLUÍDA_SE_UNIVERSAL da R-MOD (true via Unruh-g, com a regra de não universalidade nomeada como partição do operador) e tornar coerentes R-A × R-RAIZ-EP4 (separar P1-matéria de P2-luz).
+- C1 R-MOD passo 5: declarar a coincidência numérica com R-RAIZ-0 no GW250114 e publicar a tabela em spin como discriminante.
+- C1 R-MOD passo 1: Kay–Wald integral, Bisognano–Wichmann 1975/76 e Sewell 1982 na fonte (ou parede declarada); discutir as rotas a ≠ 0 (superfície de velocidade da luz, modos co-rotantes, superradiância ν < 0, estado de Unruh) e o que cada uma perde.
+- C0: acrescentar ao lado a tensão D1 V3 (T11), o sinal δτ̂ > 0 dos catálogos (T10), o −0,13 de Γ = β/t_M e o 'nada deriva τ★' (T19), o rastro de origem de L_k (T02) e o tamanho β contra σ (T20/T21); regenerar as referências (template ef1b4d69 perdido) e o status de arquivamento.
+- C0(d): citar o teorema de ausência de traço/matriz densidade em III₁ e o ModularFirstLaw.lean (K unilateral homônimo); dizer que |K| não defasa o par ±k.
+- C2: dizer explicitamente que o detector registra uma realização (desenrolamento [OPEN]) e levar essa leitura à C4/C5 como observável populacional (largura de δf̂), ou restringir a C4 declaradamente ao ensemble.
+- C2: trajetórias com N ≥ 1000 e com ruído recolorido pela PSD fora da fonte; imprimir a perda de SNR do filtro casado no texto.
+- Protocolo: fichas REAPROVEITAMENTO_C0/C1/C2 e uma ENTREGA_013_M1 formal fechando C0+C1+C2+C3.1+C5-Fisher; recibo da gerência antes de qualquer incorporação.
+- Fora da minha frente: a C5 segue reprovada (viés de recuperação IMR), a C6 rodou antes do portão (INCONCLUSIVE_SYSTEMATICS, NÃO-CEGO), e há processos da bancada ainda rodando no WSL; nada foi tocado.

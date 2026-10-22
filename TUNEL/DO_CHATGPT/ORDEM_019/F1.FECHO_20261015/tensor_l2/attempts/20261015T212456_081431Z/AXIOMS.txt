@@ -1,0 +1,33 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\tensor_l2\attempts\20261015T212456_081431Z\ScalarL2ImaginaryR4.lean:108:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (ScalarL2.R μ (weight h) ⋯)) y) x
+in the target expression
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (R μ h hh)) y) x =
+    ↑↑((op μ (phaseData μ h hh t)) ((resolventDampingOperator (R μ h hh)) y)) x
+
+X E : Type
+inst✝³ : MeasurableSpace X
+inst✝² : NormedAddCommGroup E
+inst✝¹ : InnerProductSpace ℂ E
+inst✝ : CompleteSpace E
+μ : Measure X
+h : X → ℝ
+hh : Measurable h
+t : ℝ
+u y : ↥(Lp E 2 μ)
+hd✝ : ↑↑((resolventDampingOperator (R μ h hh)) y) =ᵐ[μ] fun x => ↑(resolventDamping (↑↑(weight h x)).re) • ↑↑y x
+hp✝ :
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (ScalarL2.R μ (weight h) ⋯)) y) =ᵐ[μ] fun x =>
+    resolventPhaseFunction t (↑↑(weight h x)).re • ↑↑y x
+x : X
+hp :
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (ScalarL2.R μ (weight h) ⋯)) y) x =
+    resolventPhaseFunction t (↑↑(weight h x)).re • ↑↑y x
+hd : ↑↑((resolventDampingOperator (R μ h hh)) y) x = ↑(resolventDamping (↑↑(weight h x)).re) • ↑↑y x
+hx :
+  ↑↑((op μ (phaseData μ h hh t)) ((resolventDampingOperator (R μ h hh)) y)) x =
+    (phaseData μ h hh t).value x • ↑↑((resolventDampingOperator (R μ h hh)) y) x
+⊢ ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (R μ h hh)) y) x =
+    ↑↑((op μ (phaseData μ h hh t)) ((resolventDampingOperator (R μ h hh)) y)) x
+'F1Fecho.ScalarL2Spectral.R_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.ScalarL2Spectral.complement_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.ScalarL2Spectral.imaginaryPower_eq_phase' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

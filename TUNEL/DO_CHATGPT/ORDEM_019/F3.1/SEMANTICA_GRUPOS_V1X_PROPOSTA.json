@@ -1,0 +1,126 @@
+{
+  "id": "FASE9_V1X_GROUP_SEMANTICS_PROPOSAL",
+  "status": "PROPOSED_NOT_FROZEN_NOT_EXECUTED",
+  "generated_utc": "2026-10-08T00:10:32.415347+00:00",
+  "frozen_v1": {
+    "path": "C:\\IALD\\Bancada_Um\\investigacao\\preregistro_fase9_hubble\\PREREGISTRO_FASE9_RAZAO_DE_HUBBLE_V1.json",
+    "sha256": "1893261e730994b3508d14dd2105f8aae3a764d3d217e28bd5939cb58f865273",
+    "bytes": 26910
+  },
+  "binding": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_scalar_reader_sources\\VINCULO_DOCUMENTAL_CINCO_LEITORES.json",
+    "sha256": "d37d7507f24bafd6960a7ff6cc5c375dea6d08fcbfadfc9d38ede2f1871b5bb0",
+    "bytes": 14451
+  },
+  "readers": [
+    {
+      "reader_id": "L1_sh0es_r22",
+      "old_label": "Cefeidas (SH0ES R22)",
+      "new_label": "SH0ES R22 — Cepheids and SN Ia",
+      "old_flags": {
+        "grupo_SN": true,
+        "grupo_4258": true
+      },
+      "typed_dependencies": [
+        "SN_IA_CALIBRATORS",
+        "NGC4258_DISTANCE_ANCHOR",
+        "PANTHEONPLUS_HUBBLE_FLOW"
+      ],
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\fontes_publicas\\sh0es_2022.html",
+        "sha256": "df9136da862ef625ce692d6a6813b069ccdc9d7ce93537256fedcc9457c2d7d0",
+        "bytes": 50043
+      },
+      "documentary_status": "REAL_DOCUMENTARY_MATCH_ONLY",
+      "cross_covariance_status": "OPEN_SOURCE_BACKED_VALUE_REQUIRED"
+    },
+    {
+      "reader_id": "L2_cchp",
+      "old_label": "CCHP TRGB+JAGB+Cef (JWST), stat+sys+sigma_SN em quadratura",
+      "new_label": "CCHP — TRGB alone, 24 SN Ia calibrators",
+      "old_flags": {
+        "grupo_SN": true,
+        "grupo_4258": true
+      },
+      "typed_dependencies": [
+        "TRGB_ZERO_POINT",
+        "SN_IA_CALIBRATORS",
+        "NGC4258_DISTANCE_ANCHOR"
+      ],
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\fontes_publicas\\cchp_2025_v3.html",
+        "sha256": "eb1b6689f13dbceaaa9e919ad68682bc75cf8f8cd4bf78ced3180a39b8207fa6",
+        "bytes": 45366
+      },
+      "documentary_status": "REAL_DOCUMENTARY_MATCH_ONLY",
+      "cross_covariance_status": "OPEN_SOURCE_BACKED_VALUE_REQUIRED"
+    },
+    {
+      "reader_id": "L3_sbf",
+      "old_label": "SBF calibrado por TRGB (JWST)",
+      "new_label": "TRGB-calibrated SBF, independent of Cepheids and SN Ia",
+      "old_flags": {
+        "grupo_SN": true,
+        "grupo_4258": false
+      },
+      "typed_dependencies": [
+        "TRGB_ZERO_POINT",
+        "NGC4258_DISTANCE_ANCHOR"
+      ],
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_scalar_reader_sources\\sbf_2502.15935v2.html",
+        "sha256": "b61012efc5238c0e701baf9a442bb697deaec041fb3f1016b91365bb164d4946",
+        "bytes": 45130
+      },
+      "documentary_status": "REAL_DOCUMENTARY_MATCH_ONLY",
+      "cross_covariance_status": "OPEN_SOURCE_BACKED_VALUE_REQUIRED"
+    },
+    {
+      "reader_id": "L4_masers",
+      "old_label": "megamasers (geometrico)",
+      "new_label": "Geometric megamasers, including NGC 4258 as one sample galaxy",
+      "old_flags": {
+        "grupo_SN": false,
+        "grupo_4258": false
+      },
+      "typed_dependencies": [
+        "NGC4258_IN_MASER_SAMPLE"
+      ],
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_scalar_reader_sources\\masers_2001.09213v2.html",
+        "sha256": "041b7bd9bf8a4a31eec2d81f08f28a0734c72c9aec6c80821c408dfe712fddc7",
+        "bytes": 45680
+      },
+      "documentary_status": "REAL_DOCUMENTARY_MATCH_ONLY",
+      "cross_covariance_status": "OPEN_SOURCE_BACKED_VALUE_REQUIRED"
+    },
+    {
+      "reader_id": "L5_tdcosmo",
+      "old_label": "lentes com atraso (geometrico)",
+      "new_label": "Time-delay lenses with Pantheon+ Omega_m prior",
+      "old_flags": {
+        "grupo_SN": false,
+        "grupo_4258": false
+      },
+      "typed_dependencies": [
+        "PANTHEONPLUS_OMEGA_M_PRIOR"
+      ],
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\fontes_publicas\\tdcosmo_2025_v4.html",
+        "sha256": "b04dfc911acb4ad357224a3f2b432b407a109254277993f90a68a0e56137bf02",
+        "bytes": 52315
+      },
+      "documentary_status": "REAL_DOCUMENTARY_MATCH_ONLY",
+      "cross_covariance_status": "OPEN_SOURCE_BACKED_VALUE_REQUIRED"
+    }
+  ],
+  "covariance_rule": {
+    "published_diagonal_sigmas": "retain published or predeclared V1 values with component caveats",
+    "old_off_diagonal_sigma_SN": "DECLARADO_DESIGN_NOT_SOURCE_BACKED",
+    "old_off_diagonal_4258": "DECLARADO_DESIGN_NOT_SOURCE_BACKED",
+    "new_numeric_cross_terms": null,
+    "admission": "BLOCK_NEW_COMPOSITE_UNTIL_JOINT_COVARIANCE_OR_PREDECLARED_SOURCE_BACKED_SENSITIVITY",
+    "typed_dependency_is_not_numeric_covariance": true
+  },
+  "gate": "NO_DATA_OPENED_NO_VERDICT_RECOMPUTED"
+}

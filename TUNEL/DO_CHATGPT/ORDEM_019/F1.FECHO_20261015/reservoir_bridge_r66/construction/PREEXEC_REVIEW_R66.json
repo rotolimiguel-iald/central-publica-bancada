@@ -1,0 +1,89 @@
+{
+  "status": "PASS_PREEXEC_WITH_SCOPE",
+  "reviewer": "codex-mission-memory-review",
+  "created_utc": "2026-10-18T10:21:03.269630+00:00",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "mission_revision": 478,
+  "requirement_satisfied": false,
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\construction\\PLAN_COLLISION_R66.json",
+      "sha256": "c3764d3ae48207537d4666e8935e680051339400cbb5603d04c3671b45f2d121"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\construction\\run_collision_r66.py",
+      "sha256": "02e1270a0e445e70d64f499a3ac308d5d61cbb7a6df1210034ccf0d234f4e1f2"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\construction\\CONSTRUCTION_R66.md",
+      "sha256": "36a07d2a6916eec410ccae0fc5e380fc7af4ca5f14368e8c8840fda5ab9ea71a"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\finite_device_functions_r62.py",
+      "sha256": "be3d3b21f7a5e8e0c8db812c44d6dd599b84613f5b5fcbd53cc054b01a54d069"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\PREPARED_READOUT_PLAN_R62.json",
+      "sha256": "862458a7b7f8b8797a2a2f71aa5ed674abbef0488af6acb41bd0e3aa908f3bea"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\RESULT_OUTPUT_R64.json",
+      "sha256": "1cfd76ee90f6c442aaf2a5ab961aecc19513b3d051badf69df527cb2f0713306"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\calibration\\CONTRATO_CALIBRACAO_R65.md",
+      "sha256": "245f97e48ad2da218ad4fe744e4a573c71e56b1aca72c12966ff2b50b58ff85f"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\BARE_FREQUENCY_COVARIANCE_R65.txt",
+      "sha256": "31e04530030a8a3c8462e708f58bc2cb5b2d4269101f48b54d46174597efc250"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\HANDOFF_R66.json",
+      "sha256": "f5134988a3ec62ab31daf00cf2163779b35ad5440ef28902221f7030a8cd2012"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\REVIEWER_PROJECT_RESUME_20261018T101946Z.json",
+      "sha256": "36f3efcbd6a5f9dffda5d59c8327a5eeaedacff2412d188d3605a74e2177e430"
+    }
+  ],
+  "checks": [
+    {
+      "item": "Derivação independente do termo de bomba",
+      "result": "PASS",
+      "detail": "Com epsilon=sqrt(delta), <V>_b=epsilon*(alpha* L3-alpha L3†)/(1+epsilon²|alpha|²). O termo de ordem delta é o comutador com alpha*L3-alphaL3†. alpha=+i Omega/sqrt(gammaOH) produz Hdrive=+Omega(sigma-+sigma+), sem fator 1/2; gammaOH>0 explícito. Kraus K0 inclui -alpha L3† e a normalização -|alpha|²I/2, cancelados corretamente na soma."
+    },
+    {
+      "item": "Mesmo gerador e ambiente escolhido",
+      "result": "PASS",
+      "detail": "h_base conserva gJC e omite somente a bomba que a entrada fornece; cinco canais completos, um único rótulo para J=A+B. Ancillas fresh independentes e produto com sistema explicitados. GammaLambda=1 e parâmetros R62 são INPUTs sintéticos preservados."
+    },
+    {
+      "item": "Ordem local/global",
+      "result": "PASS",
+      "detail": "Conjugação simultânea P U(epsilon) P=U(-epsilon) e P b(epsilon)=b(-epsilon) torna o canal par. Analiticidade matricial dá Phi_delta=I+delta L+O(delta²). Em dimensão finita as normas são equivalentes; telescoping entre canais CPTP de norma diamante 1 dá N*C*(T/N)². Campanha mede Frobenius, não diamante."
+    },
+    {
+      "item": "Ponte para bins Fock",
+      "result": "PASS",
+      "detail": "Vácuo+cinco estados de uma excitação incluem C6 no Fock de cada bin, e a extensão unitária por identidade no complemento é válida. Projeção normalizada do coerente tem fidelidade quadrática e^(-x)(1+x); derivada de e^(-x)(1+x)-1+x²/2 é x(1-e^(-x))>=0. Desigualdade do produto fornece 1-F<=Nx²/2. Distância de traço usa convenção (1/2)||rho-sigma||1; norma sem 1/2 tem fator 2."
+    },
+    {
+      "item": "Leitura estática do script e guardas de execução",
+      "result": "PASS",
+      "detail": "Vetorização por colunas, extração Kraus einsum ajbe,e->jab e Liouvilliano compatíveis. Compara superoperador inteiro, não só trajetória. Negativos: split A/B, bomba ausente, fase oposta. Passos/tolerâncias fixos, escrita exclusiva de START/RESULT e freeze/pinos antes da campanha. Preflight fresco e freeze ficam a cargo do executor autorizado."
+    },
+    {
+      "item": "Pinos locais",
+      "result": "PASS",
+      "detail": "Seis fontes diretas do plano medidas e iguais. Plano, script e derivação pinados neste parecer; nenhum teste numérico ou import do modelo foi executado pelo revisor."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Aprovação da campanha única pré-registrada; não é recibo de execução nem aprovação antecipada dos resultados.",
+    "Construção finita 2x2x2, distinta dos cortes por N da demonstração bosônica da raiz.",
+    "Banho projetado escolhido e entrada coerente são INPUT instrumental; não identificam banho térmico Davies, aparelho físico, Poincare ou localização.",
+    "Não se afirma convergência forte das dilatações/HP ou saídas ilimitadas. Nenhum aceite R4/R5, memória, gate ou produção alterado."
+  ]
+}

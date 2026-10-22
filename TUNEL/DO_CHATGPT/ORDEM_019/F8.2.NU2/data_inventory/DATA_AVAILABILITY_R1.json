@@ -1,0 +1,207 @@
+{
+  "unit": "F8.2.NU2",
+  "claim_event": 618,
+  "author": "codex-gerente-tgl / nu2_data_sources",
+  "created_utc": "2026-10-09T12:48:24.146125+00:00",
+  "status": "DERIVED_DOCUMENTARY_AVAILABILITY_SURVEY",
+  "existing_local_source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F7.2\\V2_STAGING\\TABELA_DE_PODER_POR_CANAL_V2.md",
+    "sha256": "f2376aea770e877dd43dead67d186a2da326e4ae7076b2f66574a0d00bccd5fd",
+    "bytes": 8248,
+    "read_scope": "entire local table; no PDFs opened",
+    "reused": "F7.2 already catalogs n=-2 and the JUNO damping bound; operator matching and compatible likelihood remain OPEN. The present survey only adds availability and identifies September update.",
+    "historical_text_warning": "This pinned V2 contains staging-status and section-anchor text superseded by later additive errata. No deployment status is inferred here; Eq.6 is in III.B of the paper."
+  },
+  "nos_vivo": {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "C:\\IALD\\NOS_VIVO\\consultar.py",
+      "--unidade",
+      "F7.2"
+    ],
+    "exit_code": 0,
+    "artifact": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F8.2.NU2\\data_inventory\\CONSULTA_F72_R1.txt",
+      "bytes": 21826,
+      "sha256": "38e1b21da0407f784db76f59a0b44b6760add99074625963328008d9965834bb"
+    },
+    "initial_sandbox_attempt": "Denied before execution; read succeeded after permitted escalation."
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "title": "JUNO first measurement, Nature 654,343-348 (2026)",
+      "url": "https://www.nature.com/articles/s41586-026-10538-z",
+      "doi": "10.1038/s41586-026-10538-z",
+      "published": "2026-06-10",
+      "consulted_utc_date": "2026-10-09",
+      "anchors": [
+        "Data availability",
+        "Code availability",
+        "Supplementary information"
+      ],
+      "verified_access": "publisher HTML",
+      "available": [
+        "source-data links for Figures 3,4 and Extended Data Figure 2",
+        "Supplementary Data ZIP link"
+      ],
+      "not_public_per_source": [
+        "raw detector data",
+        "collaboration simulation and raw-analysis code"
+      ],
+      "not_verified": [
+        "ZIP contents, detector response matrix, full nuisance covariance, likelihood payload"
+      ],
+      "download_status": "No source-data bytes downloaded; web ZIP click returned an internal error. No checksum asserted.",
+      "inference": "Figure-level release is useful but its existence does not certify a complete likelihood for an arbitrary new dissipator."
+    },
+    {
+      "id": "S2",
+      "title": "JUNO updated oscillation measurement and mass ordering indication",
+      "url": "https://arxiv.org/html/2609.37895v1",
+      "doi": "10.48550/arXiv.2609.37895",
+      "published": "2026-09-29",
+      "consulted_utc_date": "2026-10-09",
+      "anchors": [
+        "analysis Eq.(1)",
+        "detector response paragraphs",
+        "Figure 3"
+      ],
+      "verified_access": "full arXiv HTML",
+      "available": [
+        "paper describes 207.2 live days and 8294 IBD candidates",
+        "joint JUNO,TAO,Daya Bay chi-square and nuisance construction"
+      ],
+      "not_verified": [
+        "numerical release for the updated JUNO/TAO spectra, response matrices and covariance"
+      ],
+      "download_status": "Paper HTML only; no observed tables downloaded.",
+      "inference": "The newer exposure cannot be substituted into the June decoherence bound without reanalysis. Failure to locate a numerical release in this survey is not proof of its absence."
+    },
+    {
+      "id": "S3",
+      "title": "KamLAND official release collection",
+      "url": "https://www.awa.tohoku.ac.jp/KamLAND/2013_result_data_release/2013PRD.html",
+      "published": "2013 result; release page updated 2020-07-21",
+      "consulted_utc_date": "2026-10-09",
+      "anchors": [
+        "2013 chi-square map",
+        "4th release Prompt Energy Spectrum",
+        "2nd release Event List and Other Relevant Constants"
+      ],
+      "verified_access": "official HTML pages",
+      "related_urls": [
+        "https://www.awa.tohoku.ac.jp/KamLAND/4th_result_data_release/4th_result_data_release.html",
+        "https://www.awa.tohoku.ac.jp/KamLAND/datarelease/2ndresult.html"
+      ],
+      "available": [
+        "2013: standard-parameter chi-square map advertised,57MB",
+        "2011: prompt-energy histogram advertised,0.1MeV bins,observed/reactor/background columns,efficiency incorporated",
+        "2005: candidate energies and monthly livetime,backgrounds,fission flux and approximate resolution advertised"
+      ],
+      "not_verified": [
+        "data-file bytes",
+        "complete correlated response and nuisance likelihood for a new dephasing model"
+      ],
+      "download_status": "Release landing pages only; no event list,histogram or large chi-square map downloaded.",
+      "inference": "A chi-square map only in standard oscillation parameters is not a likelihood in Gamma. Histogram reconstruction requires model validation."
+    },
+    {
+      "id": "S4",
+      "title": "Beccaria and Ternes: damping with first JUNO data",
+      "url": "https://arxiv.org/html/2606.13362v1",
+      "doi": "10.48550/arXiv.2606.13362",
+      "published": "2026-06-11",
+      "consulted_utc_date": "2026-10-09",
+      "anchors": [
+        "II Eq.(1)",
+        "III.B Eq.(6)",
+        "IV.B Eq.(13)",
+        "Table I"
+      ],
+      "verified_access": "full arXiv HTML",
+      "available": [
+        "GLoBES and Poisson-plus-pulls analysis specification",
+        "published conditional 90% CL n=-2 bound,gamma<4.1e-27GeV"
+      ],
+      "texture": {
+        "gamma21": "gamma",
+        "gamma31": "gamma",
+        "gamma32": 0,
+        "E0_GeV": 1,
+        "n": -2,
+        "delta_chi2": 2.71,
+        "solar_prior": "sin^2(theta12)=0.308 +/- 0.020; compare profiles with/without"
+      },
+      "not_verified": [
+        "authors numerical likelihood or code release"
+      ],
+      "download_status": "HTML only in this unit; F7.2 earlier custody is not re-certified here.",
+      "inference": "Matching exponent n=-2 alone is insufficient. A double commutator with H generally has rates proportional to squared mass-squared splittings, not this equality/zero texture."
+    },
+    {
+      "id": "S5",
+      "title": "Wright et al.: Ia deflagration-to-detonation neutrino prediction",
+      "url": "https://arxiv.org/html/1605.01408v2",
+      "doi": "10.1103/PhysRevD.94.025026",
+      "published": "2016-07-19; arXiv v2 2016-08-22",
+      "consulted_utc_date": "2026-10-09",
+      "anchors": [
+        "IV.1 Eq.(10)",
+        "V Eq.(11)",
+        "VI.1",
+        "VI.2 Table2"
+      ],
+      "verified_access": "full arXiv HTML",
+      "available": [
+        "model N100nu time,energy,flavor,trajectory predictions in article",
+        "JUNO-like interaction expectation at10kpc:0.014 NMO,0.032 IMO before efficiency loss"
+      ],
+      "not_verified": [
+        "machine-readable N100nu flux files",
+        "joint observed Ia neutrino/bolometric sample"
+      ],
+      "download_status": "Article only; no simulation flux file downloaded.",
+      "inference": "The model already takes vacuum propagation to Earth as decohered. Additional pure dephasing in the same mass basis after complete decoherence cannot alter the populations; effects in matter/production require a separate calculation."
+    },
+    {
+      "id": "S6",
+      "title": "SNOwGLoBES official repository",
+      "url": "https://github.com/SNOwGLoBES/snowglobes",
+      "related_urls": [
+        "https://github.com/SNOwGLoBES/snowglobes/tree/master/fluxes",
+        "https://github.com/SNOwGLoBES/snowglobes/blob/master/doc/tex_src/snowglobes_1.1.tex"
+      ],
+      "published": "living repository,not commit-pinned in this survey",
+      "consulted_utc_date": "2026-10-09",
+      "anchors": [
+        "repository directories",
+        "fluxes listing",
+        "manual Supernova Neutrino Fluxes"
+      ],
+      "verified_access": "repository HTML and manual text",
+      "available": [
+        "cross-sections,efficiencies,smearing and flux example directories",
+        "Livermore/GKVM examples and pinched-flux generator"
+      ],
+      "not_verified": [
+        "full repository bytes or commit",
+        "N100nu flux in repository",
+        "operational build"
+      ],
+      "download_status": "No clone,installation or execution.",
+      "inference": "Suitable for a synthetic forecast after a physical flux and operator are supplied; representative response does not replace experiment-specific response/covariance."
+    }
+  ],
+  "scope": {
+    "observed_fit_executed": false,
+    "raw_data_downloaded": false,
+    "provider_called": false,
+    "original_modified": false,
+    "memory_modified": false,
+    "bench_modified": false,
+    "writes": "Only new derived files inside this unit/data_inventory"
+  },
+  "recommendation": "First derive and test the exact TGL rate texture in a synthetic reactor spectrum. Keep Ia as a separate source/in-matter branch; no 5sigma result is inferred from published upper limits."
+}

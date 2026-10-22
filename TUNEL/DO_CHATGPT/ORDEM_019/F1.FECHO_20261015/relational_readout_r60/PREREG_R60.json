@@ -1,0 +1,40 @@
+{
+  "status": "INPUT_CONDITIONAL_MEASUREMENT_MODELS",
+  "unit": "F1.FECHO_20261015",
+  "claim": 939,
+  "operator_source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\relational_readout_r60\\OPERADOR_R60.txt",
+    "sha256": "913750ec405e0796bf2d9947a0b9fe88a7558b6dc7cc4447fb5686ad40c72ba7"
+  },
+  "parent_delivery": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\pair_covariance_r59\\DELIVERY_R59.json",
+    "sha256": "4282cc53f357f46d25daeb5de13eaa610eac9f4cadab2d439976150116d479f6"
+  },
+  "objective": "Locate and test relational estimators with explicit nuisance parameters. No presumed equality of measured channel b or squeeze rho with betaTGL.",
+  "models": [
+    {
+      "id": "CROSS_RATIO",
+      "assumptions": "Two inputs, common symmetric lossless power transfer [[1-b,b],[b,1-b]], positive unknown input intensities IA,IB, fixed positive port gains g1,g2, backgrounds removed, 0<b<1.",
+      "equations": "A1=g1*IA*(1-b); A2=g2*IA*b; B1=g1*IB*b; B2=g2*IB*(1-b). Q=A2*B1/(A1*B2).",
+      "claim": "sqrt(Q)=b/(1-b), b=sqrt(Q)/(1+sqrt(Q)); no target beta input.",
+      "falsifiers": "Symbolic residual nonzero; injected channel b not recovered. Single configuration with unknown gains must be nonidentifiable; configuration-dependent gains must break recovery."
+    },
+    {
+      "id": "PAIR_LOSS",
+      "assumptions": "R59 pure zero-mean two-mode squeezed input; independent vacuum loss etaA,etaB in (0,1]; calibrated photon units; no extra additive noise, mixing or phase jitter; n>0.",
+      "equations": "x=etaA*n; y=etaB*n; z=|m_out|^2=etaA*etaB*n*(n+1); d=z-x*y.",
+      "claim": "n=x*y/d; etaA=d/y; etaB=d/x. Local identifiability with determinant nonzero. This does not yield beta.",
+      "falsifiers": "Exact reconstruction fails; boundary d<=0 must refuse; arbitrary mixed input must permit indistinguishable states, including ones passing ideal-domain checks."
+    }
+  ],
+  "verification": "SymPy exact identities and rational synthetic controls; numerical checks only if named and tolerance fixed. No observed data, no 5-sigma or empirical power claim.",
+  "scope": "R5 readout/covariance component only. R4 recovery, OH generator and clock unchanged; no accepted mission requirement.",
+  "no_changes": [
+    "um.py",
+    "kernel",
+    "Bancada",
+    "observed data",
+    "gate"
+  ],
+  "provider_calls": 0
+}

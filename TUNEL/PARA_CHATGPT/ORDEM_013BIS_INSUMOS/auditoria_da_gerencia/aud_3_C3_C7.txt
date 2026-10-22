@@ -1,0 +1,165 @@
+<!-- Relatório do auditor 3 da gerência (22/09/2026), cópia integral para a ORDEM 013-bis com este cabeçalho de 2 linhas (o sha256 difere do original só por isso). Frente: C3/C7. Os caminhos «...\scratchpad\ordem013\auditoria\...» citados são efêmeros: as cópias dos scripts e saídas estão em auditoria_da_gerencia\scripts\ (ver README_INSUMOS.md). -->
+
+SUMMARY: Frente C3/C7 auditada em cópias no scratch, sem escrever nada na casa nem na bancada e sem tocar nos processos vivos.
+
+**Código C3: sólido.**
+- **Regressão pedida:** paga e verificada por mim no módulo atual (sha16 fd0fc446e1c732f3), com erro relativo de 3,95e-16 (R-A) e 3,48e-16 (R-B) contra per_series[2] do V2 (sha16 ff15f023dd91d8c7). Nas 169 séries do V2, o pior erro é 6,6e-16.
+- **β:** nunca aparece literal no código.
+- **QNM exatos:** vêm do pacote qnm 0.4.4 e conferem com um Leaver independente meu a ≤1,5e-15. As predições da CSV (33 eventos × 5 leituras) foram recalculadas por mim: erro 0 nas leituras sem co-rotação e 1,5e-11 em R-MOD.
+- **Template:** conferido por ajuste independente, com δτ̂ = −x/(1+x) a 1e-14 e δf̂ = 0. A convenção de polarização é a da eq. 1 da LVK. O consumidor Bilby e os verificadores dos desenrolamentos e do multimodo, reexecutados no WSL, dão PASS com números idênticos.
+- **Verossimilhança marginal:** exata a 3e-15.
+- **Não pago na C3:**
+  - o controle BCW com o desvio impresso para R-MOD (medi eu: razão 1,03 em χ=0,68, 0,77 em 0,9 e 34 em 0,99);
+  - o observável 'realização' devolve None;
+  - não se declarou que as constantes do V2 não são CODATA/IAU, nem se imprimiu a diferença entre perfis.
+
+**Pacote C7: íntegro, mas não pronto para liberar.**
+- **O que confere:** todos os manifestos (52/52, 125/125, 194/194) e 15/15 sha alegados. O demo roda no Windows e reproduz a saída enviada, e o zip regenerado é idêntico ao enviado. O README está em inglês e não diz «confirma».
+- **BLOQUEANTE:** o zip enviado contém C6_REPRODUCTION_RESULT.json, e reproduce_c6.py:70 aborta com FileExistsError depois de rodar tudo. O comando de reprodução do strain documentado no README falha numa extração limpa, e por isso o critério ficou PAGO_FALSO. O conserto é trivial.
+- **Faltas (CORRIGIR):**
+  - a frase de escopo leitura a leitura com estatuto e números (só R-B aparece nos dados reais);
+  - a marca de hipótese da gerência no R-MOD, que falta no overview, na CSV e no escopo do módulo, junto com as paredes Kay–Wald e Unruh-g;
+  - as bandeiras EXCLUDED_IF_UNIVERSAL.
+- **Processo:** a bancada não parou no M1 à espera de recibo. Empacotou o M6 antes da C5 e há processos C5 ainda vivos, então o bundle v2 já está defasado.
+
+**O que isto contribui.**
+- A lei da casa agora é predição concreta no espaço (δf̂, δτ̂) da LVK, por leitura. No GW250114: R-B −0,0199, R-RAIZ-0 −0,037, R-MOD −0,037 [CONJECTURE], R-LIN −0,071; R-A invisível; δf̂ = 0.
+- Há uma forma de onda utilizável por grupos externos.
+- O discriminante real entre R-MOD e R-B é a tendência de spin, que é oposta nas duas.
+- Os dados atuais (C6, catálogo de 31, GWTC-3) dão INCONCLUSIVE_SYSTEMATICS para todas as leituras. Os catálogos puxam δτ̂ para o lado positivo e a própria RG fica fora de 95%, então nada foi excluído nem favorecido. Isto é NÃO-CEGO, NOT_FALSIFIED, nunca CONFIRMED.
+
+**Nova ordem?** Para esta frente, não uma reformulação: basta um adendo corretivo curto, com os ~8 itens de «remaining». A calibração C5 (reprovada) e a escolha da partição (que é do operador) seguem fora desta frente.
+
+Os scripts de auditoria estão em C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\ordem013\auditoria\C3_C7_codigo_pacote\ (regressao_c3.py, leaver_indep.py, rmod_bcw_vs_exato.py, recompute_csv.py, template_indep.py, likelihood_indep.py, confere_sha.py, verifica_manifesto_longpath.py).
+
+## CRITERIA
+- [PAGO_VERIFICADO] C3.1 Regressão: delta_pred_A/B de per_series[2] (GW150914_H1) com as constantes de ringdown_dephasing_v2.py:22-23, |Δ|/|δ| ≤ 1e-12 :: Rodei a cópia do módulo atual (tgl_ringdown_prediction.py sha16 fd0fc446e1c732f3, idêntica ao original e a todas as cópias C7), perfil LEGACY_V346, contra o JSON canônico lido por script (sha16 ff15f023dd91d8c7), com Mf_det=67.73752907959711 e a_f=0.6712194217379245. R-A: alvo −3.2248834885292296e-42, módulo −3.224883488529231e-42, |Δ|/|δ| = 3.95e-16. R-B: alvo −0.019962060309612117, módulo −0.019962060309612124, |Δ|/|δ| = 3.48e-16. Varri também as 169 séries OK do V2: pior 5.5e-16 (A) e 6.6e-16 (B). Minha reimplementação com as constantes lidas das l.22-23 dá diferença 0.0. Ressalva: a regressão bate na chave delta_tau_linear; o delta_tau principal do módulo é −x/(1+x) = −0.019571 e difere 2% do valor do V2 (scripts: scratchpad/.../C3_C7_codigo_pacote/regressao_c3.py).
+- [PAGO_VERIFICADO] C3 — β nunca literal no código :: grep por 0.0120, 0.01203, 1.2031, 12031300 e 'beta = <número>' em todos os .py de ORDEM_013_RINGDOWN (sem cache) e das pastas C7_*: zero ocorrências. β = ALPHA_FINE_CODATA_2018*math.sqrt(math.e) em tgl_ringdown_prediction.py:18-19, e o runtime devolve 0.012031300400803142. O β só aparece como SAÍDA em CSV (coluna Gamma_over_omega de R-LIN, que é β por construção).
+- [PAGO_VERIFICADO] C3.1 — QNM exatos (Leaver/qnm) para as leituras com ω−mΩ_H (R-MOD) :: R-MOD recusa o fit BCW (tgl_ringdown_prediction.py:108-110). A grade QNM_GRID.json vem do pacote qnm 0.4.4. Escrevi um solver de Leaver próprio (fração contínua radial + angular) e ele concorda com a grade e com tables/reference_QNM.json a ≤1.5e-15 em χ = 0; 0,3; 0,5; 0,68; 0,9; 0,98. Recalculei as 33 linhas R-MOD do CSV do pacote com o meu Leaver: erro máximo 1.5e-11. O R-MOD do módulo reproduz o bloco g da revisão da gerência a ~1e-16: −0.19179 (χ=0), −0.03660 (0,68), −0.007654 (0,9), −0.000224 (0,99).
+- [NAO_PAGO] C3.1 — BCW só como controle, com o desvio impresso, nas leituras com ω−mΩ_H :: Não há em nenhum JSON nem em nenhuma ENTREGA uma tabela de controle BCW × exato para R-MOD (grep por bcw/berti em C1_TABLES.json e C1_LEITURAS.json: só aparece o rótulo qnm_method). Calculei o controle eu mesmo, passando o BCW ao módulo: razão BCW/exato = 0,995 (χ=0), 1,023 (0,5), 1,032 (0,68), 0,772 (0,9), 1,50 (0,98) e 34,1 (0,99).
+- [NAO_PAGO] C3.1 — função (M_f,det, χ_f, leitura, observável ∈ {ensemble, realização}) → δf̂, δτ̂ e, na realização, o espalhamento :: No ensemble a função está paga e conferida: ajustei o template sem ruído e o δτ̂ ajustado bate com −x/(1+x) a ~1e-14, com δf̂ = 0. Na realização, tgl_ringdown_prediction.py:130-132 devolve delta_tau=None, delta_f=None e frequency_scatter=None, com a mensagem 'requires... no universal fitted value'. Os números existem só em C2_TRAJECTORY_RECOVERY.json, com ruído SINTÉTICO: para R-B sem ruído, δτ̂ médio −0,0075 e dispersão de δf̂ 0,0192. Eles não estão no módulo nem no README.
+- [PAGO_VERIFICADO] C3.1 — tabela evento a evento (M1: GW150914 + GW250114; M2: eventos com δτ̂₂₂₀ publicado) :: M1 está em C1_TABLES.json/C1_LEITURAS.json: GW150914 do V2 e GW250114 pelas medianas do posterior pSEOB (M_det 68,287, χ 0,6785, z 0,0843; não pela API do GWOSC). M2 é C7_INDEPENDENT/tables/event_reading_predictions.csv, com 264 linhas = 33 eventos × 8 leituras. Recalculei 165 linhas (R-A, R-B, R-RAIZ-0, R-LIN, R-MOD) a partir dos quantis de C4_CATALOG_220.json: erro 0 nas quatro primeiras e 1.5e-11 em R-MOD. C3_PREDICTION_COMPATIBILITY.json (264 predições inalteradas após o spin assinado) é coerente com isso.
+- [NAO_PAGO] C3.1 — dizer que G=6,674e-11 e M☉=1,98892e30 do V2 NÃO são CODATA/IAU; imprimir a diferença entre os perfis :: O perfil CODATA2018_IAU2015 existe (tgl_ringdown_prediction.py:26-27). Mas o grep por '1.98892', '6.674e', 'not CODATA' e 'não são CODATA' nas ENTREGAs, no README, na C0 e na C1 não acha a declaração pedida. O README:71-72 diz apenas 'LEGACY_V346 is an explicit, distinct regression profile'. Nenhum campo imprime a diferença entre perfis; medi eu: R-A +2,34e-4 (relativo), R-B −1,7e-16 (independe do perfil).
+- [PAGO_VERIFICADO] C3.2 — template: convenções de fase, tempo de início e polarizações documentadas (pycbc/bilby/pyRing) :: A docstring de tgl_ringdown_template.py:1-21 define h+ = A(1+cos²ι)/2·e^{−t/τ}cos(ωt+φ) e h× = A cos ι·e^{−t/τ}sin(ωt+φ). Conferi no HTML arquivado do arXiv:2509.08099 (cache/literature) que a eq. do artigo é h+ − i h× = Σ e^{−t/τ}(A^R e^{−2πift} + A^L e^{2πift}); com a face voltada ao observador, o template dá o termo R, como a docstring afirma. O consumidor real do Bilby 2.8.2, reexecutado por mim no WSL numa cópia, dá erros relativos 0,0 e efeito da deformação 0,01520, idênticos a C3_BILBY_CONSUMER.json. Ressalva (NOTA): t_start é o tempo em que a amplitude é referenciada, e o documento não diz como ele se liga ao pico ou ao t0 do pyRing.
+- [PAGO_VERIFICADO] C3.2 — parâmetro de amplitude a (a=0 RG, a=1 leitura) :: O parâmetro chama-se `deformation` e multiplica Γ (tgl_ringdown_template.py:57); valores negativos são recusados (l.38-39). Com deformation=0 sai exatamente a RG. Com deformation=1, o ajuste independente dá δτ̂ = −0,019845285 (R-B), −0,071477 (R-LIN) e −0,037063 (R-RAIZ-0), iguais à predição a 1e-14. A média de 400 realizações brownianas reproduz a envoltória do ensemble a 0,87% (dentro do ruído de Monte Carlo).
+- [PAGO_VERIFICADO] C3 — testes de unidade e docstring com estatutos :: Reexecutei em cópias verify_template.py (Windows) e verify_unravelings.py, verify_bilby_consumer.py e verify_multimode_template.py (WSL /opt/lal_env, só uso). Os quatro dão PASS, com números idênticos aos JSONs da bancada. No multimodo 220/440 contra LAL o resíduo máximo é 2,3e-16. As docstrings trazem [DERIVED]/[INPUT]/[OPEN], e cada leitura tem sua string de escopo. Ressalva: os verificadores não vão no pacote C7_INDEPENDENT (só verify_manifest.py e run_demo.py) e o 221 não foi exercitado especificamente.
+- [PAGO_VERIFICADO] C7 — README em inglês com a lei, as leituras com estatuto, a tabela δf̂/δτ̂ por evento, os dois módulos e a reprodução :: Os 7 READMEs C7_* estão em inglês (zero marcadores de português). C7_INDEPENDENT/README.md traz a lei (l.25-47), a tabela de leituras com estatuto (l.49-60), a CSV de 264 linhas (l.20-23), os módulos (l.68-101) e a reprodução (l.136-159).
+- [NAO_PAGO] C7 — frase de escopo leitura a leitura, com estatuto, saída da tabela C1/C4 ('reading X [status]: predicts δτ̂₂₂₀ = … ± …; excluded / not excluded at …') :: O README e o C7_DELIVERY_OVERVIEW.md não trazem essas frases. Na tabela de leituras do README há só a fórmula da taxa, sem número, sem banda ± e sem veredito. A tabela de dados reais do overview (l.36-40) e o README (l.105-107) trazem só o ln B de R-B. Os números por leitura existem: C6 R-MOD −0,251 / R-LIN −0,091 / R-RAIZ-0 −0,043; catálogo 31 R-LIN −8,22 / R-RAIZ-0 −3,66 / R-MOD −3,56; bandas shift_05_50_95 em C4_CATALOG_220.json. Também não vão as bandeiras EXCLUDED_IF_UNIVERSAL da C1 (R-RAIZ-0, R-RAIZ-REST e R-LIN = True).
+- [PAGO_VERIFICADO] C7 — R-MOD marcada [CONJECTURE — management hypothesis, not TGL canon] :: Pago no README principal: C7_INDEPENDENT/README.md:58 'CONJECTURE management hypothesis, not TGL canon'. Mas a marca falta em C7_DELIVERY_OVERVIEW.md:18 (a linha R-MOD está sem marca), na coluna formula_scope da CSV e na string de escopo do módulo (tgl_ringdown_prediction.py:119 diz CONJECTURE, sem 'management hypothesis'). O README também não traz a parede do relógio de Unruh-g, excluído se universal; e em C1_LEITURAS.json o R-MOD tem excluded_if_universal = null.
+- [PAGO_VERIFICADO] C7 — nada de 'confirma'; nenhuma leitura escolhida :: O grep por confirm, proved, detect e discover nos READMEs e no overview só acha negações ('NOT_EXCLUDED does not mean CONFIRMED', 'not a detection'). Nenhuma leitura é escolhida. Ressalva: a síntese destaca só R-B nos números de dados reais.
+- [PAGO_VERIFICADO] C7 — manifestos e sha256 conferindo (5-10 por script) :: Conferi por script 15 sha256 alegados nas ENTREGAs: 15/15 OK (o zip v1 c03563c8…, o MANIFEST 29d36d2e…, o README 4b8f7315…, os módulos, os verificadores e os JSONs C3). Também conferi: C7_INDEPENDENT/MANIFEST, 52/52; os outros seis manifestos C7_*, 125/125; o bundle TGL_RINGDOWN_DELIVERY_v2.zip (sha 3c1ae842…), 194/194 depois de extraído, e o seu C7_INDEPENDENT, 52/52. Nos zips do SEOB nativo (a368ae33…) e do GWTC-3 (8b0c8fcf…) o sha bate com o alegado.
+- [PAGO_VERIFICADO] C7 — reprodução leve (verify_package_release / demo / verificação do registro) numa cópia :: Resultados nas cópias: verify_manifest.py PASS 52/52. run_demo.py roda no Windows com Python 3.14.3 e numpy 2.4.3 e reproduz o demo_output/predictions.json enviado sem nenhuma diferença (β 0.012031300400803142; variação relativa da forma de onda R-B 0,015453). verify_package_release.py na cópia regenera um zip com 54/54 membros de bytes idênticos ao enviado; a etapa de extração limpa falhou por MAX_PATH no meu caminho longo, o que é limitação do Windows e não defeito de conteúdo. reproduce_c6.py (só o registro) dá PASS no WSL (ded00f09…).
+- [PAGO_FALSO] C7 — reprodução do strain real pelo comando documentado, a partir do pacote enviado (python reproduce_c6.py --run --download) :: A bancada alega a reprodução em pasta nova (all_windows_recomputed_from_strain: true; C7_REQUIREMENTS_AUDIT: 'fresh-directory regeneration'). Porém o zip enviado contém TGL_RINGDOWN/C6_REPRODUCTION_RESULT.json (verify_package_release.py:16; conferido na listagem do v1 e do v2), e reproduce_c6.py:69-70 faz 'if target.exists(): raise FileExistsError' DEPOIS de rodar tudo. Numa extração nova do pacote enviado, o comando do README (l.141) roda as janelas e aborta sem imprimir PASS. O PASS registrado é de antes de esse arquivo ser incluído. Não rodei o --run (download de 82 MB e cálculo): a conclusão vem da leitura do código e da listagem do zip.
+
+## DEFECTS
+### [BLOQUEANTE] C7_INDEPENDENT/reproduce_c6.py:69-70 + verify_package_release.py:16 (zip cache/TGL_RINGDOWN_INDEPENDENT_v1.zip e bundle v2)
+P: O pacote enviado traz o arquivo de saída que impede o próprio comando de reprodução do strain documentado no README. Bloqueia a liberação do C7 a grupos externos, não a ciência.
+E: A listagem dos zips confirma 'TGL_RINGDOWN/C6_REPRODUCTION_RESULT.json' e 'TGL_RINGDOWN_DELIVERY/C7_INDEPENDENT/C6_REPRODUCTION_RESULT.json'. reproduce_c6.py:70 dá 'if target.exists():raise FileExistsError(...)' depois de run_c6_grid.py rodar.
+FIX: Tirar C6_REPRODUCTION_RESULT.json do zip (movê-lo para evidence/) ou gravar a saída com nome carimbado. Depois regenerar o zip e testar o --run numa extração limpa do zip, não na pasta de trabalho.
+
+### [CORRIGIR] C7_INDEPENDENT/README.md:49-60 e 103-114; C7_DELIVERY_OVERVIEW.md:10-19 e 36-40
+P: Falta a frase de escopo leitura a leitura pedida na C7: estatuto, δτ̂ previsto ± banda, ln B por conjunto de dados e excluído/não excluído. Só o R-B tem números de dados reais na síntese, o que destaca uma leitura.
+E: Os números existem e não estão na síntese. C6_RESULTS.json (início 10 t_M, sd 1e-20): R-MOD −0,251, R-LIN −0,091, R-RAIZ-0 −0,043, R-B −0,0026. C4_CATALOG_COMBINATION.json (31 eventos): R-LIN −8,22, R-RAIZ-0 −3,66, R-MOD −3,56, R-B −1,81. GWTC-3 (10 eventos): R-LIN −3,39, R-RAIZ-0 −1,57, R-MOD −1,49, R-B −0,82. As bandas shift_05_50_95 estão em C4_CATALOG_220.json.
+FIX: Gerar por script, da C1, C4 e C6, uma frase por leitura no formato da ordem, com EXCLUDED_IF_UNIVERSAL e o z da RG ao lado, e pôr no README e no overview.
+
+### [CORRIGIR] C7_DELIVERY_OVERVIEW.md:18; CSV event_reading_predictions.csv (coluna formula_scope); tgl_ringdown_prediction.py:119; C1_LEITURAS.json rows[R-MOD].excluded_if_universal=null
+P: R-MOD aparece sem a marca [CONJECTURE — management hypothesis, not TGL canon] fora do README principal. As paredes da ordem (Kay–Wald; o relógio KMS é o mesmo da alternativa Unruh-g, excluída pelos relógios v369 se universal) não chegam ao pacote.
+E: Linha 18 do overview: '| R-MOD | 9.27534086 | 0.00596126066 | -0.0368397228 |', sem marca. A string de escopo diz 'CONJECTURE_RESTRICTED_KMS_AND_MODULAR_CLOCK__NO_GLOBAL_KERR_HARTLE_HAWKING', sem 'management hypothesis'.
+FIX: Acrescentar a marca no overview, na CSV e no escopo do módulo, e uma linha no README com a parede Unruh-g/v369 e a regra de não universalidade (partição do operador). Preencher excluded_if_universal do R-MOD com o condicional em vez de null.
+
+### [CORRIGIR] tgl_ringdown_prediction.py:108-119 (R-MOD); ausência de tabela de controle
+P: A ordem pede o BCW como CONTROLE, com o desvio impresso, nas leituras com ω−mΩ_H. O módulo só recusa o BCW e nenhum artefato imprime o desvio.
+E: Recalculado por mim (módulo copiado, BCW passado como QNM externo): razão BCW/exato no R-MOD = 0,995 (χ=0), 1,023 (0,5), 1,032 (0,68), 0,772 (0,9), 1,504 (0,98), 34,1 (0,99).
+FIX: Emitir um JSON de controle com R-MOD exato × BCW numa grade de spin e nos eventos da tabela, e citá-lo no README.
+
+### [CORRIGIR] tgl_ringdown_prediction.py:24-30 (perfil LEGACY_V346); README:71-72
+P: A ordem manda dizer que G=6,674e-11 e M☉=1,98892e30 (V2 l.23) NÃO são CODATA/IAU e imprimir a diferença entre perfis. Nenhum dos dois foi feito.
+E: O grep nas ENTREGAs, C0, C1, C7_REQUIREMENTS_AUDIT e README não acha a declaração. Diferença medida por mim no GW150914: R-A +2,34e-4 relativo (via ħ e G), R-B −1,7e-16.
+FIX: Uma linha na docstring e no README com os valores legados e os de CODATA2018/IAU2015, mais um campo profile_difference no JSON da C3.
+
+### [CORRIGIR] tgl_ringdown_prediction.py:130-132
+P: O observável 'realization' da C3.1 devolve None para δτ̂, δf̂ e espalhamento. A ordem pede o espalhamento por evento, e os números existentes ficam só num JSON da C2 com ruído sintético.
+E: C2_TRAJECTORY_RECOVERY.json (R-B, sem ruído): mean_dtau −0,00753 (38% do ensemble −0,0199) e sd_df 0,0192. Com ruído OU sintético a RG sozinha já dá mean_dtau +0,030, maior que o sinal do R-B.
+FIX: Expor no módulo uma função de realização com desenrolamento, estimador, janela e ruído explícitos (reusando trajectory_recovery), ou declarar no README o NÃO PAGO com os números da C2 e o seu escopo.
+
+### [CORRIGIR] Protocolo da ORDEM §3 (marcos) — TUNEL/DO_CHATGPT; STATUS_ORDEM_013.json
+P: A bancada não parou no M1 à espera do recibo. Executou M1 a M6 numa só rodada (C6 no strain e C7 empacotado antes de qualquer recibo) e não emitiu ENTREGA_013_M1…M6.
+E: Não há ENTREGA_013_M*. O C7_INDEPENDENT é de 21/09 22:38-22:41 (hora local), a ordem é de 21/09, e o STATUS goal_status é WORK_RESUMED_NOT_COMPLETE, com processos C5 ainda vivos.
+FIX: Pedir as notas de fechamento por marco. A gerência audita o M1 antes de incorporar qualquer coisa. O pacote C7 é congelado de novo só depois da C5.
+
+### [NOTA] Bundle TGL_RINGDOWN_DELIVERY_v2.zip: verify_c0_c3.py:51
+P: A regressão da C3 não é reprodutível por grupo externo: o verificador enviado lê cache/casa/RINGDOWN_DEPHASING_V2_RESULT.json, que não vai no pacote.
+E: Executado na cópia extraída: FileNotFoundError '...\cache\casa\RINGDOWN_DEPHASING_V2_RESULT.json'.
+FIX: Enviar um JSON mínimo com per_series[2] (Mf_det, a_f, delta_pred_A/B, sha do original) e apontar o verificador para ele, sem gravar por cima de evidência enviada.
+
+### [NOTA] C7_INDEPENDENT (conteúdo do pacote)
+P: Os testes de unidade (verify_template, verify_unravelings, verify_bilby_consumer, verify_multimode_template) não vão no pacote independente, que só traz verify_manifest.py (bytes) e run_demo.py (smoke com 2 asserts).
+E: A listagem de TGL_RINGDOWN_INDEPENDENT_v1.zip só tem verify_manifest.py.
+FIX: Incluir uma versão isolada dos testes (sem atomic_json gravando na raiz) com saída em stdout.
+
+### [NOTA] reproduce_c6.py:65
+P: O veredito esperado está fixo no código: um re-run que desse outro veredito, inclusive um rebaixamento, é tratado como erro 'Scientific status was promoted'.
+E: A linha 65 compara actual['status'] com 'INCONCLUSIVE_SYSTEMATICS' e levanta ValueError se diferir.
+FIX: Relatar a divergência de veredito como resultado (DIVERGENT_VERDICT) em vez de abortar, preservando o fail-closed contra CONFIRMED/PROVED.
+
+### [NOTA] Bundles TGL_RINGDOWN_DELIVERY_v1/v2.zip
+P: O 'pacote unificado' v2 (00:24) é anterior aos pacotes IMR_RECOVERY (00:41), COHERENT_SOURCE (01:35) e NATIVE_SEOB (05:00), e carrega o overview antigo. O bundle também traz arquivos em português (C0_AUDITORIA.md, C1_LEITURAS_E_RELOGIOS.md, C2_MAPEAMENTO_ANALITICO.md, C0_ADENDO_ESCOPO_LITERATURA.md) num pacote que deveria sair em inglês.
+E: Os mtimes estão em cache/. A lista de membros da raiz do v2 foi extraída por script.
+FIX: Gerar um bundle final depois da C5, com todos os pacotes, o overview corrente e os arquivos PT traduzidos ou rotulados como registro interno.
+
+### [NOTA] Bundle v2 (caminho interno de até 152 caracteres); README sem aviso
+P: No Windows sem LongPathsEnabled, extrair sob uma pasta profunda quebra verify_delivery.py e verify_manifest.py.
+E: Falharam no meu caminho de scratch. Com o prefixo \\?\ os mesmos arquivos conferem 194/194 e 52/52.
+FIX: Avisar no README ('extract near drive root') ou encurtar os caminhos internos.
+
+### [NOTA] C5 (overtones com Γ₂₂₀ comum) × tgl_ringdown_template/prediction (Γ por modo ∝ ω²)
+P: A convenção das injeções da C5 ('All 22 overtones share the effective imposed 220 Gamma') difere da do template público, que calcula Γ do próprio modo quando se passa mode=(2,2,1). Quem usa o template com overtones obtém outra deformação.
+E: STATUS verified.C5_recolored.physical_scope contra tgl_ringdown_prediction.py:70-80 e 125 (gamma com o ω do modo).
+FIX: Documentar as duas convenções no README ou expor a opção no template.
+
+### [NOTA] tgl_ringdown_prediction.py:82-85 (R-RAIZ-0) e CSV/C4/C6
+P: O escopo do R-RAIZ-0 diz 'CONDITIONAL_VACUUM_TO_ONE_QUANTUM_COHERENCE__NOT_MACROSCOPIC_FIELD', mas a leitura é aplicada como taxa aditiva ao strain macroscópico nas tabelas e ln B. É tensão de tipo, dita no rótulo mas não no README.
+E: A CSV traz o ln B do R-RAIZ-0 para os 33 eventos. O C6 dá −0,043.
+FIX: Uma linha no README: a taxa do R-RAIZ-0 usada no strain é extrapolação condicional do vácuo→1 quantum.
+
+### [NOTA] tgl_ringdown_prediction.py:126-134 (chaves de saída)
+P: O delta_tau principal é −x/(1+x), e o valor do V2 corresponde a delta_tau_linear. Quem comparar delta_tau com delta_pred_B do V2 vê 2% de diferença (−0,019571 contra −0,019962).
+E: Medido na regressão.
+FIX: Citar no README qual chave reproduz o rito v346.
+
+### [NOTA] ORDEM §2.3 — fichas REAPROVEITAMENTO_Cn.md
+P: As fichas de aproveitamento por alvo não existem como arquivo, só como seção dentro das ENTREGAs.
+E: ls de ORDEM_013_RINGDOWN e TUNEL/DO_CHATGPT: nenhum REAPROVEITAMENTO_*.
+FIX: Aceitar as seções embutidas ou exigir os arquivos no fechamento de cada marco.
+
+
+## RESULTS
+- O módulo novo reproduz exatamente o rito v346 (V2) já existente | GW150914_H1: R-B −0,019962060309612 (|Δ|/|δ| 3,5e-16); R-A −3,2249e-42 (3,9e-16); 169/169 séries do V2 com erro ≤ 6,6e-16 | [REAL — medido por mim numa cópia]
+  => A predição nova é a mesma lei da casa (Milburn, Γ=½βτ★ω²), agora num módulo reutilizável. Não é física nova: garante que tudo o que vem depois conversa com o programa sem desvio.
+- Predição da TGL no espaço da LVK por leitura, GW250114 (medianas do posterior pSEOB; M_det 68,29, χ 0,6785, z 0,084) | δτ̂ de ensemble (exato −x/(1+x)), δf̂ = 0 em todas: R-A −3,5e-42; R-B −0,01985; R-RAIZ-0 −0,0371; R-LIN −0,0715; R-MOD −0,0368 [CONJECTURE, gerência]; R-RAIZ-EP4 −3,5e-42; R-RAIZ-REST −1,5e-82; R-GLOBAL 0. No R-B, correção/σ marginal ≈ 0,34 (lido da ENTREGA parcial, não recomputado por mim) | [DERIVED condicional ao relógio INPUT/CONJECTURE; valores recomputados por mim a partir da CSV/C4]
+  => Cada leitura prevê linhas um pouco MAIS LARGAS (amortecimento mais rápido) e nenhuma mudança de frequência. As correções vão de invisível (10⁻⁴²) a ~7%. No GW250114 a precisão é ~6% (1σ), então só R-LIN e, marginalmente, R-RAIZ-0/R-MOD chegam perto de 1σ; o R-B fica em ~⅓σ.
+- Γ/ω por leitura: a exigência (2) do texto (Γ ≪ ω) | Γ/ω: R-LIN = β = 0,01203; R-RAIZ-0 = β/2 = 0,00602; R-MOD 0,00596; R-B 0,00316; R-A 5,5e-43 | [DERIVED/REAL numérico]
+  => Todas as leituras cumprem Γ ≪ ω. Isso não informa sobre a viabilidade: o que decide é x = Γτ contra σ(δτ̂).
+- R-MOD com QNM exato × BCW, e a dependência em spin contra o R-B | R-MOD exato: −0,1918 (χ=0), −0,0682 (0,5), −0,0366 (0,68), −0,00765 (0,9), −0,00077 (0,98), −0,00022 (0,99). R-B: −0,0093, −0,0149, −0,0199, −0,0402, −0,096, −0,134. Razão BCW/exato no R-MOD: 1,03 (0,68), 0,77 (0,9), 34 (0,99). Leaver próprio contra a grade da bancada: ≤1,5e-15 | [DERIVED; R-MOD = CONJECTURE da gerência; QNM REAL conferido por dois solvers]
+  => O R-MOD e o R-B têm tendências de spin OPOSTAS: é esse o discriminante, porque um evento isolado não separa. No GW250114 o R-MOD (−0,0368) e o R-RAIZ-0 (−0,0371) praticamente coincidem. O fit BCW é inutilizável para o R-MOD em spin alto, o que justifica exigir QNM exato.
+- Forma de onda para grupos independentes (template + parâmetro a) | Ajuste independente sem ruído: δτ̂ ajustado = predito a 1e-14; δf̂ = 2e-16. Bilby 2.8.2: erro 0,0, efeito da deformação 0,0152. Harmônicos LAL 220/440: resíduo 2,3e-16. Média de 400 realizações ≈ ensemble (0,87%) | [REAL — reexecutado por mim]
+  => Existe um seno amortecido concreto que o Bilby consome direto, com a=0 (RG) e a=1 (leitura), e convenção de polarização igual à da LVK (eq. 1 do arXiv:2509.08099). É modelo de ringdown, não IMR completo.
+- Realização única (o que um detector veria de fato), estudo sintético da C2 | R-B sem ruído: δτ̂ médio −0,0075 (≈38% do ensemble) e espalhamento de δf̂ ≈ 1,9%. Com ruído OU sintético em SNR 20, a própria RG dá δτ̂ médio +0,030 | [REAL em ruído sintético; fora do módulo e do README]
+  => Numa realização o efeito aparece mais como tremor de frequência que como alargamento, na ordem da estimativa da gerência (0,3× e ~2,3%). O viés do estimador é maior que o sinal do R-B, o que confirma a necessidade da calibração C5.
+- Confronto com dados atuais, por leitura (lido dos JSON da bancada; hashes conferidos; não rerodado por mim) | Strain do GW250114 (C6, 10 t_M): R-B −0,0026, R-RAIZ-0 −0,043, R-LIN −0,091, R-MOD −0,251. Catálogo de 31 eventos: R-B −1,81, R-MOD −3,56, R-RAIZ-0 −3,66, R-LIN −8,22, com a RG FORA de 95% (HPD 0,983; δτ̂ comum mediano +0,072). GWTC-3, 10 eventos: R-B −0,82, R-MOD −1,49, R-RAIZ-0 −1,57, R-LIN −3,39. Veredito: INCONCLUSIVE_SYSTEMATICS em todos | [REAL — NÃO-CEGO: os posteriores eram públicos e conhecidos]
+  => Nada foi excluído nem favorecido. Os catálogos puxam δτ̂ para o lado POSITIVO (linhas mais estreitas), o sinal oposto a qualquer amortecimento extra. Por isso toda leitura com dephasing leva ln B negativo, mas a própria RG também está em tensão com a combinação, e a regra relativa impede excluir a TGL. Coincidir com a RG aqui é correspondência, não derrota.
+- Integridade e reprodutibilidade do pacote C7 | C7_INDEPENDENT 52/52; seis pacotes C7_* 125/125; bundle v2 194/194; 15/15 sha alegados; zip regenerado com 54/54 membros idênticos; demo igual ao enviado; registro C6 PASS (ded00f09…); marginalização da verossimilhança conferida por força bruta a 3e-15 | [REAL — medido por mim]
+  => Um grupo externo consegue usar o núcleo (numpy puro): predição, template, desenrolamentos e verossimilhança funcionam fora da casa. A reprodução do strain real, como está no pacote, aborta no fim por um arquivo de saída incluído indevidamente (conserto trivial).
+
+## REMAINING
+- Consertar o BLOQUEANTE do C7: tirar C6_REPRODUCTION_RESULT.json do zip (ou mudar o nome de saída em reproduce_c6.py:69-70), regenerar os zips e testar 'reproduce_c6.py --run' numa extração limpa do zip.
+- Escrever no README e no overview a frase de escopo leitura a leitura, gerada por script da C1/C4/C6: estatuto, δτ̂ previsto com banda 5-95%, ln B por conjunto (C6, catálogo 31, GWTC-3), veredito, z da RG e EXCLUDED_IF_UNIVERSAL.
+- Marcar o R-MOD como [CONJECTURE — management hypothesis, not TGL canon] também no overview, na CSV e na string de escopo do módulo; acrescentar a parede Kay–Wald e a do relógio Unruh-g (v369); preencher excluded_if_universal do R-MOD na C1 (hoje é null).
+- Emitir o controle BCW × exato do R-MOD, com o desvio impresso (grade de spin e eventos).
+- Declarar que as constantes do V2 (G 6,674e-11; M☉ 1,98892e30) não são CODATA/IAU e imprimir a diferença entre perfis (R-A 2,3e-4; R-B ~1e-16).
+- C3.1 na realização: expor no módulo a função de desenrolamento explícito (espalhamento de δf̂ e δτ̂ médio) ou declarar NÃO PAGO no README com os números da C2 e o seu escopo sintético.
+- Documentar a relação de t_start com o pico e com o t0 do pyRing, a convenção de Γ nos overtones (C5 comum × template por modo) e qual chave reproduz o v346 (delta_tau_linear).
+- Enviar no pacote os insumos mínimos da regressão (per_series[2]) e testes de unidade isolados.
+- Depois que os processos C5 vivos terminarem (SEOBNRv4HM/IMRPhenomXPHM), gerar UM bundle final com todos os pacotes (os três posteriores ao v2 incluídos), o overview corrente, tudo em inglês, e avisar sobre MAX_PATH.
+- Processo: a bancada deve emitir as ENTREGA_013_M1…M6 de fechamento; a gerência audita o M1 antes de incorporar qualquer coisa (a ordem de marcos não foi respeitada).
+- Fora desta frente, mas condicionando o C7: a calibração científica da C5 segue REPROVADA (0 grupos FULL_IMR passam nas duas famílias e nas duas injeções); a partição, o relógio e o desenrolamento seguem sem escolha, que é do operador.

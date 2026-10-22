@@ -1,0 +1,131 @@
+{
+  "unit": "F1.TEMPO.V394",
+  "reviewer": "atrator_lean",
+  "created_utc": "2026-10-15T15:55:59.502918+00:00",
+  "status": "PASS_RUNTIME_R2_AND_PREFLIGHT_WITH_SCOPE",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "MEDIUM",
+      "description": "Phase clock division overflow: (1e308,1e308) returned 0 instead of 0.5; (1,5e-324) returned infinity.",
+      "status": "RESOLVED_RUNTIME_R2"
+    },
+    {
+      "id": "R2",
+      "severity": "MEDIUM",
+      "description": "expected_ladder was written but never consumed; absent/wrong counts accepted in admission mock.",
+      "status": "RESOLVED_RUNTIME_R2"
+    },
+    {
+      "id": "R3",
+      "severity": "LOW",
+      "description": "Nested malformed axiom list raised TypeError outside controlled refusal.",
+      "status": "RESOLVED_RUNTIME_R2"
+    },
+    {
+      "id": "R4",
+      "severity": "MEDIUM",
+      "description": "Repeated integration wrote candidate and backup before immutable-receipt refusal.",
+      "status": "RESOLVED_PREFLIGHT_R2"
+    }
+  ],
+  "runtime_r1_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime\\time_runtime_v394.py",
+      "bytes": 15317,
+      "sha256": "2762ce2edd92d6ecf5d2652e7a186f26b51a6e8f4fc37233a357d8b7ce7651f2"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\physical_parameters.py",
+      "bytes": 6206,
+      "sha256": "a2a698d0aa6d63ddfe52d116943c47d59d985aa129f10db6a514661785f7294b"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\integrate_time_v394.py",
+      "bytes": 10697,
+      "sha256": "33803759271894f5126014e9e2ec98c2f28b5da2a99f61fe8aea2989f818bf2f"
+    }
+  ],
+  "runtime_r2_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime\\time_runtime_v394_r2.py",
+      "bytes": 16191,
+      "sha256": "4439afffe8079fb15e318c34f27a1e9257024df2b6b4eabc843ab49f6c1cecb4"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\physical_contract\\physical_parameters.py",
+      "bytes": 6206,
+      "sha256": "a2a698d0aa6d63ddfe52d116943c47d59d985aa129f10db6a514661785f7294b"
+    }
+  ],
+  "integrator_corrected": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\integrate_time_v394.py",
+    "bytes": 11220,
+    "sha256": "b564c425e0e28446b59107908bd1cf48717186480c0db802c90d7aa36104feb5"
+  },
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\RESULTADO_RUNTIME_REVIEW_R2.json",
+      "bytes": 847004,
+      "sha256": "a39bcd9ee8ee815e08ab407858bd2c7536dbb0aeb8aad2f32ae848153555dcf2"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\RUNTIME_R2_CORRECTION_REVIEW.json",
+      "bytes": 804054,
+      "sha256": "bd912771f0f80091f0d34e62f40af6bab33987a4a2f4870a1ac83bedfcdf36b5"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\INTEGRATION_FIXTURE_REVIEW_R1.json",
+      "bytes": 2794,
+      "sha256": "f19c038d0b87528ea38fe988a7008ff2ba9633cbccebcec974957bdf82e88be0"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\INTEGRATION_PREFLIGHT_R2_REVIEW.json",
+      "bytes": 798,
+      "sha256": "916679fd02ad37d817702615ce54dffce63679a7953c311cb7037cda6f8638d0"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\RELATORIO_REVISAO_RUNTIME_R1.md",
+      "bytes": 2738,
+      "sha256": "b9d8ba17a972c93b5d211f87f0093462fbf6c22e7a3f2f21ff8ca69d94468908"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\review_r1.py",
+      "bytes": 7264,
+      "sha256": "928cfc0144d959578eae1599c33c5f782a7b70dca6d301b53e1e839f30829d34"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\review_r2.py",
+      "bytes": 1162,
+      "sha256": "32c58cade74ac7adcaf9b72a0155c7619c720a9d0ccad8795b6120f1b4d83186"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\verify_corrections_r2.py",
+      "bytes": 4347,
+      "sha256": "4804797d29a6db837757e9762c3fc82644df46f27477e433707f0a12b35fe248"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\integration_fixture_r1.py",
+      "bytes": 5198,
+      "sha256": "7d1f1e887ab792803594f1738a38d0ec569bd1a861593615804b0f46fa7409bb"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\integration_preflight_r2.py",
+      "bytes": 2503,
+      "sha256": "f2b7a7c796b477704a8cf92827a7d956610c4b7816fe2c0d22e3b4589ab96378"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\close_review_r1.py",
+      "bytes": 5222,
+      "sha256": "12e87282a7ab567c97fb18bbc38160790091efcea5149e387aac75dd45fd88c3"
+    }
+  ],
+  "incomplete_harness_failure_preserved": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.TEMPO.V394\\runtime_review\\RESULTADO_RUNTIME_REVIEW_R1.json",
+    "bytes": 836591,
+    "sha256": "026e6f391f38e5b9b8ab49f19fee3f1915daabcf9c51f7582e2cb9c8a5aa3ffc"
+  },
+  "integration_actual_review": "Pending actual integration; no approval of the complete program implied.",
+  "production_changes": false,
+  "gate_changed": false
+}

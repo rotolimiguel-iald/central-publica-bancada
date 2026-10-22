@@ -1,0 +1,79 @@
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 113ms
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 133ms
+import took 63.4s
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170624_260370Z\UnitaryFourierRealStressR1.lean:43:29: error: unsolved goals
+z : ℂ
+hp : Real.pi ≠ 0
+⊢ (↑(Real.pi * 2) ^ 3).re * z.im + (↑(Real.pi * 2) ^ 3).im * z.re = Real.pi ^ 3 * z.im * 8
+interpretation of Mathlib.Tactic.FieldSimp._aux_Mathlib_Tactic_FieldSimp___elabRules_Mathlib_Tactic_FieldSimp_fieldSimp_1._boxed took 251ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170624_260370Z\UnitaryFourierRealStressR1.lean:47:4: warning: This simp argument is unused:
+  Complex.ofReal_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [unitaryFourierStressScale, Complex.mul_re, Complex.mul_im,
+  ̵  ̵ ̵ ̵Complex.neg_re,
+  ̲  ̲ ̲ ̲Complex.neg_im, Complex.I_re, Complex.I_im,
+  ̵  ̵ ̵ ̵Complex.ofReal_p̵o̵w̵,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵re, Complex.ofReal_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170624_260370Z\UnitaryFourierRealStressR1.lean:47:24: warning: This simp argument is unused:
+  Complex.ofReal_re
+
+Hint: Omit it from the simp argument list.
+  simp only [unitaryFourierStressScale, Complex.mul_re, Complex.mul_im,
+  ̵  ̵ ̵ ̵Complex.neg_re,
+  ̲  ̲ ̲ ̲Complex.neg_im, Complex.I_re, Complex.I_im,
+  ̵  ̵ ̵ ̵Complex.ofReal_pow, Complex.ofReal_r̵e̵,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T170624_260370Z\UnitaryFourierRealStressR1.lean:47:43: warning: This simp argument is unused:
+  Complex.ofReal_im
+
+Hint: Omit it from the simp argument list.
+  simp only [unitaryFourierStressScale, Complex.mul_re, Complex.mul_im,
+  ̵  ̵ ̵ ̵Complex.neg_re,
+  ̲  ̲ ̲ ̲Complex.neg_im, Complex.I_re, Complex.I_im,
+  ̵  ̵ ̵ ̵Complex.ofReal_pow, Complex.ofReal_re,̵ ̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵i̵m̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.MaxwellGlobal.unitaryFourierStressScale_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_unitaryFourierRealNullStress_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_unitaryFourierRealNullStress_moment_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_unitaryFourierRealNullStress_moment' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.0657ms
+	blocked (unaccounted) 564ms
+	congr simp thm 1.04ms
+	dsimp 3.14ms
+	elaboration 49.6ms
+	fix level params 0.445ms
+	import 63.4s
+	initialization 30.8ms
+	instantiate metavars 0.414ms
+	interpretation 11.6s
+	let-to-have transformation 0.339ms
+	linting 6.76ms
+	norm_num 17.3ms
+	overlappingInstancesLinter 18.9ms
+	parsing 2.8ms
+	process pre-definitions 4.04ms
+	ring 160ms
+	share common exprs 5.23ms
+	simp 6.33ms
+	tactic execution 136ms
+	tacticAnalysis 24.4ms
+	type checking 55.4ms
+	typeclass inference 306ms

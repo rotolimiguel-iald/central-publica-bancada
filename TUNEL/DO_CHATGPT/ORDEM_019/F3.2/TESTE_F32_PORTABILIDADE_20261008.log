@@ -1,0 +1,52 @@
+{
+  "start_utc": "2026-10-08T18:43:31.045750+00:00",
+  "finish_utc": "2026-10-08T18:43:32.206529+00:00",
+  "copy_dir": "C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680",
+  "copy_files": {
+    "test_f9_v1x_f34_20261008.py": "3ddc86683b6eb12d0ee33f37f4ff179de4d9ec169375944f177489f37f924e2c",
+    "test_f9_v1x_f34_portable_20261008.py": "0d15773cce8bed4bfd08a7b083d9cf956a05418a4c5db85dfaa531916bd57e97",
+    "f9_reader_gate.py": "ce4d4a128f5278a04defccc70aba82df0c5c80069909b3db2312c3234cc08e42",
+    "f9_reader_gate_v1x_f34.py": "43c63bdbf7f0a47d2e4a2070afc88955e3d6a1adb4b6b6ae5cb2f69f78976e95",
+    "f9_reader_gate_v1x_r4.py": "24be1c1d70dd95b28046052f3ecaee62ad5d9dae887773acb040b4ac4d2fd584",
+    "f9_runner_v1x_preflight_f34.py": "a341e9943795d7139c8264ba2558be0df914fd55207bb87dd2f11ab305e41993",
+    "f9_runner_v1x_preflight_r4.py": "fbecf698f27b341b5defe2aa8ba45082b08ad607c14be1fbda08997c17e5ed52",
+    "f9_runner_v1x_staged_f34.py": "aca495d0d0d94d39b43c0c68dbaf5478a44d9e3dc2546a8b9014f4af53047490",
+    "f9_runner_v1x_staged_r4.py": "8ea34638f11c274e23191451a3b3ee3103b68eb00728a5fb4ac6f3cb41b8ec5d",
+    "VINCULO_DOCUMENTAL_V1X_F34_20261008.json": "19d03542ae8839d4856a44eb2291397a4c26f7760881345762d1de5e7c0854cc",
+    "VINCULO_DOCUMENTAL_V1X_R4_20261008.json": "54c456fc201b224220ac52724d5d6e52aac12485d6d911c96ff72b12c7c9982e",
+    "FIXTURE_SINTETICO_V1X_R3_20261008.json": "d9c07fd536ee4ca93956ccc06a3e8217719e1d028cd00350cd5ddb43ec2f08ff"
+  },
+  "runs": {
+    "historical": {
+      "cmd": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\test_f9_v1x_f34_20261008.py",
+        "-v"
+      ],
+      "cwd": "C:\\IALD\\Central de Patentes\\work",
+      "exit": 1,
+      "seconds": 0.196,
+      "stdout": "",
+      "stderr": "test_documentary_preflight_has_no_admission (__main__.F34BindingTests.test_documentary_preflight_has_no_admission) ... ERROR\ntest_false_no_pooling_decision_refused (__main__.F34BindingTests.test_false_no_pooling_decision_refused) ... ok\ntest_old_r4_binding_refused (__main__.F34BindingTests.test_old_r4_binding_refused) ... ok\ntest_projection_and_function_pins (__main__.F34BindingTests.test_projection_and_function_pins) ... ERROR\ntest_real_mode_refused_before_documentary_read (__main__.F34BindingTests.test_real_mode_refused_before_documentary_read) ... ok\ntest_synthetic_statistics_equal_r4_and_no_real_verdict (__main__.F34BindingTests.test_synthetic_statistics_equal_r4_and_no_real_verdict) ... ERROR\n\n======================================================================\nERROR: test_documentary_preflight_has_no_admission (__main__.F34BindingTests.test_documentary_preflight_has_no_admission)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate.py\", line 53, in _resolve_existing\n    return Path(path).resolve(strict=True)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\pathlib\\__init__.py\", line 938, in resolve\n    return self.with_segments(os.path.realpath(self, strict=strict))\n                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen ntpath>\", line 694, in realpath\nFileNotFoundError: [WinError 2] O sistema não pode encontrar o arquivo especificado: 'C:\\\\IALD\\\\Central de Patentes\\\\ORDEM_018'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\test_f9_v1x_f34_20261008.py\", line 71, in test_documentary_preflight_has_no_admission\n    record = pre.prepare_v1x(\n        BINDING, expected_binding_sha256=sha(BINDING),\n        allowed_source_root=SOURCE_ROOT, expected_spec_sha256=SPEC_SHA,\n    )\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_runner_v1x_preflight_f34.py\", line 73, in prepare_v1x\n    gate = verify_v1x_binding(\n        binding_path,\n    ...<2 lines>...\n        expected_spec_sha256=expected_spec_sha256,\n    )\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate_v1x_f34.py\", line 248, in verify_v1x_binding\n    root = base._resolve_existing(allowed_source_root)\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate.py\", line 55, in _resolve_existing\n    raise ReaderGateError(f\"file missing or inaccessible: {path}\") from exc\nf9_reader_gate.ReaderGateError: file missing or inaccessible: C:\\IALD\\Central de Patentes\\ORDEM_018\n\n======================================================================\nERROR: test_projection_and_function_pins (__main__.F34BindingTests.test_projection_and_function_pins)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate.py\", line 53, in _resolve_existing\n    return Path(path).resolve(strict=True)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\pathlib\\__init__.py\", line 938, in resolve\n    return self.with_segments(os.path.realpath(self, strict=strict))\n                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen ntpath>\", line 694, in realpath\nFileNotFoundError: [WinError 2] O sistema não pode encontrar o arquivo especificado: 'C:\\\\IALD\\\\Central de Patentes\\\\ORDEM_018'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\test_f9_v1x_f34_20261008.py\", line 42, in test_projection_and_function_pins\n    record = verify()\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\test_f9_v1x_f34_20261008.py\", line 34, in verify\n    return gate.verify_v1x_binding(\n           ~~~~~~~~~~~~~~~~~~~~~~~^\n        path, expected_binding_sha256=sha(path),\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        allowed_source_root=SOURCE_ROOT, expected_spec_sha256=SPEC_SHA,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate_v1x_f34.py\", line 248, in verify_v1x_binding\n    root = base._resolve_existing(allowed_source_root)\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate.py\", line 55, in _resolve_existing\n    raise ReaderGateError(f\"file missing or inaccessible: {path}\") from exc\nf9_reader_gate.ReaderGateError: file missing or inaccessible: C:\\IALD\\Central de Patentes\\ORDEM_018\n\n======================================================================\nERROR: test_synthetic_statistics_equal_r4_and_no_real_verdict (__main__.F34BindingTests.test_synthetic_statistics_equal_r4_and_no_real_verdict)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate.py\", line 53, in _resolve_existing\n    return Path(path).resolve(strict=True)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\pathlib\\__init__.py\", line 938, in resolve\n    return self.with_segments(os.path.realpath(self, strict=strict))\n                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen ntpath>\", line 694, in realpath\nFileNotFoundError: [WinError 2] O sistema não pode encontrar o arquivo especificado: 'C:\\\\IALD\\\\Central de Patentes\\\\ORDEM_018'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\test_f9_v1x_f34_20261008.py\", line 82, in test_synthetic_statistics_equal_r4_and_no_real_verdict\n    fresh = run.run_synthetic(\n        BINDING, sha(BINDING), SOURCE_ROOT, SPEC_SHA,\n        FIXTURE, sha(FIXTURE), mode=\"synthetic_only\",\n    )\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_runner_v1x_staged_f34.py\", line 485, in run_synthetic\n    gate = verify_v1x_binding(binding_path, expected_binding_sha256=binding_sha256,\n                              allowed_source_root=source_root,\n                              expected_spec_sha256=spec_sha256)\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate_v1x_f34.py\", line 248, in verify_v1x_binding\n    root = base._resolve_existing(allowed_source_root)\n  File \"C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\f9_reader_gate.py\", line 55, in _resolve_existing\n    raise ReaderGateError(f\"file missing or inaccessible: {path}\") from exc\nf9_reader_gate.ReaderGateError: file missing or inaccessible: C:\\IALD\\Central de Patentes\\ORDEM_018\n\n----------------------------------------------------------------------\nRan 6 tests in 0.038s\n\nFAILED (errors=3)\n"
+    },
+    "portable": {
+      "cmd": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\IALD\\Central de Patentes\\work\\f32_portable_probe_267680\\test_f9_v1x_f34_portable_20261008.py",
+        "-v"
+      ],
+      "cwd": "C:\\IALD\\Central de Patentes\\work",
+      "exit": 0,
+      "seconds": 0.948,
+      "stdout": "",
+      "stderr": "test_documentary_preflight_has_no_admission (__main__.F34BindingTests.test_documentary_preflight_has_no_admission) ... ok\ntest_false_no_pooling_decision_refused (__main__.F34BindingTests.test_false_no_pooling_decision_refused) ... ok\ntest_old_r4_binding_refused (__main__.F34BindingTests.test_old_r4_binding_refused) ... ok\ntest_projection_and_function_pins (__main__.F34BindingTests.test_projection_and_function_pins) ... ok\ntest_real_mode_refused_before_documentary_read (__main__.F34BindingTests.test_real_mode_refused_before_documentary_read) ... ok\ntest_synthetic_statistics_equal_r4_and_no_real_verdict (__main__.F34BindingTests.test_synthetic_statistics_equal_r4_and_no_real_verdict) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.821s\n\nOK\n"
+    }
+  },
+  "scope": "synthetic only; real mode refused before documentary read; no freeze or data opening"
+}

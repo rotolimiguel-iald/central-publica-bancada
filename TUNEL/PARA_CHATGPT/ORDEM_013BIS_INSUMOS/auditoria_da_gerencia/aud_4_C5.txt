@@ -1,0 +1,150 @@
+<!-- Relatório do auditor 4 da gerência (22/09/2026), cópia integral para a ORDEM 013-bis com este cabeçalho de 2 linhas (o sha256 difere do original só por isso). Frente: C5. Os caminhos «...\scratchpad\ordem013\auditoria\...» citados são efêmeros: as cópias dos scripts e saídas estão em auditoria_da_gerencia\scripts\ (ver README_INSUMOS.md). -->
+
+SUMMARY: A bancada não terminou a C5. O próprio STATUS diz WORK_RESUMED_NOT_COMPLETE e scientific_acceptance=false, e não existe nenhuma entrega de marco (M1 ou M4).
+
+**O que está pago e eu conferi:**
+- O C5-Fisher do M1: refiz a conta de Fisher de forma independente, e o σ bate com erro de ~3e-5.
+- As PSDs com controles: o O4 medido fora da fonte termina 317,2 s antes do evento; O5, ET e CE têm as razões impressas.
+- O número de eventos para 5σ.
+- A matriz de injeção com duas famílias e N ≥ 50: recalculei dos draws o viés, a cobertura, o ln B e o poder das 288 células, com diferença zero.
+
+**O que não está pago:**
+- Viés e cobertura onde importa (R-B em SNR40); com a fonte marginalizada, nada foi medido.
+- O ln B com parâmetro livre.
+- O portão do poder na forma da ordem. Ele foi trocado por uma regra de falha de calibração, registrada antes do strain; é segura, mas não é o que a ordem pede.
+- R-PROP e R-RAIZ-COHERENT na C5.
+- A ficha de aproveitamento e o protocolo de marcos: a C6 rodou sem recibo.
+
+**Por que a C5 inchou:** a parede já estava medida às ~01:36 de 22/09, com o Fisher, a degenerescência construtiva e a falha da soma de QNMs. Mesmo assim, a bancada tentou transformar uma campanha bayesiana só de ringdown, com a fonte marginalizada em 7D, numa calibração precisa, sem critério de parada. Cada controle que falhava abriu um subprojeto: dynesty, amostragem por importância, fase, coordenadas, malha interna da SEOB, leitor de Nyquist, curvas contínuas.
+
+**O que a C5 mostra sobre a pergunta do texto:**
+- **Fonte conhecida:** 5σ no ramo B pede um evento com SNR de ringdown ≈490, ou ~150 eventos como o GW250114. No O5 a mesma fonte dá z≈0,8, no ET ≈3,9 e no CE ≈7.
+- **Fonte desconhecida, só ringdown:** o efeito é absorvido por um Kerr ~1,25% mais leve e com spin 0,016 menor. Mesmo com o modelo perfeito, seria preciso SNR ≥ 335–1380 (pelo Fisher, ~3000–5800).
+- **Modelos de forma de onda:** a diferença entre SEOB e Phenom (viés mediano de 0,88 do efeito) e o erro da soma de QNMs a partir de 10 tM (viés de 1 a 3 vezes o efeito) são maiores que a própria correção β.
+
+As duas frases do STATUS estão certas, com duas correções: a degenerescência vale só para o R-B e só na janela de 10 tM, e o «32768 Hz» não refina a malha da SEOB. Além disso, o «SNR40» é 2,5 a 4,4 vezes o GW250114 nessa janela, o que deixa a conclusão ainda mais forte.
+
+**Os processos vivos:** faltam de ~5 a ~16 h, e eles só atacam o R-B em SNR40. Esse caso tem teto no Fisher com fonte fixa (z≈0,41), então não podem mudar o portão nem nenhum veredito. O retorno para a decisão é baixo. O resultado estrutural já responde: no O4 o poder fica abaixo de 5 em todas as leituras, e a C6 permanece INCONCLUSIVE_SYSTEMATICS.
+
+**Fechamento mínimo honesto:**
+1. Declarar o portão numérico, com hash.
+2. Escrever as entregas M1 e M4 com PAGO/NÃO PAGO.
+3. Aplicar as correções de escopo e da base de SNR.
+4. Não abrir rodada nova.
+5. Se o operador quiser, a rota de sinal completo (tipo pSEOB, para O5/3G) fica para uma ordem nova.
+
+**Arquivos:**
+- Meus scripts: C:\Users\rotol\AppData\Local\Temp\claude\c--IALD-Central-de-Patentes\6da8f00d-d44f-4888-a88d-fc9f73eead3d\scratchpad\ordem013\auditoria\c5\fisher_oracle.py e degeneracy_oracle.py.
+- A ordem: C:\IALD\Central de Patentes\Chatgpt\TUNEL\PARA_CHATGPT\ORDEM_013_confrontacao_do_ringdown.md (sha16 d4440c6a28eaad4b, confere).
+
+## CRITERIA
+- [PAGO_ALEGADO] C5-Fisher (M1): declarar, leitura a leitura, se a hipótese é PONTUAL (τ★ fixo) ou tem parâmetro livre :: A declaração existe, mas é global e não por leitura. fisher_forecast.py:3-6 diz «Point hypotheses are a=0 and a=1 ... No free-parameter Occam factor is inserted», e todos os 384 registros de C5_FISHER.json (sha16 71189d65f52d3530) têm scope LOCAL_LINEAR_GAUSSIAN_POINT_FORECAST. Não há campo por leitura. Como as 8 leituras usadas têm relógio fixo em C1_LEITURAS.json, a declaração global se sustenta, mas não foi escrita linha a linha.
+- [NAO_PAGO] C5-Fisher: distribuição de ln B (média e dispersão) contra o SNR de ringdown, por leitura, na versão com parâmetro livre (amplitude a livre ou τ★ livre) :: O próprio C5_FISHER.json lista «Free-tau evidence integral» na chave not_done. O ⟨ln B⟩≈0,05 da gerência para a∈[0,1] (ORDEM §1.4) não foi refeito em nenhum artefato C5_*. Procurei por 'free_parameter', 'Laplace' e 'hypothesis_type' e não achei nada.
+- [PAGO_VERIFICADO] C5-Fisher: distribuição de ln B PONTUAL (média ±z²/2, desvio z) contra SNR 10–600, por leitura, e número de eventos para 5σ :: Refiz o Fisher com um oráculo independente (…\auditoria\c5\fisher_oracle.py): FT analítica, parâmetros ln A, φ, ln f e ln d, β=α·√e calculado em runtime. No O4 de referência, meu σ(δτ̂) difere do da bancada em −2,9e-5 (relativo) com fonte fixa e em +4,0e-5 com frequência livre, em todos os SNR. Em SNR40: σ=0,049741 (meu) contra 0,049739 (bancada), e o analítico 2/ρ dá 0,05. z_RB: 0,4074 (meu, com o x exato do qnm) contra 0,4083 (bancada, x pelo BCW, 0,23% maior). N para 5σ em SNR40: 151 (meu) contra 150 (bancada). SNR para 5σ num evento só: 490.
+- [PAGO_VERIFICADO] PSD O4 = Welch em dado fora da fonte (t < t_GPS − 2 s), sem ler a janela do evento, mais a referência aLIGO_O4_high_asd.txt :: C5_EMPIRICAL_NOISE.json: o arquivo H1 cobre GPS 1420873728 a 1420877824, e a última janela retida é 1420877816,375 + 0,2 s. O evento está em 1420878141,2, ou seja, o ruído termina 317,2 s antes. Welch por mediana, janelas Hann de 4 s. C5_FISHER_EMPIRICAL.json (sha16 00fbe67f5aa5b382) dá z_RB(SNR40) = 0,385 em H1 e 0,390 em L1. A referência está em FISHER_INPUTS.json (sha256 eb5ec9b0…).
+- [PAGO_ALEGADO] PSD O5 = Aplus_asd.txt, com controle aLIGOAPlusDesignSensitivityT1800042 e a razão impressa; dizer que o cronograma do O5 está «in discussion» :: A razão está impressa em PSD_CONTROLS.json: PyCBC/Bilby para o O5 vai de 0,815 a 1,326 (mediana 0,867) e vale 1,238 em 250 Hz. A frase «in discussion» não está em nenhum artefato nem nota C5 (o grep não acha nada). O que existe é «Reference O5 A+ is a scenario, not a scheduled achieved sensitivity», na chave interpretation de C5_FISHER.json.
+- [PAGO_VERIFICADO] PSD 3G = ET_D_psd e CE_psd, com controles EinsteinTelescopeP1600143 e CosmicExplorerP1600143 e a razão impressa :: PSD_CONTROLS.json: ET de 0,599 a 2,507 (mediana 1,0000); CE de 0,99962 a 1,00038. Em same_source_R_B (C5_FISHER.json), com a mesma fonte e a mesma projeção, a razão de SNR sobre o O4 é 1,99 no O5, 9,55 no ET e 17,46 no CE, e z_RB vale 0,80, 3,86 e 7,03.
+- [PAGO_VERIFICADO] C5-injeção (M4): matriz a=0/a=1 por leitura, em ruído fora da fonte :: Há três matrizes. C5_RECOLORED_FORECAST.json tem 4608 células (O4/O5/ET/CE × 8 leituras × 3 modelos × 6 SNR × 2 famílias × a=0/1 × FULL_IMR/MATCHED). C5_IMR_RECOVERY.json tem 576 células com 206 ruídos cada (janelas 50:256, fora da fonte). cache/source_evidence tem 1200 mocks, só R-B em SNR40. As duas primeiras usam fonte fixa; a com fonte marginalizada cobre só R-B em SNR40.
+- [PAGO_VERIFICADO] Nulo de família SEOBNRv4HM × IMRPhenomXPHM :: Recontei em C5_IMR_RECOVERY.json, só as células identificáveis. Recuperadas pela família oposta: 0 de 96 passam, com viés mediano de 0,88 em unidades de a (máximo 2,65). Pela mesma família passam 76, e pela mistura 1/2–1/2 passam 78. A mistura só passa porque o gerador verdadeiro está dentro dela: «manufactured closure», como diz a chave scope.
+- [PAGO_VERIFICADO] N ≥ 50 injeções por célula (leitura × PSD × SNR) :: N_per_cell é 206 em C5_IMR_RECOVERY, 50 em C5_RECOLORED_FORECAST e 50 em source_evidence. Em O4_draws.npz há 206 GPS de H1 distintos, espaçados de 8 s. Ressalva: os ruídos são reutilizados de forma pareada entre células, e cada célula injeta UMA fonte fixa. N conta realizações de ruído de um mesmo sinal, não fontes diferentes.
+- [NAO_PAGO] Viés |mediana(â) − a_inj| ≤ 0,2 :: Recalculei viés, cobertura, ln B médio e poder das 288 células identificáveis a partir de cache/imr_recovery/O4_draws.npz e O5_draws.npz; a diferença para o JSON é 0 em todas. Com fonte fixa, o viés em SNR40 vai de 0,047 a 0,919 no R-B e de 0,05 a 0,74 no R-MOD. A recuperação por soma de QNMs de injeções IMR (FULL_IMR, C5_RECOLORED_FORECAST) passa em 0 de 288 grupos, com viés mediano do R-B de 2,29 em SNR40 e 1,08 em SNR600. Com fonte marginalizada o viés ainda não foi medido (curvas contínuas em execução).
+- [NAO_PAGO] Cobertura de 90% em [0,80; 0,97] :: Com fonte fixa em SNR40: R-B de 0,752 a 0,845 (em O4: 0,811, 0,820, 0,752, 0,777); R-MOD de 0,699 a 0,801, com 1 a 20 intervalos batendo na borda. Só SNR200/600 passa, e em conjunto fechado (mesma fonte, gerador dentro da mistura). Com fonte marginalizada, a cobertura não foi medida.
+- [PAGO_VERIFICADO] Poder = |δ_L|/σ_comb em σ, como no v346 :: O power_proxy é 1/σ_a, com σ_a = mediana da largura do IC90 dividida por 2·1,645 (calibrate_imr_recovery.py:199-202). Recalculei dos draws com diferença 0. R-B: 0,375–0,397 em SNR40, 1,92–2,01 em SNR200, 5,78–6,04 em SNR600. R-LIN: 1,27–1,35 em SNR40. Batem com o Fisher de fonte fixa (0,41, 2,04 e 6,12).
+- [NAO_PAGO] PORTÃO do poder declarado ANTES da C6 (poder ≥5 ⇒ teste; <5 ⇒ medida calibrada, veredito máximo NOT_FALSIFIED_UNDERPOWERED/EXCLUDED_IN_READING) :: Nenhum artefato nem nota traz um portão numérico com o poder contra 5 (grep por 'portão' e 'power_gate' vazio). Em vez disso, REGISTRO_C6.json (sha16 ded00f09b5010d62, created_utc 00:56:31 UTC) traz physical_gate: «C5 two-family injection calibration failed: every actual-data verdict is INCONCLUSIVE_SYSTEMATICS». Essa regra foi gravada antes do download do strain do evento (C6_DOWNLOADS.json, 00:57:32 UTC). É mais restritiva e segura, mas não é o portão que a ordem pede.
+- [NAO_PAGO] Marcos: parar ao fim do M1 e esperar o recibo; uma ENTREGA por marco (ENTREGA_013_M1, …M4) :: Não há nenhum ENTREGA_013_M* em TUNEL\DO_CHATGPT. O C5-Fisher ficou pronto às 20:08 de 21/09. Sem recibo, a bancada seguiu para C4, C5-injeção, C6 (rodada das 21:58 às 22:00, hora local) e C7. Há 21 notas parciais de C5, e o STATUS diz goal_status=WORK_RESUMED_NOT_COMPLETE.
+- [NAO_PAGO] Ficha de aproveitamento REAPROVEITAMENTO_C5.md :: O arquivo não existe em ORDEM_013_RINGDOWN. Há parágrafos «Ficha de aproveitamento» dentro de 7 das notas C5.
+- [NAO_PAGO] Todas as leituras da C1 presentes na C5, com linha analítica (ln B≈0 por construção) para as de |δ|<1e-6 :: C1_LEITURAS.json tem 10 leituras. C5_FISHER, C5_RECOLORED e C5_IMR_RECOVERY cobrem 8. Faltam R-PROP (Xi≈3,0e-23) e R-RAIZ-COHERENT (Γ≈2,35e-78 s⁻¹, INITIAL_SLOPE_ONLY), e nenhuma das duas tem a linha analítica. As leituras sub-resolução que estão lá (R-A, R-RAIZ-EP4, R-RAIZ-REST, R-GLOBAL) aparecem com N_5σ absurdos, como 9,3e82, em vez de «sub-resolução, ln B≡0».
+- [PAGO_VERIFICADO] Régua: β em runtime; nenhum CONFIRMED/PROVED; NÃO-CEGO dito; partição não escolhida; nenhum posterior do mesmo evento como prior :: tgl_ringdown_prediction.py:12-19 calcula β como ALPHA_FINE_CODATA_2018·√e, e o grep por 0,0120… no código da bancada não acha nada. As notas C5 não têm veredito proibido. As priors em source_evidence/REGISTRATION.json são uniformes e declaradas. Ressalva no defeito de assimetria: a campanha cara com fonte marginalizada cobre só o R-B.
+
+## DEFECTS
+### [BLOQUEANTE] C:\IALD\Central de Patentes\Chatgpt\ORDEM_013_RINGDOWN\STATUS_ORDEM_013.json (goal_status, requirements_remaining) e cache\source_evidence\source_family_combination_real_repeat\RESULT.json
+P: A C5-injeção (M4) não pode receber recibo de paga. Os critérios de aceitação fixados pela ordem (viés ≤ 0,2 e cobertura em [0,80; 0,97]) falham justamente onde importa, R-B em SNR40, e com a fonte marginalizada nem chegaram a ser medidos. A integração de fonte continua sem precisão.
+E: Os dois resultados têm scientific_acceptance=false. Na repetição SEOB, 444 de 1200 mocks atingem a precisão (RESULT.json, sha256 edf72705…). Na mistura, 238 de 1200 passam em conjunto (somei os 24 passing_both_and_mixture_MC e deu 238; sha256 016daeb7…), e nenhuma das 24 células tem as 50 aprovadas. Com fonte fixa, o R-B em SNR40 chega a viés 0,919 e desce a cobertura 0,752.
+FIX: Declarar a C5-injeção NÃO PAGA no escopo da fonte desconhecida, dizer que a parede foi medida e fechar o marco com esse negativo. Não tentar aprovar a C5 abrindo novas rodadas.
+
+### [CORRIGIR] REGISTRO_C6.json, chave physical_gate
+P: O portão do poder não foi declarado na forma da ordem (poder por leitura contra 5). Em seu lugar entrou uma regra de falha de calibração. O conteúdo é seguro, porque só admite INCONCLUSIVE_SYSTEMATICS, mas o número que a ordem pede não está escrito.
+E: O grep por 'portão', 'power_gate' e 'gate_power' não acha nada nos artefatos nem nas notas. O portão pode ser declarado agora com os números existentes. Com fonte fixa (o caso otimista), o poder em SNR40 é 0,41 no R-B, 0,76 no R-MOD, 0,78 no R-RAIZ-0 e 1,55 no R-LIN: todos abaixo de 5.
+FIX: Registrar com hash um adendo com o poder máximo por leitura, na base de SNR do evento, todos abaixo de 5. Com isso a C6 é medida, com veredito máximo NOT_FALSIFIED_UNDERPOWERED ou EXCLUDED_IN_READING, e o INCONCLUSIVE_SYSTEMATICS atual se mantém por causa da falha de calibração.
+
+### [CORRIGIR] TUNEL\DO_CHATGPT (nenhum ENTREGA_013_M*); ORDEM §3 (marcos) e §5
+P: O protocolo de marcos foi violado. O M1 ficou pronto às 20:08 de 21/09, mas não foi entregue nem esperou recibo. A C6 rodou sem nenhum recibo do M1 ao M4, e 21 notas parciais tomaram o lugar das entregas de marco.
+E: Pelos mtimes: C5_FISHER.json às 20:08 (hora local), REGISTRO_C6 às 21:56 e strain lido entre 21:57 e 22:00. Não existe ENTREGA_013_M1 nem M4.
+FIX: Escrever ENTREGA_013_M1 (C0, C1, C2, C3.1 e C5-Fisher) e ENTREGA_013_M4 (C5-injeção), com PAGO/NÃO PAGO por critério. Registrar que a C6 rodou antes do recibo; isso não a invalida, porque houve registro prévio, é NÃO-CEGO e o veredito é limitado.
+
+### [CORRIGIR] C5_IMR_RECOVERY.json (reference_SNR_403Mpc); notas C5 e STATUS («SNR40»)
+P: A base do SNR não está dita de modo uniforme, e o «SNR40» acaba lido como se fosse o GW250114. Nas injeções, o SNR é o da rede na janela que começa em 10 tM. Nessa janela, a fonte de referência a 403 Mpc dá SNR entre 9,07 e 10,65 no O4 e entre 15,38 e 18,07 no O5. As células SNR40 são, portanto, 4,2 a 4,4 vezes mais fortes que a fonte de referência no O4, e 2,5 a 2,6 vezes no O5. Além disso, entre o pico e 10 tM o SNR do 220 cai por um fator 0,443, o que leva ~40 pós-fusão a ~17,7.
+E: Calculei por script a partir de FISHER_INPUTS.json (τ/M=12,27; exp(−10·|ωI|)=0,4426) e de reference_SNR_403Mpc em C5_IMR_RECOVERY.json.
+FIX: Declarar a base do SNR em toda tabela (janela a partir de 10 tM, rede, fatores de resposta fixos) e converter para a escala do GW250114. A conclusão fica mais forte, porque o SNR40 já é otimista.
+
+### [CORRIGIR] STATUS_ORDEM_013.json requirements_remaining[1] («verificado até 32768 Hz»); C5_NONLINEAR_SOURCE_SUMMARY.json
+P: Na SEOBNRv4HM, dobrar a taxa de saída de 16384 para 32768 Hz não refina o gerador. A malha interna do LAL fica em 262144 Hz para todas as saídas de 8192 a 262144 Hz e só muda em 524288 Hz. Dita como está, a frase dá à verificação da degenerescência na SEOB um peso que ela não tem.
+E: cache\source_evidence\LAL_INTERNAL_MESH_AUDIT.json: internal_rate 262144 para output_rate de 8192 a 262144, nas fontes reference e source_64. O teste com malha refinada, só na fonte90, dá ΔlogL de 0,019 a 0,060 em SNR40, abaixo de 0,1. A conclusão continua valendo em SNR40.
+FIX: Reescrever como «verificado em 16384/32768 Hz de saída; na SEOB, a malha interna só foi refinada no controle a 262144/524288 Hz em SNR40, com ΔlogL ≤ 0,06, só na fonte90».
+
+### [CORRIGIR] ENTREGA_013_C5_recuperacao_IMR_e_limites.md (tabela 19/24 «PAGO neste conjunto»)
+P: Os PAGO em SNR200/600 são crime inverso: a mesma fonte, a mesma matriz de forma de onda na injeção e na recuperação, e o gerador verdadeiro dentro da mistura. Controles posteriores mostraram que a SEOB não converge numericamente nesses SNR, e a tabela não foi anotada depois disso.
+E: ENTREGA_013_C5_coordenadas_ringdown_e_resolucao.md: em SNR600 passam só 42 e 69 de 144, com ΔlogL de até 2,07. malha_interna: ΔlogL de 0,43 a 1,63 em SNR600 e de 0,10 a 0,25 em SNR200.
+FIX: Anotar ao lado: «em SNR ≥ 200 o conjunto é fechado; a resolução da SEOB não foi demonstrada; não vale para sinal real».
+
+### [CORRIGIR] cache\source_evidence\REGISTRATION.json («reading»: «R-B»); REGISTRO_C5_NONLINEAR_COHERENT.json
+P: O rigor foi assimétrico entre leituras. A busca não linear de degenerescência e a integração de fonte foram feitas só para o R-B. R-MOD, R-RAIZ-0 e R-LIN, com |δ| de 1,8 a 3,6 vezes maior, não têm nenhum teste com fonte livre. A C1 exige o mesmo rigor para todas; isso não é escolha de partição, mas precisa ser declarado.
+E: REGISTRATION.json tem reading=R-B e target_snr=40. A frase de degenerescência no STATUS não restringe o escopo ao R-B.
+FIX: Declarar o escopo R-B como limite de orçamento computacional. Rodar para R-MOD, R-RAIZ-0 e R-LIN a busca de resíduo não linear, que é barata, ou declará-la NÃO PAGA.
+
+### [CORRIGIR] Toda a sequência C5 de 00:52 a 10:04 de 22/09 (17 notas, ~22 workers)
+P: Não há critério de parada pré-registrado. O ciclo «diagnóstico → nova proposta → nova rodada» foi reaberto umas 10 vezes (dynesty, importância, fase, coordenadas de ringdown, regularização, malha nativa, proposta balanceada, curvas contínuas, 32768) depois que a parede estrutural já estava medida, às 01:36 (hora local). Foi isso que inchou a C5.
+E: Precisão, rodada a rodada: 0/1200 quatro vezes seguidas, depois 512/1200 (Phenom) e 444/1200 (SEOB). Estimativa de término feita por script a partir das taxas lidas: 34860 está em 30,7% e faltam de 8,4 a 12,7 h; 19681 está em 18,4% e faltam de 14,7 a 16,2 h; 43367 está em 39,8% e faltam de 4,9 a 5,7 h.
+FIX: Registrar a regra de parada (fechado = resultado, falsificador ou parede medida) e declarar a parede. Não abrir rodada nova. Os processos vivos terminam como anexo diagnóstico ou são encerrados; a decisão é do operador.
+
+### [NOTA] C5_FISHER.json, chave not_done
+P: O arquivo ficou desatualizado. Lista como não feitos «Measured off-source O4 PSD» e «PyCBC PSD controls», que depois foram pagos em outros arquivos.
+E: PSD_CONTROLS.json (20:09) e C5_FISHER_EMPIRICAL.json (22:05) existem. A própria nota PARCIAL admite a defasagem.
+FIX: Pôr no pacote do M1 uma errata ao lado, apontando os arquivos que pagam esses itens.
+
+### [NOTA] C5_IMR_RECOVERY.json (lnB sob a=0)
+P: Em SNR40 o ln B médio sai positivo mesmo sem sinal TGL: +0,42 a +0,64 com a=0 e +0,58 a +0,80 com a=1, com desvio ~0,36. Quem manda é o volume do prior de amplitudes. Nesse regime, qualquer ln B é efeito de Occam, não de dephasing.
+E: Recalculei a partir dos draws. Em SNR600 fica −20,6 com a=0 e +16,8 com a=1; a separação, ~37, bate com z² ≈ 36.
+FIX: Manter esse aviso em qualquer texto público e não converter esses ln B em σ.
+
+### [NOTA] ENTREGA_013_C3_C5_C7_recoloracao_e_pacote.md («Nenhum grupo passou…»)
+P: A frase só vale para FULL_IMR. No MATCHED_RINGDOWN, em que a injeção usa o próprio modelo, 94 de 288 grupos passam.
+E: Recontei C5_RECOLORED_FORECAST.json: FULL_IMR 0/288 e MATCHED_RINGDOWN 94/288.
+FIX: Qualificar como «nenhum grupo FULL_IMR».
+
+### [NOTA] fisher_forecast.py:65-78
+P: z é calculado com o x linear, e não com o deslocamento exato em ln d, que é ln(1+x); a diferença é de ~1%. O x do R-B vem do BCW, 0,23% acima do qnm exato. O efeito é desprezível.
+E: x_BCW=0,020308; x_qnm=0,020262; ln(1+x)=0,02006.
+FIX: Nenhuma ação obrigatória; basta citar o perfil usado.
+
+
+## RESULTS
+- Fisher com fonte conhecida (M_f e χ_f fixos, só o 220, janela de ringdown): tamanho do efeito do ramo B contra o erro | 68,1 M☉ e χ=0,68: f220=248,6 Hz, τ=4,12 ms, x_RB=0,0203, δτ̂=−0,0199. σ(δτ̂)=2/ρ, o que dá 0,0497 em SNR40. z_RB vale 0,41 em SNR40, 2,04 em 200 e 6,1 em 600. ⟨ln B⟩=±0,083 com desvio 0,41 em SNR40. Para 5σ: um evento com SNR_RD≈490, ou ~150 eventos em SNR40. | [REAL — reproduzido pelo auditor com erro de ~3e-5; condicional à leitura R-B, que é INPUT]
+  => Mesmo conhecendo exatamente o buraco negro final, um evento como o GW250114 só vê o ramo B a ~0,4σ. A correção β, de ~2% no amortecimento, é 0,4 vez a incerteza atual. Isso é correspondência com a RG dentro do erro, não derrota.
+- A mesma fonte em outros detectores (Fisher, fonte fixa) | SNR relativo ao O4: 1,99 no O5, 9,55 no ET e 17,46 no CE. z_RB: 0,80 no O5, 3,86 no ET e 7,03 no CE (um detector só). As outras leituras em SNR40: R-MOD 0,76, R-RAIZ-0 0,78 e R-LIN 1,55. R-A, R-RAIZ-EP4, R-RAIZ-REST e R-GLOBAL ficam abaixo da resolução. | [REAL-condicional — cenário de PSD de projeto; o O5 é cenário, sem cronograma]
+  => Só a 3ª geração chegaria a 5σ num único evento, e só se o remanescente for conhecido por fora do ringdown.
+- Degenerescência do modo fundamental | Na aproximação BCW, o R-B em χ=0,68 é imitado por um Kerr com Δχ=−0,0165 e ΔM/M=−1,25%. O resíduo da tangente é 8,75e-9 (C5_FISHER.json, mass_spin_free). | [DERIVED — conta do auditor em …\auditoria\c5\degeneracy_oracle.py; KNOWN: um 220 sozinho não separa (M, χ) de δτ]
+  => No modo 220, um «buraco negro com dephasing do ramo B» é praticamente o mesmo que um «buraco negro RG um pouco mais leve e com um pouco menos de spin». Só uma informação independente sobre o remanescente, vinda da inspiral, desfaz essa troca.
+- Fonte desconhecida, só ringdown a partir de 10 tM (Fisher local, parâmetros da fonte livres) | A informação que sobra é de 0,84% a 2,66% na Phenom, que é estável; a SEOB não fica numericamente resolvida. z_RB em SNR40 cai de 0,38–0,42 para 0,035–0,066. Para 5σ: SNR≈3000–5800 num evento só, ou de 5.800 a 21.000 eventos em SNR40. | [REAL — frações recalculadas pelo auditor (erro 1e-17); diagnóstico local. As 12 amplitudes livres por detector são flexibilidade fenomenológica e tornam o número pessimista]
+  => Sem saber a fonte, o ringdown sozinho perde quase toda a capacidade de ver o ramo B.
+- Degenerescência construtiva não linear (candidatos RG explícitos) | Na própria família, os resíduos em SNR40 vão de 0,145 a 0,598 (6 combinações fonte×família × 2 PSDs, a 16384 e 32768 Hz). Isso exige SNR ≥ 335–1380 para 50% de poder a 5σ e ≥ 420–1734 para 90%. Entre famílias, os resíduos vão de 0,66 a 4,86. | [REAL — cota superior do resíduo mínimo (busca local, não cega); SNR recalculado pelo auditor; escopo só R-B e só a janela de 10 tM]
+  => Existem binários sem nenhum dephasing que reproduzem, dentro do ruído, o sinal do ramo B no SNR de hoje. E a diferença entre dois modelos da RG (SEOB e Phenom) é maior que o próprio efeito da TGL em 2 das 3 fontes. O limite de baixo é a sistemática de forma de onda.
+- A soma de QNMs a partir de 10 tM não recupera injeções IMR | FULL_IMR: 0 de 288 grupos calibrados. Viés mediano do R-B, em unidades de a: 3,20 (SNR10), 2,29 (40), 1,67 (200) e 1,08 (600). | [REAL — contagens recalculadas pelo auditor]
+  => O modelo de ringdown puro, do tipo usado na C6, erra o amortecimento em mais do que o efeito do ramo B, que é 1 unidade de a. A C6 não consegue testar o ramo B com esse modelo; o INCONCLUSIVE_SYSTEMATICS dela está correto.
+- Recuperação com a forma IMR completa, fonte fixa, duas famílias | 19 de 24 grupos passam, em conjunto fechado. R-B e R-MOD falham em SNR40: viés de 0,047 a 0,919 e cobertura de 0,70 a 0,85. Pela família oposta, 0 de 96 passam (viés mediano 0,88). Poder do R-B: 0,38–0,40 em SNR40, 1,9–2,0 em 200 e 5,8–6,0 em 600. | [REAL — recalculado dos draws pelo auditor, diferença 0; nos SNR altos é crime inverso]
+  => Mesmo com a fonte fixa e um sinal ~4 vezes mais forte que o GW250114 nessa janela, o estimador do ramo B em SNR40 não fica calibrado. Só trocar SEOB por Phenom já desloca a medida em ~90% do efeito.
+- Integração completa da fonte em 7D (pilotos) | SEOB: 444 de 1200 com a precisão exigida. Mistura: 238 de 1200. Em SNR40, o ln B com a=1 difere do ln B com a=0 por 0,04 a 0,18, contra um desvio de 0,13 a 0,45, ou seja, 0,27 a 0,56 desvios. | [REAL — piloto NÃO aceito (scientific_acceptance=false); números lidos e somados pelo auditor]
+  => Com a fonte marginalizada, as distribuições de ln B com e sem TGL quase se sobrepõem em SNR40. Não há poder, coerente com os resultados anteriores.
+- Conferência cruzada com o dado real (C4, que não é desta frente) | GW250114, pSEOB, ramo B: ln B=0,029, com bootstrap de 95% [−0,034; 0,092]; correção/erro=0,343. | [REAL — lido do STATUS; auditado por outra frente]
+  => O dado real cai onde o Fisher prevê (±0,06, desvio ~0,35). O poder atual do teste é de ~0,35σ.
+
+## REMAINING
+- Registrar com hash o PORTÃO do poder na forma da ordem: o poder máximo por leitura (fonte fixa, que é o limite otimista), na base de SNR do GW250114. Todos ficam abaixo de 5; o maior é o R-LIN, com ≈1,3–1,55 em SNR40. A C6 fica como medida, e o INCONCLUSIVE_SYSTEMATICS atual se mantém.
+- Escrever ENTREGA_013_M1 e ENTREGA_013_M4 com PAGO/NÃO PAGO por critério, registrando que a C6 rodou antes do recibo.
+- Declarar NÃO PAGO: viés e cobertura com fonte marginalizada; as outras leituras além do R-B e os outros SNR além de 40 nessa matriz; a resolução da SEOB em SNR ≥ 200; ET/CE na recuperação IMR.
+- Refazer o ln B com parâmetro livre (a uniforme em [0,1] e τ★ livre), comparando com o ≈0,05 da gerência. Pôr a linha analítica de R-PROP e R-RAIZ-COHERENT (ln B≡0, sub-resolução) e trocar os N_5σ absurdos por «sub-resolução».
+- Corrigir a base de SNR em todas as tabelas (janela a partir de 10 tM versus pico; as células SNR40 correspondem a 2,5–4,4 vezes o GW250114). Corrigir a frase «verificado até 32768 Hz», por causa da malha interna da SEOB. Anotar ao lado da tabela 19/24 que é crime inverso e que a SEOB não está resolvida em SNR ≥ 200.
+- Dizer que a degenerescência construtiva vale só para o R-B, ou rodar a busca barata de resíduo não linear também para R-MOD, R-RAIZ-0 e R-LIN.
+- Processos vivos (34860, 19681, 43367 e 58182; faltam de ~5 a ~16 h): não abrir rodada nova. Deixá-los terminar como anexo diagnóstico ou encerrá-los; a decisão é do operador. Nenhum resultado deles muda o portão.
+- Escrever a ficha REAPROVEITAMENTO_C5.md.
+- Se o operador quiser poder de verdade: numa ORDEM nova, a rota (b), com sinal completo no estilo pSEOB e deformação só depois do pico. Nela a inspiral fixa o remanescente, e a previsão seria para O5, ET e CE. É ali que o ramo B pode chegar a 5σ; hoje não existe caminho no O4.

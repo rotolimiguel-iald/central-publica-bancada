@@ -1,0 +1,31 @@
+{
+  "schema": "f1-tempo-v394-physical-preregistration/v1",
+  "unit": "F1.TEMPO.V394",
+  "claim_event": 839,
+  "purpose": "Verificar contrato dimensional do modelo finito R9 por álgebra e cálculo sintético, sem dado observado, sem calibração universal.",
+  "status": "INPUT choices; DERIVED identities to be checked computationally",
+  "mu_do_rito": "q->0 (Thomson; Teorema da Escala)",
+  "source_constants": {"hbar": "6.62607015e-34/(2*pi)", "beta": "ALPHA_FINE_CODATA_2018*sqrt(e) in runtime", "alpha": 0.0072973525693},
+  "reference": {"Omega_rad_s": 1.0, "V0_J": "hbar*Omega", "Eref_J": "2*V0", "kappa_s_inv": 2.0, "status": "INPUT synthetic, not fitted"},
+  "secondary_ground_instance": {"Eref_J": "V0", "status": "INPUT synthetic; not an atomic-clock energy prescription"},
+  "clock_rescalings": [0.5, 1.0, 2.0, 10.0],
+  "time_grid_s": [0.0, 0.125, 1.0, 5.0],
+  "echo_steps": [0, 1, 2, 3],
+  "tolerances": {"matrix_abs": 1e-12, "relative_scalar": 1e-11},
+  "assertions": [
+    {"id": "D1", "claim": "Conjugation, positive spectrum, root dissipator and rate agree on all four M2 basis matrices.", "falsifier": "Residual above matrix_abs."},
+    {"id": "D2", "claim": "Root and quadratic generators agree for the same two-level gap with tau_eff; root and matched echo agree at n*echo_dt.", "falsifier": "Residual above matrix_abs or relative_scalar."},
+    {"id": "D3", "claim": "Scaling V0,Eref,kappa by lambda scales Omega,gamma by lambda and tau_eff,echo_dt,P by 1/lambda; channel at t/lambda and Gibbs weights invariant.", "falsifier": "Residual above fixed tolerances."},
+    {"id": "D4", "claim": "Finite Gibbs modular flow and physical Heisenberg flow obey sigma_s=alpha_(-P*s).", "falsifier": "Residual above matrix_abs."},
+    {"id": "N1", "claim": "The old echo w1=1.30,dt=0.35 is incompatible with positive-offset root rates on its active two-level sector in the same clock.", "falsifier": "Its gamma/Omega is <= beta."},
+    {"id": "N2", "claim": "A single tau cannot equate root and quadratic rates on energy levels 0,E,4E.", "falsifier": "All three pairwise tau_eff coincide."},
+    {"id": "N3", "claim": "Energy shifts leave Gibbs/unitary flows unchanged but change root rates.", "falsifier": "Eref=V0 and Eref=2V0 have equal gamma."},
+    {"id": "N4", "claim": "The Supercondutor holographic jump is nonunital, so its dissipator is not unitarily equivalent to the Hermitian root dephasing dissipator.", "falsifier": "J Jdagger - Jdagger J =0 in its declared finite model."},
+    {"id": "N5", "claim": "Old echo on full dimension16 distinguishes degenerate zero-energy states, so it cannot equal f(H) dephasing there.", "falsifier": "The 0,2 matrix unit is preserved by the old mirror map."},
+    {"id": "G1", "claim": "NaN, infinities, bool, zero/negative positive-required fields, Eref<V0, and numeric overflow are visibly refused.", "falsifier": "Any invalid input returns an accepted contract."}
+  ],
+  "no_data_access": true,
+  "no_original_execution": true,
+  "no_production_changes": true,
+  "limitations": ["No experimental significance or five sigma result", "No global light-net or full H2 inhabitant", "No universal choice of energy origin", "The KMS period is not identified with the real-time coherence period"]
+}

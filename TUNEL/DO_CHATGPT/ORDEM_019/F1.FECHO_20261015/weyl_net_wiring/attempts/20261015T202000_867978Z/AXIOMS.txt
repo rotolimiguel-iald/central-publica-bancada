@@ -1,0 +1,31 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T202000_867978Z\NoFiniteInvariantR1.lean:21:26: error: Function expected at
+  Submodule.nontrivial_iff_ne_bot
+but this term has type
+  Nontrivial ↥?m.80 ↔ ?m.80 ≠ ⊥
+
+Note: Expected a function because this term is being applied to the argument
+  S
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\weyl_net_wiring\attempts\20261015T202000_867978Z\NoFiniteInvariantR1.lean:57:2: error: Tactic `apply` failed: could not unify the type of `ContinuousLinearMap.eq_zero_of_forall_hasEigenvalue_eq_zero hB hs`
+  (∀ (μ : ℂ), Module.End.HasEigenvalue (↑B) μ → μ = 0) ↔ B = 0
+with the goal
+  B = 0
+
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A : ℝ → H →L[ℂ] H
+hstar : ∀ (s : ℝ), star (A s) = A (-s)
+hcomm : ∀ (s t : ℝ), Commute (A s) (A t)
+hnorm : ∀ (s : ℝ) (x : H), ‖(A s) x‖ = ‖x‖
+hno : ∀ (x : H), (∀ (s : ℝ), ∃ c, ‖c‖ = 1 ∧ (A s) x = c • x) → x = 0
+B : H →L[ℂ] H
+hB : IsCompactOperator ⇑B
+hs : (↑B).IsSymmetric
+hBA : ∀ (s : ℝ), Commute B (A s)
+⊢ B = 0
+'F1Fecho.NoFiniteInvariant.finite_invariant_eq_bot' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.NoFiniteInvariant.compact_symmetric_commutant_eq_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

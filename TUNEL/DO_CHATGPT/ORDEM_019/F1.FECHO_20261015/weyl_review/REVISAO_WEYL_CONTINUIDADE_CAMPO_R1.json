@@ -1,0 +1,269 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "reviewer": "/root/atrator_skeptic",
+  "created_utc": "2026-10-15T18:21:22.255335+00:00",
+  "verdict": "PASSA_NO_ESCOPO__FASE_CORRIGIDA_SEM_ALEGAR_TOMITA",
+  "checks": [
+    {
+      "id": "exponential_continuity",
+      "verdict": "PASSA",
+      "statute": "REAL",
+      "finding": "A norma da diferença entre exponenciais deriva da expansão do produto interno e da identidade exp(inner). A continuidade resulta de funções escalares contínuas e limite zero; não é hipótese."
+    },
+    {
+      "id": "strong_continuity",
+      "verdict": "PASSA",
+      "statute": "REAL",
+      "finding": "A órbita W(f)e(g) é contínua pela amplitude e pelo mapa exponencial. O subespaço de órbitas contínuas é fechado por convergência uniforme decorrente de ||D(f)||=1; sua inclusão do span total dos exponenciais permite alcançar todo vetor. O argumento reutiliza continuousOrbitSpace_closed, sem assumir regularidade da família D."
+    },
+    {
+      "id": "continuity_topology",
+      "verdict": "PASSA_COM_ESCOPO",
+      "statute": "REAL",
+      "finding": "O enunciado prova continuidade forte, f↦W(f)ψ para cada ψ, e regularidade t↦W(tf)ψ. Não prova continuidade na norma de operador ou diferenciabilidade/geradores."
+    },
+    {
+      "id": "phase_rotation",
+      "verdict": "PASSA",
+      "statute": "REAL",
+      "finding": "rotate(f)=i*f preserva inner e a forma simplética. W_field(f)=D(i*f) conserva exatamente o cociclo exp(-i Im inner(f,g)), sem 1/sqrt(2) adicional. A lei de adjunto e a covariância unitária são transportadas com sinais consistentes."
+    },
+    {
+      "id": "field_net",
+      "verdict": "PASSA",
+      "statute": "REAL",
+      "finding": "A álgebra de campo é gerada por D(i*f) para f em K, no mesmo Fock e vácuo. R_mono/R_local/R_cov e o fluxo restrito são derivados dessas leis. A identidade wedgeFlow_is_Ad tem o sinal -(2*pi*t) previsto na assinatura."
+    },
+    {
+      "id": "previous_integration_finding",
+      "verdict": "CORRECAO_DE_FASE_ATENDIDA__IDENTIFICACAO_TOMITA_ABERTA",
+      "statute": "REAL/DERIVED",
+      "finding": "A ressalva de convenção do parecer R1 foi tratada por um módulo novo e separado. A órbita agora é proporcional a e(i*k), compatível com a antilinearidade de S_K quando S_K k=k. Esta compatibilidade de fase não demonstra que o Tomita da álgebra seja Gamma(S_K); nenhuma identificação Tomita, ciclicidade/separação de cunha ou KMS é afirmada por estas fontes."
+    }
+  ],
+  "material_findings_current": [],
+  "builds": {
+    "continuity": {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\RECEIPT_R1.json",
+        "sha256": "5a69b0bb0e431003429ee04ec7ea15978dcdb34517e797cc874b3351628e9127",
+        "bytes": 33839
+      },
+      "start_utc": "2026-10-15T18:01:34.998442+00:00",
+      "end_utc": "2026-10-15T18:03:55.302415+00:00",
+      "seconds": 140.30395179999687,
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\src\\ConcreteWeylContinuityR2.lean",
+        "sha256": "c462cba6469f72bc3911fe57afae32f7b7d999741c4311e3b10146ccad67a860",
+        "bytes": 2726
+      },
+      "exit_code": 0,
+      "axiom_count": 5,
+      "olean": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\lib\\ConcreteWeylContinuityR2.olean",
+        "sha256": "5be9c54440294946dffa30629a125d1025bc93fb87a44a0c175b30644e4b8f9f",
+        "bytes": 122280
+      },
+      "olean_identical_to_accepted": true,
+      "log": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\BUILD.log",
+        "sha256": "07b662f66501334b023ae42ee47d363ca6b94a124d8f789d3ef9c4d45e9b8653",
+        "bytes": 6337
+      }
+    },
+    "field": {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\RECEIPT_R1.json",
+        "sha256": "97eaad3a801b20af60471297650fcfbcfb76d2f58694b39d9c47efb644743568",
+        "bytes": 37752
+      },
+      "start_utc": "2026-10-15T18:06:45.295085+00:00",
+      "end_utc": "2026-10-15T18:21:16.398339+00:00",
+      "seconds": 871.1032326999994,
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+        "sha256": "5bd58aeda018c649b621b40b7c31600f9b0c7ad0c08c2957ef52a316b033590c",
+        "bytes": 4710
+      },
+      "exit_code": 0,
+      "axiom_count": 31,
+      "olean": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\lib\\FieldWeylR3.olean",
+        "sha256": "4c5f03bc5cfc81f0a696210fb26d217c1e2d70da12bfde462c253627983fd7bc",
+        "bytes": 201072
+      },
+      "olean_identical_to_accepted": true,
+      "log": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\BUILD.log",
+        "sha256": "8483f340fab1c385954b5e165c7f459c503c1974900a38705e40da36d3dd96d7",
+        "bytes": 8248
+      }
+    }
+  },
+  "anchors": [
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\src\\ConcreteWeylContinuityR2.lean",
+      "line": 15,
+      "declaration": "theorem exponential_norm_sub (x y : H1) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\src\\ConcreteWeylContinuityR2.lean",
+      "line": 23,
+      "declaration": "theorem exponential_continuous : Continuous exponential := by"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\src\\ConcreteWeylContinuityR2.lean",
+      "line": 33,
+      "declaration": "theorem amplitude_continuous (g : H1) : Continuous (fun f : H1 => amplitude f g) := by"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\src\\ConcreteWeylContinuityR2.lean",
+      "line": 37,
+      "declaration": "theorem W_strongly_continuous (ψ : F) : Continuous (fun f : H1 => W f ψ) := by"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\continuity\\src\\ConcreteWeylContinuityR2.lean",
+      "line": 52,
+      "declaration": "theorem W_regular (f : H1) (ψ : F) : Continuous (fun t : ℝ => W (t • f) ψ) :="
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 19,
+      "declaration": "def rotate (f : H1) : H1 := Complex.I • f"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 21,
+      "declaration": "theorem rotate_inner (f g : H1) : inner ℂ (rotate f) (rotate g) = inner ℂ f g := by"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 27,
+      "declaration": "theorem rotate_add (f g : H1) : rotate (f+g) = rotate f + rotate g := by simp [rotate,smul_add]"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 29,
+      "declaration": "theorem rotate_neg (f : H1) : rotate (-f) = -rotate f := by simp [rotate]"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 31,
+      "declaration": "def W (f : H1) : F →L[ℂ] F := ConcreteWeyl.W (rotate f)"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 33,
+      "declaration": "theorem W_zero : W 0 = 1 := by simp [W,rotate,ConcreteWeyl.W_zero]"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 35,
+      "declaration": "theorem W_strongly_continuous (v : F) : Continuous (fun f : H1 => W f v) :="
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 39,
+      "declaration": "theorem W_star (f : H1) : star (W f) = W (-f) := by"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 42,
+      "declaration": "theorem W_ccr (f g : H1) : W f * W g = phase f g • W (f+g) := by"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 45,
+      "declaration": "theorem W_local (f g : H1) (h : (inner ℂ f g).im = 0) : Commute (W f) (W g) := by"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 49,
+      "declaration": "theorem W_covariance (u : H1 ≃ₗᵢ[ℂ] H1) (f : H1) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 53,
+      "declaration": "theorem W_vacuum (f : H1) : W f vacuum = amplitude (rotate f) 0 • exponential (rotate f) :="
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 56,
+      "declaration": "theorem vacuum_characteristic (f : H1) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 61,
+      "declaration": "def R (K : Submodule ℝ H1) : VonNeumannAlgebra F := F1Fecho.WeylNet.R W K"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 63,
+      "declaration": "theorem R_mono (K K' : Submodule ℝ H1) (h : K ≤ K') :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 66,
+      "declaration": "theorem R_local (K K' : Submodule ℝ H1)"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 70,
+      "declaration": "theorem R_covariance (u : H1 ≃ₗᵢ[ℂ] H1) (K K' : Submodule ℝ H1)"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 75,
+      "declaration": "theorem W_mem_R (K : Submodule ℝ H1) (f : H1) (hf : f ∈ K) : W f ∈ R K :="
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 78,
+      "declaration": "def wedgeFlow (L : TGLExt.QGSolution.LightNetData) (t : ℝ) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 83,
+      "declaration": "theorem wedgeFlow_zero (L : TGLExt.QGSolution.LightNetData) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 86,
+      "declaration": "theorem wedgeFlow_add (L : TGLExt.QGSolution.LightNetData) (s t : ℝ) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\field\\src\\FieldWeylR3.lean",
+      "line": 90,
+      "declaration": "theorem wedgeFlow_is_Ad (L : TGLExt.QGSolution.LightNetData) (t : ℝ)"
+    }
+  ],
+  "support_read": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\attempts\\20261013T223630_675979Z\\BosonicSectorContinuity.lean",
+    "sha256": "58590620b1513b35a567f9324f543bb06a39c820252522a2b98ea593c54c2248",
+    "bytes": 4719,
+    "lines": "25-49: continuousOrbitSpace and closedness by uniform isometric bound"
+  },
+  "previous_review": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\REVISAO_WEYL_R1.json",
+    "sha256": "d01873244cc262f44620b278697f2b9ec4721fc28a42190803a8268e6de67785",
+    "bytes": 29283
+  },
+  "oh_review_separate": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_clock_reuse\\review\\REVISAO_OH_R1.json",
+    "sha256": "94b4abc9e06aced1eb05890e5b3dfa1315dfb45a15e604929c343cb3740cbbca",
+    "bytes": 8757
+  },
+  "scope": [
+    "Rodada material limitada às duas fontes novas; os quatro Weyl antigos aprovados não foram recompilados novamente.",
+    "Recompilações em sandbox próprio com Lean 4.31.0, cópias exatas, dependências independentes quando disponíveis e hashes conferidos antes/depois. Logs registram comando, início/fim/segundos/exit e LEAN_PATH literal.",
+    "As tentativas FieldWeyl R1/R2 recusadas não integram o aceite. Nenhuma fonte do construtor foi alterada pelo revisor.",
+    "LightNetData continua hipótese de localização do fluxo. Nenhum FockCertificate completo ou habitante físico foi produzido por esta revisão.",
+    "Originais, memória, produção e gate preservados; AUDITADA/FECHADA pertence à gerência."
+  ],
+  "generator": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_review\\assemble_review_r2.py",
+    "sha256": "e899e0ed7b6663de62bd2f75446a3dd36982ef9cbfca03831692d81149021d1d",
+    "bytes": 5917
+  }
+}

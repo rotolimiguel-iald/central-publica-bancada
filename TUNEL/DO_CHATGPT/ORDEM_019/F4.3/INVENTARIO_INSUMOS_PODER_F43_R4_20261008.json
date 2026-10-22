@@ -1,0 +1,118 @@
+{
+  "unit": "F4.3",
+  "status": "REUSE_AUDIT__EXACT_JOINT_POWER_INPUTS_INCOMPLETE",
+  "sources": {
+    "V1_Ramo_B": {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\preregistro_ramo_b_05out\\PREREGISTRO_RAMO_B_RINGDOWN_V1.json",
+      "bytes": 138727,
+      "sha256": "86f98fcc124dd9cae04fdb06bd10c14175893253d5b139496bd4c05f109feee0"
+    },
+    "PODER_CEGO_220_V1": {
+      "path": "C:\\IALD\\Central de Patentes\\work\\cadeia_de_selo\\v386\\ramo_b\\pre_registro\\PODER_CEGO_RAMO_B_v2.json",
+      "bytes": 360514,
+      "sha256": "126adc100753c2ca6e65fb935a2bb89379ea72ee984cccb613afe5e8353cb782"
+    },
+    "O4_32S_archive_manifest": {
+      "path": "C:\\IALD\\Bancada_Um\\fontes_externas\\gwosc_o4\\GWOSC_O4_32S_V1.manifest.json",
+      "bytes": 253528,
+      "sha256": "a795cf04ca3b2f6ac20e813668dfc2390224ca630c4bb9b752ac6e6b308069a1"
+    },
+    "C7_injection_bundle": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\C7_INJECTION_REPRODUCTION_v3_2\\MANIFEST.json",
+      "bytes": 10110,
+      "sha256": "649b6dcc239101c9da50159790630318d370999df58bb637271ee4c7176b6d35"
+    },
+    "PSD_controls": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\PSD_CONTROLS.json",
+      "bytes": 2196,
+      "sha256": "eafa22ff5611cc991aa0d53b9d302a91000ec5fb035b6bd4e122fb12d4de9cb9"
+    },
+    "QNM_grid": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\QNM_GRID.json",
+      "bytes": 169231,
+      "sha256": "4f34367a0906023836fcf8013ada3ccef48877a17f59f697b9dabc25a2494b24"
+    },
+    "F43_V3": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F4.3\\PREREGISTRO_F4_3_V3.json",
+      "bytes": 9073,
+      "sha256": "5822e92a5ceba9d773df163191ffdab7e238ada9236dc77f9f959797e40a18ca"
+    }
+  },
+  "read_scope": "Only manifests, protocol JSON and existing power JSON were read; no D strain, posterior or PE was opened.",
+  "v1_D_candidates": 14,
+  "v1_D_holds": 4,
+  "o4_archive_window_s": [
+    -16.0,
+    16.0
+  ],
+  "c7_status": "RAW_OFF_SOURCE_TO_FORECAST_REGENERATION",
+  "p220_scope": "PODER_CEGO_RAMO_B_v2 is 220-only/older A-B-C sigma-and-spin power; cannot transport to F4.3 joint 220+440 D power.",
+  "fields": [
+    {
+      "name": "event_list_final_pinned",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "V1 gives 14 eligible candidates and 4 holds, but says event-by-event freeze is future; final D list is not pinned for F4.3."
+    },
+    {
+      "name": "event_list_hash",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "V1 file hash pins the selection rule/candidates, not the future final list after holds."
+    },
+    {
+      "name": "psd_per_event_and_detector",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "O4 32 s archive exists; C7 carries generic O4/other design PSD and one off-source example. No per-event/detector PSD selection for 220+440 D."
+    },
+    {
+      "name": "psd_hashes",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "C7 pins generic PSD asset hashes; no map assigning a chosen PSD hash to every D event/detector."
+    },
+    {
+      "name": "analysis_windows",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "O4 manifest window_s=32 names extraction windows; not ringdown start/end/fit windows for the F4.3 PE."
+    },
+    {
+      "name": "window_hashes",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "No per-event ringdown fit-window hashes chosen for F4.3."
+    },
+    {
+      "name": "priors_and_bounds",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "V1 and C7 contain prior/control families for 220/IMR; no frozen joint 220+440 shared-source bounds under V1 clock."
+    },
+    {
+      "name": "prior_hash",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "No chosen F4.3 joint-prior artifact hash."
+    },
+    {
+      "name": "start_time_rule",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "V1 C4 varies t0; no single F4.3 decision start-time rule and sensitivity grid fixed for D."
+    },
+    {
+      "name": "waveform_family_and_version",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "V1 names a pSEOB single-220 IMR instrument; C7 uses earlier waveform families. The 440 deformation with common M_f,chi_f is INPUT and no chosen implementation/version exists."
+    },
+    {
+      "name": "waveform_hash",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "QNM grid is pinned, but not the executable joint 220+440 V1-clock waveform/likelihood."
+    },
+    {
+      "name": "detector_covariance",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "C7 older controls use independent Gaussian quadratures; V1 C7 groups H1/L1 by event. No covariance choice validated for this joint F4.3 experiment."
+    },
+    {
+      "name": "injection_seed_and_null_repetitions",
+      "status": "NOT_SATISFIED_FOR_F43",
+      "reuse_and_gap": "Older C7 injection bundle is not an F4.3 seed/count. No frozen seed, null count or exact-power campaign for D."
+    }
+  ],
+  "conclusion": "F4.3 exact synthetic injection power on D cannot be measured honestly from the frozen inputs available now; AWAITING_POWER and operator request suspended."
+}

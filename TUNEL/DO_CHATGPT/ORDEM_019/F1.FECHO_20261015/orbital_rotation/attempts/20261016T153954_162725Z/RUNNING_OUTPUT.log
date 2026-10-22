@@ -1,0 +1,114 @@
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 162ms
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 148ms
+import took 79.6s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T153954_162725Z\MaxwellNullSchwartzCoreTransportR1.lean:53:77: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun y => ↑(y.1 0)`
+
+Issues:
+  No theorems found for `Complex.ofReal` in order to prove `ContDiff ℝ ∞ fun y0 => ↑y0`
+  No theorems found for `Complex.ofReal` in order to prove `ContDiff ℝ ∞ fun y => ↑(y.1 0)`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T153954_162725Z\MaxwellNullSchwartzCoreTransportR1.lean:54:77: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun y => ↑(y.1 1)`
+
+Issues:
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T153954_162725Z\MaxwellNullSchwartzCoreTransportR1.lean:57:4: error: Tactic `apply` failed: could not unify the conclusion of `@funext`
+  ?f = ?g
+with the goal
+  Complex.instNormedAddCommGroup = NonUnitalNormedRing.toNormedAddCommGroup
+
+Note: The full type of `@funext` is
+  ∀ {α : Sort ?u.142} {β : α → Sort ?u.141} {f g : (x : α) → β x}, (∀ (x : α), f x = g x) → f = g
+
+case e'_7
+g : MomentumCoordinates → Fib
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → g y = 0
+v : MomentumCoordinates → Fin 2 → ℂ := fun y => (g y).ofLp
+hv : ContDiff ℝ ∞ v
+hvcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → v y = 0
+h0 : ContDiff ℝ ∞ fun y => v y 0 / ↑(transverseMass 0 y.1)
+h1 : ContDiff ℝ ∞ fun y => v y 1 / ↑(transverseMass 0 y.1)
+hq0 : ContDiff ℝ ∞ fun y => ↑(y.1 0)
+hq1 : ContDiff ℝ ∞ fun y => ↑(y.1 1)
+⊢ Complex.instNormedAddCommGroup = NonUnitalNormedRing.toNormedAddCommGroup
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T153954_162725Z\MaxwellNullSchwartzCoreTransportR1.lean:61:4: error: Tactic `apply` failed: could not unify the conclusion of `@funext`
+  ?f = ?g
+with the goal
+  Complex.instNormedAddCommGroup = NonUnitalNormedRing.toNormedAddCommGroup
+
+Note: The full type of `@funext` is
+  ∀ {α : Sort ?u.159} {β : α → Sort ?u.158} {f g : (x : α) → β x}, (∀ (x : α), f x = g x) → f = g
+
+case e'_7
+g : MomentumCoordinates → Fib
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → g y = 0
+v : MomentumCoordinates → Fin 2 → ℂ := fun y => (g y).ofLp
+hv : ContDiff ℝ ∞ v
+hvcut : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → v y = 0
+h0 : ContDiff ℝ ∞ fun y => v y 0 / ↑(transverseMass 0 y.1)
+h1 : ContDiff ℝ ∞ fun y => v y 1 / ↑(transverseMass 0 y.1)
+hq0 : ContDiff ℝ ∞ fun y => ↑(y.1 0)
+hq1 : ContDiff ℝ ∞ fun y => ↑(y.1 1)
+⊢ Complex.instNormedAddCommGroup = NonUnitalNormedRing.toNormedAddCommGroup
+interpretation of Mathlib.Meta.FunProp.funPropTac._boxed took 111ms
+interpretation of Mathlib.Tactic._aux_Mathlib_Tactic_Convert___elabRules_Mathlib_Tactic_convert_1._boxed took 140ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T153954_162725Z\MaxwellNullSchwartzCoreTransportR1.lean:144:8: error: Application type mismatch: The argument
+  PiLp.continuous_toLp
+has type
+  ∀ (p : ENNReal) {ι : Type ?u.7} (β : ι → Type ?u.6) [inst : (i : ι) → TopologicalSpace (β i)],
+    Continuous (WithLp.toLp p)
+but is expected to have type
+  ∀ (a : ?m.7), Continuous nullFourierProfilePoint
+in the application
+  Function.comp PiLp.continuous_toLp
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T153954_162725Z\MaxwellNullSchwartzCoreTransportR1.lean:181:64: error: Type mismatch
+  PiLp.continuous_apply 0
+has type
+  ∀ (β : ?m.65 → Type ?u.48) [inst : (i : ?m.65) → TopologicalSpace (β i)] (i : ?m.65), Continuous fun f => f.ofLp i
+but is expected to have type
+  Continuous fun p => p.ofLp 0
+'F1Fecho.MaxwellGlobal.screenAmplitudeOf_smooth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.screenAmplitudeOf_compact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCutoff_tsupport_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.axisCompact_uniform_null_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreMomentum_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreMomentum_smoothAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreMomentum_point_inverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreAmplitude_zero_below_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreAmplitude_smooth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreAmplitude_compact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile_nonpositive' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile_orbital' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.nullCoreSchwartzProfile_null' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 1.52ms
+	blocked (unaccounted) 1.2s
+	congr simp thm 1.44ms
+	dsimp 3.12ms
+	elaboration 152ms
+	fix level params 0.951ms
+	import 79.6s
+	initialization 29.2ms
+	instantiate metavars 2.46ms
+	interpretation 11.5s
+	let-to-have transformation 1.06ms
+	linting 22.9ms
+	overlappingInstancesLinter 15.2ms
+	parsing 15.1ms
+	process pre-definitions 12.6ms
+	share common exprs 6.82ms
+	simp 60.8ms
+	tactic execution 194ms
+	tacticAnalysis 48.7ms
+	type checking 144ms
+	typeclass inference 950ms

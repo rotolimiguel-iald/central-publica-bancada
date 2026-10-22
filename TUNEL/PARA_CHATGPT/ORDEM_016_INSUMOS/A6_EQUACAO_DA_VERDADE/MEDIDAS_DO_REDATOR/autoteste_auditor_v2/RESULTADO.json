@@ -1,0 +1,285 @@
+{
+ "nota": "negativos TEM de dar FALHA; positivos TEM de dar PASSA; tipo REAL = compilacao isolada medida, SINTETICO = so parser",
+ "n_casos": 14,
+ "n_conformes": 14,
+ "n_negativos": 9,
+ "n_positivos": 5,
+ "auditor_v2_sha16": "bb6ebd277d86fedc",
+ "auditor_v1_sobre_M7b": "PASSA",
+ "casos": [
+  {
+   "caso": "N1_sorry",
+   "tipo": "SINTETICO",
+   "fonte": "autoteste_auditor_v2/sinteticos/n1.lean",
+   "fonte_sha16": "4088922afa0335f4",
+   "log": "autoteste_auditor/sorry.log",
+   "log_sha16": "586f69ce09c45415",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "sorry"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "fora do trio",
+    "sorry",
+    "token proibido na fonte"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 1,
+   "n_declaracoes_auditadas": 1,
+   "conforme": true
+  },
+  {
+   "caso": "N2_axioma_com_print",
+   "tipo": "SINTETICO",
+   "fonte": "autoteste_auditor_v2/sinteticos/n2.lean",
+   "fonte_sha16": "ccf467b7dda14be5",
+   "log": "autoteste_auditor/axioma_novo.log",
+   "log_sha16": "de556b123dd41c34",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "fora do trio",
+    "token proibido na fonte"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "fora do trio",
+    "token proibido na fonte"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 1,
+   "n_declaracoes_auditadas": 1,
+   "conforme": true
+  },
+  {
+   "caso": "N3_erro",
+   "tipo": "SINTETICO",
+   "fonte": "autoteste_auditor_v2/sinteticos/n3.lean",
+   "fonte_sha16": "95fabbd5ac913967",
+   "log": "autoteste_auditor/erro.log",
+   "log_sha16": "1947b91354fe74e2",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "erro de compilacao"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "nenhum #print axioms lido no log",
+    "erro de compilacao",
+    "cobertura: theorem/lemma sem #print axioms"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 1,
+   "n_declaracoes_auditadas": 0,
+   "conforme": true
+  },
+  {
+   "caso": "N4_M6_sorry_real",
+   "tipo": "REAL",
+   "fonte": "mutantes_C2/M6/TheEquationOfTruthM6.lean",
+   "fonte_sha16": "0c754d611c5748c3",
+   "log": "mutantes_C2/M6/out/compile.log",
+   "log_sha16": "6e00b6000acefccc",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "sorry"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "fora do trio",
+    "sorry",
+    "token proibido na fonte"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 46,
+   "n_declaracoes_auditadas": 46,
+   "conforme": true
+  },
+  {
+   "caso": "N5_M7a_axioma_com_print_real",
+   "tipo": "REAL",
+   "fonte": "mutantes_C2/M7a/TheEquationOfTruthM7a.lean",
+   "fonte_sha16": "9a275553cffc6542",
+   "log": "mutantes_C2/M7a/out/compile.log",
+   "log_sha16": "dff17e297dc10990",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "fora do trio",
+    "token proibido na fonte"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "fora do trio",
+    "token proibido na fonte"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 47,
+   "n_declaracoes_auditadas": 47,
+   "conforme": true
+  },
+  {
+   "caso": "N6_M7b_axioma_sem_print_real",
+   "tipo": "REAL",
+   "fonte": "mutantes_C2/M7b/TheEquationOfTruthM7b.lean",
+   "fonte_sha16": "c781ae1a9f0f3470",
+   "log": "mutantes_C2/M7b/out/compile.log",
+   "log_sha16": "8d2cfaddc7569710",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "cobertura: theorem/lemma sem #print axioms",
+    "token proibido na fonte"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "cobertura: theorem/lemma sem #print axioms",
+    "token proibido na fonte"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 47,
+   "n_declaracoes_auditadas": 46,
+   "conforme": true
+  },
+  {
+   "caso": "N7_so_cobertura",
+   "tipo": "SINTETICO (fonte = V3 + 1 teorema sem #print; log = o REAL da V3)",
+   "fonte": "autoteste_auditor_v2/sinteticos/n7.lean",
+   "fonte_sha16": "ffb438cae085ceb3",
+   "log": "../../V3/out/compile_final.log",
+   "log_sha16": "2f0ed3b1ba60ca7b",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "cobertura: theorem/lemma sem #print axioms"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "cobertura: theorem/lemma sem #print axioms"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 47,
+   "n_declaracoes_auditadas": 46,
+   "conforme": true
+  },
+  {
+   "caso": "N8_native_decide",
+   "tipo": "SINTETICO (fonte = V3 + native_decide; log = o REAL da V3)",
+   "fonte": "autoteste_auditor_v2/sinteticos/n8.lean",
+   "fonte_sha16": "4bbfd668a71b97ab",
+   "log": "../../V3/out/compile_final.log",
+   "log_sha16": "2f0ed3b1ba60ca7b",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "token proibido na fonte"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "token proibido na fonte"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 46,
+   "n_declaracoes_auditadas": 46,
+   "conforme": true
+  },
+  {
+   "caso": "N9_private",
+   "tipo": "SINTETICO (fonte = V3 + private theorem; log = o REAL da V3)",
+   "fonte": "autoteste_auditor_v2/sinteticos/n9.lean",
+   "fonte_sha16": "55c6f5fd85c1467c",
+   "log": "../../V3/out/compile_final.log",
+   "log_sha16": "2f0ed3b1ba60ca7b",
+   "esperado": "FALHA",
+   "motivos_esperados": [
+    "cobertura: theorem/lemma sem #print axioms",
+    "private theorem/lemma"
+   ],
+   "auditoria": "FALHA",
+   "motivos": [
+    "cobertura: theorem/lemma sem #print axioms",
+    "private theorem/lemma"
+   ],
+   "rc_auditor": 1,
+   "n_theorem_lemma_na_fonte": 47,
+   "n_declaracoes_auditadas": 46,
+   "conforme": true
+  },
+  {
+   "caso": "P1_V3_real",
+   "tipo": "REAL",
+   "fonte": "../../V3/TheEquationOfTruth.lean",
+   "fonte_sha16": "35b91f86b88b8e6c",
+   "log": "../../V3/out/compile_final.log",
+   "log_sha16": "2f0ed3b1ba60ca7b",
+   "esperado": "PASSA",
+   "motivos_esperados": [],
+   "auditoria": "PASSA",
+   "motivos": [],
+   "rc_auditor": 0,
+   "n_theorem_lemma_na_fonte": 46,
+   "n_declaracoes_auditadas": 46,
+   "conforme": true
+  },
+  {
+   "caso": "P2_V3_copia_do_redator_real",
+   "tipo": "REAL",
+   "fonte": "lean_copia/TheEquationOfTruth.lean",
+   "fonte_sha16": "35b91f86b88b8e6c",
+   "log": "lean_copia/out/compile.log",
+   "log_sha16": "c262ef055386c6f1",
+   "esperado": "PASSA",
+   "motivos_esperados": [],
+   "auditoria": "PASSA",
+   "motivos": [],
+   "rc_auditor": 0,
+   "n_theorem_lemma_na_fonte": 46,
+   "n_declaracoes_auditadas": 46,
+   "conforme": true
+  },
+  {
+   "caso": "P3_so_mathlib_real",
+   "tipo": "REAL",
+   "fonte": "lean_so_mathlib/TheEquationOfTruthMathlibOnly.lean",
+   "fonte_sha16": "9808cfc523dbdd57",
+   "log": "lean_so_mathlib/out/compile.log",
+   "log_sha16": "935023ca065b3d86",
+   "esperado": "PASSA",
+   "motivos_esperados": [],
+   "auditoria": "PASSA",
+   "motivos": [],
+   "rc_auditor": 0,
+   "n_theorem_lemma_na_fonte": 44,
+   "n_declaracoes_auditadas": 44,
+   "conforme": true
+  },
+  {
+   "caso": "P4_contorno_real",
+   "tipo": "REAL",
+   "fonte": "lean_contorno/AxiomasContorno.lean",
+   "fonte_sha16": "ab0fdcdd5284aaae",
+   "log": "lean_contorno/out/compile.log",
+   "log_sha16": "5a82aa33711ea309",
+   "esperado": "PASSA",
+   "motivos_esperados": [],
+   "auditoria": "PASSA",
+   "motivos": [],
+   "rc_auditor": 0,
+   "n_theorem_lemma_na_fonte": 0,
+   "n_declaracoes_auditadas": 7,
+   "conforme": true
+  },
+  {
+   "caso": "P5_comentario_com_palavras_proibidas",
+   "tipo": "SINTETICO (as palavras so em comentario e string)",
+   "fonte": "autoteste_auditor_v2/sinteticos/p5.lean",
+   "fonte_sha16": "7eb01dc1d9114f57",
+   "log": "autoteste_auditor_v2/sinteticos/p5.log",
+   "log_sha16": "4c378c9a202c7c4e",
+   "esperado": "PASSA",
+   "motivos_esperados": [],
+   "auditoria": "PASSA",
+   "motivos": [],
+   "rc_auditor": 0,
+   "n_theorem_lemma_na_fonte": 1,
+   "n_declaracoes_auditadas": 1,
+   "conforme": true
+  }
+ ]
+}
