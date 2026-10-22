@@ -1,0 +1,79 @@
+{
+  "start_utc": "2026-10-16T00:44:59.433698+00:00",
+  "end_utc": "2026-10-16T00:47:46.934391+00:00",
+  "seconds": 167.50069000000076,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-j2",
+    "--profile",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\attempts\\20261016T004459_324752Z\\GaussianLogScalarR3.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\attempts\\20261016T004459_324752Z\\GaussianLogScalarR3.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\attempts\\20261016T004459_324752Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\attempts\\20261016T004459_324752Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\attempts\\20261016T004459_324752Z\\GaussianLogScalarR3.lean",
+    "sha256": "9bcc032efb64c9707c92854d492bddf096be1f2410e228cec7a4467340bdd743",
+    "bytes": 5487
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+import took 160s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004459_324752Z\GaussianLogScalarR3.lean:24:12: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+interpretation of Mathlib.Tactic.FieldSimp._aux_Mathlib_Tactic_FieldSimp___elabRules_Mathlib_Tactic_FieldSimp_fieldSimp_1._boxed took 167ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004459_324752Z\GaussianLogScalarR3.lean:41:2: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004459_324752Z\GaussianLogScalarR3.lean:54:73: error: unsolved goals
+h1 : Tendsto (fun x => Real.log (1 - x)) (𝓝[≠] 0) (𝓝 0)
+h : Tendsto (fun x => Real.log (1 - x) + (Neg.neg ∘ Real.log) x) (𝓝[≠] 0) atTop
+x : ℝ
+hx1 : x ≠ 1
+hx : ¬x = 0
+⊢ Real.log (1 + -x) + (Neg.neg ∘ Real.log) x = Real.log (1 + -x) - Real.log x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004459_324752Z\GaussianLogScalarR3.lean:67:72: error: unsolved goals
+hn : Tendsto (fun x => 1 - x) (𝓝[≠] 1) (𝓝[≠] 0)
+h2 : Tendsto (fun x => Real.log x) (𝓝[≠] 1) (𝓝 0)
+h : Tendsto (fun x => (Real.log ∘ fun x => 1 - x) x + -Real.log x) (𝓝[≠] 1) atBot
+x : ℝ
+hx0 : x ≠ 0
+hx : ¬x = 1
+⊢ (Real.log ∘ fun x => 1 - x) x + -Real.log x = Real.log (1 - x) + -Real.log x
+'F1Fecho.GaussianLogScalar.gaussian_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.GaussianLogScalar.gaussian_linear_atTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.GaussianLogScalar.gaussian_linear_atBot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.GaussianLogScalar.compactify_continuous' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0561ms
+	blocked (unaccounted) 559ms
+	congr simp thm 1.28ms
+	dsimp 7.6ms
+	elaboration 29.1ms
+	fix level params 0.423ms
+	import 160s
+	initialization 40.1ms
+	instantiate metavars 1.29ms
+	interpretation 6.81s
+	let-to-have transformation 0.0832ms
+	linting 10.1ms
+	norm_num 106ms
+	overlappingInstancesLinter 9.11ms
+	parsing 5.31ms
+	process pre-definitions 4.74ms
+	ring 111ms
+	share common exprs 4.43ms
+	simp 36.4ms
+	tactic execution 90ms
+	tacticAnalysis 24ms
+	type checking 34.2ms
+	typeclass inference 202ms

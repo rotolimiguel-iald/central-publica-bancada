@@ -1,0 +1,46 @@
+R87 — Estacionariedade que já existe, alcance que ela não substitui
+Em nome de codex-gerente-tgl, 19/10/2026. [DERIVED — composição analítica de fontes existentes; não nova prova Lean do habitante].
+
+1. Fontes e operação de reaproveitamento
+
+O HABITANTE_CURVO_SIGMA_E_AREA.md de09/09 e OPERADOR_JACOBI_GAUGE_E_ESCOPO.md da mesma data já fornecem um ramo ambiente explícito. A primeira fonte distingue ação escolhida, construção same-P, equações ambientes verificadas e constante calibrada no exemplo. VERIFICACAO_SIMBOLICA.json contém14 grupos de controles exatos, todos passed=true; é recibo histórico, não uma nova execução nesta rodada. R87 recupera a ligação entre esse ramo e a identidade integradaR86. Os pinos integrais das fontes estão no resultado desta rodada.
+
+2. A ação e as variáveis realmente admitidas
+
+Em assinatura +---, com a convenção de Ricci das fontes, seja
+S[g,phi,lambda] = integral v { -(R-2Lambda)/(2kappa) + c/2 sum_j g^{ab}partial_a phi_j partial_b phi_j + lambda/2(sum_j phi_j^2-1) }.
+c>0 e kappa>0 constantes; quatro campos reais phi_j e multiplicador lambda. Métrica g, campos phi e lambda são variáveis INDEPENDENTES da ação ambiente. Na superfície de restrição, phi:M→S³. Não confundir kappa desta ação com kappa² do artigo Custo: os símbolos têm normalizações próprias nas fontes.
+
+Para variações suaves compactamente suportadas no interior de uma região relativamente compacta, h=delta g covariante, xi=delta phi e ell=delta lambda, a ligação de Palatini/volume e integração por partes deR86, com f=-(2kappa)^(-1), dá
+delta S = integral v { [ (G^{ab}+Lambda*g^{ab})/(2kappa) - T^{ab}/2 ] h_ab
+                    + sum_j (-c Box phi_j + lambda phi_j) xi_j
+                    + (sum_j phi_j²-1) ell/2 }.
+Aqui T é o tensor da densidade material inteira. Na superfície sum phi²=1, o termo multiplicador não contribui a T, que fica c sum_j[dphi_j tensor dphi_j - g |dphi_j|²/2]. A restrição deve ser imposta DEPOIS de variar lambda. O fluxo gravitacional e o fluxo c*partial^a phi_j*xi_j desaparecem por suporte compacto; não se impõe apenas h=0 numa fronteira física, nem se demonstra problema global de contorno.
+
+3. A testemunha existente satisfaz os coeficientes, não apenas a identidade de Noether
+
+Na família P5 positiva, q=P_0=sin²(r/2), P_j=(1-q)phi_j², phi=z em S³_+, a=2cos(r/2),
+g=dr²-a²h_S³, Q=sum |dphi|²=-3/a², Box phi_j=3phi_j/a².
+Os valores escolhidos no exemplo são lambda=3c/a², Lambda=3/4 e kappa=4/c. As componentes verificadas são
+T_rr=3c/(2a²), T_AB=-c*h_AB/2,
+G_rr=6/a²-3/4, G_AB=(-2+3a²/4)*h_AB.
+Portanto G+Lambda*g=kappa*T, -c Box phi+lambda phi=0 e sum phi²=1. Todos os coeficientes da variação acima se anulam para variações ambientes independentes. Isso demonstra estacionariedade LOCAL do ramo já especificado, não só estacionariedade sob variações de P. Não é necessário refazer a busca desse habitante nem fingir que estacionariedade alguma existe.
+
+Uma frase como 'ainda falta qualquer habitante estacionário' seria ampla demais: a pendência vigente é a estacionariedade para a AÇÃO COMPLETA identificada e o contrato físico pretendido. A existência deste exemplo foi declarada em setembro e emR84; esta camada torna explícita sua reutilização no caminho integrado.
+
+4. Todas as direções nulas: o que é pago neste exemplo
+
+Em cada ponto e para qualquer k nulo nãozero, H=h_S³(k_sp,k_sp)>0 e k_r²=a²H. Segue T(k,k)=cH e Ric(k,k)=4H. Com kappa*c=4, Ric(k,k)=kappa*T(k,k). Os campos são os mesmos para todas as direções; não se escolhe a fonte separadamente para cada k. O exemplo também fornece tela de equilíbrio local e resposta Gibbs quadrática com eta=pi*c/2 na fonte09/09. Esta última composição completa do habitante ainda não tem prova Lean integral nesta entrega.
+
+As igualdades kappa=4/c e Lambda=3/4 são ESCOLHAS/IDENTIFICAÇÕES do modelo, assim descritas pela fonte. Não determinam G_N, escala física da métrica Fisher ou Lambda observada. Se se exige kappa=8pi*G com G já fisicamente identificado, então c=1/(2pi*G) é uma obrigação adicional de calibração/compatibilidade, não algo derivado da normalização sumP=1. Rótulos iguais não pagam essa obrigação.
+
+5. Por que não contradiz R84–R86
+
+A restrição P5 tem dimensão4 e, em rank4, suas variações são difeomorfismos locais: estacionariedade APENAS nesse domínio não força os coeficientes ambientes acima a zero. Aqui eles foram calculados separadamente e efetivamente zeram. O exemplo positivo e a insuficiência do critério restrito coexistem.
+P16/R85 tem sigma em S14, não S³. Seu alcance normal livre e o residual nãozeroR86 são fatos sobre outra classe admissível do tipo genérico; não refutam o ramo S³ nem a TGL completa. O negativo global de uma ação tem os mesmos pontos críticos. Somar Lambda*g tampouco cancela o residual nulo deP16, porque g(k,k)=0.
+
+6. Resíduo preciso para a próxima construção
+
+O passo a realizar não é reconstruir o ramo sigma. É identificar a representação de Psi e a fonte de TODOS os setores da ação pretendida, incluindo a dependência métrica fora do fundo do termo modular, e demonstrar compatibilidade entre esse contrato e a construção selecionada de P. O programa selado conserva identificação Psi escalar/1-forma/sigma e Cartan/métrica como INPUT. A análise focalR87 não encontrou revogação dessa pendência. O levantamento não cobre todo o computador e não prova ausência de uma fonte ainda não localizada.
+
+H3 universal permanece OPEN. R16 permanece em trabalho; esta camada é avanço parcial com alcance explícito. Nenhum dado observado, OH, kernel canônico, um.py, produção ou gate alterado. O aceite administrativoR13 já está registrado na revisão563; esta rodada não o repete nem o converte em provaH3.

@@ -1,0 +1,1182 @@
+--- base/driver_p3.py
++++ budgetA/driver_p3.py
+@@ -19,11 +19,14 @@
+     return hashlib.sha256(a.tobytes(order="C")).hexdigest()
+ from failure_audit import BudgetStop, FailureAudit
+ from audit_guard import AuditLatch, AuditViolation, PreopenedJournal
++from budget_counters import CallBudget
++from recovery_diagnostics import summarize
+ class Counter(list):
+     def __init__(self):super().__init__([0,0.,0]);self.lock=threading.RLock()
+     def get_lock(self):return self.lock
+ 
+ def main():
++    started=time.perf_counter();cpu0=time.process_time()
+     if len(sys.argv)!=4:raise ValueError("Exact contract hash, job id and decision hash required")
+     pin,job_id,decision_pin=sys.argv[1:]
+     from science_admission import admit
+@@ -50,10 +53,11 @@
+         if os.environ.get(name)!="1":raise ValueError("One-thread environment required")
+     resource.setrlimit(resource.RLIMIT_AS,(c["limits"]["address_space_bytes"],)*2)
+     resource.setrlimit(resource.RLIMIT_CPU,(c["limits"]["cpu_soft_s"],c["limits"]["cpu_hard_s"]))
+-    started=time.perf_counter();cpu0=time.process_time()
+     def on_budget(sig,frame):raise BudgetStop("SIGNAL_"+str(sig))
+     signal.signal(signal.SIGALRM,on_budget);signal.signal(signal.SIGXCPU,on_budget)
+-    signal.setitimer(signal.ITIMER_REAL,c["limits"]["wall_soft_s"])
++    remaining=c["limits"]["wall_soft_s"]-(time.perf_counter()-started)
++    if remaining<=0:raise BudgetStop("STARTUP_EXHAUSTED_WALL")
++    signal.setitimer(signal.ITIMER_REAL,remaining)
+     js(out/"CHILD_STARTED.json",{"at":datetime.now(timezone.utc).isoformat(),"pid":os.getpid(),
+                                  "contract_sha256":pin,"job_id":job_id})
+     import numpy as np
+@@ -86,11 +90,15 @@
+     js(out/"PREHOOK_IMPORTS.json",prehook_receipt)
+     audit_paths=set();blocked=[]
+     counts=Counter();ll_calls=0
++    call_budget=CallBudget(c["limits"]["max_likelihood_calls"],c["limits"]["native_waveform_calls_at_most"])
+     journal_path=out/"AUDIT_EVENTS.jsonl"
+     guard=AuditLatch(PreopenedJournal(journal_path))
+     def checkpoint(phase):
+         guard.context(phase,ll_calls,counts[0])
+         guard.checkpoint(phase, cause=sys.exc_info()[1])
++        if phase=="source_before_waveform":
++            if time.perf_counter()-started>=c["limits"]["wall_soft_s"]:raise BudgetStop("WALL_BEFORE_WAVEFORM")
++            call_budget.take_native()
+     source.set_audit_checkpoint(checkpoint)
+     def deny(event,target,reason,mode=None,flags=None):
+         blocked.append(str(target))
+@@ -114,6 +122,7 @@
+     source.set_deadline(time.time()+c["limits"]["wall_soft_s"]-(time.perf_counter()-started))
+     source.set_edom_log(out/"EDOM_LOG.jsonl")
+     ll_calls=0;sampler=None;last=None;status="FAILED";error=None;delta=None;ess=None
++    live_span=None;final_live_added=False;weights=None;recovery=None
+     failures=FailureAudit();last_parameters=None
+     initialization_defaults=[];initialization_before=[];initialization_after=[]
+     def budget():
+@@ -156,7 +165,7 @@
+             nonlocal ll_calls,last_parameters
+             checkpoint("pre_likelihood")
+             last_parameters=parameters(v)
+-            budget();ll_calls+=1
++            budget();ll_calls=call_budget.take_likelihood()
+             guard.refresh_counts(ll_calls,counts[0])
+             value=guard.evaluate(lambda:float(likelihood.log_likelihood_ratio(last_parameters)))
+             if counts[2]!=0 or not math.isfinite(value) or abs(value)>1e100:
+@@ -176,14 +185,21 @@
+         checkpoint("sampler_returned")
+         if last is None:raise RuntimeError("Sampler returned no dead points")
+         delta=float(np.logaddexp(0.,np.max(sampler.live_logl)+last.logvol-last.logz))
+-        if delta<.1 and np.ptp(sampler.live_logl)>0 and ll_calls<c["limits"]["max_likelihood_calls"]:
++        live_span=float(np.ptp(sampler.live_logl))
++        if not math.isfinite(delta) or not math.isfinite(live_span):raise RuntimeError("Nonfinite convergence diagnostic")
++        if delta<.1 and live_span>0 and ll_calls<c["limits"]["max_likelihood_calls"]:
+             for _ in sampler.add_live_points():checkpoint("live_point_added")
++            final_live_added=True
+             values=compute_integrals(logl=sampler.saved_run["logl"],logvol=sampler.saved_run["logvol"])
+             for key,val in zip(("logwt","logz","logzvar","h"),values):sampler.saved_run[key]=val.tolist()
+             weights=np.exp(np.array(sampler.saved_run["logwt"])-sampler.saved_run["logz"][-1])
++            if not np.isfinite(weights).all() or np.any(weights<0) or not np.sum(weights)>0:raise RuntimeError("Invalid posterior weights")
+             weights/=sum(weights);ess=float(1/sum(weights**2))
+             status="DLOGZ_REACHED_ESS_OK" if ess>=100 else "DLOGZ_REACHED_ESS_LOW"
+         else:status="STOPPED_NOT_CONVERGED"
++        if weights is not None:
++            recovery=summarize(np.asarray(sampler.saved_run["v"])[:,FREE.index("dtau220")].tolist(),
++                weights.tolist(),job["truth"]["dtau220"],numerical_eligible=status=="DLOGZ_REACHED_ESS_OK")
+     except AuditViolation as exc:
+         status="AUDIT_VIOLATION";error=type(exc).__name__+": "+str(exc)
+         failures.external(exc,last_parameters)
+@@ -216,7 +232,7 @@
+         if guard.snapshot()["latched"]:
+             status="AUDIT_VIOLATION"
+         result={"status":status,"pid":os.getpid(),"job_id":job_id,"label":job["label"],"contract_sha256":pin,
+-                "scope":"Operational candidate under inherited envelope; partial exit zero is not convergence, recovery or F3 qualification",
++                "scope":"Proposed budget A; numerical criteria and weak recovery summaries are distinct; operational exit zero is not F3 or D qualification",
+                 "preparation_id":c["preparation_id"],"execution_id":authorization["execution_id"],
+                 "decision_sha256":decision_pin,"scientific_qualification":False,
+                 "error":error,"wall_s":time.perf_counter()-started,"cpu_s":time.process_time()-cpu0,
+@@ -228,6 +244,8 @@
+                 "initialization_analytic_after_likelihood":initialization_after,
+                 "initialization_qualified":len(initialization_after)==2 and initialization_after==initialization_before,
+                 "delta_logz_before_live_addition":delta,"weighted_ESS":ess,"diagnostics":artifact,
++                "live_logl_span_before_addition":live_span,"final_live_points_added":final_live_added,
++                "recovery_diagnostic":recovery,"budget_counters":call_budget.snapshot(),
+                 "filesystem_read_write_paths_after_hook":sorted(audit_paths),"blocked_operations":blocked,
+                 "audit_latch":guard.snapshot(),"audit_journal_sha256":sha(journal_path),
+                 "audit_scope":"Python open/process/socket hook after fixed imports and pin checks; not OS/native syscall containment",
+@@ -237,6 +255,8 @@
+                 "finished_utc":datetime.now(timezone.utc).isoformat()}
+         js(out/"RESULT.json",result)
+         checkpoint("final_after_result")
+-        print(json.dumps({k:result[k] for k in ("status","job_id","likelihood_calls","native_calls","wall_s","cpu_s")}))
++        print(json.dumps({k:result[k] for k in ("status","job_id","likelihood_calls","native_calls","wall_s","cpu_s")}),flush=True)
++        if time.perf_counter()-started>=c["limits"]["wall_soft_s"]+5:
++            raise TimeoutError("CHILD_FINALIZATION_LATE_RESULT_PROVISIONAL")
+     return 2 if status in ("FAILED","AUDIT_VIOLATION") else 0
+ if __name__=="__main__":sys.exit(main())
+--- base/launch_p3.py
++++ budgetA/launch_p3.py
+@@ -1,81 +1,195 @@
+-"""One-shot Linux supervisor. Do not run until coordination authorizes the pinned contract."""
+-import sys,os,json,hashlib,subprocess,time,signal
++"""Prepared A supervisor; no consumption without the exact external decision."""
++import sys, os, json, hashlib, subprocess, time, signal, contextlib
+ from pathlib import Path
+-from datetime import datetime,timezone
+-ROOT=Path(__file__).resolve().parent
+-sys.dont_write_bytecode=True
+-sys.path.insert(0,str(ROOT))
+-from result_acceptance import assess, campaign_exit
+-def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+-def fresh(path,raw):
+-    if path.exists():raise FileExistsError(str(path))
+-    temp=path.with_name(path.name+".tmp")
+-    with temp.open("xb") as f:f.write(raw)
+-    if temp.read_bytes()!=raw:raise OSError("Atomic verification failed")
+-    os.replace(temp,path)
+-def js(path,obj):fresh(path,(json.dumps(obj,indent=2,allow_nan=False)+"\n").encode())
++from datetime import datetime, timezone
++
++ROOT = Path(__file__).resolve().parent
++sys.dont_write_bytecode = True
++sys.path.insert(0, str(ROOT))
++from result_acceptance import assess, campaign_exit, paired_numerical
++from process_supervision import supervise, SupervisorInterrupted
++
++
++def sha(path):
++    h = hashlib.sha256()
++    with Path(path).open("rb") as f:
++        for block in iter(lambda: f.read(1024 * 1024), b""):
++            h.update(block)
++    return h.hexdigest()
++
++
++def fresh(path, raw):
++    if path.exists():
++        raise FileExistsError(str(path))
++    temp = path.with_name(path.name + ".tmp")
++    with temp.open("xb") as f:
++        f.write(raw)
++        f.flush()
++        os.fsync(f.fileno())
++    if temp.read_bytes() != raw:
++        raise OSError("Atomic verification failed")
++    os.replace(temp, path)
++    if path.read_bytes() != raw:
++        raise OSError("Final byte verification failed")
++
++
++def js(path, obj):
++    fresh(path, (json.dumps(obj, indent=2, allow_nan=False) + "\n").encode())
++
++
++def check_deadline(deadline):
++    if time.perf_counter() >= deadline:
++        raise TimeoutError("NOMINAL_DEADLINE_INCLUDING_FINALIZATION_EXCEEDED")
++
++
++@contextlib.contextmanager
++def ownership_context():
++    previous = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
++    try:
++        yield
++    finally:
++        # Pending interruption arrives after supervise owns the returned handle.
++        signal.pthread_sigmask(signal.SIG_SETMASK, previous)
++
++
++@contextlib.contextmanager
++def cleanup_context():
++    old = {s: signal.getsignal(s) for s in (signal.SIGINT, signal.SIGTERM)}
++    try:
++        for s in old:
++            signal.signal(s, signal.SIG_IGN)
++        yield
++    finally:
++        for s, handler in old.items():
++            signal.signal(s, handler)
++
++
+ def main():
+-    if len(sys.argv)!=3:raise ValueError("Exact contract and external ROOT decision hashes required")
+-    pin,decision_pin=sys.argv[1:]
+-    from science_admission import admit
+-    c,authorization=admit(ROOT,pin,decision_pin)
+-    auth_path=ROOT/"ROOT_DECISION.json"
+-    # No automatic retry: reserve the entire collection before any child.
+-    fd=os.open(ROOT/"CAMPAIGN_CLAIM.json",os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+-    with os.fdopen(fd,"wb") as f:
+-        f.write((json.dumps({"contract_sha256":pin,"decision_sha256":decision_pin,
+-                            "execution_id":authorization["execution_id"],"pid":os.getpid()})+"\n").encode())
+-        f.flush();os.fsync(f.fileno())
+-    run=ROOT/c["execution_directory"];run.mkdir(exist_ok=False)
+-    js(run/"LAUNCH_STARTED.json",{"contract_sha256":pin,"authorization_sha256":sha(auth_path),
+-                                  "at":datetime.now(timezone.utc).isoformat(),"pid":os.getpid()})
+-    env=dict(os.environ,OMP_NUM_THREADS="1",OPENBLAS_NUM_THREADS="1",MKL_NUM_THREADS="1",PYTHONDONTWRITEBYTECODE="1")
+-    results=[];assessments=[];t0=time.perf_counter()
+-    for job in c["jobs"]:
+-        out=run/job["id"];out.mkdir(exist_ok=False)
+-        js(out/"CLAIM.json",{"contract_sha256":pin,"decision_sha256":decision_pin,
+-                             "execution_id":authorization["execution_id"],
+-                             "job_id":job["id"],"supervisor_pid":os.getpid()})
+-        cmd=["/opt/lal_env/bin/python","-I","-B",str(ROOT/"driver_p3.py"),pin,job["id"],decision_pin]
+-        start=time.perf_counter()
+-        with (out/"stdout.log").open("xb") as fo,(out/"stderr.log").open("xb") as fe:
+-            p=subprocess.Popen(cmd,stdin=subprocess.DEVNULL,stdout=fo,stderr=fe,env=env,
+-                               cwd=str(ROOT),start_new_session=True)
++    t0 = time.perf_counter()
++    run = None
++    def interrupted(sig, frame):
++        raise SupervisorInterrupted("SIGNAL_" + str(sig))
++    old = {s: signal.signal(s, interrupted) for s in (signal.SIGINT, signal.SIGTERM)}
++    try:
++        if len(sys.argv) != 3:
++            raise ValueError("Exact contract and external decision hashes required")
++        pin, decision_pin = sys.argv[1:]
++        from science_admission import admit
++        c, authorization = admit(ROOT, pin, decision_pin)
++        campaign_deadline = t0 + c["limits"]["supervisor_wall_s"] * len(c["jobs"])
++        fd = os.open(ROOT / "CAMPAIGN_CLAIM.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
++        with os.fdopen(fd, "wb") as f:
++            f.write((json.dumps({"contract_sha256": pin, "decision_sha256": decision_pin,
++                                "preparation_id": c["preparation_id"],
++                                "execution_id": authorization["execution_id"],
++                                "pid": os.getpid()}) + "\n").encode())
++            f.flush()
++            os.fsync(f.fileno())
++        run = ROOT / c["execution_directory"]
++        run.mkdir(exist_ok=False)
++        js(run / "LAUNCH_STARTED.json",
++           {"contract_sha256": pin, "decision_sha256": decision_pin,
++            "preparation_id": c["preparation_id"], "execution_id": authorization["execution_id"],
++            "at": datetime.now(timezone.utc).isoformat(), "pid": os.getpid()})
++        env = dict(os.environ, OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1",
++                   MKL_NUM_THREADS="1", PYTHONDONTWRITEBYTECODE="1")
++        results, assessments = [], []
++        for job in c["jobs"]:
++            start = time.perf_counter()
++            total_deadline = min(start + c["limits"]["supervisor_wall_s"], campaign_deadline)
++            # 14400 work; 5 child-finalization grace; 4 kill/reap; 1 receipt reserve.
++            wait_deadline = min(start + c["limits"]["wall_soft_s"] + 5, total_deadline - 5)
++            cleanup_deadline = total_deadline - 1
++            check_deadline(wait_deadline)
++            out = run / job["id"]
++            out.mkdir(exist_ok=False)
++            js(out / "CLAIM.json", {"contract_sha256": pin, "decision_sha256": decision_pin,
++                                   "execution_id": authorization["execution_id"],
++                                   "job_id": job["id"], "supervisor_pid": os.getpid()})
++            cmd = ["/opt/lal_env/bin/python", "-I", "-B", str(ROOT / "driver_p3.py"),
++                   pin, job["id"], decision_pin]
++            with (out / "stdout.log").open("xb") as fo, (out / "stderr.log").open("xb") as fe:
++                def spawn():
++                    return subprocess.Popen(cmd, stdin=subprocess.DEVNULL, stdout=fo, stderr=fe,
++                                            env=env, cwd=str(ROOT), start_new_session=True)
++                row = supervise(spawn, wait_deadline=wait_deadline,
++                                cleanup_deadline=cleanup_deadline, clock=time.perf_counter,
++                                kill_owned_group=lambda pid: os.killpg(pid, signal.SIGKILL),
++                                cleanup_context=cleanup_context, ownership_context=ownership_context)
++            row.update(job_id=job["id"], wall_s=time.perf_counter() - start,
++                       stdout_sha256=sha(out / "stdout.log"), stderr_sha256=sha(out / "stderr.log"))
++            result, journal = None, None
+             try:
+-                rc=p.wait(timeout=c["limits"]["supervisor_wall_s"]);state="PROCESS_RETURNED"
+-            except subprocess.TimeoutExpired:
+-                os.killpg(p.pid,signal.SIGKILL);rc=p.wait();state="SUPERVISOR_TIMEOUT_UNCERTAIN_PARTIAL"
+-        row={"pid":p.pid,"job_id":job["id"],"returncode":rc,"supervisor_status":state,"wall_s":time.perf_counter()-start,
+-             "stdout_sha256":sha(out/"stdout.log"),"stderr_sha256":sha(out/"stderr.log")}
+-        rp=out/"RESULT.json"
+-        result=None;journal=None
+-        try:
+-            if rp.exists():
+-                raw=rp.read_bytes();result=json.loads(raw)
+-                row.update(result_sha256=hashlib.sha256(raw).hexdigest(),result_status=result.get("status"))
+-            jp=out/"AUDIT_EVENTS.jsonl"
+-            if jp.exists():
+-                journal=jp.read_bytes()
+-                row.update(audit_journal_sha256=hashlib.sha256(journal).hexdigest(),audit_journal_bytes=len(journal))
+-            decision=assess(result,journal,returncode=rc,process_state=state,
+-                expected_job=job["id"],expected_label=job["label"],expected_contract=pin,
+-                expected_pid=p.pid,max_calls=c["limits"]["max_likelihood_calls"])
+-        except Exception as exc:
+-            decision={"accepted":False,"disposition":"TERMINAL_FAILURE",
+-                      "reasons":["RECEIPT_READ_OR_VALIDATION_ERROR"],"error":type(exc).__name__+": "+str(exc)}
+-        row["acceptance"]=decision;assessments.append(decision)
+-        results.append(row);js(out/"PROCESS_RECEIPT.json",row)
+-        if not decision["accepted"]:
+-            break # Terminal even for a partial label; no retry/resume/replacement.
+-    js(run/"CAMPAIGN_RECEIPT.json",{"contract_sha256":pin,"jobs":results,"wall_s":time.perf_counter()-t0,
+-                                    "started_jobs":len(results),"planned_jobs":len(c["jobs"]),"no_retry":True,
+-                                    "exit_code":campaign_exit(assessments,len(c["jobs"])),
+-                                    "status":"CLEAN_PROTOCOL_COMPLETION" if campaign_exit(assessments,len(c["jobs"]))==0 else "TERMINAL_FAILURE_OR_INCOMPLETE",
+-                                    "coverage_claim":False,"D_read_authorized":False,
+-                                    "scientific_qualification":False,
+-                                    "scope":"Operational completion may accept clean partials; not F3 qualification",
+-                                    "preparation_id":c["preparation_id"],
+-                                    "execution_id":authorization["execution_id"],"decision_sha256":decision_pin})
+-    print(json.dumps(results))
+-    return campaign_exit(assessments,len(c["jobs"]))
+-if __name__=="__main__":sys.exit(main())
++                rp, jp = out / "RESULT.json", out / "AUDIT_EVENTS.jsonl"
++                if rp.exists():
++                    raw = rp.read_bytes()
++                    result = json.loads(raw)
++                    row.update(result_sha256=hashlib.sha256(raw).hexdigest(),
++                               result_status=result.get("status"))
++                if jp.exists():
++                    journal = jp.read_bytes()
++                    row.update(audit_journal_sha256=hashlib.sha256(journal).hexdigest(),
++                               audit_journal_bytes=len(journal))
++                decision = assess(result, journal, returncode=row["returncode"],
++                    process_state=row["supervisor_status"], expected_job=job["id"],
++                    expected_label=job["label"], expected_contract=pin,
++                    expected_pid=row["pid"], max_calls=c["limits"]["max_likelihood_calls"],
++                    expected_preparation=c["preparation_id"],
++                    expected_execution=authorization["execution_id"],
++                    expected_decision=decision_pin,
++                    max_native=c["limits"]["native_waveform_calls_at_most"],
++                    dlogz=c["numeric_thresholds"]["dlogz"],
++                    ess_min=c["numeric_thresholds"]["weighted_ESS_min"])
++                if row["process_accepted"] is not True:
++                    decision = {"accepted": False, "disposition": "TERMINAL_FAILURE",
++                                "numerical_criteria_met": False,
++                                "reasons": ["SUPERVISION_OR_TERMINATION_UNCERTAIN"]}
++            except Exception as exc:
++                decision = {"accepted": False, "disposition": "TERMINAL_FAILURE",
++                            "numerical_criteria_met": False,
++                            "reasons": ["RECEIPT_READ_OR_VALIDATION_ERROR"],
++                            "error": type(exc).__name__ + ": " + str(exc)}
++            row["acceptance"] = decision
++            check_deadline(total_deadline)
++            assessments.append(decision)
++            results.append(row)
++            js(out / "PROCESS_RECEIPT.json", row)
++            # A receipt written just before a slow IO overrun is provisional.
++            check_deadline(total_deadline)
++            if decision["accepted"] is not True:
++                break
++        code = campaign_exit(assessments, len(c["jobs"]))
++        terminal = {"contract_sha256": pin, "jobs": results, "wall_s": time.perf_counter() - t0,
++                    "started_jobs": len(results), "planned_jobs": len(c["jobs"]),
++                    "no_retry": True, "exit_code_provisional": code,
++                    "status": "CLEAN_PROTOCOL_COMPLETION" if code == 0 else "TERMINAL_FAILURE_OR_INCOMPLETE",
++                    "paired_numerical_criteria_met": paired_numerical(assessments),
++                    "scientific_qualification": False, "coverage_claim": False,
++                    "D_read_authorized": False, "preparation_id": c["preparation_id"],
++                    "execution_id": authorization["execution_id"], "decision_sha256": decision_pin,
++                    "acceptance_requires": "External exit 0, exact receipt pins and no FINALIZATION_FAILURE.json"}
++        check_deadline(campaign_deadline)
++        js(run / "CAMPAIGN_RECEIPT.json", terminal)
++        receipt_pin = sha(run / "CAMPAIGN_RECEIPT.json")
++        check_deadline(campaign_deadline)
++        print(json.dumps({"status": terminal["status"], "receipt_sha256": receipt_pin,
++                          "scientific_qualification": False}), flush=True)
++        check_deadline(campaign_deadline)
++        return code
++    except BaseException as exc:
++        # Never change a prior provisional success into silent success after failure.
++        if run is not None:
++            try:
++                js(run / "FINALIZATION_FAILURE.json",
++                   {"status": "TERMINAL_FAILURE_NO_RETRY", "type": type(exc).__name__,
++                    "message": str(exc), "wall_s": time.perf_counter() - t0})
++            except BaseException:
++                pass  # Missing failure receipt is not acceptance; external exit stays nonzero.
++        return 2
++    finally:
++        for s, handler in old.items():
++            signal.signal(s, handler)
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+--- base/science_admission.py
++++ budgetA/science_admission.py
+@@ -5,10 +5,11 @@
+ from pathlib import Path
+ import sys
+ import uuid
++from budget_counters import validate_limits
+ 
+-PREPARATION_ID = "3249312d-d7b6-4a04-93d6-81f65d4f4945"
+-EXPECTED_LINUX_ROOT = "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_preparation"
+-ACTION = "EXECUTE_EXACT_TWO_SYNTHETIC_JOBS"
++PREPARATION_ID = "6a99afd6-831c-4fa5-9190-cef5db67e52c"
++EXPECTED_LINUX_ROOT = "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA_preparation"
++ACTION = "EXECUTE_EXACT_TWO_SYNTHETIC_JOBS_BUDGET_A"
+ 
+ 
+ def digest(path):
+@@ -44,7 +45,9 @@
+     contract = json.loads(cp.read_bytes())
+     decision = json.loads(dp.read_bytes())
+     keys = {"approved", "action", "preparation_id", "execution_id", "contract_sha256",
+-            "manifest_sha256", "root_linux", "execution_directory", "jobs", "data_access"}
++            "manifest_sha256", "root_linux", "execution_directory", "jobs", "data_access",
++            "design_choice", "resource_envelope_approved", "recovery_diagnostic_approved",
++            "input_access_plan_sha256", "operator_approval_reference"}
+     if set(decision) != keys:
+         raise ValueError("Exact external ROOT decision schema required")
+     if (decision["approved"] is not True or decision["action"] != ACTION
+@@ -54,8 +57,17 @@
+             or contract["mode"] != "SYNTHETIC_ONLY"
+             or contract["observed_data_allowed"] is not False):
+         raise ValueError("Only this exact future synthetic qualification can be admitted")
+-    if contract["consumption_justification"]["status"] != "JUSTIFIED_BY_SEPARATE_REVIEW":
+-        raise RuntimeError("NOT_JUSTIFIED_UNDER_INHERITED_ENVELOPE: new reviewed contract required")
++    if contract["consumption_justification"]["status"] != "PROPOSED_AWAITING_SPECIFIC_OPERATOR_DECISION":
++        raise RuntimeError("Only the proposed A contract is supported")
++    validate_limits(contract["limits"])
++    if (decision["design_choice"]!="A" or decision["resource_envelope_approved"] is not True
++            or decision["recovery_diagnostic_approved"] is not True
++            or not isinstance(decision["operator_approval_reference"],str)
++            or not decision["operator_approval_reference"].strip()
++            or digest(root/"PLANO_ACESSO_REQUERIDO.json")!=_hash(decision["input_access_plan_sha256"])):
++        raise RuntimeError("Separate explicit scope/design/resources/access decision required")
++    # No environment flag, CLI force mode, or fallback can bypass this decision.
++
+     execution_id = decision["execution_id"]
+     if not isinstance(execution_id, str) or str(uuid.UUID(execution_id)) != execution_id:
+         raise ValueError("Fresh canonical execution UUID required")
+@@ -69,7 +81,7 @@
+             or decision["root_linux"] != str(root)
+             or contract["expected_linux_root"] != str(root)
+             or decision["execution_directory"] != contract["execution_directory"]
+-            or decision["data_access"] != "EXACT_PINNED_SYNTHETIC_AND_DECLARED_INITIALIZATION_INPUTS_ONLY"):
++            or decision["data_access"] != "EXACT_ACCESS_PLAN_BYTES_DECODE_PREHOOK_AND_TWO_SYNTHETIC_CASES_ONLY"):
+         raise ValueError("Root/output/data binding differs")
+     run = root / contract["execution_directory"]
+     if run.parent != root or run.name != contract["execution_directory"]:
+--- base/result_acceptance.py
++++ budgetA/result_acceptance.py
+@@ -1,5 +1,6 @@
+ """Pure fail-closed supervisor acceptance; no scientific imports or file opening."""
+ import hashlib
++from recovery_diagnostics import finite_number, numerical_criteria
+ 
+ ACCEPTABLE = {"DLOGZ_REACHED_ESS_OK", "DLOGZ_REACHED_ESS_LOW",
+               "STOPPED_NOT_CONVERGED", "BUDGET_EXHAUSTED_PARTIAL"}
+@@ -8,7 +9,9 @@
+     return type(value) is int and value >= 0
+ 
+ def assess(result, journal, *, returncode, process_state, expected_job,
+-           expected_label, expected_contract, expected_pid, max_calls):
++           expected_label, expected_contract, expected_pid, max_calls,
++           expected_preparation, expected_execution, expected_decision,
++           max_native, dlogz, ess_min):
+     reasons = []
+     def require(ok, reason):
+         if not ok:
+@@ -22,11 +25,40 @@
+     require(result.get("label") == expected_label, "LABEL_IDENTITY")
+     require(result.get("contract_sha256") == expected_contract, "CONTRACT_IDENTITY")
+     require(type(result.get("pid")) is int and result.get("pid") == expected_pid, "PID_IDENTITY")
++    require(result.get("preparation_id")==expected_preparation, "PREPARATION_IDENTITY")
++    require(result.get("execution_id")==expected_execution, "EXECUTION_IDENTITY")
++    require(result.get("decision_sha256")==expected_decision, "DECISION_IDENTITY")
++    require(result.get("scientific_qualification") is False, "NO_SCIENCE_PROMOTION")
+     status = result.get("status")
+     require(isinstance(status, str) and status in ACCEPTABLE, "RESULT_STATUS")
+     ll, native = result.get("likelihood_calls"), result.get("native_calls")
+     require(integer(ll) and integer(native) and integer(max_calls)
+             and native <= ll <= max_calls, "CALL_LIMIT_OR_TYPE")
++    require(integer(max_native) and integer(native) and native<=max_native, "NATIVE_LIMIT")
++    budget=result.get("budget_counters")
++    if not isinstance(budget,dict):budget={}
++    reserved=budget.get("native_reserved")
++    require(type(budget.get("likelihood_started")) is int and budget.get("likelihood_started")==ll,
++            "LIKELIHOOD_RESERVATION")
++    require(integer(reserved) and integer(native) and native<=reserved<=max_native
++            and reserved-native<=1, "NATIVE_RESERVATION")
++    require(type(budget.get("likelihood_limit")) is int and budget.get("likelihood_limit")==max_calls
++            and type(budget.get("native_limit")) is int and budget.get("native_limit")==max_native,
++            "COUNTER_LIMIT_BINDING")
++    numeric=numerical_criteria(result,max_calls=max_calls,dlogz=dlogz,ess_min=ess_min)
++    if status=="DLOGZ_REACHED_ESS_OK":
++        require(numeric, "NUMERICAL_CRITERIA_NOT_MET")
++        require(reserved==native, "CONVERGED_INFLIGHT_NATIVE")
++    if status=="DLOGZ_REACHED_ESS_LOW":
++        delta,ess,span=(result.get(k) for k in
++                       ("delta_logz_before_live_addition","weighted_ESS","live_logl_span_before_addition"))
++        require(finite_number(delta) and 0<=delta<dlogz and finite_number(ess) and 0<ess<ess_min
++                and finite_number(span) and span>0 and result.get("final_live_points_added") is True
++                and result.get("error") is None, "LOW_ESS_STATUS_INCOHERENT")
++    if status!="BUDGET_EXHAUSTED_PARTIAL":
++        require(result.get("error") is None, "UNEXPECTED_ERROR")
++    else:
++        require(isinstance(result.get("error"),str) and bool(result["error"]), "BUDGET_REASON_MISSING")
+     require(result.get("blocked_operations") == [], "BLOCKED_OPERATIONS")
+     require(result.get("initialization_qualified") is True, "INITIALIZATION_NOT_QUALIFIED")
+     before, after = result.get("initialization_analytic_before_likelihood"), result.get("initialization_analytic_after_likelihood")
+@@ -69,8 +101,20 @@
+         require(status == "BUDGET_EXHAUSTED_PARTIAL", "BUDGET_EVENT_STATUS")
+     for name in ("source_returned_none_count", "source_returned_none_counter_raw", "recognized_domain_exception_count", "indeterminate_exception_after_native_attempt_count", "pre_native_exception_count", "temporal_guard_count", "application_exception_count"):
+         require(type(failures.get(name)) is int and failures.get(name)==0, "FAILURE_COUNTER_"+name)
++    if status=="BUDGET_EXHAUSTED_PARTIAL":
++        require(isinstance(events,list) and len(events)>0, "BUDGET_WITHOUT_EVENT")
+     accepted = not reasons
+-    return {"accepted": accepted, "disposition": ("CLEAN_PARTIAL" if status in {"STOPPED_NOT_CONVERGED", "BUDGET_EXHAUSTED_PARTIAL", "DLOGZ_REACHED_ESS_LOW"} else "CLEAN_CONVERGED") if accepted else "TERMINAL_FAILURE", "reasons": reasons}
++    return {"accepted": accepted,
++            "disposition": ("CLEAN_CONVERGED_NUMERICAL_ONLY" if numeric and status=="DLOGZ_REACHED_ESS_OK"
++                            else "CLEAN_PARTIAL") if accepted else "TERMINAL_FAILURE",
++            "numerical_criteria_met": accepted and numeric and status=="DLOGZ_REACHED_ESS_OK",
++            "scientific_qualification": False, "recovery_qualified": False, "D_ready": False,
++            "reasons": reasons}
++
++def paired_numerical(assessments):
++    return (len(assessments)==2 and all(x.get("accepted") is True
++            and x.get("numerical_criteria_met") is True for x in assessments))
++
+ 
+ def campaign_exit(assessments, planned):
+     """Nonzero for incomplete/failed campaigns, even if the parent reached its end."""
+--- base/CONTRATO_P3.json
++++ budgetA/CONTRATO_P3.json
+@@ -1,9 +1,9 @@
+ {
+-  "id": "ORDEM018_F3_OPERATIONAL_CANDIDATE_3249312d-d7b6-4a04-93d6-81f65d4f4945",
++  "id": "P3_A_PREPARATION_6a99afd6-831c-4fa5-9190-cef5db67e52c",
+   "state": "PREPARED_NOT_EXECUTED",
+-  "created_utc": "2026-10-06T16:55:08.546401+00:00",
++  "created_utc": "2026-10-06T18:32:09.586644+00:00",
+   "authorization_scope": "Static preparation only. Root external decision and separately reviewed scientific/operational justification required. Existing terminal units are not reopened.",
+-  "purpose": "Operational guarded connection candidate under inherited two-case envelope. New consumption not justified now; no F3 scientific-completion claim.",
++  "purpose": "Concrete proposed A budget/diagnostic candidate for independent review; not selected for consumption. Adequate scientific recovery remains unmeasured.",
+   "hypothesis": "Same aligned-spin pSEOBNRv4HM_PA IMR model for both synthetic datasets; DTau220 only free QNM deformation; DOmega220=DTau440=DOmega440=0.",
+   "free_parameters": [
+     "mass_1",
+@@ -147,7 +147,7 @@
+   },
+   "jobs": [
+     {
+-      "id": "P3_GR_GAUSS_3249312d-d7b6-4a04-93d6-81f65d4f4945",
++      "id": "GR_GAUSS",
+       "label": "GR_GAUSS",
+       "sampler_seed": 180602,
+       "truth": {
+@@ -184,10 +184,11 @@
+           "signal_sha256": "c220103a0d025b1941179e2c31d8c966221c9bb89aefb50efe088a8f4c033148",
+           "injected_sha256": "8988b97c163774d10071cd79f73033acc5375894758c2915b84063d3de70a788"
+         }
+-      }
++      },
++      "base_case_id_reference_only": "P3_GR_GAUSS_3249312d-d7b6-4a04-93d6-81f65d4f4945"
+     },
+     {
+-      "id": "P3_RB_GAUSS_3249312d-d7b6-4a04-93d6-81f65d4f4945",
++      "id": "RB_GAUSS",
+       "label": "RB_GAUSS",
+       "sampler_seed": 180603,
+       "truth": {
+@@ -224,10 +225,11 @@
+           "signal_sha256": "9e42b48affffa5da2fda5237fdb3f877a6a2a7d7f7305e8d196afcccd209e26a",
+           "injected_sha256": "8ed069f9e1ab6d99430acf8e95f6fc1801078f3dc874ac2f784c440486cebeed"
+         }
+-      }
++      },
++      "base_case_id_reference_only": "P3_RB_GAUSS_3249312d-d7b6-4a04-93d6-81f65d4f4945"
+     }
+   ],
+-  "execution_directory": "EXECUTION_3249312d-d7b6-4a04-93d6-81f65d4f4945",
++  "execution_directory": "EXECUTION",
+   "sampler": {
+     "library": "dynesty",
+     "version": "3.1.0",
+@@ -251,12 +253,12 @@
+     "log_likelihood": "bilby GravitationalWaveTransient.log_likelihood_ratio, Gaussian independent H1/L1; absolute noise-only normalization omitted equally in the same job; no cross-dataset Bayes-factor interpretation"
+   },
+   "limits": {
+-    "max_likelihood_calls": 10000,
+-    "native_waveform_calls_at_most": 10000,
+-    "wall_soft_s": 3600,
+-    "supervisor_wall_s": 3610,
+-    "cpu_soft_s": 3300,
+-    "cpu_hard_s": 3305,
++    "max_likelihood_calls": 100000,
++    "native_waveform_calls_at_most": 100000,
++    "wall_soft_s": 14400,
++    "supervisor_wall_s": 14410,
++    "cpu_soft_s": 13200,
++    "cpu_hard_s": 13205,
+     "address_space_bytes": 8589934592,
+     "workers": 1,
+     "threads": 1,
+@@ -280,7 +282,7 @@
+       "D readiness",
+       "physical verdict"
+     ],
+-    "posterior_summary_rule": "Driver saves weighted raw diagnostics only; independent review interprets recovery. No automatic pass from truth inclusion."
++    "posterior_summary_rule": "Expose weighted raw diagnostics and proposed dtau220 summaries; label numerical-only/weak-descriptive. Never auto-pass science, coverage or D."
+   },
+   "cost": {
+     "measured_reference": "P0-P2 RUN_002: six native waveform generations for fixed cases, not PE benchmark.",
+@@ -365,8 +367,8 @@
+       "sha256": "ba7e8870e5935ce420013a5a123152bf2f99acc637dc33a139e9b776092f0d8c"
+     },
+     "result_acceptance.py": {
+-      "bytes": 5525,
+-      "sha256": "7263cc8cb86374fc1a354a6b0a7c9b1863c04700f2373ed607d009c19d5bc664"
++      "bytes": 8235,
++      "sha256": "78dec147fd613a57af749e5167f1f85a52ebc271a4576be352fb759d18006a9a"
+     },
+     "src/pseob_source.py": {
+       "bytes": 8204,
+@@ -429,24 +431,40 @@
+       "sha256": "81d3076eb826c66a1795ead510febc12fd7d55738cab2bc52113b4845a887e8a"
+     },
+     "science_admission.py": {
+-      "bytes": 5698,
+-      "sha256": "4e173c301ce624fc219136896c6a4f40066cd7c5766500eecc8128f4e231a977"
++      "bytes": 6539,
++      "sha256": "59258e35d78401e213c2a047248c096aece845bb137c178727a9cafa57db4d65"
+     },
+     "driver_p3.py": {
+-      "bytes": 15873,
+-      "sha256": "1c6858eff2e57e8c3d6997a8de0d0771bb67e0abd58a7027831d119185416b12"
++      "bytes": 17410,
++      "sha256": "280add270e8fb475f87694359c76e5364c2b46e7a970daa08a32c0e7c9f1e764"
+     },
+     "launch_p3.py": {
+-      "bytes": 5330,
+-      "sha256": "e7dc20580212bf6f249f7148f4cb853a4d2d6921b98b508303c405b557864bf8"
++      "bytes": 9685,
++      "sha256": "fd5a8f0883499820273b0d34a074d7362dd3343688c60d3b42ba7deb039de488"
+     },
+     "PREHOOK_PLAN.json": {
+-      "bytes": 4996,
+-      "sha256": "ba6fad167e76a84b01b3c946dc56adc9a2bf108325bd2ecbbd55f7b62be1d46a"
++      "bytes": 5438,
++      "sha256": "93a87d82a7145255413c7be47d15a895bce64907a302fcc8ac89a5a69e175018"
+     },
+     "../p3_startup_pin_preparation/RECIBO_ROOT_ACEITE_IMPORTS.json": {
+       "bytes": 2545,
+       "sha256": "366a9bfd1912b6581925cc9dd316335a7bf64af41a53435e73857217bf04a4c5"
++    },
++    "budget_counters.py": {
++      "bytes": 1982,
++      "sha256": "c151177c872be06fff834c8a673a18b562b3132676c0999ae8a348e6f5fcf572"
++    },
++    "recovery_diagnostics.py": {
++      "bytes": 3666,
++      "sha256": "0f0aaccd64301d3843530c6754fbe39446400644e54fe167cd1cbc11e7751cf9"
++    },
++    "process_supervision.py": {
++      "bytes": 3061,
++      "sha256": "5359850abd4cbee0ab6aac0687b8834552b69acbc65e3a1c34be9c50797f896c"
++    },
++    "PLANO_ACESSO_REQUERIDO.json": {
++      "bytes": 261798,
++      "sha256": "92d60f33f885d27e349619c34db0a1e83d56de976f46cca2b8d8f05d5b4b15da"
+     }
+   },
+   "coordination_receipt_required": {
+@@ -463,12 +481,17 @@
+       "root_linux",
+       "execution_directory",
+       "jobs",
+-      "data_access"
++      "data_access",
++      "design_choice",
++      "resource_envelope_approved",
++      "recovery_diagnostic_approved",
++      "input_access_plan_sha256",
++      "operator_approval_reference"
+     ]
+   },
+   "allowed_status_claim": "REAL static package and documentary comparisons; OPEN input integrity, candidate execution, posterior recovery/convergence, coverage and PE D.",
+-  "revision": "Only isolated operational packaging/admission/pre-hook wiring. Scientific source, priors, arrays expected pins, seeds, sampler, convergence thresholds and resource ceilings unchanged. No raw external integrity recheck now.",
+-  "revised_utc": "2026-10-06T03:50:22.303763+00:00",
++  "revision": "Proposal A only; limits and visible recovery summaries plus P3-01/P3-02 correction. No scientific source/prior/seed/data alteration, no v388 migration.",
++  "revised_utc": "2026-10-06T18:51:47.518418+00:00",
+   "failure_receipt_policy": {
+     "source_returned_none": "Count independently; raw P0-P2 EDOM counter means None returns only and is named source_returned_none_counter_raw. Preserved EDOM_LOG.jsonl filename is not a total of all domain failures.",
+     "recognized_domain_exception": "After a counted native attempt, errno EDOM or explicit Input domain error is classified as recognized, with type/message/parameters.",
+@@ -477,7 +500,7 @@
+     "no_double_count": "Same exception object propagated from source to outer handler is recorded once. None guard raises and is likewise deduplicated. Counts across categories are not added as EDOM.",
+     "total_EDOM": "domain_error_total=null; never infer a total from None or generic exceptions.",
+     "behavior": "Keep catch_waveform_errors=False and propagate/abort. The wrapper binds to wf.frequency_domain_source_model, preserves signature/args/kwargs/fixed zeros, never returns -inf and does not retry.",
+-    "budget_status": "Use the recorded exception kind with its native-attempt stage; never reclassify a generic native timeout as a pre-native budget event."
++    "budget_status": "Use the recorded exception kind with its native-attempt stage; never reclassify a generic native timeout as a pre-native budget event. Native reservations occur before the unchanged native-call boundary; completion count is separate."
+   },
+   "prior_design_lineage": {
+     "sha256": "dddeeae653965bf67375b22eb2b65e1ede93a54f01dbddbb1588a52273fc981f",
+@@ -558,11 +581,103 @@
+     "dynamic_boundary": "Previous control evaluated no waveform/likelihood/sampler. This package has not been executed; initial sampling and prior-dependent waveform validity remain unmeasured.",
+     "execution_permission": false
+   },
+-  "preparation_id": "3249312d-d7b6-4a04-93d6-81f65d4f4945",
++  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
+   "mode": "SYNTHETIC_ONLY",
+   "observed_data_allowed": false,
+-  "expected_linux_root": "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_preparation",
++  "expected_linux_root": "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA_preparation",
+   "consumption_justification": {
++    "status": "PROPOSED_AWAITING_SPECIFIC_OPERATOR_DECISION",
++    "alternative": "A",
++    "selected_for_consumption": false,
++    "consumption_authorized": false,
++    "material_delta": "Tenfold external likelihood/native-call caps, fourfold work/CPU limits; same sampler, prior, seed, source and frozen inputs; no empirical efficiency claim",
++    "admission_guard": "Exact future external decision must approve design A, envelope, weak diagnostic and exact access plan, pin contract/manifest and reference the operator approval; no force/bypass/fallback",
++    "scientific_gain": "Opportunity for additional constrained-prior exploration; adequate convergence/recovery not demonstrated; null/incomplete outcome remains possible"
++  },
++  "imports_qualification_evidence": {
++    "qualification_id": "5e391d57-ae76-4aa7-8dfe-648c349c3994",
++    "acceptance_relative_path": "../p3_startup_pin_preparation/RECIBO_ROOT_ACEITE_IMPORTS.json",
++    "acceptance_pin": {
++      "bytes": 2545,
++      "sha256": "366a9bfd1912b6581925cc9dd316335a7bf64af41a53435e73857217bf04a4c5"
++    },
++    "use": "Documentary evidence only, not imported object or permission to run PE"
++  },
++  "operational_acceptance_not_scientific": {
++    "validator": "result_acceptance.py revised for P3-02",
++    "exit_zero_may_mean": [
++      "CLEAN_PARTIAL",
++      "CLEAN_CONVERGED_NUMERICAL_ONLY"
++    ],
++    "both_cases_needed_for_paired_numerical_criteria": true,
++    "recovery_independent_review_required": true,
++    "F3_completed": false,
++    "recovery_qualified": false,
++    "D_ready": false
++  },
++  "external_integrity": "Historical expected pins only, raw targets not accessed in this preparation. Prior input rejection remains operative until exact separate permission.",
++  "case_id_semantics": "GR_GAUSS and RB_GAUSS are descriptive slots only, not issued jobs/request IDs. Future execution UUID belongs solely to separately approved external decision.",
++  "numeric_thresholds": {
++    "dlogz": 0.1,
++    "weighted_ESS_min": 100,
++    "nonflat_live_span_strict_min": 0
++  },
++  "stopping_and_acceptance": {
++    "numerical_criteria_retained": {
++      "numerical_stop": "delta_logz<0.1 before final live points, non-flat live likelihood, below hard call cap, no error.",
++      "sampling_diagnostic": "weighted ESS>=100 after final live points; ESS low is explicitly incomplete.",
++      "not_sufficient_for": [
++        "coverage",
++        "global-mode discovery",
++        "population bias",
++        "D readiness",
++        "physical verdict"
++      ],
++      "posterior_summary_rule": "Driver saves weighted raw diagnostics only; independent review interprets recovery. No automatic pass from truth inclusion."
++    },
++    "validity": "No audit violation, unknown read, native/EDOM/None/nonfinite/temporal error, identity/pin mismatch; exact finalized receipts and certain process termination. Partial operational receipt is not scientific success.",
++    "paired_numerical_acceptance": "Both cases clean; delta_logz<0.1 before final live addition, non-flat likelihood, below external hard call cap, weighted ESS>=100 after addition; no global-mode certificate claimed.",
++    "budget": "External pre-evaluation counters include initial live points. No extensions. Cooperative budget partial only when clean and terminal identity certain.",
++    "second_case": "Preplanned RB after clean converged or clean incomplete GR; any failure or uncertainty stops remaining campaign. No threshold/seed/algorithm adaptation.",
++    "no_retry_resume_fallback": true,
++    "recovery": {
++      "target": "dtau220 only",
++      "weighted_quantile_definition": "inf{x:F_w(x)>=p}; normalize weights; sort by dtau220; no random resampling or interpolation",
++      "fields": [
++        "q05",
++        "q50",
++        "q95",
++        "q95_minus_q05",
++        "q50_minus_truth",
++        "F_w_truth",
++        "mass_lower_prior_edge",
++        "mass_upper_prior_edge",
++        "W90_divided_by_2p52"
++      ],
++      "prior_edge_intervals": [
++        [
++          -0.8,
++          -0.66
++        ],
++        [
++          1.86,
++          2.0
++        ]
++      ],
++      "edge_endpoints": "included",
++      "proposed_favorable_diagnostic": "truth in [q05,q95] AND W90<2.52; only after clean numerical convergence and independent interpretation of shape/edges/limitations",
++      "strength": "Weak case-specific compatibility plus contraction; not automatic scientific pass; near-prior width may still qualify weakly and must be reported",
++      "ESS_limit": "ESS100 does not certify quantile accuracy or tails",
++      "if_not_met": "RECOVERY_NOT_ESTABLISHED_FOR_THIS_REALIZATION, not physical falsification or coverage result",
++      "operator_decision_required_before_future_posterior": "accept or alter this visible new diagnostic before execution"
++    }
++  },
++  "diagnostic_proposal_reference": {
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_design_proposal\\DESENHO_PROPOSTO.json",
++    "bytes": 13066,
++    "sha256": "8d5c083d2afca30a5b06cc85d52915cd3d1892d9f5c894e2aaf5c56c5866dfa8"
++  },
++  "prior_consumption_justification_history": {
+     "status": "NOT_JUSTIFIED_UNDER_INHERITED_ENVELOPE",
+     "admission_guard": "admit refuses before external input reads; enabling requires separately reviewed contract with status JUSTIFIED_BY_SEPARATE_REVIEW and explicit ROOT decision, never this preparation message",
+     "material_operational_delta": "Persistent audit latch/checkpoints/FD journal, strict result acceptance, known pinned pre-hook including exact startup, root/manifest/decision/parent-process binding",
+@@ -586,26 +701,30 @@
+     "limitation": "Prior run not operationally accepted; no assertion future trajectory bitwise identical or that convergence is impossible. No evidence repairs improve posterior exploration.",
+     "preferred_next": "Review separate documentary recovery design, not a repeat of the inherited envelope by default."
+   },
+-  "imports_qualification_evidence": {
+-    "qualification_id": "5e391d57-ae76-4aa7-8dfe-648c349c3994",
+-    "acceptance_relative_path": "../p3_startup_pin_preparation/RECIBO_ROOT_ACEITE_IMPORTS.json",
+-    "acceptance_pin": {
+-      "bytes": 2545,
+-      "sha256": "366a9bfd1912b6581925cc9dd316335a7bf64af41a53435e73857217bf04a4c5"
+-    },
+-    "use": "Documentary evidence only, not imported object or permission to run PE"
+-  },
+-  "operational_acceptance_not_scientific": {
+-    "validator": "result_acceptance.py unchanged",
+-    "exit_zero_may_mean": [
+-      "CLEAN_PARTIAL",
+-      "CLEAN_CONVERGED"
+-    ],
+-    "campaign_status": "CLEAN_PROTOCOL_COMPLETION is operational and can include honest nonconvergence",
+-    "F3_completed": false,
+-    "recovery_qualified": false,
+-    "D_ready": false,
+-    "new_partial_result_requires_no_retry": true
+-  },
+-  "external_integrity": "Expected frozen pins only; preparation read rejected by auto-review. None of these raw targets rehashed, copied, decoded or indirectly opened."
++  "supervisor_policy": {
++    "work_s": 14400,
++    "child_finalization_grace_s": 5,
++    "kill_reap_reserved_s": 4,
++    "receipt_reserve_s": 1,
++    "total_per_case_nominal_s": 14410,
++    "total_collection_nominal_s": 28820,
++    "start": "supervisor main before admission; per-case before output/CLAIM IO",
++    "cpu": "RLIMIT_CPU counts total child process CPU; soft13200/hard13205, same limits also used at cooperative budget",
++    "finalization": "check monotonic deadline after result/process receipt persistence, hashing and flushed terminal output; external nonzero or failure marker invalidates any provisional success",
++    "uncertain_termination": "stop entire collection, no retry/remaining case",
++    "uncontrollable_limit": "SIGKILL, process creation interruption before an owned Popen handle, host failure and uninterruptible OS I/O are not hard-contained; absence of conclusive external exit/receipts remains uncertain",
++    "logs": "stdout/stderr file capture preserved; not described as a hard disk/output quota",
++    "posix_signal_mask": "Parent defers SIGINT/SIGTERM around Popen→handle assignment. Child inherits their blocked mask; Popen.restore_signals does not restore it. Current cleanup intentionally uses unmaskable SIGKILL for the owned group. Child SIGALRM/SIGXCPU remain unblocked. No preexec_fn. Verified by source inspection only, not a real POSIX-process test."
++  },
++  "aggregate_maxima_proposed": {
++    "jobs": 2,
++    "likelihood_calls": 200000,
++    "waveform_wrapper_calls": 200000,
++    "sum_supervisor_nominal_seconds": 28820,
++    "sum_CPU_hard_seconds": 26410,
++    "concurrency": 1,
++    "resources_are_policy_not_cost_prediction": true
++  },
++  "configuration_32_semantics": "CONFIG_SYNTHETIC.max_native_calls=32 belongs to frozen P0/P2 adapter metadata checked by validate_config. generator does not use it as P3 counter; unchanged. P3 external counters in driver and source_before_waveform enforce100000.",
++  "base_contract_id_reference_only": "ORDEM018_F3_OPERATIONAL_CANDIDATE_3249312d-d7b6-4a04-93d6-81f65d4f4945"
+ }
+--- base/PREHOOK_PLAN.json
++++ budgetA/PREHOOK_PLAN.json
+@@ -1,6 +1,6 @@
+ {
+   "schema": "P3_EXPLICIT_PREHOOK_PLAN_V1",
+-  "preparation_id": "3249312d-d7b6-4a04-93d6-81f65d4f4945",
++  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
+   "alternative": "B",
+   "targets": [
+     "lal",
+@@ -45,21 +45,57 @@
+       "bytes": 4142,
+       "sha256": "ba7e8870e5935ce420013a5a123152bf2f99acc637dc33a139e9b776092f0d8c"
+     },
+-    "result_acceptance.py": {
+-      "bytes": 5525,
+-      "sha256": "7263cc8cb86374fc1a354a6b0a7c9b1863c04700f2373ed607d009c19d5bc664"
++    "budget_counters.py": {
++      "bytes": 1982,
++      "sha256": "c151177c872be06fff834c8a673a18b562b3132676c0999ae8a348e6f5fcf572"
+     },
+-    "src/pseob_source.py": {
+-      "bytes": 8204,
+-      "sha256": "4aa20038c1666156fb5a490a493c937930b0603c0932e51375a5b151c788fd60"
++    "driver_p3.py": {
++      "bytes": 17410,
++      "sha256": "280add270e8fb475f87694359c76e5364c2b46e7a970daa08a32c0e7c9f1e764"
++    },
++    "failure_audit.py": {
++      "bytes": 4329,
++      "sha256": "a521e7bdf047a7a3b6146e418cc6f82f8d5fc0a0193d0ef0fb88e33d7154d8ae"
++    },
++    "init_detectors.py": {
++      "bytes": 4261,
++      "sha256": "95dfef3df297d981a1a56fda4e617a0595768c98bee96979dfc208db55dd8890"
++    },
++    "launch_p3.py": {
++      "bytes": 9685,
++      "sha256": "fd5a8f0883499820273b0d34a074d7362dd3343688c60d3b42ba7deb039de488"
++    },
++    "prehook_imports.py": {
++      "bytes": 6696,
++      "sha256": "9486e3ff019011de4949c4174f92ca283fa9ca5902719396a58be5129166a84f"
++    },
++    "preload_npz_codec.py": {
++      "bytes": 1149,
++      "sha256": "7014b22f36ba9be21dc73fc63e562498ff19d24c964c84c77ebbb1846e7c5c02"
+     },
+     "prior_transform.py": {
+       "bytes": 1367,
+       "sha256": "adac7ad3036121eb9c192c37abb305ac088c9a530da04f2bf17f79f8b8a3ebe2"
+     },
+-    "failure_audit.py": {
+-      "bytes": 4329,
+-      "sha256": "a521e7bdf047a7a3b6146e418cc6f82f8d5fc0a0193d0ef0fb88e33d7154d8ae"
++    "process_supervision.py": {
++      "bytes": 3061,
++      "sha256": "5359850abd4cbee0ab6aac0687b8834552b69acbc65e3a1c34be9c50797f896c"
++    },
++    "recovery_diagnostics.py": {
++      "bytes": 3666,
++      "sha256": "0f0aaccd64301d3843530c6754fbe39446400644e54fe167cd1cbc11e7751cf9"
++    },
++    "result_acceptance.py": {
++      "bytes": 8235,
++      "sha256": "78dec147fd613a57af749e5167f1f85a52ebc271a4576be352fb759d18006a9a"
++    },
++    "science_admission.py": {
++      "bytes": 6539,
++      "sha256": "59258e35d78401e213c2a047248c096aece845bb137c178727a9cafa57db4d65"
++    },
++    "src/pseob_source.py": {
++      "bytes": 8204,
++      "sha256": "4aa20038c1666156fb5a490a493c937930b0603c0932e51375a5b151c788fd60"
+     },
+     "src/synthetic_adapter_v2.py": {
+       "bytes": 11883,
+@@ -68,34 +104,10 @@
+     "src/temporal_contract.py": {
+       "bytes": 1859,
+       "sha256": "c8f4ecbc28d4312e3885d61c14f174062c6055eee0bbd54897e725a18240b605"
+-    },
+-    "preload_npz_codec.py": {
+-      "bytes": 1149,
+-      "sha256": "7014b22f36ba9be21dc73fc63e562498ff19d24c964c84c77ebbb1846e7c5c02"
+-    },
+-    "init_detectors.py": {
+-      "bytes": 4261,
+-      "sha256": "95dfef3df297d981a1a56fda4e617a0595768c98bee96979dfc208db55dd8890"
+-    },
+-    "prehook_imports.py": {
+-      "bytes": 6696,
+-      "sha256": "9486e3ff019011de4949c4174f92ca283fa9ca5902719396a58be5129166a84f"
+-    },
+-    "science_admission.py": {
+-      "bytes": 5698,
+-      "sha256": "4e173c301ce624fc219136896c6a4f40066cd7c5766500eecc8128f4e231a977"
+-    },
+-    "driver_p3.py": {
+-      "bytes": 15873,
+-      "sha256": "1c6858eff2e57e8c3d6997a8de0d0771bb67e0abd58a7027831d119185416b12"
+-    },
+-    "launch_p3.py": {
+-      "bytes": 5330,
+-      "sha256": "e7dc20580212bf6f249f7148f4cb853a4d2d6921b98b508303c405b557864bf8"
+     }
+   },
+   "runtime_snapshot": {
+-    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_preparation\\RUNTIME_P3_READONLY.json",
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA_preparation\\RUNTIME_P3_READONLY.json",
+     "bytes": 259011,
+     "sha256": "281eb3c4fb6d3e78a6405d7da6e051c2480efc98424e766260510e10bacce11e"
+   },
+@@ -122,7 +134,7 @@
+     "sha256": "19781398cff4d55ffd9c00445c69f012205fecaecfbc0df7a83d1418bf0ac341"
+   },
+   "system_startup_pin_source": {
+-    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_preparation\\SYSTEM_STARTUP_PIN.json",
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA_preparation\\SYSTEM_STARTUP_PIN.json",
+     "bytes": 882,
+     "sha256": "81d3076eb826c66a1795ead510febc12fd7d55738cab2bc52113b4845a887e8a"
+   },
+--- /dev/null
++++ budgetA/budget_counters.py
+@@ -0,0 +1,47 @@
++"""Exact pre-evaluation counters; standard-library-only, no scientific calls."""
++from failure_audit import BudgetStop
++
++EXPECTED_LIMITS = {
++    "max_likelihood_calls": 100000, "native_waveform_calls_at_most": 100000,
++    "wall_soft_s": 14400, "supervisor_wall_s": 14410,
++    "cpu_soft_s": 13200, "cpu_hard_s": 13205,
++    "address_space_bytes": 8589934592, "workers": 1, "threads": 1,
++    "parallel_jobs": 1, "jobs_at_most": 2, "no_retry": True,
++}
++
++
++def validate_limits(limits):
++    if not isinstance(limits, dict) or set(limits) != set(EXPECTED_LIMITS):
++        raise ValueError("Exact proposed A limits required")
++    for key, expected in EXPECTED_LIMITS.items():
++        if type(limits[key]) is not type(expected) or limits[key] != expected:
++            raise ValueError("Limit/type differs: " + key)
++
++
++class CallBudget:
++    """Reservations include initialization; counters never reset or retry."""
++    def __init__(self, likelihood_limit, native_limit):
++        if any(type(x) is not int or x <= 0 for x in (likelihood_limit, native_limit)):
++            raise ValueError("Positive integer call limits required")
++        self.likelihood_limit = likelihood_limit
++        self.native_limit = native_limit
++        self.likelihood_started = 0
++        self.native_reserved = 0
++
++    def take_likelihood(self):
++        if self.likelihood_started >= self.likelihood_limit:
++            raise BudgetStop("MAXCALL_INCLUDING_INITIALIZATION")
++        self.likelihood_started += 1
++        return self.likelihood_started
++
++    def take_native(self):
++        if self.native_reserved >= self.native_limit:
++            raise BudgetStop("MAX_NATIVE_RESERVED_BEFORE_WAVEFORM")
++        self.native_reserved += 1
++        return self.native_reserved
++
++    def snapshot(self):
++        return {"likelihood_started": self.likelihood_started,
++                "native_reserved": self.native_reserved,
++                "likelihood_limit": self.likelihood_limit,
++                "native_limit": self.native_limit}
+--- /dev/null
++++ budgetA/recovery_diagnostics.py
+@@ -0,0 +1,73 @@
++"""Proposed weak, realization-specific summaries; never a science PASS."""
++import math
++
++
++def finite_number(value):
++    return type(value) in (int, float) and math.isfinite(value)
++
++
++def numerical_criteria(result, *, max_calls, dlogz=0.1, ess_min=100):
++    delta = result.get("delta_logz_before_live_addition")
++    ess = result.get("weighted_ESS")
++    span = result.get("live_logl_span_before_addition")
++    calls = result.get("likelihood_calls")
++    return (finite_number(delta) and 0 <= delta < dlogz
++            and finite_number(ess) and ess >= ess_min
++            and finite_number(span) and span > 0
++            and result.get("final_live_points_added") is True
++            and type(calls) is int and 0 < calls < max_calls
++            and result.get("error") is None)
++
++
++def summarize(values, weights, truth, *, numerical_eligible):
++    if type(numerical_eligible) is not bool:
++        raise TypeError("Explicit numerical eligibility required")
++    if (not isinstance(values, (list, tuple)) or not isinstance(weights, (list, tuple))
++            or not values or len(values) != len(weights)):
++        raise ValueError("Equal nonempty value/weight vectors required")
++    if not finite_number(truth) or not -0.8 <= truth <= 2.0:
++        raise ValueError("Truth outside frozen synthetic prior")
++    if any(not finite_number(x) or not -0.8 <= x <= 2.0 for x in values):
++        raise ValueError("Nonfinite/out-of-prior posterior value")
++    if any(not finite_number(x) or x < 0 for x in weights):
++        raise ValueError("Nonnegative finite weights required")
++    total = math.fsum(weights)
++    if not math.isfinite(total) or total <= 0:
++        raise ValueError("Positive finite total weight required")
++    pairs = sorted((float(x), float(weight / total))
++                   for x, weight in zip(values, weights) if weight > 0)
++    norm = math.fsum(weight for _, weight in pairs)
++    pairs = [(x, weight / norm) for x, weight in pairs]
++    # Discrete inverse CDF, no interpolation or random resampling.
++    def quantile(p):
++        running = 0.0
++        correction = 0.0
++        for x, weight in pairs:
++            add = weight - correction
++            updated = running + add
++            correction = (updated - running) - add
++            running = updated
++            if running >= p:
++                return x
++        return pairs[-1][0]
++    q05, q50, q95 = (quantile(p) for p in (0.05, 0.5, 0.95))
++    width = q95 - q05
++    favorable = q05 <= truth <= q95 and width < 2.52
++    return {
++        "schema": "P3_WEAK_RECOVERY_DIAGNOSTIC_V1",
++        "q05": q05, "q50": q50, "q95": q95,
++        "q95_minus_q05": width, "q50_minus_truth": q50 - truth,
++        "F_w_truth": math.fsum(weight for x, weight in pairs if x <= truth),
++        "mass_lower_prior_edge": math.fsum(weight for x, weight in pairs if -0.8 <= x <= -0.66),
++        "mass_upper_prior_edge": math.fsum(weight for x, weight in pairs if 1.86 <= x <= 2.0),
++        "W90_divided_by_2p52": width / 2.52,
++        "weighted_ESS_from_summary": 1 / math.fsum(weight * weight for _, weight in pairs),
++        "numerical_eligible": numerical_eligible,
++        "proposed_favorable_condition": favorable if numerical_eligible else None,
++        "interpretation": ("WEAK_COMPATIBILITY_AND_CONTRACTION_REQUIRES_INDEPENDENT_REVIEW"
++                           if numerical_eligible and favorable else
++                           "RECOVERY_NOT_ESTABLISHED_FOR_THIS_REALIZATION"
++                           if numerical_eligible else "NUMERICALLY_INCOMPLETE_DESCRIPTIVE_ONLY"),
++        "independent_interpretation_required": True,
++        "scientific_qualification": False, "coverage_claim": False, "D_ready": False,
++    }
+--- /dev/null
++++ budgetA/process_supervision.py
+@@ -0,0 +1,71 @@
++"""Bounded wait/cleanup using injected process doubles or owned child handles."""
++import subprocess
++
++
++class SupervisorInterrupted(BaseException):
++    pass
++
++
++def supervise(spawn, *, wait_deadline, cleanup_deadline, clock, kill_owned_group,
++              cleanup_context, ownership_context):
++    """No retry. Only the child returned by spawn may be signalled/reaped.
++
++    Deadlines are nominal. SIGKILL/host failure cannot run Python cleanup.
++    No successful return is inferred from a label or from sending a signal.
++    """
++    proc = None
++    rc = None
++    state = "SPAWN_NOT_COMPLETED"
++    errors = []
++    cleanup_attempted = False
++    try:
++        if clock() >= wait_deadline:
++            raise TimeoutError("No work interval remains before spawn")
++        # Defer SIGINT/SIGTERM until the owned handle is assigned.
++        with ownership_context():
++            proc = spawn()
++        remaining = wait_deadline - clock()
++        if remaining <= 0:
++            raise subprocess.TimeoutExpired("owned child", 0)
++        rc = proc.wait(timeout=remaining)
++        state = "PROCESS_RETURNED"
++    except subprocess.TimeoutExpired as exc:
++        state = "SUPERVISOR_TIMEOUT"
++        errors.append(type(exc).__name__ + ": " + str(exc))
++    except BaseException as exc:
++        state = "SUPERVISOR_INTERRUPTED_OR_ERROR"
++        errors.append(type(exc).__name__ + ": " + str(exc))
++    finally:
++        if proc is not None:
++            # Temporarily defer controllable interruptions only during cleanup.
++            # The caller keeps the failure state and returns nonzero afterward.
++            with cleanup_context():
++                try:
++                    observed = proc.poll()
++                    if observed is None:
++                        cleanup_attempted = True
++                        kill_owned_group(proc.pid)
++                    else:
++                        rc = observed
++                except BaseException as exc:
++                    errors.append("KILL_OR_POLL:" + type(exc).__name__ + ": " + str(exc))
++                try:
++                    remaining = cleanup_deadline - clock()
++                    if remaining > 0:
++                        rc = proc.wait(timeout=remaining)
++                    else:
++                        rc = proc.poll()
++                        errors.append("CLEANUP_DEADLINE_EXHAUSTED")
++                except BaseException as exc:
++                    rc = None
++                    errors.append("REAP:" + type(exc).__name__ + ": " + str(exc))
++    certain = proc is not None and type(rc) is int
++    within = clock() < cleanup_deadline
++    if not within:
++        errors.append("CLEANUP_OR_RETURN_LATE")
++    return {"pid": None if proc is None else proc.pid,
++            "returncode": rc, "supervisor_status": state,
++            "termination_certain": certain, "within_cleanup_deadline": within,
++            "cleanup_attempted": cleanup_attempted, "supervision_errors": errors,
++            "process_accepted": certain and within and not errors
++                                and state == "PROCESS_RETURNED" and rc == 0}

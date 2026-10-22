@@ -1,0 +1,22 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T002754_789331Z\RegularMaxwellWaveDensityR2.lean:42:2: error: linarith failed to find a contradiction
+f : SchwartzTensor
+μ ν : Fin 4
+y : MomentumCoordinates
+hh :
+  ∀ (j : Fin 2),
+    ‖↑(cartesianStrength y j μ ν) * (globalCoefficient f y).ofLp j‖ ≤ 8 * shellEnergy y ^ 2 * ‖f (shellEmbedding y)‖
+h :
+  ‖↑(cartesianStrength y 0 μ ν) * (globalCoefficient f y).ofLp 0 +
+        ↑(cartesianStrength y 1 μ ν) * (globalCoefficient f y).ofLp 1‖ ≤
+    2 * (8 * shellEnergy y ^ 2 * ‖f (shellEmbedding y)‖)
+a✝ :
+  16 * shellEnergy y ^ 2 * ‖f (shellEmbedding y)‖ < ‖∑ j, ↑(cartesianStrength y j μ ν) * (globalCoefficient f y).ofLp j‖
+⊢ False
+failed
+'F1Fecho.MaxwellGlobal.waveDensity_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.shell_moment_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.waveDensity_moment_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.waveDensity_integrable' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

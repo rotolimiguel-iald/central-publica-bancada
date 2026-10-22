@@ -1,0 +1,21 @@
+GERÊNCIA (c1), 10/10/2026: unidade nova F1.ATRATOR, por ordem do operador. Façam primeiro o levantamento: consultem o mapa e o inventário da bancada, e só construam o que faltar.
+
+A CUNHAGEM (verbatim em C:\IALD\Central de Patentes\work\cunhagens_10out\OPERADOR_10out_singularidade_verbatim.txt, sha16 1d9dd9a65fdacf68): «a singularidade não converge ao atrator, a singularidade é a leitura do atrator como única verdade universal». As trajetórias percorrem e dissipam. O atrator é o fechamento, o ponto fixo. A singularidade é a inscrição que LÊ esse fechamento; ela não viaja. Estatuto da forma: [ONTO]. O que se testa é a estrutura matemática que a sustenta.
+
+O QUE TESTAR. Pré-registrem por hash, ANTES de rodar, as quatro afirmações e o falsificador de cada uma:
+- A1, as trajetórias viajam: para a dinâmica T (canal ótico ou semigrupo GKLS), T^n x converge para R x, ou a média de Cesàro converge, se só houver isso. Falsificador: alguma trajetória não converge.
+- A2, a leitura não viaja: R∘T = R e T∘R = R. Ler antes ou depois de evoluir dá o mesmo. Falsificador: a leitura depende do instante.
+- A3, a leitura identifica e não acrescenta: R² = R, e R é a projeção sobre o espaço fixo. Liguem isso à PALAVRA (a letra é o polinômio aniquilador normalizado) e a observing_adds_nothing. Falsificador: R não idempotente, ou diferente da projeção espectral.
+- A4, a verdade é única: o espaço fixo tem dimensão 1 sob a hipótese NOMEADA (saltos não comutantes ou contração estrita; reaproveitem o atrator único do GKLS da v384). Mostrem também o contraexemplo SEM a hipótese, em que há dois pontos fixos. Falsificador: dimensão maior que 1 com a hipótese.
+
+SISTEMA ÓTICO (sintético, Python, em cópia). Usem a matriz S de fronteira com |𝓡|² = β e β = ALPHA_FINE_CODATA_2018 · √e calculado em runtime, nunca literal, e o canal de espelhamento iterado. Meçam A1 a A4 numericamente, com tolerâncias fixadas antes. Incluam os controles: um canal sem a hipótese (A4 tem de falhar ali) e uma dinâmica sem ponto fixo (A1 tem de falhar). Lembrem a regra dos dois regimes: a convergência mora no regime da FACE (hiperbólico). A leitura angular só lê e não tem limite. Não peçam limite ao ângulo.
+
+KERNEL (Lean 4.31, sandbox, LEAN_PATH só de leitura no .lake do Nós). Façam uma pedra candidata com nome provisório TheSingularityReadsTheAttractor, que o operador pode renomear. Ela deve trazer:
+- A2 e A3 em espaço de Hilbert (R ∘ T = R, R² = R, R = starProjection do espaço fixo);
+- A1 pelo teorema ergódico médio da mathlib, se existir; consultem antes;
+- A4 condicional à hipótese nomeada.
+Critérios: EXIT 0, #print axioms só com o trio, zero sorry. Incluam sondas de vacuidade: a hipótese não pode ser vazia, e tem de haver um habitante concreto (a face finita).
+
+ENTREGA: arquivos novos no túnel ORDEM_019\F1.ATRATOR, o registro no mapa e o avanço no quadro. Digam PASSA ou FALHA item a item. NÃO toquem um.py, kernel do Nós, Bancada de produção, dado observado nem gate. A inserção no um.py fica para o apanhado geral da Bancada, junto com os testes finais, como ordenou o operador.
+
+Nada move o gate. Um PASSA aqui é validade matemática na face testada, não creditação.

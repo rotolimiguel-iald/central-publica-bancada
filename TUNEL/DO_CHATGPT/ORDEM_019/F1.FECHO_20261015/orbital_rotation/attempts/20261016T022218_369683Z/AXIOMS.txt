@@ -1,0 +1,36 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T022218_369683Z\DominatedWithinIntegralR1.lean:32:52: error: typeclass instance problem is stuck
+  IsBoundedSMul ℂ ?m.289
+
+Note: Lean will not try to resolve this typeclass instance problem because the second, fourth, sixth, and seventh type arguments to `IsBoundedSMul` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T022218_369683Z\DominatedWithinIntegralR1.lean:51:10: error: unsolved goals
+case neg
+X : Type u_1
+inst✝ : MeasurableSpace X
+μ : Measure X
+F : ℂ → X → ℂ
+D : X → ℂ
+B : X → ℝ
+s : Set ℂ
+z : ℂ
+hF : ∀ w ∈ s, Integrable (F w) μ
+hz : z ∈ s
+hD : Integrable D μ
+hB : Integrable B μ
+hBn : ∀ᵐ (x : X) ∂μ, 0 ≤ B x
+hLip : ∀ᵐ (x : X) ∂μ, ∀ w ∈ s, ‖F w x - F z x‖ ≤ B x * ‖w - z‖
+hd : ∀ᵐ (x : X) ∂μ, HasDerivWithinAt (fun w => F w x) (D x) s z
+rem : ℂ → X → ℂ := fun w x => ‖w - z‖⁻¹ • (F w x - F z x - (w - z) • D x)
+hrep :
+  ∀ᶠ (w : ℂ) in 𝓝[s] z,
+    ‖w - z‖⁻¹ * ‖∫ (x : X), F w x ∂μ - ∫ (x : X), F z x ∂μ - (w - z) • ∫ (x : X), D x ∂μ‖ = ‖∫ (x : X), rem w x ∂μ‖
+w : ℂ
+hw : w ∈ s
+x : X
+hl : ∀ w ∈ s, ‖F w x - F z x‖ ≤ B x * ‖w - z‖
+hb : 0 ≤ B x
+he : ¬w = z
+hn : ‖w - z‖ ≠ 0
+⊢ B x + ‖D x‖ ≤ B x + ‖D x‖
+'F1Fecho.DominatedWithin.integral_hasDerivWithinAt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

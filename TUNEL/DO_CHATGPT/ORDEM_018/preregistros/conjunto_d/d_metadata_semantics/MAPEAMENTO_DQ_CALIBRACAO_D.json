@@ -1,0 +1,232 @@
+{
+  "schema": "TGL_D_METADATA_SEMANTICS_V1",
+  "request_id": "c1fe821a-9c84-4659-8778-382645875498",
+  "status": "DOCUMENTARY_SEMANTICS_QUALIFIED_LOCAL_PRESENCE_NOT_VERIFIED",
+  "statute": "KNOWN_DOCUMENTATION + DERIVED_MAPPING; no science measurement",
+  "DQ_bits": [
+    {
+      "mask": 0,
+      "bit": 0,
+      "shortName": "DATA",
+      "bit_value": 1,
+      "local_presence_verified": null,
+      "meaning_when_set": "Dados presentes segundo DATA"
+    },
+    {
+      "mask": 0,
+      "bit": 1,
+      "shortName": "CBC_CAT1",
+      "bit_value": 2,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    },
+    {
+      "mask": 0,
+      "bit": 2,
+      "shortName": "CBC_CAT2",
+      "bit_value": 4,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    },
+    {
+      "mask": 0,
+      "bit": 3,
+      "shortName": "CBC_CAT3",
+      "bit_value": 8,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    },
+    {
+      "mask": 0,
+      "bit": 4,
+      "shortName": "BURST_CAT1",
+      "bit_value": 16,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    },
+    {
+      "mask": 0,
+      "bit": 5,
+      "shortName": "BURST_CAT2",
+      "bit_value": 32,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    },
+    {
+      "mask": 0,
+      "bit": 6,
+      "shortName": "BURST_CAT3",
+      "bit_value": 64,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    },
+    {
+      "mask": 0,
+      "bit": 7,
+      "shortName": "STOCH_CAT1",
+      "bit_value": 128,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    },
+    {
+      "mask": 0,
+      "bit": 8,
+      "shortName": "CW_CAT1",
+      "bit_value": 256,
+      "local_presence_verified": null,
+      "meaning_when_set": "Passa a categoria de qualidade indicada para a análise nomeada"
+    }
+  ],
+  "injection_bits": [
+    {
+      "mask": 1,
+      "bit": 0,
+      "shortName": "NO_CBC_HW_INJ",
+      "bit_value": 1,
+      "local_presence_verified": null,
+      "meaning_when_set": "Ausência da classe de injeção de hardware indicada"
+    },
+    {
+      "mask": 1,
+      "bit": 1,
+      "shortName": "NO_BURST_HW_INJ",
+      "bit_value": 2,
+      "local_presence_verified": null,
+      "meaning_when_set": "Ausência da classe de injeção de hardware indicada"
+    },
+    {
+      "mask": 1,
+      "bit": 2,
+      "shortName": "NO_DETCHAR_HW_INJ",
+      "bit_value": 4,
+      "local_presence_verified": null,
+      "meaning_when_set": "Ausência da classe de injeção de hardware indicada"
+    },
+    {
+      "mask": 1,
+      "bit": 3,
+      "shortName": "NO_CW_HW_INJ",
+      "bit_value": 8,
+      "local_presence_verified": null,
+      "meaning_when_set": "Ausência da classe de injeção de hardware indicada"
+    },
+    {
+      "mask": 1,
+      "bit": 4,
+      "shortName": "NO_STOCH_HW_INJ",
+      "bit_value": 16,
+      "local_presence_verified": null,
+      "meaning_when_set": "Ausência da classe de injeção de hardware indicada"
+    }
+  ],
+  "dictionary_provenance": [
+    "o4a_dictionary_json",
+    "o4a_dictionary",
+    "o4b_dictionary",
+    "o4_details"
+  ],
+  "mask_field_meaning": "mask=0 denotes DQ; mask=1 denotes INJ. This field is NOT 1<<bit.",
+  "applies_documentarily_to": [
+    "O4a_4KHZ_R1",
+    "O4b_4KHZ_R1"
+  ],
+  "bridge": "O4 technical documentation explicitly equates O4a/O4b and 4 kHz/16 kHz flag semantics. Direct 4 kHz schema fetches via web tool failed; no local schema was inspected.",
+  "DATA_semantics": {
+    "conditions": [
+      "ANALYSIS_READY",
+      "CBC_CAT1",
+      "BURST_CAT1"
+    ],
+    "source_id": "data_flag",
+    "implies_no_hardware_injection": false,
+    "implies_stationarity": false
+  },
+  "quality_groups": "Category levels accumulate within each analysis group, not across CBC, BURST, CW and STOCH.",
+  "time_contract": {
+    "documented_mask_rate_hz": 1,
+    "documented_bulk_duration_s": 4096,
+    "documented_mask_samples": 4096,
+    "strain_manifest_rate_hz": 4096,
+    "future_required_checks": [
+      "Read and verify mask time origin, rate, length and exact shortname/bit dictionary for each detector.",
+      "Read and verify strain origin and sampling; reject fractional alignment not covered by registration.",
+      "Verify all intersecting seconds in both onsource and offsource windows; do not interpolate bitfields or fill missing time.",
+      "Reject missing flags, differing time origins, inconsistent coverage or unsupported releases."
+    ],
+    "proposed_half_open_convention": "DQ sample k covers [t_DQ0+k*Delta_DQ, t_DQ0+(k+1)*Delta_DQ). Map strain time t by floor((t-t_DQ0)/Delta_DQ). This interval convention is a proposed reader contract, not a claim of local verification.",
+    "local_origin_cadence_verified": false,
+    "existing_reader_static_finding": "strain_io.py checks integer masks, equal shape and length equal to strain duration; assumes mask origin meta/GPSstart and 1 Hz. It does not independently read mask cadence/origin attributes or validate the full dictionary against the published bit positions."
+  },
+  "GWF_channels_only": [
+    "{ifo}:GWOSC-4KHZ_R1_STRAIN",
+    "{ifo}:GWOSC-4KHZ_R1_DQMASK",
+    "{ifo}:GWOSC-4KHZ_R1_INJMASK"
+  ],
+  "HDF5_reader_expected_paths_not_observed": [
+    "strain/Strain",
+    "meta/GPSstart",
+    "quality/simple/DQmask",
+    "quality/simple/DQShortnames",
+    "quality/injections/Injmask",
+    "quality/injections/InjShortnames"
+  ],
+  "source_channel_by_release": {
+    "O4a_4KHZ_R1": "{ifo}:GDS-CALIB_STRAIN_CLEAN_AR",
+    "O4b_4KHZ_R1": "{ifo}:DCS-CALIB_STRAIN_CLEAN_AR01"
+  },
+  "channel_scope": "Public bulk-release source identity, not direct verification of local HDF5 attributes; GWF channel names are not HDF5 group paths.",
+  "calibration_release": {
+    "O4a": "C00 online, documented final public bulk product",
+    "O4b": "AR01 is C01 where available and C00 otherwise; CLEAN includes noise subtraction.",
+    "documented_C01_period_GPS": [
+      1409425408,
+      1415647232
+    ],
+    "R1_is_not_C01": true,
+    "event_specific_C00_C01_assignment": null,
+    "reason_not_assigned": "No new 14-GPS reconciliation or payload inspection in this unit.",
+    "source_ids": [
+      "o4a",
+      "o4b",
+      "o4b_alternate"
+    ]
+  },
+  "selection_unchanged": {
+    "criteria_V1_verbatim": "eligible = quality_INPUT (SNR_rede >= 12; M_f,det mediana >= 40 Msun; 0 <= chi_f < 0,98; fonte GWOSC/GR IMR) E ausente do corpus de publicacao congelado em 22/09 20:32Z (PUBLICATION_CENSUS: FOUND = analise publicada que admite desvios QNM de f/tau) E fora do GWTC-5.0 33 / GWTC-3 18 / corpus auditado de 39",
+    "freeze_V1_verbatim": "NÃO CONGELADO NESTE V1 (os 4 holds e os 8 pendentes podem mudar a lista); o conjunto congela por evento na v387, no estágio cego, ANTES de qualquer PE abrir; o critério é o que congela aqui",
+    "original_order": [
+      "GW230919_215712",
+      "GW240513_183302",
+      "GW240515_005301",
+      "GW240615_160735",
+      "GW240920_073424",
+      "GW240923_204006",
+      "GW240930_035959",
+      "GW241102_144729",
+      "GW241111_111552",
+      "GW241130_034908",
+      "GW241210_060606",
+      "GW250104_015122",
+      "GW250109_010541",
+      "GW250118_170523"
+    ],
+    "four_holds_preserved": [
+      "GW240515_005301",
+      "GW240615_160735",
+      "GW240930_035959",
+      "GW241102_144729"
+    ],
+    "ten_without_prior_hold_are_not_ready": true,
+    "four_holds_can_only_change": "Separate explicit metadata-based decision and reviewed evidence before any PE; current document changes none.",
+    "eight_pending_outside_list": "No additions/reconciliation/eligibility changes in this task.",
+    "H1_L1_block": "One event for inference, both detectors same chosen policy; one missing detector -> HOLD under this proposal, no single-detector substitution.",
+    "blindness": "No delta-tau, posterior center, H0, fit/Bayes factor or signal residual used for metadata selection; catalogue GR eligibility criteria inherited, not recalculated."
+  },
+  "required_quality_flags": null,
+  "required_no_injection_flags": null,
+  "ratified": false,
+  "hold_released": false,
+  "scientific_containers_opened": false,
+  "science_executed": false,
+  "remote_model_calls": 0
+}

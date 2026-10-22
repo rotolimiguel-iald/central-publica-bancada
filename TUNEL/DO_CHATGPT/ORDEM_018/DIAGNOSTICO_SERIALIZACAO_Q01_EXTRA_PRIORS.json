@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-06T13:17:22.698356+00:00",
+  "status": "ADDITIONAL_CROSS_PROCESS_MARSHAL_REPRODUCTION_NOT_ESTABLISHED",
+  "verification_tool_failure": "6d8cc7: exit1 in extra verification, before receipt writes; not scientific execution",
+  "diagnostic_tool": "d1bf58",
+  "comparisons": [
+    {
+      "module": "candidate",
+      "source_matches": true,
+      "recorded_post_load_marshal_sha256": "987ca8ca3092d8fc4fa8115c62a48431d4db1bb72f542e1cbf596fde7f2842a8",
+      "external_pre_execution_marshal_sha256": "36b13b5935d5228e507462172b356d43192da2fee860a66fd902e3d6efa55efc",
+      "equal": false
+    },
+    {
+      "module": "precision_module",
+      "source_matches": true,
+      "recorded_post_load_marshal_sha256": "857df193180c3b6b5d730723267fdd69e3ad29a4545363511dc8bf79ca18ddfd",
+      "external_pre_execution_marshal_sha256": "f787591a2df850f393fd3ff0510933a7b316c894dcb3d4a0b8f5164856cb76bf",
+      "equal": false
+    },
+    {
+      "module": "cases",
+      "source_matches": true,
+      "recorded_post_load_marshal_sha256": "c94b7e0436880ccd6b384729dfdfbbff07801bab427e1aff67ea7aec602b9bc3",
+      "external_pre_execution_marshal_sha256": "545e401a8e3af69efc5a322b55203f64c66eba13ad231c4750cb38da9de2d125",
+      "equal": false
+    }
+  ],
+  "cause": "NOT_ESTABLISHED_HERE",
+  "scope": "Marshal of a fresh compile before execution in another process differs from recorded post-load marshal. No serialized bytecode was itself a source pin in the frozen contract. Contractual source bytes, fixed loader, function origins and external/case receipts remain coherent. No assertion of independent cross-process bytecode hash reproduction.",
+  "candidate_rerun": false,
+  "new_candidate_execution": false
+}

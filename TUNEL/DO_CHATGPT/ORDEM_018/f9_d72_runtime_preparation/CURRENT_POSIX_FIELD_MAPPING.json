@@ -1,0 +1,404 @@
+{
+  "schema": "F9_CURRENT_POSIX_PREPARATION_MAPPING_V1",
+  "status": "OPEN_NOT_AN_ADMISSIBLE_RUNTIME_INVENTORY",
+  "target_schema": "F9_CURRENT_POSIX_RUNTIME_INVENTORY_V1",
+  "preparation_request_id": "d72f7125-bd1a-4e04-96e2-470ec6a823b0",
+  "d72_manifest_pin": {
+    "bytes": 29959,
+    "sha256": "89b21ff91e26ad3e8f501c42f93bd2e8c0a66d4df038c58963acd0321c1ec3b9"
+  },
+  "fields": {
+    "python_executable": {
+      "value": "/usr/bin/python3.12",
+      "status": "REAL_CURRENT_NONROOT_PROCESS"
+    },
+    "python_version": {
+      "value": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "status": "REAL_CURRENT_NONROOT_PROCESS"
+    },
+    "python_search_path": {
+      "value": [
+        "/usr/lib/python3.12",
+        "/usr/lib/python3.12/lib-dynload",
+        "/opt/lal_env/lib/python3.12/site-packages"
+      ],
+      "status": "INPUT_EXPLICIT_EXISTING_DIRECTORIES_FOR_FUTURE_REVIEW",
+      "reason": "-I -S excludes site processing; explicit site-packages directory is needed for the existing packages. Absent zip is not a directory and must not be copied into this field."
+    },
+    "files": {
+      "reference": "CURRENT_RUNTIME_OBSERVATIONS.json#/files",
+      "current_pin_count": 4724,
+      "status": "REAL_MEASURED_SUBSET_NOT_COMPLETE_SCIENTIFIC_IMPORT_CLOSURE"
+    },
+    "absent_paths": {
+      "value": [
+        "/usr/lib/python312.zip"
+      ],
+      "status": "REAL_ENOENT_AT_INSPECTION_NOT_COMPLETE_IMPORT_PROBE_TRACE"
+    },
+    "scan_directories": {
+      "reference": "CURRENT_RUNTIME_OBSERVATIONS.json#/existing_scan_directories_static_candidates",
+      "also_required_existing_directories": [
+        "/usr/lib/python3.12",
+        "/usr/lib/python3.12/lib-dynload",
+        "/opt/lal_env/lib/python3.12/site-packages"
+      ],
+      "status": "REAL_EXISTS_STATIC_CANDIDATES_NOT_IMPORT_TRACE"
+    },
+    "native_map_pins": {
+      "value": null,
+      "candidate_bytes_reference": "NATIVE_CANDIDATE_PINS_CURRENT.json",
+      "status": "OPEN_SCIENTIFIC_IMPORT_NOT_EXECUTED"
+    },
+    "trust_scope": {
+      "value": "TRUSTED_PINNED_NATIVE_COOPERATIVE_PYTHON_NOT_OS_ISOLATION",
+      "status": "CONTRACT_SCOPE_NOT_A_NEW_SECURITY_QUALIFICATION"
+    },
+    "measurement_reference": {
+      "available_receipts": [
+        "RECIBO_COLETA.json",
+        "RECIBO_SUPLEMENTO.json",
+        "CURRENT_WSL_REGISTRATION.json"
+      ],
+      "scope": "READ_ONLY_INSPECTION_ONLY"
+    },
+    "status": {
+      "value": null,
+      "required_after_actual_qualification": "MEASURED_CURRENT_AUTHORIZED_INVENTORY",
+      "reason": "Not issued here; changing a flag would not close observed gaps."
+    }
+  },
+  "engine_required_pins": [
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/HighLExtrapTemplate_lenspotentialCls.dat",
+      "current_pin": null,
+      "status": "OPEN_CONTENT_NOT_READ",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/PArthENoPE_880.2_marcucci.dat",
+      "current_pin": null,
+      "status": "OPEN_CONTENT_NOT_READ",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/PArthENoPE_880.2_standard.dat",
+      "current_pin": null,
+      "status": "OPEN_CONTENT_NOT_READ",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/PRIMAT_Yp_DH_Error.dat",
+      "current_pin": null,
+      "status": "OPEN_CONTENT_NOT_READ",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/PRIMAT_Yp_DH_ErrorMC_2021.dat",
+      "current_pin": null,
+      "status": "OPEN_CONTENT_NOT_READ",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/PRIMAT_Yp_DH_ErrorMC_2024.dat",
+      "current_pin": null,
+      "status": "OPEN_CONTENT_NOT_READ",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/__init__.py",
+      "current_pin": {
+        "bytes": 1484,
+        "sha256": "6e7a3404aa59e025fd1d9924624acb036beaeb163e448cd68891b6e4f26358ab"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/_command_line.py",
+      "current_pin": {
+        "bytes": 2307,
+        "sha256": "ea2b390b7718f25940d0f7ef134f24c4606d8587b7d17108aecf182e65e4855b"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/_compilers.py",
+      "current_pin": {
+        "bytes": 5486,
+        "sha256": "e626f67869664cd4ee8388d1f2965044ad0c250b60c89b7642bf72b2352865ff"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/_config.py",
+      "current_pin": {
+        "bytes": 3380,
+        "sha256": "2e9521bfc69623a550e0d0ba08c90d4b10d4d19d6db48e0d9f7f1f8ea7359949"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/_ini.py",
+      "current_pin": {
+        "bytes": 10878,
+        "sha256": "b41bdac13d645787d0f32df564959802de62d55b8035443245a94297d807f220"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/baseconfig.py",
+      "current_pin": {
+        "bytes": 33537,
+        "sha256": "2f953eed2d88ad1f7f6ada9a62b33b98d0799f8e7815effedcad46e36f5b73df"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/bbn.py",
+      "current_pin": {
+        "bytes": 10314,
+        "sha256": "18ba3020d29bbe63fe92cf833b682bb1ff348a5e7dd7d09244f73618eadbb454"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/bispectrum.py",
+      "current_pin": {
+        "bytes": 11684,
+        "sha256": "9afb88c70f0f189e77185e993cb14477e352259589e3e0998de9d3545070a68b"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/camb.py",
+      "current_pin": {
+        "bytes": 19419,
+        "sha256": "bb4f751b1b144996933c2c42c4c7102a866552e8c72a944d640c2d8174d76a18"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/camblib.so",
+      "current_pin": {
+        "bytes": 1850673,
+        "sha256": "306640a8948cd5246fc9b21e76525f6adebdff5ba3bc792a57d50bba67225ad5"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/check_accuracy.py",
+      "current_pin": {
+        "bytes": 96181,
+        "sha256": "5db2feb106aedb5dcd0836a0fa12a5b711827fb027a643b1d4a12a552805e233"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/constants.py",
+      "current_pin": {
+        "bytes": 1706,
+        "sha256": "df76eb664b788093b9f92490ac7db1b04699796fd30a34545c43a1b2a580e35a"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/correlations.py",
+      "current_pin": {
+        "bytes": 37791,
+        "sha256": "5be4b43294a3c3159429782440b8048f150443a6814072ae7679659614eb47fb"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/dark_energy.py",
+      "current_pin": {
+        "bytes": 10254,
+        "sha256": "2117cae3467aa3c8705a4de89604c55dc8bf1a3cae829ea438d2a150c492e6f4"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/emission_angle.py",
+      "current_pin": {
+        "bytes": 10054,
+        "sha256": "0ae34832bbd60e5182b00210b13f6e4aed3f63158e23a4ef77d7fb7a6af90c4d"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/inifile.py",
+      "current_pin": {
+        "bytes": 14142,
+        "sha256": "dafd82793310db673bc2232d684b49ff0572e03b591d62bec40689e0bec71347"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/initialpower.py",
+      "current_pin": {
+        "bytes": 8651,
+        "sha256": "8cda74dae606a003c1a52997bd70de28a2370691206e2848bbb7c471912dd764"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/mathutils.py",
+      "current_pin": {
+        "bytes": 14405,
+        "sha256": "4e4cd8add963e44445db2acce65b2f1482e34d9ebabb98fb2d725946665f7b72"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/model.py",
+      "current_pin": {
+        "bytes": 52363,
+        "sha256": "a92bed930e341eadadf7700e2670882172b8806bbc379cc7cdb18ca76fc97624"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/nonlinear.py",
+      "current_pin": {
+        "bytes": 18381,
+        "sha256": "0aa7e3010f1b513bfa97983c6844ea217eec9b9919b185cde75e154ff5dc6755"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/postborn.py",
+      "current_pin": {
+        "bytes": 9864,
+        "sha256": "26e3d26d115cd2b9687b6c65e8f35a06008f1fd687a35f1ca1ae1b6ff11e057c"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/recombination.py",
+      "current_pin": {
+        "bytes": 7404,
+        "sha256": "a7a4d3e1def2529cc1642c20d64d7750bd4f2e6b766dd61cf440994c5be9eb6f"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/reionization.py",
+      "current_pin": {
+        "bytes": 8319,
+        "sha256": "529b9ecd2aaa825a95b7510b0cc2b1fdf7c3c7bde9a8ecbd874ae73888fda0ff"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+      "current_pin": {
+        "bytes": 86419,
+        "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/sources.py",
+      "current_pin": {
+        "bytes": 4415,
+        "sha256": "75452ee8e254215aa170bfc80552b4cb9c5a5cc86a3a788bc0113ace05cab132"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/symbolic.py",
+      "current_pin": {
+        "bytes": 38444,
+        "sha256": "d14321e6ee068540266315dbe0f0ed18e8d595a1f025c8ab3e1f1bbf4af4f2a8"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/tests/__init__.py",
+      "current_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/tests/camb_test.py",
+      "current_pin": {
+        "bytes": 60973,
+        "sha256": "1fc50103f43c6a43dd7a17484e04bd435d782af1f3df3d3f2eab4fbb66cc1da6"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/tests/camb_test_slow.py",
+      "current_pin": {
+        "bytes": 9480,
+        "sha256": "fb30697acafc42888e541d38992e760b84840e82d23ea19b15b363382ab41980"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/tests/hmcode_test.py",
+      "current_pin": {
+        "bytes": 8522,
+        "sha256": "f97abd702b99bdb42e6794e3baebf3e0c31cbd39d3a35d7131b986c4c3a20348"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/tests/mathutils_test.py",
+      "current_pin": {
+        "bytes": 15513,
+        "sha256": "f91ee5f63cd032b427c025c1b74e566bdd45b63077a823ac1121d9e451e28d34"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages/camb/tests/spk_test.py",
+      "current_pin": {
+        "bytes": 12011,
+        "sha256": "b4dcd350fa5c65b25ad59179debb1ec2f40012e295357f226642cfb97634ff14"
+      },
+      "status": "REAL_MATCH",
+      "required_by": "background_controls.runtime_check lines76-78"
+    }
+  ],
+  "native_counts": {
+    "historical_ELF_routes": 179,
+    "candidate_pins_rehashed_now": 185,
+    "actual_inspector_maps": 12,
+    "actual_scientific_maps": null
+  },
+  "execution_documents_created": false
+}

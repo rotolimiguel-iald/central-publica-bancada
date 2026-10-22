@@ -1,0 +1,13 @@
+<!-- ORDEM018_F1_LINEAR_DESIGN_EC4872EC -->
+## 05/10/2026 23:49 — Projeto linear V01 e medida nuisance F1/F9
+
+[INPUT — delegação delimitada] Unidade ec4872ec-82f0-4236-a76c-1e10f89aefe5, solicitada pela coordenação 01a0ce2b-8c2f-71b0-a9a8-91b17715a569: explicitar X, h, nuisance e desvio Cefeida, vínculos por âncora e medida comum aos cinco modelos. Sem centros novos, ajuste, S/g/H0/lnB, upstream, D ou modelos remotos.
+
+[REAL documental / DERIVED] Projeto esparso por chaves:267linhas; eta63=(59hospedeiras,2grupos,MB,M110offset), h64ªcoluna. As53hospedeiras anteriores eram as medidas diretamente; seis extras entram pelos grupos. a_h=1 em7linhas de fluxo; c_C=1 em119linhas Cefeida, conferido com candidato anterior. 104HMS,11MAS ativos,14referências disponíveis (três inativas),9componentes. Componente R22 tem37hosts×3âncoras:72ciclos independentes, posto de incidência106 no bloco inteiro. Verificadas identidades exatas LX=La_h=Lc_C=0; Ly permanece não examinado. X pleno63 por conectividade; [X,h]64 e [X,h,c_C]65 por testemunhas estruturais. Nenhuma covariância numérica montada.
+
+[DERIVED condicional] Entregues opções de prior próprio (gaussiano ou domínio uniforme finito) e razão plana com mesma medida em R^63; explicitadas normalizações, suporte, jacobianos e condições de cancelamento. Determinantes dependentes de lambda/theta não saem automaticamente das integrais. Parâmetros específicos beta livre/delta_C/r_drag precisam de priors próprios. Âncora/MAS/HMS já em C não duplicados como nuisance. Compressão cinemática q0/j0 fixa do upstream deve ser preservada no recorte ou requalificada com a normalização completa.
+
+[REAL — custódia] Falha inicial detectou pin antigo do candidato V1. Dono resolveu apontando para backup com hash original; snapshot e nota conferidos, sem repin de conteúdo novo e sem repetir análise. 13artefatos da entrega verificados por hash/tamanho. Relatório `C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\h0dn_documentary_review\linear_design\PROJETO_LINEAR_E_MEDIDA.md`; SHA256 `66616993e30427b41b7fb3c64caef71a2cc444e7cf61b890ca25c14ffbda13dc`. Manifesto `C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\h0dn_documentary_review\linear_design\MANIFESTO_ENTREGA.json`; SHA256 `04cc8b0a45b63cb64f034c9c004bb681c1d6750305c2a5cb146fe294d3b24343`. Mapa antes438, registro posterior444.
+
+[OPEN] Revisão independente, escolha da medida nuisance e contrato físico/V1 continuam com a coordenação. Não há nova evidência observada, sigma, ajuste ou mudança de gate. Reutilizar guard de suporte e seleção existentes; não criar camada de física repetida. Provedores bloqueados e suspensões preservados.
+

@@ -1,0 +1,80 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:18:18: error: unsolved goals
+E : Type u_1
+G : Type u_2
+inst✝³ : NormedAddCommGroup E
+inst✝² : InnerProductSpace ℂ E
+inst✝¹ : NormedAddCommGroup G
+inst✝ : InnerProductSpace ℂ G
+J : E ≃ₗᵢ⋆[ℂ] E
+a x y : E
+⊢ inner ℂ (J x + J y) a = inner ℂ (J x) a + inner ℂ (J y) a
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:19:19: error: unsolved goals
+E : Type u_1
+G : Type u_2
+inst✝³ : NormedAddCommGroup E
+inst✝² : InnerProductSpace ℂ E
+inst✝¹ : NormedAddCommGroup G
+inst✝ : InnerProductSpace ℂ G
+J : E ≃ₗᵢ⋆[ℂ] E
+a : E
+c : ℂ
+x : E
+⊢ inner ℂ (J (c • x)) a = c * inner ℂ (J x) a
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:26:21: error: unsolved goals
+E : Type u_1
+G : Type u_2
+inst✝³ : NormedAddCommGroup E
+inst✝² : InnerProductSpace ℂ E
+inst✝¹ : NormedAddCommGroup G
+inst✝ : InnerProductSpace ℂ G
+J : E ≃ₗᵢ⋆[ℂ] E
+a : E
+c : ℂ
+x : G
+z : E
+⊢ (evalJ J a) z • c • x = c • (evalJ J a) z • x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:27:45: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:49:60: error: unsolved goals
+E : Type u_1
+G : Type u_2
+inst✝³ : NormedAddCommGroup E
+inst✝² : InnerProductSpace ℂ E
+inst✝¹ : NormedAddCommGroup G
+inst✝ : InnerProductSpace ℂ G
+J : E ≃ₗᵢ⋆[ℂ] E
+z : E ⊗[ℂ] G
+x : E
+V : Submodule ℂ G
+hV : Module.Finite ℂ ↥V
+hz : {z} ⊆ ↑(LinearMap.lTensor E V.subtype).range
+this : Module.Finite ℂ ↥V := hV
+y : E ⊗[ℂ] ↥V
+hy : (LinearMap.lTensor E V.subtype) y = z
+e : OrthonormalBasis (Fin (Module.finrank ℂ ↥V)) ℂ ↥V := stdOrthonormalBasis ℂ ↥V
+v : Fin (Module.finrank ℂ ↥V) →₀ E
+hv : (v.sum fun i m => m ⊗ₜ[ℂ] e.toBasis i) = y
+hr : z = ∑ i, v i ⊗ₜ[ℂ] ↑(e i)
+he : Orthonormal ℂ fun i => ↑(e i)
+hm : ((raw J) z) x = ∑ i, inner ℂ (J x) (v i) • ↑(e i)
+⊢ ∑ x_1, (inner ℂ (J x) (v x_1)).re * (inner ℂ (v x_1) (J x)).re -
+      ∑ x_1, (inner ℂ (J x) (v x_1)).im * (inner ℂ (v x_1) (J x)).im =
+    ∑ x_1, Complex.normSq (inner ℂ (J x) (v x_1))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:53:38: warning: This simp argument is unused:
+  Complex.normSq_eq_conj_mul_self
+
+Hint: Omit it from the simp argument list.
+  simp [← Complex.normSq_eq_norm_sq,̵C̵o̵m̵p̵l̵e̵x̵.̵n̵o̵r̵m̵S̵q̵_̵e̵q̵_̵c̵o̵n̵j̵_̵m̵u̵l̵_̵s̵e̵l̵f̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:80:25: error(lean.invalidField): Invalid field `extend`: The environment does not contain `ContinuousLinearMap.extend`, so it is not possible to project the field `extend` from an expression
+  algebraicCompleted J
+of type
+  E ⊗[ℂ] ?m.48 →L[ℂ] E →L[ℂ] Completion ?m.48
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:84:8: error(lean.unknownIdentifier): Unknown constant `ContinuousLinearMap.extend_eq`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:89:53: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:86:16: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:95:8: error: failed to elaborate eliminator, expected type is not available
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203120_745092Z\TensorContractionR1.lean:96:8: error: No goals to be solved
+'F1Fecho.TensorContraction.norm_raw_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.TensorContraction.contraction_tmul' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.TensorContraction.contraction_compact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

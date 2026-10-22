@@ -1,0 +1,130 @@
+[
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/model.py",
+    "sha256": "a92bed930e341eadadf7700e2670882172b8806bbc379cc7cdb18ca76fc97624",
+    "symbol": "set_accuracy",
+    "start_line": 458,
+    "end_line": 486,
+    "text": "458:     def set_accuracy(\n459:         self,\n460:         AccuracyBoost=1.0,\n461:         lSampleBoost=1.0,\n462:         lAccuracyBoost=1.0,\n463:         DoLateRadTruncation=True,\n464:         min_l_logl_sampling=None,\n465:     ):\n466:         \"\"\"\n467:         Set parameters determining overall calculation accuracy (large values may give big slow down).\n468:         For finer control you can set individual accuracy parameters by changing CAMBParams.Accuracy\n469:         (:class:`.model.AccuracyParams`) .\n470: \n471:         :param AccuracyBoost: increase AccuracyBoost to decrease integration step size, increase density of k\n472:                               sampling, etc.\n473:         :param lSampleBoost: increase lSampleBoost to increase density of L sampling for CMB\n474:         :param lAccuracyBoost: increase lAccuracyBoost to increase the maximum L included in the Boltzmann hierarchies\n475:         :param DoLateRadTruncation: If True, use approximation to radiation perturbation evolution at late times\n476:         :param min_l_logl_sampling: at L>min_l_logl_sampling uses sparser log sampling for L interpolation;\n477:                                     increase above 5000 for better accuracy at L > 5000\n478:         :return: self\n479:         \"\"\"\n480:         self.Accuracy.lSampleBoost = lSampleBoost\n481:         self.Accuracy.AccuracyBoost = AccuracyBoost\n482:         self.Accuracy.lAccuracyBoost = lAccuracyBoost\n483:         self.DoLateRadTruncation = DoLateRadTruncation\n484:         if min_l_logl_sampling:\n485:             self.min_l_logl_sampling = min_l_logl_sampling\n486:         return self"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/model.py",
+    "sha256": "a92bed930e341eadadf7700e2670882172b8806bbc379cc7cdb18ca76fc97624",
+    "symbol": "set_cosmology",
+    "start_line": 641,
+    "end_line": 794,
+    "text": "641:     def set_cosmology(\n642:         self,\n643:         *,\n644:         H0: float | None = None,\n645:         ombh2=0.022,\n646:         omch2=0.12,\n647:         omk=0.0,\n648:         cosmomc_theta: float | None = None,\n649:         thetastar: float | None = None,\n650:         neutrino_hierarchy: str | int = \"degenerate\",\n651:         num_massive_neutrinos=1,\n652:         mnu: float | None = 0.06,\n653:         omnuh2_active: float | None = None,\n654:         nnu=constants.default_nnu,\n655:         YHe: float | None = None,\n656:         meffsterile=0.0,\n657:         standard_neutrino_neff=constants.default_nnu,\n658:         TCMB=constants.COBE_CMBTemp,\n659:         tau: float | None = None,\n660:         zrei: float | None = None,\n661:         Alens=1.0,\n662:         bbn_predictor: None | str | bbn.BBNPredictor = None,\n663:         theta_H0_range=(10, 100),\n664:         setter_H0=None,\n665:     ):\n666:         r\"\"\"\n667:         Sets cosmological parameters in terms of physical densities and parameters (e.g. as used in Planck analyses).\n668:         Default settings give a single distinct neutrino mass eigenstate, by default one neutrino with mnu = 0.06eV.\n669:         Set the neutrino_hierarchy parameter to normal or inverted to use a two-eigenstate model that is a good\n670:         approximation to the known mass splittings seen in oscillation measurements.\n671:         For more fine-grained control can set the neutrino parameters directly rather than using this function.\n672: \n673:         Instead of setting the Hubble parameter directly, you can instead set the acoustic scale parameter\n674:         (cosmomc_theta, which is based on a fitting formula for simple models, or thetastar, which is numerically\n675:         calculated more generally). Note that you must have already set the dark energy and recombination model,\n676:         you can't use set_cosmology with theta and then change the background evolution (which would change theta\n677:         at the calculated H0 value). Likewise, the dark energy model cannot depend explicitly on H0 unless you provide\n678:         a custom setter_H0 function to update the model for each H0 iteration used to search for thetastar.\n679: \n680:         If in doubt, print CAMBparams after setting parameters to see the underlying values that have been set.\n681: \n682:         :param H0: Hubble parameter today in km/s/Mpc. Can leave unset and instead set thetastar or cosmomc_theta\n683:                   (which solves for the required H0).\n684:         :param ombh2: physical density in baryons\n685:         :param omch2:  physical density in cold dark matter\n686:         :param omk: Omega_K curvature parameter\n687:         :param cosmomc_theta: The approximate CosmoMC theta parameter :math:`\\theta_{\\rm MC}`. The angular\n688:                               diameter distance is calculated numerically, but the redshift :math:`z_\\star`\n689:                               is calculated using an approximate (quite accurate but non-general) fitting formula.\n690:                               Leave unset to use H0 or thetastar.\n691:         :param thetastar: The angular acoustic scale parameter :math:`\\theta_\\star = r_s(z_*)/D_M(z_*)`, defined as\n692:                     the ratio of the photon-baryon sound horizon :math:`r_s` to the angular diameter\n693:                     distance :math:`D_M`, where both quantities are evaluated at :math:`z_*`, the redshift at\n694:                     which the optical depth (excluding reionization) is unity. Leave unset to use H0 or cosmomc_theta.\n695:         :param neutrino_hierarchy: 'degenerate', 'normal', or 'inverted' (1 or 2 eigenstate approximation)\n696:         :param num_massive_neutrinos: number of massive neutrinos for degenerate neutrinos.\n697:                Usually 1 for a single light mass, or 3 for degenerate approximation at any mass.\n698:                Ignored for 'normal' or 'inverted' neutrino_hierarchy\n699:                If meffsterile is set, this is the number of massive active neutrinos.\n700:         :param mnu: sum of neutrino masses (in eV).\n701:                :math:`\\Omega_\\nu h^2` is calculated from this accounting for the small finite-temperature contribution\n702:                to the neutrino density today (but neglecting spectral distortions to the neutrino distribution).\n703: \n704:                To match a given :math:`\\Omega_\\nu h^2` set omnuh2_active instead. Set the neutrino eigenstate\n705:                field values directly if you need finer control or more complex neutrino models.\n706:         :param omnuh2_active: alternative to mnu (which must then be set to None) that sets\n707:                :math:`\\Omega_\\nu h^2` for the active neutrinos directly.\n708:         :param nnu: N_eff, effective relativistic degrees of freedom\n709:         :param YHe: Helium mass fraction. If None, set from BBN consistency.\n710:         :param meffsterile: effective mass of sterile neutrinos (set along with nnu greater than the standard value).\n711:                  Defined as in the Planck papers. You do not need to also change num_massive_neutrinos.\n712:         :param standard_neutrino_neff:  default value for N_eff in standard cosmology (non-integer to allow for partial\n713:                 heating of neutrinos at electron-positron annihilation and QED effects)\n714:         :param TCMB: CMB temperature (in Kelvin)\n715:         :param tau: optical depth; if None and zrei is None, current Reion settings are not changed\n716:         :param zrei: reionization mid-point optical depth (set tau=None to use this)\n717:         :param Alens: (non-physical) scaling of the lensing potential compared to prediction\n718:         :param bbn_predictor: :class:`.bbn.BBNPredictor` instance used to get YHe from BBN consistency if YHe is None,\n719:          or name of a BBN predictor class, or file name of an interpolation table\n720:         :param theta_H0_range: if thetastar or cosmomc_theta is specified, the min, max interval of H0 values to map to;\n721:           if H0 is outside this range it will raise an exception.\n722:         :param setter_H0: if specified, a function to call to set H0 for each iteration to find thetastar. It should be\n723:          a function(pars: CAMBParams, H0: float). Not normally needed, but can be used e.g. when DE model needs to be\n724:          changed for each H0 because it depends explicitly on H0\n725:         \"\"\"\n726: \n727:         if YHe is None:\n728:             # use BBN prediction\n729:             if isinstance(bbn_predictor, str):\n730:                 self.bbn_predictor = bbn.get_predictor(bbn_predictor)\n731:             else:\n732:                 self.bbn_predictor = bbn_predictor or bbn.get_predictor()\n733:             YHe = self.bbn_predictor.Y_He(ombh2 * (constants.COBE_CMBTemp / TCMB) ** 3, nnu - standard_neutrino_neff)\n734:         self.YHe: float = YHe\n735:         self.TCMB = TCMB\n736:         self.ombh2 = ombh2\n737:         self.omch2 = omch2\n738:         self.Alens = Alens\n739: \n740:         if not isinstance(neutrino_hierarchy, str):\n741:             neutrino_hierarchy = neutrino_hierarchies[neutrino_hierarchy - 1]\n742: \n743:         if omnuh2_active is not None and mnu is not None:\n744:             raise CAMBError(\"Set mnu=None when setting omnuh2_active.\")\n745:         if omnuh2_active is None and mnu is None:\n746:             raise CAMBError(\"Set one of mnu or omnuh2_active.\")\n747: \n748:         neutrino_mass_fac = constants.neutrino_mass_fac * (constants.COBE_CMBTemp / TCMB) ** 3\n749:         omnuh2_sterile = meffsterile / neutrino_mass_fac\n750:         if omnuh2_sterile > 0 and nnu < standard_neutrino_neff:\n751:             raise CAMBError(f\"sterile neutrino mass required Neff> {constants.default_nnu:.3g}\")\n752:         if (mnu or omnuh2_active) and not num_massive_neutrinos:\n753:             raise CAMBError(\"non-zero neutrino mass with zero num_massive_neutrinos\")\n754: \n755:         self.omk = omk\n756:         assert num_massive_neutrinos == int(num_massive_neutrinos)\n757:         # SetNeutrinoMasses takes the physical mass sum, SetNeutrinoHierarchy the (proxy) density directly\n758:         set_neutrinos = self.f_SetNeutrinoHierarchy if mnu is None else self.f_SetNeutrinoMasses\n759:         set_neutrinos(\n760:             byref(c_double(omnuh2_active + omnuh2_sterile if mnu is None else mnu)),\n761:             byref(c_double(omnuh2_sterile)),\n762:             byref(c_double(nnu)),\n763:             byref(c_int(neutrino_hierarchies.index(neutrino_hierarchy) + 1)),\n764:             byref(c_int(int(num_massive_neutrinos))),\n765:             byref(c_double(standard_neutrino_neff)),\n766:         )\n767: \n768:         if cosmomc_theta or thetastar:\n769:             if H0 is not None:\n770:                 raise CAMBError(\"Set H0=None when setting theta.\")\n771:             if cosmomc_theta and thetastar:\n772:                 raise CAMBError(\"Cannot set both cosmomc_theta and thetastar\")\n773: \n774:             self.set_H0_for_theta(\n775:                 cosmomc_theta or thetastar,\n776:                 cosmomc_approx=cosmomc_theta is not None,\n777:                 theta_H0_range=theta_H0_range,\n778:                 setter_H0=setter_H0,\n779:             )\n780:         else:\n781:             if H0 is None:\n782:                 raise CAMBError(\"Must set H0, cosmomc_theta or thetastar\")\n783:             if H0 < 1:\n784:                 raise CAMBValueError(\"H0 is the value in km/s/Mpc, your value looks very small\")\n785:             self.H0 = H0\n786: \n787:         if tau is not None:\n788:             if zrei is not None:\n789:                 raise CAMBError(\"Cannot set both tau and zrei\")\n790:             self.Reion.set_tau(tau)\n791:         elif zrei is not None:\n792:             self.Reion.set_zrei(zrei)\n793: \n794:         return self"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/model.py",
+    "sha256": "a92bed930e341eadadf7700e2670882172b8806bbc379cc7cdb18ca76fc97624",
+    "symbol": "set_classes",
+    "start_line": 834,
+    "end_line": 860,
+    "text": "834:     def set_classes(\n835:         self,\n836:         dark_energy_model=None,\n837:         initial_power_model=None,\n838:         non_linear_model=None,\n839:         recombination_model=None,\n840:         reionization_model=None,\n841:     ):\n842:         \"\"\"\n843:         Change the classes used to implement parts of the model.\n844: \n845:         :param dark_energy_model: 'fluid', 'ppf', or name of a DarkEnergyModel class\n846:         :param initial_power_model: name of an InitialPower class\n847:         :param non_linear_model: name of a NonLinearModel class\n848:         :param recombination_model: name of RecombinationModel class\n849:         :param reionization_model: name of a ReionizationModel class\n850:         \"\"\"\n851:         if dark_energy_model:\n852:             self.DarkEnergy = self.make_class_named(dark_energy_model, DarkEnergyModel)\n853:         if initial_power_model:\n854:             self.InitPower = self.make_class_named(initial_power_model, InitialPower)\n855:         if non_linear_model:\n856:             self.NonLinearModel = self.make_class_named(non_linear_model, NonLinearModel)\n857:         if recombination_model:\n858:             self.Recomb = self.make_class_named(recombination_model, RecombinationModel)\n859:         if reionization_model:\n860:             self.Reion = self.make_class_named(reionization_model, ReionizationModel)"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/model.py",
+    "sha256": "a92bed930e341eadadf7700e2670882172b8806bbc379cc7cdb18ca76fc97624",
+    "symbol": "set_dark_energy",
+    "start_line": 862,
+    "end_line": 891,
+    "text": "862:     def set_dark_energy(\n863:         self,\n864:         w=-1.0,\n865:         cs2=1.0,\n866:         wa=0,\n867:         use_tabulated_w=False,\n868:         wde_a_array=None,\n869:         wde_w_array=None,\n870:         dark_energy_model=\"fluid\",\n871:     ):\n872:         r\"\"\"\n873:         Set dark energy parameters (use set_dark_energy_w_a to set w(a) from numerical table instead)\n874:         To use a custom dark energy model, assign the class instance to the DarkEnergy field instead.\n875: \n876:         :param w: :math:`w\\equiv p_{\\rm de}/\\rho_{\\rm de}`, assumed constant\n877:         :param wa: evolution of w (for dark_energy_model=ppf)\n878:         :param cs2: rest-frame sound speed squared of dark energy fluid\n879:         :param use_tabulated_w: whether use interpolated w\n880:         :param wde_a_array: array of scale factors\n881:         :param wde_w_array: array of w(a)\n882:         :param dark_energy_model: model to use ('fluid' or 'ppf'), default is 'fluid'\n883:         :return: self\n884:         \"\"\"\n885: \n886:         de = self.make_class_named(dark_energy_model, DarkEnergyEqnOfState)\n887:         de.set_params(\n888:             w=w, wa=wa, cs2=cs2, use_tabulated_w=use_tabulated_w, wde_a_array=wde_a_array, wde_w_array=wde_w_array\n889:         )\n890:         self.DarkEnergy = de\n891:         return self"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "get_derived_params",
+    "start_line": 275,
+    "end_line": 281,
+    "text": "275:     def get_derived_params(self):\n276:         \"\"\"\n277:         :return: dictionary of derived parameter values, indexed by name (age, zstar, thetastar, etc.)\n278:                  Definitions of derived parameters follow those in the Planck parameter papers.\n279:                  Note that all `theta__` derived parameters here are scaled by a factor of 100 for historical reasons.\n280:         \"\"\"\n281:         return dict(zip(model.derived_names, self.ThermoDerivedParams))"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "get_Omega",
+    "start_line": 750,
+    "end_line": 750,
+    "text": "750:     def get_Omega(self, var, z: float = 0) -> float: ..."
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "get_Omega",
+    "start_line": 753,
+    "end_line": 753,
+    "text": "753:     def get_Omega(self, var, z: Array1D) -> np.ndarray: ..."
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "get_Omega",
+    "start_line": 755,
+    "end_line": 765,
+    "text": "755:     def get_Omega(self, var, z: NumberOrArray1D = 0.0):\n756:         r\"\"\"\n757:         Get density relative to critical density of variables var\n758: \n759:         :param var: one of 'K', 'cdm', 'baryon', 'photon', 'neutrino' (massless), 'nu' (massive neutrinos), 'de'\n760:         :param z: redshift\n761:         :return:  :math:`\\Omega_i(a)`\n762:         \"\"\"\n763:         dic = self.get_background_densities(1.0 / (1 + z), [\"tot\", var])\n764:         res = dic[var] / dic[\"tot\"]\n765:         return res[0] if np.isscalar(z) else res"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "comoving_radial_distance",
+    "start_line": 1589,
+    "end_line": 1589,
+    "text": "1589:     def comoving_radial_distance(self, z: float, tol=1e-4) -> float: ..."
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "comoving_radial_distance",
+    "start_line": 1592,
+    "end_line": 1592,
+    "text": "1592:     def comoving_radial_distance(self, z: Array1D, tol=1e-4) -> np.ndarray: ..."
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "comoving_radial_distance",
+    "start_line": 1594,
+    "end_line": 1613,
+    "text": "1594:     def comoving_radial_distance(self, z: NumberOrArray1D, tol=1e-4):\n1595:         \"\"\"\n1596:         Get comoving radial distance from us to redshift z in Mpc. This is efficient for arrays.\n1597: \n1598:         Must have called :meth:`calc_background`, :meth:`calc_background_no_thermo` or calculated transfer\n1599:         functions or power spectra.\n1600: \n1601:         :param z: redshift\n1602:         :param tol: numerical tolerance parameter\n1603:         :return: comoving radial distance (Mpc)\n1604:         \"\"\"\n1605:         if not np.isscalar(z):\n1606:             indices = np.argsort(z)\n1607:             redshifts = np.array(z[indices], dtype=np.float64)  # type: ignore\n1608:             chis = np.empty(redshifts.shape)\n1609:             self.f_ComovingRadialDistanceArr(chis, redshifts, byref(c_int(chis.shape[0])), byref(c_double(tol)))\n1610:             chis[indices] = chis.copy()\n1611:             return chis\n1612:         else:\n1613:             return self.f_ComovingRadialDistance(byref(c_double(z)))"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "hubble_parameter",
+    "start_line": 1705,
+    "end_line": 1705,
+    "text": "1705:     def hubble_parameter(self, z: float) -> float: ..."
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "hubble_parameter",
+    "start_line": 1708,
+    "end_line": 1708,
+    "text": "1708:     def hubble_parameter(self, z: Array1D) -> np.ndarray: ..."
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/results.py",
+    "sha256": "3b31762703c5b3e21132114be0ae1ba37cbffe2d0c6307d7b328ea7f10f4cf64",
+    "symbol": "hubble_parameter",
+    "start_line": 1710,
+    "end_line": 1720,
+    "text": "1710:     def hubble_parameter(self, z: NumberOrArray1D):\n1711:         \"\"\"\n1712:         Get Hubble rate at redshift z, in km/s/Mpc units. Scalar or array.\n1713: \n1714:         Must have called :meth:`calc_background`, :meth:`calc_background_no_thermo` or calculated transfer functions\n1715:         or power spectra.\n1716: \n1717:         :param z: redshift\n1718:         :return: H(z)/[km/s/Mpc]\n1719:         \"\"\"\n1720:         return (constants.c / 1e3) * self.h_of_z(z)"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/camb.py",
+    "sha256": "bb4f751b1b144996933c2c42c4c7102a866552e8c72a944d640c2d8174d76a18",
+    "symbol": "get_background",
+    "start_line": 96,
+    "end_line": 111,
+    "text": "96: def get_background(params, no_thermo=False):\n97:     \"\"\"\n98:     Calculate background cosmology for specified parameters and return :class:`~.results.CAMBdata`, ready to get derived\n99:     parameters and use background functions like :func:`~results.CAMBdata.angular_diameter_distance`.\n100: \n101:     :param params: :class:`.model.CAMBparams` instance\n102:     :param no_thermo: set True if thermal and ionization history not required.\n103:     :return: :class:`~.results.CAMBdata` instance\n104:     \"\"\"\n105: \n106:     res = CAMBdata()\n107:     if no_thermo:\n108:         res.calc_background_no_thermo(params)\n109:     else:\n110:         res.calc_background(params)\n111:     return res"
+  },
+  {
+    "source": "/opt/lal_env/lib/python3.12/site-packages/camb/recombination.py",
+    "sha256": "a7a4d3e1def2529cc1642c20d64d7750bd4f2e6b766dd61cf440994c5be9eb6f",
+    "symbol": "Recfast",
+    "start_line": 75,
+    "end_line": 153,
+    "text": "75: class Recfast(RecombinationModel):\n76:     \"\"\"\n77:     RECFAST recombination model (see recfast source for details).\n78: \n79:     \"\"\"\n80: \n81:     _fields_ = (\n82:         (\"RECFAST_fudge\", c_double),\n83:         (\"RECFAST_fudge_He\", c_double),\n84:         (\"RECFAST_Hswitch\", c_bool),\n85:         (\"RECFAST_He_rate_correction\", c_bool),\n86:         (\"AGauss1\", c_double),\n87:         (\"AGauss2\", c_double),\n88:         (\"zGauss1\", c_double),\n89:         (\"zGauss2\", c_double),\n90:         (\"wGauss1\", c_double),\n91:         (\"wGauss2\", c_double),\n92:         (\"Nz\", c_int),\n93:         (\"use_rosenbrock\", c_bool),\n94:         (\"rosenbrock_handoff_xH\", c_double),\n95:         (\"rosenbrock_tol\", c_double),\n96:     )\n97: \n98:     _fortran_class_module_ = \"Recombination\"\n99:     _fortran_class_name_ = \"TRecfast\"\n100: \n101:     def set_params(self, recfast_approx_model=None):\n102:         \"\"\"\n103:         Set RECFAST approximation parameters.\n104: \n105:         :param recfast_approx_model: optional named approximation parameter set. One of\n106: \n107:             - ``planck``: CAMB v1.x/RECFAST 1.5.2 Planck-era fudge parameters.\n108:             - ``cosmorec``: RECFAST fit with an He rate correction to direct CosmoRec ``accuracy=6`` with\n109:               10 H shells.\n110:             - ``hyrec``: seven-parameter RECFAST fit to direct HyRec-2.\n111: \n112:         :return: self\n113:         \"\"\"\n114:         if recfast_approx_model is not None:\n115:             try:\n116:                 params = recfast_approx_model_params[recfast_approx_model]\n117:             except KeyError as err:\n118:                 allowed = \", \".join(sorted(recfast_approx_model_params))\n119:                 raise CAMBValueError(\n120:                     f\"Unknown RECFAST recfast_approx_model '{recfast_approx_model}'. Use one of: {allowed}\"\n121:                 ) from err\n122:             for name, value in params.items():\n123:                 setattr(self, name, value)\n124: \n125:         return self\n126: \n127:     def write_ini(self, state) -> None:\n128:         super().write_ini(state)\n129:         state.set(\"RECFAST_H_fudge\", self.RECFAST_fudge)\n130:         state.write_fields(\n131:             self,\n132:             names=(\n133:                 \"RECFAST_fudge_He\",\n134:                 \"RECFAST_Hswitch\",\n135:                 \"RECFAST_He_rate_correction\",\n136:                 \"AGauss1\",\n137:                 \"AGauss2\",\n138:                 \"zGauss1\",\n139:                 \"zGauss2\",\n140:                 \"wGauss1\",\n141:                 \"wGauss2\",\n142:                 \"Nz\",\n143:                 \"use_rosenbrock\",\n144:                 \"rosenbrock_handoff_xH\",\n145:                 \"rosenbrock_tol\",\n146:             ),\n147:             rename={\n148:                 \"Nz\": \"RECFAST_nz\",\n149:                 \"use_rosenbrock\": \"RECFAST_use_rosenbrock\",\n150:                 \"rosenbrock_handoff_xH\": \"RECFAST_rosenbrock_handoff_xH\",\n151:                 \"rosenbrock_tol\": \"RECFAST_rosenbrock_tol\",\n152:             },\n153:         )"
+  }
+]

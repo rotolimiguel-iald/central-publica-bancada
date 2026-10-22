@@ -1,0 +1,64 @@
+--- sealed_tail/supervisor.py
++++ nc02/supervisor.py
+@@ -21,16 +21,10 @@
+ sys.path.insert(0, str(PACKAGE))
+ from finalization import finalize_unit
+ TOTAL_SECONDS = 30.0
+-WORK_SECONDS = 25.0
+-COOPERATIVE_SECONDS = 23.0
+-PRIMARY_IDS = ["T01_ATOM", "T02_THRESHOLD_AND_DOMAIN", "T03_EVEN", "T04_ODD",
+-               "T05_MONOTONE_D148", "T06_NO_FALSE_UNDERFLOW", "T07_LOWER_ENDPOINT",
+-               "T08_AGGREGATION_AND_FAILURE"]
+-NEGATIVE_IDS = ["N01_IDENTITY_AND_BINDING", "N02_CERTIFICATION_NOT_FLAGS",
+-                "N03_CANONICAL_AND_SIZE", "N04_RESOURCE_AFTER_SEMANTICS",
+-                "N05_SCRATCH_PREFLIGHT", "N06_FAMILY_DUPLICATES_AND_TAMPERING",
+-                "N07_ROOT_CERTIFICATE_BOUNDARIES", "N08_FROZEN_FAMILY_BINDING",
+-                "N09_FINALIZATION_DEADLINES_WITH_DOUBLES"]
++WORK_SECONDS = 10.0
++COOPERATIVE_SECONDS = 8.0
++PRIMARY_IDS = ["NC02-RAT-01-POSITIVE"]
++NEGATIVE_IDS = ["NC02-RAT-01-NEGATIVE-ANNIHILATION"]
+ 
+ 
+ def sha(data):
+@@ -109,7 +103,7 @@
+     authorization = json.loads(authorization_bytes)
+     expected = {
+         "request_id": identity["request_id"], "authorized": True, "authorized_by": "ROOT",
+-        "scope": "F9_SYNTHETIC_TAIL_CONTROLS_ONLY",
++        "scope": "F9_SYNTHETIC_NC02_RATIONAL_ONLY",
+         "contract_sha256": args.contract_sha256,
+         "execution_inputs_sha256": args.inputs_sha256,
+         "one_execution_only": True, "total_wall_seconds": 30,
+@@ -198,7 +192,7 @@
+         # Start immediately before launch; startup is inside the same total budget.
+         execution_started = time.monotonic()
+         total_deadline = execution_started + TOTAL_SECONDS
+-        argv = [sys.executable, "-I", "-X", "utf8", str(PACKAGE / "worker_controls.py"),
++        argv = [sys.executable, "-I", "-S", "-B", "-X", "utf8", str(PACKAGE / "worker_controls.py"),
+                 "--request-id", identity["request_id"], "--claim-token", token,
+                 "--deadline-monotonic", repr(execution_started + COOPERATIVE_SECONDS)]
+         process = subprocess.Popen(argv, cwd=str(PACKAGE), env=environment,
+@@ -219,7 +213,7 @@
+             detail.update(cleanup)
+             detail["reason"] = "WORK_DEADLINE_EXCEEDED"
+         else:
+-            if len(stdout) > 2 * 1024 * 1024 or len(stderr) > 65536:
++            if len(stdout) > 128 * 1024 or len(stderr) > 8192:
+                 status = "FAILED_OUTPUT_ACCEPTANCE_LIMIT"
+             elif remaining(total_deadline) <= 0:
+                 status = "FAILED_NOMINAL_TOTAL_LIMIT"
+@@ -236,7 +230,12 @@
+                     worker.get("audit_denied") == [] and
+                     worker.get("synthetic_only") is True and
+                     worker.get("physical_certification") is False and
+-                    worker.get("observed_data") is False)
++                    worker.get("observed_data") is False and
++                    worker.get("claim_token") == token and
++                    worker.get("execution_inputs_sha256") == args.inputs_sha256 and
++                    worker.get("contract_sha256") == args.contract_sha256 and
++                    type(worker.get("peak_working_set_bytes")) is int and
++                    worker["peak_working_set_bytes"] <= 256 * 1024 * 1024)
+                 status = "PASS" if valid else "FAILED_WORKER_OR_RECEIPT"
+                 if remaining(total_deadline) <= 0:
+                     status = "FAILED_NOMINAL_TOTAL_LIMIT"

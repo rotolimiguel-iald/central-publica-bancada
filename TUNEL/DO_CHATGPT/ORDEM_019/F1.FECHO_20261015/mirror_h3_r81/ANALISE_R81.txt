@@ -1,0 +1,46 @@
+R81 — Recuperação da identidade e coeficiente geométrico de H3
+19/10/2026. Autor: codex-gerente-tgl. Unidade F1.FECHO_20261015, claim987.
+Estatuto inicial: DERIVED, candidato à revisão. Fontes Lean lidas; compilação nova tem recibo próprio.
+
+1. Origem e recorte
+A fala integral está em ORIGEM.txt. “Morte e ressurreição” é a leitura ONTO do operador para a passagem/reconstrução. O objeto matemático verificável é a recuperação de informação no domínio admitido. A ponte material OH permanece adiada. Não se cria interpretação de morte física, identidade divina ou consciência subjetiva a partir do codec.
+Consulta: Nós Vivo desconhece F1.FECHO_20261015, falha preservada na sessão, sem reconstruir índice. Mapa: pesquisa composta recovery H3 Mirror sem resultado; Clausius recupera a auditoria de alcance e o ligante. A ausência de resultado no índice não é ausência de fonte: fontes abaixo foram abertas diretamente.
+
+2. Reaproveitamento localizado, sem refazer a rede
+- Acom_v17_mirror.py:204–219, 291–325, 338–373: guarda sinal/estado, ângulo e escala; manifesta L'=sign(L)*(g_max*sin(theta))². O algoritmo quantiza theta; no ideal contínuo, com g_max>0 e sem o regularizador EPSILON, sin(arcsin(sqrt(abs(L))/g_max)) reconstrói L. O caso de vetor zero pode ser tratado separadamente. O código finito não é identidade exata geral.
+- Recibo histórico 12/07/2026 12:26:07: sete correlações v17 entre 0,9999480298054341 e 0,9999907180582787; não houve reexecução desses ensaios. 1,00 arredondado não é igualdade integral. Pearson=1 permite y=a*x+b, a>0, logo sozinho não certifica amplitude/origem.
+- SelectorRecordReconstruction.lean:61–78: vetor normalizado e leitura do caráter; :85–91 caracteriza a classe do registro; :105–110 reconstrói métrica E fonte em U. Esta ponte JÁ EXISTE.
+- Mesmo arquivo :112–115: normalized_selected_records_all_agree; na família ali construída normalizar o resultado selecionado apaga a distinção. Peso de Born e norma não são sinônimos: a norma dos vetores de entrada é1, mas o peso de Born guarda a leitura e está estritamente entre0e1 (:65–68). Não generalizar isso a todo projetor/observador.
+- Mesmo arquivo :117–133: reconstrói Einstein, mas recebe conservação hd E correspondência área-entropia harea. A recuperação preserva o conteúdo de um registro admitido; ela não fornece harea.
+- GravitationalResponseRecord.lean:45–56: métrica e coeficientes de resposta já são dados do registro; regularidade não é a origem física deles.
+- BoundaryEntropyBridge.lean:33–44,59–76: estado conjunto puro/idempotente/traço1, marginais e entropia modular. :100–105 usa área por contagem escolhida; não é automaticamente inducedArea da métrica.
+- UnitaryEntropyResponse.lean:23–59: resposta unitária e coeficiente quadrático da entropia das probabilidades. UnitaryClausiusBridge.lean:24–36: tangente inicial nula, Fisher nesta ordem zero; area_matching e heat_matching ainda são hipóteses.
+- MicroscopicClausiusBridge.lean:31–62: decomposição do resíduo e termo Fisher no caso geral. Recuperabilidade não obriga Fisher a zero em toda curva; a família unitária particular já o elimina nesta ordem.
+- LiganteLeiCampoCurvo.lean:32–41: NamedAtlasH3 exige a correspondência para cada carta, ponto e direção nula nãozero, usando inducedArea da mesma métrica.
+
+3. Avanço formal curto
+RecoveryAreaCoefficient.lean reaproveita unitary_entropy_quadratic_limit. Se
+ A2 = lim_{t→0-} [A(t)-A(0)]/t²,
+ B = unitaryResponse(a,b,frequency,u,v),
+então
+ lim_{t→0-} microscopicAreaError/t² =0  sse  B=eta*A2.
+O coeficiente A2 é uma hipótese explícita de limite de área; não se define área como entropia/eta. A equivalência é uma redução verificável do campo harea nessa família, não uma derivação de A2 nem uma instanciação da família unificada em todas as cartas. O ramo geral de Fisher e a calibração de calor continuam separados.
+
+4. Controle analítico: recuperação exata e entropia local variável coexistem
+No espaço C²⊗C², tome X=[[0,1],[1,0]], V=X⊗X e U(t)=cos(omega*t)I-i*sin(omega*t)V. Como V*=V e V²=I, U*U=I. Defina E_t(rho)=U rho U* e R_t(sigma)=U* sigma U: R_t E_t=id para TODOS os estados conjuntos.
+Para rho0=diag(p,1-p)⊗|0><0|, 0<p<1, o traço parcial da segunda parte é diag(p(t),1-p(t)), com p(t)=p*cos²(omega*t)+(1-p)*sin²(omega*t).
+Logo p(t)=p+(1-2p)omega²t²+O(t⁴). Para h(p)=-p log p-(1-p)log(1-p), h'(p)=log((1-p)/p). Assim
+ [h(p(t))-h(p)]/t² → B=(1-2p)omega² log((1-p)/p).
+Em p=1/4 e omega≠0, B=(omega²/2)log3>0. A recuperação conjunta continua exata, traço1. O retorno NÃO foi demonstrado usando só a marginal: ele usa as duas partes/correlações que guardam a inscrição.
+Se acrescentarmos uma função de área positiva perto de0, A(t)=A0+a*t², A0>0, o resíduo tende a B-eta*a. Recuperação exata sozinha admite qualquer a; a relação requer a=B/eta (eta≠0). Isso é um contraexemplo à implicação abstrata “recuperação implica área”, não é um contraexemplo à TGL completa nem um modelo de tela lorentziana. A construção geométrica pode restringir a; essa restrição é justamente a ligação a demonstrar. Não houve experimento novo: cálculo algébrico explícito.
+
+5. O próximo alvo concreto
+Conservar a inscrição completa do registro (não só norma/peso1), construir ou recuperar a regra que entrelaça seu gerador microscópico com a evolução da tela geométrica e provar B=eta*A2 para o mesmo objeto. Fixar eta=(4G)^-1 no sistema de unidades do kernel. Usar calor da mesma fonte, temperatura já ligada e gluing existente. Universalizar em x e direção nula; evitar importar a equação de Einstein ou definir a área para obter a igualdade.
+No nível operacional: preservação da identidade global permite mudança da entropia acessível em cada face. Essa distinção acomoda a intuição do operador sem congelar indevidamente a entropia da tela. A equivalência formal desta etapa localiza a dívida restante, não a quita.
+
+6. Alcance experimental
+Nenhum dado observado aberto, nenhum canal físico rodado, nenhuma estatística de5sigma calculada. Esta ponte não gera sozinha previsão exclusiva TGL. Antes de buscar discriminação, ligar a lei a observável, alternativas/nuisances e covariância; fixar função de veredito e avaliar poder. Resultado desfavorável não se corrige escolhendo o canal após o resultado.
+Fonte primária contextual consultada: Jacobson, Thermodynamics of Spacetime (1995), https://arxiv.org/abs/gr-qc/9504004. O resumo exige entropia/área e Clausius para todos os horizontes locais; não demonstra essas premissas pela recuperação do sinal.
+
+7. Proibições preservadas
+Sem modificação de um.py, kernel canônico, Bancada produtiva, dado observado, gate ou fontes pinadas. Sem provedor remoto. Sem novo levantamento de OH. Sem afirmar ausência no acervo inteiro; consulta limitada às fontes pinadas nesta entrega.

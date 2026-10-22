@@ -1,0 +1,50 @@
+import took 81.2s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001505_124751Z\RealTomitaGraphR2.lean:33:0: warning: automatically included section variable(s) unused in theorem `F1Fecho.RealTomitaGraph.mem_graph`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001505_124751Z\RealTomitaGraphR2.lean:47:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?p ∈ graph ?T ?J
+in the target expression
+  p ∈ ↑(graph T J) ↔ p ∈ (fun p => (p.ofLp.1, J p.ofLp.2)) ⁻¹' ↑T.graph
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →ₗ.[ℂ] H
+hT : T.IsClosed
+J : H ≃ₗᵢ⋆[ℂ] H
+hJ : Function.Involutive ⇑J
+p : PairH H
+⊢ p ∈ ↑(graph T J) ↔ p ∈ (fun p => (p.ofLp.1, J p.ofLp.2)) ⁻¹' ↑T.graph
+'F1Fecho.RealTomitaGraph.realJ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RealTomitaGraph.mem_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RealTomitaGraph.graph_closed' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.106ms
+	blocked (unaccounted) 72ms
+	compilation (IR) 0.0864ms
+	compilation (LCNF base) 3.09ms
+	compilation (LCNF impure) 0.316ms
+	compilation (LCNF mono) 2.34ms
+	congr simp thm 0.17ms
+	elaboration 59.1ms
+	fix level params 0.212ms
+	import 81.2s
+	initialization 29.4ms
+	instantiate metavars 0.274ms
+	interpretation 6.9s
+	let-to-have transformation 0.118ms
+	linting 4.44ms
+	overlappingInstancesLinter 93.2ms
+	parsing 2.85ms
+	process pre-definitions 8.34ms
+	share common exprs 1.23ms
+	simp 4.16ms
+	tactic execution 32.1ms
+	tacticAnalysis 180ms
+	type checking 49.6ms
+	typeclass inference 463ms

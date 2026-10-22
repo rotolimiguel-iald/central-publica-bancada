@@ -1,0 +1,27 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T040913_716497Z\SpacelikeAxisRotationR1.lean:19:8: warning: This simp argument is unused:
+  WithLp.prod_norm_sq_eq_of_L2
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵W̵i̵t̵h̵L̵p̵.̵p̵r̵o̵d̵_̵n̵o̵r̵m̵_̵s̵q̵_̵e̵q̵_̵o̵f̵_̵L̵2̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T040913_716497Z\SpacelikeAxisRotationR1.lean:23:62: error: unsolved goals
+z : V
+v : Spatial := spacetimeSpatial z
+w : Spatial := spatialChart (![0, 0], ‖v‖)
+hn : ‖v‖ = ‖w‖
+Q : Spatial ≃ₗᵢ[ℝ] Spatial := (ℝ ∙ (v - w))ᗮ.reflection
+hQ : Q v = w
+hp : (spatialAction Q) (![z 2, z 3], z 1) = (![0, 0], ‖v‖)
+⊢ (have p := (![0, 0], ‖v‖);
+    ![z 0, p.2, p.1 0, p.1 1]) =
+    ![z 0, ‖spacetimeSpatial z‖, 0, 0]
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T040913_716497Z\SpacelikeAxisRotationR1.lean:40:4: error: 'change' tactic failed, pattern
+  orbitPairing z z = ?m.50
+is not definitionally equal to target
+  minkowskiSq z = z 0 ^ 2 - ‖spacetimeSpatial z‖ ^ 2
+'F1Fecho.SpacelikeGeometry.spatial_axis_rotation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.SpacelikeGeometry.spacelike_rotates_into_rightWedge' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

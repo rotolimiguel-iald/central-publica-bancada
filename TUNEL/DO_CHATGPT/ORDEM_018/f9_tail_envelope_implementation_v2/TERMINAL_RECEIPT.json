@@ -1,0 +1,292 @@
+{
+  "request_id": "4893d182-7efc-419f-ac8a-ec6803ea8d7a",
+  "status": "PENDING_FINAL_DEADLINE_CHECK",
+  "supervisor_pid": 231416,
+  "worker_pid": 78784,
+  "worker_returncode": 0,
+  "authorization_sha256": "03418bcc438d42a5e9ad7a8b2846829f045eaa0ec650d951c449ef70dd469651",
+  "contract_sha256": "c5cb151a622d0df707dff686dfee98064512bf1049f4f46a171a9e81fd469513",
+  "execution_inputs_sha256": "337b9ba61fe8267ddbc5d253192989d76183ab5618fd27917e47620e2e921204",
+  "preflight_seconds": 0.08157999999821186,
+  "execution_started_monotonic": 1257004.2472126,
+  "wall_before_terminal_persistence_seconds": 0.1495185000821948,
+  "nominal_total_seconds": 30.0,
+  "extra_cleanup_seconds": 0,
+  "output_caps_semantics": "Post-communicate acceptance caps only; retained pipe output is not memory-bounded by these checks.",
+  "OS_deadline_guarantee": false,
+  "stdout_sha256": "d65d4b786d590baddcdd48cdac89d9d2bb977fd21d1f1b2c5203fe726844922f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_excerpt": "",
+  "worker": {
+    "request_id": "4893d182-7efc-419f-ac8a-ec6803ea8d7a",
+    "status": "PASS",
+    "worker_pid": 78784,
+    "supervisor_pid": 231416,
+    "results": [
+      {
+        "id": "T01_ATOM",
+        "status": "PASS",
+        "result": {
+          "F9_statuses": [
+            "VALID_ATOM_TAIL",
+            "VALID_ATOM_TAIL",
+            "INVALID"
+          ],
+          "positive_p": null,
+          "abstract_tail_not_used_as_API_output": true
+        }
+      },
+      {
+        "id": "T02_THRESHOLD_AND_DOMAIN",
+        "status": "PASS",
+        "result": {
+          "threshold_cases": 3,
+          "invalid_degree_or_float_cases": 4
+        }
+      },
+      {
+        "id": "T03_EVEN",
+        "status": "PASS",
+        "result": {
+          "status": "VALID_CERTIFIED_ENVELOPE",
+          "certificate_sha256": "406886c80b76e9d78f5c54108004f680aa8eb8589b17e9938af987594ca3cdf7",
+          "p_upper": {
+            "numerator": "368596788526828462585717391733",
+            "denominator": "500000000000000000000000000000"
+          }
+        }
+      },
+      {
+        "id": "T04_ODD",
+        "status": "PASS",
+        "result": {
+          "status": "VALID_CERTIFIED_ENVELOPE",
+          "certificate_sha256": "6f890164da2d4883d3178548cda1a2ecc9f4b890a93d67c38dd7f2a24f0b2229",
+          "p_upper": {
+            "numerator": "633876087669842049074794886189",
+            "denominator": "1000000000000000000000000000000"
+          }
+        }
+      },
+      {
+        "id": "T05_MONOTONE_D148",
+        "status": "PASS",
+        "result": {
+          "p_upper": [
+            {
+              "numerator": "1",
+              "denominator": "1"
+            },
+            {
+              "numerator": "555971071208139771752219",
+              "denominator": "500000000000000000000000000000"
+            },
+            {
+              "numerator": "134379",
+              "denominator": "1000000000000000000000000000000"
+            }
+          ],
+          "scope": "three fixed inputs only"
+        }
+      },
+      {
+        "id": "T06_NO_FALSE_UNDERFLOW",
+        "status": "PASS",
+        "result": {
+          "status": "VALID_CERTIFIED_ENVELOPE",
+          "certificate_sha256": "d503f6beb1746b4e6d5ed36a5327c8d13801433cecc1b9bacae7208ec9323910",
+          "p_upper": {
+            "numerator": "1",
+            "denominator": "1000000000000000000000000000000"
+          }
+        }
+      },
+      {
+        "id": "T07_LOWER_ENDPOINT",
+        "status": "PASS",
+        "result": {
+          "lower_endpoint_preserved": true,
+          "local_upper_rejected": true,
+          "mutated_endpoint_rejected": true
+        }
+      },
+      {
+        "id": "T08_AGGREGATION_AND_FAILURE",
+        "status": "PASS",
+        "result": {
+          "complete": {
+            "status": "COMPLETE_CONDITIONAL_BOUND",
+            "p_robust": {
+              "numerator": "1",
+              "denominator": "500"
+            },
+            "p_FWER_upper": {
+              "numerator": "1",
+              "denominator": "100"
+            },
+            "family_factor": 5,
+            "verified_records": [
+              {
+                "scenario_id": "a",
+                "scope": "SYNTHETIC_CONTROL_ONLY",
+                "record_sha256": "705c26b2e905ef197fc1ebc15726dfded624b72765084ab885dbfab5af1b1cc1"
+              },
+              {
+                "scenario_id": "b",
+                "scope": "SYNTHETIC_CONTROL_ONLY",
+                "record_sha256": "613fb8386f86cc18244b44509862fc6653532e9185eb3c39d9898590e48acb03"
+              },
+              {
+                "scenario_id": "c",
+                "scope": "SYNTHETIC_CONTROL_ONLY",
+                "record_sha256": "5981d44439d4e73c39f55ca4595c89a09b4b10285c93c6593ef135fedcbae9ef"
+              }
+            ],
+            "verified_family": {
+              "payload_sha256": "483143527e6588ca12001575f33d1e5336a1945bde36ba8205660d04600bf125",
+              "scope": "SYNTHETIC_CONTROL_ONLY",
+              "ordered_scenarios": [
+                "a",
+                "b",
+                "c"
+              ],
+              "verifier_reference_sha256": "325dae91510432842e942a6c9a27ed89105b00523b2b8b645f16f0bf8123cabd"
+            },
+            "alpha_evaluated": false,
+            "physical_certification": false,
+            "automatic_rejection": false
+          },
+          "missing_and_invalid_unavailable": true
+        }
+      },
+      {
+        "id": "N01_IDENTITY_AND_BINDING",
+        "status": "PASS",
+        "result": {
+          "negative_inputs": 5
+        }
+      },
+      {
+        "id": "N02_CERTIFICATION_NOT_FLAGS",
+        "status": "PASS",
+        "result": {
+          "negative_verifiers": 4,
+          "physical_certificates_created": 0
+        }
+      },
+      {
+        "id": "N03_CANONICAL_AND_SIZE",
+        "status": "PASS",
+        "result": {
+          "negative_encodings": 11,
+          "verifier_calls": 0
+        }
+      },
+      {
+        "id": "N04_RESOURCE_AFTER_SEMANTICS",
+        "status": "PASS",
+        "result": {
+          "resource_upper": {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          "missing_semantics_not_hidden": true,
+          "positive_d0_clock_calls": 0
+        }
+      },
+      {
+        "id": "N05_SCRATCH_PREFLIGHT",
+        "status": "PASS",
+        "result": {
+          "scratch_cap": 524288,
+          "blocked_before_product": true
+        }
+      },
+      {
+        "id": "N06_FAMILY_DUPLICATES_AND_TAMPERING",
+        "status": "PASS",
+        "result": {
+          "negative_family_or_record_inputs": 5
+        }
+      },
+      {
+        "id": "N07_ROOT_CERTIFICATE_BOUNDARIES",
+        "status": "PASS",
+        "result": {
+          "perfect_square": true,
+          "grid_boundary": true,
+          "non_square_upper": true,
+          "invalid_domains": 4
+        }
+      },
+      {
+        "id": "N08_FROZEN_FAMILY_BINDING",
+        "status": "PASS",
+        "result": {
+          "same_pin_subset_rejected": true,
+          "silent_order_change_rejected": true,
+          "row_only_receipts_rejected": true,
+          "tail_family_binding_required": true
+        }
+      },
+      {
+        "id": "N09_FINALIZATION_DEADLINES_WITH_DOUBLES",
+        "status": "PASS",
+        "result": {
+          "doubles_only": true,
+          "scenarios": [
+            {
+              "id": "on_time",
+              "exit": 0,
+              "invalidation_count": 0
+            },
+            {
+              "id": "late_persist",
+              "exit": 1,
+              "invalidation_count": 1
+            },
+            {
+              "id": "late_digest",
+              "exit": 1,
+              "invalidation_count": 1
+            },
+            {
+              "id": "late_output",
+              "exit": 1,
+              "invalidation_count": 1
+            },
+            {
+              "id": "persist_error",
+              "exit": 1,
+              "invalidation_count": 1
+            },
+            {
+              "id": "emit_error",
+              "exit": 1,
+              "invalidation_count": 1
+            }
+          ],
+          "real_IO_performed": false
+        }
+      }
+    ],
+    "primary_count_expected": 8,
+    "negative_group_count_expected": 9,
+    "error": null,
+    "audit_denied": [],
+    "wall_s": 0.03793909982778132,
+    "synthetic_only": true,
+    "physical_certification": false,
+    "observed_data": false,
+    "remote_calls": 0,
+    "MC": 0,
+    "CAMB": 0
+  },
+  "detail": {},
+  "synthetic_only": true,
+  "physical_certification": false,
+  "automatic_retry": false,
+  "controls_status": "PASS",
+  "acceptance_rule": "Acceptance requires external supervisor exit0, this pinned provisional receipt with controls_status PASS, and no FINALIZATION_FAILURE.json. A provisional receipt or stdout message alone is never terminal PASS.",
+  "supervisor_exit_required": 0
+}

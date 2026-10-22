@@ -1,0 +1,27 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005839_048108Z\BoundedScalarL2LimitR1.lean:17:32: error(lean.unknownIdentifier): Unknown identifier `StrongIntegral.Family`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005839_048108Z\BoundedScalarL2LimitR1.lean:27:4: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005839_048108Z\BoundedScalarL2LimitR1.lean:31:8: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005839_048108Z\BoundedScalarL2LimitR1.lean:46:73: error: typeclass instance problem is stuck
+  SeminormedAddGroup ?m.157
+
+Note: Lean will not try to resolve this typeclass instance problem because the type argument to `SeminormedAddGroup` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005839_048108Z\BoundedScalarL2LimitR1.lean:58:42: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+w : ℕ → ℝ → ℂ
+hw : ∀ (n : ℕ), Continuous (w n)
+C : ℝ
+hC : 0 ≤ C
+hbound : ∀ (n : ℕ) (r : ℝ), ‖w n r‖ ≤ C
+hlim : ∀ (r : ℝ), Tendsto (fun n => w n r) atTop (𝓝 1)
+f : ↥(RegularHilbert H)
+g : ℕ → ℝ → H := fun n r => w n r • ↑↑f r - ↑↑f r
+hb : ∀ (n : ℕ) (r : ℝ), ‖g n r‖ ≤ (C + 1) * ‖↑↑f r‖
+r : ℝ
+⊢ Tendsto (fun n => ‖g n r‖ ^ 2) atTop (𝓝 0)
+'F1Fecho.BoundedScalarL2.multiply_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.BoundedScalarL2.multiply_tendsto' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

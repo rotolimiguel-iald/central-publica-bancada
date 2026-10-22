@@ -1,0 +1,107 @@
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 139ms
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 132ms
+import took 69.3s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:36:1: warning: automatically included section variable(s) unused in theorem `F1Fecho.RealCompactConservation.compact_test_integrable`:
+  [FiniteDimensional ℝ E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional ℝ E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:89:4: error: Application type mismatch: The argument
+  PiLp.continuous_toLp
+has type
+  ∀ (p : ENNReal) {ι : Type ?u.19} (β : ι → Type ?u.18) [inst : (i : ι) → TopologicalSpace (β i)],
+    Continuous (WithLp.toLp p)
+but is expected to have type
+  Continuous (WithLp.toLp 2)
+in the application
+  Continuous.comp (pointStressForm_continuous ψ ψ μ ν) PiLp.continuous_toLp
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:94:4: error: Application type mismatch: The argument
+  PiLp.continuous_toLp
+has type
+  ∀ (p : ENNReal) {ι : Type ?u.20} (β : ι → Type ?u.19) [inst : (i : ι) → TopologicalSpace (β i)],
+    Continuous (WithLp.toLp p)
+but is expected to have type
+  Continuous (WithLp.toLp 2)
+in the application
+  Continuous.comp (pointStressForm_partial_continuous ψ ψ ρ μ ν) PiLp.continuous_toLp
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:107:2: error: Type mismatch: After simplification, term
+  hr
+ has type
+  @HasDerivAt ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.normedAddCommGroup.toAddCommGroup
+    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace ⋯
+    (⇑Complex.reCLM ∘ fun t => pointStressForm ψ ψ μ ν (WithLp.toLp 2 x + t • spacetimeBasis ρ))
+    (deriv (fun t => pointStressForm ψ ψ μ ν (WithLp.toLp 2 x + t • spacetimeBasis ρ)) 0).re 0
+but is expected to have type
+  @HasDerivAt ℝ DenselyNormedField.toNontriviallyNormedField ℝ Real.normedAddCommGroup.toAddCommGroup
+    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace ⋯
+    (fun t => (pointStressForm ψ ψ μ ν (WithLp.toLp 2 x + t • spacetimeBasis ρ)).re)
+    (deriv (fun t => pointStressForm ψ ψ μ ν (WithLp.toLp 2 x + t • spacetimeBasis ρ)) 0).re 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:117:14: error(lean.unknownIdentifier): Unknown constant `Complex.sum_re`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:117:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  (∑ x_1,
+        ↑(metricSignV32 x_1) *
+          deriv (fun t => pointStressForm ψ ψ x_1 ν (WithLp.toLp 2 x + t • spacetimeBasis x_1)) 0).re =
+    0
+but is expected to have type
+  ∑ x_1,
+      metricSignV32 x_1 * (deriv (fun t => pointStressForm ψ ψ x_1 ν (WithLp.toLp 2 x + t • spacetimeBasis x_1)) 0).re =
+    0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:143:31: error(lean.invalidField): Invalid field `transpose`: The environment does not contain `Function.transpose`, so it is not possible to project the field `transpose` from an expression
+  realCoordinateStress ψ x
+of type `Fin 4 → Fin 4 → ℝ`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:148:46: error: unsolved goals
+x : Fin 4 → ℝ
+μ ν : Fin 4
+⊢ 0 = 0 μ ν
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T133508_005370Z\RegularFockRealCoordinateStressR1.lean:150:73: warning: This simp argument is unused:
+  Matrix.zero_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [̵r̵e̵a̵l̵C̵o̵o̵r̵d̵i̵n̵a̵t̵e̵S̵t̵r̵e̵s̵s̵,̵p̵o̵i̵n̵t̵S̵t̵r̵e̵s̵s̵F̵o̵r̵m̵_̵v̵a̵c̵u̵u̵m̵,̵C̵o̵m̵p̵l̵e̵x̵.̵z̵e̵r̵o̵_̵r̵e̵,̵M̵a̵t̵r̵i̵x̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵]̵[̲r̲e̲a̲l̲C̲o̲o̲r̲d̲i̲n̲a̲t̲e̲S̲t̲r̲e̲s̲s̲,̲ ̲p̲o̲i̲n̲t̲S̲t̲r̲e̲s̲s̲F̲o̲r̲m̲_̲v̲a̲c̲u̲u̲m̲,̲ ̲C̲o̲m̲p̲l̲e̲x̲.̲z̲e̲r̲o̲_̲r̲e̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.RealCompactConservation.compact_test_ibp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RealCompactConservation.weak_conservation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_hasLineDerivAt' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_test_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_conserved' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_symmetric' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_vacuum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_nontrivial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.115ms
+	blocked (unaccounted) 330ms
+	congr simp thm 3.07ms
+	elaboration 119ms
+	fix level params 1.06ms
+	import 69.3s
+	initialization 31.8ms
+	instantiate metavars 0.343ms
+	interpretation 9.54s
+	let-to-have transformation 1.2ms
+	linting 14.4ms
+	overlappingInstancesLinter 34.5ms
+	parsing 8.39ms
+	process pre-definitions 11.8ms
+	share common exprs 5.04ms
+	simp 57.8ms
+	tactic execution 161ms
+	tacticAnalysis 46.5ms
+	type checking 235ms
+	typeclass inference 867ms

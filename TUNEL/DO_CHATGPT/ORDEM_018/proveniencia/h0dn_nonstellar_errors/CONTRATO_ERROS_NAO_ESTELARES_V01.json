@@ -1,0 +1,217 @@
+{
+  "status": "CANDIDATE_ERROR_CONTRACT_NOT_GLOBAL_C_NOT_V1",
+  "scope": "Nonstellar error provenance for pinned H0DN V01; no means, fit or upstream execution",
+  "upstream_variant": "V01 - Baseline + JAGB",
+  "selection_is_not_preregistration_V1": true,
+  "row_order_derived_from_equations_py": [
+    {
+      "block": "stellar_context_only",
+      "count": 178,
+      "zero_based_start": 0,
+      "units": "mag",
+      "handled_elsewhere": true
+    },
+    {
+      "block": "group_ties",
+      "count": 13,
+      "zero_based_start": 178,
+      "units": "mag"
+    },
+    {
+      "block": "SN_calibrators",
+      "count": 55,
+      "zero_based_start": 191,
+      "units": "mag"
+    },
+    {
+      "block": "SBF_calibrators",
+      "count": 14,
+      "zero_based_start": 246,
+      "units": "mag"
+    },
+    {
+      "block": "SN_intercept",
+      "count": 1,
+      "zero_based_start": 260,
+      "units": "log10 units"
+    },
+    {
+      "block": "SBF_intercept",
+      "count": 1,
+      "zero_based_start": 261,
+      "units": "log10 units"
+    },
+    {
+      "block": "megamasers",
+      "count": 5,
+      "zero_based_start": 262,
+      "units": "log10 units"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "SN_calibrators",
+      "metadata_key": "SN_calibrators",
+      "variance": "sigma_file^2 + sigma_intrinsic_config^2",
+      "config_intrinsic_mag": "0",
+      "offdiagonal_upstream": "zero",
+      "source_kind": "Published upstream per-row errors plus configurable independent intrinsic variance; no full calibrator covariance supplied to this function.",
+      "code": [
+        "main.py:240-245",
+        "equations.py:399-413"
+      ]
+    },
+    {
+      "id": "SBF_calibrators",
+      "metadata_key": "SBF_calibrators",
+      "variance": "sigma_m110^2 + sigma_M110^2",
+      "offdiagonal_upstream": "zero",
+      "source_kind": "Published upstream per-row errors; upstream quadrature omits the -2 Cov(m110,M110) term and cross-host covariance.",
+      "code": [
+        "equations.py:445-458"
+      ]
+    },
+    {
+      "id": "group_ties",
+      "metadata_key": "group_equations",
+      "variance": "sigma_depth^2",
+      "group_error_mag": {
+        "Fornax": "0.057",
+        "Virgo": "0.086"
+      },
+      "offdiagonal_upstream": "zero; shared group distance parameter resides in design, not a second error covariance",
+      "source_kind": "Input group-depth/scatter constraint; not a measured matrix of all host distances.",
+      "code": [
+        "data_loader.py:100-128",
+        "equations.py:380-396"
+      ]
+    },
+    {
+      "id": "SN_intercept",
+      "metadata_key": "SN_flow_error_inputs",
+      "covariance_input": "Pinned sn1a_covar_pp.dat, 277x277, mag^2, original row order",
+      "selected_peculiar_velocity": "vp_2mpp",
+      "redshift_velocity_mapping": {
+        "c_km_s": "299792.458",
+        "z_pec": "sqrt((1+v_pec/c)/(1-v_pec/c))-1",
+        "z_corr": "(1+z_cmb)/(1+z_pec)-1",
+        "v_corr": "c*((1+z_corr)^2-1)/((1+z_corr)^2+1)"
+      },
+      "per_row_velocity_variance": "[log10(v_corr+240 km/s)-log10(v_corr)]^2",
+      "covariance_in_intercept_units": "V_SN=C_mag/25 + diag(velocity_variance), restricted by same row selection if any",
+      "variance": "1/(1^T V_SN^{-1} 1)",
+      "variance_evaluated": false,
+      "conditional_error_depends_on_q0_j0": false,
+      "mean_depends_on_q0_j0": true,
+      "mean_cosmographic_factor": "K(z)=1+(1-q0)z/2-(1-q0-3q0^2+j0)z^2/6",
+      "notes": [
+        "No active redshift cut in V01: all 277 rows retained.",
+        "Covariance path supersedes mb_err in compute_alpha; mb_err is not added again.",
+        "Optional intrinsic increment in mb_err does not alter the supplied covariance path; current configured extra intrinsic is zero.",
+        "Upstream uses ordinary inverse, not the qualified support guard; later assembly must verify support and avoid a silent inverse-to-pseudoinverse replacement.",
+        "zhel enters the mean transformation, not this implemented error propagation; it was not extracted."
+      ],
+      "code": [
+        "data_loader.py:265-267,318-323",
+        "main.py:399-418",
+        "equations.py:464-492,520-527",
+        "intercept.py:157-192,208-241"
+      ]
+    },
+    {
+      "id": "SBF_intercept",
+      "metadata_key": "SBF_flow_error_inputs",
+      "selected_velocity": "v2m++",
+      "count": 61,
+      "per_row_variance": "(0.2*sigma_m110)^2 + [log10(v_2mpp+240 km/s)-log10(v_2mpp)]^2",
+      "variance": "1/sum_i(1/per_row_variance_i)",
+      "variance_evaluated": false,
+      "conditional_error_depends_on_q0_j0": false,
+      "mean_depends_on_q0_j0_upstream": false,
+      "upstream_flags": {
+        "optical": true,
+        "ignore_cosmology": true
+      },
+      "unused_available_error": "e(M110): nonzero in all 61 flow rows; available does not establish that it should be added independently or is already absorbed.",
+      "source_kind": "Upstream inverse-variance compression with independent flow errors; no supplied SBF covariance used by the call.",
+      "code": [
+        "equations.py:594-625",
+        "intercept.py:127-155",
+        "main.py:496-520"
+      ]
+    },
+    {
+      "id": "megamasers",
+      "metadata_key": "megamaser_error_inputs",
+      "count": 5,
+      "mode": "mm_dz=true; vcorr_mm=2M++",
+      "sigma_distance": "(|d_minus|+|d_plus|)/2",
+      "variance": "[sigma_D/(D ln(10))]^2 + [(sqrt(sigma_v^2+240^2))/(v_corr ln(10))]^2",
+      "variance_evaluated": false,
+      "unconverted_required_input": "D, zero-based column 1 in megamaser.dat; available in source but outside this extraction authorization.",
+      "offdiagonal_upstream": "zero",
+      "mean_cosmographic_factor": "G(z)=1-(q0+3)z/2+(11+7q0+3q0^2-j0)z^2/6; z=v_corr/c",
+      "conditional_error_depends_on_q0_j0": false,
+      "mean_depends_on_q0_j0": true,
+      "notes": [
+        "Upstream symmetrizes asymmetric distance errors and uses first-order log propagation.",
+        "The velocity error ignores the derivative of G(z), and q0/j0 uncertainties are not propagated; these are upstream approximations, not an exact total physical covariance."
+      ],
+      "code": [
+        "data_loader.py:528-589",
+        "main.py:533-536",
+        "equations.py:630-642"
+      ]
+    }
+  ],
+  "cross_block_covariances": {
+    "upstream": "zero for the nonstellar blocks and their links to the stellar error block; shared latent parameters belong to the design",
+    "statute": "INPUT/modeling choice, not an experimentally measured independence claim",
+    "no_duplicate_observations": "Do not add aggregate H0 or the individual flow rows as independent observations when already using their compressed intercept.",
+    "finite_scope": "Specific potential shared calibration/flow-systematic components may be tested by an explicit finite nuisance/PSD sensitivity model. No demand for every conceivable covariance."
+  },
+  "q0_j0": {
+    "configured": {
+      "q0": "-0.55",
+      "j0": "1"
+    },
+    "implemented_errors": "No dependence on q0/j0 in the selected conditional error formulas. SN and MM means vary; SBF explicitly ignores cosmology.",
+    "if_uncertain": "Keep q0/j0 explicit in the common mean/background model, or specify a joint prior and its propagated covariance once. Do not both marginalize them and add the same uncertainty again."
+  },
+  "concrete_decisions_before_total_covariance": [
+    {
+      "id": "NS-01",
+      "decision": "Reproduce or revise SBF-flow error prescription e(m110)-only; e(M110) is present and nonzero, so neither absorption nor independent addition may be asserted without a component statement."
+    },
+    {
+      "id": "NS-02",
+      "decision": "MM numerical logH variance remains unevaluated until a specifically authorized error-only propagation can use D, or an already published relative-error input is pinned."
+    },
+    {
+      "id": "NS-03",
+      "decision": "Preserve and qualify the SN 277-row covariance and compression normalization/support. Existing symmetric/finite/diagonal-positive diagnostics do not establish PSD/rank."
+    },
+    {
+      "id": "NS-04",
+      "decision": "State finite cross-block independence or selected shared-systematic alternatives and whether input SN covariance already includes the velocity/intrinsic components being added."
+    },
+    {
+      "id": "NS-05",
+      "decision": "Use common q0/j0/background conventions across means, fixed data set and mixed row units; do not promote a fixed-intercept compression beyond its model qualification."
+    }
+  ],
+  "execution_guard": {
+    "no_upstream_execution": true,
+    "no_observed_centres_converted": true,
+    "no_intercept_centres_computed": true,
+    "no_global_C_constructed": true,
+    "no_S_g_H0_evidence_fit": true,
+    "no_V1_adoption": true
+  },
+  "metadata": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\h0dn_nonstellar_errors\\METADADOS_ERROS_NAO_ESTELARES_V01.json",
+    "bytes": 113861,
+    "sha256": "c1843c397cfd78b4a82c416de49fe04929d0b830bd841efb6ff725d260902e7d",
+    "mtime_utc": "2026-10-06T02:54:47.432118+00:00"
+  }
+}

@@ -1,0 +1,732 @@
+{
+  "schema": "iald-r8-gap-inventory/v1",
+  "status": "DERIVED_SOURCE_INVENTORY__R8_OPEN",
+  "created_utc": "2026-10-16T19:46:51.235174+00:00",
+  "actor": {
+    "kind": "agent",
+    "id": "codex-r49-maxwell-gap-inventory"
+  },
+  "handle": "r49-maxwell-gap-inventory",
+  "reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "mission_receipt": {
+    "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+    "scope": {
+      "house": "IALD",
+      "principal": "luiz-antonio-rotoli-miguel"
+    },
+    "revision": 313,
+    "event_id": "r49-first-two-candidates-returned",
+    "event_hash": "3b0034ef4ac88d66765da3340825f5dc05bf633aae5133f3e9d4032137ed7470",
+    "objective_sha256": "f57ee2d752f8f8b2226baaf45307f91c485298d2a42758739e4c18ee08cb516e",
+    "anchor_sha256": "6fc1dab76ae9ec6ae35ad68b45e8b82fc2829156e1761945f257d030ae0589c7",
+    "state_sha256": "e3ba41c53716369cc47fe0c48713c3858c6945912a8c29abfe20bfd41764ba68",
+    "replayed": false
+  },
+  "projection_sha256": "befc7b6e508de2f20d125332b55e3079e9be930e4179b1dc938b17c662d1fc66",
+  "requirement": {
+    "id": "R8",
+    "criterion": "Realizacao conjunta de Maxwell e tensor de materia. Campos do certificado completo nao triviais na mesma rede; simetria/conservacao e fonte geometrica ligados.",
+    "status": "working",
+    "epoch": 5
+  },
+  "r9_preserved": {
+    "id": "R9",
+    "criterion": "Alcance fisico de H3 em todas as direcoes. Classificar hipotese conhecida vs consequencia demonstrada; nao assumir o antecedente como prova de derivacao.",
+    "status": "satisfied"
+  },
+  "conclusion": "Para o tipo literal MaxwellCertificate, A é a obrigação de existência restante depois de fixar a rede construída D; N permanece parâmetro. Isso não encerra a realização conjunta mais forte de R8: faltam identificar o Wick local do campo normalizado com o tensor calibrado e explicitar o transporte circular na mesma rede. H3 padrão tem consumidor pronto para composição; H3 curvo mantém seus antecedentes classificados, não derivados.",
+  "rows": [
+    {
+      "id": "literal_certificate",
+      "status": "REAL_COMPILED_CONDITIONAL",
+      "refs": [
+        {
+          "source": "certificate",
+          "line": 30,
+          "end_line": 30,
+          "anchor": "def axisCompactMaxwellCertificate"
+        },
+        {
+          "source": "contract",
+          "line": 505,
+          "end_line": 505,
+          "anchor": "structure MaxwellCertificate"
+        },
+        {
+          "source": "certificate",
+          "line": 20,
+          "end_line": 20,
+          "anchor": "theorem axisCompact_calibrated_regular_nontrivial"
+        }
+      ],
+      "finding": "Todos os campos literais MaxwellCertificate foram construídos: domínio denso AxisCompact, vácuo/translação, tensor calibrado, charge_link, Regular integral e estado normalizado de energia modular não nula. Não há hipótese adicional de derivada, carga ou não vacuidade neste construtor.",
+      "exact_signature": "def axisCompactMaxwellCertificate {D : CanonicalNetInput}\n    (A : RemainingModularCoreInput D) (N : KillingNormalization) :\n    MaxwellCertificate A.toCertificate",
+      "remaining": "Para habitar esse tipo sobre a rede escolhida, fornecer A : RemainingModularCoreInput D. N é parâmetro explícito; selecionar um relógio físico pertence ao R4. Não refazer charge/Regular/testemunha."
+    },
+    {
+      "id": "same_network",
+      "status": "REAL_NETWORK_AVAILABLE__ASSEMBLY_SPECIALIZATION_PENDING",
+      "refs": [
+        {
+          "source": "physical_net",
+          "line": 212,
+          "end_line": 212,
+          "anchor": "def physicalCanonicalNet"
+        },
+        {
+          "source": "fock_net",
+          "line": 18,
+          "end_line": 18,
+          "anchor": "def net"
+        },
+        {
+          "source": "core_input",
+          "line": 48,
+          "end_line": 48,
+          "anchor": "structure RemainingModularCoreInput"
+        },
+        {
+          "source": "core_input",
+          "line": 118,
+          "end_line": 118,
+          "anchor": "def RemainingModularCoreInput.toCertificate"
+        }
+      ],
+      "finding": "D não precisa ser novo postulado: physicalCanonicalNet já foi construído e compilado; PhysicalFockNet.net é FieldWeyl.R dessa rede. A deve ser indexado por esse D explícito. A contém dados/leis de traço e PF do núcleo representado; não foi habitado por R48.",
+      "typed_target": "(A : RemainingModularCoreInput F1Fecho.MaxwellLocalization.physicalCanonicalNet) (N : KillingNormalization) : MaxwellCertificate A.toCertificate := axisCompactMaxwellCertificate A N"
+    },
+    {
+      "id": "tensor_from_maxwell_waves",
+      "status": "REAL_EXPLICIT_CONSTRUCTION",
+      "refs": [
+        {
+          "source": "calibration_bridge",
+          "line": 31,
+          "end_line": 31,
+          "anchor": "theorem calibratedStress_eq_unitaryFourierFock"
+        },
+        {
+          "source": "fock_tensor",
+          "line": 19,
+          "end_line": 19,
+          "anchor": "def unitaryFourierPointStressForm"
+        },
+        {
+          "source": "fock_form",
+          "line": 39,
+          "end_line": 39,
+          "anchor": "def pointStressForm"
+        },
+        {
+          "source": "coherent_stress",
+          "line": 12,
+          "end_line": 12,
+          "anchor": "def coherentProfileStress"
+        },
+        {
+          "source": "coherent_wave",
+          "line": 13,
+          "end_line": 13,
+          "anchor": "def coherentProfileWave"
+        },
+        {
+          "source": "stress_polynomial",
+          "line": 12,
+          "end_line": 12,
+          "anchor": "def stress"
+        }
+      ],
+      "finding": "O tensor não é uma função arbitrária que passa pelo tipo. É a parte real da forma sesquilinear de somas coerentes únicas, cujo kernel é exp(inner h k) vezes o polinômio de Maxwell aplicado às ondas coerentes efetivas; multiplicado por c=(2π)^(-3). Isso prova proveniência por ondas Maxwell, ainda distinta de identificar o Wick local do campo operador smeared."
+    },
+    {
+      "id": "symmetry_conservation",
+      "status": "REAL_CONSTRUCTED_AND_TRANSPORTED",
+      "refs": [
+        {
+          "source": "coherent_wave",
+          "line": 40,
+          "end_line": 40,
+          "anchor": "theorem coherentProfileJet_bianchi"
+        },
+        {
+          "source": "coherent_wave",
+          "line": 54,
+          "end_line": 54,
+          "anchor": "theorem coherentProfileJet_divergence"
+        },
+        {
+          "source": "coherent_stress",
+          "line": 29,
+          "end_line": 29,
+          "anchor": "theorem coherentProfileStress_conserved"
+        },
+        {
+          "source": "fock_tensor",
+          "line": 69,
+          "end_line": 69,
+          "anchor": "theorem unitaryFourierPointStressForm_symmetric"
+        },
+        {
+          "source": "fock_tensor",
+          "line": 96,
+          "end_line": 96,
+          "anchor": "theorem unitaryFourierPointStressForm_weak_conserved"
+        },
+        {
+          "source": "calibrated",
+          "line": 18,
+          "end_line": 18,
+          "anchor": "def scaleMaxwellQuadraticForm"
+        }
+      ],
+      "finding": "Antissimetria, Bianchi e divergência da onda dão conservação do polinômio. Somatório finito e calibração preservam simetria e conservação distribucional de Minkowski. Não confundir essa lei plana com conservação covariante para uma métrica curva a determinar."
+    },
+    {
+      "id": "field_exists",
+      "status": "REAL_DISTINCT_FIELD_COMPONENT",
+      "refs": [
+        {
+          "source": "field",
+          "line": 44,
+          "end_line": 44,
+          "anchor": "def physicalSmearCLM"
+        },
+        {
+          "source": "field",
+          "line": 66,
+          "end_line": 66,
+          "anchor": "def physicalField"
+        },
+        {
+          "source": "field",
+          "line": 78,
+          "end_line": 78,
+          "anchor": "theorem exists_nonzero_physicalField_vacuum"
+        },
+        {
+          "source": "weak_field",
+          "line": 98,
+          "end_line": 98,
+          "anchor": "def weakPhysicalField"
+        },
+        {
+          "source": "field_maxwell",
+          "line": 31,
+          "end_line": 31,
+          "anchor": "theorem weakPhysicalField_spacetimeDivergence_zero"
+        },
+        {
+          "source": "pairing",
+          "line": 25,
+          "end_line": 25,
+          "anchor": "theorem physicalSmear_inner_wave"
+        }
+      ],
+      "finding": "O campo de Segal físico e sua distribuição fraca existem no mesmo Fock; há excitação não nula do vácuo e identidade Maxwell de divergência. physicalSmear_inner_wave liga a smearing às ondas do mesmo H1, conservando a contração 1/2. Essa igualdade linear não identifica por si o produto de Wick coincidente."
+    },
+    {
+      "id": "wick_local_normalization",
+      "status": "OPEN_MATERIAL_PROVENANCE_LINK",
+      "refs": [
+        {
+          "source": "wick",
+          "line": 37,
+          "end_line": 37,
+          "anchor": "def quadratic"
+        },
+        {
+          "source": "wick",
+          "line": 43,
+          "end_line": 43,
+          "anchor": "theorem coherent_kernel"
+        },
+        {
+          "source": "fock_form",
+          "line": 8,
+          "end_line": 8,
+          "anchor": "No density"
+        },
+        {
+          "source": "calibration",
+          "line": 17,
+          "end_line": 17,
+          "anchor": "def unitaryFourierStressScale"
+        },
+        {
+          "source": "field",
+          "line": 66,
+          "end_line": 66,
+          "anchor": "def physicalField"
+        }
+      ],
+      "finding": "WickQuadraticFormR6 constrói uma forma bilocal normalmente ordenada a partir de aniquilação; o consumidor que restringe ao ponto coincidente e contrai seus índices para obter pointStressForm não foi localizado. physicalField usa physicalSmearCLM sem o fator c. O tensor certificado é c·pointStressForm; a identificação correta deve construir o campo normalizado por r=sqrt(c), provar r²=c e consumir essa normalização, sem parâmetro físico ajustável e sem alterar o campo antigo.",
+      "next_exact_target": "let r : ℂ := (Real.sqrt unitaryFourierStressScale : ℂ); ∀ f g h k : H1, F1Fecho.WickForm.quadratic (r • f) (r • g) (F1Fecho.WickForm.expDomain h) (F1Fecho.WickForm.expDomain k) = (unitaryFourierStressScale : ℂ) * F1Fecho.WickForm.quadratic f g (F1Fecho.WickForm.expDomain h) (F1Fecho.WickForm.expDomain k)",
+      "next_after_scaling": "Usar physicalSmear_inner_wave + coherent_kernel para a fórmula bilocal smeared; construir a restrição coincidente nos perfis regulares por aproximação explícita de testes, contrair o polinômio stress e estender por finiteKernel. Exigir igualdade com unitaryFourierPointStressForm, não defini-la como premissa."
+    },
+    {
+      "id": "circular_representation",
+      "status": "OPEN_EXPLICIT_LINK__DOMAIN_TRANSPORT_EXISTS",
+      "refs": [
+        {
+          "source": "circular_smear",
+          "line": 59,
+          "end_line": 59,
+          "anchor": "def circularSmear"
+        },
+        {
+          "source": "compact_localization",
+          "line": 15,
+          "end_line": 15,
+          "anchor": "def compactSupportedGenerators"
+        },
+        {
+          "source": "circular_domain",
+          "line": 36,
+          "end_line": 36,
+          "anchor": "def regularCircular"
+        },
+        {
+          "source": "circular_domain",
+          "line": 13,
+          "end_line": 13,
+          "anchor": "theorem strongRegularProfile_fiberLift"
+        },
+        {
+          "source": "circular_basis",
+          "line": 68,
+          "end_line": 68,
+          "anchor": "theorem fiberLift_U1"
+        },
+        {
+          "source": "circular_basis",
+          "line": 76,
+          "end_line": 76,
+          "anchor": "theorem fiberLift_B0"
+        }
+      ],
+      "finding": "A rede compacta é gerada por circularSmear=circularH1.symm∘physicalSmearCLM. O campo antigo usa physicalSmearCLM diretamente. A identidade do espaço H1 não basta para identificar esses campos locais. Reutilizar regularCircular e o entrelaçamento com U1/B0; transportar também o domínio AxisCompact, os estados e o tensor ou provar a igualdade exigida. Não afirmar invariância do tensor sob circularH1 sem prova.",
+      "next_exact_target": "let r : ℂ := (Real.sqrt unitaryFourierStressScale : ℂ); ∀ (f g : SchwartzTensor) (h k : H1), F1Fecho.WickForm.quadratic (r • F1Fecho.MaxwellLocalization.circularSmear f) (r • F1Fecho.MaxwellLocalization.circularSmear g) (F1Fecho.WickForm.expDomain h) (F1Fecho.WickForm.expDomain k) = F1Fecho.WickForm.quadratic (r • physicalSmearCLM f) (r • physicalSmearCLM g) (F1Fecho.WickForm.expDomain (F1Fecho.OrbitalScreen.circularH1 h)) (F1Fecho.WickForm.expDomain (F1Fecho.OrbitalScreen.circularH1 k))",
+      "shortcut": "coherent_kernel, circularH1.apply_symm_apply, inner_map_map, gamma_exponential e RegularCircularTransportR2; nenhum desses lemas autoriza omitir a mudança dos vetores h,k."
+    },
+    {
+      "id": "standard_h3_source",
+      "status": "EXISTING_CONSUMER__SPECIALIZATION_PENDING",
+      "refs": [
+        {
+          "source": "contract",
+          "line": 547,
+          "end_line": 547,
+          "anchor": "def lightH3 "
+        },
+        {
+          "source": "contract",
+          "line": 558,
+          "end_line": 558,
+          "anchor": "def lightH3v32 "
+        },
+        {
+          "source": "contract",
+          "line": 577,
+          "end_line": 577,
+          "anchor": "def lightImport "
+        },
+        {
+          "source": "null_solution",
+          "line": 23,
+          "end_line": 23,
+          "anchor": "def construct_null_solution"
+        },
+        {
+          "source": "null_consumer",
+          "line": 9,
+          "end_line": 9,
+          "anchor": "def responseOf"
+        },
+        {
+          "source": "h3_contract",
+          "line": 334,
+          "end_line": 334,
+          "anchor": "structure ContratoH3"
+        }
+      ],
+      "finding": "Com M=axisCompactMaxwellCertificate A N, lightH3/lightH3v32/lightImport já consomem exatamente M.T, Regular, charge_link e nontrivial. G>0 permanece parâmetro explícito. A geometria produzida é resposta linearizada de tela diag(0,0,-a,-a) à fonte T_nn ao longo de nullDir=(1,1,0,0), em todo ponto; o fator 8πG está no propagador construído.",
+      "exact_signature": "def lightH3v32 (M : MaxwellCertificate C) (N : KillingNormalization) (G : ℝ) (hG : 0 < G) :\n    ContratoH3v32 (lightNet C) (lightRealization C) N (lightBoost C) M.T",
+      "typed_consumer": "(A : RemainingModularCoreInput D) (N : KillingNormalization) (G : ℝ) (hG : 0 < G) : ContratoH3v32 (lightNet A.toCertificate) (lightRealization A.toCertificate) N (lightBoost A.toCertificate) (axisCompactMaxwellCertificate A N).T := lightH3v32 (axisCompactMaxwellCertificate A N) N G hG",
+      "remaining": "Compor e auditar esse consumidor específico; não reconstruir a solução nula. O alvo não fornece uma métrica curva global que satisfaça todas as componentes de Einstein."
+    },
+    {
+      "id": "curved_source_boundary",
+      "status": "OPEN_STRONGER_REALIZATION__R9_CLASSIFICATION_RETAINED",
+      "refs": [
+        {
+          "source": "curved_ligand",
+          "line": 32,
+          "end_line": 32,
+          "anchor": "def NamedAtlasH3"
+        },
+        {
+          "source": "curved_ligand",
+          "line": 46,
+          "end_line": 46,
+          "anchor": "theorem passage_h3_to_connected_smooth_atlas_einstein"
+        },
+        {
+          "source": "curved_control",
+          "line": 32,
+          "end_line": 32,
+          "anchor": "theorem s5_local"
+        },
+        {
+          "source": "curved_source",
+          "line": 95,
+          "end_line": 95,
+          "anchor": "theorem general_source_einstein_from_area"
+        },
+        {
+          "source": "record",
+          "line": 55,
+          "end_line": 55,
+          "anchor": "def recordSource"
+        },
+        {
+          "source": "record_decoder",
+          "line": 101,
+          "end_line": 101,
+          "anchor": "theorem ten_responses_reconstruct_source_field"
+        }
+      ],
+      "finding": "O antecedente de H3 curvo quantifica sobre toda carta, ponto e direção nula não zero. Não é consequência automática da equação na direção nullDir. A rota existente requer identificar o mesmo tensor Maxwell como recordSource, construir métrica/telas compatíveis, conservação covariante e a lei de área/Ricci para esses mesmos dados. O controle s5_local explicita o conteúdo Ricci dessa obrigação.",
+      "typed_source_identification": "(A : RemainingModularCoreInput D) (ψ : regularFockDomain) (U : Set Coordinate4) (R : GravitationalResponseRecord U) : ∀ x ∈ U, recordSource R x = (toStress (regularMaxwellCalibratedForm A)).T ψ.val x",
+      "typed_geometric_target": "NamedAtlasH3 ((4 * G)⁻¹) U R screens",
+      "scope": "R9 já está satisfeito como classificação de alcance, não como prova do antecedente físico. Este inventário não reabre R9 nem adiciona Einstein curvo ao tipo MaxwellCertificate. Se a fonte geométrica de R8 pretendida for essa rota forte, a ligação continua aberta; para H3 da cunha padrão, a composição anterior basta sob A,N,G."
+    }
+  ],
+  "sources": {
+    "certificate": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactMaxwellCertificateR4.lean",
+      "sha256": "a037f15fa579ce247be05a063eb815316cd14a010b00385e88abee1c493c58ac",
+      "bytes": 3295
+    },
+    "regular": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactRegularR2.lean",
+      "sha256": "59f1ac8049daf3479b72afa0f8a89a9cf150a2884b7e8e96ec3238dc12f6564f",
+      "bytes": 9993
+    },
+    "nonzero": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactFockNonzeroEnergyR4.lean",
+      "sha256": "586a8aa36822410702d931b141e677438b038afa7ec596e1854d64c3a1a5f5d6",
+      "bytes": 7209
+    },
+    "charge": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactFockNullPlaneChargeR1.lean",
+      "sha256": "b0c75ea2e489de8b3bba25c0dd1817513390188667dc632957e08de1d219e24a",
+      "bytes": 8484
+    },
+    "calibrated": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularFockMaxwellCalibratedR1.lean",
+      "sha256": "b43e055ea6707c06954fa31fe32c6fa193263a3d69dd2363638dd22dce11c3d1",
+      "bytes": 5136
+    },
+    "calibration_bridge": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CalibratedFockStressDomainBridgeR1.lean",
+      "sha256": "d5ac5180bd3a48b71329ad6c61f88821cc62cbc7abd50ea2fd25027cf43dedb4",
+      "bytes": 3783
+    },
+    "fock_tensor": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\UnitaryFourierFockStressR1.lean",
+      "sha256": "8ec018146a0bae12fe7e20a1e4c7a06eae987e405caf74c00c2c683546cf1194",
+      "bytes": 8273
+    },
+    "fock_form": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularFockPointStressR4.lean",
+      "sha256": "bcc132cfcd98da5b1e0bf8793cb641dca1f5e088fab8738e1a09e679a85f6bd6",
+      "bytes": 7409
+    },
+    "coherent_stress": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CoherentPointStressR2.lean",
+      "sha256": "428586fb4763a1b793287395b9af960c8eea505021cc205f513db38b8ea35993",
+      "bytes": 4468
+    },
+    "coherent_wave": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CoherentPointMaxwellR1.lean",
+      "sha256": "9f43c54c10b6686c23b8d2b7af27ccd723543b3dcc1adb98c946bd74368b64c7",
+      "bytes": 4788
+    },
+    "real_wave_stress": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RealProfileMaxwellStressR4.lean",
+      "sha256": "c1ff568125ea854e5b6bc8602e961504a9bdfbe454ab6d4647c98b5731414371",
+      "bytes": 5001
+    },
+    "stress_polynomial": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellStressJetAlgebraR3.lean",
+      "sha256": "345255978cf81b80496ebb7a306f8550f9e9cb4f6ba9c272d1e009324d064b8d",
+      "bytes": 4502
+    },
+    "calibration": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\UnitaryFourierRealStressR2.lean",
+      "sha256": "24e43c4b466132d00b97a51fd4eb9de129a384eab5755528f1fe8a045be6eff3",
+      "bytes": 3423
+    },
+    "field": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\PhysicalSchwartzMaxwellR1.lean",
+      "sha256": "a7ac6222b588273cd37a276a98128eb680f479b44e4e7f8a2ca13cfe93d0202e",
+      "bytes": 4358
+    },
+    "weak_field": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\WeakSegalDistributionR3.lean",
+      "sha256": "372f5f0c4f7ebfb607e80c862300d375c7a3345bfde16e67dd23338ef4307cc8",
+      "bytes": 5056
+    },
+    "field_maxwell": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\WeakMaxwellEquationR3.lean",
+      "sha256": "9b0806f062f4514eaf751f08441e2711d67bf63457876c019fc3475c0f9d274e",
+      "bytes": 1804
+    },
+    "pairing": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\PhysicalSmearWavePairingR2.lean",
+      "sha256": "59d3732c868e9fb4ec41134d4a1a5b39eb0d853affe191d68bffc55b5a3dc353",
+      "bytes": 2536
+    },
+    "wick": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\WickQuadraticFormR6.lean",
+      "sha256": "fe43f649a0e2dc18f1caa35cda64af2f6d5bc1c82bc324f417ef1a46923aa58d",
+      "bytes": 4073
+    },
+    "circular_domain": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularCircularTransportR2.lean",
+      "sha256": "26c9f6084fe49e84011e6ab902fc3cae053eecefea388b061437feafc25b8aba",
+      "bytes": 2238
+    },
+    "circular_smear": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalSmearTranslationR2.lean",
+      "sha256": "b0e417274dcf136a78189ec7aa656a34e470b90ad02708405ea968378ac61935",
+      "bytes": 3623
+    },
+    "circular_basis": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\ScreenCircularBasisR2.lean",
+      "sha256": "83f77c886819ba15e52143311cacb60087ab6c9edf337bab7a4915a7e4aa5efc",
+      "bytes": 4133
+    },
+    "compact_localization": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalCompactNetCovarianceR1.lean",
+      "sha256": "2512d049b0851947ad605a25b3ba47d049e37946baa861e13a8db23ece252fe1",
+      "bytes": 7208
+    },
+    "physical_net": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalCanonicalNetCompleteR1.lean",
+      "sha256": "4409c3037623a103c0033b4b4fb4d4c55ec2787ef940fff42e0802eafcfe75a4",
+      "bytes": 11555
+    },
+    "fock_net": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalFockNetRealizationR2.lean",
+      "sha256": "9e79a29edbe9f8db10c49e5f27c88770e01e14cfa0789ffe519ed74fead92516",
+      "bytes": 4100
+    },
+    "net_covariance": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalFockSpacetimeCovarianceR2.lean",
+      "sha256": "031bf92269ea7c1dd8c3c8e5f4d2703627fb77b0ec0ff09655a2276ed28555be",
+      "bytes": 4722
+    },
+    "core_input": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\CanonicalModularCoreAssemblyR1.lean",
+      "sha256": "e7a0e056108c92237aa439b760cf8f4e8c03905762381fc3f92d8c984d0349aa",
+      "bytes": 5599
+    },
+    "contract": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheImportedSecondQuantization.lean",
+      "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+      "bytes": 35835
+    },
+    "h3_contract": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ContratoQG_v31.lean",
+      "sha256": "2f2c6561a5a5d832b43f11f7bacccf4811eb4392f1832f78cf4a5838a72a4808",
+      "bytes": 24897
+    },
+    "null_solution": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\TeleologicalNullSolution_v2.lean",
+      "sha256": "957f59b5a4598f4c11923a1f7f7400d1739b1d021b9dfbd90c9081df7e65e383",
+      "bytes": 3228
+    },
+    "null_consumer": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\NullSolutionConsumerReuse.lean",
+      "sha256": "a78e1c92adbb68ab89daad95531bf73d9b669a0a359245d9445a13a92799d12e",
+      "bytes": 3201
+    },
+    "curved_ligand": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\LiganteLeiCampoCurvo.lean",
+      "sha256": "e3f32d9b85ae82dbea4c281673d5105af6b16c240c2add5de0b5bea9134d0697",
+      "bytes": 4616
+    },
+    "curved_control": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\LiganteLeiCampoCurvoTestemunha.lean",
+      "sha256": "eeeed286178408b37df5296ee2e517f33606f02f941dcad5e10482a5be24f76c",
+      "bytes": 13925
+    },
+    "curved_source": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\GeneralSourceEinsteinBridge.lean",
+      "sha256": "d4055e0f95d6ed7b83456bbd837a3c77e354f191a248c7f1b65933fb0f4853e9",
+      "bytes": 8275
+    },
+    "record": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\GravitationalResponseRecord.lean",
+      "sha256": "6ec37ca79051152da8c36f26e73bf767d15b2a0c8b1ea73f2f32d3389c5aa9c6",
+      "bytes": 11565
+    },
+    "record_decoder": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\GeneralSourceResponseReconstruction.lean",
+      "sha256": "a27d1c0963daffadc845120fd892d46a47f41ffcd022c10ae67888d1bc18c468",
+      "bytes": 9138
+    },
+    "historical_inventory": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\matter_h3_inventory\\INVENTARIO_R8_R9_R1.md",
+      "sha256": "144b286736e6001a3026c67bbbe69a7d83e99bad309341c13fa134349211943a",
+      "bytes": 2176
+    },
+    "r48_progress": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\PROGRESS_R48.json",
+      "sha256": "28a3e69ec4df221247d98cf30f7b5e00a8f693d6062c8d18147a391ac3b205f2",
+      "bytes": 15517
+    },
+    "r48_review": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_review_20261016\\R48_NONZERO_CERTIFICATE_INDEPENDENT_REVIEW_R1.json",
+      "sha256": "23277595a7411fd2bcbf95af49c805a1ef606c2619301deca70503e89c2da6c2",
+      "bytes": 637665
+    }
+  },
+  "build_evidence": [
+    {
+      "source": "certificate",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T193149_734842Z\\RECEIPT.json",
+        "sha256": "ff7d6419c971e70625be9e03f7747fd72ed5645ea297e22d065674b2aa904b39",
+        "bytes": 256035
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T193149_734842Z\\AXIOMS.txt",
+        "sha256": "0c421cb1c87e7e4a00ee6b722f64bcdcf9d6c99922aa917f0b8f69bb61e52acc",
+        "bytes": 1285
+      },
+      "exit_code": 0,
+      "seconds": 72.63125399999262,
+      "axiom_lists": 5
+    },
+    {
+      "source": "physical_net",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T120556_913253Z\\RECEIPT.json",
+        "sha256": "768af0a0facbac19a92b4643fd0a8061ec59a8626e39f24f91712258212ddcf2",
+        "bytes": 225997
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T120556_913253Z\\AXIOMS.txt",
+        "sha256": "b820efba3b5a6ff311408e234b49c94e00961e1fbc1e1f93530d60740b6c9017",
+        "bytes": 2816
+      },
+      "exit_code": 0,
+      "seconds": 777.9177112000034,
+      "axiom_lists": 11
+    },
+    {
+      "source": "circular_domain",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T040742_822768Z\\RECEIPT.json",
+        "sha256": "03b30b216980db3845a0c1c5801e52199bb23f431538c023fdb411d10daabbd7",
+        "bytes": 112449
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T040742_822768Z\\AXIOMS.txt",
+        "sha256": "ed20c1e41a94e2822b80d340887a9e16741c18ae2e37100f6395d19f089023b4",
+        "bytes": 448
+      },
+      "exit_code": 0,
+      "seconds": 211.36133159999736,
+      "axiom_lists": 4
+    },
+    {
+      "source": "pairing",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T025112_632090Z\\RECEIPT.json",
+        "sha256": "7c00294a8f376625af1dfc9175860f5cdfff0fd6c6649a9cab7ce60ebafd2555",
+        "bytes": 114461
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T025112_632090Z\\AXIOMS.txt",
+        "sha256": "866da42a796ff35030f02c1b35f95880bd413688acb590750b976d420977d843",
+        "bytes": 505
+      },
+      "exit_code": 0,
+      "seconds": 617.9956612000024,
+      "axiom_lists": 2
+    },
+    {
+      "source": "wick",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T002717_951561Z\\RECEIPT.json",
+        "sha256": "ce30f6c4d59fb17f01389b573a49b15d334d70574a7768fafc970195390a2f95",
+        "bytes": 60370
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T002717_951561Z\\AXIOMS.txt",
+        "sha256": "acbcb5be00245afc0649b45381874572137a2f857862e9ebb05bad578628e3e4",
+        "bytes": 604
+      },
+      "exit_code": 0,
+      "seconds": 340.9936546999961,
+      "axiom_lists": 6
+    },
+    {
+      "source": "field_maxwell",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T002705_137895Z\\RECEIPT.json",
+        "sha256": "86ddc96b359055d4b602895f0e926d6a49a2f0f53da015274842a19d7a0fb518",
+        "bytes": 68538
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T002705_137895Z\\AXIOMS.txt",
+        "sha256": "b8088e43947ac5acc49c2d3d19b32cc7ed5498cf9a985ca41410a26ff47f274e",
+        "bytes": 344
+      },
+      "exit_code": 0,
+      "seconds": 349.21334420000494,
+      "axiom_lists": 3
+    },
+    {
+      "source": "calibration_bridge",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T182655_578546Z\\RECEIPT.json",
+        "sha256": "57521f1a0d3f8c2772c5f17989f037130660f8fb2ad2047137ad269cf01ab9e5",
+        "bytes": 244138
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T182655_578546Z\\AXIOMS.txt",
+        "sha256": "99448af2efdcaf9416b26c6aba835929eca01c6acfd8ab274fe65ec1130f3611",
+        "bytes": 1472
+      },
+      "exit_code": 0,
+      "seconds": 73.53719480001018,
+      "axiom_lists": 5
+    }
+  ],
+  "verification": {
+    "certificate_receipt_and_component_pins_checked": 854,
+    "checked_bytes": 89744059,
+    "certificate_axiom_lists": 5,
+    "certificate_only_standard_trio": true,
+    "additional_direct_green_receipts": 6,
+    "no_new_build": true,
+    "no_production_or_provider": true,
+    "search_scope": "Inspected Maxwell sources, physical net/circular transport, existing Wick and weak fields, R48 custody, prior matter/H3 inventory and exact kernel geometric consumers. Absence claims are limited to this source chain; type sketches in inventory are proposed consumers, not newly compiled declarations."
+  },
+  "reuse_update": "O inventário R8/R9 de 15/10 fica histórico: suas lacunas de Regular, carga e testemunha foram descarregadas em R47/R48. Não repetir esses alvos. Permanecem distintas a identificação Wick, a representação circular e a interpretação geométrica forte.",
+  "requirement_satisfied": false,
+  "mission_mutations": false,
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\inventory_r49_maxwell_gaps_r1.py",
+    "sha256": "4e5229ffafc24c3ecd87c7c5a182dd4bf7f17220676148b0a389981e4e227bcf",
+    "bytes": 19033
+  }
+}

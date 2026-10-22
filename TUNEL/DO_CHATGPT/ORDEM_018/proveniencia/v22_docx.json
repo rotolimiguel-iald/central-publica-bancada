@@ -1,0 +1,135 @@
+{
+  "source": {
+    "path": "C:\\IALD\\IMac LA\\Física - TGL\\Base Referencial Completa TGL\\TGL Validation v22.docx",
+    "bytes": 50027,
+    "sha256": "723f1c39d0fa9d23ebdc0a39e816c66db81e56e3b0c5c0bc53d551c69e757c17",
+    "mtime_utc": "2025-12-23T23:45:34+00:00"
+  },
+  "method": "stdlib zipfile + OOXML w:p/w:t; no execution; pandoc absent",
+  "core_properties": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<cp:coreProperties xmlns:cp=\"http://schemas.openxmlformats.org/package/2006/metadata/core-properties\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:dcmitype=\"http://purl.org/dc/dcmitype/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><dc:title></dc:title><dc:subject></dc:subject><dc:creator>Luiz Antonio Rotoli Miguel</dc:creator><cp:keywords></cp:keywords><dc:description></dc:description><cp:lastModifiedBy>Luiz Antonio Rotoli Miguel</cp:lastModifiedBy><cp:revision>2</cp:revision><dcterms:created xsi:type=\"dcterms:W3CDTF\">2025-12-23T23:44:00Z</dcterms:created><dcterms:modified xsi:type=\"dcterms:W3CDTF\">2025-12-23T23:45:00Z</dcterms:modified></cp:coreProperties>",
+  "paragraphs": 1260,
+  "matched_paragraphs": 20,
+  "pattern": "alpha2_from_H0|print_alpha2_derivation|sqrt|√|ALPHA_2 =|alpha2_derived|H0_bulk_predicted",
+  "excerpts": [
+    {
+      "match_paragraph": 80,
+      "first_paragraph": 76,
+      "last_paragraph": 84,
+      "text": "    Constantes da TGL - Cosmologia do Espelho Holográfico\n    \"\"\"\n    \n    # CONSTANTE HOLOGRÁFICA FUNDAMENTAL\n    ALPHA_2 = 0.012\n    BETA_TGL = ALPHA_2\n    \n    # Velocidade da luz\n    C_LIGHT_KM_S = 299792.458"
+    },
+    {
+      "match_paragraph": 108,
+      "first_paragraph": 104,
+      "last_paragraph": 112,
+      "text": "    OMEGA_LAMBDA = 0.6847\n    R_DRAG = 147.09\n    \n    @classmethod\n    def alpha2_from_H0_tension(cls):\n        ratio = cls.H0_BULK / cls.H0_BOUNDARY\n        ln_z = np.log1p(cls.Z_MIRROR_BOUNDARY)\n        return (ratio - 1) / ln_z\n    "
+    },
+    {
+      "match_paragraph": 114,
+      "first_paragraph": 110,
+      "last_paragraph": 118,
+      "text": "        ln_z = np.log1p(cls.Z_MIRROR_BOUNDARY)\n        return (ratio - 1) / ln_z\n    \n    @classmethod\n    def H0_bulk_predicted(cls, alpha2=None):\n        if alpha2 is None:\n            alpha2 = cls.ALPHA_2\n        ln_z = np.log1p(cls.Z_MIRROR_BOUNDARY)\n        return cls.H0_BOUNDARY * (1 + alpha2 * ln_z)"
+    },
+    {
+      "match_paragraph": 121,
+      "first_paragraph": 117,
+      "last_paragraph": 125,
+      "text": "        ln_z = np.log1p(cls.Z_MIRROR_BOUNDARY)\n        return cls.H0_BOUNDARY * (1 + alpha2 * ln_z)\n    \n    @classmethod\n    def print_alpha2_derivation(cls):\n        print(\"\\n\" + \"=\" * 70)\n        print(\" DERIVAÇÃO DE α₂ A PARTIR DA TENSÃO H0\")\n        print(\"=\" * 70)\n        "
+    },
+    {
+      "match_paragraph": 130,
+      "first_paragraph": 126,
+      "last_paragraph": 134,
+      "text": "        print(f\"\\n H0 na FRONTEIRA (Planck): {cls.H0_BOUNDARY} ± {cls.H0_BOUNDARY_ERR} km/s/Mpc\")\n        print(f\" H0 no BULK (SH0ES):       {cls.H0_BULK} ± {cls.H0_BULK_ERR} km/s/Mpc\")\n        print(f\" ln(1 + z_CMB):            {np.log1p(cls.Z_MIRROR_BOUNDARY):.4f}\")\n        \n        alpha2_measured = cls.alpha2_from_H0_tension()\n        \n        print(f\"\\n α₂ = (H0_bulk/H0_front - 1) / ln(1+z)\")\n        print(f\"    = {alpha2_measured:.6f}\")\n        print(f\"\\n Concordância com teoria: {100*(1 - abs(alpha2_measured - cls.ALPHA_2)/cls.ALPHA_2):.2f}%\")"
+    },
+    {
+      "match_paragraph": 285,
+      "first_paragraph": 281,
+      "last_paragraph": 289,
+      "text": "    # ΛCDM\n    # =========================================================================\n    \n    def E_LCDM(self, z):\n        return np.sqrt(self.Omega_m * (1 + z)**3 + self.Omega_Lambda)\n    \n    def H_LCDM(self, z):\n        return self.H0 * self.E_LCDM(z)\n    "
+    },
+    {
+      "match_paragraph": 356,
+      "first_paragraph": 352,
+      "last_paragraph": 360,
+      "text": "        return np.log1p(z)\n    \n    def E_TGL(self, z, alpha_2=None):\n        if alpha_2 is None:\n            alpha_2 = TGLConstants.ALPHA_2\n        E_LCDM_sq = self.E_LCDM(z)**2\n        correction = 1 + alpha_2 * self.g_H(z)\n        return np.sqrt(E_LCDM_sq * correction)\n    "
+    },
+    {
+      "match_paragraph": 359,
+      "first_paragraph": 355,
+      "last_paragraph": 363,
+      "text": "        if alpha_2 is None:\n            alpha_2 = TGLConstants.ALPHA_2\n        E_LCDM_sq = self.E_LCDM(z)**2\n        correction = 1 + alpha_2 * self.g_H(z)\n        return np.sqrt(E_LCDM_sq * correction)\n    \n    def H_TGL(self, z, alpha_2=None):\n        if alpha_2 is None:\n            alpha_2 = TGLConstants.ALPHA_2"
+    },
+    {
+      "match_paragraph": 363,
+      "first_paragraph": 359,
+      "last_paragraph": 367,
+      "text": "        return np.sqrt(E_LCDM_sq * correction)\n    \n    def H_TGL(self, z, alpha_2=None):\n        if alpha_2 is None:\n            alpha_2 = TGLConstants.ALPHA_2\n        return self.H0 * self.E_TGL(z, alpha_2)\n    \n    def comoving_distance_TGL(self, z, alpha_2=None):\n        if alpha_2 is None:"
+    },
+    {
+      "match_paragraph": 368,
+      "first_paragraph": 364,
+      "last_paragraph": 372,
+      "text": "        return self.H0 * self.E_TGL(z, alpha_2)\n    \n    def comoving_distance_TGL(self, z, alpha_2=None):\n        if alpha_2 is None:\n            alpha_2 = TGLConstants.ALPHA_2\n        def integrand(zp):\n            return 1.0 / self.E_TGL(zp, alpha_2)\n        integral, _ = quad(integrand, 0, z, limit=500)\n        return (self.c / self.H0) * integral"
+    },
+    {
+      "match_paragraph": 438,
+      "first_paragraph": 434,
+      "last_paragraph": 442,
+      "text": "        Isso explica por que lensing \"via\" α₂ ~ 0.15 em vez de 0.012:\n        Estava tentando compensar a inversão de sinal não contabilizada!\n        \"\"\"\n        if alpha_2 is None:\n            alpha_2 = TGLConstants.ALPHA_2\n        \n        # INVERSÃO DE PARIDADE: usar -α₂ para lensing!\n        alpha_2_mirror = -alpha_2\n        "
+    },
+    {
+      "match_paragraph": 458,
+      "first_paragraph": 454,
+      "last_paragraph": 462,
+      "text": "        Quando você levanta o braço direito, a imagem levanta o esquerdo.\n        Quando α₂ = +0.012 no substrato, α₂ = -0.012 na imagem (lensing).\n        \"\"\"\n        if alpha_2 is None:\n            alpha_2 = TGLConstants.ALPHA_2\n        \n        # INVERSÃO DE PARIDADE: usar -α₂ para lensing!\n        alpha_2_mirror = -alpha_2\n        "
+    },
+    {
+      "match_paragraph": 584,
+      "first_paragraph": 580,
+      "last_paragraph": 588,
+      "text": "        z_front = TGLConstants.Z_MIRROR_BOUNDARY\n        \n        ln_z = np.log1p(z_front)\n        \n        sigma_combined = np.sqrt(H0_front_err**2 + H0_bulk_err**2)\n        chi2_LCDM = ((H0_bulk - H0_front) / sigma_combined)**2\n        \n        alpha2_theory = TGLConstants.ALPHA_2\n        H0_bulk_pred = H0_front * (1 + alpha2_theory * ln_z)"
+    },
+    {
+      "match_paragraph": 595,
+      "first_paragraph": 591,
+      "last_paragraph": 599,
+      "text": "        alpha2_measured = (H0_bulk / H0_front - 1) / ln_z\n        \n        term1 = (H0_bulk_err / H0_front)**2\n        term2 = (H0_bulk * H0_front_err / H0_front**2)**2\n        alpha2_err = np.sqrt(term1 + term2) / ln_z\n        \n        H0_bulk_best = H0_front * (1 + alpha2_measured * ln_z)\n        chi2_TGL_best = ((H0_bulk - H0_bulk_best) / H0_bulk_err)**2\n        "
+    },
+    {
+      "match_paragraph": 696,
+      "first_paragraph": 692,
+      "last_paragraph": 700,
+      "text": "        alpha2_fitted, chi2_best = float(result.x), float(result.fun)\n        \n        eps = 0.0005\n        d2chi2 = (chi2_func(alpha2_fitted + eps) - 2*chi2_best + chi2_func(alpha2_fitted - eps)) / eps**2\n        alpha2_err = min(float(np.sqrt(2 / max(abs(d2chi2), 0.1))), 0.1)\n        \n        delta_chi2 = chi2_LCDM - chi2_TGL_fixed\n        \n        alpha2_consistent = abs(alpha2_fitted - alpha2_theory) < 2 * alpha2_err"
+    },
+    {
+      "match_paragraph": 808,
+      "first_paragraph": 804,
+      "last_paragraph": 812,
+      "text": "        alpha2_fitted, chi2_best = float(result.x), float(result.fun)\n        \n        eps = 0.0005\n        d2chi2 = (chi2_func(alpha2_fitted + eps) - 2*chi2_best + chi2_func(alpha2_fitted - eps)) / eps**2\n        alpha2_err = min(float(np.sqrt(2 / max(abs(d2chi2), 0.1))), 0.1)\n        \n        delta_chi2 = chi2_LCDM - chi2_TGL_fixed\n        \n        alpha2_consistent = abs(alpha2_fitted - alpha2_theory) < 2 * alpha2_err"
+    },
+    {
+      "match_paragraph": 973,
+      "first_paragraph": 969,
+      "last_paragraph": 977,
+      "text": "        \n        # H0 de lensing mede expansão no bulk\n        z_eff_lens = 0.5\n        H0_bulk_pred = H0_front * (1 + alpha2_theory * np.log1p(z_eff_lens))\n        sigma_H0 = np.sqrt(self.H0_lens_err**2 + TGLConstants.H0_BOUNDARY_ERR**2)\n        \n        chi2_H0_LCDM = ((self.H0_lens - H0_front) / sigma_H0)**2\n        chi2_H0_TGL = ((self.H0_lens - H0_bulk_pred) / self.H0_lens_err)**2\n        "
+    },
+    {
+      "match_paragraph": 1013,
+      "first_paragraph": 1009,
+      "last_paragraph": 1017,
+      "text": "        alpha2_fitted, chi2_best = float(result.x), float(result.fun)\n        \n        eps = 0.001\n        d2chi2 = (chi2_func(alpha2_fitted + eps) - 2*chi2_best + chi2_func(alpha2_fitted - eps)) / eps**2\n        alpha2_err = min(float(np.sqrt(2 / max(abs(d2chi2), 0.1))), 0.1)\n        \n        delta_chi2 = chi2_LCDM - chi2_TGL_fixed\n        \n        # Consistência: agora deve ser muito melhor!"
+    },
+    {
+      "match_paragraph": 1098,
+      "first_paragraph": 1094,
+      "last_paragraph": 1102,
+      "text": "    \n    def run_all(self):\n        self._print_header()\n        \n        TGLConstants.print_alpha2_derivation()\n        \n        executed, failed = [], []\n        \n        for name, module in self.modules.items():"
+    },
+    {
+      "match_paragraph": 1149,
+      "first_paragraph": 1145,
+      "last_paragraph": 1153,
+      "text": "            chi2_LCDM_total += r.chi2_LCDM\n            chi2_TGL_total += r.chi2_TGL_fixed\n        \n        alpha2_combined = float(np.average(alphas, weights=weights)) if weights else 0\n        alpha2_combined_err = float(1 / np.sqrt(sum(weights))) if weights else 0\n        \n        alpha2_theory = TGLConstants.ALPHA_2\n        combined_consistent = abs(alpha2_combined - alpha2_theory) < 2 * alpha2_combined_err\n        tgl_improves = chi2_TGL_total < chi2_LCDM_total"
+    }
+  ]
+}

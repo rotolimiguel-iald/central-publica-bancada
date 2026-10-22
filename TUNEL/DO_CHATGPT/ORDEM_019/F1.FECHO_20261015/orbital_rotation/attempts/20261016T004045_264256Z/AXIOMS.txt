@@ -1,0 +1,40 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T004045_264256Z\RegularizedContourSpaceR3.lean:43:42: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : ℝ), regSlice b p (-Real.pi) F a + regSlice b p (-Real.pi) G a ∂volume
+in the target expression
+  ∫ (x : ℝ), (regSlice b p (-Real.pi) F + regSlice b p (-Real.pi) G) x =
+    ∫ (x : ℝ), (regSlice b p 0 F + regSlice b p 0 G) x
+
+b p : ℝ
+F G : ℂ → ℂ
+hF0 : Integrable (regSlice b p 0 F) volume
+hFπ : Integrable (regSlice b p (-Real.pi) F) volume
+hFe : ∫ (x : ℝ), regSlice b p (-Real.pi) F x = ∫ (x : ℝ), regSlice b p 0 F x
+hG0 : Integrable (regSlice b p 0 G) volume
+hGπ : Integrable (regSlice b p (-Real.pi) G) volume
+hGe : ∫ (x : ℝ), regSlice b p (-Real.pi) G x = ∫ (x : ℝ), regSlice b p 0 G x
+⊢ ∫ (x : ℝ), (regSlice b p (-Real.pi) F + regSlice b p (-Real.pi) G) x =
+    ∫ (x : ℝ), (regSlice b p 0 F + regSlice b p 0 G) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T004045_264256Z\RegularizedContourSpaceR3.lean:49:36: error: Type mismatch: After simplification, term
+  congrArg (fun z => c • z) hFe
+ has type
+  c • ∫ (x : ℝ), regSlice b p (-Real.pi) F x = c • ∫ (x : ℝ), regSlice b p 0 F x
+but is expected to have type
+  ∫ (x : ℝ), (c • regSlice b p (-Real.pi) F) x = ∫ (x : ℝ), (c • regSlice b p 0 F) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T004045_264256Z\RegularizedContourSpaceR3.lean:66:4: error: Type mismatch: After simplification, term
+  regularized_slice_integrable b hb k p C 0 F hC hc hF (neg_nonpos.mpr (LT.lt.le Real.pi_pos)) le_rfl
+ has type
+  Integrable (fun x => regularized b k p F ↑x) volume
+but is expected to have type
+  Integrable (regSlice b p 0 (RapidityPolynomial.mode k * F)) volume
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T004045_264256Z\RegularizedContourSpaceR3.lean:68:4: error: Type mismatch
+  regularized_slice_integrable b hb k p C (-Real.pi) F hC hc hF le_rfl (neg_nonpos.mpr (LT.lt.le Real.pi_pos))
+has type
+  Integrable (fun x => regularized b k p F (↑x + ↑(-Real.pi) * I)) volume
+but is expected to have type
+  Integrable (regSlice b p (-Real.pi) (RapidityPolynomial.mode k * F)) volume
+'F1Fecho.WedgeLaplace.contourSpace' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WedgeLaplace.mode_mul_mem_contourSpace' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WedgeLaplace.polynomial_mul_mem_contourSpace' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

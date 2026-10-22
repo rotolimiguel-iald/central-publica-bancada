@@ -1,0 +1,15 @@
+{
+  "source": {
+    "path": "C:\\IALD\\Bancada_Um\\bancada\\fundo_gpu.py",
+    "sha256": "dc3920c2445c256f5a92f81e8c69eece0d758a7cb0cc9a53cda15e25c5ef5f88",
+    "bytes": 8477,
+    "role": "scientific reference read only"
+  },
+  "excerpts": [
+    {
+      "first_line": 130,
+      "last_line": 159,
+      "text": "        Rb = 3.0 * ombh2[:, None] * torch.exp(self.x2)[None, :] / (4.0 * self.ogh2)\n        Crs = _cum_simpson((C_KMS / torch.sqrt(3.0 * (1.0 + Rb))) * ex / (H0[:, None] * E), h2g)\n        i0 = int(round((0.0 - X_MIN) / (4.0 * self.h)))\n        return dict(E=E, Phi=Phi, rho2=rho2, rpp2=rpp2, Om=Om, OL=OL, res_fecho=res, Cdm=Cdm, Crs=Crs, H0=H0,\n                    C0=_interp_cubico(Cdm, X_MIN, 4.0 * self.h, torch.zeros_like(H0)[:, None])[:, 0])\n\n    def DM(self, fd, z):\n        \"\"\"D_M (Mpc) nos redshifts z (B,K): (c/H0) ∫_{-ln(1+z)}^{0} e^{-x}/E dx.\"\"\"\n        Cz = _interp_cubico(fd[\"Cdm\"], X_MIN, 4.0 * self.h, -torch.log1p(z))\n        return C_KMS / fd[\"H0\"][:, None] * (fd[\"C0\"][:, None] - Cz)\n\n    def DM_com_boost(self, fd, z, logK2):\n        \"\"\"01/10/2026 (SH0ES): D_M (Mpc) com a taxa E multiplicada por exp(logK2) nos nós pares (logK2: (B, N2)) -- a lei ACUMULADA nas distâncias,\n        D_M = (c/H0) ∫ e^{-x} dx / (E·K): o mesmo integrador cumulativo de `fundo`, com o fator da lei dentro.\"\"\"\n        E2 = fd[\"E\"] * torch.exp(logK2)\n        ex = torch.exp(-self.x2)[None, :]\n        Cdm = _cum_simpson(ex / E2, 2.0 * self.h)\n        C0 = _interp_cubico(Cdm, X_MIN, 4.0 * self.h, torch.zeros_like(fd[\"H0\"])[:, None])[:, 0]\n        Cz = _interp_cubico(Cdm, X_MIN, 4.0 * self.h, -torch.log1p(z))\n        return C_KMS / fd[\"H0\"][:, None] * (C0[:, None] - Cz)\n\n    def Ez(self, fd, z):\n        return _interp_cubico(fd[\"E\"], X_MIN, 2.0 * self.h, -torch.log1p(z))\n\n    def rs_int(self, fd, z_lo):\n        \"\"\"∫ de a = 1e-8 até a(z_lo) de c_s dz/H -- a integral do horizonte sonoro, (B,).\"\"\"\n        return _interp_cubico(fd[\"Crs\"], X_MIN, 4.0 * self.h, -torch.log1p(z_lo)[:, None])[:, 0]\n\n    def residuo_segunda(self, fd):\n        \"\"\"d(E²)/dx + 3Φ(ρ+p) = 0, conferido no passado físico (autoverificação do worker), nos nós pares.\"\"\""
+    }
+  ]
+}

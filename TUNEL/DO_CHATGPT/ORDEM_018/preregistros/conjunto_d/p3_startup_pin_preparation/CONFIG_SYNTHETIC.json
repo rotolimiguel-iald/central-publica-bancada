@@ -1,0 +1,108 @@
+{
+  "id": "ORDEM018_F3_SYNTHETIC_P0_P2",
+  "mode": "SYNTHETIC_ONLY",
+  "fixture_ids": [
+    "SYN_A",
+    "SYN_B"
+  ],
+  "grid": {
+    "duration_s": 32.0,
+    "sample_rate_hz": 4096,
+    "generation_sample_rate_hz": 8192,
+    "generation_maximum_frequency_hz": 4096,
+    "minimum_frequency_hz": 20.0,
+    "maximum_frequency_hz": 1024.0,
+    "reference_frequency_hz": 20.0,
+    "roll_off_s": 0.4,
+    "geocenter_seconds_after_segment_start": 16.0
+  },
+  "detectors": [
+    "H1",
+    "L1"
+  ],
+  "psd_kind": "LAL_ANALYTIC_aLIGOZeroDetHighPower",
+  "target_SNR": 20.0,
+  "noise_seed": 180601,
+  "geometry": {
+    "theta_jn": 0.7,
+    "ra": 1.0,
+    "dec": 0.2,
+    "psi": 0.4,
+    "phase": 1.2,
+    "geocent_time": 1000000000.0
+  },
+  "priors": {
+    "mass_1": {
+      "kind": "Uniform",
+      "minimum": 35.0,
+      "maximum": 110.0
+    },
+    "mass_2": {
+      "kind": "Uniform",
+      "minimum": 20.0,
+      "maximum": 80.0
+    },
+    "mass_ratio": {
+      "kind": "Constraint",
+      "minimum": 0.2,
+      "maximum": 1.0
+    },
+    "chi_1": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 0.95
+    },
+    "chi_2": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 0.95
+    },
+    "dtau220": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 2.0
+    },
+    "domega220": 0.0,
+    "dtau440": 0.0,
+    "domega440": 0.0,
+    "luminosity_distance": {
+      "kind": "Uniform",
+      "minimum": 10.0,
+      "maximum": 10000.0
+    },
+    "theta_jn": {
+      "kind": "Sine",
+      "minimum": 0.0,
+      "maximum": 3.141592653589793
+    },
+    "ra": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 6.283185307179586,
+      "boundary": "periodic"
+    },
+    "dec": {
+      "kind": "Cosine",
+      "minimum": -1.5707963267948966,
+      "maximum": 1.5707963267948966
+    },
+    "psi": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 3.141592653589793,
+      "boundary": "periodic"
+    },
+    "phase": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 6.283185307179586,
+      "boundary": "periodic"
+    },
+    "geocent_time": {
+      "kind": "Uniform",
+      "minimum": 999999999.9,
+      "maximum": 1000000000.1
+    }
+  },
+  "max_native_calls": 32
+}

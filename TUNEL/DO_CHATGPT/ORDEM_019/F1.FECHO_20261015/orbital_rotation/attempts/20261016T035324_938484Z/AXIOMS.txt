@@ -1,0 +1,55 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T035324_938484Z\PhysicalSmearLorentzR2.lean:42:35: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ μ, ∑ ν, ↑(cartesianStrength p ?j μ ν) * (CovariantTensor.pull ((↑↑L⁻¹).map Complex.ofReal)) ?T μ ν
+in the target expression
+  1 / 2 *
+      ∑ μ,
+        ∑ ν,
+          ↑(cartesianStrength p j μ ν) *
+            (CovariantTensor.pull ((↑(↑L)⁻¹).map Complex.ofReal))
+              ((physicalFourierCLM f) (shellEmbedding (shellAction (↑L⁻¹) p))) μ ν =
+    ∑ i,
+      transportMatrix L p j i *
+        (1 / 2 *
+          ∑ μ,
+            ∑ ν,
+              ↑(cartesianStrength (shellAction (↑L⁻¹) p) i μ ν) *
+                (physicalFourierCLM f) (shellEmbedding (shellAction (↑L⁻¹) p)) μ ν)
+
+L : ↥generatedLorentz
+f : SchwartzTensor
+htr :
+  ∀ᵐ (x : MomentumCoordinates) ∂orbitalMeasure 0,
+    ↑↑(physicalSmearCLM f) (shellAction (↑L⁻¹) x) = globalCoefficient (physicalFourierCLM f) (shellAction (↑L⁻¹) x)
+p : MomentumCoordinates
+h1 : ↑↑(physicalSmearCLM ((transform ↑L) f)) p = globalCoefficient (physicalFourierCLM ((transform ↑L) f)) p
+h2 :
+  ↑↑((transverseAction L) (physicalSmearCLM f)) p =
+    (matrixFiberOperator (transportMatrix L p)) (↑↑(physicalSmearCLM f) (shellAction (↑L⁻¹) p))
+h3 : ↑↑(physicalSmearCLM f) (shellAction (↑L⁻¹) p) = globalCoefficient (physicalFourierCLM f) (shellAction (↑L⁻¹) p)
+hs : (action ↑L).symm (shellEmbedding p) = shellEmbedding (shellAction (↑L⁻¹) p)
+hc :
+  ∀ (j : Fin 2) (T : TensorValue),
+    ∑ μ, ∑ ν, ↑(cartesianStrength p j μ ν) * (CovariantTensor.pull ((↑↑L⁻¹).map Complex.ofReal)) T μ ν =
+      ∑ i, transportMatrix L p j i * ∑ μ, ∑ ν, ↑(cartesianStrength (shellAction (↑L⁻¹) p) i μ ν) * T μ ν
+j : Fin 2
+⊢ 1 / 2 *
+      ∑ μ,
+        ∑ ν,
+          ↑(cartesianStrength p j μ ν) *
+            (CovariantTensor.pull ((↑(↑L)⁻¹).map Complex.ofReal))
+              ((physicalFourierCLM f) (shellEmbedding (shellAction (↑L⁻¹) p))) μ ν =
+    ∑ i,
+      transportMatrix L p j i *
+        (1 / 2 *
+          ∑ μ,
+            ∑ ν,
+              ↑(cartesianStrength (shellAction (↑L⁻¹) p) i μ ν) *
+                (physicalFourierCLM f) (shellEmbedding (shellAction (↑L⁻¹) p)) μ ν)
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  function expected
+    cartesianStrength p j μ
+'F1Fecho.MaxwellLocalization.physicalSmear_lorentz' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellLocalization.circularSmear_lorentz' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellLocalization.localized_lorentz_iff' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

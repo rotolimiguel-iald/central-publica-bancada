@@ -1,0 +1,140 @@
+{
+  "schema": "F9_PRECISION_SERVICES_PREPARATION_V1",
+  "request_id": "f820203f-b83c-420a-87ec-7816f3179139",
+  "status": "PREPARATION_ONLY_NOT_NUMERICALLY_QUALIFIED",
+  "module": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_precision_services_preparation\\precision_services.py",
+    "bytes": 13442,
+    "sha256": "63f6adc987308cb14d986a07a9006610e0a304bb36d7d705f59e8c3874b7f278"
+  },
+  "signatures": {
+    "log_exp_quad_interval": {
+      "positional": [
+        "A",
+        "h",
+        "L",
+        "U"
+      ],
+      "keyword_only_required": [
+        "absolute_log_error_target",
+        "max_evaluations"
+      ],
+      "line": 224,
+      "receipt_keys": [
+        "service_id",
+        "status",
+        "log_value",
+        "error_estimate",
+        "error_kind",
+        "converged",
+        "evaluations",
+        "method"
+      ]
+    },
+    "positive_quad_1d": {
+      "positional": [
+        "f",
+        "lower",
+        "upper"
+      ],
+      "keyword_only_required": [
+        "absolute_error_target",
+        "relative_error_target",
+        "max_evaluations"
+      ],
+      "line": 157,
+      "receipt_keys": [
+        "service_id",
+        "status",
+        "value",
+        "error_estimate",
+        "error_kind",
+        "converged",
+        "evaluations",
+        "method"
+      ]
+    }
+  },
+  "service_ids": {
+    "LOG_SERVICE_ID": "f9.log_exp_quad_interval.scaled_simpson.v1",
+    "QUAD_SERVICE_ID": "f9.positive_quad_1d.adaptive_simpson.v1"
+  },
+  "inherited_contract": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_physical_prior_preparation\\CONTRATO_API.json",
+    "bytes": 6777,
+    "sha256": "96dbd03f15ac8614eba760b8775145014d9684d1e51a5f63a1cad9303a0c1a03"
+  },
+  "inherited_service_contract": {
+    "log_exp_quad_interval": {
+      "signature": "(A,h,L,U,*,absolute_log_error_target,max_evaluations)",
+      "target": "log integral_L^U exp(h*z-A*z*z/2) dz, combined and stable",
+      "domain": "A>0; finite L<U, L<=0<=U; maximum-restricted anchoring",
+      "must_not": "ordinary CDF subtraction or isolated exp(h^2/(2A)) presented as stable in extreme tails",
+      "not_implemented_or_qualified_here": true
+    },
+    "positive_quad_1d": {
+      "signature": "(callback,0.0,1.0,*,absolute_error_target,relative_error_target,max_evaluations)",
+      "target": "scaled positive H5 integrand, original normalized prior preserved",
+      "callback_budget_enforced": true,
+      "callback_errors_latched": true,
+      "not_implemented_or_qualified_here": true
+    },
+    "receipt": {
+      "exact_keys": [
+        "service_id",
+        "status",
+        "log_value_OR_value",
+        "error_estimate",
+        "error_kind",
+        "converged",
+        "evaluations",
+        "method"
+      ],
+      "status": "ENGINEERING_ESTIMATE",
+      "error_kind": [
+        "ESTIMATED_NOT_CERTIFIED",
+        "UNASSESSED"
+      ],
+      "convergence_and_precision_claim": "receipt retained; no promotion to certified or assertion that requested target met"
+    }
+  },
+  "inherited_scope": {
+    "theta": "fixed shared H0,ombh2,omch2; original domain/priors unchanged",
+    "models": [
+      "H1_TGL",
+      "H2_LCDM",
+      "H3_beta_free",
+      "H4_Cepheid",
+      "H5_rd_free"
+    ],
+    "base_prior": {
+      "density_exact": "50/3",
+      "applied": false,
+      "integrated": false
+    },
+    "n_rows": 283,
+    "eta_dimension": 63,
+    "MM": "CONDITIONAL_UNRATIFIED"
+  },
+  "receipt_status": "ENGINEERING_ESTIMATE",
+  "error_kinds": [
+    "ESTIMATED_NOT_CERTIFIED",
+    "UNASSESSED"
+  ],
+  "minimum_budget": {
+    "positive_quad_1d": 17,
+    "window_per_nonempty_side": 5
+  },
+  "maximum_budget_schema_cap": 1000000,
+  "algorithm": "shared positive adaptive Simpson; exact-float rational recentering, localized monotone sides and analytic tail envelope for quadratic window",
+  "unbounded_errors": [
+    "generic missed peaks",
+    "backend and theory errors",
+    "rounding without outward interval arithmetic"
+  ],
+  "authorization": false,
+  "claim": false,
+  "numerical_tests": 0,
+  "candidate_imports": 0,
+  "observed_reads": 0
+}

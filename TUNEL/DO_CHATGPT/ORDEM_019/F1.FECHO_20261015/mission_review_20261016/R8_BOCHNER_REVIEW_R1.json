@@ -1,0 +1,289 @@
+{
+  "schema": "R8_BOCHNER_INDEPENDENT_REVIEW_V1",
+  "created_utc": "2026-10-16T14:49:42.138656+00:00",
+  "reviewer": {
+    "id": "codex-mission-memory-review",
+    "kind": "agent"
+  },
+  "verdict": "PASS_COMPONENT_WITH_SCOPE",
+  "status": "REAL_LOCAL_SOURCE_AND_RECEIPT_REVIEW",
+  "reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "fresh_project": {
+    "revision": 78,
+    "receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_PROJECT_20261016T144941_067261Z_6b722122_RECEIPT.json",
+      "sha256": "eb186f6fbd1aab471e7ebc77f4fbadcee675ab4e66abe7af93bf5c7ee0f1a02a",
+      "bytes": 103942
+    },
+    "task": {
+      "id": "R8",
+      "attempts": 1,
+      "criterion": "Realizacao conjunta de Maxwell e tensor de materia. Campos do certificado completo nao triviais na mesma rede; simetria/conservacao e fonte geometrica ligados.",
+      "depends_on": [
+        "M0_MEMORIA"
+      ],
+      "epoch": 1,
+      "evidence": [],
+      "lease": {
+        "expires_at": 1792168174.8266604,
+        "id": "9cd31679-ce37-402e-bef8-e3d2fe61cc04",
+        "owner": "codex-gerente-tgl",
+        "task_epoch": 1
+      },
+      "note": "",
+      "review_evidence": [],
+      "reviewed_by": null,
+      "status": "working",
+      "submitted_by": null,
+      "ready": false
+    }
+  },
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullFrequencyBochnerR2.lean",
+    "sha256": "418edc14ba27630d692a8488aa603d9af837e2fe4ce09edc4734ac9a853e894c",
+    "bytes": 9284
+  },
+  "build_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\RECEIPT.json",
+    "sha256": "a0a6c24cfd3c65e01de5ec8a3a050218f234f6402178b0e2b7d919859f1efe25",
+    "bytes": 7240
+  },
+  "build": {
+    "exit_code": 0,
+    "seconds": 45.90890589999617,
+    "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+    "printed_declarations": [
+      {
+        "name": "F1Fecho.NullFrequency.longitudinal_bochner",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.longitudinal_bochner_integrable_iff",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.frequency_bochner",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.frequency_bochner_integrable_iff",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.longitudinal_null_bochner",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.longitudinal_null_bochner_integrable_iff",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.longitudinal_null_bochner_inverse",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.longitudinal_null_bochner_inverse_integrable_iff",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.orbital_nullFrequency_bochner",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "name": "F1Fecho.NullFrequency.orbital_nullFrequency_bochner_cancel",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    ]
+  },
+  "verified": {
+    "source_equals_compiled_snapshot": true,
+    "receipt_pins_verified_unique_files": 16,
+    "cache_copies_and_their_recorded_originals_match": true,
+    "axiom_sets_exactly_standard_trio": true,
+    "error_lines_in_build_log": false,
+    "new_compilation_executed": false
+  },
+  "semantic_findings": [
+    {
+      "verdict": "PASS",
+      "lines": [
+        28,
+        116
+      ],
+      "finding": "Mudanças p=r sinh(x), E=r cosh(x), u=r exp(-x)>0 transportam dp/E para du/u. As fórmulas Bochner nas fibras vêm acompanhadas de equivalências de Integrable/IntegrableOn; a igualdade totalizada não é usada como prova de convergência."
+    },
+    {
+      "verdict": "PASS",
+      "lines": [
+        127,
+        149
+      ],
+      "finding": "O transporte global exige hf: Integrable f (orbitalMeasure 0). hf fornece Integrable da densidade recíproca em momentumMeasure antes de integral_prod/Fubini."
+    },
+    {
+      "verdict": "PASS",
+      "lines": [
+        147,
+        149
+      ],
+      "finding": "transverseMass_pos_ae 0 exclui q=0 sob volume transversal, por measure_singleton. A fonte OrbitalRapidityMeasure_v4 define a medida orbital como densidade de 1/E sobre a medida produto e também prova nulidade do eixo para ambas as medidas."
+    },
+    {
+      "verdict": "PASS",
+      "lines": [
+        153,
+        170
+      ],
+      "finding": "Cancelamento exige integrabilidade do integrando ponderado (E-p)•f; em Ioi 0, null_inverseLongitudinal dá E-p=u e a desigualdade hu0:0<u permite (1/u)*u=1. A inversa usada neste passo vale para todo r e u>0; a passagem global já tratou o eixo excepcional."
+    }
+  ],
+  "limits": [
+    "PASS apenas do componente de medida/Jacobiano Bochner. Não prova charge_link nem aceita R8 completo.",
+    "Integrabilidade de uma onda Maxwell concreta é obrigação do consumidor: aqui hf é hipótese explícita, e as equivalências nas fibras preservam o domínio real de integrabilidade.",
+    "Fase, contração da polarização nula, identidade Fourier/carga, domínio do gerador e testemunha não nula de energia modular permanecem separados.",
+    "Conferidos os pinos do recibo e os dois módulos locais do cache; não reconstruído nem auditado novamente todo o grafo canônico/Mathlib."
+  ],
+  "source_resolution": {
+    "NullFrequencyMeasureR3": "Leitura feita no snapshot exato do recibo kms_strip/attempts/20261016T035107_356372Z; kms_strip/NullFrequencyMeasureR3.lean não existe."
+  },
+  "supporting_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullFrequencyCoordinatesR3.lean",
+      "sha256": "ac1e97354b7ab15f831e227e785b30a7a493ab7c4b95cf91b7a9f311c8622f49",
+      "bytes": 2421
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T035107_356372Z\\NullFrequencyMeasureR3.lean",
+      "sha256": "acae487a44471e2993bb62a76734aa8f79eed58eb758cf98ed5de67227de9001",
+      "bytes": 2648
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\OrbitalRapidityMeasure_v4.lean",
+      "sha256": "e5e6b7605009a17973d76a96a4449dabdde56be2086b6718770a2c5ef23600d3",
+      "bytes": 5118
+    }
+  ],
+  "verified_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\NullFrequencyBochnerR2.lean",
+      "sha256": "418edc14ba27630d692a8488aa603d9af837e2fe4ce09edc4734ac9a853e894c",
+      "bytes": 9284
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\build_orbital_compact_r3.py",
+      "sha256": "1bc30d8c6cca8f0bcfb81e171590e8cdcc1f89cf35f3ae8119918e81b2d4c3f8",
+      "bytes": 6668
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\DEPENDENCY_CACHE.json",
+      "sha256": "71d9e08dbce904d786eb2bdbc2129f04f6fb5f89a0d98a1d8e4c32d44f6e4785",
+      "bytes": 2195
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\AXIOMS.txt",
+      "sha256": "e6739f370e9197d2077c2ef5e21e80d32f2fd437db9843e95e6c8556244cb7cb",
+      "bytes": 3212
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\BUILD.log",
+      "sha256": "407ea0d9435a3bf58097f9401797f5ee57fad9a9feaea8ed945a4e60d1ba1ac8",
+      "bytes": 8374
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\NullFrequencyBochnerR2.olean",
+      "sha256": "3ce89c3dec520033725746d720542f9dc0d4e066ffe4d9348c7343011f21143b",
+      "bytes": 196832
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\RUNNING_OUTPUT.log",
+      "sha256": "e6739f370e9197d2077c2ef5e21e80d32f2fd437db9843e95e6c8556244cb7cb",
+      "bytes": 3212
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\START_RECEIPT.json",
+      "sha256": "e68350b7100265e21659c82b1b79448e7e27dda6988180b233a5ceb9e8a539f8",
+      "bytes": 2996
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T123047_944060Z\\NullFrequencyCoordinatesR3.olean",
+      "sha256": "b68657c953748afe232398cd724c0b130fc0eaaff9fae321345c5fbf0f11c84d",
+      "bytes": 265472
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T123047_944060Z\\NullFrequencyCoordinatesR3.lean",
+      "sha256": "ac1e97354b7ab15f831e227e785b30a7a493ab7c4b95cf91b7a9f311c8622f49",
+      "bytes": 2421
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T123047_944060Z\\RECEIPT.json",
+      "sha256": "a59c087b4adf64a472d3f82952c4030b8403575714179f1432db90c29da20e0b",
+      "bytes": 5413
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T035107_356372Z\\NullFrequencyMeasureR3.olean",
+      "sha256": "89aa6263a8c411e90d3fa34ae277300e4468d9acae294674d2e2ed8d3e911e31",
+      "bytes": 227616
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T035107_356372Z\\NullFrequencyMeasureR3.lean",
+      "sha256": "acae487a44471e2993bb62a76734aa8f79eed58eb758cf98ed5de67227de9001",
+      "bytes": 2648
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T035107_356372Z\\RECEIPT.json",
+      "sha256": "d95a247abb725be2a71df32c7fa5c14446235ba663c84bec87e12292bed391ab",
+      "bytes": 3707
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\dependency_cache\\NullFrequencyCoordinatesR3.olean",
+      "sha256": "b68657c953748afe232398cd724c0b130fc0eaaff9fae321345c5fbf0f11c84d",
+      "bytes": 265472
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144537_890350Z\\dependency_cache\\NullFrequencyMeasureR3.olean",
+      "sha256": "89aa6263a8c411e90d3fa34ae277300e4468d9acae294674d2e2ed8d3e911e31",
+      "bytes": 227616
+    }
+  ],
+  "accept_performed": false
+}

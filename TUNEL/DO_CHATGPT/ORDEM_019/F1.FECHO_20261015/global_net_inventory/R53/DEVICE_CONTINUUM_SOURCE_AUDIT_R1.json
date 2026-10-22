@@ -1,0 +1,496 @@
+{
+  "schema": "iald-r53-device-continuum-source-audit/v1",
+  "created_utc": "2026-10-16T21:37:16.826788+00:00",
+  "actor": {
+    "id": "codex-fock-r6-review",
+    "kind": "agent"
+  },
+  "unit": "F1.FECHO_20261015",
+  "requirement": "R5",
+  "handle": "r53-device-continuum-source",
+  "reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "mission_revision": 419,
+  "projection_sha256": "3bb5f2cf8ba10ade2ba9b75443b4404fa3480438b8a00bca4b4780ea730a3da4",
+  "mission_receipt": {
+    "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+    "scope": {
+      "house": "IALD",
+      "principal": "luiz-antonio-rotoli-miguel"
+    },
+    "revision": 419,
+    "event_id": "r53-physical-source-audits-start",
+    "event_hash": "5a0b762e95020389de80c5008cf61ad79f7ea1fce74018046ceecb543cca2126",
+    "objective_sha256": "f57ee2d752f8f8b2226baaf45307f91c485298d2a42758739e4c18ee08cb516e",
+    "anchor_sha256": "6fc1dab76ae9ec6ae35ad68b45e8b82fc2829156e1761945f257d030ae0589c7",
+    "state_sha256": "471f4edda43313fad91ae433516fcb82ae244b8611dfff000534b4004d1e94fe",
+    "replayed": false
+  },
+  "criterion_unchanged": "Rede global e realizacao do dispositivo. Representacao Poincare/localizacao e entrelacamento pertinente, com a construcao existente reutilizada.",
+  "lease_observed": {
+    "expires_at": 1792193271.2328255,
+    "id": "06f5dc56-9b67-4159-99df-f78f41648a84",
+    "owner": "codex-gerente-tgl",
+    "task_epoch": 3
+  },
+  "verdict": "OPEN_DEVICE_CONTINUUM_BRIDGE_WITH_FINITE_SPECTRAL_OBSTRUCTION",
+  "requirement_satisfied": false,
+  "statute": "REAL_SOURCE_AUDIT; DERIVED_DIAGNOSTIC; NO_NEW_FORMAL_PROOF",
+  "scope": "Auditoria focal das fontes indicadas, contratos e fornecedor B0 atual. Não é inventário exaustivo de todo o acervo, auditoria de olean nem nova compilação. R7/R8 aceitos e a rede física existente são reutilizados sem reabertura.",
+  "device_identity": "O nome/setor físico pretendido permanece pendente da resposta humana solicitada pela raiz. Esta auditoria não escolhe MQC, Supercondutor ou sua composição por inferência.",
+  "inventory": [
+    {
+      "object": "G_epsilon",
+      "located": "Geometria fixa MQC de 27 nós e 54 enlaces na instanciação finita; N6_REFINEMENT enumera família dirigida como input.",
+      "status": "OPEN_NOT_CONSTRUCTED_IN_AUDITED_SCOPE",
+      "sources": [
+        "contract_r1:125-134",
+        "contract_r1_machine:334-357",
+        "mqc_extraction:152-156",
+        "finite_source:157-163"
+      ]
+    },
+    {
+      "object": "states",
+      "located": "Matrizes densidade normalizadas positivas sintéticas no único H=C^2 tensor C^2 tensor C^2; nenhuma família rho_epsilon compatível com inclusões/convergência foi localizada.",
+      "status": "FINITE_STATES_EXIST; LIMIT_COMPATIBILITY_OPEN",
+      "sources": [
+        "finite_source:174-182",
+        "finite_result",
+        "q6:224-232"
+      ]
+    },
+    {
+      "object": "inclusions",
+      "located": "embed(A,region,dims) constrói A tensor I no mesmo sistema finito e testa composição entre regiões; Q6 exige inclusões isométricas entre fibras e D-intertwining. Não há construção localizada de i_epsilon_delta entre refinamentos com coerência e estados compatíveis.",
+      "status": "FIXED_TENSOR_INCLUSIONS_EXIST; REFINEMENT_INCLUSIONS_OPEN",
+      "sources": [
+        "finite_source:47-95",
+        "q6:176-206",
+        "contract_r1_machine:345-349"
+      ]
+    },
+    {
+      "object": "device_dynamics",
+      "located": "Hamiltoniano cavidade/OH e dissipadores GKLS simbólicos, com versão numérica truncada. Isso não fornece uma representação unitária de Poincaré/boost do setor físico.",
+      "status": "SOURCE_DYNAMICS_PRESENT; REQUIRED_REPRESENTATION_OPEN",
+      "sources": [
+        "supercondutor:340-370",
+        "finite_source:166-172",
+        "psinet:490-521"
+      ]
+    },
+    {
+      "object": "H1_and_net",
+      "located": "H1=Lp (EuclideanSpace C (Fin 2)) 2 (orbitalMeasure 0), U1 e B0 concretos. physicalCanonicalNet contém compactPhysicalNet e wedge_glue.",
+      "status": "REUSE_EXISTING_CONSTRUCTION",
+      "sources": [
+        "h1_boost:88-134",
+        "physical_net:207-224"
+      ]
+    },
+    {
+      "object": "V",
+      "located": "O contrato exige V unitário entre setores físicos, entrelaçando Poincaré completo e reflexão e levando K_device(W) a K_can(W). Não localizado termo/mapa de dispositivo que satisfaça essas identidades.",
+      "status": "OPEN_EXPLICIT_BRIDGE",
+      "sources": [
+        "contract_r1:127-133",
+        "contract_r2:168-175",
+        "continuous_construction:146-150"
+      ]
+    }
+  ],
+  "material_distinctions": [
+    "MQC usa 27 nós, mas a extração pp.5-6 descreve três estados por sítio (alpha|0>+beta|1>+gamma|Psi>), embora os chame qubits. Não identificar literalmente esse dispositivo com 27 qubits binários. A hipótese tensorial independente também precisa ser declarada.",
+    "O teste custodiado tem dimensão Hilbert 8, fatores [2,2,2], não aloca o Hilbert de 27 sítios e declara |Psi> fora do modelo reduzido. A geometria clássica e o Hilbert testado são objetos distintos.",
+    "Um número finito de sítios não implica Hilbert físico finito se existem modos bosônicos sem truncamento. A obstrução finita aplica-se ao setor/truncamento finito explicitamente escolhido.",
+    "GKLS dissipativo e boost unitário têm tipos diferentes. O Hamiltoniano temporal apresentado na patente não pode ser renomeado gerador de boost sem prova.",
+    "O histórico INVENTARIO_REDE_GLOBAL_R1 e comentários antigos não revogam os fornecedores globais e R7/R8 aceitos na missão atual."
+  ],
+  "finite_evidence": {
+    "exit_code": 0,
+    "checks_passed": 142,
+    "checks_total": 142,
+    "quantum_dimensions": {
+      "Hilbert": 8,
+      "Liouville": 64,
+      "Choi": 64,
+      "factors": [
+        2,
+        2,
+        2
+      ]
+    },
+    "rerun": false,
+    "result_log_freeze_hashes_match_receipt": true,
+    "source_hash_matches_result": true,
+    "physical_confirmation_claimed": false
+  },
+  "exact_obstruction": {
+    "formal_source": "TGLExt.ImportedSQ.B0_no_eigen",
+    "statement": "(f : H1) -> (forall s : R, exists c : C, norm c = 1 and B0 s f = c smul f) -> f = 0",
+    "anchors": [
+      "h1_boost:133-134",
+      "boost_supplier:83-105"
+    ],
+    "typed_instantiation": {
+      "E": "complex normed vector space",
+      "b": "R -> (E linearIsometryEquiv[C] E)",
+      "V": "E linearMap[C] H1; injective if an isometric embedding",
+      "intertwining": "forall s x, V (b s x) = B0 s (V x)",
+      "common_eigenray": "x != 0 and forall s, exists c, norm c=1 and b s x=c smul x",
+      "conclusion": "V x = 0; contradicts injectivity of V and x != 0"
+    },
+    "proof_in_text": "Fix s and c from the device eigenray. By intertwining and complex linearity, B0 s (V x) = V (b s x) = V (c smul x) = c smul V x. Apply B0_no_eigen to V x. Injectivity then gives x=0.",
+    "finite_corollary_statute": "DERIVED in text, not a newly compiled Lean declaration: a finite-dimensional unitary representation of the abelian boost group has a simultaneous orthonormal eigenbasis; equivalently b_s=exp(i s K) with finite self-adjoint K has an eigenvector. Each basis vector would be killed by V. The source audit did not locate a precompiled theorem already specialized to a patent device.",
+    "applicability_limit": "No device boost b or its intertwining law has yet been supplied by these sources. The theorem diagnoses the proposed exact finite interpretation; it does not prove a contradiction for every physical interpretation of the patents. It is a common eigenray for all s, not merely one chosen boost.",
+    "fock_exception": "B0 acts on one-particle H1. The full Fock boost has a nonzero fixed vacuum, so a trivial one-dimensional vacuum embedding is possible and is not a one-particle device realization. A unitary equivalence of an entire finite Hilbert with the actual Fock is excluded separately by concrete_kinematics_inhabited (infinite dimensionality).",
+    "other_formal_obstruction": "Santo.no_finite_spectral_translation rules out V^-1 H V = H+s I for finite nonempty matrices, invertible V and s!=0. Its additive spectral-translation premise is not derived for the device and must not be confused with the relativistic boost conjugation law."
+  },
+  "remaining_typed_data": [
+    "Directed index I with G_i, local algebras A_i(O), unital injective *-maps alpha_i_j, identity/composition/local-region coherence, and positive normalized states omega_i with omega_j(alpha_i_j(a))=omega_i(a) (or an explicitly proved limiting replacement).",
+    "A declared convergence topology and compatible dynamics/correlators yielding H_phys, positive-energy U_device of the required spacetime group, physical helicity sector, antiunitary reflection J_device and localized real spaces K_device(W).",
+    "V : H_phys linearIsometryEquiv[C] H1 with V U_device(g)=U_can(g) V for the full required action, V J_device=J_can V and image(V,K_device(W))=K_can(W). The translation/boost subidentities must agree with existing U1 and B0.",
+    "Identification of engineering coordinates, units, orientation and the selected patent/device sector. These cannot be supplied by a Hilbert-space dimension match or by copying the already constructed global net."
+  ],
+  "alternatives_diagnostic_only": [
+    {
+      "route": "Exact fixed finite sector",
+      "diagnosis": "Fails for any nonzero common boost eigenray when injective intertwining into H1 is demanded. Not an accepted realization of R5."
+    },
+    {
+      "route": "Continuum/refinement limit",
+      "diagnosis": "Dimension unbounded, coherent inclusions/positive compatible states and controlled convergence can avoid finite point-spectrum obstruction. These ingredients remain to be constructed; no limit or equivalence is asserted here."
+    },
+    {
+      "route": "Untruncated bosonic device",
+      "diagnosis": "The finite obstruction alone does not decide this case. Construct the actual physical sector and full representation, then prove the required V identities."
+    },
+    {
+      "route": "Finite-window approximation",
+      "diagnosis": "Would require norms, parameter/energy windows and explicit error bounds. This is a different possible engineering contract, not an automatic weakening or satisfaction of original R5."
+    }
+  ],
+  "search_scope": {
+    "primary_roots": [
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE",
+      "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\global_net_inventory",
+      "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16"
+    ],
+    "focused_files": "Four source-pin entries, custodied MQC extraction, R1/R2 contract, continuous construction, finite_device runner/results, existing inventory, B0 and its exact supplier; current physical net and Fock infinite-dimension anchor.",
+    "explicit_exclusions": [
+      "**/attempts/**",
+      "**/dependency_cache/**",
+      "**/*backup*/**",
+      "**/*.bak*",
+      "**/full_rite/**",
+      "**/candidate*/**",
+      "**/network_bundle*/**",
+      "**/review*/**",
+      "**/.lake/**"
+    ],
+    "absence_semantics": "Not located in the audited slice; no claim of universal nonexistence across the entire archive. No reconstructed full inventory.",
+    "search_limit": "One broad provider-text search produced truncated duplicate payloads and was not used as an absence proof; final conclusions use exact source reads and pinned line anchors. Initial O16 parent-path miss was corrected to TGLExt/O16; rg --no-ignore found ProductOrbitalSpectrum_v3."
+  },
+  "sources": {
+    "contract_r1": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R1.md",
+      "sha256": "2d6b93f9ce014533c672a1b959e4b210e61c13f828e50cea4a514648dc8d5a11",
+      "bytes": 9109,
+      "line_anchors": [
+        [
+          7,
+          29
+        ],
+        [
+          125,
+          134
+        ]
+      ]
+    },
+    "contract_r1_machine": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R1.json",
+      "sha256": "2e22e203bb3329f757353b7fab0297b1ff00e441973c2af33f178ff7ba9fb4cf",
+      "bytes": 19785,
+      "line_anchors": [
+        [
+          334,
+          357
+        ]
+      ]
+    },
+    "contract_r2": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONTRATO_REDE_R2.md",
+      "sha256": "19f083c6a5484f66ac8cc361aece658a7e510b8307fc2ac1cbd5c0393ecbffac",
+      "bytes": 12642,
+      "line_anchors": [
+        [
+          168,
+          175
+        ]
+      ]
+    },
+    "continuous_construction": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONSTRUCAO_CONTINUA_R1.md",
+      "sha256": "fea72d71ac891255b08428999810940e3508f11f0059e0d56e93bb64980c1a19",
+      "bytes": 8369,
+      "line_anchors": [
+        [
+          4,
+          20
+        ],
+        [
+          146,
+          150
+        ]
+      ]
+    },
+    "inventory": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\global_net_inventory\\INVENTARIO_REDE_GLOBAL_R1.md",
+      "sha256": "afc986c2812ee108c3f76b76f0efd695fbc31030495fa3629d961db62f974385",
+      "bytes": 7187,
+      "line_anchors": [
+        [
+          3,
+          7
+        ],
+        [
+          30,
+          42
+        ]
+      ]
+    },
+    "article_pins": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\sources\\ARTICLE_SOURCE_PINS_R1.json",
+      "sha256": "6bc93268f52ee9d3b6892043cb23ff941e03da82cfa3d311037ec269c3f2eff7",
+      "bytes": 6710
+    },
+    "extraction_custody": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\sources\\PRIMARY_SOURCES_R1.json",
+      "sha256": "77b2eac2019dfda5bf7eede050a9b83e27bd471c4c0a8479b7ca23dfd972f1ba",
+      "bytes": 1333
+    },
+    "mqc": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\MQC - Microprocessador Cúbico\\mqc_pi_inpi_relatorio descritivo.pdf",
+      "sha256": "654d9fda96f2f050c234020b7f3cc80c6468dd65bc945d05d9e7ca7687e62d7f",
+      "bytes": 349041,
+      "custodied_sha256": "654d9fda96f2f050c234020b7f3cc80c6468dd65bc945d05d9e7ca7687e62d7f",
+      "custody_matches": true
+    },
+    "supercondutor": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+      "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e",
+      "bytes": 76972,
+      "line_anchors": [
+        [
+          340,
+          389
+        ],
+        [
+          708,
+          740
+        ]
+      ],
+      "custodied_sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e",
+      "custody_matches": true
+    },
+    "psinet": {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\Psi_Net_Protocol_PI_INPI.tex",
+      "sha256": "f883dc2b0b79df8ae6c8657440628e20b09a55546dd6ed336d0d2cea92ac22c9",
+      "bytes": 59050,
+      "line_anchors": [
+        [
+          490,
+          521
+        ]
+      ],
+      "custodied_sha256": "f883dc2b0b79df8ae6c8657440628e20b09a55546dd6ed336d0d2cea92ac22c9",
+      "custody_matches": true
+    },
+    "q6": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\RESPOSTA_Q6_MORADA_PACOTE_HILBERT.md",
+      "sha256": "966c21678ed51923ff3e5d663f1307dd09837e375f00b8ff8dc41e8247d4f98b",
+      "bytes": 7604,
+      "line_anchors": [
+        [
+          5,
+          27
+        ],
+        [
+          176,
+          206
+        ],
+        [
+          224,
+          232
+        ],
+        [
+          350,
+          359
+        ]
+      ],
+      "custodied_sha256": "966c21678ed51923ff3e5d663f1307dd09837e375f00b8ff8dc41e8247d4f98b",
+      "custody_matches": true
+    },
+    "mqc_extraction": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\sources\\MQC_DESCRITIVO_EXTRACT_R1.txt",
+      "sha256": "e7f07be74236fae4fea0e708fb70de7925b7183bc38270c68c3cee5596d4acb8",
+      "bytes": 21428,
+      "line_anchors": [
+        [
+          152,
+          156
+        ],
+        [
+          216,
+          224
+        ],
+        [
+          456,
+          482
+        ]
+      ],
+      "custody_matches": true
+    },
+    "finite_source": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\run_finite_device.py",
+      "sha256": "89332d76e3fdcbf67f50e8328dfd9316196d7ef18ccf710666eb544426aa17be",
+      "bytes": 17373,
+      "line_anchors": [
+        [
+          1,
+          1
+        ],
+        [
+          47,
+          95
+        ],
+        [
+          157,
+          182
+        ]
+      ]
+    },
+    "finite_report": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\RELATORIO_DEVICE_R1.md",
+      "sha256": "edc79d1af9437c8e17ca8701320698768eea5d8a5335d1af970458ad5090bb3f",
+      "bytes": 2200,
+      "line_anchors": [
+        [
+          1,
+          14
+        ]
+      ]
+    },
+    "finite_preregister": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\PREREGISTRO_DEVICE_R1.json",
+      "sha256": "6e4e2ce553aea405878e967df9314be2af030b45e234dd35dbe1b30731d2560a",
+      "bytes": 6577
+    },
+    "finite_receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\RUN_RECEIPT_DEVICE_R1.json",
+      "sha256": "1785da9588262a8d6903bfc517cec12424af5c97491fdb8af4affbfc5b100f2f",
+      "bytes": 654
+    },
+    "finite_manifest": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\RUN_MANIFEST_DEVICE_R1.json",
+      "sha256": "846789f59875934abf30e83c56bac8d5cd591bbe4a993c3114ff8443a1197880",
+      "bytes": 573
+    },
+    "finite_result": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\RESULTADO_DEVICE_R1.json",
+      "sha256": "0eee8952a7217827e8c246acaea2c41b4aedba94b698a9ff63a0e9d71fe3a430",
+      "bytes": 43870,
+      "receipt_pin_matches": true
+    },
+    "finite_log": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\RUN_DEVICE_R1.log",
+      "sha256": "c872c1bce9a319dab51e5247b8e5839d53f3f9d11c869a0b4da5e38e240f38e8",
+      "bytes": 563,
+      "receipt_pin_matches": true
+    },
+    "finite_freeze": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\FREEZE_DEVICE_R1.json",
+      "sha256": "aca98052da1b64317bd586bdbd62554af2df4ebb851e7840f1100f574031ae7f",
+      "bytes": 879,
+      "receipt_pin_matches": true
+    },
+    "h1_boost": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheImportedSecondQuantization.lean",
+      "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+      "bytes": 35835,
+      "line_anchors": [
+        [
+          88,
+          95
+        ],
+        [
+          115,
+          134
+        ]
+      ]
+    },
+    "boost_supplier": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\ProductOrbitalSpectrum_v3.lean",
+      "sha256": "f144318b4f272336f72abddb6673dbca5718d7439b2344750e5f2d8f37b0a094",
+      "bytes": 6033,
+      "line_anchors": [
+        [
+          83,
+          105
+        ]
+      ]
+    },
+    "finite_spectral_shift": {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\Santo.lean",
+      "sha256": "245b5a7a666c15472daba498b0c01a12da74f055ef964ed3c2c7c6dde383d9e4",
+      "bytes": 120116,
+      "line_anchors": [
+        [
+          205,
+          218
+        ]
+      ]
+    },
+    "fock_infinite": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_reuse\\CanonicalFockAssemblyR1.lean",
+      "sha256": "4b1d8ec2f9fa69b551782546ad0c5620e0021e219aca4efa1fc36f97065b24a5",
+      "bytes": 11100,
+      "line_anchors": [
+        [
+          48,
+          63
+        ]
+      ]
+    },
+    "physical_net": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalCanonicalNetCompleteR1.lean",
+      "sha256": "4409c3037623a103c0033b4b4fb4d4c55ec2787ef940fff42e0802eafcfe75a4",
+      "bytes": 11555,
+      "line_anchors": [
+        [
+          207,
+          224
+        ]
+      ]
+    },
+    "handoff": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R53_RECOVER_HANDOFF_R5_20261016T212930_109018Z_b3387565_RECEIPT.json",
+      "sha256": "ccf3cf500ffb27849bb45cdfa28600b4f5c079371214dbc20b0cebd2fab0a158",
+      "bytes": 139784
+    },
+    "mission_reference": {
+      "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+      "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+      "bytes": 672
+    }
+  },
+  "actions": {
+    "new_lean_builds": 0,
+    "new_provider_calls": 0,
+    "production_mutations": 0,
+    "mission_mutations": 0,
+    "memory_mutations": 0,
+    "requirement_accepts": 0
+  },
+  "next_action": "Use the human-selected device/sector to choose an exact infinite-dimensional realization or a rigorously defined refinement limit; preserve the original RC1 identities. Do not reconstruct accepted A,D,Fock or global net."
+}

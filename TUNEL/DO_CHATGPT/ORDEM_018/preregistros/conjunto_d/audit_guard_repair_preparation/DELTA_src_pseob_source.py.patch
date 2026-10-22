@@ -1,0 +1,63 @@
+--- INIT003/src/pseob_source.py
++++ candidate/src/pseob_source.py
+@@ -13,6 +13,18 @@
+ STOP_UTC_TIMESTAMP = None
+ COST_COUNTER = None
+ EDOM_LOG = None
++AUDIT_CHECKPOINT = None
++
++def set_audit_checkpoint(callback):
++    global AUDIT_CHECKPOINT
++    if AUDIT_CHECKPOINT is not None:raise RuntimeError("Audit checkpoint already bound")
++    if not callable(callback):raise TypeError("Audit callback required")
++    AUDIT_CHECKPOINT=callback
++
++def audit_checkpoint(phase):
++    if AUDIT_CHECKPOINT is None:raise RuntimeError("Audit callback not configured")
++    AUDIT_CHECKPOINT(phase)
++
+ 
+ def set_deadline(timestamp):
+     global STOP_UTC_TIMESTAMP
+@@ -76,9 +88,11 @@
+         luminosity_distance, chi_1, chi_2, theta_jn, phase,
+         dtau220, dtau440, domega220=0., domega440=0., geocent_time=None, **kwargs):
+     if STOP_UTC_TIMESTAMP is not None and time.time()>=STOP_UTC_TIMESTAMP:raise TimeoutError('Source deadline reached')
++    audit_checkpoint("source_entry")
+     import lal
+     import lalsimulation as ls
+     from bilby.gw.source import lal_binary_black_hole
++    audit_checkpoint("source_after_imports")
+     values=[mass_1,mass_2,luminosity_distance,chi_1,chi_2,theta_jn,
+             phase,dtau220,dtau440,domega220,domega440]
+     if not np.isfinite(values).all():raise ValueError('Nonfinite waveform parameters')
+@@ -92,18 +106,21 @@
+     # Conservative LAL temporal bounds; failure aborts PE, never trims the prior.
+     timing=kwargs.pop('analysis_time_contract',None)
+     from temporal_contract import validate_time_contract
++    audit_checkpoint("source_before_temporal")
+     validate_time_contract(mass_1,mass_2,chi_1,chi_2,kwargs['minimum_frequency'],
+                            geocent_time,timing,dtau220,dtau440)
+     if kwargs.get('waveform_approximant','pSEOBNRv4HM_PA')!='pSEOBNRv4HM_PA':raise ValueError('Unregistered approximant')
+     # A fresh dictionary per evaluation prevents parameter leakage between calls.
+     if 'lal_waveform_dictionary' in kwargs:raise ValueError('Caller must not override deformation dictionary')
+     if any(k in kwargs for k in ('DTau220','DTau440','DOmega220','DOmega440')):raise ValueError('Duplicate deformation override')
++    audit_checkpoint("source_before_dictionary")
+     dictionary=lal.CreateDict()
+     for name,value in [('DTau220',dtau220),('DTau440',dtau440),
+                        ('DOmega220',domega220),('DOmega440',domega440)]:
+         getattr(ls,'SimInspiralWaveformParamsInsert'+name)(dictionary,float(value))
+     options=dict(kwargs,waveform_approximant='pSEOBNRv4HM_PA',lal_waveform_dictionary=dictionary)
+     options['maximum_frequency']=generation_maximum
++    audit_checkpoint("source_before_waveform")
+     started=time.perf_counter()
+     try:
+         result=lal_binary_black_hole(generated_grid,mass_1,mass_2,
+@@ -113,6 +130,7 @@
+         if COST_COUNTER is not None:
+             with COST_COUNTER.get_lock():
+                 COST_COUNTER[0]+=1;COST_COUNTER[1]+=time.perf_counter()-started
++        audit_checkpoint("source_after_waveform")
+     if result is None:
+         record_edom(dict(mass_1=float(mass_1),mass_2=float(mass_2),chi_1=float(chi_1),chi_2=float(chi_2)),generation_maximum)
+         return None

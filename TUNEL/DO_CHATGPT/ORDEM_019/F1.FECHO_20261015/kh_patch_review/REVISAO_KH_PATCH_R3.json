@@ -1,0 +1,183 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "reviewer": "codex-atrator-skeptic",
+  "start_utc": "2026-10-15T19:31:58.645472+00:00",
+  "end_utc": "2026-10-15T19:32:13.222624+00:00",
+  "seconds": 14.577152300000307,
+  "verdict": "PASSA_COM_ESCOPO_PREAUDITORIA_PINADA",
+  "material_findings": [],
+  "resolved": [
+    "R1: contagens agora reconstruídas do log e vinculadas ao recibo real e ao conjunto de fontes recompiladas.",
+    "R1: exit booleano recusado tanto no contrato quanto no recibo."
+  ],
+  "independent_checks": [
+    {
+      "name": "actual_pinned_full_audit",
+      "accepted": true,
+      "expected_accept": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "decl_and_entries_plus_one",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "thm_plus_one",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "regex_gap_changed_coherently",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "boolean_exit",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "A successful, whole-closure pre-audit is required"
+    },
+    {
+      "name": "boolean_decl",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Non-negative non-boolean integer required: decl"
+    },
+    {
+      "name": "outside_trio_contract",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "wrong_log_pin",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Artifact pin mismatch: audit log"
+    },
+    {
+      "name": "duplicate_total",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Exactly one whole-kernel TOTAL line is required"
+    },
+    {
+      "name": "missing_all_rows_of_declaration",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "TOTAL does not agree with parsed declaration rows"
+    },
+    {
+      "name": "outside_axiom",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Audit includes an axiom outside the allowed trio"
+    },
+    {
+      "name": "sorry_token",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Audit includes an axiom outside the allowed trio"
+    },
+    {
+      "name": "coherent_embedded_and_contract_change",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Embedded sources do not equal the baseline plus the actually compiled additions and roots"
+    },
+    {
+      "name": "audit_receipt_bool_exit",
+      "accepted": false,
+      "expected_accept": false,
+      "passed": true,
+      "error": "Audit receipt is not a successful TGL/Audit build"
+    }
+  ],
+  "structural_checks": [
+    "Somente três atribuições de dados mudam; todos os outros nós AST ficam iguais.",
+    "Spec v393 integral preservada em extras; pisos históricos e igualdade exata v394 explícitos.",
+    "Conjunto de fontes reconstruído da baseline, dos 50 módulos realmente compilados e das duas raízes."
+  ],
+  "counts": {
+    "decl": 26797,
+    "thm": 21209,
+    "fora_do_trio": 0,
+    "axiom_report_entries": 26793,
+    "nao_lidas_pelo_regex": 4,
+    "sorryAx_no_log_do_audit": 0
+  },
+  "parser_lengths": {
+    "runtime": 26793,
+    "receipt": 26783,
+    "complete": 26797
+  },
+  "builder_tests_passed": 18,
+  "fixture_erratum": "A tentativa de teste R3 removia só a primeira ocorrência de declaração com linhas duplicadas legítimas. R4 remove todas; essa recusa e as demais 18 verificações foram conferidas. Não é recusa ao recibo real.",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\build_kh_n1_patch_r3.py",
+      "sha256": "98cac30b6f78cd3b14619f81e42d9f3e8154f70437698c274405cb26626093cb",
+      "bytes": 16496
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\kh_patch_tests_r3\\KH_N1_V394_PREAUDIT_CONTRACT_R3.json",
+      "sha256": "a86b73d64c49dd6d1feef4c70df4400e9d4c507ddbcfe8c131565db6bb0783c6",
+      "bytes": 143430
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\kh_patch_tests_r4\\PATCH_TEST_RECEIPT_R4.json",
+      "sha256": "38e8241a320dcc106e1ec7d10bdea757d265e1128f3c43d8742346c5803af9b5",
+      "bytes": 12951
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r4\\um.py",
+      "sha256": "d8df24d0c35cd826d58f54e5aff82e38fe836dc30ce2172bcb841ad15ae3048f",
+      "bytes": 36177789
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\test_kh_n1_patch_r4.py",
+      "sha256": "ddf80f70edff02dd0e5ba4d2042a8e2167c5d5156d2e7770c5163409e79320c1",
+      "bytes": 4841
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_bundle_r4\\full_audit_r3\\TGL_Audit_STDOUT.log",
+      "sha256": "8c2d5ea40dd954191763e06e1613a66bba97cd1579daf5e8fb6e79a5e9490961",
+      "bytes": 3918194
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_bundle_r4\\full_audit_r3\\TGL_Audit_BUILD_RECEIPT.json",
+      "sha256": "38877f5c0257bca18d986c9344f1ef24835a25b34c1de0e14e254e7501b6e0de",
+      "bytes": 3183782
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_bundle_r4\\full_audit_r3\\MEASURED_COVERAGE_R1.json",
+      "sha256": "c46d75487acfd563649afdaa39ea1b1d010c8a039246541fb9b0618fc56a8350",
+      "bytes": 2081
+    }
+  ],
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kh_patch_review\\review_patch_r3.py",
+    "sha256": "cb90460e0afdc96cecbb269134d883cf23813ef58304e396767eda4067c23d4b",
+    "bytes": 7408
+  },
+  "scope": "Validação real e composição em memória; não executa/importa um.py, não materializa candidato nem roda main. É pré-auditoria local de componentes matemáticos, não autorização de produção ou confirmação física.",
+  "production_memory_gate_changed": false
+}

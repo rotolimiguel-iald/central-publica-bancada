@@ -1,0 +1,52 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T024208_911980Z\PositiveCoefficientBothR2.lean:30:51: error(lean.invalidField): Invalid field `star`: The environment does not contain `And.star`, so it is not possible to project the field `star` from an expression
+  hh
+of type
+  AEStronglyMeasurable h μ ∧ HasFiniteIntegral h μ
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T024208_911980Z\PositiveCoefficientBothR2.lean:33:49: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  coefficient μ p h ↑(-t)
+in the target expression
+  (starRingEnd ℂ) (coefficient μ p h (-↑t)) = 0
+
+X : Type u_1
+inst✝ : MeasurableSpace X
+μ : Measure X
+p : X → ℝ
+hp : Measurable p
+hpos : ∀ (x : X), 0 ≤ p x
+h : X → ℂ
+hh : Integrable h μ
+hm : Integrable (fun x => p x * ‖h x‖) μ
+hz : ∀ t < 0, coefficient μ p h ↑t = 0
+hc : Integrable (fun x => (starRingEnd ℂ) (h x)) μ
+hm' : Integrable (fun x => p x * ‖(starRingEnd ℂ) (h x)‖) μ
+t : ℝ
+ht : 0 < t
+⊢ (starRingEnd ℂ) (coefficient μ p h (-↑t)) = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T024208_911980Z\PositiveCoefficientBothR2.lean:36:33: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  - -?a
+in the target expression
+  (starRingEnd ℂ) (coefficient μ p h (-↑(-t))) = 0
+
+X : Type u_1
+inst✝ : MeasurableSpace X
+μ : Measure X
+p : X → ℝ
+hp : Measurable p
+hpos : ∀ (x : X), 0 ≤ p x
+h : X → ℂ
+hh : Integrable h μ
+hm : Integrable (fun x => p x * ‖h x‖) μ
+hz : ∀ t < 0, coefficient μ p h ↑t = 0
+hc : Integrable (fun x => (starRingEnd ℂ) (h x)) μ
+hm' : Integrable (fun x => p x * ‖(starRingEnd ℂ) (h x)‖) μ
+hv : ∀ z ∈ HalfPlaneBoundary.upper, coefficient μ p (fun x => (starRingEnd ℂ) (h x)) z = 0
+t : ℝ
+ht : (starRingEnd ℂ) (coefficient μ p h (-↑(-t))) = 0
+⊢ coefficient μ p h ↑t = 0
+'F1Fecho.PositiveCoefficientBoundary.coefficient_conjugate_real' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.PositiveCoefficientBoundary.vanishes_from_negative_ray' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

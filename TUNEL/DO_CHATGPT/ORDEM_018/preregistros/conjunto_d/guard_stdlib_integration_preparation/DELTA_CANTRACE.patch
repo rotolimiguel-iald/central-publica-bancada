@@ -1,0 +1,12 @@
+--- worker.before_cantrace.py
++++ worker.py
+@@ -97,6 +97,9 @@
+     try:
+         latch.context("real_hook_setup", 0, 0)
+         sys.setprofile(profile)  # Observer only: os.write/fsync are not replaced.
++        # CPython suppresses tracing in audit hooks unless this opt-in is true.
++        # Observation only: preserve the real hook, original guard and allowlist.
++        audit.__cantrace__ = True
+         sys.addaudithook(audit)
+         latch.installed()
+         sys.audit("iald.guard.integration.ping", case_id)

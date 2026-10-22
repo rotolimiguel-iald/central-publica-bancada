@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "identity": "chatgpt-codex/ordem-018/derivacoes",
+  "scope": "F1B_HISTORICAL_P_F4_D1B_AND_P_F5_SHADOW_ACCUMULATED_DETERMINISTIC_ONLY",
+  "authorization": "ORDEM018 F1(b), unidade delegada explícita após T/F4: P/F4 D1b, P/F5 sombra e acumulada; nenhuma evidência, Monte Carlo, F9 ou novo veredito.",
+  "families": {
+    "P4_d1b": {
+      "datasets": [
+        "planck_comp",
+        "desi_dr2",
+        "sh0es_local"
+      ],
+      "contains_ladder": true
+    },
+    "P5_sombra": {
+      "datasets": [
+        "planck_comp",
+        "desi_dr2",
+        "pantheon_sh0es"
+      ],
+      "contains_ladder": true
+    },
+    "P5_acumulada": {
+      "datasets": [
+        "planck_comp",
+        "desi_dr2",
+        "pantheon_sh0es"
+      ],
+      "contains_ladder": true
+    }
+  },
+  "kernel": "d1b",
+  "mode": "artigo",
+  "models": [
+    "lcdm",
+    "tgl",
+    "livre"
+  ],
+  "beta_rule": "ALPHA_FINE_CODATA_2018 * sqrt(e) at runtime, no fitted beta in TGL",
+  "z_star_law": 1089.95,
+  "c_fixed": 0,
+  "declared_limits": {
+    "H0": [
+      50,
+      90
+    ],
+    "ombh2": [
+      0.015,
+      0.03
+    ],
+    "omch2": [
+      0.08,
+      0.18
+    ],
+    "beta": [
+      -0.05,
+      0.05
+    ]
+  },
+  "camb_support": {
+    "H0": [
+      60,
+      76
+    ],
+    "ombh2": [
+      0.02025,
+      0.02475
+    ],
+    "omch2": [
+      0.102,
+      0.138
+    ]
+  },
+  "prior": "Historical uniform broad declared bounds; CAMB support smaller. No evidence or prior normalization computed; no silent renormalization.",
+  "covariance": {
+    "planck": "full 3x3 Chen2019",
+    "DR2": "full 13x13 in archived row order",
+    "SN": "full STAT+SYS1701x1701 reduced by historical OR mask to1657x1657, symmetrized, including calibrator-cosmological correlations",
+    "cross_blocks": "No cross-block covariance supplied: block factorization is historical INPUT",
+    "CC": "absent from all three families",
+    "SH0ES_scalar": "included only P4; absent P5 to avoid duplicating ladder"
+  },
+  "SN": {
+    "mask": "zHD > .01 OR IS_CALIBRATOR == 1",
+    "counts": {
+      "all": 1701,
+      "selected": 1657,
+      "calibrators": 77,
+      "cosmological": 1580
+    },
+    "distance": "mu=5log10[(1+zHEL)DM(zHD)]+25; calibrators replaced by CEPH_DIST",
+    "M": "Analytically profiled once in full selected covariance; no prior imposed",
+    "shadow": "DM/K*, K*=exp(beta*(2/3)lnE(z*))",
+    "accumulated": "c/H0 integral[du/(E(u) A(u))], A=exp(beta*(Istar-I(u))); all cosmological redshifts must be below z*"
+  },
+  "numerics": {
+    "distance": "New direct Gauss-Legendre64 checked against128 at all archived theta before any fit and all minima afterward; independent alternative to original cumulative Simpson20001+interpolation, not asserted identical algorithm",
+    "linear_algebra": "Cholesky whitening, equivalent to covariance inverse quadratic form; preserve historical symmetrization; stable profiled residual instead of subtraction of large scalar forms",
+    "table": "Reuse own independently written T4 six-node degree5 separable Lagrange; reuse verified T4 table receipt, no new table holdout run",
+    "optimization": "TRF least_squares; historical scaled coordinates (1,.0005,.005,.005), central Jacobian h=.001 scaled, xtol/ftol/gtol1e-12, max_nfev200; LCDM first, fixed beta and free start from LCDM minimum",
+    "uncertainty": "inverse JtJ in physical coordinates, no chi2/dof rescaling",
+    "reuse": "P5 LCDM fitted once because beta0 makes shadow and accumulated identical; reuse earlier T4 and SN-only receipts without rerunning those fits"
+  },
+  "tolerances": {
+    "chi2_block_abs": 0.01,
+    "chi2_total_abs": 0.01,
+    "quadrature_residual_abs": 1e-07,
+    "H0_abs": 0.001,
+    "density_abs": 1e-06,
+    "beta_abs": 1e-05,
+    "sigma_beta_relative": 0.01,
+    "z_abs": 0.02,
+    "M_abs": 1e-05
+  },
+  "tolerance_status": "Engineering replication tolerances frozen before any P45 computation. Historic target values already read and declared; no new scientific discrimination thresholds.",
+  "resources": {
+    "wall_seconds_max": 600,
+    "threads": 1,
+    "optimizer_max_nfev_per_model": 200,
+    "maximum_fits": 8,
+    "maximum_reported_fits": 9,
+    "peak_working_set_budget_bytes": 536870912,
+    "design_memory": "Dense1701^2 input and1657^2 covariance/factor, discarded after initialization; no batches or chains",
+    "gpu": false
+  },
+  "targets": "Exact archived JSON paths, theta, chi2 blocks, K, H0, M, free beta/sigma and derived diagnostics; complete raw subobjects retained. P4 full LCDM theta not present, H0 and block minima still compared.",
+  "stop_rule": "Source mismatch, support excursion, fixed-point or quadrature failure, optimizer failure or tolerance discrepancy -> preserve P45_RESULTADO and stop batch. Do not tune law or targets.",
+  "independence": "Only new P45 implementation plus previously independent T4 helpers; original um.py, motor, backups and original helpers never imported/executed. Scientific originals read-only. No remote calls/new catalogs.",
+  "created_utc": "2026-10-06T01:36:59.749288+00:00",
+  "source_result_origins": [
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase4_desvio_30set\\RESULTADO_FASE4_DESVIO_20260930.json",
+      "bytes": 44444,
+      "sha256": "10683b334d28d84acdd8a086fe91fcbeaa46e747b0e3b51dc4192c270d8e6219"
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase5_sh0es_01out\\RESULTADO_FASE5_SH0ES_20261001.json",
+      "bytes": 45862,
+      "sha256": "851d1076b85f12f671bfbe018f67e8291a2c83686bb98fb2251a4ed3c254eca2"
+    }
+  ],
+  "file_pins": {
+    "ENTRADAS_HISTORICAS_E_COVARIANCIAS.json": "f2521084b5b5eaffde38646b8f082bc523eb9360713b824c13f90153f831ebf3",
+    "AUDITORIA_E_CONTRATOS.json": "7f2e5f4f668b111f69647ef3cce00668afa25313180be32594d6570264a61640",
+    "T4_reproduzir.py": "08552c24d56f23cf04342bd8e41db61e5a9ce688af84ea3205ee53b3beb1c340",
+    "T4_PROTOCOLO.json": "ee8760baee2d32ad6fd5de4036599d3d08ed143b46ade54b83afb3bdda3b1518",
+    "T4_PREEXEC_HASHES.json": "f56571d8d31e84b975d543ab47c5fed22097752c7be4724a098be37a751ca904",
+    "T4_RESULTADO.json": "ec0dca49ce9c3b5d00d026ff5b517f6a723dda2de20534bbc966e8a4d38637c3",
+    "T4_camb_lcdm_v1.npz": "6bc4dd4a092325007ed05504401d6722d2f849956f3168a72b474786b4ce7363",
+    "T4_desi_mean.txt": "9ac154ab583ce759c0f7eef3c978c7c70a6ead2d18774caceadf1a350a640585",
+    "T4_desi_cov.txt": "252a143274c8a07c78694c119617d36594f6d7965d00319ca611c6ffb886e509",
+    "P45_ALVOS_HISTORICOS.json": "60738525e4ea43c88ba84d1d9469f9b6680b8a550867b16a3d4d29baac757d61",
+    "../reproducao_fase5/Pantheon+SH0ES.dat": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8",
+    "../reproducao_fase5/pantheon_covariance.dat": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc",
+    "../reproducao_fase5/RESULT.json": "bd5275cbaf403b5f8dc81fc1ead36a22d722f62b9ebda7b59e2adeee15122690"
+  }
+}

@@ -1,0 +1,91 @@
+import took 221s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T035927_443256Z\GeneralRepresentedDoubleCutR1.lean:87:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  TGLV350.Regular.regularInverseGeneratorCutoff ?P 1
+in the target expression
+  RegularPositiveFlow.regularInverseGeneratorCutoff Q 1 * RegularPositiveFlow.regularInverseGeneratorCutoff Q δ =
+    RegularPositiveFlow.regularInverseGeneratorCutoff Q δ * RegularPositiveFlow.regularInverseGeneratorCutoff Q 1
+
+H K : Type
+inst✝⁵ : NormedAddCommGroup H
+inst✝⁴ : InnerProductSpace ℂ H
+inst✝³ : CompleteSpace H
+inst✝² : NormedAddCommGroup K
+inst✝¹ : InnerProductSpace ℂ K
+inst✝ : CompleteSpace K
+Q : UnitaryFlow H
+M : VonNeumannAlgebra H
+π : ↥(core Q M).toStarSubalgebra →⋆ₐ[ℂ] K →L[ℂ] K
+T : K →L[ℂ] K
+J : K ≃ₗᵢ⋆[ℂ] K
+hTA : Commute T (π (resolventElement Q M))
+hTB : Commute T (antiunitaryConjugate J (π (resolventElement Q M)))
+hiA : Function.Injective ⇑(π (resolventElement Q M))
+hiB : Function.Injective ⇑(antiunitaryConjugate J (π (resolventElement Q M)))
+hbase :
+  (1 - T) * π (resolventElement Q M) * (1 - antiunitaryConjugate J (π (resolventElement Q M))) =
+    T * (1 - π (resolventElement Q M)) * antiunitaryConjugate J (π (resolventElement Q M))
+hflip : antiunitaryConjugate J T = 1 - T
+hcross : ∀ (a : ↥(core Q M).toStarSubalgebra), Commute (antiunitaryConjugate J (π (resolventElement Q M))) (π a)
+ε η : ℝ
+hε : 0 < ε
+hη : 0 < η
+N : StarSubalgebra ℂ (↥(RegularHilbert H) →L[ℂ] ↥(RegularHilbert H)) := (core Q M).toStarSubalgebra
+r : ↥N := resolventElement Q M
+A : K →L[ℂ] K := π r
+B : K →L[ℂ] K := antiunitaryConjugate J A
+c : ℝ → ↥N := fun δ => cutElement Q M δ
+C : K →L[ℂ] K := π (c ε)
+D : K →L[ℂ] K := antiunitaryConjugate J (π (c η))
+p : K →L[ℂ] K := π (RegularPositiveFlow.regularDomainCut Q M ε)
+q : K →L[ℂ] K := antiunitaryConjugate J (π (RegularPositiveFlow.regularDomainCut Q M η))
+this : IsClosed ↑N
+hTC : ∀ (δ : ℝ), 0 < δ → Commute T (π (c δ))
+hTD : Commute T D
+δ : ℝ
+hδ : 0 < δ
+hh :
+  RegularPositiveFlow.regularInverseGeneratorCutoff Q 1 * ↑(RegularPositiveFlow.regularDomainCut Q M δ) =
+    RegularPositiveFlow.regularInverseGeneratorCutoff Q δ -
+      RegularPositiveFlow.regularInverseGeneratorCutoff Q δ * RegularPositiveFlow.regularInverseGeneratorCutoff Q 1
+hc :
+  RegularPositiveFlow.regularInverseGeneratorCutoff Q 1 * RegularPositiveFlow.regularInverseGeneratorCutoff Q δ =
+    RegularPositiveFlow.regularInverseGeneratorCutoff Q δ * RegularPositiveFlow.regularInverseGeneratorCutoff Q 1
+⊢ ↑(r * RegularPositiveFlow.regularDomainCut Q M δ) = ↑((1 - r) * c δ)
+typeclass inference of T2Space took 137ms
+tactic execution of Lean.Parser.Tactic.obtain took 165ms
+tactic execution of Lean.Parser.Tactic.rewriteSeq took 254ms
+type checking took 152ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T035927_443256Z\GeneralRepresentedDoubleCutR1.lean:85:17: warning: This simp argument is unused:
+  regularInverseGeneratorCutoff_one
+
+Hint: Omit it from the simp argument list.
+  simp only [̵r̵e̵g̵u̵l̵a̵r̵I̵n̵v̵e̵r̵s̵e̵G̵e̵n̵e̵r̵a̵t̵o̵r̵C̵u̵t̵o̵f̵f̵_̵o̵n̵e̵,̵C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵o̵n̵e̵,̵o̵n̵e̵_̵s̵m̵u̵l̵]̵[̲C̲o̲m̲p̲l̲e̲x̲.̲o̲f̲R̲e̲a̲l̲_̲o̲n̲e̲,̲ ̲o̲n̲e̲_̲s̲m̲u̲l̲]̲ at hh
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.RepresentedDoubleCut.cutElement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.RepresentedDoubleCut.balance' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 1.72ms
+	blocked (unaccounted) 2.84s
+	compilation (IR) 0.0959ms
+	compilation (LCNF base) 2.31ms
+	compilation (LCNF impure) 0.37ms
+	compilation (LCNF mono) 1.89ms
+	congr simp thm 3.1ms
+	elaboration 191ms
+	fix level params 1.15ms
+	import 221s
+	initialization 29.7ms
+	instantiate metavars 2.73ms
+	interpretation 6.12s
+	let-to-have transformation 7.46ms
+	linting 6.38ms
+	overlappingInstancesLinter 22.2ms
+	parsing 5.61ms
+	process pre-definitions 12.8ms
+	share common exprs 9.59ms
+	simp 40.5ms
+	tactic execution 612ms
+	tacticAnalysis 21.1ms
+	type checking 226ms
+	typeclass inference 3.51s

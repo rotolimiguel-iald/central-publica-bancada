@@ -1,0 +1,355 @@
+{
+  "schema": "F9_COMPLETION_DEPENDENCIES_DOCUMENTARY_INPUT",
+  "scope": "ORDEM018 F1e — parent documentary delegation; no scientific unit or execution created",
+  "status": "DOCUMENTARY_ONLY_NOT_V1_NOT_AUTHORIZATION",
+  "dependencies": [
+    {
+      "id": "I01",
+      "group": "IMPLEMENTACAO_AGORA",
+      "title": "Serviços escalares de precisão dos extras",
+      "owner": "Gerente — f820203f-b83c-420a-87ec-7816f3179139; não duplicar",
+      "clauses": [
+        "C03",
+        "C11"
+      ],
+      "sources": [
+        "precision_request",
+        "prior_review",
+        "prior_api"
+      ],
+      "already": "H3/H4/H5 foram derivados e implementados em df482; revisão573 sem bloqueador estático. Falta o corpo concreto dos dois serviços injetados.",
+      "deliverable": "log_exp_quad_interval e positive_quad_1d com IDs/pins, contagem, limites, erro estimado/UNASSESSED e convergência; integração pela API já fixada.",
+      "alternatives": [
+        "Janela analítica por log-CDF/erfc estáveis e quadratura positiva qualificada para H5.",
+        "Quadratura adaptativa positiva escalada com localização do pico, compartilhável entre os serviços; riscos de pico perdido explícitos."
+      ],
+      "recommendation": "Consumir a entrega f820 após revisão. Não trocar método por fallback após falha.",
+      "closure": "Módulo concreto compatível com df482 e recibo de revisão; a qualificação numérica entra em Q01.",
+      "authorization_boundary": "Preparação técnica não depende de novo certificado uniforme ou da leitura de y."
+    },
+    {
+      "id": "I02",
+      "group": "IMPLEMENTACAO_AGORA",
+      "title": "Ligação motor → montador → consumidor → priors",
+      "owner": "ROOT — integração já atribuída",
+      "clauses": [
+        "C02",
+        "C03",
+        "C04",
+        "C07",
+        "C08",
+        "C11"
+      ],
+      "sources": [
+        "c435",
+        "consumer_review",
+        "prior_review",
+        "consumer_api",
+        "prior_api"
+      ],
+      "already": "c435 executou uma predição teórica/montagem de cinco modelos em um θ; a987 e df482 só receberam revisão estática no recorte consultado.",
+      "deliverable": "Callback por θ que autentica os módulos realmente carregados, verifica pacote/estrutura/admissão, recebe explicitamente y/C/IDs, reutiliza PreparedJoint e devolve cinco integrais condicionais completas com proveniência e erros.",
+      "alternatives": [
+        "Ligar as APIs pinadas existentes com admissão explícita e backend gaussiano comum.",
+        "Escrever um segundo solver ou consumidores por modelo; duplicaria suporte/normalização e não é necessário."
+      ],
+      "recommendation": "Reutilizar integralmente a987/df482 e a configuração verificada por c435. c435 é evidência e identidade consumida, não autorização de nova chamada; futuras avaliações pertencem à unidade própria.",
+      "closure": "Uma cadeia revisável sem leitura implícita, sem reaplicar offsets/T, sem tratar exceção como zero, sem rival omitido; recibos preservam ENGINEERING_ONLY.",
+      "authorization_boundary": "Pode ser preparada com entradas sintéticas/bytes explícitos; admissão e flags não liberam observados."
+    },
+    {
+      "id": "I03",
+      "group": "IMPLEMENTACAO_AGORA",
+      "title": "Montagem da covariância conjunta e da lista completa de cenários",
+      "owner": "ROOT — integração; proposta documental desta unidade, não novo despacho",
+      "clauses": [
+        "C01",
+        "C05",
+        "C06",
+        "C08"
+      ],
+      "sources": [
+        "resolver",
+        "stellar_protocol",
+        "mm_contract",
+        "consumer_review",
+        "numerical_interface"
+      ],
+      "already": "Existem contratos de erros, família estelar e preflight262; isso não é um recibo de 600 matrizes conjuntas de 283 linhas incluindo os cinco MM.",
+      "deliverable": "Builder puro com entradas explícitas para blocos/cross-blocos/variâncias MM e receitas SBF; saída C_s, IDs e mapa completo rótulo→matriz/resposta/suporte/normalização. Sem preencher MM null, zeros cruzados ou referências por inferência.",
+      "alternatives": [
+        "Compor blocos admitidos e cross-blocos explícitos segundo a lista finita já proposta, preservando todos os rótulos.",
+        "Gerar C por componentes primitivas e Jacobianos assinados; exige entradas e modelo de dependência próprios se ainda não admitidos."
+      ],
+      "recommendation": "Primeiro builder da alternativa finita existente, parametrizado pela decisão O01/O02. Duplicatas só podem ser comprimidas por equivalência integral e mapa de todos os rótulos.",
+      "closure": "Receita/identidade executáveis antes de abrir dados; avaliação da C com referências protegidas somente em Q03 após autorização.",
+      "authorization_boundary": "Não é necessário ler os centros MM para implementar o builder e seus estados de referência ausente."
+    },
+    {
+      "id": "I04",
+      "group": "IMPLEMENTACAO_AGORA",
+      "title": "Integral externa no prior θ inteiro",
+      "owner": "Derivações — ad02511d-1536-4a1b-a6c4-fb3e5eb26550, em preparação na seq576",
+      "clauses": [
+        "C03",
+        "C07",
+        "C11"
+      ],
+      "sources": [
+        "theta_identity",
+        "theta_alternatives",
+        "prior_review",
+        "numerical_interface"
+      ],
+      "already": "df482 integra apenas o extra de H3/H4/H5 em θ fixo; H1/H2 permanecem pontuais. Ainda não são cinco evidências físicas integradas.",
+      "deliverable": "Integrador externo sobre a caixa original H0/ombh2/omch2, callback da coleção inteira, pesos normalizados e cinco logJ relativos/10 diferenças por cenário. Preservar κ comum e erros separados.",
+      "alternatives": [
+        "Cubatura adaptativa logescalada da caixa completa, com dependência adaptativa qualificada e riscos de picos não detectados.",
+        "Produtos Simpson diádicos positivos em todos os níveis previamente fixados, cache de nós canônicos e log-somas; crescimento cúbico e erro entre níveis apenas diagnóstico."
+      ],
+      "recommendation": "A preparação576 escolheu a segunda. Consumir a entrega/revisão sem duplicá-la e sem transformar diferença entre níveis em certificado.",
+      "closure": "Código/pins e revisão; futuro orçamento explícito suficiente para todos os níveis pedidos, sem estreitar prior ou parar por conveniência.",
+      "authorization_boundary": "Ausência de erro uniforme limita o estatuto, não impede implementar estimativa ENGINEERING_ONLY."
+    },
+    {
+      "id": "I05",
+      "group": "IMPLEMENTACAO_AGORA",
+      "title": "Perfil dos extras e interface de mínimos em θ",
+      "owner": "ROOT — dependência delimitada identificada; não executada aqui",
+      "clauses": [
+        "C09",
+        "C10"
+      ],
+      "sources": [
+        "prior_derivation",
+        "prior_review",
+        "numerical_interface",
+        "calibration",
+        "resolver"
+      ],
+      "already": "A álgebra condicional do mesmo residual está documentada; não consta nestas fontes um produtor aplicado de mínimos globais dos cinco modelos.",
+      "deliverable": "Reutilizar R e q do backend. Ao longo do extra afim, usar clip(B/A) no intervalo para A>0 e ramo plano quando direção projetada zero; fornecer estimativas em θ e campos distintos para L/U certificados quando disponíveis. H4 nunca usa B−λ para minimizar likelihood.",
+      "alternatives": [
+        "Eliminar o extra afim pelo mínimo restrito e procurar θ na caixa original, reutilizando a geometria.",
+        "Pesquisar diretamente as três/quatro coordenadas físicas no mesmo domínio e mesma likelihood, com custo maior."
+      ],
+      "recommendation": "Redução afim evita buscas desnecessárias. Busca local fornece candidato factível/estimativa, não L global nem U certificado sem controle do erro de avaliação. L=0 pode ser cota analítica válida quando q≥0 e hipóteses completas estão admitidas.",
+      "closure": "API de perfil/estimativa e interface de certificados separadas; não reivindicar otimização global ou cauda calibrada a partir de convergência local.",
+      "authorization_boundary": "Certificado rigoroso mais apertado é necessário para a afirmação que o usa, não para a preparação de engenharia."
+    },
+    {
+      "id": "I06",
+      "group": "IMPLEMENTACAO_AGORA",
+      "title": "Função única de saída e veredito V2",
+      "owner": "ROOT — bf6d6747-6383-40a0-9aa4-7c02e76cadd6, seq577",
+      "clauses": [
+        "C09",
+        "C11",
+        "C13"
+      ],
+      "sources": [
+        "reducer_request",
+        "verdict_v2",
+        "verdict_review",
+        "tail_receipt"
+      ],
+      "already": "Predicados V2 e cauda/agregação racional existem; o redutor de relatório está sendo preparado em unidade própria.",
+      "deliverable": "Saída por teste/cenário com completude, falha, p superior, direção, evidência relativa e poder separados. Rejeição válida de G ou Q sobrevive à indisponibilidade do outro; não-rejeição H1 exige ambos completos. Cinco modelos, cinco testes e dez razões sem omissão.",
+      "alternatives": [
+        "Um redutor central estrito que recebe registros já validados e preserva estados de cada teste.",
+        "Código de relatório independente por teste; duplica regras e aumenta risco de confundir falta com não-rejeição."
+      ],
+      "recommendation": "Consumir o redutor central577; verificador semântico dos certificados permanece do chamador, não nasce de flags.",
+      "closure": "Código/API/revisão e futura conferência lógica delimitada; V2 preservado e nenhuma aplicação observada aqui.",
+      "authorization_boundary": "Uma implementação de predicados não autoriza leitura de dados nem cria calibração."
+    },
+    {
+      "id": "Q01",
+      "group": "QUALIFICACAO_NUMERICA_FUTURA",
+      "title": "Qualificar as junções novas, não repetir unidades consumidas",
+      "owner": "ROOT após serviços e módulos estáveis",
+      "clauses": [
+        "C03",
+        "C04",
+        "C08",
+        "C11"
+      ],
+      "sources": [
+        "consumer_review",
+        "prior_review",
+        "calibration_receipt",
+        "tail_receipt",
+        "nc02_failure"
+      ],
+      "already": "563/573 são estáticos; C01–C08 e tail17 passaram em unidades próprias. NC02 falhou terminalmente antes de resultado aritmético aceito.",
+      "deliverable": "Evidência numérica limitada das junções novas: transporte y/C e offsets, prefator/κ, H3/H4 truncados, H5 Jacobiano, plano/subidentificação, caudas/cancelamento, falhas propagadas e coleção completa. Delimitar casos/custo antes de qualquer execução futura.",
+      "alternatives": [
+        "Confrontos sintéticos discriminantes com identidades analíticas/integrais de referência, focados nas interfaces novas.",
+        "Confronto com método numérico independente nas coordenadas originais, com precisão/custo e domínio explícitos."
+      ],
+      "recommendation": "Escolher o menor recorte que esclareça as junções após revisão; reutilizar recibos antigos como evidência de seus módulos. Não exigir novamente todas as listas históricas nem reabrir NC02.",
+      "closure": "Recibo identifica o que foi realmente exercitado e suas tolerâncias; não promove a execução pontual c435 nem testes sintéticos a dados F9.",
+      "authorization_boundary": "Esta nota não cria campanha, autorização, CLAIM ou ordem de medir."
+    },
+    {
+      "id": "Q02",
+      "group": "QUALIFICACAO_NUMERICA_FUTURA",
+      "title": "Precisão e custo sobre o domínio físico declarado",
+      "owner": "ROOT/gerente nas unidades concretas de integração",
+      "clauses": [
+        "C07",
+        "C11"
+      ],
+      "sources": [
+        "background_receipt",
+        "c435",
+        "theta_alternatives",
+        "precision_request",
+        "numerical_interface"
+      ],
+      "already": "Há cinco pontos em dois níveis de precisão do fundo e uma chamada teórica c435. Não há, nestas evidências, qualificação de erro uniforme em todo prior nem integral externa medida.",
+      "deliverable": "Orçamento nominal de avaliações/memória/parede, política de nós e cache, diagnósticos de estabilidade e concentração e erros locais declarados; preservar toda massa do prior. Evidência ENGINEERING_ONLY deve marcar erro de teoria/global não limitado.",
+      "alternatives": [
+        "Motor direto na caixa completa com regra de integração e diagnósticos previamente fixados.",
+        "Tabela ampliada cobrindo a caixa inteira e interpolação validada no alcance alegado; nunca zero fora de tabela ou renormalização silenciosa."
+      ],
+      "recommendation": "Prosseguir engenharia direta já integrada; avaliar eficiência sem prometer que custo de um ponto representa toda a caixa. Certificação uniforme mais forte é extensão separada se a afirmação final a exigir.",
+      "closure": "Resultado numérico honesto pode ser ENGINEERING_ONLY; divergência/falha/erro não avaliado ficam visíveis, nunca viram likelihood zero.",
+      "authorization_boundary": "Não condicionar a implementação ou estimativa de engenharia à existência prévia de oráculo CAMB intervalar."
+    },
+    {
+      "id": "Q03",
+      "group": "QUALIFICACAO_NUMERICA_FUTURA",
+      "title": "Aplicação geométrica e dos certificados à família real",
+      "owner": "ROOT após V1/abertura autorizada para referências protegidas",
+      "clauses": [
+        "C05",
+        "C06",
+        "C08",
+        "C10"
+      ],
+      "sources": [
+        "consumer_review",
+        "mm_contract",
+        "calibration",
+        "numerical_interface",
+        "tail_receipt"
+      ],
+      "already": "Postos estruturais e suporte genérico têm evidência delimitada. Dimensões148/17/18 continuam limites condicionais; cinco MM não podem ser excluídos para reutilizar o preflight262 como composto.",
+      "deliverable": "Verificar por cenário C comum, origem afim, X suportado de posto63, 72 vínculos quando148 for usado, span global quando17/18 for usado, cobertura completa e erro dos limites L/U/SF. Validar referências MM e C somente no estágio admitido.",
+      "alternatives": [
+        "Fatorização/identidades e certificados por componentes, com prova de transporte ao C conjunto e à família inteira.",
+        "Validação numérica do C e do quociente admitidos com diagnóstico ENGINEERING_ONLY; limites certificados ficam indisponíveis onde não justificados."
+      ],
+      "recommendation": "Fixar receita/guardas no V1 e executar a validação dependente dos dados depois da abertura; não pedir os próprios centros para congelar o protocolo. L=0/p=1 só são cotas triviais válidas após todas as hipóteses; falta de modelo ou cobertura é unavailable, não p=1.",
+      "closure": "Para afirmar cauda conservadora, vincular identidade/família/modelo/suporte/L e grau ao verificador semântico. Para engenharia, conservar estimativas e limitações sem alegar certificado.",
+      "authorization_boundary": "Nem esta nota nem a implementação tail fabricam certificado físico. d=0 com limite positivo é INVALID/null."
+    },
+    {
+      "id": "O01",
+      "group": "ESCOLHA_CIENTIFICA_OPERADOR",
+      "title": "Experimento e propagação dos cinco megamasers",
+      "owner": "Operador ratifica proposta preparada/revista; ROOT apresenta pacote concreto",
+      "clauses": [
+        "C06",
+        "C10"
+      ],
+      "sources": [
+        "mm_contract",
+        "mm_review",
+        "resolver"
+      ],
+      "already": "Contrato MM511 e revisão513 distinguem receita upstream e lei amostral; referencias D_ref/v_ref e cinco variâncias seguem null no preparo.",
+      "deliverable": "Ratificar interpretação, receita de erros, referências fixas e proveniência/endogeneidade, dependências e alcance do experimento; preservar todos os cinco MM.",
+      "alternatives": [
+        "Gaussiana de trabalho estipulada, C fixa nas referências futuras: simetrização upstream, derivada de erro upstream, bloco MM positivo diagonal e cross-bloco zero como INPUT explícito.",
+        "Lei primitiva conjunta de D/v com seleção, assimetria/dependências e transporte/normalização próprios; não herda automaticamente a cota gaussiana fixa."
+      ],
+      "recommendation": "A é a proposta atual, concreta e mais curta; sua adequação física não se prova por congelar números. B exige modelo adicional e não deve ser inserida silenciosamente.",
+      "closure": "Decisão vinculada ao contrato por hash; receita antes de abertura, referências numéricas somente quando autorizadas.",
+      "authorization_boundary": "O parecer independente não ratifica o experimento nem abre dados."
+    },
+    {
+      "id": "O02",
+      "group": "ESCOLHA_CIENTIFICA_OPERADOR",
+      "title": "Família de sensibilidades, fatoração e convenções do composto",
+      "owner": "Operador no V1; ROOT consolida escolhas existentes",
+      "clauses": [
+        "C01",
+        "C05",
+        "C08"
+      ],
+      "sources": [
+        "resolver",
+        "root_recommendation",
+        "stellar_protocol",
+        "mm_contract"
+      ],
+      "already": "Proposta preserva Planck3+BAO13+267 locais, família estelar finita e duas receitas SBF. Não há independência empírica universal demonstrada por blocos ausentes.",
+      "deliverable": "Fixar lista/ordem completa, interpretação das duas receitas SBF, dependências/cross-blocos, fatoração de compressões, convenções q0/j0/velocidades e ausência de dupla contagem; alcance robusto restrito à família admitida.",
+      "alternatives": [
+        "Adotar a família finita já proposta (300 rótulos estelares ×2 SBF), com limites de cobertura declarados e zeros cruzados somente se estipulados.",
+        "Modelo de componentes/correlações apoiado em fontes adicionais já admitidas, com lista e cobertura revistas antes de qualquer composto; não presumir independência total."
+      ],
+      "recommendation": "Apresentar A como V1 concreto sem vendê-la como todos os sistemáticos possíveis; B é alternativa de modelagem, não exigência automática.",
+      "closure": "Família e semântica fixadas por hash; deduplicação não elimina rótulos e compara C/resposta/normalização completos.",
+      "authorization_boundary": "Nenhum cenário é escolhido pelos resíduos, nenhum MM é removido."
+    },
+    {
+      "id": "O03",
+      "group": "ESCOLHA_CIENTIFICA_OPERADOR",
+      "title": "Mapas, priors e medida nuisance comum",
+      "owner": "Operador ratifica o conjunto proposto; ROOT mantém interfaces",
+      "clauses": [
+        "C02",
+        "C03",
+        "C04"
+      ],
+      "sources": [
+        "resolver",
+        "root_recommendation",
+        "consumer_review",
+        "prior_review",
+        "nuisance_measure"
+      ],
+      "already": "H1–H5 e priors foram explicitados/revistos; H3 contém H1/H2, H4 atua via c_C, H5 é BAO-only. κdη permite somente razões relativas finitas.",
+      "deliverable": "Ratificar mapas R-A por indicador, fundo comum e domínio físico original, priors extras/transportes e medida comum. Não criar63 larguras arbitrárias para resolver implementação.",
+      "alternatives": [
+        "Mesma medida plana κdη em R63 e priors físicos próprios originais; relatar apenas integrais relativas finitas.",
+        "Priori nuisance própria comum somente com larguras/formas justificadas por fontes e decisão científica anterior ao composto; exige revisão de contrato."
+      ],
+      "recommendation": "A já tem backend/consumidor preparados e mantém o caminho curto. Não alterar modelos/limites sem decisão; q=1/rd no implementado H5 e q=rd/rdCAMB no documento são coordenadas diferentes do mesmo prior, com Jacobianos respectivos.",
+      "closure": "V1 explicita unidades, suporte/normalização, identidade da medida e domínios; um token de admissão não substitui essa decisão.",
+      "authorization_boundary": "ENGINEERING_ONLY não ratifica mapa físico nem dá evidência absoluta."
+    },
+    {
+      "id": "O04",
+      "group": "ESCOLHA_CIENTIFICA_OPERADOR",
+      "title": "Alcance da decisão científica e abertura por V1",
+      "owner": "Operador; preparação/revisão executiva com ROOT",
+      "clauses": [
+        "C09",
+        "C10",
+        "C11",
+        "C13"
+      ],
+      "sources": [
+        "order",
+        "verdict_v2",
+        "verdict_review",
+        "calibration",
+        "numerical_interface",
+        "tail_v2_contract"
+      ],
+      "already": "V2 define cinco testes, α unilateral, Bonferroni5 e estados de ausência; prova condicional/cauda estão disponíveis. Nenhum resultado de engenharia autoriza veredito observado.",
+      "deliverable": "V1 único com função executável, pins de fontes/código/runtime, escolhas O01–O03, políticas numéricas/recursos e saídas permitidas. Ratificação por hash precede decisão separada de abrir dados para veredito, conforme §6.",
+      "alternatives": [
+        "Manter a família frequentista calibrada mais evidência relativa separada; usar cota residual ou span global somente quando suas hipóteses estiverem demonstradas.",
+        "Relatar engenharia/evidência relativa com calibração indisponível e sem sigma onde a cota não se aplica; essa limitação não se converte em não-rejeição nem elimina rejeição válida de outro teste."
+      ],
+      "recommendation": "Preparar A com o comportamento de indisponibilidade já previsto no V2. Não exigir uma futura rejeição ou poder alto como condição de ratificabilidade. Poder fica campo separado; confirmar física continua ato do operador.",
+      "closure": "Pacote revisável sem cláusulas concorrentes, com saída nula antes da abertura e comportamento definido para falha/ausência; decisão do operador registrada fora desta unidade.",
+      "authorization_boundary": "Nenhuma abertura, veredito, nova autorização ou alteração da consolidação é produzida aqui."
+    }
+  ]
+}

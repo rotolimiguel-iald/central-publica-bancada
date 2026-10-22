@@ -1,0 +1,603 @@
+{
+  "status": "DERIVED_CONDITIONAL_FORECAST_NO_OBSERVED_SIGNIFICANCE_NO_VERDICT",
+  "author": "chatgpt-codex/ordem-018/derivacoes",
+  "created_at": "2026-10-06T00:34:24.107283+00:00",
+  "input": {
+    "H0_fid_km_s_Mpc": 70.0,
+    "Omega_m_fid": 0.3,
+    "Omega_r_fid": 9e-05,
+    "rd_fid_Mpc": 147.0,
+    "alpha_CODATA_2018": 0.0072973525693,
+    "beta_runtime": 0.012031300400803142
+  },
+  "method": {
+    "metric": "D=sqrt(s^T W s), covariance-weighted separation of model templates",
+    "marginalization": "Analytic common amplitudes; Omega_m linear tangent with flat prior, not data fit",
+    "joint_crosscovariance": "ZERO assumed; not measured",
+    "observed_means_parsed": false,
+    "fiducial_BAO_values_are_not_data": true,
+    "SN_selection": "zHD>0.01 and IS_CALIBRATOR==0",
+    "BAO_A_signal": "exactly zero by specified motor mapping",
+    "dualities": {
+      "A": "eta_ac/eta_s=Q if angular distance unchanged; normalization not fixed",
+      "B": "eta=1 if luminosity/angular share transport; extra hypothesis"
+    }
+  },
+  "SN": {
+    "n_selected": 1580,
+    "z_range": [
+      0.01016,
+      2.26137
+    ],
+    "max_template_magnitude": 0.008654551964796893,
+    "covariance": {
+      "n": 1580,
+      "max_absolute_asymmetry": 0.0,
+      "min_diagonal": 0.00644455,
+      "min_cholesky_diagonal": 0.07803326835969979,
+      "treatment": "(C+C.T)/2; no eigenvalue repair"
+    },
+    "fixed_amplitude": {
+      "D_expected": 0.30446011097750014,
+      "D_squared": 0.09269595917643171,
+      "nuisance_rank": 0,
+      "nuisances": [],
+      "retained_fraction_vs_fixed_amplitude": 1.0,
+      "nuisance_singular_values": [],
+      "orthogonality_residual": 0.0,
+      "ideal_uniform_sigma_improvement_for_D5": 16.42251257134142
+    },
+    "intercept_projected": {
+      "D_expected": 0.1832109871659491,
+      "D_squared": 0.03356626581832157,
+      "nuisance_rank": 1,
+      "nuisances": [
+        "SN_intercept_M_H0_Kstar"
+      ],
+      "retained_fraction_vs_fixed_amplitude": 0.36211142445199396,
+      "nuisance_singular_values": [
+        265.0781845104034
+      ],
+      "orthogonality_residual": 3.737924972174233e-17,
+      "ideal_uniform_sigma_improvement_for_D5": 27.290939682951944
+    },
+    "intercept_Om_projected": {
+      "D_expected": 0.030213462215598577,
+      "D_squared": 0.0009128532990534028,
+      "nuisance_rank": 2,
+      "nuisances": [
+        "SN_intercept_M_H0_Kstar",
+        "Omega_m_tangent"
+      ],
+      "retained_fraction_vs_fixed_amplitude": 0.009847821924102806,
+      "nuisance_singular_values": [
+        279.68631185375006,
+        54.61646438630732
+      ],
+      "orthogonality_residual": 2.376407190637746e-16,
+      "ideal_uniform_sigma_improvement_for_D5": 165.48914402198517
+    }
+  },
+  "BAO_B_extra_hypothesis": {
+    "n": 13,
+    "covariance": {
+      "n": 13,
+      "max_absolute_asymmetry": 0.0,
+      "min_diagonal": 0.00578998687,
+      "min_cholesky_diagonal": 0.07609196324185624,
+      "treatment": "(C+C.T)/2; no eigenvalue repair"
+    },
+    "fixed_amplitude": {
+      "D_expected": 1.4147255110399555,
+      "D_squared": 2.0014482715872632,
+      "nuisance_rank": 0,
+      "nuisances": [],
+      "retained_fraction_vs_fixed_amplitude": 1.0,
+      "nuisance_singular_values": [],
+      "orthogonality_residual": 0.0,
+      "ideal_uniform_sigma_improvement_for_D5": 3.5342544974145076
+    },
+    "common_projected": {
+      "D_expected": 0.8083832407763745,
+      "D_squared": 0.6534834639681139,
+      "nuisance_rank": 1,
+      "nuisances": [
+        "BAO_common_inverse_H0_rd_Kstar"
+      ],
+      "retained_fraction_vs_fixed_amplitude": 0.32650529781110155,
+      "nuisance_singular_values": [
+        355.4888708532038
+      ],
+      "orthogonality_residual": 8.991332063437764e-17,
+      "ideal_uniform_sigma_improvement_for_D5": 6.185185129763428
+    },
+    "common_Om_projected": {
+      "D_expected": 0.22136836654350162,
+      "D_squared": 0.04900395370613809,
+      "nuisance_rank": 2,
+      "nuisances": [
+        "BAO_common_inverse_H0_rd_Kstar",
+        "Omega_m_tangent"
+      ],
+      "retained_fraction_vs_fixed_amplitude": 0.02448424693348439,
+      "nuisance_singular_values": [
+        454.5972664113586,
+        88.83819698380007
+      ],
+      "orthogonality_residual": 2.24130543475627e-16,
+      "ideal_uniform_sigma_improvement_for_D5": 22.586786351054535
+    }
+  },
+  "joint": {
+    "A_luminosity_only": {
+      "fixed_amplitudes": {
+        "D_expected": 0.30446011097750014,
+        "D_squared": 0.0926959591764317,
+        "nuisance_rank": 0,
+        "nuisances": [],
+        "retained_fraction_vs_fixed_amplitude": 1.0,
+        "nuisance_singular_values": [],
+        "orthogonality_residual": 0.0,
+        "ideal_uniform_sigma_improvement_for_D5": 16.42251257134142
+      },
+      "independent_amplitudes": {
+        "D_expected": 0.18321098716594908,
+        "D_squared": 0.03356626581832156,
+        "nuisance_rank": 2,
+        "nuisances": [
+          "SN_intercept",
+          "BAO_common_scale"
+        ],
+        "retained_fraction_vs_fixed_amplitude": 0.36211142445199396,
+        "nuisance_singular_values": [
+          355.4888708532038,
+          265.0781845104034
+        ],
+        "orthogonality_residual": 9.063930161978817e-17,
+        "ideal_uniform_sigma_improvement_for_D5": 27.29093968295195
+      },
+      "independent_amplitudes_shared_Om": {
+        "D_expected": 0.1639631157873136,
+        "D_squared": 0.026883903338684,
+        "nuisance_rank": 3,
+        "nuisances": [
+          "SN_intercept",
+          "BAO_common_scale",
+          "shared_Omega_m_tangent"
+        ],
+        "retained_fraction_vs_fixed_amplitude": 0.2900223869253552,
+        "nuisance_singular_values": [
+          461.3672475768449,
+          271.50595499951925,
+          95.8283379569507
+        ],
+        "orthogonality_residual": 1.493057695404729e-16,
+        "ideal_uniform_sigma_improvement_for_D5": 30.49466324173664
+      }
+    },
+    "B_universal_geometry_extra_assumption": {
+      "fixed_amplitudes": {
+        "D_expected": 1.4471158318405941,
+        "D_squared": 2.094144230763695,
+        "nuisance_rank": 0,
+        "nuisances": [],
+        "retained_fraction_vs_fixed_amplitude": 1.0,
+        "nuisance_singular_values": [],
+        "orthogonality_residual": 0.0,
+        "ideal_uniform_sigma_improvement_for_D5": 3.4551484338613543
+      },
+      "independent_amplitudes": {
+        "D_expected": 0.8288846299615137,
+        "D_squared": 0.6870497297864354,
+        "nuisance_rank": 2,
+        "nuisances": [
+          "SN_intercept",
+          "BAO_common_scale"
+        ],
+        "retained_fraction_vs_fixed_amplitude": 0.32808138030487105,
+        "nuisance_singular_values": [
+          355.4888708532038,
+          265.0781845104034
+        ],
+        "orthogonality_residual": 2.8188093220412045e-16,
+        "ideal_uniform_sigma_improvement_for_D5": 6.03220257592683
+      },
+      "independent_amplitudes_shared_Om": {
+        "D_expected": 0.29364941273486717,
+        "D_squared": 0.08622997759953235,
+        "nuisance_rank": 3,
+        "nuisances": [
+          "SN_intercept",
+          "BAO_common_scale",
+          "shared_Omega_m_tangent"
+        ],
+        "retained_fraction_vs_fixed_amplitude": 0.041176713777773516,
+        "nuisance_singular_values": [
+          461.3672475768449,
+          271.50595499951925,
+          95.8283379569507
+        ],
+        "orthogonality_residual": 5.802461799754278e-16,
+        "ideal_uniform_sigma_improvement_for_D5": 17.027107098335815
+      }
+    }
+  },
+  "controls": {
+    "SN_constant": {
+      "D_expected": 6.850837950551488e-14,
+      "D_squared": 4.693398062471651e-27,
+      "nuisance_rank": 1,
+      "nuisances": [
+        "SN_constant_control"
+      ],
+      "retained_fraction_vs_fixed_amplitude": 6.679430182817502e-32,
+      "nuisance_singular_values": [
+        265.0781845104034
+      ],
+      "orthogonality_residual": 6.53081184921039e-14,
+      "ideal_uniform_sigma_improvement_for_D5": null
+    },
+    "BAO_common_scale": {
+      "D_expected": 2.842170943040401e-14,
+      "D_squared": 8.077935669463161e-28,
+      "nuisance_rank": 1,
+      "nuisances": [
+        "BAO_common_scale_control"
+      ],
+      "retained_fraction_vs_fixed_amplitude": 6.392170819991715e-33,
+      "nuisance_singular_values": [
+        355.4888708532038
+      ],
+      "orthogonality_residual": 8.782914153515179e-15,
+      "ideal_uniform_sigma_improvement_for_D5": null
+    }
+  },
+  "checks": [
+    {
+      "name": "SN_covariance_rows_match_metadata",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Pantheon_STAT_SYS_selected_square",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Pantheon_STAT_SYS_selected_finite",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Pantheon_STAT_SYS_selected_symmetry",
+      "passed": true,
+      "detail": 0.0
+    },
+    {
+      "name": "Pantheon_STAT_SYS_selected_positive_diagonal",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Pantheon_STAT_SYS_selected_cholesky",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Q_quadrature_64_128",
+      "passed": true,
+      "detail": 6.661338147750939e-16
+    },
+    {
+      "name": "Q_bounds",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "beta_zero_signal",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sn_Om_derivative_convergence",
+      "passed": true,
+      "detail": 3.27154969781418e-08
+    },
+    {
+      "name": "projection_nonincrease_[]",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['SN_intercept_M_H0_Kstar']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['SN_intercept_M_H0_Kstar']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['SN_intercept_M_H0_Kstar']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['SN_intercept_M_H0_Kstar', 'Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['SN_intercept_M_H0_Kstar', 'Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['SN_intercept_M_H0_Kstar', 'Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['SN_constant_control']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['SN_constant_control']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['SN_constant_control']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "SN_constant_erased",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "BAO_covariance_rows_match_metadata",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "DESI_DR2_square",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "DESI_DR2_finite",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "DESI_DR2_symmetry",
+      "passed": true,
+      "detail": 0.0
+    },
+    {
+      "name": "DESI_DR2_positive_diagonal",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "DESI_DR2_cholesky",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "BAO_Om_derivative_convergence",
+      "passed": true,
+      "detail": 9.250200605492864e-07
+    },
+    {
+      "name": "projection_nonincrease_[]",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['BAO_common_inverse_H0_rd_Kstar']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['BAO_common_inverse_H0_rd_Kstar']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['BAO_common_inverse_H0_rd_Kstar']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['BAO_common_inverse_H0_rd_Kstar', 'Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['BAO_common_inverse_H0_rd_Kstar', 'Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['BAO_common_inverse_H0_rd_Kstar', 'Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['BAO_common_scale_control']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['BAO_common_scale_control']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['BAO_common_scale_control']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "BAO_common_scale_erased",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_[]",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['SN_intercept', 'BAO_common_scale']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['SN_intercept', 'BAO_common_scale']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['SN_intercept', 'BAO_common_scale']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['SN_intercept', 'BAO_common_scale', 'shared_Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['SN_intercept', 'BAO_common_scale', 'shared_Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['SN_intercept', 'BAO_common_scale', 'shared_Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_[]",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['SN_intercept', 'BAO_common_scale']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['SN_intercept', 'BAO_common_scale']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['SN_intercept', 'BAO_common_scale']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_nuisance_rank_['SN_intercept', 'BAO_common_scale', 'shared_Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_orthogonal_['SN_intercept', 'BAO_common_scale', 'shared_Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "projection_nonincrease_['SN_intercept', 'BAO_common_scale', 'shared_Omega_m_tangent']",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "SN_Om_reduces_distance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "BAO_Om_reduces_distance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "joint_A_zero_BAO_fixed_matches_SN",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "joint_A_amps_matches_SN_amp",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "checks_passed": 57,
+  "quadrature_max_delta_Q": 6.661338147750939e-16,
+  "SN_derivative_max_delta": 3.27154969781418e-08,
+  "BAO_derivative_max_delta": 9.250200605492864e-07,
+  "precalculation_plan": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\poder_forma\\PLANO_ANTES_DO_PODER.md",
+      "sha256": "61477ac2e681764833d0f88c4c1b005543c854a19a41139afe0870cff6aa165c",
+      "mtime_ns": 1791246415916972500
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\poder_forma\\ADENDO_FONTES_ANTES_DO_PODER.md",
+      "sha256": "d84b0294010971b1e0e48c45f70c915d8e84efac1b5a12801b64c4de3d55f181",
+      "mtime_ns": 1791246746912518000
+    }
+  ],
+  "software": {
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.3",
+    "scipy": "1.18.0"
+  },
+  "source_hashes": [
+    {
+      "file": "pantheon_metadata_only.json",
+      "sha256": "40db095447818339cb4ab1cff6ce528c9d9c655b5adbfcf0d422c7884455b346",
+      "bytes": 126027
+    },
+    {
+      "file": "pantheon_STAT_SYS.cov",
+      "sha256": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc",
+      "bytes": 33284960
+    },
+    {
+      "file": "desi_metadata_only.json",
+      "sha256": "8554a51a675c2a75620c76aa8f536d8ea47142403698df4dc42c63bb4d6134c3",
+      "bytes": 649
+    },
+    {
+      "file": "desi_DR2.cov",
+      "sha256": "252a143274c8a07c78694c119617d36594f6d7965d00319ca611c6ffb886e509",
+      "bytes": 2547
+    },
+    {
+      "file": "alpha_source.json",
+      "sha256": "28df71dab2538aba03cfa028d4e5c0130f8c37ba98375f69997da22d5fbed7f4",
+      "bytes": 475
+    },
+    {
+      "file": "FONTES_COVARIANCIAS_METADATA.json",
+      "sha256": "05a6ea4db3461951b2ce47636d60959c7ac689cb862e61eb77607cb218940d9e",
+      "bytes": 2685
+    },
+    {
+      "file": "forecast_shape.py",
+      "sha256": "4db2cb8e51fdfb174e4570753c100649850801f25355996779c7b87a8af053a6",
+      "bytes": 10056
+    }
+  ],
+  "elapsed_seconds": 0.5604548000264913,
+  "providers_called": [],
+  "request_ids": []
+}

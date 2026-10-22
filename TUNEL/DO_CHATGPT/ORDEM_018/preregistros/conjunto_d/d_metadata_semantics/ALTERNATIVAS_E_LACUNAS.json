@@ -1,0 +1,47 @@
+{
+  "status": "PROPOSALS_ONLY_NO_SELECTION_CHANGED",
+  "calibration_gap": [
+    {
+      "id": "CAL_A",
+      "route": "PE-container header/schema-only inventory, under separately authorized segregated reader",
+      "advantage": "Can link exact analysis label and calibration product to already pinned PE release.",
+      "cost_or_risk": "HDF5 header access itself is excluded now; a generic PESummary read can load posterior arrays. Never execute it to discover paths.",
+      "future_receipt": "Exact observed path, detector, label, units, epoch/range, declared convention, payload provenance; no assumed conventional path."
+    },
+    {
+      "id": "CAL_B",
+      "route": "Independent public DCC hourly-envelope inventory and later calibration-only qualification",
+      "advantage": "No need to open PE posteriors; separates calibration product from science target.",
+      "cost_or_risk": "Archive inspection and numerical envelopes are not authorized in this documentary unit. Need exact member names, provider/hash/epoch coverage and agreement with C00/C01 strain.",
+      "future_receipt": "Archive identity/hash, member IFO/GPS, actual grid and valid epoch, documented ratio convention, reviewed nuisance model before data."
+    }
+  ],
+  "recommendation": "Prefer CAL_B for segregating PE information; use CAL_A if exact released PE calibration provenance is needed. Neither is completed or selected here.",
+  "injection_policy_gap": [
+    {
+      "id": "INJ_A",
+      "required_if_later_ratified": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "meaning": "Absence of transient/other listed injection classes; CW is not covered.",
+      "condition": "Separately preregister handling of known CW lines/contamination; do not presume negligible effect."
+    },
+    {
+      "id": "INJ_B",
+      "required_if_later_ratified": [
+        "NO_CBC_HW_INJ",
+        "NO_BURST_HW_INJ",
+        "NO_DETCHAR_HW_INJ",
+        "NO_CW_HW_INJ",
+        "NO_STOCH_HW_INJ"
+      ],
+      "meaning": "Absence of all five documented hardware-injection classes.",
+      "cost_or_risk": "May remove substantial observing time since LIGO had CW injections; no survival fraction measured here."
+    }
+  ],
+  "DQ_choice": "Nine defined bits do not imply requiring all nine. CBC/ringdown policy and category threshold remain pending ratification; do not silently replace it with a BURST/CW/STOCH intersection.",
+  "calibration_statistics_gap": "An amplitude/phase envelope is not a complete stochastic nuisance model. Correlation, interpolation, marginalization/correction and band must be fixed with independent justification; no independent-Gaussian prior inferred from 1-sigma boundaries."
+}

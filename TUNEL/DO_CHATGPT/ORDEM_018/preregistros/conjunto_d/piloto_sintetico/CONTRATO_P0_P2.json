@@ -1,0 +1,88 @@
+{
+  "id": "ORDEM018_F3_SYNTHETIC_P0_P2_01",
+  "created_utc": "2026-10-06T01:18:18.755349+00:00",
+  "authorization": "Parent delegated instruction: P0-P2 synthetic local qualification explicitly authorized; no new routine confirmation. P3/PE excluded.",
+  "run_id": "RUN_001",
+  "stages": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "PE_authorized": false,
+  "D_read_authorized": false,
+  "original_execution_authorized": false,
+  "install_authorized": false,
+  "remote_calls_authorized": false,
+  "inputs": {
+    "src/pseob_source.py": {
+      "sha256": "58cb22bbe37f9207b526281801855ab38ebbda4fdc229596da92917b4f12098d",
+      "bytes": 7505
+    },
+    "src/temporal_contract.py": {
+      "sha256": "c8f4ecbc28d4312e3885d61c14f174062c6055eee0bbd54897e725a18240b605",
+      "bytes": 1859
+    },
+    "src/synthetic_adapter.py": {
+      "sha256": "56e47e31c4a3220173a42ddb94e9962c1d747638aee16056633f6e27f4399019",
+      "bytes": 9658
+    },
+    "qualify_synthetic.py": {
+      "sha256": "7f82fb571bbbe6f5131fb45195efedad86cca633445cdf56f56f11d4e6127a1b",
+      "bytes": 15641
+    },
+    "CONFIG_SYNTHETIC.json": {
+      "sha256": "844c11c27368fb9c321dd342272347a18636bcd56d6d0aea6ea1642610958093",
+      "bytes": 2242
+    },
+    "ENVIRONMENT_PREFLIGHT.json": {
+      "sha256": "4807006874dc8f5295e47428f3856ace63903b504f8c152814ddac38e59e5829",
+      "bytes": 1942
+    }
+  },
+  "supervisor_sha256": "d27deba80630488616ab6883cfd3369f778b6b5e5d2f3384d9479b2909a6165a",
+  "max_native_calls": 32,
+  "max_wall_seconds": 600,
+  "launch_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "env",
+    "OMP_NUM_THREADS=1",
+    "OPENBLAS_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "620",
+    "/opt/lal_env/bin/python",
+    "-B",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/piloto_sintetico/qualify_synthetic.py"
+  ],
+  "workers": 1,
+  "fixtures": {
+    "SYN_A": {
+      "mass_1": 50.0,
+      "mass_2": 35.0,
+      "chi_1": 0.3,
+      "chi_2": 0.1
+    },
+    "SYN_B": {
+      "mass_1": 90.0,
+      "mass_2": 60.0,
+      "chi_1": 0.7,
+      "chi_2": 0.3
+    }
+  },
+  "tolerances": {
+    "GR_repeat_relative": 1e-12,
+    "RB_GR_minimum_relative_difference": 1e-10,
+    "amplitude_rescaling_relative": 1e-10,
+    "noise_chisquare_z_abs_max": 8.0
+  },
+  "PSD": "LAL analytic SimNoisePSDaLIGOZeroDetHighPower, no measured data",
+  "truth_map": "Runtime alpha2018*sqrt(e), k=4pi(1+sqrt(1-chi_f^2))/sqrt(1-chi_f^2), BCW FQ, delta=-x/(1+x); chi_f from LAL SEOBNRv4 aligned GR fit for synthetic progenitor.",
+  "read_allowlist_policy": "Child permits pilot tree and runtime libraries; writes RUN_001 only; rejects outside mounted paths, process launches and network via Python audit hooks.",
+  "limitations": "Source/injection qualification only. Python audit hook is not an OS proof against unaudited native syscalls. No recovery, bias, coverage, D sigma or verdict.",
+  "failure_policy": "Preserve rc, logs, parameters and cost. No automatic retry. Any local correction receives new artifact/contract lineage before another attempt."
+}

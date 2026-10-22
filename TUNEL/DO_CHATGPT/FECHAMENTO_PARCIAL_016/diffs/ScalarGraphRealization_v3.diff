@@ -1,0 +1,35 @@
+--- C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D6\ScalarGraphRealization_v3.lean
+
++++ C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\FECHAMENTO_PARCIAL\lean\ScalarGraphRealization_v3.lean
+
+@@ -1,5 +1,6 @@
+
+ -- predecessor_sha256: 21e1d590d7bdfaf950030d214fd06aa813fe10be6b4f49d2251e718cc4aaf4db
+ -- predecessor_sha256: 6e947b19e661c02b809cd5ad9b8860c69853455fa6084dd118bbd6da0bc6d8a2
++import Lean
+ import RecognitionReadout
+ import TGLExt.V351ScalarTomitaImaginaryPowers
+ 
+@@ -138,3 +139,21 @@
+
+ #print axioms scalarGraphReadout
+ end
+ end ORDEM016.D6
++
++
++-- Engineering audit: all declarations introduced by this compilation unit.
++open Lean in
++run_cmd do
++  let env ← Elab.Command.liftCoreM getEnv
++  for (n, ci) in env.constants.map₂.toList do
++    let axs ← collectAxioms n
++    let kind := match ci with
++      | .axiomInfo _ => "axiom"
++      | .thmInfo _ => "theorem"
++      | .defnInfo _ => "definition"
++      | _ => "generated_or_type"
++    IO.println ("BENCH_DECL\t" ++ n.toString ++ "\t" ++ kind ++ "\t" ++
++      String.intercalate "," (axs.toList.map Name.toString))
++    unless axs.all (fun a => a == `propext || a == `Classical.choice || a == `Quot.sound) do
++      throwError "AXIOM_AUDIT_REFUSED: {n}"
++    if kind == "axiom" then throwError "NEW_AXIOM_REFUSED: {n}"

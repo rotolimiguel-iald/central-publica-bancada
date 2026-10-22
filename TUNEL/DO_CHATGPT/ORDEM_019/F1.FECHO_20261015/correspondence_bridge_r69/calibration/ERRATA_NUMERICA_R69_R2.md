@@ -1,0 +1,9 @@
+# R69 R2 — guarda de faixa numérica, em nome de r69_calibration_bridge
+
+A revisão independente preservou em `../AUDIT_NUMERICAL_RANGE_R69.json` três falhas materiais de R1: produto de ganhos finitos pode transbordar e zerar a recuperação; uma razão pode devolver infinito; a formação explícita de G=(C⁻¹)†C⁻¹ pode subfluir e zerar falsamente o resíduo. Os 38 controles originais não cobriam esses casos. Seu PASS permanece histórico, de alcance insuficiente para certificar robustez numérica. Nenhum artefato anterior foi alterado.
+
+R2 mantém o decoder R62 e as mesmas fórmulas científicas. Todas as operações numéricas expostas usam `np.errstate` com recusa de overflow, underflow, divisão e operação inválida; intermediários e resultados são conferidos finitos. O produto de ganhos e a razão são operações NumPy explicitamente guardadas, sem permitir infinito como divisor. O comportamento conservador pode recusar resultados matematicamente representáveis quando um intermediário não é seguro; não se promete cálculo universal de todas as magnitudes.
+
+O resíduo transportado passa a calcular d=C(x−a), resolver Cy=d e medir ‖y‖ por `math.hypot`, que escala antes de elevar ao quadrado. Não forma G numericamente nem recorta um valor quadrático negativo para zero. A identidade teórica da métrica de R1 permanece válida, mas essa implementação é mais segura. Matriz singular, mal condicionada (cond>1e10), condição não finita ou resultado não finito recusam. Os controles incluem C=1e200 I, onde o resíduo unitário deve continuar um, e casos extremos que devem recusar visivelmente.
+
+Pré-registro R2 fixa os mesmos 38 controles mais 12 ataques, sem nova ODE, medição ou cálculo de betaTGL. O wrapper de execução também é pinado no FREEZE_R69_R2.json antes do START, corrigindo a lacuna de custódia do wrapper R1. A execução R2 é única; falha permanece como resultado e não provoca repetição automática.

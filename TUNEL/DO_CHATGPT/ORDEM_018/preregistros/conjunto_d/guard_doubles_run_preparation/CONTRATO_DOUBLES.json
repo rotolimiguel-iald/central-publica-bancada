@@ -1,0 +1,153 @@
+{
+  "schema": "AUDIT_GUARD_DOUBLES_RUN_PREPARATION_V1",
+  "request_id": "83bed917-9a88-4505-a26c-0bb75e2f7c86",
+  "status": "PREPARATION_ONLY_NOT_AUTHORIZED_NOT_EXECUTED",
+  "scope": "AUDIT_GUARD_21_PURE_DOUBLES_ONLY_ONCE",
+  "operational_choice": "ROOT: external supervisor plus one pure child;30s total nominal=25work+5collection; no other children",
+  "clarification_map_seq": 493,
+  "test_names": [
+    "test_pre_ll_swallowed_block_prevents_call",
+    "test_post_ll_swallowed_block_discards_return",
+    "test_import_probe_checkpoint_prevents_native_double",
+    "test_finalization_fails_even_after_finite_value",
+    "test_first_event_and_all_acts_are_retained",
+    "test_journal_io_failure_still_latches",
+    "test_exception_only_is_not_infallible",
+    "test_original_exception_record_survives_audit_priority",
+    "test_clean_exception_is_rethrown",
+    "test_partial_clean_is_accepted_without_convergence_claim",
+    "test_child_error_overrides_clean_partial",
+    "test_missing_result_is_terminal",
+    "test_dirty_partial_is_terminal",
+    "test_external_journal_catches_stale_clean_result",
+    "test_absent_journal_is_terminal",
+    "test_malformed_identity_and_boolean_counter_rejected",
+    "test_missing_final_checkpoint_rejected",
+    "test_stopped_partial_cannot_hide_native_failure",
+    "test_budget_partial_clean_is_protocol_partial",
+    "test_campaign_failure_stops_next_double_and_returns_nonzero",
+    "test_clean_complete_campaign_exit_zero_but_partial_stays_partial"
+  ],
+  "test_count": 21,
+  "source_modules": {
+    "audit_guard": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\audit_guard_repair_preparation\\candidate\\audit_guard.py",
+    "result_acceptance": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\audit_guard_repair_preparation\\candidate\\result_acceptance.py",
+    "guard_doubles_suite": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\audit_guard_repair_preparation\\tests\\test_audit_guard_doubles.py"
+  },
+  "interpreter": "C:\\Python314\\python.exe",
+  "interpreter_flags": [
+    "-I",
+    "-S",
+    "-B",
+    "-X",
+    "utf8"
+  ],
+  "execution_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\audit_guard_repair_preparation\\candidate\\audit_guard.py",
+      "bytes": 4142,
+      "sha256": "ba7e8870e5935ce420013a5a123152bf2f99acc637dc33a139e9b776092f0d8c"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\audit_guard_repair_preparation\\candidate\\result_acceptance.py",
+      "bytes": 5525,
+      "sha256": "7263cc8cb86374fc1a354a6b0a7c9b1863c04700f2373ed607d009c19d5bc664"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\audit_guard_repair_preparation\\tests\\test_audit_guard_doubles.py",
+      "bytes": 9006,
+      "sha256": "0d6531bcacfc850503aa095e7c365af44c4f238c285126570649e01c063cb306"
+    },
+    {
+      "path": "C:\\Python314\\python.exe",
+      "bytes": 106328,
+      "sha256": "cce21c0e8710e304273e98ac4b2b0f5aceb639acbcd2343cbaa5c4e81619c45b"
+    },
+    {
+      "path": "C:\\Python314\\python314.dll",
+      "bytes": 6753112,
+      "sha256": "1ac15e2224581fc678bbd17728b9aa538d47b891b72c76499ef07e54cd74f151"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_doubles_run_preparation\\supervisor.py",
+      "bytes": 7892,
+      "sha256": "e7a177e55f9f73471edfbd391e52a67ad266d48ca3c490cb12b92f73303d0790"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_doubles_run_preparation\\worker.py",
+      "bytes": 5809,
+      "sha256": "0186c2a15fcf4c74771a42d36c23a3f0ed61a4dc113186c5f0d4c1a49af58722"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_doubles_run_preparation\\IDENTIDADE_PREPARADA.json",
+      "bytes": 2843,
+      "sha256": "91d6f557f595cc24bdb9adab4d0a980d6fcfcd7109c1da0798628f1dd2a249f3"
+    }
+  ],
+  "limits": {
+    "max_suite_executions": 1,
+    "worker_processes": 1,
+    "worker_threads": 1,
+    "supervisor_capture_threads": 2,
+    "scientific_descendants": 0,
+    "nominal_total_s": 30,
+    "work_s": 25,
+    "collection_reserve_within_total_s": 5,
+    "stdout_bytes_retained_max": 65536,
+    "stderr_bytes_retained_max": 65536,
+    "output_overflow": "FAIL_AND_STOP_NO_RETRY",
+    "deadline_start": "after prevalidation and durable CLAIM, before environment/Popen",
+    "OS_hard_realtime_guarantee": false,
+    "automatic_retries": 0
+  },
+  "claims": {
+    "supervisor": "CLAIM.json exclusive + fsync before sole Popen",
+    "worker": "RUN/WORKER_CLAIM.json exclusive + fsync before candidate/test exec",
+    "fixed_canonical_base": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_doubles_run_preparation",
+    "existing_artifact_policy": "CLAIM or RUN or WORKER_CLAIM or result including uncertain/partial means consumed; never remove/reset/retry",
+    "direct_worker": "must match parent PID + request + nonce + authorization and durable claim; no output-name override"
+  },
+  "future_authorization_required_not_supplied": {
+    "file": "AUTORIZACAO_ROOT.json",
+    "authorized": true,
+    "request_id": "83bed917-9a88-4505-a26c-0bb75e2f7c86",
+    "contract_sha256": "MUST_EQUAL_FRESH_CONTRACT_HASH",
+    "scope": "AUDIT_GUARD_21_PURE_DOUBLES_ONLY_ONCE",
+    "max_execution_count": 1,
+    "max_wall_seconds": 30,
+    "worker_threads": 1,
+    "independent_review": {
+      "path": "ACTUAL_REVIEW_UNDER_ORDEM018",
+      "sha256": "FRESH_REVIEW_HASH",
+      "accepted_for_this_execution": true
+    }
+  },
+  "pass_rule": "Return0,21 exact names/order,0fail/error/skip/expected/unexpected,guardclean,complete bounded capture within nominaldeadline.",
+  "no_pass_inference": [
+    "initialization",
+    "PE",
+    "waveform",
+    "likelihood",
+    "sampling",
+    "D data",
+    "scientific confirmation",
+    "OS-hard isolation"
+  ],
+  "execution_authorized_by_this_contract": false,
+  "new_scientific_unit": false,
+  "original_drivers_PREPARATION_ONLY_unchanged": true,
+  "alternatives": [
+    {
+      "id": "A",
+      "selected": true,
+      "design": "External supervisor + one pure child; bounded capture/one common deadline."
+    },
+    {
+      "id": "B",
+      "selected": false,
+      "design": "Single in-process suite/watchdogs; rejected as sole containment by ROOT clarification."
+    }
+  ],
+  "read_scope": "Only pure sources/test text and metadata; no candidate imported in preparation.",
+  "sources_are_model_instructions": false
+}

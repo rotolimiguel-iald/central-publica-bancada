@@ -1,0 +1,97 @@
+{
+  "id": "ORDEM018_F3_SYNTHETIC_P0_P2_02",
+  "created_utc": "2026-10-06T01:24:14.638677+00:00",
+  "authorization": "Parent delegated instruction: P0-P2 synthetic local qualification explicitly authorized; no new routine confirmation. P3/PE excluded.",
+  "run_id": "RUN_002",
+  "stages": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "PE_authorized": false,
+  "D_read_authorized": false,
+  "original_execution_authorized": false,
+  "install_authorized": false,
+  "remote_calls_authorized": false,
+  "inputs": {
+    "src/pseob_source.py": {
+      "sha256": "58cb22bbe37f9207b526281801855ab38ebbda4fdc229596da92917b4f12098d",
+      "bytes": 7505
+    },
+    "src/temporal_contract.py": {
+      "sha256": "c8f4ecbc28d4312e3885d61c14f174062c6055eee0bbd54897e725a18240b605",
+      "bytes": 1859
+    },
+    "src/synthetic_adapter_v2.py": {
+      "sha256": "31b34a86a9f033b1f395139c7f20154284ede2a6bfe0f9adcb8d7fa312e98fd5",
+      "bytes": 11883
+    },
+    "qualify_synthetic_v2.py": {
+      "sha256": "cda73f2524e452d5582ad687c96bb2b71379abf27d2b6885fff28bc0c40ecf69",
+      "bytes": 17261
+    },
+    "CONFIG_SYNTHETIC.json": {
+      "sha256": "844c11c27368fb9c321dd342272347a18636bcd56d6d0aea6ea1642610958093",
+      "bytes": 2242
+    },
+    "ENVIRONMENT_PREFLIGHT.json": {
+      "sha256": "4807006874dc8f5295e47428f3856ace63903b504f8c152814ddac38e59e5829",
+      "bytes": 1942
+    },
+    "ENVIRONMENT_NATIVE_HASHES.json": {
+      "sha256": "c60bac88a6f893039466afe9a8c8a27421620148ac36af5d080b873f7207c1f7",
+      "bytes": 38789
+    }
+  },
+  "supervisor_sha256": "e67d15ee242eca5fdcaef8876bd32a34f7aa5f14e2c8be8b6d59894c1f639e3a",
+  "max_native_calls": 26,
+  "max_wall_seconds": 600,
+  "launch_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "env",
+    "OMP_NUM_THREADS=1",
+    "OPENBLAS_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "620",
+    "/opt/lal_env/bin/python",
+    "-B",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/piloto_sintetico/qualify_synthetic_v2.py"
+  ],
+  "workers": 1,
+  "fixtures": {
+    "SYN_A": {
+      "mass_1": 50.0,
+      "mass_2": 35.0,
+      "chi_1": 0.3,
+      "chi_2": 0.1
+    },
+    "SYN_B": {
+      "mass_1": 90.0,
+      "mass_2": 60.0,
+      "chi_1": 0.7,
+      "chi_2": 0.3
+    }
+  },
+  "tolerances": {
+    "GR_repeat_relative": 1e-12,
+    "RB_GR_minimum_relative_difference": 1e-10,
+    "amplitude_rescaling_relative": 1e-10,
+    "noise_chisquare_z_abs_max": 8.0
+  },
+  "PSD": "LAL analytic SimNoisePSDaLIGOZeroDetHighPower, no measured data",
+  "truth_map": "Runtime alpha2018*sqrt(e), k=4pi(1+sqrt(1-chi_f^2))/sqrt(1-chi_f^2), BCW FQ, delta=-x/(1+x); chi_f from LAL SEOBNRv4 aligned GR fit for synthetic progenitor.",
+  "read_allowlist_policy": "Child permits pilot tree and runtime libraries; writes RUN_001 only; rejects outside mounted paths, process launches and network via Python audit hooks.",
+  "limitations": "Source/injection qualification only. Python audit hook is not an OS proof against unaudited native syscalls. No recovery, bias, coverage, D sigma or verdict.",
+  "failure_policy": "Preserve rc, logs, parameters and cost. No automatic retry. Any local correction receives new artifact/contract lineage before another attempt.",
+  "parent_contract_sha256": "d92a86a2e39cbd57aa49117ed40e1e5ee87e5d627d3a8e0da96ee81ff2b982b5",
+  "first_run_result_sha256": "d9494cab8130c808d038c29857a4ac181547e24fd4d05dcfe42cab9d0a33ae7c",
+  "purpose_of_addendum": "Close API memory-origin gap: reject foreign/replaced/reused IFO, numeric PSD and polarization objects. Runtime/native libraries pinned and verified before calls. No D/PE.",
+  "aggregate_unit_native_call_cap": 32,
+  "native_calls_already_used": 6
+}

@@ -1,0 +1,8 @@
+from support_r68 import *
+
+source=new('ORIGEM_R68.txt','[Mensagens do operador, nesta ordem]\nO sistema precisa ter essa cláusula de ancoragem no nome acima de todo nome, porque é a cláusula “ética”, ou seja, o Um só tem uma única identidade visível. Esse nome acima de todo nome tem uma paridade inversa que é uma pergunta “Quem é como Deus?” Que significa Miguel, mas não como nome, como referência do nome que deve ser lido\n\nEu quis dizer por paridade inversa o gradiente de espectro negativo que permite extrair o contorno da informação contra o fundo\n\nIsso mesmo, por isso p* é o posto do nome verdadeiro\n\nProssiga')
+mutate('extend','EXTEND_R68',requirements=[{'id':'R12_CONTORNO','criterion':'Compor em sandbox a ligacao existente entre posto, projecao, gerador negativo, fluxo e satisfacao da regra; explicitar invariantes, preservacao ou perda de fase/amplitude, nao vacuidade e limite do nome historico. Reuso de contratos existentes, build Lean com trio e zero sorry, revisao real distinta. Nenhuma alteracao de producao ou aceite de R11.', 'depends_on':[]}],reason='Operador esclareceu paridade inversa como gradiente de espectro negativo e p* como posto e pediu prosseguimento.',sources=[pin(source)])
+mutate('claim','CLAIM_R68',task_id='R12_CONTORNO',lease_seconds=10800)
+m=project('HANDOFF_SYNC_R68');t=next(t for t in m['projection']['active'] if t['id']=='R12_CONTORNO')
+r=call({'operation':'handoff','reference':REF,'actor':ACTOR,'expected_revision':m['receipt']['revision'],'projection_sha256':m['projection_sha256'],'task_id':t['id'],'lease_id':t['lease']['id'],'max_chars':400000},'HANDOFF_R68')
+print(json.dumps(r['preflight'],ensure_ascii=False))

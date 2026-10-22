@@ -1,0 +1,120 @@
+{
+  "unit": "F9.REBASE_COORD",
+  "time_utc": "2026-10-08T02:52:51.436118+00:00",
+  "statute": "[REAL documental/local]",
+  "new_evidence": true,
+  "R1": {
+    "finding": "act('cancel') first called get() and refused the historical memory generation; _change was used for the historical cancellation.",
+    "candidate_fix": "Early cancel branch reads only stage/execution_task_id and uses existing _change CAS; no canonical-memory prepare.",
+    "candidate_installed": false,
+    "installation_reserved_to": "operator",
+    "tests": "2 PASS, temporary SQLite"
+  },
+  "R2": {
+    "map_seq": 688,
+    "pinned_backup": "29caef73e4d07a45eb4209f6789ab51dfcfa1bdd7695b53a57f21c2e7217bf87",
+    "live_manifest": "3ce00912e26457878b046a69532fa93d5459b9e14d457fd4c2f73b305315b9bb",
+    "instruction": "Verify seq 688 against byte-identical backup, not edited live path."
+  },
+  "R3": {
+    "window": "seq 688-706, 2026-10-06 19:31-19:35 local",
+    "finding": "Inventory existed but had no map entry or line in ORDEM_018/recibos.jsonl; retrospective registration only.",
+    "source_sha256": "faaf4578d0609470c3fed7f30570cfc1c9865ec0c1f2c8caa6d03619410c3eb3"
+  },
+  "R4": {
+    "finding": "Original memory sentence retained; adjacent errata states public act refused and private _change performed cancellation.",
+    "surfaces": 8,
+    "memory_receipt_sha256": "5e842d4edd403cd1ac1b4edcce1bb34c722974d0eb9753d49f9f20f8898256f4"
+  },
+  "R6": {
+    "finding": "Previously unreceipted marker write declared here; original marker preserved.",
+    "marker_sha256": "4f41d98b2939b5aa2deb641be10168602d1e245268309eab4ba9b25c8f298b6e"
+  },
+  "R7": {
+    "corrige": 742,
+    "original_seq": 696,
+    "finding": "Seq 696 and seq 742 pin the same maser receipt bytes, not an earlier version.",
+    "same_sha256": "311f3241a0c8ab0b88c2286ead74303e0681a0a3749fc392d3e4cb993b0ab06d"
+  },
+  "R5": "No change to heartbeat or provider authorization; provenance reserved for gerência/operator.",
+  "pins": {
+    "audit": {
+      "path": "C:\\IALD\\PROGRAMA_IALD\\auditorias\\F9.REBASE_COORD\\AUDITORIA_F9_REBASE_COORD_C1_20261007.md",
+      "bytes": 10040,
+      "sha256": "8e541131ff4ceac47b91d952a43a0f958c3286a41d4c339f406b8a508b90a31d"
+    },
+    "source_coordination": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\iald_orchestrator\\coordination.py",
+      "bytes": 15189,
+      "sha256": "93906389afd2c67ddd6183f30831a21aaf432d2994341d104e2f1101e94285ec"
+    },
+    "candidate_coordination": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\ADENDO003_COORD\\CANCEL_MEMORY_PIN_CANDIDATE\\coordination.py",
+      "bytes": 15632,
+      "sha256": "e978ecc654047b4b6686704afeb249ad7a6a4f4f27a66db556e8166001a055a6"
+    },
+    "candidate_manifest": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\ADENDO003_COORD\\CANCEL_MEMORY_PIN_CANDIDATE\\SOURCE_CANDIDATE_MANIFEST.json",
+      "bytes": 588,
+      "sha256": "abddeff6b13a99bb3b89ceb71008e326b813191acbf2ec7d79b82435c48bf249"
+    },
+    "candidate_test": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\ADENDO003_COORD\\CANCEL_MEMORY_PIN_CANDIDATE\\test_cancel_candidate.py",
+      "bytes": 3718,
+      "sha256": "a5f32a5d93f0989cfdba499438f71c5f45ca7a0b30edcc74b13f2d2edd9a0057"
+    },
+    "candidate_test_report": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\ADENDO003_COORD\\CANCEL_MEMORY_PIN_CANDIDATE\\TEST_REPORT.json",
+      "bytes": 801,
+      "sha256": "c03d48965e849f0fd1dfbe9ca67e8e141517c4e906426fd6df52d458d9c0d137"
+    },
+    "memory_correction_receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\ADENDO003_COORD\\AUDIT_R4_MEMORY_DELIVERY.json",
+      "bytes": 5427,
+      "sha256": "5e842d4edd403cd1ac1b4edcce1bb34c722974d0eb9753d49f9f20f8898256f4"
+    },
+    "cancel_read_failure": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\ADENDO003_COORD\\CANCELAMENTO_FALHA_LEITURA.json",
+      "bytes": 183,
+      "sha256": "9650e248026c8192f7b6a207ca768e88d69f383a3cd8607a977b641e14a206e1"
+    },
+    "cancel_terminal_evidence": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\ADENDO003_COORD\\CANCELAMENTO_VERIFICADO.json",
+      "bytes": 3928,
+      "sha256": "c664ea9bcc69f58a37ba59a5368843e565dad4ecfcacbecbd16ddd2669489152"
+    },
+    "inventory_reuse": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\provider_reuse_inventory_20261006\\INVENTARIO_REUSO.json",
+      "bytes": 6699,
+      "sha256": "faaf4578d0609470c3fed7f30570cfc1c9865ec0c1f2c8caa6d03619410c3eb3"
+    },
+    "map_entry_marker": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_scalar_reader_sources\\MAP_ENTRY_REGISTERED_ADENDO003.json",
+      "bytes": 602,
+      "sha256": "4f41d98b2939b5aa2deb641be10168602d1e245268309eab4ba9b25c8f298b6e"
+    },
+    "v388_pinned_backup": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\devices\\MANIFESTO_ENTREGA_V388.json.bak_20261007_210029_629468",
+      "bytes": 727102,
+      "sha256": "29caef73e4d07a45eb4209f6789ab51dfcfa1bdd7695b53a57f21c2e7217bf87"
+    },
+    "v388_current_manifest": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V388_20261006\\devices\\MANIFESTO_ENTREGA_V388.json",
+      "bytes": 727816,
+      "sha256": "3ce00912e26457878b046a69532fa93d5459b9e14d457fd4c2f73b305315b9bb"
+    },
+    "maser_receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\RECIBO_F9_MASER_ANCHOR_ALTERNATIVE_20261006.json",
+      "bytes": 2609,
+      "sha256": "311f3241a0c8ab0b88c2286ead74303e0681a0a3749fc392d3e4cb993b0ab06d"
+    },
+    "ordem018_recibos_jsonl": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\recibos.jsonl",
+      "bytes": 42860,
+      "sha256": "15ab830ebc93b8cd6d1146311713aa840f8c106a9ac030f5fe385a7531ab4a6b"
+    }
+  },
+  "provider_calls": 0,
+  "gate_changed": false,
+  "x10_installed": false
+}

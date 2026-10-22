@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "identity": "chatgpt-codex/ordem-018/derivacoes",
+  "created_for": "Explicit coordinator continuation after E45 scalar cost: prepare/validate exact P4 and P5 shadow beta acceleration only",
+  "scope": "ALGEBRAIC_ACCELERATION_VALIDATION_NO_NEW_EVIDENCE",
+  "authorization_boundary": "Validation and cost only. Send plan, cost and controls before any grid batch. Accumulated branch remains separate and unsupported here.",
+  "basis": {
+    "P4": "For fixed background, Planck+BAO constant; chi2_SH=[H0 exp(beta I*)-H_SH]^2/sigma_SH^2. Evaluate unchanged beta nodes in vector.",
+    "P5_shadow": "mu_noncal(beta)=mu0-(5 I*/ln10)beta, mu_cal=CEPH_DIST. Whiten and project single intercept M: r_perp(beta)=r0_perp+(5I*/ln10)beta q_perp. chi2_SN=C+Bbeta+Abeta^2 exactly. Mhat=M0+M1beta. Full SN covariance including calibrator correlations retained.",
+    "preserved": "Same priors, table support, geometry, rectangular weights and profile M; change arithmetic organization only, no analytic replacement of beta integration; logsumexp grouping may differ at rounding level.",
+    "accumulated": "Not quadratic in general, never replaced by shadow. This program rejects accumulated family."
+  },
+  "validation": {
+    "backgrounds": "Three verified P45 fit backgrounds per family; no new fits. Reuse same known model beta for original receipt check.",
+    "beta_points": [
+      -0.04,
+      -0.015,
+      0,
+      0.005,
+      0.01,
+      0.02,
+      0.04
+    ],
+    "beta_extra": "runtime alpha_CODATA2018*sqrt(e)",
+    "prior_endpoints": "-.05,+.05 must return infinite chi2, historical strict mask",
+    "chi2_abs_tolerance": 1e-08,
+    "M_abs_tolerance": 1e-10,
+    "known_point_chi2_abs_tolerance": 1e-08,
+    "meaning": "Fixed beta controls are engineering parameter points, not synthetic observed data; scalar and vector same frozen observed inputs. No integration or scientific conclusions."
+  },
+  "benchmark": {
+    "rounds": 5,
+    "cycles": 4,
+    "vector_length": 35,
+    "payload": "Repeat fixed beta controls to35 elements; no new beta values or observational integral.",
+    "cost": "Per background including one scalar beta0 evaluation and coefficient creation plus beta35 vector; extrapolate n25^3+n35^3 by model."
+  },
+  "resources": {
+    "wall_seconds_validation_max": 120,
+    "peak_bytes_max": 536870912,
+    "threads": 1,
+    "max_seconds_future_grid_unit": 600,
+    "maximum_validation_scalar_evaluations": 174
+  },
+  "future_grid": {
+    "status": "PREPARED_NOT_LAUNCHED",
+    "n": [
+      25,
+      35
+    ],
+    "reuse": "P45 centers/sigmas no fits; E45 contract intact",
+    "statistics": "same logZ25/logZ35, counts, marginal, SD and diagonal Laplace defined in E45 protocol; unknown tails same caveat",
+    "stop": "validation failure -> no grid; unit resource failure -> partial evidence not claimed, no auto-extension.",
+    "first_candidate_command": "C:\\Python314\\python.exe -X utf8 E45A_aceleracao_exata.py grid P4_d1b tgl 25 --max-seconds 600"
+  },
+  "scientific_verdict": null,
+  "created_utc": "2026-10-06T01:54:47.133652+00:00",
+  "pins": {
+    "E45_piloto_e_grade.py": "31042ef8b8d37eb5f310c7307d4c0056c53997cb3db10f6022af43a8eccef479",
+    "E45_PROTOCOLO_PILOTO_E_GRADE.json": "35bd6815dc9c8e7b8768136a6d33a740bc08abe6a47c49f4c06612893457df8c",
+    "E45_PREEXEC_HASHES.json": "73e1274cd9511494a865eadbc5344d372006064f483b4006b7f1762eb20d3893",
+    "E45_PILOTO_RESULTADO.json": "4b6406d2c526693a61f4ce4509d80d81b2cb800b745c83000b5caea5ba271745",
+    "P45_RESULTADO.json": "0dc829c19e6137dd5b417069e52ad3331937dca63b7bd23106bddf37ae59831e",
+    "P45_reproduzir.py": "ac3d6b356909eaf881aabdbc65f7c31b3b32a6157894c166424902d88be3a6cd",
+    "T4_reproduzir.py": "08552c24d56f23cf04342bd8e41db61e5a9ce688af84ea3205ee53b3beb1c340"
+  }
+}

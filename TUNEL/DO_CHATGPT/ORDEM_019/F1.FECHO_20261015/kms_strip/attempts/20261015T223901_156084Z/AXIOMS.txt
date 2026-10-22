@@ -1,0 +1,30 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T223901_156084Z\WeylSegalDenseDomainR3.lean:41:13: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?g (∑ x ∈ ?s, ?f x)
+in the target expression
+  (Complex.I * ↑√2) • (segal f).toFun (∑ g ∈ c.support, c g • y g) =
+    ∑ i ∈ c.support, c i • (Complex.I * ↑√2) • ↑(segal f) ⟨exponential i, ⋯⟩
+
+case e'_9
+f : ↥H1
+x : ↥domain
+c : ↥H1 →₀ ℂ := preimage x
+y : ↥H1 → ↥domain := fun g => ⟨exponential g, ⋯⟩
+hy : ∑ g ∈ c.support, c g • y g = x
+hd :
+  HasDerivAt (fun y => ∑ i ∈ c.support, (c i • fun t => (FieldWeyl.W (↑t • f)) (exponential i)) y)
+    (∑ i ∈ c.support, c i • (Complex.I * ↑√2) • ↑(segal f) ⟨exponential i, ⋯⟩) 0
+⊢ (Complex.I * ↑√2) • (segal f).toFun (∑ g ∈ c.support, c g • y g) =
+    ∑ i ∈ c.support, c i • (Complex.I * ↑√2) • ↑(segal f) ⟨exponential i, ⋯⟩
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    ∑ g ∈ c.support, c g • y g
+  has type
+    ↥domain
+  but is expected to have type
+    ↥(segal f).domain
+  in the application
+    (segal f).toFun (∑ g ∈ c.support, c g • y g)
+'F1Fecho.Creation.Weyl_preserves_domain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.Creation.Weyl_domain_hasDerivAt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

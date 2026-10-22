@@ -1,0 +1,180 @@
+--- snapshot498/PROPOSTA_ENVELOPE_F9.md
++++ documentary_v2/PROPOSTA_ENVELOPE_F9.md
+@@ -1,6 +1,8 @@
+-# Proposta documental de envelope superior da cauda F9
++# Proposta documental de envelope superior da cauda F9 — V2
+ 
+ [DERIVED — condicional, não adotado] A cota de Chernoff da qui-quadrado e um envelope racional distinto podem substituir a avaliação exata da SF apenas como **majorantes conservadoras**. A proposta recomenda à revisão a alternativa racional com N=256 e grade fixa Q=10^30 por reduzir as funções numéricas a aritmética inteira/racional e raiz inteira. Não seleciona cientificamente um método, não modifica os cinco testes nem concede autorização de execução.
++
++[ERRATA DOCUMENTAL V2 — ao lado da proposta498] A revisão independente identificou que a versão anterior separava d=0 das fórmulas gerais, mas ainda permitia que a API F9 devolvesse p=0 para um limite estatístico positivo. Isso conflita com o C04 consumido. Nesta V2 a identidade matemática do átomo é preservada como referência abstrata; a API F9 exige INVALID, p_upper=null e CONTRACT_INCOHERENCE_NOT_REJECTION quando d=0 e L>0. Não há rejeição automática. A pasta da proposta498 permanece íntegra.
+ 
+ [REAL — alcance desta entrega] Foram lidos documentos e calculados hashes de arquivos. Não houve implementação do módulo, execução dos casos propostos, avaliação de SF/Chernoff, cálculo de estatísticas observadas, importação científica, abertura de séries/posteriores D, rede ou chamadas de modelos. As contas abaixo são derivações simbólicas; os valores esperados dos casos não são recibos de medição. O protocolo consumido 6273, a prova, V2, modelos, fontes e memórias permanecem intactos.
+ 
+@@ -30,7 +32,7 @@
+ 
+ Portanto C_d começa em 1 em x=d, é positiva e decrescente depois desse ponto, e satisfaz SF_d(x)<=C_d(x)<=1. Para d>0 a lei é contínua; a cauda inclusiva coincide com a usual.
+ 
+-Para d=0, Z é o átomo em zero: a cauda inclusiva é 1 quando x<=0 e 0 quando x>0. Este ramo é analítico e separado, sem divisão por d, rotina gama ou alegação de underflow. Uma estatística positiva nesse ramo é evento de probabilidade zero sob as premissas do nulo; a validade das premissas/suporte deve ter sido verificada antes. Um zero decorrente de suporte inválido ou de falha de cálculo não é admissível.
++Para d=0, Z é abstratamente o átomo em zero: a cauda inclusiva matemática é 1 quando x<=0 e 0 quando x>0, sem divisão por d, rotina gama ou underflow. **Essa identidade abstrata não é a regra de retorno da API F9 para x>0.** No contrato de G/Q/T, dimensão certificada zero com limite estatístico positivo denuncia incoerência entre estatística, suporte e certificados; deve produzir INVALID, p_upper=null e CONTRACT_INCOHERENCE_NOT_REJECTION. Exige revisão do suporte comum, do grau/espaço global, da identidade do teste e do limite inferior, sem rejeição automática. O C04 consumido já distingue o zero abstrato desse diagnóstico operacional. Com d=0 e limite não positivo, a API pode devolver VALID_ATOM_TAIL, p_upper=1, após validar as demais premissas. Nenhum modo abstrato/override está disponível na API proposta para alimentar uma rejeição F9.
+ 
+ ## 3. Direção do certificado da estatística
+ 
+@@ -113,6 +115,8 @@
+ 
+ A ordem das guardas é parte do contrato:
+ 
++**Guarda de coerência F9 de dimensão zero:** depois das validações semânticas/de tipo e antes de qualquer retorno de cauda, cota trivial por recurso ou agregação, d=0 com x_lower>0 termina INVALID/null, motivo CONTRACT_INCOHERENCE_NOT_REJECTION. Esse caso não pode ser convertido em p=0, p=1, não rejeição ou rejeição. O teste afetado não dispõe de p robusto completo enquanto a incoerência persistir; outros testes completos e válidos mantêm a regra V2 original.
++
+ 1. Validar identidade/pins, modelo/covariância/suporte, certificado de dominância e de d, cobertura pertinente e certificado L<=S. Não basta um booleano fornecido pelo solicitante: devem existir referências verificáveis aos certificados e ao escopo congelado.
+ 2. Validar representação racional canônica e domínio. Tipo inválido, d fora de 0..148, float sem envoltória certificada, denominador inválido ou entrada sem certificado não são caudas calculáveis.
+ 3. Só depois executar o ramo matemático selecionado, com os limites previamente declarados.
+@@ -138,6 +142,6 @@
+ 
+ ## 9. Contrato proposto e próximos passos
+ 
+-CONTRATO_MODULO_CANDIDATO.json define entradas/saídas/guardas e limites ainda não executáveis. CASOS_SINTETICOS_PROPOSTOS.json contém oito grupos fixos de casos, com resultados simbólicos esperados justificados antes de qualquer avaliação. O caso de cauda muito pequena tem expectativa de saída exatamente 1/Q por desigualdade analítica, não por observação numérica.
++CONTRATO_MODULO_CANDIDATO.json define entradas/saídas/guardas e limites ainda não executáveis. CASOS_SINTETICOS_PROPOSTOS.json contém oito grupos fixos de casos, com resultados simbólicos esperados justificados antes de qualquer avaliação. O caso de cauda muito pequena tem expectativa de saída exatamente 1/Q por desigualdade analítica, não por observação numérica. T01 foi corrigido nesta V2: o terceiro retorno F9 é INVALID/null; [1,1,0] aparece somente como referência abstrata da cauda do átomo. T02–T08 permanecem estruturalmente iguais.
+ 
+ A recomendação é submeter C à revisão independente, mantendo A/B explicitamente distintas. Somente depois de decisão específica se prepararia uma implementação e seus controles em nova unidade, sem mudar contratos consumidos. Não há código, comando executável, CLAIM, autorização ou job científico neste pacote. Tempo/custo de avaliação e desempenho permanecem não medidos.
+--- snapshot498/CONTRATO_MODULO_CANDIDATO.json
++++ documentary_v2/CONTRATO_MODULO_CANDIDATO.json
+@@ -1,7 +1,7 @@
+ {
+   "request_id": "e8bf5643-8da4-4ebb-a923-db65e41bd042",
+-  "version": 1,
+-  "created_utc": "2026-10-06T05:20:25.128796+00:00",
++  "version": 2,
++  "created_utc": "2026-10-06T05:29:13.800974+00:00",
+   "status": "DOCUMENTARY_MODULE_PROPOSAL_NOT_IMPLEMENTED_NOT_ADOPTED",
+   "statute": "DERIVED_CONDITIONAL_BOUND_AND_PROPOSED_INTERFACE",
+   "authorization": {
+@@ -127,14 +127,14 @@
+     }
+   ],
+   "algorithm_specification_not_code": {
+-    "zero_degree": "inclusive atom at0: 1 for x<=0, 0 for x>0; only after semantic validation",
++    "zero_degree": "F9 API: after semantic/type validation, if d=0 and x_lower>0 return INVALID with p_upper=null and reason CONTRACT_INCOHERENCE_NOT_REJECTION; require support/degree/global-span/lower-statistic certificate review. If d=0 and x_lower<=0 return VALID_ATOM_TAIL with p_upper=1. No automatic rejection.",
+     "positive_degree_below_mean": "1 for x<=d",
+     "rational_branch": "x>d,d>=1: R=(x/d)^d/[1+(x-d)/(2N)]^(2N)=A/B>0 exactly",
+     "root_upper": "k=isqrt(floor(A*Q^2/B)); u=k if k^2*B=A*Q^2 else k+1; p_upper=u/Q",
+     "certificate": "(u-1)^2*B < A*Q^2 <= u^2*B, 1<=u<=Q, 0<R<=1",
+     "derivative_log_B": "(d-2N)*(x-d)/(2*x*(2N+x-d))",
+     "strict_monotonic_condition": "2N>d; fixed256 covers d1..148",
+-    "no_underflow": "finite positive branch returns at least1/Q; d0 analytic zero is separately labeled",
++    "no_underflow": "Every valid positive-degree finite rational branch returns at least1/Q. The abstract chi-square0 tail is0 for x>0, but the F9 API rejects that incoherent input and emits no numeric p.",
+     "monotonicity_scope": "certified completed branch only; explicit resource-bound1 may cause an upward jump"
+   },
+   "resource_policy_proposal_only": {
+@@ -287,5 +287,58 @@
+     "scientific_or_observed_computations": 0,
+     "providers_called": 0,
+     "measured_cost": null
++  },
++  "revision_scope": "Documentary F9-specific coherence guard for d=0 with positive certified statistic lower; no change to d>0, models, alpha, alternatives, resources or scientific execution.",
++  "predecessor": {
++    "map_seq": 498,
++    "manifest": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_proposal\\MANIFESTO_PROPOSTA.json",
++      "bytes": 2879,
++      "sha256": "bc53a4fcefef341a35b57fca313f050e4d75ff8b5a1d9f19548baf09bb970c0e"
++    },
++    "contract": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_proposal\\CONTRATO_MODULO_CANDIDATO.json",
++      "bytes": 13414,
++      "sha256": "f080f210ca66e52ff550738751042e1f15da6a777f105f2d2e774b86a60c8ad1"
++    },
++    "preserved_in_place": true
++  },
++  "api_scope": "F9 G/Q/T statistics only. The abstract chi-square0 identity is explanatory and is not an alternate callable mode or override of the F9 guard.",
++  "zero_degree_F9_coherence_guard": {
++    "priority": "after mandatory semantic and type checks, before any tail, resource-trivial bound or aggregation",
++    "condition": "d == 0 AND x_lower > 0",
++    "status": "INVALID",
++    "p_upper": null,
++    "reason": "CONTRACT_INCOHERENCE_NOT_REJECTION",
++    "reject": false,
++    "required_action": [
++      "review common support certificate",
++      "review residual-degree or global-difference-span certificate and test identity",
++      "review certified lower statistic and its sign/orientation",
++      "retain failure visible; do not issue robust p for this incomplete test"
++    ],
++    "no_trivial_resource_override": true,
++    "abstract_chi_square0_reference": {
++      "inclusive_tail_at_x_le_0": "1",
++      "inclusive_tail_at_x_gt_0": "0",
++      "scope": "mathematical reference only; cannot feed F9 p_upper or a rejection"
++    },
++    "source_C04": [
++      {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\PROTOCOLO_EXATO.json",
++        "bytes": 18679,
++        "sha256": "895544d37ab05c2ff28eab3b2ee1298fc78e5dbe445a88a7a3a8cb7a861635a7"
++      },
++      {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\controls.py",
++        "bytes": 10614,
++        "sha256": "7ddb3cf8f2d646995c6b61ee056ccd492ce2d3ca8b1417b2446afea5fdea0c95"
++      },
++      {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\RUN\\RESULT.json",
++        "bytes": 3680097,
++        "sha256": "a5131e39c52d618156e1d1c75715992ce5ae2c36b72a5338399f5ebfc327020d"
++      }
++    ]
+   }
+ }
+--- snapshot498/CASOS_SINTETICOS_PROPOSTOS.json
++++ documentary_v2/CASOS_SINTETICOS_PROPOSTOS.json
+@@ -11,13 +11,35 @@
+         "0",
+         "1"
+       ],
+-      "expected_upper": [
++      "abstract_tail_reference": [
+         "1",
+         "1",
+         "0"
+       ],
+-      "justification": "Inclusive tail of point mass at0; last zero is analytical, never underflow. All semantic certificates prevalidated.",
+-      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
++      "abstract_reference_scope": "Mathematical point-mass tail only, not F9 API outputs at positive lower statistic",
++      "expected_upper": [
++        "1",
++        "1",
++        null
++      ],
++      "expected_status": [
++        "VALID_ATOM_TAIL",
++        "VALID_ATOM_TAIL",
++        "INVALID"
++      ],
++      "expected_reason": [
++        null,
++        null,
++        "CONTRACT_INCOHERENCE_NOT_REJECTION"
++      ],
++      "positive_F9_case": {
++        "p_upper": null,
++        "automatic_rejection": false,
++        "resource_trivial_override_allowed": false,
++        "required_action": "Review support, degree/global-span, test identity and lower-statistic certificates before any further F9 conclusion."
++      },
++      "justification": "C04 distinguishes the abstract atom tail0 at positive x from an operationally incoherent positive G/Q/T statistic with certified dimension0. The F9 API must stop INVALID/null, never convert that mathematical reference into a rejection. Nonpositive x still yields1 after semantic validation.",
++      "statute": "DERIVED_SYMBOLIC_EXPECTATION_DOCUMENTARY_CORRECTION_NOT_EXECUTED"
+     },
+     {
+       "id": "T02_THRESHOLD_AND_DOMAIN",
+@@ -142,5 +164,11 @@
+   "cases_executed": 0,
+   "observed_inputs_allowed": false,
+   "numerical_expected_values_measured": false,
+-  "science_models_and_threshold_changed": false
++  "science_models_and_threshold_changed": false,
++  "version": 2,
++  "predecessor": {
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_proposal\\CASOS_SINTETICOS_PROPOSTOS.json",
++    "bytes": 4733,
++    "sha256": "9c392c690da2a85b1dad2bf84a41f16a0e763b9eb3335e297a785af3e80329cc"
++  }
+ }

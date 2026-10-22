@@ -1,0 +1,101 @@
+{
+  "review_id": "4b03b8e7-3b6f-4ab8-affc-f080360354d5",
+  "status": "STATIC_REVIEW_ONLY",
+  "findings": [
+    {
+      "id": "P3A-01",
+      "priority": "P1",
+      "blocking": true,
+      "status": "STATIC_CONTROL_FLOW_FINDING",
+      "title": "Interrupção controlável pode escapar antes de kill/reap",
+      "references": [
+        {
+          "file": "launch_p3.py",
+          "lines": [
+            55,
+            64
+          ],
+          "focus": [
+            57,
+            60
+          ]
+        },
+        {
+          "file": "launch_p3.py",
+          "lines": [
+            70,
+            72
+          ]
+        },
+        {
+          "file": "process_supervision.py",
+          "lines": [
+            38,
+            61
+          ],
+          "focus": [
+            42,
+            47
+          ]
+        },
+        {
+          "file": "launch_p3.py",
+          "lines": [
+            179,
+            188
+          ]
+        }
+      ],
+      "cause": "Entrada de cleanup_context lê handlers e troca SIGINT/SIGTERM por SIG_IGN um a um; handler ativo lança SupervisorInterrupted. O context manager entra fora dos catches internos e já no finally de supervise.",
+      "witness": "Filho vivo; espera termina por timeout; supervisor entra no finally; SIGTERM chega antes de o handler ser ignorado; exceção escapa antes de kill/wait. Except externo do launcher pode gravar FINALIZATION_FAILURE e sair2 sem recolher filho.",
+      "consequence": "Não causa PASS falso, mas admite filho vivo após cancelamento controlável. Não depende de SIGKILL externo/host perdido/hard-real-time.",
+      "test_boundary": "Teste26 cobre interrupção pendente na saída de ownership_context após atribuir handle, não entrada de cleanup_context; doubles não demonstram processos reais.",
+      "minimum_next_step": "Sucessor deve impedir escape assíncrono antes do cleanup limitado do filho possuído, conservando falha/deadline/identidade/no-retry. Flag não lançadora e waits curtos sugeridos por ROOT são alternativa a avaliar, ainda não solução aprovada/testada.",
+      "execution_performed": false
+    },
+    {
+      "id": "P3A-02",
+      "priority": "P2",
+      "blocking": true,
+      "status": "DOCUMENTARY_CONTRACT_CONFLICT",
+      "title": "Tabela de custo antiga sem rótulo histórico",
+      "references": [
+        {
+          "file": "CONTRATO_P3.json",
+          "lines": [
+            303,
+            307
+          ]
+        },
+        {
+          "file": "CONTRATO_P3.json",
+          "lines": [
+            256,
+            266
+          ]
+        },
+        {
+          "file": "CONTRATO_P3.json",
+          "lines": [
+            719,
+            724
+          ]
+        }
+      ],
+      "stale_field": {
+        "path": "cost.hard_envelope_two_jobs",
+        "supervisor_wall_s": 7220,
+        "child_cpu_hard_s": 6610,
+        "total_likelihood_calls": 20000
+      },
+      "A_aggregate": {
+        "sum_supervisor_nominal_seconds": 28820,
+        "sum_CPU_hard_seconds": 26410,
+        "likelihood_calls": 200000,
+        "waveform_wrapper_calls": 200000
+      },
+      "consequence": "Runtime usa limits A corretos; campo antigo parece vigente e pode induzir decisão/relato de custo menor. Nenhuma ampliação oculta localizada.",
+      "minimum_next_step": "Separar números antigos em histórico vinculado à base ou alinhar campo vigente aos totais A; proxies antigos não são previsão medida."
+    }
+  ]
+}

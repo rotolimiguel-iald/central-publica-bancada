@@ -1,0 +1,90 @@
+{
+  "action": "read",
+  "name": "lei_h0_primitiva",
+  "created_utc": "2026-10-06T00:09:56.968606+00:00",
+  "originals_modified": false,
+  "source": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py.bak_d1kernel",
+    "bytes": 757343,
+    "sha256": "2af742f0fc9ecc3135c424c3394abec79d861596379cb87fa2a1fae53ac90bf3",
+    "mtime_utc": "2026-06-04T17:03:21.155892+00:00"
+  },
+  "pattern": "^def predict_H0|D1b|ratio =|flow equation",
+  "matched_lines": 17,
+  "total_lines": 14387,
+  "excerpts": [
+    {
+      "match_line": 2057,
+      "first_line": 2052,
+      "last_line": 2062,
+      "text": "        vals = [hermitian_fraction(rng.standard_normal((n, n))) for _ in range(n_rep)]\n        null_by_size[n] = {'mean': float(np.mean(vals)), 'std': float(np.std(vals))}\n        null_all.extend(vals)\n    # weight-like control (small scale + nonzero bias, mimicking trained tensors)\n    Wlike = rng.standard_normal((512, 512)) * 0.02 + 0.001\n    weight_like_ratio = hermitian_fraction(Wlike)\n\n    # ---- Leg 2: POSITIVE (explicitly anti-Hermitian) ----\n    Rm = rng.standard_normal((256, 256))\n    A_anti = 0.5 * (Rm - Rm.T)\n    positive_antiherm_ratio = hermitian_fraction(A_anti)"
+    },
+    {
+      "match_line": 2062,
+      "first_line": 2057,
+      "last_line": 2067,
+      "text": "    weight_like_ratio = hermitian_fraction(Wlike)\n\n    # ---- Leg 2: POSITIVE (explicitly anti-Hermitian) ----\n    Rm = rng.standard_normal((256, 256))\n    A_anti = 0.5 * (Rm - Rm.T)\n    positive_antiherm_ratio = hermitian_fraction(A_anti)\n\n    # ---- Leg 3: CANONICAL TGL GENERATOR (Davies, H = 0) ----\n    canonical = {}\n    try:\n        K = build_rindler_K(d_gen)"
+    },
+    {
+      "match_line": 3350,
+      "first_line": 3345,
+      "last_line": 3355,
+      "text": "\n# ============================================================================\n# C.3  --  D1  --  ZERO-FREE H0 PREDICTION  (with optional CAMB MCMC)\n# ============================================================================\n# Core identity:   H0_local / H0_CMB = (1 + z*)^beta\n# At Planck z* = 1089.95 and beta = alpha*sqrt(e):  ratio = 1.08780\n# At Planck+DESI joint H0_CMB = 67.35:  H0_local_pred = 73.263 km/s/Mpc\n# Tension vs SH0ES 73.04 +/- 1.04:  (73.263 - 73.04)/1.04 = 0.215 sigma\n\ndef predict_H0_zero_free(H0_CMB: float = H0_CMB_LCDM,\n                          z_star: float = Z_STAR_PLANCK,"
+    },
+    {
+      "match_line": 3354,
+      "first_line": 3349,
+      "last_line": 3359,
+      "text": "# Core identity:   H0_local / H0_CMB = (1 + z*)^beta\n# At Planck z* = 1089.95 and beta = alpha*sqrt(e):  ratio = 1.08780\n# At Planck+DESI joint H0_CMB = 67.35:  H0_local_pred = 73.263 km/s/Mpc\n# Tension vs SH0ES 73.04 +/- 1.04:  (73.263 - 73.04)/1.04 = 0.215 sigma\n\ndef predict_H0_zero_free(H0_CMB: float = H0_CMB_LCDM,\n                          z_star: float = Z_STAR_PLANCK,\n                          beta: float = BETA_TGL,\n                          H0_local_obs: float = H0_SH0ES_2022,\n                          sigma_local: float = H0_SH0ES_ERR) -> Dict[str, Any]:\n    \"\"\""
+    },
+    {
+      "match_line": 3365,
+      "first_line": 3360,
+      "last_line": 3370,
+      "text": "    Zero-free identity:  H0_local = H0_CMB * (1+z*)^beta.\n\n    Returns the prediction, the residual tension vs SH0ES, and the\n    pre-TGL tension (which is the gold-standard 5-sigma Hubble tension).\n    \"\"\"\n    ratio = (1.0 + z_star) ** beta\n    H0_local_pred = H0_CMB * ratio\n    tension_post = abs(H0_local_pred - H0_local_obs) / sigma_local\n    tension_pre = abs(H0_CMB - H0_local_obs) / sigma_local\n    return {\n        'name': 'D1 -- zero-free H0 identity',"
+    },
+    {
+      "match_line": 5685,
+      "first_line": 5680,
+      "last_line": 5690,
+      "text": "    F_RING = 0.3737  # dimensionless QNM frequency, real part, n=0 l=m=2\n    inv_alpha = 1.0 / alpha\n    for ev in _GWTC_ECHO_EVENTS:\n        M0 = ev['M_final_Msun']; dM = ev['M_err']\n        # Monte Carlo over the PUBLISHED mass uncertainty only\n        taus = []; ada = []; rings = []; eo_ratio = []\n        for _ in range(n_mc):\n            M = max(float(rng.normal(M0, dM)), 1.0) * Msun\n            t_g = G * M / c**3                       # GM/c^3 in seconds\n            r_g = G * M / c**2                       # GM/c^2 in metres\n            tau_e = 2.0 * t_g * inv_alpha2           # ECHO = g^2 ~ 1/alpha^2"
+    },
+    {
+      "match_line": 5697,
+      "first_line": 5692,
+      "last_line": 5702,
+      "text": "            taus.append(tau_e)\n            ada.append(8.0 * t_g * math.log(r_g / l_planck))  # Abedi reference\n            rings.append(tau_w)\n            eo_ratio.append(tau_e / tau_w)           # echo/wave: should carry 1/alpha\n        taus = np.array(taus); ada = np.array(ada)\n        rings = np.array(rings); eo_ratio = np.array(eo_ratio)\n        tau_mean = float(taus.mean()); tau_std = float(taus.std())\n        ada_mean = float(ada.mean()); ring_mean = float(rings.mean())\n        eo_mean = float(eo_ratio.mean())\n        # The echo/wave ratio = (2 t_g/alpha^2)/(2 pi t_g/F_RING) = F_RING/(pi alpha^2)\n        # We compare it to 1/alpha (the g vs g^2 single-radical signature):"
+    },
+    {
+      "match_line": 5701,
+      "first_line": 5696,
+      "last_line": 5706,
+      "text": "        taus = np.array(taus); ada = np.array(ada)\n        rings = np.array(rings); eo_ratio = np.array(eo_ratio)\n        tau_mean = float(taus.mean()); tau_std = float(taus.std())\n        ada_mean = float(ada.mean()); ring_mean = float(rings.mean())\n        eo_mean = float(eo_ratio.mean())\n        # The echo/wave ratio = (2 t_g/alpha^2)/(2 pi t_g/F_RING) = F_RING/(pi alpha^2)\n        # We compare it to 1/alpha (the g vs g^2 single-radical signature):\n        # echo/wave divided by (1/alpha) should be ~ F_RING/(pi alpha) ~ a clean number\n        eo_over_invalpha2 = eo_mean / inv_alpha2\n        per_event.append({\n            'name':             ev['name'],"
+    },
+    {
+      "match_line": 5747,
+      "first_line": 5742,
+      "last_line": 5752,
+      "text": "        'standard_search_window_s': search_window_s,\n        'tgl_echo_inside_window': all(e['inside_standard_search_window'] for e in per_event),\n        'wave_vs_echo_test': {\n            'description': (\n                'Algebraic signature g vs g^2: echo ~ g^2 ~ 1/alpha^2, ringdown '\n                'wave ~ g with QNM geometric factor. Echo/wave ratio = '\n                'F_ring/(pi alpha^2), mass-INDEPENDENT (M cancels), a pure '\n                'operator signature carrying 1/alpha^2 times the clean QNM '\n                'factor F_ring/pi ~ 0.119.'\n            ),\n            'echo_over_wave_mean': float(np.mean(eo_vals)),"
+    },
+    {
+      "match_line": 5850,
+      "first_line": 5845,
+      "last_line": 5855,
+      "text": "    # ----------------------------------------------------------------\n    log_subsection(\"D.2  GOE comparison (pure random matrix baseline)\")\n    eigs_goe = goe_eigenvalues(n=256, seed=1)\n    r_goe = r_ratio_from_eigenvalues(eigs_goe)\n    vac_goe = spectral_vacuum_fraction(eigs_goe)\n    log_info(f\"  GOE (n=256): r_ratio = {r_goe:.4f}  (theoretical: 0.5359)\")\n    log_info(f\"  GOE vacuum_fraction = {vac_goe:.4f}\")\n    log_info(f\"  Qwen3-32B vacuum fraction (Q, K) = ({qwen_ref['vacuum_fraction_Q']:.3f}, \"\n             f\"{qwen_ref['vacuum_fraction_K']:.3f})\")\n    log_info(f\"  Qwen3-32B values significantly ABOVE pure GOE:\")\n    log_info(f\"      Q excess: {(qwen_ref['vacuum_fraction_Q'] - vac_goe):.3f}  \""
+    },
+    {
+      "match_line": 6152,
+      "first_line": 6147,
+      "last_line": 6157,
+      "text": "                 f\"(ratio {e['ratio_TGL_over_Abedi']:.1f}x)\")\n    log_info(f\"  TGL echo range: {gwecho['tau_TGL_range_s'][0]:.1f}-{gwecho['tau_TGL_range_s'][1]:.1f} s \"\n             f\"(BEYOND standard 0-1 s window)\")\n    wvt = gwecho['wave_vs_echo_test']\n    log_info(f\"  --- g vs g^2 signature in REAL data (echo=g^2, wave=g) ---\")\n    log_info(f\"  echo/wave ratio = {wvt['echo_over_wave_mean']:.2f} \"\n             f\"(mass-independent: {wvt['mass_independent']}); 1/alpha^2 = {wvt['inv_alpha_squared_reference']:.1f}\")\n    log_info(f\"  echo/wave / (1/alpha^2) = {wvt['echo_over_wave_div_inv_alpha2']:.5f} \"\n             f\"= F_ring/pi = {wvt['clean_QNM_factor_F_ring_over_pi']:.5f} (clean, zero-param)\")\n    log_info(f\"  => exponent -2 DERIVED algebraically (g vs g^2), confirmed in real data\")\n"
+    },
+    {
+      "match_line": 7234,
+      "first_line": 7229,
+      "last_line": 7239,
+      "text": "    # TGL luminosity shift via Arnett's law: L ∝ M_Ch^alpha_Arnett,\n    # so L_TGL/L_LCDM = ((1-beta)^(3/2))^alpha_Arnett = (1-beta)^(1.5*alpha).\n    # With alpha_Arnett = 1.8 this gives (1-beta)^2.7 -> 3.215% deviation,\n    # matching sn_ia_chandrasekhar / synthesis_terminal.\n    alpha_arnett = 1.8\n    L_ratio = ONE_MINUS_BETA ** (1.5 * alpha_arnett)   # (1-beta)^2.7\n    delta_m_TGL = -2.5 * math.log10(L_ratio)           # magnitude shift (mag)\n    lum_dev_pct = 100.0 * (1.0 - L_ratio)\n\n    # Best-fit LCDM: fit Om0 with analytic-marginalized offset (the offset\n    # absorbs H0 + M_B).  chi2(Om0) marginalizes a constant via GLS."
+    }
+  ],
+  "elapsed_seconds": 0.05354420002549887
+}

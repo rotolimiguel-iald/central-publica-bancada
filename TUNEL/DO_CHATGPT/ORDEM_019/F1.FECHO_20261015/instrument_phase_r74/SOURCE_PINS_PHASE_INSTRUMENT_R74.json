@@ -1,0 +1,148 @@
+{
+  "schema": "r74-phase-instrument-bridge/v1",
+  "created_at": "2026-10-18T21:08:22.738971+00:00",
+  "status": "DERIVED_NOT_LEAN",
+  "mission_revision": 513,
+  "task_id": "R4",
+  "lease_id": "df34d007-70c4-43cb-a80a-6e27ddd55e4e",
+  "preflight_ready": true,
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_clock_r57\\DERIVACAO_R57.md",
+      "sha256": "89a0247276e0704c84ab93d5992a682e6e48ae5bfd37ca5c2dae34d3d5354811",
+      "bytes": 10955,
+      "anchors": [
+        {
+          "marker": "## 2. Equação",
+          "line": 51,
+          "through": 66,
+          "excerpt": "## 2. Equação de Heisenberg completa, derivada\n\nPara `D[J]†(A)=J†AJ-(J†JA+AJ†J)/2`, o cálculo fornece:\n\n```\nL†(sigma+) = (i omega_OH - gamma_OH/2 - 2 gamma_phi) sigma+\n             + i g_JC a_in† Z + i Omega_Rabi Z\n             + lambda [a_in† a_out† sigma-\n                        - (n_in + a_out a_out†) sigma+/2].\n```\n\nEssa igualdade foi conferida entrada a entrada, com o Hamiltoniano e os cinco\ndissipadores completos. A forma com `a_out a_out†` evita transferir indevidamente\nCCR bosônicas ao cutoff: **a_out a_out†=I-n_out** neste modelo. No núcleo algébrico\nde Fock sem truncamento, a mesma conta formal troca esse fator por `I+n_out`;\nexistência do semigrupo não limitado e condições de domínio não foram provadas aqui."
+        },
+        {
+          "marker": "## 5. Construção",
+          "line": 132,
+          "through": 147,
+          "excerpt": "## 5. Construção positiva: leitor da fronteira fixa com fator escalar\n\nA fonte multiplica por G_OH. A codificação que preserva a abertura é, portanto,\n\n```\nA_beta(z) = z S(theta_M),  theta_M = thetaMiguel(beta),\nphaseReading(A_beta(z)) = z exp(i theta_M),\nD_beta(w) = [w exp(-i theta_M)] S(theta_M).\n```\n\nAs identidades de leitura e reconstrução foram conferidas exatamente.\nOs pesos da primeira coluna são `|z|² beta` e `|z|²(1-beta)`; quando z≠0,\nas proporções normalizadas continuam beta e 1-beta. Isto distingue o fator\nescalar da órbita `S(theta_M+Omega*t)` de R56, que varia essas proporções.\nQuando z=0, a matriz nula ainda é reconstruída, mas não há fase ou proporção\nnormalizada a informar."
+        },
+        {
+          "marker": "## 6. Construção",
+          "line": 160,
+          "through": 175,
+          "excerpt": "## 6. Construção positiva: referência externa por mudança de quadro\n\nO lock-in do original lê fase relativa a uma entrada. Sob a hipótese explicitamente\nnomeada **LAB_PHASE_LOCKED_DRIVE**, escreva um bombeamento no laboratório:\n\n```\nh_lab(t) = h0 + Omega_Rabi [exp(-i omega_d t) sigma+ + exp(i omega_d t) sigma-],\nh0 = omega_c N_c + omega_OH n_e + g_JC(a_in† sigma- + sigma+ a_in),\nN_total = N_c+n_e,  R(t)=exp(i omega_d t N_total),\nrho_rot=R rho_lab R†.\n```\n\nFoi verificado exatamente:\n\n```\nh_rot = R h_lab R† + i R'R†"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\CONTRATO_OUTPUT_R64.md",
+      "sha256": "bb759be867d71b68b47154e46db2596e3e0b1926f01dfcc5128912cfee4767a1",
+      "bytes": 7447,
+      "anchors": [
+        {
+          "marker": "## Hipótese nomeada",
+          "line": 9,
+          "through": 24,
+          "excerpt": "## Hipótese nomeada do instrumento\n\n**[INPUT — H_MARKOV_VACUUM_PORTS]** Escolhe-se uma realização unitária/dilatação Markov de vácuo para os cinco operadores de colapso do modelo, com banhos independentes. Monitoram-se as portas\n\n\\[\nL_i=\\sqrt{\\kappa_i}\\,a_i,\\qquad L_o=\\sqrt{\\kappa_o}\\,a_o.\n\\]\n\nOs outros canais, `√γ σ−`, `√γφ Z` e `√(βγΛ)J`, permanecem no gerador e não são monitorados. O código original guarda pares `(taxa,operador)`: as raízes entram nas portas de leitura, sem aplicá-las duas vezes ao dissipador. Mantém-se a convenção `γφ D[Z]`, cujo amortecimento de coerência é `2γφ`.\n\nUm GKLS isolado não seleciona fisicamente essas portas, o estado do banho ou a realização instrumental. Esses dados adicionais, eficiência ideal, ganho e referência dos osciladores locais são hipóteses explícitas. A existência de uma representação Markov de uma dinâmica finita não prova que os terminais da patente realizem essa representação.\n\nPara a corrente normalizada como quadratura, defina\n\n\\[\n\\mathcal M_{j,\\theta}\\rho="
+        },
+        {
+          "marker": "## Modos filtrados",
+          "line": 38,
+          "through": 53,
+          "excerpt": "## Modos filtrados e ODE reutilizável\n\nPara filtros reais de norma L² um, `Qj=∫₀ᵀ fj(t)dXj(t)`. No banho de entrada, o incremento de Wiener tem dimensão √tempo; um filtro com dimensão tempo⁻¹/² fornece uma quadratura adimensional. Os tempos e taxas da instância computacional continuam adimensionais.\n\nTransportam-se matrizes auxiliares completas, com `u(0)=v(0)=0`:\n\n\\[\n\\dot\\rho=\\mathcal L\\rho,\\qquad\n\\dot u_j=\\mathcal Lu_j+f_j\\mathcal M_j\\rho,\n\\]\n\\[\n\\dot v_{jk}=\\mathcal Lv_{jk}\n +f_j\\mathcal M_ju_k+f_k\\mathcal M_ku_j\n +\\frac{\\delta_{jk}}2f_jf_k\\rho.\n\\]\n"
+        },
+        {
+          "marker": "## Quadro girante",
+          "line": 68,
+          "through": 83,
+          "excerpt": "## Quadro girante, oscilador local e unidades\n\nCom `R=e^{+iχN}` e `ρrot=RρlabR†`, um abaixador satisfaz `RLR†=e^{−iχ}L`. Logo\n\n\\[\nR\\,\\mathcal M_{\\theta_{lab}}(\\rho_{lab})R^\\dagger\n=\\mathcal M_{\\theta_{lab}+\\chi}(\\rho_{rot}).\n\\]\n\nPara `χ=ωd t`, a fase correta é `θrot=θlab+ωd t`. Um LO casado, `θlab=θ0−ωd t`, remove a portadora da leitura rotativa. Isso não transforma a portadora externa em relógio interno inferido. A implementação verifica a identidade de fase; não relabela as frequências constantes do modelo como detunings físicos.\n\nHá uma obstrução de sinal à tentativa de calibrar os números sintéticos antigos por simples troca de unidade/carrier. Se ambos fossem detunings do mesmo carrier, com escala temporal positiva t0, teríamos `ΔOH−Δc=t0(ωOH−ωc)`. Os números fixados dão `1,2−1>0`. Para a identificação proposta do modo de cavidade com a faixa óptica do dispositivo, na qual `ωOH<ωc`, o lado direito é negativo. Portanto essa identificação não se obtém por um carrier comum e unidade positiva. Uma nova instância com parâmetros físicos independentes pode ser construída; esta execução não faz tal calibração.\n\n## O que o resultado pode estabelecer\n\nUm PASS verifica a consistência numérica do instrumento condicional, sua normalização, ordem temporal e decodificação sobre o estado conjunto, com controles analíticos. Não demonstra que o aparelho possua o banho/portas escolhidos, que `G_OH` seja derivado, que `γΛ` esteja calibrado ou que β tenha sido inferido. R4, Poincaré, contínuo físico, creditação e gate não são encerrados por esta camada. O resultado e a revisão independente seguem em arquivos próprios, sem alterar as evidências anteriores."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\IDENTIFIABILITY_AND_FRAME_R64.txt",
+      "sha256": "2d9ae6b30ffe5fcfc9222de69e355bb122960d10e5abaed88de04ba9f534d68d",
+      "bytes": 3538,
+      "anchors": [
+        {
+          "marker": "1. Identificabilidade",
+          "line": 5,
+          "through": 20,
+          "excerpt": "1. Identificabilidade no canal desta entrega\nHipóteses nomeadas: L=L0+lambda D[J], lambda=beta*gammaLambda; estado inicial, L0, J, portas monitoradas de perda, filtros, eficiência e calibração são independentes desses dois parâmetros. Não se afirma isso de todos os canais daTGL.\nEntão qualquer estatística de saída calculada pela evolução e pelo instrumento desta entrega é F(lambda), possivelmente com outros parâmetros fixos. Para c>0 no domínio admissível, (beta,gammaLambda)->(c*beta,gammaLambda/c) conserva lambda e todo esse instrumento. É identidade algébrica, não tolerância ou ajuste.\nQuando as derivadas e a informação deFisher existem: d_beta F=gammaLambda*d_lambda F e d_gammaLambda F=beta*d_lambda F. A matriz de informação desse par é I_lambda vezes [[gammaLambda²,beta*gammaLambda],[beta*gammaLambda,beta²]], com determinante zero e posto no máximo1.\nConsequência: sem fixar gammaLambda por informação independente, esse canal pode identificar lambda, mas não discriminar valores não nulos de beta que possam ser compensados por gammaLambda. Não se infere daqui equivalência do caso beta=0 a lambda>0 com gammaLambda finito. O valor constitutivo betaTGL continua fixo e calculado em runtime; nenhuma estimação ou alteração dele foi realizada. Outros observáveis ou vínculos físicos que quebrem a degenerescência precisam ser demonstrados, não pressupostos.\n\n2. O quadro girante comum não calibra os INPUTs antigos por renomeação\nConsidere tau=t/t0, t0>0, e o quadro com frequência portadora comum omega_d já construído emR57. As frequências adimensionais seriam Delta_c=t0*(omega_c-omega_d) e Delta_OH=t0*(omegaOH-omega_d). Subtrair elimina o carrier:\n  Delta_OH-Delta_c=t0*(omegaOH-omega_c).\nNo projeto óptico780nm/OH1.667359GHz consultado emR63, omegaOH<omega_c. Logo a diferença é negativa, qualquer que seja o carrier comum. Os INPUTs do teste finito Delta_c=1,Delta_OH=1.2 têm diferença positiva. Portanto um carrier comum e uma escala positiva de tempo não tornam essa instância uma calibração simultânea das duas frequências absolutas documentadas.\nIsso não invalida a álgebra dos testes nem impede outra instância física. Impede apresentar a instância sintética antiga como calibrada só porque foi chamada de quadro girante. Quadros com carriers distintos mudam os fatores de fase dos acoplamentos/drive e exigem transformação explícita; nenhuma equivalência desse tipo é afirmada aqui.\n\n3. Referência de fase do receptor\nCom R(t)=exp(+i omega_d t N), rho_rot=R rho_lab R† e [N,a]=-a, segue <a>_lab=exp(-i omega_d t)<a>_rot. Para X_theta=(exp(-i theta)a+exp(i theta)a†)/sqrt2, a mesma leitura usa theta_rot=theta_lab+omega_d*t. Um teste que muda Hamiltoniano/estado e mantém uma faseLO incompatível mudou a leitura; não é apenas mudança de coordenadas.\n\nFontes internas: R63/sources/PHYSICAL_RECEIVER_MAP_R1.json (fontes/valores/limites); R57/derive_polarization_r57.py e derivação correspondente (quadro); F1.REDE/finite_device (parametrização lambda e perdas). Pinos de origem ficam nos manifestos da entregaR64. As consequências acima são demonstrações escritas por substituição/diferença; não se reivindica nova pedraLean ou identificação física universal."
+        },
+        {
+          "marker": "3. Referência",
+          "line": 17,
+          "through": 20,
+          "excerpt": "3. Referência de fase do receptor\nCom R(t)=exp(+i omega_d t N), rho_rot=R rho_lab R† e [N,a]=-a, segue <a>_lab=exp(-i omega_d t)<a>_rot. Para X_theta=(exp(-i theta)a+exp(i theta)a†)/sqrt2, a mesma leitura usa theta_rot=theta_lab+omega_d*t. Um teste que muda Hamiltoniano/estado e mantém uma faseLO incompatível mudou a leitura; não é apenas mudança de coordenadas.\n\nFontes internas: R63/sources/PHYSICAL_RECEIVER_MAP_R1.json (fontes/valores/limites); R57/derive_polarization_r57.py e derivação correspondente (quadro); F1.REDE/finite_device (parametrização lambda e perdas). Pinos de origem ficam nos manifestos da entregaR64. As consequências acima são demonstrações escritas por substituição/diferença; não se reivindica nova pedraLean ou identificação física universal."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\construction\\CONSTRUCTION_R66.md",
+      "sha256": "36a07d2a6916eec410ccae0fc5e380fc7af4ca5f14368e8c8840fda5ab9ea71a",
+      "bytes": 8724,
+      "anchors": [
+        {
+          "marker": "## 1. Colisão",
+          "line": 30,
+          "through": 45,
+          "excerpt": "## 1. Colisão explícita e CPTP em cada passo\n\nUma ancilla é E=C6, base `|0>,|1>,...,|5>`. Defina\n\n\\[\nV=\\sum_{j=1}^5(L_j\\otimes|j\\rangle\\langle0|\n-L_j^\\dagger\\otimes|0\\rangle\\langle j|),\\qquad\nU_\\delta=\\exp(\\sqrt\\delta V-i\\delta h_0\\otimes I_E).\n\\]\n\nV é anti-adjunto, h0 é auto-adjunto; portanto Uδ é unitário para todo δ>=0. Para qualquer estado normalizado ηδ de E, `Phiδ(rho)=Tr_E Uδ(rho tensor ηδ)Uδ†` é CPTP. No caso puro `ηδ=|bδ><bδ|`, os Kraus são `Kj=<j|Uδ|bδ>` e `sum Kj†Kj=I`. Esta é uma dilatação explícita, não a repetição da definição abstrata de um canal.\n\n**[INPUT instrumental]** A cada passo entra uma ancilla nova no mesmo estado, independente do sistema, das anteriores e das futuras. O canal é homogêneo; não há realimentação nem correlação inicial oculta entre bins. A cadeia é uma realização matemática escolhida do gerador. Sua implementação física e a atribuição dos portos ao aparelho permanecem próprias de R4.\n\n## 2. Vácuo: expansão com erro local de ordem2\n"
+        },
+        {
+          "marker": "## 3. O bombeamento",
+          "line": 61,
+          "through": 76,
+          "excerpt": "## 3. O bombeamento sai de uma entrada coerente\n\nSuponha `gamma_OH>0`, como na instância reutilizada. No canal3, prepare\n\n\\[\nb_\\delta={|0\\rangle+\\sqrt\\delta\\,\\alpha|3\\rangle\\over\n\\sqrt{1+\\delta|\\alpha|^2}},\\qquad\n\\alpha={i\\Omega\\over\\sqrt{\\gamma_{OH}}}.\n\\]\n\nAs amplitudes de Kraus agora são\n\n\\[\nK_0=I+\\delta\\left(-ih_0-\\tfrac12\\sum_jL_j^\\dagger L_j\n-\\alpha L_3^\\dagger-\\tfrac12|\\alpha|^2 I\\right)+O(\\delta^2),\n\\]"
+        },
+        {
+          "marker": "## 5. Ponte",
+          "line": 112,
+          "through": 127,
+          "excerpt": "## 5. Ponte concreta para bins temporais de Fock\n\nPara uma partição uniforme de[0,T], defina `f_k=1_bin_k/sqrtδ` e cinco canais ortogonais. No espaço de um quantum `L²([0,T];C5)`, os vetores `f_k tensor e_j` são ortonormais. Pela fatoração de Fock em soma ortogonal de modos, cada E_k=C6 inclui-se isometricamente como o vácuo e os cinco estados de uma excitação de seu bin. O produto de N ancillas inclui-se em Fock sobre esses modos e, depois, no Fock temporal completo, com vácuo nos modos complementares.\n\nPara cada bin, Uδ atua no sistema tensor esse subespaço. Pode ser estendido por identidade no complemento ortogonal, formando um unitário no sistema tensor Fock do bin. A composição cronológica conserva as ancillas anteriores como saída e usa somente a nova ancilla em cada etapa. Logo o canal de N passos tem uma dilatação exata por esse reservatório Fock temporal **com cortes locais no ambiente**. Não se alegam CCR exatos para as matrizes `|j><0|` isoladas nem um limite unitário HP já demonstrado.\n\nO estado coerente de amplitude constante alpha no canal3 tem amplitude `z=alpha sqrtδ` em cada bin. A projeção normalizada dele sobre vácuo/uma excitação é exatamente bδ. Se `x=δ|alpha|²`, a fidelidade quadrática por bin é `e^-x(1+x)`. Para o produto,\n\n\\[\n1-|\\langle b_\\delta^{\\otimes N}|\\mathrm{coh}(\\alpha1_{[0,T]}e_3)\\rangle|^2\n\\le N x^2/2=T\\delta|\\alpha|^4/2\\longrightarrow0.\n\\]\n\nUsou-se `e^-x(1+x)>=1-x²/2`, provada derivando a diferença para x>=0. A aproximação de banho converge ao estado coerente temporal; o erro de distância de traço dos estados puros é no máximo a raiz do lado direito. A convergência do canal reduzido já foi provada no item4. Isso não prova automaticamente convergência forte das dilatações, de todos os observáveis de saída, de uma rede de Poincaré, nem igualdade entre o sistema hard-core e o sistema bosônico não limitado da patente.\n\n## 6. Controles e interpretação"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\BOSONIC_CONTINUUM_R66.txt",
+      "sha256": "ce231991f651be507bb5ff33600208b22231e004729c903e25eac577cd64aace",
+      "bytes": 9332,
+      "anchors": [
+        {
+          "marker": "2. Estrutura",
+          "line": 16,
+          "through": 31,
+          "excerpt": "2. Estrutura que permite retirar o corte — prova algébrica\nN=n_i+n_o+n_e, P_m=1_[0,m](N), dimP_mH=(m+1)².\n[N,h_0]=[N,J]=[N,Z]=0; a_i,a_o,σ_- baixamN por1.\nEm particular A e B preservamN separadamente. A†B=B†A=0, mas A X B†+B X A† não é zero como superoperador: usar dois canais independentes muda G.\nJ†J=(n_o+1)n_e+n_i(1-n_e)≤N. Cada L_j†L_j comutaN.\nLogo h_0 e todos L_j preservamP_mH, e L_j†L_j P_m=P_m L_j†L_j P_m. Embora L_j† isolado possa sair deP_m, seu produto L_j†L_j não sai.\n\n3. Construção conservativa sem bombeamento — não supor um limite\nSeja G_0,m o gerador matricial acima semh_d, com os operadores comprimidos P_m L_j P_m e P_m h_0 P_m. Para m≤n, E_mn:X↦V_mn X V_mn† é a inclusão pelos MESMOS vetores de número. Para TODO X∈T1(P_mH), inclusive |u><v| entre excitações diferentes,\nG_0,n E_mn(X)=E_mn G_0,m(X).\nProva: o termo de salto usa invariânciaP_m; o anticomutador usa o produto L†L que comutaN; h_0 é redutor. A identidade vale em cada matriz-unitária, logo em todoX. Exponenciando matrizes, T_0,n(t)E_mn=E_mnT_0,m(t).\nDefina D_0=∪_m P_m T1(H) P_m. O sistema compatível define T_0(t) emD_0, sem escolha de corte. Cada T_0,m é CPTP; sua norma T1→T1 é1, inclusive sobre matrizes complexas, pela dualidade com uma aplicação unital completamente positiva. D_0 é denso emT1(H), pois ||X-P_mXP_m||_1→0. Portanto T_0(t) estende UNICAMENTE por continuidade a T1(H). É semigrupo: a identidade de composição passa por densidade. É fortemente contínuo: vale em cada corte e a contração controla o erro de aproximação. Traço e positividade passam ao limite; positividade completa é conferida do mesmo modo em cada amplificação finita. Não há perda de massa nem hipótese adicional de não explosão.\nSe A_0 é o gerador fechado dessa extensão, D_0 é core em norma de gráfico: para z>0, R(z,A_0)Y=∫exp(-zt)T_0(t)Ydt pertence ao mesmo corte queY∈D_0; dado X∈D(A_0), aproxime Y=(z-A_0)X por Y_m∈D_0. X_m=R(z,A_0)Y_m∈D_0 satisfaz X_m→X e A_0X_m=zX_m-Y_m→A_0X. EmD_0, A_0 é exatamente a fórmula GKLS acima sem bomba.\n\n4. Bombeamento no MESMO gerador ilimitado\nB(X)=-i[h_d,X] é limitado emT1, ||B||≤2|Ω|. A perturbação limitada define A=A_0+B emD(A_0), comD_0 ainda core. Uma construção explícita é a série de Dyson-Phillips:"
+        },
+        {
+          "marker": "J=A+B=",
+          "line": 11,
+          "through": 26,
+          "excerpt": "J=A+B=a_o†σ_-+σ_+a_i, λ=βγ_Λ, β=ALPHA_FINE_CODATA_2018 sqrt(e) em runtime.\nTodas as taxas são finitas e não negativas; nenhuma taxa física é calibrada por esta construção.\nG(X)=-i[h,X]+Σ_j(L_j X L_j†-{L_j†L_j,X}/2).\nR64 já construiu instrumento de saída de duas portas sob dilataçãoHP escolhida; R65 fixou normalização, relógio e identificabilidade. Preservamos esses contratos. A nova construção finita de colisões explicita uma realização do reservatório, não demonstra que todo banho microscópico da patente a realiza.\n\n2. Estrutura que permite retirar o corte — prova algébrica\nN=n_i+n_o+n_e, P_m=1_[0,m](N), dimP_mH=(m+1)².\n[N,h_0]=[N,J]=[N,Z]=0; a_i,a_o,σ_- baixamN por1.\nEm particular A e B preservamN separadamente. A†B=B†A=0, mas A X B†+B X A† não é zero como superoperador: usar dois canais independentes muda G.\nJ†J=(n_o+1)n_e+n_i(1-n_e)≤N. Cada L_j†L_j comutaN.\nLogo h_0 e todos L_j preservamP_mH, e L_j†L_j P_m=P_m L_j†L_j P_m. Embora L_j† isolado possa sair deP_m, seu produto L_j†L_j não sai.\n\n3. Construção conservativa sem bombeamento — não supor um limite\nSeja G_0,m o gerador matricial acima semh_d, com os operadores comprimidos P_m L_j P_m e P_m h_0 P_m. Para m≤n, E_mn:X↦V_mn X V_mn† é a inclusão pelos MESMOS vetores de número. Para TODO X∈T1(P_mH), inclusive |u><v| entre excitações diferentes,\nG_0,n E_mn(X)=E_mn G_0,m(X).\nProva: o termo de salto usa invariânciaP_m; o anticomutador usa o produto L†L que comutaN; h_0 é redutor. A identidade vale em cada matriz-unitária, logo em todoX. Exponenciando matrizes, T_0,n(t)E_mn=E_mnT_0,m(t)."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\local_error_r71\\locality\\BOGOLIUBOV_CAVITY_R71.md",
+      "sha256": "15b4d08765740831a6ea1b91c1dda72d72236836f0ddfaad60de45996130a14a",
+      "bytes": 13083,
+      "anchors": [
+        {
+          "marker": "## 3. O subfator",
+          "line": 65,
+          "through": 80,
+          "excerpt": "## 3. O subfator de osciladores é local e seus cortes são diferentes\n\nNa representação (B), as quatro famílias Weyl dos pares locais geram\n\n\\[\n\\mathcal N_b=U\\bigl(B(\\Gamma_s(\\mathbb C^2))\\otimes I_{\\rm spec}\\bigr)U^\\dagger\n\\subset\\mathcal A(O).\n\\]\n\nA identificação do fator usa a representação Schrödinger explícita dos dois pares: operadores que comutam com todas as multiplicações e translações são escalares nesse fator, e o bicomutante é B(L²(ℝ²)). O espectador é mantido; não se afirma que A(O) inteira seja um fator tipo I.\n\nN_b=b₁†b₁+b₂†b₂ é auto-adjunto positivo, afiliado a N_b (álgebra), pelo transporte unitário do número dos dois osciladores. Os dois números fortemente comutam porque seus originais canônicos o fazem. Com OH local, use N_tot,b=N_b+n_e. As projeções\n\n\\[\nP_m^b=1_{[0,m]}(N_{tot,b})\\in\\mathcal A(O)\\bar\\otimes M_2\n\\]"
+        },
+        {
+          "marker": "## 4. Transporte",
+          "line": 86,
+          "through": 101,
+          "excerpt": "## 4. Transporte exato do gerador completo, incluindo reservatório e bomba\n\nAmplifique o semigrupo conservativo R66 pelo canal identidade do espectador. Essa amplificação age também em estados entrelaçados, não só produtos: os canais são normais e completamente positivos; a extensão é obtida inicialmente em matrizes de posto finito no espectador e por densidade em classe-traço, mantendo contração. Conjugue por U⊗I_OH:\n\n\\[\nT_b(t)=\\operatorname{Ad}_{U\\otimes I}\\circ\n\\bigl(T_{R66}(t)\\otimes\\operatorname{Id}_{spec}\\bigr)\n\\circ\\operatorname{Ad}_{U^\\dagger\\otimes I}.\n\\tag{T}\n\\]\n\nEsse é um semigrupo CPTP fortemente contínuo. Seu gerador fechado é a conjugação do gerador R66 amplificado, com domínio transportado. No core transportado, a fórmula é **exatamente** R66 com a_r substituído por b_r, mesmos coeficientes, mesmo OH, mesmo J=b_o†σ₋+σ₊b_i e mesma bomba. Não se apagam os termos cruzados de J. A realização de colisões também é conjugada pelo mesmo U; os estados das ancillas, o canal OH coerente e a ordem dos limites permanecem os de R66.\n\nA referência física mudou, embora a dinâmica abstrata seja unitariamente equivalente. A isometria do sistema R66 na rede passa a ser ψ↦U(ψ⊗Ω_spec), em vez da inclusão em modos que levava o vácuo diretamente a Ω. A bomba mantém o alcance de R66: sem bomba, Ω_b⊗g é estacionário; com bomba, não se presume isso.\n\n### Causalidade da dinâmica transportada"
+        }
+      ]
+    }
+  ],
+  "report": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\instrument_phase_r74\\PHASE_INSTRUMENT_BRIDGE_R74.md",
+    "sha256": "fe9f2caa6481d3e28b4255b977daf95b5a15531d0240671b4b2b0596f0548b9a",
+    "bytes": 9608
+  }
+}

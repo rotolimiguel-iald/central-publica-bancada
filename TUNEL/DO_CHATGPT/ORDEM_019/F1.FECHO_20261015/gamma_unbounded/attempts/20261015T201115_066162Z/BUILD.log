@@ -1,0 +1,157 @@
+{
+  "start_utc": "2026-10-15T20:11:15.133028+00:00",
+  "end_utc": "2026-10-15T20:11:46.574365+00:00",
+  "seconds": 31.44133019999572,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T201115_066162Z\\PositiveRegularizedRootR1.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T201115_066162Z\\PositiveRegularizedRootR1.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T201115_066162Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T201115_066162Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T201115_066162Z\\PositiveRegularizedRootR1.lean",
+    "sha256": "d82f9053f68585fafe2f761d99cfa4b7fbe6894b370c4404f33ce0074c35cdcd",
+    "bytes": 5306
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:19:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (selfadjointSquareResolvent D hs) x
+in the target expression
+  (R D hs) x ∈ D.domain
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →ₗ.[ℂ] H
+hs : IsSelfAdjoint D
+x : H
+u : ↥(partialOperatorSquare D).domain
+hu : ↑u = (selfadjointSquareResolvent D hs) x
+right✝ : ↑u + ↑(partialOperatorSquare D) u = x
+⊢ (R D hs) x ∈ D.domain
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:38:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (selfadjointSquareResolvent D hs) x
+in the target expression
+  (R D hs) x + ↑D ⟨↑D ⟨↑u, ⋯⟩, ⋯⟩ = x
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →ₗ.[ℂ] H
+hs : IsSelfAdjoint D
+x : H
+u : ↥(partialOperatorSquare D).domain
+hu : ↑u = (selfadjointSquareResolvent D hs) x
+he : ↑u + ↑(partialOperatorSquare D) u = x
+hv : (input D hs) x = ⟨↑u, ⋯⟩
+hw : second D hs x = ⟨↑D ⟨↑u, ⋯⟩, ⋯⟩
+⊢ (R D hs) x + ↑D ⟨↑D ⟨↑u, ⋯⟩, ⋯⟩ = x
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    u.property
+  has type
+    ↑u ∈ (partialOperatorSquare D).domain
+  but is expected to have type
+    ∃ (a : ↑u ∈ D.domain), ↑D ⟨↑u, a⟩ ∈ D.domain
+  in the application
+    Exists.choose u.property
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:55:2: error: linarith failed to find a contradiction
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →ₗ.[ℂ] H
+hs : IsSelfAdjoint D
+x : H
+hf : ⟪↑D ((input D hs) x), ↑D ((input D hs) x)⟫_ℂ = ⟪(R D hs) x, x⟫_ℂ - ⟪(R D hs) x, (R D hs) x⟫_ℂ
+he : ↑D (second D hs x) = x - (R D hs) x
+hr : ‖↑D ((input D hs) x)‖ ^ 2 = (⟪(R D hs) x, x⟫_ℂ).re - ‖(R D hs) x‖ ^ 2
+hn1 : (⟪↑D ((input D hs) x), ↑D ((input D hs) x)⟫_ℂ).re = ‖↑D ((input D hs) x)‖ ^ 2
+hn2 : (⟪(R D hs) x, (R D hs) x⟫_ℂ).re = ‖(R D hs) x‖ ^ 2
+hc : RCLike.re ⟪(R D hs) x, x⟫_ℂ ≤ ‖(R D hs) x‖ * ‖x‖
+a✝ : ‖x‖ < ‖↑D ((input D hs) x)‖
+⊢ False
+failed
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:59:2: error: Type mismatch: After simplification, term
+  image_bound D hs x
+ has type
+  @LE.le ℝ Real.instLE ‖↑D ((input D hs) x)‖ ‖x‖
+but is expected to have type
+  @LE.le ℝ Real.instLE ‖(D.toFun ∘ₗ input D hs) x‖ ‖x‖
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:67:24: error: Application type mismatch: The argument
+  h1
+has type
+  ⟪↑D ((input D hs) x), ↑((input D hs) y)⟫_ℂ = ⟪↑((input D hs) x), ↑D ((input D hs) y)⟫_ℂ
+but is expected to have type
+  ⟪↑D ((input D hs) ((R D hs) x + ↑D (second D hs x))), (R D hs) y⟫_ℂ =
+    ⟪(R D hs) x, ↑D ((input D hs) ((R D hs) y + ↑D (second D hs y)))⟫_ℂ
+in the application
+  congrArg₂ (fun x1 x2 => x1 + x2) h1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:80:13: error(lean.unknownIdentifier): Unknown identifier `hp`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:74:33: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →ₗ.[ℂ] H
+hs : IsSelfAdjoint D
+x : H
+⊢ 0 ≤
+    (⟪↑D ((input D hs) ((R D hs) x + ↑D (second D hs x))), (R D hs) x⟫_ℂ).re +
+      (⟪↑D ((input D hs) ((R D hs) x + ↑D (second D hs x))), ↑D (second D hs x)⟫_ℂ).re
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:94:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ⟪x, ↑(L D hs) ((L D hs) y)⟫_ℂ
+in the target expression
+  ⟪x, (L D hs) ((L D hs) y)⟫_ℂ = ⟪x, (R D hs) (y - (R D hs) y)⟫_ℂ
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →ₗ.[ℂ] H
+hs : IsSelfAdjoint D
+y x : H
+⊢ ⟪x, (L D hs) ((L D hs) y)⟫_ℂ = ⟪x, (R D hs) (y - (R D hs) y)⟫_ℂ
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:103:35: error: Function expected at
+  L_nonneg D hs
+but this term has type
+  0 ≤ L D hs
+
+Note: Expected a function because this term is being applied to the argument
+  hp
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:107:6: error: Function expected at
+  sqrt_damping D hs
+but this term has type
+  CFC.sqrt (resolventDampingOperator (R D hs)) = L D hs
+
+Note: Expected a function because this term is being applied to the argument
+  hp
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T201115_066162Z\PositiveRegularizedRootR1.lean:106:75: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →ₗ.[ℂ] H
+hs : IsSelfAdjoint D
+x : H
+⊢ ((R D hs) x, (CFC.sqrt (resolventDampingOperator (R D hs))) x) ∈ D.graph
+'F1Fecho.PositiveRegularized.image_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PositiveRegularized.L_symmetric' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PositiveRegularized.L_nonneg' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PositiveRegularized.L_square' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PositiveRegularized.sqrt_damping' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PositiveRegularized.regularized_graph' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

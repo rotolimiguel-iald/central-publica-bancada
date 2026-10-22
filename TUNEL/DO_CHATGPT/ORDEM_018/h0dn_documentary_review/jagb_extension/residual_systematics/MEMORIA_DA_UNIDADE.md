@@ -1,0 +1,13 @@
+<!-- ORDEM018_F1_RESIDUAL_PSD_54FEB986 -->
+## 05/10/2026 23:26 — ORDEM018 F1: covariâncias residuais concretas
+
+[INPUT — resumo da delegação] Coordenação pediu qualificar N4258, JAGB CCHP/SH0ES e as 11 hospedeiras de V01; duas alternativas e família PSD caso não houvesse matriz publicada, sem centros para ajuste, S/g/H0/lnB, upstream ou novos modelos remotos. Request `54feb986-d927-4ff9-aa69-3c07680ee78b`.
+
+[REAL] Cinco fontes primárias HTML arquivadas com SHA/linhas derivadas. 47 caminhos/hash conferidos; seis artefatos JAGB anteriores intactos. Auditoria somente de erros/identificadores: 178 equações, 104 HMS, erros exatamente iguais dentro de cada HMS, nenhuma referência MAS ausente. A distância geométrica N4258 (0,032 mag) já é comum; MAS JAGB de cada fonte (0,05 mag) são termos separados. N5643 tem campos e estrelas sobrepostos documentados. Matriz residual conjunta não localizada no recorte lido, sem afirmar ausência universal.
+
+[DERIVED] Família C=D0+C_anchor+B Dm Rm Dm B.T+H Dh Rh Dh H.T: R PSD com diagonal 1 preserva marginais. Misturas convexas de blocos assinados definem grupos concretos; grade interior R>=I/4 preserva o núcleo do C baseline. É prova algébrica de admissibilidade, não medição da correlação física. D0=0 nesta seleção de erros. Alternativa A reconstrói componentes/jacobiano/reamostragem conjunta; alternativa B usa envelope PSD pré-especificado. Não somar erros agregados novamente; efeitos cruzados entre níveis MAS/HMS exigem realocação com resposta host−âncora.
+
+[OPEN] Escolher e congelar alternativa, grupos, sinais e regra de robustez no contrato científico da coordenação, sem escolher pelo resultado. Reutilizar o guard de suporte já entregue; não criar camada repetida. Nenhum novo ajuste, C global, S, g, H0, lnB, sigma ou veredito foi calculado. Fontes contêm tabelas observadas; não alegar cegamento. Executor MiMo com âncora bloqueada preservado, nenhuma nova chamada. Originais/kernel/gate intactos.
+
+Relatório: `C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\h0dn_documentary_review\jagb_extension\residual_systematics\REVISAO_RESIDUAIS.md`; SHA256 `9d91a8435d099146c3a6c402718fe974ffa46e1faa360c1af9fe93b78fe11eb7`. Contrato: `C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\h0dn_documentary_review\jagb_extension\residual_systematics\CONTRATO_PSD_CANDIDATO.json`. Manifesto: `C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\h0dn_documentary_review\jagb_extension\residual_systematics\MANIFESTO_ENTREGA.json`; SHA256 `e9bdc7d5e428225b6d9d55c9d385af06beb5dd1c7410ee5e3f2f1930512e809f`. Mapa antes consultado; ANOTACAO posterior **seq 435**, rota `hubble.fase9_razao_discriminante`. Estatuto da rota segue EM_CURSO.
+

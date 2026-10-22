@@ -1,0 +1,9 @@
+[REAL — confronto de parecer consultivo com a fonte custodiada]
+
+Abertura ORDEM 016: SHA256 `216a1a7d6b29548a4a47f5aa22f67e953d04f56d2e00bc3e505487d68df0f57a`. ORDEM 015: SHA256 `c903681d01eec5ed8d55b7fe69e061a79b3a7b73eecede8f895cfb2d127f75a3`, §T-07/§T-08, linhas 295–303. Parecer MiMo: texto SHA256 `55b7d393958868d427aa42d71299104a57b8dd9ceb041673aa2ed609e8681855`, job `5c6c2958-78e0-41f7-b429-2fcf68dcefc6`.
+
+**Correção tipada:** minha pergunta ao MiMo chamou as duas medições de “o mesmo ρ”; a ORDEM 015 não faz essa identificação. T-07 pede ρ na janela de 10 t_M do ringdown, na norma branqueada do F4, para 31/33 eventos de calibração. T-08 pede ρ_inspiral e ρ_pós-inspiral por evento para 74 candidatos O4, com o limiar conjunto LVK ≥ 8 e ≥ 8, e depois ε(θ) e α(Λ). São **estimandos distintos** com janelas/bandas e populações distintas. Compará-los exige declarar convenções de strain, PSD, Fourier, rede/detector e unidades; não exige igualdade numérica nem a mesma PSD/evento em ambos os alvos.
+
+Do checklist consultivo, ficam como controles de implementação: proveniência do strain e PSD, base de SNR, normalização de Fourier/Δf, janela e quadro de massa para 10 t_M. Não promovemos a regras de recusa da ordem as sugestões de “menos de dois detectores”, “ρ de formas distintas”, “mesma versão de strain nos dois lados” ou “Λ ausente por evento”: tais regras **não constam do alvo** e podem excluir dados válidos. Λ é parâmetro da normalização populacional α(Λ), não campo obrigatório de cada evento. R-MOD/R-RAIZ-0/R-LIN/R-B são leituras da predição e não devem entrar como premissa na medição observacional de ρ.
+
+Os controles negativos sugeridos pelo MiMo são possibilidades consultivas; executar qualquer um depende de caber na árvore e no orçamento. Este confronto não mede ρ, não paga T-07/T-08, não escolhe leitura e não move o gate. Conservar o parecer original e esta correção lado a lado.

@@ -1,0 +1,56 @@
+--- run_optical_r1.py
++++ run_optical_r3.py
+@@ -1,6 +1,6 @@
+ """Preregistered finite F1.ATRATOR synthetic experiment. No production imports or writes."""
+ from pathlib import Path
+-import ast, datetime, hashlib, json, math, platform, sys, time
++import ast, re, datetime, hashlib, json, math, platform, sys, time
+ import numpy as np
+ from scipy.linalg import expm
+ 
+@@ -40,7 +40,7 @@
+ def run():
+     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
+     start = time.perf_counter()
+-    manifest = json.loads((HERE / 'RUN_MANIFEST_R1.json').read_text(encoding='utf-8'))
++    manifest = json.loads((HERE / 'RUN_MANIFEST_R3.json').read_text(encoding='utf-8'))
+     if digest(__file__) != manifest['script_sha256'] or digest(PREREG) != manifest['preregister_sha256']:
+         raise ValueError('Run or preregister pin changed')
+     p = json.loads(PREREG.read_text(encoding='utf-8'))
+@@ -51,11 +51,18 @@
+     band_lo, band_hi = nm['rank_ambiguity_band']
+     def close_error(error, scale=1.): return bool(error <= atol + rtol * scale)
+     um = next(x for x in p['source_pins'] if Path(x['path']).name == 'um.py')
+-    tree = ast.parse(Path(um['path']).read_bytes().decode('utf-8-sig'))
+-    assignments = [n for n in tree.body if isinstance(n, ast.Assign) and
+-                   any(isinstance(t, ast.Name) and t.id == 'ALPHA_FINE_CODATA_2018' for t in n.targets)]
+-    if len(assignments) != 1: raise ValueError('Alpha assignment is not unique top level')
+-    alpha = ast.literal_eval(assignments[0].value)
++    um_text = Path(um['path']).read_bytes().decode('utf-8-sig')
++    tree = ast.parse(um_text)
++    # The only physical line with this unindented assignment is inside a source literal.
++    # Parse that assignment as code; never execute the wrapper or the embedded module.
++    matches = list(re.finditer(r'^ALPHA_FINE_CODATA_2018[ \t]*=[ \t]*([^\r\n]+)\r?$', um_text, re.MULTILINE))
++    if len(matches) != 1: raise ValueError('Alpha unindented source-line assignment is not unique')
++    assignment = ast.parse(matches[0].group(0)).body[0]
++    alpha = ast.literal_eval(assignment.value)
++    sealed = [n for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'SEALED_CODATA_ALPHA' for t in n.targets)]
++    if len(sealed) != 1 or ast.literal_eval(sealed[0].value) != alpha:
++        raise ValueError('Embedded alpha differs from top-level sealed alpha')
++    alpha_source_line = um_text[:matches[0].start()].count('\n') + 1
+     if isinstance(alpha, bool) or not isinstance(alpha, (float, int)) or not math.isfinite(alpha):
+         raise ValueError('Invalid alpha')
+     beta = float(alpha * math.sqrt(math.e))
+@@ -188,10 +195,10 @@
+         'primary_density_normalized':matrix(I2/2.),
+     }
+     all_ok=all(x['expected_outcomes_met'] for x in output.values()) and all(x['PASSA'] for x in channels.values()) and optical['PASSA'] and hyperbolic['PASSA']
+-    result={'unit':'F1.ATRATOR','started_utc':started,'finished_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'elapsed_seconds':time.perf_counter()-start,'environment':{'python':sys.version,'platform':platform.platform(),'numpy':np.__version__},'preregister_sha256':digest(PREREG),'script_sha256':digest(__file__),'um_sha256':digest(um['path']),'alpha':alpha,'alpha_assignment_line':assignments[0].lineno,'beta_runtime':beta,'lambda':lam,'lambda_runtime':lam,'maximum_iteration':max(nm['powers']),'per_step_transient_contraction':lam,'transient_decay_rate_per_step':-math.log(lam),'probability_loss_per_step':0.0,'hypothesis_snapshot':p['hypotheses'],'normalization':p['claims']['A4']['normalization'],'theta':math.asin(math.sqrt(beta)),'tolerances':{k:nm[k] for k in ['absolute_tolerance','relative_tolerance','rank_threshold','rank_ambiguity_band','positivity_tolerance']},'models':output,'channel_checks':channels,'optical':optical,'normalized_hyperbolic_representation':hyperbolic,'no_fixed_affine':affine,'nonvacuity_and_fixed_examples':fixed_examples,'all_expected_outcomes_met':all_ok,'scope':'REAL numerical finite checks; DERIVED analytic bounds; no empirical sigma or physical creditation; ontology remains ONTO','observed_data':False,'gate_changed':False,'production_runs':False}
++    result={'unit':'F1.ATRATOR','started_utc':started,'finished_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'elapsed_seconds':time.perf_counter()-start,'environment':{'python':sys.version,'platform':platform.platform(),'numpy':np.__version__},'preregister_sha256':digest(PREREG),'script_sha256':digest(__file__),'um_sha256':digest(um['path']),'alpha':alpha,'alpha_assignment_line':alpha_source_line,'alpha_reader_scope':'Unique unindented source line in embedded module; cross-checked with wrapper SEALED_CODATA_ALPHA AST top level','beta_runtime':beta,'lambda':lam,'lambda_runtime':lam,'maximum_iteration':max(nm['powers']),'per_step_transient_contraction':lam,'transient_decay_rate_per_step':-math.log(lam),'probability_loss_per_step':0.0,'hypothesis_snapshot':p['hypotheses'],'normalization':p['claims']['A4']['normalization'],'theta':math.asin(math.sqrt(beta)),'tolerances':{k:nm[k] for k in ['absolute_tolerance','relative_tolerance','rank_threshold','rank_ambiguity_band','positivity_tolerance']},'models':output,'channel_checks':channels,'optical':optical,'normalized_hyperbolic_representation':hyperbolic,'no_fixed_affine':affine,'nonvacuity_and_fixed_examples':fixed_examples,'all_expected_outcomes_met':all_ok,'scope':'REAL numerical finite checks; DERIVED analytic bounds; no empirical sigma or physical creditation; ontology remains ONTO','observed_data':False,'gate_changed':False,'production_runs':False}
+     verify_finite(result)
+     check_preregistered_sources(p)
+-    write_new(HERE/'RESULTADOS_NUMERICOS_R1.json',result)
++    write_new(HERE/'RESULTADOS_NUMERICOS_R3.json',result)
+     print(json.dumps({'all_expected_outcomes_met':all_ok,'beta':beta,'lambda':lam,'models':{k:{'claims':v['claims'],'fixed_dimension':v['fixed_dimension'],'final_distance':v['powers'][-1]['distance_to_R'],'complement_norm':v['strict_complement_operator_norm']} for k,v in output.items()},'channels':{k:v['PASSA'] for k,v in channels.items()},'hyperbolic_residual':hyperbolic['residual'],'elapsed_seconds':result['elapsed_seconds']},ensure_ascii=False,indent=2,allow_nan=False))
+     return 0 if all_ok else 1
+ 

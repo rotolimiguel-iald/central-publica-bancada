@@ -1,0 +1,43 @@
+{
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "purpose": "Compatibility shape only; no numerical calibration certified",
+  "success_significancia_example": {
+    "schema": "SIGNIFICANCIA_V2_PROPOSED",
+    "p_local": null,
+    "z_local": null,
+    "n_familias": 1,
+    "p_global": null,
+    "z_global": null,
+    "local": {
+      "status": "UNAVAILABLE",
+      "motivo": "Hipoteses/calibracao nao admitidas neste exemplo"
+    },
+    "global": {
+      "status": "UNAVAILABLE",
+      "motivo": "Ausencia de calibracao global admitida",
+      "calibracao": null
+    },
+    "sidak_ilustrativo": {
+      "status": "ILLUSTRATIVE_NOT_CALIBRATED",
+      "p": null,
+      "z": null,
+      "n_livro": 1
+    },
+    "metodo": "Diagnosticos separados; nenhum p global calibrado disponivel"
+  },
+  "failure_example": {
+    "http_status": 400,
+    "body": {
+      "erro": "Comparacao recusada: ajuste invalido",
+      "codigo_erro": "COMPARISON_INVALID_FIT_PROPOSED",
+      "estatuto": "UNAVAILABLE"
+    }
+  },
+  "requirements": [
+    "Finite JSON numbers or null only",
+    "Unavailable is not zero",
+    "Do not return error-shaped HTTP200 from comparar/ajustar",
+    "Keep old scientific records unchanged",
+    "No promotion of local or Sidak illustration by field naming"
+  ]
+}

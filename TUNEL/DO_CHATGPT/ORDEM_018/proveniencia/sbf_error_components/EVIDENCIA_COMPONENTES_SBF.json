@@ -1,0 +1,313 @@
+{
+  "created_utc": "2026-10-06T03:10:44.228672+00:00",
+  "scope": "DOCUMENTARY_SBF_ERROR_COMPONENTS_ONLY_NO_CENTERS_NO_FIT_NO_UPSTREAM_EXECUTION",
+  "upstream_commit": "cc0a4b9f36e65470d514f254a3c5cffa463fbd94",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\UPSTREAM_MANIFEST.json",
+      "bytes": 9146,
+      "sha256": "473fece2dcd99807b60d24a8940c17c8df47cc634311e4bbb846cae3a6aeabc1",
+      "mtime_utc": "2026-10-06T00:56:44.519290+00:00",
+      "pin_matches_inherited_manifest": false,
+      "excerpts": []
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\SOURCES.json",
+      "bytes": 3730,
+      "sha256": "b8c71201958923ccdd4f71b9bbcdf9a79307781972d1d1ddce310b1a8990bcbd",
+      "mtime_utc": "2026-10-06T01:46:51.333562+00:00",
+      "pin_matches_inherited_manifest": false,
+      "excerpts": []
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\upstream\\idlcode\\org_v3p9.pro",
+      "bytes": 102503,
+      "sha256": "49a4cf6cfcb3805a103f7060c10137431f3285c5d74144445de56a821052e501",
+      "mtime_utc": "2026-10-06T00:56:44.516778+00:00",
+      "pin_matches_inherited_manifest": true,
+      "excerpts": [
+        {
+          "first_line": 1782,
+          "last_line": 1811,
+          "text": "   ;\n   ; So the SBF calibration looks like:\n   ;    m = M + M_offset + mu\n   ; and the luminosity distance (modulus) estimate for objects in \n   ; Hubble flow is given by\n   ;    mu = m - M - M_offset\n   ; which then goes into the luminosity distance-redshift relation\n   ;\n   ; Each calibrator offers an equation relating the parameters \n   ; iabs_sbf and mu_host with a measured quantity (m-M):\n   ;   M_offset + mu_host = m - M  (= yval)\n   ;\n   for k = 0, n_sbf-1 do begin\n      ieq = k + ieq_sbf_start    ; this is the equation tying \n                    ; each SBF calibrator to its host distance\n                    ; and to the SBF calibration offset.\n                    ; Each equation has the form\n                    ;   M_offset + mu_host = m - M  (= yval)\n      ihost = ihost_sbf[k]       ; the index of the host -> mu_host\n                    ; k is the SBF calibrator index\n      coeffs (ieq, ihost) = 1.d0\n      coeffs (ieq, iabs_sbf) = 1.d0\n      yval[ieq] = small_m110_sbf[k] - big_m110_sbf[k]\n      yvar[ieq] = sigma_big_m110_sbf[k]^2 + sigma_small_m110_sbf[k]^2 ; color + intrinsic and phot error\n      covar[ieq,ieq] = sigma_big_m110_sbf[k]^2 + sigma_small_m110_sbf[k]^2 ; same\n      eq_descr[ieq] = ' SBF calibrator distance for ' + $\n                      name_sbf[k] + ' based on host distance from all sources'\n      eq_shape[ieq] = ' M110_offset + mu_host = m110 - M110'\n      eq_covar[ieq] = ' Variance of m110 and M110 (must include propagated color, intrinsic, ' + $\n                      ' and photometry errors)'"
+        },
+        {
+          "first_line": 1817,
+          "last_line": 1827,
+          "text": "   ; Format notes: the original file has name, color with error, \n   ; mbar110 (observed) with error, distance modulus with error, \n   ; distance with error, vgal, vgrp, vflow, v_2m++, v_rm, N_grp.\n   ; The processed file will have: name; bigm110 with error;\n   ; m110 with error; vcmb; vcorr.  bigm110 will be computed   \n   ; from the color and error-propagated, with an extra term\n   ; reflecting theintrinsic width of the distribution (to be\n   ; determined).  m110 is directly as given in the original.\n   ; vcmb is v_grp, assuming optical convention.  vcorr is \n   ; v_2m++, assuming optical convention.  We defer the issue of\n   ; other velocity information."
+        },
+        {
+          "first_line": 1830,
+          "last_line": 1833,
+          "text": "   readcol, sbf_hf, name_sbf_hf, big_m110_sbf_hf, sigma_big_m110_sbf_hf, $\n            m110_sbf_hf, sigma_m110_sbf_hf, $\n            sbf_v_cmb, sbf_v_corr, $\n            format = 'a,f,f,f,f,f,f', comment='#', /silent"
+        },
+        {
+          "first_line": 1843,
+          "last_line": 1872,
+          "text": "   ; Interprets vgrp as vcmb, and v2m++ as vcorr.  Ignores the \n   ; heliocentric velocity correction\n   ; \n   ; Assumes that the bigm110 error includes the measurement uncertainties\n   ; for both velocity and parameters, as\n   ; well as the intrinsic spread of the relation.\n   ; It does NOT include the distance calibration uncertainty.\n   ; m110 error is the photometric uncertainty.\n   ; Errors are assumed uncorrelated between Hubble Flow objects.\n   ; This is a simplification, as some uncertainties related to the\n   ; internal SBF calibration parameters (NOT the absolute\n   ; magnitude offset) would correlate uncertainties.\n   ; Such terms are expected to be subdominant compared to the\n   ; absolute magnitude calibration uncertainty.\n   ; \n   ; The absolute magnitude calibration uncertainty is taken care of \n   ; directly as the uncertainty in the m_offset parameter.\n   ; The above uses 2m++ as the default correction.  Additional\n   ; calling parameters can be used to select a different\n   ; peculiar velocity correction, redshift range, and so on.\n\n   ; Note that for SBF, the quantity to\n   ; form ALPHA is m110 minus bigm110.\n   value = m110_sbf_hf - big_m110_sbf_hf\n   alpha_sbf_value = compute_alpha (value, sigma_m110_sbf_hf, $\n            vcorr = sbf_v_corr, $ ; vcmb = sbf_v_cmb, $\n            redshift_range=redshift_range, alpha_err=alpha_sbf_error, $\n            chisq=chisq_sbf_hf, ndof=ndof_sbf_hf, vdisp=sbf_vpec_error, $\n            /optical, /ignore_cosmology, details=alphadet_sbf)\n   printf, lun, 'Alpha from SBF:', alpha_sbf_value, alpha_sbf_error, $"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\upstream\\h0_constrainer\\h0_constrainer\\equations.py",
+      "bytes": 34466,
+      "sha256": "1b4f8f81cd6f75cc241156ae1dbb80199cf4e58ab5752a0d5e4d2e9dff367236",
+      "mtime_utc": "2026-10-06T00:56:43.996131+00:00",
+      "pin_matches_inherited_manifest": true,
+      "excerpts": [
+        {
+          "first_line": 255,
+          "last_line": 266,
+          "text": "    iabs_sbf = None\n    if sbf_calib_df is not None and len(sbf_calib_df) > 0:\n        parinfo.append({\n            \"name\": \"SBF absolute magnitude offset (m110 = M110 + M110_offset + mu)\",\n            \"value\": 0.0,\n            \"fixed\": False,\n            \"limits\": [0.0, 0.0],\n            \"limited\": [False, False],\n            \"type\": 0,\n            \"objname\": \"SBF M_offset\"\n        })\n        iabs_sbf = len(parinfo) - 1"
+        },
+        {
+          "first_line": 445,
+          "last_line": 458,
+          "text": "    ieq_sbf_start = None\n    if nsbf>0:\n        ieq_sbf_start=eq_counter\n        for k in range(len(sbf_calib_df)):\n            ieq = ieq_sbf_start + k\n            ihost = host_index_sbf[k]\n            coeffs[ieq, ihost] = 1.0\n            coeffs[ieq, iabs_sbf] = 1.0\n            yval[ieq] = sbf_calib_df.iloc[k][\"m110\"]-sbf_calib_df.iloc[k][\"M110\"] \n            covar[ieq, ieq] = sbf_calib_df.iloc[k][\"m110_error\"] ** 2 + sbf_calib_df.iloc[k][\"M110_error\"] ** 2 # color + intrinsic and phot error\n            eq_descr[ieq] = f\"SBF calibrator distance for {sbf_calib_df.iloc[k]['host']} based on distances from all sources\"\n            eq_shape[ieq] = \"M_offset + mu_host = m110 - M110\"\n            eq_covar[ieq] = \"Variance of m and M (must include propagated color, intrinsic, and photometry errors)\"\n            eq_counter += 1"
+        },
+        {
+          "first_line": 594,
+          "last_line": 625,
+          "text": "    ieq_h0_msbf = None\n    if nsbf>0:\n        ieq_h0_msbf=eq_counter\n        if sbf_hf_df is not None:\n            value = sbf_hf_df[\"m110\"] - sbf_hf_df[\"M110\"]\n            vcorr = sbf_hf_df[sbf_v_column]\n\n            a_sbf, a_sbf_err, chisq_sbf_hf, ndof_sbf_hf = compute_alpha(\n                value,\n                mag_err=sbf_hf_df[\"e(m110)\"],\n                vcorr=vcorr,\n                vdisp=sbf_vpec_error,\n                redshift_range=redshift_range,\n                apply_redshift_range=z_range_sbf,\n                q0=q0,\n                j0=j0,\n                optical=True,\n                ignore_cosmology=True\n            )\n            r_chisq_sbf_hf=chisq_sbf_hf/ndof_sbf_hf\n            config_reader.vprint(f\"\\nAlpha from SBF is computed: a_b={a_sbf:.4f}\"+u\"\\u00B1\"+f\"{a_sbf_err:.4f}, chi2={chisq_sbf_hf:2f}, dof={ndof_sbf_hf}, reduced chi2={r_chisq_sbf_hf:2f}\")\n        else:\n            a_sbf=alpha_sbf\n            a_sbf_err= alpha_sbf_error       \n        ieq = ieq_h0_msbf\n        coeffs[ieq, iabs_sbf] = -0.2\n        coeffs[ieq, ihub] = 1.0\n        yval[ieq] = a_sbf + 5\n        covar[ieq, ieq] = a_sbf_err ** 2\n        eq_descr[ieq] = \"Link between M_offset_SBF and H_0 (SBF HF)\"\n        eq_shape[ieq] = \"log10(H0) - 0.2*M_offset_SBF = a_b + 5\"\n        eq_covar[ieq] = \"Variance in SBF Hubble flow (a_b)\""
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\upstream\\h0_constrainer\\h0_constrainer\\data_loader.py",
+      "bytes": 40100,
+      "sha256": "0fe032b09dcba71bd6f602dabd7e3873a369fc09f8cf340b01584b9b31bf7c04",
+      "mtime_utc": "2026-10-06T00:56:43.786781+00:00",
+      "pin_matches_inherited_manifest": true,
+      "excerpts": [
+        {
+          "first_line": 255,
+          "last_line": 284,
+          "text": "    Example:\n        >>> df, cov = load_hf('data', 'sn1a_hf.dat', 'sn1a')\n        >>> df, cov = load_hf('data', 'sn1a_hf.dat', 'sn1a', 'sn1a_cov.dat')\n    \"\"\"\n    if not filename:\n        return None, None\n\n    path = os.path.join(datadir, filename)\n\n    # --- Standard methods ---\n    if method == \"sn1a\":\n        columns = [\"name\", \"mb\", \"mb_err\", \"zhel\", \"zcmb\", \"vp\", \"vp_2mpp_sdss_6df\", \"vp_2mrs\", \"vp_2mpp\"]\n        df = load_rung_file(path, columns, skip_header_condition=lambda line: line.strip().startswith(\"#\"))\n\n    elif method == \"sn2\":\n        columns = [\"name\", \"z_corr\", \"m0_i\", \"em0_i\"]\n        df = load_rung_file(path, columns, skip_header_condition=lambda line: line.strip().startswith(\"#\"))\n\n    elif method == \"tf\":\n        columns = [\"name\", \"PCG\", \"mu\", \"mu_err\", \"M\", \"m\", \"sigma\", \"v_cmb\", \"v_2mpp\", \"v_2mrs\", \"v_2mpp_6df_sdss\"]\n        df = load_rung_file(path, columns, skip_header_condition=lambda line: line.strip().startswith(\"#\"))\n\n    elif method == \"sbf\":  # SBF\n        columns = [\"Name\", \"M110\", \"e(M110)\", \"m110\", \"e(m110)\", \"vgrp\", \"v2m++\"]\n        df = load_rung_file(path, columns, skip_header_condition=lambda line: line.strip().startswith(\"#\"))\n\n    # --- For SN Ia IR HF files (J/H order agnostic) ---\n    elif method == \"sn1a_IR\":\n        # Read everything (whitespace-delimited), ignore lines starting with '#'.\n        raw = pd.read_csv(path, sep=r\"\\s+\", comment=\"#\", header=None, engine=\"python\")"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\upstream\\h0_constrainer\\h0_constrainer\\intercept.py",
+      "bytes": 9781,
+      "sha256": "fa98f8364cf7571498d4f3338c705e06696a8f25fd859a7b0dc61bf81c14d97c",
+      "mtime_utc": "2026-10-06T00:56:44.040006+00:00",
+      "pin_matches_inherited_manifest": true,
+      "excerpts": [
+        {
+          "first_line": 131,
+          "last_line": 165,
+          "text": "            raise ValueError(\"Must provide either vcmb or vcorr.\")\n\n        zhd = _vel_to_z(vcorr, c, optical)\n        useflag = np.ones_like(zhd, dtype=bool)\n\n        if apply_redshift_range:\n            if redshift_range is not None and (redshift_range[0] != 0 or redshift_range[1] != 0):\n                useflag = (zhd >= redshift_range[0]) & (zhd <= redshift_range[1])\n\n            if np.sum(useflag) == 0:\n                raise ValueError(\n                    \"No objects for this calibrator type after redshift selection\"\n                )\n        \n        kz = _kz(zhd, q0, j0, ignore_cosmology)\n\n        alphavec = np.log10(vcorr) + np.log10(kz) - 0.2 * mag\n        errsqvec = (0.2 * mag_err) ** 2 + (np.log10(vcorr + vdisp) - np.log10(vcorr)) ** 2\n\n        w = useflag / errsqvec\n        alpha = np.sum(w * alphavec) / np.sum(w)\n        alpha_err = 1.0 / np.sqrt(np.sum(w))\n        chisq = np.sum(w * (alphavec - alpha) ** 2)\n        ndof = np.sum(useflag) - 1\n        return alpha, alpha_err, chisq, ndof\n\n    else:\n        # Advanced branch with vcmb\n        zcmb = _vel_to_z(vcmb, c, optical)\n\n        # Require exactly one of vpec, vcorr\n        if (vpec is None) and (vcorr is None):\n            raise ValueError(\"Need one of vpec or vcorr.\")\n        if (vpec is not None) and (vcorr is not None):\n            raise ValueError(\"Provide exactly one of vpec or vcorr (got both).\")"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\upstream\\data\\README.md",
+      "bytes": 3607,
+      "sha256": "6b187a669429b8024ac974d3f14ed9c15225083f259ac8d5dfe94bbba40784a4",
+      "mtime_utc": "2026-10-06T00:56:43.053023+00:00",
+      "pin_matches_inherited_manifest": true,
+      "excerpts": [
+        {
+          "first_line": 9,
+          "last_line": 14,
+          "text": "| --- | --- |\n| Geometric distance measurements to anchors | `anchors.dat` |\n| Host distances from primary distance indicators (cepheids, TRGB, etc.) | **`host_data.dat`**, `host_data_nomet.dat` |\n| Calibrator magnitude data (SNe Ia, SBF, SN II, TF) | **`sn1a_calib.dat`**, `sn1a_calib_H.dat`, `sn1a_calib_J.dat`, `rung3_salt3.dat`, `sn1a_calib_bayessn.dat`, `sn1a_cal_csp_burns.dat`, **`sbf_calib.dat`**, `sn2_calib.dat`, `tf_calib.dat` |\n| Hubble-flow data used to infer H0, and covariances | `hf_csp_lluis_v2.dat`, `hf_csp_lluis_v2_cov.dat`, `hf_salt3.dat`, `hf_salt3_cov.dat`, `sn1a_hf_H.dat`, `sn1a_hf_J.dat`, `sn1a_hf_bayessn.dat`, `sn1a_covar_bayessn.dat`, **`sn1a_hf_pp.dat`**, **`sn1a_covar_pp.dat`**, **`sbf_hf.dat`**, `sn2_hf.dat`, `tf_hf.dat` |\n| Additional constraints and ties (megamasers, EPM, groups, coma) | **`megamaser.dat`**, `epm.dat`, **`groups.dat`**, `coma_sn.dat` |"
+        },
+        {
+          "first_line": 63,
+          "last_line": 70,
+          "text": "      <td>Coma</td>\n      <td><code>coma_sn.dat</code></td>\n    </tr>\n    <tr>\n      <td>SBF</td>\n      <td>-</td>\n      <td><strong><code>sbf_calib.dat</code></strong>, <strong><code>sbf_hf.dat</code></strong></td>\n    </tr>"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\residual_systematics\\sources\\h0dn.txt",
+      "bytes": 353287,
+      "sha256": "588675233bb29069e2eba5a412516a3038018212c25b873ca977d77766dd246c",
+      "mtime_utc": "2026-10-06T02:16:40.792520+00:00",
+      "pin_matches_inherited_manifest": false,
+      "excerpts": [
+        {
+          "first_line": 488,
+          "last_line": 490,
+          "text": "SBF |\nJ. B. Jensen et al. [101] |\nAncillary info from priv. comm. with J. B. Jensen. |"
+        },
+        {
+          "first_line": 1821,
+          "last_line": 1845,
+          "text": "Data Sources.\nIn 2024, JWST/NIRCam observed 14 giant elliptical galaxies to simultaneously measure both their TRGB brightnesses and SBF magnitudes [6, 8], enabling a high-precision absolute calibration of the near-IR SBF distance zero point. The TRGB distances were calibrated using the geometric distance to the megamaser galaxy NGC 4258 [7]. This approach provides a zero point for the WFC3/IR F110W SBF distance scale that is entirely independent of the Cepheid distance scale.\nThe new TRGB-based calibration was applied to SBF measurements of 61 galaxies from J. B. Jensen et al. [103] and J. P. Blakeslee et al. [21], using updated optical (g−z)({g-z}) color measurements, to determine the distances used here [101].1010\n10\nhttps://github.com/jjensen-uvu/sbf_distances_2021 The distant galaxy SBF sample spans distances up to 100 Mpc.\nIn summary, the key measurements for the adopted SBF-based distances in this study come from:\n•\nJWST/NIRCam imaging of 14 elliptical galaxies used for both SBF and TRGB measurements [6, 8]. Eight of these galaxies have HST WFC3/IR SBF data, and the full set provided a distance calibration for the Fornax and Virgo clusters that connects the JWST TRGB calibration to the HST IR SBF sample of J. B. Jensen et al. [102].\n•\nJWST/NIRCam TRGB distance to the anchor galaxy NGC 4258 [7].\n•\nHST/WFC3-IR imaging of 61 early-type galaxies in the F110W filter [103, 21].\nMethodological Details.\nSBF distances are derived from the amplitude of spatial brightness fluctuations in galaxies, quantified by fitting the Fourier spatial power spectrum with a scaled power spectrum of the image point-spread function.\nAccurate SBF relative distances are obtained using an empirical calibration adjusted for stellar population age and metallicity variations based on optical colors.\nThe recent JWST/TRGB calibration of the absolute SBF magnitude, M¯\\overline{M}, as a function of the observed (g−z)({g-z}) color has replaced the earlier Cepheid-based calibration, which had been used in almost all previous SBF-based distance estimates.\nSystematic Corrections.\nThe absolute fluctuation magnitude calibration depends on galaxy color, and for this study, a new calibration with updated optical colors and slope was derived [101]. The SBF zero point is anchored to TRGB distances that were calibrated using the geometric distance to NGC 4258. To convert distances into Hubble-flow velocities, peculiar velocity corrections were applied based on group assignments from both the Cosmic Flows 3 database [83] and the 2M++ flow model [38], following the approach of J. P. Blakeslee et al. [21] and G. S. Anand et al. [8]. Standard corrections for foreground extinction were also applied using the prescription from E. F. Schlafly & D. P. Finkbeiner [182].\nAssumptions.\nThe main assumptions behind the SBF method are that stellar population variations between galaxies are adequately accounted for by color corrections (i.e., M¯\\overline{M} vs. (g−z)({g-z}) color calibration), and — for the analysis presented in this work — that the TRGB stars in the spiral megamaser galaxy NGC 4258 at a given color are representative of those in the 14 giant elliptical galaxies used to calibrate SBF.\nConnection to the Network.\nSBF distances are calibrated by TRGB distances from JWST/NIRCam, which are anchored to the geometric distance to NGC 4258.\nAdditionally, SBF can be used to calibrate other distance indicators, thereby adding another rung to the cosmic distance ladder. The published SBF distance to one galaxy in the Coma cluster [103] was used to provide a calibration of the Fundamental Plane (FP) method used to measure distances to thousands of elliptical galaxies [180]. SBF has also been used to provide an alternate calibration of type Ia SNe [79]. However, this latter path was not included in the baseline network for this study.\nComments and Known Issues.\nWhile SBF is robust for early-type galaxies, its use is limited in spiral galaxies where star formation, clumpy dust, intermediate age asymptotic giant branch and young massive stars can all affect the RGB-based SBF fluctuation signal useful for determining the distance. The accuracy of SBF distances also depends on high-quality imaging and precise knowledge of the point spread function. The SBF method is potentially sensitive to calibration systematics from (i)(i) the uncertainty in the slope of the stellar population correction arising from the limited number of calibrators and their color range, and (i​i)(ii) the systematic uncertainty in the zero point calibration from TRGB measured in a single anchor galaxy (NGC 4258), and the potential differences between the TRGB brightness in that spiral galaxy and in the elliptical galaxies used to calibrate SBF."
+        },
+        {
+          "first_line": 1964,
+          "last_line": 1966,
+          "text": "B.3.4 Calibrator equations\nFor every calibrator 𝒞{\\cal C}, we include an equation relating the distance modulus of its host and the quantity being calibrated, the reference magnitude Mref,𝒯M_{\\rm ref,{\\cal T}}, with the standardized apparent magnitude m𝒞m_{{\\cal C}}. This quantity can be the reference magnitude for TF or SBF, the standardized absolute magnitude of a SN Ia or SN II in the appropriate band, or (in the case of BayesSN) a reference magnitude for the SN. These equations have in general negligible covariance in the data, but it is critical that the intrinsic dispersion in each calibrator’s distance estimate (e.g., the intrinsic variance in SNe Ia absolute magnitude, or the internal dispersion of the TF relation) be included in the uncertainty of each source. These uncertainties are reduced by using more calibrators. Distance calibration uncertainties are propagated from the uncertainty of the host distance modulus, which is derived from the distance network, and therefore are not included in the data covariance matrix.\nThe calibrator equations have the form:"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\upstream\\data\\sbf_hf.dat",
+      "bytes": 5083,
+      "sha256": "1e8e592f9dc66f74fefb77af6cd7df54afa2d8a778aef2f4a9f2edb08478d884",
+      "mtime_utc": "2026-10-06T01:46:51.067180+00:00",
+      "pin_matches_inherited_manifest": true,
+      "headers": [
+        "#    Name          M110    e(M110)        m110     e(m110)        vgrp      2m++"
+      ],
+      "numeric_fields_parsed": false
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\upstream\\data\\sbf_calib.dat",
+      "bytes": 780,
+      "sha256": "b4bf14c425b77fec9e161008518a2e78bf278fff8cc311f81ed458c0d8e40f8a",
+      "mtime_utc": "2026-10-06T01:46:51.063173+00:00",
+      "pin_matches_inherited_manifest": true,
+      "headers": [
+        "#  Host          M110     sigma     m110      sigma"
+      ],
+      "numeric_fields_parsed": false
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\h0dn_nonstellar_errors\\CONTRATO_ERROS_NAO_ESTELARES_V01.json",
+      "bytes": 9077,
+      "sha256": "ad4248c09b43c29a7a5be47eeea2586d215f545717336d2de1e53a607c186f0e",
+      "mtime_utc": "2026-10-06T02:58:37.625063+00:00",
+      "pin_matches_inherited_manifest": false,
+      "excerpts": []
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\h0dn_nonstellar_errors\\METADADOS_ERROS_NAO_ESTELARES_V01.json",
+      "bytes": 113861,
+      "sha256": "c1843c397cfd78b4a82c416de49fe04929d0b830bd841efb6ff725d260902e7d",
+      "mtime_utc": "2026-10-06T02:54:47.432118+00:00",
+      "pin_matches_inherited_manifest": false,
+      "excerpts": []
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\h0dn_nonstellar_errors\\NOTA_ERROS_NAO_ESTELARES_V01.md",
+      "bytes": 8125,
+      "sha256": "70860d9c82049b45f4e943ba72481e61f987bc04ec23b7f4a3ba6bf8d66ff7fd",
+      "mtime_utc": "2026-10-06T02:58:37.632085+00:00",
+      "pin_matches_inherited_manifest": false,
+      "excerpts": []
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\h0dn_nonstellar_errors\\MANIFESTO_ERROS_NAO_ESTELARES.json",
+      "bytes": 2395,
+      "sha256": "86639ddf6c11a173b066927aa13395ed00acb21b7388f43533da52e0471a004e",
+      "mtime_utc": "2026-10-06T02:58:37.646618+00:00",
+      "pin_matches_inherited_manifest": false,
+      "excerpts": []
+    }
+  ],
+  "inventory_examined": {
+    "upstream_manifest_files": [
+      "README.md",
+      "data/README.md",
+      "data/anchors.dat",
+      "data/groups.dat",
+      "data/host_data.dat",
+      "data/sn1a_covar_pp.dat",
+      "h0_constrainer/MANIFEST.in",
+      "h0_constrainer/README.md",
+      "h0_constrainer/configs/base_variants_config.ini",
+      "h0_constrainer/configs/config.ini",
+      "h0_constrainer/configs/variants.ini",
+      "h0_constrainer/h0_constrainer/__init__.py",
+      "h0_constrainer/h0_constrainer/cli.py",
+      "h0_constrainer/h0_constrainer/config_reader.py",
+      "h0_constrainer/h0_constrainer/data_loader.py",
+      "h0_constrainer/h0_constrainer/equations.py",
+      "h0_constrainer/h0_constrainer/intercept.py",
+      "h0_constrainer/h0_constrainer/logger.py",
+      "h0_constrainer/h0_constrainer/main.py",
+      "h0_constrainer/h0_constrainer/solver.py",
+      "h0_constrainer/pyproject.toml",
+      "h0_constrainer/requirements.txt",
+      "idlcode/mpinv.pro",
+      "idlcode/org_v3p9.pro"
+    ],
+    "jagb_extension_manifest_files": [
+      "data/host_data_nomet.dat",
+      "data/megamaser.dat",
+      "data/sbf_calib.dat",
+      "data/sbf_hf.dat",
+      "data/sn1a_calib.dat",
+      "data/sn1a_hf_pp.dat",
+      "idlcode/vars.pro"
+    ],
+    "claim_limit": "These admitted snapshots contain the loader, consumer and explanatory IDL. No numerical constructor for e(M110) was established in this bounded examination. This is not a claim about all remote repository contents."
+  },
+  "findings": [
+    {
+      "id": "NS01-A",
+      "status": "REAL_CODE_AND_DECLARED_INTENT",
+      "finding": "IDL 1817-1824 describes color propagation plus intrinsic width; 1849 explicitly excludes absolute distance calibration uncertainty, allocated to m_offset at 1858-1859."
+    },
+    {
+      "id": "NS01-B",
+      "status": "REAL",
+      "finding": "Both IDL1867 and Python603 pass only apparent-magnitude error to SBF HF intercept. Calibrators combine M110_error and m110_error. Free common offset does not represent differential object errors."
+    },
+    {
+      "id": "NS01-C",
+      "status": "OPEN_NUMERICAL_DECOMPOSITION",
+      "finding": "No verified per-row decomposition identifies color, intrinsic width, slope uncertainty and common contributions in supplied e(M110). Cannot quantify predominance or subtract common pieces uniquely."
+    }
+  ],
+  "components": [
+    {
+      "component": "absolute calibration / common zero point",
+      "intended_treatment": "free M110_offset, constrained jointly by calibrators; avoid readding same external zero-point prior",
+      "basis": "IDL1849,1858-1859; Python255-266"
+    },
+    {
+      "component": "object color measurement / extinction contribution",
+      "intended_treatment": "propagated through color slope; not removed by common offset",
+      "basis": "IDL1821-1824; Jensen2025 sec3.1"
+    },
+    {
+      "component": "intrinsic SBF width at fixed color",
+      "intended_treatment": "residual per-object term in documented diagonal approximation; actual amplitude in column unverified",
+      "basis": "IDL1822-1824,1846-1854"
+    },
+    {
+      "component": "slope and internal calibration parameter uncertainty",
+      "intended_treatment": "potential shared nonconstant low-rank covariance; explicitly neglected as subdominant in upstream comments",
+      "basis": "IDL1851-1856"
+    },
+    {
+      "component": "apparent-magnitude photometry",
+      "intended_treatment": "e(m110), already propagated in both source implementations",
+      "basis": "IDL1850; Python603"
+    }
+  ],
+  "alternatives": [
+    {
+      "id": "A",
+      "status": "FINITE_EXACT_UPSTREAM_REPRODUCTION_WITH_EXPLICIT_LIMIT",
+      "prescription": "Preserve observed code: HF mag_err=e(m110); calib variance=e(m110)^2+e(M110)^2; common free offset. Clearly declare residual e(M110) omitted in HF, not absorbed by offset. This is reproducibility, not proof that the uncertainty is complete."
+    },
+    {
+      "id": "B",
+      "status": "FINITE_CONDITIONAL_RECONSTRUCTION_NOT_ADOPTED",
+      "prescription": "At fixed calibration coefficients, residual var_i=sigma_m_i^2+b^2*sigma_color_i^2+sigma_int_i^2-2*b*Cov(m_i,color_i). Add only separately established shared parameter covariance or explicit nuisance parameters. Avoid same calibration data twice. Supplied eM quadrature may define a declared diagonal sensitivity variant under IDL intent, but is not yet an independently reconstructed decomposition."
+    }
+  ],
+  "not_done": [
+    "No means, magnitudes, distances or H0 centers calculated",
+    "No observational C assembled",
+    "No intercept, S, g, fit, likelihood or evidence",
+    "No upstream imports/execution",
+    "No real D or remote model executor",
+    "No numerical counterexample needed: algebraic difference/common-mode argument suffices"
+  ],
+  "web_archive_limitation": {
+    "public_sources_read_via_web": [
+      "https://arxiv.org/html/2502.15935v2",
+      "https://github.com/jjensen-uvu/sbf_distances_2021"
+    ],
+    "external_bytes_pinned": false,
+    "network_download_default": "Four urllib reads failed due sandbox network denial; WEB_SOURCES.json preserves errors.",
+    "escalation": "Auto-review rejected download as outside visible heartbeat authorization and driven by untrusted agent context. No elevated command executed. No retry or alternate download.",
+    "parent_instruction": "Close using pinned local primary source and already-read public references; archival is unnecessary for this unit."
+  }
+}

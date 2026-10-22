@@ -1,0 +1,164 @@
+--- frozen_p3_codec_002/CONTRATO_P3.json
++++ p3_init_qualified_003/CONTRATO_P3.json
+@@ -1,8 +1,8 @@
+ {
+-  "id": "ORDEM018_F3_P3_CODEC_002",
++  "id": "ORDEM018_F3_P3_INIT_QUALIFIED_003",
+   "state": "PREPARED_NOT_EXECUTED",
+-  "created_utc": "2026-10-06T02:54:27.169843+00:00",
+-  "authorization_scope": "ROOT specifically authorized preparation of this corrected local package after independent review seq445. Execution is withheld pending ROOT final acceptance and a matching explicit receipt. This contract does not grant permission.",
++  "created_utc": "2026-10-06T03:50:22.303763+00:00",
++  "authorization_scope": "ROOT authorized only this separate preparation after initialization-only pass seq465. No execution permission: independent review and matching explicit ROOT receipt still required.",
+   "purpose": "Two bounded synthetic recovery/cost feasibility jobs. GR/RB label injections, not rival likelihood models.",
+   "hypothesis": "Same aligned-spin pSEOBNRv4HM_PA IMR model for both synthetic datasets; DTau220 only free QNM deformation; DOmega220=DTau440=DOmega440=0.",
+   "free_parameters": [
+@@ -147,7 +147,7 @@
+   },
+   "jobs": [
+     {
+-      "id": "P3_GR_CODEC_002",
++      "id": "P3_GR_INIT_QUALIFIED_003",
+       "label": "GR_GAUSS",
+       "sampler_seed": 180602,
+       "truth": {
+@@ -187,7 +187,7 @@
+       }
+     },
+     {
+-      "id": "P3_RB_CODEC_002",
++      "id": "P3_RB_INIT_QUALIFIED_003",
+       "label": "RB_GAUSS",
+       "sampler_seed": 180603,
+       "truth": {
+@@ -227,7 +227,7 @@
+       }
+     }
+   ],
+-  "execution_directory": "EXECUTION_CODEC_002",
++  "execution_directory": "EXECUTION_INIT_QUALIFIED_003",
+   "sampler": {
+     "library": "dynesty",
+     "version": "3.1.0",
+@@ -306,8 +306,8 @@
+     "projection_rule": "Report measured sums and rates only; no extrapolation to fourteen observed events as validated cost."
+   },
+   "isolation": {
+-    "python_read_allowlist": "Exact pinned local synthetic inputs, copied scientific source, installed runtime files (1162), matching receipt/claim; no arbitrary directory allowlist.",
+-    "writes": "This execution/job output tree only after hook; supervisor only fixed EXECUTION_CODEC_002 tree.",
++    "python_read_allowlist": "Same exact 1162 runtime files and synthetic/source pins, plus the one hash-pinned installed ASD demanded by official H1/L1 factory. No directory wildcard. Qualification metadata are exact pinned inputs.",
++    "writes": "This execution/job output tree only after hook; unchanged supervisor only fixed EXECUTION_INIT_QUALIFIED_003 tree.",
+     "runtime_caveat": "Fixed imports/pin verification precede hook. Python audit is not native syscall or OS security containment. -I -B limits environment/bytecode effects; no installation.",
+     "source_fresh_lal_dict": "Preserved unchanged P0-P2 source makes lal.CreateDict per waveform and inserts all four deformation values.",
+     "no_PE_during_preparation": true,
+@@ -317,8 +317,8 @@
+   },
+   "inputs": {
+     "driver_p3.py": {
+-      "sha256": "801cd809f6c55bbcf36546666b5f7542bb8e784dbb532da3412d66f90b526956",
+-      "bytes": 12651
++      "sha256": "265fd07e4c39a239ac79ab1598bd4808d310d63e0a52abbd2bccd8ba8fc94af6",
++      "bytes": 13830
+     },
+     "launch_p3.py": {
+       "sha256": "c3876b1d5350662537fc6139558e8522fd73e440fc8c318e789c4deb67228aa5",
+@@ -391,6 +391,34 @@
+     "CODEC_CP437_PIN.json": {
+       "sha256": "fd09b00998b1c2d77952a35eb14f91b71a9ee1da6a2d353f863e05c4f503c4ab",
+       "bytes": 322
++    },
++    "init_detectors.py": {
++      "sha256": "95dfef3df297d981a1a56fda4e617a0595768c98bee96979dfc208db55dd8890",
++      "bytes": 4261
++    },
++    "GEOMETRIA_PINADA.json": {
++      "sha256": "2ae02847448f609ded06c2f514d701157a66b7f1a70d22adf5d636b8a3c8cc78",
++      "bytes": 2604
++    },
++    "DEPENDENCIA_FACTORY_PIN.json": {
++      "sha256": "85ef4e61929308ae0d2ce236dfb380255dfa159d223c8c90dd86bb5a733afe64",
++      "bytes": 291
++    },
++    "sources/gw/detector/noise_curves/aLIGO_O4_high_asd.txt": {
++      "sha256": "eb5ec9b081c3d86d2f4257b9aff6a57566d168b8a95e5e57b7909eebad021780",
++      "bytes": 71136
++    },
++    "../p3_init_preparation/CONTRATO_CONTROLE_INIT.json": {
++      "sha256": "ec8ca95137da8f27ffeb1636cbe6fe779463286d62b341387a23b33649ced6a9",
++      "bytes": 12962
++    },
++    "../p3_init_preparation/CONTROL_INIT_001/RESULT.json": {
++      "sha256": "dfd9318a2bfdfe6681968eb6cf814081ee1b874caa4321e43a401c99c18efe09",
++      "bytes": 5480
++    },
++    "../p3_init_preparation/MANIFESTO_RESULTADO_INIT.json": {
++      "sha256": "717e566264c9c7af2a9e80fd24721f07f0e083ba9f84fc84ca71e7937e972fd9",
++      "bytes": 4342
+     }
+   },
+   "coordination_receipt_required": {
+@@ -399,13 +427,13 @@
+     "authorized": true,
+     "contract_sha256": "SHA256 OF THIS EXACT FILE",
+     "jobs": [
+-      "P3_GR_CODEC_002",
+-      "P3_RB_CODEC_002"
++      "P3_GR_INIT_QUALIFIED_003",
++      "P3_RB_INIT_QUALIFIED_003"
+     ]
+   },
+-  "allowed_status_claim": "REAL preparation/code/pins only; OPEN execution, recovery, cost of PE, coverage and D.",
+-  "revision": "Only reviewed cp437 preload delta; new isolated job identities; science and resource limits unchanged.",
+-  "revised_utc": "2026-10-06T02:54:27.169843+00:00",
++  "allowed_status_claim": "REAL preparation, input/runtime hashes and earlier initialization-only pass; OPEN this campaign execution/recovery/cost of PE/coverage/D.",
++  "revision": "Only qualified factory B, exact installed ASD dependency, unchanged helper and analytic-PSD checks/receipt; separate job identities; all science and resource limits unchanged.",
++  "revised_utc": "2026-10-06T03:50:22.303763+00:00",
+   "failure_receipt_policy": {
+     "source_returned_none": "Count independently; raw P0-P2 EDOM counter means None returns only and is named source_returned_none_counter_raw. Preserved EDOM_LOG.jsonl filename is not a total of all domain failures.",
+     "recognized_domain_exception": "After a counted native attempt, errno EDOM or explicit Input domain error is classified as recognized, with type/message/parameters.",
+@@ -453,5 +481,46 @@
+     "pin": "CODEC_CP437_PIN.json",
+     "stage": "After exact runtime checks and fixed imports, before installing the unchanged read hook.",
+     "no_directory_grant": true
++  },
++  "derived_from_failed_CODEC002": {
++    "contract": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\CONTRATO_P3.json",
++      "bytes": 17581,
++      "sha256": "6d2b6be5224b16bb8c267838f8bbe4023b17c9bd0b4614421146e4f5685fef3a"
++    },
++    "terminal_receipt": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\RECIBO_EXECUCAO_P3_CODEC_002.json",
++      "bytes": 8306,
++      "sha256": "840092e44a578070850b6a15973d2c7095bf60bad9530726ef2720f0f17023d3"
++    },
++    "old_jobs": [
++      "P3_GR_CODEC_002",
++      "P3_RB_CODEC_002"
++    ],
++    "old_jobs_reopened": false,
++    "old_files_unchanged": true
++  },
++  "qualified_initialization": {
++    "map_sequence": 465,
++    "alternative": "B",
++    "result": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_preparation\\CONTROL_INIT_001\\RESULT.json",
++      "bytes": 5480,
++      "sha256": "dfd9318a2bfdfe6681968eb6cf814081ee1b874caa4321e43a401c99c18efe09"
++    },
++    "manifest": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_preparation\\MANIFESTO_RESULTADO_INIT.json",
++      "bytes": 4342,
++      "sha256": "717e566264c9c7af2a9e80fd24721f07f0e083ba9f84fc84ca71e7937e972fd9"
++    },
++    "helper": "init_detectors.py",
++    "geometry": "GEOMETRIA_PINADA.json",
++    "dependency": "DEPENDENCIA_FACTORY_PIN.json",
++    "dependency_scope": "Exact default ASD is initialization-only; replaced by qualified analytic NPZ PSD before likelihood construction and rechecked afterward.",
++    "control_zero_blocks_transported": false,
++    "no_monkeypatch": true,
++    "source_signature_policy": "Unchanged adapter: generator constructor binds original synthetic_only220 and computes source_parameter_keys before the unchanged FailureAudit wrapper is assigned. No compatibility shim.",
++    "dynamic_boundary": "Previous control evaluated no waveform/likelihood/sampler. This package has not been executed; initial sampling and prior-dependent waveform validity remain unmeasured.",
++    "execution_permission": false
+   }
+ }

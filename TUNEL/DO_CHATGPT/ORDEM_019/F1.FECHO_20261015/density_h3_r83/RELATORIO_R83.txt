@@ -1,0 +1,88 @@
+R83 — Variação da densidade gravitacional e reaproveitamento do registro comum
+19/10/2026; codex-gerente-tgl; F1.FECHO_20261015; reivindicação991.
+
+1. Correção de alcance ao lado da R82
+[REAL — leitura da fonte, não recompilação integral] O registro geral armazena
+métrica e respostas separadamente. Entretanto, NÃO se deve estender essa
+descrição a todo o kernel. SelectedFisherGibbsBridge.lean:41–70 já constrói
+recordMetric e recordSource das MESMAS probabilidades P. As igualdades
+selected_gibbs_metric e selected_gibbs_source estão escritas por termo.
+SelectedProbabilitySigma.lean:132–150 faz isso para potenciais sigma.
+Logo não é preciso construir de novo essa origem comum.
+
+O tipo SelectedProbabilityData (SelectedFisherLorentzMetric.lean:243–250)
+recebe probabilidades normalizadas/positivas/suaves, diferencial injetiva e
+relógio não nulo. selectedMetric:260–261 deriva a métrica pela construção
+Fisher/reflexão. Esses certificados continuam hipóteses do tipo.
+
+2. O que ainda é condição nessa construção
+SelectedFisherGibbsBridge.lean:91–101 deriva conservação sob equação de onda.
+Sua docstring:103 declara que o teorema seguinte NÃO é variação de ação em P.
+SelectedProbabilitySigma.lean:170–189 deriva conservação sob heigen;
+:191–218 ainda recebe harea para concluir Einstein.
+Não eliminar essas condições pela palavra “mesmo”: mesma origem não prova
+por si só que uma trajetória satisfaz a equação dinâmica pretendida.
+
+3. Componente variacional novo, em sandbox
+Reutilizamos ScalarMatterDensityVariation.metric_volume_first_variation e
+quadratic_inverse_first_variation, e
+MetricEinsteinVariation.metric_scalar_first_variation.
+O objeto calculado é a DENSIDADE LOCAL, antes da integração:
+
+  D(t,x)=v(g_t(x)) [c0+ξ u(t)] R(g_t)(x),
+  g_t=g+t h, v(g)=sqrt(|det g|).
+
+Sob suavidade/invertibilidade das fontes e du=(d/dt)u(0), sua derivada é
+
+  D'(0,x)= (v/2) tr(h g^{-1}) (c0+ξu0) R0
+            +v ξ du R0
+            +v (c0+ξu0) δR.
+
+Aqui δR é scalarMetricVariation, o termo que o kernel já deriva da variação
+de Levi-Civita/Ricci. c0 e ξ são parâmetros explícitos; c0 pode ser
+1/(2κ²) no contrato físico da R82, sem o identificar por nome em Lean.
+O teorema geral distingue duas especializações:
+  a) u independente de t: du=0;
+  b) u(t)=g_t^{-1}(w,w), com covetor real w fixo:
+     du=−(g^{-1} h g^{-1})(w,w).
+A segunda não pode usar silenciosamente a primeira. Não se identifica o
+covetor real desse controle com todo o campo complexo Ψ do artigo.
+
+A R82 variou g^{ab}; esta construção varia g_ab por g+t h. As fórmulas
+devem ser comparadas usando δg^{-1}=−g^{-1} h g^{-1}; não trocar os sinais
+sem essa conversão. Os coeficientes são derivados, não assumidos como um
+campo “Einstein” ou “H3” na estrutura.
+
+O estado real de compilação, contagem, axiomas e tentativas encontra-se nos
+recibos BUILD_*; presença deste texto não certifica build. O arquivo final
+e sua revisão independente são pinados em DELIVERY_R83.json.
+
+4. O que a normalização sigma permite afirmar agora
+[REAL — fonte lida] SelectedProbabilitySigma.lean:104–108 prova
+  Σ_j phi_j(x)^2=1,  phi_j=√p_j condicionado.
+[DERIVED, condicional de identificação] SE o campo usado no termo ξR|Ψ|²
+for definido por Ψ_j=a phi_j, com amplitude a constante e norma interna
+euclidiana, então u=Σ_j Ψ_j²=a² é constante. Nesse contrato a Hessiana
+espacial de u se anula, mas a parcela de curvatura −2ξuG_ab da R82 não
+desaparece. O coeficiente de R passa a c0+ξa².
+O kernel citado normaliza phi, não identifica Ψ com esse multiplete nem
+fixa uma amplitude física dimensionful. Portanto essa identificação fica
+INPUT de uma especialização candidata, não fato atribuído ao operador.
+Não há ajuste numérico ou introdução de uma constante para obter um dado.
+
+5. Continuação precisa
+Variação local não é estacionariedade. Ainda faltam, para a rota variacional:
+integração por partes/contorno apropriados, identificação da ação material
+com a fonte lida e uma lei independente que selecione a configuração.
+Além disso, se g=g(P), variar P induz apenas certas variações de g. É preciso
+demonstrar o alcance dessas variações antes de inferir uma equação obtida
+ao variar TODAS as métricas. Não se tomou g(P) simultaneamente como fixo
+por definição e livre para variar sem justificativa.
+
+O próximo trabalho deve partir de selectedSigmaRecord/selectedGibbsRecord
+e da variação já calculada, não de um registro genérico reconstruído.
+H3 universal, campo físico completo e sinal discriminante >5sigma continuam
+abertos. OH–modos–reservatório segue adiado. Nenhum kernel original, um.py,
+Bancada de produção, dado observado ou gate foi alterado por esta camada.
+O Nós Vivo não indexa esta unidade: a consulta falhou explicitamente;
+reaproveitamento veio do mapa anterior, R58, R82 e fontes diretas pinadas.

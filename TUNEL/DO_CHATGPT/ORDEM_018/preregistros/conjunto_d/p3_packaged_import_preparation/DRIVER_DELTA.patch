@@ -1,0 +1,31 @@
+--- pinned_candidate/driver_p3.py
++++ packaged/driver_p3.py
+@@ -65,6 +65,7 @@
+     from dynesty.utils import compute_integrals
+     import pseob_source as source
+     from synthetic_adapter_v2 import generator
++    import synthetic_adapter_v2 as adapter
+     cfg=json.loads((ROOT/"CONFIG_SYNTHETIC.json").read_text())
+     receipt=json.loads((ROOT/c["qualified_result"]).read_text())
+     inj=next(x for x in receipt["injections"] if x["label"]==job["label"])
+@@ -82,6 +83,11 @@
+     geometry=json.loads((ROOT/"GEOMETRIA_PINADA.json").read_text())
+     init_dependency=json.loads((ROOT/"DEPENDENCIA_FACTORY_PIN.json").read_text())
+     allowed_data.add(init_dependency["runtime_path"])
++    # Alternative B: explicit pinned import phase BEFORE the strict audit hook.
++    from prehook_imports import preload_known_imports
++    prehook_receipt=preload_known_imports(
++        ROOT,runtime,json.loads((ROOT/"PREHOOK_PLAN.json").read_text()),source,adapter)
++    js(out/"PREHOOK_IMPORTS.json",prehook_receipt)
+     audit_paths=set();blocked=[]
+     counts=Counter();ll_calls=0
+     journal_path=out/"AUDIT_EVENTS.jsonl"
+@@ -227,6 +233,8 @@
+                 "filesystem_read_write_paths_after_hook":sorted(audit_paths),"blocked_operations":blocked,
+                 "audit_latch":guard.snapshot(),"audit_journal_sha256":sha(journal_path),
+                 "audit_scope":"Python open/process/socket hook after fixed imports and pin checks; not OS/native syscall containment",
++                "prehook_imports_sha256":sha(out/"PREHOOK_IMPORTS.json"),
++                "prehook_alternative":"B_EXPLICIT_PINNED_IMPORT_PHASE",
+                 "D_read":False,"independent_noise_realizations":False,"coverage_estimated":False,
+                 "finished_utc":datetime.now(timezone.utc).isoformat()}
+         js(out/"RESULT.json",result)

@@ -1,0 +1,9 @@
+# F1.2 — correção ao lado: tipos do núcleo regular e da face matricial
+
+07/10/2026 · [REAL] `TGLExt.TowerDefinite.SiteProfile` escolhe pesos para **infinitos sítios** da torre, e `V350RegularGeneratedAlgebra.regularCoreAlgebra P` age em `RegularHilbert (TowerHilbert P)`. Já `ModularFlow.modPow ρ t` age em `Matrix n n ℂ`, e o sandbox `MatrixInnerGauge.lean` usa funções matriciais em ℝ. São representações **de tipos diferentes**.
+
+Por isso, a prova `scalarInverseLimitTraceData P` da v351 não é automaticamente um traço no produto cruzado de `M_n(ℂ)` pela ação interna. Ela fornece o **método e a lei de escala já formalizados** em outro núcleo regular. A F1.2 precisa de uma construção própria do núcleo matricial contínuo e de seu traço, ou de um transporte explícito que preserve cone positivo, ação dual e traço. Uma simples aplicação do teorema v351 sem esse transporte seria erro de tipo.
+
+[REAL] A busca no snapshot Mathlib do sandbox encontrou `VonNeumannAlgebra.Basic`, `L2Space`, `Fourier.LpSpace` e bibliotecas de Haar, mas não localizou uma definição de produto cruzado contínuo pronta para importar. Esta é uma constatação sobre o checkout local, não sobre todas as versões da Mathlib. [OPEN] A construção analítica envolve: representação covariante em L²(ℝ,M_n), extensão isométrica do gauge algébrico, igualdade das álgebras de von Neumann geradas, Fourier com convenção fixada e o traço `tr_n⊗e^{-x}dx` normal semifinito com escala. O sandbox atual paga apenas as duas identidades nos geradores antes do completamento.
+
+**Próximo alvo mínimo verificável:** elevar `Lmul (modPow ρ t)` a operadores contínuos na fibra de Frobenius, definir a conjugação em `RegularHilbert (Matrix n n ℂ)` e provar a igualdade nos geradores com `fibre`/`shift`. Depois, tratar o fechamento e o traço separadamente. Nenhuma dessas etapas pode ser substituída por uma premissa chamada “Takesaki” dentro de uma estrutura sem habitante.

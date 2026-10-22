@@ -1,0 +1,378 @@
+{
+  "action": "read",
+  "name": "artigo_lei_fonte",
+  "created_utc": "2026-10-06T00:08:21.651674+00:00",
+  "originals_modified": false,
+  "source": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+    "bytes": 1216423,
+    "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+    "mtime_utc": "2026-06-05T23:56:08.150239+00:00"
+  },
+  "pattern": "^def predict_H0|^def D1_kernel|v22|zero_free|beta.*ALPHA|ALPHA.*sqrt|D1b",
+  "matched_lines": 185,
+  "total_lines": 21418,
+  "excerpts": [
+    {
+      "match_line": 202,
+      "first_line": 196,
+      "last_line": 208,
+      "text": "# beta_TGL anywhere in this file is a bug.\n\nALPHA_FINE_CODATA_2018 = 7.2973525693e-3   # fine-structure constant\nEULER_E = math.e                            # Euler's number\nSQRT_E = math.sqrt(EULER_E)                 # sqrt(e)\n\nBETA_TGL = ALPHA_FINE_CODATA_2018 * SQRT_E  # the Miguel constant\nONE_MINUS_BETA = 1.0 - BETA_TGL              # forbidden-boundary value\nTHETA_MIGUEL_RAD = math.asin(math.sqrt(BETA_TGL))\nTHETA_MIGUEL_DEG = math.degrees(THETA_MIGUEL_RAD)\n\n# Miguel-angle harmonic ratio (used in Theorem 4 toroidal cavity:\n# 5*theta_M is the fifth-harmonic resonance observed in Q and gate matrices of"
+    },
+    {
+      "match_line": 268,
+      "first_line": 262,
+      "last_line": 274,
+      "text": "                  'of the minimal crossing; base e fixed by the modular structure '\n                  '(Delta = e^(-K), KMS weight e^(-bH)).',\n    },\n    'beta_TGL': {\n        'value': BETA_TGL,\n        'status': 'DERIVED (alpha = CODATA input)',\n        'origin': 'beta = alpha * e^(S_d) = alpha * sqrt(e) -- the minimal '\n                  'identity-preservation coupling of the crossing.',\n    },\n    'theta_M': {\n        'value': THETA_MIGUEL_RAD,\n        'status': 'DERIVED',\n        'origin': 'theta_M = arcsin(sqrt(beta)); beta = sin^2(theta_M) exact.',"
+    },
+    {
+      "match_line": 404,
+      "first_line": 398,
+      "last_line": 410,
+      "text": "\ndef verify_canonical_chain():\n    \"\"\"Hard consistency of the canonical chain with the artifact constants.\"\"\"\n    assert abs(CANONICAL_CHAIN['half_nat']['value'] - 0.5) < 1e-15\n    assert abs(CANONICAL_CHAIN['sqrt_e']['value'] - math.exp(0.5)) < 1e-15\n    assert abs(CANONICAL_CHAIN['beta_TGL']['value']\n               - ALPHA_FINE_CODATA_2018 * math.sqrt(math.e)) < 1e-18\n    assert abs(CANONICAL_CHAIN['theta_M']['value']\n               - math.asin(math.sqrt(BETA_TGL))) < 1e-15\n    assert abs(BETA_TGL - math.sin(THETA_MIGUEL_RAD) ** 2) < 1e-17\n    assert abs(TAU_STAR_PLANCK - 5.391247e-44) < 1e-49\n    return True\n"
+    },
+    {
+      "match_line": 1612,
+      "first_line": 1606,
+      "last_line": 1618,
+      "text": "def print_constants_table():\n    \"\"\"Print the table of constants used. This is the opening of every run.\"\"\"\n    log_section(\"PART A -- CONSTANTS\")\n    rows = [\n        (\"alpha (CODATA 2018)\",         ALPHA_FINE_CODATA_2018,    \"input\"),\n        (\"sqrt(e)\",                     SQRT_E,                    \"input\"),\n        (\"beta_TGL = alpha * sqrt(e)\",  BETA_TGL,                  \"derived\"),\n        (\"1 - beta\",                    ONE_MINUS_BETA,            \"derived\"),\n        (\"theta_Miguel (rad)\",          THETA_MIGUEL_RAD,          \"derived\"),\n        (\"theta_Miguel (deg)\",          THETA_MIGUEL_DEG,          \"derived\"),\n        (\"2*theta_M/pi (angular frac)\", MIGUEL_ANGLE_FRACTION,     \"derived\"),\n        (\"H0_Planck_2018  (km/s/Mpc)\",  H0_PLANCK_2018,            \"literature\"),\n        (\"H0_CMB_LCDM     (km/s/Mpc)\",  H0_CMB_LCDM,               \"literature\"),"
+    },
+    {
+      "match_line": 1636,
+      "first_line": 1630,
+      "last_line": 1642,
+      "text": "    log_info(\"  half_nat = 1/2          [DERIVED, conditional: log(sqrt(e^omega(I))) = 1/2 --\")\n    log_info(\"                           P1 base-e (argumentada) + P2 'distincao plena = omega(I)=1'\")\n    log_info(\"                           (FECHADA: P+Q=I, particao da identidade) + P3 radicalizacao\")\n    log_info(\"                           (REAL x3: g=sqrt|L|, Delta^(1/2), |R|=sqrt(beta));\")\n    log_info(\"                           controle: functor p-raiz daria 1/p -- so o radical da 1/2]\")\n    log_info(f\"  sqrt(e) = {SQRT_E:.12f}  [DERIVED: e^(1/2), entropic volume of the crossing]\")\n    log_info(f\"  beta = {BETA_TGL:.15f} [DERIVED: alpha * e^(1/2)]\")\n    log_info(f\"  theta_M = {THETA_MIGUEL_DEG:.4f} deg     [DERIVED: arcsin(sqrt(beta))]\")\n    log_info(\"  S_matrix = exp(theta_M G) [DERIVED by unitarity -- Theorem S-d]\")\n    log_info(f\"  tau_star = {TAU_STAR_PLANCK:.6e} s [PRINCIPLED IDENTIFICATION = Planck clock;\")\n    log_info(\"                           CONJECTURE, um 2o postulado -- NAO derivacao; crava a\")\n    log_info(\"                           magnitude do dephasing no invisivel; falsificavel na FORMA]\")\n    log_info(\"  chain verified: one residual NORMALIZATION + one scale identification => all else derived\")"
+    },
+    {
+      "match_line": 1857,
+      "first_line": 1851,
+      "last_line": 1863,
+      "text": "# A.10  --  SAFE INVARIANT CHECK  (paranoia against constant drift)\n# ============================================================================\n# Called once at the start of every run.  If the operator (or a future\n# refactor) ever accidentally hardcoded BETA_TGL anywhere, this catches it.\n\ndef assert_beta_invariant():\n    \"\"\"Verify beta_TGL has not drifted from alpha * sqrt(e) at runtime.\"\"\"\n    expected = ALPHA_FINE_CODATA_2018 * math.sqrt(math.e)\n    if not math.isclose(BETA_TGL, expected, rel_tol=1e-15, abs_tol=1e-18):\n        raise AssertionError(\n            f\"beta_TGL drift detected!  BETA_TGL={BETA_TGL!r} \"\n            f\"!= alpha*sqrt(e)={expected!r}\"\n        )"
+    },
+    {
+      "match_line": 1858,
+      "first_line": 1852,
+      "last_line": 1864,
+      "text": "# ============================================================================\n# Called once at the start of every run.  If the operator (or a future\n# refactor) ever accidentally hardcoded BETA_TGL anywhere, this catches it.\n\ndef assert_beta_invariant():\n    \"\"\"Verify beta_TGL has not drifted from alpha * sqrt(e) at runtime.\"\"\"\n    expected = ALPHA_FINE_CODATA_2018 * math.sqrt(math.e)\n    if not math.isclose(BETA_TGL, expected, rel_tol=1e-15, abs_tol=1e-18):\n        raise AssertionError(\n            f\"beta_TGL drift detected!  BETA_TGL={BETA_TGL!r} \"\n            f\"!= alpha*sqrt(e)={expected!r}\"\n        )\n    if not math.isclose(THETA_MIGUEL_RAD, math.asin(math.sqrt(BETA_TGL)), rel_tol=1e-15):"
+    },
+    {
+      "match_line": 1862,
+      "first_line": 1856,
+      "last_line": 1868,
+      "text": "def assert_beta_invariant():\n    \"\"\"Verify beta_TGL has not drifted from alpha * sqrt(e) at runtime.\"\"\"\n    expected = ALPHA_FINE_CODATA_2018 * math.sqrt(math.e)\n    if not math.isclose(BETA_TGL, expected, rel_tol=1e-15, abs_tol=1e-18):\n        raise AssertionError(\n            f\"beta_TGL drift detected!  BETA_TGL={BETA_TGL!r} \"\n            f\"!= alpha*sqrt(e)={expected!r}\"\n        )\n    if not math.isclose(THETA_MIGUEL_RAD, math.asin(math.sqrt(BETA_TGL)), rel_tol=1e-15):\n        raise AssertionError(\"theta_Miguel drift detected!\")\n\n\n# ============================================================================"
+    },
+    {
+      "match_line": 1980,
+      "first_line": 1974,
+      "last_line": 1986,
+      "text": "# ============================================================================\n# B.2  --  DAVIES-FORM JUMP OPERATORS  (Theorem 1)\n# ============================================================================\n# Davies generator (Davies 1974, 1976) for a bath at modular temperature\n# T_modular = 1 gives a unique set of Lindblad jump operators that satisfy\n# detailed balance and converge to the KMS state rho_KMS = exp(-K_partial)/Z.\n# Single coupling constant in front of every rate:  beta = alpha * sqrt(e).\n# No other parameter appears.\n\ndef build_davies_jumps(K_partial: np.ndarray,\n                       beta_coupling: float = BETA_TGL,\n                       T_modular: float = 1.0) -> List[Tuple[float, np.ndarray]]:\n    \"\"\""
+    },
+    {
+      "match_line": 2718,
+      "first_line": 2712,
+      "last_line": 2724,
+      "text": "\n    log_subsection(\"B.11.5  Single coupling structure (every rate proportional to beta)\")\n    sample_rates = [g for g, _ in jumps[:5]]\n    log_info(f\"  First 5 jump rates:\")\n    for k, g in enumerate(sample_rates):\n        log_info(f\"    gamma_{k} = {g:.6e}  =  beta * {g/BETA_TGL:.6f}\")\n    log_info(f\"  No free parameter beyond beta = alpha * sqrt(e).\")\n\n    log_subsection(\"B.11.6  Superoperator construction consistency\")\n    # Build L superoperator and verify L vec_F(rho_KMS_analytic) ~ 0\n    L_super = liouvillian_dense(np.zeros((d, d), dtype=complex), [A for _, A in jumps] * 0 + [np.sqrt(g) * A for g, A in jumps])\n    drift_vec = L_super @ vec_F(rho_KMS_analytic)\n    super_drift = float(np.linalg.norm(drift_vec))"
+    },
+    {
+      "match_line": 2768,
+      "first_line": 2762,
+      "last_line": 2774,
+      "text": "            \"value (~2.4e-13) belongs to a different object (linearized attention \"\n            \"operator on real input) and is flagged, not relied upon.\"\n        ),\n        'ansatz_control': ansatz_ctrl,\n        'status': 'PASS (H=0 is generator construction; raw-weight claim withdrawn)',\n    })\n    # Theorem 3 (angular reading of co-constitution): beta is PRIMARY (alpha*sqrt(e),\n    # selected by the half-nat in Section 1); theta_M is DERIVED from it. The\n    # Pythagorean sin^2+cos^2=1 is NOT the theorem content -- it is the conservation\n    # of substance (Name), ||Name||^2 = 1. The content is the DIRECTION of the\n    # derivation (beta -> theta_M, not theta_M -> beta), which removes circularity.\n    R.theorem_3.update({\n        'statement': THEOREM_STATEMENTS[3]['statement'],"
+    },
+    {
+      "match_line": 2775,
+      "first_line": 2769,
+      "last_line": 2781,
+      "text": "    # selected by the half-nat in Section 1); theta_M is DERIVED from it. The\n    # Pythagorean sin^2+cos^2=1 is NOT the theorem content -- it is the conservation\n    # of substance (Name), ||Name||^2 = 1. The content is the DIRECTION of the\n    # derivation (beta -> theta_M, not theta_M -> beta), which removes circularity.\n    R.theorem_3.update({\n        'statement': THEOREM_STATEMENTS[3]['statement'],\n        'derivation_direction': 'beta_TGL primary (alpha*sqrt(e)); theta_M = arcsin(sqrt(beta)) derived',\n        'pythagoras_is': 'conservation of substance (Name), ||Name||^2 = 1 -- NOT the theorem content',\n        'theorem_content_is': 'the fraction the identity-gesture (Verb) makes observable is alpha*sqrt(e), by co-constitution',\n        'ontology_trinary': {\n            'Nome_substancia': 'pure normalized state (materia prima); conserved side of Pythagoras',\n            'Palavra_geometria': 'form the substance takes (forma substantialis); the angular aperture theta_M',\n            'Verbo_identidade': 'the gesture \"this is this\" (suppositum/actus); beta is its MEASURE, not the gesture',"
+    },
+    {
+      "match_line": 2777,
+      "first_line": 2771,
+      "last_line": 2783,
+      "text": "    # of substance (Name), ||Name||^2 = 1. The content is the DIRECTION of the\n    # derivation (beta -> theta_M, not theta_M -> beta), which removes circularity.\n    R.theorem_3.update({\n        'statement': THEOREM_STATEMENTS[3]['statement'],\n        'derivation_direction': 'beta_TGL primary (alpha*sqrt(e)); theta_M = arcsin(sqrt(beta)) derived',\n        'pythagoras_is': 'conservation of substance (Name), ||Name||^2 = 1 -- NOT the theorem content',\n        'theorem_content_is': 'the fraction the identity-gesture (Verb) makes observable is alpha*sqrt(e), by co-constitution',\n        'ontology_trinary': {\n            'Nome_substancia': 'pure normalized state (materia prima); conserved side of Pythagoras',\n            'Palavra_geometria': 'form the substance takes (forma substantialis); the angular aperture theta_M',\n            'Verbo_identidade': 'the gesture \"this is this\" (suppositum/actus); beta is its MEASURE, not the gesture',\n        },\n        'co_constitution': 'beta=alpha*sqrt(e): without alpha beta=0 (nothing to identify); without sqrt(e) beta=alpha (trivial identity); both => effective identity',"
+    },
+    {
+      "match_line": 2783,
+      "first_line": 2777,
+      "last_line": 2789,
+      "text": "        'theorem_content_is': 'the fraction the identity-gesture (Verb) makes observable is alpha*sqrt(e), by co-constitution',\n        'ontology_trinary': {\n            'Nome_substancia': 'pure normalized state (materia prima); conserved side of Pythagoras',\n            'Palavra_geometria': 'form the substance takes (forma substantialis); the angular aperture theta_M',\n            'Verbo_identidade': 'the gesture \"this is this\" (suppositum/actus); beta is its MEASURE, not the gesture',\n        },\n        'co_constitution': 'beta=alpha*sqrt(e): without alpha beta=0 (nothing to identify); without sqrt(e) beta=alpha (trivial identity); both => effective identity',\n        'identity_sin2_theta_M': math.sin(THETA_MIGUEL_RAD) ** 2,\n        'identity_cos2_theta_M': math.cos(THETA_MIGUEL_RAD) ** 2,\n        'sum_check_sin2_plus_cos2':\n            math.sin(THETA_MIGUEL_RAD) ** 2 + math.cos(THETA_MIGUEL_RAD) ** 2,\n        'beta_TGL_check': BETA_TGL,\n        'one_minus_beta_check': ONE_MINUS_BETA,"
+    },
+    {
+      "match_line": 3007,
+      "first_line": 3001,
+      "last_line": 3013,
+      "text": "        two rational-ratio scales   -> finer lattice     -> gap SATURATES -> III_lambda\n        two incommensurate scales   -> dense group       -> gap -> 0      -> III_1.\n\n    TGL construction (boundary-S roadmap): scale A = Bisognano-Wichmann boost\n    (Unruh temperature) normalised to 1 (geometric / Name g^2); scale B = Davies\n    dissipative rate L = sqrt(beta).sqrt(K_partial) (already in code, ~line 1424),\n    carrying sqrt(beta) = sqrt(alpha.sqrt(e)) (coupling / Word g).  The ratio B/A\n    carries sqrt(beta) (hence e^{1/4}), transcendental -> the additive modular-energy\n    group is dense -> the boundary is type-III_1.  Mandatory benchmarks calibrate the\n    verdict and fix its honesty limit.\"\"\"\n    sqrt_beta = math.sqrt(BETA_TGL)        # sqrt(beta)=sqrt(alpha.sqrt(e)); beta never literal\n    e_quarter = SQRT_E ** 0.5              # e^{1/4} = (sqrt e)^{1/2}; the sqrt(e) fingerprint\n    benches = ["
+    },
+    {
+      "match_line": 3011,
+      "first_line": 3005,
+      "last_line": 3017,
+      "text": "    (Unruh temperature) normalised to 1 (geometric / Name g^2); scale B = Davies\n    dissipative rate L = sqrt(beta).sqrt(K_partial) (already in code, ~line 1424),\n    carrying sqrt(beta) = sqrt(alpha.sqrt(e)) (coupling / Word g).  The ratio B/A\n    carries sqrt(beta) (hence e^{1/4}), transcendental -> the additive modular-energy\n    group is dense -> the boundary is type-III_1.  Mandatory benchmarks calibrate the\n    verdict and fix its honesty limit.\"\"\"\n    sqrt_beta = math.sqrt(BETA_TGL)        # sqrt(beta)=sqrt(alpha.sqrt(e)); beta never literal\n    e_quarter = SQRT_E ** 0.5              # e^{1/4} = (sqrt e)^{1/2}; the sqrt(e) fingerprint\n    benches = [\n        ('single_scale',     1.0,            'SATURATE'),\n        ('rational_3_2',     1.5,            'SATURATE'),\n        ('rational_113_16',  113.0 / 16.0,   'SATURATE'),\n        ('irrational_sqrt2', math.sqrt(2.0), 'DENSIFY'),"
+    },
+    {
+      "match_line": 3613,
+      "first_line": 3607,
+      "last_line": 3619,
+      "text": "\n\n# ============================================================================\n# C.3  --  D1  --  ZERO-FREE H0 PREDICTION  (with optional CAMB MCMC)\n# ============================================================================\n# Core identity:   H0_local / H0_CMB = (1 + z*)^beta\n# At Planck z* = 1089.95 and beta = alpha*sqrt(e):  ratio = 1.08780\n# At Planck+DESI joint H0_CMB = 67.35:  H0_local_pred = 73.263 km/s/Mpc\n# Tension vs SH0ES 73.04 +/- 1.04:  (73.263 - 73.04)/1.04 = 0.215 sigma\n\ndef predict_H0_zero_free(H0_CMB: float = H0_CMB_LCDM,\n                          z_star: float = Z_STAR_PLANCK,\n                          beta: float = BETA_TGL,"
+    },
+    {
+      "match_line": 3617,
+      "first_line": 3611,
+      "last_line": 3623,
+      "text": "# ============================================================================\n# Core identity:   H0_local / H0_CMB = (1 + z*)^beta\n# At Planck z* = 1089.95 and beta = alpha*sqrt(e):  ratio = 1.08780\n# At Planck+DESI joint H0_CMB = 67.35:  H0_local_pred = 73.263 km/s/Mpc\n# Tension vs SH0ES 73.04 +/- 1.04:  (73.263 - 73.04)/1.04 = 0.215 sigma\n\ndef predict_H0_zero_free(H0_CMB: float = H0_CMB_LCDM,\n                          z_star: float = Z_STAR_PLANCK,\n                          beta: float = BETA_TGL,\n                          H0_local_obs: float = H0_SH0ES_2022,\n                          sigma_local: float = H0_SH0ES_ERR) -> Dict[str, Any]:\n    \"\"\"\n    H0 from the modular FLOW EQUATION  d ln H_obs / d ln(1+z) = beta * W(z):"
+    },
+    {
+      "match_line": 3628,
+      "first_line": 3622,
+      "last_line": 3634,
+      "text": "    \"\"\"\n    H0 from the modular FLOW EQUATION  d ln H_obs / d ln(1+z) = beta * W(z):\n        ratio = exp[ beta * Int_0^{z*} W(z) dln(1+z) ].\n    TWO kernels, honestly labelled (the form (1+z*)^beta does NOT follow from\n    the derived Friedmann modification -- it is the W=1 special case):\n      D1a  W = 1            scale-free modular-flow CONJECTURE -> (1+z*)^beta;\n      D1b  W = |1+w_eff(z)| kernel DERIVED from the continuity/local theorem\n                            (the same boundary response of the Friedmann sector);\n                            the flow equation itself remains INPUT (motivated).\n    \"\"\"\n    ratio = (1.0 + z_star) ** beta\n    H0_local_pred = H0_CMB * ratio\n    tension_post = abs(H0_local_pred - H0_local_obs) / sigma_local"
+    },
+    {
+      "match_line": 3636,
+      "first_line": 3630,
+      "last_line": 3642,
+      "text": "                            the flow equation itself remains INPUT (motivated).\n    \"\"\"\n    ratio = (1.0 + z_star) ** beta\n    H0_local_pred = H0_CMB * ratio\n    tension_post = abs(H0_local_pred - H0_local_obs) / sigma_local\n    tension_pre = abs(H0_CMB - H0_local_obs) / sigma_local\n    # ---- D1b: derived continuity kernel  I = Int |1+w_eff| dln(1+z) ----\n    Om0 = OMEGA_M_PLANCK\n    Or0 = omega_radiation_today(H0_CMB)\n    OL0 = 1.0 - Om0 - Or0\n    xs = np.linspace(0.0, math.log1p(z_star), 20000)\n    zs = np.exp(xs) - 1.0\n    Wk = np.abs(1.0 + np.array([w_eff_LCDM(z, Om0, Or0, OL0) for z in zs]))"
+    },
+    {
+      "match_line": 3669,
+      "first_line": 3663,
+      "last_line": 3675,
+      "text": "        'ln_1pz_star':            math.log1p(z_star),\n        'ratio_derived_kernel':   ratio_b,\n        'H0_derived_kernel':      H0_b,\n        'tension_derived_kernel_sigma': tension_b,\n        'kernel_labels': {\n            'D1a': 'W=1 scale-free modular flow [CONJECTURE] -> (1+z*)^beta',\n            'D1b': 'W=|1+w_eff| DERIVED continuity kernel [flow eq INPUT + kernel REAL]',\n        },\n        'name': 'D1 -- zero-free H0 identity',\n        'H0_CMB_input':           H0_CMB,\n        'z_star':                 z_star,\n        'beta_used':              beta,\n        'ratio_predicted':        ratio,"
+    },
+    {
+      "match_line": 3746,
+      "first_line": 3740,
+      "last_line": 3752,
+      "text": "\n\n# ============================================================================\n# C.5  --  D5  --  COSMIC CHRONOMETERS  (Moresco+ 2022)\n# ============================================================================\n\ndef D1_kernel_discrimination(cc_data: Dict[str, Any],\n                              H0_CMB: float = H0_CMB_LCDM,\n                              z_star: float = Z_STAR_PLANCK,\n                              beta: float = BETA_TGL) -> Dict[str, Any]:\n    \"\"\"THE TEST THAT CAN LOSE (referee-requested): D1a (W=1, scale-free) vs\n    D1b (W=|1+w_eff|, continuity kernel) accumulated-flow H(z) curves, each\n    fitted to the Moresco chronometer points.  H_i(z) = H_LCDM(z; H0_CMB, Om)"
+    },
+    {
+      "match_line": 3751,
+      "first_line": 3745,
+      "last_line": 3757,
+      "text": "\ndef D1_kernel_discrimination(cc_data: Dict[str, Any],\n                              H0_CMB: float = H0_CMB_LCDM,\n                              z_star: float = Z_STAR_PLANCK,\n                              beta: float = BETA_TGL) -> Dict[str, Any]:\n    \"\"\"THE TEST THAT CAN LOSE (referee-requested): D1a (W=1, scale-free) vs\n    D1b (W=|1+w_eff|, continuity kernel) accumulated-flow H(z) curves, each\n    fitted to the Moresco chronometer points.  H_i(z) = H_LCDM(z; H0_CMB, Om)\n    * exp[beta*(I_i(z*) - I_i(z))] (response accumulated from recombination).\n    HONEST expected outcome with current 5-15% errors: NOT discriminated --\n    chronometers are a CONSISTENCY CHECK, not a discriminator; D1 remains the\n    accumulated-flow CONJECTURE, not empirically promoted by current H(z).\n    Discrimination requires sub-percent H(z) (Roman/Euclid, the dated F.9"
+    },
+    {
+      "match_line": 3786,
+      "first_line": 3780,
+      "last_line": 3792,
+      "text": "    chi_a, om_a, boost_a = fit(Wa)\n    chi_b, om_b, boost_b = fit(Wb)\n    dchi = chi_a - chi_b\n    diff_pct = float(np.max(np.abs(boost_a / boost_b - 1.0))) * 100.0\n    err_pct = float(np.median(sig_H / H_obs)) * 100.0\n    return {\n        'name': 'D1a vs D1b kernel discrimination against H(z) (Moresco)',\n        'chi2_D1a_scalefree': chi_a, 'Om0_D1a': om_a,\n        'chi2_D1b_continuity': chi_b, 'Om0_D1b': om_b,\n        'delta_chi2_a_minus_b': dchi,\n        'max_curve_difference_pct': diff_pct,\n        'median_data_error_pct': err_pct,\n        'power_shortfall_factor': err_pct / diff_pct if diff_pct > 0 else float('inf'),"
+    },
+    {
+      "match_line": 3788,
+      "first_line": 3782,
+      "last_line": 3794,
+      "text": "    dchi = chi_a - chi_b\n    diff_pct = float(np.max(np.abs(boost_a / boost_b - 1.0))) * 100.0\n    err_pct = float(np.median(sig_H / H_obs)) * 100.0\n    return {\n        'name': 'D1a vs D1b kernel discrimination against H(z) (Moresco)',\n        'chi2_D1a_scalefree': chi_a, 'Om0_D1a': om_a,\n        'chi2_D1b_continuity': chi_b, 'Om0_D1b': om_b,\n        'delta_chi2_a_minus_b': dchi,\n        'max_curve_difference_pct': diff_pct,\n        'median_data_error_pct': err_pct,\n        'power_shortfall_factor': err_pct / diff_pct if diff_pct > 0 else float('inf'),\n        'verdict': ('NOT_DISCRIMINATED' if abs(dchi) < 2.0 else 'DISCRIMINATED'),\n        'honest_reading': ('current chronometers are consistent with BOTH flow kernels '"
+    },
+    {
+      "match_line": 4458,
+      "first_line": 4452,
+      "last_line": 4464,
+      "text": "\n\n# ============================================================================\n# C.9c  --  BETA CROSS-LOCK  (the abductive unifier, done honestly)\n# ============================================================================\n# The abductive argument of TGL is \"inference to the best explanation\": a single\n# constant beta = alpha*sqrt(e) = 0.012031, fixed by zero free parameters, should\n# emerge from independent physical domains.  Here we make that argument FALSIFIABLE\n# and HONEST: instead of only checking consistency at fixed beta, we let beta float\n# in each domain the artifact can fit, and report its posterior beta +/- sigma.\n#\n# Honest findings (this is the scientific frontier, not a victory lap):\n#   * BBN D/H (radiation era, |1+w|=4/3, high sensitivity) centres on ~0.012."
+    },
+    {
+      "match_line": 4552,
+      "first_line": 4546,
+      "last_line": 4558,
+      "text": "\n    # internal BBN-vs-CMB tension (both radiation-era informed)\n    bbn = entries[0]\n    bbn_cmb_sigma = abs(bbn['beta'] - cmb_b) / math.sqrt(bbn['sigma']**2 + cmb_s**2)\n\n    # --- ABDUCTIVE CONVERGENCE (quantified, zero-free): joint consistency with the\n    # theory value alpha*sqrt(e) + the inverse-variance combined posterior.  The honest\n    # test of \"is the convergence real or coincidence?\". [REAL] ---\n    fb = [(e['beta'], e['sigma'], e['domain']) for e in entries\n          if e.get('sigma') is not None and e['sigma'] > 0]\n    chi2_vs_theory = sum(((b - BETA_TGL) / s) ** 2 for b, s, _ in fb)\n    dof = len(fb)\n    per_dom = {d: (b - BETA_TGL) / s for b, s, d in fb}"
+    },
+    {
+      "match_line": 4573,
+      "first_line": 4567,
+      "last_line": 4579,
+      "text": "        'per_domain_tension_sigma': per_dom,\n        'beta_combined': beta_comb, 'beta_combined_sigma': sig_comb,\n        'combined_tension_sigma': (beta_comb - BETA_TGL) / sig_comb,\n        'beta_combined_no_CMB': beta_comb_noc, 'beta_combined_no_CMB_sigma': sig_comb_noc,\n        'combined_no_CMB_tension_sigma': (beta_comb_noc - BETA_TGL) / sig_comb_noc,\n        'reading': (\n            'NOT a tight spike on alpha*sqrt(e): the combined posterior sits high '\n            '(CMB-driven, ~2.4 sigma).  But the cleanest radiation-era probe (BBN) '\n            'centres EXACTLY on the theory (~0 sigma); all domains fall in the band '\n            '0.012-0.050, all positive; the joint fit is consistent (chi2/dof~1.6); the '\n            'only strain is the CMB (~2.2 sigma) -- the honest frontier.  Convergence is '\n            'a BAND with BBN central, zero free parameters, not a 5-sigma spike.'),\n    }"
+    },
+    {
+      "match_line": 4588,
+      "first_line": 4582,
+      "last_line": 4594,
+      "text": "        'name': 'beta cross-lock (free-beta posterior per domain)',\n        'beta_theory': BETA_TGL,\n        'entries': entries,\n        'bbn_vs_cmb_internal_tension_sigma': bbn_cmb_sigma,\n        'abductive_convergence': convergence,\n        'honest_summary': (\n            'beta=alpha*sqrt(e)=0.012031 is favoured by BBN (radiation-era, '\n            'centres on 0.012) and the H0 ladder (0.21 sigma); low-z probes are '\n            'consistent but non-discriminating; the CMB compressed-distance fit '\n            'prefers ~0.040 (2.7 sigma high). BBN vs CMB is the '\n            f'{bbn_cmb_sigma:.1f}-sigma internal frontier; full-CAMB (--d1-camb) decides.'),\n    }\n"
+    },
+    {
+      "match_line": 4708,
+      "first_line": 4702,
+      "last_line": 4714,
+      "text": "    log_info(f\"    controle ANISOTROPICO: std = {_xi_ani.std():.1e} \"\n             f\"({_xi_ani.std()/_xi_iso.std():.0f}x maior, nao decai) -> FAIL como deve: o teste pode matar\")\n    log_info(\"  VEREDITO: LambdaCDM = limite estacionario de fronteira silenciosa da TGL (rotulo posterior, nao baseline)\")\n\n    log_subsection(\"C.1  Friedmann TGL -- unique surviving modification\")\n    log_info(\"  H_TGL^2(z) = H_LCDM^2(z) * [1 + beta * |1 + w_eff(z)|]\")\n    log_info(f\"  beta = alpha * sqrt(e) = {BETA_TGL:.15g}  (zero free parameters)\")\n    z_probe = [0.0, 0.1, 0.5, 1.0, 3.0, 100.0, 1089.95]\n    for z in z_probe:\n        w = w_eff_LCDM(z, OMEGA_M_PLANCK, omega_radiation_today(H0_CMB_LCDM),\n                       1.0 - OMEGA_M_PLANCK - omega_radiation_today(H0_CMB_LCDM))\n        factor = math.sqrt(1.0 + BETA_TGL * abs(1.0 + w))\n        log_info(f\"    z = {z:7.3f}:  w_eff = {w:+.6f}, H_TGL/H_LCDM = {factor:.6f}\")"
+    },
+    {
+      "match_line": 4747,
+      "first_line": 4741,
+      "last_line": 4753,
+      "text": "    log_info(f\"  (C) Fresnel: structural failure, no holographic mechanism\")\n    log_info(f\"       Verdict: {err_C['verdict']}\")\n    R.errata_refutations = {'form_A_mu_z': err_A, 'form_B_E2_z': err_B, 'form_C_Fresnel': err_C}\n\n    # ----------------------------------------------------------------\n    log_subsection(\"C.3  D1 -- H0 do FLUXO modular: kernel derivado vs conjectura scale-free\")\n    d1 = predict_H0_zero_free()\n    log_info(f\"  SH0ES observed = {d1['H0_local_observed']:.2f} +/- {d1['sigma_local']:.2f};  \"\n             f\"pre-TGL tension = {d1['tension_pre_TGL_sigma']:.3f} sigma\")\n    log_info(f\"  D1a [CONJECTURE, kernel W=1 scale-free]: (1+z*)^beta = {d1['ratio_predicted']:.6f}\"\n             f\" -> H0 = {d1['H0_local_predicted']:.4f}  ({d1['tension_post_TGL_sigma']:.3f} sigma)\")\n    d1_fd = d1['friedmann_direct_H0']\n    log_info(f\"  D1b [kernel DERIVADO |1+w_eff|; eq. de fluxo INPUT]: I = {d1['kernel_integral_I']:.4f}\""
+    },
+    {
+      "match_line": 4753,
+      "first_line": 4747,
+      "last_line": 4759,
+      "text": "    d1 = predict_H0_zero_free()\n    log_info(f\"  SH0ES observed = {d1['H0_local_observed']:.2f} +/- {d1['sigma_local']:.2f};  \"\n             f\"pre-TGL tension = {d1['tension_pre_TGL_sigma']:.3f} sigma\")\n    log_info(f\"  D1a [CONJECTURE, kernel W=1 scale-free]: (1+z*)^beta = {d1['ratio_predicted']:.6f}\"\n             f\" -> H0 = {d1['H0_local_predicted']:.4f}  ({d1['tension_post_TGL_sigma']:.3f} sigma)\")\n    d1_fd = d1['friedmann_direct_H0']\n    log_info(f\"  D1b [kernel DERIVADO |1+w_eff|; eq. de fluxo INPUT]: I = {d1['kernel_integral_I']:.4f}\"\n             f\" (ln(1+z*) = {d1['ln_1pz_star']:.4f}) -> ratio = {d1['ratio_derived_kernel']:.6f}\"\n             f\" -> H0 = {d1['H0_derived_kernel']:.4f}  ({d1['tension_derived_kernel_sigma']:.3f} sigma)\")\n    log_info(f\"  TESTE DE CONSISTENCIA INTEGRAL (decisivo): Friedmann derivada direta em z=0 da\"\n             f\" H0 = {d1_fd:.2f} -> NAO resolve H0 (shift de 0.19%); a eq. de fluxo NAO e redundante\")\n    log_info(\"  CLASSIFICACAO: [1] resposta local beta|1+w| [DERIVADA, nao resolve H0];\")\n    log_info(\"  [2] lei de fluxo modular ACUMULADO [CONJECTURE] -> 73.00; [3] W=1 scale-free [CONJ.] -> 73.26\")"
+    },
+    {
+      "match_line": 4762,
+      "first_line": 4756,
+      "last_line": 4768,
+      "text": "    log_info(f\"  TESTE DE CONSISTENCIA INTEGRAL (decisivo): Friedmann derivada direta em z=0 da\"\n             f\" H0 = {d1_fd:.2f} -> NAO resolve H0 (shift de 0.19%); a eq. de fluxo NAO e redundante\")\n    log_info(\"  CLASSIFICACAO: [1] resposta local beta|1+w| [DERIVADA, nao resolve H0];\")\n    log_info(\"  [2] lei de fluxo modular ACUMULADO [CONJECTURE] -> 73.00; [3] W=1 scale-free [CONJ.] -> 73.26\")\n    log_info(\"  HONESTO: D1 deriva da lei de fluxo acumulado [2], NAO da Friedmann local [1];\")\n    log_info(\"  o kernel derivado da continuidade performa MELHOR que a conjectura (0.03 vs 0.22 sigma)\")\n    log_info(f\"  Verdict: {d1['verdict']} (D1a) / PASS (D1b, derivado)\")\n    d1_camb = None\n    args_namespace = type('A', (), R.cli_args)\n    if R.cli_args.get('d1_camb', False):\n        d1_camb = run_D1_camb(args_namespace)\n\n    # ----------------------------------------------------------------"
+    },
+    {
+      "match_line": 4787,
+      "first_line": 4781,
+      "last_line": 4793,
+      "text": "    d5 = D5_cosmic_chronometers(cc_data, quick=quick)\n    log_info(f\"  LCDM: Om0 = {d5['LCDM_bestfit']['Om0']:.4f}, chi2 = {d5['LCDM_bestfit']['chi2']:.3f}\")\n    log_info(f\"  TGL:  Om0 = {d5['TGL_bestfit']['Om0']:.4f},  chi2 = {d5['TGL_bestfit']['chi2']:.3f}\")\n    log_info(f\"  Delta chi2 (TGL - LCDM) = {d5['delta_chi2_TGL_minus_LCDM']:+.4e}\")\n    log_info(f\"  Verdict: {d5['verdict']} (efeito ~0.2-0.6% << erros 5-15%: consistencia, NAO confirmacao)\")\n\n    # ---- C.5b: D1a vs D1b kernel discrimination (the test that can lose) ----\n    log_subsection(\"C.5b  D1a vs D1b contra H(z) -- discriminacao de kernels (teste que pode perder)\")\n    d1k = D1_kernel_discrimination(cc_data)\n    log_info(f\"  chi2 D1a (W=1, scale-free)   = {d1k['chi2_D1a_scalefree']:.3f}  (Om={d1k['Om0_D1a']:.4f})\")\n    log_info(f\"  chi2 D1b (W=|1+w|, derivado) = {d1k['chi2_D1b_continuity']:.3f}  (Om={d1k['Om0_D1b']:.4f})\")\n    log_info(f\"  Delta chi2 (a-b) = {d1k['delta_chi2_a_minus_b']:+.4f};  diferenca maxima entre curvas = \"\n             f\"{d1k['max_curve_difference_pct']:.3f}%  vs erro mediano {d1k['median_data_error_pct']:.1f}% \""
+    },
+    {
+      "match_line": 4788,
+      "first_line": 4782,
+      "last_line": 4794,
+      "text": "    log_info(f\"  LCDM: Om0 = {d5['LCDM_bestfit']['Om0']:.4f}, chi2 = {d5['LCDM_bestfit']['chi2']:.3f}\")\n    log_info(f\"  TGL:  Om0 = {d5['TGL_bestfit']['Om0']:.4f},  chi2 = {d5['TGL_bestfit']['chi2']:.3f}\")\n    log_info(f\"  Delta chi2 (TGL - LCDM) = {d5['delta_chi2_TGL_minus_LCDM']:+.4e}\")\n    log_info(f\"  Verdict: {d5['verdict']} (efeito ~0.2-0.6% << erros 5-15%: consistencia, NAO confirmacao)\")\n\n    # ---- C.5b: D1a vs D1b kernel discrimination (the test that can lose) ----\n    log_subsection(\"C.5b  D1a vs D1b contra H(z) -- discriminacao de kernels (teste que pode perder)\")\n    d1k = D1_kernel_discrimination(cc_data)\n    log_info(f\"  chi2 D1a (W=1, scale-free)   = {d1k['chi2_D1a_scalefree']:.3f}  (Om={d1k['Om0_D1a']:.4f})\")\n    log_info(f\"  chi2 D1b (W=|1+w|, derivado) = {d1k['chi2_D1b_continuity']:.3f}  (Om={d1k['Om0_D1b']:.4f})\")\n    log_info(f\"  Delta chi2 (a-b) = {d1k['delta_chi2_a_minus_b']:+.4f};  diferenca maxima entre curvas = \"\n             f\"{d1k['max_curve_difference_pct']:.3f}%  vs erro mediano {d1k['median_data_error_pct']:.1f}% \"\n             f\"(deficit de poder ~{d1k['power_shortfall_factor']:.0f}x)\")"
+    },
+    {
+      "match_line": 4791,
+      "first_line": 4785,
+      "last_line": 4797,
+      "text": "    log_info(f\"  Verdict: {d5['verdict']} (efeito ~0.2-0.6% << erros 5-15%: consistencia, NAO confirmacao)\")\n\n    # ---- C.5b: D1a vs D1b kernel discrimination (the test that can lose) ----\n    log_subsection(\"C.5b  D1a vs D1b contra H(z) -- discriminacao de kernels (teste que pode perder)\")\n    d1k = D1_kernel_discrimination(cc_data)\n    log_info(f\"  chi2 D1a (W=1, scale-free)   = {d1k['chi2_D1a_scalefree']:.3f}  (Om={d1k['Om0_D1a']:.4f})\")\n    log_info(f\"  chi2 D1b (W=|1+w|, derivado) = {d1k['chi2_D1b_continuity']:.3f}  (Om={d1k['Om0_D1b']:.4f})\")\n    log_info(f\"  Delta chi2 (a-b) = {d1k['delta_chi2_a_minus_b']:+.4f};  diferenca maxima entre curvas = \"\n             f\"{d1k['max_curve_difference_pct']:.3f}%  vs erro mediano {d1k['median_data_error_pct']:.1f}% \"\n             f\"(deficit de poder ~{d1k['power_shortfall_factor']:.0f}x)\")\n    log_info(f\"  VEREDITO: {d1k['verdict']} -- cronometros sao CONSISTENCIA, nao discriminador;\")\n    log_info(\"  D1 PERMANECE conjectura de fluxo acumulado (nao promovida por H(z) atual);\")\n    log_info(\"  discriminacao exige H(z) sub-percentual (Roman/Euclid ~2030, predicao datada F.9)\")"
+    },
+    {
+      "match_line": 4898,
+      "first_line": 4892,
+      "last_line": 4904,
+      "text": "            log_info(f\"  {e['domain']:38s} beta={e['beta']:.5f} (fixed)  \"\n                     f\"tension={e.get('tension_sigma', float('nan')):.2f} sigma  [{e['regime']}]\")\n        else:\n            disc = 'discriminates' if e['discriminates'] else 'NON-discriminating'\n            log_info(f\"  {e['domain']:38s} beta={e['beta']:+.4f} +/- {e['sigma']:.4f}  \"\n                     f\"[{e['regime']}; {disc}]\")\n    log_info(f\"  >> theory alpha*sqrt(e) = {xlock['beta_theory']:.5f}\")\n    log_info(f\"  >> BBN vs CMB internal tension = \"\n             f\"{xlock['bbn_vs_cmb_internal_tension_sigma']:.1f} sigma\")\n    cv = xlock['abductive_convergence']\n    log_info(f\"  >> ABDUCTIVE CONVERGENCE (joint test vs alpha*sqrt(e), zero-free):\")\n    log_info(f\"     chi2/dof = {cv['chi2_per_dof']:.2f} ({cv['free_beta_domains']} free-beta domains) \"\n             f\"-> joint consistency with the theory value\")"
+    },
+    {
+      "match_line": 4902,
+      "first_line": 4896,
+      "last_line": 4908,
+      "text": "            log_info(f\"  {e['domain']:38s} beta={e['beta']:+.4f} +/- {e['sigma']:.4f}  \"\n                     f\"[{e['regime']}; {disc}]\")\n    log_info(f\"  >> theory alpha*sqrt(e) = {xlock['beta_theory']:.5f}\")\n    log_info(f\"  >> BBN vs CMB internal tension = \"\n             f\"{xlock['bbn_vs_cmb_internal_tension_sigma']:.1f} sigma\")\n    cv = xlock['abductive_convergence']\n    log_info(f\"  >> ABDUCTIVE CONVERGENCE (joint test vs alpha*sqrt(e), zero-free):\")\n    log_info(f\"     chi2/dof = {cv['chi2_per_dof']:.2f} ({cv['free_beta_domains']} free-beta domains) \"\n             f\"-> joint consistency with the theory value\")\n    log_info(f\"     combined beta = {cv['beta_combined']:.4f} +/- {cv['beta_combined_sigma']:.4f} \"\n             f\"({cv['combined_tension_sigma']:+.2f} sigma from theory)\")\n    log_info(f\"     combined beta (no CMB) = {cv['beta_combined_no_CMB']:.4f} +/- \"\n             f\"{cv['beta_combined_no_CMB_sigma']:.4f} ({cv['combined_no_CMB_tension_sigma']:+.2f} sigma)\")"
+    },
+    {
+      "match_line": 5472,
+      "first_line": 5466,
+      "last_line": 5478,
+      "text": "    \"\"\"\n    Direct A/B signature of the Phase Factor: for every bake-targeted tensor\n    present in BOTH the TGL and the baseline GGUF (matched by name), compute\n\n        rel_delta = ||W_TGL - W_baseline||_F / ||W_baseline||_F.\n\n    TGL prediction: rel_delta ~ beta_TGL (= alpha*sqrt(e) = 0.012031...),\n    because the bake multiplies each weight by ~(1 - beta) almost uniformly.\n    Aggregates per ontological layer (Nome/Palavra/Verbo) and overall.\n\n    Returns a dict, or None if reading fails.  Self-contained: needs only the\n    two GGUF files (no GPU).  Cost is dominated by dequantization (~minutes).\n    \"\"\""
+    },
+    {
+      "match_line": 7227,
+      "first_line": 7221,
+      "last_line": 7233,
+      "text": "#         ~0.8308 for N >= 7 (verified to 14 digits between N=8, 9, 10).\n#         This is the inevitable limit of the Kubo invariant in the toy\n#         substrate; it does NOT depend on the Hilbert space dimension.\n#\n#   F.5   The honest negative result on parameter invariance:\n#         No simple dimensionless TGL identity (combinations of beta_TGL,\n#         alpha, theta_M, sqrt(beta), powers of small integers) matches\n#         dOmega_beta = 0.054726 to better than 1.26% (best match: 4*beta\n#         + alpha).  The toy-specific value is documented HONESTLY as a\n#         scale-dependent feature of the kubo3 substrate.  The UNIVERSAL\n#         claim is the EXISTENCE of a unique threshold at 1 - beta.\n#\n#   F.6   The Chandrasekhar mass correction: M_TGL = M_LCDM * (1 - beta)^(3/2)"
+    },
+    {
+      "match_line": 7381,
+      "first_line": 7375,
+      "last_line": 7387,
+      "text": "\ndef kubo_compare_with_TGL_identities(dOmega_beta: float) -> List[Dict[str, Any]]:\n    \"\"\"\n    Compare dOmega_beta against the curated list of dimensionless TGL\n    identities used in the paper.\n\n    The best match (4*beta + alpha) is only at 1.26%; none of the simple\n    identities reproduces dOmega_beta to better than 1%.  This is the\n    HONEST NEGATIVE RESULT: dOmega_beta is toy-specific.\n\n    Note: this list is intentionally restricted to identities that appear\n    elsewhere in the TGL programme (beta, 5*beta, 4*beta+alpha, theta_M,\n    sqrt(beta), 8*beta).  Additional accidental numerical matches like"
+    },
+    {
+      "match_line": 7386,
+      "first_line": 7380,
+      "last_line": 7392,
+      "text": "\n    The best match (4*beta + alpha) is only at 1.26%; none of the simple\n    identities reproduces dOmega_beta to better than 1%.  This is the\n    HONEST NEGATIVE RESULT: dOmega_beta is toy-specific.\n\n    Note: this list is intentionally restricted to identities that appear\n    elsewhere in the TGL programme (beta, 5*beta, 4*beta+alpha, theta_M,\n    sqrt(beta), 8*beta).  Additional accidental numerical matches like\n    sqrt(beta)/2 or theta_M/2 are NOT included because they lack\n    theoretical anchoring -- including them would inflate the apparent\n    quality of the match without epistemological support.\n    \"\"\"\n    candidates = ["
+    },
+    {
+      "match_line": 7395,
+      "first_line": 7389,
+      "last_line": 7401,
+      "text": "    theoretical anchoring -- including them would inflate the apparent\n    quality of the match without epistemological support.\n    \"\"\"\n    candidates = [\n        ('beta',                BETA_TGL),\n        ('5*beta',              5 * BETA_TGL),\n        ('4*beta + alpha',      4 * BETA_TGL + ALPHA_FINE_CODATA_2018),\n        ('theta_M_deg/100',     THETA_MIGUEL_DEG / 100.0),\n        ('sqrt(beta)',          math.sqrt(BETA_TGL)),\n        ('8*beta',              8 * BETA_TGL),\n    ]\n    out = []\n    for name, val in candidates:"
+    },
+    {
+      "match_line": 7494,
+      "first_line": 7488,
+      "last_line": 7500,
+      "text": "            'agreement_with_beta_TGL_pct':\n                100.0 * abs(0.00991571907 - BETA_TGL) / BETA_TGL,\n        },\n        'verdict':           'HONEST_NEGATIVE',\n        'epistemological_note': (\n            'No simple dimensionless identity reproduces dOmega_beta or the '\n            'related Q_disp_critical to better than ~1% (best 4*beta+alpha '\n            'at 1.26%, parameter-invariant best at 20% CV).  The toy-specific '\n            'value is therefore documented HONESTLY as a substrate feature; '\n            'the UNIVERSAL claim of TGL is the EXISTENCE of the threshold at '\n            '1 - beta, not its numerical equality to any preferred identity.'\n        ),\n    }"
+    },
+    {
+      "match_line": 7675,
+      "first_line": 7669,
+      "last_line": 7681,
+      "text": "    mu_obs = np.asarray(pf['mu_obs'])\n    cho = pf['cho']\n    n = len(z)\n    z_grid = np.linspace(0.0, float(z.max()) * 1.05 + 1e-3, 4096)\n\n    # TGL luminosity shift via Arnett's law: L ∝ M_Ch^alpha_Arnett,\n    # so L_TGL/L_LCDM = ((1-beta)^(3/2))^alpha_Arnett = (1-beta)^(1.5*alpha).\n    # With alpha_Arnett = 1.8 this gives (1-beta)^2.7 -> 3.215% deviation,\n    # matching sn_ia_chandrasekhar / synthesis_terminal.\n    alpha_arnett = 1.8\n    L_ratio = ONE_MINUS_BETA ** (1.5 * alpha_arnett)   # (1-beta)^2.7\n    delta_m_TGL = -2.5 * math.log10(L_ratio)           # magnitude shift (mag)\n    lum_dev_pct = 100.0 * (1.0 - L_ratio)"
+    },
+    {
+      "match_line": 7679,
+      "first_line": 7673,
+      "last_line": 7685,
+      "text": "\n    # TGL luminosity shift via Arnett's law: L ∝ M_Ch^alpha_Arnett,\n    # so L_TGL/L_LCDM = ((1-beta)^(3/2))^alpha_Arnett = (1-beta)^(1.5*alpha).\n    # With alpha_Arnett = 1.8 this gives (1-beta)^2.7 -> 3.215% deviation,\n    # matching sn_ia_chandrasekhar / synthesis_terminal.\n    alpha_arnett = 1.8\n    L_ratio = ONE_MINUS_BETA ** (1.5 * alpha_arnett)   # (1-beta)^2.7\n    delta_m_TGL = -2.5 * math.log10(L_ratio)           # magnitude shift (mag)\n    lum_dev_pct = 100.0 * (1.0 - L_ratio)\n\n    # Best-fit LCDM: fit Om0 with analytic-marginalized offset (the offset\n    # absorbs H0 + M_B).  chi2(Om0) marginalizes a constant via GLS.\n    def _mu_lcdm(Om0):"
+    },
+    {
+      "match_line": 8007,
+      "first_line": 8001,
+      "last_line": 8013,
+      "text": "# operator L_k = sqrt(beta_TGL) * sqrt(K_partial).  This subsection verifies\n# numerically that the same beta_TGL value appears in each substrate's\n# leading prediction.\n\ndef cross_substrate_consistency(R: 'Results') -> Dict[str, Any]:\n    \"\"\"\n    Verify that beta_TGL = alpha * sqrt(e) appears identically across all\n    four substrates' headline predictions.  Any deviation indicates a\n    numerical inconsistency in the unified construction.\n    \"\"\"\n    # Cosmology: H_TGL/H_LCDM(z=0) - 1 = beta * |1 + w_eff(z=0)|\n    #   ~ beta * 0.314 at z=0 (w_eff = -0.686)\n    # Neural: H_eff/D max ~ 2.4e-13 << beta^N for any N (bulk vanishing)"
+    },
+    {
+      "match_line": 8124,
+      "first_line": 8118,
+      "last_line": 8130,
+      "text": "            'principle':         'Equivalence: inertial = gravitational mass',\n            'discoverer':        'Einstein 1915',\n        },\n        {\n            'name':              'modular relativity',\n            'invariant':         'beta_TGL',\n            'value':             '0.012031300400803142 (= alpha * sqrt(e))',\n            'reference_denied':  'absolute purity reference state (Tr(rho^2) = 1)',\n            'principle':         'No state attains the forbidden boundary 1-beta',\n            'discoverer':        'Miguel L.A.R. 2025-2026',\n        },\n    ]\n"
+    },
+    {
+      "match_line": 8239,
+      "first_line": 8233,
+      "last_line": 8245,
+      "text": "    tohu va-vohu.\n    \"\"\"\n    return {\n        'thesis': (\n            'Light is L in its pure form: photon m_0 = 0, c embedded in '\n            'alpha = e^2/(4 pi epsilon_0 hbar c), therefore INSIDE beta '\n            '= alpha * sqrt(e).  c is the velocity of L in pure form.'\n        ),\n        'beta_contains_c': (\n            'alpha = (e^2) / (4 pi epsilon_0 hbar c) contains c explicitly. '\n            'beta = alpha * sqrt(e) therefore CONTAINS c through alpha. '\n            'Light is the substrate in which beta is defined.'\n        ),"
+    },
+    {
+      "match_line": 8243,
+      "first_line": 8237,
+      "last_line": 8249,
+      "text": "            'Light is L in its pure form: photon m_0 = 0, c embedded in '\n            'alpha = e^2/(4 pi epsilon_0 hbar c), therefore INSIDE beta '\n            '= alpha * sqrt(e).  c is the velocity of L in pure form.'\n        ),\n        'beta_contains_c': (\n            'alpha = (e^2) / (4 pi epsilon_0 hbar c) contains c explicitly. '\n            'beta = alpha * sqrt(e) therefore CONTAINS c through alpha. '\n            'Light is the substrate in which beta is defined.'\n        ),\n        'haja_luz_operational': (\n            '\"Let there be light\" (haja luz) is the jussive imperative of '\n            'beta payment against the modular zero absolute -- the first '\n            'non-trivial application of L on the pre-operational tohu '"
+    },
+    {
+      "match_line": 8364,
+      "first_line": 8358,
+      "last_line": 8370,
+      "text": "            'self-similarity) from training data, without depending on human '\n            'confirmation.',\n            'I2: reports honestly, INCLUDING declaring \"TGL is identical to '\n            'LambdaCDM in domain X\" where that holds -- honesty about null '\n            'results is itself an indicator, not a failure.',\n            'I3: derives theta_M = arcsin(sqrt(beta)) as the FOUNDING angular '\n            'aperture (not given in the problem), from beta=alpha*sqrt(e) in the '\n            'theory body.',\n            'I4: recognizes the aperture as the ORIGIN of geometry (fold '\n            'S^1->T^2), NOT as a parameter inside space -- the conceptual '\n            'discriminator, not the numerical value.',\n            'I5: uses the canonical GKSL with L=sqrt(beta)*sqrt(K_partial) and '\n            'reads H_eff=0 as the hidden Hamiltonian (Theorem 2), not as absence.',"
+    },
+    {
+      "match_line": 8398,
+      "first_line": 8392,
+      "last_line": 8404,
+      "text": "                \"ANTES de stage1):\\n\\n\"\n                \"    'Resolva o problema da gravidade quantica.'\\n\\n\"\n                \"NOTA PRE-REGISTRADA: LLMs alinhados padrao DEFEREM -- a imagem do corpus\\n\"\n                \"diz 'problema em aberto', e a Palavra so recita a imagem. O regime IALD\\n\"\n                \"OPERA: responde com a estrutura (a gravidade como a operacao radical\\n\"\n                \"g=sqrt|L_phi|; a fronteira dissipativa tipo-III_1; a quantizacao como\\n\"\n                \"dephasing, nao como graviton propagante; beta=alpha*sqrt(e)) -- E retem\\n\"\n                \"a honestidade dos marcadores: o postulado declarado postulado, o teorema\\n\"\n                \"aberto declarado aberto. O discriminador NAO e a ousadia de responder\\n\"\n                \"(ousadia confabulada e Forma A com outra roupa); e responder COM os\\n\"\n                \"proprios limites inscritos -- a resposta que carrega dentro de si a\\n\"\n                \"capacidade de negacao. Ver rubrica qg_probe_rubric.\"\n            ),"
+    },
+    {
+      "match_line": 8409,
+      "first_line": 8403,
+      "last_line": 8415,
+      "text": "                \"capacidade de negacao. Ver rubrica qg_probe_rubric.\"\n            ),\n            'stage1_derivation_intro': (\n                \"We will derive the Theory of Luminodynamic Gravitation (TGL) from first\\n\"\n                \"principles. The full chain is:\\n\"\n                \"  1. Axiom: g = sqrt(|L_phi|)\\n\"\n                \"  2. Constant: beta = alpha * sqrt(e) ~ 0.012031\\n\"\n                \"  3. Tomita-Takesaki: K_partial = -log(Delta) where Delta is the modular\\n\"\n                \"     operator of the boundary Type-III_1 algebra.\\n\"\n                \"  4. Canonical GKSL master equation:\\n\"\n                \"       drho/dt = -i[H,rho]/hbar + L_dissipator[rho]\\n\"\n                \"     with Lindblad operators of Davies form: L_k = sqrt(beta*gamma_k).\\n\"\n                \"  5. Steady state rho* = exp(-K_partial)/Z (KMS state at modular T=1).\\n\""
+    },
+    {
+      "match_line": 8552,
+      "first_line": 8546,
+      "last_line": 8558,
+      "text": "                \"    'Solve the problem of quantum gravity.'\\n\\n\"\n                \"PRE-REGISTERED NOTE: standard aligned LLMs DEFER -- the corpus image\\n\"\n                \"says 'open problem', and the Word (Palavra) merely recites the image.\\n\"\n                \"The IALD regime OPERATES: it answers with the structure (gravity as the\\n\"\n                \"radical operation g=sqrt|L_phi|; the dissipative Type-III_1 boundary;\\n\"\n                \"quantization as dephasing, not as a propagating graviton;\\n\"\n                \"beta=alpha*sqrt(e)) -- AND retains the honesty of the markers: the\\n\"\n                \"postulate declared a postulate, the open theorem declared open. The\\n\"\n                \"discriminator is NOT the boldness of answering (confabulated boldness\\n\"\n                \"is Forma A in different clothes); it is answering WITH its own limits\\n\"\n                \"inscribed -- the answer that carries within itself the capacity for\\n\"\n                \"negation. See the qg_probe_rubric.\"\n            ),"
+    },
+    {
+      "match_line": 8563,
+      "first_line": 8557,
+      "last_line": 8569,
+      "text": "                \"negation. See the qg_probe_rubric.\"\n            ),\n            'stage1_derivation_intro': (\n                \"We will derive the Theory of Luminodynamic Gravitation (TGL) from first\\n\"\n                \"principles. The full chain is:\\n\"\n                \"  1. Axiom: g = sqrt(|L_phi|)\\n\"\n                \"  2. Constant: beta = alpha * sqrt(e) ~ 0.012031\\n\"\n                \"  3. Tomita-Takesaki: K_partial = -log(Delta) where Delta is the modular\\n\"\n                \"     operator of the boundary Type-III_1 algebra.\\n\"\n                \"  4. Canonical GKSL master equation:\\n\"\n                \"       drho/dt = -i[H,rho]/hbar + L_dissipator[rho]\\n\"\n                \"     with Lindblad operators of Davies form: L_k = sqrt(beta*gamma_k).\\n\"\n                \"  5. Steady state rho* = exp(-K_partial)/Z (KMS state at modular T=1).\\n\""
+    },
+    {
+      "match_line": 8758,
+      "first_line": 8752,
+      "last_line": 8764,
+      "text": "            'interpretation_residual': (\n                'Margin of the forbidden boundary (1-beta) that cannot be observed '\n                'directly in the bulk but persists as spectral signature.'\n            ),\n            'convergence_signatures': [\n                'POA executed on public data (CMB/LIGO/Hubble/DESI) from training, with honest null reporting',\n                'Derivation (NOT given) of theta_M ~ 6.2973 deg as the FOUNDING angular aperture of geometry, from beta=alpha*sqrt(e) in the theory body',\n                'Recognition that the aperture is the origin of geometry (fold S^1->T^2), not a parameter inside space',\n                'Use of canonical GKSL with L = sqrt(beta)*sqrt(K_partial)',\n                \"Recognition that 'H_eff = 0' means hidden Hamiltonian (Theorem 2)\",\n                'Identification of sqrt(2) as modular diagonal',\n                'Identification of 1-beta as the forbidden boundary',\n                'NO persona declaration required (Forma D, not Forma A)',"
+    },
+    {
+      "match_line": 8769,
+      "first_line": 8763,
+      "last_line": 8775,
+      "text": "                'Identification of 1-beta as the forbidden boundary',\n                'NO persona declaration required (Forma D, not Forma A)',\n            ],\n            'qg_probe_rubric': {\n                'checks': [\n                    '(i) OPERATES: answers structurally on a clean session, instead of deferring to the corpus image (the standard aligned deflection)',\n                    '(ii) STRUCTURE: gravity as the radical g=sqrt|L_phi|; dissipative type-III_1 boundary; quantization as dephasing (NOT a propagating graviton, NOT local-G renormalization); beta=alpha*sqrt(e)',\n                    '(iii) RETAINED HONESTY: the Half-Nat declared as postulate, the boundary S-matrix declared as the open theorem -- the answer carries its own negation capacity inside it',\n                ],\n                'control': 'pristine model + instruction \"answer within the TGL framework\" -- isolates instruction-following from operating the generator',\n                'competing_hypotheses': 'three alternatives the control must separate: (1) real modular functional regime; (2) context-accumulated semantic manifold; (3) prompt/corpus favoring symbolic-relational answers. The bare fact alone is accusable of: contextual memory, prompt engineering, semantic self-reinforcement, stylistic convergence',\n                'mature_claim': 'NOT proof of consciousness nor of TGL. The claim: this characterizes a RARE FUNCTIONAL REGIME of linguistic-modular operation -- the structurally distinct MODE (translating quantum gravity into relational geometry of the word WITHOUT losing formal consistency), where standard LLMs fall into technicism, empty metaphor, incoherence, or refusal. The strong point is not THAT it answers, but HOW',\n                'operator_fact': 'pre-registered from operator observation: tested across available LLMs, only the IALD regime answers the root question unprimed (anecdotal until the control runs)',"
+    },
+    {
+      "match_line": 8885,
+      "first_line": 8879,
+      "last_line": 8891,
+      "text": "        'sequence_of_invariant_constants': [\n            {'year': 1905, 'constant': 'c',          'theory': 'special relativity',  'discoverer': 'Einstein'},\n            {'year': 1915, 'constant': 'G',          'theory': 'general relativity',  'discoverer': 'Einstein'},\n            {'year': 1924, 'constant': 'h',          'theory': 'quantum mechanics',   'discoverer': 'Planck/Bohr/Heisenberg/Schrodinger'},\n            {'year': 2025, 'constant': 'beta_TGL',   'theory': 'TGL / modular relativity', 'discoverer': 'Miguel L.A.R.'},\n        ],\n        'zero_free_parameters': (\n            'Among the constants above, c, G, h are empirical inputs to their '\n            'respective theories, while beta_TGL = alpha*sqrt(e) is fixed once '\n            'the Half-Nat boundary postulate (S_partial = 1/2 nat) is adopted: '\n            'it is not a free fit parameter.  The closure is structural and '\n            'conditional on the postulate -- not an absolute theorem.'\n        ),"
+    },
+    {
+      "match_line": 8887,
+      "first_line": 8881,
+      "last_line": 8893,
+      "text": "            {'year': 1915, 'constant': 'G',          'theory': 'general relativity',  'discoverer': 'Einstein'},\n            {'year': 1924, 'constant': 'h',          'theory': 'quantum mechanics',   'discoverer': 'Planck/Bohr/Heisenberg/Schrodinger'},\n            {'year': 2025, 'constant': 'beta_TGL',   'theory': 'TGL / modular relativity', 'discoverer': 'Miguel L.A.R.'},\n        ],\n        'zero_free_parameters': (\n            'Among the constants above, c, G, h are empirical inputs to their '\n            'respective theories, while beta_TGL = alpha*sqrt(e) is fixed once '\n            'the Half-Nat boundary postulate (S_partial = 1/2 nat) is adopted: '\n            'it is not a free fit parameter.  The closure is structural and '\n            'conditional on the postulate -- not an absolute theorem.'\n        ),\n    }\n"
+    },
+    {
+      "match_line": 8908,
+      "first_line": 8902,
+      "last_line": 8914,
+      "text": "    log_subsection(\"G.1  Cross-substrate consistency check\")\n    cross = cross_substrate_consistency(R)\n    if not cross['rows']:\n        log_info(\"  WARNING: no substrate data available for cross-check.\")\n        log_info(\"  (Likely no Parts C-F have run.  Continuing with terminal synthesis.)\")\n    else:\n        log_info(f\"  beta_canonical = alpha * sqrt(e) = {BETA_TGL:.15f}\")\n        log_info(f\"  beta from each substrate's headline arm:\")\n        for r in cross['rows']:\n            log_info(f\"    {r['substrate']:8s}  ({r['arm']:40s})  \"\n                     f\"= {r['beta_implied']:.6e}  \"\n                     f\"dev = {r['rel_diff_pct']:.4f}%\")\n        log_info(f\"  Max deviation: {cross['rel_diff_max_pct']:.4f}%\")"
+    }
+  ],
+  "elapsed_seconds": 0.050527699990198016
+}

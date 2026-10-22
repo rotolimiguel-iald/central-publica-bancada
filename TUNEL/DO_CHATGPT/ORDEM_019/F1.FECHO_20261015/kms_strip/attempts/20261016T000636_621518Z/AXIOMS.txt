@@ -1,0 +1,67 @@
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T000636_621518Z\WickQuadraticFormR2.lean:42:39: error: unsolved goals
+f g h k : ↥H1
+⊢ inner ℂ g k * inner ℂ f k * Complex.exp (inner ℂ h k) * (1 / 2) +
+          Complex.exp (inner ℂ h k) * inner ℂ h f * inner ℂ h g * (1 / 2) +
+        inner ℂ (↑(annihilation g) ⟨exponential h, ⋯⟩) (↑(annihilation f) ⟨exponential k, ⋯⟩) * (1 / 2) +
+      inner ℂ (↑(annihilation f) ⟨exponential h, ⋯⟩) (↑(annihilation g) ⟨exponential k, ⋯⟩) * (1 / 2) =
+    inner ℂ g k * inner ℂ f k * Complex.exp (inner ℂ h k) * (1 / 2) +
+          inner ℂ g k * Complex.exp (inner ℂ h k) * inner ℂ h f * (1 / 2) +
+        inner ℂ f k * Complex.exp (inner ℂ h k) * inner ℂ h g * (1 / 2) +
+      Complex.exp (inner ℂ h k) * inner ℂ h f * inner ℂ h g * (1 / 2)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T000636_621518Z\WickQuadraticFormR2.lean:45:23: warning: This simp argument is unused:
+  annihilation_exponential
+
+Hint: Omit it from the simp argument list.
+  simp only [̵e̵x̵p̵D̵o̵m̵a̵i̵n̵,̵a̵n̵n̵i̵h̵i̵l̵a̵t̵i̵o̵n̵_̵e̵x̵p̵o̵n̵e̵n̵t̵i̵a̵l̵,̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵l̵e̵f̵t̵,̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵,̵
+  ̵ ̵ ̵ ̵ ̵e̵x̵p̵o̵n̵e̵n̵t̵i̵a̵l̵_̵i̵n̵n̵e̵r̵,̵m̵a̵p̵_̵m̵u̵l̵,̵i̵n̵n̵e̵r̵_̵c̵o̵n̵j̵_̵s̵y̵m̵m̵]̵[̲e̲x̲p̲D̲o̲m̲a̲i̲n̲,̲ ̲i̲n̲n̲e̲r̲_̲s̲m̲u̲l̲_̲l̲e̲f̲t̲,̲ ̲i̲n̲n̲e̲r̲_̲s̲m̲u̲l̲_̲r̲i̲g̲h̲t̲,̲ ̲e̲x̲p̲o̲n̲e̲n̲t̲i̲a̲l̲_̲i̲n̲n̲e̲r̲,̲ ̲m̲a̲p̲_̲m̲u̲l̲,̲
+  ̲ ̲ ̲ ̲ ̲i̲n̲n̲e̲r̲_̲c̲o̲n̲j̲_̲s̲y̲m̲m̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T000636_621518Z\WickQuadraticFormR2.lean:55:50: error: unsolved goals
+f g : ↥H1
+x y : ↥domain
+⊢ ((starRingEnd ℂ) 2)⁻¹ * inner ℂ (doubleAnnihilate f g y) ↑x +
+          ((starRingEnd ℂ) 2)⁻¹ * inner ℂ (↑(annihilation f) y) (↑(annihilation g) x) +
+        ((starRingEnd ℂ) 2)⁻¹ * inner ℂ (↑(annihilation g) y) (↑(annihilation f) x) +
+      ((starRingEnd ℂ) 2)⁻¹ * inner ℂ (↑y) (doubleAnnihilate g f x) =
+    inner ℂ (doubleAnnihilate f g y) ↑x * (1 / 2) + inner ℂ (↑(annihilation f) y) (↑(annihilation g) x) * (1 / 2) +
+        inner ℂ (↑(annihilation g) y) (↑(annihilation f) x) * (1 / 2) +
+      inner ℂ (↑y) (doubleAnnihilate g f x) * (1 / 2)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T000636_621518Z\WickQuadraticFormR2.lean:57:56: warning: This simp argument is unused:
+  star_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [̵q̵u̵a̵d̵r̵a̵t̵i̵c̵,̵m̵a̵p̵_̵m̵u̵l̵,̵m̵a̵p̵_̵a̵d̵d̵,̵m̵a̵p̵_̵d̵i̵v̵₀̵,̵m̵a̵p̵_̵o̵n̵e̵,̵s̵t̵a̵r̵_̵o̵f̵N̵a̵t̵,̵[̲q̲u̲a̲d̲r̲a̲t̲i̲c̲,̲ ̲m̲a̲p̲_̲m̲u̲l̲,̲ ̲m̲a̲p̲_̲a̲d̲d̲,̲ ̲m̲a̲p̲_̲d̲i̲v̲₀̲,̲ ̲m̲a̲p̲_̲o̲n̲e̲,̲ inner_conj_symm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T000636_621518Z\WickQuadraticFormR2.lean:66:4: error: Type mismatch
+  Complex.add_conj ?m.39
+has type
+  ?m.39 + (starRingEnd ℂ) ?m.39 = ↑(2 * Complex.re ?m.39)
+but is expected to have type
+  (starRingEnd ℂ) (inner ℂ h f) + inner ℂ h f = ↑(2 * ((starRingEnd ℂ) (inner ℂ h f)).re)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T000636_621518Z\WickQuadraticFormR2.lean:68:40: error: Type mismatch: After simplification, term
+  inner_self_eq_norm_sq_to_K h
+ has type
+  @Eq ℂ (inner ℂ h h) (↑‖h‖ ^ 2)
+but is expected to have type
+  @Eq ℂ (inner ℂ h h) (↑‖h‖ ^ 2)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T000636_621518Z\WickQuadraticFormR2.lean:71:2: error: failed to prove positivity/nonnegativity/nonzeroness
+'F1Fecho.WickForm.invariant_exponential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.WickForm.doubleAnnihilate_exponential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.WickForm.coherent_kernel' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WickForm.quadratic_vacuum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WickForm.quadratic_hermitian_swap' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.WickForm.diagonal_coherent_positive' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

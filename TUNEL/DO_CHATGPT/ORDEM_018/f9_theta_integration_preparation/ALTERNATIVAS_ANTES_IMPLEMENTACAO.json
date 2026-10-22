@@ -1,0 +1,23 @@
+{
+  "request_id": "ad02511d-1536-4a1b-a6c4-fb3e5eb26550",
+  "selected": "POSITIVE_NESTED_COMPOSITE_SIMPSON_PRODUCT_LOGSUM",
+  "alternatives": [
+    {
+      "id": "A",
+      "method": "Adaptive cubature of five log-scaled conditional likelihoods over the full unit cube",
+      "tradeoff": "Can refine localized features efficiently, but local error estimators may miss peaks and requires a qualified adaptive service. No such implementation is assumed here."
+    },
+    {
+      "id": "B",
+      "method": "Nested dyadic tensor composite Simpson rules, all predeclared levels completed; positive weights, canonical-node cache, log sums",
+      "tradeoff": "Uses only stdlib and deterministic full-box nodes; cost grows cubically. Differences between levels and concentration diagnostics cannot bound unresolved peaks; no early convergence stop or certified coverage claim."
+    }
+  ],
+  "choice_before_code": true,
+  "callback_family": "all five conditional integrals from df482 per unique theta",
+  "prior": "Uniform original box; density50/3 cancels box Jacobian3/50",
+  "limits": "Future explicit max callbacks must cover finest requested full grid. Schema ceiling is not an execution budget/authorization.",
+  "no_automatic_retry": true,
+  "no_campaign_proposed": true,
+  "no_integral_evaluated": true
+}

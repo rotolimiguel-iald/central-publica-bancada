@@ -1,0 +1,344 @@
+{
+  "request_id": "e8bf5643-8da4-4ebb-a923-db65e41bd042",
+  "version": 2,
+  "created_utc": "2026-10-06T05:29:13.800974+00:00",
+  "status": "DOCUMENTARY_MODULE_PROPOSAL_NOT_IMPLEMENTED_NOT_ADOPTED",
+  "statute": "DERIVED_CONDITIONAL_BOUND_AND_PROPOSED_INTERFACE",
+  "authorization": {
+    "execute": false,
+    "implement": false,
+    "open_observed_data": false,
+    "new_campaign_or_job": false,
+    "claim_created": false,
+    "remote": false,
+    "modify_consumed_contracts": false
+  },
+  "module_name_proposed": "certified_chi_square_tail_upper",
+  "alternatives": [
+    {
+      "id": "A_EXACT_SF_INTERVAL",
+      "target": "SF chi2 itself",
+      "benefit": "Tighter upper enclosure",
+      "gap": "General-domain certified implementation not established by five C08 points"
+    },
+    {
+      "id": "B_CHERNOFF_INTERVAL",
+      "target": "Chernoff bound C_d, not exact SF",
+      "benefit": "Closed form; rational enclosures of exponential and positive roots",
+      "gap": "Cost/rounding/general-domain qualification and output monotonicity not established"
+    },
+    {
+      "id": "C_RATIONAL_256_FIXED_GRID",
+      "target": "B_d,256 >= Chernoff >= SF",
+      "benefit": "Integer/rational operations plus isqrt; fixed-grid upper remains monotone on completed branch",
+      "tradeoff": "Looser bound with positive floor 1/Q; no measured power/performance"
+    }
+  ],
+  "recommendation_for_review": "C_RATIONAL_256_FIXED_GRID",
+  "scientifically_adopted_alternative": null,
+  "constants_proposed": {
+    "N": 256,
+    "Q_integer_decimal": "1000000000000000000000000000000",
+    "degree_min": 0,
+    "degree_max": 148
+  },
+  "inputs": {
+    "x_lower": {
+      "type": "canonical exact rational",
+      "encoding": {
+        "numerator": "signed base10 integer string",
+        "denominator": "positive base10 integer string"
+      },
+      "no_float_coercion": true,
+      "meaning": "certified lower endpoint ell_lo <= S, not a feasible objective upper"
+    },
+    "d": {
+      "type": "integer, bool forbidden",
+      "range": [
+        0,
+        148
+      ],
+      "meaning": "certified stochastic dominating chi-square degree or degree upper; no measured-rank inference"
+    },
+    "identity": [
+      "test_id",
+      "null_model_id",
+      "scenario_id",
+      "frozen_scenario_family_sha256",
+      "model_contract_sha256",
+      "lower_statistic_certificate_sha256",
+      "support_certificate_sha256",
+      "domination_certificate_sha256",
+      "degree_certificate_sha256",
+      "algorithm_contract_sha256"
+    ],
+    "data_arrays_allowed": false,
+    "file_reading_by_module": false,
+    "verified_certificate_bundle_required": true
+  },
+  "prerequisites_inherited_without_certification": [
+    {
+      "requirement": "Fixed known Gaussian joint covariance per frozen scenario, common to all compared models",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Same affine support, observation units and density normalizations",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "True mean and nuisance contained in declared null domains",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Fixed X of supported full column rank63, eta in R^63",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "All actual model means globally contained in declared response span for refined bound",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Whitening, quotient and global span recomputed or certified for each scenario",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Exact inherited72 covariance constraints if residual df upper148 is used",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Certified lower bounds for true global minima, feasible certified upper bounds for competitors",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Certified upper numerical SF including theory/rounding errors; no numerical zero tail",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Entire frozen scenario family available or proved equivalent coverage, with label mapping",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Selection and multiplicity contract held fixed, no new data-dependent route selection",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    },
+    {
+      "requirement": "Conditional interpretation of reported or plug-in errors explicitly ratified",
+      "application_status": "REQUIRES_CASE_VERIFICATION"
+    }
+  ],
+  "algorithm_specification_not_code": {
+    "zero_degree": "F9 API: after semantic/type validation, if d=0 and x_lower>0 return INVALID with p_upper=null and reason CONTRACT_INCOHERENCE_NOT_REJECTION; require support/degree/global-span/lower-statistic certificate review. If d=0 and x_lower<=0 return VALID_ATOM_TAIL with p_upper=1. No automatic rejection.",
+    "positive_degree_below_mean": "1 for x<=d",
+    "rational_branch": "x>d,d>=1: R=(x/d)^d/[1+(x-d)/(2N)]^(2N)=A/B>0 exactly",
+    "root_upper": "k=isqrt(floor(A*Q^2/B)); u=k if k^2*B=A*Q^2 else k+1; p_upper=u/Q",
+    "certificate": "(u-1)^2*B < A*Q^2 <= u^2*B, 1<=u<=Q, 0<R<=1",
+    "derivative_log_B": "(d-2N)*(x-d)/(2*x*(2N+x-d))",
+    "strict_monotonic_condition": "2N>d; fixed256 covers d1..148",
+    "no_underflow": "Every valid positive-degree finite rational branch returns at least1/Q. The abstract chi-square0 tail is0 for x>0, but the F9 API rejects that incoherent input and emits no numeric p.",
+    "monotonicity_scope": "certified completed branch only; explicit resource-bound1 may cause an upward jump"
+  },
+  "resource_policy_proposal_only": {
+    "one_thread": true,
+    "nominal_wall_seconds": 30,
+    "input_integer_bits_cap": 512,
+    "scratch_integer_bits_cap": 524288,
+    "limits_measured": false,
+    "clock_start": "after semantic/identity certificate validation, before exact numerical arithmetic; prevalidation separately reported",
+    "resource_cap_result": "Only if all semantic prerequisites are already verified: explicitly declared VALID_TRIVIAL_BOUND_RESOURCE_LIMIT with exact p_upper1 and numerical evaluation not completed",
+    "identity_model_support_failure_result": "UNAVAILABLE or INVALID, p_upper=null; never trivial1",
+    "implementation_or_certificate_failure_result": "INVALID, p_upper=null",
+    "retry": false,
+    "implicit_fallback": false,
+    "OS_deadline_guarantee": false,
+    "note": "These are proposed module limits, not authority to launch controls or scientific evaluation. Scope review must adopt or reject the trivial-bound policy before any use."
+  },
+  "output": {
+    "status_enum": [
+      "VALID_CERTIFIED_ENVELOPE",
+      "VALID_ATOM_TAIL",
+      "VALID_TRIVIAL_BOUND_MATHEMATICAL",
+      "VALID_TRIVIAL_BOUND_RESOURCE_LIMIT",
+      "UNAVAILABLE",
+      "INVALID"
+    ],
+    "p_upper": "exact canonical rational or null",
+    "exact_SF_claim": false,
+    "certificate": "root inequalities and exact R or analytic branch/trivial justification",
+    "error_and_resource_reason": "visible separate fields",
+    "input_and_contract_identities": "echo pinned references",
+    "measured_evaluation_cost_now": null,
+    "observed_p_upper_now": null,
+    "emits_verdict": false,
+    "emits_sigma": false,
+    "emits_lnB": false
+  },
+  "integration": {
+    "statistic_lower_formulas": [
+      {
+        "id": "COMPAT_H1",
+        "null": "H1",
+        "statistic": "G1=g1",
+        "df_upper_candidate": 148,
+        "df_status": "CONDITIONAL_RESIDUAL_DIMENSION_UPPER_BOUND",
+        "statistic_lower": "max(0,L1)"
+      },
+      {
+        "id": "LAW_H1_VS_FREE",
+        "null": "H1",
+        "statistic": "Q1=g1-g3",
+        "df_upper_candidate": 17,
+        "df_status": "STRUCTURAL_SPAN_UPPER_BOUND_NOT_MEASURED_RANK",
+        "statistic_lower": "max(0,L1-U3), only with qualified H1 subset H3"
+      },
+      {
+        "id": "H2_TO_H1",
+        "null": "H2",
+        "statistic": "T21=g2-g1",
+        "df_upper_candidate": 17,
+        "df_status": "STRUCTURAL_SPAN_UPPER_BOUND_NOT_MEASURED_RANK",
+        "statistic_lower": "L2-U1"
+      },
+      {
+        "id": "H4_TO_H1",
+        "null": "H4",
+        "statistic": "T41=g4-g1",
+        "df_upper_candidate": 18,
+        "df_status": "STRUCTURAL_SPAN_UPPER_BOUND_NOT_MEASURED_RANK",
+        "statistic_lower": "L4-U1"
+      },
+      {
+        "id": "H5_TO_H1",
+        "null": "H5",
+        "statistic": "T51=g5-g1",
+        "df_upper_candidate": 17,
+        "df_status": "STRUCTURAL_SPAN_UPPER_BOUND_NOT_MEASURED_RANK",
+        "statistic_lower": "L5-U1"
+      }
+    ],
+    "whole_family_required": true,
+    "robust": "p_robust_j=max_s p_j,s; valid for union of the explicitly admitted scenarios if every p_j,s is valid for its null",
+    "bonferroni": "p_FWER_j=min(1,5*p_robust_j); Bonferroni, arbitrary dependence; same5used for all claims",
+    "alpha5": "0.5*erfc(5/sqrt(2))",
+    "model_test_and_alpha_changes": false,
+    "interface_mapping": "All valid bound statuses map to V2 VALID_UNIFORM_NULL_OR_CONSERVATIVE_BOUND only after this proposed method/policy is adopted and scientific certificates are verified; UNAVAILABLE/INVALID remain missing/invalid. Explicitly expose resource-trivial branch.",
+    "V2_decision_predicates_unchanged": {
+      "calibration_per_test_per_scenario": {
+        "fields": [
+          "scenario_id",
+          "statistic_available",
+          "statistic_valid",
+          "calibration_status",
+          "calibration_scope",
+          "p_upper_certified",
+          "numerical_certificate",
+          "direction_positive_certified"
+        ],
+        "allowed_calibration_status": [
+          "VALID_UNIFORM_NULL_OR_CONSERVATIVE_BOUND",
+          "UNAVAILABLE",
+          "PARTIAL",
+          "INVALID"
+        ],
+        "missing_value": null,
+        "rule": "No unavailable or invalid value is replaced by zero, non-rejection or a numeric sigma. Raw valid statistics and relative Bayes outputs remain separately visible."
+      },
+      "complete_test_j": "For every frozen admitted scenario exactly once, a valid statistic and valid uniformly conservative null p upper bound including numerical uncertainty are available; no omitted scenarios. Certified equivalent scenario coverage may substitute only with a frozen proof and full label mapping.",
+      "p_robust_j": "Defined only if complete_test_j; maximum over every admitted scenario p upper bound, not a maximum over the available subset.",
+      "reject_j": "complete_test_j AND min(1,5*p_robust_j)<=alpha5.",
+      "H1_rejected": "reject_COMPAT_H1 OR reject_LAW_H1_VS_FREE; either valid complete rejection remains reportable if the other test is unavailable, with that missing state visible.",
+      "H1_calibrated_not_rejected": "complete_test_COMPAT_H1 AND complete_test_LAW_H1_VS_FREE AND NOT reject_COMPAT_H1 AND NOT reject_LAW_H1_VS_FREE. This means only not rejected by the adopted tests, not model validation.",
+      "combined_discrimination_H1_from_Hj": "H1_calibrated_not_rejected AND complete_test_Hj_TO_H1 AND all admitted scenarios have certified positive T_j1 AND reject_Hj_TO_H1; j=2,4,5 separately.",
+      "NOT_FALSIFIED_IN_THIS_CONTRACT": "Allowed only when H1_calibrated_not_rejected. Missing rival comparisons remain explicitly unavailable; they are not required to report the two valid non-rejections of H1.",
+      "CALIBRATION_UNAVAILABLE_OR_PARTIAL": "If any claimed test lacks complete_test_j, its robust decision is unavailable; retain its valid raw per-scenario values and identify missing/invalid scenarios. Do not suppress any other valid rejection or evidence output.",
+      "power": "Independent final field; never turns missing calibration into non-rejection, nor suppresses a calibrated rejection."
+    },
+    "threshold_interval_comparison": "p_FWER<=alpha_lo certifies rejection; p_FWER>alpha_hi certifies this bound does not reject; overlap is comparison unresolved, not numerical threshold adjustment"
+  },
+  "source_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\PROVA_COTA_CALIBRACAO_F9.md",
+      "bytes": 19270,
+      "sha256": "3f3f9deb07563acad114cff2ad4d6d3da71e6027cc44b48891afb320d881cd47"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\CALIBRATION_BOUND_CANDIDATE.json",
+      "bytes": 8941,
+      "sha256": "c5dfc055174fba6412488a8f63c9d32b1756602aa5dcb5ce7052b77c803b5641"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\PROTOCOLO_CONTROLES_FUTUROS.json",
+      "bytes": 2538,
+      "sha256": "f5a3fdd93495533919a830060cadee4a48581f7956c05e48b867ed4344db2dbd"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_verdict_contract\\F9_VERDICT_CONTRACT_CANDIDATE_V2.json",
+      "bytes": 15895,
+      "sha256": "6b5118548490392a26eb43a8de9e5a252ae6e6fd28c3d0edbc2daa15c5813655"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_cota_calibracao_f9\\PARECER_COTA_CALIBRACAO_F9.md",
+      "bytes": 11497,
+      "sha256": "fe98859ea62cf5c25deda26f3a389335bfb5e817c0c0b623c55fd6d8478f0f2e"
+    }
+  ],
+  "execution_now": {
+    "module_implemented": false,
+    "synthetic_cases_executed": 0,
+    "scientific_or_observed_computations": 0,
+    "providers_called": 0,
+    "measured_cost": null
+  },
+  "revision_scope": "Documentary F9-specific coherence guard for d=0 with positive certified statistic lower; no change to d>0, models, alpha, alternatives, resources or scientific execution.",
+  "predecessor": {
+    "map_seq": 498,
+    "manifest": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_proposal\\MANIFESTO_PROPOSTA.json",
+      "bytes": 2879,
+      "sha256": "bc53a4fcefef341a35b57fca313f050e4d75ff8b5a1d9f19548baf09bb970c0e"
+    },
+    "contract": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_proposal\\CONTRATO_MODULO_CANDIDATO.json",
+      "bytes": 13414,
+      "sha256": "f080f210ca66e52ff550738751042e1f15da6a777f105f2d2e774b86a60c8ad1"
+    },
+    "preserved_in_place": true
+  },
+  "api_scope": "F9 G/Q/T statistics only. The abstract chi-square0 identity is explanatory and is not an alternate callable mode or override of the F9 guard.",
+  "zero_degree_F9_coherence_guard": {
+    "priority": "after mandatory semantic and type checks, before any tail, resource-trivial bound or aggregation",
+    "condition": "d == 0 AND x_lower > 0",
+    "status": "INVALID",
+    "p_upper": null,
+    "reason": "CONTRACT_INCOHERENCE_NOT_REJECTION",
+    "reject": false,
+    "required_action": [
+      "review common support certificate",
+      "review residual-degree or global-difference-span certificate and test identity",
+      "review certified lower statistic and its sign/orientation",
+      "retain failure visible; do not issue robust p for this incomplete test"
+    ],
+    "no_trivial_resource_override": true,
+    "abstract_chi_square0_reference": {
+      "inclusive_tail_at_x_le_0": "1",
+      "inclusive_tail_at_x_gt_0": "0",
+      "scope": "mathematical reference only; cannot feed F9 p_upper or a rejection"
+    },
+    "source_C04": [
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\PROTOCOLO_EXATO.json",
+        "bytes": 18679,
+        "sha256": "895544d37ab05c2ff28eab3b2ee1298fc78e5dbe445a88a7a3a8cb7a861635a7"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\controls.py",
+        "bytes": 10614,
+        "sha256": "7ddb3cf8f2d646995c6b61ee056ccd492ce2d3ca8b1417b2446afea5fdea0c95"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\RUN\\RESULT.json",
+        "bytes": 3680097,
+        "sha256": "a5131e39c52d618156e1d1c75715992ce5ae2c36b72a5338399f5ebfc327020d"
+      }
+    ]
+  }
+}

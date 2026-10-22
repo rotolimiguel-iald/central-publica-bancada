@@ -1,0 +1,33 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T203224_088347Z\VectorWedgeImaginaryPowersR3.lean:98:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (realScalarMultiplier (weight c) ⋯ ⋯ ⋯)) y) x
+in the target expression
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (R c)) y) x =
+    ↑↑((characterMultiplier (2 * c * t)) ((resolventDampingOperator (R c)) y)) x
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+c t : ℝ
+u y : ↥(VH H)
+hd✝ : ↑↑((resolventDampingOperator (R c)) y) =ᵐ[volume] fun x => ↑(resolventDamping (↑(weight c x)).re) • ↑↑y x
+hp✝ :
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (realScalarMultiplier (weight c) ⋯ ⋯ ⋯)) y) =ᵐ[volume] fun x =>
+    resolventPhaseFunction t (↑(weight c x)).re • ↑↑y x
+x : ℝ
+hp :
+  ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (realScalarMultiplier (weight c) ⋯ ⋯ ⋯)) y) x =
+    resolventPhaseFunction t (↑(weight c x)).re • ↑↑y x
+hd : ↑↑((resolventDampingOperator (R c)) y) x = ↑(resolventDamping (↑(weight c x)).re) • ↑↑y x
+hc :
+  ↑↑((characterMultiplier (2 * c * t)) ((resolventDampingOperator (R c)) y)) x =
+    Complex.exp (-Complex.I * ↑(2 * c * t) * ↑x) • ↑↑((resolventDampingOperator (R c)) y) x
+⊢ ↑↑((cfc (fun z => resolventPhaseFunction t z.re) (R c)) y) x =
+    ↑↑((characterMultiplier (2 * c * t)) ((resolventDampingOperator (R c)) y)) x
+'F1Fecho.VectorWedgePowers.R_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.VectorWedgePowers.square_is_resolvent_graph' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.VectorWedgePowers.phase_at_weight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.VectorWedgePowers.imaginaryPower_eq_character' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

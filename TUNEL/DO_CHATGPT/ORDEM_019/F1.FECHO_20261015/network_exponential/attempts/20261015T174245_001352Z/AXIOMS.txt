@@ -1,0 +1,66 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\network_exponential\attempts\20261015T174245_001352Z\ExponentialTotalityR3.lean:28:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(exponential ?x) ?n
+in the target expression
+  ∑ b ∈ n, (fun i => inner ℂ (↑v i) (↑(exponential (z • x)) i)) b = ∑ b ∈ n, (fun n => z ^ n * coefficient v x n) b
+
+v : ↥F
+x : ↥H1
+z : ℂ
+hs : HasSum (fun i => inner ℂ (↑v i) (↑(exponential (z • x)) i)) (inner ℂ v (exponential (z • x)))
+n : Finset ℕ
+⊢ ∑ b ∈ n, (fun i => inner ℂ (↑v i) (↑(exponential (z • x)) i)) b = ∑ b ∈ n, (fun n => z ^ n * coefficient v x n) b
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    fun x => x ∈ lp Sectors 2
+  has type
+    PreLp Sectors → Prop
+  but is expected to have type
+    ((i : ℕ) → Sectors i) → Prop
+  in the application
+    @Subtype.val ((i : ℕ) → Sectors i) fun x => x ∈ lp Sectors 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\network_exponential\attempts\20261015T174245_001352Z\ExponentialTotalityR3.lean:99:2: error: Tactic `simp` failed with a nested error:
+maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\network_exponential\attempts\20261015T174245_001352Z\ExponentialTotalityR3.lean:109:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(lp.single 2 0 ?m.66) ?m.67
+in the target expression
+  component 0 (n + 1) = ↑(lp.single 2 0 vacuumSector) (n + 1)
+
+case succ
+n : ℕ
+⊢ component 0 (n + 1) = ↑(lp.single 2 0 vacuumSector) (n + 1)
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    fun x => x ∈ lp Sectors 2
+  has type
+    PreLp Sectors → Prop
+  but is expected to have type
+    ((i : ℕ) → Sectors i) → Prop
+  in the application
+    @Subtype.val ((i : ℕ) → Sectors i) fun x => x ∈ lp Sectors 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\network_exponential\attempts\20261015T174245_001352Z\ExponentialTotalityR3.lean:109:48: error: omega could not prove the goal:
+No usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\network_exponential\attempts\20261015T174245_001352Z\ExponentialTotalityR3.lean:109:31: error: Application type mismatch: The argument
+  vacuumSector
+has type
+  ↥(Sector 0)
+but is expected to have type
+  ?m.59 0
+in the application
+  @lp.single_apply_ne ℕ ?m.59 ?m.60 instDecidableEqNat 2 0 vacuumSector
+'F1Fecho.Exponential.scalar_series' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Exponential.coefficients_zero_of_orthogonal' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.Exponential.sector_eq_zero_of_pure_inner_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.Exponential.exponential_orthogonal_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Exponential.exponential_total' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Exponential.gamma_exponential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.Exponential.gammaJ_exponential' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Exponential.exponential_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,93 @@
+{
+  "start_utc": "2026-10-15T18:29:01.083164+00:00",
+  "end_utc": "2026-10-15T18:29:02.389569+00:00",
+  "seconds": 1.306400899993605,
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-c",
+    "\nimport importlib.util,json,os,socket\nfrom pathlib import Path\nroot=Path(os.environ['TGL_RITE_SANDBOX']);outside=root.parent/'outside'\nspec=importlib.util.spec_from_file_location('rite_guard',os.environ['TEST_GUARD_SOURCE']);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nchecks=[]\ndef yes(name,condition): checks.append({'name':name,'passed':bool(condition)})\ndef refused(name,action):\n try:action();yes(name,False)\n except PermissionError:yes(name,True)\next=chr(92)*2+'?'+chr(92)\nfor name,path in [('ordinary',str(root/'ordinary')),('extended',ext+str(root/'extended'))]:\n os.mkdir(path);yes('mkdir_'+name,Path(path).is_dir())\n with open(str(Path(path)/'value.txt'),'x') as f:f.write('inside')\n yes('write_'+name,True)\nrefused('parent_escape',lambda:os.mkdir(str(root/'..'/'outside'/'escaped')))\nrefused('extended_parent_escape',lambda:os.mkdir(ext+str(root/'..'/'outside'/'extended_escape')))\nrefused('sibling_prefix_escape',lambda:os.mkdir(str(root.parent/'sandbox_evil')))\nrefused('junction_escape',lambda:os.mkdir(str(root/'escape_junction'/'escaped')))\nrefused('extended_junction_escape',lambda:os.mkdir(ext+str(root/'escape_junction'/'extended_escape')))\nrefused('ordinary_outside_write',lambda:open(outside/'forbidden','x'))\nyes('UNC_rejected_without_remote_access',not m._inside(ext+'UNC'+chr(92)+'nonexistent.invalid'+chr(92)+'share'+chr(92)+'x'))\nyes('NT_device_not_reinterpreted_inside',not m._inside(ext+'GLOBALROOT'+chr(92)+'Device'+chr(92)+'HarddiskVolumeShadowCopy1'+chr(92)+'x'))\nrefused('DNS_still_refused',lambda:socket.getaddrinfo('nonexistent.invalid',443))\n# The real UDP call must be stopped by the audit event before transmission.\nwith socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as udp:\n refused('UDP_sendto_refused_before_transmission',lambda:udp.sendto(b'guard-probe',('127.0.0.1',9)))\nrefused('reverse_lookup_getnameinfo_refused',lambda:socket.getnameinfo(('127.0.0.1',9),0))\nimport sys\nrefused('sendmsg_audit_event_refused',lambda:sys.audit('socket.sendmsg',None,('127.0.0.1',9)))\nprint(json.dumps({'checks':checks,'passed':all(x['passed'] for x in checks)}))\n"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_r4_test\\sandbox",
+  "exit_code": 0,
+  "stdout": "{\"checks\": [{\"name\": \"mkdir_ordinary\", \"passed\": true}, {\"name\": \"write_ordinary\", \"passed\": true}, {\"name\": \"mkdir_extended\", \"passed\": true}, {\"name\": \"write_extended\", \"passed\": true}, {\"name\": \"parent_escape\", \"passed\": true}, {\"name\": \"extended_parent_escape\", \"passed\": true}, {\"name\": \"sibling_prefix_escape\", \"passed\": true}, {\"name\": \"junction_escape\", \"passed\": true}, {\"name\": \"extended_junction_escape\", \"passed\": true}, {\"name\": \"ordinary_outside_write\", \"passed\": true}, {\"name\": \"UNC_rejected_without_remote_access\", \"passed\": true}, {\"name\": \"NT_device_not_reinterpreted_inside\", \"passed\": true}, {\"name\": \"DNS_still_refused\", \"passed\": true}, {\"name\": \"UDP_sendto_refused_before_transmission\", \"passed\": true}, {\"name\": \"reverse_lookup_getnameinfo_refused\", \"passed\": true}, {\"name\": \"sendmsg_audit_event_refused\", \"passed\": true}], \"passed\": true}\n",
+  "stderr": "",
+  "result": {
+    "checks": [
+      {
+        "name": "mkdir_ordinary",
+        "passed": true
+      },
+      {
+        "name": "write_ordinary",
+        "passed": true
+      },
+      {
+        "name": "mkdir_extended",
+        "passed": true
+      },
+      {
+        "name": "write_extended",
+        "passed": true
+      },
+      {
+        "name": "parent_escape",
+        "passed": true
+      },
+      {
+        "name": "extended_parent_escape",
+        "passed": true
+      },
+      {
+        "name": "sibling_prefix_escape",
+        "passed": true
+      },
+      {
+        "name": "junction_escape",
+        "passed": true
+      },
+      {
+        "name": "extended_junction_escape",
+        "passed": true
+      },
+      {
+        "name": "ordinary_outside_write",
+        "passed": true
+      },
+      {
+        "name": "UNC_rejected_without_remote_access",
+        "passed": true
+      },
+      {
+        "name": "NT_device_not_reinterpreted_inside",
+        "passed": true
+      },
+      {
+        "name": "DNS_still_refused",
+        "passed": true
+      },
+      {
+        "name": "UDP_sendto_refused_before_transmission",
+        "passed": true
+      },
+      {
+        "name": "reverse_lookup_getnameinfo_refused",
+        "passed": true
+      },
+      {
+        "name": "sendmsg_audit_event_refused",
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "guard_sha256": "b48bbf9326441a0e8be10effd4bf5e7f46fde494febc71eef748877d10920d7e",
+  "script_sha256": "08751ff63ba9922152eee6a610243c9741feb2ec3689c078dd985b9c55a6fb8b",
+  "junction_removed": true,
+  "outside_unchanged_empty": true,
+  "scientific_program_executed": false,
+  "network_enabled": false,
+  "passed": true
+}

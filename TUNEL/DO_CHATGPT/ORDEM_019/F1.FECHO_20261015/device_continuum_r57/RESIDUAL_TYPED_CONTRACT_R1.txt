@@ -1,0 +1,63 @@
+R57 / R5 — resíduo tipado e alcance da construção
+Estatuto deste texto: DERIVED da leitura focal; compilações e revisões constam dos recibos próprios.
+
+1. Obstrução precisa, sem inversão do entrelaçamento
+Para P : TGLExt.SiteProfile, clock : ℝ → ℝ e
+V : TGLExt.TowerHilbert P →L[ℂ] TGLExt.ImportedSQ.H1,
+  (∀ s x, V (ChatgptAudit.modularFlow P (clock s) x) = TGLExt.ImportedSQ.B0 s (V x)) → V = 0.
+O domínio é o completamento GNS da torre PRODUTO já construída, com seu modularFlow.
+A prova usa a família total localEigenvector, suas fases de norma 1 e B0_no_eigen.
+Não conclui inexistência de qualquer limite de células, qualquer dinâmica de dispositivo,
+qualquer estado não produto, nem ausência de vácuo/ação no Fock. Não impõe essa torre ao MQC.
+SiteProfile usa sítios de dimensão 2; o MQC descreve três estados por sítio. Não são identificados.
+
+2. Família concreta oferecida como ALVO, sem renomear Hilberts
+CompactPacket O := {s : Finset H1 // ↑s ⊆ compactSupportedGenerators O}.
+packetSpace S := Submodule.span ℝ ↑S.val.
+Refinamento: S.val ⊆ T.val; inclusão é a inclusão literal isométrica no mesmo H1.
+A união dirigida, após fecho, recupera exatamente compactLocalized O.
+Translações e Lorentz transportam S para sua imagem; não preservam cada nível finito.
+Os quadrados de refinamento com esse transporte comutam por construção e os mapas de H1
+são os U1/helicityUnitary existentes, com helicityUnitary(generatedBoost s)=B0 s.
+complexPacketSpace usa span ℂ das mesmas listas; sua união na cunha direita é densa em H1.
+Essa complexificação é somente o alvo global de uma partícula. A localização continua real.
+Não foi construído um tensor celular, uma dinâmica microscópica ou um limite de estados físicos.
+
+3. Obrigação física que permanece OPEN
+As fontes dão papéis complementares: MQC — geometria/célula e três estados; Supercondutor —
+modos, H e geradores dissipativos; Psi-NET — protocolo. Nenhum papel é descartado nem substituído.
+Falta extrair dessas definições uma família direcionada de espaços de excitações físicas
+C_ε, regiões de suporte e mapas j_{δε}:C_ε→ₗᵢ[ℂ]C_δ, com j_{γε}=j_{γδ}∘j_{δε}.
+Não basta usar o Hilbert inteiro da célula ou seu GNS como o setor de uma partícula.
+Para cada rótulo físico a, construir uma função-teste tensorial f_{ε,a}:SchwartzTensor,
+com suporte/realidade apropriados e ancoragem nos observáveis de campo efetivamente definidos.
+A associação a↦circularSmear(f_{ε,a}) precisa ser DERIVADA dos acoplamentos/observáveis,
+não escolhida por uma isometria abstrata ou por igualdade de nomes.
+
+Alvos mínimos a provar, e não a adicionar como novas hipóteses de um certificado pronto:
+  (i) ⟪J_ε a,J_ε b⟫_H1 = C_ε(a,b), onde J_ε a=circularSmear(f_{ε,a}) e C_ε é a
+      forma positiva de duas pontas construída do estado do modelo microscópico;
+ (ii) J_δ(j_{δε}a)=J_ε a, e densidade das imagens no H1 canônico;
+(iii) convergência das funções de correlação/estados à realização canônica escolhida;
+ (iv) construção da ação física no limite e V U_dev(g)=U_can(g) V para o grupo pertinente,
+      incluindo a reflexão antiunitária, mais V K_dev(O)=compactLocalized O;
+  (v) mostrar que a dinâmica microscópica documentada induz essa ação/gerador no domínio correto.
+A hipótese (i) não está demonstrada pela norma de um vetor nem pela contagem de 27 sítios.
+A ausência de (i)–(v) impede promover estes pacotes a uma realização do dispositivo.
+
+4. Duas compatibilidades distintas, sem relaxamento silencioso
+Q6, seção Isotonia, exige D_{O2} ι_{21}=ι_{21} D_{O1} para O1⊆O2 e operadores definidos
+nos respectivos espaços. É uma condição exata por região, não a construção de refinamentos ε.
+Os pacotes provam inclusões e covariância entre IMAGENS de níveis finitos; não fornecem D_ε.
+Uma eventual rota de convergência forte exige demonstrar, por exemplo,
+  ‖J_ε U_ε(g)a_ε - U_can(g)J_ε a_ε‖ → 0,
+com domínios, ações e embeddings efetivamente construídos. Isso não equivale à condição Q6.
+Se Q6 for exigida no dispositivo, sua condição exata deve ser descarregada separadamente.
+
+5. Próxima etapa viável delimitada
+Escolher, a partir dos observáveis explícitos das fontes, UM tipo de excitação de campo do
+modelo de célula; calcular sua forma de duas pontas no estado documentado e seu suporte.
+Comparar essa forma, sem ajuste posterior, com a forma induzida por circularSmear nos pacotes.
+Se coincidirem ou convergirem com controle, construir J_ε por essa igualdade e prosseguir ao limite.
+Se falharem, preservar o resultado e localizar a divergência; os pacotes de Maxwell não a corrigem.
+Os documentos consultados não fornecem esse cálculo/construção. R5 integral permanece OPEN.

@@ -1,0 +1,669 @@
+--- snapshot507/tail_envelope.py
++++ deltaV2/tail_envelope.py
+@@ -97,6 +97,25 @@
+         raise InvalidInput("DOMAIN_PINS")
+ 
+ 
++def family_payload(domain):
++    """The exact full ordered domain presented to the external family verifier."""
++    _domain(domain)
++    return {
++        "schema": "F9_FROZEN_ORDERED_DOMAIN_V1",
++        "test_id": domain.test_id,
++        "null_model_id": domain.null_model_id,
++        "ordered_scenarios": list(domain.scenarios),
++        "frozen_scenario_family_sha256": domain.family_sha256,
++        "model_contract_sha256": domain.model_sha256,
++        "algorithm_contract_sha256": domain.algorithm_sha256,
++    }
++
++
++def _family_semantic(domain, verifier):
++    return _semantic(family_payload(domain), "FROZEN_DOMAIN_FAMILY",
++                     (domain.family_sha256, domain.model_sha256, domain.algorithm_sha256), verifier)
++
++
+ def _integer_text(value, signed):
+     # Type, length, grammar and the exact 512-bit lexical ceiling precede int().
+     if type(value) is not str or not 1 <= len(value) <= len(MAX_DECIMAL) + int(signed):
+@@ -220,11 +239,15 @@
+             "physical_certification": False, "automatic_rejection": False}
+ 
+ 
+-def _success(payload, receipt, status, numerator, denominator, certificate, reason=None):
++def _success(payload, receipt, family_receipt, domain, status, numerator, denominator, certificate, reason=None):
+     return {
+         "status": status, "reason": reason, "p_upper": _encoded(numerator, denominator),
+         "identity": dict(payload["identity"]), "input": json.loads(canonical_bytes(payload)),
+         "semantic_scope": receipt.scope,
++        "verified_family": {"payload_sha256": family_receipt.payload_sha256,
++                            "scope": family_receipt.scope,
++                            "ordered_scenarios": list(domain.scenarios),
++                            "verifier_reference_sha256": family_receipt.verifier_reference_sha256},
+         "semantic_receipt": {
+             "payload_sha256": receipt.payload_sha256, "role": receipt.role,
+             "scope": receipt.scope, "evidence_references": list(receipt.evidence_references),
+@@ -277,6 +300,7 @@
+         a, b = _rational(request["x_lower"])
+         # All request fields are bounded primitive values before copying/hashing.
+         payload = json.loads(canonical_bytes(request))
++        family_receipt = _family_semantic(domain, verifier)
+         receipt = _semantic(payload, "STATISTIC_SEMANTICS",
+                             [payload["identity"][k] for k in HASH_KEYS], verifier)
+     except InvalidInput as error:
+@@ -289,10 +313,10 @@
+     if d == 0 and a > 0:
+         return _failure("INVALID", "CONTRACT_INCOHERENCE_NOT_REJECTION")
+     if d == 0:
+-        return _success(payload, receipt, "VALID_ATOM_TAIL", 1, 1,
++        return _success(payload, receipt, family_receipt, domain, "VALID_ATOM_TAIL", 1, 1,
+                         {"kind": "F9_NONPOSITIVE_ATOM_BOUND"})
+     if a <= d * b:
+-        return _success(payload, receipt, "VALID_TRIVIAL_BOUND_MATHEMATICAL", 1, 1,
++        return _success(payload, receipt, family_receipt, domain, "VALID_TRIVIAL_BOUND_MATHEMATICAL", 1, 1,
+                         {"kind": "LOWER_STATISTIC_AT_OR_BELOW_DEGREE"})
+     try:
+         budget = Budget(deadline, clock)
+@@ -312,9 +336,9 @@
+         if not 0 < numerator <= denominator:
+             raise InvalidCertificate("R_OUTSIDE_POSITIVE_UNIT_INTERVAL")
+         u, certificate = ceil_root_certificate(numerator, denominator, budget)
+-        return _success(payload, receipt, "VALID_CERTIFIED_ENVELOPE", u, Q, certificate)
++        return _success(payload, receipt, family_receipt, domain, "VALID_CERTIFIED_ENVELOPE", u, Q, certificate)
+     except ResourceLimit as error:
+-        return _success(payload, receipt, "VALID_TRIVIAL_BOUND_RESOURCE_LIMIT", 1, 1,
++        return _success(payload, receipt, family_receipt, domain, "VALID_TRIVIAL_BOUND_RESOURCE_LIMIT", 1, 1,
+                         {"kind": "PREDECLARED_TRIVIAL_BOUND_AFTER_SEMANTIC_VALIDATION",
+                          "numerical_evaluation_completed": False,
+                          "monotonic_across_resource_states": False},
+@@ -334,6 +358,7 @@
+         _domain(domain)
+         if type(records) is not list or len(records) != len(domain.scenarios):
+             raise InvalidInput("MISSING_OR_EXTRA_SCENARIO")
++        family_receipt = _family_semantic(domain, verifier)
+         seen = set()
+         best = (0, 1)
+         verified = []
+@@ -367,7 +392,12 @@
+         adjusted = _encoded(1, 1) if 5 * a >= b else _encoded(5 * a, b)
+         return {"status": "COMPLETE_CONDITIONAL_BOUND", "p_robust": _encoded(a, b),
+                 "p_FWER_upper": adjusted, "family_factor": 5,
+-                "verified_records": verified, "alpha_evaluated": False,
++                "verified_records": verified,
++                "verified_family": {"payload_sha256": family_receipt.payload_sha256,
++                                    "scope": family_receipt.scope,
++                                    "ordered_scenarios": list(domain.scenarios),
++                                    "verifier_reference_sha256": family_receipt.verifier_reference_sha256},
++                "alpha_evaluated": False,
+                 "physical_certification": False, "automatic_rejection": False}
+     except InvalidInput as error:
+         return {"status": "UNAVAILABLE", "reason": str(error),
+--- snapshot507/worker_controls.py
++++ deltaV2/worker_controls.py
+@@ -13,6 +13,7 @@
+ import time
+ from fractions import Fraction
+ import tail_envelope as te
++from finalization import finalize_unit
+ 
+ DEADLINE = None
+ VERIFIER_REFERENCE = None
+@@ -62,8 +63,15 @@
+ 
+ class FixtureVerifier:
+     """Exact fixture registry, not a verifier of physical F9 certificates."""
+-    def __init__(self):
++    def __init__(self, frozen_domain):
+         self.entries = {}
++        # Only these complete, independently named synthetic families are admitted.
++        allowed = (domain(("a",)), domain(("a", "b", "c")))
++        if frozen_domain in allowed:
++            payload = te.family_payload(frozen_domain)
++            refs = (frozen_domain.family_sha256, frozen_domain.model_sha256,
++                    frozen_domain.algorithm_sha256)
++            self.entries[(te.digest(payload), "FROZEN_DOMAIN_FAMILY")] = refs
+ 
+     def admit(self, payload, role, source_kind="GLOBAL_LOWER_SYNTHETIC"):
+         if source_kind not in {"GLOBAL_LOWER_SYNTHETIC", "EXACT_SYNTHETIC_BOUND"}:
+@@ -85,7 +93,7 @@
+              deadline=None, source_kind="GLOBAL_LOWER_SYNTHETIC"):
+     dom = dom or domain()
+     payload = request(d, x, scenario, dom, source_kind)
+-    verifier = FixtureVerifier()
++    verifier = FixtureVerifier(dom)
+     verifier.admit(payload, "STATISTIC_SEMANTICS", source_kind)
+     budget()
+     result = te.tail_upper(payload, dom, verifier,
+@@ -192,7 +200,7 @@
+             "feasible upper is not lower certificate")
+     dom = domain()
+     lower = request(148, 150, dom=dom)
+-    verifier = FixtureVerifier()
++    verifier = FixtureVerifier(dom)
+     verifier.admit(lower, "STATISTIC_SEMANTICS")
+     tampered = copy.deepcopy(lower)
+     tampered["x_lower"]["numerator"] = "160"
+@@ -204,7 +212,7 @@
+ 
+ def bound_records():
+     dom = domain(("a", "b", "c"))
+-    verifier = FixtureVerifier()
++    verifier = FixtureVerifier(dom)
+     records = []
+     for scenario, denominator in zip(dom.scenarios, (1000, 500, 4000)):
+         row = {
+@@ -245,7 +253,7 @@
+ def N01_IDENTITY_AND_BINDING():
+     dom = domain()
+     good = request(17, 18, dom=dom)
+-    verifier = FixtureVerifier()
++    verifier = FixtureVerifier(dom)
+     verifier.admit(good, "STATISTIC_SEMANTICS")
+     count = 0
+     for key, value in (("algorithm_contract_sha256", ref("wrong-algorithm")),
+@@ -377,13 +385,82 @@
+             "invalid_domains": 4}
+ 
+ 
++def N08_FROZEN_FAMILY_BINDING():
++    dom, verifier, rows = bound_records()
++    shortened = te.Domain(dom.test_id, dom.null_model_id, ("a", "b"),
++                          dom.family_sha256, dom.model_sha256, dom.algorithm_sha256)
++    outcome = te.aggregate_bounds(rows[:2], shortened, verifier)
++    require(outcome["status"] == "UNAVAILABLE" and outcome["p_robust"] is None,
++            "shortened family cannot reuse full-family pin")
++    permuted = te.Domain(dom.test_id, dom.null_model_id, ("b", "a", "c"),
++                         dom.family_sha256, dom.model_sha256, dom.algorithm_sha256)
++    require(te.aggregate_bounds(rows, permuted, verifier)["status"] == "UNAVAILABLE",
++            "ordered family certificate cannot be silently permuted")
++    # Missing family receipt cannot be replaced by individually accepted rows.
++    row_only = FixtureVerifier(dom)
++    row_only.entries.clear()
++    for row in rows:
++        row_only.admit(row, "BOUND_RECORD", "EXACT_SYNTHETIC_BOUND")
++    require(te.aggregate_bounds(rows, dom, row_only)["status"] == "UNAVAILABLE",
++            "row receipts are not a domain receipt")
++    payload = request(17, 18, "a", dom)
++    verifier.admit(payload, "STATISTIC_SEMANTICS")
++    require(te.tail_upper(payload, shortened, verifier, DEADLINE)["status"] == "UNAVAILABLE",
++            "tail call must also validate the complete family")
++    return {"same_pin_subset_rejected": True, "silent_order_change_rejected": True,
++            "row_only_receipts_rejected": True, "tail_family_binding_required": True}
++
++
++def N09_FINALIZATION_DEADLINES_WITH_DOUBLES():
++    # Pure injected doubles: no files, output or real delayed I/O in this control.
++    scenarios = (
++        ("on_time", 1.0, 1.0, 2.0, False, False, 0),
++        ("late_persist", 31.0, 31.0, 32.0, False, False, 1),
++        ("late_digest", 1.0, 31.0, 32.0, False, False, 1),
++        ("late_output", 1.0, 1.0, 31.0, False, False, 1),
++        ("persist_error", 1.0, 1.0, 2.0, True, False, 1),
++        ("emit_error", 1.0, 1.0, 2.0, False, True, 1),
++    )
++    summaries = []
++    for name, persist_time, digest_time, output_time, fail_persist, fail_emit, expected_exit in scenarios:
++        state = {"clock": 0.0, "saved": [], "emitted": [], "invalidated": []}
++        def persist(value):
++            if fail_persist:
++                raise OSError("synthetic persistence failure")
++            state["saved"].append(copy.deepcopy(value))
++            state["clock"] = persist_time
++        def emit(value):
++            if fail_emit:
++                raise OSError("synthetic output failure")
++            state["emitted"].append(copy.deepcopy(value))
++            state["clock"] = output_time
++        def invalidate(value):
++            state["invalidated"].append(copy.deepcopy(value))
++        def read_digest():
++            state["clock"] = digest_time
++            return ref("synthetic-receipt")
++        result = finalize_unit({"request_id": "synthetic-only", "execution_started_monotonic": 0.0},
++                               "PASS", 30.0, lambda: state["clock"], persist,
++                               read_digest, emit, invalidate)
++        require(result == expected_exit, "finalization expected exit")
++        require(all(x["status"] != "PASS" for x in state["saved"] + state["emitted"]),
++                "provisional evidence never claims terminal PASS")
++        if expected_exit:
++            require(bool(state["invalidated"]), "failure has invalidation attempt")
++        else:
++            require(not state["invalidated"], "on-time exit has no invalidation")
++        summaries.append({"id": name, "exit": result, "invalidation_count": len(state["invalidated"])})
++    return {"doubles_only": True, "scenarios": summaries, "real_IO_performed": False}
++
++
+ PRIMARY = (T01_ATOM, T02_THRESHOLD_AND_DOMAIN, T03_EVEN, T04_ODD,
+            T05_MONOTONE_D148, T06_NO_FALSE_UNDERFLOW, T07_LOWER_ENDPOINT,
+            T08_AGGREGATION_AND_FAILURE)
+ NEGATIVE = (N01_IDENTITY_AND_BINDING, N02_CERTIFICATION_NOT_FLAGS,
+             N03_CANONICAL_AND_SIZE, N04_RESOURCE_AFTER_SEMANTICS,
+             N05_SCRATCH_PREFLIGHT, N06_FAMILY_DUPLICATES_AND_TAMPERING,
+-            N07_ROOT_CERTIFICATE_BOUNDARIES)
++            N07_ROOT_CERTIFICATE_BOUNDARIES, N08_FROZEN_FAMILY_BINDING,
++            N09_FINALIZATION_DEADLINES_WITH_DOUBLES)
+ 
+ 
+ def install_audit():
+@@ -440,7 +517,7 @@
+     output = {
+         "request_id": args.request_id, "status": status, "worker_pid": os.getpid(),
+         "supervisor_pid": os.getppid(), "results": results,
+-        "primary_count_expected": 8, "negative_group_count_expected": 7,
++        "primary_count_expected": 8, "negative_group_count_expected": 9,
+         "error": error, "audit_denied": AUDIT_DENIED,
+         "wall_s": time.monotonic() - started, "synthetic_only": True,
+         "physical_certification": False, "observed_data": False,
+--- snapshot507/supervisor.py
++++ deltaV2/supervisor.py
+@@ -18,6 +18,8 @@
+ import uuid
+ 
+ PACKAGE = Path(__file__).resolve().parent
++sys.path.insert(0, str(PACKAGE))
++from finalization import finalize_unit
+ TOTAL_SECONDS = 30.0
+ WORK_SECONDS = 25.0
+ COOPERATIVE_SECONDS = 23.0
+@@ -27,7 +29,8 @@
+ NEGATIVE_IDS = ["N01_IDENTITY_AND_BINDING", "N02_CERTIFICATION_NOT_FLAGS",
+                 "N03_CANONICAL_AND_SIZE", "N04_RESOURCE_AFTER_SEMANTICS",
+                 "N05_SCRATCH_PREFLIGHT", "N06_FAMILY_DUPLICATES_AND_TAMPERING",
+-                "N07_ROOT_CERTIFICATE_BOUNDARIES"]
++                "N07_ROOT_CERTIFICATE_BOUNDARIES", "N08_FROZEN_FAMILY_BINDING",
++                "N09_FINALIZATION_DEADLINES_WITH_DOUBLES"]
+ 
+ 
+ def sha(data):
+@@ -98,7 +101,7 @@
+         raise RuntimeError("WRONG_PYTHON_EXECUTABLE")
+     if contract["limits"]["total_wall_seconds"] != TOTAL_SECONDS:
+         raise RuntimeError("CONTRACT_WALL_CHANGED")
+-    for name in ("CLAIM.json", "RUN", "TERMINAL_RECEIPT.json"):
++    for name in ("CLAIM.json", "RUN", "TERMINAL_RECEIPT.json", "FINALIZATION_FAILURE.json"):
+         if (PACKAGE / name).exists():
+             raise RuntimeError("IDENTITY_ALREADY_CONSUMED_OR_OUTPUT_EXISTS:" + name)
+     authorization_path = PACKAGE / "AUTORIZACAO_ROOT.json"
+@@ -217,7 +220,7 @@
+             detail["reason"] = "WORK_DEADLINE_EXCEEDED"
+         else:
+             if len(stdout) > 2 * 1024 * 1024 or len(stderr) > 65536:
+-                status = "FAILED_OUTPUT_LIMIT"
++                status = "FAILED_OUTPUT_ACCEPTANCE_LIMIT"
+             elif remaining(total_deadline) <= 0:
+                 status = "FAILED_NOMINAL_TOTAL_LIMIT"
+             else:
+@@ -257,9 +260,11 @@
+         "authorization_sha256": authorization_sha, "contract_sha256": args.contract_sha256,
+         "execution_inputs_sha256": args.inputs_sha256,
+         "preflight_seconds": (execution_started or time.monotonic()) - preflight_started,
+-        "execution_wall_seconds": (time.monotonic() - execution_started
++        "execution_started_monotonic": execution_started,
++        "wall_before_terminal_persistence_seconds": (time.monotonic() - execution_started
+                                    if execution_started is not None else None),
+         "nominal_total_seconds": TOTAL_SECONDS, "extra_cleanup_seconds": 0,
++        "output_caps_semantics": "Post-communicate acceptance caps only; retained pipe output is not memory-bounded by these checks.",
+         "OS_deadline_guarantee": False,
+         "stdout_sha256": sha(stdout) if stdout is not None else None,
+         "stderr_sha256": sha(stderr) if stderr is not None else None,
+@@ -268,20 +273,19 @@
+         "synthetic_only": True, "physical_certification": False,
+         "automatic_retry": False,
+     }
+-    try:
+-        create_atomic_json(PACKAGE / "TERMINAL_RECEIPT.json", receipt)
+-    except Exception as error:
+-        print(json.dumps({"status": "RECEIPT_PERSISTENCE_UNCERTAIN",
+-                          "request_id": identity["request_id"],
+-                          "prior_status": status,
+-                          "error": {"type": type(error).__name__, "message": str(error)[:1000]},
+-                          "do_not_retry": True}))
+-        return 4
+-    print(json.dumps({"status": status, "request_id": identity["request_id"],
+-                      "worker_pid": receipt["worker_pid"],
+-                      "receipt": str(PACKAGE / "TERMINAL_RECEIPT.json"),
+-                      "receipt_sha256": sha((PACKAGE / "TERMINAL_RECEIPT.json").read_bytes())}))
+-    return 0 if status == "PASS" else 1
++    terminal_path = PACKAGE / "TERMINAL_RECEIPT.json"
++    def persist_terminal(value):
++        create_atomic_json(terminal_path, value)
++    def read_terminal_digest():
++        return sha(terminal_path.read_bytes())
++    def emit_report(value):
++        print(json.dumps(value), flush=True)
++    def invalidate_terminal(value):
++        create_atomic_json(PACKAGE / "FINALIZATION_FAILURE.json", value)
++    # A missing process-start deadline can only finalize as failure, never PASS.
++    final_deadline = total_deadline if total_deadline is not None else time.monotonic()
++    return finalize_unit(receipt, status, final_deadline, time.monotonic,
++                         persist_terminal, read_terminal_digest, emit_report, invalidate_terminal)
+ 
+ 
+ if __name__ == "__main__":
+--- snapshot507/CONTROL_CONTRACT.json
++++ deltaV2/CONTROL_CONTRACT.json
+@@ -1,7 +1,7 @@
+ {
+   "request_id": "4893d182-7efc-419f-ac8a-ec6803ea8d7a",
+   "created_utc": "2026-10-06T05:51:56.002627+00:00",
+-  "status": "PREPARED_NOT_EXECUTED_PENDING_INDEPENDENT_REVIEW_AND_ROOT_DECISION",
++  "status": "DELTA_PREPARED_NOT_EXECUTED_PENDING_INDEPENDENT_REVIEW_AND_ROOT_DECISION",
+   "scope": "F9_SYNTHETIC_TAIL_CONTROLS_ONLY",
+   "source_contract": {
+     "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_proposal_v2\\CONTRATO_MODULO_CANDIDATO.json",
+@@ -26,7 +26,7 @@
+   },
+   "limits": {
+     "primary_groups": 8,
+-    "negative_groups": 7,
++    "negative_groups": 9,
+     "worker_compute_threads": 1,
+     "total_wall_seconds": 30,
+     "work_collection_deadline_seconds": 25,
+@@ -35,8 +35,6 @@
+     "extra_cleanup_seconds": 0,
+     "input_integer_bits": 512,
+     "scratch_integer_bits": 524288,
+-    "worker_stdout_max_bytes": 2097152,
+-    "worker_stderr_max_bytes": 65536,
+     "semantic_label_max_chars": 64,
+     "scenario_representation_max": 4096,
+     "matrix_computations": 0,
+@@ -47,9 +45,11 @@
+     "provider_calls": 0,
+     "one_execution_per_request_id": true,
+     "automatic_retry": false,
+-    "OS_deadline_guarantee": false
+-  },
+-  "timer_scope": "Preflight hashes/authorization outside execution interval. One monotonic interval starts immediately before Popen, includes startup, work, collection, validation and attempted terminal persistence; OS operations are not a hard real-time guarantee. No additional wait budget after total deadline.",
++    "OS_deadline_guarantee": false,
++    "worker_stdout_acceptance_max_bytes": 2097152,
++    "worker_stderr_acceptance_max_bytes": 65536
++  },
++  "timer_scope": "Preflight outside execution interval. One monotonic nominal30s deadline starts before Popen and covers startup/work/collection/validation/terminal persistence/read/hash/output flush. finalization.py checks after persistence plus read/hash, then after output flush. Successful return0 performs no further I/O or callbacks. No hard OS real-time guarantee; any detected late I/O invalidates acceptance with nonzero exit.",
+   "input_validation": "Strict built-in types and bounded canonical ASCII decimal grammar/lexical512-bit maximum before int. Positive denominator and gcd1 required. Out-of-interface-size/noncanonical inputs are UNAVAILABLE; never coerced or silently reduced. Internal scratch/time caps are separately declared resource limits.",
+   "semantic_boundary": {
+     "explicit_verifier_required": true,
+@@ -58,7 +58,10 @@
+     "physical_verifier_shipped": false,
+     "synthetic_verifier": "Exact registry of frozen synthetic fixtures only; receipt scope SYNTHETIC_CONTROL_ONLY. A physically meaningful verifier/certificates remain external OPEN prerequisites.",
+     "external_verifier_scope": "EXTERNAL_VERIFIER_CONDITIONAL does not itself certify physics; module output physical_certification remains false. Caller is responsible for independently audited certificate semantics.",
+-    "inputs_no_arrays": true
++    "inputs_no_arrays": true,
++    "family_receipt": "Mandatory FROZEN_DOMAIN_FAMILY receipt for exact canonical payload with complete ordered scenario list, test/null IDs and frozen-family/model/algorithm references. Verify before any tail or aggregate. Same family pin with shortened/reordered Domain fails unless a distinct explicit external certificate actually validates that exact frozen domain.",
++    "family_hash_meaning": "No redefinition of family scientific hash. Verifier must bind that existing reference to the complete ordered manifest, independently of each row receipt.",
++    "synthetic_family_verifier": "Registry admits only the two exact synthetic fixture domains a and a,b,c with their existing identities. Neither a,b with the old a,b,c pin nor reordered b,a,c is registered."
+   },
+   "zero_degree_guard": {
+     "priority": "after mandatory semantic and type checks, before any tail, resource-trivial bound or aggregation",
+@@ -99,7 +102,7 @@
+   },
+   "resource_trivial_policy": "Internal time/scratch ResourceLimit after valid semantic receipt and F9 coherence guard yields explicitly labeled upper1; input/model/identity/support/certificate failure returns null. No implicit retry or alternate scientific method. Completed-branch monotonicity is not promised across resource states.",
+   "certificate": "Exact positive rational R as bounded hex integers; u/Q with (u-1)^2 B < A Q² <= u² B and1<=u<=Q, checked internally. No float SF/sqrt/exp/log; clock floats only.",
+-  "aggregation": "Every frozen scenario exactly once with own externally verified bound-record receipt, valid positive canonical bound, complete family, matching test/null/model/family/algorithm refs. Max all, then min(1,5p). Missing/duplicate/extra/invalid/unverified records => unavailable robust output; no alpha or verdict calculation.",
++  "aggregation": "Require a verified FROZEN_DOMAIN_FAMILY payload before row verification. Every frozen scenario exactly once, with its own verified positive bound record; family list/order/test/null/model/algorithm refs bound to the receipt. Missing/duplicate/extra/invalid/unverified records or a shortened/reordered family reusing the original pin => unavailable. Max over all, then min(1,5p); no alpha or physical verdict calculation.",
+   "integration_unchanged_from_proposalV2": {
+     "statistic_lower_formulas": [
+       {
+@@ -385,6 +388,16 @@
+       "id": "N07_ROOT_CERTIFICATE_BOUNDARIES",
+       "expected": "sqrt(1/4) grid exact Q/2; sqrt(1/Q²) grid1; sqrt(1/3) outward integer inequality; zero/negative/zero-denominator/A>B invalid",
+       "scope": "three fixed rational roots and four invalid domains; no SF"
++    },
++    {
++      "id": "N08_FROZEN_FAMILY_BINDING",
++      "expected": "UNAVAILABLE for Domain(a,b) reusing a,b,c pin with its two valid rows; for silent reordered family; for row receipts without family receipt; and for tail request under changed family",
++      "scope": "fixed exact synthetic family-reference mutations; no aggregate evaluated in preparation"
++    },
++    {
++      "id": "N09_FINALIZATION_DEADLINES_WITH_DOUBLES",
++      "expected": "exit0 only for on-time finalization; nonzero plus invalidation on late persistence, late digest, late output, persistence error or output error. No stored/emitted terminal PASS in provisional path.",
++      "scope": "six pure injected-I/O/clock scenarios, no files/sleeps/output in these control doubles"
+     }
+   ],
+   "negative_function_order": [
+@@ -394,7 +407,9 @@
+     "N04_RESOURCE_AFTER_SEMANTICS",
+     "N05_SCRATCH_PREFLIGHT",
+     "N06_FAMILY_DUPLICATES_AND_TAMPERING",
+-    "N07_ROOT_CERTIFICATE_BOUNDARIES"
++    "N07_ROOT_CERTIFICATE_BOUNDARIES",
++    "N08_FROZEN_FAMILY_BINDING",
++    "N09_FINALIZATION_DEADLINES_WITH_DOUBLES"
+   ],
+   "execution_gate": {
+     "authorization_filename": "AUTORIZACAO_ROOT.json",
+@@ -412,35 +427,41 @@
+     },
+     "claim": "Exclusive CLAIM.json after preflight/authorization and before Popen; existing claim/output blocks launch. Uncertain claim write or process result never retried.",
+     "supervisor_child_identity": "PIDs, exact argv, request ID, nonce, contract/authorization pins; worker checks parent PID and claim before controls.",
+-    "terminal": "TERMINAL_RECEIPT.json records PASS/FAILED/limit/PROCESS_STATE_UNCERTAIN; no PASS on worker failure, incomplete controls, audit denial, missing identity or budget limit."
++    "terminal": "Provisional TERMINAL_RECEIPT plus externally observed exit0 required for acceptance; FINALIZATION_FAILURE invalidates candidate. All failed/uncertain/late outcomes remain nonzero, and missing final process status never accepted.",
++    "preexisting_output_blocks_launch": "CLAIM.json, RUN, TERMINAL_RECEIPT.json or FINALIZATION_FAILURE.json"
+   },
+   "worker_audit": "After preloading stdlib and reading only named package identity/claim/auth/contract/source, an audit hook denies further open/import not preloaded/network/subprocess/mutation; denial is latched. The hook is a Python control, not an OS sandbox proof.",
+   "code_pins": [
+     {
+-      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation\\tail_envelope.py",
+-      "bytes": 15839,
+-      "sha256": "230bbe61031189fbf7403356cdbf47a4e7dfbb55a263a42a0395f15f037baafd"
+-    },
+-    {
+-      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation\\worker_controls.py",
+-      "bytes": 20163,
+-      "sha256": "9db18f9a29989c5f76d0c976a8734d7180912a81813186d0183fda94ccaabbe0"
+-    },
+-    {
+-      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation\\supervisor.py",
+-      "bytes": 13262,
+-      "sha256": "f30c0bf15bbc955859e72c3cb60341e6f586972b7932364ea766d58a3c855350"
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\tail_envelope.py",
++      "bytes": 17472,
++      "sha256": "7238379e8828d3519de1911674d8977c0a42d7c9984d2d4c962686a1cad1e1bf"
++    },
++    {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\worker_controls.py",
++      "bytes": 24488,
++      "sha256": "325dae91510432842e942a6c9a27ed89105b00523b2b8b645f16f0bf8123cabd"
++    },
++    {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\supervisor.py",
++      "bytes": 13607,
++      "sha256": "563ca29397eed3729b9b3efe50e304269ccf51a19d4e06e3022d7ef67649ecf0"
++    },
++    {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\finalization.py",
++      "bytes": 4373,
++      "sha256": "7b6ebbd6520b5dca7c5b05fa73eff879cc08e56d9a4a6953815676a2cb96846b"
+     }
+   ],
+   "runtime_manifest": {
+-    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation\\RUNTIME_PINS.json",
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\RUNTIME_PINS.json",
+     "bytes": 25745,
+     "sha256": "9866b26713677755d9eb50d4cf629b4292822277163d4b804336f55cc88c46bf"
+   },
+   "sources_manifest": {
+-    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation\\SOURCE_PINS.json",
+-    "bytes": 2161,
+-    "sha256": "ee6a386b8973eb28c6061936f37d2f01b86a5d13c2bfd79abe7f1c5d2d7ea136"
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\SOURCE_PINS.json",
++    "bytes": 3111,
++    "sha256": "7f41fd682b637d7cef588d19d38df8f357ef24ad11c043afa3e297e98b49b4f0"
+   },
+   "measured_now": {
+     "cauda_evaluations": 0,
+@@ -449,5 +470,53 @@
+     "scientific_imports": 0,
+     "benchmark_cost": null,
+     "physical_certificates_created": 0
++  },
++  "implementation_revision": 2,
++  "updated_utc": "2026-10-06T06:12:10.941832+00:00",
++  "original_implementation_manifest": {
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation\\MANIFESTO_IMPLEMENTACAO.json",
++    "bytes": 6140,
++    "sha256": "d20722133293ce6eaba1c6df69b7d535ee05698bdb7544ab8594ded334aef78d"
++  },
++  "correction_review_pins": [
++    {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_tail_implementation\\PARECER_ESTATICO_IMPLEMENTACAO.md",
++      "bytes": 11717,
++      "sha256": "b64ccb9cce145d1d96c62de845a30f4d6b522b12913d468412dfb81f4c74430b"
++    },
++    {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_tail_implementation\\ACHADOS_ESTATICOS.json",
++      "bytes": 1649,
++      "sha256": "51ed6cdd68007a22e9e08eec23dd3f1c63538270c2683838b4e711a0987da321"
++    },
++    {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_tail_implementation\\MANIFESTO_REVISAO_ESTATICA.json",
++      "bytes": 1289,
++      "sha256": "a77a760686ff40a50b61f088c1addbe317945d755b5a780a69e305ec580549a6"
++    }
++  ],
++  "output_capture": {
++    "method": "subprocess.communicate with pipes for the fixed pinned worker",
++    "caps_scope": "Acceptance only, checked after collection (2MiB stdout,64KiB stderr). They do NOT bound retained memory while capture is running.",
++    "retention_memory_limit_implemented": false,
++    "alternative_not_selected": "Incremental bounded capture; unnecessary scope expansion for this correction and not implemented.",
++    "fixed_worker_reduces_risk_not_guarantee": true
++  },
++  "finalization_protocol": {
++    "provisional_file": "TERMINAL_RECEIPT.json",
++    "successful_controls_receipt_status": "PENDING_FINAL_DEADLINE_CHECK",
++    "controls_status_field": "PASS denotes controls only; never terminal acceptance by itself",
++    "accepted_unit_requires": [
++      "external observed supervisor exit_code exactly0",
++      "pinned provisional receipt controls_status PASS and status PENDING_FINAL_DEADLINE_CHECK",
++      "matching request/process/authorization/contract/input identity and all expected control records",
++      "absence of FINALIZATION_FAILURE.json"
++    ],
++    "post_persistence_check": "after terminal write, byte verification, read and SHA256",
++    "post_output_check": "after print(...,flush=True) returns; then return0 only if still before deadline and controls_status PASS, with no further I/O in successful path",
++    "late_or_IO_failure": "Attempt separate FINALIZATION_FAILURE.json, naming provisional hash when known; emit failure best-effort, return1 or4, never0. Any provisional output/receipt is invalidated; it never says terminal PASS.",
++    "measurement_fields": "wall_before_terminal_persistence_seconds is explicitly pre-persistence; stdout provides observed_wall_through_persistence_seconds. The final post-output deadline decision is evidenced by external exit0, not by another post-check I/O. Failure record captures observed late timestamp/elapsed when available.",
++    "unknown_or_nonzero_exit": "Never accepted; preserve uncertainty and do not rerun.",
++    "no_extra_budget_or_retry": true
+   }
+ }
+--- snapshot507/README_PREPARACAO.md
++++ deltaV2/README_PREPARACAO.md
+@@ -1,6 +1,6 @@
+ # Instrumento racional F9 — preparado, sem execução
+ 
+-[REAL — implementação estática] Nova unidade sintética com identidade própria em IDENTITY.json. O módulo tail_envelope.py implementa a especificação V2; worker_controls.py prepara oito grupos T01–T08 e sete grupos negativos N01–N07. Nenhum foi importado ou executado na preparação. A qualificação dinâmica e o custo permanecem OPEN.
++[REAL — implementação estática] Nova unidade sintética com identidade própria em IDENTITY.json. O módulo tail_envelope.py implementa a especificação V2; worker_controls.py prepara oito grupos T01–T08 e nove grupos negativos N01–N09. Nenhum foi importado ou executado na preparação. A qualificação dinâmica e o custo permanecem OPEN.
+ 
+ O caminho d=0/Lpositivo termina INVALID/null CONTRACT_INCOHERENCE_NOT_REJECTION antes do relógio/fallback. Inputs têm gramática canônica, teto lexical512bits antes de int, denominador positivo e gcd1; valores maiores não são admitidos. Os limites internos de tamanho/tempo somente podem produzir cota trivial1 depois da validação semântica explícita e da guarda de coerência. Erro de certificado/implementação não é classificado como recurso.
+ 
+@@ -13,3 +13,11 @@
+ O worker não abre dados: lê somente os arquivos nomeados do próprio pacote antes de instalar hook auditável com latch; após isso nega open, rede, processos e mutação. Imports próprios/stdlib são pré-carregados, sem imports de ciência upstream. O hook não é alegado como sandbox de sistema. O runtime registra fontes/cache/extensões stdlib admitidas mais intérprete/DLL; não é inventário de toda biblioteca do OS.
+ 
+ ALTERNATIVAS_ANTES_DA_EXECUCAO.md registra a escolha racional versus Decimal e SF/Chernoff intervalar antes de medir. CONTROL_CONTRACT.json fixa todos os casos, negativos, limites e fronteiras de confiança. COMMAND_PROPOSED.json será apenas uma proposta de argv; preparação não equivale a autorização para usá-la. Não reexecuta os C01–C08 consumidos nem altera as propostas498/502, modelos, alpha ou memórias compartilhadas.
++
++## Revisão técnica V2 — snapshot507 preservado
++
++[REAL estático] Mesma unidade ainda não consumida; código/contratos originais e backups exatos preservados. A família completa agora entra no verificador sob papel FROZEN_DOMAIN_FAMILY: lista ordenada, test/null e pins de família/modelo/algoritmo. O recibo tem SHA do payload completo e referências ligadas. Registros individuais válidos não autorizam encolher a lista sob o mesmo pin. N08 prepara esse contraexemplo e mudanças de ordem/recibo. A interface continua sem provar semântica física.
++
++[PROTOCOLO DE ACEITE] TERMINAL_RECEIPT.json é provisório quando os controles passam: status PENDING_FINAL_DEADLINE_CHECK, controls_status PASS. A aceitação da unidade exige exit0 real do supervisor, identidade/pins válidos e ausência de FINALIZATION_FAILURE.json. Não aceitar recibo ou stdout isoladamente. finalization.py checa deadline depois de gravar/reler/hash e depois de emitir/flush; no caminho de sucesso, retorna0 sem novo I/O. I/O tardio/erro tenta registrar invalidação e sai não zero. Se a invalidação não persistir, o retorno continua não zero e a incerteza permanece visível. Resultado de processo ausente/incerto nunca autoriza retry ou aceitação. N09 contém somente doubles de clock/I/O para seis cenários; não foi executado.
++
++[TI-03] Os2MiB/64KiB limitam a ACEITAÇÃO após communicate. Não limitam bytes retidos em memória durante a captura; o worker fixo reduz risco, sem garanti-lo. Não foi implantada captura incremental limitada. As medições de tempo pré e pós-persistência são rotuladas; o check final após output se expressa no exitcode, evitando adicionar mais I/O após o check de sucesso. Prazo30s segue nominal, sem orçamento adicional de cleanup.
+--- /dev/null
++++ deltaV2/finalization.py
+@@ -0,0 +1,95 @@
++"""Pure finalization coordinator with injected I/O and clock operations.
++
++A provisional persisted receipt is never sufficient for acceptance. The caller
++must observe supervisor exit0 after the final post-output clock check. On any
++late I/O/failure the coordinator returns nonzero and attempts a separate
++invalidation receipt. No operation after a successful final check is performed
++here except returning the integer exit status.
++"""
++import math
++
++
++def finalize_unit(receipt, controls_status, deadline, clock,
++                  persist, read_digest, emit, invalidate):
++    candidate = dict(receipt)
++    candidate["status"] = (
++        "PENDING_FINAL_DEADLINE_CHECK" if controls_status == "PASS" else controls_status)
++    candidate["controls_status"] = controls_status
++    candidate["acceptance_rule"] = (
++        "Acceptance requires external supervisor exit0, this pinned provisional "
++        "receipt with controls_status PASS, and no FINALIZATION_FAILURE.json. "
++        "A provisional receipt or stdout message alone is never terminal PASS.")
++    candidate["supervisor_exit_required"] = 0
++    candidate_sha = None
++
++    def failure(reason, observed=None, exception=None):
++        record = {
++            "request_id": candidate.get("request_id"),
++            "status": reason,
++            "invalidates_provisional_receipt_sha256": candidate_sha,
++            "provisional_receipt_is_accepted": False,
++            "controls_status": controls_status,
++            "supervisor_exit_will_be_nonzero": True,
++            "observed_monotonic": observed,
++            "nominal_deadline_monotonic": deadline,
++            "observed_wall_seconds": (
++                observed - candidate["execution_started_monotonic"]
++                if observed is not None and candidate.get("execution_started_monotonic") is not None
++                else None),
++            "exception": exception,
++            "retry_allowed": False,
++        }
++        persistence_error = None
++        try:
++            invalidate(record)
++        except Exception as error:
++            persistence_error = type(error).__name__ + ":" + str(error)[:1000]
++        report = dict(record)
++        report["invalidation_persistence_error"] = persistence_error
++        try:
++            emit(report)
++        except Exception:
++            pass
++        # Failure reporting may also block or fail. Never return0 afterward.
++        return 1 if persistence_error is None else 4
++
++    def timestamp():
++        value = clock()
++        if type(value) not in (int, float) or not math.isfinite(value):
++            raise RuntimeError("FINALIZATION_CLOCK_INVALID")
++        return value
++
++    try:
++        if type(deadline) not in (int, float) or not math.isfinite(deadline):
++            raise RuntimeError("FINALIZATION_DEADLINE_INVALID")
++        persist(candidate)
++        candidate_sha = read_digest()
++        if (type(candidate_sha) is not str or len(candidate_sha) != 64 or
++                any(c not in "0123456789abcdef" for c in candidate_sha)):
++            raise RuntimeError("PROVISIONAL_RECEIPT_DIGEST_INVALID")
++        after_persistence = timestamp()
++        if after_persistence >= deadline:
++            return failure("FAILED_NOMINAL_TOTAL_LIMIT_AFTER_PERSISTENCE", after_persistence)
++        report = {
++            "request_id": candidate.get("request_id"),
++            "status": candidate["status"],
++            "provisional_receipt_sha256": candidate_sha,
++            "controls_status": controls_status,
++            "observed_wall_through_persistence_seconds": (
++                after_persistence - candidate["execution_started_monotonic"]
++                if candidate.get("execution_started_monotonic") is not None else None),
++            "external_supervisor_exit0_required": True,
++            "message_is_not_terminal_acceptance": True,
++        }
++        # The real emit must perform its flush before returning.
++        emit(report)
++        after_output = timestamp()
++        if after_output >= deadline:
++            return failure("FAILED_NOMINAL_TOTAL_LIMIT_AFTER_OUTPUT", after_output)
++        if controls_status != "PASS":
++            return 1
++        # No further persistence, output, hash or callback on this successful path.
++        return 0
++    except Exception as error:
++        return failure("FINALIZATION_FAILED_NOT_ACCEPTED", exception={
++            "type": type(error).__name__, "message": str(error)[:2000]})

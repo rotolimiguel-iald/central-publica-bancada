@@ -1,0 +1,46 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T193809_542742Z\BoundedTensorMapR1.lean:23:45: error: unsolved goals
+E : Type u_1
+F : Type u_2
+inst✝⁴ : NormedAddCommGroup E
+inst✝³ : InnerProductSpace ℂ E
+inst✝² : NormedAddCommGroup F
+inst✝¹ : InnerProductSpace ℂ F
+I : Type u_5
+inst✝ : Fintype I
+v : I → E
+e : I → F
+he : Orthonormal ℂ e
+⊢ ∑ x, (↑‖v x‖ ^ 2).re = ∑ i, ‖v i‖ ^ 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T193809_542742Z\BoundedTensorMapR1.lean:48:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ‖∑ i, ?m.350 i ⊗ₜ[ℂ] ↑(e i)‖ ^ 2
+in the target expression
+  ∑ i, ‖A (v i)‖ ^ 2 ≤ (‖A‖ * ‖∑ i, v i ⊗ₜ[ℂ] ↑(e i)‖) ^ 2
+
+E : Type u_1
+F : Type u_2
+G : Type u_3
+inst✝⁵ : NormedAddCommGroup E
+inst✝⁴ : InnerProductSpace ℂ E
+inst✝³ : NormedAddCommGroup F
+inst✝² : InnerProductSpace ℂ F
+inst✝¹ : NormedAddCommGroup G
+inst✝ : InnerProductSpace ℂ G
+A : E →L[ℂ] G
+x : E ⊗[ℂ] F
+V : Submodule ℂ F
+hV : Module.Finite ℂ ↥V
+hx : {x} ⊆ ↑(LinearMap.lTensor E V.subtype).range
+this : Module.Finite ℂ ↥V := hV
+y : E ⊗[ℂ] ↥V
+hy : (LinearMap.lTensor E V.subtype) y = x
+e : OrthonormalBasis (Fin (finrank ℂ ↥V)) ℂ ↥V := stdOrthonormalBasis ℂ ↥V
+v : Fin (finrank ℂ ↥V) →₀ E
+hv : (v.sum fun i m => m ⊗ₜ[ℂ] e.toBasis i) = y
+hr : x = ∑ i, v i ⊗ₜ[ℂ] ↑(e i)
+he : Orthonormal ℂ fun i => ↑(e i)
+hm : (TensorProduct.map (↑A) LinearMap.id) x = ∑ i, A (v i) ⊗ₜ[ℂ] ↑(e i)
+⊢ ∑ i, ‖A (v i)‖ ^ 2 ≤ (‖A‖ * ‖∑ i, v i ⊗ₜ[ℂ] ↑(e i)‖) ^ 2
+'F1Fecho.BoundedTensor.norm_sum_tmul_sq' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.BoundedTensor.norm_map_first_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.BoundedTensor.norm_map_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.BoundedTensor.mapCLM_norm_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

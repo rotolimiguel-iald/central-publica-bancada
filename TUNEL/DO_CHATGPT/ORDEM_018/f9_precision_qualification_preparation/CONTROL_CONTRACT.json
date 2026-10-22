@@ -1,0 +1,297 @@
+{
+  "schema": "F9_Q01_CONTROL_CONTRACT_V1",
+  "request_id": "d8aac6d3-7061-42fb-ae33-6e8b834b3de8",
+  "unit": "Q01",
+  "status": "PREPARATION_ONLY_REQUIRES_FUTURE_ROOT_DECISION_AND_INDEPENDENT_REVIEW",
+  "source_request": "f820203f-b83c-420a-87ec-7816f3179139",
+  "candidate": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_precision_services_preparation\\precision_services.py",
+    "bytes": 13442,
+    "sha256": "63f6adc987308cb14d986a07a9006610e0a304bb36d7d705f59e8c3874b7f278"
+  },
+  "case_order": [
+    "W01",
+    "W02",
+    "W03",
+    "W04",
+    "W05",
+    "P01",
+    "P02",
+    "N01",
+    "N02"
+  ],
+  "cases": [
+    {
+      "id": "W01",
+      "kind": "window",
+      "purpose": "interior peak, resolved finite interval",
+      "input": [
+        2,
+        0,
+        -1,
+        1
+      ],
+      "reference": "symmetric_unit_gaussian",
+      "log_target": 1e-09,
+      "comparison_absolute_tolerance": 3e-08,
+      "max_evaluations": 4098,
+      "expected_evaluations": null,
+      "require_converged": true
+    },
+    {
+      "id": "W02",
+      "kind": "window",
+      "purpose": "restricted maximum at boundary and finite wide interval exercising localized tail accounting",
+      "input": [
+        2,
+        -2,
+        0,
+        16
+      ],
+      "reference": "boundary_erfc_difference",
+      "log_target": 1e-09,
+      "comparison_absolute_tolerance": 3e-08,
+      "max_evaluations": 4097,
+      "expected_evaluations": null,
+      "require_converged": true
+    },
+    {
+      "id": "W03",
+      "kind": "window",
+      "purpose": "short representable interval without CDF subtraction",
+      "input": [
+        2,
+        0,
+        0,
+        {
+          "power_of_two": -40,
+          "sign": 1
+        }
+      ],
+      "reference": "short_window_inequality",
+      "log_target": 1e-09,
+      "comparison_absolute_tolerance": 3e-11,
+      "max_evaluations": 5,
+      "expected_evaluations": 5,
+      "require_converged": true
+    },
+    {
+      "id": "W04",
+      "kind": "window",
+      "purpose": "very large representable curvature and correspondingly narrow interval",
+      "input": [
+        {
+          "power_of_two": 1001,
+          "sign": 1
+        },
+        0,
+        {
+          "power_of_two": -500,
+          "sign": -1
+        },
+        {
+          "power_of_two": -500,
+          "sign": 1
+        }
+      ],
+      "reference": "scaled_unit_gaussian_minus500",
+      "log_target": 1e-08,
+      "comparison_absolute_tolerance": 3e-07,
+      "max_evaluations": 4098,
+      "expected_evaluations": null,
+      "require_converged": true
+    },
+    {
+      "id": "W05",
+      "kind": "window",
+      "purpose": "very small positive curvature and correspondingly wide finite interval",
+      "input": [
+        {
+          "power_of_two": -999,
+          "sign": 1
+        },
+        0,
+        {
+          "power_of_two": 500,
+          "sign": -1
+        },
+        {
+          "power_of_two": 500,
+          "sign": 1
+        }
+      ],
+      "reference": "scaled_unit_gaussian_plus500",
+      "log_target": 1e-08,
+      "comparison_absolute_tolerance": 3e-07,
+      "max_evaluations": 4098,
+      "expected_evaluations": null,
+      "require_converged": true
+    },
+    {
+      "id": "P01",
+      "kind": "positive_cubic",
+      "purpose": "independent exact cubic integral and count",
+      "absolute_target": 1e-10,
+      "relative_target": 1e-10,
+      "max_evaluations": 17,
+      "expected_evaluations": 17,
+      "reference": "five_over_four",
+      "comparison_absolute_tolerance": 1e-13,
+      "require_converged": true
+    },
+    {
+      "id": "P02",
+      "kind": "positive_exp_nonconverged",
+      "purpose": "full partition retained under deliberately impossible local targets and minimum budget",
+      "absolute_target": 1e-30,
+      "relative_target": 1e-30,
+      "max_evaluations": 17,
+      "expected_evaluations": 17,
+      "reference": "expm1_one_with_classical_composite_simpson_bound",
+      "comparison_rounding_allowance": 1e-13,
+      "require_converged": false
+    },
+    {
+      "id": "N01",
+      "kind": "insufficient_budget",
+      "purpose": "budget refusal before first callback",
+      "absolute_target": 1e-10,
+      "relative_target": 1e-10,
+      "max_evaluations": 16,
+      "expected_evaluations": 0,
+      "expected_exception_code": "INSUFFICIENT_BUDGET"
+    },
+    {
+      "id": "N02",
+      "kind": "callback_exception",
+      "purpose": "same sentinel exception at third call, propagated without retry",
+      "absolute_target": 1e-10,
+      "relative_target": 1e-10,
+      "max_evaluations": 17,
+      "expected_evaluations": 3,
+      "raise_on_call": 3,
+      "expected_same_exception_object": true
+    }
+  ],
+  "case_count": 9,
+  "maximum_service_calls": 9,
+  "maximum_total_evaluations": 16433,
+  "evaluation_accounting": {
+    "actual_observed": "Profile exact candidate nested integrand calls for windows; count wrapper invocations for positive callbacks; compare success receipts. No call-count claim is inferred from budget.",
+    "adaptive_counts": "W01/W02/W04/W05: actual count unknown until a permitted run; count is bounded by explicit per-case cap.",
+    "deterministic_counts": {
+      "W03": 5,
+      "P01": 17,
+      "P02": 17,
+      "N01": 0,
+      "N02": 3
+    },
+    "candidate_no_monkeypatch": true
+  },
+  "tolerances": "Explicit engineering comparison thresholds. Reference math library/roundoff not certified; no observed tuning or automatic target relaxation.",
+  "limits": {
+    "total_nominal_seconds": 30,
+    "worker_cooperative_seconds": 23,
+    "worker_outer_wait_seconds": 25,
+    "collection_reserve_seconds": 4,
+    "maximum_children": 1,
+    "maximum_descendants": 0,
+    "maximum_output_bytes_per_stream_acceptance": 65536,
+    "output_retention": "Direct files; post-collection size acceptance, not a hard filesystem quota. Known pure worker emits no bulk output.",
+    "threads": 1,
+    "retry": false,
+    "fallback": false,
+    "timer_scope": "From supervisor main entry, including validation, child startup, collection and terminal persistence/readback; supervisor interpreter/import startup excluded. Nominal deadline with late PASS refusal, not hard realtime."
+  },
+  "runtime": {
+    "interpreter": {
+      "path": "C:\\Python314\\python.exe",
+      "bytes": 106328,
+      "sha256": "cce21c0e8710e304273e98ac4b2b0f5aceb639acbcd2343cbaa5c4e81619c45b"
+    },
+    "required_python_major_minor": [
+      3,
+      14
+    ],
+    "flags": [
+      "-I",
+      "-S",
+      "-B",
+      "-X",
+      "utf8"
+    ],
+    "candidate_loading": "Compile and execute pinned bytes in fresh ModuleType; no import path lookup or pycache; attest source and code object hashes."
+  },
+  "custody": {
+    "fixed_root": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_precision_qualification_preparation",
+    "decision_filename": "ROOT_DECISION.json",
+    "root_decision_required": true,
+    "decision_digest_cli_required": true,
+    "manifest_digest_in_decision": true,
+    "run_claim": "RUN_CLAIM.json exclusive O_EXCL before child launch",
+    "worker_claim": "execution_once/WORKER_STARTED.json exclusive O_EXCL before candidate load",
+    "single_output_directory": "execution_once",
+    "reinvocation": "Any existing run claim or execution output refuses; no alternate output path option.",
+    "success": "External supervisor exit0 + TERMINAL_RECEIPT PASS + RESULT PASS + no failure record. Worker result alone is provisional. Post-IO monotonic checks include terminal persistence/hash.",
+    "failure": "Preserve claims, per-case records and failure; no repeat after uncertainty. Claim remaining without terminal is uncertain/consumed."
+  },
+  "decision_schema": {
+    "schema": "F9_Q01_ROOT_DECISION_V1",
+    "request_id": "d8aac6d3-7061-42fb-ae33-6e8b834b3de8",
+    "unit": "Q01",
+    "authorize_single_execution": true,
+    "manifest_sha256": "FUTURE_MANIFEST_HASH",
+    "review_reference": {
+      "id": "FUTURE_INDEPENDENT_REVIEW",
+      "sha256": "FUTURE_REVIEW_HASH"
+    },
+    "scope": "ONLY_NINE_PINNED_PRECISION_CASES_NO_OBSERVED"
+  },
+  "forbidden": [
+    "WSL",
+    "CAMB",
+    "NumPy",
+    "SciPy",
+    "observed data",
+    "consumer or theta integration",
+    "network/providers",
+    "NC02/tail/24case/c435 repetitions",
+    "new science or uniform certification claim"
+  ],
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\RECIBO_ROOT_REVISOES_PRECISAO_THETA_F9.json",
+      "bytes": 12157,
+      "sha256": "032fe4db047afc11c1d04f0558aead75e85415610c8fbd85fc7813327221a35a"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_precision_services_preparation\\MANIFESTO_PREPARACAO.json",
+      "bytes": 2782,
+      "sha256": "d1d46e7cc3b5320b02684541f68f8d358ab23b6775142a58b868674e123a8ea2"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_precision_services_preparation\\API_CONTRATO.md",
+      "bytes": 5835,
+      "sha256": "ad6d5b0c5fb8316c2089d10ae29cd1e785b08845bf415fc7b7cf005b371ccc7c"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_precision_services_preparation\\DERIVACAO.md",
+      "bytes": 10593,
+      "sha256": "f115faf4ca0df893c4be97b7c97c827ca86d65c8a38df1d6dc6e5ced98b5b50a"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_f9_precision_services\\MANIFESTO_REVISAO_SERVICOS_PRECISAO_F9.json",
+      "bytes": 2235,
+      "sha256": "e30b56b1a15cf05ac0b66a1dc78a1d0794379ac8a7500c84640e2000d37e49c9"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_f9_precision_services\\PARECER_SERVICOS_PRECISAO_F9.md",
+      "bytes": 8714,
+      "sha256": "d3f3433952495819b1978f08ff90f159360fbb5a7024970e9a261ac66d50dfc9"
+    }
+  ],
+  "authorization_created": false,
+  "execution_claim_created": false,
+  "candidate_imports": 0,
+  "numerical_controls_executed": 0
+}

@@ -1,0 +1,78 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "reviewer": {
+    "id": "codex-mission-memory-review",
+    "kind": "agent"
+  },
+  "created_utc": "2026-10-16T12:12:50.667077+00:00",
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+  "projection_at_review": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_review_20261016\\REVIEW_PROJECT_SNAPSHOT.json",
+    "sha256": "f90a74b6d040c045d4fc0772ef369352b4065d26b2c8c22495a4e25c2738240e",
+    "bytes": 34325
+  },
+  "review_revision": 15,
+  "independence": "Revisor real distinto do construtor/submitter; não reconstruiu os componentes nem simulou outro ator.",
+  "method": "Leitura dos critérios e fontes Lean/Python, exame dos recibos e revisões existentes, hashes atuais e verificações estáticas próprias.",
+  "verification": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_review_20261016\\MECHANICAL_VERIFICATION.json",
+    "sha256": "529ec39b0f9bb1bb7f39f17fb4599f8aecad46c717a1c49d1f5032479068415b",
+    "bytes": 22049
+  },
+  "scope": "Aceite do requisito no controlador da missão. Não fecha o quadro, não ratifica gate/selo nem confirma física.",
+  "new_provider_calls": 0,
+  "new_builds": 0,
+  "production_science_modified": false,
+  "findings_blocking_criterion": [],
+  "requirement": "R2",
+  "criterion": "Contrato quadratico da correspondencia. Lean: residuo nulo iff leitura=ancora, invariancia no fluxo e controles; consumidor usa prova e fontes.",
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\INTEGRATION_QUADRATIC_R3.json",
+      "sha256": "3db8e80a6fefa5b7bfdf1859ee4457cca5047e95f80600e4b682a9dad33497bb"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\quadratic_review\\REVISAO_QUADRATICA_R3_R1.json",
+      "sha256": "4808d12cab4b21c2fb3d4063f95a3055cc7526bd4cf28ab566f4a58a61d6a18b"
+    }
+  ],
+  "verdict": "PASS_CRITERION_WITH_COMPONENT_SCOPE",
+  "criterion_mapping": [
+    {
+      "clause": "resíduo nulo iff leitura=âncora",
+      "result": "PASS",
+      "reason": "residual A X = purityR(Eg X - A); positividade estrita de purityR e sub_eq_zero dão Eg X = A. Domínio M2."
+    },
+    {
+      "clause": "invariância no fluxo",
+      "result": "PASS",
+      "reason": "residual_flow usa reading_flow para qualquer A fixa. Continuidade e derivada temporal zero decorrem da constância; não se afirma decaimento do resíduo."
+    },
+    {
+      "clause": "controles",
+      "result": "PASS",
+      "reason": "transportedRho é aceito para I/2 apesar de ser estado bruto distinto; projPlus produz resíduo 1/2 e recusa; âncora fora da imagem de Eg tem resíduo positivo."
+    },
+    {
+      "clause": "consumidor usa prova e fontes",
+      "result": "PASS",
+      "reason": "Consumidor exige relatório formal válido, 18 declarações com axiomas padrão, fonte embutida pinada, contagem exata 7171 e dependência temporal. Três funções coincidem por AST com a candidata; 7 recusas existentes foram conferidas."
+    }
+  ],
+  "evidence_counts": {
+    "lean_declarations": 18,
+    "existing_runtime_checks": 274,
+    "existing_refusal_controls": 7
+  },
+  "preserved_limits": [
+    "Eg não é injetiva nos estados brutos; resíduo nulo não prova X=A fora do subtipo de inscrições fixas.",
+    "Âncora fixa e modelo finito M2. A função é quadrática afim no estado para âncora não nula; não cria evolução dissipativa de aprendizado.",
+    "Tolerâncias numéricas do consumidor são distintas da igualdade exata Lean.",
+    "O teste integrado existente é de componente; execução final de main/artigos/selo continua pertencendo a R3 e requer a candidata final corrente."
+  ]
+}

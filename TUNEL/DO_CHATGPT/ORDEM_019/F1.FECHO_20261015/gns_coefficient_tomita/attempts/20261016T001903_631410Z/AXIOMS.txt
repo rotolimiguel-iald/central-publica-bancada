@@ -1,0 +1,58 @@
+import took 87.5s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001903_631410Z\LpPairTransportR2.lean:39:2: error: Tactic `rfl` failed: The left-hand side
+  leftMap (↑↑f a) + rightMap (↑↑g a)
+is not definitionally equal to the right-hand side
+  WithLp.toLp 2 (↑↑f a, ↑↑g a)
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+f g : ↥(RegularHilbert H)
+a : ℝ
+hb : ↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f) a = leftMap (↑↑f a)
+hc : ↑↑((ContinuousLinearMap.compLpL 2 volume rightMap) g) a = rightMap (↑↑g a)
+ha :
+  ↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f + (ContinuousLinearMap.compLpL 2 volume rightMap) g) a =
+    (↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f) + ↑↑((ContinuousLinearMap.compLpL 2 volume rightMap) g)) a
+⊢ leftMap (↑↑f a) + rightMap (↑↑g a) = WithLp.toLp 2 (↑↑f a, ↑↑g a)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001903_631410Z\LpPairTransportR2.lean:44:2: warning: 'change fstMap (pair f g) a = _' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001903_631410Z\LpPairTransportR2.lean:52:2: warning: 'change sndMap (pair f g) a = _' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001903_631410Z\LpPairTransportR2.lean:78:2: warning: 'change encode B f g a = _' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'F1Fecho.LpPairTransport.pair_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.fst_pair' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.snd_pair' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.decode_encode' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.encode_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.165ms
+	blocked (unaccounted) 90.5ms
+	compilation (IR) 0.154ms
+	compilation (LCNF base) 5ms
+	compilation (LCNF impure) 0.581ms
+	compilation (LCNF mono) 3.35ms
+	congr simp thm 0.744ms
+	dsimp 23ms
+	elaboration 215ms
+	fix level params 0.934ms
+	import 87.5s
+	initialization 33.1ms
+	instantiate metavars 0.946ms
+	interpretation 6.98s
+	let-to-have transformation 0.376ms
+	linting 6.62ms
+	overlappingInstancesLinter 125ms
+	parsing 4.89ms
+	process pre-definitions 17.5ms
+	share common exprs 6.03ms
+	simp 6.37ms
+	tactic execution 167ms
+	tacticAnalysis 207ms
+	type checking 94.3ms
+	typeclass inference 1.47s

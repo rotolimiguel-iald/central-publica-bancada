@@ -1,0 +1,86 @@
+{
+  "start_utc": "2026-10-16T10:30:53.379212+00:00",
+  "end_utc": "2026-10-16T10:31:15.556375+00:00",
+  "seconds": 22.17716150000342,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-j2",
+    "--profile",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T103053_297823Z\\GenericSmearSymplecticR1.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T103053_297823Z\\GenericSmearSymplecticR1.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T103053_297823Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T103053_297823Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T103053_297823Z\\GenericSmearSymplecticR1.lean",
+    "sha256": "d429b53b2b9cc9b4849f5a79387cd26631db2b5f51c6206aa189dfaf8b4144fc",
+    "bytes": 1363
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+import took 18.2s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T103053_297823Z\GenericSmearSymplecticR1.lean:18:15: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ?m.127 ?x (↑?r • ?y)
+in the target expression
+  (inner ℂ (T f) (↑r • T g)).im = r * (inner ℂ (T f) (T g)).im
+
+X H : Type
+inst✝³ : NormedAddCommGroup X
+inst✝² : NormedSpace ℂ X
+inst✝¹ : NormedAddCommGroup H
+inst✝ : InnerProductSpace ℂ H
+T : X →L[ℂ] H
+f : X
+r : ℝ
+g : X
+ht : T (r • g) = ↑r • T g
+⊢ (inner ℂ (T f) (↑r • T g)).im = r * (inner ℂ (T f) (T g)).im
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T103053_297823Z\GenericSmearSymplecticR1.lean:31:11: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ?m.248 (↑?r • ?x) ?y
+in the target expression
+  (inner ℂ (↑r • T f) (T g)).im = r * (inner ℂ (T f) (T g)).im
+
+X H : Type
+inst✝³ : NormedAddCommGroup X
+inst✝² : NormedSpace ℂ X
+inst✝¹ : NormedAddCommGroup H
+inst✝ : InnerProductSpace ℂ H
+T : X →L[ℂ] H
+r : ℝ
+f g : X
+ht : T (r • f) = ↑r • T f
+⊢ (inner ℂ (↑r • T f) (T g)).im = r * (inner ℂ (T f) (T g)).im
+'F1Fecho.GenericSmearSymplectic.pairing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0111ms
+	blocked (unaccounted) 14.5ms
+	compilation (IR) 0.0793ms
+	compilation (LCNF base) 2.61ms
+	compilation (LCNF impure) 0.351ms
+	compilation (LCNF mono) 1.59ms
+	congr simp thm 0.138ms
+	elaboration 13.3ms
+	fix level params 0.0951ms
+	import 18.2s
+	initialization 29.2ms
+	instantiate metavars 0.174ms
+	interpretation 3.55s
+	let-to-have transformation 0.0742ms
+	linting 1.36ms
+	overlappingInstancesLinter 18.6ms
+	parsing 1.2ms
+	process pre-definitions 6.79ms
+	share common exprs 0.457ms
+	simp 3.85ms
+	tactic execution 33ms
+	tacticAnalysis 15.3ms
+	type checking 9.8ms
+	typeclass inference 188ms

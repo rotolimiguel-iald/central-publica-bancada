@@ -1,0 +1,71 @@
+--- REFERENCE_ONLY/f9_controller_preparation/controller.py
++++ PROPOSAL_ONLY/controller.py
+@@ -14,7 +14,7 @@
+ import time
+ import types
+ 
+-PREPARATION_ID='39f88c04-76b0-44dd-bf6f-11f937048fa9'
++PREPARATION_ID='f7e2ffb8-6efb-4d0d-85c1-59c7a8f932bc'
+ SCENARIO_FIELDS=('scenario_id','consumer_admission','backend_receipt','structure','row_ids',
+                  'y_native','C_native','affine_origin_native','theta_plan','coupling_template')
+ GLOBAL_FIELDS=('engine_configuration','assembly_admission','runtime_inventory',
+@@ -22,7 +22,7 @@
+ MODULE_ROLES=('theta','node','durable','assembler','consumer','prior','precision',
+               'profile','linear','support','engine')
+ CONSUMED_SCOPES=('c4359a48-bf7c-4dd5-a753-8c3413774cdf','ffd6ccba-cd70-4747-aceb-a10003dfb7f4',
+-                 PREPARATION_ID,'99e2bfa7-36b8-4e0f-92e7-1a6918e80591')
++                 '39f88c04-76b0-44dd-bf6f-11f937048fa9',PREPARATION_ID,'99e2bfa7-36b8-4e0f-92e7-1a6918e80591')
+ 
+ 
+ class ControllerError(RuntimeError):
+@@ -155,8 +155,8 @@
+     need(type(unit) is str and 0<len(unit)<=128 and unit not in CONSUMED_SCOPES and
+          decision['execution_unit_id']==unit and decision['request_sha256']==request_sha256 and
+          decision['authorize_single_execution'] is True and
+-         decision['scope']=='F9_FULL_PRIOR_ENGINEERING_ONLY','SPECIFIC_ROOT_DECISION_REQUIRED')
+-    need(type(decision['may_read_observations']) is bool,'EXPLICIT_DATA_RELEASE_REQUIRED')
++         decision['scope']=='F9_FULL_PRIOR_SYNTHETIC_ENGINEERING_ONLY','SPECIFIC_ROOT_DECISION_REQUIRED')
++    need(decision['may_read_observations'] is False,'SYNTHETIC_ONLY_NO_OBSERVED_RELEASE')
+     need(request['family_scope']=='EXACT_DECLARED_SCENARIOS_NOT_UNIVERSAL','FAMILY_SCOPE')
+     keys(request['global_artifacts'],GLOBAL_FIELDS)
+     keys(artifacts,request['artifact_pins'])
+@@ -213,7 +213,7 @@
+         raw=lambda field:artifacts[spec[field]]
+         consumer_doc=document(raw('consumer_admission'))
+         need(consumer_doc['scenario_id']==spec['scenario_id'],'CONSUMER_SCENARIO')
+-        need(consumer_doc['data_kind'] in ('SYNTHETIC','OPERATOR_RELEASED_OBSERVATIONS'),'DATA_KIND')
++        need(consumer_doc['data_kind']=='SYNTHETIC','SYNTHETIC_ONLY_DATA_KIND')
+         need(consumer_doc['data_kind']=='SYNTHETIC' or decision['may_read_observations'] is True,
+              'OBSERVED_RELEASE_NOT_AUTHORIZED')
+         # Operator release/V1 references must be backed by bytes, then actually
+@@ -321,24 +321,18 @@
+                 'new_supplier_entries':supplier.entries}
+         audit_raw=supervisor.terminal_audit(context={'execution_unit_id':unit,'request_sha256':request_sha256,
+             'decision_sha256':decision_sha256,'runtime_sha256':runtime_sha,**counts})
+-        audit=document(audit_raw)
+-        need(audit['schema']=='F9_CONTROLLER_SUPERVISOR_TERMINAL_V1' and
+-             audit['execution_unit_id']==unit and audit['status']=='AUDIT_ACCEPTED' and audit['latched'] is False and
+-             audit['unexpected_reads']==audit['network_operations']==0 and audit['runtime_sha256']==runtime_sha and
+-             audit['execution_decision_sha256']==decision_sha256 and
+-             audit['new_solver_attempts']==supplier.attempts and audit['new_solver_returns']==supplier.returns,
+-             'TERMINAL_AUDIT_REJECTED')
+-        keys(audit['supervisor_reference'],('id','sha256'))
+-        need(audit['supervisor_reference']['sha256']==decision['supervisor_adapter_pin']['sha256'] and
+-             'resource_measurements' in audit,'SUPERVISOR_TERMINAL_IDENTITY_AND_MEASUREMENTS')
+-        need(audit['observed_reads'] is any(doc['data_kind']=='OPERATOR_RELEASED_OBSERVATIONS' for _,_,doc in prepared_specs),
+-             'OBSERVED_ACCESS_RECEIPT_MISMATCH')
++        audit=bindings['supervisor_port'].validate_terminal(audit_raw,
++            execution_unit_id=unit,request_sha256=request_sha256,
++            decision_sha256=decision_sha256,runtime_sha256=runtime_sha,
++            supervisor_pin=decision['supervisor_adapter_pin'],
++            new_solver_attempts=supplier.attempts,new_solver_returns=supplier.returns)
+         output={'schema':'F9_CONTROLLER_ENGINEERING_RESULT_V1','status':'ENGINEERING_ONLY',
+             'execution_unit_id':unit,'request_sha256':request_sha256,'decision_sha256':decision_sha256,
+             'scenarios':results,'family_scope':request['family_scope'],'complete_declared_family':True,
+             'counts':counts,'wall_s':time.monotonic()-started,'runtime_sha256':runtime_sha,
+             'supervisor_terminal_sha256':sha(audit_raw),'global_convergence':None,
+             'uniform_theory_error_bound':None,'p':None,'sigma':None,'verdict':None,
++            'audit_evidence_scope':audit['evidence_scope'],'native_IO_isolation':False,
+             'acceptance':'REQUIRES_EXTERNAL_EXIT_AND_CLEANUP_VERIFICATION'}
+         result_raw=canonical(output)
+         runs.commit(ticket,{'controller_result.json':result_raw,'supervisor_terminal.json':audit_raw,

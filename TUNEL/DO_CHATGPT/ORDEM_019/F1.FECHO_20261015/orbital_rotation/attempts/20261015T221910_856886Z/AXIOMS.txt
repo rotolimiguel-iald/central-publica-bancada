@@ -1,0 +1,39 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221910_856886Z\OrbitalSpatialPoincareR1.lean:27:2: error: Tactic `apply` failed: could not unify the conclusion of `spacetime_ext rfl`
+  ?m.8 = ?m.8
+with the goal
+  spatialSpacetime (LinearIsometryEquiv.refl ℝ Spatial) a = a
+
+Note: The full type of `spacetime_ext rfl` is
+  spacetimeSpatial ?m.8 = spacetimeSpatial ?m.8 → ?m.8 = ?m.8
+
+a : Fin 4 → ℝ
+⊢ spatialSpacetime (LinearIsometryEquiv.refl ℝ Spatial) a = a
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221910_856886Z\OrbitalSpatialPoincareR1.lean:33:2: error: Tactic `apply` failed: could not unify the conclusion of `spacetime_ext rfl`
+  ?m.58 = ?m.58
+with the goal
+  spatialSpacetime (Q.trans R) a = spatialSpacetime R (spatialSpacetime Q a)
+
+Note: The full type of `spacetime_ext rfl` is
+  spacetimeSpatial ?m.58 = spacetimeSpatial ?m.58 → ?m.58 = ?m.58
+
+Q R : Spatial ≃ₗᵢ[ℝ] Spatial
+a : Fin 4 → ℝ
+⊢ spatialSpacetime (Q.trans R) a = spatialSpacetime R (spatialSpacetime Q a)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221910_856886Z\OrbitalSpatialPoincareR1.lean:40:4: error: Type mismatch
+  spatialSpacetime_refl ↑↑a
+has type
+  spatialSpacetime (LinearIsometryEquiv.refl ℝ Spatial) ↑↑a = ↑↑a
+but is expected to have type
+  (spatialSpacetimeLinear (LinearIsometryEquiv.refl ℝ Spatial) ∘ₗ LinearMap.single ℝ (fun i => ℝ) a) 1 x✝ =
+    (LinearMap.id ∘ₗ LinearMap.single ℝ (fun i => ℝ) a) 1 x✝
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221910_856886Z\OrbitalSpatialPoincareR1.lean:49:4: error: Type mismatch
+  spatialSpacetime_trans Q R ↑↑a
+has type
+  spatialSpacetime (Q.trans R) ↑↑a = spatialSpacetime R (spatialSpacetime Q ↑↑a)
+but is expected to have type
+  (spatialSpacetimeLinear (Q.trans R) ∘ₗ LinearMap.single ℝ (fun i => ℝ) a) 1 x✝ =
+    ((spatialSpacetimeLinear R ∘ₗ spatialSpacetimeLinear Q) ∘ₗ LinearMap.single ℝ (fun i => ℝ) a) 1 x✝
+'F1Fecho.OrbitalSpatial.orthogonalLorentzHom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialPoincare_mul' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialPoincareH1_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialPoincareH1_one' depends on axioms: [propext, Classical.choice, Quot.sound]

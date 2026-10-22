@@ -1,0 +1,27 @@
+--- reference_consumed/common.py
++++ future_candidate/common.py
+@@ -1,11 +1,13 @@
+ """Pure stdlib protocol helpers. Importing this module runs no control."""
+ import os, sys, json, hashlib, time
+-from pathlib import Path
++from pathlib import Path, PurePosixPath
+ REQUEST = "4f5d0b21-e1d2-4906-a6ce-eb70e60bc6cf"
+ SCOPE = "WSL312_ONE_STDLIB_CACHE_LATCH_CONTROL"
+ CASE = "WSL_CACHE_LATCH_001"
+ WIN = Path(r"C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\preregistros\conjunto_d\guard_wsl_integration_preparation_v2")
+-LINUX = Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2")
++LINUX_ARGV_ROOT = PurePosixPath('/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2')
++# POSIX representation for transported tokens; concrete Path is only for host IO.
++LINUX = Path(LINUX_ARGV_ROOT.as_posix())
+ BASE = WIN if os.name == "nt" else LINUX
+ PY = "/opt/lal_env/bin/python"
+ FLAGS = ["-I", "-S", "-B", "-X", "utf8"]
+@@ -63,7 +65,7 @@
+     finally: os.close(fd)
+ def argv_for(role, nonce):
+     script="worker.py" if role=="--child" else "linux_control.py"
+-    return [PY,*FLAGS,str(LINUX/script),role,REQUEST,nonce]
++    return [PY,*FLAGS,(LINUX_ARGV_ROOT/script).as_posix(),role,REQUEST,nonce]
+ def scoped_processes(nonce):
+     targets=[argv_for("--supervisor",nonce),argv_for("--child",nonce)]; found=[]
+     for p in Path("/proc").iterdir():

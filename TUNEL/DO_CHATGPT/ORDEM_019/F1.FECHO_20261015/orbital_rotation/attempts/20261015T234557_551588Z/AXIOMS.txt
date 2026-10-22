@@ -1,0 +1,38 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T234557_551588Z\ScreenGeometricReflectionR3.lean:50:15: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(toRapidity f) (reflectTransverse p)
+in the target expression
+  fiberSwappedJ (↑↑(toRapidity f) (-p.1, p.2)) = ↑↑(Theta f) (reflectTransverse (rapidityChart 0 p))
+
+f : ↥H1
+hrot :
+  ∀ᵐ (x : MomentumCoordinates) ∂momentumMeasure,
+    ↑↑((helicityUnitary halfTurn) (Theta f)) (rapidityChart 0 x) =
+      (fun p => ↑↑(Theta f) (reflectTransverse p)) (rapidityChart 0 x)
+htheta :
+  ∀ᵐ (x : Transverse × ℝ) ∂momentumMeasure,
+    ↑↑(Theta f) (rapidityChart 0 (reflectTransverse x)) =
+      (fun p => fiberSwappedJ (↑↑f p)) (rapidityChart 0 (reflectTransverse x))
+hf✝ :
+  ∀ᵐ (x : Transverse × ℝ) ∂momentumMeasure,
+    ↑↑((orbitalL2Pullback 0) f) (reflectTransverse x) = (fun y => ↑↑f (rapidityChart 0 y)) (reflectTransverse x)
+p : MomentumCoordinates
+hj : ↑↑(toRapidity (Jcandidate f)) p = fiberSwappedJ (↑↑(toRapidity f) (-p.1, p.2))
+hr : ↑↑((helicityUnitary halfTurn) (Theta f)) (rapidityChart 0 p) = ↑↑(Theta f) (reflectTransverse (rapidityChart 0 p))
+ht : ↑↑(Theta f) (rapidityChart 0 (reflectTransverse p)) = fiberSwappedJ (↑↑f (rapidityChart 0 (reflectTransverse p)))
+hp :
+  ↑↑(toRapidity ((helicityUnitary halfTurn) (Theta f))) p = ↑↑((helicityUnitary halfTurn) (Theta f)) (rapidityChart 0 p)
+hf : ↑↑(toRapidity f) (reflectTransverse p) = ↑↑f (rapidityChart 0 (reflectTransverse p))
+⊢ fiberSwappedJ (↑↑(toRapidity f) (-p.1, p.2)) = ↑↑(Theta f) (reflectTransverse (rapidityChart 0 p))
+'F1Fecho.OrbitalScreen.helicityUnitary_halfTurn_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalScreen.Jcandidate_eq_helicity_halfTurn_Theta' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.OrbitalScreen.Jcandidate_helicity_intertwines' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.OrbitalScreen.Jcandidate_conjugates_helicity' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

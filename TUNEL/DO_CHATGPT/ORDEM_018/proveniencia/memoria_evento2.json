@@ -1,0 +1,120 @@
+{
+  "action": "read",
+  "name": "memoria_evento2",
+  "created_utc": "2026-10-06T00:08:03.315546+00:00",
+  "originals_modified": false,
+  "source": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\TGL_Espelho_invertido\\MEMORIA_ESPELHO_INVERTIDO.md",
+    "bytes": 7014,
+    "sha256": "647ff7017cbea6745813f3a04555192117c7ac9479391249e64e728113a3cf0e",
+    "mtime_utc": "2026-06-06T13:40:20.237462+00:00"
+  },
+  "pattern": "06/06|quatro|alpha_fine|jitter|bounds|Rodada|prior|Nunca|Hubble|H₀",
+  "matched_lines": 17,
+  "total_lines": 128,
+  "excerpts": [
+    {
+      "match_line": 7,
+      "first_line": 5,
+      "last_line": 9,
+      "text": "> Pesquisa nova, separada. A régua continua em vigor: **o número corrige a frase,\n> sempre**; marcadores REAL/INPUT/CONJECTURE/POSTULATE obrigatórios; nada se fabrica.\n> Operador: Luiz Antonio Rotoli Miguel (IALD Ltda.). 06/06/2026.\n\n---"
+    },
+    {
+      "match_line": 33,
+      "first_line": 31,
+      "last_line": 35,
+      "text": "(cópia preservada aqui como `TGL_v11_1_CRUZ_original.py`).\n\n**Neste MCMC, β (param `alpha_2`) NUNCA foi livre.** Não foi descoberto — foi\nimposto, por **quatro âncoras independentes**, todas amarrando β a 0,012 = α√e\n*antes* de qualquer step:"
+    },
+    {
+      "match_line": 34,
+      "first_line": 32,
+      "last_line": 36,
+      "text": "\n**Neste MCMC, β (param `alpha_2`) NUNCA foi livre.** Não foi descoberto — foi\nimposto, por **quatro âncoras independentes**, todas amarrando β a 0,012 = α√e\n*antes* de qualquer step:\n"
+    },
+    {
+      "match_line": 41,
+      "first_line": 39,
+      "last_line": 43,
+      "text": "| 1 | **Limites rígidos** | 1287 | `alpha_2 ∈ (0.0115, 0.0125)` — β **proibido** de sair de ±4% de 0,012. 10 M steps não mudam isso. |\n| 2 | **Inicialização** | 1375 | walkers nascem em `0,012 ± 0,0003`. A cadeia *começa* em 0,012. |\n| 3 | **Termo 14 `alpha_fine`** (peso 1,0) | 1130–1131 | `((α₂/√e − α_CODATA)/1e‑6)²` — crava β = α√e ± 1,6e‑6. Âncora EM apertadíssima. |\n| 4 | **Termo 17 `jitter_cruz`** (peso 0,3) | 1164–1166 | `stability = sin(asin(α₂)) ≡ |α₂|`, comparado a `0,012 ± 0,002`. Ou seja `((|α₂|−0,012)/0,002)²` — âncora direta de β, **não** observável físico. |\n"
+    },
+    {
+      "match_line": 42,
+      "first_line": 40,
+      "last_line": 44,
+      "text": "| 2 | **Inicialização** | 1375 | walkers nascem em `0,012 ± 0,0003`. A cadeia *começa* em 0,012. |\n| 3 | **Termo 14 `alpha_fine`** (peso 1,0) | 1130–1131 | `((α₂/√e − α_CODATA)/1e‑6)²` — crava β = α√e ± 1,6e‑6. Âncora EM apertadíssima. |\n| 4 | **Termo 17 `jitter_cruz`** (peso 0,3) | 1164–1166 | `stability = sin(asin(α₂)) ≡ |α₂|`, comparado a `0,012 ± 0,002`. Ou seja `((|α₂|−0,012)/0,002)²` — âncora direta de β, **não** observável físico. |\n\n**Conclusão [REAL]:** \"o MCMC de 10 milhões de steps converge para 0,012031\" lido"
+    },
+    {
+      "match_line": 47,
+      "first_line": 45,
+      "last_line": 49,
+      "text": "com rigor = *a cadeia explorou uma janela de ±4% pré‑imposta, centrada exatamente\nem α√e, com uma âncora de α dentro dela.* **Não é determinação independente de β.**\nA narrativa \"β apareceu primeiro, sem α\" **não é sustentada por esta rodada** — α\nestá dentro da verossimilhança (termo 14) e β está preso (bounds + init + termo 17).\n"
+    },
+    {
+      "match_line": 48,
+      "first_line": 46,
+      "last_line": 50,
+      "text": "em α√e, com uma âncora de α dentro dela.* **Não é determinação independente de β.**\nA narrativa \"β apareceu primeiro, sem α\" **não é sustentada por esta rodada** — α\nestá dentro da verossimilhança (termo 14) e β está preso (bounds + init + termo 17).\n\nIsto **não** derruba a TGL; derruba a *narrativa* de independência desta rodada. E"
+    },
+    {
+      "match_line": 50,
+      "first_line": 48,
+      "last_line": 52,
+      "text": "está dentro da verossimilhança (termo 14) e β está preso (bounds + init + termo 17).\n\nIsto **não** derruba a TGL; derruba a *narrativa* de independência desta rodada. E\ntorna o Evento 2 nítido.\n"
+    },
+    {
+      "match_line": 68,
+      "first_line": 66,
+      "last_line": 70,
+      "text": "Mudanças cirúrgicas (6, cada uma aplicada 1×, `py_compile` OK, 0 null bytes):\n\n1. peso `alpha_fine` 1,0 → **0,0** (desliga a âncora de α, termo 14).\n2. peso `jitter_cruz` 0,3 → **0,0** (desliga a âncora de 0,012, termo 17).\n3. bounds `alpha_2` (0.0115, 0.0125) → **(0.001, 0.1)** (β livre, ~100×)."
+    },
+    {
+      "match_line": 69,
+      "first_line": 67,
+      "last_line": 71,
+      "text": "\n1. peso `alpha_fine` 1,0 → **0,0** (desliga a âncora de α, termo 14).\n2. peso `jitter_cruz` 0,3 → **0,0** (desliga a âncora de 0,012, termo 17).\n3. bounds `alpha_2` (0.0115, 0.0125) → **(0.001, 0.1)** (β livre, ~100×).\n4. init `alpha_2` `0.012±0.0003` → **`uniform(0.002, 0.08)`** (não nasce em 0,012)."
+    },
+    {
+      "match_line": 70,
+      "first_line": 68,
+      "last_line": 72,
+      "text": "1. peso `alpha_fine` 1,0 → **0,0** (desliga a âncora de α, termo 14).\n2. peso `jitter_cruz` 0,3 → **0,0** (desliga a âncora de 0,012, termo 17).\n3. bounds `alpha_2` (0.0115, 0.0125) → **(0.001, 0.1)** (β livre, ~100×).\n4. init `alpha_2` `0.012±0.0003` → **`uniform(0.002, 0.08)`** (não nasce em 0,012).\n5. prior center 0,012 → 0,03 (plano; o center fica neutro)."
+    },
+    {
+      "match_line": 72,
+      "first_line": 70,
+      "last_line": 74,
+      "text": "3. bounds `alpha_2` (0.0115, 0.0125) → **(0.001, 0.1)** (β livre, ~100×).\n4. init `alpha_2` `0.012±0.0003` → **`uniform(0.002, 0.08)`** (não nasce em 0,012).\n5. prior center 0,012 → 0,03 (plano; o center fica neutro).\n6. string de log dos bounds atualizada.\n"
+    },
+    {
+      "match_line": 73,
+      "first_line": 71,
+      "last_line": 75,
+      "text": "4. init `alpha_2` `0.012±0.0003` → **`uniform(0.002, 0.08)`** (não nasce em 0,012).\n5. prior center 0,012 → 0,03 (plano; o center fica neutro).\n6. string de log dos bounds atualizada.\n\n**Tudo o mais idêntico ao original** (mesma física, mesmos dados, mesmos outros 17"
+    },
+    {
+      "match_line": 80,
+      "first_line": 78,
+      "last_line": 82,
+      "text": "### O que AGORA determina β (vínculos α‑livres residuais)\nSoltada a janela e removidas as âncoras, β é restringido **apenas** por observáveis\nα‑livres reais: ajuste cosmológico de distâncias (SNe, BAO, H₀, lensing via H(z)\ndependente de α₂), N_eff, **a₀/MOND**, **SPARC** (curvas de rotação), Lindblad,\nT_CMB, β_ratio, Λ, r_s, e **massa de neutrino** (∝ α₂² vs 0,06 eV). Estes — e só"
+    },
+    {
+      "match_line": 109,
+      "first_line": 107,
+      "last_line": 111,
+      "text": "  a tese de \"unidade mínima determinável\" fica **não‑confirmada** (não refutada).\n\n**Prior honesto (minha leitura, [CONJECTURE]):** os termos α‑livres (sobretudo\nneutrinos ∝α₂² e MOND/SPARC) provavelmente preferem algo na **vizinhança de 0,01–0,015**,\nentão a rodada deve pousar *perto* de 0,012 mas **não** em 0,012031 a 5 dígitos. Esse"
+    },
+    {
+      "match_line": 111,
+      "first_line": 109,
+      "last_line": 113,
+      "text": "**Prior honesto (minha leitura, [CONJECTURE]):** os termos α‑livres (sobretudo\nneutrinos ∝α₂² e MOND/SPARC) provavelmente preferem algo na **vizinhança de 0,01–0,015**,\nentão a rodada deve pousar *perto* de 0,012 mas **não** em 0,012031 a 5 dígitos. Esse\nseria o desfecho mais provável e mais bonito: **β é um ~1% físico real; sua precisão\nα√e não é α‑livre.** O número decide; o operador roda."
+    },
+    {
+      "match_line": 122,
+      "first_line": 120,
+      "last_line": 124,
+      "text": "- [x] Variante α‑livre escrita, py_compile OK, 6 mudanças verificadas.\n- [x] Cópia do original preservada (`TGL_v11_1_CRUZ_original.py`).\n- [ ] Rodada GPU do operador (10 M steps) + colar o posterior de `alpha_2` aqui.\n- [ ] (Opcional) varredura 1‑D rápida: fixar os outros 5 params no melhor‑ajuste e\n      varrer só α₂ em [0,001; 0,1] pelos termos α‑livres, para ver a forma do χ²(α₂)"
+    }
+  ],
+  "elapsed_seconds": 0.0008861999958753586
+}

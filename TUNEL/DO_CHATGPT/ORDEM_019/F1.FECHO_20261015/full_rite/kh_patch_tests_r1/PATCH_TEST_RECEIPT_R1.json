@@ -1,0 +1,251 @@
+{
+  "scope": "Structural tests only, historical R3 audit used as fixture; final49-module expected totals are NOT populated",
+  "source_sha256": "9ac3cdf7b6b40f636a3ecb7792339d999376b18369feb9427df21f869de7efcd",
+  "builder_sha256": "3787fc7551f72f56f6026d30da8355377199dfe0c525cc5fccca90d141669890",
+  "checks": [
+    {
+      "name": "old_original_preserved",
+      "passed": true
+    },
+    {
+      "name": "only_historical_h2_h3_become_floors",
+      "passed": true
+    },
+    {
+      "name": "new_counts_exact",
+      "passed": true
+    },
+    {
+      "name": "new_full_source_set_exact",
+      "passed": true
+    },
+    {
+      "name": "all_non_patch_ast_identical",
+      "passed": true
+    },
+    {
+      "name": "bool_count",
+      "passed": true
+    },
+    {
+      "name": "inconsistent_counts",
+      "passed": true
+    },
+    {
+      "name": "nonzero_audit_exit",
+      "passed": true
+    },
+    {
+      "name": "not_whole_closure",
+      "passed": true
+    },
+    {
+      "name": "wrong_source",
+      "passed": true
+    },
+    {
+      "name": "unexpected_extra",
+      "passed": true
+    },
+    {
+      "name": "missing_extra_provenance",
+      "passed": true
+    },
+    {
+      "name": "changed_log_pin",
+      "passed": true
+    },
+    {
+      "name": "new_axiom",
+      "passed": true
+    }
+  ],
+  "all_passed": true,
+  "details": {
+    "original_v393_coverage_spec": {
+      "nome": "kh_n1_cobertura_v393",
+      "veredito_prefixo": "TGL_KH_N1_COBERTURA_V393",
+      "veredito_sufixo": "AXIOM_REPORT_COVERS_THE_WHOLE_TGL_AND_TGLEXT_CLOSURE_25161_CONSTANTS_19901_THEOREMS_NONE_OUTSIDE_THE_TRIO__FOUR_NAMES_THE_REGEX_CANNOT_READ_DECLARED__V392_SOURCE_REPINNED__GATE_UNMOVED",
+      "estatuto": "[REAL] a cobertura e' medida a cada rito no Audit do proprio rito; os numeros esperados saem do arquivo da medida do sandbox da v393; a cobertura NAO move o gate",
+      "fontes": [
+        "kh_n1_v392",
+        "kh_n1_v393"
+      ],
+      "kernel_flags": [],
+      "kernel_decls": [],
+      "checks": [
+        {
+          "id": "h1",
+          "descricao": "a checagem de cobertura do kernel do rito passou",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "ok"
+          ],
+          "op": "verdadeiro",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h2",
+          "descricao": "constantes cobertas == as do sandbox v393 (KH_N1_v393.json)",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "decl"
+          ],
+          "op": "igual",
+          "valor": 25161,
+          "capturar": "constantes_cobertas",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h3",
+          "descricao": "teoremas cobertos == os do sandbox v393",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "thm"
+          ],
+          "op": "igual",
+          "valor": 19901,
+          "capturar": "teoremas_cobertos",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h4",
+          "descricao": "nenhuma constante fora do trio",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "fora_do_trio"
+          ],
+          "op": "igual",
+          "valor": 0,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h5",
+          "descricao": "nomes que o regex do um.py nao le == 4 (declarados)",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "nao_lidas_pelo_regex"
+          ],
+          "op": "igual",
+          "valor": 4,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h6",
+          "descricao": "o axiom_report do rito tem entrada para as constantes lidas",
+          "onde": "kf",
+          "caminho": [
+            "axiom_report"
+          ],
+          "op": "tamanho_maior_igual",
+          "valor": 25157,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h7",
+          "descricao": "a cobertura da v393 inclui toda a da v392 (constantes >= 24975, teoremas >= 19761)",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "decl"
+          ],
+          "op": "maior_igual",
+          "valor": 24975,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h8",
+          "descricao": "medida do Audit v393: duracao bem abaixo do timeout de 1800 s",
+          "onde": "fonte:kh_n1_v393",
+          "caminho": [
+            "duracao_audit_s"
+          ],
+          "op": "menor_igual",
+          "valor": 900,
+          "capturar": "duracao_do_audit_s",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h9",
+          "descricao": "medida do Audit v393: sorryAx ausente do log",
+          "onde": "fonte:kh_n1_v393",
+          "caminho": [
+            "sorryAx_no_log_do_audit"
+          ],
+          "op": "igual",
+          "valor": 0,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h10",
+          "descricao": "medida do Audit v393: as entradas novas de usuario estao no trio",
+          "onde": "fonte:kh_n1_v393",
+          "caminho": [
+            "novas_de_usuario_no_trio"
+          ],
+          "op": "verdadeiro",
+          "estatuto": "[REAL]"
+        }
+      ],
+      "erratas": [
+        {
+          "ao_lado_de": "kh_n1_cobertura_v392 (fonte kh_n1_v392 e duas igualdades de contagem)",
+          "dizia": "A v392 pinou KH_N1_v392.json (1389 bytes, sha256 104377ce6d1280c7...) e exigia constantes cobertas == 24975 e teoremas == 19761.",
+          "agora": "O arquivo foi regravado pelo pos_build da v392 em 13/10/2026 18:34, depois do rito (1390 bytes, sha256 3784f8739bb882ce...; o campo novas_de_usuario_no_trio ficou false nessa regravacao): o pino da v392 deixou de conferir e o registro kh_n1_cobertura_v392 nao selaria numa nova rodada. A v393 repina a fonte a uma copia do arquivo regravado (insumos/KH_N1_v392.regravado.json) e troca as duas igualdades por pisos (24975 e 19761), porque a cobertura cresce com as pedras da regra; a igualdade exata passa a ser cobrada por este registro, contra a medida do sandbox da v393.",
+          "lacuna_de_fidelidade": "a estrutura dizia que o pino da fonte e as contagens eram da v392 para sempre; o texto escrito deixou o registro preso a um arquivo regravavel e a uma igualdade que a propria v393 quebra",
+          "estatuto": "[REAL: sha256 lidos dos arquivos; a regravacao e' do pos_build da v392, registrada em pos_rito]",
+          "assinatura": "gerencia c1, em nome proprio, 14/10/2026"
+        }
+      ],
+      "limites": [
+        "[REAL] os dois arquivos de medida sao do sandbox (fora do selo); a cobertura que vale e' a medida no Audit do proprio rito",
+        "validade no kernel nao e' creditacao; o gate nao se move"
+      ],
+      "diz": [
+        "a cobertura do axiom_report no fecho inteiro cresceu para os numeros da v393 e segue sem constante fora do trio"
+      ],
+      "nao_diz": [
+        "que a cobertura prove algo alem de que nenhum axioma fora do trio foi lido"
+      ],
+      "leituras_do_operador": [],
+      "extras": {
+        "assinatura": "gerencia c1, em nome proprio, 14/10/2026"
+      }
+    },
+    "replacements": [
+      {
+        "name": "_V393_NOMES_REGISTROS",
+        "start_line": 209279,
+        "end_line": 209279,
+        "before_sha256": "8a294bb257a4fe20850782e958f281ff580fcf37f4c9a6e95f08d8487a2d31d1",
+        "after_sha256": "ba06dfe32b90b30bc579a48109172e1e0174d7b1615654e3c9eb4429aa2ba0af",
+        "before_ast_sha256": "dcde592d9a50a97fa6fcf83e0bdce5b5931de6d93c07aca6a108f7deabfc541b"
+      },
+      {
+        "name": "_V393_SPECS",
+        "start_line": 208995,
+        "end_line": 209278,
+        "before_sha256": "2f75cfd56924dfd6bed096670dfb2b783f47b753e04155f21abb981bc9d40f8b",
+        "after_sha256": "141b4f654b4651fe9b164a58d717615e7add7149b806fe223c3ba1670407ecec",
+        "before_ast_sha256": "6d40eebd54b390a3e7a56186189a6ea42bd6b8d6e602c18118c667bc546db049"
+      },
+      {
+        "name": "_V393_FONTES",
+        "start_line": 208904,
+        "end_line": 208960,
+        "before_sha256": "c4e91069dfa6bf580514bdd2106ee135acd577dae12d797e545cf196a2889740",
+        "after_sha256": "191961390b0eea4b00a04cfb3d492df1755f0caec24fbcb5d5dc193fe4a1c183",
+        "before_ast_sha256": "14cf74a3e2a21bf073e96bde632d0d2d773bdfe6f6eaa436cf5769cfd84ea756"
+      }
+    ],
+    "embedded_source_count": 1237,
+    "contract_sha256": "69c69c7bfc5759829f559c98e0a950fe452b3a10613a26b5034005705282c0a5"
+  },
+  "fixture_contract_sha256": "69c69c7bfc5759829f559c98e0a950fe452b3a10613a26b5034005705282c0a5",
+  "source_original_unchanged": true
+}

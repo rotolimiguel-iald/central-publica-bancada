@@ -1,0 +1,63 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T034948_934398Z\MaxwellLorentzContractionR4.lean:36:55: error: unsolved goals
+L : LorentzGrp
+p q : MomentumCoordinates
+hp : p.1 ≠ 0
+hq : q.1 ≠ 0
+hm : (lorentzLinear L⁻¹) (shellMomentum 0 p) = shellMomentum 0 q
+j : Fin 2
+T : TensorValue
+hpc : rapidityChart 0 (inverseRapidityChart 0 p) = p
+hqc : rapidityChart 0 (inverseRapidityChart 0 q) = q
+ht :
+  ∀ (μ ν : Fin 4),
+    realStrength ((lorentzLinear L⁻¹) (shellMomentum 0 p)) ((lorentzLinear L⁻¹) (screen (inverseRapidityChart 0 p) j)) μ
+        ν =
+      screenCoefficient (lorentzLinear L⁻¹) (inverseRapidityChart 0 p) (inverseRapidityChart 0 q) 0 j *
+          realStrength (shellMomentum 0 q) (screen (inverseRapidityChart 0 q) 0) μ ν +
+        screenCoefficient (lorentzLinear L⁻¹) (inverseRapidityChart 0 p) (inverseRapidityChart 0 q) 1 j *
+          realStrength (shellMomentum 0 q) (screen (inverseRapidityChart 0 q) 1) μ ν
+⊢ ∑ x,
+        ∑ x_1,
+          ↑(screenCoefficient (lorentzLinear L) (inverseRapidityChart 0 q) (inverseRapidityChart 0 p) j 0) *
+              ↑(realStrength (shellMomentum 0 q) (screen (inverseRapidityChart 0 q) 0) x x_1) *
+            T x x_1 +
+      ∑ x,
+        ∑ x_1,
+          ↑(screenCoefficient (lorentzLinear L) (inverseRapidityChart 0 q) (inverseRapidityChart 0 p) j 1) *
+              ↑(realStrength (shellMomentum 0 q) (screen (inverseRapidityChart 0 q) 1) x x_1) *
+            T x x_1 =
+    ↑(screenCoefficient (lorentzLinear L) (inverseRapidityChart 0 q) (inverseRapidityChart 0 p) j 0) *
+        ∑ x, ∑ x_1, ↑(realStrength (shellMomentum 0 q) (screen (inverseRapidityChart 0 q) 0) x x_1) * T x x_1 +
+      ↑(screenCoefficient (lorentzLinear L) (inverseRapidityChart 0 q) (inverseRapidityChart 0 p) j 1) *
+        ∑ x, ∑ x_1, ↑(realStrength (shellMomentum 0 q) (screen (inverseRapidityChart 0 q) 1) x x_1) * T x x_1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T034948_934398Z\MaxwellLorentzContractionR4.lean:51:4: warning: This simp argument is unused:
+  ← mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp only [Fin.sum_univ_two, ̲coefficientMatrix, ̲add_mul, ̲Finset.sum_add_distrib,
+  ̵  ̵ ̵ ̵←m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵←̵ ̲Finset.mul_sum]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T034948_934398Z\MaxwellLorentzContractionR4.lean:51:15: warning: This simp argument is unused:
+  ← Finset.mul_sum
+
+Hint: Omit it from the simp argument list.
+  simp only [̵F̵i̵n̵.̵s̵u̵m̵_̵u̵n̵i̵v̵_̵t̵w̵o̵,̵c̵o̵e̵f̵f̵i̵c̵i̵e̵n̵t̵M̵a̵t̵r̵i̵x̵,̵a̵d̵d̵_̵m̵u̵l̵,̵F̵i̵n̵s̵e̵t̵.̵s̵u̵m̵_̵a̵d̵d̵_̵d̵i̵s̵t̵r̵i̵b̵,̵
+  ̵ ̵ ̵ ̵ ̵←̵m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵←̵F̵i̵n̵s̵e̵t̵.̵m̵u̵l̵_̵s̵u̵m̵]̵[̲F̲i̲n̲.̲s̲u̲m̲_̲u̲n̲i̲v̲_̲t̲w̲o̲,̲ ̲c̲o̲e̲f̲f̲i̲c̲i̲e̲n̲t̲M̲a̲t̲r̲i̲x̲,̲ ̲a̲d̲d̲_̲m̲u̲l̲,̲ ̲F̲i̲n̲s̲e̲t̲.̲s̲u̲m̲_̲a̲d̲d̲_̲d̲i̲s̲t̲r̲i̲b̲,̲ ̲←̲ ̲m̲u̲l̲_̲a̲s̲s̲o̲c̲]̲
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.MaxwellLorentzContraction.inverse_screen_coefficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellLorentzContraction.contraction_lorentz' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellLorentzContraction.contraction_lorentz_ae' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

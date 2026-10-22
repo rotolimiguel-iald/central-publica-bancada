@@ -1,0 +1,71 @@
+{
+  "status": "P0_P1_P2_LOCAL_QUALIFICATION_COMPLETE__INDEPENDENT_REVIEW_PENDING",
+  "created_utc": "2026-10-06T01:27:11.786306+00:00",
+  "scope": "Synthetic-only source/injection instrument; no P3/PE/D.",
+  "final_adapter": "src/synthetic_adapter_v2.py",
+  "final_contract": "CONTRATO_P0_P2_V2.json",
+  "final_run": "RUN_002/RESULT.json",
+  "contracts": [
+    {
+      "file": "CONTRATO_PREFLIGHT.json",
+      "sha256": "c8d34bde8542fd90528000c09d60a5acda31d4dfc506f789a7bc5a12fecfde1d"
+    },
+    {
+      "file": "CONTRATO_RUNTIME_HASHES.json",
+      "sha256": "d83ab6385a61dae9e739cbec04abc6d297db069422cfa40063514e768a651334"
+    },
+    {
+      "file": "CONTRATO_P0_P2.json",
+      "sha256": "d92a86a2e39cbd57aa49117ed40e1e5ee87e5d627d3a8e0da96ee81ff2b982b5"
+    },
+    {
+      "file": "CONTRATO_P0_P2_V2.json",
+      "sha256": "23f9013c5139f5480a18fce103ea802750e020706808b5f52256e5ee478c1415"
+    }
+  ],
+  "runs": [
+    {
+      "file": "RUN_001/RESULT.json",
+      "sha256": "d9494cab8130c808d038c29857a4ac181547e24fd4d05dcfe42cab9d0a33ae7c",
+      "controls": 30,
+      "native_calls": 6,
+      "native_wall_seconds": 0.3447406579507515,
+      "CPU_seconds": 1.2239823650000001,
+      "wall_seconds": 1.7162134299287573,
+      "source_inputs_unchanged": true
+    },
+    {
+      "file": "RUN_002/RESULT.json",
+      "sha256": "02293a030529b43190b87b7d37940e3969fcf3d977e6c664f244d4969fd251a5",
+      "controls": 38,
+      "native_calls": 6,
+      "native_wall_seconds": 0.33295305783394724,
+      "CPU_seconds": 1.269192633,
+      "wall_seconds": 1.6932367759291083,
+      "source_inputs_unchanged": true
+    }
+  ],
+  "unit_totals": {
+    "native_calls": 12,
+    "native_wall_seconds": 0.6776937157846987,
+    "child_CPU_seconds": 2.493174998,
+    "child_wall_seconds": 3.4094502058578655,
+    "supervisor_wall_seconds": 7.511290099937469,
+    "distinct_injection_cases": 3,
+    "case_executions_including_revision_regression": 6,
+    "PE": 0,
+    "EDOM": 0,
+    "remote_calls": 0,
+    "installs": 0
+  },
+  "independent_review_requested_to": "/root/ordem018_proveniencia",
+  "runtime_files_verified_before_RUN002": 165,
+  "lineage_note": "Contract01/RUN001 retained. Contract02 addresses API in-memory provenance and runtime code pins; old controls are not alone taken as qualification of the new API.",
+  "limits": [
+    "No inference/recovery, bias or coverage measured.",
+    "No D observation or posterior opened.",
+    "No candidate list/hold/V1/Atlas/gate changed.",
+    "Python audit hook is not an OS proof against arbitrary unaudited native syscalls.",
+    "Object registries are bounded to this qualification process; P3 would need an independently reviewed lifecycle and recovery contract."
+  ]
+}

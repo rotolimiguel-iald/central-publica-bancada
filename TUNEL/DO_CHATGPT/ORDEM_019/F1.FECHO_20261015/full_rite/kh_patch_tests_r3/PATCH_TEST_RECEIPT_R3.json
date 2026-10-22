@@ -1,0 +1,331 @@
+{
+  "passed": false,
+  "start_utc": "2026-10-15T19:26:33.997105+00:00",
+  "end_utc": "2026-10-15T19:26:48.919608+00:00",
+  "seconds": 14.92250249999779,
+  "builder": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\build_kh_n1_patch_r3.py",
+    "sha256": "98cac30b6f78cd3b14619f81e42d9f3e8154f70437698c274405cb26626093cb",
+    "bytes": 16496
+  },
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r4\\um.py",
+    "sha256": "d8df24d0c35cd826d58f54e5aff82e38fe836dc30ce2172bcb841ad15ae3048f",
+    "bytes": 36177789
+  },
+  "contract": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\kh_patch_tests_r3\\KH_N1_V394_PREAUDIT_CONTRACT_R3.json",
+    "sha256": "a86b73d64c49dd6d1feef4c70df4400e9d4c507ddbcfe8c131565db6bb0783c6",
+    "bytes": 143430
+  },
+  "tests": [
+    {
+      "name": "actual_preaudit_contract",
+      "passed": true,
+      "expected_refusal": false,
+      "error": null
+    },
+    {
+      "name": "changed_decl",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "changed_thm",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "changed_axiom_report_entries",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "changed_nao_lidas_pelo_regex",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "changed_fora_do_trio",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "changed_sorryAx_no_log_do_audit",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "coherent_decl_and_entries_plus_one",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Contract counts do not match counts reconstructed from the actual audit log"
+    },
+    {
+      "name": "boolean_count",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Non-negative non-boolean integer required: decl"
+    },
+    {
+      "name": "duplicate_TOTAL",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Exactly one whole-kernel TOTAL line is required"
+    },
+    {
+      "name": "missing_axiom_row",
+      "passed": false,
+      "expected_refusal": true,
+      "error": null
+    },
+    {
+      "name": "outside_trio_in_actual_row",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Conflicting axiom rows for TGL.HalfNat.halfNat_of_selfConjugate"
+    },
+    {
+      "name": "sorryAx_in_actual_row",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Conflicting axiom rows for TGL.HalfNat.halfNat_of_selfConjugate"
+    },
+    {
+      "name": "failed_receipt",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Audit receipt is not a successful TGL/Audit build"
+    },
+    {
+      "name": "bad_log_pin",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Artifact pin mismatch: audit log"
+    },
+    {
+      "name": "coherent_embedded_and_contract_mutation",
+      "passed": true,
+      "expected_refusal": true,
+      "error": "ValueError: Embedded sources do not equal the baseline plus the actually compiled additions and roots"
+    },
+    {
+      "name": "all_functions_classes_unchanged",
+      "passed": true,
+      "expected_refusal": false,
+      "error": null
+    },
+    {
+      "name": "full_historical_spec_preserved",
+      "passed": true,
+      "expected_refusal": false,
+      "error": null
+    }
+  ],
+  "counts": {
+    "decl": 26797,
+    "thm": 21209,
+    "fora_do_trio": 0,
+    "axiom_report_entries": 26793,
+    "nao_lidas_pelo_regex": 4,
+    "sorryAx_no_log_do_audit": 0
+  },
+  "report_lengths": {
+    "runtime": 26793,
+    "receipt": 26783,
+    "complete": 26797
+  },
+  "patch_detail": {
+    "original_v393_coverage_spec": {
+      "nome": "kh_n1_cobertura_v393",
+      "veredito_prefixo": "TGL_KH_N1_COBERTURA_V393",
+      "veredito_sufixo": "AXIOM_REPORT_COVERS_THE_WHOLE_TGL_AND_TGLEXT_CLOSURE_25161_CONSTANTS_19901_THEOREMS_NONE_OUTSIDE_THE_TRIO__FOUR_NAMES_THE_REGEX_CANNOT_READ_DECLARED__V392_SOURCE_REPINNED__GATE_UNMOVED",
+      "estatuto": "[REAL] a cobertura e' medida a cada rito no Audit do proprio rito; os numeros esperados saem do arquivo da medida do sandbox da v393; a cobertura NAO move o gate",
+      "fontes": [
+        "kh_n1_v392",
+        "kh_n1_v393"
+      ],
+      "kernel_flags": [],
+      "kernel_decls": [],
+      "checks": [
+        {
+          "id": "h1",
+          "descricao": "a checagem de cobertura do kernel do rito passou",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "ok"
+          ],
+          "op": "verdadeiro",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h2",
+          "descricao": "constantes cobertas == as do sandbox v393 (KH_N1_v393.json)",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "decl"
+          ],
+          "op": "igual",
+          "valor": 25161,
+          "capturar": "constantes_cobertas",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h3",
+          "descricao": "teoremas cobertos == os do sandbox v393",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "thm"
+          ],
+          "op": "igual",
+          "valor": 19901,
+          "capturar": "teoremas_cobertos",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h4",
+          "descricao": "nenhuma constante fora do trio",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "fora_do_trio"
+          ],
+          "op": "igual",
+          "valor": 0,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h5",
+          "descricao": "nomes que o regex do um.py nao le == 4 (declarados)",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "nao_lidas_pelo_regex"
+          ],
+          "op": "igual",
+          "valor": 4,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h6",
+          "descricao": "o axiom_report do rito tem entrada para as constantes lidas",
+          "onde": "kf",
+          "caminho": [
+            "axiom_report"
+          ],
+          "op": "tamanho_maior_igual",
+          "valor": 25157,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h7",
+          "descricao": "a cobertura da v393 inclui toda a da v392 (constantes >= 24975, teoremas >= 19761)",
+          "onde": "kf",
+          "caminho": [
+            "axiom_coverage_v392",
+            "decl"
+          ],
+          "op": "maior_igual",
+          "valor": 24975,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h8",
+          "descricao": "medida do Audit v393: duracao bem abaixo do timeout de 1800 s",
+          "onde": "fonte:kh_n1_v393",
+          "caminho": [
+            "duracao_audit_s"
+          ],
+          "op": "menor_igual",
+          "valor": 900,
+          "capturar": "duracao_do_audit_s",
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h9",
+          "descricao": "medida do Audit v393: sorryAx ausente do log",
+          "onde": "fonte:kh_n1_v393",
+          "caminho": [
+            "sorryAx_no_log_do_audit"
+          ],
+          "op": "igual",
+          "valor": 0,
+          "estatuto": "[REAL]"
+        },
+        {
+          "id": "h10",
+          "descricao": "medida do Audit v393: as entradas novas de usuario estao no trio",
+          "onde": "fonte:kh_n1_v393",
+          "caminho": [
+            "novas_de_usuario_no_trio"
+          ],
+          "op": "verdadeiro",
+          "estatuto": "[REAL]"
+        }
+      ],
+      "erratas": [
+        {
+          "ao_lado_de": "kh_n1_cobertura_v392 (fonte kh_n1_v392 e duas igualdades de contagem)",
+          "dizia": "A v392 pinou KH_N1_v392.json (1389 bytes, sha256 104377ce6d1280c7...) e exigia constantes cobertas == 24975 e teoremas == 19761.",
+          "agora": "O arquivo foi regravado pelo pos_build da v392 em 13/10/2026 18:34, depois do rito (1390 bytes, sha256 3784f8739bb882ce...; o campo novas_de_usuario_no_trio ficou false nessa regravacao): o pino da v392 deixou de conferir e o registro kh_n1_cobertura_v392 nao selaria numa nova rodada. A v393 repina a fonte a uma copia do arquivo regravado (insumos/KH_N1_v392.regravado.json) e troca as duas igualdades por pisos (24975 e 19761), porque a cobertura cresce com as pedras da regra; a igualdade exata passa a ser cobrada por este registro, contra a medida do sandbox da v393.",
+          "lacuna_de_fidelidade": "a estrutura dizia que o pino da fonte e as contagens eram da v392 para sempre; o texto escrito deixou o registro preso a um arquivo regravavel e a uma igualdade que a propria v393 quebra",
+          "estatuto": "[REAL: sha256 lidos dos arquivos; a regravacao e' do pos_build da v392, registrada em pos_rito]",
+          "assinatura": "gerencia c1, em nome proprio, 14/10/2026"
+        }
+      ],
+      "limites": [
+        "[REAL] os dois arquivos de medida sao do sandbox (fora do selo); a cobertura que vale e' a medida no Audit do proprio rito",
+        "validade no kernel nao e' creditacao; o gate nao se move"
+      ],
+      "diz": [
+        "a cobertura do axiom_report no fecho inteiro cresceu para os numeros da v393 e segue sem constante fora do trio"
+      ],
+      "nao_diz": [
+        "que a cobertura prove algo alem de que nenhum axioma fora do trio foi lido"
+      ],
+      "leituras_do_operador": [],
+      "extras": {
+        "assinatura": "gerencia c1, em nome proprio, 14/10/2026"
+      }
+    },
+    "replacements": [
+      {
+        "name": "_V393_NOMES_REGISTROS",
+        "start_line": 211203,
+        "end_line": 211203,
+        "before_sha256": "8a294bb257a4fe20850782e958f281ff580fcf37f4c9a6e95f08d8487a2d31d1",
+        "after_sha256": "ba06dfe32b90b30bc579a48109172e1e0174d7b1615654e3c9eb4429aa2ba0af",
+        "before_ast_sha256": "dcde592d9a50a97fa6fcf83e0bdce5b5931de6d93c07aca6a108f7deabfc541b"
+      },
+      {
+        "name": "_V393_SPECS",
+        "start_line": 210919,
+        "end_line": 211202,
+        "before_sha256": "2f75cfd56924dfd6bed096670dfb2b783f47b753e04155f21abb981bc9d40f8b",
+        "after_sha256": "f47bd40db2190ff61f3ce32bbe0a9b58b0742da72c290b8fc167f27b6c289882",
+        "before_ast_sha256": "6d40eebd54b390a3e7a56186189a6ea42bd6b8d6e602c18118c667bc546db049"
+      },
+      {
+        "name": "_V393_FONTES",
+        "start_line": 210828,
+        "end_line": 210884,
+        "before_sha256": "c4e91069dfa6bf580514bdd2106ee135acd577dae12d797e545cf196a2889740",
+        "after_sha256": "2f36f2f8726dc0541f7a4e8aa274f628fb77a5fcd2a8deba65c5c3aabf4aafdb",
+        "before_ast_sha256": "14cf74a3e2a21bf073e96bde632d0d2d773bdfe6f6eaa436cf5769cfd84ea756"
+      }
+    ],
+    "embedded_source_count": 1287,
+    "contract_sha256": "a86b73d64c49dd6d1feef4c70df4400e9d4c507ddbcfe8c131565db6bb0783c6"
+  },
+  "patched_sha256": "a309424b442c96e721c3bf8942c6377ae6a8fbdae2dc7d08e20e7bedf928164b",
+  "scope": "Actual separate full-audit log/receipts and read-only AST composition; refusal fixtures are local, no um.py execution or runtime manufactured result."
+}

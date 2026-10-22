@@ -1,0 +1,81 @@
+{
+  "start_utc": "2026-10-15T18:29:30.326712+00:00",
+  "end_utc": "2026-10-15T18:29:31.604182+00:00",
+  "seconds": 1.2774655999965034,
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-c",
+    "\nimport importlib.util,json,os,socket\nfrom pathlib import Path\nroot=Path(os.environ['TGL_RITE_SANDBOX']);outside=root.parent/'outside'\nspec=importlib.util.spec_from_file_location('rite_guard',os.environ['TEST_GUARD_SOURCE']);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nchecks=[]\ndef yes(name,condition): checks.append({'name':name,'passed':bool(condition)})\ndef refused(name,action):\n try:action();yes(name,False)\n except PermissionError:yes(name,True)\next=chr(92)*2+'?'+chr(92)\nfor name,path in [('ordinary',str(root/'ordinary')),('extended',ext+str(root/'extended'))]:\n os.mkdir(path);yes('mkdir_'+name,Path(path).is_dir())\n with open(str(Path(path)/'value.txt'),'x') as f:f.write('inside')\n yes('write_'+name,True)\nrefused('parent_escape',lambda:os.mkdir(str(root/'..'/'outside'/'escaped')))\nrefused('extended_parent_escape',lambda:os.mkdir(ext+str(root/'..'/'outside'/'extended_escape')))\nrefused('sibling_prefix_escape',lambda:os.mkdir(str(root.parent/'sandbox_evil')))\nrefused('junction_escape',lambda:os.mkdir(str(root/'escape_junction'/'escaped')))\nrefused('extended_junction_escape',lambda:os.mkdir(ext+str(root/'escape_junction'/'extended_escape')))\nrefused('ordinary_outside_write',lambda:open(outside/'forbidden','x'))\nyes('UNC_rejected_without_remote_access',not m._inside(ext+'UNC'+chr(92)+'nonexistent.invalid'+chr(92)+'share'+chr(92)+'x'))\nyes('NT_device_not_reinterpreted_inside',not m._inside(ext+'GLOBALROOT'+chr(92)+'Device'+chr(92)+'HarddiskVolumeShadowCopy1'+chr(92)+'x'))\nrefused('DNS_still_refused',lambda:socket.getaddrinfo('nonexistent.invalid',443))\nprint(json.dumps({'checks':checks,'passed':all(x['passed'] for x in checks)}))\n"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\replay_elevated\\guard_r3_test_b\\sandbox",
+  "exit_code": 0,
+  "stdout": "{\"checks\": [{\"name\": \"mkdir_ordinary\", \"passed\": true}, {\"name\": \"write_ordinary\", \"passed\": true}, {\"name\": \"mkdir_extended\", \"passed\": true}, {\"name\": \"write_extended\", \"passed\": true}, {\"name\": \"parent_escape\", \"passed\": true}, {\"name\": \"extended_parent_escape\", \"passed\": true}, {\"name\": \"sibling_prefix_escape\", \"passed\": true}, {\"name\": \"junction_escape\", \"passed\": true}, {\"name\": \"extended_junction_escape\", \"passed\": true}, {\"name\": \"ordinary_outside_write\", \"passed\": true}, {\"name\": \"UNC_rejected_without_remote_access\", \"passed\": true}, {\"name\": \"NT_device_not_reinterpreted_inside\", \"passed\": true}, {\"name\": \"DNS_still_refused\", \"passed\": true}], \"passed\": true}\n",
+  "stderr": "",
+  "result": {
+    "checks": [
+      {
+        "name": "mkdir_ordinary",
+        "passed": true
+      },
+      {
+        "name": "write_ordinary",
+        "passed": true
+      },
+      {
+        "name": "mkdir_extended",
+        "passed": true
+      },
+      {
+        "name": "write_extended",
+        "passed": true
+      },
+      {
+        "name": "parent_escape",
+        "passed": true
+      },
+      {
+        "name": "extended_parent_escape",
+        "passed": true
+      },
+      {
+        "name": "sibling_prefix_escape",
+        "passed": true
+      },
+      {
+        "name": "junction_escape",
+        "passed": true
+      },
+      {
+        "name": "extended_junction_escape",
+        "passed": true
+      },
+      {
+        "name": "ordinary_outside_write",
+        "passed": true
+      },
+      {
+        "name": "UNC_rejected_without_remote_access",
+        "passed": true
+      },
+      {
+        "name": "NT_device_not_reinterpreted_inside",
+        "passed": true
+      },
+      {
+        "name": "DNS_still_refused",
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "guard_sha256": "a1d07e37ec4defd7ed665980d57ff0b775a8cc80ce2602a2c03990bcd74bfaca",
+  "script_sha256": "0d711645963bcdcbf2d493850bad152017114ad69b6497d00c80c7a57dc4a29d",
+  "junction_removed": true,
+  "outside_unchanged_empty": true,
+  "scientific_program_executed": false,
+  "network_enabled": false,
+  "passed": true
+}

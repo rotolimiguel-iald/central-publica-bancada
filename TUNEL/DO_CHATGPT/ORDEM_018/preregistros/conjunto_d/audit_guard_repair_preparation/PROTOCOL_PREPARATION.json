@@ -1,0 +1,102 @@
+{
+  "state": "PREPARATION_ONLY_REQUIRES_INDEPENDENT_REVIEW",
+  "created_utc": "2026-10-06T04:54:01.861926+00:00",
+  "parent_authorization_scope": "Prepare operational repair and a small doubles suite; AST/syntax/pins only. Do not execute suite, initialization, waveform, likelihood, sampler or PE.",
+  "selected_approach": "Sticky monotonic audit latch, preopened append-only journal, cooperative checkpoints and independent supervisor acceptance",
+  "alternatives_document": "COMPARACAO_ABORDAGENS.md",
+  "supersedes_consumed_campaign": false,
+  "reopens_consumed_ids": false,
+  "consumed_ids_preserved": [
+    "P3_GR_INIT_QUALIFIED_003",
+    "P3_RB_INIT_QUALIFIED_003"
+  ],
+  "baseline_limits_preserved": {
+    "max_likelihood_calls": 10000,
+    "native_waveform_calls_at_most": 10000,
+    "wall_soft_s": 3600,
+    "supervisor_wall_s": 3610,
+    "cpu_soft_s": 3300,
+    "cpu_hard_s": 3305,
+    "address_space_bytes": 8589934592,
+    "workers": 1,
+    "threads": 1,
+    "parallel_jobs": 1,
+    "jobs_at_most": 2,
+    "no_retry": true
+  },
+  "new_scientific_contract_created": false,
+  "new_authorization_created": false,
+  "new_claim_created": false,
+  "prepared_only_test_names": [
+    "test_pre_ll_swallowed_block_prevents_call",
+    "test_post_ll_swallowed_block_discards_return",
+    "test_import_probe_checkpoint_prevents_native_double",
+    "test_finalization_fails_even_after_finite_value",
+    "test_first_event_and_all_acts_are_retained",
+    "test_journal_io_failure_still_latches",
+    "test_exception_only_is_not_infallible",
+    "test_original_exception_record_survives_audit_priority",
+    "test_clean_exception_is_rethrown",
+    "test_partial_clean_is_accepted_without_convergence_claim",
+    "test_child_error_overrides_clean_partial",
+    "test_missing_result_is_terminal",
+    "test_dirty_partial_is_terminal",
+    "test_external_journal_catches_stale_clean_result",
+    "test_absent_journal_is_terminal",
+    "test_malformed_identity_and_boolean_counter_rejected",
+    "test_missing_final_checkpoint_rejected",
+    "test_stopped_partial_cannot_hide_native_failure",
+    "test_budget_partial_clean_is_protocol_partial",
+    "test_campaign_failure_stops_next_double_and_returns_nonzero",
+    "test_clean_complete_campaign_exit_zero_but_partial_stays_partial"
+  ],
+  "suite_execution_authorized_by_this_protocol": false,
+  "candidate_entrypoints": "driver_p3.main and launch_p3.main immediately raise PREPARATION_ONLY; incomplete standalone package deliberately contains no campaign contract",
+  "expected_doubles_outcomes": [
+    "Swallowed PermissionError permanently invalidates current/next evaluation and terminal acceptance",
+    "Late import probe denial is seen before the controlled native dispatch",
+    "Original exception evidence retained when audit violation takes terminal priority",
+    "Journal IO failure leaves latch dirty; missing/nonempty/inconsistent journal rejected by supervisor",
+    "Child error or missing result prevents the next job and yields nonzero campaign exit",
+    "Clean partial may be accepted as protocol partial only; not convergence, coverage or physical confirmation"
+  ],
+  "not_executed": [
+    "test_audit_guard_doubles.py",
+    "candidate modules",
+    "initialization",
+    "LAL",
+    "waveform",
+    "likelihood",
+    "sampler",
+    "PE",
+    "upstream programs"
+  ],
+  "integration_requirements_open": [
+    "Independent ROOT review of this isolated operational delta and static evidence",
+    "Separate express decision before any pure doubles execution; this protocol grants none",
+    "If later authorized, package exact unchanged dependencies plus candidate source/driver/launch and two new pure modules under new pins; never transplant an old authorization/CLAIM or reuse consumed IDs",
+    "Any later initialization or PE remains a separate specific decision with a new contract and pins; none is prepared/authorized here"
+  ],
+  "non_goals": [
+    "allowlist relaxation",
+    "new cache exception",
+    "preloading scientific imports to hide refusals",
+    "larger resource budgets",
+    "new scientific target",
+    "real D data",
+    "V1 adoption",
+    "retry/resume",
+    "OS-hard containment"
+  ],
+  "limitations": [
+    "The Python hook begins after fixed imports/pin checks; native syscalls and arbitrary preexisting file descriptors are outside that instrumentation",
+    "Checkpoints are cooperative; BaseException/SystemExit can be caught and are not an infallible stop mechanism",
+    "An audit event inside an already-running C call may only be acted on after return; no C interruption guarantee",
+    "The event counter native_attempts_completed_at_event denotes the inherited waveform counter, not every LAL helper invocation",
+    "Events are latched before journal serialization/IO; severe IO/process failure may prevent durable child receipt, so external missing/incomplete evidence is terminal",
+    "Inherited supervisor first wait is 3610 s per child; cleanup/IO/unbounded wait after kill are not an absolute OS deadline",
+    "Clean journal is evidence only of no denied Python-hook event under the pinned cooperative program, not proof of no possible external syscall"
+  ],
+  "shared_memories_modified": false,
+  "map_write_deferred_to_ROOT": true
+}

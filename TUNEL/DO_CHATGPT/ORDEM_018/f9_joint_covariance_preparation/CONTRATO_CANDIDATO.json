@@ -1,0 +1,129 @@
+{
+  "schema": "F9_JOINT_COVARIANCE_CANDIDATE_V1",
+  "request_id": "f200dee1-0ecf-4a51-9b38-4c32d7eb0696",
+  "status": "PREPARED_STATIC_ONLY_ENGINEERING_ONLY",
+  "frozen_V1": false,
+  "execution_authorized": false,
+  "claim_created": false,
+  "scope": "ORDEM018 F1e I03; new reusable pure assembler, no second Gaussian solver",
+  "metadata_pin": {
+    "bytes": 375476,
+    "sha256": "39b0b41a99711cd24491b5680ff579707547e3c45c8718d9edb66f73ddb89849"
+  },
+  "dimensions": {
+    "joint_rows": 283,
+    "nuisance_columns": 63,
+    "MM_rows": 5,
+    "stellar_labels": 300,
+    "SBF_recipes": 2,
+    "complete_label_count": 600,
+    "blocks": 9,
+    "explicit_cross_blocks": 36
+  },
+  "covariance_coordinates": "NATIVE_F9_283",
+  "units": {
+    "background": "dimensionless x dimensionless",
+    "first_260_local_rows": "mag",
+    "last_7_local_rows": "dex",
+    "cross_entries": "product of native row units"
+  },
+  "numeric_inputs_now": {
+    "C": null,
+    "y": null,
+    "MM_variances": null,
+    "MM_distance_velocity_references": null,
+    "observed_centres": null,
+    "actual_rank": null,
+    "support_receipts": null,
+    "normalization_receipts": null
+  },
+  "primitive_reuse": {
+    "source": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\qualify_stellar_family.py",
+      "bytes": 7450,
+      "sha256": "bcf46566826f019b33ecc1f96ea54b409dd9d1cbff9f4329f0e80dca151a7f89"
+    },
+    "callable": "block_correlation",
+    "not_called_now": true,
+    "callable_and_numpy_global_identity": "external trusted caller validates loaded object and pinned source; metadata receipt is not a physical certificate"
+  },
+  "gaussian_solver": "Only existing SupportGaussian / FlatNuisanceGaussian downstream; none invoked by builder",
+  "transformation_owner": "likelihood_consumer.prepare_joint, exactly once T C Tt including cross blocks",
+  "component_requirements": {
+    "common_blocks": [
+      "PLANCK",
+      "DESI",
+      "GROUP",
+      "SN_CAL",
+      "SBF_CAL",
+      "SN_HF"
+    ],
+    "cross_blocks": "all36upperpairs explicitly present with full values; zeros require EXPLICIT_INPUT_ZERO and reference",
+    "stellar": "fixed metadata incidence, explicit positive sigmas and hashes; D0 explicit baseline zero; existing block_correlation; no extra latent cross-level term",
+    "SBF": "native compressed variance supplied explicitly; exact recipe and compression/weights/offset reference; no central intercept read",
+    "MM": "alternative A only,5positive explicit native variances, positive fixed reference values and source/endogeneity/recipe refs; diagonal by explicit policy,8MM-rest cross matrices explicitly zero"
+  },
+  "O01": {
+    "status": "CONDITIONAL_UNRATIFIED",
+    "supported_proposal": "A_UPSTREAM_FIXED_ERROR_WORKING_GAUSSIAN",
+    "recipe": "H0DN_MM_DZ_UPSTREAM_SYMMETRIC",
+    "primitive_alternative_B": "OPEN_MODEL_COMPONENT_NOT_IMPLEMENTED",
+    "reference_data_status": "NOT_READ_NOT_PROVIDED"
+  },
+  "O02": {
+    "status": "CONDITIONAL_UNRATIFIED",
+    "family": "restricted interior300x2, not complete physical covariance space",
+    "order": "sign source order -> fraction source order -> SBF preflight order",
+    "deduplication": "NONE",
+    "common_invariants": "common blocks/errors/MM/non-SBF cross matrices fixed; eachSBFrecipe variance/compression/cross matrices fixed across300stellar labels",
+    "new_parameter_dependent_cross_recipe": "OPEN_NOT_SILENTLY_ADDED"
+  },
+  "family_mapping": {
+    "C": "native f64le SHA of constructed bytes",
+    "response": "five_model_response_sha256 of fixed recipe/design, not theta-specific mean",
+    "support": "reference preserved; numeric receipt/rank remain null until existing guard qualifies actual fullC/X/responses/origin",
+    "normalization": "recipe/reference and common kappa d_eta identity; actual receipt null",
+    "coverage": "600 ordered records required; open records preserved explicitly; no subset completion"
+  },
+  "failure_policy": {
+    "missing_components": "OPEN_MODEL_COMPONENT or visible schema error; never0/drop rows",
+    "bad_pins_schema_units": "visible error, no likelihood",
+    "nonfinite": "visible error",
+    "PSD_rank_affine_support": "existing backend, explicit tolerances; no new solver/jitter/clipping",
+    "symmetry": "builder preserves floating bytes; full numerical symmetry tolerance solely in existing backend",
+    "physical_model_failure": "not zero density; no model removal",
+    "legitimate_off_affine_support": "existing backend may assign zero density with diagnostic; not evaluated here"
+  },
+  "no_observed_access_authority": "Any eventual observed admission requires operator/V1 per existing consumer; this contract grants none",
+  "limitations": [
+    "No matrix arithmetic or candidate import was performed",
+    "No guarantee of physical covariance completeness from input references or pins",
+    "Explicit reference flags do not certify a real sampling law",
+    "No numerical qualification of new assembly or full600family",
+    "No assumption of true/known covariance merely because fixed",
+    "No uniform error certificate claimed; ENGINEERING_ONLY remains a valid preparation status",
+    "No p,S,g,H0fit,lnB,sigma or verdict"
+  ],
+  "public_API": [
+    "JointCovarianceBuilder",
+    "family_metadata",
+    "build_case",
+    "open_record",
+    "summarize_family"
+  ],
+  "forbidden_now": [
+    "candidate imports",
+    "numpy/scipy imports",
+    "matrix arithmetic",
+    "controls",
+    "solver",
+    "observed data",
+    "network",
+    "WSL",
+    "remote provider",
+    "AUTH",
+    "CLAIM",
+    "shared memories",
+    "ledger changes"
+  ]
+}

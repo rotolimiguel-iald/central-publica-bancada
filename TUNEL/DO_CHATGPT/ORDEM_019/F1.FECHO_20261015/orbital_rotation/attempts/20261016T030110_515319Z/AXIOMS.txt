@@ -1,0 +1,27 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T030110_515319Z\SchwartzCutoffEstimateR4.lean:63:23: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a * ∑ i ∈ ?s, ?f i
+in the target expression
+  ∑ i ∈ Finset.range (n + 1),
+      ‖x‖ ^ k * (↑(n.choose i) * ‖iteratedFDeriv ℝ i (residual s) x‖ * ‖iteratedFDeriv ℝ (n - i) (⇑f) x‖) ≤
+    s * errorBound k n f
+
+case neg
+F : Type u_1
+inst✝¹ : NormedAddCommGroup F
+inst✝ : NormedSpace ℝ F
+s : ℝ
+hs : 0 ≤ s
+hs1 : s ≤ 1
+f : 𝓢(E, F)
+k n : ℕ
+x : E
+hx : ¬‖s • x‖ < 1
+hx' : 1 ≤ s * ‖x‖
+hprod :
+  ‖iteratedFDeriv ℝ n (fun y => residual s y • f y) x‖ ≤
+    ∑ i ∈ Finset.range (n + 1), ↑(n.choose i) * ‖iteratedFDeriv ℝ i (residual s) x‖ * ‖iteratedFDeriv ℝ (n - i) (⇑f) x‖
+⊢ ∑ i ∈ Finset.range (n + 1),
+      ‖x‖ ^ k * (↑(n.choose i) * ‖iteratedFDeriv ℝ i (residual s) x‖ * ‖iteratedFDeriv ℝ (n - i) (⇑f) x‖) ≤
+    s * errorBound k n f
+'F1Fecho.SchwartzCutoff.error_pointwise_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.SchwartzCutoff.error_seminorm_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

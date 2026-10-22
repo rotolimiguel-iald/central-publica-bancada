@@ -1,0 +1,208 @@
+[NÃO-CEGO — B2: registro, nulos sintéticos e diagnósticos condicionais PAGOS; calibração e significância físicas NÃO PAGAS]
+
+# B2 — registro, modo440 e rotaIV
+
+Abertura `ENTREGA_013BIS_ABERTURA_operador.md` — `0118a54b7a806a0a5ef5572afc8349c223cc3da4bec62ff18a9cd1b07433f9f0`. Ficha `REAPROVEITAMENTO_AMPLIACAO_B2.md` — `c2955cfb4df7907ad372ac6a6a24216986e544420d8f0ef30a1ab05e307f1251`.
+Registro E2 `e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416`; testemunha `ENTREGA_013BIS_E2_REGISTRO_V1.md` — `e95787fd52852c090b18d760ba5f58cb422087b136686414571023a19782403c`.
+
+A testemunha e a ativação precedem as campanhas. O desenho é NÃO-CEGO; nenhuma PE cega foi iniciada nesta etapa. As dez leituras permanecem paralelas, sem escolher a favorável. O gate físico continua INCONCLUSIVE_SYSTEMATICS.
+
+| Item | Pago e limite |
+|---|---|
+| E2 | PAGO: registro, testemunha, árvores/input/runtime pinados, critérios e nulos sintéticos. A cauda física da pipeline não foi calibrada. |
+| E4.1 | PAGO: Fisher440 condicionado a massa/spin e fonte fixa, quatro PSDs, duas variantes, dois perfis e duas convenções de SNR. Degenerescência da fonte livre NÃO PAGA. |
+| E4.2 | PAGO: razões de densidade 2D com amostras pareadas, quatro estimadores, bordas/prior e suporte. lnB físico normalizado NÃO PAGO; não se promove KDE4D. |
+| E4.3 | PAGO: só220 e220+440 separados. Deformar440 é INPUT; não é escolha inferida dos dados. |
+| E4.4 | PAGO: lista nominal E0 por corrida e prioridade por SNR; GW250207_115645 permanece candidato futuro AWAITING_DATA. |
+| E5 | PAGO: contrato de amostras completas, LRT nulo heterogêneo, informação1/sigma^4 e secundário registrado. Transferência browniana e sigma_sys físicos NÃO PAGOS. |
+
+## Nulos registrados
+
+Foram executadas 25 células, total de 1,609,000,000 draws. Parede da campanha: 437.518s. O controle gaussiano e o controle com medida elíptica t5 mais nuisance gaussiano são modelos distintos. A covariância E1 é INPUT de curvatura local, não erro físico calibrado. Cada intervalo abaixo é pontual95%; desacordo ocasional com o valor analítico em várias células não autoriza escolher ou refazer células. Na rotaIV, zero contagens significa limite superior finito, nunca p=0.
+
+| Célula | Draws | Excedências | p empírico | UL95 unilateral | p analítico |
+|---|---:|---:|---:|---:|---:|
+| GWTC5_31_R_B_G | 100000000 | 19 | 1.9e-07 | 2.78792e-07 | 2.86652e-07 |
+| GWTC5_31_R_B_T5M_GN | 100000000 | 7727 | 7.727e-05 | 7.87316e-05 | 7.75118e-05 |
+| GWTC5_31_R_MOD_G | 100000000 | 24 | 2.4e-07 | 3.37524e-07 | 2.86652e-07 |
+| GWTC5_31_R_MOD_T5M_GN | 100000000 | 10064 | 0.00010064 | 0.000102306 | 9.98141e-05 |
+| GWTC5_31_R_RAIZ_0_G | 100000000 | 25 | 2.5e-07 | 3.49161e-07 | 2.86652e-07 |
+| GWTC5_31_R_RAIZ_0_T5M_GN | 100000000 | 519 | 5.19e-06 | 5.58068e-06 | 5.12881e-06 |
+| GWTC5_31_R_LIN_G | 100000000 | 23 | 2.3e-07 | 3.25854e-07 | 2.86652e-07 |
+| GWTC5_31_R_LIN_T5M_GN | 100000000 | 1816 | 1.816e-05 | 1.88768e-05 | 1.81206e-05 |
+| GWTC5_33_R_B_G | 100000000 | 32 | 3.2e-07 | 4.29825e-07 | 2.86652e-07 |
+| GWTC5_33_R_B_T5M_GN | 100000000 | 7837 | 7.837e-05 | 7.98418e-05 | 7.82333e-05 |
+| GWTC5_33_R_MOD_G | 100000000 | 25 | 2.5e-07 | 3.49161e-07 | 2.86652e-07 |
+| GWTC5_33_R_MOD_T5M_GN | 100000000 | 9921 | 9.921e-05 | 0.000100864 | 9.96354e-05 |
+| GWTC5_33_R_RAIZ_0_G | 100000000 | 31 | 3.1e-07 | 4.18376e-07 | 2.86652e-07 |
+| GWTC5_33_R_RAIZ_0_T5M_GN | 100000000 | 517 | 5.17e-06 | 5.55996e-06 | 5.22899e-06 |
+| GWTC5_33_R_LIN_G | 100000000 | 25 | 2.5e-07 | 3.49161e-07 | 2.86652e-07 |
+| GWTC5_33_R_LIN_T5M_GN | 100000000 | 1753 | 1.753e-05 | 1.82345e-05 | 1.78994e-05 |
+| IV_GW250114_actual_width_N61 | 1000000 | 0 | 0 | 2.99573e-06 | OPEN |
+| IV_GW250114_actual_width_N39 | 1000000 | 0 | 0 | 2.99573e-06 | OPEN |
+| IV_GW250114_actual_width_N22 | 1000000 | 0 | 0 | 2.99573e-06 | OPEN |
+| IV_GWTC5_31_quality_mixture_N1588 | 1000000 | 1 | 1e-06 | 4.74386e-06 | OPEN |
+| IV_GWTC5_31_quality_mixture_N996 | 1000000 | 0 | 0 | 2.99573e-06 | OPEN |
+| IV_GWTC5_31_quality_mixture_N524 | 1000000 | 0 | 0 | 2.99573e-06 | OPEN |
+| IV_GWTC5_33_quality_mixture_N1696 | 1000000 | 1 | 1e-06 | 4.74386e-06 | OPEN |
+| IV_GWTC5_33_quality_mixture_N1144 | 1000000 | 0 | 0 | 2.99573e-06 | OPEN |
+| IV_GWTC5_33_quality_mixture_N594 | 1000000 | 0 | 0 | 2.99573e-06 | OPEN |
+
+Os alvos N90 do portão sem nuisance não garantem90% de poder com nuisance. Não somar significâncias entre modelos de ruído ou leituras.
+
+## Modo440: referência declarada
+
+Recorte de exibição fixado pelo script: SNR isolado do440=10, perfil FREE_FREQUENCY_FIXED_TAU_GR, mesma SNR por PSD. Todos os1920 cenários, inclusive amplitude fixa e outro perfil, estão no JSON. Massa/spin e perfil GR da fonte são fixos. N90 pressupõe fontes independentes idênticas, covariância conhecida e nenhuma sistemática; não é previsão astrofísica.
+
+| Leitura | Variante | PSD | delta_tau440 | sigma local | delta/sigma | N90 condicional | Estatuto |
+|---|---|---|---:|---:|---:|---:|---|
+| R-A | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-A | BOTH_220_440_DEFORMED | O4 | -1.43876e-41 | 0.200744 | 7.16717e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | BOTH_220_440_DEFORMED | O4 | -0.0821606 | 0.200744 | 0.409281 | 235.554 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-MOD | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-MOD | BOTH_220_440_DEFORMED | O4 | -0.195997 | 0.200744 | 0.976355 | 41.3922 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-0 | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-0 | BOTH_220_440_DEFORMED | O4 | -0.0736783 | 0.200744 | 0.367027 | 292.913 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-EP4 | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-EP4 | BOTH_220_440_DEFORMED | O4 | -1.43876e-41 | 0.200744 | 7.16717e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | BOTH_220_440_DEFORMED | O4 | -5.78126e-82 | 0.200744 | 2.87992e-81 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | ONLY_220_DEFORMED | O4 | OPEN | 0.200744 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | BOTH_220_440_DEFORMED | O4 | OPEN | 0.200744 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | BOTH_220_440_DEFORMED | O4 | -0.137245 | 0.200744 | 0.683681 | 84.4163 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-GLOBAL | ONLY_220_DEFORMED | O4 | 0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-GLOBAL | BOTH_220_440_DEFORMED | O4 | -0 | 0.200744 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | ONLY_220_DEFORMED | O4 | OPEN | 0.200744 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | BOTH_220_440_DEFORMED | O4 | OPEN | 0.200744 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-A | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-A | BOTH_220_440_DEFORMED | O5 | -1.43876e-41 | 0.201014 | 7.15754e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | BOTH_220_440_DEFORMED | O5 | -0.0821606 | 0.201014 | 0.408731 | 236.188 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-MOD | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-MOD | BOTH_220_440_DEFORMED | O5 | -0.195997 | 0.201014 | 0.975043 | 41.5036 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-0 | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-0 | BOTH_220_440_DEFORMED | O5 | -0.0736783 | 0.201014 | 0.366534 | 293.701 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-EP4 | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-EP4 | BOTH_220_440_DEFORMED | O5 | -1.43876e-41 | 0.201014 | 7.15754e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | BOTH_220_440_DEFORMED | O5 | -5.78126e-82 | 0.201014 | 2.87605e-81 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | ONLY_220_DEFORMED | O5 | OPEN | 0.201014 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | BOTH_220_440_DEFORMED | O5 | OPEN | 0.201014 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | BOTH_220_440_DEFORMED | O5 | -0.137245 | 0.201014 | 0.682763 | 84.6436 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-GLOBAL | ONLY_220_DEFORMED | O5 | 0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-GLOBAL | BOTH_220_440_DEFORMED | O5 | -0 | 0.201014 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | ONLY_220_DEFORMED | O5 | OPEN | 0.201014 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | BOTH_220_440_DEFORMED | O5 | OPEN | 0.201014 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-A | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-A | BOTH_220_440_DEFORMED | ET | -1.43876e-41 | 0.201182 | 7.15157e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | BOTH_220_440_DEFORMED | ET | -0.0821606 | 0.201182 | 0.40839 | 236.583 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-MOD | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-MOD | BOTH_220_440_DEFORMED | ET | -0.195997 | 0.201182 | 0.97423 | 41.573 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-0 | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-0 | BOTH_220_440_DEFORMED | ET | -0.0736783 | 0.201182 | 0.366228 | 294.192 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-EP4 | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-EP4 | BOTH_220_440_DEFORMED | ET | -1.43876e-41 | 0.201182 | 7.15157e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | BOTH_220_440_DEFORMED | ET | -5.78126e-82 | 0.201182 | 2.87365e-81 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | ONLY_220_DEFORMED | ET | OPEN | 0.201182 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | BOTH_220_440_DEFORMED | ET | OPEN | 0.201182 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | BOTH_220_440_DEFORMED | ET | -0.137245 | 0.201182 | 0.682193 | 84.785 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-GLOBAL | ONLY_220_DEFORMED | ET | 0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-GLOBAL | BOTH_220_440_DEFORMED | ET | -0 | 0.201182 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | ONLY_220_DEFORMED | ET | OPEN | 0.201182 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | BOTH_220_440_DEFORMED | ET | OPEN | 0.201182 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-A | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-A | BOTH_220_440_DEFORMED | CE | -1.43876e-41 | 0.201284 | 7.14792e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-B | BOTH_220_440_DEFORMED | CE | -0.0821606 | 0.201284 | 0.408182 | 236.825 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-MOD | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-MOD | BOTH_220_440_DEFORMED | CE | -0.195997 | 0.201284 | 0.973732 | 41.6155 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-0 | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-0 | BOTH_220_440_DEFORMED | CE | -0.0736783 | 0.201284 | 0.366041 | 294.493 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-RAIZ-EP4 | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-EP4 | BOTH_220_440_DEFORMED | CE | -1.43876e-41 | 0.201284 | 7.14792e-41 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-REST | BOTH_220_440_DEFORMED | CE | -5.78126e-82 | 0.201284 | 2.87218e-81 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | ONLY_220_DEFORMED | CE | OPEN | 0.201284 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-RAIZ-COHERENT | BOTH_220_440_DEFORMED | CE | OPEN | 0.201284 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-LIN | BOTH_220_440_DEFORMED | CE | -0.137245 | 0.201284 | 0.681844 | 84.8718 | DERIVED_CONDITIONAL_GAUSSIAN |
+| R-GLOBAL | ONLY_220_DEFORMED | CE | 0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-GLOBAL | BOTH_220_440_DEFORMED | CE | -0 | 0.201284 | 0 | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | ONLY_220_DEFORMED | CE | OPEN | 0.201284 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+| R-PROP | BOTH_220_440_DEFORMED | CE | OPEN | 0.201284 | OPEN | OPEN | OPEN_ZERO_SUBRESOLUTION_OR_NO_EXPONENTIAL |
+
+## Posterior arquivado do440
+
+Faixas entre KDE2D nas três bandas e gaussiana por momentos completos; são sensibilidade a estimadores, não IC nem lnB. 220 e440 compartilham o evento e parâmetros: não multiplicar as razões marginais como evidências independentes.
+
+| Leitura | Faixa do log de razão de densidade440 | Estatuto |
+|---|---|---|
+| R-A | [0.0, 0.0] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-B | [-0.09254073975576643, -0.07542624538172671] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-MOD | [-0.29013192111178115, -0.19031466154155963] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-RAIZ-0 | [-0.08143883993857887, -0.06750437146828148] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-RAIZ-EP4 | [0.0, 0.0] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-RAIZ-REST | [0.0, 0.0] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-RAIZ-COHERENT | OPEN | OPEN_NO_UNIQUE_EXPONENTIAL |
+| R-LIN | [-0.1764853664640585, -0.1290567773188216] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-GLOBAL | [0.0, 0.0] | NONBLIND_CONDITIONAL_DENSITY_DIAGNOSTIC |
+| R-PROP | OPEN | OPEN_NO_UNIQUE_EXPONENTIAL |
+
+## Informação e eventos
+
+A informação gaussiana local da variância escala com1/sigma^4; esse peso já vem da likelihood e não é multiplicado novamente no LRT. O contrato de posterior completo permanece explícito; não foi executado ajuste populacional físico nesta etapa.
+
+| Conjunto de calibração | Equivalentes GW250114 no cenário sigma_sys=0 |
+|---|---:|
+| GWTC5_31 | 1.08462 |
+| GWTC5_33 | 1.08462 |
+| GWTC3_10 | 0.0126697 |
+| GWTC3_18 | 0.0127207 |
+
+| Evento que passa E0 e SNR>=30 | Corrida | SNR rede público |
+|---|---|---:|
+| GW240920_124024 | O4b | 37.4 |
+| GW241127_061008 | O4b | 31.3 |
+| GW250114_082203 | O4b | 78.6 |
+
+## Revisão, incidentes e custo
+
+A revisão independente passou em 310 verificações, zero falhas. Compartilha os QNM/PSDs pinados, mas usa derivadas/projeção, somas KDE diretas e fórmulas de informação independentes. Oito pares de densidade foram predefinidos; não se afirma refit independente universal. Nenhuma revisão transforma o diagnóstico em calibração física.
+
+Falhas preservadas: selagem inicial barrada pela política de scripts antes de pasta/seed; substituição por API nativa revisada, sem mudar política. A primeira integração WSL recusou a semente porque as identidades Windows de criação e runtime diferem. A DACL foi transferida exclusivamente para a identidade do runtime; o compromisso dos mesmos32bytes foi verificado. Registro, testemunha e seed não foram reescritos. O proprietário Windows original não mudou: a DACL restringe a leitura normal, mas não elimina seus poderes de gerir permissões. Custódia procedural local, sem separação de administradores; nenhum conteúdo da seed ou offset foi divulgado.
+
+E4/E5: 6.056718s parede; revisão: 8.570957s. Tempo contínuo da Parte B até esta entrega: 2.857108h de40. Deadline `2026-09-24T11:06:33.802143+00:00`. Campanhas simultâneas não se somam em dobro.
+
+Comandos executados: `python -B bis/e2_code/null_campaign.py`; `python -B refeito/activate_e4_e5_013bis.py`; `python -B bis/e4_indep_review/independent_review.py --execute --authorization <arquivo pinado> --authorization-sha256 <hash>`; `python -B refeito/audit_e2_null_receipts_013bis.py`. Runtime WSL /opt/lal_env; BLAS solicitado com1thread. Saídas são exclusivas; reproduzir em destino isolado sob registro próprio. N/A — sem Lean. Próximo: E3.1, encerramento dos diagnósticos F0, Kerr e piloto, sem parar no marco.
+
+## Arquivos e hashes
+
+- `RINGDOWN_5SIGMA_V1.json` — `e1be6b0409720c6883af5281458922fb03c5329bc0b08df7efe129d65e487416` (183005B).
+- `bis/E2_REGISTRATION_RECEIPT.json` — `46699aa4ee24ccacfd105b714ffe27f63176b483d26ca2fb46ed9e4420e55d7b` (1243B).
+- `bis/E2_REVIEW_APPLICATION_V2.json` — `196625fd41c15fec6351f2abe8f6f0c897413d1c448c6dd00c994b05122a1c4d` (7401B).
+- `bis/E2_REGISTRATION_SMOKE.json` — `ef86079b67b525295edca884674a2e8bc9322b8381b1493a3150eaa6d2a9363e` (1227B).
+- `bis/E2_NULL_RECEIPTS_AUDIT_V1.json` — `93cffda37b3d80bb961dcaca229e31f8dd5b0c11a183d583300a80429840ae31` (33752B).
+- `bis/RESULT_E2_NULL_CAMPAIGN.json` — `cb104ff0c6c4049e9bc4ee9db7a95a53224045039916438738958a691ee4643a` (8052B).
+- `bis/E4_E5_EXECUTION_V1.json` — `3cfaec349e3b3dcf6c2334ff4d6fd4783cc37a46e66726ad4a90cadd5e06061f` (757B).
+- `bis/E4_E5_AUTHORIZATION_V1.json` — `faa92c52251d7d2552b0f74288ef2cbc96586e5fdf9deca369c378294346c067` (1144B).
+- `bis/E4_INDEPENDENT_AUTHORIZATION_V1.json` — `13dd28a75f9592e204577630dbf01021192ae66f424f3f3df392ef11b96c204b` (1220B).
+- `bis/e4_e5_prepare/runs/authorized_001/DETERMINISTIC_DIAGNOSTICS.json` — `a1e441ac0b16687d093d8590f70adae46acba100bee2c0923de17e687b88a55f` (4560707B).
+- `bis/e4_e5_prepare/runs/authorized_001/RESULT_RECEIPT.json` — `1f4fb47ad04a1b37b8df458056ed02c4cbdd71512c613e7ee0627aa521e4184b` (756B).
+- `bis/e4_indep_review/runs/authorized_001/INDEPENDENT_REVIEW.json` — `d8f8d56faf6e6a65735594d9d80a5a3d39c18022f4d4782a2fcf31f241f2205d` (61377B).
+- `bis/E2_SEAL_ATTEMPT_001_FAILED_SCRIPT_EXECUTION_POLICY.json` — `ad8d73bb0244588c97594587e6f652d4a4d2715e034dbbc524688d5023ca3a33` (721B).
+- `bis/E2_SMOKE_ATTEMPT_001_FAILED_PRIVATE_ACCESS.json` — `03676479d22c9036249df2ac180759362b3ddead85249e2305d797780f23fbd4` (824B).
+- `bis/E2_CUSTODY_TRANSFER_BEFORE_V1.json` — `4ed5cd78866061a5c8ea30008ae8e4608d068d04ce9d62ae063e558a84145dd0` (1011B).
+- `bis/E2_CUSTODY_TRANSFER_V1.json` — `3388809f74dbe7de93f892864d62f02852ddf93fd314c4415fd11bb653207c9f` (724B).
+- `bis/E2_CUSTODY_HOST_VERIFIED_V1.json` — `ab250239cb89625079b358c34d20b20b97619a12c8fcbc6971b508c5af3de713` (802B).
+- `bis/PART_B_BUDGET_START.json` — `2b3cfefd17cb8f3df845172a3b41f6e457b92b2c5bb164128aa0b40e8919355f` (1536B).
+- `PORTAO_DA_AMPLIACAO_V1.json` — `710028a7d2af7b649511afe369d88462d2add95c5fecbb1fb03c517fc91fe8a0` (903525B).
+- `NUISANCE_V1.json` — `83f860bbfa904c0048005c8b0f1b367814032052f352e780af7d77ed1f257b85` (1437250B).
+- `bis/e2_publication_census/E2_RUNTIME_CUSTODY_CLOSING_REVIEW.md` — `46baee96d38a857d550a1fb6597e36bf2d6406f41affff957bb6850449e5ec34` (28847B).
+- `bis/e4_indep_review/E4_E5_INDEPENDENT_REVIEW.md` — `8cec0e87041405bccb8159d1a7c6f98c631cf0624db93a17702620ead3adf462` (11111B).
+- `refeito/repair_e2_runtime_custody_013bis.py` — `ebac65df2ff47369e61cc69c3b6a7e49894d2280beb6d9a8ece7766cfef95cfb` (6714B).

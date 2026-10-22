@@ -1,0 +1,39 @@
+{
+  "id": "ORDEM018_INITIALIZATION_SUPERVISION_001",
+  "status": "PREPARED_NOT_EXECUTED_NOT_AUTHORIZED",
+  "created_at": "2026-10-06T03:34:50.890500+00:00",
+  "purpose": "Close external wall supervision defect before one initialization-only control; no PE or waveform/likelihood evaluation",
+  "control_contract_sha256": "ec8ca95137da8f27ffeb1636cbe6fe779463286d62b341387a23b33649ced6a9",
+  "inputs": {
+    "supervise_init.py": {
+      "sha256": "f77c1f090738c48eac9fe02d006ed4452f0a324ac4b8738d16a90ea86f2533cd",
+      "bytes": 6681
+    },
+    "control_init.py": {
+      "sha256": "ee669d8c19434cd01315e3ed9f604f3c5f270c7edf5a86f3c2e680b7be4fcd95",
+      "bytes": 12654
+    },
+    "init_detectors.py": {
+      "sha256": "95dfef3df297d981a1a56fda4e617a0595768c98bee96979dfc208db55dd8890",
+      "bytes": 4261
+    },
+    "CONTRATO_CONTROLE_INIT.json": {
+      "sha256": "ec8ca95137da8f27ffeb1636cbe6fe779463286d62b341387a23b33649ced6a9",
+      "bytes": 12962
+    },
+    "MANIFESTO_PREPARACAO_INIT.json": {
+      "sha256": "0aa5a11869c5ac03f92f672ccb3ec87c61c4abf7754c478aabd75846e48b5c8f",
+      "bytes": 11557
+    }
+  },
+  "output_directory": "CONTROL_INIT_SUPERVISION_001",
+  "wall_seconds_from_entry": 60,
+  "termination_grace_seconds": 3,
+  "kill_reap_seconds": 3,
+  "maximum_child_calls": 1,
+  "automatic_retry": false,
+  "science_alternative": "B unchanged",
+  "authority_required": "ROOT matching DECISAO_CONTROLE_INIT after independent delta review",
+  "limits": "External child deadline includes child bootstrap/pin reads. Parent-local pin checks/receipt IO are not OS hard-time confinement. Cleanup has up to3s TERM grace+3s KILL/reap. Failed/orphan identity must be reconciled, never relaunched.",
+  "old_units_remain_terminal": true
+}

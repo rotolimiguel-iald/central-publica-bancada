@@ -1,0 +1,492 @@
+{
+  "action": "read",
+  "name": "cruz_original",
+  "created_utc": "2026-10-06T00:08:20.765137+00:00",
+  "originals_modified": false,
+  "source": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\TGL_Espelho_invertido\\TGL_v11_1_CRUZ_original.py",
+    "bytes": 84123,
+    "sha256": "61db3f99967b7be706f3b2b25dc3b60580dfcc77be7e3dadae6dc10f78006b78",
+    "mtime_utc": "2026-06-06T13:31:00.815732+00:00"
+  },
+  "pattern": "alpha_fine|jitter_cruz|0.0115|0.0125|0.0003|H0|H_0|Hubble|SH0ES|Planck|tf32|benchmark",
+  "matched_lines": 79,
+  "total_lines": 1685,
+  "excerpts": [
+    {
+      "match_line": 22,
+      "first_line": 19,
+      "last_line": 25,
+      "text": "║   O palco original — impedância infinita, plano puro.                                                    ║\n║                                                                                                           ║\n║   PASSO 2: DEFLEXÃO MÁXIMA → 3D (xyz)                                                                    ║\n║   τ = τ_Planck → θ = 90° → eixo z emerge (bulk)                                                          ║\n║                                                                                                           ║\n║   PASSO 3: PARIDADE REVERSA → CRUZ (+z, -z)                                                              ║\n║   A ligação ψ₊ψ₋ não permite direção única.                                                              ║"
+    },
+    {
+      "match_line": 91,
+      "first_line": 88,
+      "last_line": 94,
+      "text": "        GPU_SM_COUNT = torch.cuda.get_device_properties(0).multi_processor_count\n        \n        # CUDA optimizations for RTX 5090\n        torch.backends.cudnn.benchmark = True\n        torch.backends.cuda.matmul.allow_tf32 = True\n        torch.backends.cudnn.allow_tf32 = True\n        torch.set_float32_matmul_precision('high')"
+    },
+    {
+      "match_line": 92,
+      "first_line": 89,
+      "last_line": 95,
+      "text": "        \n        # CUDA optimizations for RTX 5090\n        torch.backends.cudnn.benchmark = True\n        torch.backends.cuda.matmul.allow_tf32 = True\n        torch.backends.cudnn.allow_tf32 = True\n        torch.set_float32_matmul_precision('high')\n        torch.cuda.set_device(0)"
+    },
+    {
+      "match_line": 93,
+      "first_line": 90,
+      "last_line": 96,
+      "text": "        # CUDA optimizations for RTX 5090\n        torch.backends.cudnn.benchmark = True\n        torch.backends.cuda.matmul.allow_tf32 = True\n        torch.backends.cudnn.allow_tf32 = True\n        torch.set_float32_matmul_precision('high')\n        torch.cuda.set_device(0)\n        "
+    },
+    {
+      "match_line": 222,
+      "first_line": 219,
+      "last_line": 225,
+      "text": "        self.mu_0 = 1.25663706212e-6\n        self.Z_0 = np.sqrt(self.mu_0 / self.epsilon_0)\n        \n        self.alpha_fine = 7.2973525693e-3\n        self.alpha_fine_err = 1.1e-12\n        \n        self.e_euler = np.e"
+    },
+    {
+      "match_line": 223,
+      "first_line": 220,
+      "last_line": 226,
+      "text": "        self.Z_0 = np.sqrt(self.mu_0 / self.epsilon_0)\n        \n        self.alpha_fine = 7.2973525693e-3\n        self.alpha_fine_err = 1.1e-12\n        \n        self.e_euler = np.e\n        self.sqrt_e = np.sqrt(np.e)"
+    },
+    {
+      "match_line": 228,
+      "first_line": 225,
+      "last_line": 231,
+      "text": "        self.e_euler = np.e\n        self.sqrt_e = np.sqrt(np.e)\n        \n        # Planck scales\n        self.ell_Planck = np.sqrt(self.hbar * self.G / self.c_ms**3)\n        self.t_Planck_time = np.sqrt(self.hbar * self.G / self.c_ms**5)\n        self.m_Planck = np.sqrt(self.hbar * self.c_ms / self.G)"
+    },
+    {
+      "match_line": 229,
+      "first_line": 226,
+      "last_line": 232,
+      "text": "        self.sqrt_e = np.sqrt(np.e)\n        \n        # Planck scales\n        self.ell_Planck = np.sqrt(self.hbar * self.G / self.c_ms**3)\n        self.t_Planck_time = np.sqrt(self.hbar * self.G / self.c_ms**5)\n        self.m_Planck = np.sqrt(self.hbar * self.c_ms / self.G)\n        self.T_Planck = np.sqrt(self.hbar * self.c_ms**5 / (self.G * self.k_B**2))"
+    },
+    {
+      "match_line": 230,
+      "first_line": 227,
+      "last_line": 233,
+      "text": "        \n        # Planck scales\n        self.ell_Planck = np.sqrt(self.hbar * self.G / self.c_ms**3)\n        self.t_Planck_time = np.sqrt(self.hbar * self.G / self.c_ms**5)\n        self.m_Planck = np.sqrt(self.hbar * self.c_ms / self.G)\n        self.T_Planck = np.sqrt(self.hbar * self.c_ms**5 / (self.G * self.k_B**2))\n        self.E_Planck = np.sqrt(self.hbar * self.c_ms**5 / self.G)"
+    },
+    {
+      "match_line": 231,
+      "first_line": 228,
+      "last_line": 234,
+      "text": "        # Planck scales\n        self.ell_Planck = np.sqrt(self.hbar * self.G / self.c_ms**3)\n        self.t_Planck_time = np.sqrt(self.hbar * self.G / self.c_ms**5)\n        self.m_Planck = np.sqrt(self.hbar * self.c_ms / self.G)\n        self.T_Planck = np.sqrt(self.hbar * self.c_ms**5 / (self.G * self.k_B**2))\n        self.E_Planck = np.sqrt(self.hbar * self.c_ms**5 / self.G)\n        self.rho_Planck = self.c_ms**5 / (self.hbar * self.G**2)"
+    },
+    {
+      "match_line": 232,
+      "first_line": 229,
+      "last_line": 235,
+      "text": "        self.ell_Planck = np.sqrt(self.hbar * self.G / self.c_ms**3)\n        self.t_Planck_time = np.sqrt(self.hbar * self.G / self.c_ms**5)\n        self.m_Planck = np.sqrt(self.hbar * self.c_ms / self.G)\n        self.T_Planck = np.sqrt(self.hbar * self.c_ms**5 / (self.G * self.k_B**2))\n        self.E_Planck = np.sqrt(self.hbar * self.c_ms**5 / self.G)\n        self.rho_Planck = self.c_ms**5 / (self.hbar * self.G**2)\n        self.tau_Planck = self.E_Planck / self.ell_Planck**3"
+    },
+    {
+      "match_line": 233,
+      "first_line": 230,
+      "last_line": 236,
+      "text": "        self.t_Planck_time = np.sqrt(self.hbar * self.G / self.c_ms**5)\n        self.m_Planck = np.sqrt(self.hbar * self.c_ms / self.G)\n        self.T_Planck = np.sqrt(self.hbar * self.c_ms**5 / (self.G * self.k_B**2))\n        self.E_Planck = np.sqrt(self.hbar * self.c_ms**5 / self.G)\n        self.rho_Planck = self.c_ms**5 / (self.hbar * self.G**2)\n        self.tau_Planck = self.E_Planck / self.ell_Planck**3\n        "
+    },
+    {
+      "match_line": 234,
+      "first_line": 231,
+      "last_line": 237,
+      "text": "        self.m_Planck = np.sqrt(self.hbar * self.c_ms / self.G)\n        self.T_Planck = np.sqrt(self.hbar * self.c_ms**5 / (self.G * self.k_B**2))\n        self.E_Planck = np.sqrt(self.hbar * self.c_ms**5 / self.G)\n        self.rho_Planck = self.c_ms**5 / (self.hbar * self.G**2)\n        self.tau_Planck = self.E_Planck / self.ell_Planck**3\n        \n        self.Z_Planck = self.hbar / self.e**2"
+    },
+    {
+      "match_line": 235,
+      "first_line": 232,
+      "last_line": 238,
+      "text": "        self.T_Planck = np.sqrt(self.hbar * self.c_ms**5 / (self.G * self.k_B**2))\n        self.E_Planck = np.sqrt(self.hbar * self.c_ms**5 / self.G)\n        self.rho_Planck = self.c_ms**5 / (self.hbar * self.G**2)\n        self.tau_Planck = self.E_Planck / self.ell_Planck**3\n        \n        self.Z_Planck = self.hbar / self.e**2\n        self.R_K = self.h / self.e**2"
+    },
+    {
+      "match_line": 237,
+      "first_line": 234,
+      "last_line": 240,
+      "text": "        self.rho_Planck = self.c_ms**5 / (self.hbar * self.G**2)\n        self.tau_Planck = self.E_Planck / self.ell_Planck**3\n        \n        self.Z_Planck = self.hbar / self.e**2\n        self.R_K = self.h / self.e**2\n        \n        # Wavelengths"
+    },
+    {
+      "match_line": 241,
+      "first_line": 238,
+      "last_line": 244,
+      "text": "        self.R_K = self.h / self.e**2\n        \n        # Wavelengths\n        self.lambda_Planck = self.ell_Planck\n        self.lambda_CMB = 1.063e-3\n        \n        # Cosmology"
+    },
+    {
+      "match_line": 245,
+      "first_line": 242,
+      "last_line": 248,
+      "text": "        self.lambda_CMB = 1.063e-3\n        \n        # Cosmology\n        self.H0_base = 67.4\n        self.H0_local = 73.04\n        self.H0_local_err = 1.04\n        self.Omega_m = 0.315"
+    },
+    {
+      "match_line": 246,
+      "first_line": 243,
+      "last_line": 249,
+      "text": "        \n        # Cosmology\n        self.H0_base = 67.4\n        self.H0_local = 73.04\n        self.H0_local_err = 1.04\n        self.Omega_m = 0.315\n        self.Omega_r = 5.38e-5"
+    },
+    {
+      "match_line": 247,
+      "first_line": 244,
+      "last_line": 250,
+      "text": "        # Cosmology\n        self.H0_base = 67.4\n        self.H0_local = 73.04\n        self.H0_local_err = 1.04\n        self.Omega_m = 0.315\n        self.Omega_r = 5.38e-5\n        self.Omega_Lambda = 1 - self.Omega_m - self.Omega_r"
+    },
+    {
+      "match_line": 253,
+      "first_line": 250,
+      "last_line": 256,
+      "text": "        self.Omega_Lambda = 1 - self.Omega_m - self.Omega_r\n        self.r_d = 147.09\n        \n        self.H0_SI = self.H0_base * 1000 / 3.086e22\n        self.R_Hubble = self.c_ms / self.H0_SI\n        self.R_Universe = 4.4e26\n        self.t_Universe = 13.8e9 * 3.156e7"
+    },
+    {
+      "match_line": 254,
+      "first_line": 251,
+      "last_line": 257,
+      "text": "        self.r_d = 147.09\n        \n        self.H0_SI = self.H0_base * 1000 / 3.086e22\n        self.R_Hubble = self.c_ms / self.H0_SI\n        self.R_Universe = 4.4e26\n        self.t_Universe = 13.8e9 * 3.156e7\n        self.z_recombination = 1089.8"
+    },
+    {
+      "match_line": 311,
+      "first_line": 308,
+      "last_line": 314,
+      "text": "        \"\"\"Create GPU tensors for all constants\"\"\"\n        d, dt = self.device, self.dtype\n        \n        self.t_H0 = torch.tensor(self.H0_base, device=d, dtype=dt)\n        self.t_H0_local = torch.tensor(self.H0_local, device=d, dtype=dt)\n        self.t_H0_local_err = torch.tensor(self.H0_local_err, device=d, dtype=dt)\n        self.t_Omega_m = torch.tensor(self.Omega_m, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 312,
+      "first_line": 309,
+      "last_line": 315,
+      "text": "        d, dt = self.device, self.dtype\n        \n        self.t_H0 = torch.tensor(self.H0_base, device=d, dtype=dt)\n        self.t_H0_local = torch.tensor(self.H0_local, device=d, dtype=dt)\n        self.t_H0_local_err = torch.tensor(self.H0_local_err, device=d, dtype=dt)\n        self.t_Omega_m = torch.tensor(self.Omega_m, device=d, dtype=dt)\n        self.t_Omega_r = torch.tensor(self.Omega_r, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 313,
+      "first_line": 310,
+      "last_line": 316,
+      "text": "        \n        self.t_H0 = torch.tensor(self.H0_base, device=d, dtype=dt)\n        self.t_H0_local = torch.tensor(self.H0_local, device=d, dtype=dt)\n        self.t_H0_local_err = torch.tensor(self.H0_local_err, device=d, dtype=dt)\n        self.t_Omega_m = torch.tensor(self.Omega_m, device=d, dtype=dt)\n        self.t_Omega_r = torch.tensor(self.Omega_r, device=d, dtype=dt)\n        self.t_Omega_Lambda = torch.tensor(self.Omega_Lambda, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 322,
+      "first_line": 319,
+      "last_line": 325,
+      "text": "        self.t_c_kms = torch.tensor(self.c_kms, device=d, dtype=dt)\n        self.t_c_cubed = torch.tensor(self.c_cubed, device=d, dtype=dt)\n        self.t_R_Universe = torch.tensor(self.R_Universe, device=d, dtype=dt)\n        self.t_R_Hubble = torch.tensor(self.R_Hubble, device=d, dtype=dt)\n        self.t_a0_emp = torch.tensor(self.a0_emp, device=d, dtype=dt)\n        self.t_a0_err = torch.tensor(self.a0_err, device=d, dtype=dt)\n        self.t_T_CMB_obs = torch.tensor(self.T_CMB_obs, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 326,
+      "first_line": 323,
+      "last_line": 329,
+      "text": "        self.t_a0_emp = torch.tensor(self.a0_emp, device=d, dtype=dt)\n        self.t_a0_err = torch.tensor(self.a0_err, device=d, dtype=dt)\n        self.t_T_CMB_obs = torch.tensor(self.T_CMB_obs, device=d, dtype=dt)\n        self.t_T_Planck = torch.tensor(self.T_Planck, device=d, dtype=dt)\n        self.t_N_eff_obs = torch.tensor(self.N_eff_obs, device=d, dtype=dt)\n        self.t_N_eff_err = torch.tensor(self.N_eff_err, device=d, dtype=dt)\n        self.t_N_eff_SM = torch.tensor(self.N_eff_SM, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 336,
+      "first_line": 333,
+      "last_line": 339,
+      "text": "        self.t_BETA_RATIO_ERR = torch.tensor(self.BETA_RATIO_ERR, device=d, dtype=dt)\n        self.t_r_ent_over_rd_target = torch.tensor(self.r_ent_over_rd_target, device=d, dtype=dt)\n        self.t_r_ent_over_rd_err = torch.tensor(self.r_ent_over_rd_err, device=d, dtype=dt)\n        self.t_rho_Planck = torch.tensor(self.rho_Planck, device=d, dtype=dt)\n        self.t_ell_Planck = torch.tensor(self.ell_Planck, device=d, dtype=dt)\n        self.t_N_dim = torch.tensor(float(self.N_dim), device=d, dtype=dt)\n        self.t_rho_Lambda_obs = torch.tensor(self.rho_Lambda_obs, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 337,
+      "first_line": 334,
+      "last_line": 340,
+      "text": "        self.t_r_ent_over_rd_target = torch.tensor(self.r_ent_over_rd_target, device=d, dtype=dt)\n        self.t_r_ent_over_rd_err = torch.tensor(self.r_ent_over_rd_err, device=d, dtype=dt)\n        self.t_rho_Planck = torch.tensor(self.rho_Planck, device=d, dtype=dt)\n        self.t_ell_Planck = torch.tensor(self.ell_Planck, device=d, dtype=dt)\n        self.t_N_dim = torch.tensor(float(self.N_dim), device=d, dtype=dt)\n        self.t_rho_Lambda_obs = torch.tensor(self.rho_Lambda_obs, device=d, dtype=dt)\n        self.t_rho_Lambda_err = torch.tensor(self.rho_Lambda_err, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 341,
+      "first_line": 338,
+      "last_line": 344,
+      "text": "        self.t_N_dim = torch.tensor(float(self.N_dim), device=d, dtype=dt)\n        self.t_rho_Lambda_obs = torch.tensor(self.rho_Lambda_obs, device=d, dtype=dt)\n        self.t_rho_Lambda_err = torch.tensor(self.rho_Lambda_err, device=d, dtype=dt)\n        self.t_m_Planck = torch.tensor(self.m_Planck, device=d, dtype=dt)\n        self.t_H0_SI = torch.tensor(self.H0_SI, device=d, dtype=dt)\n        self.t_eV = torch.tensor(self.eV, device=d, dtype=dt)\n        self.t_tau_Planck = torch.tensor(self.tau_Planck, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 342,
+      "first_line": 339,
+      "last_line": 345,
+      "text": "        self.t_rho_Lambda_obs = torch.tensor(self.rho_Lambda_obs, device=d, dtype=dt)\n        self.t_rho_Lambda_err = torch.tensor(self.rho_Lambda_err, device=d, dtype=dt)\n        self.t_m_Planck = torch.tensor(self.m_Planck, device=d, dtype=dt)\n        self.t_H0_SI = torch.tensor(self.H0_SI, device=d, dtype=dt)\n        self.t_eV = torch.tensor(self.eV, device=d, dtype=dt)\n        self.t_tau_Planck = torch.tensor(self.tau_Planck, device=d, dtype=dt)\n        self.t_hbar = torch.tensor(self.hbar, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 344,
+      "first_line": 341,
+      "last_line": 347,
+      "text": "        self.t_m_Planck = torch.tensor(self.m_Planck, device=d, dtype=dt)\n        self.t_H0_SI = torch.tensor(self.H0_SI, device=d, dtype=dt)\n        self.t_eV = torch.tensor(self.eV, device=d, dtype=dt)\n        self.t_tau_Planck = torch.tensor(self.tau_Planck, device=d, dtype=dt)\n        self.t_hbar = torch.tensor(self.hbar, device=d, dtype=dt)\n        self.t_h = torch.tensor(self.h, device=d, dtype=dt)\n        self.t_t_Planck = torch.tensor(self.t_Planck_time, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 347,
+      "first_line": 344,
+      "last_line": 350,
+      "text": "        self.t_tau_Planck = torch.tensor(self.tau_Planck, device=d, dtype=dt)\n        self.t_hbar = torch.tensor(self.hbar, device=d, dtype=dt)\n        self.t_h = torch.tensor(self.h, device=d, dtype=dt)\n        self.t_t_Planck = torch.tensor(self.t_Planck_time, device=d, dtype=dt)\n        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=d, dtype=dt)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=d, dtype=dt)\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 348,
+      "first_line": 345,
+      "last_line": 351,
+      "text": "        self.t_hbar = torch.tensor(self.hbar, device=d, dtype=dt)\n        self.t_h = torch.tensor(self.h, device=d, dtype=dt)\n        self.t_t_Planck = torch.tensor(self.t_Planck_time, device=d, dtype=dt)\n        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=d, dtype=dt)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=d, dtype=dt)\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=d, dtype=dt)\n        self.t_Z_0 = torch.tensor(self.Z_0, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 349,
+      "first_line": 346,
+      "last_line": 352,
+      "text": "        self.t_h = torch.tensor(self.h, device=d, dtype=dt)\n        self.t_t_Planck = torch.tensor(self.t_Planck_time, device=d, dtype=dt)\n        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=d, dtype=dt)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=d, dtype=dt)\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=d, dtype=dt)\n        self.t_Z_0 = torch.tensor(self.Z_0, device=d, dtype=dt)\n        self.t_R_K = torch.tensor(self.R_K, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 356,
+      "first_line": 353,
+      "last_line": 359,
+      "text": "        self.t_m_nu_obs_sum = torch.tensor(self.m_nu_obs_sum, device=d, dtype=dt)\n        self.t_m_nu_obs_err = torch.tensor(self.m_nu_obs_err, device=d, dtype=dt)\n        self.t_lambda_CMB = torch.tensor(self.lambda_CMB, device=d, dtype=dt)\n        self.t_lambda_Planck = torch.tensor(self.lambda_Planck, device=d, dtype=dt)\n        self.t_theta_theoretical = torch.tensor(self.theta_theoretical, device=d, dtype=dt)\n        self.t_D_spatial_obs = torch.tensor(float(self.D_spatial_obs), device=d, dtype=dt)\n        self.t_D_temporal_obs = torch.tensor(float(self.D_temporal_obs), device=d, dtype=dt)"
+    },
+    {
+      "match_line": 374,
+      "first_line": 371,
+      "last_line": 377,
+      "text": "    A CRUZ DA PARIDADE E A EMERGÊNCIA DE 3+1 DIMENSÕES\n    ═══════════════════════════════════════════════════════════════════════════════════════════\n    \n    Quando τ = τ_Planck (força de expulsão máxima):\n    θ = arcsin(1) = 90°\n    \n    Mas a paridade reversa (ψ₊ψ₋) não permite direção única:"
+    },
+    {
+      "match_line": 568,
+      "first_line": 565,
+      "last_line": 571,
+      "text": "            wavelength = self.const.lambda_CMB\n        \n        G_radical = np.sqrt(wavelength)\n        G_normalized = G_radical / np.sqrt(self.const.ell_Planck)\n        fixation_point = G_radical * alpha_2\n        \n        delta_p = self.const.h / wavelength"
+    },
+    {
+      "match_line": 573,
+      "first_line": 570,
+      "last_line": 576,
+      "text": "        \n        delta_p = self.const.h / wavelength\n        Psi_G = np.sqrt(self.const.h / (delta_p * alpha_2 + 1e-100))\n        Psi_G_normalized = Psi_G / self.const.ell_Planck\n        \n        RAM_address = wavelength / self.const.ell_Planck\n        "
+    },
+    {
+      "match_line": 575,
+      "first_line": 572,
+      "last_line": 578,
+      "text": "        Psi_G = np.sqrt(self.const.h / (delta_p * alpha_2 + 1e-100))\n        Psi_G_normalized = Psi_G / self.const.ell_Planck\n        \n        RAM_address = wavelength / self.const.ell_Planck\n        \n        # O gráviton fixa os dois braços da cruz\n        cruz = self.cruz_geometry(alpha_2)"
+    },
+    {
+      "match_line": 596,
+      "first_line": 593,
+      "last_line": 599,
+      "text": "            wavelength = self.const.t_lambda_CMB\n        \n        G_radical = torch.sqrt(wavelength)\n        G_normalized = G_radical / torch.sqrt(self.const.t_ell_Planck)\n        fixation_point = G_radical * alpha_2\n        \n        delta_p = self.const.t_h / wavelength"
+    },
+    {
+      "match_line": 601,
+      "first_line": 598,
+      "last_line": 604,
+      "text": "        \n        delta_p = self.const.t_h / wavelength\n        Psi_G = torch.sqrt(self.const.t_h / (delta_p * alpha_2 + 1e-100))\n        Psi_G_normalized = Psi_G / self.const.t_ell_Planck\n        \n        RAM_address = wavelength / self.const.t_ell_Planck\n        "
+    },
+    {
+      "match_line": 603,
+      "first_line": 600,
+      "last_line": 606,
+      "text": "        Psi_G = torch.sqrt(self.const.t_h / (delta_p * alpha_2 + 1e-100))\n        Psi_G_normalized = Psi_G / self.const.t_ell_Planck\n        \n        RAM_address = wavelength / self.const.t_ell_Planck\n        \n        cruz = self.cruz_geometry_tensor(alpha_2)\n        cross_fixation = G_radical * torch.abs(torch.sin(cruz['theta_rad']))"
+    },
+    {
+      "match_line": 724,
+      "first_line": 721,
+      "last_line": 727,
+      "text": "    # ELETRODINÂMICA\n    # ═══════════════════════════════════════════════════════════════════════════════════════════════════\n    \n    def alpha_fine_TGL(self, alpha_2: float) -> float:\n        return alpha_2 / self.const.sqrt_e\n    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_line": 727,
+      "first_line": 724,
+      "last_line": 730,
+      "text": "    def alpha_fine_TGL(self, alpha_2: float) -> float:\n        return alpha_2 / self.const.sqrt_e\n    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return alpha_2 / self.const.t_sqrt_e\n    \n    def Z_Miguel(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_line": 741,
+      "first_line": 738,
+      "last_line": 744,
+      "text": "    # ═══════════════════════════════════════════════════════════════════════════════════════════════════\n    \n    def a0_TGL(self, alpha_2: float) -> float:\n        H0_si = self.const.H0_base * 1000 / 3.086e22\n        return self.const.c_ms * H0_si * np.sqrt(alpha_2)\n    \n    def a0_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_line": 742,
+      "first_line": 739,
+      "last_line": 745,
+      "text": "    \n    def a0_TGL(self, alpha_2: float) -> float:\n        H0_si = self.const.H0_base * 1000 / 3.086e22\n        return self.const.c_ms * H0_si * np.sqrt(alpha_2)\n    \n    def a0_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        H0_si = self.const.t_H0 * 1000 / 3.086e22"
+    },
+    {
+      "match_line": 745,
+      "first_line": 742,
+      "last_line": 748,
+      "text": "        return self.const.c_ms * H0_si * np.sqrt(alpha_2)\n    \n    def a0_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        H0_si = self.const.t_H0 * 1000 / 3.086e22\n        return self.const.t_c_ms * H0_si * torch.sqrt(alpha_2)\n    \n    def r_entangle_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_line": 746,
+      "first_line": 743,
+      "last_line": 749,
+      "text": "    \n    def a0_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        H0_si = self.const.t_H0 * 1000 / 3.086e22\n        return self.const.t_c_ms * H0_si * torch.sqrt(alpha_2)\n    \n    def r_entangle_TGL(self, alpha_2: float) -> float:\n        return self.const.R_Universe * alpha_2 / 3.086e22"
+    },
+    {
+      "match_line": 791,
+      "first_line": 788,
+      "last_line": 794,
+      "text": "    \n    def rho_Lambda_TGL(self, alpha_2: float) -> float:\n        D = self.const.N_dim\n        ratio = self.const.ell_Planck / self.const.R_Hubble\n        geometric_factor = D * (D - 1) / 4.0\n        return alpha_2 * self.const.rho_Planck * (ratio ** 2) * geometric_factor\n    "
+    },
+    {
+      "match_line": 793,
+      "first_line": 790,
+      "last_line": 796,
+      "text": "        D = self.const.N_dim\n        ratio = self.const.ell_Planck / self.const.R_Hubble\n        geometric_factor = D * (D - 1) / 4.0\n        return alpha_2 * self.const.rho_Planck * (ratio ** 2) * geometric_factor\n    \n    def rho_Lambda_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        D = self.const.t_N_dim"
+    },
+    {
+      "match_line": 797,
+      "first_line": 794,
+      "last_line": 800,
+      "text": "    \n    def rho_Lambda_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        D = self.const.t_N_dim\n        ratio = self.const.t_ell_Planck / self.const.t_R_Hubble\n        geometric_factor = D * (D - 1) / 4.0\n        return alpha_2 * self.const.t_rho_Planck * (ratio ** 2) * geometric_factor\n    "
+    },
+    {
+      "match_line": 799,
+      "first_line": 796,
+      "last_line": 802,
+      "text": "        D = self.const.t_N_dim\n        ratio = self.const.t_ell_Planck / self.const.t_R_Hubble\n        geometric_factor = D * (D - 1) / 4.0\n        return alpha_2 * self.const.t_rho_Planck * (ratio ** 2) * geometric_factor\n    \n    def show_derivations(self, alpha_2: float):\n        \"\"\"Display all derivations — v11.1 A CRUZ\"\"\""
+    },
+    {
+      "match_line": 861,
+      "first_line": 858,
+      "last_line": 864,
+      "text": "        # ELETRODINÂMICA\n        print(\"   \" + \"-\" * 80)\n        print(\"   [ELETRODINÂMICA]\")\n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")"
+    },
+    {
+      "match_line": 862,
+      "first_line": 859,
+      "last_line": 865,
+      "text": "        print(\"   \" + \"-\" * 80)\n        print(\"   [ELETRODINÂMICA]\")\n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                         1/{1/alpha_fine:.2f} (obs: 1/137.036)\")"
+    },
+    {
+      "match_line": 864,
+      "first_line": 861,
+      "last_line": 867,
+      "text": "        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                         1/{1/alpha_fine:.2f} (obs: 1/137.036)\")\n        print(f\"                         ERRO: {alpha_fine_err:.2f}%\")\n        print(f\"   Z_Miguel            = {Z_M:.3f} Ω\")"
+    },
+    {
+      "match_line": 865,
+      "first_line": 862,
+      "last_line": 868,
+      "text": "        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                         1/{1/alpha_fine:.2f} (obs: 1/137.036)\")\n        print(f\"                         ERRO: {alpha_fine_err:.2f}%\")\n        print(f\"   Z_Miguel            = {Z_M:.3f} Ω\")\n        "
+    },
+    {
+      "match_line": 866,
+      "first_line": 863,
+      "last_line": 869,
+      "text": "        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                         1/{1/alpha_fine:.2f} (obs: 1/137.036)\")\n        print(f\"                         ERRO: {alpha_fine_err:.2f}%\")\n        print(f\"   Z_Miguel            = {Z_M:.3f} Ω\")\n        \n        # COSMOLOGY"
+    },
+    {
+      "match_line": 986,
+      "first_line": 983,
+      "last_line": 989,
+      "text": "        self.weights = {\n            'SNe': 1.0,\n            'BAO': 1.0,\n            'H0': 0.5,\n            'lensing': 1.0,\n            'N_eff': 0.5,\n            'a0': 1.0,"
+    },
+    {
+      "match_line": 997,
+      "first_line": 994,
+      "last_line": 1000,
+      "text": "            'alpha_2': 0.0,  # FLAT prior\n            'Lambda': 0.3,\n            'r_s': 0.5,\n            'alpha_fine': 1.0,\n            'm_nu_hierarchy': 0.5,\n            'identity_singular': 0.5,\n            'jitter_cruz': 0.3,"
+    },
+    {
+      "match_line": 1000,
+      "first_line": 997,
+      "last_line": 1003,
+      "text": "            'alpha_fine': 1.0,\n            'm_nu_hierarchy': 0.5,\n            'identity_singular': 0.5,\n            'jitter_cruz': 0.3,\n            'theta_consistency': 0.3,\n            'D_consistency': 0.5,  # NEW: 3+1 dimensionality check\n        }"
+    },
+    {
+      "match_line": 1028,
+      "first_line": 1025,
+      "last_line": 1031,
+      "text": "                      self.const.t_Omega_r*(1+z)**4 + \n                      self.const.t_Omega_Lambda*f_TGL)\n        dz = z[1] - z[0]\n        dc = torch.cumsum(1.0/E, dim=0) * dz * self.const.t_c_kms / self.const.t_H0\n        return dc, E\n    \n    @torch.no_grad()"
+    },
+    {
+      "match_line": 1066,
+      "first_line": 1063,
+      "last_line": 1069,
+      "text": "        E_bao = E_grid[idx_bao-1] + t_bao * (E_grid[idx_bao] - E_grid[idx_bao-1])\n        res_bao = torch.zeros(12, device=self.device, dtype=self.dtype)\n        res_bao[0::2] = self.data.t_bao_DM - dc_bao/self.const.t_r_d\n        res_bao[1::2] = self.data.t_bao_DH - self.const.t_c_kms/(self.const.t_H0*E_bao*self.const.t_r_d)\n        chi2_bao = (res_bao @ self.data.t_bao_cov_inv @ res_bao).expand(n_batch)\n        breakdown['BAO'] = chi2_bao.mean().item()\n        "
+    },
+    {
+      "match_line": 1070,
+      "first_line": 1067,
+      "last_line": 1073,
+      "text": "        chi2_bao = (res_bao @ self.data.t_bao_cov_inv @ res_bao).expand(n_batch)\n        breakdown['BAO'] = chi2_bao.mean().item()\n        \n        # 3. H0\n        chi2_H0 = (((self.const.t_H0 - self.const.t_H0_local) / self.const.t_H0_local_err)**2).expand(n_batch)\n        breakdown['H0'] = chi2_H0.mean().item()\n        "
+    },
+    {
+      "match_line": 1071,
+      "first_line": 1068,
+      "last_line": 1074,
+      "text": "        breakdown['BAO'] = chi2_bao.mean().item()\n        \n        # 3. H0\n        chi2_H0 = (((self.const.t_H0 - self.const.t_H0_local) / self.const.t_H0_local_err)**2).expand(n_batch)\n        breakdown['H0'] = chi2_H0.mean().item()\n        \n        # 4. Lensing"
+    },
+    {
+      "match_line": 1072,
+      "first_line": 1069,
+      "last_line": 1075,
+      "text": "        \n        # 3. H0\n        chi2_H0 = (((self.const.t_H0 - self.const.t_H0_local) / self.const.t_H0_local_err)**2).expand(n_batch)\n        breakdown['H0'] = chi2_H0.mean().item()\n        \n        # 4. Lensing\n        chi2_lensing = ((beta_0 - self.const.t_beta_lensing_obs) / self.const.t_beta_lensing_err)**2"
+    },
+    {
+      "match_line": 1130,
+      "first_line": 1127,
+      "last_line": 1133,
+      "text": "        breakdown['r_s_pred'] = r_s_TGL.mean().item()\n        \n        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()"
+    },
+    {
+      "match_line": 1131,
+      "first_line": 1128,
+      "last_line": 1134,
+      "text": "        \n        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        "
+    },
+    {
+      "match_line": 1132,
+      "first_line": 1129,
+      "last_line": 1135,
+      "text": "        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        \n        # 15. Neutrino Hierarchy"
+    },
+    {
+      "match_line": 1133,
+      "first_line": 1130,
+      "last_line": 1136,
+      "text": "        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        \n        # 15. Neutrino Hierarchy\n        nu_data = self.deriv.neutrino_static_noise_tensor(alpha_2)"
+    },
+    {
+      "match_line": 1167,
+      "first_line": 1164,
+      "last_line": 1170,
+      "text": "        expected_stability = torch.tensor(0.012, device=self.device, dtype=self.dtype)\n        stability_err = torch.tensor(0.002, device=self.device, dtype=self.dtype)\n        chi2_jitter = ((stability - expected_stability) / stability_err)**2\n        breakdown['jitter_cruz'] = chi2_jitter.mean().item()\n        breakdown['theta_rad'] = theta_rad.mean().item()\n        breakdown['theta_deg'] = np.degrees(theta_rad.mean().item())\n        breakdown['stability'] = stability.mean().item()"
+    },
+    {
+      "match_line": 1209,
+      "first_line": 1206,
+      "last_line": 1212,
+      "text": "        \n        # TOTAL (19 components)\n        chi2_total = sum(self.weights[k] * v for k, v in [\n            ('SNe', chi2_sne), ('BAO', chi2_bao), ('H0', chi2_H0), ('lensing', chi2_lensing),\n            ('N_eff', chi2_N_eff), ('a0', chi2_a0), ('SPARC', chi2_sparc), ('Lindblad', chi2_lindblad),\n            ('T_CMB', chi2_T_CMB), ('beta_ratio', chi2_beta_ratio), ('alpha_2', chi2_alpha_2),\n            ('Lambda', chi2_Lambda), ('r_s', chi2_r_s), ('alpha_fine', chi2_alpha_fine),"
+    },
+    {
+      "match_line": 1212,
+      "first_line": 1209,
+      "last_line": 1215,
+      "text": "            ('SNe', chi2_sne), ('BAO', chi2_bao), ('H0', chi2_H0), ('lensing', chi2_lensing),\n            ('N_eff', chi2_N_eff), ('a0', chi2_a0), ('SPARC', chi2_sparc), ('Lindblad', chi2_lindblad),\n            ('T_CMB', chi2_T_CMB), ('beta_ratio', chi2_beta_ratio), ('alpha_2', chi2_alpha_2),\n            ('Lambda', chi2_Lambda), ('r_s', chi2_r_s), ('alpha_fine', chi2_alpha_fine),\n            ('m_nu_hierarchy', chi2_m_nu_sum), ('identity_singular', chi2_identity),\n            ('jitter_cruz', chi2_jitter), ('theta_consistency', chi2_theta),\n            ('D_consistency', chi2_D)"
+    },
+    {
+      "match_line": 1214,
+      "first_line": 1211,
+      "last_line": 1217,
+      "text": "            ('T_CMB', chi2_T_CMB), ('beta_ratio', chi2_beta_ratio), ('alpha_2', chi2_alpha_2),\n            ('Lambda', chi2_Lambda), ('r_s', chi2_r_s), ('alpha_fine', chi2_alpha_fine),\n            ('m_nu_hierarchy', chi2_m_nu_sum), ('identity_singular', chi2_identity),\n            ('jitter_cruz', chi2_jitter), ('theta_consistency', chi2_theta),\n            ('D_consistency', chi2_D)\n        ])\n        breakdown['total'] = chi2_total.mean().item()"
+    },
+    {
+      "match_line": 1287,
+      "first_line": 1284,
+      "last_line": 1290,
+      "text": "            'n_evap': (0.3, 4.0),\n            'theta_evap': (0.6, 0.99),\n            'A_neff': (0.5, 3.0),\n            'alpha_2': (0.0115, 0.0125)\n        }\n        \n        self.samples = None"
+    },
+    {
+      "match_line": 1295,
+      "first_line": 1292,
+      "last_line": 1298,
+      "text": "        self.gpu_calls = 0\n        \n        self.traces = {\n            'chi2': [], 'alpha2': [], 'alpha_fine': [], 'Z_Miguel': [],\n            'm_sum': [], 'm_1': [], 'm_2': [], 'm_3': [],\n            'T_CMB': [], 'r_s': [], 'L': [], 'id_error': [],\n            'theta_rad': [], 'theta_deg': [], 'stability': [], 'jitter': [],"
+    },
+    {
+      "match_line": 1330,
+      "first_line": 1327,
+      "last_line": 1333,
+      "text": "        if self.gpu_calls % 500 == 0:\n            self.traces['chi2'].append(chi2_val)\n            self.traces['alpha2'].append(params[5])\n            self.traces['alpha_fine'].append(breakdown.get('alpha_fine_pred', 0))\n            self.traces['Z_Miguel'].append(breakdown.get('Z_Miguel', 0))\n            self.traces['m_sum'].append(breakdown.get('m_sum', 0))\n            self.traces['m_1'].append(breakdown.get('m_1', 0))"
+    },
+    {
+      "match_line": 1375,
+      "first_line": 1372,
+      "last_line": 1378,
+      "text": "        \n        p0_center = np.array([self.priors[name][0] for name in self.param_names])\n        p0 = p0_center + 0.01 * np.random.randn(n_walkers, n_dim)\n        p0[:, 5] = np.clip(0.012 + 0.0003 * np.random.randn(n_walkers), 0.0116, 0.0124)\n        \n        print(f\"[CONFIG] Walkers: {n_walkers}, Steps: {n_steps}, Total: {n_walkers*n_steps:,}\")\n        print(f\"[CONFIG] χ² components: 19 (inclui D_consistency)\")"
+    },
+    {
+      "match_line": 1380,
+      "first_line": 1377,
+      "last_line": 1383,
+      "text": "        print(f\"[CONFIG] Walkers: {n_walkers}, Steps: {n_steps}, Total: {n_walkers*n_steps:,}\")\n        print(f\"[CONFIG] χ² components: 19 (inclui D_consistency)\")\n        print(f\"[CONFIG] CPU cores: {self.n_cores}, GPU: {GPU_NAME}\")\n        print(f\"[PARAM]  α₂: FLAT prior, bounds [0.0115, 0.0125]\")\n        print(f\"[DERIV]  Cruz (θ+,θ-), Rotação (tempo), D = 3+1\")\n        \n        self.gpu_calls = 0"
+    },
+    {
+      "match_line": 1650,
+      "first_line": 1647,
+      "last_line": 1653,
+      "text": "        chi2, breakdown = engine.chi2_batch_gpu(params)\n        \n        print(f\"   χ² total:           {breakdown['total']:.2f}\")\n        print(f\"   α pred:             {breakdown['alpha_fine_pred']:.7f}\")\n        print(f\"   θ:                  {breakdown['theta_deg']:.4f}°\")\n        print(f\"   Abertura cruz:      {breakdown['cross_opening']*100:.2f}%\")\n        print(f\"   D_total:            {breakdown['D_total']:.1f} (esperado: 4)\")"
+    }
+  ],
+  "elapsed_seconds": 0.01056530000641942
+}

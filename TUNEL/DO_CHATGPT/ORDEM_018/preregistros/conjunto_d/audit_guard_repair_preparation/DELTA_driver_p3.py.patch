@@ -1,0 +1,148 @@
+--- INIT003/driver_p3.py
++++ candidate/driver_p3.py
+@@ -18,11 +18,13 @@
+ def array_sha(a):
+     return hashlib.sha256(a.tobytes(order="C")).hexdigest()
+ from failure_audit import BudgetStop, FailureAudit
++from audit_guard import AuditLatch, AuditViolation, PreopenedJournal
+ class Counter(list):
+     def __init__(self):super().__init__([0,0.,0]);self.lock=threading.RLock()
+     def get_lock(self):return self.lock
+ 
+ def main():
++    raise RuntimeError("PREPARATION_ONLY: no runnable campaign contract or execution permission")
+     if len(sys.argv)!=3:raise ValueError("Exact contract hash and job id required")
+     pin,job_id=sys.argv[1:]
+     cp=ROOT/"CONTRATO_P3.json"
+@@ -81,26 +83,39 @@
+     init_dependency=json.loads((ROOT/"DEPENDENCIA_FACTORY_PIN.json").read_text())
+     allowed_data.add(init_dependency["runtime_path"])
+     audit_paths=set();blocked=[]
++    counts=Counter();ll_calls=0
++    journal_path=out/"AUDIT_EVENTS.jsonl"
++    guard=AuditLatch(PreopenedJournal(journal_path))
++    def checkpoint(phase):
++        guard.context(phase,ll_calls,counts[0])
++        guard.checkpoint(phase, cause=sys.exc_info()[1])
++    source.set_audit_checkpoint(checkpoint)
++    def deny(event,target,reason,mode=None,flags=None):
++        blocked.append(str(target))
++        guard.refresh_counts(ll_calls,counts[0])
++        guard.deny(event,target,mode=mode,flags=flags,reason=reason)
+     def audit(event,args):
+         if event in ("socket.connect","socket.bind","subprocess.Popen","os.system","os.fork","os.forkpty","os.posix_spawn"):
+-            blocked.append(event);raise PermissionError("P3 forbids network/child execution")
++            deny(event,event,"P3 forbids network/child execution")
+         if event=="open" and not isinstance(args[0],int):
+             p=Path(os.fsdecode(args[0])).resolve()
+             mode=args[1];flags=args[2] or 0
+             write=bool(flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)) or (isinstance(mode,str) and any(x in mode for x in "wax+"))
+             inside=p==out or out in p.parents
+-            if write and not inside:blocked.append(str(p));raise PermissionError("Write outside this synthetic job")
++            if write and not inside:deny(event,str(p),"Write outside this synthetic job",mode,flags)
+             if not write and not inside and str(p) not in allowed_data:
+-                blocked.append(str(p));raise PermissionError("Read outside exact synthetic/runtime allowlist")
++                deny(event,str(p),"Read outside exact synthetic/runtime allowlist",mode,flags)
+             audit_paths.add(str(p))
+-    sys.addaudithook(audit)
+-    counts=Counter();source.set_cost_counter(counts)
++    sys.addaudithook(audit);guard.installed()
++    checkpoint("hook_installed")
++    source.set_cost_counter(counts)
+     source.set_deadline(time.time()+c["limits"]["wall_soft_s"]-(time.perf_counter()-started))
+     source.set_edom_log(out/"EDOM_LOG.jsonl")
+     ll_calls=0;sampler=None;last=None;status="FAILED";error=None;delta=None;ess=None
+     failures=FailureAudit();last_parameters=None
+     initialization_defaults=[];initialization_before=[];initialization_after=[]
+     def budget():
++        checkpoint("budget")
+         if ll_calls>=c["limits"]["max_likelihood_calls"]:raise BudgetStop("MAXCALL_INCLUDING_INITIALIZATION")
+         if time.perf_counter()-started>=c["limits"]["wall_soft_s"]:raise BudgetStop("WALL")
+         if time.process_time()>=c["limits"]["cpu_soft_s"]:raise BudgetStop("CPU")
+@@ -134,12 +149,14 @@
+             calibration_marginalization=False,jitter_time=False,reference_frame="sky",time_reference="geocenter")
+         initialization_after=[verify_analytic_state(np,ifo,f,psd,geometry) for ifo in likelihood.interferometers]
+         if initialization_after!=initialization_before:raise ValueError("Analytic detector state changed in likelihood constructor")
+-        if blocked:raise ValueError("Initialization swallowed a blocked operation")
++        checkpoint("initialization_ready")
+         def logl(v):
+             nonlocal ll_calls,last_parameters
++            checkpoint("pre_likelihood")
+             last_parameters=parameters(v)
+             budget();ll_calls+=1
+-            value=float(likelihood.log_likelihood_ratio(last_parameters))
++            guard.refresh_counts(ll_calls,counts[0])
++            value=guard.evaluate(lambda:float(likelihood.log_likelihood_ratio(last_parameters)))
+             if counts[2]!=0 or not math.isfinite(value) or abs(value)>1e100:
+                 raise RuntimeError("Native/domain/nonfinite likelihood abort; never a silent prior rejection")
+             return value
+@@ -154,16 +171,20 @@
+                 js(out/("PROGRESS_%07d.json"%sampler.it),{"iteration":sampler.it,"calls":ll_calls,
+                     "delta_logz":float(item.delta_logz),"native_calls":int(counts[0]),
+                     "wall_s":time.perf_counter()-started,"cpu_s":time.process_time()-cpu0})
++        checkpoint("sampler_returned")
+         if last is None:raise RuntimeError("Sampler returned no dead points")
+         delta=float(np.logaddexp(0.,np.max(sampler.live_logl)+last.logvol-last.logz))
+         if delta<.1 and np.ptp(sampler.live_logl)>0 and ll_calls<c["limits"]["max_likelihood_calls"]:
+-            for _ in sampler.add_live_points():pass
++            for _ in sampler.add_live_points():checkpoint("live_point_added")
+             values=compute_integrals(logl=sampler.saved_run["logl"],logvol=sampler.saved_run["logvol"])
+             for key,val in zip(("logwt","logz","logzvar","h"),values):sampler.saved_run[key]=val.tolist()
+             weights=np.exp(np.array(sampler.saved_run["logwt"])-sampler.saved_run["logz"][-1])
+             weights/=sum(weights);ess=float(1/sum(weights**2))
+             status="DLOGZ_REACHED_ESS_OK" if ess>=100 else "DLOGZ_REACHED_ESS_LOW"
+         else:status="STOPPED_NOT_CONVERGED"
++    except AuditViolation as exc:
++        status="AUDIT_VIOLATION";error=type(exc).__name__+": "+str(exc)
++        failures.external(exc,last_parameters)
+     except BudgetStop as exc:
+         status="BUDGET_EXHAUSTED_PARTIAL";error=str(exc)
+         failures.external(exc,last_parameters)
+@@ -174,14 +195,25 @@
+     finally:
+         signal.setitimer(signal.ITIMER_REAL,0)
+         artifact=None
+-        if sampler is not None and len(sampler.saved_run["logl"]):
+-            # Partial arrays are diagnostics; no inferred summary is promoted.
+-            target=out/"SAMPLER_DIAGNOSTICS.npz";tmp=out/"SAMPLER_DIAGNOSTICS.npz.tmp"
+-            with tmp.open("xb") as fh:
+-                np.savez(fh,**{k:np.asarray(sampler.saved_run[k]) for k in ("v","logl","logvol","logwt","logz","logzvar")})
+-            if tmp.stat().st_size<=0:raise OSError("Empty diagnostics")
+-            os.replace(tmp,target);artifact={"path":target.name,"sha256":sha(target),"bytes":target.stat().st_size}
+-        result={"status":status,"job_id":job_id,"label":job["label"],"contract_sha256":pin,
++        try:
++            checkpoint("final_before_diagnostics")
++            if sampler is not None and len(sampler.saved_run["logl"]):
++                # Partial arrays are diagnostics; no inferred summary is promoted.
++                target=out/"SAMPLER_DIAGNOSTICS.npz";tmp=out/"SAMPLER_DIAGNOSTICS.npz.tmp"
++                with tmp.open("xb") as fh:
++                    np.savez(fh,**{k:np.asarray(sampler.saved_run[k]) for k in ("v","logl","logvol","logwt","logz","logzvar")})
++                if tmp.stat().st_size<=0:raise OSError("Empty diagnostics")
++                os.replace(tmp,target);artifact={"path":target.name,"sha256":sha(target),"bytes":target.stat().st_size}
++            checkpoint("final_before_result")
++        except AuditViolation as exc:
++            status="AUDIT_VIOLATION";error=type(exc).__name__+": "+str(exc)
++            failures.external(exc,last_parameters)
++        except Exception as exc:
++            status="FAILED";error=type(exc).__name__+": "+str(exc)
++            failures.external(exc,last_parameters)
++        if guard.snapshot()["latched"]:
++            status="AUDIT_VIOLATION"
++        result={"status":status,"pid":os.getpid(),"job_id":job_id,"label":job["label"],"contract_sha256":pin,
+                 "scope":"Synthetic cost/recovery feasibility only; neither coverage nor a D verdict",
+                 "error":error,"wall_s":time.perf_counter()-started,"cpu_s":time.process_time()-cpu0,
+                 "cpu_process_total_s":time.process_time(),"likelihood_calls":ll_calls,
+@@ -193,10 +225,12 @@
+                 "initialization_qualified":len(initialization_after)==2 and initialization_after==initialization_before,
+                 "delta_logz_before_live_addition":delta,"weighted_ESS":ess,"diagnostics":artifact,
+                 "filesystem_read_write_paths_after_hook":sorted(audit_paths),"blocked_operations":blocked,
++                "audit_latch":guard.snapshot(),"audit_journal_sha256":sha(journal_path),
+                 "audit_scope":"Python open/process/socket hook after fixed imports and pin checks; not OS/native syscall containment",
+                 "D_read":False,"independent_noise_realizations":False,"coverage_estimated":False,
+                 "finished_utc":datetime.now(timezone.utc).isoformat()}
+         js(out/"RESULT.json",result)
++        checkpoint("final_after_result")
+         print(json.dumps({k:result[k] for k in ("status","job_id","likelihood_calls","native_calls","wall_s","cpu_s")}))
+-    return 2 if status=="FAILED" else 0
++    return 2 if status in ("FAILED","AUDIT_VIOLATION") else 0
+ if __name__=="__main__":sys.exit(main())

@@ -1,0 +1,341 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "checks": [
+    {
+      "name": "probabilities_normalized",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "conditional_potentials_squared",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "fisher_derived_from_six_probabilities",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "selected_lorentz_metric",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "ricci_from_metric_derivatives",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "wave_eigen_equation_all_five_potentials",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "stress_covariant_conservation_direct",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "point_probabilities",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "point_metric",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "point_ricci",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "point_stress_from_source",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "both_vectors_null",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "two_ricci_contractions",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "equal_nonzero_stress_contractions",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "incompatible_required_C_times_cG",
+      "passed": true,
+      "residuals": [
+        "0",
+        "0"
+      ]
+    }
+  ],
+  "expressions": {
+    "coordinates": [
+      "tau",
+      "theta",
+      "chi",
+      "psi"
+    ],
+    "phi": [
+      "sqrt(3)*cos(theta)/3",
+      "sqrt(3)*sin(theta)/3",
+      "sqrt(6)*sin(chi)*cos(psi)/3",
+      "sqrt(6)*sin(chi)*sin(psi)/3",
+      "sqrt(6)*cos(chi)/3"
+    ],
+    "probabilities": [
+      "sin(tau/2)**2",
+      "cos(tau/2)**2*cos(theta)**2/3",
+      "sin(theta)**2*cos(tau/2)**2/3",
+      "2*sin(chi)**2*cos(psi)**2*cos(tau/2)**2/3",
+      "2*sin(chi)**2*sin(psi)**2*cos(tau/2)**2/3",
+      "2*cos(chi)**2*cos(tau/2)**2/3"
+    ],
+    "Fisher": "Matrix([[1, 0, 0, 0], [0, 4*cos(tau/2)**2/3, 0, 0], [0, 0, 8*cos(tau/2)**2/3, 0], [0, 0, 0, 8*sin(chi)**2*cos(tau/2)**2/3]])",
+    "clock_q": "sin(tau)**2/4",
+    "metric": "Matrix([[1, 0, 0, 0], [0, -4*cos(tau/2)**2/3, 0, 0], [0, 0, -8*cos(tau/2)**2/3, 0], [0, 0, 0, -8*sin(chi)**2*cos(tau/2)**2/3]])",
+    "metric_determinant": "-256*sin(chi)**2*cos(tau/2)**6/27",
+    "nonzero_christoffels": {
+      "0,1,1": "-sin(tau)/3",
+      "0,2,2": "-2*sin(tau)/3",
+      "0,3,3": "-4*sin(chi)**2*sin(tau/2)*cos(tau/2)/3",
+      "1,0,1": "-sin(tau)/(2*(cos(tau) + 1))",
+      "1,1,0": "-sin(tau)/(2*(cos(tau) + 1))",
+      "2,0,2": "-sin(tau)/(2*(cos(tau) + 1))",
+      "2,2,0": "-sin(tau)/(2*(cos(tau) + 1))",
+      "2,3,3": "-2*sin(chi)*cos(chi)*cos(tau/2)**2/(cos(tau) + 1)",
+      "3,0,3": "-sin(tau)/(2*(cos(tau) + 1))",
+      "3,2,3": "2*cos(tau/2)**2/((cos(tau) + 1)*tan(chi))",
+      "3,3,0": "-sin(tau)/(2*(cos(tau) + 1))",
+      "3,3,2": "2*cos(tau/2)**2/((cos(tau) + 1)*tan(chi))"
+    },
+    "Ricci": "Matrix([[3/4, 0, 0, 0], [0, -(-3*sin(tau)**2 + 2*cos(tau) + 2)/(6*(cos(tau) + 1)), 0, 0], [0, 0, -(-sin(tau)**2*cos(chi)**2*cos(tau)*tan(chi)**2 - sin(tau)**2*cos(chi)**2*tan(chi)**2 + 12*cos(chi)**2*cos(tau/2)**4 + 2*cos(chi)**2*cos(tau)**3*tan(chi)**2 + 4*cos(chi)**2*cos(tau)**2*tan(chi)**2 + 2*cos(chi)**2*cos(tau)*tan(chi)**2 - 6*cos(tau/2)**2*cos(tau) - 6*cos(tau/2)**2)/(3*(cos(tau) + 1)**2*cos(chi)**2*tan(chi)**2), 0], [0, 0, 0, -(-11*cos(tau) + 4*cos(2*tau) + 3*cos(3*tau) - 12)*sin(chi)**2/(12*(cos(tau) + 1)**2)]])",
+    "waves": [
+      "sqrt(3)*cos(theta)/(2*(cos(tau) + 1))",
+      "sqrt(3)*sin(theta)/(2*(cos(tau) + 1))",
+      "sqrt(6)*sin(chi)*cos(psi)/(2*(cos(tau) + 1))",
+      "sqrt(6)*sin(chi)*sin(psi)/(2*(cos(tau) + 1))",
+      "sqrt(6)*cos(chi)/(2*(cos(tau) + 1))"
+    ],
+    "gradient_gram": "Matrix([[0, 0, 0, 0], [0, 1/3, 0, 0], [0, 0, 2/3, 0], [0, 0, 0, 2*sin(chi)**2/3]])",
+    "kinetic_trace": "-3/(2*(cos(tau) + 1))",
+    "T_over_cG": "Matrix([[3/(4*(cos(tau) + 1)), 0, 0, 0], [0, -1/6, 0, 0], [0, 0, -1/3, 0], [0, 0, 0, -sin(chi)**2/3]])",
+    "point_contractions": [
+      {
+        "g": "0",
+        "Ric": "1",
+        "T_over_cG": "1/2"
+      },
+      {
+        "g": "0",
+        "Ric": "7/4",
+        "T_over_cG": "1/2"
+      }
+    ],
+    "required_C_times_cG": [
+      "2",
+      "7/2"
+    ]
+  },
+  "domain": "0<tau<pi; 0<theta,chi,psi<pi/2; k_G>0 constant",
+  "domain_argument": "All phi_j and P_i are positive here; thus the positive square root of each conditional probability is phi_j. Fisher diagonal is strictly positive, so rank dP=4; dp0 is nonzero. These inequalities are stated domain reasoning, not an SMT sign certification.",
+  "scope": "Exact symbolic same-P geometry verification; no stationary-action, full TGL-solution, physical realization or Lean proof claim.",
+  "started_utc": "2026-10-19T12:51:47.192242+00:00",
+  "ended_utc": "2026-10-19T12:51:50.554417+00:00",
+  "seconds": 3.362169999978505,
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "sympy": "1.14.0",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\integrated_h3_r84\\geometry_check\\check_geometry_r84.py",
+      "sha256": "e4bd1d9ce1df239903a8c841cc68831e567e5b743730c8c9cc651581aeaa9561"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\integrated_h3_r84\\geometry_check\\PLAN_GEOMETRY_R84.json",
+      "sha256": "81ab5e99ed670ad14f93f7d2f2d9878f13e78c333773f2a6b46bfa138c093f25"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\integrated_h3_r84\\geometry_check\\SOURCE_PINS_GEOMETRY_R84.json",
+      "sha256": "46bf127e11aedaa2378a3dc9942ea16c968887fceb08c0be05d37620ba4bb788"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\integrated_h3_r84\\p_variations\\P_VARIATIONS_AND_COUNTEREXAMPLE_R84.md",
+      "sha256": "fb81bd7f6ce0b0bb4c011d8e5e03e8ccc3416b8bb5acc2872cd9acedfbac9ef0",
+      "lines": "1-218"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedProbabilitySigma.lean",
+      "sha256": "889e6c7dc0564ad7dcaf787e922b48744130d6b6b083e043bab661045bf167b7",
+      "lines": "44-51,104-108,132-150,170-218"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedFisherLorentzMetric.lean",
+      "sha256": "346db9497cbebf1824b279972d2cc342abed90b9df13874d439ffd7737533a3d",
+      "lines": "39-43,243-261"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\FiniteCoherentSources.lean",
+      "sha256": "4b71fe49ae505d3017a3c2d05395de95f6c64f9630ea27c56de8ed024d94416b"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\CurvatureJetAlgebra.lean",
+      "sha256": "85287748b45debe315c72f1154d28875e3bd200763f5454ba3d5fde63ac74004",
+      "lines": "27-29"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\MetricCurvatureSymmetries.lean",
+      "sha256": "6070daffdf63f24ee64157c11da8cbcf43765b6ce2c42069780a09b140064db7",
+      "lines": "31-32"
+    }
+  ]
+}

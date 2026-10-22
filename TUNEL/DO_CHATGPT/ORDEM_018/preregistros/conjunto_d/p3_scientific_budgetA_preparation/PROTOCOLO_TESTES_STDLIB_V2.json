@@ -1,0 +1,49 @@
+{
+  "schema": "P3_A_SOFTWARE_CHECKS_ONLY_V2",
+  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
+  "utc_before_tests": "2026-10-06T18:48:23.247613+00:00",
+  "exact_test_count": 26,
+  "groups": {
+    "counter": 3,
+    "recovery": 5,
+    "acceptance": 10,
+    "supervision_doubles": 8
+  },
+  "pins": [
+    {
+      "relative_path": "test_budgetA_stdlib_v2.py",
+      "bytes": 14363,
+      "sha256": "c2b65eb86da1caf9e104c1657c0305d7c00fe50a8c925dd72f36bd982fa62250"
+    },
+    {
+      "relative_path": "budget_counters.py",
+      "bytes": 1982,
+      "sha256": "c151177c872be06fff834c8a673a18b562b3132676c0999ae8a348e6f5fcf572"
+    },
+    {
+      "relative_path": "failure_audit.py",
+      "bytes": 4329,
+      "sha256": "a521e7bdf047a7a3b6146e418cc6f82f8d5fc0a0193d0ef0fb88e33d7154d8ae"
+    },
+    {
+      "relative_path": "recovery_diagnostics.py",
+      "bytes": 3666,
+      "sha256": "0f0aaccd64301d3843530c6754fbe39446400644e54fe167cd1cbc11e7751cf9"
+    },
+    {
+      "relative_path": "result_acceptance.py",
+      "bytes": 8235,
+      "sha256": "78dec147fd613a57af749e5167f1f85a52ebc271a4576be352fb759d18006a9a"
+    },
+    {
+      "relative_path": "process_supervision.py",
+      "bytes": 3061,
+      "sha256": "5359850abd4cbee0ab6aac0687b8834552b69acbc65e3a1c34be9c50797f896c"
+    }
+  ],
+  "reason_for_new_software_check": "Concrete controlled-signal race before Popen handle assignment; blocked during ownership handoff then delivered inside cleanup-protected region. New double checks pending interruption on context exit. Source/science unchanged; previous25 result retained.",
+  "scientific_or_provider_unit": false,
+  "real_children_or_signals": false,
+  "allowed_imports": "Own pure stdlib helpers only",
+  "no_contract_consumption": true
+}

@@ -1,0 +1,155 @@
+{
+  "source": "C:\\IALD\\Bancada_Um\\mcp_um.py",
+  "tools": [
+    {
+      "name": "estado",
+      "line": 36,
+      "signature": "",
+      "doc": "Estado da Bancada Um: GPU/VRAM, RAM, motor, β_TGL = α√e, validações, lago residente e livro de tentativas."
+    },
+    {
+      "name": "listar_dados",
+      "line": 45,
+      "signature": "",
+      "doc": "Os conjuntos cosmológicos do motor (Planck comprimido, DESI DR1/DR2, SH0ES, Pantheon+) com proveniência, e o lago residente (arquivos na RAM)."
+    },
+    {
+      "name": "avaliar",
+      "line": 62,
+      "signature": "H0: float=67.95, ombh2: float=0.022362, omch2: float=0.119, beta: float=0.0, c: float=0.0, conjuntos: list[str]=['planck_comp', 'desi_dr1'], opcoes: dict={}",
+      "doc": "Avaliação diagnóstica de um ponto (ver a descrição da ferramenta)."
+    },
+    {
+      "name": "ajustar",
+      "line": 71,
+      "signature": "conjuntos: list[str]=['planck_comp', 'desi_dr1'], beta: str='livre', c_livre: bool=False, opcoes: dict={}",
+      "doc": "Ajuste de máxima verossimilhança (ver a descrição da ferramenta)."
+    },
+    {
+      "name": "comparar",
+      "line": 78,
+      "signature": "conjuntos: list[str]=['planck_comp', 'desi_dr1'], c_livre: bool=False, opcoes: dict={}",
+      "doc": "Comparação de modelos por Δχ² (ver a descrição da ferramenta)."
+    },
+    {
+      "name": "amostrar_posterior",
+      "line": 85,
+      "signature": "conjuntos: list[str]=['planck_comp', 'desi_dr1'], walkers: int=256, passos: int=2000, queima: int=500, semente: int=42, c_livre: bool=False, opcoes: dict={}",
+      "doc": "Amostragem do posterior (ver a descrição da ferramenta)."
+    },
+    {
+      "name": "lago_colunas",
+      "line": 104,
+      "signature": "caminho: str, hdu: int=1",
+      "doc": "As colunas (nome, tipo) de uma tabela residente do lago (caminho exato de listar_dados) — sem copiar dados."
+    },
+    {
+      "name": "lago_histograma",
+      "line": 111,
+      "signature": "caminho: str, coluna: str, hdu: int=1, bins: int=120, log: bool=False",
+      "doc": "Histograma de uma coluna INTEIRA do lago residente, calculado na GPU (ex.: Z_B dos 21 milhões de galáxias do KiDS)."
+    },
+    {
+      "name": "lago_mapa",
+      "line": 117,
+      "signature": "caminho: str, x: str, y: str, hdu: int=1, nx: int=180, ny: int=90",
+      "doc": "Densidade 2D de duas colunas inteiras (ex.: RA × DEC), na GPU; devolve a matriz de contagens nx × ny."
+    },
+    {
+      "name": "gw_estado",
+      "line": 125,
+      "signature": "",
+      "doc": "O banco residente de ondas gravitacionais da Bancada Um: eventos por era, séries na RAM (sha256), NaN, remanescentes, arquivos dos estágios (pré-registro, poder, cego, aberto, RESULTADO) com sha16."
+    },
+    {
+      "name": "gw_eventos",
+      "line": 132,
+      "signature": "era: str='', src: str='', snr_min: float=0.0, snr_max: float=0.0, Mf_min: float=0.0, Mf_max: float=0.0",
+      "doc": "Tabela de eventos do banco residente (ver a descrição)."
+    },
+    {
+      "name": "gw_serie",
+      "line": 141,
+      "signature": "key: str, branqueada: bool=True, t0: float=-0.5, dur: float=1.0, n_max: int=2000",
+      "doc": "Trecho de série (ver a descrição)."
+    },
+    {
+      "name": "gw_espectro",
+      "line": 147,
+      "signature": "key: str, f_max: float=1024.0",
+      "doc": "A ASD (√PSD de Welch) de uma série residente, fora da fonte, até f_max Hz (decimada)."
+    },
+    {
+      "name": "gw_resultados",
+      "line": 153,
+      "signature": "",
+      "doc": "Os estágios da rodada do eco V3 lidos do disco por mtime: pré-registro (leituras, critérios, hashes), PODER antes de abrir, cego, aberto e o RESULTADO selado (vereditos por par leitura × lei)."
+    },
+    {
+      "name": "gw_empilhar",
+      "line": 161,
+      "signature": "sub: str='todos', filtros: dict={}, sigma_regra: str='max', versao: str='v3'",
+      "doc": "Empilhamento de consulta (ver a descrição); versao 'v3' (a rodada pré-registrada) ou 'v4' (a emenda com grade ±2σ, não cega)."
+    },
+    {
+      "name": "gw_rodar",
+      "line": 168,
+      "signature": "stage: str='tudo', pool: int=40, n_off: int=32",
+      "doc": "Dispara a rodada (ver a descrição)."
+    },
+    {
+      "name": "gw_recarregar",
+      "line": 174,
+      "signature": "series: bool=True",
+      "doc": "Recarrega do disco os estágios/remanescentes e (series=True) as séries de 32 s — p. ex. depois de um download novo de O4 — sem reiniciar a Bancada."
+    },
+    {
+      "name": "gw_tarefa",
+      "line": 180,
+      "signature": "tarefa: str",
+      "doc": "Estado de uma rodada disparada por gw_rodar (rodando | pronta | falhou), com a cauda do log."
+    },
+    {
+      "name": "livro",
+      "line": 186,
+      "signature": "",
+      "doc": "O livro de tentativas: as últimas consultas e o número de famílias de teste (usado para corrigir a significância)."
+    },
+    {
+      "name": "rotas_consultar",
+      "line": 202,
+      "signature": "padrao: str='', dominio: str='', status: str=''",
+      "doc": "ANTES de examinar qualquer caminho, consulte o MAPA DE ROTAS: o que já foi examinado, por quem, com que resultado, o defeito\nconhecido, por que não refazer e o próximo passo. padrao = regex (sem acento e sem caixa); dominio e status são filtros opcionais."
+    },
+    {
+      "name": "rotas_ver",
+      "line": 212,
+      "signature": "rota_id: str",
+      "doc": "Uma rota do mapa com a história inteira (todos os registros, erratas ao lado, artefatos com sha256)."
+    },
+    {
+      "name": "rotas_registrar",
+      "line": 221,
+      "signature": "registros: list[dict], quem: str=''",
+      "doc": "DEPOIS de examinar, registre no MAPA DE ROTAS (só acréscimo; a correção vai AO LADO como ERRATA). Cada registro: tipo (ROTA para\nrota nova; RESULTADO/ANOTACAO/ERRATA para rota existente), rota_id, dominio, titulo, status, e o que couber de pergunta, dados,\nmetodo, resultado, veredito, estatuto, defeito, nao_refazer, proximo_passo, onde, artefatos (caminhos; o sha256 é calculado),\nrefs, olhou_dados, corrige (seq, só em ERRATA), nota. quem = sua identidade (padrão: o cliente do MCP)."
+    },
+    {
+      "name": "neff_canal",
+      "line": 237,
+      "signature": "sigmas_extra: list[float]=[], controle: bool=False",
+      "doc": null
+    },
+    {
+      "name": "neutrino_canal_f72",
+      "line": 252,
+      "signature": "",
+      "doc": null
+    },
+    {
+      "name": "neutrino_canal_f72_v2",
+      "line": 264,
+      "signature": "",
+      "doc": null
+    }
+  ]
+}

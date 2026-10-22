@@ -1,0 +1,57 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T232120_002821Z\ScreenPhysicalHelicityR1.lean:26:2: error: Tactic `apply` failed: could not unify the conclusion of `ScreenOrientation.screen_orientation_of_proper_transport
+  (lorentzLinear ↑L) (shellAction (↑L⁻¹) p) p hq hp`
+  ScreenOrientationMeasured (lorentzLinear ↑L) (shellAction (↑L⁻¹) p) p
+with the goal
+  ScreenOrientationMeasured (lorentzLinear ↑L) (inverseRapidityChart 0 (shellAction (↑L⁻¹) p))
+    (inverseRapidityChart 0 p)
+
+Note: The full type of `ScreenOrientation.screen_orientation_of_proper_transport (lorentzLinear ↑L)
+  (shellAction (↑L⁻¹) p) p hq hp` is
+  (lorentzLinear ↑L) (shellMomentum 0 (rapidityChart 0 (shellAction (↑L⁻¹) p))) = shellMomentum 0 (rapidityChart 0 p) →
+    (∀ (a b : Fin 4 → ℝ), orbitPairing ((lorentzLinear ↑L) a) ((lorentzLinear ↑L) b) = orbitPairing a b) →
+      (LinearMap.toMatrix' (lorentzLinear ↑L)).det = 1 →
+        ScreenOrientationMeasured (lorentzLinear ↑L) (shellAction (↑L⁻¹) p) p
+
+L : ↥generatedLorentz
+hd : (↑↑L).det = 1
+hr : ∀ᵐ (x : MomentumCoordinates) ∂orbitalMeasure 0, (shellAction (↑L⁻¹) x).1 ≠ 0
+hc :
+  ∀ᵐ (x : MomentumCoordinates) ∂orbitalMeasure 0,
+    (fun y => rapidityChart 0 (inverseRapidityChart 0 y)) (shellAction (↑L⁻¹) x) = id (shellAction (↑L⁻¹) x)
+p : MomentumCoordinates
+hp : p.1 ≠ 0
+hq : (shellAction (↑L⁻¹) p).1 ≠ 0
+hpc : rapidityChart 0 (inverseRapidityChart 0 p) = id p
+hqc : rapidityChart 0 (inverseRapidityChart 0 (shellAction (↑L⁻¹) p)) = id (shellAction (↑L⁻¹) p)
+ht : (lorentzLinear ↑L) (shellMomentum 0 (shellAction (↑L⁻¹) p)) = shellMomentum 0 p
+⊢ ScreenOrientationMeasured (lorentzLinear ↑L) (inverseRapidityChart 0 (shellAction (↑L⁻¹) p))
+    (inverseRapidityChart 0 p)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T232120_002821Z\ScreenPhysicalHelicityR1.lean:44:2: error: Tactic `apply` failed: could not unify the conclusion of `oriented_screen_phase_unit (lorentzLinear ↑L)
+  (shellAction (↑L⁻¹) p) p hq hp`
+  Complex.normSq (screenPhase (lorentzLinear ↑L) (shellAction (↑L⁻¹) p) p) = 1
+with the goal
+  Complex.normSq (transportPhase L p) = 1
+
+Note: The full type of `oriented_screen_phase_unit (lorentzLinear ↑L) (shellAction (↑L⁻¹) p) p hq hp` is
+  (lorentzLinear ↑L) (shellMomentum 0 (rapidityChart 0 (shellAction (↑L⁻¹) p))) = shellMomentum 0 (rapidityChart 0 p) →
+    (∀ (a b : Fin 4 → ℝ), orbitPairing ((lorentzLinear ↑L) a) ((lorentzLinear ↑L) b) = orbitPairing a b) →
+      ScreenOrientationMeasured (lorentzLinear ↑L) (shellAction (↑L⁻¹) p) p →
+        Complex.normSq (screenPhase (lorentzLinear ↑L) (shellAction (↑L⁻¹) p) p) = 1
+
+L : ↥generatedLorentz
+hd : (↑↑L).det = 1
+mL : Measure.QuasiMeasurePreserving (shellAction ↑L⁻¹) (orbitalMeasure 0) (orbitalMeasure 0)
+p : MomentumCoordinates
+hp : p.1 ≠ 0
+hq : (shellAction (↑L⁻¹) p).1 ≠ 0
+hpc : rapidityChart 0 (inverseRapidityChart 0 p) = id p
+hqc : rapidityChart 0 (inverseRapidityChart 0 (shellAction (↑L⁻¹) p)) = id (shellAction (↑L⁻¹) p)
+ht : (lorentzLinear ↑L) (shellMomentum 0 (shellAction (↑L⁻¹) p)) = shellMomentum 0 p
+ho :
+  ScreenOrientationMeasured (lorentzLinear ↑L) (inverseRapidityChart 0 (shellAction (↑L⁻¹) p))
+    (inverseRapidityChart 0 p)
+⊢ Complex.normSq (transportPhase L p) = 1
+'F1Fecho.OrbitalScreen.transport_orientation_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalScreen.transportPhase_unit_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalScreen.transportPhase_mul_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalScreen.transportMatrix_circular_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

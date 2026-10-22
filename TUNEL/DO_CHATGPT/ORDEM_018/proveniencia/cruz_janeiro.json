@@ -1,0 +1,129 @@
+{
+  "source": {
+    "path": "C:\\IALD\\IMac LA\\Física - TGL\\Validação\\TGL_v11_1_CRUZ.docx",
+    "bytes": 60921,
+    "sha256": "b1f03413126921c81a16696019696ca26fee0e1fc429908593d865408b0d1af8",
+    "mtime_utc": "2026-01-19T08:55:52+00:00"
+  },
+  "method": "stdlib zipfile + OOXML w:p/w:t; no execution; pandoc absent",
+  "core_properties": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<cp:coreProperties xmlns:cp=\"http://schemas.openxmlformats.org/package/2006/metadata/core-properties\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:dcmitype=\"http://purl.org/dc/dcmitype/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><dc:title></dc:title><dc:subject></dc:subject><dc:creator>Luiz Antonio Rotoli Miguel</dc:creator><cp:keywords></cp:keywords><dc:description></dc:description><cp:lastModifiedBy>Luiz Antonio Rotoli Miguel</cp:lastModifiedBy><cp:revision>1</cp:revision><dcterms:created xsi:type=\"dcterms:W3CDTF\">2026-01-19T08:42:00Z</dcterms:created><dcterms:modified xsi:type=\"dcterms:W3CDTF\">2026-01-19T08:43:00Z</dcterms:modified></cp:coreProperties>",
+  "paragraphs": 1685,
+  "matched_paragraphs": 19,
+  "pattern": "sqrt_e|alpha_fine_TGL|CODATA|alpha_fine.*1.0|chi2_H0",
+  "excerpts": [
+    {
+      "match_paragraph": 226,
+      "first_paragraph": 224,
+      "last_paragraph": 228,
+      "text": "        \n        self.e_euler = np.e\n        self.sqrt_e = np.sqrt(np.e)\n        \n        # Planck scales"
+    },
+    {
+      "match_paragraph": 350,
+      "first_paragraph": 348,
+      "last_paragraph": 352,
+      "text": "        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=d, dtype=dt)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=d, dtype=dt)\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=d, dtype=dt)\n        self.t_Z_0 = torch.tensor(self.Z_0, device=d, dtype=dt)\n        self.t_R_K = torch.tensor(self.R_K, device=d, dtype=dt)"
+    },
+    {
+      "match_paragraph": 709,
+      "first_paragraph": 707,
+      "last_paragraph": 711,
+      "text": "    def identity_singular_error(self, alpha_2: float) -> float:\n        \"\"\"α × √e = α₂\"\"\"\n        alpha_derived = alpha_2 / self.const.sqrt_e\n        alpha_reconstructed = alpha_derived * self.const.sqrt_e\n        error = np.abs(alpha_reconstructed - alpha_2) / alpha_2"
+    },
+    {
+      "match_paragraph": 710,
+      "first_paragraph": 708,
+      "last_paragraph": 712,
+      "text": "        \"\"\"α × √e = α₂\"\"\"\n        alpha_derived = alpha_2 / self.const.sqrt_e\n        alpha_reconstructed = alpha_derived * self.const.sqrt_e\n        error = np.abs(alpha_reconstructed - alpha_2) / alpha_2\n        return error"
+    },
+    {
+      "match_paragraph": 715,
+      "first_paragraph": 713,
+      "last_paragraph": 717,
+      "text": "    \n    def identity_singular_error_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        alpha_derived = alpha_2 / self.const.t_sqrt_e\n        alpha_reconstructed = alpha_derived * self.const.t_sqrt_e\n        error = torch.abs(alpha_reconstructed - alpha_2) / alpha_2"
+    },
+    {
+      "match_paragraph": 716,
+      "first_paragraph": 714,
+      "last_paragraph": 718,
+      "text": "    def identity_singular_error_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        alpha_derived = alpha_2 / self.const.t_sqrt_e\n        alpha_reconstructed = alpha_derived * self.const.t_sqrt_e\n        error = torch.abs(alpha_reconstructed - alpha_2) / alpha_2\n        return error"
+    },
+    {
+      "match_paragraph": 724,
+      "first_paragraph": 722,
+      "last_paragraph": 726,
+      "text": "    # ═══════════════════════════════════════════════════════════════════════════════════════════════════\n    \n    def alpha_fine_TGL(self, alpha_2: float) -> float:\n        return alpha_2 / self.const.sqrt_e\n    "
+    },
+    {
+      "match_paragraph": 725,
+      "first_paragraph": 723,
+      "last_paragraph": 727,
+      "text": "    \n    def alpha_fine_TGL(self, alpha_2: float) -> float:\n        return alpha_2 / self.const.sqrt_e\n    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 727,
+      "first_paragraph": 725,
+      "last_paragraph": 729,
+      "text": "        return alpha_2 / self.const.sqrt_e\n    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return alpha_2 / self.const.t_sqrt_e\n    "
+    },
+    {
+      "match_paragraph": 728,
+      "first_paragraph": 726,
+      "last_paragraph": 730,
+      "text": "    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return alpha_2 / self.const.t_sqrt_e\n    \n    def Z_Miguel(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 861,
+      "first_paragraph": 859,
+      "last_paragraph": 863,
+      "text": "        print(\"   \" + \"-\" * 80)\n        print(\"   [ELETRODINÂMICA]\")\n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)"
+    },
+    {
+      "match_paragraph": 862,
+      "first_paragraph": 860,
+      "last_paragraph": 864,
+      "text": "        print(\"   [ELETRODINÂMICA]\")\n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")"
+    },
+    {
+      "match_paragraph": 997,
+      "first_paragraph": 995,
+      "last_paragraph": 999,
+      "text": "            'Lambda': 0.3,\n            'r_s': 0.5,\n            'alpha_fine': 1.0,\n            'm_nu_hierarchy': 0.5,\n            'identity_singular': 0.5,"
+    },
+    {
+      "match_paragraph": 1071,
+      "first_paragraph": 1069,
+      "last_paragraph": 1073,
+      "text": "        \n        # 3. H0\n        chi2_H0 = (((self.const.t_H0 - self.const.t_H0_local) / self.const.t_H0_local_err)**2).expand(n_batch)\n        breakdown['H0'] = chi2_H0.mean().item()\n        "
+    },
+    {
+      "match_paragraph": 1072,
+      "first_paragraph": 1070,
+      "last_paragraph": 1074,
+      "text": "        # 3. H0\n        chi2_H0 = (((self.const.t_H0 - self.const.t_H0_local) / self.const.t_H0_local_err)**2).expand(n_batch)\n        breakdown['H0'] = chi2_H0.mean().item()\n        \n        # 4. Lensing"
+    },
+    {
+      "match_paragraph": 1130,
+      "first_paragraph": 1128,
+      "last_paragraph": 1132,
+      "text": "        \n        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()"
+    },
+    {
+      "match_paragraph": 1131,
+      "first_paragraph": 1129,
+      "last_paragraph": 1133,
+      "text": "        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()"
+    },
+    {
+      "match_paragraph": 1133,
+      "first_paragraph": 1131,
+      "last_paragraph": 1135,
+      "text": "        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        \n        # 15. Neutrino Hierarchy"
+    },
+    {
+      "match_paragraph": 1209,
+      "first_paragraph": 1207,
+      "last_paragraph": 1211,
+      "text": "        # TOTAL (19 components)\n        chi2_total = sum(self.weights[k] * v for k, v in [\n            ('SNe', chi2_sne), ('BAO', chi2_bao), ('H0', chi2_H0), ('lensing', chi2_lensing),\n            ('N_eff', chi2_N_eff), ('a0', chi2_a0), ('SPARC', chi2_sparc), ('Lindblad', chi2_lindblad),\n            ('T_CMB', chi2_T_CMB), ('beta_ratio', chi2_beta_ratio), ('alpha_2', chi2_alpha_2),"
+    }
+  ]
+}

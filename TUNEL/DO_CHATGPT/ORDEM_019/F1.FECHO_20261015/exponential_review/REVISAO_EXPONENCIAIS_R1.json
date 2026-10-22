@@ -1,0 +1,194 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "reviewer": "/root/atrator_skeptic",
+  "created_utc": "2026-10-15T17:49:59.717797+00:00",
+  "verdict": "PASSA_NO_ESCOPO_MATEMATICO",
+  "material_findings": [],
+  "checks": [
+    {
+      "id": "normalization",
+      "verdict": "PASSA",
+      "reason": "O setor n usa x tensor n dividido por sqrt(n!), incluindo setor zero = 1. O quadrado da norma é ||x||^(2n)/n!, sem perda ou duplicação de fatoriais."
+    },
+    {
+      "id": "membership_inner",
+      "verdict": "PASSA",
+      "reason": "Memℓp com p=2 deriva da somabilidade da série exponencial. A identidade inner(e(x),e(y))=exp(inner(x,y)) deriva das componentes e lp.hasSum_inner; a conjugação do fator real está consumida."
+    },
+    {
+      "id": "totality",
+      "verdict": "PASSA",
+      "reason": "A hipótese temporária de ortogonalidade a todos e(x) implica uma série escalar identicamente zero para e(z*x). A unicidade analítica anula cada coeficiente; positividade dos pesos permite removê-los. O núcleo fechado do funcional inner(v_n,·) contém o span e seu fecho, logo v_n=0. O complemento ortogonal trivial prova totalidade. Não há hipótese de totalidade na conclusão nem substituição de F."
+    },
+    {
+      "id": "second_quantization",
+      "verdict": "PASSA",
+      "reason": "Gamma(u)e(x)=e(ux) segue setor a setor das ações unitárias existentes. GammaJ(j,hj)e(x)=e(jx) usa a ação antilinear existente, j antiunitária involutiva e o fato de os pesos serem reais; não afirma que toda antiunitária seja involutiva."
+    },
+    {
+      "id": "nonvacuity",
+      "verdict": "PASSA",
+      "reason": "exponential_zero identifica e(0) com o vacuum existente, cuja norma é 1. A família e o Fock são objetos concretos do tipo canônico, não campos postulados de um contrato."
+    }
+  ],
+  "builds": {
+    "vectors": {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\RECEIPT_R1.json",
+        "sha256": "261bb6cca98e1a5fce4209dc69c5c8d2642d1806283383c4cf0e93ae98083261",
+        "bytes": 24618
+      },
+      "start_utc": "2026-10-15T17:45:03.922810+00:00",
+      "end_utc": "2026-10-15T17:46:56.168476+00:00",
+      "seconds": 112.2456373999994,
+      "exit_code": 0,
+      "axiom_count": 5,
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\src\\ExponentialVectorsR3.lean",
+        "sha256": "118904002d8aa864a169bd4d37c903ab03c3129c298edc3331775d960511c9da",
+        "bytes": 5078
+      },
+      "olean": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\lib\\ExponentialVectorsR3.olean",
+        "sha256": "e4d46c9cbc5249fe49a37aecf084cd461bec52dec2c1f14d8d09397c10a2742e",
+        "bytes": 235016
+      },
+      "olean_identical_to_accepted": true,
+      "log": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\BUILD.log",
+        "sha256": "056b5040d4df1e111a841f838490db97ecc7bc33f3acafe8519a0e572a8298d1",
+        "bytes": 5067
+      }
+    },
+    "totality": {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\RECEIPT_R1.json",
+        "sha256": "ab45e2808e9b50bf37ddfe18cc660cfcd43c590a48ebc8e3215b47383d1266cc",
+        "bytes": 25452
+      },
+      "start_utc": "2026-10-15T17:48:04.017681+00:00",
+      "end_utc": "2026-10-15T17:49:42.480999+00:00",
+      "seconds": 98.46329330000299,
+      "exit_code": 0,
+      "axiom_count": 8,
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+        "sha256": "29061554561154b276af4fc5cb66d64a40e4e398f7dbc1ca1cf8cdec566147af",
+        "bytes": 5718
+      },
+      "olean": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\lib\\ExponentialTotalityR4.olean",
+        "sha256": "8fd08fcd6dba311a31aea377d4fec270f767ed75d5324e6b1ac03a3f0aeb5b61",
+        "bytes": 294832
+      },
+      "olean_identical_to_accepted": true,
+      "log": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\BUILD.log",
+        "sha256": "805be63163908c6b031979b923ec1e63f5257a0aee37ffcd1abd0cae118edf67",
+        "bytes": 5531
+      }
+    }
+  },
+  "anchors": [
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\src\\ExponentialVectorsR3.lean",
+      "line": 29,
+      "declaration": "theorem pureTensor_inner (x y : H1) (n : ℕ) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\src\\ExponentialVectorsR3.lean",
+      "line": 50,
+      "declaration": "def weight (n : ℕ) : ℝ := (Real.sqrt (n.factorial : ℝ))⁻¹"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\src\\ExponentialVectorsR3.lean",
+      "line": 64,
+      "declaration": "def component (x : H1) (n : ℕ) : Sector n := (weight n : ℂ) • pureTensor n x"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\vectors\\src\\ExponentialVectorsR3.lean",
+      "line": 86,
+      "declaration": "def exponential (x : H1) : F := ⟨component x, component_mem_lp x⟩"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+      "line": 20,
+      "declaration": "def coefficient (v : F) (x : H1) (n : ℕ) : ℂ :="
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+      "line": 23,
+      "declaration": "theorem scalar_series (v : F) (x : H1) (z : ℂ) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+      "line": 35,
+      "declaration": "theorem coefficients_zero_of_orthogonal (v : F)"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+      "line": 49,
+      "declaration": "theorem pure_inner_zero_of_orthogonal (v : F)"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+      "line": 57,
+      "declaration": "theorem sector_eq_zero_of_pure_inner_zero (n : ℕ) (v : Sector n)"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+      "line": 90,
+      "declaration": "theorem gamma_exponential (u : H1 ≃ₗᵢ[ℂ] H1) (x : H1) :"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\totality\\src\\ExponentialTotalityR4.lean",
+      "line": 97,
+      "declaration": "theorem gammaJ_exponential (j : H1 ≃ₛₗᵢ[starRingEnd ℂ] H1)"
+    }
+  ],
+  "support_read": [
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Analytic\\Basic.lean",
+      "sha256": "532aea32663f679462e97145c06da7cb5144fe7ccccb16fd92fc965361cd53f1",
+      "bytes": 58424,
+      "lines": "1104-1127: hasFPowerSeriesAt_iff"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Analytic\\Uniqueness.lean",
+      "sha256": "530e362504f59ca913664a36ea56a482dcba9c0ffa972bb4d34bf637d2989462",
+      "bytes": 13425,
+      "lines": "90-103: HasFPowerSeriesAt.apply_eq_zero"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\attempts\\20261013T223041_528152Z\\BosonicSectors.lean",
+      "sha256": "83c5660c0505774c6899c8837f9719fabbf232403ae4fb10bd74d702633ed69b",
+      "bytes": 10618,
+      "lines": "32-34,93-119: actual tensor powers, completion and closed symmetric sectors"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\attempts\\20261013T223456_898217Z\\BosonicFock.lean",
+      "sha256": "c7d24c14f9bb1c2a31c3b207a9f86e839577b6705c4b55b2aa6eab187450d3ec",
+      "bytes": 3270,
+      "lines": "17-27: existing direct sum F, vacuum and unit norm"
+    }
+  ],
+  "builder_delivery": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_exponential\\FINAL_EXPONENTIAL_RECEIPT_R1.json",
+    "sha256": "ecfa30c66239c3eae06e57329bc7cc1d2d91972ddedada8f7feba26a34f4e8eb",
+    "bytes": 10456
+  },
+  "scope": [
+    "Revisão independente das duas fontes aceitas e recompilação uma vez de cada; a totalidade importa a base recompilada pelo revisor.",
+    "Os vetores exponenciais são não normalizados: ||e(x)||²=exp(||x||²). A normalização adicional de estados coerentes não é parte desta tarefa.",
+    "Deriva totalidade no Fock de setores fechados gerados por potências diagonais já construído; não reabre a equivalência desse modelo com outras apresentações do Fock.",
+    "Não é revisão independente do lema GramTotalExtensionR4, que foi construído por este agente e é revisto pelo pai.",
+    "Não verifica nesta entrega a construção de Weyl, relações CCR, KMS, BW, certificado físico ou confirmação experimental.",
+    "Não foram alterados originais, memória, produção, kernel do Nós ou gate. Ato AUDITADA/FECHADA permanece da gerência."
+  ],
+  "generator": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\assemble_review_r1.py",
+    "sha256": "45be52fd3d51f9480a5218815e2c5a69d10e9420e676c5e526fceedf79e329c6",
+    "bytes": 6614
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "schema": "iald-independent-focal-review/v1",
+  "created_at_utc": "2026-10-16T14:08:17.462810+00:00",
+  "reviewer": "codex-mission-memory-review",
+  "verdict": "PASS_R5_EQUALITY_TRANSPORT_WITH_SCOPE",
+  "statute": "REAL: leitura, pinos e recibo existente conferidos; sem compilação pelo revisor",
+  "mission": {
+    "reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "start_revision": 55,
+    "end_revision": 58,
+    "projection_sha256": "67ee9baedc3c47577334a7125d0b562705e5d474f67ed2f397cea07fe07c3aa9",
+    "r7": {
+      "id": "R7",
+      "attempts": 2,
+      "criterion": "Takesaki na representacao pretendida. Produto cruzado, acao/peso/traco entrelacados por termos ou derivacao identificada; escalaV351 reutilizada.",
+      "depends_on": [
+        "M0_MEMORIA"
+      ],
+      "epoch": 3,
+      "evidence": [],
+      "lease": {
+        "expires_at": 1792169798.9885473,
+        "id": "bdd384a3-eca8-48e5-be33-e08c4e5f9a75",
+        "owner": "codex-gerente-tgl",
+        "task_epoch": 3
+      },
+      "note": "Diagnóstico concluído; root assume intervenção e eventual build. R7 integral permanece aberto, sem aceite.",
+      "review_evidence": [],
+      "reviewed_by": null,
+      "status": "working",
+      "submitted_by": null,
+      "ready": false
+    },
+    "tetelestai": false
+  },
+  "r4_failure": {
+    "exit_code": 1,
+    "seconds": 77.36130319999938,
+    "location": "R7SineWindowClosureProbeR4.lean:81",
+    "finding": "A anotação explícita instCFC não sintetizou ContinuousFunctionalCalculus complexa no carrier concreto. O fragmento anterior permanece histórico DECLARADO e não deve ser reutilizado como prova."
+  },
+  "instance_scope": [
+    {
+      "statute": "REAL_SOURCE",
+      "source": "GeneralSineResolventApproxR2.lean:14,95-98",
+      "finding": "O enunciado nasce com H, NormedAddCommGroup H, InnerProductSpace ℂ H e CompleteSpace H como parâmetros; não recebe uma premissa CFC extra ou uma instância GNS local."
+    },
+    {
+      "statute": "REAL_SOURCE",
+      "source": "V350L2OperatorLift.lean:10-13; L2Space.lean:192; Adjoint.lean:239-248; ContinuousLinearMap.lean:20-21; Basic.lean:151-178",
+      "finding": "RegularHilbert H é Lp H 2 volume. A rota padrão usa norma Lp e produto interno L2, star como adjoint em endomorfismos do Hilbert completo, CStarAlgebra de ContinuousLinearMap e CFC complexa para IsStarNormal. Instâncias estruturais pertencem ao termo elaborado, não apenas ao nome textual do carrier."
+    },
+    {
+      "statute": "LIMIT",
+      "finding": "Sem extração do termo ou trace de síntese não se identifica a primeira divergência oculta de norma/inner/star da anotação R4. O erro não prova ausência de CFC nem uma diferença matemática entre normas. Não se atribui causa exata não medida."
+    }
+  ],
+  "r5_mechanism": {
+    "source_lines": [
+      68,
+      78
+    ],
+    "finding": "O lema privado hilbert_cfc_operator_congr é elaborado no Hilbert genérico completo; congrArg recebe uma única função CFC já tipada. Ao aplicar ao regularSineWindow_val.symm, H e estruturas são inferidos da igualdade; Eq.trans compõe com regularSineResolvent_cfc. Não reconstrói o carrier concreto nem fornece instCFC manual.",
+    "same_equality_statement_as_r4": true,
+    "new_mathematical_assumptions": false
+  },
+  "r5_verification": {
+    "attempt": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z",
+    "exit_code": 0,
+    "seconds": 84.87557299999753,
+    "working_source_equals_attempt": true,
+    "receipt_artifact_pins_verified": [
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\AXIOMS.txt",
+        "sha256": "42acc12ebbdadc1892d1f073de215dab30ce2d2a4aae09a13eae6f03452edb1b",
+        "bytes": 1621
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\BUILD.log",
+        "sha256": "4c38ad648898dda486e6adaa09d1a1bfe4e438f05c0e6127918ad01c994185f2",
+        "bytes": 87555
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\DEPENDENCY_CACHE.json",
+        "sha256": "c005198211d344b32f57ca1024ecb21354729b9ea9589d598a2ddeacf5de5ed4",
+        "bytes": 95397
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\R7_stages.log",
+        "sha256": "eee0ebf88fa9033d01316d1cf2458a3012322f62f335c7dd335fd206cddf2607",
+        "bytes": 201
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\R7SineWindowClosureProbeR5.lean",
+        "sha256": "657e5d3c48511cf7bf6149107ee5804d31d6aa7a238450644dd36da2e6c4998c",
+        "bytes": 4797
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\R7SineWindowClosureProbeR5.olean",
+        "sha256": "660be12c2dbbcbf31a40c0ec3200514819058c302ebce1923654057098d71755",
+        "bytes": 160072
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\RUNNING_OUTPUT.log",
+        "sha256": "42acc12ebbdadc1892d1f073de215dab30ce2d2a4aae09a13eae6f03452edb1b",
+        "bytes": 1621
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\START_RECEIPT.json",
+        "sha256": "4fb6e059dcedd516205cfd26876ba0824787cdc4087963b3e81e0f68824492f7",
+        "bytes": 3009
+      }
+    ],
+    "source_origins_verified": [
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\attempts\\20261016T024004_329223Z\\GeneralSineResolventApproxR2.lean",
+        "sha256": "fc78a550d9e4ec1b67627a96ee51fad08a7afd4a046a49f2c1722668b43adf91",
+        "bytes": 12294
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\attempts\\20261016T104658_597906Z\\GenericClosedEquationsCFCR5.lean",
+        "sha256": "a2999d2866fa85cc236238a9f874c800883d29ed984d8f3cf816ff8aa4b6c90f",
+        "bytes": 3278
+      }
+    ],
+    "axiom_sets": {
+      "F1Fecho.CanonicalFockPolarRight.regularSineWindowCore_right": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "F1Fecho.CanonicalFockPolarRight.regularSineWindow_cfc_right": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "F1Fecho.CanonicalFockPolarRight.regularSineResolvent_eq_window_cfc": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "F1Fecho.CanonicalFockPolarRight.regularSineResolvent_right": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "cache_unchanged_reported_by_build_receipt": true,
+    "readonly_dependencies_unchanged_reported_by_build_receipt": true,
+    "full_cache_not_rehashed_in_this_focal_review": true
+  },
+  "scope": [
+    "Resultado cobre a igualdade CFC e o consumidor de pertencimento/comutação à direita condicionado a J e hreg nas fontes.",
+    "Não comprova toda a composição cutoff/ordem perturbada, traço/PF ou critério integral R7.",
+    "R7 permanece working sob lease do coordenador; nenhum accept, transição, build, processo, provedor, gate, memória global ou fonte anterior alterado.",
+    "Por instrução posterior, a investigação de instâncias foi encerrada ao conferir o R5 aprovado; nenhum segundo candidato foi criado."
+  ],
+  "pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+      "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+      "bytes": 672
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\R7SineWindowClosureProbeR4.lean",
+      "sha256": "67f0c830479ada5c40153970d1a436a3e664fbcfe59d12c031e5f9e8233bfe3b",
+      "bytes": 5498
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\R7SineWindowClosureProbeR5.lean",
+      "sha256": "657e5d3c48511cf7bf6149107ee5804d31d6aa7a238450644dd36da2e6c4998c",
+      "bytes": 4797
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T135841_617951Z\\RECEIPT.json",
+      "sha256": "dd31f7ae90a55736421e02b72a69724e7df888d81f379d98edb7b421c4808cca",
+      "bytes": 88000
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T135841_617951Z\\AXIOMS.txt",
+      "sha256": "f05dcd742b016600e47052bf7939f61415957de96dc258ad3bd61f895438d1f7",
+      "bytes": 2253
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T140448_960256Z\\RECEIPT.json",
+      "sha256": "22ed769916c988654cb4e6486a4d8348bc9a561707adb304adee33b06d9e6cd3",
+      "bytes": 88311
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\GeneralSineResolventApproxR2.lean",
+      "sha256": "fc78a550d9e4ec1b67627a96ee51fad08a7afd4a046a49f2c1722668b43adf91",
+      "bytes": 12294
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\GenericClosedEquationsCFCR5.lean",
+      "sha256": "a2999d2866fa85cc236238a9f874c800883d29ed984d8f3cf816ff8aa4b6c90f",
+      "bytes": 3278
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockPolarRightClosureR10.lean",
+      "sha256": "de7144afa2e275d0bf8962f0133ee57f6ac47c61203d747f8ea0612456fd81c2",
+      "bytes": 8896
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockRegularCoreR2.lean",
+      "sha256": "9658974b516918a29433b65427f8a507def5220389165569de43ae986b4d9e21",
+      "bytes": 5262
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V350L2OperatorLift.lean",
+      "sha256": "bbdf07f64bc1abdfb50fed8420911c868a11cc6c8036b6f06167f021a1db7465",
+      "bytes": 4131
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\CStarAlgebra\\ContinuousLinearMap.lean",
+      "sha256": "5236e7cb617df10064fb4fecd991ff97668787df8931221cbe3a6f58f7b9d5a9",
+      "bytes": 610
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\CStarAlgebra\\ContinuousFunctionalCalculus\\Basic.lean",
+      "sha256": "593ce861074319a9f0a1dec296f014718daccc12979de9287cc1e80bc9a4b479",
+      "bytes": 23954
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\Adjoint.lean",
+      "sha256": "d1636c8ae9160d3762630f6f99815134dbc4da51188d9e2e34dcc3c06c6c32fc",
+      "bytes": 48494
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\MeasureTheory\\Function\\L2Space.lean",
+      "sha256": "a163d1750172052118dd30d8f423aa4bfe52481a70f34a567adf5b5463483c17",
+      "bytes": 14306
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_review_20261016\\R7SineWindowEqualityTransportFragmentR1.lean",
+      "sha256": "e83b069867eca1269f8675c6d8caf7254c735cd22a78cdc9f36c22caecc7ecb5",
+      "bytes": 1841
+    }
+  ]
+}

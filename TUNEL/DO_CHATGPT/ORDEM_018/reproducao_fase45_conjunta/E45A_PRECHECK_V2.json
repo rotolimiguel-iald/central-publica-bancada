@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-10-06T02:16:35.471287+00:00",
+  "status": "PURE_PRECHECK_PASSED_NO_GRID_DISPATCH",
+  "controller": {
+    "name": "E45A_campanha_unidade_v2.py",
+    "sha256": "9301ee2b700bda97e7fe4970fa3115e64aaa26b641f66313f097bc255a474c54"
+  },
+  "campaign": {
+    "name": "E45A_CONTINUACAO_CAMPANHA_V2.json",
+    "sha256": "86d4507613bc1048cc159d1d93757cfb675d29587b289341c95e663f6816e28c"
+  },
+  "initial_state": {
+    "name": "E45A_ESTADO_CAMPANHA_V2.json",
+    "sha256": "5119e4d7b4d555aea3829d152f5a40f5c981880c0f015cb72bb5a308ada0b1a2"
+  },
+  "checks": {
+    "ast_parses": true,
+    "only_three_declared_deltas": true,
+    "same_eleven_ids_order": true,
+    "all26_source_pins_match": true,
+    "all11_outputs_absent": true,
+    "old_state_STOPPED_preserved": true,
+    "pure_prefix_evaluated": true,
+    "v2_state_hash_unchanged": true,
+    "no_subprocess_in_compiled_main": true
+  },
+  "method": "Read-only main AST prefix through source pin loop; truncated before first RUNNING assignment. No main dispatch body compiled. Existing stdlib function definitions not invoked. No numerical likelihood/grid execution.",
+  "prefix_statements": 12,
+  "validation_harness_correction": "First harness incorrectly expected11 AST statements, observed12 because semicolon-separated statements are distinct. Replaced numerical count assumption by structural check: prior node is source_pins For loop. Original controller unchanged, prior harness had no main evaluation or scientific process.",
+  "new_scientific_processes_started": 0,
+  "delta": [
+    "--- E45A_campanha_unidade.py",
+    "+++ E45A_campanha_unidade_v2.py",
+    "@@ -1,8 +1,8 @@",
+    " \"\"\"Single-unit guard for the explicitly authorized historical E45A campaign. No automatic batch.\"\"\"",
+    " import sys,json,pathlib,os,hashlib,datetime,subprocess,time,math,traceback",
+    " ROOT=pathlib.Path(__file__).resolve().parent",
+    "-CAMP=ROOT/\"E45A_CONTINUACAO_CAMPANHA_P4_P5_SOMBRA.json\"",
+    "-STATE=ROOT/\"E45A_ESTADO_CAMPANHA.json\"",
+    "+CAMP=ROOT/\"E45A_CONTINUACAO_CAMPANHA_V2.json\"",
+    "+STATE=ROOT/\"E45A_ESTADO_CAMPANHA_V2.json\"",
+    " def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()",
+    " def stamp():return datetime.datetime.now(datetime.timezone.utc).isoformat()",
+    " def write_state(d):",
+    "@@ -15,7 +15,7 @@",
+    " def main():",
+    "  assert len(sys.argv)==2,\"Give one authorized index, never a batch.\"",
+    "  index=int(sys.argv[1]);camp=json.loads(CAMP.read_bytes());state=json.loads(STATE.read_bytes())",
+    "- assert sha(Path(__file__))==camp[\"controller_sha256\"],\"controller pin\"",
+    "+ assert sha(pathlib.Path(__file__))==camp[\"controller_sha256\"],\"controller pin\"",
+    "  assert state[\"campaign_sha256\"]==sha(CAMP),\"campaign pin\"",
+    "  assert state[\"status\"]==\"READY\" and state[\"next_index\"]==index,\"campaign is not ready for this unit; no retry\"",
+    "  unit=camp[\"units\"][index];name=unit[\"result_name\"];resultpath=ROOT/name"
+  ],
+  "old_scientific_grid": {
+    "name": "E45A_GRID_P4_d1b_tgl_n25.json",
+    "sha256": "9ca5d31f0ca48f2e2954ec3b31d85a03ee39de1e7970bbbe95d1d9166388942b"
+  }
+}

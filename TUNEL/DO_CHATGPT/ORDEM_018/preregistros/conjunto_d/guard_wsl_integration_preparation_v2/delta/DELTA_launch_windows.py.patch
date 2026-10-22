@@ -1,0 +1,81 @@
+--- snapshot514/launch_windows.py
++++ v2/launch_windows.py
+@@ -3,7 +3,7 @@
+ ENTRY=time.monotonic()
+ import sys,os,json,hashlib,types,uuid,subprocess,threading
+ from pathlib import Path
+-BASE=Path(r"C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\preregistros\conjunto_d\guard_wsl_integration_preparation")
++BASE=Path(r"C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\preregistros\conjunto_d\guard_wsl_integration_preparation_v2")
+ WSL=r"C:\Windows\System32\wsl.exe"
+ def load():
+     c=json.loads((BASE/"CONTRATO_WSL.json").read_bytes());raw=(BASE/"common.py").read_bytes()
+@@ -13,18 +13,39 @@
+ class Capture:
+     def __init__(self,proc):
+         self.buffers={"stdout":bytearray(),"stderr":bytearray()};self.overflow=False;self.threads=[]
++        self.errors={key:None for key in self.buffers}
++        self.eof={key:False for key in self.buffers}
+         for key in self.buffers:
+             t=threading.Thread(target=self.read,args=(key,getattr(proc,key)),daemon=True);t.start();self.threads.append(t)
+     def read(self,key,stream):
+-        while True:
+-            raw=stream.read(4096)
+-            if not raw:break
+-            room=32768-len(self.buffers[key]);self.buffers[key].extend(raw[:room])
+-            if len(raw)>room:self.overflow=True
++        try:
++            while True:
++                raw=stream.read(4096)
++                if raw==b"":
++                    self.eof[key]=True
++                    return
++                if not isinstance(raw,bytes):raise TypeError("Capture read did not return bytes")
++                room=32768-len(self.buffers[key]);self.buffers[key].extend(raw[:room])
++                if len(raw)>room:self.overflow=True
++        except BaseException as exc:
++            # A terminated reader is not evidence of EOF or a complete stream.
++            self.errors[key]={"type":type(exc).__name__,"message":str(exc)[:1000]}
++    def require_no_errors(self):
++        if any(error is not None for error in self.errors.values()):
++            raise RuntimeError("WSL capture read failure: "+json.dumps(self.errors,sort_keys=True))
+     def join(self,deadline):
+         for t in self.threads:t.join(timeout=max(0,min(1,deadline-time.monotonic())))
+-        return not any(t.is_alive() for t in self.threads)
++        self.require_no_errors()
++        if any(t.is_alive() for t in self.threads):return False
++        if not all(self.eof.values()):raise RuntimeError("Capture reader ended without normal EOF")
++        if self.overflow:raise RuntimeError("WSL output overflow")
++        return True
++    def snapshot(self):
++        return {"errors":dict(self.errors),"eof":dict(self.eof),"overflow":self.overflow,
++                "retained_bytes":{key:len(value) for key,value in self.buffers.items()},
++                "all_readers_terminated":not any(t.is_alive() for t in self.threads)}
+     def text(self,key):return bytes(self.buffers[key])
++
+ def launch(g,mode,nonce):
+     argv=[WSL,"--distribution","Ubuntu-24.04","--exec",*g.argv_for(mode,nonce)]
+     proc=subprocess.Popen(argv,cwd=BASE,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,
+@@ -33,10 +54,12 @@
+ 
+ def wait(proc,cap,deadline):
+     while proc.poll() is None:
++        cap.require_no_errors()
+         if cap.overflow:raise RuntimeError("WSL output overflow")
+         if time.monotonic()>=deadline:raise TimeoutError("Outer WSL deadline")
+         time.sleep(.02)
+     if not cap.join(deadline):raise TimeoutError("Stream capture not joined")
++    cap.require_no_errors()
+     if cap.overflow:raise RuntimeError("WSL output overflow")
+     return proc.returncode
+ 
+@@ -97,7 +120,9 @@
+     receipt={"status":status,"request_id":g.REQUEST,"nonce":nonce,"pid":os.getpid(),"error":error,"linux":linux,"cleanup":cleanup,
+         "primary_returncode":None if primary is None else primary.returncode,"cleanup_returncode":None if cleaner is None else cleaner.returncode,
+         "wall_before_final_receipt_io_s":time.monotonic()-ENTRY,"scientific_calls":0,"D_read":False,"retry_allowed":False,
+-        "requires_external_exit0_and_total_deadline":True}
++        "requires_external_exit0_and_total_deadline":True,
++        "capture_state":{"primary":None if pcap is None else pcap.snapshot(),
++                         "cleanup":None if ccap is None else ccap.snapshot()}}
+     g.fresh(BASE/"RESULT.json",receipt);g.need(time.monotonic()<deadline,"Final IO exceeded nominal60s; invalidate provisional PASS")
+     print(json.dumps(receipt,sort_keys=True),flush=True)
+     g.need(time.monotonic()<deadline,"Terminal stdout IO exceeded nominal60s")

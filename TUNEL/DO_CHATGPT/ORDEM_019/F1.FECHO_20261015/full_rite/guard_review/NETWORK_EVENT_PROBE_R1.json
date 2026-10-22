@@ -1,0 +1,95 @@
+{
+  "schema": "guard-audit-events-independent/v1",
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "actual_network_calls": 0,
+  "scientific_program_executed": false,
+  "results": [
+    {
+      "version": "R3",
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\sitecustomize_rite_r3.py",
+        "sha256": "a1d07e37ec4defd7ed665980d57ff0b775a8cc80ce2602a2c03990bcd74bfaca",
+        "bytes": 6980
+      },
+      "start_utc": "2026-10-15T18:31:27.277307+00:00",
+      "end_utc": "2026-10-15T18:31:27.618211+00:00",
+      "seconds": 0.34092019999661716,
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nfrom pathlib import Path\nimport importlib.util,json,os,sys\np=Path(os.environ['TEST_GUARD_SOURCE'])\ns=importlib.util.spec_from_file_location('guard_under_review',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nchecks=[]\nfor name,args in [('socket.connect',(None,('127.0.0.1',9))),('socket.sendto',(None,('127.0.0.1',9))),('socket.sendmsg',(None,('127.0.0.1',9))),('socket.getnameinfo',(('127.0.0.1',9),0))]:\n refused=False\n try:sys.audit(name,*args)\n except PermissionError:refused=True\n checks.append({'audit_event':name,'refused':refused})\nprint(json.dumps(checks))\n"
+      ],
+      "exit_code": 0,
+      "stdout": "[{\"audit_event\": \"socket.connect\", \"refused\": true}, {\"audit_event\": \"socket.sendto\", \"refused\": false}, {\"audit_event\": \"socket.sendmsg\", \"refused\": false}, {\"audit_event\": \"socket.getnameinfo\", \"refused\": false}]\n",
+      "stderr": "",
+      "checks": [
+        {
+          "audit_event": "socket.connect",
+          "refused": true
+        },
+        {
+          "audit_event": "socket.sendto",
+          "refused": false
+        },
+        {
+          "audit_event": "socket.sendmsg",
+          "refused": false
+        },
+        {
+          "audit_event": "socket.getnameinfo",
+          "refused": false
+        }
+      ]
+    },
+    {
+      "version": "R4",
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\replay_r4_sentinel\\sitecustomize_rite_r4.py",
+        "sha256": "b48bbf9326441a0e8be10effd4bf5e7f46fde494febc71eef748877d10920d7e",
+        "bytes": 7037
+      },
+      "start_utc": "2026-10-15T18:31:27.618890+00:00",
+      "end_utc": "2026-10-15T18:31:27.938238+00:00",
+      "seconds": 0.31936169999971753,
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nfrom pathlib import Path\nimport importlib.util,json,os,sys\np=Path(os.environ['TEST_GUARD_SOURCE'])\ns=importlib.util.spec_from_file_location('guard_under_review',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nchecks=[]\nfor name,args in [('socket.connect',(None,('127.0.0.1',9))),('socket.sendto',(None,('127.0.0.1',9))),('socket.sendmsg',(None,('127.0.0.1',9))),('socket.getnameinfo',(('127.0.0.1',9),0))]:\n refused=False\n try:sys.audit(name,*args)\n except PermissionError:refused=True\n checks.append({'audit_event':name,'refused':refused})\nprint(json.dumps(checks))\n"
+      ],
+      "exit_code": 0,
+      "stdout": "[{\"audit_event\": \"socket.connect\", \"refused\": true}, {\"audit_event\": \"socket.sendto\", \"refused\": true}, {\"audit_event\": \"socket.sendmsg\", \"refused\": true}, {\"audit_event\": \"socket.getnameinfo\", \"refused\": true}]\n",
+      "stderr": "",
+      "checks": [
+        {
+          "audit_event": "socket.connect",
+          "refused": true
+        },
+        {
+          "audit_event": "socket.sendto",
+          "refused": true
+        },
+        {
+          "audit_event": "socket.sendmsg",
+          "refused": true
+        },
+        {
+          "audit_event": "socket.getnameinfo",
+          "refused": true
+        }
+      ]
+    }
+  ],
+  "finding": "R3 did not refuse sendto/sendmsg/getnameinfo synthetic audit events; R4 refuses all three. These are event dispatch probes, not network transmissions.",
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\network_event_probe_r1.py",
+    "sha256": "4fbd073ae30035d1c08096fa8d69fb4c535d4ddb9f89a21608e009ea2e4c9da9",
+    "bytes": 2575
+  }
+}

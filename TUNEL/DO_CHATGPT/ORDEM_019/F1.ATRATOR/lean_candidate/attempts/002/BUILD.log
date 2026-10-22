@@ -1,0 +1,102 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:66:0: warning: automatically included section variable(s) unused in theorem `TGLExt.TheSingularityReadsTheAttractor.fixed_of_mem_span`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:103:0: warning: automatically included section variable(s) unused in theorem `TGLExt.TheSingularityReadsTheAttractor.faceFamily_hypothesis`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:125:27: warning: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:125:58: warning: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:126:6: warning: `ContinuousLinearMap.sub_apply` has been deprecated: Use `sub_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sub_apply` to `sub_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:126:37: warning: `ContinuousLinearMap.one_apply` has been deprecated: Use `one_apply_eq_self` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.one_apply` to `one_apply_eq_self x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:114:0: warning: automatically included section variable(s) unused in theorem `TGLExt.TheSingularityReadsTheAttractor.faceFamily_iterate`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:143:0: warning: automatically included section variable(s) unused in theorem `TGLExt.TheSingularityReadsTheAttractor.defect_kernel_eq_fixedSpace`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:154:15: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => _a.starProjection = (q.coeff 0)⁻¹ • (Polynomial.aeval (1 - T)) q
+Error: Application type mismatch: The argument
+  reading._proof_1 T
+has type
+  (fixedSpace T).HasOrthogonalProjection
+but is expected to have type
+  _a.HasOrthogonalProjection
+in the application
+  @Submodule.starProjection ℂ E Complex.instRCLike inst✝² inst✝¹ _a ⋯
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+E : Type u_3
+inst✝² : NormedAddCommGroup E
+inst✝¹ : InnerProductSpace ℂ E
+inst✝ : CompleteSpace E
+T : E →L[ℂ] E
+hsa : ContinuousLinearMap.adjoint (1 - T) = 1 - T
+q : Polynomial ℂ
+hann : (Polynomial.aeval (1 - T)) (Polynomial.X * q) = 0
+h0 : q.coeff 0 ≠ 0
+hq : ∀ (n : ℕ), (starRingEnd ℂ) (q.coeff n) = q.coeff n
+⊢ (fixedSpace T).starProjection = (q.coeff 0)⁻¹ • (Polynomial.aeval (1 - T)) q
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.ATRATOR\lean_candidate\TheSingularityReadsTheAttractor.lean:157:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+'TGLExt.TheSingularityReadsTheAttractor.A1_cesaro' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A1_face_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A2_reading_stationary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A3_reading_idempotent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A3_reading_is_fixed_space_projection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A3_normalized_letter' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A3_letter_exists_finite' does not depend on any axioms
+'TGLExt.TheSingularityReadsTheAttractor.A4_fixedSpace_eq_span' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A4_dimension_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.faceFamily_hypothesis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.concrete_hypothesis_inhabited' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.concrete_fixed_dimension_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.counterexample_identity_fixed_dimension_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.TheSingularityReadsTheAttractor.A3_angular_rereading_only' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

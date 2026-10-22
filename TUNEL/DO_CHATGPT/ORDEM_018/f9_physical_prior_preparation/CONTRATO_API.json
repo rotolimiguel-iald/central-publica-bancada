@@ -1,0 +1,185 @@
+{
+  "schema": "F9_PHYSICAL_PRIOR_PREPARATION_CONTRACT_V1",
+  "request_id": "df482198-56c4-4169-ae5e-3908f5d12f2c",
+  "status": "PREPARATION_ONLY_NO_EXECUTION",
+  "module": "physical_prior.py",
+  "authorization": false,
+  "claim": false,
+  "observed_reads": 0,
+  "candidate_imports": 0,
+  "scientific_executions": 0,
+  "selected_alternative": "conditional analytic H3/H4 with injected stable log-window; H5 bounded 1D quadrature",
+  "not_selected": "direct quadrature in original beta/s/rd coordinates; no automatic fallback or retry",
+  "entry": "integrate_at_fixed_theta(joint, assembly_json, *, assembly_sha256, background_json, consumer_module, precision_json, precision_sha256, services)",
+  "scope": {
+    "theta": "fixed shared H0,ombh2,omch2; original domain/priors unchanged",
+    "models": [
+      "H1_TGL",
+      "H2_LCDM",
+      "H3_beta_free",
+      "H4_Cepheid",
+      "H5_rd_free"
+    ],
+    "base_prior": {
+      "density_exact": "50/3",
+      "applied": false,
+      "integrated": false
+    },
+    "n_rows": 283,
+    "eta_dimension": 63,
+    "MM": "CONDITIONAL_UNRATIFIED"
+  },
+  "reuse": {
+    "consumer_request": "a9874f79-9d71-48f5-824c-d51d6d819534",
+    "private_fields": [
+      "_np",
+      "_engine",
+      "_y",
+      "_origin",
+      "_structure",
+      "_admission_sha256"
+    ],
+    "consumer_methods": [
+      "evaluate_five",
+      "_json",
+      "_keys",
+      "_reference",
+      "_digest",
+      "_fraction"
+    ],
+    "backend_methods": [
+      "residualize",
+      "support.evaluate",
+      "log_integral"
+    ],
+    "new_gaussian_solver": false,
+    "new_background_calls_per_extra": 0,
+    "trust": "Caller verifies exact loaded objects/services and external admission; flags/pins alone are not authorization/certificates"
+  },
+  "curves": {
+    "H3": {
+      "coordinate": "beta",
+      "lower": "-1/20",
+      "upper": "1/20",
+      "prior_density": "10",
+      "direction": "(I_law/ln(10))*a_h in already transformed units"
+    },
+    "H4": {
+      "coordinate": "delta=-5log10(1+s)",
+      "lower": "-5log10(23/20)",
+      "upper": "-5log10(17/20)",
+      "original_prior": "s uniform[-3/20,3/20], density10/3",
+      "lambda": "ln(10)/5",
+      "prior_density": "lambda/(3/10)*exp(-lambda*delta)",
+      "direction": "c_C in already transformed units"
+    },
+    "H5": {
+      "coordinate": "q=1/rd",
+      "lower": "1/160",
+      "upper": "1/130",
+      "original_prior": "rd uniform[130,160] Mpc",
+      "prior_density": "1/(30*q^2)",
+      "direction": "D(theta) only in BAO indices3:16; reconstructed as pinned BAO means times rd_ref, rounding unbounded",
+      "integration": "q=qlo+(qhi-qlo)*u; positive scaled quadrature u in[0,1]"
+    }
+  },
+  "quadratic": {
+    "r": "R(y-mu_ref) via qualified backend residualize",
+    "w": "R*v via same backend",
+    "A": "w dot w",
+    "B": "r dot w",
+    "log_likelihood": "K-||r-w*(x-xref)||^2/2",
+    "a_zero": "flat only if all projected components are float-exact zero; underflow otherwise is failure",
+    "underidentification": "Proper extra prior integrates to one if likelihood flat; does not relax nuisance rank63",
+    "conditional_minimum_documentation": "xref+clip(B/A,[lo-xref,hi-xref]), independent of prior; H4 B-lambda is not likelihood minimum"
+  },
+  "normalization": {
+    "nuisance": "Common kappa d_eta, log(kappa) omitted exactly as existing consumer",
+    "data": "Euclidean measure on common fixed transformed affine support",
+    "prefactors": "retained",
+    "full_cross_covariance": "always inherited from joint; no block simplification"
+  },
+  "precision_admission": {
+    "schema": "F9_PHYSICAL_PRIOR_PRECISION_V1",
+    "fields": [
+      "schema",
+      "source_pins",
+      "consumer_admission_sha256",
+      "assembly_sha256",
+      "services",
+      "max_quadrature_evaluations",
+      "max_window_evaluations",
+      "absolute_log_error_target",
+      "absolute_scaled_error_target",
+      "relative_scaled_error_target",
+      "caller_verification_reference"
+    ],
+    "budgets": "Explicit integers1..1000000; schema cap only, no execution budget granted here",
+    "error_targets": "Explicit positive finite values; requests, not certified guarantees",
+    "references": "id+sha256 for verified loaded services and caller verification"
+  },
+  "services": {
+    "log_exp_quad_interval": {
+      "signature": "(A,h,L,U,*,absolute_log_error_target,max_evaluations)",
+      "target": "log integral_L^U exp(h*z-A*z*z/2) dz, combined and stable",
+      "domain": "A>0; finite L<U, L<=0<=U; maximum-restricted anchoring",
+      "must_not": "ordinary CDF subtraction or isolated exp(h^2/(2A)) presented as stable in extreme tails",
+      "not_implemented_or_qualified_here": true
+    },
+    "positive_quad_1d": {
+      "signature": "(callback,0.0,1.0,*,absolute_error_target,relative_error_target,max_evaluations)",
+      "target": "scaled positive H5 integrand, original normalized prior preserved",
+      "callback_budget_enforced": true,
+      "callback_errors_latched": true,
+      "not_implemented_or_qualified_here": true
+    },
+    "receipt": {
+      "exact_keys": [
+        "service_id",
+        "status",
+        "log_value_OR_value",
+        "error_estimate",
+        "error_kind",
+        "converged",
+        "evaluations",
+        "method"
+      ],
+      "status": "ENGINEERING_ESTIMATE",
+      "error_kind": [
+        "ESTIMATED_NOT_CERTIFIED",
+        "UNASSESSED"
+      ],
+      "convergence_and_precision_claim": "receipt retained; no promotion to certified or assertion that requested target met"
+    }
+  },
+  "failures": {
+    "engineering": "exception aborts full collection, no model/region omitted",
+    "legitimate_zero": "complement of admitted common affine support, with own status; not underflow",
+    "window_underflow": "nonfinite log of positive finite window rejected",
+    "quadrature_zero": "positive mathematical integral cannot be inferred zero from nodes",
+    "node_underflow": "counted; no bound on missed mass inferred",
+    "retry": false,
+    "fallback": false
+  },
+  "output": {
+    "schema": "F9_CONDITIONAL_PHYSICAL_PRIOR_RESULT_V1",
+    "status": "ENGINEERING_ONLY",
+    "quantity": "conditional proper-extra-prior average, not theta-integrated evidence",
+    "certification": "UNBOUNDED_THEORY_ERROR preserved; service-local errors do not bound all errors",
+    "unset": [
+      "absolute_evidence",
+      "theta_integrated_evidence",
+      "lnB",
+      "p",
+      "sigma",
+      "verdict"
+    ]
+  },
+  "minimum_future_verification": [
+    "independent formula/code/Jacobian review",
+    "loaded dependencies and precision services",
+    "concrete integration diagnostics/support/callback failures",
+    "precision near tails/small curvature without artificial campaign"
+  ],
+  "does_not_propose_campaign": true
+}

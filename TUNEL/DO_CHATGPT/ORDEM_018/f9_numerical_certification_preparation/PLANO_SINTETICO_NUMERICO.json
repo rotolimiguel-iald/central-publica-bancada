@@ -1,0 +1,96 @@
+{
+  "request_id": "b5fe6406-4430-48a0-bc59-e58f68917c12",
+  "status": "PLAN_ONLY_NOT_EXECUTED",
+  "execution_authorized": false,
+  "controls": [
+    {
+      "id": "NC01",
+      "target": "Global lower versus local optimizer",
+      "fixture": "Rational polynomial on [0,1] with boundary optimum and separated wells; exact known minima",
+      "expected": "Local proposals never become lower bound; full cover encloses each minimum"
+    },
+    {
+      "id": "NC02",
+      "target": "Certified dual lower",
+      "fixture": "Small rational PSD matrix and exact null-space vectors for X; one intentionally near-null invalid vector",
+      "expected": "Valid vectors give lower bounds; approximate annihilation is refused without nuisance bound"
+    },
+    {
+      "id": "NC03",
+      "target": "Prior preservation",
+      "fixture": "Affine cube maps for inherited physical coordinates; analytic toy means for H4/H5 reparameterizations",
+      "expected": "Mass exactly one and transformed Jacobians retained; no real model/centres used"
+    },
+    {
+      "id": "NC04",
+      "target": "Minimization pruning versus integration",
+      "fixture": "Positive analytic integrand with sizeable mass outside minimum cell; certified cell bounds",
+      "expected": "Pruned minimum cells remain in evidence interval"
+    },
+    {
+      "id": "NC05",
+      "target": "Failed or unknown cell",
+      "fixture": "Mock oracle reports failure in a positive-prior-mass cell of a completely defined toy target",
+      "expected": "Integral includes [0,w], minimum includes lower0, failure visible; no renormalization or zero likelihood"
+    },
+    {
+      "id": "NC06",
+      "target": "Metric and support uncertainty",
+      "fixture": "Exact rational support and covariance sandwiches, then rank-changing/jitter mutation",
+      "expected": "Bounds contain analytic toy profile; changed support refused; no physical covariance claim"
+    },
+    {
+      "id": "NC07",
+      "target": "Forward uncertainty versus agreement",
+      "fixture": "Two deliberately identical biased mock solvers and an independently supplied valid enclosure",
+      "expected": "Agreement alone remains ENGINEERING_ONLY; only the enclosure supports certificate"
+    },
+    {
+      "id": "NC08",
+      "target": "Relative normalization",
+      "fixture": "Analytically integrable low-dimensional Gaussian nuisance with common flat measure and normalized compact physical prior",
+      "expected": "Common factor cancels only when conditions hold; changed nuisance measure or prefactor retained/refused"
+    },
+    {
+      "id": "NC09",
+      "target": "Integral and ratio containment",
+      "fixture": "Positive toy integrands with analytic integral; deliberately wide bounds including zero and extreme log scale",
+      "expected": "Analytic value contained; no finite ratio claim from zero denominator lower bound or underflow"
+    },
+    {
+      "id": "NC10",
+      "target": "Coverage and resource contract",
+      "fixture": "Document-only toy cell tree and scenario manifest; shortened list, gap, budget exhaustion and certificate hash mutation",
+      "expected": "Missing coverage/hash cannot count as complete; valid wide bounds retained; no new execution of existing guard/tail controls"
+    }
+  ],
+  "scope": "New numerical certificate interfaces only; no CAMB, observed data or tail Monte Carlo",
+  "limits_proposed_not_measured": {
+    "total_wall_seconds": 180,
+    "per_control_wall_seconds": 10,
+    "threads": 1,
+    "RSS_MiB": 512,
+    "cells_per_case": 4096,
+    "precision_bits": [
+      128,
+      256
+    ],
+    "output_MiB": 16,
+    "stdout_MiB": 1
+  },
+  "before_execution": [
+    "Independent review and separate concrete authorization/unit IDs",
+    "Select and pin interval backend; if unavailable BLOCKED_DEPENDENCY, no install by this plan",
+    "Confirm arithmetic and actual resource enforcement through final persistence",
+    "Reference existing controls C01-C08 and guard/tail receipts without replay"
+  ],
+  "excluded": [
+    "consumed C01-C08",
+    "CAMB five-point pilot",
+    "INIT003",
+    "old Claude generation/pin blockage",
+    "observed F9"
+  ],
+  "scientific_campaign_created": false,
+  "real_values_allowed": false
+}

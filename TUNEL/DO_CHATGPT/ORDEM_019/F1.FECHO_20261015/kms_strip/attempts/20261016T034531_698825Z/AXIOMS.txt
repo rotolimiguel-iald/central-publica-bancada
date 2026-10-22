@@ -1,0 +1,52 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T034531_698825Z\MaxwellStressTensorCovarianceR1.lean:23:27: warning: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [quadraticTensor, ̲Matrix.mul_apply, ̲Matrix.transpose_apply, ̲Matrix.diagonal_apply,
+  ̵  ̵ ̵ ̵mul_comm,
+  ̲ ̲ ̲ ̲ ̲mul_left_comm,̵m̵u̵l̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T034531_698825Z\MaxwellStressTensorCovarianceR1.lean:32:2: error: Tactic `apply` failed: could not unify the conclusion of `congrArg fun x => (1 / 4 * if μ = ν then s μ else 0) * x`
+  (1 / 4 * if μ = ν then s μ else 0) * ?m.48 = (1 / 4 * if μ = ν then s μ else 0) * ?m.49
+with the goal
+  ∑ x, ∑ i, (1 / 4 * if μ = ν then s μ else 0) * (s x * s i * F x i * F x i) =
+    (∑ i, 1 / 4 * (diagonal s * quadraticTensor (diagonal s) (of F)).diag i) * if μ = ν then s μ else 0
+
+Note: The full type of `congrArg fun x => (1 / 4 * if μ = ν then s μ else 0) * x` is
+  ?m.48 = ?m.49 → (1 / 4 * if μ = ν then s μ else 0) * ?m.48 = (1 / 4 * if μ = ν then s μ else 0) * ?m.49
+
+case e_a
+ι : Type u_1
+inst✝¹ : Fintype ι
+inst✝ : DecidableEq ι
+s : ι → ℂ
+F : ι → ι → ℂ
+μ ν : ι
+⊢ ∑ x, ∑ i, (1 / 4 * if μ = ν then s μ else 0) * (s x * s i * F x i * F x i) =
+    (∑ i, 1 / 4 * (diagonal s * quadraticTensor (diagonal s) (of F)).diag i) * if μ = ν then s μ else 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T034531_698825Z\MaxwellStressTensorCovarianceR1.lean:29:67: warning: This simp argument is unused:
+  Matrix.diagonal_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [stress, ̲stressMatrix, ̲Matrix.add_apply, ̲Matrix.neg_apply, ̲Matrix.smul_apply,
+      smul_eq_mul, ̲quadraticTensor_apply, ̲Matrix.of_apply, ̲Matrix.trace, ̲Matrix.diagonal_m̵u̵a̲p̲p̲ly̲,
+      M̵a̵t̵r̵i̵x̵.̵d̵i̵a̵g̵o̵n̵a̵l̵_̵a̵p̵p̵l̵y̵,̵Finset.mul_sum]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T034531_698825Z\MaxwellStressTensorCovarianceR1.lean:43:6: error(lean.unknownIdentifier): Unknown constant `Matrix.mul_transpose`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T034531_698825Z\MaxwellStressTensorCovarianceR1.lean:41:77: error: unsolved goals
+ι : Type u_1
+inst✝¹ : Fintype ι
+inst✝ : DecidableEq ι
+η A F : Matrix ι ι ℂ
+hA : A * η * Aᵀ = η
+⊢ Aᵀ * F * A * η * (Aᵀ * F * A)ᵀ = Aᵀ * (F * η * Fᵀ) * A
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T034531_698825Z\MaxwellStressTensorCovarianceR1.lean:48:0: warning: automatically included section variable(s) unused in theorem `F1Fecho.MaxwellStress.tensorTrace_covariant`:
+  [DecidableEq ι]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq ι] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+'F1Fecho.MaxwellStress.stress_as_matrix' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStress.stressMatrix_covariant' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

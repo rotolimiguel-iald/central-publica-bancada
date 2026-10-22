@@ -1,0 +1,77 @@
+{
+  "schema": "POSIX_ARGV_INTERFACE_CANDIDATE_ONLY",
+  "status": "PREPARATION_DOCUMENTARY_STATIC_NOT_VALIDATED",
+  "source_terminal_request_id": "4f5d0b21-e1d2-4906-a6ce-eb70e60bc6cf",
+  "new_execution_request_id": null,
+  "new_authorization": false,
+  "new_claim": false,
+  "new_launcher": false,
+  "candidate_file": "common.py.candidate.txt",
+  "candidate_source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\common.py",
+    "bytes": 4567,
+    "sha256": "b5d51aecf197163924beb25a8234c08844150e5fb4566169bee516731065ee38",
+    "mtime_utc": "2026-10-06T06:31:06.955253+00:00"
+  },
+  "selected_alternative": "Separate PurePosixPath representation for argv and concrete Path for IO",
+  "alternatives": [
+    {
+      "id": "A",
+      "selected": true,
+      "approach": "PurePosixPath (or posixpath) explicitly models Linux destination independently of os.name. Concrete Path retained separately for IO."
+    },
+    {
+      "id": "B",
+      "selected": false,
+      "approach": "Use (LINUX/script).as_posix() on host-concrete Path. Smaller patch for fixed literal; still interprets the input via host path semantics, so less explicit boundary."
+    }
+  ],
+  "interface": {
+    "transport": "List of argv tokens, no shell string/split/embedded quoting/URL encoding",
+    "destination_root": "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2",
+    "allowed_roles": [
+      "--supervisor",
+      "--cleanup",
+      "--child"
+    ],
+    "scripts": {
+      "--supervisor": "linux_control.py",
+      "--cleanup": "linux_control.py",
+      "--child": "worker.py"
+    },
+    "posix_token_constraints": [
+      "Absolute beginning /",
+      "No backslash",
+      "Spaces preserved in one list element",
+      "Same spelling on Windows and Linux",
+      "Same constructor for launch and identity/cleanup expected argv"
+    ],
+    "windows_io": "WIN and BASE remain host-concrete Path; wsl.exe remains Windows path",
+    "linux_io": "LINUX remains concrete Path derived from POSIX text, used for IO only on Linux",
+    "root_flag": "Absent in source; no --root added. Contract covers representation if a later explicit interface supplies it.",
+    "not_generic_converter": "No inference from Windows drives or UNC, no shell quoting service, no arbitrary user path normalization"
+  },
+  "scope_preservation": [
+    "Only import/representation binding/argv script token change in candidate",
+    "No protocol/state/limits/cleanup/claim redesign",
+    "Consumed package must never receive this patch or be rerun"
+  ],
+  "future_minimum_evidence": [
+    {
+      "phase": "Pure interface check under a separate decision",
+      "proposal": "Exercise only the isolated token builder with supervisor/cleanup/child and frozen examples; confirm absolute forward-slash token, list length/positions, spaces and exact equality of launch/identity representations. No WSL, hook or control needed for this check.",
+      "why": "Directly checks the missing cross-host serialization property, unlike AST preservation alone."
+    },
+    {
+      "phase": "Only if a new concrete transport unit is later authorized",
+      "proposal": "Observe received argv at the destination in that new unit or a specifically approved minimal receiver; compare tokens/exit/receipts. Do not create a separate extra campaign automatically.",
+      "why": "String checks alone do not demonstrate wsl.exe transport/remote opening. This is outside current authorization."
+    }
+  ],
+  "non_claims": [
+    "No repair validation",
+    "No dynamic PurePosixPath/candidate execution here",
+    "No WSL transport validation",
+    "No guard/journal/PE/D qualification"
+  ]
+}

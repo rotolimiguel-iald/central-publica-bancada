@@ -1,0 +1,80 @@
+{
+  "start_utc": "2026-10-15T22:42:01.968090+00:00",
+  "end_utc": "2026-10-15T22:42:34.960351+00:00",
+  "seconds": 32.99225529999967,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261015T224201_893285Z\\DeficiencyCriterionR2.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261015T224201_893285Z\\DeficiencyCriterionR2.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261015T224201_893285Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261015T224201_893285Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261015T224201_893285Z\\DeficiencyCriterionR2.lean",
+    "sha256": "33f9d7146cf0622217fdda98eb3bf8988965a47a7792e8dd8d58fae103281b69",
+    "bytes": 3685
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T224201_893285Z\DeficiencyCriterionR2.lean:49:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (a, b).1
+in the target expression
+  inner ℂ b (v, -u).1 - inner ℂ a (v, -u).2 = 0
+
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+G : H →ₗ.[ℂ] H
+hc : G.IsClosed
+hs : G.IsFormalAdjoint G
+hd : Dense ↑G.domain
+hplus : ∀ (x : H), (x, Complex.I • x) ∈ G.adjoint.graph → x = 0
+hminus : ∀ (x : H), (x, -Complex.I • x) ∈ G.adjoint.graph → x = 0
+hsub : G ≤ G.adjoint
+p : H × H
+hp : p ∈ G.adjoint.graph
+E : Type u_1 := WithLp 2 (H × H)
+e : E ≃L[ℂ] H × H := WithLp.prodContinuousLinearEquiv 2 ℂ H H
+L : Submodule ℂ E := Submodule.comap (↑↑e) G.graph
+hL : IsClosed ↑L
+this : CompleteSpace ↥L := IsClosed.completeSpace_coe
+w : E := e.symm p
+q : E := L.starProjection w
+r : E := w - q
+hq : e q ∈ G.graph
+hr : e r ∈ G.adjoint.graph
+horth : ∀ (x : ↥G.domain), inner ℂ r (e.symm (↑x, ↑G x)) = 0
+u : H := (e r).1
+v : H := (e r).2
+a b : H
+hab : (a, b) ∈ G.graph
+x : ↥G.domain
+hx : (↑x, ↑G x) = (a, b)
+⊢ inner ℂ b (v, -u).1 - inner ℂ a (v, -u).2 = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T224201_893285Z\DeficiencyCriterionR2.lean:60:50: warning: This simp argument is unused:
+  Complex.I_sq
+
+Hint: Omit it from the simp argument list.
+  simp [̵u̵,̵v̵,̵s̵m̵u̵l̵_̵a̵d̵d̵,̵s̵m̵u̵l̵_̵s̵m̵u̵l̵,̵n̵e̵g̵_̵s̵m̵u̵l̵,̵C̵o̵m̵p̵l̵e̵x̵.̵I̵_̵s̵q̵]̵[̲u̲,̲ ̲v̲,̲ ̲s̲m̲u̲l̲_̲a̲d̲d̲,̲ ̲s̲m̲u̲l̲_̲s̲m̲u̲l̲,̲ ̲n̲e̲g̲_̲s̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T224201_893285Z\DeficiencyCriterionR2.lean:65:50: warning: This simp argument is unused:
+  Complex.I_sq
+
+Hint: Omit it from the simp argument list.
+  simp [̵u̵,̵v̵,̵s̵m̵u̵l̵_̵s̵u̵b̵,̵s̵m̵u̵l̵_̵s̵m̵u̵l̵,̵n̵e̵g̵_̵s̵m̵u̵l̵,̵C̵o̵m̵p̵l̵e̵x̵.̵I̵_̵s̵q̵]̵[̲u̲,̲ ̲v̲,̲ ̲s̲m̲u̲l̲_̲s̲u̲b̲,̲ ̲s̲m̲u̲l̲_̲s̲m̲u̲l̲,̲ ̲n̲e̲g̲_̲s̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.DeficiencyCriterion.selfAdjoint_of_no_deficiency' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

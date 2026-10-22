@@ -1,0 +1,476 @@
+{
+  "checked_utc": "2026-10-15T17:22:14.779349+00:00",
+  "sources": [
+    {
+      "id": "maxwell_bridge",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\MaxwellLiteratureBridge.lean",
+      "bytes": 8843,
+      "sha256": "c07d135fac53737465c50636204da7ee79d27ced9df3867382d1e190781febe4",
+      "read_ranges": [
+        [
+          37,
+          53
+        ],
+        [
+          59,
+          115
+        ],
+        [
+          120,
+          136
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 37,
+          "last": 53,
+          "text": "37: structure MaxwellQuadraticForm where\n38:   Dom : Set C.F\n39:   Dom_vac : C.Ω ∈ Dom\n40:   Dom_translate : ∀ (b : Fin 4 → ℝ) (ψ : C.F), C.Γ (U1 b) ψ ∈ Dom ↔ ψ ∈ Dom\n41:   Dom_boost : ∀ (s : ℝ) (ψ : C.F), C.Γ (B0 s) ψ ∈ Dom ↔ ψ ∈ Dom\n42:   Q : C.F → (Fin 4 → ℝ) → Matrix (Fin 4) (Fin 4) ℝ\n43:   Q_vac : ∀ x : Fin 4 → ℝ, Q C.Ω x = 0\n44:   Q_covariant : ∀ (a : Fin 4 → ℝ) (ψ : C.F) (x : Fin 4 → ℝ), ψ ∈ Dom → Q (C.Γ (U1 a) ψ) x = Q ψ (x - a)\n45:   Q_symmetric : ∀ (ψ : C.F) (x : Fin 4 → ℝ), ψ ∈ Dom → (Q ψ x).transpose = Q ψ x\n46:   Q_test_integrable : ∀ (ψ : C.F), ψ ∈ Dom → ∀ (ν μ : Fin 4) (f : (Fin 4 → ℝ) → ℝ),\n47:     ContDiff ℝ (⊤ : ℕ∞) f → HasCompactSupport f →\n48:     Integrable (fun x => metricSignV32 μ * Q ψ x μ ν * testDerivativeV32 f μ x)\n49:   Q_conserved : ∀ (ψ : C.F), ψ ∈ Dom → ∀ (ν : Fin 4) (f : (Fin 4 → ℝ) → ℝ),\n50:     ContDiff ℝ (⊤ : ℕ∞) f → HasCompactSupport f →\n51:     (∑ μ : Fin 4, ∫ x : Fin 4 → ℝ, metricSignV32 μ * Q ψ x μ ν * testDerivativeV32 f μ x) = 0\n52:   Q_boost_covariant : ∀ (s : ℝ) (ψ : C.F) (x : Fin 4 → ℝ), ψ ∈ Dom →\n53:     Q (C.Γ (B0 s) ψ) x = (TGLExt.boostMat (-s)).transpose * Q ψ (wedgeBoostMap (-s) x) * TGLExt.boostMat (-s)"
+        },
+        {
+          "first": 59,
+          "last": 115,
+          "text": "59: def extendByZero (Q : MaxwellQuadraticForm C) : C.F → (Fin 4 → ℝ) → Matrix (Fin 4) (Fin 4) ℝ :=\n60:   fun ψ x => if ψ ∈ Q.Dom then Q.Q ψ x else 0\n61: \n62: theorem extendByZero_on_dom (Q : MaxwellQuadraticForm C) {ψ : C.F} (h : ψ ∈ Q.Dom) (x : Fin 4 → ℝ) :\n63:     extendByZero Q ψ x = Q.Q ψ x := by\n64:   classical\n65:   simp [extendByZero, h]\n66: \n67: theorem extendByZero_off_dom (Q : MaxwellQuadraticForm C) {ψ : C.F} (h : ψ ∉ Q.Dom) (x : Fin 4 → ℝ) :\n68:     extendByZero Q ψ x = 0 := by\n69:   classical\n70:   simp [extendByZero, h]\n71: \n72: /-- ★★ o tensor TOTAL do certificado, construído POR TERMO a partir da forma da literatura. -/\n73: def toStress (Q : MaxwellQuadraticForm C) : StressTensorDataLocalV32 (lightNet C) (lightBoost C) where\n74:   T := extendByZero Q\n75:   T_vac := fun x => by\n76:     show extendByZero Q C.Ω x = 0\n77:     rw [extendByZero_on_dom Q Q.Dom_vac, Q.Q_vac]\n78:   T_covariant := fun a ψ x => by\n79:     show extendByZero Q (C.Γ (U1 a) ψ) x = extendByZero Q ψ (x - a)\n80:     by_cases h : ψ ∈ Q.Dom\n81:     · rw [extendByZero_on_dom Q ((Q.Dom_translate a ψ).mpr h), extendByZero_on_dom Q h, Q.Q_covariant a ψ x h]\n82:     · have h' : C.Γ (U1 a) ψ ∉ Q.Dom := fun hm => h ((Q.Dom_translate a ψ).mp hm)\n83:       rw [extendByZero_off_dom Q h', extendByZero_off_dom Q h]\n84:   symmetric := fun ψ x => by\n85:     by_cases h : ψ ∈ Q.Dom\n86:     · rw [extendByZero_on_dom Q h]; exact Q.Q_symmetric ψ x h\n87:     · rw [extendByZero_off_dom Q h]; exact Matrix.transpose_zero\n88:   test_integrable := fun ψ ν μ f hf hc => by\n89:     by_cases h : ψ ∈ Q.Dom\n90:     · simp only [extendByZero_on_dom Q h]; exact Q.Q_test_integrable ψ h ν μ f hf hc\n91:     · simp only [extendByZero_off_dom Q h, Matrix.zero_apply, mul_zero, zero_mul]\n92:       exact integrable_zero _ _ _\n93:   conserved := fun ψ ν f hf hc => by\n94:     by_cases h : ψ ∈ Q.Dom\n95:     · simp only [extendByZero_on_dom Q h]; exact Q.Q_conserved ψ h ν f hf hc\n96:     · simp only [extendByZero_off_dom Q h, Matrix.zero_apply, mul_zero, zero_mul, integral_zero,\n97:         Finset.sum_const_zero]\n98:   boost_covariant := fun s ψ x => by\n99:     show extendByZero Q (C.Γ (B0 s) ψ) x =\n100:       (TGLExt.boostMat (-s)).transpose * extendByZero Q ψ (wedgeBoostMap (-s) x) * TGLExt.boostMat (-s)\n101:     by_cases h : ψ ∈ Q.Dom\n102:     · rw [extendByZero_on_dom Q ((Q.Dom_boost s ψ).mpr h), extendByZero_on_dom Q h, Q.Q_boost_covariant s ψ x h]\n103:     · have h' : C.Γ (B0 s) ψ ∉ Q.Dom := fun hm => h ((Q.Dom_boost s ψ).mp hm)\n104:       rw [extendByZero_off_dom Q h', extendByZero_off_dom Q h, Matrix.mul_zero, Matrix.zero_mul]\n105: \n106: /-- ★★ dentro do domínio, o tensor do certificado É a forma da literatura (nada inventado). -/\n107: theorem toStress_on_dom (Q : MaxwellQuadraticForm C) {ψ : C.F} (h : ψ ∈ Q.Dom) :\n108:     (toStress Q).T ψ = Q.Q ψ := funext fun x => extendByZero_on_dom Q h x\n109: \n110: /-- ★ fora do domínio o tensor é zero (sem conteúdo físico) — nenhuma prova do caminho o consome ali (`Regular` exige ψ ∈ Dom). -/\n111: theorem toStress_off_dom (Q : MaxwellQuadraticForm C) {ψ : C.F} (h : ψ ∉ Q.Dom) :\n112:     (toStress Q).T ψ = 0 := funext fun x => extendByZero_off_dom Q h x\n113: \n114: theorem regular_in_dom (Q : MaxwellQuadraticForm C) {ψ : C.F}\n115:     (h : Regular Q.Dom (toStress Q).toStressTensorData ψ) : ψ ∈ Q.Dom := h.1"
+        },
+        {
+          "first": 120,
+          "last": 136,
+          "text": "120: def toCertificate (Q : MaxwellQuadraticForm C)\n121:     (charge_link : ∀ ψ, Regular Q.Dom (toStress Q).toStressTensorData ψ → ∀ k : ℝ,\n122:       HasModularEnergy (lightDelta C) ψ k → k = 2 * Real.pi * nullPlaneCharge (toStress Q).toStressTensorData ψ)\n123:     (nontrivial : ∃ ψ, Regular Q.Dom (toStress Q).toStressTensorData ψ ∧\n124:       ∃ k : ℝ, HasModularEnergy (lightDelta C) ψ k ∧ k ≠ 0) : MaxwellCertificate C where\n125:   Dom := Q.Dom\n126:   Dom_vac := Q.Dom_vac\n127:   Dom_translate := fun b ψ h => (Q.Dom_translate b ψ).mpr h\n128:   T := toStress Q\n129:   charge_link := charge_link\n130:   nontrivial := nontrivial\n131: \n132: /-- ★★ o certificado construído não inventa: o domínio é o citado e, nele, o tensor é a forma citada. -/\n133: theorem toCertificate_is_the_literature (Q : MaxwellQuadraticForm C) (cl) (nt) :\n134:     (toCertificate Q cl nt).Dom = Q.Dom ∧\n135:       ∀ ψ ∈ (toCertificate Q cl nt).Dom, (toCertificate Q cl nt).T.T ψ = Q.Q ψ :=\n136:   ⟨rfl, fun ψ h => toStress_on_dom Q h⟩"
+        }
+      ]
+    },
+    {
+      "id": "imported_sq",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\TheImportedSecondQuantization.lean",
+      "bytes": 35835,
+      "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+      "read_ranges": [
+        [
+          235,
+          263
+        ],
+        [
+          498,
+          516
+        ],
+        [
+          547,
+          593
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 235,
+          "last": 263,
+          "text": "235:   [instCA : Algebra ℂ Core]\n236:   embedding : (R (L.K rightWedge)).toStarSubalgebra →⋆ₐ[ℂ] Core\n237:   embedding_injective : Function.Injective embedding\n238:   dualAction : ℝ → (Core ≃⋆ₐ[ℂ] Core)\n239:   dualAction_zero : dualAction 0 = StarAlgEquiv.refl\n240:   dualAction_add : ∀ s t : ℝ, dualAction (s + t) = (dualAction s).trans (dualAction t)\n241:   trace : Core → ENNReal\n242:   trace_zero : trace 0 = 0\n243:   trace_tracial : ∀ x y : Core, trace (x * y) = trace (y * x)\n244:   trace_star : ∀ x : Core, trace (star x) = trace x\n245:   trace_dual_scaling : ∀ (s : ℝ) (x : Core),\n246:     trace ((dualAction s) x) = ENNReal.ofReal (Real.exp (-s)) * trace x\n247:   /-- uma projeção finita não nula do núcleo II_∞, partida em duas metades de traço igual [Connes 1973]. -/\n248:   PF : Core\n249:   PF_sa : star PF = PF\n250:   PF_idem : PF * PF = PF\n251:   PF_ne : PF ≠ 0\n252:   PF_pos : 0 < trace PF\n253:   PF_fin : trace PF < ⊤\n254:   Pp : Core\n255:   Pm : Core\n256:   Pp_sa : star Pp = Pp\n257:   Pp_idem : Pp * Pp = Pp\n258:   Pm_sa : star Pm = Pm\n259:   Pm_idem : Pm * Pm = Pm\n260:   split : Pp + Pm = PF\n261:   orth : Pp * Pm = 0\n262:   trace_additive : trace PF = trace Pp + trace Pm\n263:   equal_halves : trace Pp = trace Pm"
+        },
+        {
+          "first": 498,
+          "last": 516,
+          "text": "498: def Regular {W : TGLSpecificAQFTWitness} (D : Set W.H) (T : StressTensorData W) (ψ : W.H) : Prop :=\n499:   ψ ∈ D ∧ (∀ x, MeasureTheory.Integrable (fun p : ℝ × (Fin 2 → ℝ) =>\n500:       p.1 * nullEnergy T ψ (x + (p.1 • nullDir + screenEmbed p.2)))) ∧ ‖ψ‖ = 1 ∧ (∀ x, Continuous (fun u : ℝ => nullEnergy T ψ (x + u • nullDir))) ∧\n501:     (∀ x l, IntegrableOn (fun u : ℝ => nullEnergy T ψ (x + u • nullDir)) (Ioi l)) ∧\n502:     (∀ x l, IntegrableOn (fun u : ℝ => u * nullEnergy T ψ (x + u • nullDir)) (Ioi l))\n503: \n504: /-- **MaxwellCertificate** — o tensor de Maxwell da luz e os dois fatos de estado [CITADOS]. -/\n505: structure MaxwellCertificate where\n506:   /-- o domínio NOMEADO dos estados suaves (finitas partículas/coerentes suaves), invariante e com o vácuo [Wightman]. -/\n507:   Dom : Set C.F\n508:   Dom_vac : C.Ω ∈ Dom\n509:   Dom_translate : ∀ (b : Fin 4 → ℝ) (ψ : C.F), ψ ∈ Dom → C.Γ (U1 b) ψ ∈ Dom\n510:   /-- ⟨ψ, :T_ab(x): ψ⟩ do campo de Maxwell livre, simétrico, conservado, covariante [campos livres de Wightman]. -/\n511:   T : StressTensorDataLocalV32 (lightNet C) (lightBoost C)\n512:   /-- ★ o elo da carga modular no plano nulo [Casini–Teste–Torroba 2017; Wall 2011 — KNOWN-física], no domínio nomeado. -/\n513:   charge_link : ∀ ψ, Regular Dom T.toStressTensorData ψ → ∀ k : ℝ,\n514:     HasModularEnergy (lightDelta C) ψ k → k = 2 * Real.pi * nullPlaneCharge T.toStressTensorData ψ\n515:   /-- um estado coerente regular de energia modular não nula [Longo 2019]. -/\n516:   nontrivial : ∃ ψ, Regular Dom T.toStressTensorData ψ ∧ ∃ k : ℝ, HasModularEnergy (lightDelta C) ψ k ∧ k ≠ 0"
+        },
+        {
+          "first": 547,
+          "last": 593,
+          "text": "547: def lightH3 (M : MaxwellCertificate C) (N : KillingNormalization) (G : ℝ) (hG : 0 < G) :\n548:     TGLExt.ContratoQGv31.ContratoH3 (lightNet C) (lightRealization C) N M.T.toStressTensorData :=\n549:   H3_of_null_solution (lightH2 C N) M.T.toStressTensorData G hG {ψ | Regular (W := lightNet C) M.Dom M.T.toStressTensorData ψ}\n550:     (fun ψ h => h.2.2.1) (regular_vac M) (fun b ψ h => regular_translate M b ψ h)\n551:     (fun ψ h k hk => M.charge_link ψ h k hk)\n552:     (by obtain ⟨ψ, hψ, k, hk, hk0⟩ := M.nontrivial; exact ⟨ψ, hψ, k, hk, hk0⟩)\n553:     (fun ψ h => h.2.2.2.1) (fun x hx => wedgeFrame_screen_flat x hx)\n554:     (construct_null_solution M.T.toStressTensorData G {ψ | Regular (W := lightNet C) M.Dom M.T.toStressTensorData ψ}\n555:       (fun ψ h => h.2.2.2.1) (fun ψ h => h.2.2.2.2.1) (fun ψ h => h.2.2.2.2.2))\n556: \n557: /-- **lightH3v32** — o H3 v3.2: o MESMO horizonte da luz e o MESMO boost do tensor. -/\n558: def lightH3v32 (M : MaxwellCertificate C) (N : KillingNormalization) (G : ℝ) (hG : 0 < G) :\n559:     ContratoH3v32 (lightNet C) (lightRealization C) N (lightBoost C) M.T :=\n560:   { lightH3 M N G hG with\n561:     light_horizon := lightH2v32 C N\n562:     same_stress_boost := rfl\n563:     same_local_horizon := rfl }\n564: \n565: /-- o reconhecimento do par por si mesmo (U = identidade): o caso em que a forma nominada NÃO difere. -/\n566: def selfRecognition : ORDEM016.D6.ReconhecimentoPeloConteudo\n567:     ((lightNet C).net rightWedge).toStarSubalgebra ((lightNet C).net rightWedge).toStarSubalgebra\n568:     (lightNet C).vac (lightNet C).vac where\n569:   U := LinearIsometryEquiv.refl ℂ _\n570:   reference := rfl\n571:   algebra := fun A => by\n572:     have : (LinearIsometryEquiv.refl ℂ (lightNet C).H).conjStarAlgEquiv A = A := by\n573:       apply ContinuousLinearMap.ext; intro ψ; rfl\n574:     rw [this]\n575: \n576: /-- **lightImport** — o import v3.2: produce = H3 da luz, same_horizon por conteúdo, a fonte É h2. -/\n577: def lightImport (M : MaxwellCertificate C) (N : KillingNormalization) (G : ℝ) (hG : 0 < G) :\n578:     ContratoImportH3v32 (lightNet C) (lightRealization C) N (lightBoost C) M.T (lightH2v32 C N) where\n579:   produce := lightH3v32 M N G hG\n580:   same_horizon := selfRecognition\n581:   source_realization := C.tomita\n582:   source_is_the_light := rfl\n583: \n584: /-! ## 6. O TEOREMA -/\n585: \n586: /-- ★★★ **O CONTRATO v3.2 DA TGL HABITADO SOB HIPÓTESES NOMEADAS** (PROVADA POR CITAÇÃO): da luz de uma partícula\n587:     (translações PAGAS), da segunda quantização, do tensor de Maxwell e de G > 0, o contrato v3.2 INTEIRO\n588:     — H2 da luz, H3 no MESMO horizonte, o import — é habitado, para TODO relógio N. -/\n589: theorem qg_formalized_by_citation (L : LightOneParticle) (C : FockCertificate L)\n590:     (M : MaxwellCertificate C) (N : KillingNormalization) (G : ℝ) (hG : 0 < G) :\n591:     ∃ h2 : ContratoH2v32 (lightNet C) (lightRealization C) N,\n592:       Nonempty (ContratoImportH3v32 (lightNet C) (lightRealization C) N (lightBoost C) M.T h2) :=\n593:   ⟨lightH2v32 C N, ⟨lightImport M N G hG⟩⟩"
+        }
+      ]
+    },
+    {
+      "id": "stress_v32",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\ContratoQG_v32.lean",
+      "bytes": 4850,
+      "sha256": "e57bfb47fedfe63e50dc51701a73d5bef12bc0f6e413415f88583b9212970523",
+      "read_ranges": [
+        [
+          41,
+          66
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 41,
+          "last": 66,
+          "text": "41: def metricSignV32 (μ : Fin 4) : ℝ := if μ = 0 then 1 else -1\n42: \n43: /-- a derivada parcial de um teste. -/\n44: def testDerivativeV32 (f : (Fin 4 → ℝ) → ℝ) (μ : Fin 4) (x : Fin 4 → ℝ) : ℝ :=\n45:   fderiv ℝ f x (Pi.single μ 1)\n46: \n47: /-- **StressTensorDataLocalV32** — o tensor do par com as cláusulas locais (A-1.c da bancada). -/\n48: structure StressTensorDataLocalV32 (W0 : TGLSpecificAQFTWitness) (B : WedgeBoostRep W0)\n49:     extends StressTensorData W0 where\n50:   symmetric : ∀ ψ x, (T ψ x).transpose = T ψ x\n51:   test_integrable : ∀ (ψ : W0.H) (ν μ : Fin 4) (f : (Fin 4 → ℝ) → ℝ),\n52:     ContDiff ℝ (⊤ : ℕ∞) f → HasCompactSupport f →\n53:     Integrable (fun x => metricSignV32 μ * T ψ x μ ν * testDerivativeV32 f μ x)\n54:   conserved : ∀ (ψ : W0.H) (ν : Fin 4) (f : (Fin 4 → ℝ) → ℝ),\n55:     ContDiff ℝ (⊤ : ℕ∞) f → HasCompactSupport f →\n56:     (∑ μ : Fin 4, ∫ x : Fin 4 → ℝ, metricSignV32 μ * T ψ x μ ν * testDerivativeV32 f μ x) = 0\n57:   boost_covariant : ∀ (s : ℝ) (ψ : W0.H) (x : Fin 4 → ℝ),\n58:     T (B.V s ψ) x = (TGLExt.boostMat (-s)).transpose * T ψ (wedgeBoostMap (-s) x) * TGLExt.boostMat (-s)\n59: \n60: /-- **ContratoH3v32** — o H3 v3.1 sobre o MESMO horizonte da luz e o MESMO boost do tensor. -/\n61: structure ContratoH3v32 (W0 : TGLSpecificAQFTWitness) (R0 : TGLModularRealization W0)\n62:     (N0 : KillingNormalization) (B : WedgeBoostRep W0) (T0 : StressTensorDataLocalV32 W0 B)\n63:     extends TGLExt.ContratoQGv31.ContratoH3 W0 R0 N0 T0.toStressTensorData where\n64:   light_horizon : ContratoH2v32 W0 R0 N0\n65:   same_stress_boost : light_horizon.boost = B\n66:   same_local_horizon : H2 = light_horizon.toContratoH2"
+        }
+      ]
+    },
+    {
+      "id": "stress_v31",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\ContratoQG_v31.lean",
+      "bytes": 24897,
+      "sha256": "2f2c6561a5a5d832b43f11f7bacccf4811eb4392f1832f78cf4a5838a72a4808",
+      "read_ranges": [
+        [
+          109,
+          110
+        ],
+        [
+          178,
+          183
+        ],
+        [
+          276,
+          296
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 109,
+          "last": 110,
+          "text": "109: def nullDir : Fin 4 → ℝ := ![1, 1, 0, 0]\n110: "
+        },
+        {
+          "first": 178,
+          "last": 183,
+          "text": "178: def HasBoostEnergy {H : Type} [NormedAddCommGroup H] [InnerProductSpace ℂ H]\n179:     (V : ℝ → (H ≃ₗᵢ[ℂ] H)) (ψ : H) (b : ℝ) : Prop :=\n180:   HasDerivAt (fun s : ℝ => ⟪ψ, V s ψ⟫_ℂ) (I * (b : ℂ)) 0\n181: \n182: /-- «Δit não tem autovetor fora da reta do vácuo» — a MESMA forma de `W5Final.Espectral.NoEigenOutsideVacuum`. -/\n183: def NoEigenOutsideVacuum (W : TGLSpecificAQFTWitness) (D : ℝ → (W.H ≃ₗᵢ[ℂ] W.H)) : Prop :="
+        },
+        {
+          "first": 276,
+          "last": 296,
+          "text": "276: structure StressTensorData (W : TGLSpecificAQFTWitness) where\n277:   T : W.H → (Fin 4 → ℝ) → Matrix (Fin 4) (Fin 4) ℝ\n278:   T_vac : ∀ x : Fin 4 → ℝ, T W.vac x = 0\n279:   T_covariant : ∀ (a : Fin 4 → ℝ) (ψ : W.H) (x : Fin 4 → ℝ), T (W.U a ψ) x = T ψ (x - a)\n280: \n281: /-- o pareamento T(u, v) = uᵀ T v. -/\n282: def pairing (A : Matrix (Fin 4) (Fin 4) ℝ) (u v : Fin 4 → ℝ) : ℝ := dotProduct u (A.mulVec v)\n283: \n284: /-- a densidade de energia nula T_nn(ψ)(x) = nᵃ nᵇ T_ab. -/\n285: def nullEnergy {W : TGLSpecificAQFTWitness} (T : StressTensorData W) (ψ : W.H) (x : Fin 4 → ℝ) : ℝ :=\n286:   pairing (T.T ψ x) nullDir nullDir\n287: \n288: /-- o ponto transversal (0, 0, y², y³). -/\n289: def screenEmbed (y : Fin 2 → ℝ) : Fin 4 → ℝ := ![0, 0, y 0, y 1]\n290: \n291: /-- a CARGA NULA BILATERAL de ψ no plano nulo do horizonte: ∫∫ λ T_nn(λn + y) dλ d²y (sobre λ ∈ ℝ).\n292:     [KNOWN: −log Δ = 2π × esta carga (CTT 2017); aqui é o lado direito do campo `modular_charge`.] -/\n293: def nullPlaneCharge {W : TGLSpecificAQFTWitness} (T : StressTensorData W) (ψ : W.H) : ℝ :=\n294:   ∫ p : ℝ × (Fin 2 → ℝ), p.1 * nullEnergy T ψ (p.1 • nullDir + screenEmbed p.2)\n295: \n296: /-- o bloco (2,3) de uma métrica: a métrica induzida na tela. -/"
+        }
+      ]
+    },
+    {
+      "id": "boost_energy",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\O16\\ModularBoostEnergyReuse_v2.lean",
+      "bytes": 2585,
+      "sha256": "246230b2a2768513f0d00139a35f5178aea8ba6a2dba6eef122d623e4ca064c5",
+      "read_ranges": [
+        [
+          9,
+          38
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 9,
+          "last": 38,
+          "text": "9: theorem modularEnergy_of_boostEnergy (C : ContratoH2 W R N) {ψ : W.H} {b : ℝ}\n10:     (h : HasBoostEnergy C.boost.V ψ b) : HasModularEnergy C.Δit ψ (2 * Real.pi * b) := by\n11:   unfold HasBoostEnergy at h\n12:   unfold HasModularEnergy\n13:   have hg : HasDerivAt (fun t : ℝ => -(2 * Real.pi * t)) (-(2 * Real.pi)) 0 := by\n14:     have h0 := (hasDerivAt_id (0:ℝ)).const_mul (-(2 * Real.pi))\n15:     have e : (fun t : ℝ => -(2 * Real.pi * t)) = (fun y : ℝ => -(2 * Real.pi) * id y) := by\n16:       funext t; simp [id]\n17:     rw [e]\n18:     exact h0.congr_deriv (by ring)\n19:   have h' : HasDerivAt (fun s : ℝ => ⟪ψ, C.boost.V s ψ⟫_ℂ) (I * (b : ℂ)) (-(2 * Real.pi * 0)) := by\n20:     simpa using h\n21:   have hc := h'.scomp (0:ℝ) hg\n22:   have hfun : (fun t : ℝ => ⟪ψ, C.Δit t ψ⟫_ℂ)\n23:       = (fun s : ℝ => ⟪ψ, C.boost.V s ψ⟫_ℂ) ∘ (fun t : ℝ => -(2 * Real.pi * t)) := by\n24:     funext t\n25:     simp only [Function.comp, C.bw]\n26:   rw [hfun]\n27:   refine hc.congr_deriv ?_\n28:   rw [Complex.real_smul]\n29:   push_cast\n30:   ring\n31: \n32: theorem modularEnergy_unique {H : Type} [NormedAddCommGroup H] [InnerProductSpace ℂ H]\n33:     {D : ℝ → (H ≃ₗᵢ[ℂ] H)} {ψ : H} {k k' : ℝ}\n34:     (h : HasModularEnergy D ψ k) (h' : HasModularEnergy D ψ k') : k = k' := by\n35:   have hu := h.unique h'\n36:   have hI : I * (k : ℂ) = I * (k' : ℂ) := neg_inj.mp hu\n37:   have : (k : ℂ) = k' := mul_left_cancel₀ Complex.I_ne_zero hI\n38:   exact_mod_cast this"
+        }
+      ]
+    },
+    {
+      "id": "modular_charge",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\O16\\ModularChargeLink.lean",
+      "bytes": 2894,
+      "sha256": "c4b2e2ad8d32779586bf1cee11189f02b36ed499cc097310b495149846d47384",
+      "read_ranges": [
+        [
+          11,
+          42
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 11,
+          "last": 42,
+          "text": "11: def ModularChargeLink (C : ContratoH2 W R N) (T : StressTensorData W) (A : Set W.H) : Prop :=\n12:   ∀ ψ ∈ A, ∀ k : ℝ, HasModularEnergy C.Δit ψ k →\n13:     k = 2 * Real.pi * nullPlaneCharge T ψ\n14: \n15: /-- A sufficient link from the chosen stress tensor to the actual boost expectation.\n16: The hypothesis includes existence of this derivative for every admissible state. -/\n17: theorem modular_charge_of_boost_charge (C : ContratoH2 W R N)\n18:     (T : StressTensorData W) (A : Set W.H)\n19:     (hboost : ∀ ψ ∈ A, HasBoostEnergy C.boost.V ψ (nullPlaneCharge T ψ)) :\n20:     ModularChargeLink C T A := by\n21:   intro ψ hψ k hk\n22:   exact modularEnergy_unique hk (modularEnergy_of_boostEnergy C (hboost ψ hψ))\n23: \n24: /-- This tensor meets only the weak vacuum/covariance type, not physical stress claims. -/\n25: def zeroTensor (W : TGLSpecificAQFTWitness) : StressTensorData W where\n26:   T := fun _ _ => 0\n27:   T_vac := fun _ => rfl\n28:   T_covariant := fun _ _ _ => rfl\n29: \n30: theorem zero_tensor_charge (ψ : W.H) : nullPlaneCharge (zeroTensor W) ψ = 0 := by\n31:   simp [nullPlaneCharge,nullEnergy,pairing,zeroTensor]\n32: \n33: /-- Thus H2 together with the weak tensor type does not supply the link\n34: for arbitrary tensors on a class with a nonzero modular energy witness. -/\n35: theorem zero_tensor_rejects_nonzero_modular_energy (C : ContratoH2 W R N) (A : Set W.H)\n36:     (hn : ∃ ψ ∈ A, ∃ k : ℝ, HasModularEnergy C.Δit ψ k ∧ k ≠ 0) :\n37:     ¬ ModularChargeLink C (zeroTensor W) A := by\n38:   intro hlink\n39:   obtain ⟨ψ,hψ,k,hk,hne⟩ := hn\n40:   have he := hlink ψ hψ k hk\n41:   rw [zero_tensor_charge,mul_zero] at he\n42:   exact hne he"
+        }
+      ]
+    },
+    {
+      "id": "null_solution",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\O16\\TeleologicalNullSolution_v2.lean",
+      "bytes": 3228,
+      "sha256": "957f59b5a4598f4c11923a1f7f7400d1739b1d021b9dfbd90c9081df7e65e383",
+      "read_ranges": [
+        [
+          9,
+          48
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 9,
+          "last": 48,
+          "text": "9: structure NullSolution (W : TGLSpecificAQFTWitness) (T : StressTensorData W) (G : ℝ) (A : Set W.H) where\n10:   a : Source → (Fin 4 → ℝ) → ℝ\n11:   θ : W.H → (Fin 4 → ℝ) → ℝ\n12:   a_zero : ∀ x, a 0 x = 0\n13:   a_cov : ∀ (b : Fin 4 → ℝ) (f : Source) (x : Fin 4 → ℝ), a (fun y => f (y - b)) x = a f (x - b)\n14:   a_deriv : ∀ ψ ∈ A, ∀ x : Fin 4 → ℝ, HasDerivAt (fun l : ℝ => a (T.T ψ) (x + l • nullDir)) (θ ψ x) 0\n15:   θ_deriv : ∀ ψ ∈ A, ∀ x : Fin 4 → ℝ,\n16:     HasDerivAt (fun l : ℝ => θ ψ (x + l • nullDir)) (-(8 * Real.pi * G) * nullEnergy T ψ x) 0\n17: \n18: end TGLExt.ContratoQGv31.ProbeResidual\n19: namespace ChatgptAudit.TeleologicalConstruct016\n20: open TGLExt.ContratoQGv31.ProbeResidual\n21: open ChatgptAudit.TeleologicalMatrix016 ChatgptAudit.NullRay016\n22: \n23: def construct_null_solution {W : TGLSpecificAQFTWitness}\n24:     (T : StressTensorData W) (G : ℝ) (A : Set W.H)\n25:     (hc : ∀ ψ ∈ A, ∀ x, Continuous (fun u : ℝ => nullEnergy T ψ (x+u • nullDir)))\n26:     (hi : ∀ ψ ∈ A, ∀ x l, IntegrableOn (fun u : ℝ => nullEnergy T ψ (x+u • nullDir)) (Ioi l))\n27:     (hm : ∀ ψ ∈ A, ∀ x l, IntegrableOn (fun u : ℝ => u*nullEnergy T ψ (x+u • nullDir)) (Ioi l)) :\n28:     NullSolution W T G A where\n29:   a := fun f => area n (8*Real.pi*G) (sourceDensity f)\n30:   θ := fun ψ => expansion n (8*Real.pi*G) (sourceDensity (T.T ψ))\n31:   a_zero := by\n32:     intro x\n33:     rw [sourceDensity_zero]\n34:     exact congrFun (area_zero n (8*Real.pi*G)) x\n35:   a_cov := by\n36:     intro b f x\n37:     rw [sourceDensity_translation]\n38:     exact congrFun (area_covariant n (8*Real.pi*G) (sourceDensity f) b) x\n39:   a_deriv := by\n40:     intro ψ hψ x\n41:     have h := local_ray_equations n (8*Real.pi*G) (sourceDensity (T.T ψ)) x\n42:       (hc ψ hψ x) (hi ψ hψ x) (hm ψ hψ x) 0\n43:     simpa only [n,nullDir,sourceDensity,nullEnergy,pairing,zero_smul,add_zero] using h.1\n44:   θ_deriv := by\n45:     intro ψ hψ x\n46:     have h := local_ray_equations n (8*Real.pi*G) (sourceDensity (T.T ψ)) x\n47:       (hc ψ hψ x) (hi ψ hψ x) (hm ψ hψ x) 0\n48:     simpa only [n,nullDir,sourceDensity,nullEnergy,pairing,zero_smul,add_zero] using h.2"
+        }
+      ]
+    },
+    {
+      "id": "null_consumer",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\O16\\NullSolutionConsumerReuse.lean",
+      "bytes": 3201,
+      "sha256": "a78e1c92adbb68ab89daad95531bf73d9b669a0a359245d9445a13a92799d12e",
+      "read_ranges": [
+        [
+          18,
+          58
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 18,
+          "last": 58,
+          "text": "18: def H3_of_null_solution (C2 : ContratoH2 W R N) (T : StressTensorData W) (G : ℝ) (hG : 0 < G)\n19:     (A : Set W.H) (hAu : ∀ ψ ∈ A, ‖ψ‖ = 1) (hAv : W.vac ∈ A)\n20:     (hAt : ∀ (b : Fin 4 → ℝ) (ψ : W.H), ψ ∈ A → W.U b ψ ∈ A)\n21:     (hmc : ∀ ψ ∈ A, ∀ k : ℝ, HasModularEnergy C2.Δit ψ k → k = 2 * Real.pi * nullPlaneCharge T ψ)\n22:     (hAn : ∃ ψ ∈ A, ∃ k : ℝ, HasModularEnergy C2.Δit ψ k ∧ k ≠ 0)\n23:     (hcont : ∀ ψ ∈ A, ∀ x : Fin 4 → ℝ, Continuous (fun l : ℝ => nullEnergy T ψ (x + l • nullDir)))\n24:     (hflat : ∀ x ∈ rightWedge, screenBlockV31 (solderMetric4 (C2.E x)⁻¹) = -1)\n25:     (S : NullSolution W T G A) : ContratoH3 W R N T where\n26:   H2 := C2\n27:   G := G\n28:   G_pos := hG\n29:   admissible := A\n30:   admissible_unit := hAu\n31:   vac_admissible := hAv\n32:   admissible_translate := hAt\n33:   modular_charge := hmc\n34:   admissible_nontrivial := hAn\n35:   energy_continuous := hcont\n36:   background_screen_flat := hflat\n37:   propagator := responseOf S.a\n38:   propagator_zero := by\n39:     funext x\n40:     ext i j\n41:     fin_cases i <;> fin_cases j <;> simp [responseOf, S.a_zero]\n42:   propagator_covariant := by\n43:     intro b f\n44:     funext x\n45:     simp only [responseOf, S.a_cov]\n46:   response_symm := by\n47:     intro ψ hψ x\n48:     exact Matrix.diagonal_transpose _\n49:   lightcone_gauge := by\n50:     intro ψ hψ x\n51:     funext i\n52:     fin_cases i <;> simp [responseOf, nullDir, Matrix.mulVec_diagonal]\n53:   theta := S.θ\n54:   theta_is_expansion := by\n55:     intro ψ hψ x\n56:     rw [areaDensity_responseOf]\n57:     exact S.a_deriv ψ hψ x\n58:   raychaudhuri_einstein := S.θ_deriv"
+        }
+      ]
+    },
+    {
+      "id": "classical_maxwell",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\O16\\MaxwellPolynomial_v2.lean",
+      "bytes": 2949,
+      "sha256": "5e5460abca91081c2c62a1454e3660273e93952b51f739cb34825941ae3c2782",
+      "read_ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 1,
+          "last": 49,
+          "text": "1: -- predecessor_sha256: 031f90ba8820f8f1c4c709aada7809a9e5ca35e704b04db26f6c615e5ec94770\n2: import Lean\n3: import TGLExt.O16.StressTensorDataLocal_v2\n4: \n5: set_option autoImplicit false\n6: set_option maxHeartbeats 1800000\n7: noncomputable section\n8: open Matrix\n9: open TGLExt.ContratoQGv31\n10: namespace ORDEM016.D2prime\n11: \n12: /-- Covariant Maxwell tensor in a Minkowski frame (+---), classical fields.\n13: This polynomial is not an operator-valued Wick distribution. -/\n14: def energy (E B : Fin 3 → ℝ) : ℝ :=\n15:   (E 0^2+E 1^2+E 2^2+B 0^2+B 1^2+B 2^2)/2\n16: \n17: def flux (E B : Fin 3 → ℝ) : Fin 3 → ℝ :=\n18:   ![E 1*B 2-E 2*B 1,E 2*B 0-E 0*B 2,E 0*B 1-E 1*B 0]\n19: \n20: def maxwellTensor (E B : Fin 3 → ℝ) : Matrix (Fin 4) (Fin 4) ℝ :=\n21:   !![energy E B, -flux E B 0, -flux E B 1, -flux E B 2;\n22:      -flux E B 0, energy E B-E 0^2-B 0^2, -E 0*E 1-B 0*B 1, -E 0*E 2-B 0*B 2;\n23:      -flux E B 1, -E 0*E 1-B 0*B 1, energy E B-E 1^2-B 1^2, -E 1*E 2-B 1*B 2;\n24:      -flux E B 2, -E 0*E 2-B 0*B 2, -E 1*E 2-B 1*B 2, energy E B-E 2^2-B 2^2]\n25: \n26: theorem maxwell_symmetric (E B : Fin 3 → ℝ) :\n27:     (maxwellTensor E B).transpose=maxwellTensor E B := by\n28:   ext i j\n29:   fin_cases i <;> fin_cases j <;> rfl\n30: \n31: theorem maxwell_trace_zero (E B : Fin 3 → ℝ) :\n32:     (∑ i : Fin 4, ChatgptAudit.LocalStress.metricSign i * maxwellTensor E B i i)=0 := by\n33:   simp [Fin.sum_univ_four,ChatgptAudit.LocalStress.metricSign,maxwellTensor,energy]\n34:   ring\n35: \n36: /-- Classical pointwise identity only; no positivity assertion for renormalized\n37: quantum stress expectations is made or used. -/\n38: theorem maxwell_null_flux (E B : Fin 3 → ℝ) :\n39:     pairing (maxwellTensor E B) nullDir nullDir = (E 1-B 2)^2+(E 2+B 1)^2 := by\n40:   simp [pairing,dotProduct,Matrix.mulVec,Fin.sum_univ_four,nullDir,maxwellTensor,energy,flux]\n41:   ring\n42: \n43: theorem maxwell_null_flux_nonnegative (E B : Fin 3 → ℝ) :\n44:     0 ≤ pairing (maxwellTensor E B) nullDir nullDir := by\n45:   rw [maxwell_null_flux]; positivity\n46: \n47: theorem maxwell_zero : maxwellTensor 0 0=0 := by\n48:   ext i j\n49:   fin_cases i <;> fin_cases j <;> norm_num [maxwellTensor,energy,flux] <;> rfl"
+        }
+      ]
+    },
+    {
+      "id": "zero_negative",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\CertificateNegativeProbe.lean",
+      "bytes": 1798,
+      "sha256": "29a3183a5394790623f9fb12b25eb482d56bfb14066f654b05fba0f710b4a39b",
+      "read_ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 1,
+          "last": 40,
+          "text": "1: import TGLExt.MaxwellLiteratureBridge\n2: set_option autoImplicit false\n3: noncomputable section\n4: namespace F1Rede.CertificateNegativeProbe\n5: open TGLExt.ImportedSQ TGLExt.MaxwellBridge TGLExt.ContratoQGv31 TGLExt.ContratoQGv32\n6: open MeasureTheory\n7: variable {L : LightOneParticle} (C : FockCertificate L)\n8: \n9: /-- The stress-form interface alone admits the zero form. This is a negative\n10: typing probe, not a Maxwell field or a proposed inhabitant of MaxwellCertificate. -/\n11: def zeroQuadraticForm : MaxwellQuadraticForm C where\n12:   Dom := Set.univ\n13:   Dom_vac := Set.mem_univ _\n14:   Dom_translate := by intros; simp\n15:   Dom_boost := by intros; simp\n16:   Q := fun _ _ => 0\n17:   Q_vac := by intros; rfl\n18:   Q_covariant := by intros; rfl\n19:   Q_symmetric := by intros; exact Matrix.transpose_zero\n20:   Q_test_integrable := by intros; simpa using (integrable_zero (Fin 4 → ℝ) ℝ volume)\n21:   Q_conserved := by intros; simp\n22:   Q_boost_covariant := by intros; simp\n23: \n24: @[simp] theorem zeroQuadraticForm_toStress (ψ : C.F) (x : Fin 4 → ℝ) :\n25:     (toStress (zeroQuadraticForm C)).T ψ x = 0 := by\n26:   rw [toStress_on_dom _ (Set.mem_univ ψ)]\n27:   rfl\n28: \n29: /-- The complete certificate excludes a zero stress tensor: its named\n30: nontriviality and charge identity have mathematical weight together. -/\n31: theorem maxwell_stress_not_everywhere_zero (M : MaxwellCertificate C) :\n32:     ¬ (∀ ψ x, M.T.T ψ x = 0) := by\n33:   intro hzero\n34:   obtain ⟨ψ, hreg, k, hk, hne⟩ := M.nontrivial\n35:   have h := M.charge_link ψ hreg k hk\n36:   have hc : nullPlaneCharge M.T.toStressTensorData ψ = 0 := by\n37:     simp [nullPlaneCharge, nullEnergy, pairing, hzero]\n38:   rw [hc, mul_zero] at h\n39:   exact hne h\n40: "
+        }
+      ]
+    },
+    {
+      "id": "curved_bridge",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\LiganteLeiCampoCurvo.lean",
+      "bytes": 4616,
+      "sha256": "e3f32d9b85ae82dbea4c281673d5105af6b16c240c2add5de0b5bea9134d0697",
+      "read_ranges": [
+        [
+          32,
+          97
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 32,
+          "last": 97,
+          "text": "32: def NamedAtlasH3 {ι : Type} (eta : ℝ) (U : ι → Set Coordinate4)\n33:     (R : ∀ i, GravitationalResponseRecord (U i))\n34:     (screens : ∀ i, MetricScreenFamily (U i) (recordMetric (R i))) : Prop :=\n35:   ∀ i x (hx : x ∈ U i) d (hv : d ≠ 0)\n36:     (hn : tensorQuad (recordMetric (R i) x) d = 0),\n37:     Tendsto (fun t => microscopicAreaError (unifiedPreparation (R i) x d) eta\n38:       (inducedArea (recordMetric (R i))\n39:         (screens i x hx d hv hn).curve\n40:         (screens i x hx d hv hn).screen.vectors) t / t^2)\n41:       (𝓝[<] (0 : ℝ)) (𝓝 0)\n42: \n43: /-- Conditional binder: the finite passage feeds the *named* H3 screen law;\n44:     v338 then gives one Einstein coefficient across a smooth selected atlas.\n45:     No physical construction of that bridge or of a global solution is claimed. -/\n46: theorem passage_h3_to_connected_smooth_atlas_einstein\n47:     {n X ι : Type} [Fintype n] [DecidableEq n]\n48:     [TopologicalSpace X] [PreconnectedSpace X]\n49:     {d : n → ℝ} (hd : ∀ i, 0 < d i) (hinj : Function.Injective d)\n50:     {W : Matrix n n ℂ} (hW : Wᴴ * W = 1)\n51:     (hω : ∀ y, (rhoD d * adU W y).trace = (rhoD d * y).trace)\n52:     (G : ℝ) (hG : 0 < G)\n53:     (U : ι → Set Coordinate4) (hopenU : ∀ i, IsOpen (U i))\n54:     (hconnU : ∀ i, IsPreconnected (U i))\n55:     (R : ∀ i, GravitationalResponseRecord (U i))\n56:     (screens : ∀ i, MetricScreenFamily (U i) (recordMetric (R i)))\n57:     (conserved : ∀ i, ∀ x ∈ U i, ∀ j,\n58:       tensorFieldDivergence (metricInverse (recordMetric (R i)))\n59:         (leviCivitaField (recordMetric (R i))\n60:           (metricInverse (recordMetric (R i))))\n61:         (recordSource (R i)) x j = 0)\n62:     (hH3 : (∀ x, adU W (diagExpect x) = diagExpect (adU W x)) →\n63:       NamedAtlasH3 ((4 * G)⁻¹) U R screens)\n64:     (anchor : ι) (S : ι → Set X) (hopenS : ∀ i, IsOpen (S i))\n65:     (hcover : ∀ x, ∃ i, x ∈ S i) (hne : ∀ i, (S i).Nonempty)\n66:     (chart : ∀ i, S i ≃ₜ U i)\n67:     (htransitions : ∀ i j p (_hi : p ∈ S i) (hj : p ∈ S j),\n68:       ∃ D : SmoothRecordTransition U R S chart i j,\n69:         (chart j ⟨p, hj⟩).val ∈ D.source) :\n70:     ∃! a : ℝ, ∀ i x, x ∈ U i →\n71:       recordEinstein (R i) x + a • recordMetric (R i) x =\n72:         (8 * Real.pi * G) • recordSource (R i) x := by\n73:   have hpost : ∀ x, adU W (diagExpect x) = diagExpect (adU W x) :=\n74:     TGLExt.Fundacao.the_post_lives_in_the_passage hd hinj hW hω\n75:   have harea := hH3 hpost\n76:   have hG0 : G ≠ 0 := ne_of_gt hG\n77:   have heta : (4 * G)⁻¹ ≠ 0 := inv_ne_zero (mul_ne_zero (by norm_num) hG0)\n78:   let C : ι → AreaChart ((4 * G)⁻¹) := fun i => {\n79:     domain := U i\n80:     open_domain := hopenU i\n81:     connected_domain := hconnU i\n82:     record := R i\n83:     screens := screens i\n84:     conserved := conserved i\n85:     area := by\n86:       intro x hx v hv hn\n87:       exact harea i x hx v hv hn\n88:   }\n89:   have htransC : ∀ i j p (_hi : p ∈ S i) (hj : p ∈ S j),\n90:       ∃ D : SmoothRecordTransition (fun i => (C i).domain)\n91:         (fun i => (C i).record) S chart i j,\n92:         (chart j ⟨p, hj⟩).val ∈ D.source := by\n93:     intro i j p hi hj\n94:     simpa only [C] using htransitions i j p hi hj\n95:   have hfield := connected_smooth_atlas_einstein ((4 * G)⁻¹) heta C anchor\n96:     S hopenS hcover hne chart htransC\n97:   simpa only [C, ChatgptAudit.entropy_density_einstein_coefficient G hG0] using hfield"
+        }
+      ]
+    },
+    {
+      "id": "curved_controls",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\LiganteLeiCampoCurvoTestemunha.lean",
+      "bytes": 13925,
+      "sha256": "eeeed286178408b37df5296ee2e517f33606f02f941dcad5e10482a5be24f76c",
+      "read_ranges": [
+        [
+          32,
+          57
+        ],
+        [
+          175,
+          202
+        ],
+        [
+          265,
+          295
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 32,
+          "last": 57,
+          "text": "32: theorem s5_local {ι : Type} (eta : ℝ)\n33:     (U : ι → Set Coordinate4) (hopenU : ∀ i, IsOpen (U i))\n34:     (R : ∀ i, GravitationalResponseRecord (U i))\n35:     (screens : ∀ i, MetricScreenFamily (U i) (recordMetric (R i))) :\n36:     NamedAtlasH3 eta U R screens ↔\n37:       ∀ i x (hx : x ∈ U i) d (hv : d ≠ 0) (hn : tensorQuad (recordMetric (R i) x) d = 0),\n38:         eta * tensorQuad (coordinateRicci (leviCivitaField (recordMetric (R i))\n39:           (metricInverse (recordMetric (R i)))) x) d =\n40:         2 * Real.pi * tensorQuad (recordSource (R i) x) d := by\n41:   unfold NamedAtlasH3\n42:   apply forall_congr'; intro i\n43:   apply forall_congr'; intro x\n44:   apply forall_congr'; intro hx\n45:   apply forall_congr'; intro d\n46:   apply forall_congr'; intro hv\n47:   apply forall_congr'; intro hn\n48:   rw [unified_area_matching_iff (R i) x d eta _]\n49:   have hLor := record_metric_lorentz (R i)\n50:   have hg := record_metric_smooth (R i)\n51:   have hgi := constructed_metric_inverse_smooth (U i) (recordMetric (R i)) hg hLor\n52:   have hGc := levi_civita_field_smooth (U i) (hopenU i) _ _ hg hgi\n53:   have ht := levi_civita_field_torsion_free (U i) (hopenU i) (recordMetric (R i))\n54:     (metricInverse (recordMetric (R i))) (record_metric_symmetric (R i)) x hx\n55:   exact ChatgptAudit.GeneralSourceEinstein.general_source_area_matching_iff_ricci\n56:     (screens i x hx d hv hn) (recordSource (R i)) eta (hopenU i) hg hGc ht (hLor x hx)\n57:     (record_source_symmetric (R i) x hx) hn"
+        },
+        {
+          "first": 175,
+          "last": 202,
+          "text": "175: theorem vacuum_source (x : Coordinate4) : recordSource (flatRecordS 0) x = 0 := by\n176:   rw [flat_record_source]\n177:   have h0 : decodeResponse (normalizedSamples (0 : ResponseSamples)) = 0 := by\n178:     ext a b\n179:     fin_cases a <;> fin_cases b <;> simp [decodeResponse, normalizedSamples]\n180:   simp [h0, traceReverse]\n181: \n182: theorem vacuum_h3 (eta : ℝ) :\n183:     NamedAtlasH3 eta (fun _ : Unit => (univ : Set Coordinate4)) (fun _ => flatRecordS 0)\n184:       (fun _ => flatScreensS 0) := by\n185:   rw [s5_local eta (fun _ : Unit => (univ : Set Coordinate4)) (fun _ => isOpen_univ)]\n186:   intro i x hx d hv hn\n187:   try dsimp only\n188:   rw [flat_ricci_rec, vacuum_source]\n189:   simp [tensorQuad]\n190: \n191: /-- S7: TESTEMUNHA — as hipoteses da F2.3 sao conjuntamente satisfaziveis (vacuo plano). -/\n192: theorem s7_f23_hypotheses_jointly_satisfiable (G : ℝ) (hG : 0 < G) :\n193:     ∃! a : ℝ, ∀ i x, x ∈ (fun _ : Unit => (univ : Set Coordinate4)) i →\n194:       recordEinstein ((fun _ : Unit => flatRecordS 0) i) x +\n195:         a • recordMetric ((fun _ : Unit => flatRecordS 0) i) x =\n196:         (8 * Real.pi * G) • recordSource ((fun _ : Unit => flatRecordS 0) i) x :=\n197:   passage_h3_to_connected_smooth_atlas_einstein (X := Coordinate4) (ι := Unit)\n198:     (n := Fin 1) (d := fun _ => (1:ℝ))\n199:     (fun _ => one_pos) (fun a b _ => Subsingleton.elim a b) (W := 1) (by simp)\n200:     (fun y => by simp [adU]) G hG (fun _ => (univ : Set Coordinate4)) (fun _ => isOpen_univ)\n201:     (fun _ => isPreconnected_univ) (fun _ => flatRecordS 0) (fun _ => flatScreensS 0)\n202:     (fun _ => flat_conserved 0) (fun _ => vacuum_h3 _)"
+        },
+        {
+          "first": 265,
+          "last": 295,
+          "text": "265: theorem s8_h3_is_load_bearing (G : ℝ) (hG : 0 < G) :\n266:     (∀ x ∈ (univ : Set Coordinate4), ∀ j,\n267:       tensorFieldDivergence (metricInverse (recordMetric (flatRecordS sP)))\n268:         (leviCivitaField (recordMetric (flatRecordS sP))\n269:           (metricInverse (recordMetric (flatRecordS sP))))\n270:         (recordSource (flatRecordS sP)) x j = 0) ∧\n271:     ¬ NamedAtlasH3 ((4 * G)⁻¹) (fun _ : Unit => (univ : Set Coordinate4))\n272:         (fun _ => flatRecordS sP) (fun _ => flatScreensS sP) ∧\n273:     ¬ (∃! a : ℝ, ∀ i x, x ∈ (fun _ : Unit => (univ : Set Coordinate4)) i →\n274:         recordEinstein ((fun _ : Unit => flatRecordS sP) i) x +\n275:           a • recordMetric ((fun _ : Unit => flatRecordS sP) i) x =\n276:           (8 * Real.pi * G) • recordSource ((fun _ : Unit => flatRecordS sP) i) x) := by\n277:   refine ⟨flat_conserved sP, ?_, ?_⟩\n278:   · intro h\n279:     have hb := (s5_local ((4 * G)⁻¹) (fun _ : Unit => (univ : Set Coordinate4))\n280:       (fun _ => isOpen_univ) _ _).mp h () 0 (mem_univ _) horizonControlDirection hcd_ne\n281:       (by try dsimp only\n282:           rw [flat_record_metric]; exact flat_control_null)\n283:     try dsimp only at hb\n284:     rw [flat_ricci_rec, sP_null_value] at hb\n285:     simp [tensorQuad] at hb\n286:   · rintro ⟨a, ha, _⟩\n287:     have h := ha () 0 (mem_univ _)\n288:     try dsimp only at h\n289:     have hq := congrArg (fun A : Tensor4 => tensorQuad A horizonControlDirection) h\n290:     try dsimp only at hq\n291:     rw [tq_add, tq_smul, tq_smul, flat_einstein_zero, flat_record_metric, flat_control_null,\n292:       sP_null_value] at hq\n293:     simp [tensorQuad] at hq\n294:     have hpos : 0 < 8 * Real.pi * G := by positivity\n295:     linarith"
+        }
+      ]
+    },
+    {
+      "id": "horizon_reconstruction",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\HorizonEinsteinReconstruction.lean",
+      "bytes": 7283,
+      "sha256": "77180ae46c3ed6e897639e598a623193a3e30a334ea31e13449b0882bafed1bf",
+      "read_ranges": [
+        [
+          101,
+          130
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 101,
+          "last": 130,
+          "text": "101: theorem horizon_einstein_reconstruction (U : Set Coordinate4) (hU : IsOpen U)\n102:     (hconn : IsPreconnected U) (E D T : TensorField4) (eta : ℝ) (heta : eta≠0)\n103:     (hED : ∀ x∈U, E x*D x=1) (hDE : ∀ x∈U, D x*E x=1)\n104:     (hE : SmoothMatrixOn U E) (hD : SmoothMatrixOn U D)\n105:     (hT : ∀ i j, DifferentiableOn ℝ (fun x => T x i j) U)\n106:     (hsT : ∀ x∈U, (T x)ᵀ=T x)\n107:     (hdT : ∀ x∈U, ∀ j, tensorFieldDivergence (inverseFrameMetricField D)\n108:       (frameLeviCivita E D) T x j=0)\n109:     (pencils : ∀ x∈U, ∀ v, tensorQuad (frameMetricField E x) v=0 →\n110:       Nonempty (LocalHorizonPencil U (frameMetricField E) (frameLeviCivita E D) T eta x v)) :\n111:     ∃ cosmological : ℝ, ∀ x∈U,\n112:       frameEinsteinTensor E D x+cosmological • frameMetricField E x=(2*Real.pi/eta) • T x := by\n113:   have hG := levi_civita_field_smooth U hU (frameMetricField E) (inverseFrameMetricField D)\n114:     (frame_metric_smooth U E hE) (inverse_frame_metric_smooth U D hD)\n115:   have ht := levi_civita_field_torsion_free U hU (frameMetricField E) (inverseFrameMetricField D)\n116:     (fun x _ => frame_metric_symmetric E x)\n117:   apply geometric_einstein_equation_from_ricci_null_balance U hU hconn E D T (2*Real.pi/eta)\n118:     hED hDE hE hD hT hsT\n119:   · intro x hx v hv\n120:     obtain ⟨P⟩ := pencils x hx v hv\n121:     have hr := pencil_ricci_balance U hU (frameMetricField E) (frameLeviCivita E D) T\n122:       eta heta hG hT x v (ht x hx) P\n123:     rw [tensorQuad_sub_smul,hr]\n124:     ring\n125:   · exact hdT\n126: \n127: theorem entropy_density_einstein_coefficient (newton : ℝ) (hG : newton≠0) :\n128:     2*Real.pi/((4*newton)⁻¹)=8*Real.pi*newton := by\n129:   field_simp\n130:   ring"
+        }
+      ]
+    },
+    {
+      "id": "fock_obligations",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\MATRIZ_CONTRATO_FOCK_R2.json",
+      "bytes": 8540,
+      "sha256": "39a3c34f5d64a7f737ca128bf415290c4703fba02bf410c008c44ac01d75a932",
+      "read_ranges": [
+        [
+          155,
+          175
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 155,
+          "last": 175,
+          "text": "155:       \"remaining\": \"Propriedades da álgebra concreta no vácuo e identificação modular.\"\n156:     },\n157:     {\n158:       \"fields\": \"J, J_invol, J_vac, tomita, flow, flow_zero, flow_add, flow_is_Ad\",\n159:       \"statute\": \"OPEN_CONSTRUCTION_KNOWN_LITERATURE\",\n160:       \"remaining\": \"Segunda quantização antiunitária e realização modular do par álgebra-vácuo. O J de uma partícula já foi construído.\"\n161:     },\n162:     {\n163:       \"fields\": \"Core, embedding, dualAction, trace, PF, Pp, Pm e suas leis\",\n164:       \"statute\": \"OPEN_CONSTRUCTION_KNOWN_LITERATURE\",\n165:       \"remaining\": \"Ligar a construção do núcleo à representação concreta. A escala e não vacuidade no V351 já existem; não são reconstruídas.\"\n166:     },\n167:     {\n168:       \"fields\": \"MaxwellCertificate\",\n169:       \"statute\": \"OPEN_CONSTRUCTION_KNOWN_LITERATURE\",\n170:       \"remaining\": \"Construir a forma Q, estado regular não nulo e ligação à carga modular; reutilizar MaxwellLiteratureBridge.\"\n171:     }\n172:   ],\n173:   \"reviews\": [\n174:     {\n175:       \"path\": \"C:\\\\IALD\\\\Central de Patentes\\\\Chatgpt\\\\TUNEL\\\\DO_CHATGPT\\\\ORDEM_019\\\\F1.REDE\\\\review_geometric_r2\\\\REVIEW_GEOMETRIC_R1.json\","
+        }
+      ]
+    },
+    {
+      "id": "fock_construction",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONSTRUCAO_CONTINUA_R1.md",
+      "bytes": 8369,
+      "sha256": "fea72d71ac891255b08428999810940e3508f11f0059e0d56e93bb64980c1a19",
+      "read_ranges": [
+        [
+          140,
+          158
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 140,
+          "last": 157,
+          "text": "140: absoluta foi 1e−9. O maior resíduo ficou abaixo de 1,57e−13; o erro máximo da\n141: conjugação antiga sem reflexão transversal foi 0,99109, bem acima do mínimo\n142: pré-registrado 1e−4. A rodada inicial nem iniciou porque o sandbox não acessou o\n143: Python científico; a execução autorizada com esse runtime gerou o único resultado.\n144: São controles finitos de sinais/convenções, sem substituir a prova global.\n145: \n146: Esta rede livre tem construção matemática conhecida e aqui explicitada no gauge\n147: compatível com B0. β não entra na cinemática de Wigner e não foi inserido por nome.\n148: O dispositivo só se identifica com ela após construir um refinamento, um setor\n149: físico e uma equivalência unitária que entrelace a representação inteira, a reflexão\n150: e as sub-redes localizadas. Isso é RC1 do contrato e continua [OPEN].\n151: \n152: Também continuam [OPEN] a realização simultânea dos certificados da TGL, o\n153: stress tensor normalizado/domínios, sua conservação na realização, a identificação\n154: com Maxwell e o antecedente físico H3 em todas as direções. A implicação geométrica\n155: auditada da F2.3 é reutilizada; não se deduz H3 do estado ou deste dispositivo.\n156: O contraexemplo T→−T é excluído pela positividade adicional RC2, agora provada\n157: para a candidata da cunha. Nada nesta camada mede hardware, 5σ ou creditação."
+        }
+      ]
+    },
+    {
+      "id": "new_network_assembly",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_reuse\\CanonicalFockAssemblyR1.lean",
+      "bytes": 11100,
+      "sha256": "4b1d8ec2f9fa69b551782546ad0c5620e0021e219aca4efa1fc36f97065b24a5",
+      "read_ranges": [
+        [
+          1,
+          45
+        ],
+        [
+          210,
+          240
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 1,
+          "last": 45,
+          "text": "1: import BosonicFockContinuity\n2: import BosonicFockGroupActions\n3: import CanonicalOutput\n4: import ConcreteLightRayNet\n5: import TGLExt.QGSolutionComplete\n6: import TGLExt.MaxwellLiteratureBridge\n7: \n8: /-!\n9: Concrete wiring, not a claim that the remaining imported fields are inhabited.\n10: The canonical H1, standard wedge and bosonic Fock are reused without rebuilding.\n11: Only genuinely remaining Fock fields are inputs. The scalar light-ray net is\n12: retained as a separately typed construction; no scalar-to-4D identification is\n13: claimed. Gamma(J) and exponential-vector totality belong to preexisting jobs.\n14: No new axiom, no physical H3 derivation, no global solution or device equivalence.\n15: -/\n16: set_option autoImplicit false\n17: set_option maxHeartbeats 1200000\n18: noncomputable section\n19: open scoped InnerProductSpace\n20: namespace F1Fecho.NetworkReuse\n21: open TGL.SpecificAQFT TGL.ModularRealization TGLExt.ContratoQGv31\n22: open TGLExt.ContratoQGv32 TGLExt.ImportedSQ TGLExt.QGSolution\n23: open F1Rede.BosonicFock\n24: \n25: structure CanonicalNetInput extends LightNetData where\n26:   wedge_glue : toLightNetData.K rightWedge =\n27:     F1Rede.CanonicalWedge.spectralOutput.KWR.toClosedSubmodule.toSubmodule\n28: \n29: def CanonicalNetInput.toStandardWedge (D : CanonicalNetInput) :\n30:     AuditF13v31.LightNetStandardWedgeDataBGL where\n31:   toLightNetData := D.toLightNetData\n32:   out := F1Rede.CanonicalWedge.spectralOutput\n33:   wedge_glue := D.wedge_glue\n34: \n35: theorem canonical_wedge_nonzero (D : CanonicalNetInput) :\n36:     ∃ f : H1, f ∈ D.K rightWedge ∧ f ≠ 0 := by\n37:   obtain ⟨f,hf,hn⟩ := F1Rede.CanonicalWedge.spectralOutput_nonzero\n38:   refine ⟨f,?_,hn⟩\n39:   rw [D.wedge_glue]\n40:   exact hf\n41: \n42: theorem zero_wedge_refused (D : CanonicalNetInput) : D.K rightWedge ≠ ⊥ := by\n43:   intro h\n44:   obtain ⟨f,hf,hn⟩ := canonical_wedge_nonzero D\n45:   rw [h] at hf"
+        },
+        {
+          "first": 210,
+          "last": 240,
+          "text": "210:   instCR := A.instCR\n211:   instCS := A.instCS\n212:   instCA := A.instCA\n213: \n214: theorem assembled_F_is_concrete {L : LightOneParticle} (A : RemainingFockInput L) :\n215:     A.toCertificate.F = F := rfl\n216: theorem assembled_gamma_is_concrete {L : LightOneParticle} (A : RemainingFockInput L) :\n217:     A.toCertificate.Γ = gamma := rfl\n218: theorem assembled_inclusion_is_concrete {L : LightOneParticle} (A : RemainingFockInput L) :\n219:     A.toCertificate.ι = oneParticle := rfl\n220: theorem assembled_boost_is_concrete {L : LightOneParticle} (A : RemainingFockInput L)\n221:     (s : ℝ) (f : F) : (lightBoost A.toCertificate).V s f = gamma (B0 s) f := rfl\n222: theorem assembled_modular_parameter {L : LightOneParticle} (A : RemainingFockInput L)\n223:     (t : ℝ) : lightDelta A.toCertificate t = gamma (B0 (-(2*Real.pi*t))) := rfl\n224: \n225: /-- Existing H2/H3 consumer instantiated on this concrete kinematic Fock.\n226: Maxwell and the remaining analytic fields stay explicit hypotheses. -/\n227: theorem canonical_contract_from_named_imports (D : CanonicalNetInput)\n228:     (A : RemainingFockInput D.toLightNetData.toLightOneParticle)\n229:     (M : MaxwellCertificate A.toCertificate) (N : KillingNormalization)\n230:     (G : ℝ) (hG : 0 < G) :\n231:     ∃ h2 : ContratoH2v32 (lightNet A.toCertificate) (lightRealization A.toCertificate) N,\n232:       Nonempty (ContratoImportH3v32 (lightNet A.toCertificate) (lightRealization A.toCertificate)\n233:         N (lightBoost A.toCertificate) M.T h2) :=\n234:   qg_contract_from_the_cited_net D.toLightNetData A.toCertificate M N G hG\n235: \n236: end F1Fecho.NetworkReuse\n237: \n238: open Lean in\n239: run_cmd do\n240:   let env ← Elab.Command.liftCoreM getEnv"
+        }
+      ]
+    },
+    {
+      "id": "star_commutant",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\V350DualFixedCore.lean",
+      "bytes": 5443,
+      "sha256": "2c120aeaa01da764d94370d273bf16e9e5f5a1ae7d3a91f9066e48a745e09582",
+      "read_ranges": [
+        [
+          14,
+          21
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 14,
+          "last": 21,
+          "text": "14: def starCommutantAlgebra (S : Set (H →L[ℂ] H)) : VonNeumannAlgebra H where\n15:   toStarSubalgebra := StarSubalgebra.centralizer ℂ S\n16:   centralizer_centralizer' := by simp\n17: \n18: theorem dualAmbient_fixed_iff_commutes (s : ℝ)\n19:     (R : RegularHilbert H →L[ℂ] RegularHilbert H) :\n20:     dualAmbient s R = R ↔ characterMultiplier s * R = R * characterMultiplier s := by\n21:   constructor"
+        }
+      ]
+    },
+    {
+      "id": "commutant",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\Commutant.lean",
+      "bytes": 3824,
+      "sha256": "114782c4fb991da15ae22e3e053ecf6a8c4a5f68e7152afd40102a66c44db19a",
+      "read_ranges": [
+        [
+          22,
+          30
+        ],
+        [
+          65,
+          88
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 22,
+          "last": 30,
+          "text": "22: def commutantSet (S : Set A) : Set A := {x : A | ∀ s ∈ S, s * x = x * s}\n23: \n24: theorem mem_commutantSet {S : Set A} {x : A} :\n25:     x ∈ commutantSet S ↔ ∀ s ∈ S, s * x = x * s := Iff.rfl\n26: \n27: /-- [KERNEL] `1` está em todo comutante. -/\n28: theorem one_mem_commutant (S : Set A) : (1 : A) ∈ commutantSet S :=\n29:   fun s _ => by rw [mul_one, one_mul]\n30: "
+        },
+        {
+          "first": 65,
+          "last": 88,
+          "text": "65: theorem commutant_antitone {S T : Set A} (h : S ⊆ T) :\n66:     commutantSet T ⊆ commutantSet S :=\n67:   fun _ hx s hs => hx s (h hs)\n68: \n69: /-- [KERNEL] `S ⊆ S′′`: todo elemento comuta com o que comuta com ele.\n70:     O primeiro meio-passo do bicomutante. -/\n71: theorem subset_bicommutant (S : Set A) :\n72:     S ⊆ commutantSet (commutantSet S) :=\n73:   fun s hs _ hx => (hx s hs).symm\n74: \n75: /-- [KERNEL] `S′ = S′′′`: o comutante estabiliza no terceiro passo.\n76:     (Consequência formal de antitonia + `S ⊆ S′′` — o fecho de Galois.) -/\n77: theorem commutant_triple (S : Set A) :\n78:     commutantSet (commutantSet (commutantSet S)) = commutantSet S := by\n79:   apply Set.Subset.antisymm\n80:   · exact commutant_antitone (subset_bicommutant S)\n81:   · exact subset_bicommutant (commutantSet S)\n82: \n83: /-- [KERNEL] Ponte para a mathlib: nosso comutante É `Set.centralizer`, na\n84:     mesma ordem `s * x = x * s`. Auditoria honesta (recon 11/07/2026): os dez\n85:     teoremas acima têm análogos em `Set.*_centralizer`; o que a mathlib NÃO\n86:     tem é o teorema do bicomutante como TEOREMA (em `VonNeumannAlgebra` ele é\n87:     campo estrutural) — essa é a contribuição-alvo desta frente. -/\n88: theorem commutantSet_eq_centralizer (S : Set A) :"
+        }
+      ]
+    },
+    {
+      "id": "conjugation",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\TheConjugationMapsCommutants.lean",
+      "bytes": 3511,
+      "sha256": "0fd2461d9db0668341779a4950dd0f10770b80e512329cb9c4f553c1550d331b",
+      "read_ranges": [
+        [
+          49,
+          80
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 49,
+          "last": 80,
+          "text": "49: theorem conj_commutant (Φ : A → A) (hmul : ∀ x y, Φ (x * y) = Φ x * Φ y)\n50:     (hinv : ∀ x, Φ (Φ x) = x) (S : Set A) :\n51:     Φ '' (commutantSet S) = commutantSet (Φ '' S) := by\n52:   apply Set.Subset.antisymm\n53:   · rintro _ ⟨t, ht, rfl⟩ _ ⟨s, hs, rfl⟩\n54:     rw [← hmul, ← hmul, ht s hs]\n55:   · intro T hT\n56:     refine ⟨Φ T, ?_, hinv T⟩\n57:     intro s hs\n58:     have h := hT (Φ s) ⟨s, hs, rfl⟩\n59:     have h2 := congrArg Φ h\n60:     rw [hmul, hmul, hinv] at h2\n61:     exact h2\n62: \n63: /-- ★★ **MONOTONIA DO BICOMUTANTE**. -/\n64: theorem bicommutant_mono {S T : Set A} (h : S ⊆ T) :\n65:     commutantSet (commutantSet S) ⊆ commutantSet (commutantSet T) :=\n66:   commutant_antitone (commutant_antitone h)\n67: \n68: /-- ★★★ **A CLÁUSULA, SEM VON NEUMANN**: se a conjugação leva os GERADORES no\n69:     comutante, então leva o BICOMUTANTE INTEIRO no comutante. -/\n70: theorem conj_bicommutant_in_commutant (Φ : A → A)\n71:     (hmul : ∀ x y, Φ (x * y) = Φ x * Φ y) (hinv : ∀ x, Φ (Φ x) = x)\n72:     (S : Set A) (hgen : Φ '' S ⊆ commutantSet S) :\n73:     Φ '' (commutantSet (commutantSet S)) ⊆ commutantSet S := by\n74:   have e1 : Φ '' (commutantSet (commutantSet S))\n75:       = commutantSet (commutantSet (Φ '' S)) := by\n76:     rw [conj_commutant Φ hmul hinv, conj_commutant Φ hmul hinv]\n77:   rw [e1]\n78:   calc commutantSet (commutantSet (Φ '' S))\n79:       ⊆ commutantSet (commutantSet (commutantSet S)) := bicommutant_mono hgen\n80:     _ = commutantSet S := commutant_triple S"
+        }
+      ]
+    },
+    {
+      "id": "biinverse_conjugation",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\tgl_kernel\\TGLExt\\TheOathOnTheTower.lean",
+      "bytes": 20026,
+      "sha256": "ef0634a160a9d22ecfab7e2cd865de2a9b6f9a61e524d9eac7c17b25932d4dab",
+      "read_ranges": [
+        [
+          73,
+          87
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 73,
+          "last": 87,
+          "text": "73: theorem conj_commutant_of_biinverse {A : Type} [Ring A] (Φ Ψ : A → A)\n74:     (hmul : ∀ x y, Φ (x * y) = Φ x * Φ y)\n75:     (hΨΦ : ∀ x, Ψ (Φ x) = x) (hΦΨ : ∀ x, Φ (Ψ x) = x) (S : Set A) :\n76:     Φ '' commutantSet S = commutantSet (Φ '' S) := by\n77:   ext y\n78:   constructor\n79:   · rintro ⟨x, hx, rfl⟩ s ⟨t, ht, rfl⟩\n80:     rw [← hmul, ← hmul, hx t ht]\n81:   · intro hy\n82:     refine ⟨Ψ y, ?_, hΦΨ y⟩\n83:     intro s hs\n84:     have hinj : Function.Injective Φ := Function.LeftInverse.injective hΨΦ\n85:     apply hinj\n86:     rw [hmul, hmul, hΦΨ]\n87:     exact hy (Φ s) ⟨s, hs, rfl⟩"
+        }
+      ]
+    }
+  ],
+  "source_status": "Source statements inspected locally; only the new adapter is compiled in this delivery. Prior audit/build status is not recreated by textual inspection."
+}

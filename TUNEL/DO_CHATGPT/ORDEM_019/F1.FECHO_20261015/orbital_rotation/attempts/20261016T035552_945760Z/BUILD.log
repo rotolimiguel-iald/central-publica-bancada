@@ -1,0 +1,76 @@
+{
+  "start_utc": "2026-10-16T03:55:53.017276+00:00",
+  "end_utc": "2026-10-16T03:56:29.425185+00:00",
+  "seconds": 36.407905199987,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-j2",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T035552_945760Z\\SpacelikeOpenClosureR4.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T035552_945760Z\\SpacelikeOpenClosureR4.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T035552_945760Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T035552_945760Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T035552_945760Z\\SpacelikeOpenClosureR4.lean",
+    "sha256": "09c10eae2d7687c732c2b12128784d55b3b4ad48b056c17492e6e0fc1eebc9ce",
+    "bytes": 2119
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T035552_945760Z\SpacelikeOpenClosureR4.lean:45:2: error: linarith failed to find a contradiction
+A B : Set V
+h : SpacelikeSep A B
+hB : IsOpen B
+x : Fin 4 → ℝ
+hx : x ∈ closure A
+y : Fin 4 → ℝ
+hy : y ∈ B
+hw : minkowskiSq (x - y) ≤ 0
+hn : ¬minkowskiSq (x - y) < 0
+hz : (x 0 - y 0) ^ 2 - (x 1 - y 1) ^ 2 - (x 2 - y 2) ^ 2 - (x 3 - y 3) ^ 2 = 0
+hc : Continuous fun t => y + t • timeUnit
+he✝ : ∀ᶠ (t : ℝ) in 𝓝 0, y + t • timeUnit ∈ B
+ε : ℝ
+hε : ε > 0
+he : ∀ ⦃y_1 : ℝ⦄, dist y_1 0 < ε → y + y_1 • timeUnit ∈ B
+hp : y + (ε / 2) • timeUnit ∈ B
+hm : y + -(ε / 2) • timeUnit ∈ B
+h1 :
+  (x 0 - (Matrix.vecHead y + ε / 2)) ^ 2 ≤
+    (x 3 - Matrix.vecHead (Matrix.vecTail (Matrix.vecTail (Matrix.vecTail y)))) ^ 2 +
+        (x 2 - Matrix.vecHead (Matrix.vecTail (Matrix.vecTail y))) ^ 2 +
+      (x 1 - Matrix.vecHead (Matrix.vecTail y)) ^ 2
+h2 :
+  (x 0 - (Matrix.vecHead y + -(ε / 2))) ^ 2 ≤
+    (x 3 - Matrix.vecHead (Matrix.vecTail (Matrix.vecTail (Matrix.vecTail y)))) ^ 2 +
+        (x 2 - Matrix.vecHead (Matrix.vecTail (Matrix.vecTail y))) ^ 2 +
+      (x 1 - Matrix.vecHead (Matrix.vecTail y)) ^ 2
+⊢ False
+failed
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T035552_945760Z\SpacelikeOpenClosureR4.lean:44:29: warning: This simp argument is unused:
+  Matrix.cons_val_zero'
+
+Hint: Omit it from the simp argument list.
+  simp [̵m̵i̵n̵k̵o̵w̵s̵k̵i̵S̵q̵,̵t̵i̵m̵e̵U̵n̵i̵t̵,̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵'̵,̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵s̵u̵c̵c̵'̵]̵[̲m̲i̲n̲k̲o̲w̲s̲k̲i̲S̲q̲,̲ ̲t̲i̲m̲e̲U̲n̲i̲t̲,̲ ̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲s̲u̲c̲c̲'̲]̲ at h1 h2 hz
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T035552_945760Z\SpacelikeOpenClosureR4.lean:44:51: warning: This simp argument is unused:
+  Matrix.cons_val_succ'
+
+Hint: Omit it from the simp argument list.
+  simp [̵m̵i̵n̵k̵o̵w̵s̵k̵i̵S̵q̵,̵t̵i̵m̵e̵U̵n̵i̵t̵,̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵'̵,̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵s̵u̵c̵c̵'̵]̵[̲m̲i̲n̲k̲o̲w̲s̲k̲i̲S̲q̲,̲ ̲t̲i̲m̲e̲U̲n̲i̲t̲,̲ ̲M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲'̲]̲ at h1 h2 hz
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.SpacelikeGeometry.weak_spacelike_closure_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.SpacelikeGeometry.spacelike_closure_left_of_open' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

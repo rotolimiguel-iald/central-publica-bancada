@@ -1,0 +1,34 @@
+--- terminal_v2/launch_windows.py
++++ corrected_transport/launch_windows.py
+@@ -3,7 +3,7 @@
+ ENTRY=time.monotonic()
+ import sys,os,json,hashlib,types,uuid,subprocess,threading
+ from pathlib import Path
+-BASE=Path(r"C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\preregistros\conjunto_d\guard_wsl_integration_preparation_v2")
++BASE=Path(r"C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\preregistros\conjunto_d\guard_wsl_corrected_transport_preparation")
+ WSL=r"C:\Windows\System32\wsl.exe"
+ def load():
+     c=json.loads((BASE/"CONTRATO_WSL.json").read_bytes());raw=(BASE/"common.py").read_bytes()
+@@ -84,6 +84,12 @@
+         linux=json.loads(pcap.text("stdout"));g.need(linux==g.read(run/"LINUX_RESULT.json"),"Linux result stream mismatch")
+         g.need(linux["status"]=="WSL_CONTROL_PASS_PENDING_EXTERNAL_CLEANUP" and linux["request_id"]==g.REQUEST and linux["nonce"]==nonce,
+             "Linux result status/identity")
++        g.validate_observed_argv(linux["argv_transport"],"--supervisor",nonce)
++        g.need(linux["argv_transport"]==g.read(run/"ARGV_SUPERVISOR.json"),"Supervisor argv physical receipt")
++        g.need(linux["argv_transport"]["process"]==linux["process"],"Supervisor argv process binding")
++        g.validate_observed_argv(linux["child"]["argv_transport"],"--child",nonce)
++        g.need(linux["child"]["argv_transport"]==g.read(run/"ARGV_CHILD.json"),"Child argv physical receipt")
++        g.need(linux["child"]["argv_transport"]["process"]==linux["child"]["process"],"Child argv process binding")
+         g.need(linux["child_reaped"] is True and linux["child_returncode"]==0 and linux["scientific_calls"]==0,"Child not cleanly reaped")
+         status="CONTROL_PASS_CLEANUP_PENDING"
+     except BaseException as exc:error={"type":type(exc).__name__,"message":str(exc)[:2000]}
+@@ -99,6 +105,9 @@
+             cleanup=json.loads(ccap.text("stdout"));g.need(cleanup==g.read(run/"CLEANUP_RESULT.json"),"Cleanup stream mismatch")
+             g.need(cleanup["status"]=="NO_LIVE_CONTROLLED_PROCESSES_VERIFIED" and cleanup["nonce"]==nonce and cleanup["request_id"]==g.REQUEST,
+                 "No proof of controlled process termination")
++            g.validate_observed_argv(cleanup["argv_transport"],"--cleanup",nonce)
++            g.need(cleanup["argv_transport"]==g.read(run/"ARGV_CLEANUP.json"),"Cleanup argv physical receipt")
++            g.need(cleanup["argv_transport"]["process"]==g.read(run/"CLEANUP_CLAIM.json")["process"],"Cleanup argv process binding")
+             if status=="CONTROL_PASS_CLEANUP_PENDING" and not cleanup["stopped"]:status="PASS_WSL_STDLIB_INTEGRATION_ONCE"
+             else:status="FAILED_TERMINAL_CLEANED"
+         except BaseException as exc:

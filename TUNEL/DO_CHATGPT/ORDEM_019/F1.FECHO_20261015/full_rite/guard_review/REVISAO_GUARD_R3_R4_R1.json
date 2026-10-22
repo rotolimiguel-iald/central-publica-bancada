@@ -1,0 +1,146 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "reviewer": "/root/atrator_skeptic",
+  "created_utc": "2026-10-15T18:32:46.546173+00:00",
+  "verdict": "R4_PASSA_COM_ESCOPO__R3_REDE_INCOMPLETA_CORRIGIDA",
+  "checks": [
+    {
+      "id": "differential_scope",
+      "verdict": "PASSA",
+      "finding": "R2→R3 altera somente _path. A lista de executáveis, permissões de subprocessos, regra de GPU e callbacks restantes permanecem iguais. R3→R4 acrescenta somente três eventos à lista de recusas de rede."
+    },
+    {
+      "id": "normal_extended_containment",
+      "verdict": "PASSA",
+      "finding": "Caminhos DOS ordinários e estendidos legítimos dentro da fixture são aceitos. Parent traversal ordinário/estendido, prefixo irmão e gravação fora são recusados. A comparação é por parentesco de Path, não prefixo textual."
+    },
+    {
+      "id": "junction",
+      "verdict": "PASSA",
+      "finding": "A resolução do caminho local detectou a junção escapando da raiz, inclusive com prefixo DOS estendido. A única junção de cada fixture foi validada e removida sem recursão; o alvo de fora, ainda dentro da revisão autorizada, permaneceu vazio."
+    },
+    {
+      "id": "unc_device",
+      "verdict": "PASSA_NO_TESTE_DE_CLASSIFICACAO",
+      "finding": "A função de contenção rejeita as representações UNC e NT device testadas sem resolver esses caminhos remotos. O ensaio não abre caminhos UNC nem afirma isolar chamadas nativas."
+    },
+    {
+      "id": "r3_network_gap",
+      "verdict": "RESSALVA_MATERIAL_CORRIGIDA_EM_R4",
+      "finding": "R3 ignorava socket.sendto/sendmsg/getnameinfo; sys.audit reproduziu essa omissão sem tráfego. Por isso seus 13 testes não justificavam uma afirmação irrestrita de bloqueio de rede. R4 passou as recusas dos eventos e os testes efetivos sendto/getnameinfo antes da operação."
+    },
+    {
+      "id": "independent_network_safety",
+      "verdict": "PASSA",
+      "finding": "O teste R4 recebeu um segundo hook sentinela, posterior ao guard, que lançaria RuntimeError para qualquer evento de rede coberto que passasse pelo primeiro. As 16 verificações e a 17ª de sentinela ociosa passaram: o guard recusou antes dela. Nenhum tráfego foi autorizado ou enviado pela revisão."
+    }
+  ],
+  "scope": [
+    "Revisão técnica da mitigação de I/O Python para o programa fixado; não é garantia de sandbox do sistema operacional ou isolamento contra código hostil.",
+    "Processos nativos Lean/Lake/MiKTeX permanecem fora da contenção dos audit hooks, conforme a própria docstring. Esta revisão não iniciou o rito científico nem esses processos.",
+    "A primeira tentativa independente em ambiente restrito recusou a criação da junção antes dos testes. Foi preservada; uma fixture nova foi executada com permissão própria apenas para criar/remover a junção local controlada.",
+    "Originais R2/R3/R4 e resultados anteriores permaneceram intactos. Escritas apenas na revisão; nenhuma memória, ACOM, produção, dado observado, provedor ou gate foi alterado.",
+    "O aceite refere-se ao guard R4 com SHA pinado neste recibo. Não autoriza outro executável, rede, recarga ou implantação."
+  ],
+  "ast_functions_changed_R2_R3": [
+    "_path"
+  ],
+  "ast_functions_changed_R3_R4": [
+    "_audit"
+  ],
+  "independent_replays": {
+    "R3": {
+      "exit_code": 0,
+      "seconds": 1.2774655999965034,
+      "checks": 13
+    },
+    "R4_with_sentinel": {
+      "exit_code": 0,
+      "seconds": 1.5004361000028439,
+      "checks": 17
+    }
+  },
+  "guard_R4": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\sitecustomize_rite_r4.py",
+    "sha256": "b48bbf9326441a0e8be10effd4bf5e7f46fde494febc71eef748877d10920d7e",
+    "bytes": 7037
+  },
+  "files": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\sitecustomize_rite_r2.py",
+      "sha256": "ac56c72a5d48a49b216c70444331d2ab3d226700ddb62321dca859fb9a6f480f",
+      "bytes": 6309
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\sitecustomize_rite_r3.py",
+      "sha256": "a1d07e37ec4defd7ed665980d57ff0b775a8cc80ce2602a2c03990bcd74bfaca",
+      "bytes": 6980
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\sitecustomize_rite_r4.py",
+      "sha256": "b48bbf9326441a0e8be10effd4bf5e7f46fde494febc71eef748877d10920d7e",
+      "bytes": 7037
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\test_guard_paths_r3b.py",
+      "sha256": "0d711645963bcdcbf2d493850bad152017114ad69b6497d00c80c7a57dc4a29d",
+      "bytes": 4782
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\test_guard_paths_r4.py",
+      "sha256": "08751ff63ba9922152eee6a610243c9741feb2ec3689c078dd985b9c55a6fb8b",
+      "bytes": 5213
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\GUARD_PATHS_R3B_RESULT.json",
+      "sha256": "c3dc0b6d98c553785a394c2439567f3d2fb64332eb01729f85453e2e7a353d49",
+      "bytes": 4309
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\GUARD_PATHS_R4_RESULT.json",
+      "sha256": "d812c338fa5f0f7a3504f91d2183917f3e0cbf4830d1bbb8e7a6259e2b0b6b81",
+      "bytes": 5233
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\PLANO_RITO_REAL_R3.json",
+      "sha256": "7b16cefbee61b834ff3edd25aae9021dcc16fbd8c989f26c13abc2fbb9b93ace",
+      "bytes": 3408
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\SETUP_REFUSAL_R1.json",
+      "sha256": "5be3151bc0515b876d45f35dfd233f6426c961f876c7c482a049a5a1ad476ed9",
+      "bytes": 542
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\replay_elevated\\GUARD_PATHS_R3B_RESULT.json",
+      "sha256": "b925530639b8aa85fa65936f5b22795a7b5532b8ac556a90fd323f52cccf94d2",
+      "bytes": 4340
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\replay_r4_sentinel\\GUARD_PATHS_R4_RESULT.json",
+      "sha256": "75612817166c45344bd0b11e306abe51d3dd62a2f15f70cc1cb91bb3b97f5158",
+      "bytes": 5880
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\replay_r4_sentinel\\test_guard_independent_r1.py",
+      "sha256": "6f7c487335246180e876fe41430bbe0bff97102ec63e5a5b417d5586daee21ea",
+      "bytes": 5663
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\NETWORK_EVENT_PROBE_R1.json",
+      "sha256": "9a645ce25cd4cab990200951eaec332557d3a943a4222d9a14ca29722df3d61d",
+      "bytes": 4537
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\network_event_probe_r1.py",
+      "sha256": "4fbd073ae30035d1c08096fa8d69fb4c535d4ddb9f89a21608e009ea2e4c9da9",
+      "bytes": 2575
+    }
+  ],
+  "generator": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\guard_review\\assemble_guard_review_r1.py",
+    "sha256": "e3e4aaa63c8b1ffb90e389628c3e47ebde9958f482b3cd53d7fc0a2475f8e300",
+    "bytes": 6849
+  }
+}

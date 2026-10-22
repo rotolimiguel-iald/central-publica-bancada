@@ -1,0 +1,9 @@
+# Preparação de implantação privada e clausura de imports d72
+
+[INPUT] Autorização delegada ROOT nesta subtarefa: criar exclusivamente a raiz nova /opt/iald_ordem018_d72_d72f7125, vazia,0700/UID65534/GID65534; root somente nessa criação/atribuição. Se existir, não alterar nem seguir. Escritas seguintes via Ubuntu-24.04 --user nobody --exec. Copiar d72 byte a byte; medir uma única inicialização de NumPy/CAMB sob supervisor, sem integrated_parent/bootstrap/candidatos científicos, solver, likelihood ou background. Limite total120s/AS8GiB, threads1, Python -I -S -B. Se falhar, diagnosticar sem repetir import automaticamente.
+
+[INPUT] Os seis .dat nomeados no mapeamento anterior são recursos empacotados autorizados agora para hash; essa autorização não se estende a datasets/observados. Não instalar, criar contas, mudar /opt/montagens, apagar, criar AUTH/CLAIM/ROOT_DECISION/unidade científica ou escrever mapa/memórias/ledger. A cópia e o inventário selados anteriores permanecem intactos.
+
+Alternativas antes do código: A, raiz privada ext4 sob /opt já documentada e escolhida expressamente por ROOT; B, conta dedicada/raiz em /home, não escolhida nem executada. Para medir imports, A1 usar supervisor stdlib separado com Popen/pidfd/timeout/kill/reap e auditoria cooperativa de reads/imports; A2 aproveitar main científico consumido, inadequado ao escopo e rejeitado. A1 fornece saída e exit reais sem iniciar a cadeia científica.
+
+Escopo de evidência: eventos de auditoria Python, módulos carregados, bytes realmente lidos, mapas nativos amostrados e identidade/recursos do processo. Inicializadores internos de imports pertencem ao runtime; o coletor não chama cálculo de NumPy/CAMB. Não alegar ausência universal de syscalls/rede nativa. Permanecem null as operações nativas não observadas; isso não autoriza redes/segredos. FS Python restrito a leituras em runtime e seis tabelas, nenhuma escrita ou processo/rede filho pelo coletor.

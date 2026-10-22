@@ -1,0 +1,266 @@
+{
+  "schema": "iald-lean-candidate/v1",
+  "status": "DECLARADO_UNCOMPILED",
+  "created_utc": "2026-10-16T18:40:17.807617+00:00",
+  "actor": {
+    "kind": "agent",
+    "id": "codex-r8-mixed-stress-integral"
+  },
+  "reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "mission_receipt": {
+    "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+    "scope": {
+      "house": "IALD",
+      "principal": "luiz-antonio-rotoli-miguel"
+    },
+    "revision": 244,
+    "event_id": "track-flow-build-20261016T183826_075105Z-completed",
+    "event_hash": "258138d656d671b385784b11ea2e006e458a8c4aa06d71af9bc0e5941a42524b",
+    "objective_sha256": "f57ee2d752f8f8b2226baaf45307f91c485298d2a42758739e4c18ee08cb516e",
+    "anchor_sha256": "6fc1dab76ae9ec6ae35ad68b45e8b82fc2829156e1761945f257d030ae0589c7",
+    "state_sha256": "137efb1b38b50542c1b4e6a6a01af71d99ce99140312c8b3d6a7d85536af1148",
+    "replayed": false
+  },
+  "projection_sha256": "399c66e48222a251f09bc0d0760e97aba69f28353ce939bedf885a3336752066",
+  "projection_chars": 87519,
+  "handle": "r47-r8-mixed-stress-integral",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CoherentNullStressMomentR1.lean",
+      "sha256": "69326b76dca36ea7d1a69ae2a1e8dbbc25a2de21af9b64370811729a73f0d1c1",
+      "bytes": 9547,
+      "lines": 178,
+      "public_theorems": 6,
+      "private_theorems": 2,
+      "print_axioms": 6
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactFockNullStressMomentR1.lean",
+      "sha256": "61017184d65fc83d3259d4697dcef1f27ef1c4aa7d9a64959434cccc7bc306bd",
+      "bytes": 8316,
+      "lines": 155,
+      "public_theorems": 11,
+      "private_theorems": 0,
+      "print_axioms": 11
+    }
+  ],
+  "chain": [
+    "Expand the complex coherent square with its exact sqrt(2) factor into conjugated same-sign, mixed, and same-sign products.",
+    "Weighted integrability is constructed for each term from the existing angular Schwartz integrability theorems and the conjugation continuous linear map.",
+    "The two same-sign integrals vanish by the existing positive-null-frequency support theorem; the conjugated one vanishes by integral_conj.",
+    "The remaining mixed term is evaluated by the existing angular_weighted_parseval with its full (2*pi)^3 factor.",
+    "The actual tensor null contraction is expressed by stress_null_contraction and the constructed mixed coherent screen waves.",
+    "The exact unitaryFourierStressScale cancels (2*pi)^3; the mixed H1 derivative bridge identifies the complex moment with -I*coherentBoostPair.",
+    "A support-restricted integral theorem transports integrability and the equality through the actual finiteKernel and unique regularCoefficients.",
+    "Taking the real part yields Im(regularFockBoostPair) for the whole diagonal finite sum, and the existing actual VF derivative proves HasBoostEnergy with this real tensor moment."
+  ],
+  "mixed_statement": "axisCompact_coherentNullStress_moment (h k : H1) (hh : AxisCompactProfile h) (hk : AxisCompactProfile k) : (∫ x : NullFourierSpace, (x 0 : ℂ) * unitaryFourierCoherentNullStress h k x) = -Complex.I * coherentBoostPair h k",
+  "mixed_statement_expansion": "unitaryFourierCoherentNullStress is definitionally the four 00+01+10+11 components at nullPlanePoint (x 0) (nullFourierScreen x), exactly the prior manifest obligation.",
+  "finite_statement": "axisCompact_fockNullStress_moment (psi chi : regularFockDomain) (hpsi : AxisCompactFock psi) (hchi : AxisCompactFock chi) : (∫ x : NullFourierSpace, (x 0 : ℂ) * unitaryFourierFockNullStress psi chi x) = -Complex.I * regularFockBoostPair psi chi",
+  "final_statement": "axisCompact_fock_hasBoostEnergy_null_moment (psi : regularFockDomain) (hpsi : AxisCompactFock psi) : HasBoostEnergy VF psi.val (∫ x : NullFourierSpace, x 0 * (unitaryFourierFockNullStress psi psi x).re)",
+  "premises": "Only existing AxisCompactProfile/AxisCompactFock regularity in the final public identities. No integral equality, charge identity, HasDerivAt or integrability is added as a hypothesis there.",
+  "unchanged_objects": [
+    "Actual H1/Fock, orbital measure, B0/VF and unique regular coefficients",
+    "Existing unitaryFourierCoherentStress and unitaryFourierPointStressForm",
+    "Existing calibrated Maxwell form and its coefficient (2*pi)^(-3)"
+  ],
+  "remaining": [
+    "Compile both new modules and independently review them.",
+    "Prove the named AxisCompact Fock core has vacuum, translation/boost invariance and the required density/nontriviality.",
+    "Transport the Euclidean null Fourier coordinates/measure and screen reflection to the contract nullPlaneCharge product coordinates.",
+    "Compose the calibrated tensor bridge and modular/boost convention into charge_link on the named domain.",
+    "Construct a normalized Regular state with nonzero modular energy and discharge the other full R8 obligations."
+  ],
+  "not_claimed": [
+    "Compilation",
+    "Independent acceptance",
+    "Full MaxwellCertificate",
+    "Full charge_link in contract coordinates",
+    "Nonzero modular energy",
+    "Complete R8",
+    "Gate change"
+  ],
+  "build_performed_by_author": false,
+  "pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactFockBoostDerivativeR2.lean",
+      "sha256": "4b844ad594c99a5ea841edd19e8aef1daf08bf38fba501d0af2dd7394a3679ab",
+      "bytes": 8747
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactBoostMixedNullMomentR1.lean",
+      "sha256": "94692f8c55ffbb47d7481e658cdcfb7e463cb89511a155dab7cee5e1b95c16cf",
+      "bytes": 7327
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactBoostNullMomentLinkR5.lean",
+      "sha256": "2083c84e71931d260f645900e7be1795b921d1a3cdf8a320f7d741f1c8041134",
+      "bytes": 13542
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactBoostStrongDerivativeR2.lean",
+      "sha256": "af46ccd4ed9e5a76a85dbb594f621dfd38f6bf1b16fb5f83f161d40c57aecc59",
+      "bytes": 10534
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullSchwartzSameSignR2.lean",
+      "sha256": "2e315bd046c96d6fadb7870f45cee0fdeba60b4db7df1b3bdba86779f0d227c3",
+      "bytes": 9658
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AngularWeightedPlancherelR3.lean",
+      "sha256": "d73b5bf251c03c8e9c870336376c105e34ef07fcf4231b6692931032e47438c6",
+      "bytes": 3040
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\WeightedSchwartzPlancherelR3.lean",
+      "sha256": "99aed84df13d5abf26a3d16802293a124e640b509e224230a22a6660a28c2d22",
+      "bytes": 1946
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullSchwartzConsumerR2.lean",
+      "sha256": "70524b1a7b6cee5435e5b5840172a20d729bbb60cf1b588b3ed250eacbdb73b5",
+      "bytes": 12668
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\ConstructedNullSchwartzConsumerR1.lean",
+      "sha256": "181d445b603d0a087aa51673635a041132c07d29b230f45d16f66ab49e427cef",
+      "bytes": 2629
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\ConstructedRealNullStressMomentR1.lean",
+      "sha256": "69c4cc007658d8cf8b5fa6d102b56c3d84e11861a49e5ccf9850cd76883a1dc1",
+      "bytes": 5352
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullPlaneAlgebraR2.lean",
+      "sha256": "e50326da6bd138778bee08351ef764fb46ab7f96ddcaa86793694d721f875235",
+      "bytes": 2699
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullPlaneWaveR2.lean",
+      "sha256": "41e3aebb60f97d39d8894abec271d5dccb2c0d8dd80352e53522d5abc3452fc7",
+      "bytes": 9043
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CoherentPointMaxwellR1.lean",
+      "sha256": "9f43c54c10b6686c23b8d2b7af27ccd723543b3dcc1adb98c946bd74368b64c7",
+      "bytes": 4788
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CoherentPointStressR2.lean",
+      "sha256": "428586fb4763a1b793287395b9af960c8eea505021cc205f513db38b8ea35993",
+      "bytes": 4468
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\FiniteCoherentKernelR3.lean",
+      "sha256": "e30050cd8b503da6e795557f00d371dd6210abe0d71550a34d33da5df7fcf1bb",
+      "bytes": 3190
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\FiniteCoherentKernelCalculusR2.lean",
+      "sha256": "629bdc7be5833b0af84bc2919356e3d1765f219bf47166de0cc7f989d8710def",
+      "bytes": 2125
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularFockPointStressR4.lean",
+      "sha256": "bcc132cfcd98da5b1e0bf8793cb641dca1f5e088fab8738e1a09e679a85f6bd6",
+      "bytes": 7409
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularMaxwellFockDomainR5.lean",
+      "sha256": "2613bb3eee560b1b04a38aa4305b0dbaa91a698be3903174ae69430d7288c729",
+      "bytes": 5212
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\UnitaryFourierRealStressR2.lean",
+      "sha256": "24e43c4b466132d00b97a51fd4eb9de129a384eab5755528f1fe8a045be6eff3",
+      "bytes": 3423
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\UnitaryFourierStressTensorR2.lean",
+      "sha256": "bb9ddb65375f1237736ecc6ed7e899570d84f96c3e6f370458bab2b4f836c412",
+      "bytes": 5365
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\UnitaryFourierFockStressR1.lean",
+      "sha256": "8ec018146a0bae12fe7e20a1e4c7a06eae987e405caf74c00c2c683546cf1194",
+      "bytes": 8273
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CalibratedFockStressDomainBridgeR1.lean",
+      "sha256": "d5ac5180bd3a48b71329ad6c61f88821cc62cbc7abd50ea2fd25027cf43dedb4",
+      "bytes": 3783
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularFockMaxwellCalibratedR1.lean",
+      "sha256": "b43e055ea6707c06954fa31fe32c6fa193263a3d69dd2363638dd22dce11c3d1",
+      "bytes": 5136
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\COMPACT_FOCK_BOOST_CANDIDATE_R47.json",
+      "sha256": "8d98db45c86624967743b23e69d0a61ec89edc7f2888165d2c89bd7e0e8fdab6",
+      "bytes": 15310
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\MeasureTheory\\Integral\\Bochner\\Basic.lean",
+      "sha256": "ad39ea8b083f63553a4615376fd7f4cb510efa395457a98ef6adbdc3628f875d",
+      "bytes": 71193
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\MeasureTheory\\Integral\\Bochner\\ContinuousLinearMap.lean",
+      "sha256": "b658d7d2987e8f2ae1e143348cce977554b9883eb9c345297b87c33177bee17e",
+      "bytes": 18509
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\MeasureTheory\\Function\\L1Space\\Integrable.lean",
+      "sha256": "d6c9022392bd8f06b77504a229cd32281ff7ba3f1ae3b335b94c7447a358a7e7",
+      "bytes": 58939
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\Basic.lean",
+      "sha256": "4c8941b7256fd3f7b7124e22cf51f083960662ce2aa4ade75daca8777d630628",
+      "bytes": 48166
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R47_MIXED_STRESS_HANDOFF_20261016T182947_666234Z_985f9740_RECEIPT.json",
+      "sha256": "e015a1f0376ac0d3a48fe7b69fe7a68936158c724644b8797146d9dfc40df822",
+      "bytes": 118952
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T183037_597328Z\\AXIOMS.txt",
+      "sha256": "71fefb99b5911ea2c9c16d2d4485e9b0a63848b5b25f344f22fbed0d9e7601ec",
+      "bytes": 1413
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T183826_075105Z\\RECEIPT.json",
+      "sha256": "7880debf08e990639f730d953d3f8477e0c3080adcaaf048e79a0caa88709452",
+      "bytes": 149754
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T183826_075105Z\\AXIOMS.txt",
+      "sha256": "dc538a4989fcf2b44405b86cd7c7c452dd839ede189ad01b0dd07c050f7f487b",
+      "bytes": 3435
+    }
+  ],
+  "derivative_supplier": {
+    "source": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactFockBoostDerivativeR2.lean",
+      "sha256": "4b844ad594c99a5ea841edd19e8aef1daf08bf38fba501d0af2dd7394a3679ab",
+      "bytes": 8747
+    },
+    "receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T183826_075105Z\\RECEIPT.json",
+      "sha256": "7880debf08e990639f730d953d3f8477e0c3080adcaaf048e79a0caa88709452",
+      "bytes": 149754
+    },
+    "exit_code": 0,
+    "seconds": 79.34255439999106,
+    "attempt_source_matches": true
+  },
+  "pin_coverage": "Consulted direct suppliers and mathlib APIs, exact handoff, prior candidate manifest and mixed H1 build axiom output. Not a transitive build custody."
+}

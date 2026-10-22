@@ -1,0 +1,72 @@
+[
+  {
+    "rota_id": "vazios.piso.cadeia_v78_v92",
+    "titulo": "A cadeia do piso v78→v92 (V2, V3, densidade v90/v91, V4.1 = primeiro POWERED): a cronologia das emendas contra a abertura do sinal",
+    "status": "PROPOSTA",
+    "estatuto": "[OPEN]",
+    "onde": "prove_void_floor_v41_calibrated e antecessores",
+    "nota": "Família que a auditoria de 28/09 NÃO cobriu (crítico de completude). [ALTO] O canal N_eff e o fechamento rho+p (prove_neff_channel, um.py:4773; prove_rho_plus_p_closure, um.py:4702; core.neff_channel = TGL_NEFF_ARMED_CONSISTENT; core.rho_plus_p_closure = «EVERY_PUBLISHED_NEFF_MEASURES_BETA_RETROACTIVELY») ficaram sem família. As tensões atuais são literais de sessão, não vêm de medida: um.py:4803 `tens_now = 1.61  # [SESSAO]` e um.py:4804 `tens_act = 2.49  # [SESSAO: ACT+BBN]`. A checagem que dá ARMED_CONSISTENT é True fixo. A conjunta V3 exclui o canal como A9_SEM_INCERTEZA («o core registra só tensões … sem obs nem sigma»), mas ele é um dos 10 domínios de the_truth_is_in_the_contour. No mapa, consultar «neff» devolve só d1.camb.v3_real e «rho_plus» devolve 0.",
+    "historico": [
+      {
+        "seq": 158,
+        "tipo": "ROTA",
+        "quem": "claude-code/central-de-patentes (gerência) sessão 6da8f00d — auditoria 28/09 (crítico de completude)",
+        "quando": "2026-09-28T18:20:08-03:00",
+        "status": "PROPOSTA",
+        "resumo": "Família que a auditoria de 28/09 NÃO cobriu (crítico de completude). [ALTO] O canal N_eff e o fechamento rho+p (prove_neff_channel, um.py:4773; prove_rho_plus_p_closure, um.py:4702; core.neff_channel = TGL_NEFF_ARMED_CONSISTENT; core.rho_plus_p_closure = «EVERY_PUBLISHED_NEFF_MEASURES_BETA_RETROACTI"
+      }
+    ],
+    "scope": "Snapshot metadata only; full history remains in official route map"
+  },
+  {
+    "rota_id": "vazios.piso.v11",
+    "titulo": "Piso dos vazios V11 (SDSS/VAST): o degrau experimental do gate",
+    "status": "EXAMINADA_COM_DEFEITO",
+    "estatuto": "[REAL — auditoria 28/09; verificação adversarial: ACHADO_DO_VERIFICADOR]",
+    "onde": "um.py, funções onde o veredito aparece: _void_floor_protocol_record, evaluate_void_floor_test, prove_void_floor_definitive, prove_void_floor_v2, prove_void_floor_spectroscopic_opening, prove_void_floor_v41_calibrated (prefixo de 1 de 1 segmentos)",
+    "nota": "chave do selo: void_floor_v11_verdict · semeado pela gerência a partir do selo; método, dados, defeitos e próximos passos a acrescentar pela auditoria de 28/09 (rota auditoria.testes_passados_28set)",
+    "historico": [
+      {
+        "seq": 3,
+        "tipo": "ROTA",
+        "quem": "claude-code/central-de-patentes (gerência) sessão 6da8f00d",
+        "quando": "2026-09-28T17:27:34-03:00",
+        "status": "EXAMINADA",
+        "resumo": "TGL_VOID_FLOOR_NOT_FALSIFIED_POWERED"
+      },
+      {
+        "seq": 75,
+        "tipo": "ANOTACAO",
+        "quem": "claude-code/central-de-patentes (gerência) sessão 6da8f00d — auditoria 28/09 (aferidor + verificador adversarial)",
+        "quando": "2026-09-28T17:58:50-03:00",
+        "status": "EXAMINADA_COM_DEFEITO",
+        "resumo": "[GV-02 · DEFEITO_DE_DESENHO · verificador: PARCIAL, severidade revista MEDIO] «POWERED» é homônimo: na V11 mede a capacidade de ver uma violação que, se vista, não falsifica. Afirmação auditada: V11: «powered := beta*Summu_usado >= 25» = «capacidade de detectar VIOLACAO do piso a 5 sigma» (v92, um.p"
+      },
+      {
+        "seq": 82,
+        "tipo": "ERRATA",
+        "quem": "claude-code/central-de-patentes (gerência) sessão 6da8f00d — auditoria 28/09 (aferidor + verificador adversarial)",
+        "quando": "2026-09-28T17:58:50-03:00",
+        "status": null,
+        "resumo": "[GV-09 · ERRO_ESTATISTICO · verificador: SUSTENTADO, severidade revista BAIXO] Na V11 o sinal é desblindado na mesma chamada mesmo quando o split-null reprova; a emenda V11.1 que virou SYSTEMATICS→POWERED veio depois de uma execução que já tinha calculado o sinal. Afirmação auditada: «SPLIT-NULL ava"
+      },
+      {
+        "seq": 83,
+        "tipo": "ANOTACAO",
+        "quem": "claude-code/central-de-patentes (gerência) sessão 6da8f00d — auditoria 28/09 (aferidor + verificador adversarial)",
+        "quando": "2026-09-28T17:58:50-03:00",
+        "status": null,
+        "resumo": "[GV-10 · JA_REGISTRADO · verificador: SUSTENTADO, severidade revista INFO] As réplicas concordam no lado, mas não no valor, e o VoidFinder fica a 0,54σ do limiar. Afirmação auditada: «replicas (VIDE/VoidFinder) julgadas NO LADO e concordantes». Correção proposta: Nenhuma de veredito. Reportar ao lad"
+      },
+      {
+        "seq": 84,
+        "tipo": "ANOTACAO",
+        "quem": "claude-code/central-de-patentes (gerência) sessão 6da8f00d — auditoria 28/09 (aferidor + verificador adversarial)",
+        "quando": "2026-09-28T17:58:50-03:00",
+        "status": "EXAMINADA_COM_DEFEITO",
+        "resumo": "[GVV-01 · DEFEITO_DE_DESENHO · verificador: ACHADO_DO_VERIFICADOR, severidade revista MEDIO] O «assalto de falsificação» v135 trocou o critério de KILL depois de ver um candidato, e o critério adotado é inalcançável por construção; mesmo assim o SURVIVED é citado como corroboração. Afirmação auditad"
+      }
+    ],
+    "scope": "Snapshot metadata only; full history remains in official route map"
+  }
+]

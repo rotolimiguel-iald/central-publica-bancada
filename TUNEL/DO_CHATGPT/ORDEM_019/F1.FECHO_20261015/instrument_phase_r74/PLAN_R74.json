@@ -1,0 +1,160 @@
+{
+  "status": "PREPARED_AWAITING_INDEPENDENT_REVIEW_AND_ROOT_EXECUTION",
+  "unit": "F1.FECHO_20261015",
+  "claim": 967,
+  "scope_event": 973,
+  "mission_revision_checked": 513,
+  "scope": "New finite synthetic frame/instrument transport only; do not rerun R64 or calibrate physical parameters.",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\finite_device_functions_r62.py",
+      "sha256": "be3d3b21f7a5e8e0c8db812c44d6dd599b84613f5b5fcbd53cc054b01a54d069",
+      "role": "r62_pure"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\run_prepared_readout_r62_r2.py",
+      "sha256": "25d25154153e7399a3e0878ac072ecfbc8a4781190cb9a2660d81d59d36f813a",
+      "role": "r62_decoder"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\PREPARED_READOUT_PLAN_R62.json",
+      "sha256": "862458a7b7f8b8797a2a2f71aa5ed674abbef0488af6acb41bd0e3aa908f3bea",
+      "role": "r62_plan"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\Skygrid\\SkyGrid_Piloto\\skygrid_sim\\tgl_core.py",
+      "sha256": "a1e103cd08eb3f45144200b0c6c588589d267868cd85101c527138e3bce81f3f",
+      "role": "alpha"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\run_filtered_output_r64.py",
+      "sha256": "ec2c5d2201f1246ab83fc291ebb306c50abcf3805fc1353445f82ffdd968344c",
+      "role": "r64_method"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\construction\\run_collision_r66.py",
+      "sha256": "02e1270a0e445e70d64f499a3ac308d5d61cbb7a6df1210034ccf0d234f4e1f2",
+      "role": "r66_coherent"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_clock_r57\\MiguelFixedBoundaryScalarReadingR57R2.lean",
+      "sha256": "4cc627790a2e44dfd0bf84b2c8cb459c519ad2bf710e46523623ea5dc5f00d75",
+      "role": "r57_decoder"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SMatrix.lean",
+      "sha256": "14f7e717a4ef70204eeb825d989e6dcc3397c274f1c45a3820420ea6af12a3b7",
+      "role": "Smat"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectionAngleReconstruction.lean",
+      "sha256": "0abd94278cbd50e2a510a60d2fd7cec8870b1fd0eaa9937625f72d0d2875c679",
+      "role": "phaseReading"
+    }
+  ],
+  "T": 1.0,
+  "point_times": [
+    0.0,
+    0.2,
+    0.55,
+    1.0
+  ],
+  "negative_point_time": 0.7,
+  "gains": [
+    1.3,
+    0.8
+  ],
+  "pure_weight": 0.85,
+  "rich_state_amplitudes": [
+    [
+      1.0,
+      0.0
+    ],
+    [
+      0.4,
+      0.2
+    ],
+    [
+      -0.2,
+      0.3
+    ],
+    [
+      0.5,
+      -0.1
+    ],
+    [
+      0.3,
+      0.4
+    ],
+    [
+      -0.4,
+      0.1
+    ],
+    [
+      0.2,
+      -0.5
+    ],
+    [
+      0.6,
+      0.2
+    ]
+  ],
+  "phase_laws": [
+    {
+      "linear": 0.7,
+      "quadratic": 0.15,
+      "sin_amplitude": 0.0,
+      "sin_frequency": 1.0
+    },
+    {
+      "linear": -0.5,
+      "quadratic": 0.0,
+      "sin_amplitude": 0.1,
+      "sin_frequency": 1.3
+    },
+    {
+      "linear": 1.1,
+      "quadratic": 0.12,
+      "sin_amplitude": 0.0,
+      "sin_frequency": 1.0
+    }
+  ],
+  "filters": [
+    {
+      "amplitude_slope": 0.3,
+      "phase_linear": 0.2,
+      "phase_quadratic": 0.1
+    },
+    {
+      "amplitude_slope": -0.2,
+      "phase_linear": -0.3,
+      "phase_quadratic": 0.15
+    }
+  ],
+  "filter_convention": "f=(1+a*t)*exp(i*(b*t+c*t*t))/sqrt(1+a+a*a/3), normalized on [0,1]; Bf=int conj(f)b. Gains same in all branches; divide product only after reading.",
+  "branches": [
+    "lab",
+    "transported",
+    "base_LO",
+    "stale_LO",
+    "bad_J_phase",
+    "split_bath",
+    "bad_pump"
+  ],
+  "tolerances": {
+    "algebra": 1e-11,
+    "ode": 2e-08,
+    "negative_generator": 1e-06,
+    "negative_output": 1e-07,
+    "rtol": 2e-10,
+    "atol": 2e-12
+  },
+  "controls": "Generator pointwise covariance, explicit joint J, coherent pump, full filtered means/second/covariance and four-cross decoder; negatives stale LO/J phase/split bath/pump/endpoint correction; R57 reconstruction and idempotence separately.",
+  "limits": [
+    "Every parameter dimensionless INPUT; beta derived runtime from pinned CODATA.",
+    "No new physics inference or complete tomography; no automatic G_OH identification.",
+    "Do not infer GHz/nm calibration from a frame change.",
+    "Four distinct quadrature settings, Markov vacuum monitored channels 1/2; coherent input only channel3.",
+    "One execution after review. Any failed condition remains failure, no tuning."
+  ]
+}

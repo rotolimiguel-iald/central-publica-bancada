@@ -1,0 +1,27 @@
+{
+  "status": "PROPOSALS_ONLY_FOR_NEW_SPECIFIC_DECISION",
+  "same_consumed_request_must_not_be_reused": true,
+  "alternatives": [
+    {
+      "id": "A",
+      "proposal": "Construct the Linux argv token using a dedicated PurePosixPath or posixpath.join, independent of the launcher host; keep concrete native Path for actual filesystem I/O.",
+      "advantage": "Makes destination path syntax explicit on both hosts.",
+      "caution": "Do not blindly replace global LINUX with a PurePosixPath if BASE on Linux depends on filesystem methods; separate argv representation from I/O Path. No .resolve from Windows for Linux destination.",
+      "preference": "Recommended conceptually; not implemented or adopted."
+    },
+    {
+      "id": "B",
+      "proposal": "Keep existing host Path and serialize the Linux script token explicitly via (LINUX/script).as_posix().",
+      "advantage": "Smaller local source delta for the present fixed /mnt/c literal.",
+      "caution": "Still relies on host parsing before serialization; constrain to the exact fixed POSIX-rooted destination, no drive/UNC/generalized user input. Changes need a new contract/identity and decision."
+    }
+  ],
+  "future_possible_documentary_conditions": [
+    "Exact script token starts /mnt/c/ and contains forward slashes, no backslash or drive prefix.",
+    "argv is a list; preserve spaces as part of one token without adding shell quoting.",
+    "Supervisor and cleanup must use the same canonical destination builder; parent/child identity matching must remain coherent on Linux.",
+    "Any future checks must be newly authorized and must not reopen consumed request4f5d."
+  ],
+  "implementation": false,
+  "tests_or_path_evaluation_executed": false
+}

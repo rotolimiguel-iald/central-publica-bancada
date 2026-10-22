@@ -1,0 +1,68 @@
+{
+  "unit": "F0.3.B1",
+  "when_utc": "2026-10-09T13:01:53.799420+00:00",
+  "mode": "AST_WITH_SYMBOLIC_MOCKS",
+  "sources_sha256": {
+    "motor.py": "49f304fd41afc8e4ae5ea4573a96f973d216172247c6b13e03570acec0287b8b",
+    "evidencia.py": "92b0c9eeb6370bd835d8c34324409ee1e66b5b0b564aa60d5ba5b6164de19eb9"
+  },
+  "imports_of_originals": false,
+  "real_data_or_scientific_fit": false,
+  "curve_probe": {
+    "source_lines": [
+      52,
+      64,
+      69
+    ],
+    "caller_curve_argument_counts": [
+      1
+    ],
+    "artigo_options": {
+      "planck_cov": "chen2019",
+      "dr1_cov": "correlacionada",
+      "dm_star": "razao_camb",
+      "mapa_R": "nu",
+      "lei": "d1b",
+      "beta_no_fundo": "nao",
+      "lei_sn": "nenhuma",
+      "lei_cc": "acumulada",
+      "cc_cov": "diagonal"
+    },
+    "expected_background_beta": 0.0,
+    "actual_first_background_call": {
+      "H0": 67.5,
+      "wb": 0.02237,
+      "wc": 0.12,
+      "beta": 0.012031300400803142,
+      "c": 0.0
+    },
+    "material_mode_mismatch_reproduced": true,
+    "scope": "intercepts first FundoV3Lote call, does not calculate any distance or chi2"
+  },
+  "selection_probe": {
+    "all_default_evaluate_sets": [
+      "planck_comp",
+      "desi_dr1",
+      "desi_dr2",
+      "sh0es",
+      "pantheon",
+      "sh0es_local",
+      "cc_moresco",
+      "pantheon_sh0es"
+    ],
+    "overlap_list_accepted": [
+      "pantheon",
+      "pantheon_sh0es",
+      "sh0es",
+      "sh0es_local",
+      "desi_dr1",
+      "desi_dr2"
+    ],
+    "duplicates_accepted": [
+      "sh0es",
+      "sh0es"
+    ],
+    "scope": "chi2 membership avoids duplicating the SAME identifier, but n_dados sums input IDs; distinct overlapping datasets have separate terms"
+  },
+  "no_bench_write": true
+}

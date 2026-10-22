@@ -1,0 +1,78 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim": 845,
+  "reviewer": "tempo_math_review",
+  "created_utc": "2026-10-15T19:55:35.100866+00:00",
+  "verdict": "PASS_WITH_SCOPE",
+  "review_type": "Independent semantic source reading and byte/receipt/axiom checks; no independent recompilation",
+  "records": [
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\FINAL_BOUNDED_TENSOR_RECEIPT_R1.json",
+        "sha256": "36177ee5e1ae0008881e131c8797c0310038cd475ddca738461efcde98bdaee7",
+        "bytes": 2399
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\BoundedTensorMapR2.lean",
+        "sha256": "404d98c8b33c9529274334844c6a332ef9be71b20e2561e0dea4f276a5c27a10",
+        "bytes": 4682
+      },
+      "printed_declarations": [
+        "F1Fecho.BoundedTensor.norm_sum_tmul_sq",
+        "F1Fecho.BoundedTensor.norm_map_first_le",
+        "F1Fecho.BoundedTensor.norm_map_le",
+        "F1Fecho.BoundedTensor.mapCLM_norm_le"
+      ]
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\FINAL_BOUNDED_GAMMA_RECEIPT_R1.json",
+        "sha256": "a52a47392d8851f8b07dc6936183b1b5675642cdd8f2b5becb4b6e1295105ce0",
+        "bytes": 2887
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\BoundedBosonicGammaR2.lean",
+        "sha256": "8323d36504cab4e558291967ebe6694fee6e9d4a6bd92baa0de127f27a2f60fd",
+        "bytes": 6186
+      },
+      "printed_declarations": [
+        "F1Fecho.BoundedGamma.algebraic_bound",
+        "F1Fecho.BoundedGamma.tensor_bound",
+        "F1Fecho.BoundedGamma.sector_contraction",
+        "F1Fecho.BoundedGamma.gamma_norm_le",
+        "F1Fecho.BoundedGamma.gamma_exponential",
+        "F1Fecho.BoundedGamma.gamma_vacuum"
+      ]
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\FINAL_BOUNDED_GAMMA_PROPERTIES_RECEIPT_R1.json",
+        "sha256": "c4a9b4b520b1b896f92bf6179d9a8729867d630f8881183ad85beef7324c3a0c",
+        "bytes": 2731
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\BoundedGammaPropertiesR2.lean",
+        "sha256": "757bfed47e66ea284d2bb8a51ba0c53b6782d8617033c24e9b3e6fce34f1731c",
+        "bytes": 3055
+      },
+      "printed_declarations": [
+        "F1Fecho.BoundedGamma.gamma_commute",
+        "F1Fecho.BoundedGamma.gamma_selfadjoint",
+        "F1Fecho.BoundedGamma.gamma_denseRange",
+        "F1Fecho.BoundedGamma.gamma_injective"
+      ]
+    }
+  ],
+  "findings": [
+    "Tensor norm estimate is proved by finite-dimensional orthonormal expansion in the second factor, without a bounded tensor premise.",
+    "The extension acts on the same Algebraic/TensorHilbert/Sector/F types, then uses the real l2 norm bound. No alternative Fock or assumed exponential action appears.",
+    "The all-particle map requires ||A||<=1. This is necessary for boundedness over all sectors and is explicit, not a hidden claim for arbitrary unbounded A.",
+    "Gamma exponential action and vacuum invariance follow from actual sector construction.",
+    "Selfadjointness and commutation use total exponential vectors; dense range follows continuity and density of A. Injectivity in this file uses selfadjointness plus dense range."
+  ],
+  "scope_limits": [
+    "No unbounded second quantization maximality, selfadjointness, graph core, or identification with closed Tomita follows solely from these bounded results.",
+    "Compilation evidence is the constructors original accepted receipts; this reviewer did not execute Lean again."
+  ],
+  "material_findings": []
+}

@@ -1,0 +1,23 @@
+{
+  "selected": "A_CONDITIONAL_ANALYTIC_WITH_LOG_DOMAIN_PRIMITIVE",
+  "alternatives": [
+    {
+      "id": "A",
+      "description": "Project one affine response with existing Gaussian backend; integrate H3/H4 analytically with exact prior Jacobians and an injected stable log quadratic-window function. H5 uses bounded one-dimensional positive quadrature after scaling.",
+      "tradeoff": "Requires declared accuracy of the injected special/quadrature functions; engineering estimates allowed without physical uniform certificate."
+    },
+    {
+      "id": "B",
+      "description": "Direct quadrature in original beta,s,rd coordinates using the same already computed background and backend.",
+      "tradeoff": "Avoids coordinate Jacobians if original priors retained, but uses more conditional likelihood evaluations. No new CAMB calls; not an automatic retry when A fails."
+    },
+    {
+      "id": "C_REJECTED",
+      "description": "Subtract two ordinary normal CDF floats after completing the square.",
+      "tradeoff": "Can falsely return zero in tails or catastrophically cancel prefactor and tail. Not the selected implementation."
+    }
+  ],
+  "observed_reads": 0,
+  "candidate_imports": 0,
+  "controls": 0
+}

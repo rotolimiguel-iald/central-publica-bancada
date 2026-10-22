@@ -1,0 +1,32 @@
+{
+  "schema": "P3_A02_AFFECTED_REGRESSION_RESULT_V2",
+  "utc": "2026-10-06T19:22:49.913559+00:00",
+  "tool_result": {
+    "chunk_id": "abfbf8",
+    "wall_time_seconds": 0.2458772,
+    "exit_code": 0,
+    "original_token_count": 120,
+    "output": "test_22_launcher_handler_records_only_no_mask_mutation (a02_affected_ast_regression.Checks.test_22_launcher_handler_records_only_no_mask_mutation) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.013s\r\n\r\nOK\r\n{\"status\": \"PASS\", \"tests\": 1, \"failures\": 0, \"errors\": 0, \"wall_s\": 0.02181560010649264, \"cpu_s\": 0.03125, \"scope\": \"ONLY_AFFECTED_AST22_NO_LAUNCHER_IMPORT\", \"real_children\": 0, \"real_signals\": 0, \"scientific_calls\": 0}\r\n"
+  },
+  "command": "@'\nfrom pathlib import Path\nimport json,hashlib,runpy,unittest,time,sys\np=Path(r\"C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA02_preparation\")\nproto=json.loads((p/\"PROTOCOLO_TESTES_A02_V2.json\").read_bytes())\nfor row in proto[\"pins\"]:\n raw=(p/row[\"relative_path\"]).read_bytes()\n assert len(raw)==row[\"bytes\"] and hashlib.sha256(raw).hexdigest()==row[\"sha256\"]\nassert proto[\"exact_test_count\"]==1\nstart=time.perf_counter();cpu=time.process_time()\nns=runpy.run_path(str(p/\"test_A02_stdlib.py\"),run_name=\"a02_affected_ast_regression\")\nsuite=unittest.TestSuite([ns[\"Checks\"](proto[\"cases\"][0])])\nresult=unittest.TextTestRunner(verbosity=2).run(suite)\nprint(json.dumps({\"status\":\"PASS\" if result.wasSuccessful() else \"FAIL\",\"tests\":result.testsRun,\"failures\":len(result.failures),\"errors\":len(result.errors),\"wall_s\":time.perf_counter()-start,\"cpu_s\":time.process_time()-cpu,\"scope\":\"ONLY_AFFECTED_AST22_NO_LAUNCHER_IMPORT\",\"real_children\":0,\"real_signals\":0,\"scientific_calls\":0}))\nsys.exit(0 if result.wasSuccessful() else 1)\n\n'@ | & 'C:\\Python314\\python.exe' -I -B -X utf8 -",
+  "protocol": {
+    "relative_path": "PROTOCOLO_TESTES_A02_V2.json",
+    "bytes": 2045,
+    "sha256": "cc965e6c74470e76be3355a59ae38c0c2cdf433c8b8fa660bfb6628f9fdf6f4c"
+  },
+  "scope": "Only affected AST22 after final launcher change; 21 pure supervisor cases were not repeated.",
+  "final_code_validation": {
+    "pure_supervisor_21_cases": "V1 result with same module SHA as final",
+    "launcher_AST22": "V2 result with final launcher SHA"
+  },
+  "observations": {
+    "first_run_cases": 22,
+    "second_run_cases": 1,
+    "total_case_invocations": 23,
+    "unique_cases": 22,
+    "real_children": 0,
+    "real_signals": 0,
+    "scientific_calls": 0
+  },
+  "execution_authorized": false
+}

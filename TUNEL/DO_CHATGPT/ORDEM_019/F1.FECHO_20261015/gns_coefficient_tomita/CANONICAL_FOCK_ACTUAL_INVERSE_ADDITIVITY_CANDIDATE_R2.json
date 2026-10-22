@@ -1,0 +1,150 @@
+{
+  "status": "DECLARADO_UNCOMPILED",
+  "created_utc": "2026-10-16T18:19:28.858830+00:00",
+  "author": "codex-fock-r6-review",
+  "reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "task_id": "R7",
+  "criterion": "Takesaki na representacao pretendida. Produto cruzado, acao/peso/traco entrelacados por termos ou derivacao identificada; escalaV351 reutilizada.",
+  "handle": "r47-r7-actual-cutoff-repair",
+  "revision_before_material": 224,
+  "delivery_revision": 224,
+  "projection_sha256": "70afa8efcfe16ddf4921e75f2f8c1e57919b93a9ee1aca4fb1bc83c790bb2c1d",
+  "candidate": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockActualInverseAdditivityR2.lean",
+    "sha256": "70cc2e7eeaf46f56d39ac9f0861a68d10c3b2a8ac9281143687a1794447f6402",
+    "bytes": 13233
+  },
+  "preserved_previous": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockActualInverseAdditivityR1.lean",
+    "sha256": "8d3b2811e53ca304e1ad9d2a631afc363dd15e526e1ffb8bd48c9559fff0f107",
+    "bytes": 10331
+  },
+  "previous_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T180449_754475Z\\RECEIPT.json",
+    "sha256": "0ba8be16d21e40a18e68004c43482c61b6e680c660a76f74d0b2eef76e0d369a",
+    "bytes": 226192
+  },
+  "previous_exit_code": 1,
+  "previous_seconds": 110.6588136000064,
+  "previous_artifacts_checked": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T180449_754475Z\\AXIOMS.txt",
+      "sha256": "6fc0a1f7b294606e9231261184034760d3f7ddd46c5b886bd7f9db41532588ba",
+      "bytes": 4330
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T180449_754475Z\\BUILD.log",
+      "sha256": "fed84aaef83b1656321a9accf9f4f388b73db7993230e6bf392a1b83e0d9d4c5",
+      "bytes": 228730
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T180449_754475Z\\CanonicalFockActualInverseAdditivityR1.lean",
+      "sha256": "8d3b2811e53ca304e1ad9d2a631afc363dd15e526e1ffb8bd48c9559fff0f107",
+      "bytes": 10331
+    }
+  ],
+  "static_checks": {
+    "public_statements_unchanged": {
+      "scalarWeight_right_perturbed_norm": true,
+      "scalarWeight_right_perturbed_mono": true,
+      "cutoff_antitone": true,
+      "value_add": true,
+      "cutoff_sequence_mono": true
+    },
+    "first_two_proofs_unchanged": {
+      "scalarWeight_right_perturbed_norm": true,
+      "scalarWeight_right_perturbed_mono": true
+    },
+    "axiom_reports_requested": 5,
+    "maxHeartbeats": 400000,
+    "synthInstance.maxHeartbeats": 500000,
+    "compiled": false
+  },
+  "diagnosis": {
+    "observed_failure": "R1 line151:8 isDefEq400000 in rw of hilbert_sqrt_mul_star; line150 change was before the measured failing location. Follow-on declaration-level whnf timeout at line136 and unknown cutoff_antitone/sorryAx downstream are preserved; no whole-file green claimed.",
+    "source_semantics": "core.toStarSubalgebra inherits the ambient operator order on its elements. Ambient Loewner order is (g-f).IsPositive; hilbertPositiveSqrt fixes the native CFC instances before specialization. The log does not establish an inequivalence of these mathematical orders.",
+    "repair": "The abstract hilbert_sqrt_core_product_mono proves subtype order and sqrt-product equality before fixing H. Its sole concrete application passes AmbientHilbert=RegularHilbert F plus the existing NormedAddCommGroup, InnerProductSpace and CompleteSpace dictionaries explicitly. Existing ambient instances are cached as reducible aliases. No rw or change is applied to the concrete b/c products.",
+    "no_new_premise": "Both nonnegativity premises and B<=C of the private lemma are discharged by the existing regularInverseGeneratorCutoff_nonneg and regularInverseGeneratorCutoff_antitone. Actual root membership and actual J are preserved."
+  },
+  "source_anchors": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V350AntiunitaryPositiveConjugation.lean",
+        "sha256": "83be0cf3f811bd6fd429c7705fdb1a00b27fdd6496ee971b9ca5f355c00d6f36",
+        "bytes": 2986
+      },
+      "lines": [
+        14,
+        15
+      ],
+      "role": "native hilbertPositiveSqrt definition"
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V350L2OperatorLift.lean",
+        "sha256": "bbdf07f64bc1abdfb50fed8420911c868a11cc6c8036b6f06167f021a1db7465",
+        "bytes": 4131
+      },
+      "lines": [
+        12,
+        13
+      ],
+      "role": "RegularHilbert is the actual Lp carrier"
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\Positive.lean",
+        "sha256": "eb187f321fed60ab42530e50cd061eccc100e07e4292c4031e16f9beac30e4b6",
+        "bytes": 27033
+      },
+      "lines": [
+        458,
+        462,
+        463,
+        468
+      ],
+      "role": "Loewner order definition"
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Algebra\\Star\\Subalgebra.lean",
+        "sha256": "da23ab4947387e624a7a80aef3b2e84b3cc8e1c8e6d686fb7278e2c97d21b137",
+        "bytes": 40870
+      },
+      "lines": [
+        102,
+        104,
+        105
+      ],
+      "role": "native inherited subtype star operations"
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockRegularCoreR2.lean",
+        "sha256": "9658974b516918a29433b65427f8a507def5220389165569de43ae986b4d9e21",
+        "bytes": 5262
+      },
+      "lines": [
+        23,
+        34
+      ],
+      "role": "existing fockFlow and same regular core"
+    }
+  ],
+  "unchanged_import_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CANONICAL_FOCK_ACTUAL_INVERSE_ADDITIVITY_CANDIDATE_R1.json",
+    "sha256": "4d4a89f361f80a5bf41943a6cad47333996378c16fcb454218d7041f47b1a600",
+    "bytes": 20026
+  },
+  "pending": "Root compilation and independent component review first. Actual modular balance, double-cut limits, tracial law, complete trace interface and PF remain open; full R7 criterion unchanged.",
+  "actions_not_performed": [
+    "Lean build",
+    "mission mutation or acceptance",
+    "production/kernel/memory/gate mutation",
+    "provider call"
+  ]
+}

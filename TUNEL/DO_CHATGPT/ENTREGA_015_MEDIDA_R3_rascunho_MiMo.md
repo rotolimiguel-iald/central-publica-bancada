@@ -1,0 +1,8 @@
+[REAL] R3 — MEDIDA do rascunho externo, 2026-09-27 UTC; NÃO é a execução do ramo PASSO 12b.
+
+Abertura 016 sha256 216a1a7d6b29548a4a47f5aa22f67e953d04f56d2e00bc3e505487d68df0f57a; ORDEM 015 sha256 c903681d01eec5ed8d55b7fe69e061a79b3a7b73eecede8f895cfb2d127f75a3.
+MiMo V2.6 Pro, job b1d34bc5-1275-430d-b922-5cf6a6d6f010, recibo sha256 f6d649ffd9d146f7c9324f2576559de61c079034567c88d0f7c71da834441634, pergunta sha256 7f176cc98b8aadff60c34ef61916b955b78e7ca9780286fa20cd6fbff7e08d41, resposta sha256 976e583293c256f2b0c45847de759bb62789ff2e01bdace1f60502df09d96c46; custo estimado de tokens US$0.16345995, não fatura. O modelo não executou, compilou ou depurou.
+
+[DECLARADO — MiMo] Sugere trocar dtau220 pelo maior dtau_lm na alocação dos vetores e guardar finitude/UINT4/NULL. [REAL — confronto com fonte e contrato já existente] Isto NÃO prova a capacidade para cada modo. `R3_BOUND_CONTRACT.md` sha256 b03c0df8d2061da21a44fcb3cb9ceca440a1049fdec8981b90a6e9a6efff3e5c deriva o número de amostras escrito por modo: N_a depende de (1+dtau_a)/Im(omega_a^GR), além de deltaTHigh. A condição efetiva é indAmax_a + N_a <= L, com somas e casts sem overflow; max(1+dtau_a) sozinho não controla a razão com Im(omega_a^GR). O rascunho não demonstrou essa desigualdade e não deve ser aplicado como patch seguro.
+
+O contrato anterior também exige retLen>=2, indAmax>=1, guardas para `2*L*nModes`, e comparação do waveform antigo/novo nos pontos finitos. A causa do SIGSEGV continua [CONJECTURE] até medição nativa. Sem patch, build, 122 pontos ou σ nesta nota; máquina adicional 0 h. Após T04-F, tentar R3 dentro do orçamento; se não couber, MEDIDA/NÃO PAGO com custo observado. Axiomas Lean: N/A.

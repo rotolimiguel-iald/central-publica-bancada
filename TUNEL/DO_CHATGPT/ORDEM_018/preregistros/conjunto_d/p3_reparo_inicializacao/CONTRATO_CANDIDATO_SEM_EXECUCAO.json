@@ -1,0 +1,238 @@
+{
+  "state": "CANDIDATE_ONLY_NO_EXECUTION_PERMISSION",
+  "created_utc": "2026-10-06T02:31:58.795915+00:00",
+  "fix": "P3 initialization cp437 NPZ codec dependency",
+  "base_executed_contract": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_preparacao\\CONTRATO_P3.json",
+    "sha256": "8a52cc075cd7dfb3102f47f40f854ca89366a0636f78153abb42706adfcc91e4",
+    "bytes": 15666
+  },
+  "base_executed_driver": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_preparacao\\driver_p3.py",
+    "sha256": "b4f2b5ef7ecdc8e06c6ef5cbb704cfdf7baaa8611806398706b47e6a9b47faf8",
+    "bytes": 12522
+  },
+  "original_failure_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_preparacao\\RECIBO_EXECUCAO_P3_V2.json",
+    "sha256": "d8b601584a0bde4690bbd0a1056b5437b637c6a575770b5f7c0e663ccee07d2c",
+    "bytes": 13693
+  },
+  "alternatives": [
+    {
+      "id": "A",
+      "selected": true,
+      "method": "Preload fixed cp437 by path/hash and verify origin and codec roundtrip before existing hook.",
+      "benefit": "No change to post-hook allowlist; dependency is explicit and checked before use.",
+      "tradeoff": "One additional named dependency in pre-hook initialization; not an OS/native sandbox claim."
+    },
+    {
+      "id": "B",
+      "selected": false,
+      "method": "Add only exact pinned /usr/lib/python3.12/encodings/cp437.py to post-hook allowed reads, retaining all directory denials.",
+      "benefit": "Preserves lazy import with an exact scientific-runtime file grant.",
+      "tradeoff": "Adds a post-hook permission; attempted cached .pyc path remains denied and must be distinguished from a successful .py fallback. No wildcard or directory grant is acceptable."
+    }
+  ],
+  "selection_reason": "The observed missing dependency is one deterministic standard-library codec. Preloading it with verified source identity warms the codec registry and preserves the existing closed read boundary.",
+  "proposed_delta": "DELTA_CODEC_PRELOAD.patch",
+  "candidate_driver": "driver_p3_candidate.py",
+  "additional_contract_inputs": [
+    "preload_npz_codec.py",
+    "CODEC_CP437_PIN.json"
+  ],
+  "candidate_files": {
+    "driver_p3_candidate.py": {
+      "sha256": "801cd809f6c55bbcf36546666b5f7542bb8e784dbb532da3412d66f90b526956",
+      "bytes": 12651
+    },
+    "DELTA_CODEC_PRELOAD.patch": {
+      "sha256": "154abbbc1829090d4055736933e4a344c357595dba49c71160be59e07978da31",
+      "bytes": 591
+    },
+    "preload_npz_codec.py": {
+      "sha256": "7014b22f36ba9be21dc73fc63e562498ff19d24c964c84c77ebbb1846e7c5c02",
+      "bytes": 1149
+    },
+    "CODEC_CP437_PIN.json": {
+      "sha256": "fd09b00998b1c2d77952a35eb14f91b71a9ee1da6a2d353f863e05c4f503c4ab",
+      "bytes": 322
+    }
+  },
+  "unchanged_science_and_limits": {
+    "hypothesis": "Same aligned-spin pSEOBNRv4HM_PA IMR model for both synthetic datasets; DTau220 only free QNM deformation; DOmega220=DTau440=DOmega440=0.",
+    "free_parameters": [
+      "mass_1",
+      "mass_2",
+      "chi_1",
+      "chi_2",
+      "dtau220",
+      "luminosity_distance",
+      "theta_jn",
+      "ra",
+      "dec",
+      "psi",
+      "phase",
+      "geocent_time"
+    ],
+    "fixed_parameters": {
+      "domega220": 0.0,
+      "dtau440": 0.0,
+      "domega440": 0.0
+    },
+    "priors": {
+      "mass_1": {
+        "kind": "Uniform",
+        "minimum": 35.0,
+        "maximum": 110.0
+      },
+      "mass_2": {
+        "kind": "Uniform",
+        "minimum": 20.0,
+        "maximum": 80.0
+      },
+      "mass_ratio": {
+        "kind": "Constraint",
+        "minimum": 0.2,
+        "maximum": 1.0
+      },
+      "chi_1": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 0.95
+      },
+      "chi_2": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 0.95
+      },
+      "dtau220": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 2.0
+      },
+      "domega220": 0.0,
+      "dtau440": 0.0,
+      "domega440": 0.0,
+      "luminosity_distance": {
+        "kind": "Uniform",
+        "minimum": 10.0,
+        "maximum": 10000.0
+      },
+      "theta_jn": {
+        "kind": "Sine",
+        "minimum": 0.0,
+        "maximum": 3.141592653589793
+      },
+      "ra": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "dec": {
+        "kind": "Cosine",
+        "minimum": -1.5707963267948966,
+        "maximum": 1.5707963267948966
+      },
+      "psi": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 3.141592653589793,
+        "boundary": "periodic"
+      },
+      "phase": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "geocent_time": {
+        "kind": "Uniform",
+        "minimum": 999999999.9,
+        "maximum": 1000000000.1
+      }
+    },
+    "grid": {
+      "duration_s": 32.0,
+      "sample_rate_hz": 4096,
+      "generation_sample_rate_hz": 8192,
+      "generation_maximum_frequency_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "roll_off_s": 0.4,
+      "geocenter_seconds_after_segment_start": 16.0
+    },
+    "geometry": {
+      "theta_jn": 0.7,
+      "ra": 1.0,
+      "dec": 0.2,
+      "psi": 0.4,
+      "phase": 1.2,
+      "geocent_time": 1000000000.0
+    },
+    "detectors": [
+      "H1",
+      "L1"
+    ],
+    "noise": {
+      "seed": 180601,
+      "paired_between_jobs": true,
+      "independent_realizations": false,
+      "network_optimal_full_IMR_SNR": 20.0,
+      "regenerate": false
+    },
+    "sampler": {
+      "library": "dynesty",
+      "version": "3.1.0",
+      "method": "static NestedSampler",
+      "nlive": 256,
+      "bound": "multi",
+      "sample": "rwalk",
+      "walks": 25,
+      "dlogz": 0.1,
+      "ndim": 12,
+      "periodic_indices": [
+        7,
+        9,
+        10
+      ],
+      "pool": null,
+      "queue_size": 1,
+      "checkpoint": false,
+      "resume": false,
+      "marginalizations": [],
+      "log_likelihood": "bilby GravitationalWaveTransient.log_likelihood_ratio, Gaussian independent H1/L1; absolute noise-only normalization omitted equally in the same job; no cross-dataset Bayes-factor interpretation"
+    },
+    "limits": {
+      "max_likelihood_calls": 10000,
+      "native_waveform_calls_at_most": 10000,
+      "wall_soft_s": 3600,
+      "supervisor_wall_s": 3610,
+      "cpu_soft_s": 3300,
+      "cpu_hard_s": 3305,
+      "address_space_bytes": 8589934592,
+      "workers": 1,
+      "threads": 1,
+      "parallel_jobs": 1,
+      "jobs_at_most": 2,
+      "no_retry": true
+    },
+    "convergence": {
+      "numerical_stop": "delta_logz<0.1 before final live points, non-flat live likelihood, below hard call cap, no error.",
+      "sampling_diagnostic": "weighted ESS>=100 after final live points; ESS low is explicitly incomplete.",
+      "not_sufficient_for": [
+        "coverage",
+        "global-mode discovery",
+        "population bias",
+        "D readiness",
+        "physical verdict"
+      ],
+      "posterior_summary_rule": "Driver saves weighted raw diagnostics only; independent review interprets recovery. No automatic pass from truth inclusion."
+    }
+  },
+  "candidate_is_not_runnable_bundle": "Source and patch for review only. No new launcher, executable contract, jobs, CLAIM, execution directory or authorization is created. Full P3 deployment/repetition requires independent review and explicit specific coordination authorization.",
+  "D_or_V1_or_holds_modified": false,
+  "PE_authorized": false,
+  "P3_repeat_authorized": false
+}

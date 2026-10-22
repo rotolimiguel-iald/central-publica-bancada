@@ -1,0 +1,38 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T035457_695272Z\WeightedSchwartzPlancherelR1.lean:30:15: warning: `SchwartzMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T035457_695272Z\WeightedSchwartzPlancherelR1.lean:31:23: error(lean.unknownIdentifier): Unknown identifier `inner_smul_right_real`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T035457_695272Z\WeightedSchwartzPlancherelR1.lean:29:56: error: unsolved goals
+V : Type u_1
+H : Type u_2
+inst✝⁷ : NormedAddCommGroup V
+inst✝⁶ : InnerProductSpace ℝ V
+inst✝⁵ : FiniteDimensional ℝ V
+inst✝⁴ : MeasurableSpace V
+inst✝³ : BorelSpace V
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+f g : 𝓢(V, H)
+m : V
+ht : Function.HasTemperateGrowth fun x => inner ℝ x m
+hp :
+  ∫ (x : V), inner ℂ ((𝓕⁻ f) x) ((-(2 * ↑Real.pi * Complex.I) • (smulLeftCLM H fun x => inner ℝ x m) (𝓕⁻ g)) x) =
+    ∫ (p : V), inner ℂ (f p) ((∂_{m} g) p)
+⊢ -(2 * ↑Real.pi * Complex.I) * ∫ (a : V), inner ℂ ((𝓕⁻ f) a) (inner ℝ a m • (𝓕⁻ g) a) =
+    -(2 * ↑Real.pi * Complex.I) * ∫ (x : V), ↑(inner ℝ x m) * inner ℂ ((𝓕⁻ f) x) ((𝓕⁻ g) x)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T035457_695272Z\WeightedSchwartzPlancherelR1.lean:31:45: warning: This simp argument is unused:
+  ← mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp only [̵S̵c̵h̵w̵a̵r̵t̵z̵M̵a̵p̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵S̵c̵h̵w̵a̵r̵t̵z̵M̵a̵p̵.̵s̵m̵u̵l̵L̵e̵f̵t̵C̵L̵M̵_̵a̵p̵p̵l̵y̵_̵a̵p̵p̵l̵y̵[̲S̲c̲h̲w̲a̲r̲t̲z̲M̲a̲p̲.̲s̲m̲u̲l̲_̲a̲p̲p̲l̲y̲,̲ ̲S̲c̲h̲w̲a̲r̲t̲z̲M̲a̲p̲.̲s̲m̲u̲l̲L̲e̲f̲t̲C̲L̲M̲_̲a̲p̲p̲l̲y̲_̲a̲p̲p̲l̲y̲ ht, i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵,̵i̵n̵n̵e̵r̵_̵s̵m̵u̵l̵_̵r̵i̵g̵h̵t̵_̵r̵e̵a̵l̵,̵←̵m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵i̵n̵t̵e̵g̵r̵a̵l̵_̵c̵o̵n̵s̵t̵_̵m̵u̵l̵]̵i̲n̲n̲e̲r̲_̲s̲m̲u̲l̲_̲r̲i̲g̲h̲t̲,̲
+  ̲ ̲ ̲ ̲ ̲ ̲ ̲i̲n̲n̲e̲r̲_̲s̲m̲u̲l̲_̲r̲i̲g̲h̲t̲_̲r̲e̲a̲l̲,̲ ̲i̲n̲t̲e̲g̲r̲a̲l̲_̲c̲o̲n̲s̲t̲_̲m̲u̲l̲]̲
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.WeightedPlancherel.inverse_parseval' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.WeightedPlancherel.weighted_inverse_parseval' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,34 @@
+R65 — contrato de calibração, preparo e vínculo do banho ao dispositivo
+17/10/2026. Em nome de codex-gerente-tgl; F1.FECHO_20261015, reivindicação952.
+
+1. O avanço desta etapa
+[DERIVED condicional] Fixada a convenção do salto, a transformação de tempo/portas/filtros/LO, o preparo exigido e o conteúdo que uma calibração independente deve fornecer para separar beta da escala do canal. Acrescentadas sondas analíticas sobre a rota térmica e a covariância do salto em relação ao Hamiltoniano LIVRE. Não houve nova simulação, aquisição, ajuste, execuçãoLean/um.py ou chamada de provedor. Os89checksR64 são reaproveitados, não repetidos nem contados como evidência nova.
+[REAL — recuperação] Missão própria retomada na revisão472; R4lease válido e quadro952 conferidos, faseR65 na revisão473. Nós Vivo ainda não indexa esta unidade; falha explícita preservada. Mapa apontaR64. Cinco pinos canônicosv393 permanecem idênticos. Inventário da Bancada consultado focalmente, sem correspondência de calibração específica nesse índice.
+
+2. O que já estava escrito
+[DECLARADO na fonte, com consulta verificável] A patente identifica a notação histórica alphaii (macroalpha²,0.012) com betaTGL; não confundir com o quadrado de alphaCODATA moderno nem usar o literal como entrada. Ela escreve gamma_min=beta*kBT/hbar e beta*gammaLambda*D[J] em trechos distintos. O Custo já descreve coeficientes por correlações espectrais do banho; sua transposição ao banho/canalOH específico precisa ser demonstrada.
+[DERIVED condicional — reuso] R7 já dá gammaLambda=2/tP SE a média de absorção2/(beta*gammaLambda) do submodelo isolado for identificada com o tempo tP/beta declarado no projeto. Não é taxa medida nem conclusão do gerador completo. A lei-raiz também já tem razão taxa/frequência, mas seu dissipador não é oJ do dispositivo por mera troca de nome. O Custo declara tau*=tP como identificação conjectural; a leitura de produtos tau*·Kfac já é reconhecida no programa. A presente camada não recria essas rotas nem as promove a medidas.
+Pinos, linhas e cobertura: sources/DELIVERY_R1.json e manifesto de fontes correspondente; calibration/SOURCE_PINS_AND_ANCHORS_R65.json.
+
+3. Escala e identificabilidade agora explícitas
+FixeJ0, modos normalizados e convenção dos coeficientes. D[sJ0]=|s|²D[J0], portanto Gamma=gammaLambda_phys*|s|² e lambda_phys=beta*Gamma. A decomposição taxa/normalização precisa ficar fixa antes da leitura.
+Para tau=t/t0: Ld=t0*Lphys, hd=t0*Hphys/hbar, Lj,d=sqrt(t0)*Lj,phys; fd(tau)=sqrt(t0)*fphys(t0*tau), dXd=dXphys/sqrt(t0). A quadratura filtrada é preservada. gammaLambda_d=1 pode ser unidade somente quando todas as outras razões forem transportadas; noR64 foi INPUT sintético, não calibração.
+A razão r=lambda/kappa elimina t0, mas beta=r/c ainda exige c=Gamma/kappa independente. Igualar Gamma e kappa sem ponte não resolve isso. Para dois experimentos independentes com informação positiva sobre lambda e Gamma, det(Fisher)=Gamma²*I_lambda*I_Gamma: remove esta degenerescência LOCAL sob as hipóteses escritas. Não prova identificabilidade global, informação positiva nos dados ou5sigma. Derivação completa em IDENTIFIABILITY_COMPLETION_R65.txt.
+
+4. Rota térmica: condição que falta e sonda de suficiência
+Gamma=kBT/hbar resultaria de lambda=gamma_min=beta*kBT/hbar somente com MESMA taxa, mesma normalização e saturação da mínima. A existência de estacionário com entropia finita, isoladamente, não impõe esse piso: noqubit térmico com taxas eps e eps*q, q=exp(-Delta/kBT), o estado diag(1,q)/(1+q) permanece fiel e estacionário para todoeps>0; a soma das taxas pode tender a zero. É contraexemplo à suficiência dessa condição geral, não àTGL nem a uma classe física adicional ainda não identificada. Fonte e demonstração: THERMAL_ROUTE_SOURCE_R65.json, THERMAL_ROUTE_SCOPE_R65.txt.
+
+5. Ligação do banho aoJ: diagnóstico algébrico delimitado
+Sob h0=omega_c(ni+no)+omegaOH*nOH, A=ao†sigma- e B=sigma+ai têm frequências ±delta, delta=omega_c-omegaOH. No corte0/1, X=|001><100|,Y=|010><001| satisfazem D[J]X=Y-X. Logo (D[J]U_t-U_tD[J])X=-2i*sin(delta*t)*Y. Fora da ressonância, este dissipador não é covariante sob esse fluxo LIVRE. Uma rota secular que exija tal covariância não pode transportar automaticamente seu coeficiente aoJ; trocarD[A+B] porD[A]+D[B] muda os termos cruzados.
+O teste não usa oHamiltoniano completo com acoplamento/bombeamento nem prova impossibilidade de banho dirigido/não secular ou de outroreferencial. Também não identifica h0 com o gerador modular/Poincare. BARE_FREQUENCY_COVARIANCE_R65.txt fixa o alcance. Esse é um elo matemático concreto a resolver para a realização do dispositivo, separado da calibração experimental.
+
+6. Preparo e detector
+[DERIVED condicional] Atenuação passiva de laser coerente continua coerente; P1=mu*exp(-mu)<=1/e, portanto não é preparo determinístico de|1>. A frase específica doM1 precisa de etapa condicionada/fonte não clássica para esse uso. O par puro|00>+q|11> também não resulta só de óptica passiva de entradas clássicas. A família squeezed existente com tanh(r)=1/2 tem peso1/16 fora dos setores0/1; projetar/renormalizar esses setores reproduz o estadoR64 como condicionamento, ainda não implementado. Coerente pode servir de referência de ganho/fase, preservado seu papel. A distinção |<a>|² versus<n> já era errataR63 e é somente reutilizada.
+Contrato completo e fonte primária bibliográfica: calibration/CONTRATO_CALIBRACAO_R65.md. A consulta ao resumo arXiv é identificada; a tentativa de custódiaHTTP falhou e não se inventa hash/PDF lido.
+
+7. O que ficou resolvido e o que segue aberto
+Resolvido nesta camada: contrato operacional/matemático para unidades, normalização, detector e preparo; critério preciso de segunda informação; diagnóstico das hipóteses das rotas térmica/planckiana e do banho. Nenhuma taxa física foi inferida.
+[OPEN — R4] Calibração/preparo e vínculo de Gamma ao mesmo canal; não localizado recibo independente na cobertura focal. Há propostas/rotas condicionais, não ausência de toda construção.
+[OPEN — R5] Realização dinâmica e espacial compatível com a rede. Pode avançar MATEMATICAMENTE com parâmetros e hipóteses nomeados, sem esperar confirmação pela natureza. Calibração experimental de beta não é gate para validade formal geral. Próxima construção útil: especificar o reservatório/drive e comparar seu gerador efetivo comJ completo, preservando correlações e domínios; reaproveitarFock/Takesaki/Maxwell aceitos. R3/R10 continuam dependentes das pontes correspondentes.
+Não instalar programa novo, alterarkernel/Bancada, abrir dado ou movergate. Revisão independente e escrituração em FINAL_REVIEW_R65.json, MEMORY_REVIEW_R65.json e DELIVERY_INTEGRATED_R65.json, quando concluídos.
+

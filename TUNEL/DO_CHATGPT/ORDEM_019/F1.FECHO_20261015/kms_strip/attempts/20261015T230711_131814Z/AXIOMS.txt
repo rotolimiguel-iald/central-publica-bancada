@@ -1,0 +1,91 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T230711_131814Z\MaxwellChartSmearingR3.lean:36:2: error: Type mismatch
+  coefficient_zero_at f y
+    (Eq.mp (Eq.trans (congrArg Not coefficient_tsupport._simp_1_1) coefficient_tsupport._simp_1_2) hy)
+has type
+  coefficient f y = 0
+but is expected to have type
+  y ∉ Function.support (coefficient f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T230711_131814Z\MaxwellChartSmearingR3.lean:66:14: error: don't know how to synthesize implicit argument `x`
+  @ContinuousAt.comp MomentumCoordinates (Fin 4 → ℂ) ℂ instTopologicalSpaceProd Pi.topologicalSpace
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace momentum ?m.1069 (fun p => p μ)
+    (Continuous.continuousAt (continuous_apply μ)) (Continuous.continuousAt hp)
+context:
+f : TestTensor
+y : MomentumCoordinates
+hy : y.1 ≠ 0
+hr : transverseMass 0 y.1 ≠ 0
+hs1 : ContinuousAt screenOne y
+hm : Continuous fun z => transverseMass 0 z.1
+hs2 : ContinuousAt screenTwo y
+hs : ∀ (j : Fin 2), ContinuousAt (fun z => screen z j) y
+hp : Continuous momentum
+j : Fin 2
+hsj : ContinuousAt (fun z => screen z j) y
+μ : Fin 4
+a✝¹ : μ ∈ Finset.univ
+ν : Fin 4
+a✝ : ν ∈ Finset.univ
+⊢ MomentumCoordinates
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T230711_131814Z\MaxwellChartSmearingR3.lean:66:53: error: don't know how to synthesize implicit argument `x`
+  @Continuous.continuousAt MomentumCoordinates (Fin 4 → ℂ) instTopologicalSpaceProd Pi.topologicalSpace momentum ?m.1069
+    hp
+context:
+f : TestTensor
+y : MomentumCoordinates
+hy : y.1 ≠ 0
+hr : transverseMass 0 y.1 ≠ 0
+hs1 : ContinuousAt screenOne y
+hm : Continuous fun z => transverseMass 0 z.1
+hs2 : ContinuousAt screenTwo y
+hs : ∀ (j : Fin 2), ContinuousAt (fun z => screen z j) y
+hp : Continuous momentum
+j : Fin 2
+hsj : ContinuousAt (fun z => screen z j) y
+μ : Fin 4
+a✝¹ : μ ∈ Finset.univ
+ν : Fin 4
+a✝ : ν ∈ Finset.univ
+⊢ MomentumCoordinates
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T230711_131814Z\MaxwellChartSmearingR3.lean:66:14: error: don't know how to synthesize implicit argument `x`
+  @Continuous.continuousAt (Fin 4 → ℂ) ℂ Pi.topologicalSpace PseudoMetricSpace.toUniformSpace.toTopologicalSpace
+    (fun p => p μ) (momentum ?m.1069) (continuous_apply μ)
+context:
+f : TestTensor
+y : MomentumCoordinates
+hy : y.1 ≠ 0
+hr : transverseMass 0 y.1 ≠ 0
+hs1 : ContinuousAt screenOne y
+hm : Continuous fun z => transverseMass 0 z.1
+hs2 : ContinuousAt screenTwo y
+hs : ∀ (j : Fin 2), ContinuousAt (fun z => screen z j) y
+hp : Continuous momentum
+j : Fin 2
+hsj : ContinuousAt (fun z => screen z j) y
+μ : Fin 4
+a✝¹ : μ ∈ Finset.univ
+ν : Fin 4
+a✝ : ν ∈ Finset.univ
+⊢ Fin 4 → ℂ
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T230711_131814Z\MaxwellChartSmearingR3.lean:66:7: error: failed to infer `have` declaration type
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T230711_131814Z\MaxwellChartSmearingR3.lean:39:38: error: unsolved goals
+f : TestTensor
+y : MomentumCoordinates
+hy : y.1 ≠ 0
+hr : transverseMass 0 y.1 ≠ 0
+hs1 : ContinuousAt screenOne y
+hm : Continuous fun z => transverseMass 0 z.1
+hs2 : ContinuousAt screenTwo y
+hs : ∀ (j : Fin 2), ContinuousAt (fun z => screen z j) y
+hp : Continuous momentum
+j : Fin 2
+hsj : ContinuousAt (fun z => screen z j) y
+μ : Fin 4
+a✝¹ : μ ∈ Finset.univ
+ν : Fin 4
+a✝ : ν ∈ Finset.univ
+⊢ Tendsto (fun b => (momentum b μ * ↑(screen b j ν) - momentum b ν * ↑(screen b j μ)) * f b μ ν) (nhds y)
+    (nhds ((momentum y μ * ↑(screen y j ν) - momentum y ν * ↑(screen y j μ)) * f y μ ν))
+'F1Fecho.MaxwellSmearing.coefficient_continuous' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellSmearing.coefficient_memLp' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellSmearing.smear' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellSmearing.smear_rapidity_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

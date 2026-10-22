@@ -1,0 +1,415 @@
+{
+  "id": "ORDEM018_F3_P3_SYNTHETIC_V2",
+  "state": "PREPARED_NOT_EXECUTED",
+  "created_utc": "2026-10-06T01:48:14.362476+00:00",
+  "authorization_scope": "ORDEM018 F3 preparation authorized by coordination; execution withheld until independent review and matching coordination receipt. No new operator approval is inferred for routine preparation.",
+  "purpose": "Two bounded synthetic recovery/cost feasibility jobs. GR/RB label injections, not rival likelihood models.",
+  "hypothesis": "Same aligned-spin pSEOBNRv4HM_PA IMR model for both synthetic datasets; DTau220 only free QNM deformation; DOmega220=DTau440=DOmega440=0.",
+  "free_parameters": [
+    "mass_1",
+    "mass_2",
+    "chi_1",
+    "chi_2",
+    "dtau220",
+    "luminosity_distance",
+    "theta_jn",
+    "ra",
+    "dec",
+    "psi",
+    "phase",
+    "geocent_time"
+  ],
+  "fixed_parameters": {
+    "domega220": 0.0,
+    "dtau440": 0.0,
+    "domega440": 0.0
+  },
+  "priors": {
+    "mass_1": {
+      "kind": "Uniform",
+      "minimum": 35.0,
+      "maximum": 110.0
+    },
+    "mass_2": {
+      "kind": "Uniform",
+      "minimum": 20.0,
+      "maximum": 80.0
+    },
+    "mass_ratio": {
+      "kind": "Constraint",
+      "minimum": 0.2,
+      "maximum": 1.0
+    },
+    "chi_1": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 0.95
+    },
+    "chi_2": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 0.95
+    },
+    "dtau220": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 2.0
+    },
+    "domega220": 0.0,
+    "dtau440": 0.0,
+    "domega440": 0.0,
+    "luminosity_distance": {
+      "kind": "Uniform",
+      "minimum": 10.0,
+      "maximum": 10000.0
+    },
+    "theta_jn": {
+      "kind": "Sine",
+      "minimum": 0.0,
+      "maximum": 3.141592653589793
+    },
+    "ra": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 6.283185307179586,
+      "boundary": "periodic"
+    },
+    "dec": {
+      "kind": "Cosine",
+      "minimum": -1.5707963267948966,
+      "maximum": 1.5707963267948966
+    },
+    "psi": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 3.141592653589793,
+      "boundary": "periodic"
+    },
+    "phase": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 6.283185307179586,
+      "boundary": "periodic"
+    },
+    "geocent_time": {
+      "kind": "Uniform",
+      "minimum": 999999999.9,
+      "maximum": 1000000000.1
+    }
+  },
+  "mass_prior_normalization": {
+    "description": "Uniform rectangular m1 [35,110], m2 [20,80], conditioned on 0.2<=m2/m1<=1; normalized analytic inverse CDF. No likelihood rejection or evidence renormalization ambiguity.",
+    "area_solar_mass_squared": 3477.5,
+    "rectangle_area": 4500.0,
+    "m1_density": "(min(80,m1)-max(20,0.2*m1))/3477.5",
+    "m2_given_m1": "Uniform(max(20,0.2*m1),min(80,m1))",
+    "piecewise_integral_areas": [
+      1687.5,
+      1200.0,
+      590.0
+    ],
+    "mass_frame": "detector",
+    "parameterization": "No chirp-mass/Jacobian substitution"
+  },
+  "grid": {
+    "duration_s": 32.0,
+    "sample_rate_hz": 4096,
+    "generation_sample_rate_hz": 8192,
+    "generation_maximum_frequency_hz": 4096,
+    "minimum_frequency_hz": 20.0,
+    "maximum_frequency_hz": 1024.0,
+    "reference_frequency_hz": 20.0,
+    "roll_off_s": 0.4,
+    "geocenter_seconds_after_segment_start": 16.0
+  },
+  "geometry": {
+    "theta_jn": 0.7,
+    "ra": 1.0,
+    "dec": 0.2,
+    "psi": 0.4,
+    "phase": 1.2,
+    "geocent_time": 1000000000.0
+  },
+  "detectors": [
+    "H1",
+    "L1"
+  ],
+  "analytic_psd": "LAL_ANALYTIC_aLIGOZeroDetHighPower",
+  "qualified_arrays": "../piloto_sintetico/RUN_002/SYNTHETIC_ARRAYS.npz",
+  "qualified_result": "../piloto_sintetico/RUN_002/RESULT.json",
+  "data_rule": "Read only exact pinned NPZ allow_pickle=False; reconstruct noise+signal and check all six hashes per job. No data finder, event ids, input override, observed strain, D posterior or GR posterior.",
+  "noise": {
+    "seed": 180601,
+    "paired_between_jobs": true,
+    "independent_realizations": false,
+    "network_optimal_full_IMR_SNR": 20.0,
+    "regenerate": false
+  },
+  "jobs": [
+    {
+      "id": "P3_GR_001",
+      "label": "GR_GAUSS",
+      "sampler_seed": 180602,
+      "truth": {
+        "mass_1": 50.0,
+        "mass_2": 35.0,
+        "chi_1": 0.3,
+        "chi_2": 0.1,
+        "luminosity_distance": 1522.5263947349845,
+        "dtau220": 0.0,
+        "domega220": 0.0,
+        "dtau440": 0.0,
+        "domega440": 0.0,
+        "theta_jn": 0.7,
+        "ra": 1.0,
+        "dec": 0.2,
+        "psi": 0.4,
+        "phase": 1.2,
+        "geocent_time": 1000000000.0
+      },
+      "normalization": {
+        "H1": {
+          "noise_quadratic": 64401.02866412935,
+          "dof": 64258,
+          "z": 0.39897389672961137,
+          "noise_sha256": "fc0de0eed39afb1dd18b17b1fe03e9d632b11b5b9d6927ba2ad4e4d583b97db5",
+          "signal_sha256": "ffe025cd68b38dc4a777597a346096928f5e2bee1f3c9cce2adea869c2254ea5",
+          "injected_sha256": "557128b6c46a1334dd72ae19da7eebca286b69dd93ca410d0e4f270cf190b4d0"
+        },
+        "L1": {
+          "noise_quadratic": 64082.783819217395,
+          "dof": 64258,
+          "z": -0.48875994782203286,
+          "noise_sha256": "9a8de0f66128eb04ce76a299084791500882ebebf171524d019802ec3adfa510",
+          "signal_sha256": "c220103a0d025b1941179e2c31d8c966221c9bb89aefb50efe088a8f4c033148",
+          "injected_sha256": "8988b97c163774d10071cd79f73033acc5375894758c2915b84063d3de70a788"
+        }
+      }
+    },
+    {
+      "id": "P3_RB_001",
+      "label": "RB_GAUSS",
+      "sampler_seed": 180603,
+      "truth": {
+        "mass_1": 50.0,
+        "mass_2": 35.0,
+        "chi_1": 0.3,
+        "chi_2": 0.1,
+        "luminosity_distance": 1473.5287789752256,
+        "dtau220": -0.42461995389788576,
+        "domega220": 0.0,
+        "dtau440": 0.0,
+        "domega440": 0.0,
+        "theta_jn": 0.7,
+        "ra": 1.0,
+        "dec": 0.2,
+        "psi": 0.4,
+        "phase": 1.2,
+        "geocent_time": 1000000000.0
+      },
+      "normalization": {
+        "H1": {
+          "noise_quadratic": 64401.02866412935,
+          "dof": 64258,
+          "z": 0.39897389672961137,
+          "noise_sha256": "fc0de0eed39afb1dd18b17b1fe03e9d632b11b5b9d6927ba2ad4e4d583b97db5",
+          "signal_sha256": "db881e460d2f40dbc6fcacbd47b6a705e2a981cc4e4849c0299e63ac5ff1b9ba",
+          "injected_sha256": "77148ae4ed94356d26cdc13a1b2b6087792d1ba2ca53653ee19adfca746c78d8"
+        },
+        "L1": {
+          "noise_quadratic": 64082.783819217395,
+          "dof": 64258,
+          "z": -0.48875994782203286,
+          "noise_sha256": "9a8de0f66128eb04ce76a299084791500882ebebf171524d019802ec3adfa510",
+          "signal_sha256": "9e42b48affffa5da2fda5237fdb3f877a6a2a7d7f7305e8d196afcccd209e26a",
+          "injected_sha256": "8ed069f9e1ab6d99430acf8e95f6fc1801078f3dc874ac2f784c440486cebeed"
+        }
+      }
+    }
+  ],
+  "execution_directory": "EXECUTION_001",
+  "sampler": {
+    "library": "dynesty",
+    "version": "3.1.0",
+    "method": "static NestedSampler",
+    "nlive": 256,
+    "bound": "multi",
+    "sample": "rwalk",
+    "walks": 25,
+    "dlogz": 0.1,
+    "ndim": 12,
+    "periodic_indices": [
+      7,
+      9,
+      10
+    ],
+    "pool": null,
+    "queue_size": 1,
+    "checkpoint": false,
+    "resume": false,
+    "marginalizations": [],
+    "log_likelihood": "bilby GravitationalWaveTransient.log_likelihood_ratio, Gaussian independent H1/L1; absolute noise-only normalization omitted equally in the same job; no cross-dataset Bayes-factor interpretation"
+  },
+  "limits": {
+    "max_likelihood_calls": 10000,
+    "native_waveform_calls_at_most": 10000,
+    "wall_soft_s": 3600,
+    "supervisor_wall_s": 3610,
+    "cpu_soft_s": 3300,
+    "cpu_hard_s": 3305,
+    "address_space_bytes": 8589934592,
+    "workers": 1,
+    "threads": 1,
+    "parallel_jobs": 1,
+    "jobs_at_most": 2,
+    "no_retry": true
+  },
+  "stop_rules": [
+    "Counter checked before every likelihood, including 256 live-point initialization; Dynesty maxcall additionally applied but not trusted as hard cap.",
+    "Abort job and campaign on EDOM, native failure, nonfinite likelihood, window-bound violation, unknown read/write, pin mismatch or uncaught process failure. Never map an invalid waveform to a prior rejection.",
+    "Graceful maxcall/wall/CPU exhaustion writes partial diagnostics and permits the second planned job; no restart/resume. Supervisor timeout/kill is uncertain partial and halts remaining job.",
+    "No extension of call/time/CPU/prior/grid/seed limits based on the observed pilot outcome."
+  ],
+  "convergence": {
+    "numerical_stop": "delta_logz<0.1 before final live points, non-flat live likelihood, below hard call cap, no error.",
+    "sampling_diagnostic": "weighted ESS>=100 after final live points; ESS low is explicitly incomplete.",
+    "not_sufficient_for": [
+      "coverage",
+      "global-mode discovery",
+      "population bias",
+      "D readiness",
+      "physical verdict"
+    ],
+    "posterior_summary_rule": "Driver saves weighted raw diagnostics only; independent review interprets recovery. No automatic pass from truth inclusion."
+  },
+  "cost": {
+    "measured_reference": "P0-P2 RUN_002: six native waveform generations for fixed cases, not PE benchmark.",
+    "reference_native_calls": 6,
+    "reference_native_wall_s": 0.33295305783394724,
+    "source_only_proxy_seconds_for_10000": 554.9217630565787,
+    "warning": "Prior-dependent evaluation cost and likelihood overhead unmeasured. Proxy is neither budget guarantee nor a measured PE pilot.",
+    "report": [
+      "process wall",
+      "process CPU user+system",
+      "all likelihood calls including initialization",
+      "native waveform calls and wall",
+      "classified failure_receipt: None, recognized domain exception, indeterminate source/native exception, temporal/budget/application events",
+      "status/stop reason",
+      "delta_logz",
+      "ESS"
+    ],
+    "hard_envelope_two_jobs": {
+      "supervisor_wall_s": 7220,
+      "child_cpu_hard_s": 6610,
+      "total_likelihood_calls": 20000
+    },
+    "projection_rule": "Report measured sums and rates only; no extrapolation to fourteen observed events as validated cost."
+  },
+  "isolation": {
+    "python_read_allowlist": "Exact pinned local synthetic inputs, copied scientific source, installed runtime files (1162), matching receipt/claim; no arbitrary directory allowlist.",
+    "writes": "This execution/job output tree only after hook; supervisor only fixed EXECUTION_001 tree.",
+    "runtime_caveat": "Fixed imports/pin verification precede hook. Python audit is not native syscall or OS security containment. -I -B limits environment/bytecode effects; no installation.",
+    "source_fresh_lal_dict": "Preserved unchanged P0-P2 source makes lal.CreateDict per waveform and inserts all four deformation values.",
+    "no_PE_during_preparation": true,
+    "no_original_execution": true,
+    "no_D_access": true,
+    "V1_and_four_holds_unchanged": true
+  },
+  "inputs": {
+    "driver_p3.py": {
+      "sha256": "b4f2b5ef7ecdc8e06c6ef5cbb704cfdf7baaa8611806398706b47e6a9b47faf8",
+      "bytes": 12522
+    },
+    "launch_p3.py": {
+      "sha256": "c3876b1d5350662537fc6139558e8522fd73e440fc8c318e789c4deb67228aa5",
+      "bytes": 3766
+    },
+    "prior_transform.py": {
+      "sha256": "adac7ad3036121eb9c192c37abb305ac088c9a530da04f2bf17f79f8b8a3ebe2",
+      "bytes": 1367
+    },
+    "CONFIG_SYNTHETIC.json": {
+      "sha256": "844c11c27368fb9c321dd342272347a18636bcd56d6d0aea6ea1642610958093",
+      "bytes": 2242
+    },
+    "RUNTIME_P3_READONLY.json": {
+      "sha256": "281eb3c4fb6d3e78a6405d7da6e051c2480efc98424e766260510e10bacce11e",
+      "bytes": 259011
+    },
+    "INTERPRETER_PIN.json": {
+      "sha256": "56d105948065500ac63c7be9f71a7e433f8026bdb64a0129bb0d997cd9a250cb",
+      "bytes": 254
+    },
+    "src/pseob_source.py": {
+      "sha256": "58cb22bbe37f9207b526281801855ab38ebbda4fdc229596da92917b4f12098d",
+      "bytes": 7505
+    },
+    "src/temporal_contract.py": {
+      "sha256": "c8f4ecbc28d4312e3885d61c14f174062c6055eee0bbd54897e725a18240b605",
+      "bytes": 1859
+    },
+    "src/synthetic_adapter_v2.py": {
+      "sha256": "31b34a86a9f033b1f395139c7f20154284ede2a6bfe0f9adcb8d7fa312e98fd5",
+      "bytes": 11883
+    },
+    "../piloto_sintetico/MANIFESTO_PILOTO_SINTETICO.json": {
+      "sha256": "87bcef2f93a1f1ecd8e153229ab704b6f4696e5d5922bfc6f316c8f2f2ee6d72",
+      "bytes": 12742
+    },
+    "../piloto_sintetico/CONTRATO_P0_P2_V2.json": {
+      "sha256": "23f9013c5139f5480a18fce103ea802750e020706808b5f52256e5ee478c1415",
+      "bytes": 3770
+    },
+    "../piloto_sintetico/RUN_002/RESULT.json": {
+      "sha256": "02293a030529b43190b87b7d37940e3969fcf3d977e6c664f244d4969fd251a5",
+      "bytes": 18515
+    },
+    "../piloto_sintetico/RUN_002/SYNTHETIC_ARRAYS.npz": {
+      "sha256": "a54e8b4af0b63343910d8702f197a10c2ee4b6b2f7662aeb39082680f007020b",
+      "bytes": 5218208
+    },
+    "../piloto_sintetico/ENVIRONMENT_NATIVE_HASHES.json": {
+      "sha256": "c60bac88a6f893039466afe9a8c8a27421620148ac36af5d080b873f7207c1f7",
+      "bytes": 38789
+    },
+    "../piloto_sintetico/ERRATA_ALLOWLIST_RUN002.json": {
+      "sha256": "e10edcbe874f8ca9f5e843165eb9cdfd16b5147a72ab4c2083962149f5653187",
+      "bytes": 1036
+    },
+    "../../../proveniencia/REVISAO_PILOTO_SINTETICO_F3.md": {
+      "sha256": "dcc29357f11d0bbed33a2b6510d58f0da525e6b79610f66acdf606cae26ab368",
+      "bytes": 9135
+    },
+    "failure_audit.py": {
+      "sha256": "a521e7bdf047a7a3b6146e418cc6f82f8d5fc0a0193d0ef0fb88e33d7154d8ae",
+      "bytes": 4329
+    }
+  },
+  "coordination_receipt_required": {
+    "path": "AUTORIZACAO_COORDENACAO.json",
+    "action": "EXECUTE_EXACT_TWO_SYNTHETIC_JOBS",
+    "authorized": true,
+    "contract_sha256": "SHA256 OF THIS EXACT FILE",
+    "jobs": [
+      "P3_GR_001",
+      "P3_RB_001"
+    ]
+  },
+  "allowed_status_claim": "REAL preparation/code/pins only; OPEN execution, recovery, cost of PE, coverage and D.",
+  "revision": "P3-01: distinguish returned None from propagated native/source exceptions",
+  "supersedes_contract": {
+    "sha256": "dddeeae653965bf67375b22eb2b65e1ede93a54f01dbddbb1588a52273fc981f",
+    "bytes": 13717
+  },
+  "revised_utc": "2026-10-06T02:12:16.680019+00:00",
+  "failure_receipt_policy": {
+    "source_returned_none": "Count independently; raw P0-P2 EDOM counter means None returns only and is named source_returned_none_counter_raw. Preserved EDOM_LOG.jsonl filename is not a total of all domain failures.",
+    "recognized_domain_exception": "After a counted native attempt, errno EDOM or explicit Input domain error is classified as recognized, with type/message/parameters.",
+    "indeterminate_exception": "Other exceptions after a native attempt remain indeterminate; a completed native-call counter alone does not prove the exception originated in C.",
+    "guards": "Pre-native temporal/budget failures are separate; failures outside the source wrapper are application events.",
+    "no_double_count": "Same exception object propagated from source to outer handler is recorded once. None guard raises and is likewise deduplicated. Counts across categories are not added as EDOM.",
+    "total_EDOM": "domain_error_total=null; never infer a total from None or generic exceptions.",
+    "behavior": "Keep catch_waveform_errors=False and propagate/abort. The wrapper binds to wf.frequency_domain_source_model, preserves signature/args/kwargs/fixed zeros, never returns -inf and does not retry.",
+    "budget_status": "Use the recorded exception kind with its native-attempt stage; never reclassify a generic native timeout as a pre-native budget event."
+  }
+}

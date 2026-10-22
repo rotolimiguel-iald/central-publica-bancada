@@ -1,0 +1,73 @@
+{
+  "report": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\optical_drive_bridge_r79\\OPTICAL_DRIVE_BRIDGE_R79.md",
+    "sha256": "20f5d7cbc805865b2d06e3065779f0246b294228002a2d3bf53fe9ef10daa23f"
+  },
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\construction\\CONSTRUCTION_R66.md",
+      "sha256": "36a07d2a6916eec410ccae0fc5e380fc7af4ca5f14368e8c8840fda5ab9ea71a",
+      "excerpts": [
+        {
+          "start": 12,
+          "end": 34,
+          "text": "\\[\nh_0=\\omega_c(n_i+n_o)+\\omega_{OH}n_e+\ng_{JC}(a_i^\\dagger\\sigma_-+\\sigma_+a_i),\\quad\nh=h_0+\\Omega(\\sigma_++\\sigma_-).\n\\]\n\nTodos os cinco canais são conservados:\n\n\\[\nL_1=\\sqrt{\\kappa_i}a_i,\\quad L_2=\\sqrt{\\kappa_o}a_o,\n\\quad L_3=\\sqrt{\\gamma_{OH}}\\sigma_-,\\quad\nL_4=\\sqrt{\\gamma_\\phi}Z,\\quad\nL_5=\\sqrt{\\beta\\gamma_\\Lambda}J,\n\\quad J=a_o^\\dagger\\sigma_-+\\sigma_+a_i.\n\\]\n\nO alvo é exatamente `L(rho)=-i[h,rho]+sum_j D[Lj](rho)`. O canal5 tem um **único** índice de banho para a soma J. Dois banhos separados para suas parcelas mudam o alvo. O índice do canal não implica escolha exclusiva entre dispositivos nem localização espacial já demonstrada.\n\n## 1. Colisão explícita e CPTP em cada passo\n\nUma ancilla é E=C6, base `|0>,|1>,...,|5>`. Defina\n\n\\["
+        },
+        {
+          "start": 72,
+          "end": 106,
+          "text": "\n\\[\nK_0=I+\\delta\\left(-ih_0-\\tfrac12\\sum_jL_j^\\dagger L_j\n-\\alpha L_3^\\dagger-\\tfrac12|\\alpha|^2 I\\right)+O(\\delta^2),\n\\]\n\\[\nK_j=\\sqrt\\delta\\,(L_j+\\alpha\\,\\delta_{j3}I)+O(\\delta^{3/2}).\n\\]\n\nSomando `Kj rho Kj†`, os termos `|alpha|² rho` se cancelam e os termos lineares em alpha são\n\n\\[\n[\\alpha^*L_3-\\alpha L_3^\\dagger,\\rho]\n=-i[h_{drive},\\rho],\\qquad\nh_{drive}=i(\\alpha^*L_3-\\alpha L_3^\\dagger).\n\\]\n\nCom a fase acima, `hdrive=+Omega(sigma_-+sigma_+)`. Não há fator1/2: o alvo escrito na patente é `Omega sigma_x`. O sinal oposto de alpha troca o sinal da bomba; alpha=0 a retira. Todos os dissipadores permanecem, inclusive `gamma_OH D[sigma_-]`.\n\nTambém aqui `b(-ε)=P b(ε)`, e a mesma conjugação mostra que o canal reduzido é par em ε. Assim\n\n\\[\n\\Phi_\\delta=I+\\delta\\mathcal L+O(\\delta^2)\n\\]\n\npara o **mesmo gerador completo R62/R64**. Não se pôs a bomba diretamente no h0 usado nesta realização. Uma segunda realização de controle usa ancilla em vácuo e h completo; converge ao mesmo alvo. Se gamma_OH=0, a fórmula para alpha não existe; a alternativa válida é drive clássico externo em h, não divisão por zero ou bombeamento fictício.\n\nOs símbolos estão em unidades adimensionais da instância. Em unidades físicas, Lj tem dimensão `tempo^-1/2`, alpha a mesma dimensão, εLj e εalpha são adimensionais. A conversão integral de tempo/portas/filtros do R65 continua necessária para calibrar o aparelho.\n\n## 4. Convergência do processo reduzido\n\nPara T fixo e δ=T/N, cada Phiδ é CPTP e `exp(δ L)` também. Em norma diamante, ambas têm norma1. A analiticidade e a expansão fornecem `||Phiδ-exp(δL)||_diamond <= C δ²` em algum intervalo `0<=δ<=δ0`, com C finita dependente dos operadores fixados. Pelo telescópio,\n\n\\[\n\\|\\Phi_{T/N}^{N}-e^{T\\mathcal L}\\|_\\diamond"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\CONTRATO_OUTPUT_R64.md",
+      "sha256": "bb759be867d71b68b47154e46db2596e3e0b1926f01dfcc5128912cfee4767a1",
+      "excerpts": [
+        {
+          "start": 10,
+          "end": 40,
+          "text": "\n**[INPUT — H_MARKOV_VACUUM_PORTS]** Escolhe-se uma realização unitária/dilatação Markov de vácuo para os cinco operadores de colapso do modelo, com banhos independentes. Monitoram-se as portas\n\n\\[\nL_i=\\sqrt{\\kappa_i}\\,a_i,\\qquad L_o=\\sqrt{\\kappa_o}\\,a_o.\n\\]\n\nOs outros canais, `√γ σ−`, `√γφ Z` e `√(βγΛ)J`, permanecem no gerador e não são monitorados. O código original guarda pares `(taxa,operador)`: as raízes entram nas portas de leitura, sem aplicá-las duas vezes ao dissipador. Mantém-se a convenção `γφ D[Z]`, cujo amortecimento de coerência é `2γφ`.\n\nUm GKLS isolado não seleciona fisicamente essas portas, o estado do banho ou a realização instrumental. Esses dados adicionais, eficiência ideal, ganho e referência dos osciladores locais são hipóteses explícitas. A existência de uma representação Markov de uma dinâmica finita não prova que os terminais da patente realizem essa representação.\n\nPara a corrente normalizada como quadratura, defina\n\n\\[\n\\mathcal M_{j,\\theta}\\rho=\n\\frac{e^{-i\\theta}L_j\\rho+e^{i\\theta}\\rho L_j^\\dagger}{\\sqrt2}.\n\\]\n\nO incremento normalizado `dXj=dYj/√2` tem ruído de vácuo `dXj dXk=δjk dt/2`. Para `t>s`, a parte regular da correlação é\n\n\\[\nK_{jk}(t,s)=\\operatorname{Tr}\\!\\left[\n\\mathcal M_{j,\\theta_j(t)}e^{(t-s)\\mathcal L}\n\\mathcal M_{k,\\theta_k(s)}\\rho(s)\\right].\n\\]\n\nHá ainda `δjk δ(t−s)/2`. No triângulo temporal oposto trocam-se as etiquetas completas de tempo e detector. Não se usa ρ(t) no lugar de ρ(s) nem se substitui a inserção de superoperador por um produto de médias. Este é o contrato de um sinal de medida contínua, condicionado à dilatação nomeada.\n\n## Modos filtrados e ODE reutilizável\n\nPara filtros reais de norma L² um, `Qj=∫₀ᵀ fj(t)dXj(t)`. No banho de entrada, o incremento de Wiener tem dimensão √tempo; um filtro com dimensão tempo⁻¹/² fornece uma quadratura adimensional. Os tempos e taxas da instância computacional continuam adimensionais."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\instrument_phase_r74\\PHASE_INSTRUMENT_BRIDGE_R74.md",
+      "sha256": "fe9f2caa6481d3e28b4255b977daf95b5a15531d0240671b4b2b0596f0548b9a",
+      "excerpts": [
+        {
+          "start": 93,
+          "end": 119,
+          "text": "## 4. Reservatório R66 e o sinal da amplitude coerente\n\nR66 usa uma única ancilla C⁶, cinco saltos e\n`V=Σ_j(L_j⊗|j><0|−L_j†⊗|0><j|)`.\nCom as portas transportadas L_j', `V'=(R⊗I)V(R†⊗I)`. Mantendo o estado da ancilla e seu coeficiente α no canal 3, a bomba derivada é\n\n\\[\nh'_{drive}=i(\\alpha^*L_3'-\\alpha L_3'^\\dagger)\n             =R h_{drive}R^\\dagger.\n\\tag{4}\n\\]\n\nPara L₃=√γ_OH σ₋ e α=iΩ/√γ_OH, com γ_OH>0, isso dá\n`h'_drive=Ω(e^{-iχ_e}σ₋+e^{iχ_e}σ₊)`.\nO coeficiente α não muda quando só o sistema é conjugado. A conexão `−Σ dot(χ)n` entra no Hamiltoniano-base transportado h₀', separadamente da bomba gerada pelo banho.\n\n**Se a fase de L₃' for absorvida na referência do banho**, use W|0>=|0>, W|3>=e^{iχ_e}|3>. Então\n`(I⊗W)V(L₃')(I⊗W†)=V(L₃)` nesse canal e o estado da ancilla transforma-se em\n\n\\[\n\\frac{|0\\rangle+\\sqrt\\delta\\,\\alpha'|3\\rangle}\n {\\sqrt{1+\\delta|\\alpha'|^2}},\\qquad\n\\boxed{\\alpha'=e^{+i\\chi_e}\\alpha}.\n\\tag{5}\n\\]\n\nUsando L₃ base e α' em `i(α'^*L₃−α'L₃†)`, recupera-se (4). O sinal negativo para α' seria incorreto. Geralmente rephasing L→e^{iφ}L exige α→e^{iφ}α para conservar a mesma bomba; alterar apenas um troca a realização. As fases do canal 5 não podem ser absorvidas separadamente nas duas parcelas de J, pois há apenas um índice de banho para sua soma."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_response_r78\\consumer_r78_r2.py",
+      "sha256": "9f53ec688765b6eedf5f68b48d76b195068bdeec40249fa0749cc44ad12899e9",
+      "excerpts": [
+        {
+          "start": 53,
+          "end": 80,
+          "text": "        ai = mod['ai']; ao = np.zeros((d, d), complex)\n        for col, (i, o, e) in enumerate(mod['basis']):\n            if o: ao[mod['index'][(i, o-1, e)], col] = math.sqrt(o)\n        g = mod['g']; eye = sp.eye(d, format='csr')\n        # The physical mapping from this Hamiltonian probe to RF/laser voltage remains OPEN.\n        scale = plan['input_gain'] * math.sqrt(p['kappa_in'])\n        hprobes = [scale*(ai+ai.conj().T)/math.sqrt(2), scale*(ai-ai.conj().T)/(1j*math.sqrt(2))]\n        perturb = [-1j*(sp.kron(eye, sp.csr_matrix(h))-sp.kron(sp.csr_matrix(h.T), eye)) for h in hprobes]\n        # Input and output reservoirs are distinct in this model: no added coherent feedthrough at output.\n        lout = mod['jumps'][1]\n        def receptors(phi):\n            return [plan['output_gain']*(np.exp(-1j*(theta+phi))*lout+np.exp(1j*(theta+phi))*lout.conj().T)/math.sqrt(2) for theta in [0., math.pi/2]]\n        qs = receptors(0.); badqs = receptors(plan['wrong_LO_offset'])\n        def measure(states, operators):\n            values = np.array([[np.trace(q@mat(r, d)) for q in operators] for r in states])\n            check(branch['name']+'_observable_imag', np.max(np.abs(values.imag)), tol['algebra'])\n            return values.real\n        baseline = expm_multiply(g, r0, start=0., stop=times[-1], num=4, endpoint=True)\n        obs = measure(baseline, qs); badobs = measure(baseline, badqs)\n        z = (obs[:, 0]+1j*obs[:, 1])/math.sqrt(2)\n        badz = (badobs[:, 0]+1j*badobs[:, 1])/math.sqrt(2)\n        check(branch['name']+'_LO_rotation_law', np.max(abs(badz-np.exp(-1j*plan['wrong_LO_offset'])*z)), tol['algebra'])\n        trace_error = max(abs(np.trace(mat(r, d))-1) for r in baseline)\n        min_eigenvalue = min(np.linalg.eigvalsh((mat(r, d)+mat(r, d).conj().T)/2).min() for r in baseline)\n        check(branch['name']+'_baseline_trace', trace_error, tol['algebra'])\n        check(branch['name']+'_baseline_positivity', max(0., -float(min_eigenvalue)), tol['algebra'])\n        intracavity_ops = [ao.conj().T@ao, ai.conj().T@ao]\n        def intracavity(states):"
+        },
+        {
+          "start": 131,
+          "end": 148,
+          "text": "              'beta_runtime_INPUT':beta, 'Gamma_INPUT':gamma, 'times':times, 'cut':plan['cut'],\n              'full_minus_blocked_seeded_response_max':float(np.max(abs(np.asarray(branches['seeded_full']['response_real_2x2_by_time'])-np.asarray(branches['seeded_blocked']['response_real_2x2_by_time'])))),\n              'versions':{'numpy':np.__version__,'scipy':scipy.__version__}, 'limits':plan['limits']}\n    json.dumps(report, allow_nan=False)\n    return report"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_response_r78\\PLAN_R78_R2.json",
+      "sha256": "9adf2d3b4cc52af375b4383894112bde8ba093020ae0e3eb52f18a3f9ede6c95",
+      "excerpts": []
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_response_r78\\RESULT_R78.json",
+      "sha256": "205c81426062112d7356ddc5d915abb2b212fdc6612fac4e61066dfc7bfd731b",
+      "excerpts": []
+    }
+  ],
+  "scope": "algebraic generalization of existing collision convention; no external calibration"
+}

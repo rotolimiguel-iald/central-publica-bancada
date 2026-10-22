@@ -1,0 +1,16 @@
+--- 
+
++++ 
+
+@@ -188,7 +188,9 @@
+
+ theorem A6_identity_preserves_A123 : A123Hold 1 1 := by
+   refine ⟨?_, ?_, ?_, ?_, identity_intrinsic_reading.symm⟩
+   · intro x
+-    simpa using (tendsto_const_nhds : Tendsto (fun _ : ℕ => x) atTop (𝓝 x))
++    change Tendsto (fun n : ℕ => (id : Face → Face)^[n] x) atTop (𝓝 x)
++    simpa only [Function.iterate_id, id_eq] using
++      (tendsto_const_nhds : Tendsto (fun _ : ℕ => x) atTop (𝓝 x))
+   · ext x; rfl
+   · ext x; rfl
+   · ext x; rfl

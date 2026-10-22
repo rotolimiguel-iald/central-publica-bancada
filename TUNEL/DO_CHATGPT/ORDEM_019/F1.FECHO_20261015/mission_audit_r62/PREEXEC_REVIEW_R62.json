@@ -1,0 +1,95 @@
+{
+  "schema": "iald.r62.preexecution.independent_review.v1",
+  "status": "PASS_PREEXEC_WITH_SCOPE",
+  "reviewer": "codex-mission-memory-review",
+  "created_utc": "2026-10-17T21:05:41.367888+00:00",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "mission_revision": 466,
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\PREPARED_READOUT_PLAN_R62.json",
+      "sha256": "862458a7b7f8b8797a2a2f71aa5ed674abbef0488af6acb41bd0e3aa908f3bea"
+    }
+  ],
+  "source_pins_verified": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\run_finite_device.py",
+      "sha256": "89332d76e3fdcbf67f50e8328dfd9316196d7ef18ccf710666eb544426aa17be",
+      "matches": true
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\finite_device\\PREREGISTRO_DEVICE_R1.json",
+      "sha256": "6e4e2ce553aea405878e967df9314be2af030b45e234dd35dbe1b30731d2560a",
+      "matches": true
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_pair_dynamics_r61\\CUSTODY_R61.json",
+      "sha256": "4e50970098ed06ce37cea7c9277e8e15e925f7b58d300768777d100a54c3aa04",
+      "matches": true
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_pair_dynamics_r61\\RELATORIO_CANDIDATO_R61.md",
+      "sha256": "21defdeaf7e556b8b50b3fad4f1651dc8cba82643074378831c9e1df12a1664d",
+      "matches": true
+    },
+    {
+      "path": "C:\\IALD\\papers_latex\\graviton_paper_english_v2\\graviton_appendices.tex",
+      "sha256": "ab2e977950197a024c5a9bb49c314e08286cfa549a0dbfd5ded575e46df437cd",
+      "matches": true
+    },
+    {
+      "path": "C:\\IALD\\papers_latex\\graviton_paper\\graviton_paper.tex",
+      "sha256": "3795d68e864c5a7bdeb9329e7ac097c40aabc9e733859068a343f988c83c1847",
+      "matches": true
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+      "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e",
+      "matches": true
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\Skygrid\\SkyGrid_Piloto\\skygrid_sim\\tgl_core.py",
+      "sha256": "a1e103cd08eb3f45144200b0c6c588589d267868cd85101c527138e3bce81f3f",
+      "matches": true
+    }
+  ],
+  "checks": [
+    {
+      "id": "C_B_DECODER",
+      "status": "PASS_BY_EXACT_EXPANSION",
+      "reason": "a=(X+iP)/sqrt(2); distinct tensor factors commute, hence C=(XX-PP+i(XP+PX))/2 and B=(XX+PP+i(XP-PX))/2 exactly, including cutoff operators."
+    },
+    {
+      "id": "QUADRATIC_FORM",
+      "status": "PASS_BY_EXACT_EXPANSION",
+      "reason": "For commuting Hermitian X,Y, (X+Y)^2-(X-Y)^2=4XY and Tr(rho A* A)=||A sqrt(rho)||_F^2. Subtracting local products gives centered C/B separately."
+    },
+    {
+      "id": "PREPARATIONS",
+      "status": "PASS_BY_EXACT_REASONING",
+      "reason": "Pair and relative pure states are normalized; D=Zi tensor Xout tensor XOH is a traceless Hermitian involution, so (I +/- epsilon D)/8 is positive for |epsilon|<=1 and normalized. epsilon=1/2 is admissible."
+    },
+    {
+      "id": "R61_CONTROL",
+      "status": "PASS_BY_REUSE",
+      "reason": "Derivative targets +/- i epsilon*g/4 follow the previously independently verified traces tr(D Ldagger C)=-2ig and tr(D Ldagger B)=2ig divided by8. No new trajectory needed for plan review."
+    },
+    {
+      "id": "FAIL_CLOSED",
+      "status": "PASS",
+      "reason": "Fixed tolerances, full joint density/all dissipators, no clipping/renormalization, undefined zero phase and sign/normalization/loss/OH controls are explicit."
+    },
+    {
+      "id": "ADMISSION",
+      "status": "PASS_WITH_EXECUTION_GATES",
+      "reason": "Original source is never imported/executed; AST function extraction and new runner must be pinned before the sole authorized run. Root current preflight/order remains required."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Plan approval is not a result receipt or approval of an unseen runner.",
+    "Six preparations and common LO access are mathematical INPUT, not experimentally prepared states or an optical/OH detector construction.",
+    "Finite 2x2x2 observables are not a bosonic homodyne POVM; no infinite-dimensional GKLS theorem is asserted.",
+    "No R4/R5 satisfaction, beta estimate from data, phase-derived physical clock, mission acceptance or memory application."
+  ]
+}

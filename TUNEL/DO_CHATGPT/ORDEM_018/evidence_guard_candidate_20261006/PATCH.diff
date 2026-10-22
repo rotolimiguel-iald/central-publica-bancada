@@ -1,0 +1,287 @@
+--- original/bancada\evidencia.py
++++ candidate/bancada\evidencia.py
+@@ -1,7 +1,7 @@
+ # -*- coding: utf-8 -*-
+ """evidencia.py -- as OPERAÇÕES de evidência da Bancada Um sobre o motor residente: avaliar, ajustar, comparar, amostrar.
+ Toda operação devolve o seu ESTATUTO; ajustar/comparar/amostrar entram no LIVRO (família de teste) e trazem a significância local ao lado
+-da corrigida pelas famílias já testadas."""
++de uma ilustração de Šidák; significância global não calibrada fica indisponível."""
+ import math
+ import threading
+ import time
+@@ -13,6 +13,7 @@
+ from .amostrador import amostrar, resumo
+ from .motor import NOMES_THETA, opcoes_de, rotulo_opcoes
+ from .regua import ESTATUTOS, guarda, p_de_z, z_de_p
++from .evidence_checks import finite_number, nested_deltas, validate_fit
+ 
+ CONJUNTOS = ("planck_comp", "desi_dr1", "desi_dr2", "sh0es", "pantheon", "sh0es_local", "cc_moresco", "pantheon_sh0es")   # 30/09: + Pantheon+ (cov completa, M profilado); + sh0es_local (Fase 2, lei D1a)
+ FIDUCIAL = dict(H0=67.5, ombh2=0.02237, omch2=0.1200, beta=0.0, c=0.0)
+@@ -141,11 +142,17 @@
+         o = opcoes_de(opcoes)
+         bf = self._ajuste(cj, self._beta(beta), bool(c_livre), opcoes=o)
+         modelo = dict(beta=str(beta), c_livre=bool(c_livre), opcoes=o)
++        self._fit_or_fail(bf, "ajustar", cj, modelo, cliente, "fit")
+         out = dict(conjuntos=cj, beta=beta, c_livre=bool(c_livre), opcoes=o, modo=rotulo_opcoes(o), ajuste=bf, beta_tgl=self.m.beta_tgl,
+                    estatuto="AJUSTE_DE_MAXIMA_VEROSSIMILHANCA", estatuto_texto=ESTATUTOS["AJUSTE_DE_MAXIMA_VEROSSIMILHANCA"])
+         if self._beta(beta) is None and "beta" in bf["sigma_JtJ"]:
+-            s = bf["sigma_JtJ"]["beta"]; b = bf["theta"]["beta"]
+-            z = (self.m.beta_tgl - b) / s
++            try:
++                s = finite_number(bf["sigma_JtJ"]["beta"], "sigma_beta", positive=True)
++                b = bf["theta"]["beta"]
++                z = finite_number((self.m.beta_tgl - b) / s, "wald_z")
++            except ValueError as exc:
++                self._evidence_failure("ajustar", cj, modelo, cliente, str(exc))
++                raise
+             out["beta_tgl_em_sigma_JtJ"] = z
+             out["significancia"] = self.livro.corrige(p_de_z(z), self.livro.familia("ajustar", cj, modelo))
+         guarda(out)
+@@ -153,24 +160,54 @@
+                             bf["chi2"], out.get("significancia", {}).get("p_local"))
+         return out
+ 
++    def _evidence_failure(self, operation, cj, model, client, reason):
++        failure = dict(estatuto="DIAGNOSTICO_INVALIDO_SEM_SIGNIFICANCIA",
++                       reason=reason, significancia=None)
++        guarda(failure)
++        self.livro.registra(client, operation, cj, model, dict(conjuntos=cj),
++                            failure, failure["estatuto"], None, None)
++
++    def _fit_or_fail(self, fit, operation, cj, model, client, label):
++        try:
++            return validate_fit(fit, NOMES_THETA)
++        except ValueError as exc:
++            reason = label + ": " + str(exc)
++            self._evidence_failure(operation, cj, model, client, reason)
++            raise ValueError(reason) from exc
++
+     def comparar(self, conjuntos=None, c_livre=False, cliente="?", opcoes=None):
+         cj = _conj(conjuntos)
+         o = opcoes_de(opcoes)
++        modelo = dict(c_livre=bool(c_livre), opcoes=o)
+         l = self._ajuste(cj, 0.0, bool(c_livre), opcoes=o)
+-        t = self._ajuste(cj, self.m.beta_tgl, bool(c_livre), x0=[l["theta"][k] for k in NOMES_THETA], opcoes=o)
+-        f = self._ajuste(cj, None, bool(c_livre), x0=[l["theta"][k] for k in NOMES_THETA], opcoes=o)
+-        d_tgl_livre = t["chi2"] - f["chi2"]
+-        d_lcdm_livre = l["chi2"] - f["chi2"]
+-        p_tgl = float(math.erfc(math.sqrt(max(d_tgl_livre, 0.0) / 2.0)))
+-        modelo = dict(c_livre=bool(c_livre), opcoes=o)
+-        out = dict(conjuntos=cj, c_livre=bool(c_livre), opcoes=o, modo=rotulo_opcoes(o), lcdm=l, tgl_beta_fixo=t, beta_livre=f, beta_tgl=self.m.beta_tgl,
+-                   delta_chi2=dict(tgl_menos_lcdm=t["chi2"] - l["chi2"], tgl_menos_livre=d_tgl_livre, lcdm_menos_livre=d_lcdm_livre),
+-                   leitura=("Δχ²(β = α√e contra β livre) = %.3f ⇒ z_local = %.2f (Wilks, 1 g.l.); Δχ²(β = 0 contra β livre) = %.3f [%s]"
+-                            % (d_tgl_livre, math.sqrt(max(d_tgl_livre, 0.0)), d_lcdm_livre, rotulo_opcoes(o))),
++        self._fit_or_fail(l, "comparar", cj, modelo, cliente, "LCDM")
++        initial = [l["theta"][k] for k in NOMES_THETA]
++        t = self._ajuste(cj, self.m.beta_tgl, bool(c_livre), x0=initial, opcoes=o)
++        self._fit_or_fail(t, "comparar", cj, modelo, cliente, "fixed TGL")
++        f = self._ajuste(cj, None, bool(c_livre), x0=initial, opcoes=o)
++        self._fit_or_fail(f, "comparar", cj, modelo, cliente, "free beta")
++        try:
++            d_tgl_livre, d_lcdm_livre = nested_deltas(l, t, f)
++        except ValueError as exc:
++            self._evidence_failure("comparar", cj, modelo, cliente, str(exc))
++            raise
++        p_tgl = float(math.erfc(math.sqrt(d_tgl_livre / 2.0)))
++        out = dict(conjuntos=cj, c_livre=bool(c_livre), opcoes=o, modo=rotulo_opcoes(o),
++                   lcdm=l, tgl_beta_fixo=t, beta_livre=f, beta_tgl=self.m.beta_tgl,
++                   delta_chi2=dict(tgl_menos_lcdm=t["chi2"] - l["chi2"],
++                                   tgl_menos_livre=d_tgl_livre, lcdm_menos_livre=d_lcdm_livre),
++                   leitura=("Δχ²(TGL fixa contra β livre) = %.3f; z equivalente local = %.2f "
++                            "(Wilks condicional, 1 g.l.; regularidade não validada aqui). "
++                            "Δχ²(ΛCDM contra β livre) = %.3f. TGL−ΛCDM permanece assinada, sem conversão em sigma. [%s]"
++                            % (d_tgl_livre, math.sqrt(d_tgl_livre), d_lcdm_livre, rotulo_opcoes(o))),
++                   hipoteses_significancia=dict(nula="TGL_BETA_FIXO", alternativa="BETA_LIVRE",
++                                                graus_liberdade=1, regularidade_verificada=False),
+                    significancia=self.livro.corrige(p_tgl, self.livro.familia("comparar", cj, modelo)),
+-                   estatuto="COMPARACAO_DE_MODELOS_DELTA_CHI2", estatuto_texto=ESTATUTOS["COMPARACAO_DE_MODELOS_DELTA_CHI2"])
++                   estatuto="COMPARACAO_DE_MODELOS_DELTA_CHI2",
++                   estatuto_texto=ESTATUTOS["COMPARACAO_DE_MODELOS_DELTA_CHI2"])
+         guarda(out)
+-        self.livro.registra(cliente, "comparar", cj, modelo, dict(conjuntos=cj), out, out["estatuto"], d_tgl_livre, p_tgl)
++        self.livro.registra(cliente, "comparar", cj, modelo, dict(conjuntos=cj),
++                            out, out["estatuto"], d_tgl_livre, p_tgl)
+         return out
+ 
+     # ---------- amostrar (tarefa assíncrona) ----------
+--- original/bancada\regua.py
++++ candidate/bancada\regua.py
+@@ -3,11 +3,12 @@
+ 
+ Buscar evidência com um motor sempre ligado e várias IAs consultando é o cenário clássico de «achar sinal por insistência». Por isso:
+   * toda operação que produz estatística de teste (ajustar, comparar, amostrar) é registrada no livro, por FAMÍLIA (operação + conjuntos +
+-    modelo + parâmetros livres), e a significância local vem SEMPRE ao lado da significância corrigida pelo número de famílias já testadas
+-    (Šidák: p_global = 1 − (1 − p_local)^N);
++    modelo + parâmetros livres). Šidák é apenas ilustração, não calibração da busca adaptativa.
++    p_global/z_global ficam indisponíveis até existir contrato e calibração próprios;
+   * nenhuma saída diz CONFIRMED / PROVED_BY / confirmado: a Bancada produz DIAGNÓSTICO com estatuto;
+   * NOT_FALSIFIED ≠ CONFIRMED; PROVADA ≠ CONFIRMADA.
+ """
++from contextlib import contextmanager
+ import hashlib
+ import json
+ import math
+@@ -21,7 +22,8 @@
+ ESTATUTOS = {
+     "DIAGNOSTICO_DE_AVALIACAO": "avaliação de um ponto do modelo contra os dados: não é ajuste nem inferência",
+     "AJUSTE_DE_MAXIMA_VEROSSIMILHANCA": "melhor ajuste por mínimos quadrados; σ pela matriz JᵀJ (aproximação gaussiana local)",
+-    "COMPARACAO_DE_MODELOS_DELTA_CHI2": "Δχ² entre ajustes aninhados; significância local por Wilks (1 grau de liberdade), ao lado da corrigida",
++    "COMPARACAO_DE_MODELOS_DELTA_CHI2": "diferenças de chi2; conversão local TGL fixa versus beta livre condicional a Wilks; global indisponível",
++    "DIAGNOSTICO_INVALIDO_SEM_SIGNIFICANCIA": "ajuste ou comparação inválidos; nenhuma significância calculada",
+     "POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS": "amostras do posterior sob priors uniformes nos limites do pipeline; não é confirmação",
+ }
+ 
+@@ -60,8 +62,14 @@
+             c.execute("CREATE TABLE IF NOT EXISTS consultas (id INTEGER PRIMARY KEY, ts TEXT, cliente TEXT, operacao TEXT, familia TEXT, "
+                       "conjuntos TEXT, modelo TEXT, pedido TEXT, resultado_sha TEXT, estatuto TEXT, estatistica REAL, p_local REAL)")
+ 
++    @contextmanager
+     def _con(self):
+-        return sqlite3.connect(self.caminho, timeout=30)
++        connection = sqlite3.connect(self.caminho, timeout=30)
++        try:
++            with connection:
++                yield connection
++        finally:
++            connection.close()
+ 
+     @staticmethod
+     def familia(operacao, conjuntos, modelo):
+@@ -86,15 +94,25 @@
+         return len(fams)
+ 
+     def corrige(self, p_local, familia=None):
+-        """p local -> p global pelo número de famílias de teste, INCLUINDO a do teste corrente (Šidák)."""
++        """Return a typed Sidak illustration, never a calibrated global claim."""
++        if isinstance(p_local, bool):
++            raise ValueError("tail probability must be numeric, not boolean")
++        p_local = float(p_local)
++        if not math.isfinite(p_local) or not 0.0 <= p_local <= 1.0:
++            raise ValueError("tail probability must be finite and in [0, 1]")
+         n = max(1, self.n_familias_de_teste(incluir=familia))
+-        p_local = min(max(float(p_local), 0.0), 1.0)
+-        if n * p_local < 1e-10:
+-            pg = n * p_local                                    # primeira ordem exata a 1e-10
+-        else:
+-            pg = -math.expm1(n * math.log1p(-p_local)) if p_local < 1.0 else 1.0
+-        return dict(p_local=p_local, z_local=z_de_p(p_local), n_familias=n, p_global=pg, z_global=z_de_p(pg),
+-                    metodo="Šidák sobre as famílias de teste do livro")
++        pg = -math.expm1(n * math.log1p(-p_local)) if p_local < 1.0 else 1.0
++        zl = z_de_p(p_local) if p_local > 0.0 else None
++        zs = z_de_p(pg) if pg > 0.0 else None
++        zl = zl if zl is not None and math.isfinite(zl) else None
++        zs = zs if zs is not None and math.isfinite(zs) else None
++        return dict(schema="evidence-tail-diagnostic-v1", p_local=p_local, z_local=zl, n_familias=n,
++                    p_global=None, z_global=None, global_calibrated=False,
++                    global_status="UNAVAILABLE_NOT_CALIBRATED",
++                    local_status="TAIL_EQUIVALENT_NOT_CALIBRATION" if zl is not None else "NUMERICAL_LIMIT_NO_FINITE_Z",
++                    sidak_ilustrativo=dict(p=pg, z=zs, n_familias=n,
++                                          status="ILLUSTRATION_ONLY_NOT_GLOBAL_EVIDENCE"),
++                    metodo="Šidák ilustrativo; validade local e busca global exigem calibração própria")
+ 
+     def resumo(self, n=30):
+         with self._con() as c:
+--- original/ui\app.js
++++ candidate/ui\app.js
+@@ -140,18 +140,25 @@
+ 
+ // ---------------- evidência ----------------
+ function travar(v) { ["#b-ajustar", "#b-comparar", "#b-amostrar"].forEach((s) => ($(s).disabled = v)); }
++function diagnosticNumber(value, exponential = false) {
++  return Number.isFinite(value) ? (exponential ? value.toExponential(2) : value.toFixed(2)) : "indisponível";
++}
+ function sig(s) {
+   if (!s) return "";
+-  return `<div class="card">significância local: z = <b>${s.z_local.toFixed(2)}</b> (p = ${s.p_local.toExponential(2)})<br>
+-    corrigida por <b>${s.n_familias}</b> família(s) de teste do livro: z = <b>${s.z_global.toFixed(2)}</b> (p = ${s.p_global.toExponential(2)})</div>`;
+-}
++  const illustration = s.sidak_ilustrativo;
++  const detail = illustration
++    ? "<br>Šidák ilustrativo para " + diagnosticNumber(illustration.n_familias) + " família(s): z equivalente = " + diagnosticNumber(illustration.z) + ", p = " + diagnosticNumber(illustration.p, true) + "; não calibra a busca."
++    : "";
++  return "<div class='card'>diagnóstico de cauda local: z equivalente = <b>" + diagnosticNumber(s.z_local) + "</b> (p = " + diagnosticNumber(s.p_local, true) + ")<br>significância global: indisponível — busca não calibrada." + detail + "</div>";
++}
++
+ $("#b-ajustar").onclick = async () => {
+   travar(true); $("#ev-texto").textContent = "ajustando…";
+   try {
+     const r = await api("/api/ajustar", { conjuntos: conjuntos("#conj-ev input"), beta: "livre", c_livre: $("#c-livre").checked, opcoes: opcoes() });
+     const a = r.ajuste, s = a.sigma_JtJ;
+-    $("#ev-texto").innerHTML = `<span class="estatuto">${r.estatuto}</span>\n<span class="grande">β = ${a.theta.beta.toFixed(5)} ± ${(s.beta || 0).toFixed(5)}</span>\n` +
+-      `χ² = ${a.chi2.toFixed(3)} com ${a.gl} g.l. · H₀ = ${a.theta.H0.toFixed(2)} ± ${(s.H0 || 0).toFixed(2)}\nα√e = ${r.beta_tgl.toFixed(6)} está a ${(r.beta_tgl_em_sigma_JtJ || 0).toFixed(2)} σ (JᵀJ)` + sig(r.significancia);
++    $("#ev-texto").innerHTML = `<span class="estatuto">${r.estatuto}</span>\n<span class="grande">β = ${a.theta.beta.toFixed(5)} ± ${Number.isFinite(s.beta) ? s.beta.toFixed(5) : "indisponível"}</span>\n` +
++      `χ² = ${a.chi2.toFixed(3)} com ${a.gl} g.l. · H₀ = ${a.theta.H0.toFixed(2)} ± ${diagnosticNumber(s.H0)}\nα√e = ${r.beta_tgl.toFixed(6)} está a ${diagnosticNumber(r.beta_tgl_em_sigma_JtJ)} σ (JᵀJ)` + sig(r.significancia);
+   } catch (e) { $("#ev-texto").textContent = "falhou: " + e.message; }
+   travar(false); carregarLivro();
+ };
+@@ -323,10 +330,10 @@
+ async function carregarLivro() {
+   try {
+     const l = await api("/api/livro");
+-    $("#livro").innerHTML = `<div class="card">${l.total} registros · <b>${l.familias_de_teste}</b> famílias de teste (a correção de significância usa este número)</div>
++    $("#livro").innerHTML = `<div class="card">${l.total} registros · <b>${l.familias_de_teste}</b> famílias de teste (contagem para rastreabilidade; não calibra a busca global)</div>
+       <table><tr><td>quando</td><td>quem</td><td>operação</td><td>conjuntos</td><td>estatuto</td><td>p local</td></tr>` +
+       l.ultimas.map((u) => `<tr><td>${u.ts}</td><td>${u.cliente}</td><td>${u.operacao}</td><td>${u.conjuntos.join(", ")}</td><td>${u.estatuto}</td><td>${u.p_local === null ? "—" : (+u.p_local).toExponential(2)}</td></tr>`).join("") + "</table>";
+-  } catch (e) { }
++  } catch (e) { $("#livro").textContent = "falha ao ler o livro: " + e.message; }
+ }
+ async function carregarValidacao() {
+   try {
+--- original/mcp_um.py
++++ candidate/mcp_um.py
+@@ -3,7 +3,7 @@
+ ela chama estas ferramentas, e a Bancada (http://127.0.0.1:18777, que precisa estar no ar) faz a conta na GPU com os dados residentes.
+ 
+ Cada chamada leva o nome do cliente (variável BANCADA_UM_CLIENTE, ex.: «claude», «codex», «kimi»); as buscas de evidência (ajustar,
+-comparar, amostrar) entram no LIVRO de tentativas e voltam com a significância local AO LADO da corrigida por todas as famílias já testadas.
++comparar, amostrar) entram no LIVRO. A cauda local e Šidák são diagnósticos; significância global não calibrada fica indisponível.
+ 
+ Registro (exemplo, Claude Code):  claude mcp add bancada-um -- C:\\Python314\\python.exe C:\\IALD\\Bancada_Um\\mcp_um.py
+ """
+@@ -67,13 +67,13 @@
+ 
+ 
+ @mcp.tool(description="Melhor ajuste (mínimos quadrados, σ por JᵀJ). beta ∈ {'livre', 'tgl' (= α√e), 'zero'} ou um número. ENTRA NO LIVRO; traz a "
+-                      "significância corrigida." + OPCOES_DOC)
++                      "diagnóstico local e ilustração de Šidák; significância global não calibrada fica indisponível." + OPCOES_DOC)
+ def ajustar(conjuntos: list[str] = ["planck_comp", "desi_dr1"], beta: str = "livre", c_livre: bool = False, opcoes: dict = {}) -> dict:
+     """Ajuste de máxima verossimilhança (ver a descrição da ferramenta)."""
+     return _req("/api/ajustar", dict(conjuntos=conjuntos, beta=beta, c_livre=c_livre, opcoes=opcoes or {}))
+ 
+ 
+-@mcp.tool(description="Ajusta ΛCDM (β = 0), TGL (β = α√e) e β livre e devolve os Δχ² (Wilks, 1 g.l.). ENTRA NO LIVRO; traz a significância corrigida."
++@mcp.tool(description="Ajusta ΛCDM (β = 0), TGL (β = α√e) e β livre e devolve os Δχ²; conversão condicional de TGL fixa versus β livre por Wilks (1 g.l.), sem converter TGL fixa versus ΛCDM. ENTRA NO LIVRO; traz a diagnóstico local e ilustração de Šidák; significância global não calibrada fica indisponível."
+                       + OPCOES_DOC)
+ def comparar(conjuntos: list[str] = ["planck_comp", "desi_dr1"], c_livre: bool = False, opcoes: dict = {}) -> dict:
+     """Comparação de modelos por Δχ² (ver a descrição da ferramenta)."""
+@@ -81,7 +81,7 @@
+ 
+ 
+ @mcp.tool(description="Posterior de (H0, ω_b, ω_c, β[, c]) por ensemble afim-invariante na GPU; espera terminar e devolve o resumo (medianas, 16–84%, "
+-                      "τ, aceitação, fração do posterior além de α√e). ENTRA NO LIVRO; traz a significância corrigida." + OPCOES_DOC)
++                      "τ, aceitação, fração do posterior além de α√e). ENTRA NO LIVRO; traz a diagnóstico local e ilustração de Šidák; significância global não calibrada fica indisponível." + OPCOES_DOC)
+ def amostrar_posterior(conjuntos: list[str] = ["planck_comp", "desi_dr1"], walkers: int = 256, passos: int = 2000, queima: int = 500,
+                        semente: int = 42, c_livre: bool = False, opcoes: dict = {}) -> dict:
+     """Amostragem do posterior (ver a descrição da ferramenta)."""
+--- original/ui\index.html
++++ candidate/ui\index.html
+@@ -84,7 +84,7 @@
+     <div class="painel">
+       <h3>Posterior de β</h3><canvas id="g-post"></canvas>
+       <h3>β × H₀</h3><canvas id="g-2d"></canvas>
+-      <p class="nota">Linhas: <span class="l-zero">0 (ΛCDM)</span> e <span class="l-ouro">α√e (TGL)</span>. Toda significância vem ao lado da <b>corrigida</b> pelo número de famílias de teste do livro.</p>
++      <p class="nota">Linhas: <span class="l-zero">0 (ΛCDM)</span> e <span class="l-ouro">α√e (TGL)</span>. A cauda local e a ilustração de Šidák são diagnósticos. <b>Significância global indisponível</b>: a busca exige calibração própria.</p>
+     </div>
+   </div>
+ </section>
+--- original/README.md
++++ candidate/README.md
+@@ -60,3 +60,8 @@
+ ## ADEQUAÇÃO DA BANCADA DE TESTE (28/09/2026, noite; ordem do operador «adequarmos a bancada de teste»). A Bancada Um ganhou OPÇÕES declaradas de modelo/verossimilhança, por chamada (interface, API e MCP), com o modo padrão «selado» (reprodução da V3 do D1) e o modo «corrigido» (a covariância do Planck da Tabela I de Chen, Huang & Wang 2019, lida do PDF arquivado em fontes_externas com sha256; as correlações DM–DH do DESI DR1 da Tabela 1 do DESI 2024 VI, lidas no HTML do arXiv; D_M(z*) por razão TGL/ΛCDM sobre o CAMB, o neutrino massivo contado uma vez). O mapa de R (Ω_m nu | Ω_m efetivo (1+β)Ω_m) fica como opção SEPARADA e explícita, porque é escolha de modelo [INPUT] não derivada. Validação contra o aferidor e o verificador da família D1 (validar_corrigido.py; alvos lidos das cópias com sha256 em estado/referencias_auditoria_28set): veredito BANCADA_UM_MODO_CORRIGIDO_REPRODUZ_O_VERIFICADOR_D1 — selado β̂ = -0.01302 (3.01σ); DR1 correlacionado -0.01492 (3.52σ); Planck Chen+2019 -0.01303 (3.03σ); D_M* por razão -0.01218 (2.92σ); corrigido completo -0.01405 (3.43σ); mapa de R efetivo com Chen 0.04995 ± 0.08772 (0.85σ, na borda do prior). A variante R_eff do verificador não convergiu no ajuste livre (χ²_F = 1379,6) e por isso o alvo dessa variante é o do aferidor — dito. A covariância do Pantheon+ (existe em disco) ainda NÃO está ligada: fiação pendente. Toda busca com opções entra no livro como família própria (a correção de tentativas separa os modos).
+ 
+ Como usar: na interface (aba Evidência: «modo» e «mapa de R»; vale também para a aba Modelo); na API, `"opcoes": {"modo": "corrigido", "mapa_R": "nu"}` em /api/avaliar, /api/ajustar, /api/comparar e /api/amostrar; no MCP, o parâmetro `opcoes` das mesmas ferramentas. Validação: `python ferramentas\validar_corrigido.py`. Reinício do servidor (só o processo da gerência): `python ferramentas\reiniciar_servidor.py`.
++
++
++## Adendo candidato — 06/10/2026: diagnóstico e calibração global
++
++O texto histórico acima sobre significância corrigida fica superado, nesta preparação, pela distinção explícita: a cauda local é condicional às hipóteses do teste; Šidák por famílias é ilustração e não certifica uma busca adaptativa. p_global/z_global passam a null com estatuto UNAVAILABLE_NOT_CALIBRATED. Ajustes sem sucesso, números não finitos e mínimo livre pior que qualquer restrito são recusados, com registro de falha sem p local. TGL fixa versus LCDM conserva a diferença assinada sem conversão em sigma. Roteiros históricos que formatam z_global como float devem ser migrados antes de uso no protocolo novo. Esta cópia é candidata local, não recibo de instalação ou novo resultado físico.

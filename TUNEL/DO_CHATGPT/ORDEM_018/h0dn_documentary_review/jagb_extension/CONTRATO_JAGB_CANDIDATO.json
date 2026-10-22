@@ -1,0 +1,30 @@
+{
+  "status": "DOCUMENTARY_CANDIDATE_NOT_RATIFIED_NO_EXECUTION",
+  "upstream_variant": "V01 - Baseline + JAGB",
+  "warning": "H0DN V01 is NOT our preregistration V1",
+  "identifier_selection": "SELECTION_V01_IDENTIFIERS.json",
+  "response_column": "CEPHEID_RESPONSE_CANDIDATE.json",
+  "covariance": {
+    "known_components": [
+      "anchor",
+      "MAS",
+      "HMS",
+      "supplied SN HF covariance"
+    ],
+    "residual_cross_method_terms": null,
+    "residual_cross_source_terms": null,
+    "absence_is_not_independence": true,
+    "full_covariance_assembled": false,
+    "required_before_inference": [
+      "resolve relevant cross-terms or freeze justified PSD sensitivity family",
+      "validate support and design rank with explicit units/tolerances",
+      "retain shared SN rows once",
+      "specify independent background block or its joint dependencies"
+    ]
+  },
+  "bias_definition": "E[y_host]=mu_host+c_C*delta_C; positive delta_C = Cepheid reported distance-modulus high",
+  "response_propagation": "d xhat / d delta_C = -(A^T C+ A)^-1 A^T C+ c_C; valid on consistent support with invertible normal matrix",
+  "no_new_observed_fit": true,
+  "no_upstream_execution": true,
+  "no_remote_calls": true
+}

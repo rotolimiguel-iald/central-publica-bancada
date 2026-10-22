@@ -1,0 +1,61 @@
+interpretation of Mathlib.Tactic.ToDual.guessNameExt took 154ms
+interpretation of Mathlib.Tactic.ToAdditive.guessNameExt took 131ms
+import took 71s
+simp took 104ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T134248_159556Z\RegularFockMaxwellQuadraticR1.lean:71:9: error: Type mismatch
+  regularFockDomain
+has type
+  Submodule ℂ ↥F
+but is expected to have type
+  Set A.toCertificate.F
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T134248_159556Z\RegularFockMaxwellQuadraticR1.lean:78:28: error: unsolved goals
+D : CanonicalNetInput
+A : RemainingModularCoreInput D
+ψ : A.toCertificate.F
+x : Fin 4 → ℝ
+h : ψ ∈ sorry
+⊢ (regularStressTotal ψ x).transpose = regularStressTotal ψ x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T134248_159556Z\RegularFockMaxwellQuadraticR1.lean:99:16: error: Application type mismatch: The argument
+  ψ.property
+has type
+  ↑ψ ∈ regularFockDomain
+but is expected to have type
+  ↑ψ ∈ (regularMaxwellQuadraticForm A).Dom
+in the application
+  And.intro ψ.property
+'F1Fecho.MaxwellGlobal.boost_action_symm_coordinates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.pull_realPart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.realCoordinateStress_boost' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularStressTotal_on_domain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularStressTotal_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularStressTotal_boost' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularMaxwellQuadraticForm' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.regularMaxwellQuadraticForm_nontrivial' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellGlobal.regularMaxwellQuadraticForm_exact' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.0825ms
+	blocked (unaccounted) 200ms
+	congr simp thm 1.15ms
+	elaboration 81.1ms
+	fix level params 0.51ms
+	import 71s
+	initialization 32.7ms
+	instantiate metavars 0.434ms
+	interpretation 8.58s
+	let-to-have transformation 0.417ms
+	linting 7.38ms
+	overlappingInstancesLinter 13.5ms
+	parsing 5.24ms
+	process pre-definitions 13ms
+	share common exprs 5.28ms
+	simp 115ms
+	tactic execution 149ms
+	tacticAnalysis 32.4ms
+	type checking 163ms
+	typeclass inference 296ms

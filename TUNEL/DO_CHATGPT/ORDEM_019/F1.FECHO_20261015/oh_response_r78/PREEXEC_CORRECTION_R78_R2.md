@@ -1,0 +1,3 @@
+# Correção anterior à execução, em nome do construtor
+
+R1 permaneceu sem execução. O consumidor exigia zero de média e primeira variação no ramo sem semente, além do alcance pedido. R2 retira essas duas exigências: zero ou resposta não nula serão relatados sem escolher outro preparo. A ação conjunta dos termos cruzados de J e da bomba não será substituída por essa conclusão presumida. Não muda parâmetros, ramos, janelas, epsilons ou tolerâncias; acrescenta apenas h_+=(R_X−iR_Y)/2 e h_-=(R_X+iR_Y)/2, previamente definidos no complemento. Os pinos R1 foram preservados. Usar exclusivamente consumidor/runner/freezer/PLAN/manifest R2 na execução única. START_R78, FREEZE_R78 e RESULT_R78 conservam seus nomes, ainda inexistentes na preparação.

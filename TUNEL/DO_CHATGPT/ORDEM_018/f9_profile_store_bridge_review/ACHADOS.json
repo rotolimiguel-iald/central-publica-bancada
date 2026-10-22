@@ -1,0 +1,58 @@
+{
+  "schema": "F9_PROFILE_STORE_REVIEW_FINDINGS_V1",
+  "review_id": "7278163c-0d8f-4983-a5c2-c2982dd0b250",
+  "open_blockers": [],
+  "resolved_preseal": [
+    {
+      "id": "STORE-R01",
+      "status": "RESOLVED_BEFORE_SEAL",
+      "issue": "Exact class check originally required a registry role absent from producer bootstrap; a reload would construct another class.",
+      "resolution": "registry_module explicitly supplied from the trusted bootstrap; retained exact class/check, source pin and reader policy checked.",
+      "references": [
+        "store_bridge.py:65",
+        "store_bridge.py:75",
+        "BOOTSTRAP_FUTURO.md:7"
+      ]
+    },
+    {
+      "id": "STORE-R02",
+      "status": "RESOLVED_BEFORE_SEAL",
+      "issue": "Original intake pin was recanonicalized in output.",
+      "resolution": "Original admitted raw hash retained in constructor and returned unchanged.",
+      "references": [
+        "recovery.py:19",
+        "recovery.py:21",
+        "recovery.py:207"
+      ]
+    },
+    {
+      "id": "STORE-R03",
+      "status": "RESOLVED_BEFORE_SEAL",
+      "issue": "A shift using level preceded the finite level guard.",
+      "resolution": "read_budget checks exact int and range before shift; read_run calls this helper.",
+      "references": [
+        "store_bridge.py:52",
+        "store_bridge.py:53",
+        "recovery.py:112"
+      ]
+    },
+    {
+      "id": "STORE-R04",
+      "status": "RESOLVED_BEFORE_SEAL",
+      "issue": "Imported store_contract dependency was absent from required reader bindings.",
+      "resolution": "Required role now included, and module object plus SOURCE_PINS alias explicitly bound.",
+      "references": [
+        "recovery.py:30",
+        "store_bridge.py:96"
+      ]
+    }
+  ],
+  "pending_integration_not_static_defects": [
+    "Original metadata bytes must be retained and match original request pins; absence refuses, never reconstructs.",
+    "Externally verified parent exit0/reap receipt must bind original unit, completion seal and parent stdout.",
+    "Actual reader bootstrap/runtime/registry and existing protected POSIX store are not qualified by this review.",
+    "The original complete 600-scenario production must exist; reader cannot create or reopen it.",
+    "Prepared suite uses doubles and does not establish real POSIX or 75000-record integration."
+  ],
+  "no_scientific_authorization": true
+}

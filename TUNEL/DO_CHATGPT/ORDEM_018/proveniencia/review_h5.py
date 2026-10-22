@@ -1,0 +1,31 @@
+from pathlib import Path
+import json, datetime, hashlib
+from audit_provenance import atomic, metadata, OUT
+root=OUT.parent
+base=root/'h5_contract'
+paths=[base/'NOTA_H5_ESCALAS_ACUSTICAS.md',base/'SOURCES.json',base/'MANIFESTO.json',base/'chen2018_distance_priors.html',base/'zhai2019_distance_priors_abstract.html',root/'reproducao_fase45_conjunta'/'T4_reproduzir.py',root/'FASE9_V1_CANDIDATE.json']
+sources=[metadata(p)[0] for p in paths]
+manifest=json.loads((base/'MANIFESTO.json').read_text(encoding='utf-8-sig'))
+checks=[]
+for item in manifest['files']:
+    p=Path(item['path']); m,_=metadata(p)
+    checks.append({'path':str(p),'match':m['sha256']==item['sha256'] and m['bytes']==item['bytes']})
+assert all(x['match'] for x in checks)
+note='''# Revisão independente H5 — escalas acústicas
+
+[REAL documental / DERIVED / OPEN] **Aceite restrito: nenhum achado acionável no escopo examinado.** A nota é uma especificação de alternativas ainda não ratificadas; não torna H5 executável nem altera o candidato V1. Nenhum fit, cálculo observacional, busca nova ou programa científico foi executado nesta revisão.
+
+A distinção entre as duas escalas está correta: T4, linhas 100–101, usa `r_drag` nos três tipos de BAO e `r_star` em `l_A`; o vetor CMB também contém R e omega_b. A nota preserva a diferença entre escalas computadas sob um modelo comum e observações independentes. As fontes públicas arquivadas foram lidas: Chen/Huang/Wang validam os casos LCDM, wCDM e CPL indicados; o resumo de Zhai delimita a dependência da compressão nas hipóteses e a extensão necessária nos casos de neutrinos examinados. Nenhuma das fontes certifica uma extensão primordial arbitrária.
+
+[DERIVED] Para r(theta)>0 e prior uniforme em rd entre a e b, independente de theta na proposta original, q=rd/r(theta) tem suporte [a/r(theta),b/r(theta)] e densidade condicional r(theta)/(b-a). Sua integral vale um; o prior marginal de theta permanece o mesmo quando o Jacobiano e o suporte são transportados juntos. Os limites 130–160 Mpc são INPUT do candidato, não escolha nem ratificação do revisor. Limites fixos uniformes em q definem outro prior conjunto. A nota está correta ao rejeitar a transformação apenas no melhor ajuste.
+
+A é uma alteração fenomenológica somente da régua BAO; mantém r_star e o fundo CMB e não representa uma dinâmica EDE. B exige a dinâmica primordial e a qualificação do instrumento CMB pertinente. C é uma reparametrização **apenas sob a condição que a própria nota explicita**: beta atua somente na resposta local e os demais blocos permanecem iguais. Com eta=I(theta) beta e I diferente de zero, a densidade transforma-se por 1/|I(theta)| com suporte correspondente. Essa identidade não deve ser estendida ao T4 inteiro: seu bloco CC, linha 104, também depende de beta. No diagnóstico local do candidato F9, a ressalva é satisfeita como especificação, ainda pendente de implementação/ratificação.
+
+A exigência de comparar todos os modelos sobre o mesmo conjunto de dados e medida é correta. Um experimento auxiliar sem CMB tem outra evidência e não pode substituir silenciosamente a evidência do conjunto completo. O candidato F9 mantém H5 em PENDING e status DRAFT_NOT_AUTHORIZED_FOR_COMPOSITE, coerente com as opções A/B/C não adotadas. A ausência de ratificação é delimitada ao pacote, sem alegação sobre todo o acervo.
+
+Foram conferidos quatro pins do manifesto contra os bytes presentes e registrados hashes das sete fontes no recibo. Aceite exclusivamente documental e algébrico; compressão, priors, implementação, covariâncias e escolha de H5 continuam OPEN para o instrumento futuro. Originais preservados; nenhuma aceitação de V1 ou autorização de piloto.
+'''
+atomic(OUT/'REVISAO_H5_ESCALAS_ACUSTICAS.md',note)
+receipt={'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'status':'RESTRICTED_DOCUMENTARY_ACCEPTANCE_NO_ACTIONABLE_FINDING','sources':sources,'manifest_checks':checks,'report':metadata(OUT/'REVISAO_H5_ESCALAS_ACUSTICAS.md')[0],'observational_calculation':False,'new_search':False,'scientific_program_execution':False,'v1_accepted':False,'originals_modified':False}
+atomic(OUT/'REVISAO_H5_ESCALAS_ACUSTICAS.json',json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'report':receipt['report'],'receipt':metadata(OUT/'REVISAO_H5_ESCALAS_ACUSTICAS.json')[0],'manifest_checks':len(checks)},ensure_ascii=False))

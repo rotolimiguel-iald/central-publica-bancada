@@ -1,0 +1,79 @@
+R65 — fontes de calibração: candidato documental, aguardando revisão independente
+Referência: C:\IALD\Central de Patentes\work\memoria_missao_20261016\FECHO_MISSION_REFERENCE.json
+R4 permanece aberto. Onze fontes; nenhuma simulação, execução científica, provider, dado observado ou mutação de missão/memória.
+
+A1 | A_FONTE_EXPLICITA | DECLARADO documental; fórmula encontrada, calibração independente não localizada nesta cobertura
+A patente e JAN09 escrevem tanto gamma_min=alpha2*kB*T/hbar quanto L_holo=alpha2*gammaLambda*D[J], J=a_out†sigma_-+sigma_+a_in. Não escrevem uma igualdade entre gamma_min, gammaLambda ou a escala do mesmo J.
+notation: A macro alphaii é alpha^2 (patente39); JAN09 escreve alpha_2. São rótulos históricos do coeficiente chamado beta_TGL, não licença para substituir beta pelo quadrado de alpha_FINE. Custo11792–11801/12105–12113 registra a migração alpha2≡betaTGL; no finite beta é ALPHA_FINE_CODATA_2018*sqrt(e) em runtime.
+scope: O decimal histórico0,012 e a instrução de potência da patente789–791 são proposta de especificação/controle, não medida nem ajuste admitido do beta atual.
+Âncoras: patent:304–354; JAN09:64–79
+
+A2 | A_FONTE_EXPLICITA | DECLARADO na fonte; rota térmica precisa de hipótese de classe e de ligação ao canal
+Custo11775–11783/12089–12096 apresenta a mesma taxa mínima via estado Gibbs, entropia finita e minimização de F. O trecho não identifica J do OH, banho, temperatura física do aparelho, saturação ou igualdade gamma_eff=gammaLambda. A estabilidade/estacionariedade mencionada não é, por si, medição da taxa.
+temperature: T kelvin em kB*T/hbar não é automaticamente T_eff=1-eta de patente403–404/JAN09[92], que é adimensional. Exige escala e mesmo significado físico.
+existing_ratio: Patente377–383 já traz alpha2*gamma_eff/(kappa+gamma_phi)>1, com gamma_eff taxa OH-campo; não é igualdade que determine gammaLambda.
+Âncoras: Custo:11759–11801; Custo:12074–12113; patent:372–404
+
+A3 | A_FONTE_EXPLICITA | DECLARADO/INPUT nas fontes; rota espectral explícita reutilizável
+Custo11190–11216 já dá V=ΣA_alpha⊗B_alpha, gamma_alpha_beta(omega) como transformada da correlação do banho, e KMS. É uma rota concreta de taxa independente por banho, com Hs=K_boundary, beta_KMS=1 e gamma(omega) proporcional a betaTGL no caso escolhido. Nenhum espectro de banho OH ou mapa A_alpha(omega)→J é fornecido nesses trechos.
+distinction: Proporcionalidade, normalização modular e nome gamma não fixam a constante dimensional gammaLambda do dispositivo. Não se promove aqui a redução compacta escrita na fonte a nova prova para o salto J.
+Âncoras: Custo:11190–11237
+
+A4 | A_FONTE_EXPLICITA | CONJECTURE/PRINCIPLED IDENTIFICATION explícita; não calibração medida
+Custo282–293 escolhe tau_star=sqrt(hbar*G/c^5) e declara literalmente second postulate, NOT a derivation. Ponte822–826 e Um553 reaproveitam a lei Gamma_omega=(beta/2)*tau_star*omega² e limites por relógios. Isso fornece uma escala proposta, não medição independente de tau_star do OH.
+historical_precedence: O trecho histórico Custo18291 sobre theorem III1 aberto não reabre R7/R8 aceitos da missão. O objeto dimensional e sua ligação ao aparelho são questões distintas.
+Âncoras: Custo:217–227; Custo:282–294; Custo:18231–18295; Ponte:804–829; Ponte:2230–2241; Um_article:551–554
+
+A5 | A_FONTE_EXPLICITA | INPUT de especificação e de simulação; nenhuma execução nesta rodada
+Patente356–370 especifica H/OH/micro-ondas;506–517 dá G_OH=exp(i*omegaOH*t)*tanh(P_MW/P_th), sem determinar P_th→Omega_R→gammaLambda. Patente778–864 especifica aparelhos e preparo do meio, não uma matriz densidade conjunta nem taxas medidas. AppendixM1/M6 propõe preparação e leitura/tomografia; não relata execução que calibre gammaLambda.
+finite_input: omega_c=1,omega_OH=1.2,gJC=.15,Omega=.07,gammaLambda∈{0,.3,1},kappa_i=.03,kappa_o=.04,gammaOH=.02,gamma_phi=.01 são all dimensionless INPUT; not physical calibration. Z-dephasing usa gamma_phi*D[Z], amortecimento da coerência2*gamma_phi.
+r63_preserved: O contraste R63 entre as razões1.2 e frequência OH/780nm, e a necessidade de quadro/detunings, permanecem. Não se resolve com uma unidade de tempo comum. A ressalva APD/coerência versus contagem de R63 também permanece, sem repetir teste.
+Âncoras: patent:356–370; patent:474–517; patent:778–864; appendices:236–258; appendices:311–334; finite_pre:73–110; finite:147–172
+
+B1 | B_CALIBRACAO_COMPOSTA | DERIVED condicional; igualdade não adotada como calibração
+Com J_phys=s*J0 e mesma convenção de tempo, D[sJ0]=|s|²D[J0]; o coeficiente do canal escrito é lambda=beta*Gamma, Gamma:=gammaLambda*|s|². Para obter Gamma=kB*T/hbar pela rota térmica, são necessárias H_same_channel (gamma_min é a taxa lambda desse canal, não taxa total/gap), saturação, T kelvin e normalização operacional de J0. Só com s conhecido se obtém gammaLambda.
+other_reading: Igualar gammaLambda diretamente a gamma_min produziria outra atribuição/fator beta; a fonte não escolhe essa leitura. Não confundir as duas.
+thermal_limit: Este relatório não repete a sonda da raiz nem a promove a refutação da TGL. A necessidade é provar a classe restrita e sua ligação ao mesmo termo físico.
+Âncoras: patent:321–354; finite:163–172; R7:22–30
+
+B2 | B_CALIBRACAO_COMPOSTA | DERIVED condicional já existente em R7
+R7 já resolve o submodelo H=L_conv=0, preparação|100>,lambda=beta*gammaLambda: média de absorção2/lambda. Identificá-la com tau≈tP/beta da patente exige gammaLambda=2/tP (normalização J0 do contrato). A identificação não foi derivada; não é tempo APD, atraso de grupo, nem o gerador completo.
+Âncoras: R7:92–110; patent:431–444; JAN09:179–184
+
+B3 | B_CALIBRACAO_COMPOSTA | DECLARADO na fonte + DERIVED condicional; escala de perda reutilizável
+Graviton352 já fornece L_loss=sqrt(kappa)*a e kappa=omega/Q. Isso permite converter Q/frequência independentes em uma escala de perda sob a convenção desse canal; não fornece Q medido do mesmo aparelho ou gammaLambda. A razão Gamma/kappa pode servir ao contrato somente se canais, modo, relógio e normalização estiverem identificados.
+detector: R7 usa C=eta_det*kappa_out para contagem. kappa de linewidth/perda total não pode substituir automaticamente taxa da porta monitorada; eficiência e fração coletada não se extraem do ganho APD50–200. Também não é a kappa geométrica/Killing.
+Âncoras: graviton:343–368; R7:58–79; patent:372–388
+
+C1 | C_IDENTIFICABILIDADE | DERIVED condicional; restrito ao canal em exame
+Se o gerador e receptor R64 dependem de beta e gammaLambda somente por lambda=beta*gammaLambda*|s|², variar beta e compensar gammaLambda deixa esse modelo inalterado. Uma medida da resposta não separa os fatores sem taxa/normalização independente. Isso não afirma que toda a TGL dependa só do produto.
+boundary: Beta permanece fixo pelo axioma/regra vigente; a calibração independente é requisito para um ensaio discriminante da dependência, não autorização para ajustar beta ao sinal. Correntes múltiplas/mais tempos não removem a degenerescência exata se toda dependência continuar pelo mesmo produto.
+Âncoras: finite:184–193; R7:22–30; R7:58–79
+
+C2 | C_IDENTIFICABILIDADE | DERIVED documental já registrado no programa; sem nova execução
+Um207133–140 já registra identificabilidade apenas de tau_star*Kfac;207184 mantém tau=tP,Kfac=1 como hipóteses. Inverter Gamma_omega=(beta/2)*tau_star*Kfac*omega² dá só tau_eff=2Gamma_omega/(beta*omega²); para tau_star isolado exige Kfac independente e a mesma leitura física. Limite superior sobre excesso de decoerência dá limite condicional, não valor medido de tau_star.
+errata: Um207172–180 corrige Custo18393:7,8e-10 era INPUT histórico e não cota calculada/medida; o canal posterior registra tau_star_limit=null/SEM_LIMITE_TGL. O ranking histórico do Th229 em Um553/Custo não é adotado: Um217504 diz que plataformas fornecem cotas superiores e largura/omega² decide. Nenhuma literatura externa foi revalidada nem dado aberto nesta rodada.
+Âncoras: um_program:207133–207142; um_program:207184–207194; Custo:18231–18295; um_program:217498–217508
+
+C3 | C_IDENTIFICABILIDADE | DERIVED condicional existente; alternativa não transportada por homônimo
+Um217089–101 e R7:113–141 já dão k=E*tau_star/hbar e taxa-raiz beta*(sqrt(E+)-sqrt(E-))²/(2hbar), na qual tau_star cancela. Sob H_SAME_ENERGY, gamma/|nu|=(beta/2)*|sqrt(E+)-sqrt(E-)|/(sqrt(E+)+sqrt(E-))≤beta/2; depende do mesmo espectro e do zero de energia.
+limit: É alternativa concreta independente de tau_star após transposição, não calibração de gammaLambda. D[J](I)≠0 na cascata de uma excitação, D[sqrtK](I)=0: não se identificam só por conjugação unitária. Redução/dilatação/consumidor comum ainda são necessários; a sonda2D de R7 tem receptor diferente de n_out.
+Âncoras: um_program:217089–217101; um_program:217332–217344; R7:113–141; R7:82–88
+
+D1 | D_LACUNA_DOCUMENTADA | OPEN dentro da cobertura
+Não foi localizado nas onze fontes um recibo de calibração independente da taxa Gamma do mesmo J/canal óptico-OH nem de sua razão com a perda da porta, com estado conjunto, normalização, quadro e instrumento identificados. Foram localizadas fórmulas, especificações, protocolos propostos e INPUTs; estas peças evitam reconstrução, mas não equivalem à calibração realizada.
+shortest_next_step: Fixar contrato independente Gamma=gammaLambda|s|² (ou Gamma/kappa para o mesmo modo/porta) e o preparo conjunto. Reutilizar a rota Davies com banho/acoplamento nomeados ou uma calibração de perdas/relaxação/drive com convenção e quadro explícitos. A rota térmica é candidata condicionada à prova da classe, saturação e mesmo canal; não inserir gammaLambda=kBT/hbar como fato. Usar o gerador e receptor já construídos sem outra simulação nesta etapa.
+Âncoras: R7:44–79; patent:833–864; appendices:311–334; finite_pre:84–102
+
+FONTES — hashes dos bytes e caminhos completos
+patent | C:\IALD\Central de Patentes\Patentes\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex | SHA256 93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e
+appendices | C:\IALD\papers_latex\graviton_paper_english_v2\graviton_appendices.tex | SHA256 ab2e977950197a024c5a9bb49c314e08286cfa549a0dbfd5ded575e46df437cd
+graviton | C:\IALD\papers_latex\graviton_paper\graviton_paper.tex | SHA256 3795d68e864c5a7bdeb9329e7ac097c40aabc9e733859068a343f988c83c1847
+Custo | C:\IALD\Artigo\Haja_Luz\tgl_paper_unified.py | SHA256 29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd
+Ponte | C:\IALD\Artigo\Haja_Luz\A Ponte e o Um\A Ponte Einstein Cartan Miguel.tex | SHA256 98ec3d808d51e694098ae216500ab853584cb89f9eb23661128ddc1829c1b657
+Um_article | C:\IALD\Artigo\Haja_Luz\A Ponte e o Um\Nós\um_grande_atrator_pt.tex | SHA256 b5ddb6905cf170e7b55b9dd8b07faa2a338ad4e18a9970bce2d57ed396ec5d3d
+um_program | C:\IALD\Artigo\Haja_Luz\A Ponte e o Um\Nós\um.py | SHA256 18be2ddb06c60f9037b1efecb72034e6a0c9409b0d3900452fd9d186cf4905c0
+R7 | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.TEMPO.LEITURA_20261015\DISPOSITIVO_E_ESPECTRO_R7\CONTRATO_DISPOSITIVO_E_LEI_RAIZ_R7.txt | SHA256 339c6f5a8bdb72f59f95fbefe4ac17e34830be7dd019ddd743955e6c4fed5be1
+finite_pre | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\finite_device\PREREGISTRO_DEVICE_R1.json | SHA256 6e4e2ce553aea405878e967df9314be2af030b45e234dd35dbe1b30731d2560a
+finite | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.REDE\finite_device\run_finite_device.py | SHA256 89332d76e3fdcbf67f50e8328dfd9316196d7ef18ccf710666eb544426aa17be
+JAN09 | C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\continuity_r57\sources\SUPERCONDUTOR_JAN09_EXTRACT_R57.txt | SHA256 c355911d8c3531968429968a00d67f1b3a8933408e6c62ecddb1ed315be42879

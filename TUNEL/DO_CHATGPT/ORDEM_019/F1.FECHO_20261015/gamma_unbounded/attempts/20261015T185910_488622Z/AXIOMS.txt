@@ -1,0 +1,61 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T185910_488622Z\PairedExponentialPolarizationR1.lean:40:42: error(lean.unknownIdentifier): Unknown identifier `hreal`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T185910_488622Z\PairedExponentialPolarizationR1.lean:50:39: error(lean.unknownIdentifier): Unknown identifier `hreal`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T185910_488622Z\PairedExponentialPolarizationR1.lean:49:79: error: unsolved goals
+K : Submodule ℝ ↥H1
+A : ↥H1 → ↥H1
+v w : ↥F
+hv : ∀ x ∈ K, inner ℂ v (exponential x) + inner ℂ w (exponential (A x)) = 0
+x : ↥H1
+hx : x ∈ K
+n : ℕ
+⊢ inner ℂ (↑v n) (pureTensor n x) + inner ℂ (↑w n) (pureTensor n (A x)) = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T185910_488622Z\PairedExponentialPolarizationR1.lean:72:33: error(lean.unknownIdentifier): Unknown identifier `hreal`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T185910_488622Z\PairedExponentialPolarizationR1.lean:86:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ?m.129 ?x (?r • ?y)
+in the target expression
+  inner ℂ (↑v n) (↑(weight n) • pureTensor n (x + Complex.I • y)) +
+      inner ℂ (↑w n) (↑(weight n) • pureTensor n (A x + Complex.I • A y)) =
+    0
+
+K : Submodule ℝ ↥H1
+A : ↥H1 → ↥H1
+v w : ↥F
+hv : ∀ x ∈ K, inner ℂ v (exponential x) + inner ℂ w (exponential (A x)) = 0
+x y : ↥H1
+hx : x ∈ K
+hy : y ∈ K
+hs :
+  HasSum (fun n => 1 ^ n * pairCoefficient v w (x + Complex.I • y) (A x + Complex.I • A y) n)
+    (inner ℂ v (exponential (1 • (x + Complex.I • y))) + inner ℂ w (exponential (1 • (A x + Complex.I • A y))))
+n : ℕ
+⊢ inner ℂ (↑v n) (↑(weight n) • pureTensor n (x + Complex.I • y)) +
+      inner ℂ (↑w n) (↑(weight n) • pureTensor n (A x + Complex.I • A y)) =
+    0
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    fun x => x ∈ lp Sectors 2
+  has type
+    PreLp Sectors → Prop
+  but is expected to have type
+    ((i : ℕ) → Sectors i) → Prop
+  in the application
+    @Subtype.val ((i : ℕ) → Sectors i) fun x => x ∈ lp Sectors 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T185910_488622Z\PairedExponentialPolarizationR1.lean:88:52: error: Application type mismatch: The argument
+  hasSum_zero
+has type
+  HasSum (fun x => 0) 0 ?m.149
+but is expected to have type
+  HasSum (fun n => 1 ^ n * pairCoefficient v w (x + Complex.I • y) (A x + Complex.I • A y) n) ?m.146
+in the application
+  HasSum.unique hs hasSum_zero
+'F1Fecho.PairedExponential.pair_coefficients_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PairedExponential.pair_pure_zero_complexification' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.PairedExponential.pair_orthogonal_complexification' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,69 @@
+{
+  "status": "STATIC_PREPARATION_ONLY",
+  "request_id": "8b53f7c0-9f5f-49e1-87bc-cf73a7e1f79d",
+  "checks": [
+    {
+      "check": "controls.py AST syntax",
+      "pass": true
+    },
+    {
+      "check": "controls.py imports stdlib only",
+      "pass": true,
+      "imports": [
+        "fractions",
+        "math",
+        "json",
+        "sys",
+        "time"
+      ]
+    },
+    {
+      "check": "exactly eight case functions ordered",
+      "pass": true
+    },
+    {
+      "check": "no top-level call expression except guarded main",
+      "pass": true
+    },
+    {
+      "check": "supervisor.py AST syntax",
+      "pass": true
+    },
+    {
+      "check": "supervisor.py imports stdlib only",
+      "pass": true,
+      "imports": [
+        "pathlib",
+        "os",
+        "sys",
+        "json",
+        "time",
+        "hashlib",
+        "subprocess",
+        "datetime"
+      ]
+    },
+    {
+      "check": "parent pins unchanged",
+      "pass": true
+    },
+    {
+      "check": "no CLAIM/RUN/auth generated",
+      "pass": true
+    },
+    {
+      "check": "8 cases retain parent IDs",
+      "pass": true
+    },
+    {
+      "check": "parent limits preserved",
+      "pass": true
+    }
+  ],
+  "checks_count": 10,
+  "control_executions": 0,
+  "numerical_tail_evaluations": 0,
+  "matrix_control_evaluations": 0,
+  "scientific_imports": 0,
+  "scope": "AST, IDs, pin reads only; controls.py and supervisor.py neither imported nor run."
+}

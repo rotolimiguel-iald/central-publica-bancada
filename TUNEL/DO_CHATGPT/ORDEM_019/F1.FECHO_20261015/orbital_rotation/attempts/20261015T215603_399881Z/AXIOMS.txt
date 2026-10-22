@@ -1,0 +1,37 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T215603_399881Z\OrbitalSpatialUnitaryR1.lean:27:4: error: Type mismatch
+  spatialAction_inverse Q.symm p
+has type
+  (spatialAction Q.symm.symm) ((spatialAction Q.symm) p) = p
+but is expected to have type
+  (⇑(spatialAction Q.symm) ∘ ⇑(spatialAction Q.symm.symm)) p = id p
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T215603_399881Z\OrbitalSpatialUnitaryR1.lean:36:6: error: Type mismatch: After simplification, term
+  spatialIsometry_inverse m Q.symm f
+ has type
+  (spatialIsometry m Q) ((spatialIsometry m Q.symm) f) = f
+but is expected to have type
+  ↑↑(((spatialIsometry m Q).toLinearMap ∘ₗ (spatialIsometry m Q.symm).toLinearMap) f) =ᵐ[orbitalMeasure m]
+    ↑↑(LinearMap.id f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T215603_399881Z\OrbitalSpatialUnitaryR1.lean:37:15: error: Type mismatch
+  spatialIsometry_inverse m Q f
+has type
+  (spatialIsometry m Q.symm) ((spatialIsometry m Q) f) = f
+but is expected to have type
+  ↑↑(((spatialIsometry m Q.symm).toLinearMap ∘ₗ (spatialIsometry m Q).toLinearMap) f) =ᵐ[orbitalMeasure m]
+    ↑↑(LinearMap.id f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T215603_399881Z\OrbitalSpatialUnitaryR1.lean:49:2: error: 'change' tactic failed, pattern
+  (Lp.compMeasurePreserving ⇑(spatialAction (LinearIsometryEquiv.refl ℝ Spatial).symm) ?m.69) f = f
+is not definitionally equal to target
+  ↑↑((spatialUnitary m (LinearIsometryEquiv.refl ℝ Spatial)) f) =ᵐ[orbitalMeasure m]
+    ↑↑((LinearIsometryEquiv.refl ℂ ↥(Lp E 2 (orbitalMeasure m))) f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T215603_399881Z\OrbitalSpatialUnitaryR1.lean:59:2: error: 'change' tactic failed, pattern
+  (Lp.compMeasurePreserving ⇑(spatialAction (Q.trans R).symm) ?m.176) f =
+    (Lp.compMeasurePreserving ⇑(spatialAction R.symm) ?m.202)
+      ((Lp.compMeasurePreserving ⇑(spatialAction Q.symm) ?m.228) f)
+is not definitionally equal to target
+  ↑↑((spatialUnitary m (Q.trans R)) f) =ᵐ[orbitalMeasure m] ↑↑(((spatialUnitary m Q).trans (spatialUnitary m R)) f)
+'F1Fecho.OrbitalSpatial.spatialIsometry_inverse' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialUnitary' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialUnitary_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialUnitary_refl' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialUnitary_trans' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.scalarSpatialH1' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,26 @@
+R65 — contrato mínimo para separar beta da escala do canal
+Em nome de codex-gerente-tgl. DERIVED candidato, revisão independente pendente.
+
+1. Normalização e unidades
+Fixar antes da inferência um operador J0 adimensional e sua matriz/álgebra de referência. Se o salto físico é s J0, D[s J0]=|s|²D[J0]. O coeficiente de D[J0] é lambda_phys=beta*Gamma, Gamma=gammaLambda_phys*|s|². Um dado que determina lambda_phys não separa gammaLambda_phys de s sem convenção ou informação adicional. Esta liberdade multiplicativa é suficiente para o diagnóstico; não pretende enumerar todas as representações equivalentes de GKLS.
+Para tau=t/t0, t0>0: lambda_d=t0*lambda_phys e kappa_d=t0*kappa_phys. O Hamiltoniano usado na forma -i[h_d,rho] é h_d=t0*H_phys/hbar. Uma fase sem relógio fornece combinações adimensionais, não uma taxa em segundos.
+
+2. Proposta de leitura por razão, condicional e sem ajuste
+Se um canal de referência separado, corretamente identificado, fornece kappa_phys>0, defina r=lambda_d/kappa_d=lambda_phys/kappa_phys e c=Gamma/kappa_phys. Então beta=r/c, desde que c>0 e seja determinado independentemente da previsão betaTGL e do próprio produto que se pretende decompor. Esta razão elimina t0, mas não elimina c. Fixar gammaLambda_d=1 por escolha de unidade não fornece c, nem é medição independente.
+Uma identidade Gamma=kappa_phys daria c=1, mas só pode ser usada se um teorema/derivação física relacionar os MESMOS canais e normalizações. Igualar taxas por semelhança de nome, ambas escritas kappa, não é essa ponte. Nenhuma identidade dessas é assumida nesta entrega.
+Uma medida de perda total de cavidade não separa perdas internas e externas sem informação extra; taxa do porto monitorado e eficiência de detecção também não se identificam com a perda total por definição.
+
+3. Critério local de identificabilidade: o que uma segunda leitura precisa acrescentar
+Hipótese: o primeiro experimento depende dos parâmetros (beta,Gamma) só por lambda=beta*Gamma, com informação escalar I_lambda>=0; uma calibração estatisticamente independente depende apenas de Gamma e fornece I_Gamma>=0. As funções de verossimilhança são diferenciáveis, informação finita; restantes parâmetros conhecidos ou explicitamente condicionados.
+A soma da informação é
+ I = [[Gamma² I_lambda, beta Gamma I_lambda],
+      [beta Gamma I_lambda, beta² I_lambda + I_Gamma]].
+Por expansão, det(I)=Gamma² I_lambda I_Gamma. Assim, Gamma!=0, I_lambda>0 e I_Gamma>0 removem esta degenerescência LOCAL de dois parâmetros. Isso não prova identificabilidade global nem garante que os dados atuais forneçam qualquer dessas informações positivas. Outros parâmetros nuisance, correlações entre experimentos e simetrias exigem a matriz conjunta/perfil próprio.
+Sem calibração independente, det=0; se o sinal não responde a lambda, I_lambda=0, calibrar Gamma não basta. A existência de 89 checks de integridade numérica emR64 não é uma estimativa de I_lambda.
+
+4. Precisão e limite de interpretação
+Na aproximação local de pequenos erros independentes para beta=r/c, Var(beta)/beta² ≈ Var(r)/r² + Var(c)/c². Com covariância acrescenta-se -2Cov(r,c)/(r*c). É propagação delta, não promessa de confiança nem significância. Para discriminação física, especificar alternativas, verossimilhança, sistemáticas e regra de veredito antes do composto; esta nota não calcula5sigma.
+
+5. Próxima ação verificável
+Buscar no acervo: definição física e normalização deJ; calibração independente deGamma ouc; comprovação de preparo conjunto; decomposição das perdas do porto; relação do relógio físico com o gerador. Classificar medição documentada separada de especificação proposta. Se o acervo não fornecer a segunda leitura, entregar o contrato acima como requisito explícito, sem preencherGamma pela própria betaTGL.
+

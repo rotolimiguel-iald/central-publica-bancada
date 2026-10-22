@@ -1,0 +1,11 @@
+# Preparação documental — inventário de membros de calibração
+
+Pedido a178d269-5b24-443a-b59b-4060aebe9a4c, recebido da coordenação ROOT em 06/10/2026. Consultado o mapa antes da pesquisa; a entrega anterior de semântica está aceita documentalmente. Não repetir os 14 GPS, o contrato PSD A/B ou INIT003.
+
+**Alternativa A: índice remoto oficial.** Evita baixar conteúdo comprimido. A página DCC T2500288-v5 lista dois pacotes e README, sem apresentar índice de membros. Duas buscas restritas aos domínios oficiais e nomes dos pacotes não retornaram índice. Isso descreve o alcance da procura, não prova inexistência universal. Os nomes internos continuam desconhecidos nesta etapa.
+
+**Alternativa B: download limitado e enumeração de cabeçalhos TAR.** Cabe no mandato específico, com até 50MiB por pacote e100MiB no total. Antes de qualquer GET de pacote: extrair href da página oficial efetivamente consultada, conferir HEAD/tamanho quando disponível e fixar limite rígido de stream. Nenhum nome de URL é adivinhado. Sem repetição automática de falha/incerteza.
+
+Escolha operacional desta unidade: tentar B apenas após resolver os URLs publicados e conferir os limites. Essa escolha permite inventariar membros; não adota CAL_B como política científica nem libera D. Os arquivos comprimidos contêm material numérico, mas a operação autorizada limita-se à enumeração de cabeçalhos: sem extract/extractfile, sem parsing de linhas ou arrays, sem execução. A descompressão necessária para saltar os corpos de membros não deve ser descrita como ausência de acesso a bytes comprimidos; nenhum conteúdo numérico será interpretado.
+
+Controles adicionais: no máximo100000membros e8GiB de percurso descomprimido por arquivo; nenhuma gravação de membros extraídos; nomes não são tratados como instruções ou caminhos de escrita. Download interrompido permanece parcial com recibo; entrada marcada iniciada não é repetida. Redirecionamentos limitados aos domínios oficiais e ao mesmo arquivo/documento. Os14eventos e28detectores serão relacionados ao GPS proposto já registrado no manifesto, com proveniência e estado não ratificado preservados. Proximidade temporal pelo nome não comprova intervalo de validade, colunas, equivalência C00/C01 ou adequação do envelope.

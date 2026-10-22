@@ -1,0 +1,10 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\network_bundle_r7\src\TGLExt\F1Fecho394\WedgeNonisotropicR5.lean:59:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'F1Fecho.WedgeNonisotropic.TW_fixed_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.WedgeNonisotropic.KWR_inter_JKWR_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.WedgeNonisotropic.KWR_not_isotropic' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,18 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T210656_500360Z\CanonicalJBoostR1.lean:22:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((J transverseGeometricJ transverseGeometricJ_involutive) ((characterMultiplier s) f)) ξ
+in the target expression
+  ↑↑(Js ((characterMultiplier s) f)) ξ = ↑↑((characterMultiplier s) (Js f)) ξ
+
+s : ℝ
+f : RH
+hr : ∀ᵐ (x : ℝ), ↑↑((characterMultiplier s) f) (-x) = (fun x => Complex.exp (-Complex.I * ↑s * ↑x) • ↑↑f x) (-x)
+ξ : ℝ
+h1 :
+  ↑↑((J transverseGeometricJ transverseGeometricJ_involutive) ((characterMultiplier s) f)) ξ =
+    transverseGeometricJ (↑↑((characterMultiplier s) f) (-ξ))
+h2 : ↑↑((characterMultiplier s) (Js f)) ξ = Complex.exp (-Complex.I * ↑s * ↑ξ) • ↑↑(Js f) ξ
+h3 : ↑↑((J transverseGeometricJ transverseGeometricJ_involutive) f) ξ = transverseGeometricJ (↑↑f (-ξ))
+h4 : ↑↑((characterMultiplier s) f) (-ξ) = Complex.exp (-Complex.I * ↑s * ↑(-ξ)) • ↑↑f (-ξ)
+⊢ ↑↑(Js ((characterMultiplier s) f)) ξ = ↑↑((characterMultiplier s) (Js f)) ξ
+'F1Fecho.CanonicalJBoost.Js_character' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.CanonicalJBoost.Jcandidate_boost' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,82 @@
+{
+  "review_id": "c981e9d6-1f30-4ba2-8bab-e39db9bf956c",
+  "findings": [
+    {
+      "id": "P3-01",
+      "priority": "P1",
+      "classification": "TECHNICAL_GAP_BEFORE_FUTURE_ADMISSION",
+      "title": "Interrupção do supervisor não garante encerramento e recolhimento do filho",
+      "references": [
+        {
+          "file": "launch_p3.py",
+          "start": 40,
+          "end": 48
+        },
+        {
+          "file": "launch_p3.py",
+          "start": 24,
+          "end": 29
+        }
+      ],
+      "finding": "Popen cria uma sessão própria; somente TimeoutExpired recebe killpg e wait. Não há handler de SIGTERM nem finally envolvendo o processo que faça cleanup em KeyboardInterrupt ou erro inesperado após Popen. A reserva O_EXCL conserva não repetição, mas o filho pode continuar ativo após a saída do supervisor e não haverá recibo terminal desse caminho.",
+      "reachability": "Inferência estática para uma invocação futura admitida; não houve execução ou demonstração dinâmica. O contrato vigente NOT_JUSTIFIED impede chegar a Popen.",
+      "required_outcome": "Nas saídas controláveis do supervisor, fechar o grupo do filho, recolher o processo e registrar estado/exit reais. Cleanup falho ou incerto permanece falha terminal e impede próximo caso/retry. SIGKILL do supervisor ou perda do host não podem ser descritos como contidos sem mecanismo externo.",
+      "alternatives": [
+        {
+          "option": "A",
+          "proposal": "Sucessor local: handlers de cancelamento e try/finally com posse explícita de Popen, kill de grupo e reap auditáveis, tratando corrida ProcessLookupError e conservando recibo de cleanup incerto."
+        },
+        {
+          "option": "B",
+          "proposal": "Sucessor com supervisor externo previamente especificado e revisto, dono do grupo de processos e dos recibos. O comando atual não oferece esse vínculo; não presumir sua existência."
+        }
+      ]
+    },
+    {
+      "id": "P3-02",
+      "priority": "P2",
+      "classification": "TERMINAL_VALIDATION_GAP_BEFORE_FUTURE_ADMISSION",
+      "title": "CLEAN_CONVERGED depende do rótulo, sem validação dos diagnósticos e dos novos vínculos terminais",
+      "references": [
+        {
+          "file": "result_acceptance.py",
+          "start": 21,
+          "end": 35
+        },
+        {
+          "file": "result_acceptance.py",
+          "start": 72,
+          "end": 77
+        },
+        {
+          "file": "driver_p3.py",
+          "start": 178,
+          "end": 185
+        },
+        {
+          "file": "driver_p3.py",
+          "start": 218,
+          "end": 236
+        },
+        {
+          "file": "launch_p3.py",
+          "start": 60,
+          "end": 62
+        }
+      ],
+      "finding": "assess aceita DLOGZ_REACHED_ESS_OK por pertencimento a ACCEPTABLE e o traduz diretamente para CLEAN_CONVERGED. Não consulta delta_logz_before_live_addition, weighted_ESS, error, preparation_id, execution_id, decision_sha256 ou scientific_qualification; a não degeneração dos pontos vivos é usada no driver, mas não consta no RESULT. Logo a validação terminal não rejeita a ausência/incoerência desses campos. O driver pinado calcula delta/ESS, porém o verificador não os reconcilia de forma independente.",
+      "static_counterexample": "Mantendo todos os campos hoje verificados com valores admissíveis e status DLOGZ_REACHED_ESS_OK, remover delta_logz_before_live_addition/weighted_ESS/preparation_id/execution_id/decision_sha256/scientific_qualification não muda nenhuma condição de assess. Trata-se de prova por inspeção dos acessos AST; nenhum recibo foi fabricado/rodado no candidato.",
+      "required_outcome": "O sucessor deve vincular preparação/execução/decisão ao supervisor, exigir scientific_qualification=false e validar números finitos/limiares do contrato para o rótulo numérico. Expor diagnóstico de não degeneração verificável. Isso qualifica parada/ESS operacional, não contração, recuperação científica, cobertura ou F3.",
+      "alternatives": [
+        {
+          "option": "A",
+          "proposal": "Ampliar o schema e os argumentos esperados de assess; conferir delta finito abaixo do limiar, ESS finita acima do limiar, não degeneração, contadores abaixo do teto, identidade e ausência de erro para o ramo de parada completa."
+        },
+        {
+          "option": "B",
+          "proposal": "Manter o verificador estritamente de protocolo e substituir CLEAN_CONVERGED por rótulo que não afirme verificação numérica; um validador separado pinado deverá reconciliar os diagnósticos e identidades antes de qualquer aceite numérico/científico."
+        }
+      ]
+    }
+  ]
+}

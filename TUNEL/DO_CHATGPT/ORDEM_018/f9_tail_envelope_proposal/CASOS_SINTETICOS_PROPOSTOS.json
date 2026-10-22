@@ -1,0 +1,146 @@
+{
+  "request_id": "e8bf5643-8da4-4ebb-a923-db65e41bd042",
+  "status": "FIXED_SYMBOLIC_EXPECTATIONS_NO_IMPLEMENTATION_NO_EXECUTION",
+  "groups": 8,
+  "cases": [
+    {
+      "id": "T01_ATOM",
+      "d": 0,
+      "x": [
+        "-1",
+        "0",
+        "1"
+      ],
+      "expected_upper": [
+        "1",
+        "1",
+        "0"
+      ],
+      "justification": "Inclusive tail of point mass at0; last zero is analytical, never underflow. All semantic certificates prevalidated.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    },
+    {
+      "id": "T02_THRESHOLD_AND_DOMAIN",
+      "d": 17,
+      "x": [
+        "16",
+        "17",
+        "18"
+      ],
+      "expected_upper": [
+        "1",
+        "1",
+        "ceil(Q*sqrt(R(18,17)))/Q in [1/Q,1]"
+      ],
+      "negative_type_subcases": [
+        {
+          "d": -1,
+          "expected": "UNAVAILABLE"
+        },
+        {
+          "d": 149,
+          "expected": "UNAVAILABLE"
+        },
+        {
+          "d": true,
+          "expected": "UNAVAILABLE"
+        },
+        {
+          "x": "uncertified float",
+          "expected": "UNAVAILABLE"
+        }
+      ],
+      "justification": "Use lambda0 branch for x<=d; positive rational branch only for x>d; invalid domain/type never converted into trivial1.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    },
+    {
+      "id": "T03_EVEN",
+      "d": 2,
+      "x": "4",
+      "R_expected": "4*(256/257)^512",
+      "B_expected": "2*(256/257)^256",
+      "upper_expected": "ceil(Q*2*(256/257)^256)/Q",
+      "justification": "x/d=2 and 1+(x-d)/512=257/256; exact rational B for even d provides independent symbolic target of root grid.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    },
+    {
+      "id": "T04_ODD",
+      "d": 3,
+      "x": "6",
+      "R_expected": "8*(512/515)^512",
+      "upper_expected": "u/Q satisfying (u-1)^2*B<A*Q^2<=u^2*B for R=A/B; 1<=u<=Q",
+      "justification": "No common-float root certificate; exact integer inequalities enclose positive sqrt of R.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    },
+    {
+      "id": "T05_MONOTONE_D148",
+      "d": 148,
+      "x": [
+        "148",
+        "296",
+        "592"
+      ],
+      "expected_relation": "1=U(148)>=U(296)>=U(592)>=1/Q",
+      "justification": "512>148, log B derivative negative beyond148 and fixed sqrt/ceil grid monotone. This control presumes completed branches, no resource branch.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    },
+    {
+      "id": "T06_NO_FALSE_UNDERFLOW",
+      "d": 148,
+      "x": "10^100",
+      "expected_upper": "1/Q = 1/10^30 exactly",
+      "symbolic_certificate": "For x=10^100>296, 1+(x-148)/512>x/1024. R<1024^512/(148^148*x^364)<10^(2048-36400)=10^-34352<10^-60=1/Q^2, while R>0. Thus0<Q*sqrt(R)<1 and ceil=1.",
+      "justification": "Strict positive rational envelope gives fixed positive grid bound even when naive floating exponentials would be unsafe; this is a symbolic expectation, no numerical evaluation performed.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    },
+    {
+      "id": "T07_LOWER_ENDPOINT",
+      "d": 148,
+      "certified_intervals": [
+        [
+          "150",
+          "160"
+        ],
+        [
+          "147",
+          "150"
+        ]
+      ],
+      "expected": [
+        "Use150, never160; U(150)>=U(160)",
+        "Use147 and return1"
+      ],
+      "negative_case": "Feasible optimizer objective without global lower certificate -> UNAVAILABLE, p=null",
+      "justification": "Tail monotonicity requires lower statistic endpoint; feasible objective alone has opposite orientation.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    },
+    {
+      "id": "T08_AGGREGATION_AND_FAILURE",
+      "fixed_required_scenarios": [
+        "a",
+        "b",
+        "c"
+      ],
+      "synthetic_per_scenario_bounds": [
+        "1/1000",
+        "1/500",
+        "1/4000"
+      ],
+      "expected_complete": {
+        "robust": "1/500",
+        "FWER_Bonf5": "1/100"
+      },
+      "missing_c": "robust unavailable, not max of two available",
+      "validated_resource_cap_in_c": "If proposed trivial-resource policy adopted: c=1 with explicit status, robust=1 and FWER=1",
+      "invalid_model_in_c": "c unavailable, robust unavailable; never replace by1",
+      "alpha_decision": "No alpha evaluation or rejection verdict in this case",
+      "justification": "Exact maximum and factor5; missing/invalid scenario differs from predeclared valid trivial1 after semantic validation.",
+      "statute": "DERIVED_SYMBOLIC_EXPECTATION"
+    }
+  ],
+  "test_code_created": false,
+  "cases_executed": 0,
+  "observed_inputs_allowed": false,
+  "numerical_expected_values_measured": false,
+  "science_models_and_threshold_changed": false
+}

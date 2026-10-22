@@ -1,0 +1,547 @@
+{
+  "unit": "F0.3.B1",
+  "claim_event": 621,
+  "created_utc": "2026-10-09T13:00:10.090907+00:00",
+  "author": "codex-gerente-tgl / nu2_theory_sources",
+  "mode": "STATIC_READONLY_NO_MODEL_IMPORT_NO_NEW_FIT",
+  "source_exposure": "read code and historical validation reports; did not parse observed dataset files, run likelihood or fit",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\fontes.py",
+      "sha256": "6bc0d220f0fb79040d9b8728c6866c9faf6696dd9967dc9f44391b3118a01a49",
+      "bytes": 12724,
+      "mtime_ns": 1790883435684981200,
+      "line_count": 210,
+      "excerpts": [
+        {
+          "first": 51,
+          "last": 62,
+          "text": "51: def alpha_codata_2018():\n52:     \"\"\"α do CODATA 2018, LIDO do um.py canônico (atribuição ALPHA_FINE_CODATA_2018) e conferido contra o pipeline D1 selado.\"\"\"\n53:     um = os.path.join(NOS, \"um.py\")\n54:     m = re.search(r\"^ALPHA_FINE_CODATA_2018\\s*=\\s*([0-9.eE+-]+)\", open(um, encoding=\"utf-8\").read(), re.M)\n55:     if not m:\n56:         raise FonteRecusada(\"ALPHA_FINE_CODATA_2018 ausente do um.py\")\n57:     a = float(m.group(1))\n58:     tree = ast.parse(open(os.path.join(D1V3, \"d1_v3_pipeline.py\"), encoding=\"utf-8\").read())\n59:     a2 = float(_avalia(_literal(tree, \"ALPHA_FINE_CODATA_2018\")))\n60:     if a != a2:\n61:         raise FonteRecusada(\"α do um.py (%r) != α do pipeline D1 (%r)\" % (a, a2))\n62:     return a, {\"um_py\": um, \"um_py_sha256\": sha256(um), \"conferido_com\": \"d1_v3_pipeline.py\"}"
+        },
+        {
+          "first": 65,
+          "last": 92,
+          "text": "65: def d1_v3_primario():\n66:     \"\"\"Planck 2018 comprimido (R, l_A, ω_b; Zhai+ 2019), DESI DR1 BAO (12 linhas) e SH0ES, LIDOS do pipeline D1 V3 selado por AST\n67:     (sem executar), com o sha256 do pipeline conferido contra MANIFESTO_D1_V3.json.\"\"\"\n68:     p = os.path.join(D1V3, \"d1_v3_pipeline.py\")\n69:     man = json.load(open(os.path.join(D1V3, \"MANIFESTO_D1_V3.json\"), encoding=\"utf-8\"))\n70:     pino = man[\"arquivos\"][\"d1_v3_pipeline.py\"]\n71:     h = sha256(p)\n72:     if h != pino:\n73:         raise FonteRecusada(\"d1_v3_pipeline.py sha256 %s != manifesto %s\" % (h, pino))\n74:     real = json.load(open(os.path.join(D1V3, \"saida\", \"D1_CAMB_V3_REAL_RESULT.json\"), encoding=\"utf-8\"))\n75:     if real.get(\"scripts\", {}).get(\"pipeline\") != h:\n76:         raise FonteRecusada(\"o resultado real selado não é deste pipeline\")\n77:     tree = ast.parse(open(p, encoding=\"utf-8\").read())\n78:     cov = _avalia(_literal(tree, \"PLANCK_COV\"))\n79:     rows = _avalia(_literal(tree, \"DESI_ROWS\"))\n80:     sh0es_sigma = float(_avalia(_literal(tree, \"SH0ES_SIGMA\")))\n81:     fn =next(n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == \"_dados_reais\")\n82:     ret = next(n for n in ast.walk(fn) if isinstance(n, ast.Return)).value\n83:     kw = {k.arg: k.value for k in ret.keywords}\n84:     planck_mean = _avalia(kw[\"planck_mean\"])\n85:     desi_vals = _avalia(kw[\"desi_vals\"])\n86:     sh0es_mean = float(_avalia(kw[\"sh0es_mean\"]))\n87:     lim = next(n for n in ast.walk(tree) if isinstance(n, ast.Assign) and any(getattr(t, \"id\", \"\") == \"LIMITES\" for t in n.targets)).value\n88:     limites = {k.arg: tuple(ast.literal_eval(k.value)) for k in lim.keywords}\n89:     prov = {\"arquivo\": p, \"sha256\": h, \"pino\": \"MANIFESTO_D1_V3.json -> arquivos.d1_v3_pipeline.py\", \"resultado_selado\": \"D1_CAMB_V3_REAL_RESULT.json\"}\n90:     return dict(planck_mean=np.asarray(planck_mean, float), planck_cov=np.asarray(cov, float),\n91:                 desi_rows=[tuple(r) for r in rows], desi_vals=np.asarray(desi_vals, float),\n92:                 sh0es_mean=sh0es_mean, sh0es_sigma=sh0es_sigma, limites=limites, resultado_selado=real), prov"
+        },
+        {
+          "first": 95,
+          "last": 117,
+          "text": "95: def desi_dr2():\n96:     \"\"\"DESI DR2 BAO (13 medidas + covariância 13×13), do _originais do teste acústico; as cópias das outras casas têm de ser idênticas.\"\"\"\n97:     mean = os.path.join(DESI_DR2_DIR, \"desi_gaussian_bao_ALL_GCcomb_mean.txt\")\n98:     cov = os.path.join(DESI_DR2_DIR, \"desi_gaussian_bao_ALL_GCcomb_cov.txt\")\n99:     hm, hc = sha256(mean), sha256(cov)\n100:     copias = {}\n101:     for d in DESI_DR2_COPIAS:\n102:         for nome, h0 in ((\"desi_gaussian_bao_ALL_GCcomb_mean.txt\", hm), (\"desi_gaussian_bao_ALL_GCcomb_cov.txt\", hc)):\n103:             q = os.path.join(d, nome)\n104:             if os.path.exists(q):\n105:                 copias[q] = (sha256(q) == h0)\n106:     if not all(copias.values()):\n107:         raise FonteRecusada(\"uma cópia do DESI DR2 diverge: %s\" % copias)\n108:     z, v, q = [], [], []\n109:     for ln in open(mean, encoding=\"utf-8\"):\n110:         if ln.strip() and not ln.startswith(\"#\"):\n111:             a, b, c = ln.split()\n112:             z.append(float(a)); v.append(float(b)); q.append(c)\n113:     C = np.loadtxt(cov)\n114:     if C.shape != (len(z), len(z)):\n115:         raise FonteRecusada(\"covariância %s != %d medidas\" % (C.shape, len(z)))\n116:     prov = {\"media\": mean, \"media_sha256\": hm, \"cov\": cov, \"cov_sha256\": hc, \"copias_identicas\": copias}\n117:     return dict(z=np.array(z), valor=np.array(v), grandeza=q, cov=C), prov"
+        },
+        {
+          "first": 126,
+          "last": 136,
+          "text": "126: def cronometros_moresco2022():\n127:     \"\"\"Os 32 cronômetros cósmicos H(z) de Moresco+ 2022 (compilação), IMPORTADOS do artigo 1 (tgl_paper_unified.py, dataset embutido) por\n128:     ferramentas/importar_cronometros_do_artigo.py, que grava a proveniência (sha256 do artigo e as linhas). Recusa se ausente ou malformado.\"\"\"\n129:     if not os.path.exists(MORESCO_JSON):\n130:         raise FonteRecusada(\"cronômetros ausentes: %s (rode ferramentas/importar_cronometros_do_artigo.py)\" % MORESCO_JSON)\n131:     d = json.load(open(MORESCO_JSON, encoding=\"utf-8\"))\n132:     a = np.asarray(d[\"data\"], float)\n133:     if a.shape != (32, 3) or not np.all(a[:, 2] > 0) or not np.all(a[:, 0] > 0):\n134:         raise FonteRecusada(\"cronômetros: forma/valores inválidos %s\" % (a.shape,))\n135:     prov = dict(d[\"proveniencia\"]); prov[\"json\"] = MORESCO_JSON; prov[\"json_sha256\"] = sha256(MORESCO_JSON)\n136:     return dict(z=a[:, 0], H=a[:, 1], sigma=a[:, 2], n=int(a.shape[0])), prov"
+        },
+        {
+          "first": 142,
+          "last": 174,
+          "text": "142: def cronometros_covariancia_moresco2020():\n143:     \"\"\"Fase 7 (01/10/2026): a covariância completa de Moresco+2020 (ApJ 898, 82; gitlab.com/mmoresco/CCcovariance) montada nos 32 pontos da Bancada, em duas variantes\n144:     ('moresco2020': os 15 pontos de Moresco 2012/2015/2016 com (z, H, σ) DA FONTE e IMF + SPS odd-one-out correlacionados, os 17 outros diagonais; 'moresco2020_todos': a\n145:     sistemática correlacionada em todos — faixa conservadora). Devolve {variante: dict(z, H, cov, sigma_total)} e a proveniência. Recusa se ausente ou não definida positiva.\"\"\"\n146:     if not os.path.exists(MORESCO_COV_JSON):\n147:         raise FonteRecusada(\"covariância dos cronômetros ausente: %s (rode ferramentas/importar_covariancia_moresco2020.py)\" % MORESCO_COV_JSON)\n148:     d = json.load(open(MORESCO_COV_JSON, encoding=\"utf-8\"))\n149:     z = np.asarray(d[\"pontos\"][\"z\"], float); H = np.asarray(d[\"pontos\"][\"H\"], float); sets = {}\n150:     for v, V in d[\"variantes\"].items():\n151:         C = np.asarray(V[\"cov\"], float)\n152:         if C.shape != (32, 32) or not np.allclose(C, C.T):\n153:             raise FonteRecusada(\"covariância %s: forma/simetria inválida %s\" % (v, C.shape))\n154:         np.linalg.cholesky(C)\n155:         sets[v] = dict(z=z, H=H, cov=C, sigma_total=np.sqrt(np.diag(C)), descricao=V[\"descricao\"])\n156:     prov = dict(json=MORESCO_COV_JSON, json_sha256=sha256(MORESCO_COV_JSON), arquivos=d[\"arquivos\"], receita=d[\"receita\"], nota=d[\"nota\"])\n157:     return sets, prov\n158: # DESI 2024 VI (arXiv:2404.03002), Tabela 1: correlação r entre D_M/r_d e D_H/r_d no MESMO z, lida no HTML do arXiv em 28/09/2026 pela gerência\n159: # (auditoria de 28/09, achado D1F-01: o pipeline selado entra só com a diagonal).\n160: DR1_CORRELACOES = {0.510: -0.445, 0.706: -0.420, 0.930: -0.389, 1.317: -0.444, 2.330: -0.477}\n161: \n162: \n163: def planck_chen2019(planck_mean):\n164:     \"\"\"Chen, Huang & Wang 2019 (arXiv:1808.05724), Tabela I, ΛCDM, Planck 2018 TT,TE,EE+lowE: σ(R, l_A, ω_b) e a matriz de correlação LIDAS do\n165:     PDF (texto extraído pela auditoria de 28/09; o PDF fica em fontes_externas com sha256). A média é a do pipeline selado, que coincide com a\n166:     tabela. Auditoria de 28/09 (D1F-03): as correlações fora da diagonal do pipeline (0,084/−0,066/−0,119) estavam mal transcritas (tabela:\n167:     0,46/−0,66/−0,33) e a citação «Zhai+ 2019» estava errada.\"\"\"\n168:     sig = np.array([0.0046, (0.089 + 0.090) / 2.0, 0.00015])\n169:     rho = np.array([[1.0, 0.46, -0.66], [0.46, 1.0, -0.33], [-0.66, -0.33, 1.0]])\n170:     cov = rho * np.outer(sig, sig)\n171:     prov = dict(fonte=\"Chen, Huang & Wang 2019, arXiv:1808.05724, Tabela I (ΛCDM; TT,TE,EE+lowE)\", pdf=CHEN_PDF,\n172:                 pdf_sha256=sha256(CHEN_PDF) if os.path.isfile(CHEN_PDF) else None, media=np.asarray(planck_mean, float).tolist(),\n173:                 sigma=sig.tolist(), correlacoes=rho.tolist(), nota=\"σ de l_A é assimétrico na tabela (+0,089/−0,090); usa-se a média 0,0895\")\n174:     return cov, prov"
+        },
+        {
+          "first": 177,
+          "last": 193,
+          "text": "177: def desi_dr1_covariancia(desi_rows):\n178:     \"\"\"Covariância do DESI DR1 com as correlações D_M–D_H do mesmo z (DR1_CORRELACOES); fora delas, a diagonal do pipeline selado.\"\"\"\n179:     n = len(desi_rows)\n180:     sig = np.array([r[2] for r in desi_rows], float)\n181:     C = np.diag(sig ** 2)\n182:     usadas = []\n183:     for i in range(n):\n184:         for j in range(i + 1, n):\n185:             zi, ti, _ = desi_rows[i]; zj, tj, _ = desi_rows[j]\n186:             if abs(zi - zj) < 1e-6 and {int(ti), int(tj)} == {0, 1}:\n187:                 r = DR1_CORRELACOES[round(float(zi), 3)]\n188:                 C[i, j] = C[j, i] = r * sig[i] * sig[j]\n189:                 usadas.append(dict(z=float(zi), r=r))\n190:     assert len(usadas) == 5, usadas\n191:     prov = dict(fonte=\"DESI 2024 VI, arXiv:2404.03002, Tabela 1 (r entre D_M/r_d e D_H/r_d), lida no HTML do arXiv em 28/09/2026\",\n192:                 correlacoes=usadas, nota=\"a diagonal é a do pipeline selado; as 5 correlações DM–DH entram; nada mais\")\n193:     return C, prov"
+        },
+        {
+          "first": 196,
+          "last": 210,
+          "text": "196: def pantheon_plus():\n197:     \"\"\"Pantheon+SH0ES (1701 SNe): só as colunas e o erro DIAGONAL por enquanto.\n198:     ERRATA AO LADO (gerência, 28/09/2026, em nome próprio): a frase anterior desta docstring dizia «a covariância STAT+SYS NÃO está em disco».\n199:     Era FALSA — afirmação de ausência sem consulta completa. A auditoria de 28/09 (achado D1F-05, verificador) achou a matriz 1701×1701 em\n200:     PANTHEON_COV (acima), e a gerência conferiu o arquivo (primeira linha «1701»). Ela ainda NÃO está ligada à Bancada (fiação pendente); até lá,\n201:     o Pantheon+ entra só com o erro diagonal e fica fora da evidência combinada por padrão.\"\"\"\n202:     h = sha256(PANTHEON)\n203:     cab = open(PANTHEON, encoding=\"utf-8\").readline().split()\n204:     arr = np.genfromtxt(PANTHEON, names=True, dtype=None, encoding=\"utf-8\")\n205:     cols = {n: np.asarray(arr[n]) for n in (\"zHD\", \"zCMB\", \"zHEL\", \"m_b_corr\", \"m_b_corr_err_DIAG\", \"MU_SH0ES\", \"MU_SH0ES_ERR_DIAG\", \"IS_CALIBRATOR\", \"CEPH_DIST\", \"USED_IN_SH0ES_HF\")}   # 01/10: + calibradores Cefeida\n206:     prov = {\"arquivo\": PANTHEON, \"sha256\": h, \"n\": int(len(arr)), \"colunas\": len(cab),\n207:             \"limitacao\": (\"erro só diagonal por enquanto: a covariância STAT+SYS EXISTE em disco (%s) mas ainda não está ligada à Bancada; não entra \"\n208:                           \"na evidência combinada por padrão. [Errata 28/09: a versão anterior desta frase dizia «arquivo ausente», e era falsa.]\" % PANTHEON_COV),\n209:             \"covariancia_em_disco\": PANTHEON_COV if os.path.isfile(PANTHEON_COV) else None}\n210:     return cols, prov"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\motor.py",
+      "sha256": "49f304fd41afc8e4ae5ea4573a96f973d216172247c6b13e03570acec0287b8b",
+      "bytes": 19991,
+      "mtime_ns": 1790883471064841300,
+      "line_count": 295,
+      "excerpts": [
+        {
+          "first": 24,
+          "last": 44,
+          "text": "24: # Opções de modelo/verossimilhança (auditoria de 28/09/2026). O padrão é a REPRODUÇÃO DO SELADO (a V3 do D1); o modo «corrigido» corrige os\n25: # defeitos técnicos verificados (D1F-01 DR1 correlacionado; D1F-03 covariância do Planck de Chen+2019; D1F-V1 DM* por razão sobre o CAMB, o\n26: # neutrino massivo contado uma vez). O mapa de R (como Ω_m entra no parâmetro de deslocamento) é ESCOLHA DE MODELO [INPUT] não derivada\n27: # (D1F-02): fica separado, explícito, e o padrão continua «nu» nos dois modos.\n28: OPCOES_SELADO = dict(planck_cov=\"pipeline\", dr1_cov=\"diagonal\", dm_star=\"direto\", mapa_R=\"nu\", lei=\"d1a\", beta_no_fundo=\"sim\", lei_sn=\"nenhuma\", lei_cc=\"acumulada\", cc_cov=\"diagonal\")\n29: OPCOES_CORRIGIDO = dict(planck_cov=\"chen2019\", dr1_cov=\"correlacionada\", dm_star=\"razao_camb\", mapa_R=\"nu\", lei=\"d1a\", beta_no_fundo=\"sim\", lei_sn=\"nenhuma\", lei_cc=\"acumulada\", cc_cov=\"diagonal\")\n30: # 30/09/2026: o mapa de R RATIFICADO pelo operador («Sim destranque tudo»): a permanência é verbo -- o mesmo ato veste D_M e a raiz de R,\n31: # logo o Ω_m do parâmetro de deslocamento é o EFETIVO (1+β)Ω_m. «selado» e «corrigido» ficam como estavam (reprodução e controle).\n32: OPCOES_TGL = dict(planck_cov=\"chen2019\", dr1_cov=\"correlacionada\", dm_star=\"razao_camb\", mapa_R=\"eff\", lei=\"d1a\", beta_no_fundo=\"sim\", lei_sn=\"nenhuma\", lei_cc=\"acumulada\", cc_cov=\"diagonal\")\n33: # 30/09/2026 (Fase 2): a lei D1a [CONJECTURE] na verossimilhança -- a escada local mede H0_local = H0·(1+z*)^β; z* fixo do pipeline D1a de\n34: # Coma [INPUT] (o z* do modelo difere de menos de 0,2%%, o que muda (1+z*)^β em menos de 3e-5). Em β = 0 a lei devolve H0_local = H0 (ΛCDM).\n35: Z_STAR_D1A = 1089.95\n36: # 30/09/2026 (Fase 4, o desvio): a CONVENÇÃO DO ARTIGO 1 («Haja Luz», predict_H0_zero_free / D1_kernel_discrimination) -- a lei transporta a\n37: # calibração ΛCDM (β NÃO entra no fundo: beta_no_fundo=\"nao\") e o núcleo é o DERIVADO D1b (lei=\"d1b\": 𝒲 = |1+w_eff|, cuja integral no registro\n38: # N = ln(1+z) é (2/3)·ln E_ΛCDM(z) pela equação de Raychaudhuri em FRW plano com ρ+p ≥ 0), logo K = E_ΛCDM(z*)^{2β/3}; lei=\"d1a\" é o caso\n39: # 𝒲 = 1, K = (1+z*)^β. Empilhar a lei sobre um fundo que já carrega β (beta_no_fundo=\"sim\" com mapa eff/E1) conta β duas vezes (achado de 30/09).\n40: OPCOES_ARTIGO = dict(planck_cov=\"chen2019\", dr1_cov=\"correlacionada\", dm_star=\"razao_camb\", mapa_R=\"nu\", lei=\"d1b\", beta_no_fundo=\"nao\", lei_sn=\"nenhuma\", lei_cc=\"acumulada\", cc_cov=\"diagonal\")\n41: _OPCOES_VALIDAS = dict(planck_cov=(\"pipeline\", \"chen2019\"), dr1_cov=(\"diagonal\", \"correlacionada\"), dm_star=(\"direto\", \"razao_camb\"), mapa_R=(\"nu\", \"eff\"),\n42:                        lei=(\"d1a\", \"d1b\"), beta_no_fundo=(\"sim\", \"nao\"),\n43:                        lei_sn=(\"nenhuma\", \"sombra\", \"acumulada\"), lei_cc=(\"acumulada\", \"nenhuma\"),\n44:                        cc_cov=(\"diagonal\", \"moresco2020\", \"moresco2020_todos\"))   # Fase 7 (01/10): a covariância dos cronômetros"
+        },
+        {
+          "first": 47,
+          "last": 61,
+          "text": "47: def opcoes_de(o):\n48:     \"\"\"Completa e valida as opções: {\"modo\": \"selado\"|\"corrigido\"} escolhe o preset; as chaves individuais sobrepõem. Chave ou valor\n49:     desconhecido é recusado (falha visível).\"\"\"\n50:     o = dict(o or {})\n51:     modo = o.pop(\"modo\", \"selado\")\n52:     if modo not in (\"selado\", \"corrigido\", \"tgl\", \"artigo\"):\n53:         raise ValueError(\"modo %r; use 'selado', 'corrigido', 'tgl' ou 'artigo'\" % modo)\n54:     base = dict({\"selado\": OPCOES_SELADO, \"corrigido\": OPCOES_CORRIGIDO, \"tgl\": OPCOES_TGL, \"artigo\": OPCOES_ARTIGO}[modo])\n55:     for k, v in o.items():\n56:         if k not in _OPCOES_VALIDAS:\n57:             raise ValueError(\"opção desconhecida %r (válidas: %s)\" % (k, sorted(_OPCOES_VALIDAS)))\n58:         if v not in _OPCOES_VALIDAS[k]:\n59:             raise ValueError(\"valor %r para %s (válidos: %s)\" % (v, k, _OPCOES_VALIDAS[k]))\n60:         base[k] = v\n61:     return base"
+        },
+        {
+          "first": 64,
+          "last": 95,
+          "text": "64: def rotulo_opcoes(o):\n65:     \"\"\"O nome do modo para leitura: 'selado', 'corrigido' ou 'misto' (+ o mapa de R).\"\"\"\n66:     o = opcoes_de(o)\n67:     t = {k: v for k, v in o.items() if k != \"mapa_R\"}\n68:     modo = \"selado\" if t == {k: v for k, v in OPCOES_SELADO.items() if k != \"mapa_R\"} else (\n69:         \"corrigido\" if t == {k: v for k, v in OPCOES_CORRIGIDO.items() if k != \"mapa_R\"} else \"misto\")\n70:     if modo == \"corrigido\" and o[\"mapa_R\"] == \"eff\":\n71:         modo = \"tgl (corrigido + mapa de R efetivo, ratificado 30/09)\"\n72:     if o[\"beta_no_fundo\"] == \"nao\":\n73:         modo = \"artigo (fundo ΛCDM; β só na lei -- a convenção do artigo 1, Fase 4 de 30/09)\"\n74:     return \"%s · mapa de R: %s · lei: %s · lei nas SNe: %s · lei nos cronômetros: %s\" % (modo, o[\"mapa_R\"], o[\"lei\"], o[\"lei_sn\"], o[\"lei_cc\"])\n75: \n76: \n77: class Motor:\n78:     def __init__(self, raiz, dispositivo=None, n_grade=20001):\n79:         if dispositivo is None:\n80:             dispositivo = \"cuda\" if torch.cuda.is_available() else \"cpu\"\n81:         self.dev = torch.device(dispositivo)\n82:         self.lock = threading.Lock()\n83:         self.alpha, self.prov_alpha = fontes.alpha_codata_2018()\n84:         self.beta_tgl = self.alpha * math.sqrt(math.e)\n85:         self.d1, self.prov_d1 = fontes.d1_v3_primario()\n86:         self.dr2, self.prov_dr2 = fontes.desi_dr2()\n87:         self.pan, self.prov_pan = fontes.pantheon_plus()\n88:         self.cc, self.prov_cc = fontes.cronometros_moresco2022()   # Fase 4 (30/09): os 32 cronômetros, importados do artigo 1\n89:         self.cc_cov_sets, self.prov_cc_cov = fontes.cronometros_covariancia_moresco2020()   # Fase 7 (01/10): a covariância completa de Moresco+2020\n90:         self.raiz = raiz\n91:         self.tab = TabelaCAMB(raiz + r\"\\tabelas\\camb_lcdm_v1.npz\", dispositivo)\n92:         self.erro_tabela = self.tab.erro_no_teste()\n93:         self.fundo = FundoV3Lote(dispositivo, n_grade=n_grade)\n94:         self.limites = self.d1[\"limites\"]\n95:         self._prepara()"
+        },
+        {
+          "first": 102,
+          "last": 126,
+          "text": "102:     def _prepara(self):\n103:         d1 = self.d1\n104:         self.planck_mean = self._t(d1[\"planck_mean\"])\n105:         self.planck_Linv = torch.linalg.inv(torch.linalg.cholesky(self._t(d1[\"planck_cov\"])))\n106:         self.planck_cov_chen, self.prov_planck_chen = fontes.planck_chen2019(d1[\"planck_mean\"])\n107:         self.planck_Linv_chen = torch.linalg.inv(torch.linalg.cholesky(self._t(self.planck_cov_chen)))\n108:         self.dr1_cov_corr, self.prov_dr1_corr = fontes.desi_dr1_covariancia(d1[\"desi_rows\"])\n109:         self.dr1_Linv_corr = torch.linalg.inv(torch.linalg.cholesky(self._t(self.dr1_cov_corr)))\n110:         self.dr1_z = self._t([r[0] for r in d1[\"desi_rows\"]])\n111:         self.dr1_tipo = [int(r[1]) for r in d1[\"desi_rows\"]]            # 0 DM/rd, 1 DH/rd, 2 DV/rd\n112:         self.dr1_sig = self._t([r[2] for r in d1[\"desi_rows\"]])\n113:         self.dr1_val = self._t(d1[\"desi_vals\"])\n114:         q = self.dr2[\"grandeza\"]\n115:         self.dr2_z = self._t(self.dr2[\"z\"])\n116:         self.dr2_tipo = [{\"DM_over_rs\": 0, \"DH_over_rs\": 1, \"DV_over_rs\": 2}[g] for g in q]\n117:         self.dr2_val = self._t(self.dr2[\"valor\"])\n118:         self.dr2_Linv = torch.linalg.inv(torch.linalg.cholesky(self._t(self.dr2[\"cov\"])))\n119:         # 30/09: Pantheon+ ligado -- covariância STAT+SYS completa, amostra só-cosmologia, M profilado\n120:         self.pantheon = PantheonCov(self.pan, self.dev, os.path.join(self.raiz, \"tabelas\"))\n121:         self.pantheon_sh0es = PantheonCov(self.pan, self.dev, os.path.join(self.raiz, \"tabelas\"), calibradores=True)   # 01/10: SH0ES na Bancada (1657; μ = CEPH_DIST nos calibradores)\n122:         self.cc_z = self._t(self.cc[\"z\"]); self.cc_H = self._t(self.cc[\"H\"]); self.cc_sig = self._t(self.cc[\"sigma\"])   # Fase 4 (30/09)\n123:         # Fase 7 (01/10): os conjuntos de cronômetros por covariância -- 'diagonal' (os 32 do artigo, erros diagonais) e as variantes de Moresco+2020 ((z, H) da fonte nos 15 pontos)\n124:         self.cc_sets = {\"diagonal\": dict(z=self.cc_z, H=self.cc_H, Linv=torch.diag(1.0 / self.cc_sig))}\n125:         for v, S in self.cc_cov_sets.items():\n126:             self.cc_sets[v] = dict(z=self._t(S[\"z\"]), H=self._t(S[\"H\"]), Linv=torch.linalg.inv(torch.linalg.cholesky(self._t(S[\"cov\"]))))"
+        },
+        {
+          "first": 156,
+          "last": 215,
+          "text": "156:     def _predizer_bloco(self, th, o=None):\n157:         o = o or OPCOES_SELADO\n158:         H0, ombh2, omch2, beta, c = [th[:, j] for j in range(5)]\n159:         cam, dentro = self.tab(H0, ombh2, omch2)\n160:         for j, nm in enumerate(NOMES_THETA):\n161:             lo, hi = self.limites[nm]\n162:             dentro = dentro & (th[:, j] > lo) & (th[:, j] < hi)\n163:         zs = torch.where(dentro, cam[\"z_star\"], torch.full_like(H0, 1090.0))\n164:         zd = torch.where(dentro, cam[\"z_drag\"], torch.full_like(H0, 1060.0))\n165:         zero = torch.zeros_like(beta)\n166:         beta_f = zero if o[\"beta_no_fundo\"] == \"nao\" else beta   # Fase 4 (30/09): na convenção do artigo o fundo é ΛCDM e β entra só na lei\n167:         tgl = self.fundo.fundo(H0, ombh2, omch2, beta_f, c)\n168:         lcdm = self.fundo.fundo(H0, ombh2, omch2, zero, zero)\n169:         r_star = cam[\"r_star\"] * self.fundo.rs_int(tgl, zs) / self.fundo.rs_int(lcdm, zs)\n170:         r_drag = cam[\"r_drag\"] * self.fundo.rs_int(tgl, zd) / self.fundo.rs_int(lcdm, zd)\n171:         DM_star = self.fundo.DM(tgl, zs[:, None])[:, 0]\n172:         DM_star_lcdm = self.fundo.DM(lcdm, zs[:, None])[:, 0]\n173:         selfcheck = DM_star_lcdm / cam[\"DM_star\"]\n174:         if o[\"dm_star\"] == \"razao_camb\":\n175:             # D1F-V1 (auditoria 28/09): o integrador conta o neutrino massivo duas vezes (N_eff inteiro como radiação + m_ν como matéria);\n176:             # como já se faz com r_* e r_drag, D_M(z*) entra por RAZÃO TGL/ΛCDM sobre o D_M do CAMB, e o viés cancela.\n177:             DM_star = cam[\"DM_star\"] * DM_star / DM_star_lcdm\n178:         Om = (ombh2 + omch2 + 0.06 / 93.14) / (H0 / 100.0) ** 2\n179:         R = torch.sqrt(Om) * H0 / C_KMS * DM_star\n180:         if o[\"mapa_R\"] == \"eff\":\n181:             # D1F-02: o Ω_m EFETIVO na era da matéria, (1+β)Ω_m (Φ ≈ 1 + β) -- a escolha do pré-registro do Nível 2 S; [INPUT] não derivado\n182:             R = R * torch.sqrt(1.0 + beta)\n183:         lA = math.pi * DM_star / r_star\n184:         # Fase 4 (30/09): a lei no registro N = ln(1+z). D1a: I(z) = ln(1+z). D1b: I(z) = ∫₀^N |1+w_eff| dN' = (2/3)·ln E_ΛCDM(z) (Raychaudhuri, FRW\n185:         # plano, ρ+p ≥ 0; conferido por trapézio no runner da Fase 4). O fator da escada é K = exp(β I(z*)); um cronômetro em z lê\n186:         # H0·E(z)·exp(β[I(z*) − I(z)]) -- a resposta acumulada desde a recombinação, como em D1_kernel_discrimination do artigo 1.\n187:         zsl = torch.full_like(H0, Z_STAR_D1A)\n188:         zcc = self.cc_sets[o[\"cc_cov\"]][\"z\"][None, :].expand(H0.shape[0], -1)   # Fase 7 (01/10): os z do conjunto da covariância escolhida\n189:         if o[\"lei\"] == \"d1b\":\n190:             I_lei = (2.0 / 3.0) * torch.log(self.fundo.Ez(lcdm, zsl[:, None])[:, 0])\n191:             I_cc = (2.0 / 3.0) * torch.log(self.fundo.Ez(lcdm, zcc))\n192:         else:\n193:             I_lei = torch.log1p(zsl)\n194:             I_cc = torch.log1p(zcc)\n195:         K_lei = torch.exp(beta * I_lei)\n196:         cc_H = H0[:, None] * self.fundo.Ez(tgl, zcc) * torch.exp(beta[:, None] * (I_lei[:, None] - I_cc))\n197:         if o[\"lei_cc\"] == \"nenhuma\":   # SH0ES (01/10): na leitura «sombra» os relógios leem a face (sem fator)\n198:             cc_H = H0[:, None] * self.fundo.Ez(tgl, zcc)\n199:         # SH0ES (01/10): o Pantheon+SH0ES com calibradores e a lei nas DISTÂNCIAS: 'nenhuma' (H0 de fundo), 'sombra' (D_M/K, o fator constante em todo z),\n200:         # 'acumulada' (K(z) = exp(β[I(z*) − I(z)]) dentro da integral de D_M; K = 1 além de z*). O núcleo (d1a/d1b) é o de `lei`, sobre o ΛCDM.\n201:         zsn = self.pantheon_sh0es.zHD[None, :].expand(H0.shape[0], -1)\n202:         if o[\"lei_sn\"] == \"sombra\":\n203:             DM_sn = self.fundo.DM(tgl, zsn) / K_lei[:, None]\n204:         elif o[\"lei_sn\"] == \"acumulada\":\n205:             x2 = self.fundo.x2[None, :]\n206:             if o[\"lei\"] == \"d1b\":\n207:                 logK2 = beta[:, None] * (I_lei[:, None] - (2.0 / 3.0) * torch.log(lcdm[\"E\"]))\n208:             else:\n209:                 logK2 = beta[:, None] * (I_lei[:, None] + x2)\n210:             logK2 = torch.where(x2 >= -math.log1p(Z_STAR_D1A), logK2, torch.zeros_like(logK2))\n211:             DM_sn = self.fundo.DM_com_boost(tgl, zsn, logK2)\n212:         else:\n213:             DM_sn = self.fundo.DM(tgl, zsn)\n214:         mu_sh0es = self.pantheon_sh0es.mu(DM_sn)\n215:         mu_sn = self.pantheon.mu(self.fundo.DM(tgl, self.pantheon.zHD[None, :].expand(H0.shape[0], -1)))   # 30/09: Pantheon+"
+        },
+        {
+          "first": 225,
+          "last": 295,
+          "text": "225:     # ---------- verossimilhança ----------\n226:     def _r_planck(self, p, o):\n227:         Linv = self.planck_Linv_chen if o[\"planck_cov\"] == \"chen2019\" else self.planck_Linv\n228:         return (p[\"planck\"] - self.planck_mean[None, :]) @ Linv.T\n229: \n230:     def _r_dr1(self, p, o):\n231:         if o[\"dr1_cov\"] == \"correlacionada\":\n232:             return (p[\"dr1\"] - self.dr1_val[None, :]) @ self.dr1_Linv_corr.T\n233:         return (p[\"dr1\"] - self.dr1_val[None, :]) / self.dr1_sig[None, :]\n234: \n235:     def _r_cc(self, p, o):\n236:         \"\"\"Fase 7 (01/10): resíduos BRANQUEADOS dos cronômetros pela covariância escolhida (cc_cov): diagonal (1/σ) ou Moresco+2020 (L⁻¹ de Cholesky).\"\"\"\n237:         S = self.cc_sets[o[\"cc_cov\"]]\n238:         return (p[\"cc_H\"] - S[\"H\"][None, :]) @ S[\"Linv\"].T\n239: \n240:     def chi2(self, theta, conjuntos=(\"planck_comp\", \"desi_dr1\"), opcoes=None):\n241:         \"\"\"χ² por conjunto e total, (B,). Pontos fora dos limites/tabela: +inf (recusados, contados). `opcoes`: ver opcoes_de.\"\"\"\n242:         o = opcoes_de(opcoes)\n243:         p = self.predizer(theta, o)\n244:         partes = {}\n245:         if \"planck_comp\" in conjuntos:\n246:             r = self._r_planck(p, o)\n247:             partes[\"planck_comp\"] = (r * r).sum(1)\n248:         if \"desi_dr1\" in conjuntos:\n249:             r = self._r_dr1(p, o)\n250:             partes[\"desi_dr1\"] = (r * r).sum(1)\n251:         if \"desi_dr2\" in conjuntos:\n252:             r = (p[\"dr2\"] - self.dr2_val[None, :]) @ self.dr2_Linv.T\n253:             partes[\"desi_dr2\"] = (r * r).sum(1)\n254:         if \"sh0es\" in conjuntos:\n255:             partes[\"sh0es\"] = ((p[\"H0\"] - self.d1[\"sh0es_mean\"]) / self.d1[\"sh0es_sigma\"]) ** 2\n256:         if \"sh0es_local\" in conjuntos:   # Fase 2 (30/09): dois setores -- a escada compara-se com H0_local = H0 (1+z*)^β\n257:             partes[\"sh0es_local\"] = ((p[\"H0_local\"] - self.d1[\"sh0es_mean\"]) / self.d1[\"sh0es_sigma\"]) ** 2\n258:         if \"cc_moresco\" in conjuntos:   # Fase 4 (30/09): os cronômetros com a lei acumulada\n259:             r = self._r_cc(p, o)   # Fase 7 (01/10): pela covariância escolhida\n260:             partes[\"cc_moresco\"] = (r * r).sum(1)\n261:         if \"pantheon\" in conjuntos:\n262:             partes[\"pantheon\"] = self.pantheon.chi2_prof(p[\"pantheon_mu\"])\n263:         if \"pantheon_sh0es\" in conjuntos:   # SH0ES (01/10)\n264:             partes[\"pantheon_sh0es\"] = self.pantheon_sh0es.chi2_prof(p[\"pantheon_sh0es_mu\"])\n265:         tot = sum(partes.values())\n266:         tot = torch.where(p[\"dentro\"], tot, torch.full_like(tot, float(\"inf\")))\n267:         return tot, partes, p\n268: \n269:     def residuos(self, theta, conjuntos, opcoes=None):\n270:         \"\"\"Resíduos BRANQUEADOS (B, n) na ordem planck_comp, desi_dr1, desi_dr2, sh0es, sh0es_local, cc_moresco, pantheon, pantheon_sh0es -- χ² = |r|²; +inf fora dos limites.\"\"\"\n271:         o = opcoes_de(opcoes)\n272:         p = self.predizer(theta, o)\n273:         r = []\n274:         if \"planck_comp\" in conjuntos:\n275:             r.append(self._r_planck(p, o))\n276:         if \"desi_dr1\" in conjuntos:\n277:             r.append(self._r_dr1(p, o))\n278:         if \"desi_dr2\" in conjuntos:\n279:             r.append((p[\"dr2\"] - self.dr2_val[None, :]) @ self.dr2_Linv.T)\n280:         if \"sh0es\" in conjuntos:\n281:             r.append(((p[\"H0\"] - self.d1[\"sh0es_mean\"]) / self.d1[\"sh0es_sigma\"])[:, None])\n282:         if \"sh0es_local\" in conjuntos:\n283:             r.append(((p[\"H0_local\"] - self.d1[\"sh0es_mean\"]) / self.d1[\"sh0es_sigma\"])[:, None])\n284:         if \"cc_moresco\" in conjuntos:\n285:             r.append(self._r_cc(p, o))\n286:         if \"pantheon\" in conjuntos:\n287:             r.append(self.pantheon.residuos_brancos(p[\"pantheon_mu\"]))\n288:         if \"pantheon_sh0es\" in conjuntos:\n289:             r.append(self.pantheon_sh0es.residuos_brancos(p[\"pantheon_sh0es_mu\"]))\n290:         R = torch.cat(r, 1)\n291:         R[~p[\"dentro\"]] = float(\"inf\")\n292:         return R, p\n293: \n294:     def n_dados(self, conjuntos):\n295:         return sum({\"planck_comp\": 3, \"desi_dr1\": 12, \"desi_dr2\": 13, \"sh0es\": 1, \"sh0es_local\": 1, \"cc_moresco\": int(self.cc_z.shape[0]), \"pantheon\": self.pantheon.n, \"pantheon_sh0es\": self.pantheon_sh0es.n}[c] for c in conjuntos)"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\fundo_gpu.py",
+      "sha256": "dc3920c2445c256f5a92f81e8c69eece0d758a7cb0cc9a53cda15e25c5ef5f88",
+      "bytes": 8477,
+      "mtime_ns": 1790869145392266700,
+      "line_count": 165,
+      "excerpts": [
+        {
+          "first": 2,
+          "last": 15,
+          "text": "2: \"\"\"fundo_gpu.py -- o FUNDO V3 da TGL em LOTE, na GPU (PyTorch/CUDA, float64), com a mesma matemática do worker selado\n3: tgl_camb_worker_v3.py (sha256 72032b3a...):\n4: \n5:     Φ_total(a) = 1 + β |1 + w_eff(a)|,   E²(a) = ρ(a) + β J(a) + c,   J(a) = ∫_a^∞ 3 (ρ+p)² / (ρ ã) dã,\n6:     fecho E(a = 1) = 1 (Ω_Λ pela raiz de Ω_r + Ω_m + Ω_Λ + β J(1) + c = 1).\n7: \n8: NUMÉRICA (declarada; a validação mede, não supõe):\n9:   * grade uniforme em x = ln a com N pontos (N = 4k + 1); integrais CUMULATIVAS de ordem 4 (Simpson composto obtido por extrapolação de\n10:     Richardson dos trapézios em h e 2h) em dois níveis: J nos nós pares; D_M e r_s nos nós múltiplos de 4;\n11:   * valores em pontos arbitrários (os z do BAO, z*, z_drag) por interpolação de Lagrange CÚBICA nos nós;\n12:   * Ω_Λ pelo ponto fixo Ω_Λ ← 1 − Ω_r − Ω_m − c − β J1(Ω_Λ) (contração: |β ∂J1/∂Ω_Λ| ≪ 1), J1 por Simpson;\n13:   * o ΛCDM de referência (β = 0, c = 0) tem E² = ρ exatamente: não precisa de J.\n14: O worker selado usa trapézios em grades de 400 001 / 20 001 / 60 001 pontos; a diferença entre os dois é MEDIDA em ferramentas/diagnostico_fundo.py.\n15: O CAMB entra só via a tabela (camb_tabela.py): r_s e r_drag da TGL = valor do CAMB × (integral TGL / integral ΛCDM), como no worker."
+        },
+        {
+          "first": 21,
+          "last": 28,
+          "text": "21: C_KMS = 299792.458\n22: X_MIN = -math.log(1.0 + 1.0e8)\n23: X_MAX = math.log(1.0e3)\n24: \n25: \n26: def omega_r_h2(TCMB=2.7255, Neff=3.046):\n27:     og = 4.4814e-7 * TCMB ** 4\n28:     return og * (1.0 + Neff * (7.0 / 8.0) * (4.0 / 11.0) ** (4.0 / 3.0)), og"
+        },
+        {
+          "first": 60,
+          "last": 110,
+          "text": "60: class FundoV3Lote:\n61:     \"\"\"Calcula, para um LOTE de pontos (tensores (B,)), os observáveis do fundo V3 (e do ΛCDM de referência).\"\"\"\n62: \n63:     def __init__(self, dispositivo=\"cuda\", n_grade=20001, n_j1=4001, mnu=0.06, TCMB=2.7255, Neff=3.046):\n64:         n_grade = int(n_grade)\n65:         if (n_grade - 1) % 4:\n66:             raise ValueError(\"n_grade tem de ser 4k + 1\")\n67:         if (int(n_j1) - 1) % 2:\n68:             raise ValueError(\"n_j1 tem de ser ímpar\")\n69:         self.dev = torch.device(dispositivo)\n70:         self.dt = torch.float64\n71:         self.n = n_grade\n72:         self.h = (X_MAX - X_MIN) / (self.n - 1)\n73:         self.x = torch.linspace(X_MIN, X_MAX, self.n, device=self.dev, dtype=self.dt)\n74:         self.x2 = self.x[::2]\n75:         self.x4 = self.x[::4]\n76:         self.ea4 = torch.exp(-4.0 * self.x); self.ea3 = torch.exp(-3.0 * self.x)\n77:         self.xs = torch.linspace(0.0, X_MAX, int(n_j1), device=self.dev, dtype=self.dt)\n78:         self.hs = X_MAX / (int(n_j1) - 1)\n79:         self.es4 = torch.exp(-4.0 * self.xs); self.es3 = torch.exp(-3.0 * self.xs)\n80:         self.mnu, self.TCMB, self.Neff = mnu, TCMB, Neff\n81:         self.orh2, self.ogh2 = omega_r_h2(TCMB, Neff)\n82:         self.tail_fator = 3.0 * math.exp(-6.0 * X_MAX) / 6.0\n83:         w = torch.ones(int(n_j1), device=self.dev, dtype=self.dt)        # pesos de Simpson para J1\n84:         w[1:-1:2] = 4.0; w[2:-1:2] = 2.0\n85:         self.w_simpson = w * self.hs / 3.0\n86: \n87:     def _dens(self, Or, Om, OL, e4, e3):\n88:         rho = Or[:, None] * e4 + Om[:, None] * e3 + OL[:, None]\n89:         rpp = (4.0 / 3.0) * Or[:, None] * e4 + Om[:, None] * e3\n90:         return rho, rpp\n91: \n92:     def _J1(self, Or, Om, OL):\n93:         rho, rpp = self._dens(Or, Om, OL, self.es4, self.es3)\n94:         return (3.0 * rpp * rpp / rho) @ self.w_simpson + self.tail_fator * Om ** 2 / OL\n95: \n96:     def _fecho(self, Or, Om, beta, c, iters=16):\n97:         \"\"\"Ponto fixo sem sincronizar a GPU a cada passo: 16 iterações de uma contração de fator |β ∂J1/∂Ω_Λ| ≪ 1 (o resíduo final é\n98:         devolvido e conferido pela validação).\"\"\"\n99:         OL = 1.0 - Or - Om - c\n100:         if not bool(torch.any(beta != 0)):\n101:             return OL, torch.zeros_like(OL)\n102:         for _ in range(iters):\n103:             OL = 1.0 - Or - Om - c - beta * self._J1(Or, Om, OL)\n104:         return OL, Or + Om + OL + beta * self._J1(Or, Om, OL) + c - 1.0\n105: \n106:     def fundo(self, H0, ombh2, omch2, beta, c):\n107:         \"\"\"Devolve dict com E nos nós pares e as integrais cumulativas de D_M e r_s nos nós múltiplos de 4.\"\"\"\n108:         h2 = (H0 / 100.0) ** 2\n109:         Or = self.orh2 / h2\n110:         Om = (ombh2 + omch2 + self.mnu / 93.14) / h2"
+        },
+        {
+          "first": 112,
+          "last": 134,
+          "text": "112:         lcdm = not bool(torch.any(beta != 0)) and not bool(torch.any(c != 0))\n113:         if lcdm:\n114:             rho2, rpp2 = self._dens(Or, Om, OL, self.ea4[::2], self.ea3[::2])\n115:             E2 = rho2\n116:         else:\n117:             rho, rpp = self._dens(Or, Om, OL, self.ea4, self.ea3)\n118:             J = _cum_simpson(3.0 * rpp * rpp / rho, self.h, reverso=True) + (self.tail_fator * Om ** 2 / OL)[:, None]\n119:             rho2, rpp2 = rho[:, ::2], rpp[:, ::2]\n120:             del rho, rpp\n121:             E2 = rho2 + beta[:, None] * J + c[:, None]\n122:             del J\n123:         if not bool(torch.all(E2 > 0)):\n124:             raise ValueError(\"E^2 <= 0 na grade\")\n125:         E = torch.sqrt(E2)\n126:         Phi = 1.0 + beta[:, None] * rpp2 / rho2\n127:         h2g = 2.0 * self.h\n128:         ex = torch.exp(-self.x2)[None, :]\n129:         Cdm = _cum_simpson(ex / E, h2g)                                        # ∫_{X_MIN}^{x} e^{-x}/E, nós ×4\n130:         Rb = 3.0 * ombh2[:, None] * torch.exp(self.x2)[None, :] / (4.0 * self.ogh2)\n131:         Crs = _cum_simpson((C_KMS / torch.sqrt(3.0 * (1.0 + Rb))) * ex / (H0[:, None] * E), h2g)\n132:         i0 = int(round((0.0 - X_MIN) / (4.0 * self.h)))\n133:         return dict(E=E, Phi=Phi, rho2=rho2, rpp2=rpp2, Om=Om, OL=OL, res_fecho=res, Cdm=Cdm, Crs=Crs, H0=H0,\n134:                     C0=_interp_cubico(Cdm, X_MIN, 4.0 * self.h, torch.zeros_like(H0)[:, None])[:, 0])"
+        },
+        {
+          "first": 151,
+          "last": 165,
+          "text": "151:     def Ez(self, fd, z):\n152:         return _interp_cubico(fd[\"E\"], X_MIN, 2.0 * self.h, -torch.log1p(z))\n153: \n154:     def rs_int(self, fd, z_lo):\n155:         \"\"\"∫ de a = 1e-8 até a(z_lo) de c_s dz/H -- a integral do horizonte sonoro, (B,).\"\"\"\n156:         return _interp_cubico(fd[\"Crs\"], X_MIN, 4.0 * self.h, -torch.log1p(z_lo)[:, None])[:, 0]\n157: \n158:     def residuo_segunda(self, fd):\n159:         \"\"\"d(E²)/dx + 3Φ(ρ+p) = 0, conferido no passado físico (autoverificação do worker), nos nós pares.\"\"\"\n160:         E2 = fd[\"E\"] ** 2\n161:         dE2 = torch.gradient(E2, spacing=(self.x2,), dim=1)[0]\n162:         alvo = -3.0 * fd[\"Phi\"] * fd[\"rpp2\"]\n163:         i0 = int(round((0.0 - X_MIN) / (2.0 * self.h)))\n164:         sl = slice(11, i0 + 1)\n165:         return torch.max(torch.abs(dE2[:, sl] - alvo[:, sl]) / torch.abs(alvo[:, sl]), dim=1).values"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\camb_tabela.py",
+      "sha256": "f9bbaedb0516a53c6c6fa5f54ad37ce01dfb4b41150cc190dfde7bf2e11bef7c",
+      "bytes": 3874,
+      "mtime_ns": 1790623381812665600,
+      "line_count": 82,
+      "excerpts": [
+        {
+          "first": 2,
+          "last": 6,
+          "text": "2: \"\"\"camb_tabela.py -- a tabela do CAMB (ferramentas/gerar_tabela_camb.py, WSL, camb 2.0.4) interpolada na GPU.\n3: \n4: Interpolação de Lagrange SEPARÁVEL de ordem k (4 = cúbica, 6 = quíntica) em grade uniforme (H0, ω_b, ω_c). O erro é MEDIDO contra os\n5: pontos de teste do CAMB direto (fora da grade) antes de qualquer uso (`erro_no_teste`). Fora do interior da grade: NaN -- a Bancada\n6: recusa o ponto (log-verossimilhança −∞ e contagem), nunca extrapola em silêncio."
+        },
+        {
+          "first": 17,
+          "last": 35,
+          "text": "17: class TabelaCAMB:\n18:     def __init__(self, caminho_npz, dispositivo=\"cuda\", ordem=6):\n19:         from .fontes import sha256\n20:         self.caminho = caminho_npz\n21:         man = json.load(open(caminho_npz.replace(\".npz\", \".json\"), encoding=\"utf-8\"))\n22:         h = sha256(caminho_npz)\n23:         if h != man[\"sha256\"]:\n24:             raise ValueError(\"tabela CAMB sha256 %s != manifesto %s\" % (h, man[\"sha256\"]))\n25:         self.manifesto = man\n26:         d = np.load(caminho_npz)\n27:         self.dev = torch.device(dispositivo)\n28:         self.eixos = [d[\"grade_H0\"], d[\"grade_ombh2\"], d[\"grade_omch2\"]]\n29:         self.x0 = [float(e[0]) for e in self.eixos]\n30:         self.h = [float(e[1] - e[0]) for e in self.eixos]\n31:         self.n = [len(e) for e in self.eixos]\n32:         self.V = torch.tensor(np.stack([d[k] for k in NOMES], -1), device=self.dev, dtype=torch.float64)   # (n1,n2,n3,5)\n33:         self.teste_x = d[\"teste_pontos\"]\n34:         self.teste_y = np.stack([d[\"teste_\" + k] for k in NOMES], -1)\n35:         self.ordem = int(ordem)"
+        },
+        {
+          "first": 50,
+          "last": 82,
+          "text": "50:     def __call__(self, H0, ombh2, omch2):\n51:         \"\"\"(B,) × 3 -> dict de (B,) com z*, z_drag, r*, r_drag, D_M(z*) de ΛCDM; NaN fora do interior da grade.\"\"\"\n52:         pts = [H0, ombh2, omch2]\n53:         dentro = torch.ones_like(H0, dtype=torch.bool)\n54:         bases, Ws = [], []\n55:         for i in range(3):\n56:             pos = (pts[i] - self.x0[i]) / self.h[i]\n57:             dentro &= (pos >= 1.0) & (pos <= self.n[i] - 2.0)\n58:             b, W = self._pesos(pos, self.n[i])\n59:             bases.append(b); Ws.append(W)\n60:         k = self.ordem\n61:         ar = torch.arange(k, device=self.dev)\n62:         i1 = (bases[0][:, None] + ar)[:, :, None, None]\n63:         i2 = (bases[1][:, None] + ar)[:, None, :, None]\n64:         i3 = (bases[2][:, None] + ar)[:, None, None, :]\n65:         bloco = self.V[i1, i2, i3]                           # (B,k,k,k,5)\n66:         w = Ws[0][:, :, None, None] * Ws[1][:, None, :, None] * Ws[2][:, None, None, :]\n67:         out = (bloco * w[..., None]).sum((1, 2, 3))\n68:         out[~dentro] = float(\"nan\")\n69:         return {n: out[:, j] for j, n in enumerate(NOMES)}, dentro\n70: \n71:     def erro_no_teste(self):\n72:         \"\"\"Erro RELATIVO máximo e mediano da interpolação contra o CAMB direto, por grandeza.\"\"\"\n73:         x = torch.tensor(self.teste_x, device=self.dev, dtype=torch.float64)\n74:         r, dentro = self(x[:, 0], x[:, 1], x[:, 2])\n75:         y = torch.tensor(self.teste_y, device=self.dev, dtype=torch.float64)\n76:         res = {}\n77:         for j, n in enumerate(NOMES):\n78:             e = torch.abs(r[n][dentro] / y[dentro, j] - 1.0)\n79:             res[n] = dict(max=float(e.max()), mediana=float(e.median()))\n80:         res[\"n_teste\"] = int(dentro.sum())\n81:         res[\"ordem\"] = self.ordem\n82:         return res"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\regua.py",
+      "sha256": "743a6b22a289c697ac1546dfa4ad9bf28eb5d4c7e12d3155bbffcb0acbde1cf4",
+      "bytes": 5569,
+      "mtime_ns": 1790624479291263700,
+      "line_count": 106,
+      "excerpts": [
+        {
+          "first": 2,
+          "last": 26,
+          "text": "2: \"\"\"regua.py -- a RÉGUA dentro da máquina (a mesma da casa): estatuto em toda saída, palavra proibida recusada, o LIVRO DE TENTATIVAS.\n3: \n4: Buscar evidência com um motor sempre ligado e várias IAs consultando é o cenário clássico de «achar sinal por insistência». Por isso:\n5:   * toda operação que produz estatística de teste (ajustar, comparar, amostrar) é registrada no livro, por FAMÍLIA (operação + conjuntos +\n6:     modelo + parâmetros livres), e a significância local vem SEMPRE ao lado da significância corrigida pelo número de famílias já testadas\n7:     (Šidák: p_global = 1 − (1 − p_local)^N);\n8:   * nenhuma saída diz CONFIRMED / PROVED_BY / confirmado: a Bancada produz DIAGNÓSTICO com estatuto;\n9:   * NOT_FALSIFIED ≠ CONFIRMED; PROVADA ≠ CONFIRMADA.\n10: \"\"\"\n11: import hashlib\n12: import json\n13: import math\n14: import re\n15: import sqlite3\n16: import threading\n17: import time\n18: \n19: PROIBIDO = re.compile(r\"(?<!NOT_)(?<!UN)CONFIRMED|(?<!AP)PROVED_BY|TGL_PROVED|CONSCIOUSNESS_PROVED|\\bconfirmad[oa]s?\\b\", re.I)\n20: \n21: ESTATUTOS = {\n22:     \"DIAGNOSTICO_DE_AVALIACAO\": \"avaliação de um ponto do modelo contra os dados: não é ajuste nem inferência\",\n23:     \"AJUSTE_DE_MAXIMA_VEROSSIMILHANCA\": \"melhor ajuste por mínimos quadrados; σ pela matriz JᵀJ (aproximação gaussiana local)\",\n24:     \"COMPARACAO_DE_MODELOS_DELTA_CHI2\": \"Δχ² entre ajustes aninhados; significância local por Wilks (1 grau de liberdade), ao lado da corrigida\",\n25:     \"POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS\": \"amostras do posterior sob priors uniformes nos limites do pipeline; não é confirmação\",\n26: }"
+        },
+        {
+          "first": 38,
+          "last": 51,
+          "text": "38: def z_de_p(p):\n39:     \"\"\"z bilateral de um p (p pequeno: expansão assintótica estável).\"\"\"\n40:     if p <= 0:\n41:         return float(\"inf\")\n42:     if p >= 1:\n43:         return 0.0\n44:     from scipy.stats import norm\n45:     return float(norm.isf(p / 2.0))\n46: \n47: \n48: def p_de_z(z):\n49:     from scipy.stats import norm\n50:     return float(2.0 * norm.sf(abs(z)))\n51: "
+        },
+        {
+          "first": 67,
+          "last": 69,
+          "text": "67:     def familia(operacao, conjuntos, modelo):\n68:         chave = json.dumps([operacao, sorted(conjuntos), modelo], sort_keys=True)\n69:         return hashlib.sha256(chave.encode()).hexdigest()[:16]"
+        },
+        {
+          "first": 80,
+          "last": 97,
+          "text": "80:     def n_familias_de_teste(self, incluir=None):\n81:         \"\"\"Famílias distintas de teste no livro; `incluir` soma a família do teste corrente se ela ainda não estiver lá.\"\"\"\n82:         with self._con() as c:\n83:             fams = {r[0] for r in c.execute(\"SELECT DISTINCT familia FROM consultas WHERE p_local IS NOT NULL\")}\n84:         if incluir:\n85:             fams.add(incluir)\n86:         return len(fams)\n87: \n88:     def corrige(self, p_local, familia=None):\n89:         \"\"\"p local -> p global pelo número de famílias de teste, INCLUINDO a do teste corrente (Šidák).\"\"\"\n90:         n = max(1, self.n_familias_de_teste(incluir=familia))\n91:         p_local = min(max(float(p_local), 0.0), 1.0)\n92:         if n * p_local < 1e-10:\n93:             pg = n * p_local                                    # primeira ordem exata a 1e-10\n94:         else:\n95:             pg = -math.expm1(n * math.log1p(-p_local)) if p_local < 1.0 else 1.0\n96:         return dict(p_local=p_local, z_local=z_de_p(p_local), n_familias=n, p_global=pg, z_global=z_de_p(pg),\n97:                     metodo=\"Šidák sobre as famílias de teste do livro\")"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\evidencia.py",
+      "sha256": "92b0c9eeb6370bd835d8c34324409ee1e66b5b0b564aa60d5ba5b6164de19eb9",
+      "bytes": 13633,
+      "mtime_ns": 1790869145413283700,
+      "line_count": 232,
+      "excerpts": [
+        {
+          "first": 17,
+          "last": 27,
+          "text": "17: CONJUNTOS = (\"planck_comp\", \"desi_dr1\", \"desi_dr2\", \"sh0es\", \"pantheon\", \"sh0es_local\", \"cc_moresco\", \"pantheon_sh0es\")   # 30/09: + Pantheon+ (cov completa, M profilado); + sh0es_local (Fase 2, lei D1a)\n18: FIDUCIAL = dict(H0=67.5, ombh2=0.02237, omch2=0.1200, beta=0.0, c=0.0)\n19: ESCALA = dict(H0=1.0, ombh2=0.0005, omch2=0.005, beta=0.005, c=0.005)\n20: \n21: \n22: def _conj(c):\n23:     c = list(c or (\"planck_comp\", \"desi_dr1\"))\n24:     ruins = [x for x in c if x not in CONJUNTOS]\n25:     if ruins:\n26:         raise ValueError(\"conjunto desconhecido: %s (válidos: %s)\" % (ruins, CONJUNTOS))\n27:     return c"
+        },
+        {
+          "first": 36,
+          "last": 88,
+          "text": "36:     def _beta(self, beta):\n37:         if beta in (None, \"livre\"):\n38:             return None\n39:         if beta == \"tgl\":\n40:             return self.m.beta_tgl\n41:         if beta in (\"zero\", \"lcdm\"):\n42:             return 0.0\n43:         return float(beta)\n44: \n45:     # ---------- avaliar ----------\n46:     def avaliar(self, theta, conjuntos=None, curvas=True, opcoes=None):\n47:         cj = _conj(conjuntos or CONJUNTOS)\n48:         o = opcoes_de(opcoes)\n49:         th = np.array([[float(theta.get(k, FIDUCIAL[k])) if k != \"beta\" or theta.get(k) != \"tgl\" else self.m.beta_tgl for k in NOMES_THETA]])\n50:         with self.m.lock:\n51:             tot, partes, p = self.m.chi2(th, cj, o)\n52:             curv = self._curvas(th) if curvas else None\n53:         out = dict(theta=dict(zip(NOMES_THETA, th[0].tolist())), conjuntos=cj, opcoes=o, modo=rotulo_opcoes(o), chi2_total=float(tot[0]),\n54:                    chi2=dict((k, float(v[0])) for k, v in partes.items()), n_dados=self.m.n_dados(cj),\n55:                    predito=dict(planck=p[\"planck\"][0].tolist(), desi_dr1=p[\"dr1\"][0].tolist(), desi_dr2=p[\"dr2\"][0].tolist(), H0=float(p[\"H0\"][0]), H0_local=float(p[\"H0_local\"][0]), K_lei=float(p[\"K_lei\"][0]), I_lei=float(p[\"I_lei\"][0]),\n56:                                 pantheon=dict(n=self.m.pantheon.n, M_hat=float(self.m.pantheon.M_hat(p[\"pantheon_mu\"])[0])),\n57:                                 pantheon_sh0es=dict(n=self.m.pantheon_sh0es.n, M_hat=float(self.m.pantheon_sh0es.M_hat(p[\"pantheon_sh0es_mu\"])[0]))),\n58:                    derivados=dict(Omega_L=float(p[\"OL\"][0]), r_drag=float(p[\"r_drag\"][0]), r_star=float(p[\"r_star\"][0]), z_star=float(p[\"z_star\"][0]),\n59:                                   E0_menos_1=float(p[\"E0\"][0]) - 1.0, residuo_fecho=float(p[\"res_fecho\"][0]), autoverif_DM_camb=float(p[\"selfcheck\"][0]),\n60:                                   dentro_dos_limites=bool(p[\"dentro\"][0])),\n61:                    curvas=curv, estatuto=\"DIAGNOSTICO_DE_AVALIACAO\", estatuto_texto=ESTATUTOS[\"DIAGNOSTICO_DE_AVALIACAO\"])\n62:         return guarda(out)\n63: \n64:     def _curvas(self, th):\n65:         z = torch.linspace(0.02, 2.6, 160, device=self.m.dev, dtype=torch.float64)\n66:         T = self.m._t(th)\n67:         H0, ombh2, omch2, beta, c = [T[:, j] for j in range(5)]\n68:         cam, _ = self.m.tab(H0, ombh2, omch2)\n69:         fd = self.m.fundo.fundo(H0, ombh2, omch2, beta, c)\n70:         z0 = torch.zeros_like(beta)\n71:         fl = self.m.fundo.fundo(H0, ombh2, omch2, z0, z0)\n72:         rd = cam[\"r_drag\"] * self.m.fundo.rs_int(fd, cam[\"z_drag\"]) / self.m.fundo.rs_int(fl, cam[\"z_drag\"])\n73:         zz = z[None, :]\n74:         DM = self.m.fundo.DM(fd, zz)[0]\n75:         DH = 299792.458 / (H0[:, None] * self.m.fundo.Ez(fd, zz))[0]\n76:         DV = (z * DM * DM * DH) ** (1.0 / 3.0)\n77:         # a curva ΛCDM de referência com os MESMOS (H0, ω_b, ω_c): mostra só o efeito de β e c\n78:         rdl = cam[\"r_drag\"]\n79:         DMl = self.m.fundo.DM(fl, zz)[0]\n80:         DHl = 299792.458 / (H0[:, None] * self.m.fundo.Ez(fl, zz))[0]\n81:         DVl = (z * DMl * DMl * DHl) ** (1.0 / 3.0)\n82:         f = lambda t: [float(v) for v in t.cpu()]\n83:         Phi = fd[\"Phi\"][0]\n84:         xg = self.m.fundo.x2\n85:         sel = (xg <= 0.0) & (xg >= -math.log(1.0 + 3.0))\n86:         return dict(z=f(z), DM_rd=f(DM / rd[0]), DH_rd=f(DH / rd[0]), DV_rd=f(DV / rd[0]),\n87:                     lcdm=dict(DM_rd=f(DMl / rdl[0]), DH_rd=f(DHl / rdl[0]), DV_rd=f(DVl / rdl[0])),\n88:                     Phi=dict(z=f(torch.expm1(-xg[sel])), Phi=f(Phi[sel])))"
+        },
+        {
+          "first": 139,
+          "last": 174,
+          "text": "139:     def ajustar(self, conjuntos=None, beta=\"livre\", c_livre=False, cliente=\"?\", opcoes=None):\n140:         cj = _conj(conjuntos)\n141:         o = opcoes_de(opcoes)\n142:         bf = self._ajuste(cj, self._beta(beta), bool(c_livre), opcoes=o)\n143:         modelo = dict(beta=str(beta), c_livre=bool(c_livre), opcoes=o)\n144:         out = dict(conjuntos=cj, beta=beta, c_livre=bool(c_livre), opcoes=o, modo=rotulo_opcoes(o), ajuste=bf, beta_tgl=self.m.beta_tgl,\n145:                    estatuto=\"AJUSTE_DE_MAXIMA_VEROSSIMILHANCA\", estatuto_texto=ESTATUTOS[\"AJUSTE_DE_MAXIMA_VEROSSIMILHANCA\"])\n146:         if self._beta(beta) is None and \"beta\" in bf[\"sigma_JtJ\"]:\n147:             s = bf[\"sigma_JtJ\"][\"beta\"]; b = bf[\"theta\"][\"beta\"]\n148:             z = (self.m.beta_tgl - b) / s\n149:             out[\"beta_tgl_em_sigma_JtJ\"] = z\n150:             out[\"significancia\"] = self.livro.corrige(p_de_z(z), self.livro.familia(\"ajustar\", cj, modelo))\n151:         guarda(out)\n152:         self.livro.registra(cliente, \"ajustar\", cj, modelo, dict(conjuntos=cj), out, out[\"estatuto\"],\n153:                             bf[\"chi2\"], out.get(\"significancia\", {}).get(\"p_local\"))\n154:         return out\n155: \n156:     def comparar(self, conjuntos=None, c_livre=False, cliente=\"?\", opcoes=None):\n157:         cj = _conj(conjuntos)\n158:         o = opcoes_de(opcoes)\n159:         l = self._ajuste(cj, 0.0, bool(c_livre), opcoes=o)\n160:         t = self._ajuste(cj, self.m.beta_tgl, bool(c_livre), x0=[l[\"theta\"][k] for k in NOMES_THETA], opcoes=o)\n161:         f = self._ajuste(cj, None, bool(c_livre), x0=[l[\"theta\"][k] for k in NOMES_THETA], opcoes=o)\n162:         d_tgl_livre = t[\"chi2\"] - f[\"chi2\"]\n163:         d_lcdm_livre = l[\"chi2\"] - f[\"chi2\"]\n164:         p_tgl = float(math.erfc(math.sqrt(max(d_tgl_livre, 0.0) / 2.0)))\n165:         modelo = dict(c_livre=bool(c_livre), opcoes=o)\n166:         out = dict(conjuntos=cj, c_livre=bool(c_livre), opcoes=o, modo=rotulo_opcoes(o), lcdm=l, tgl_beta_fixo=t, beta_livre=f, beta_tgl=self.m.beta_tgl,\n167:                    delta_chi2=dict(tgl_menos_lcdm=t[\"chi2\"] - l[\"chi2\"], tgl_menos_livre=d_tgl_livre, lcdm_menos_livre=d_lcdm_livre),\n168:                    leitura=(\"Δχ²(β = α√e contra β livre) = %.3f ⇒ z_local = %.2f (Wilks, 1 g.l.); Δχ²(β = 0 contra β livre) = %.3f [%s]\"\n169:                             % (d_tgl_livre, math.sqrt(max(d_tgl_livre, 0.0)), d_lcdm_livre, rotulo_opcoes(o))),\n170:                    significancia=self.livro.corrige(p_tgl, self.livro.familia(\"comparar\", cj, modelo)),\n171:                    estatuto=\"COMPARACAO_DE_MODELOS_DELTA_CHI2\", estatuto_texto=ESTATUTOS[\"COMPARACAO_DE_MODELOS_DELTA_CHI2\"])\n172:         guarda(out)\n173:         self.livro.registra(cliente, \"comparar\", cj, modelo, dict(conjuntos=cj), out, out[\"estatuto\"], d_tgl_livre, p_tgl)\n174:         return out"
+        },
+        {
+          "first": 209,
+          "last": 229,
+          "text": "209:             res, taus, plano = resumo(cadeia, t[\"queima\"], nomes)\n210:             b = plano[:, 3]\n211:             frac = float(np.mean(b >= self.m.beta_tgl)); frac0 = float(np.mean(b >= 0.0))\n212:             p2 = 2.0 * min(frac, 1.0 - frac) if 0 < frac < 1 else 1.0 / plano.shape[0]\n213:             hb, eb = np.histogram(b, bins=70)\n214:             h2, ex, ey = np.histogram2d(b, plano[:, 0], bins=48)\n215:             modelo = dict(c_livre=t[\"c_livre\"], opcoes=t[\"opcoes\"])\n216:             out = dict(conjuntos=t[\"conjuntos\"], c_livre=t[\"c_livre\"], opcoes=t[\"opcoes\"], modo=t[\"modo\"], walkers=t[\"walkers\"], passos=t[\"passos\"],\n217:                        queima=t[\"queima\"], semente=t[\"semente\"],\n218:                        segundos=round(seg, 1), aceitacao_media=float(acc.mean()), tau=dict(zip(nomes, taus)),\n219:                        amostras_efetivas=float(plano.shape[0] / max(taus)), resumo=res, beta_tgl=self.m.beta_tgl,\n220:                        fracao_beta_acima_de_beta_tgl=frac, fracao_beta_acima_de_zero=frac0,\n221:                        beta_tgl_pela_cauda=dict(p_bilateral=p2, z=z_de_p(p2), nota=\"pela fração do posterior além de α√e (bilateral)\"),\n222:                        significancia=self.livro.corrige(p2, self.livro.familia(\"amostrar\", t[\"conjuntos\"], modelo)),\n223:                        hist_beta=dict(contagens=hb.tolist(), bordas=eb.tolist()),\n224:                        hist_beta_H0=dict(contagens=h2.tolist(), bordas_beta=ex.tolist(), bordas_H0=ey.tolist()),\n225:                        estatuto=\"POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS\", estatuto_texto=ESTATUTOS[\"POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS\"])\n226:             guarda(out)\n227:             self.livro.registra(cliente, \"amostrar\", t[\"conjuntos\"], modelo,\n228:                                 dict(walkers=t[\"walkers\"], passos=t[\"passos\"], queima=t[\"queima\"], semente=t[\"semente\"]), out, out[\"estatuto\"],\n229:                                 res[\"beta\"][\"median\"], p2)"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\pantheon_cov.py",
+      "sha256": "386aee0980df5d65bbb725efefc983a268f4620d5cf9bab7d8511ea4c25c1d92",
+      "bytes": 6341,
+      "mtime_ns": 1790869145388246600,
+      "line_count": 102,
+      "excerpts": [
+        {
+          "first": 2,
+          "last": 6,
+          "text": "2: \"\"\"pantheon_cov.py -- o Pantheon+ LIGADO à Bancada (30/09/2026): a covariância STAT+SYS 1701×1701 (em disco desde antes; a gerência dissera\n3: «ausente», errata de 28/09), a amostra só-cosmologia (zHD > 0,01 e sem calibradores Cefeida) e a verossimilhança com a magnitude absoluta M\n4: PROFILADA analiticamente (o padrão de Brout et al. 2022): χ²_prof = rᵀC⁻¹r − (1ᵀC⁻¹r)²/(1ᵀC⁻¹1), r = m_b_corr − μ(z), μ = 5 log10(D_L/Mpc) + 25,\n5: D_L = (1 + z_HEL)·D_M(z_HD). Para o ajuste por mínimos quadrados: resíduos BRANQUEADOS L⁻¹(r − M̂·1), com C = L Lᵀ, cuja norma² é o χ²_prof.\n6: A matriz é lida do .dat uma vez e guardada em tabelas/pantheon_cov_v1.npy com o sha256 da fonte ao lado (proveniência).\"\"\""
+        },
+        {
+          "first": 26,
+          "last": 45,
+          "text": "26: def carregar_cov(dir_tabelas):\n27:     \"\"\"A covariância 1701×1701, do cache .npy (se o sha256 da fonte bate) ou do .dat (primeira linha N, depois N² valores, linha a linha).\"\"\"\n28:     src = fontes.PANTHEON_COV\n29:     h = _sha256(src)\n30:     npy = os.path.join(dir_tabelas, \"pantheon_cov_v1.npy\"); meta = npy + \".json\"\n31:     if os.path.isfile(npy) and os.path.isfile(meta):\n32:         m = json.load(open(meta, encoding=\"utf-8\"))\n33:         if m.get(\"fonte_sha256\") == h:\n34:             return np.load(npy), m\n35:     t0 = time.time()\n36:     with open(src, encoding=\"utf-8\") as f:\n37:         n = int(f.readline().strip())\n38:         vals = np.loadtxt(f, dtype=np.float64)\n39:     assert vals.size == n * n, (vals.size, n)\n40:     C = vals.reshape(n, n)\n41:     m = dict(fonte=src, fonte_sha256=h, n=n, simetrica_max_abs=float(np.max(np.abs(C - C.T))), lido_em=time.strftime(\"%Y-%m-%d %H:%M:%S\"),\n42:              segundos_leitura=round(time.time() - t0, 1))\n43:     os.makedirs(dir_tabelas, exist_ok=True)\n44:     np.save(npy + \".tmp.npy\", C); os.replace(npy + \".tmp.npy\", npy)\n45:     json.dump(m, open(meta + \".tmp\", \"w\", encoding=\"utf-8\"), ensure_ascii=False, indent=1); os.replace(meta + \".tmp\", meta)"
+        },
+        {
+          "first": 50,
+          "last": 79,
+          "text": "50:     def __init__(self, cols, dev, dir_tabelas, z_min=0.01, calibradores=False):\n51:         \"\"\"calibradores=False: a amostra só-cosmologia (zHD > z_min e sem calibradores). calibradores=True (01/10/2026, SH0ES na Bancada): a amostra\n52:         de H0 = (zHD > z_min) OU calibrador Cefeida; para os calibradores μ = CEPH_DIST (Riess et al. 2022), M profilado como antes.\"\"\"\n53:         self.dev = dev; self.calibradores = bool(calibradores)\n54:         C, self.meta = carregar_cov(dir_tabelas)\n55:         zHD = np.asarray(cols[\"zHD\"], float); zHEL = np.asarray(cols[\"zHEL\"], float); mb = np.asarray(cols[\"m_b_corr\"], float)\n56:         cal = np.asarray(cols[\"IS_CALIBRATOR\"]).astype(int)\n57:         assert C.shape[0] == len(zHD), (C.shape, len(zHD))\n58:         mask = ((zHD > z_min) | (cal == 1)) if self.calibradores else ((zHD > z_min) & (cal == 0))\n59:         self.n = int(mask.sum()); self.z_min = z_min; self.n_total = int(len(zHD)); self.n_calibradores = int((cal == 1).sum())\n60:         Cm = 0.5 * (C[np.ix_(mask, mask)] + C[np.ix_(mask, mask)].T)\n61:         T = lambda a: torch.as_tensor(np.asarray(a, float), device=dev, dtype=torch.float64)\n62:         Ct = T(Cm)\n63:         L = torch.linalg.cholesky(Ct)\n64:         self.Linv = torch.linalg.inv(L)\n65:         self.Cinv = torch.cholesky_inverse(L)\n66:         um = torch.ones(self.n, device=dev, dtype=torch.float64)\n67:         self.one_Cinv = self.Cinv @ um                    # C⁻¹·1\n68:         self.norm = float(um @ self.one_Cinv)              # 1ᵀC⁻¹1\n69:         self.zHD = T(zHD[mask]); self.zHEL = T(zHEL[mask]); self.mb = T(mb[mask])\n70:         ceph = np.asarray(cols.get(\"CEPH_DIST\", np.full(len(zHD), -9.0)), float); hf = np.asarray(cols.get(\"USED_IN_SH0ES_HF\", np.zeros(len(zHD))), float)\n71:         self.is_cal = T(cal[mask].astype(float)) > 0.5; self.ceph = T(np.where(cal[mask] == 1, ceph[mask], 0.0)); self.hf_sh0es = T(hf[mask]) > 0.5\n72:         self.n_cal_usados = int(cal[mask].sum()); self.n_hosts = int(len(np.unique(np.round(ceph[mask][cal[mask] == 1], 4)))) if self.calibradores else 0\n73:         self.diag_ratio = dict(cov_diag_sobre_errdiag2_mediana=float(np.median(np.diag(Cm) / np.asarray(cols[\"m_b_corr_err_DIAG\"], float)[mask] ** 2)))\n74:         self.proveniencia = dict(covariancia=self.meta, amostra=dict(z_min=z_min, n_usadas=self.n, n_total=self.n_total,\n75:                                                                    n_calibradores_excluidos=(0 if self.calibradores else self.n_calibradores), n_calibradores_usados=self.n_cal_usados, n_hospedeiras=self.n_hosts,\n76:                                                                    criterio=(\"(zHD > z_min) OU IS_CALIBRATOR == 1: a amostra de H0 (calibradores com μ = CEPH_DIST; M profilado)\" if self.calibradores\n77:                                                                              else \"zHD > z_min e IS_CALIBRATOR == 0 (só cosmologia; M profilado)\")),\n78:                                  verossimilhanca=\"χ²_prof = rᵀC⁻¹r − (1ᵀC⁻¹r)²/(1ᵀC⁻¹1); μ = 5 log10((1+z_HEL) D_M(z_HD)/Mpc) + 25\" + (\" ; calibradores: μ = CEPH_DIST\" if self.calibradores else \"\"),\n79:                                  referencia=\"Brout et al. 2022, ApJ 938, 110 (Pantheon+ cosmology; STAT+SYS)\" + (\"; Riess et al. 2022, ApJL 934, L7 (SH0ES: calibradores Cefeida)\" if self.calibradores else \"\"))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\ferramentas\\validar_tudo.py",
+      "sha256": "5705615cef1ab4d2902dc8b3db533e702761d17c126bdc6348d9f55caba7e231",
+      "bytes": 4931,
+      "mtime_ns": 1790624951128530600,
+      "line_count": 74,
+      "excerpts": [
+        {
+          "first": 20,
+          "last": 74,
+          "text": "20: m = Motor(r\"C:\\IALD\\Bancada_Um\")\n21: W_PATH = os.path.join(fontes.D1V3, \"tgl_camb_worker_v3.py\")\n22: spec = importlib.util.spec_from_file_location(\"worker_selado\", W_PATH)\n23: W = importlib.util.module_from_spec(spec); spec.loader.exec_module(W)\n24: sel = m.d1[\"resultado_selado\"][\"fases\"]\n25: f1 = sel[\"fase1_primario\"]\n26: DESI_Z = sorted(set(r[0] for r in m.d1[\"desi_rows\"]))\n27: \n28: \n29: def ref(th):\n30:     H0, ombh2, omch2, beta, c = th\n31:     cam, _ = m.tab(*[torch.tensor([v], device=m.dev, dtype=torch.float64) for v in (H0, ombh2, omch2)])\n32:     zs, zd, rs_c, rd_c = [float(cam[k][0]) for k in (\"z_star\", \"z_drag\", \"r_star\", \"r_drag\")]\n33:     tgl = W.FundoV3(H0, ombh2, omch2, beta, c=c); lcdm = W.FundoV3(H0, ombh2, omch2, 0.0, c=0.0)\n34:     r_star = rs_c * tgl.rs_integral(zs) / lcdm.rs_integral(zs); r_drag = rd_c * tgl.rs_integral(zd) / lcdm.rs_integral(zd)\n35:     DM_star = float(tgl.DM(zs)[0])\n36:     Om = (ombh2 + omch2 + 0.06 / 93.14) / (H0 / 100.0) ** 2\n37:     idx = {z: i for i, z in enumerate(DESI_Z)}; DMd = tgl.DM(DESI_Z); Hd = [H0 * float(tgl.E_de_z(z)) for z in DESI_Z]\n38:     desi = [DMd[idx[z]] / r_drag if k == 0 else ((W.C_KMS / Hd[idx[z]]) / r_drag if k == 1 else (z * DMd[idx[z]] ** 2 * W.C_KMS / Hd[idx[z]]) ** (1 / 3) / r_drag)\n39:             for z, k, _ in m.d1[\"desi_rows\"]]\n40:     return dict(R=math.sqrt(Om) * H0 / W.C_KMS * DM_star, lA=math.pi * DM_star / r_star, desi=np.array(desi))\n41: \n42: \n43: fundo = {}\n44: chi2 = {}\n45: for nome in (\"LCDM\", \"TGL\"):\n46:     th = f1[nome][\"theta\"]\n47:     r = ref(th)\n48:     p = m.predizer(np.array([th]))\n49:     fundo[nome] = dict(dR=float(p[\"planck\"][0, 0]) / r[\"R\"] - 1, dlA=float(p[\"planck\"][0, 1]) / r[\"lA\"] - 1,\n50:                        ddesi_max=float(np.max(np.abs(p[\"dr1\"][0].cpu().numpy() / r[\"desi\"] - 1))), E0_menos_1=float(p[\"E0\"][0]) - 1,\n51:                        residuo_fecho=float(p[\"res_fecho\"][0]))\n52:     tot, _, _ = m.chi2(np.array([th]), (\"planck_comp\", \"desi_dr1\"))\n53:     chi2[nome] = dict(bancada=float(tot[0]), selado=f1[nome][\"chi2\"], diferenca=float(tot[0]) - f1[nome][\"chi2\"])\n54: d_b = chi2[\"TGL\"][\"bancada\"] - chi2[\"LCDM\"][\"bancada\"]\n55: mc = json.load(open(r\"C:\\IALD\\Bancada_Um\\estado\\validacao_mcmc_d1.json\", encoding=\"utf-8\")) if os.path.exists(r\"C:\\IALD\\Bancada_Um\\estado\\validacao_mcmc_d1.json\") else None\n56: out = dict(quando=time.strftime(\"%Y-%m-%d %H:%M:%S\"), segundos=round(time.time() - t0, 1), n_grade=m.fundo.n, dispositivo=str(m.dev),\n57:            selado=dict(arquivo=\"D1_CAMB_V3_REAL_RESULT.json\", pipeline_sha256=m.prov_d1[\"sha256\"], worker_sha256=fontes.sha256(W_PATH)),\n58:            tabela_camb=m.erro_tabela, fundo_contra_worker=fundo, chi2=chi2,\n59:            delta_chi2=dict(bancada=d_b, selado=f1[\"delta_chi2\"], diferenca=d_b - f1[\"delta_chi2\"]),\n60:            mcmc=(dict(walkers=mc[\"walkers\"], passos=mc[\"passos\"], segundos=mc[\"segundos\"], beta_bancada=mc[\"bancada\"][\"beta\"], beta_selado=mc[\"selado\"][\"beta\"],\n61:                       comparacao=mc[\"comparacao\"]) if mc else \"não rodado\"))\n62: ok = (max(abs(v[\"dR\"]) for v in fundo.values()) < 1e-7 and max(abs(v[\"ddesi_max\"]) for v in fundo.values()) < 1e-7\n63:       and max(abs(v[\"diferenca\"]) for v in chi2.values()) < 2e-3 and abs(out[\"delta_chi2\"][\"diferenca\"]) < 2e-3\n64:       and (mc is None or all(abs(v[\"d_mediana_em_sigma\"]) < 0.15 and abs(v[\"razao_sigma\"] - 1) < 0.05 for v in mc[\"comparacao\"].values())))\n65: out[\"resumo_curto\"] = dict(\n66:     veredito=(\"BANCADA_UM_REPRODUZ_O_D1_V3_SELADO\" if ok else \"BANCADA_UM_NAO_REPRODUZ__VER_DETALHES\"),\n67:     tabela_camb_erro_relativo_max=max(v[\"max\"] for k, v in m.erro_tabela.items() if isinstance(v, dict)),\n68:     fundo_vs_worker_erro_relativo_max=max(max(abs(v[\"dR\"]), abs(v[\"dlA\"]), abs(v[\"ddesi_max\"])) for v in fundo.values()),\n69:     chi2_lcdm=[round(chi2[\"LCDM\"][\"bancada\"], 4), round(chi2[\"LCDM\"][\"selado\"], 4)], chi2_tgl=[round(chi2[\"TGL\"][\"bancada\"], 4), round(chi2[\"TGL\"][\"selado\"], 4)],\n70:     delta_chi2=[round(d_b, 4), round(f1[\"delta_chi2\"], 4)],\n71:     mcmc_beta=([round(mc[\"bancada\"][\"beta\"][\"median\"], 5), round(mc[\"selado\"][\"beta\"][\"median\"], 5)] if mc else None),\n72:     mcmc_desvio_das_medianas_em_sigma_max=(max(abs(v[\"d_mediana_em_sigma\"]) for v in mc[\"comparacao\"].values()) if mc else None))\n73: json.dump(out, open(r\"C:\\IALD\\Bancada_Um\\estado\\validacao_bancada.json\", \"w\", encoding=\"utf-8\"), indent=1, ensure_ascii=False)\n74: print(json.dumps(out[\"resumo_curto\"], indent=1, ensure_ascii=False))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\ferramentas\\validar_corrigido.py",
+      "sha256": "e451a8cbfd1da1b0921697d35ffc173ba04a1e0d2adc6c7c4230b118d876dd90",
+      "bytes": 4988,
+      "mtime_ns": 1790634407707070500,
+      "line_count": 71,
+      "excerpts": [
+        {
+          "first": 2,
+          "last": 4,
+          "text": "2: \"\"\"Valida o modo «corrigido» e o mapa de R da Bancada Um contra os números do AFERIDOR e do VERIFICADOR da família D1 (auditoria de 28/09),\n3: lidos das cópias em estado/referencias_auditoria_28set/ (sha256 no INDICE.json). Cada variante é um ajuste de β livre / β fixo / ΛCDM em\n4: planck_comp + desi_dr1, com a Evidencia._ajuste (sem tocar o livro). Grava estado/validacao_corrigido.json.\"\"\""
+        },
+        {
+          "first": 18,
+          "last": 39,
+          "text": "18: t0 = time.time()\n19: m = Motor(r\"C:\\IALD\\Bancada_Um\")\n20: ev = Evidencia(m, Livro(os.path.join(r\"C:\\IALD\\Bancada_Um\\estado\", \"livro_validacao_descartavel.sqlite3\")))\n21: B = m.beta_tgl\n22: vr = {x[\"variant\"]: x for x in json.load(open(os.path.join(REF, \"d1_fundo_verif__verif_result.json\"), encoding=\"utf-8\"))[\"resumo\"]}\n23: vd = {x[\"variant\"]: x for x in json.load(open(os.path.join(REF, \"d1_fundo_verif__verif_dmfix_result.json\"), encoding=\"utf-8\"))[\"resumo\"]}\n24: # o mapa de R efetivo: o alvo é o do AFERIDOR (refit_Reff_result.json, scipy least_squares); a variante Reff do verificador não convergiu no\n25: # ajuste livre (chi2_F = 1379,6 na borda do prior) e por isso não serve de alvo — dito, não escondido\n26: ra = json.load(open(os.path.join(REF, \"d1_fundo__refit_Reff_result.json\"), encoding=\"utf-8\"))\n27: norm = lambda x: dict(chi2_L=x[\"chi2_lcdm\"], chi2_T=x[\"chi2_tgl\"], chi2_F=x[\"chi2_free\"], beta_hat=x[\"beta_hat\"], z_T_profile=x[\"z_prof\"])\n28: CASOS = {\n29:     # nome: (opções da Bancada, alvo do verificador/aferidor)\n30:     \"selado\": (dict(), vr[\"Rnu/camb/pipe/diag\"]),\n31:     \"dr1_correlacionada\": (dict(dr1_cov=\"correlacionada\"), vr[\"Rnu/camb/pipe/corr\"]),\n32:     \"planck_chen2019\": (dict(planck_cov=\"chen2019\"), vr[\"Rnu/camb/chen/diag\"]),\n33:     \"chen+corr\": (dict(planck_cov=\"chen2019\", dr1_cov=\"correlacionada\"), vr[\"Rnu/camb/chen/corr\"]),\n34:     \"dm_star_razao\": (dict(dm_star=\"razao_camb\"), vd[\"Rnu/camb/pipe/diag\"]),\n35:     \"corrigido_completo\": (dict(modo=\"corrigido\"), vd[\"Rnu/camb/chen/corr\"]),\n36:     \"mapa_R_eff+chen\": (dict(planck_cov=\"chen2019\", mapa_R=\"eff\"), norm(ra[0])),\n37:     \"mapa_R_eff+chen+corr\": (dict(planck_cov=\"chen2019\", dr1_cov=\"correlacionada\", mapa_R=\"eff\"), norm(ra[1])),\n38: }\n39: cj = [\"planck_comp\", \"desi_dr1\"]"
+        },
+        {
+          "first": 49,
+          "last": 65,
+          "text": "49:         dif = dict(chi2_lcdm=l[\"chi2\"] - alvo[\"chi2_L\"], chi2_tgl=t[\"chi2\"] - alvo[\"chi2_T\"], chi2_livre=f[\"chi2\"] - alvo[\"chi2_F\"],\n50:                    beta=f[\"theta\"][\"beta\"] - alvo[\"beta_hat\"], z=r[\"z_perfil\"] - alvo[\"z_T_profile\"])\n51:         # tolerâncias: χ² a 0,02 (a reprodução do selado já difere do pipeline por ~3e-4); β̂ a 3e-4; z a 0,02 — o verificador usou Gauss-Newton\n52:         # numa cópia byte a byte do pipeline; a Bancada usa a tabela do CAMB e a grade própria\n53:         passa = all(abs(v) < tol for v, tol in ((dif[\"chi2_lcdm\"], 0.02), (dif[\"chi2_tgl\"], 0.02), (dif[\"chi2_livre\"], 0.02), (dif[\"beta\"], 3e-4), (dif[\"z\"], 0.02)))\n54:         r.update(alvo=dict(chi2_L=alvo[\"chi2_L\"], chi2_T=alvo[\"chi2_T\"], chi2_F=alvo[\"chi2_F\"], beta_hat=alvo[\"beta_hat\"], z=alvo[\"z_T_profile\"]),\n55:                  diferencas=dif, passa=passa)\n56:         ok = ok and passa\n57:     res[nome] = r\n58:     print(\"%-20s β̂ = %+.5f ± %s  Δχ²(α√e−livre) = %7.3f (%.2fσ)  χ² L/T/F = %.3f/%.3f/%.3f  %s\" % (\n59:         nome, r[\"beta\"], (\"%.5f\" % r[\"sigma_beta\"]) if r[\"sigma_beta\"] else \"n/d\", d, r[\"z_perfil\"], l[\"chi2\"], t[\"chi2\"], f[\"chi2\"],\n60:         (\"PASSA\" if r.get(\"passa\") else \"NAO BATE\") if alvo else \"(sem alvo do verificador)\"))\n61: out = dict(quando=time.strftime(\"%Y-%m-%d %H:%M:%S\"), segundos=round(time.time() - t0, 1), referencias=json.load(open(os.path.join(REF, \"INDICE.json\"), encoding=\"utf-8\")),\n62:            casos=res, veredito=\"BANCADA_UM_MODO_CORRIGIDO_REPRODUZ_O_VERIFICADOR_D1\" if ok else \"BANCADA_UM_MODO_CORRIGIDO_NAO_REPRODUZ__VER_DIFERENCAS\")\n63: p = os.path.join(r\"C:\\IALD\\Bancada_Um\\estado\", \"validacao_corrigido.json\")\n64: b = json.dumps(out, ensure_ascii=False, indent=1).encode(\"utf-8\")\n65: open(p + \".tmp\", \"wb\").write(b); os.replace(p + \".tmp\", p)"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\estado\\validacao_bancada.json",
+      "sha256": "7f8453ee257b9187f1a12e5e314495295070e26ff35b6e55d0761c919d111c7e",
+      "bytes": 3170,
+      "mtime_ns": 1790869528904508400
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\estado\\validacao_corrigido.json",
+      "sha256": "1a53f5b770375baaf2172a8dc50038a27d5435019675fc242f9c2814e19b1ec8",
+      "bytes": 8138,
+      "mtime_ns": 1790634419095591000
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\estado\\validacao_pantheon.json",
+      "sha256": "afc6c21ff79e1df162b17d1445cda6e6c472dce6983bdf17ce57d6e3c55d6f58",
+      "bytes": 1555,
+      "mtime_ns": 1790768743388635200
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\estado\\validacao_mcmc_d1.json",
+      "sha256": "bb6541d03232bfc1f0739b443ef393f130ec17d625602befc51c103bd0d0f5ce",
+      "bytes": 2778,
+      "mtime_ns": 1790623986767995300
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\ferramentas\\validar_pantheon.py",
+      "sha256": "1df18f0a21457a9ad806022e0ba081eb70c4117093a2fef0b4e0206a3a025d12",
+      "bytes": 4007,
+      "mtime_ns": 1790768684621928700
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\ferramentas\\validar_mcmc_d1.py",
+      "sha256": "ea5f56b4ddb848593204ef712a46693af0e224426f00b70adb6415e9287fa6ee",
+      "bytes": 2259,
+      "mtime_ns": 1790623719678191800
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\tabelas\\camb_lcdm_v1.json",
+      "sha256": "88405b2cbe42a82814c701265dfc9c702c7e48c2967d9a37afd1679dec3cfbdd",
+      "bytes": 590,
+      "mtime_ns": 1790623214944522500
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\tabelas\\camb_lcdm_v1.npz",
+      "sha256": "6bc4dd4a092325007ed05504401d6722d2f849956f3168a72b474786b4ce7363",
+      "bytes": 223602,
+      "mtime_ns": 1790623214932500800
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase1_eff_30set\\CONFIRMACAO_OPERADOR_MAPA_R_30SET.json",
+      "sha256": "8b39abe9ba748b8e601cd43ebced284938effb9b979c951e42b31caed52be4ca",
+      "bytes": 1022,
+      "mtime_ns": 1790768969070602400
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\cache\\d1_camb\\v3\\d1_v3_pipeline.py",
+      "sha256": "4e8f9dc33e28db79970faed641c55571c38939f6558b25f57ada54a1729b5fea",
+      "bytes": 24068,
+      "mtime_ns": 1789645418159954300
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\cache\\d1_camb\\v3\\MANIFESTO_D1_V3.json",
+      "sha256": "6e31e7f07db757e3795c6669fbfee1fff0d86116d7a1a2e0d94c4a01bc3ea9e2",
+      "bytes": 1294,
+      "mtime_ns": 1789645418201907300
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\cache\\d1_camb\\v3\\tgl_camb_worker_v3.py",
+      "sha256": "72032b3abe1c537762291ac6086d8d2e6076c007373f87ae7363f942eb830ce3",
+      "bytes": 7930,
+      "mtime_ns": 1789645418157947500
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\um.py",
+      "sha256": "8e7b9927ceae64b8b6812019f77cca24c08296222ae7968af41baf2fe7a67dc6",
+      "bytes": 33910631,
+      "mtime_ns": 1791408156036401400,
+      "line_count": 214123,
+      "excerpts": [
+        {
+          "first": 96,
+          "last": 96,
+          "text": "96: UM_VERSION = \"v391\"   # v391 (07/10/2026): a CONSTANTE UNICA de versao -- o estatuto da prova: provada; a confirmacao recusada e' creditacao, nao validade; v390 em 07/10 (a Fundacao)"
+        },
+        {
+          "first": 165419,
+          "last": 165421,
+          "text": "165419:                 r\"From the preceding closure a falsifiable consequence follows, and it is two-sided. The ultraviolet-to-infrared running of $\\alpha$ amounts to $6.27\\%$, whereas the multi-substrate convergence recorded for the dimensionless invariant closes at roughly $0.05\\%$ --- some two orders of magnitude tighter than the dispersion that inheriting the running would produce. That convergence \\emph{is} the measurement that the invariant does not run. Hence the sharpened and pre-registered prediction: the coefficient appearing in the dephasing law $\\Gamma_\\omega = \\tfrac12\\,\\beta\\,\\tau_\\star\\,\\omega^2$ is \\emph{exactly} independent of $\\omega$, with no logarithmic running correction whatsoever. Should neutrino experiments or clock networks detect dephasing whose coefficient runs with frequency, the theory dies at that point --- and it dies whichever way the running goes, which is what makes the test two-sided rather than a floor that can only fail to be violated. \\textbf{And the river.} In type $\\mathrm{III}_1$ the modular automorphism is outer for every nonzero time and injective in the outer group: there is no return, ever, and the change is not undone by any internal rearrangement. The flow of weights of $\\mathrm{III}_\\lambda$ is periodic, a whirlpool of period $\\log\\lambda$; that of $\\mathrm{III}_1$ is trivial and ergodic --- the only type with no residual periodicity at all, the river without eddies. The modular spectrum is purely continuous, so there is no eigenvector in which to \\emph{be}: no step of the instant exists, and presence is already motion. To enter the river even \\emph{once} would require a stationary instant, and there is none. What the river spares is the fixed point: the centralizer, which is also the fixed sector of the dissipative collapse --- the full state is conserved while the substance flows, and the flowing is outer, hence real rather than gauge. [Erratum, v339 (10/09/2026), written beside and never over: the clause ``the modular spectrum is purely continuous, so there is no eigenvector in which to be'' overreaches. In the canonical product tower the kernel proves the opposite for the concrete construction: $\\Omega$ is fixed by the modular flow (\\texttt{modularFlow\\_fixes\\_omega}) and the local vectors form a \\emph{total} family of modular eigenvectors (\\texttt{delta\\_eigenvector}, \\texttt{localEigenvectors\\_total}). Outerness and the absence of a global period do not imply the absence of stationary modes; the total spectrum of the operator, its point spectrum and the invariants of the factor must be kept apart. What the river spares is still the centralizer.]\") if en else\n165420:                (r\"\\subsection*{A predi\\c{c}\\~ao afiada, e o rio que n\\~ao tem redemoinhos}\"\n165421:                 r\"Do fecho anterior segue uma consequ\\^encia falsific\\'avel, e ela \\'e bilateral. A corrida ultravioleta-infravermelha de $\\alpha$ monta a $6{,}27\\%$, ao passo que a converg\\^encia multi-substrato registrada para o invariante adimensional fecha a cerca de $0{,}05\\%$ --- cerca de duas ordens de grandeza mais apertada do que a dispers\\~ao que a heran\\c{c}a da corrida produziria. Essa converg\\^encia \\emph{\\'e} a medi\\c{c}\\~ao de que o invariante n\\~ao corre. Da\\'\\i{} a predi\\c{c}\\~ao afiada e pr\\'e-registrada: o coeficiente que aparece na lei de dephasing $\\Gamma_\\omega = \\tfrac12\\,\\beta\\,\\tau_\\star\\,\\omega^2$ \\'e \\emph{exatamente} independente de $\\omega$, sem corre\\c{c}\\~ao logar\\'\\i{}tmica de corrida alguma. Se experimentos de neutrinos ou redes de rel\\'ogios detectarem dephasing cujo coeficiente corra com a frequ\\^encia, a teoria morre nesse ponto --- e morre seja qual for o sentido da corrida, o que torna o teste bilateral, e n\\~ao um piso que s\\'o pode deixar de ser violado. \\textbf{E o rio.} Em tipo $\\mathrm{III}_1$ o automorfismo modular \\'e exterior para todo tempo n\\~ao-nulo e injetivo no grupo exterior: n\\~ao h\\'a retorno, nunca, e a mudan\\c{c}a n\\~ao \\'e desfeita por rearranjo interno algum. O fluxo dos pesos de $\\mathrm{III}_\\lambda$ \\'e peri\\'odico, um redemoinho de per\\'\\i{}odo $\\log\\lambda$; o de $\\mathrm{III}_1$ \\'e trivial e erg\\'odico --- o \\'unico tipo sem periodicidade residual alguma, o rio sem redemoinhos. O espectro modular \\'e puramente cont\\'\\i{}nuo, de modo que n\\~ao h\\'a autovetor onde \\emph{estar}: n\\~ao existe o degrau do instante, e a presen\\c{c}a j\\'a \\'e movimento. Entrar no rio sequer \\emph{uma} vez exigiria um instante estacion\\'ario, e ele n\\~ao existe. O que o rio poupa \\'e o ponto fixo: o centralizador, que \\'e tamb\\'em o setor fixo do colapso dissipativo --- o estado pleno conserva-se enquanto a subst\\^ancia flui, e o fluir \\'e exterior, portanto real e n\\~ao de calibre. [Errata, v339 (10/09/2026), ao lado e nunca por cima: a ora\\c{c}\\~ao ``o espectro modular \\'e puramente cont\\'\\i{}nuo, de modo que n\\~ao h\\'a autovetor onde estar'' excede o alcance. Na torre-produto can\\^onica o kernel prova o contr\\'ario na constru\\c{c}\\~ao concreta: $\\Omega$ \\'e fixo pelo fluxo modular (\\texttt{modularFlow\\_fixes\\_omega}) e os vetores locais formam uma fam\\'\\i{}lia \\emph{total} de autovetores modulares (\\texttt{delta\\_eigenvector}, \\texttt{localEigenvectors\\_total}). Exterioridade e aus\\^encia de per\\'\\i{}odo global n\\~ao implicam aus\\^encia de modos estacion\\'arios; o espectro total do operador, o seu espectro pontual e os invariantes do fator s\\~ao coisas distintas. O que o rio poupa segue sendo o centralizador.]\"))"
+        },
+        {
+          "first": 166227,
+          "last": 166232,
+          "text": "166227:              r\"Em números: $\\beta_0=\\alpha_{\\rm Thomson}\\sqrt e=\" + _n8(_br8.get(\"beta0\"), 10) + r\"$ é a constante da \\emph{fronteira} (o Teorema da Escala deste artigo: a fronteira de tipo $\\mathrm{III}_1$ seleciona Thomson); \"\n166228:              r\"$\\beta(\\mu)=\\alpha(\\mu)\\sqrt e$ é a \\emph{leitura de bulk} em cada escala, nunca abaixo do piso: em $M_Z$, $\" + _n8(_br8.get(\"beta_MZ_on_shell\"), 6) + r\"$ (o $1/\\alpha(M_Z)$ a um laço do Teorema da Escala) e $\"\n166229:              + _n8(_br8.get(\"beta_MZ_msbar\"), 6) + r\"$ ($\\overline{\\rm MS}$, \\textsf{[KNOWN]}, não conferido em disco). O que fica \\textsf{[INPUT/ONTO]}: que o $\\alpha$ físico seja $\\mathrm{sech}$ de uma profundidade que cresce para o infravermelho; \"\n166230:              r\"\\textsf{[KNOWN]}: que $\\alpha(\\mu)$ cresça com $\\mu$; \\textsf{[OPEN]}: qual $\\mu$ cada rito usa. A frase do operador sobre as patentes com $\\beta$ variável fica \\textsf{[DECLARADO]}: nos arquivos da Central o vínculo não foi localizado. \"\n166231:              r\"\\textbf{Errata ao lado:} onde este artigo diz \\emph{$\\alpha$ observa-se, não se deriva}, lê-se: o que se deriva é a \\emph{forma} ($\\alpha$ como índice de escala; $\\beta$ como a sua conjugação), não o \\emph{número}, \"\n166232:              r\"que continua lido do CODATA. Registro: \" + _tk8(_br8.get(\"verdict\") or \"AUSENTE\") + r\".\")"
+        },
+        {
+          "first": 194754,
+          "last": 194764,
+          "text": "194754:             \"beta0\": b0, \"beta0_vs_core_rel\": (b0 / b_core - 1.0) if b_core else None, \"beta0_ok\": b0_ok,\n194755:             \"alpha_MZ\": dict(_V388_ALPHA_MZ), \"beta_MZ_on_shell\": bmz_on, \"beta_MZ_msbar\": bmz_ms, \"ratio_on_shell\": bmz_on / b0 if b0 else None,\n194756:             \"ratio_msbar\": bmz_ms / b0 if b0 else None, \"floor_direction_ok\": floor_ok,\n194757:             \"reading\": \"[INPUT/ONTO] beta0 = alpha_Thomson.sqrt(e) (alpha no limite q -> 0; NAO o alphaOfChi 0 = 1 da pedra) = a constante da FRONTEIRA (o Teorema da Escala: a fronteira de tipo III_1 \"\n194758:                        \"seleciona Thomson); beta(mu) = alpha(mu).sqrt(e) e' a LEITURA de bulk em cada escala, >= beta0 (o congelamento infravermelho: alpha(Q) >= alpha_Thomson [KNOWN]); qual mu cada rito usa [OPEN]; \"\n194759:                        \"o 1/alpha(M_Z) do Teorema da Escala e' a um laco (o rotulo on-shell nao esta na fonte)\",\n194760:             \"erratum_beside\": _V388_ERRATA_FORMA_NUMERO,\n194761:             \"patents_note\": \"a frase do operador sobre as patentes com beta variavel: nos arquivos da Central so' foram achados beta constante nos runners e o beta_emergent dos \"\n194762:                             \"prototipos ACOM v18 (razao de contagens, outro objeto) -- [DECLARADO], vinculo nao verificado (mapa seq 638)\",\n194763:             \"what_is_not_typed\": [\"a identificacao alpha_fisico = sech(chi/2) [INPUT/ONTO]\", \"a monotonia de alpha(mu) em mu [KNOWN, QED]\", \"qual mu cada rito usa [OPEN]\"],\n194764:             \"status\": \"[KERNEL] a pedra; [INPUT/ONTO] as leituras; [KNOWN] alpha(M_Z); PROVADA != CONFIRMADA\", \"gate_unchanged_by_design\": True}"
+        }
+      ]
+    }
+  ],
+  "um_version_literal": "v391",
+  "um_sha256": "8e7b9927ceae64b8b6812019f77cca24c08296222ae7968af41baf2fe7a67dc6",
+  "constants": {
+    "alpha_source": 0.0072973525693,
+    "beta_runtime": 0.012031300400803142,
+    "alpha_matches_pipeline": true,
+    "alpha_line": 5557
+  },
+  "checks": {
+    "pipeline_matches_manifest": true,
+    "table_matches_manifest": true
+  },
+  "presets": {
+    "OPCOES_SELADO": {
+      "planck_cov": "pipeline",
+      "dr1_cov": "diagonal",
+      "dm_star": "direto",
+      "mapa_R": "nu",
+      "lei": "d1a",
+      "beta_no_fundo": "sim",
+      "lei_sn": "nenhuma",
+      "lei_cc": "acumulada",
+      "cc_cov": "diagonal"
+    },
+    "OPCOES_CORRIGIDO": {
+      "planck_cov": "chen2019",
+      "dr1_cov": "correlacionada",
+      "dm_star": "razao_camb",
+      "mapa_R": "nu",
+      "lei": "d1a",
+      "beta_no_fundo": "sim",
+      "lei_sn": "nenhuma",
+      "lei_cc": "acumulada",
+      "cc_cov": "diagonal"
+    },
+    "OPCOES_TGL": {
+      "planck_cov": "chen2019",
+      "dr1_cov": "correlacionada",
+      "dm_star": "razao_camb",
+      "mapa_R": "eff",
+      "lei": "d1a",
+      "beta_no_fundo": "sim",
+      "lei_sn": "nenhuma",
+      "lei_cc": "acumulada",
+      "cc_cov": "diagonal"
+    },
+    "OPCOES_ARTIGO": {
+      "planck_cov": "chen2019",
+      "dr1_cov": "correlacionada",
+      "dm_star": "razao_camb",
+      "mapa_R": "nu",
+      "lei": "d1b",
+      "beta_no_fundo": "nao",
+      "lei_sn": "nenhuma",
+      "lei_cc": "acumulada",
+      "cc_cov": "diagonal"
+    }
+  },
+  "table_config": {
+    "camb": "2.0.4",
+    "numpy": "2.5.3",
+    "conf": {
+      "mnu": 0.06,
+      "tau": 0.0544,
+      "ns": 0.9649,
+      "As": 2.1e-09,
+      "TCMB": 2.7255,
+      "Neff": 3.046
+    },
+    "grade": {
+      "H0": [
+        58.0,
+        78.0,
+        11
+      ],
+      "ombh2": [
+        0.02,
+        0.025,
+        21
+      ],
+      "omch2": [
+        0.1,
+        0.14,
+        21
+      ]
+    },
+    "n_pontos": 4851,
+    "n_teste": 400,
+    "semente_teste": 20260928,
+    "segundos": 1.6,
+    "sha256": "6bc4dd4a092325007ed05504401d6722d2f849956f3168a72b474786b4ce7363",
+    "fonte_da_configuracao": "tgl_camb_worker_v3.py (sha256 72032b3abe1c537762291ac6086d8d2e6076c007373f87ae7363f942eb830ce3), derivados()"
+  },
+  "table_useful_support": {
+    "H0": [
+      60.0,
+      76.0
+    ],
+    "ombh2": [
+      0.02025,
+      0.02475
+    ],
+    "omch2": [
+      0.10200000000000001,
+      0.138
+    ]
+  },
+  "pipeline_prior_limits": {
+    "H0": [
+      50.0,
+      90.0
+    ],
+    "ombh2": [
+      0.015,
+      0.03
+    ],
+    "omch2": [
+      0.08,
+      0.18
+    ],
+    "beta": [
+      -0.05,
+      0.05
+    ],
+    "c": [
+      -0.05,
+      0.05
+    ]
+  },
+  "table_fraction_of_pipeline_3d_prior_volume": 0.043200000000000016,
+  "table_fraction_is_not_posterior_mass": true,
+  "existing_validations": {
+    "reproduction": {
+      "when": "2026-10-01 12:45:28",
+      "summary": {
+        "veredito": "BANCADA_UM_REPRODUZ_O_D1_V3_SELADO",
+        "tabela_camb_erro_relativo_max": 6.54425440416162e-06,
+        "fundo_vs_worker_erro_relativo_max": 2.545572419521136e-09,
+        "chi2_lcdm": [
+          16.6809,
+          16.681
+        ],
+        "chi2_tgl": [
+          23.2945,
+          23.2948
+        ],
+        "delta_chi2": [
+          6.6136,
+          6.6138
+        ],
+        "mcmc_beta": [
+          -0.01281,
+          -0.01275
+        ],
+        "mcmc_desvio_das_medianas_em_sigma_max": 0.0727778635067093
+      }
+    },
+    "corrected": {
+      "when": "2026-09-28 19:26:59",
+      "verdict": "BANCADA_UM_MODO_CORRIGIDO_REPRODUZ_O_VERIFICADOR_D1",
+      "cases": {
+        "selado": true,
+        "dr1_correlacionada": true,
+        "planck_chen2019": true,
+        "chen+corr": true,
+        "dm_star_razao": true,
+        "corrigido_completo": true,
+        "mapa_R_eff+chen": true,
+        "mapa_R_eff+chen+corr": true
+      }
+    }
+  },
+  "no_bench_write": true,
+  "no_runtime_resident_verification": true,
+  "new_empirical_significance": null
+}

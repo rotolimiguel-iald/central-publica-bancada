@@ -1,0 +1,11 @@
+--- snapshot514/worker.py
++++ v2/worker.py
+@@ -2,7 +2,7 @@
+ import sys, os, json, hashlib, types, time
+ from pathlib import Path
+ import importlib.util, importlib.machinery, threading, copy
+-BASE=Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation")
++BASE=Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2")
+ def load_common():
+     c=json.loads((BASE/"CONTRATO_WSL.json").read_bytes()); raw=(BASE/"common.py").read_bytes()
+     item=next(x for x in c["local_pins"] if x["relative_path"]=="common.py")

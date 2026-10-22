@@ -1,0 +1,58 @@
+[REAL — custódia documental e hashes medidos nesta sessão; DERIVED — síntese de escopo; DECLARADO — resultados de compilações/rodada de origem não refeitos aqui; OPEN — identificação física e teste de natureza]
+
+# ORDEM 016 — relatório final da Parte A (A0–A8) e estado da Parte B
+
+**Corte:** 27/09/2026, leitura local. Este é o fechamento **documental da Parte A**, com os alvos integrais A0–A8 classificados como **MEDIDA**: há subresultados pagos no escopo indicado, mas nenhum alvo integral descarregou a fronteira física por termo. A ordem oficial foi lida com suas prioridades, árvores e regra de entrega. A abertura da missão tem SHA-256 `216a1a7d6b29548a4a47f5aa22f67e953d04f56d2e00bc3e505487d68df0f57a` (recalculado). O pacote `FECHAMENTO_PARCIAL_016/PRONTO.json` declara `PARTIAL_THEORETICAL_PACKAGE_DELIVERED`, `gate_changed=false` e `canonical_written=false`; seu P1 preserva pendências por alvo. O mapa lateral A0–A8 é **auditoria amostral de custódia**: conferiu 18 fontes históricas do P1, o índice do PRONTO e três arquivos amostrados; não certifica todo o PRONTO, todas as compilações nem a identificação física.
+
+## Resultado por alvo
+
+| Alvo | Estatuto do alvo integral e evidência direta | Hipótese/obrigação aberta; efeito na fronteira |
+|---|---|---|
+| **A0** | **MEDIDA.** Precondições, manifesto, estado histórico v370 e ensaio Lean local registrados; upload integral ficou sem recibo conclusivo após bloqueio de 5.040,8872 s. `ENTREGA_016_A0_precondicoes.md`. | `ScientificUploadReceiptMeasured`; execução remota dos três itens não inferida. **Não move** a fronteira. |
+| **A1** | **MEDIDA.** Contrato v3.1, controles de brinquedo/não KMS, consumidor de energia positiva e extensão condicional de tensor entregues. Reprodução integral v3/v3.1 sob 8 GiB falhou; a extensão não produz operador local físico. `ENTREGA_016_A1_contrato.md`. | `PhysicalPhotonNetContractMeasured`, localidade e reprodução integral. **Não fornece** habitante H2/H3. |
+| **A2** | **MEDIDA**, com **A2.5c PAGO no escopo matemático**: transformada limitada de operador auto-adjunto arbitrário, núcleo e transporte condicional de gap; pontes formais documentadas. `ENTREGA_016_A2_5c_transformada_ilimitada.md`. | `IsotonyImpliesStripMultiplierCriterion` e ligação ao par regional físico. A transformada não identifica o operador microscópico nem descarrega H2. |
+| **A3** | **MEDIDA.** Energia positiva, continuidade e covariância demonstradas no espaço orbital escalar; nesse setor de uma partícula não há vetor normalizado fixo pelos boosts. `ENTREGA_016_A3_energia_covariancia_e_vacuo.md` e `ENTREGA_016_A3_H2_par_fisico.md`. | `PhysicalPhotonNetContractMeasured` e `GlobalHelicityInducedRepresentationMeasured`: helicidades físicas ±1, Fock/rede regional, vácuo e BW do par. **H2 físico não pago.** |
+| **A4** | **MEDIDA.** Wick, período `2π/κ` e calibração algébrica no domínio declarado; KMS regional aparece somente sob hipóteses nomeadas. Dez leituras de ringdown foram mantidas lado a lado. `ENTREGA_016_A4_circulo_KMS.md`. | `H_regional_modular_strip`, `H_modular_equals_geometric` e relógio do mesmo horizonte. Período algébrico não prova KMS do par nem escolhe observável. |
+| **A5** | **MEDIDA.** Propagador teleológico, resposta e import H3 indexado pelo **mesmo H2/horizonte** construídos como implicação sob entradas explícitas. `ENTREGA_016_A5_RELATORIO.md`. | `PhysicalModularChargeLinkMeasured` e `TeleologicalPhysicalInputsMeasured`, mais probe integral original. A função H2→H3 não constrói H2 físico; **H3 físico não pago**. |
+| **A6** | **MEDIDA.** Doze fontes individuais e 127 lemas locais reportados auditados; integração isolada posterior paga em **C3**, uma única evidência compartilhada. A recusa histórica do monólito sob 8 GiB permanece; a ficha de transposição não é instalação canônica. `ENTREGA_016_A6_E_transposicao.md`, P1 e PRONTO. | `StrongInfiniteDephasingLimitMeasured`; ratificação/transposição canônica. O limite forte infinito não decorre do controle finito. **Não move** H2/H3 ou gate. |
+| **A7** | **MEDIDA.** Primitiva clássica, controles localizados e escopo UV tipado; Q2 curva completa não paga no timebox. `ENTREGA_016_A7_setor_interagente.md`. | `Q2FullCovariantRenormalizedWardMeasured`: família temporal covariante, representante integral, Wess–Zumino/classe e contratermos na mesma prescrição; `PhysicalUVCompletionMeasured` continua aberto para métrica quantizada. **Não fecha** estado interagente/QME/UV físico. |
+| **A8** | **MEDIDA.** Leitor exato e controles de engenharia propostos; consumidor condicional compilado. Logs integrais dos três probes físicos históricos não constam do pacote A8; seus rc são declarados pela origem. `ENTREGA_016_A8_degrau_do_gate.md`. | `ContractV32RatificationAndClosedReaderMeasured`, repetição dos probes físicos e termos fechados no par escolhido. Proposta/consumidor condicional **não acendem** as flags físicas. |
+
+**Critério físico.** O kernel e o pacote fornecem implicações formais e realizações parciais sob hipóteses nomeadas. Para H2 falta o habitante do contrato no par físico: rede/vácuo, helicidades, ação modular e identificação geométrica BW. Para H3 falta ligar carga modular, tensor físico e resposta no **mesmo** horizonte do H2. O setor interagente não ganhou uma QME física completa nem resposta UV para a métrica quantizada. O custo futuro estimado na ordem para Fock/Weyl/vácuo/rede é **100–300 h**; para fluxo modular sobre a rede e core de Takesaki é **≥100 h**. São estimativas `[INPUT]`, não horas executadas. As demais identificações dependem do par/normalização escolhidos pelo operador e não têm custo total aferido.
+
+**Atualização posterior v373, sem promoção de estatuto.** A nota de custódia `ENTREGA_016_MEDIDA_v373_selo_correspondente_v2.md`, seguida pela matriz `ENTREGA_016_MEDIDA_matriz_parteA_20260927_v2.md`, relata selo correspondente e quitação H2/H3 **por citação na classe separada `gpc_`**, com nove controles de kernel. A mesma nota registra `gpf_H2=false`, `gpf_H3=false`, `gpi_H3=false`, `full_plan_complete=false` e `legacy_gate_changed=false`; o leitor A8 aceita citação e recusa convertê-la em termo fechado sem hipótese. A retipagem v373 diz que a pergunta BRST/QME/UV de **métrica quantizada** não é posta pelo contrato semiclássico (`THE_QUESTION_CHANGED_NOT_ANSWERED`): isso não demonstra completamento UV. Nesta sessão os quatro artefatos canônicos v373, fora da casa acessível, não puderam ser rehasheados diretamente; estes dados são atribuídos aos dois recibos locais verificados, sem repetir seus pins como medição própria. O retrato histórico v370 do P1 não substitui o estado posterior v373.
+
+**Gate e natureza.** O gate legado informado pelo recibo v373 permanece `TGL_QG_MODEL_FORMALLY_CLOSED__NATURE_TEST_COMPLETED_WITHIN_LOCAL_BULK_AT_AVAILABLE_SENSITIVITY__MORE_SENSITIVE_DATA_COULD_REVISE`; a classe por citação não o moveu. A Parte A **não autoriza** a frase “gravidade quântica universalmente fechada” nem converte `NOT_FALSIFIED` em `CONFIRMED`. Não houve confirmação experimental nova, em particular **nenhuma confirmação 5σ**. A matemática condicional, a identificação física do par/horizonte e a decisão da natureza têm estatutos distintos.
+
+## Parte B — fonte direta, sem bloquear a Parte A
+
+O arquivo `ENTREGA_015_RELATORIO_FINAL.md` já existe e foi lido nesta sessão (SHA-256 na tabela abaixo). Seu fechamento é **documental**: T01–T19 conservam pagamentos restritos, parciais e não pagos por alvo. Ele mede **13,64838851314324 h debitadas de 35,01724298083333 h autorizadas**, com saldo aritmético **21,368854467690092 h**. T03 terminou com **0/30** células de nulos aceitas; T04 não produziu posterior pSEOB aceito para σ; T10 mantém `sigma(c)=null`; T15 não iniciou injeções por pré-condições; T16 não fez PE cega. A atualização T19 registra strain público do evento, mas censo/elegibilidade e inferência permanecem abertos. O relatório B declara **nenhum z conjunto calibrado de 5σ**, nenhuma alteração de gate e custo monetário conhecido apenas **parcial** (US$ 3,0821417664); assinaturas, falhas incertas e coordenação não equivalem a custo zero. Seu relatório contém a matriz detalhada e os recibos de cada T; não se somam sigmas de canais ou leituras.
+
+## Custódia, recursos e reprodução
+
+SHA-256 abaixo **recalculados dos bytes locais nesta sessão**. Os caminhos das entregas são relativos a `TUNEL/DO_CHATGPT/`; os de mapa e ordem partem de `Chatgpt/`.
+
+| Artefato | SHA-256 |
+|---|---|
+| `TUNEL/PARA_CHATGPT/ORDEM_016_a_gravidade_quantica_primeiro.md` | `c0614dbd8d9ba6065aa4e62863df92f14702b1f61e4e2f2b52c500bf97aacfe5` |
+| `ORDEM_016_QG/AUDIT_LATERAL/MAPA_A0_A8.json` | `0a5deaf033bcba75ada4fc6a33cbc3fe87fb7757ecae8116b9d1ecad81147ebf` |
+| `ORDEM_016_QG/AUDIT_LATERAL/MAPA_A0_A8.md` | `4161db859545f9e434a567877fe8264a9b1cca8c72b6ecd86231f389fecc6d8a` |
+| `FECHAMENTO_PARCIAL_016/PRONTO.json` | `d3705082716ffe8e1de8b2694c2cb56d840eff03f00fcde4034ad7dfffd59bb8` |
+| `FECHAMENTO_PARCIAL_016/P1_QUADRO.json` | `3155dbe4d98c12c7275cd46ea1f4ae79abf771c8448b72204fec549db7b6f55d` |
+| `ENTREGA_016_A0_precondicoes.md` | `abdae358adac2ffb156c76a8591ebe739d107a22d25316a0d2c6258c438a9e5f` |
+| `ENTREGA_016_A1_contrato.md` | `0db3563552d35fd146b09df56bed49be9bff58f48dfda46b1d50220c915741b1` |
+| `ENTREGA_016_A2_5c_transformada_ilimitada.md` | `93af2f8ab830ccc0868a334fbf6d9e21aee3aa79b07d5bb68011b8044a64dfe0` |
+| `ENTREGA_016_A3_energia_covariancia_e_vacuo.md` | `3520f8a193963d66d1cc6f8eeef6562f434f68ead886f31c9ccfee89159758d1` |
+| `ENTREGA_016_A3_H2_par_fisico.md` | `f953b5fbaed6992b141eb3bb533cd03240fe31a5b286c136211f604a7a52d0f4` |
+| `ENTREGA_016_A4_circulo_KMS.md` | `7335d717c78fa6420e9cc3fe2f174ece4591f193f95554e761842d5269661731` |
+| `ENTREGA_016_A5_RELATORIO.md` | `82cda6192da6a1018c69ff70e6d6024b31c041e7349826b910c6886b2adbb2f0` |
+| `ENTREGA_016_A6_E_transposicao.md` | `f9c0617c33d961fb1c8f7b9bcef7c062518a9dbee40fca3dd921939ddf72174e` |
+| `ENTREGA_016_A7_setor_interagente.md` | `fb8234467e5965f512105a7aa0ca89da2a6b7427c26b9d9ee14e84db23fb3e49` |
+| `ENTREGA_016_A8_degrau_do_gate.md` | `aab6cedee2b075f2afc773011bb1da1fb57d06b06811174eafa01516587d5270` |
+| `ENTREGA_016_MEDIDA_v373_selo_correspondente_v2.md` | `e890b7c9f360078d1a6b499dbb113e27cb3d20493404d3454deb50a6bd72c8e0` |
+| `ENTREGA_016_MEDIDA_matriz_parteA_20260927_v2.md` | `aefdf3aa16537fc57fe81bd65b55f1b0e42544e8e2bcdaf7daa8185bee37f6a4` |
+| `ENTREGA_015_RELATORIO_FINAL.md` | `84e65658012f0ba1d6cb2cb50e1c06ab090032f4ad4a04841cb351237e1920c8` |
+
+**Horas e custos:** A0 registrou 1,736511 h decorridas, incluindo upload bloqueante; A7.b registrou janela de 23,991189 h, que não mede atenção ativa. A8 registrou 0,184534 h de bancada contra teto de 4 h. O P1 não fornece total aditivo confiável de parede/CPU da Parte A: intervalos se sobrepõem e recibos medem escopos distintos. O custo monetário integral por provedor não é aferível de modo deduplicado no `LEDGER_016.jsonl` heterogêneo; o parcial conhecido citado acima **não é total da missão**. Nenhum valor ausente foi lançado como zero. Custos futuros estimados constam no critério físico acima; propostas e timeboxes vencidos não são prova de execução.
+
+**Método de reprodução desta leitura:** `Get-FileHash -Algorithm SHA256` sobre cada arquivo da tabela; `ConvertFrom-Json` para conferir `PRONTO.status/gate_changed/canonical_written`, `P1_QUADRO.items` e `MAPA_A0_A8.items`; leitura direta das entregas citadas e do relatório 015. Foram verificados os hashes **destes arquivos**, não reexecutados Lean, `um.py`, o kernel nem o programa original. Não houve edição de `um.py`, kernel, Atlas ou memórias por este relatório. O mapa lateral não foi promovido a auditoria integral.

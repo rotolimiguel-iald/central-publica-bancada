@@ -1,0 +1,51 @@
+{
+  "request_id": "4893d182-7efc-419f-ac8a-ec6803ea8d7a",
+  "status": "TWO_BLOCKERS_BEFORE_EXECUTION",
+  "findings": [
+    {
+      "id": "TI-01",
+      "blocking": true,
+      "title": "Frozen family membership not bound to Domain.scenarios",
+      "locations": [
+        "tail_envelope.py:85",
+        "tail_envelope.py:333",
+        "tail_envelope.py:356"
+      ],
+      "counterexample_type": "STATIC_BRANCH_TRACE_NOT_EXECUTED",
+      "remedies": [
+        "Explicit DOMAIN/FAMILY receipt bound to ordered complete labels and test/null/model/algorithm refs",
+        "Canonical direct hash of full family representation if compatible with scientific contract"
+      ]
+    },
+    {
+      "id": "TI-02",
+      "blocking": true,
+      "title": "No deadline recheck after terminal persistence",
+      "locations": [
+        "supervisor.py:251",
+        "supervisor.py:272",
+        "supervisor.py:280",
+        "CONTROL_CONTRACT.json:timer_scope"
+      ],
+      "remedies": [
+        "Post-IO deadline check with nonzero exit invalidating provisional PASS",
+        "Separate provisional work receipt and final supervisor acceptance required by consumer"
+      ]
+    },
+    {
+      "id": "TI-03",
+      "blocking": false,
+      "title": "Output caps are post-collection acceptance caps, not bounded retention",
+      "locations": [
+        "supervisor.py:212",
+        "supervisor.py:219",
+        "supervisor.py:138"
+      ],
+      "remedies": [
+        "State post-collection acceptance-only scope for pinned worker",
+        "Incremental bounded capture with visible limit and common deadline"
+      ]
+    }
+  ],
+  "executed_counterexamples": 0
+}

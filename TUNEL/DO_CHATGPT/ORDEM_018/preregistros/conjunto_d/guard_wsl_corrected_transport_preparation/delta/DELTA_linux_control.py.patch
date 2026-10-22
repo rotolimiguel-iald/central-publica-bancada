@@ -1,0 +1,81 @@
+--- terminal_v2/linux_control.py
++++ corrected_transport/linux_control.py
+@@ -3,7 +3,7 @@
+ ENTRY=time.monotonic()
+ import sys,os,json,hashlib,types,subprocess,selectors,fcntl,signal
+ from pathlib import Path
+-BASE=Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2")
++BASE=Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_corrected_transport_preparation")
+ def load():
+     c=json.loads((BASE/"CONTRATO_WSL.json").read_bytes());raw=(BASE/"common.py").read_bytes()
+     q=next(x for x in c["local_pins"] if x["relative_path"]=="common.py")
+@@ -44,6 +44,9 @@
+     finally:sel.close()
+ 
+ def validate_case(g,child,nonce,proc):
++    g.validate_observed_argv(child["argv_transport"],"--child",nonce)
++    g.need(child["argv_transport"]==g.read(BASE/"RUN/ARGV_CHILD.json"),"Child argv physical receipt")
++    g.need(child["argv_transport"]["process"]==child["process"],"Child argv process binding")
+     g.need(child["status"]=="PASS_EXPECTED_LATCHED" and child["request_id"]==g.REQUEST and child["case_id"]==g.CASE,"Case identity/status")
+     g.need(child["nonce"]==nonce and child["process"]["pid"]==proc.pid and child["parent_pid"]==os.getpid(),"Case PID/nonce")
+     g.need(child["import_returned_normally"] and child["next_blocked"] and child["final_blocked"] and child["callbacks"]==0,"Import/checkpoints")
+@@ -58,9 +61,9 @@
+     g.need(child["scientific_imports"]==child["scientific_calls"]==child["new_children"]==0 and child["D_read"] is False,"Scope")
+     g.need(child["runtime"]["executable"]==g.PY and child["runtime"]["version"].startswith("3.12."),"Runtime")
+ 
+-def supervise(g,c,w,nonce):
++def supervise(g,c,w,nonce,transport):
+     deadline=ENTRY+15;work=min(ENTRY+9,time.monotonic()+max(0,w["work_deadline_epoch"]-time.time()))
+-    me=g.serial_identity(g.proc_identity(os.getpid()))
++    me=transport["process"]
+     g.fresh(BASE/"RUN/LINUX_CLAIM.json",{"request_id":g.REQUEST,"nonce":nonce,"process":me,
+         "contract_sha256":g.pin(BASE/"CONTRATO_WSL.json")["sha256"],"retry_allowed":False})
+     proc=None;argv=g.argv_for("--child",nonce);status="FAILED";error=None;streams=None;child=None;clean=False
+@@ -89,7 +92,7 @@
+     if streams:
+         for name,raw in streams.items():
+             with (BASE/"RUN"/(name+".bin")).open("xb") as f:f.write(raw);f.flush();os.fsync(f.fileno())
+-    receipt={"status":status,"request_id":g.REQUEST,"nonce":nonce,"process":me,"child":child,"child_reaped":clean,
++    receipt={"status":status,"request_id":g.REQUEST,"nonce":nonce,"process":me,"argv_transport":transport,"child":child,"child_reaped":clean,
+         "child_returncode":None if proc is None else proc.returncode,"error":error,"wall_before_receipt_s":time.monotonic()-ENTRY,
+         "scientific_calls":0,"retry_allowed":False,"requires_external_cleanup_receipt":True}
+     g.fresh(BASE/"RUN/LINUX_RESULT.json",receipt)
+@@ -98,11 +101,11 @@
+     g.need(time.monotonic()<deadline,"Terminal stdout exceeded Linux deadline")
+     return 0 if status=="WSL_CONTROL_PASS_PENDING_EXTERNAL_CLEANUP" and clean else 1
+ 
+-def cleanup(g,c,w,nonce):
++def cleanup(g,c,w,nonce,transport):
+     deadline=ENTRY+12;stopped=[];lockfd=None
+     g.need((BASE/"RUN/STOP.json").exists(),"Windows durable stop fence required")
+     fence=g.read(BASE/"RUN/STOP.json");g.need(fence["nonce"]==nonce and fence["request_id"]==g.REQUEST,"Stop fence identity")
+-    g.fresh(BASE/"RUN/CLEANUP_CLAIM.json",{"request_id":g.REQUEST,"nonce":nonce,"process":g.serial_identity(g.proc_identity(os.getpid()))})
++    g.fresh(BASE/"RUN/CLEANUP_CLAIM.json",{"request_id":g.REQUEST,"nonce":nonce,"process":transport["process"]})
+     status="UNCERTAIN_ORPHAN_STATE";error=None
+     try:
+         # First terminate only exact known commands. pidfd prevents PID-reuse signaling.
+@@ -124,7 +127,7 @@
+     except BaseException as exc:error={"type":type(exc).__name__,"message":str(exc)[:2000]}
+     finally:
+         if lockfd is not None:os.close(lockfd)
+-    result={"status":status,"request_id":g.REQUEST,"nonce":nonce,"stopped":stopped,"error":error,
++    result={"status":status,"request_id":g.REQUEST,"nonce":nonce,"stopped":stopped,"error":error,"argv_transport":transport,
+         "launch_fence_persistent":True,"wall_before_receipt_s":time.monotonic()-ENTRY,"control_runs":0,"scientific_calls":0}
+     g.fresh(BASE/"RUN/CLEANUP_RESULT.json",result);g.need(time.monotonic()<deadline,"Cleanup final IO deadline")
+     print(json.dumps(result,sort_keys=True),flush=True)
+@@ -136,10 +139,13 @@
+     nonce=sys.argv[3];g.check_pins(c,linux=True);_,ah=g.authorization(c);w=g.read(BASE/"CLAIM.json")
+     g.need(w["request_id"]==g.REQUEST and w["nonce"]==nonce and w["authorization_sha256"]==ah,"Windows claim")
+     g.need(w["contract_sha256"]==g.pin(BASE/"CONTRATO_WSL.json")["sha256"],"Claim pin")
++    transport=g.observed_argv(sys.argv[1],nonce)
++    receipt_name="ARGV_SUPERVISOR.json" if sys.argv[1]=="--supervisor" else "ARGV_CLEANUP.json"
++    g.fresh(BASE/"RUN"/receipt_name,transport);g.validate_observed_argv(transport,sys.argv[1],nonce)
+     g.need(hasattr(os,"pidfd_open") and hasattr(signal,"pidfd_send_signal"),"pidfd capability required before control")
+     ownfd=os.pidfd_open(os.getpid(),0);os.close(ownfd)  # Capability preflight, no signal.
+-    if sys.argv[1]=="--supervisor":return supervise(g,c,w,nonce)
+-    return cleanup(g,c,w,nonce)
++    if sys.argv[1]=="--supervisor":return supervise(g,c,w,nonce,transport)
++    return cleanup(g,c,w,nonce,transport)
+ if __name__=="__main__":
+     try:sys.exit(main())
+     except Exception as e:print(json.dumps({"status":"FAILED_PREFLIGHT_OR_RECEIPT","error":type(e).__name__,"message":str(e)[:1200]}));sys.exit(1)

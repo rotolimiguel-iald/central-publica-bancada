@@ -1,0 +1,318 @@
+{
+  "schema": "r69-locality-source-pins/v1",
+  "created_at": "2026-10-18T13:24:24.437170+00:00",
+  "scope": "Read-only source examination and new written derivation; no compilation or production change",
+  "mission_revision_observed": 491,
+  "source_count": 12,
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalCompactNetCovarianceR1.lean",
+      "sha256": "2512d049b0851947ad605a25b3ba47d049e37946baa861e13a8db23ece252fe1",
+      "bytes": 7208,
+      "lines": 143,
+      "anchors": [
+        {
+          "marker": "def compactSupportedGenerators",
+          "line": 15,
+          "through": 24,
+          "excerpt": "def compactSupportedGenerators (O : Set Spacetime) : Set H1 :=\n  {v | ∃ f : SchwartzTensor, IsRealTest f ∧\n    HasCompactSupport (f : Spacetime → TensorValue) ∧\n    tsupport (f : Spacetime → TensorValue) ⊆ O ∧ circularSmear f=v}\n\ndef compactLocalized (O : Set Spacetime) : Submodule ℝ H1 :=\n  (Submodule.span ℝ (compactSupportedGenerators O)).topologicalClosure\n\ntheorem compactLocalized_closed (O : Set Spacetime) :\n    IsClosed (compactLocalized O : Set H1) := Submodule.isClosed_topologicalClosure _"
+        },
+        {
+          "marker": "def compactLocalized",
+          "line": 20,
+          "through": 29,
+          "excerpt": "def compactLocalized (O : Set Spacetime) : Submodule ℝ H1 :=\n  (Submodule.span ℝ (compactSupportedGenerators O)).topologicalClosure\n\ntheorem compactLocalized_closed (O : Set Spacetime) :\n    IsClosed (compactLocalized O : Set H1) := Submodule.isClosed_topologicalClosure _\n\ntheorem compactLocalized_mono {O P : Set Spacetime} (h : O ⊆ P) :\n    compactLocalized O ≤ compactLocalized P := by\n  apply Submodule.topologicalClosure_mono\n  apply Submodule.span_mono"
+        },
+        {
+          "marker": "theorem compactLocalized_lorentz_iff",
+          "line": 130,
+          "through": 139,
+          "excerpt": "theorem compactLocalized_lorentz_iff (L : generatedLorentz) (O : Set Spacetime) (v : H1) :\n    v ∈ compactLocalized O ↔ helicityUnitary L v ∈ compactLocalized (lorentzRegion L O) := by\n  constructor\n  · exact compactLocalized_lorentz L O v\n  · intro hv\n    have h := compactLocalized_lorentz L⁻¹ (lorentzRegion L O) (helicityUnitary L v) hv\n    rw [lorentzRegion_inverse,←helicityUnitary_mul,inv_mul_cancel,helicityUnitary_one] at h\n    exact h\n\nend F1Fecho.MaxwellLocalization"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalCompactNetLocalityR2.lean",
+      "sha256": "c8bb95fbbc45bc7e25a1db2b0c7e82a8fe43c7cac4a790da161bf853e24b786b",
+      "bytes": 1174,
+      "lines": 25,
+      "anchors": [
+        {
+          "marker": "theorem compactLocalized_locality",
+          "line": 14,
+          "through": 23,
+          "excerpt": "theorem compactLocalized_locality (O P : Set Spacetime)\n    (hsep : ∀ x ∈ O, ∀ y ∈ P, minkowskiSq (fun i => x i-y i)<0)\n    (u v : H1) (hu : u ∈ compactLocalized O) (hv : v ∈ compactLocalized P) :\n    (inner ℂ u v).im=0 := by\n  apply GenericSymplecticSpan.closed_spans_zero\n    (compactSupportedGenerators O) (compactSupportedGenerators P) ?_ u v hu hv\n  rintro x ⟨f,hfr,hfc,hfs,rfl⟩ y ⟨g,hgr,hgc,hgs,rfl⟩\n  exact physical_compact_spacelike_zero f g hfr hgr hfc hgc\n    (fun x hx y hy => hsep x (hfs hx) y (hgs hy))\n"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalCompactNetAssemblyR1.lean",
+      "sha256": "19d55dd69e9151443ec32090918c199220ac3106b21bb3bc522b6be7dc22fe5c",
+      "bytes": 2607,
+      "lines": 56,
+      "anchors": [
+        {
+          "marker": "theorem compactPhysicalNet_local",
+          "line": 18,
+          "through": 27,
+          "excerpt": "theorem compactPhysicalNet_local (O P : Set (Fin 4 → ℝ)) (hsep : SpacelikeSep O P) :\n    ∀ f ∈ compactPhysicalNet O, ∀ g ∈ compactPhysicalNet P, (inner ℂ f g).im=0 := by\n  intro f hf g hg\n  exact compactLocalized_locality (coordinateRegion O) (coordinateRegion P)\n    (fun x hx y hy => hsep (fun i => x i) hx (fun i => y i) hy) f g hf hg\n\ntheorem compactPhysicalNet_wedge_glue :\n    compactPhysicalNet rightWedge=KWR.toClosedSubmodule.toSubmodule :=\n  compactPhysicalNet_rightWedge.trans\n    (compactLocalized_rightWedge_eq.trans physical_right_wedge_eq_KWR)"
+        },
+        {
+          "marker": "theorem compactPhysicalNet_wedge_glue",
+          "line": 24,
+          "through": 33,
+          "excerpt": "theorem compactPhysicalNet_wedge_glue :\n    compactPhysicalNet rightWedge=KWR.toClosedSubmodule.toSubmodule :=\n  compactPhysicalNet_rightWedge.trans\n    (compactLocalized_rightWedge_eq.trans physical_right_wedge_eq_KWR)\n\ndef physicalCanonicalNet : CanonicalNetInput where\n  toLightNetData :=\n    { helicity := 1\n      helicity_light := Or.inl rfl\n      K := compactPhysicalNet"
+        },
+        {
+          "marker": "def physicalCanonicalNet",
+          "line": 29,
+          "through": 38,
+          "excerpt": "def physicalCanonicalNet : CanonicalNetInput where\n  toLightNetData :=\n    { helicity := 1\n      helicity_light := Or.inl rfl\n      K := compactPhysicalNet\n      K_mono := compactPhysicalNet_mono\n      K_local := compactPhysicalNet_local\n      K_translate := compactPhysicalNet_translate\n      K_boost := compactPhysicalNet_boost }\n  wedge_glue := compactPhysicalNet_wedge_glue"
+        },
+        {
+          "marker": "theorem physical_canonical_net_nonzero",
+          "line": 43,
+          "through": 52,
+          "excerpt": "theorem physical_canonical_net_nonzero :\n    ∃ v : H1, v ∈ physicalCanonicalNet.K rightWedge ∧ v≠0 :=\n  canonical_wedge_nonzero physicalCanonicalNet\n\ntheorem physical_canonical_net_zero_refused : physicalCanonicalNet.K rightWedge≠⊥ :=\n  zero_wedge_refused physicalCanonicalNet\n\nend F1Fecho.MaxwellLocalization\n#print axioms F1Fecho.MaxwellLocalization.compactPhysicalNet_local\n#print axioms F1Fecho.MaxwellLocalization.compactPhysicalNet_wedge_glue"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_bundle_r7\\src\\TGLExt\\F1Fecho394\\FieldWeylR3.lean",
+      "sha256": "e86e512b80f10c2ccd55eee55aa41ff0a48a873af708c11845f2aa407ffb3433",
+      "bytes": 4745,
+      "lines": 105,
+      "anchors": [
+        {
+          "marker": "def rotate",
+          "line": 18,
+          "through": 27,
+          "excerpt": "def rotate (f : H1) : H1 := Complex.I • f\n\ntheorem rotate_inner (f g : H1) : inner ℂ (rotate f) (rotate g) = inner ℂ f g := by\n  simp only [rotate,inner_smul_left,inner_smul_right,Complex.conj_I]\n  calc\n    Complex.I * (-Complex.I * inner ℂ f g) = -(Complex.I * Complex.I) * inner ℂ f g := by ring\n    _ = inner ℂ f g := by simp\n\ntheorem rotate_add (f g : H1) : rotate (f+g) = rotate f + rotate g := by simp [rotate,smul_add]\n"
+        },
+        {
+          "marker": "def W (",
+          "line": 30,
+          "through": 39,
+          "excerpt": "def W (f : H1) : F →L[ℂ] F := ConcreteWeyl.W (rotate f)\n\ntheorem W_zero : W 0 = 1 := by simp [W,rotate,ConcreteWeyl.W_zero]\n\ntheorem W_strongly_continuous (v : F) : Continuous (fun f : H1 => W f v) :=\n  (ConcreteWeyl.W_strongly_continuous v).comp (continuous_const.smul continuous_id)\n\n\ntheorem W_star (f : H1) : star (W f) = W (-f) := by\n  simp only [W,ConcreteWeyl.W_star,rotate_neg]"
+        },
+        {
+          "marker": "def R (",
+          "line": 60,
+          "through": 69,
+          "excerpt": "def R (K : Submodule ℝ H1) : VonNeumannAlgebra F := F1Fecho.WeylNet.R W K\n\ntheorem R_mono (K K' : Submodule ℝ H1) (h : K ≤ K') :\n    (R K : Set (F →L[ℂ] F)) ⊆ R K' := F1Fecho.WeylNet.R_mono W W_star K K' h\n\ntheorem R_local (K K' : Submodule ℝ H1)\n    (h : ∀ f ∈ K, ∀ g ∈ K', (inner ℂ f g).im = 0) :\n    ∀ x ∈ R K, ∀ y ∈ R K', Commute x y := F1Fecho.WeylNet.R_local W W_star W_local K K' h\n\ntheorem R_covariance (u : H1 ≃ₗᵢ[ℂ] H1) (K K' : Submodule ℝ H1)"
+        },
+        {
+          "marker": "theorem R_local",
+          "line": 65,
+          "through": 74,
+          "excerpt": "theorem R_local (K K' : Submodule ℝ H1)\n    (h : ∀ f ∈ K, ∀ g ∈ K', (inner ℂ f g).im = 0) :\n    ∀ x ∈ R K, ∀ y ∈ R K', Commute x y := F1Fecho.WeylNet.R_local W W_star W_local K K' h\n\ntheorem R_covariance (u : H1 ≃ₗᵢ[ℂ] H1) (K K' : Submodule ℝ H1)\n    (h : ∀ f, f ∈ K ↔ u f ∈ K') (x : F →L[ℂ] F) :\n    x ∈ R K ↔ (gamma u).conjStarAlgEquiv x ∈ R K' :=\n  F1Fecho.WeylNet.R_cov W W_star u (gamma u).conjStarAlgEquiv (W_covariance u) K K' h x\n\ntheorem W_mem_R (K : Submodule ℝ H1) (f : H1) (hf : f ∈ K) : W f ∈ R K :="
+        },
+        {
+          "marker": "theorem W_mem_R",
+          "line": 74,
+          "through": 83,
+          "excerpt": "theorem W_mem_R (K : Submodule ℝ H1) (f : H1) (hf : f ∈ K) : W f ∈ R K :=\n  F1Fecho.WeylNet.generators_mem _ (F1Fecho.WeylNet.generators_star_closed W W_star K) ⟨f,hf,rfl⟩\n\ndef wedgeFlow (L : TGLExt.QGSolution.LightNetData) (t : ℝ) :\n    (R (L.K TGL.SpecificAQFT.rightWedge)).toStarSubalgebra ≃⋆ₐ[ℂ]\n    (R (L.K TGL.SpecificAQFT.rightWedge)).toStarSubalgebra :=\n  F1Fecho.WeylFlow.wedgeFlow W W_star W_covariance L t\n\ntheorem wedgeFlow_zero (L : TGLExt.QGSolution.LightNetData) :\n    wedgeFlow L 0 = StarAlgEquiv.refl := F1Fecho.WeylFlow.wedgeFlow_zero W W_star W_covariance L"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_bundle_r7\\src\\TGLExt\\F1Fecho394\\ConcreteWeylR1.lean",
+      "sha256": "51a25c823c1e8f2fb2da3a0956ea097bbcf016b9fda8d1026f987ca0be961af3",
+      "bytes": 4929,
+      "lines": 110,
+      "anchors": [
+        {
+          "marker": "theorem W_ccr",
+          "line": 31,
+          "through": 40,
+          "excerpt": "theorem W_ccr (f g : H1) : W f * W g = phase f g • W (f+g) :=\n  F1Fecho.WeylConstruction.W_add _ _ _ f g\n\ntheorem W_star (f : H1) : star (W f) = W (-f) :=\n  F1Fecho.WeylConstruction.W_star _ _ _ f\n\ntheorem W_local (f g : H1) (h : (inner ℂ f g).im = 0) : Commute (W f) (W g) :=\n  F1Fecho.WeylConstruction.W_local _ _ _ f g h\n\ntheorem W_covariance (u : H1 ≃ₗᵢ[ℂ] H1) (f : H1) :"
+        },
+        {
+          "marker": "theorem R_local",
+          "line": 63,
+          "through": 72,
+          "excerpt": "theorem R_local (K K' : Submodule ℝ H1)\n    (h : ∀ f ∈ K, ∀ g ∈ K', (inner ℂ f g).im = 0) :\n    ∀ x ∈ R K, ∀ y ∈ R K', Commute x y := F1Fecho.WeylNet.R_local W W_star W_local K K' h\n\ntheorem R_covariance (u : H1 ≃ₗᵢ[ℂ] H1) (K K' : Submodule ℝ H1)\n    (h : ∀ f, f ∈ K ↔ u f ∈ K') (x : F →L[ℂ] F) :\n    x ∈ R K ↔ (gamma u).conjStarAlgEquiv x ∈ R K' :=\n  F1Fecho.WeylNet.R_cov W W_star u (gamma u).conjStarAlgEquiv (W_covariance u) K K' h x\n\ntheorem W_mem_R (K : Submodule ℝ H1) (f : H1) (hf : f ∈ K) : W f ∈ R K :="
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\segal_selfadjoint\\CanonicalSegalEssentialR6.lean",
+      "sha256": "2bf996905a71de23031262640dc967c51f1bc4d18eb68bd0d9db52acacff0788",
+      "bytes": 2616,
+      "lines": 55,
+      "anchors": [
+        {
+          "marker": "def segalFlow",
+          "line": 15,
+          "through": 24,
+          "excerpt": "def segalFlow (f : H1) (t : ℝ) : F →L[ℂ] F := FieldWeyl.W ((t:ℂ) • f)\n\ntheorem segalFlow_zero (f : H1) (x : F) : segalFlow f 0 x=x := by\n  simp [segalFlow,FieldWeyl.W_zero]\n\ntheorem segalFlow_add (f : H1) (s t : ℝ) (x : F) :\n    segalFlow f (s+t) x=segalFlow f s (segalFlow f t x) := by\n  have hp : WeylCoefficients.phase ((s:ℂ) • f) ((t:ℂ) • f)=1 := by\n    have hz : (inner ℂ f f).im=0 := inner_self_im (𝕜:=ℂ) f\n    rw [WeylCoefficients.phase, inner_smul_left, inner_smul_right]"
+        },
+        {
+          "marker": "theorem segal_essentially_selfadjoint",
+          "line": 35,
+          "through": 44,
+          "excerpt": "theorem segal_essentially_selfadjoint (f : H1) : IsSelfAdjoint (segal f).closure := by\n  apply invariant_unitary_essentialSelfAdjoint (segal f) (segalFlow f) (Real.sqrt 2)\n    (segalFlow_zero f) (segalFlow_add f) (segalFlow_norm f)\n  · exact fun t x => Weyl_preserves_domain ((t:ℂ) • f) x\n  · exact Weyl_domain_hasDerivAt f\n  · exact segal_dense f\n  · exact segal_formal_selfadjoint f\n  · exact Real.sqrt_ne_zero'.mpr (by norm_num)\n\ntheorem segal_closure_has_exponential_core (f : H1) :"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\StandardSubspace.lean",
+      "sha256": "9f5a7a2cfa95ad204e1afdff80d0b04fe5cf6293c593e744ea5c4a244f708cc7",
+      "bytes": 8831,
+      "lines": 225,
+      "anchors": [
+        {
+          "marker": "structure StandardSubspace",
+          "line": 178,
+          "through": 187,
+          "excerpt": "structure StandardSubspace where\n  /-- A real closed subspace `S`. -/\n  toClosedSubmodule : ClosedSubmodule ℝ H\n  /-- `S` is separating, that is, `S ⊓ i S` is the trivial subspace. -/\n  IsSeparating : toClosedSubmodule ⊓ toClosedSubmodule.mulI = ⊥\n  /-- `S` is cyclic, that is, `S ⊔ i S` is the whole space. -/\n  IsCyclic : toClosedSubmodule ⊔ toClosedSubmodule.mulI = ⊤\n\nend Def\n"
+        },
+        {
+          "marker": "  IsSeparating : toClosedSubmodule ⊓ toClosedSubmodule.mulI = ⊥",
+          "line": 182,
+          "through": 191,
+          "excerpt": "  IsSeparating : toClosedSubmodule ⊓ toClosedSubmodule.mulI = ⊥\n  /-- `S` is cyclic, that is, `S ⊔ i S` is the whole space. -/\n  IsCyclic : toClosedSubmodule ⊔ toClosedSubmodule.mulI = ⊤\n\nend Def\n\nnamespace StandardSubspace\n\nopen ClosedSubmodule\n"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\anchored_contour_r68\\AnchoredNameContourR68R3.lean",
+      "sha256": "c6ee858d4aae1ec237b0fcdd21bbdc3545533b56906f61e07779d34a2ab5c897",
+      "bytes": 8115,
+      "lines": 181,
+      "anchors": [
+        {
+          "marker": "theorem exact_correspondence_iff",
+          "line": 137,
+          "through": 146,
+          "excerpt": "theorem exact_correspondence_iff (a x : H) :\n    (post a x = a ∧ ((1 : H →L[ℂ] H) - post a) x = 0) ↔ x = a := by\n  constructor\n  · intro h\n    have hx : x - post a x = 0 := by simpa using h.2\n    exact (sub_eq_zero.mp hx).trans h.1\n  · intro h\n    subst x\n    simp [post_fixes_the_action]\n"
+        },
+        {
+          "marker": "theorem complementary_residual_is_invisible_to_projection",
+          "line": 147,
+          "through": 156,
+          "excerpt": "theorem complementary_residual_is_invisible_to_projection (a y : H)\n    (hy : post a y = 0) : post a (a + y) = a := by\n  rw [map_add, post_fixes_the_action, hy, add_zero]\n\ntheorem projection_alone_does_not_determine_input (a y : H)\n    (hy : post a y = 0) (hne : y ≠ 0) :\n    post a (a + y) = a ∧ a + y ≠ a := by\n  refine ⟨complementary_residual_is_invisible_to_projection a y hy, ?_⟩\n  intro h\n  apply hne"
+        },
+        {
+          "marker": "theorem projection_alone_does_not_determine_input",
+          "line": 151,
+          "through": 160,
+          "excerpt": "theorem projection_alone_does_not_determine_input (a y : H)\n    (hy : post a y = 0) (hne : y ≠ 0) :\n    post a (a + y) = a ∧ a + y ≠ a := by\n  refine ⟨complementary_residual_is_invisible_to_projection a y hy, ?_⟩\n  intro h\n  apply hne\n  exact add_left_cancel (h.trans (add_zero a).symm)\n\n#print axioms projection_contract\n#print axioms generator"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\BOSONIC_CONTINUUM_R66.txt",
+      "sha256": "ce231991f651be507bb5ff33600208b22231e004729c903e25eac577cd64aace",
+      "bytes": 9332,
+      "lines": 61,
+      "anchors": [
+        {
+          "marker": "2. Estrutura",
+          "line": 16,
+          "through": 25,
+          "excerpt": "2. Estrutura que permite retirar o corte — prova algébrica\nN=n_i+n_o+n_e, P_m=1_[0,m](N), dimP_mH=(m+1)².\n[N,h_0]=[N,J]=[N,Z]=0; a_i,a_o,σ_- baixamN por1.\nEm particular A e B preservamN separadamente. A†B=B†A=0, mas A X B†+B X A† não é zero como superoperador: usar dois canais independentes muda G.\nJ†J=(n_o+1)n_e+n_i(1-n_e)≤N. Cada L_j†L_j comutaN.\nLogo h_0 e todos L_j preservamP_mH, e L_j†L_j P_m=P_m L_j†L_j P_m. Embora L_j† isolado possa sair deP_m, seu produto L_j†L_j não sai.\n\n3. Construção conservativa sem bombeamento — não supor um limite\nSeja G_0,m o gerador matricial acima semh_d, com os operadores comprimidos P_m L_j P_m e P_m h_0 P_m. Para m≤n, E_mn:X↦V_mn X V_mn† é a inclusão pelos MESMOS vetores de número. Para TODO X∈T1(P_mH), inclusive |u><v| entre excitações diferentes,\nG_0,n E_mn(X)=E_mn G_0,m(X)."
+        },
+        {
+          "marker": "3. Construção",
+          "line": 23,
+          "through": 32,
+          "excerpt": "3. Construção conservativa sem bombeamento — não supor um limite\nSeja G_0,m o gerador matricial acima semh_d, com os operadores comprimidos P_m L_j P_m e P_m h_0 P_m. Para m≤n, E_mn:X↦V_mn X V_mn† é a inclusão pelos MESMOS vetores de número. Para TODO X∈T1(P_mH), inclusive |u><v| entre excitações diferentes,\nG_0,n E_mn(X)=E_mn G_0,m(X).\nProva: o termo de salto usa invariânciaP_m; o anticomutador usa o produto L†L que comutaN; h_0 é redutor. A identidade vale em cada matriz-unitária, logo em todoX. Exponenciando matrizes, T_0,n(t)E_mn=E_mnT_0,m(t).\nDefina D_0=∪_m P_m T1(H) P_m. O sistema compatível define T_0(t) emD_0, sem escolha de corte. Cada T_0,m é CPTP; sua norma T1→T1 é1, inclusive sobre matrizes complexas, pela dualidade com uma aplicação unital completamente positiva. D_0 é denso emT1(H), pois ||X-P_mXP_m||_1→0. Portanto T_0(t) estende UNICAMENTE por continuidade a T1(H). É semigrupo: a identidade de composição passa por densidade. É fortemente contínuo: vale em cada corte e a contração controla o erro de aproximação. Traço e positividade passam ao limite; positividade completa é conferida do mesmo modo em cada amplificação finita. Não há perda de massa nem hipótese adicional de não explosão.\nSe A_0 é o gerador fechado dessa extensão, D_0 é core em norma de gráfico: para z>0, R(z,A_0)Y=∫exp(-zt)T_0(t)Ydt pertence ao mesmo corte queY∈D_0; dado X∈D(A_0), aproxime Y=(z-A_0)X por Y_m∈D_0. X_m=R(z,A_0)Y_m∈D_0 satisfaz X_m→X e A_0X_m=zX_m-Y_m→A_0X. EmD_0, A_0 é exatamente a fórmula GKLS acima sem bomba.\n\n4. Bombeamento no MESMO gerador ilimitado\nB(X)=-i[h_d,X] é limitado emT1, ||B||≤2|Ω|. A perturbação limitada define A=A_0+B emD(A_0), comD_0 ainda core. Uma construção explícita é a série de Dyson-Phillips:\nT^(0)(t)=T_0(t), T^(k+1)(t)=∫_0^t T_0(t-s) B T^(k)(s)ds;"
+        },
+        {
+          "marker": "5. Aproximação",
+          "line": 37,
+          "through": 46,
+          "excerpt": "5. Aproximação finita controlada também COM bomba\nSe X=P_m0 X P_m0 e m≥m0, a expansão Dyson no cortem, com h_d,m=P_m h_d P_m, coincide com a expansão infinita até a ordem k=m-m0. Cada aplicação deB aumenta no máximo1 o suporte total, enquanto T_0 não aumenta o suporte. As duas caudas dão, após inclusão no espaço comum,\n||T(t)X-E_m T_m(t)X||_1 ≤ 2||X||_1 Σ_(k=m-m0+1)^∞ (2|Ω|t)^k/k!.\nPara comparar dois cortes m<n sobre o mesmoX, vale A MESMA cota com o menor m: os termos iniciais coincidem, cada cauda é limitada. Esta é cota analítica conservadora, não erro estatístico. T_m inclui todos os cinco dissipadores, Jaynes-Cummings e a bomba. Não são os antigos cortes independentes0/1.\nPara ρ positiva de momentoN finito, a relação formal adjunta é\nG†N=-κ_i n_i-κ_o n_o-γ_OH n_e+iΩ(σ_--σ_+)≤|Ω|I.\nA desigualdade de expectativa <N>_t≤<N>_0+|Ω|t segue porTrotter e semicontinuidade/Fatou: o fatorsem bomba reduzN, o fatorunitárioOH aumenta sua expectativa no máximo|Ω|Δt. Não se usa uma troca não justificada de limite e operadorilimitado para provar conservatividade.\n\n6. Ponte ao Fock já construído — além dos quatro vetores0/1\nEscolham fi,fo∈H1 ortonormais, como já admitido emR63. Para n_i+n_o=n, usem os tensores simétricos normalizados"
+        },
+        {
+          "marker": "6. Ponte",
+          "line": 45,
+          "through": 54,
+          "excerpt": "6. Ponte ao Fock já construído — além dos quatro vetores0/1\nEscolham fi,fo∈H1 ortonormais, como já admitido emR63. Para n_i+n_o=n, usem os tensores simétricos normalizados\nv_(n_i,n_o)=sqrt(n!/(n_i!n_o!)) Sym(fi^⊗n_i⊗fo^⊗n_o),\nonde Sym é a média das n! permutações. Sua norma é1 e vetores de ocupações distintas são ortogonais: entre termos permutados só sobrevivem as n_i!n_o! permutações que preservam os rótulos. Setoresn distintos já são ortogonais no Fock existente.\nO mapa V∞|n_i,n_o,e>=v_(n_i,n_o)⊗|e> estende a uma isometria de H numa subestrutura fechada S⊗C² deF1Rede.BosonicFock.F⊗C². Reaproveita os setores simétricos e sua somaHilbert; não recompila nem declara novos teoremasLean. Não necessita identificar aqui um fator espectador por um teorema de fatorização ainda não localizado.\nNo domínio de partículas finitas, os aniquiladores nas direçõesfi/fo dão os coeficientes sqrt(n_i),sqrt(n_o). Logo V∞ entrelaça h_0,h_d e os cincoL_j com seus operadores sobreS; os domínios fechados são transportados porV∞. O coreD_0 e o semigrupo construído dão então a identidade dinâmica\nT_S(t)(V∞ X V∞†)=V∞ T(t)(X) V∞†.\nIsto realiza a dinâmica bosônica de dois modos eOH na estruturaFock existente, não apenas transporta uma trajetória semgerador. Não identifica essa dinâmica com a representação de translações livres nem com o gerador modular de uma cunha.\n\n7. Covariância de família e resíduo espacial precisamente tipado"
+        },
+        {
+          "marker": "7. Covariância",
+          "line": 54,
+          "through": 61,
+          "excerpt": "7. Covariância de família e resíduo espacial precisamente tipado\nA segunda quantização gamma(u) já disponível transporta v_(n_i,n_o)(fi,fo) em v_(n_i,n_o)(ufi,ufo). Assim W_u=gamma(u)⊗I_OH entrelaça o dispositivo na dupla(fi,fo) com o dispositivo transportado(ufi,ufo), com os coeficientes e relógio declarados mantidos: T_(ufi,ufo)(t) AdW_u=AdW_u T_(fi,fo)(t), sobre os respectivos setores fechados.\nÉ covariância da FAMÍLIA de modos e geradores, não invariância de um aparelho fixo sobtodoPoincaré e não uma lei relativística de transformação de seu relógio. Um g de Poincaré pode fornecer u pela representação existente; não se confunde g com g_JC.\nPermaneceOPEN a identificação de fi/fo e acoplamentos com subespaços localizados K(O)/álgebras locais da rede, a compatibilidade causal da interação/pump e o entrelaçamento com o relógio/gerador físico pretendido. Uma projeção em poucos modos não prova pertença a uma álgebra local. A realizaçãoHP temporal Γ(L²(R+;C5)) do banho e oFock(H1) espacial têm espaçosdeuma-partícula distintos; nenhum sinaldeigualdade entreeles foi presumido.\nO limitebosônico do sistema desta nota é obtido separadamente do limiteδ→0 das colisões emcada corte. Não afirmamos intercambiabilidade desses limites, convergência da unitáriaHP com coeficientesilimitados ou igualdade das saídasR64 no modeloinfinito sem estimativas adicionais de momentos.\n\n8. Falsificadores dirigidos e estatuto\nO scriptnovo verifica compatibilidade dos geradores em todos os blocos matriciais emdoiscortes sempump, conservaçãoN porJ e termoJaynes-Cummings, coeficientessqrt(n), CPTP/traço dos estados de cortes bombeados e a cotaDyson entrecortes. O controle que exige invariância de um corte COM bomba deve falhar; também deve falhar a identificação do hardcore com o aniquilador bosônico emn=2. Parâmetros, tempos, tolerâncias e hashes são fixados antesdeexecutar. Os resultadosnuméricos verificam implementações finitas; a extensãoinfinita é a demonstraçãoanalítica acima. Sem nova medida, ajusteβ, claimde5σ, confirmaçãofísica ou aceiteintegralR4/R5."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\JOINT_RESERVOIR_CONTINUUM_LIMIT_R66.txt",
+      "sha256": "6bb2ca8cc944250056f852240714672b167eb66ec31497a428dce38277d40194",
+      "bytes": 3455,
+      "lines": 23,
+      "anchors": [
+        {
+          "marker": "Para δ=t/n",
+          "line": 12,
+          "through": 21,
+          "excerpt": "Para δ=t/n, estabilidadeCPTP e telescopagem dão\n||Φ_m,t/n^n X−T_m(t)X||_1 ≤ C_m t² ||X||_1/n.\nCom a inclusão E_m para o espaço bosônico, a desigualdade triangular e a cotaDyson já demonstrada dão\n||E_m Φ_m,t/n^n X−T(t)X||_1\n ≤ ||X||_1 [C_m t²/n + 2 Σ_(k=m-m0+1)^∞ (2|Ω|t)^k/k!].\n\nAssim, para qualquer precisão positiva, escolhe-se PRIMEIRO m para a cauda bosônica e DEPOIS n para as colisões. O limite iterado m→∞ após n→∞ é o semigrupo bosônico completoT(t), e uma sequência diagonal controlada também converge. Para estados gerais emT1, a densidade deP_m0 X P_m0 e a contração das duas famílias completam a passagem.\n\nÉ uma realização construída por reservatórios repetidos, com a bomba proveniente da entrada coerente, do MESMO geradorbosônico completo; não só uma hipótese abstrata de banho que tem esse gerador. A estrutura escolhe banhos engenheiradosMarkov/frescos e acoplamentos INPUT. Não demonstra que o banho térmico natural do dispositivo patenteado seja esse banho, nem que γ_Λ esteja calibrado.\nSe γ_OH=0 e Ω≠0, a fórmulaα é inválida: use a realização alternativa com bomba explícita no hamiltoniano; não declarar bombeamento coerente pelo canal ausente. SeΩ=0, usa-se ancila emvácuo, inclusive quandoγ_OH=0."
+        },
+        {
+          "marker": "O limite é dos",
+          "line": 23,
+          "through": 23,
+          "excerpt": "O limite é dos CANAIS REDUZIDOS. Não se infere convergência de unitárias estocásticas comcoeficientesilimitados, troca livre de limites, uniformidade emt→∞ ou convergência de observáveisilimitados a partir da norma-traço. A identificação do campo de saída no limitebosônico pede controle de momentos adicional. O entrelaçamento V∞ deBOSONIC_CONTINUUM_R66 transporta esta dinâmica reduzida ao subespaço de modos da redeFock já existente; causalidade/localização e relógioPoincaré permanecem seus requisitos próprios."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\physical_receiver_r63\\receiver\\DERIVACAO_RECEPTOR_R63.md",
+      "sha256": "35982c445a98ab6cf28c1fe56e53a3269a921b4a3a01614ae787f17bab373f84",
+      "bytes": 8747,
+      "lines": 109,
+      "anchors": [
+        {
+          "marker": "## 2.",
+          "line": 13,
+          "through": 22,
+          "excerpt": "## 2. A POVM contínua no subespaço de zero/um fóton\n\nSeja `P01=|0⟩⟨0|+|1⟩⟨1|` e `Xθ=(e^{−iθ}a+e^{iθ}a†)/√2`. As funções de onda são\n\n\\[\n\\psi_0(x)=\\pi^{-1/4}e^{-x^2/2},\\qquad \\psi_1(x)=\\sqrt2x\\psi_0(x).\n\\]\n\nA medida espectral ideal de Xθ, comprimida por P01, tem densidade de efeitos\n"
+        },
+        {
+          "marker": "## 4.",
+          "line": 78,
+          "through": 87,
+          "excerpt": "## 4. Isometria cinemática para modos da rede\n\n**[INPUT]** Escolham `fi,fo∈H1`, de norma um e ortogonais. Nas peças de Fock já existentes, defina a inclusão V pelos vetores\n\n\\[\n|00\\rangle\\mapsto\\Omega,\\quad |10\\rangle\\mapsto f_i,\\quad\n|01\\rangle\\mapsto f_o,\\quad\n|11\\rangle\\mapsto(f_i\\otimes f_o+f_o\\otimes f_i)/\\sqrt2.\n\\]\n"
+        },
+        {
+          "marker": "## 5.",
+          "line": 92,
+          "through": 101,
+          "excerpt": "## 5. Campo de saída temporal: contrato que ainda precisa de instância\n\n**[INPUT — proposta explícita, não localizada pronta como realização]** Para um campo viajante com distribuição de operadores `bout(t)`, um modo detectado é\n\n\\[\nB_f=\\int \\overline{f(t)}b_{out}(t)dt,\\qquad \\int|f(t)|^2dt=1.\n\\]\n\nO contrato deve fornecer as relações de comutação, o domínio e os dois modos acessíveis, em portas distintas ou pacotes ortogonais. O filtro f, a fase do oscilador local e o ganho devem ser conhecidos. Sob esses dados, a corrente homódina filtrada lê a quadratura de Bf; duas configurações de fase em cada ponta produzem as quatro correlações do item 3. Uma única corrente, o HBT de intensidades ou a polarização OH `σ+` não são automaticamente essas quatro leituras.\n"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RealSchwartzTestsR1.lean",
+      "sha256": "bdfde85d46345954c26af8ab2839d2101e27eef8755ac4abd3259551b932a399",
+      "bytes": 2252,
+      "lines": 55,
+      "anchors": [
+        {
+          "marker": "def IsRealTest",
+          "line": 28,
+          "through": 37,
+          "excerpt": "def IsRealTest (f : SchwartzTensor) : Prop := ∀ p μ ν,(f p μ ν).im=0\n\ntheorem realPart_apply (f : SchwartzTensor) (p : Spacetime) (μ ν : Fin 4) :\n    realPart f p μ ν=((f p μ ν).re:ℂ) := rfl\n\ntheorem imagPart_apply (f : SchwartzTensor) (p : Spacetime) (μ ν : Fin 4) :\n    imagPart f p μ ν=((f p μ ν).im:ℂ) := rfl\n\ntheorem realPart_real (f : SchwartzTensor) : IsRealTest (realPart f) := by\n  intro p μ ν"
+        },
+        {
+          "marker": "theorem real_imag_decomposition",
+          "line": 46,
+          "through": 55,
+          "excerpt": "theorem real_imag_decomposition (f : SchwartzTensor) : f=realPart f+Complex.I•imagPart f := by\n  ext p μ ν\n  change f p μ ν=realPart f p μ ν+Complex.I*imagPart f p μ ν\n  rw [realPart_apply,imagPart_apply,mul_comm Complex.I]\n  exact (Complex.re_add_im (f p μ ν)).symm\n\nend F1Fecho.MaxwellGlobal\n#print axioms F1Fecho.MaxwellGlobal.realPart_real\n#print axioms F1Fecho.MaxwellGlobal.imagPart_real\n#print axioms F1Fecho.MaxwellGlobal.real_imag_decomposition"
+        }
+      ]
+    }
+  ],
+  "report": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\correspondence_bridge_r69\\LOCALITY_BRIDGE_R69.md",
+    "sha256": "310e00aeb8a0197cda9f11c0390f6893b67b46fc1f58463a9eec217607bf105a",
+    "bytes": 10275
+  },
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\correspondence_bridge_r69\\pin_locality_r69.py",
+    "sha256": "0960d468318e3e34acfed405b3c3400ecec7338390b78fd5a8070ed5d7e17c6d"
+  }
+}

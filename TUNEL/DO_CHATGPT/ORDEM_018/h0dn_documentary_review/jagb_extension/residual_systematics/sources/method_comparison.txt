@@ -1,0 +1,1695 @@
+JWST Validates HST Distance Measurements: Selection of Supernova Subsample Explains Differences in JWST Estimates of Local H0
+Report GitHub Issue
+×
+Title:
+Content selection saved. Describe the issue below:
+Description:
+Submit without GitHub
+Submit in GitHub
+arXiv is now an independent nonprofit!
+Learn more
+×
+Back to arXiv
+Why HTML?
+Report Issue
+Back to Abstract
+Download PDF
+Abstract
+I Introduction
+II Comparing Distance Measurements
+II.1 Data
+II.1.1 Previous HST Samples
+II.1.2 JWST Observations
+II.2 Comparison Formalism
+II.3 Distance Comparisons
+II.3.1 Cepheid Distance Linearity
+III Measuring H0
+III.1 Expected Differences in H0 from JWST Subsamples
+III.2 CCHP JWST Sample Difference
+III.3 H0 from Joint Samples
+IV Discussion
+V Conclusion
+VI Acknowledgments
+References
+A Data tables
+B Differences with Analyses in F24
+License: arXiv.org perpetual non-exclusive license
+arXiv:2408.11770v2 [astro-ph.CO] 28 Oct 2024
+JWST Validates HST Distance Measurements:
+Selection of Supernova Subsample Explains Differences in JWST Estimates of Local H0
+Adam G. Riess
+Affiliation: Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA
+Affiliation: Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+Dan Scolnic
+Affiliation: Department of Physics, Duke University, Durham, NC 27708, USA
+Gagandeep S. Anand
+Affiliation: Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA
+Louise Breuval
+Affiliation: Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+Stefano Casertano
+Affiliation: Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA
+Lucas M. Macri
+Affiliation: NSF NOIRLab, 950 N Cherry Ave, Tucson, AZ 85719, USA
+Siyang Li
+Affiliation: Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+Wenlong Yuan
+Affiliation: Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+Caroline D. Huang
+Affiliation: Center for Astrophysics || Harvard & Smithsonian, 60 Garden Street, Cambridge, MA 02138, USA
+Saurabh Jha
+Affiliation: Department of Physics and Astronomy, Rutgers, The State University of New Jersey, 136 Frelinghuysen Road, Piscataway, NJ 08854
+Yukei S. Murakami
+Affiliation: Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+Rachael Beaton
+Affiliation: Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA
+Dillon Brout
+Affiliation: Departments of Astronomy and Physics, Boston University, Boston, MA 02215, USA
+Tianrui Wu
+Affiliation: Department of Physics, Duke University, Durham, NC 27708, USA
+Graeme E. Addison
+Affiliation: Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+Charles Bennett
+Affiliation: Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+Richard I. Anderson
+Affiliation: Institute of Physics, École Polytechnique Fédérale de Lausanne (EPFL), Observatoire de Sauverny, 1290 Versoix, Switzerland
+Alexei V. Filippenko
+Affiliation: Department of Astronomy, University of California, Berkeley, CA 94720-3411, USA
+Anthony Carr
+Affiliation: School of Mathematics and Physics, University of Queensland, Brisbane, QLD 4072, Australia
+Affiliation: Korea Astronomy and Space Science Institute, Yuseong-gu, Daedeok-daero 776, Daejeon 34055, Republic of Korea
+Received August 23, 2024
+Abstract
+We cross-check the HST Cepheid/SNe Ia distance ladder, which yields the most precise local H0, against early JWST subsamples (∼\sim1/4 of the HST sample) from SH0ES and CCHP, calibrated only with NGC 4258. We find HST Cepheid distances agree well (∼\sim1σ\sigma) with all combinations of methods, samples, and telescopes. The comparisons explicitly include the measurement uncertainty of each method in NGC 4258, an oft-neglected but dominant term. Mean differences are ∼\sim0.03 mag, far smaller than the 0.18 mag “Hubble tension.” Combining all measures produces the strongest constraint yet on the linearity of HST Cepheid distances, 0.994±0.0100.994\pm 0.010, ruling out distance-dependent bias or offset as the source of the tension at ∼\sim7σ\sigma.
+However, current JWST subsamples produce large sampling differences in H0 whose size and direction we can directly estimate from the full HST set. We show that Δ\DeltaH0∼{}_{0}\sim2.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} between the CCHP JWST program and the full HST sample is entirely consistent with differences in sample selection. We combine all JWST samples into a new distance-limited set of 16 SNe Ia at D≤25D\leq 25 Mpc. Using JWST Cepheids, JAGB, and TRGB, we find 73.4±2.173.4\pm 2.1, 72.2±2.272.2\pm 2.2, and 72.1±2.272.1\pm 2.2 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, respectively. Explicitly accounting for common SNe, the three-method JWST result is H0=72.6±2.0{}_{0}=72.6\pm 2.0, similar to H0=72.8{}_{0}=72.8 expected from HST Cepheids in the same galaxies. The small JWST sample trivially lowers the Hubble tension significance due to small-sample statistics and is not yet competitive with the HST set (42 SNe Ia and 4 anchors), which yields 73.2±\pm0.9. Still, the joint JWST sample provides important crosschecks which the HST data passes.
+I Introduction
+Currently, the primary route to a ∼\sim1% local determination of the Hubble constant (H0) comes from distance ladders composed of three “rungs”: (1) geometric distance measurements to multiple independent “anchors”; (2) primary distance indicators (i.e., standard or standardizable luminous stars) observed in these anchors and in the hosts of several dozen nearby Type Ia supernovae (SNe Ia); and (3) SNe observed in these local hosts and in the Hubble flow. Given state-of-the-art measurements, the precision of this route has been most limited by the sample size, NN, of the SN Ia hosts within the range of primary distance indicators such as Cepheid variable stars, tip of the red giant branch (TRGB), Mira variable stars, or C-rich asymptotic giant branch (AGB) stars, scaling as ∼\sim(5–8%)/N\sqrt{N} where the numerator depends on the (empirically demonstrated) quality of the SN distances. As of 2022, the largest collection of homogeneously measured SNe Ia [7, 46] is complete to D≤40D\leq 40 Mpc or redshift z≤0.01z\leq 0.01. It consists of 42 SNe Ia in 37 host galaxies calibrated with observations of Cepheids with the Hubble Space Telescope (HST), the heritage of more than 1000 orbits (a comparable number of hours) invested over the last ∼\sim20 yr [41, hereafter 41; see Fig. 1]. The size of this sample reduces fluctuations in H0 due to the intrinsic dispersion of SN magnitudes to ≤1\leq 1%. The sample of four anchors — NGC 4258, the Milky Way (MW), and the Large and Small Magellanic Clouds (LMC and SMC) --- all observed with HST, also reduces geometric calibration errors to ≤1\leq 1% [6].
+Figure 1: A graphic explaining two issues that may be addressed using new JWST observations, overlaid on top of the three-rung distance ladder presented by 41. The first (see §2) compares relative distances measured between NGC 4258 and SN Ia hosts by HST Cepheids with other indicators. This can be done at the 0.03–0.06 mag level depending on the quality of the measurements. This test is independent of SN magnitudes, anchor distances, and the Hubble flow. The second (see §3) refers to the measurement of H0 that can be expected from the selected SN subsamples and chosen anchor. This is strongly affected by the subsample selection owing to sampling noise and is most meaningfully compared to the same selections made from the full HST sample as indicated.
+However, the “Hubble tension,” a decade-long discrepancy now reaching a >>5σ\sigma difference between the local determination of H0 and the prediction from Λ\LambdaCDM calibrated by the cosmic microwave background (CMB) and which may augur new physics, has motivated additional tests and cross-checks [10, 48, 50, for an extensive and recent review of tests, checks and independent measures, see]. The new capabilities of the James Webb Space Telescope (JWST) offer the means for additional cross-checks by comparing distances measured to SN host galaxies with those measured with HST. Two JWST programs received time in Cycle 1 to (re-)measure distances between one anchor, NGC 4258, and a subsample of 5--10 hosts of 8-11 SNe Ia using a variety of established and new primary distance indicators: Cepheids, TRGB, and C-rich AGB stars. In this analysis, we review the consistency between all of the JWST and HST-measured host distances. From this comparison we derived the strongest constraints on the linearity of measured HST Cepheid distances. We also analyze an independent and important issue: the fluctuations in H0H_{0} due to the small size of the SN samples calibrated with JWST if exclusively used to determine the parameter.
+JWST has certain distinct advantages (and some disadvantages) compared to HST for measuring distances to nearby galaxies. For Cepheids, JWST offers a ∼\sim2.5×\times higher near-infrared (NIR) resolution than HST to mitigate crowding, though an optical facility like HST is still needed to find Cepheids. The observed reduction in the scatter of the Cepheid Period-Luminosity relation (PP–LL) for ideal observations with JWST is remarkable [43]. For the TRGB distance indicator, JWST offers greater depth in the NIR where red giants are relatively brighter than other stars, but at the cost of a large and uncertain color dependency for the method. An II-like band is usually the choice for TRGB measurements because this feature appears flat in a color-magnitude diagram (CMD) of stars, where theory indicates differences in metallicity and age move stars primarily in color rather than brightness (at least with low to intermediate metallicities; Freedman et al. 18). In the NIR, theory shows that the TRGB is tilted and non-linear, and its shape is more sensitive to age and metallicity, making such measurements more challenging [53, 31, 30, 21, 32]. Another promising, newly employed “standard population,” C-rich AGB stars (JAGB), produce a clump of stars in the NIR CMD with a luminosity function that may be measured and is presumed to be standard. The techniques for the newer methods are still evolving [9, 5, 12, 29, 44, 33, 25, 21, 27, and more].
+Even by observing only small subsamples of SN Ia hosts and NGC 4258, JWST is able to provide a strong crosscheck of distances in the first two rungs because this comparison is independent of SNe Ia and their own intrinsic scatter, empirically ∼\sim0.12–0.19 mag. This test is also independent of the knowledge of the geometric distance to the anchor. It is, however, still subject to the uncertainties in the measurements of both distance indicators or both telescopes in NGC 4258, an error floor to the comparison of two indicators or telescopes and which is not reduced by adding more SN hosts. We explain this cross-check in Fig. 1.
+Several comparisons of the measured difference in distance between NGC 4258 and a subsample of SN Ia hosts between HST Cepheids and JWST-measured have already been presented. [43] found agreement between >>1000 Cepheids measured with JWST and HST for 5 SN Ia hosts from the SH0ES team, when both sets were analyzed at the same wavelength and with the same slope for the PP–LL and using multiple JWST epochs to measure light-curve phases, with a difference of −0.011±0.032-0.011\pm 0.032 mag. [27] compared the II-band (F​090​WF090W) TRGB between NGC 4258 measured by [3] and 8 hosts of 10 SN Ia in the SH0ES JWST sample, finding agreement with HST Cepheids at the level of 0.01±0.040.01\pm 0.04 (stat) ±0.04\pm 0.04 (sys) mag. A direct comparison of the 11 II-band TRGB distances to SN Ia hosts from HST by [13] and by R22, relative to NGC 4258 (where they define MI=−4.05M_{I}=-4.05 mag; Jang et al. 24), produces a difference of 0.01±0.040.01\pm 0.04 mag11
+1
+A review by Freedman & Madore [14] notes the “excellent agreement between the published Cepheid distances in [41]
+and TRGB distances in [17], which in the mean, agree to 0.007 mag.”. [27] compared JAGB measurements with JWST between 4 SN Ia hosts and NGC 4258, finding agreement with Cepheids, though the precision was limited by systematic differences in characterizing the JAGB luminosity function (LF). A study by Freedman et al. [16, hereafter F24] and Lee et al. [26, hereafter L24] compares 3 distance indicators measured with JWST, but to each other rather than to the HST R22 Cepheid sample, the results of which we will address in the next section. We review the comparisons of each method, telescope, and group, using the HST Cepheid R22 sample as a reference since it contains all of the other measured subsamples.
+While fluctuations may occur for any selected subsample, it is important and the convention to make use of a large, distance-limited sample to reduce bias and fluctuations. It is important to note that neither the JWST SH0ES nor the CCHP targets constitute a distance-limited sample to the distance of their farthest target. Remarkably (given the lack of program coordination), a distance limited sample is formed by the combined JWST observations of the two programs for D≤25D\leq 25 Mpc, which includes 16 SNe Ia in that range.
+It seems reasonable to use JWST observations to compare relative distance methods and sources (HST Cepheids, JWST Cepheids, I-TRGB, NIR-TRGB, JAGB) to identify which are in mean accord (<2<2–2.5σ\sigma is conventional) and which are not (>2.5>2.5–3.0σ\sigma is problematic). If HST Cepheid measurements are in accord with others, there would be no evidence to reject their use, or the large sample of SNe Ia calibrated with HST to determine H0 and which offer the only route to a local measurement approaching 1% precision.
+It is less clear that there is value (beyond the host distance cross-checks) in measuring H0 exclusively from these JWST-selected subsamples, because their small size quadruples the variance in H0 owing to the intrinsic dispersion of SNe Ia while introducing no new objects. This SN sampling noise is already reduced within the HST full sample of 42 SN Ia and would otherwise revert to past levels [38, at the level of] with JWST if it is the only source used to determine H0. Furthermore, the selected subsamples cannot be considered without the potential for observer bias [39, 41, e.g., the SN absolute magnitudes having been previously measured, most by], nor are they complete in distance.
+One further consideration is the availability of geometric anchors used to determine H0. There are four geometric anchors [41, 6] for Cepheids directly observed by HST. For population-based methods (e.g., TRGB or JAGB), parallax is less useful and 3 of the 4 anchors are too bright for JWST. It is not yet clear if JWST will be able to usefully observe indicators in the MW, LMC, or SMC, a feat HST achieved only through rapid spatial scanning and gyro-guided fast slews [40, 37], not currently available for JWST. From HST Cepheids (41), there are predictable fluctuations in H0 based solely on anchor choice. NGC 4258, the sole anchor available for JWST produces the lowest value of H0 of the 4 anchors, decreasing H0 from the 4-anchor mean of Breuval et al. [6] by Δ​H0≈0.7\Delta H_{0}\approx 0.7 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}. Reducing anchors also increases the uncertainty. With NGC 4258 as the sole anchor, R22 found H0=72.5±1.5{}_{0}=72.5\pm 1.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} (a reduction to a 3σ\sigma tension with CMB+Λ\LambdaCDM even before any reduction in SN sample size). For a sample of only ∼\sim10 SNe with JWST, combining the error in measuring primary distance indicators in NGC 4258 (σ≈1.3\sigma\approx 1.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}) with the SN subsample (σ≈1.5\sigma\approx 1.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}) yields σ≈2.0\sigma\approx 2.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} before including the geometric calibration (σ≈1.1\sigma\approx 1.1 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}), thus a total error of 2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} which would be insufficient to detect the present tension of Δ​H0≈5\Delta H_{0}\approx 5–6 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}. A small, D≤25D\leq 25 Mpc distance-limited sample from R22 with only NGC 4258 as anchor selected from the HST R22 samples gives H0=72.3±1.8{}_{0}=72.3\pm 1.8 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, a reduction to a marginal 2.5σ\sigma tension (i.e., assuming perfect measurement agreement with JWST). Simply put, slashing the size of the distance-ladder sample trivially reduces the significance of the tension by inflating uncertainties rather than explaining it. A valid assessment of the tension would require taking into account all relevant data while correcting subsample bias.
+Here we analyze early JWST observing programs and the distance measurements from each. The consistency of the various distance probes are in §2, of H0 in §3, and we discuss notable differences with the analysis of some of this data in F24 in Appendix B.
+Figure 2: The main panel compares SN Ia host distances calibrated with NGC 4258 for various distance methods, samples, and telescopes (X axis) and HST Cepheids (Y axis).
+The lower panel shows the differences between these on a per host basis. The inset shows the mean differences for the whole samples.
+HST Cepheids are all observed by HST and analyzed by 41 and [43]; see Table A1 with the mean results given in Table 2. JWST (and specific HST) results can be found either in R24 (corresponding to SH0ES-selected) or F24 (corresponding to CCHP-selected) and computed here from the distances table, Table A2. All measures are in good, ∼\sim1σ\sigma agreement. The largest uncertainties in these comparisons arise from the individual measurements in NGC 4258 and the mean measures of the SN Ia hosts as given in Table 1.
+II Comparing Distance Measurements
+II.1 Data
+II.1.1 Previous HST Samples
+The full HST Cepheid sample from SH0ES (R22) is a distance-limited (z≤0.01z\leq 0.01) set of 42 SNe Ia in 37 late-type hosts (since 2021) calibrated by 4 different anchors. This sample provides an ideal reference for all other samples, because it contains all of the subsamples described here. In Table A1 we present a compilation of relevant information for the full HST sample of SN Ia hosts, and selected JWST subsamples, similar to Table 6 of R22 but with NGC 4258 as the sole anchor22
+2
+The mean change in distance modulus when using only NGC 4258 instead of the 3 anchors in R22 is an increase of 0.012 mag, but the actual value varies by host (based on fit 10 of R22). As discussed by R22, these measures are approximations to the full, simultaneous ladder fit, as they do not use the full covariance approach (but they are consistent with the full fit at the ∼\sim0.01 mag level)., allowing for a direct comparison with other methods or telescopes that rely only on this galaxy. We also make use of HST II-band TRGB measurements in SN Ia hosts given by [13] calibrated to NGC 4258 and Miras measured in SN Ia hosts calibrated to NGC 4258 [23].
+II.1.2 JWST Observations
+Several early JWST programs reobserved a number of hosts from the the full HST sample. JWST Cycle 1 GO–1685 (Riess et al. 35; SH0ES) observed 5 hosts of 8 SNe Ia in two epochs with NIRCAM filters F​090​WF090W, F​150​WF150W, and F​277​WF277W to measure Cepheids and the I-TRGB (later adding the C-rich AGB star candle). Their choice of hosts favored those with the largest numbers of Cepheids and SNe Ia per host.
+GO–1995 (Freedman et al. 15; CCHP) observed 10 hosts of 11 SNe Ia in one epoch and NIRCAM filters F​115​WF115W and F​444​WF444W (part way changing F​444​WF444W to F​356​WF356W) to measure Cepheids, the NIR-TRGB, and carbon stars. Their choice of hosts favored suitability for the three chosen distance indicators in all hosts, resulting in targets at D≤25D\leq 25 Mpc. Their most distant galaxy, NGC 4639 (μ=31.823±0.091\mu=31.823\pm 0.091 in R22 or Table 7), is consistent with the high end of this range. One host (of two SNe Ia), NGC 5643, was selected by both programs. Cycle 1 program GO-2581 [8] serendipitously observed one R22 host, NGC 4038, where we recovered 22 Cepheids in the same filter F​150​WF150W used to measure Cepheid distances in the SH0ES baseline. An early Cycle 2 program GO–4087 [22] observed 90 Cepheids in the SH0ES host M101 with the same F​150​WF150W filter. We will consider these two hosts (NGC 4038 and M101, both also present in the CCHP selected sample) here as part of a JWST SH0ES selected/system sample because they can be measured with the exact same NIRCAM F​150​WF150W system as the others. A JWST Cycle 2 program, GO-2875 (Riess et al. 36; SH0ES) has observed another 5 hosts of 7 SNe Ia. One of these, NGC 3447, is at D≤25D\leq 25 Mpc based on HST Cepheid measurements (R22), and would complete the distance-limited SN Ia sample with JWST Cepheid observations. We measured 140 Cepheids in this host (following the same procedures given in R24) and include its measurement in Table A2. We also include JWST TRGB measurements presented in [28] with D≤25D\leq 25 Mpc. All distance data are in Table A2. We note that both groups use the same primary software for measuring stellar photometry (DOLPHOT; Dolphin 11, Weisz et al. 51) so there is every reason to expect measurement consistency. Here we adopt the distance measurements provided in F24 at face-value.
+There are several differences in how the observations were obtained and in the analysis procedures adopted. Describing these differences in detail goes beyond the scope of this paper; for full details, we direct the reader to the original papers [42, 43, 3, 27, 28, 16, 26]. One specific difference impacting the quality of the results is the choice of primary filter and the number of epochs; GO-1685 adopted a redder filter, F​150​WF150W, and obtained observations at two different epochs to constrain the phases of individual Cepheids [43], while GO-1995 used F​115​WF115W as primary and obtained a single epoch [16]. For the one host in common, NGC 5643, the PP–LL relation obtained in F​150​WF150W using the two-epoch phase constraints has a scatter of 0.17 mag, while the relation obtained using a single epoch of F​115​WF115W has a scatter of 0.23 mag, about 35% larger. Both yield similar distances (SH0ES, μ=30.52\mu=30.52 mag; CCHP, μ=30.51\mu=30.51 mag). 33
+3
+We also note that the distance uncertainties provided in F24 for their Cepheid measurements are a factor of a few times larger than would be expected by conventional error propagation, i.e., using the error in the mean of the PP–LL relation (based on the empirical dispersion) or what was estimated for the same galaxies and Cepheids measured in the HST Key Project [Freedman:2001] or in R22. Rather, the addition of JWST data should reduce the distance uncertainty. For example for NGC 4536 F24 gives σ=0.12\sigma=0.12 mag while the HST KP gives σ=0.04\sigma=0.04 mag and R22 found σ=0.05\sigma=0.05. The cause appears to be that F24 states that they employ the dispersion of the PP–LL as the uncertainty in the PP–LL intercept rather than the error in the mean which will be far greater. We do not know why and this practice appears inconsistent with F24’s use of the error in the mean for JAGB and similar for TRGB. We caution the F24 Cepheid error estimates are almost certainty overestimated and may undervalue a χ2\chi^{2} comparison to other distance indicators.
+II.2 Comparison Formalism
+To briefly review, we can measure the distance modulus μi0\mu^{0}_{i} to an SN Ia host by measuring the magnitude (mm) or dereddened magnitude (m0m^{0}) of a type of standard candle, aa or bb, in the iith host and also in NGC 4258. From these, we obtain their difference in distance modulus and then add the known, geometric (maser) distance modulus, μ0,N4258\mu_{0,{\rm N}4258}:
+|
+μi,a0=mi,a0−mN4258,a0+μ0,N4258+sysa,\mu^{0}_{i,a}=m^{0}_{i,a}-m^{0}_{{\rm N}4258,a}+\mu_{0,{\rm N}4258}+{\rm sys}_{a}\,, |
+|
+(1) |
+|
+μi,b0=mi,b0−mN4258,b0+μ0,N4258+sysb,\mu^{0}_{i,b}=m^{0}_{i,b}-m^{0}_{{\rm N}4258,b}+\mu_{0,{\rm N}4258}+{\rm sys}_{b}\,, |
+|
+(2) |
+|
+Δ​μ​(a−b)=μi,a0−μi,b0=(mi,a0−mi,b0)−(mN4258,a0−mN4258,b0)+(sysa−sysb),\Delta\mu({a-b})=\mu^{0}_{i,a}-\mu^{0}_{i,b}=(m^{0}_{i,a}-m^{0}_{i,b})-(m^{0}_{{\rm N}4258,a}-m^{0}_{{\rm N}4258,b})+({\rm sys}_{a}-{\rm sys}_{b})\,, |
+|
+(3) |
+with
+|
+σ​(Δ​μ​(a−b))2=σa2+σb2+σ​(mN4258,a0)2+σ​(mN4258,b0)2+σ​(sysa)2+σ​(sysb)2,\sigma(\Delta\mu({a-b}))^{2}=\sigma_{a}^{2}+\sigma_{b}^{2}+\sigma(m^{0}_{{\rm N}4258,a})^{2}+\sigma(m^{0}_{{\rm N}4258,b})^{2}+\sigma({\rm sys}_{a})^{2}+\sigma({\rm sys}_{b})^{2}\,, |
+|
+(4) |
+where
+|
+σa2=1/∑i=1nσ​(mi,a)−2​and​σb2=1/∑i=1nσ​(mi,b)−2.\sigma_{a}^{2}=1/\sum^{n}_{i=1}\sigma(m_{i,a})^{-2}\ \textrm{and}\ \sigma_{b}^{2}=1/\sum^{n}_{i=1}\sigma(m_{i,b})^{-2}. |
+|
+(5) |
+Note that these equations assume that all error terms are independent and uncorrelated. We note that an individual host magnitude uncertainty, σ⁡(mi,a)\sigma(m_{i,a}) is defined to include both measurement error and intrinsic scatter of the candle. Equation 4 provides the error in the difference in distance moduli for a single host or for a sample of hosts by substituting σa\sigma_{a} and σb\sigma_{b} from equation 5.
+The difference in distance modulus between the methods, Δ​μ​(a−b)\Delta\mu(a-b), is independent of knowledge of the geometric distance, μ0,N4258\mu_{0,{\rm N}4258}.
+For a sample of NN SN Ia hosts, the uncertainty in the measured differences, (mi,a0−mi,b0)(m^{0}_{i,a}-m^{0}_{i,b}),
+will be reduced by N\sqrt{N} (Eq. 5), but uncertainties from the independent measurements of two methods in NGC 4258, (mN4258,a0−mN4258,b0)(m^{0}_{{\rm N}4258,a}-m^{0}_{{\rm N}4258,b}), become the limiting factors for measuring the difference. We see no way to avoid this term as it encompasses the quality of the measurements in NGC 4258 which could vary from excellent to poor which would be reflected in this term. For a population-based indicator like TRGB or JAGB, this term would also include any intrinsic field-to-field (or population to population) scatter. F24 (Table 5) refers to measurement uncertainties in NGC 4258 together with the 1.5% geometric distance uncertainty from [34] as a systematic uncertainty in H0H_{0}, terms which total 2.2% to 4.3% for each method.
+An (external) systematic error for each method, sysa and sysb, may describe a relative uncertainty between NGC 4258 and the SN hosts and may (be hoped to) partially cancel if it applies equally to method aa and bb (or may have a covariance term to include).
+The uncertainty in the two-method comparison thus contains 3 basic terms: the error in the host subsample mean measurements, the uncertainties in each method’s measurements made in NGC 4258, and any relevant (external) systematic error that applies between them. These terms apply separately to both telescopes or methods and thus affect their comparison.
+We give illustrative but realistic error budgets for the methods and comparisons in Table 1. For each method, we derive the statistical uncertainties from the measurements in the first and second rungs for an assumption of one anchor (NGC 4258) and ∼\sim10 SN hosts. We also give a systematic uncertainty due to differences between the SN host and NGC 4258 applicable for that method.
+For a realistic measurement error per host for Cepheids, TRGB, or JAGB of 0.05–0.08 mag, 10 hosts will yield an error in the mean (equation 5) of 0.02-0.03 mag. A critical and often-neglected term in a two-method comparison is the measurement error for NGC 4258 (Cepheid PP–LL intercept or TRGB/JAGB apparent magnitude) for each telescope and method, which does not cancel in the comparison in the way the geometric distance error does. Ideally NGC 4258 would be the best-measured object, but in practice this may not occur. For the quality of Cepheid measurements from JWST presented in R24, the uncertainty in the intercept of NGC 4258 using ∼\sim100 Cepheids is 0.02 mag though appears greater for the CCHP observations (F24, Table 5). For TRGB, we take the measurement error from F24 of 0.035 mag (see Appendix B for further discussion). For JAGB, we take this uncertainty to be 0.05 mag from F24 (Table 5) and reported by Lee et al. [26].
+The primary (external) systematic difference in the case of Cepheids derives from the difference in period distribution, together with the uncertainty in the slope of the assumed PP–LL relation44
+4
+[43] previously presented a mean JWST–HST difference for 5 hosts and ∼\sim1000 Cepheids. The systematic error term from the PP–LL slope uncertainty was reduced in this comparison, (sysa−sysb)({\rm sys}_{a}-{\rm sys}_{b}), by measuring both the HST and JWST samples at the same wavelength (hence the same error for aa and bb) which also allows for fixing both to the same PP–LL slope.. Metallicity effects largely cancel out, as NGC 4258 and the SN Ia host subsample have very similar measured metallicities; we adopt a common metallicity term of 0.2 mag dex-1, accurate to ∼\sim0.02 mag after application. For a subsample of ∼\sim10 hosts, random uncertainties will depend on the specific targets selected, including the number of Cepheids in each target, and the number of epochs observed, which in turn impacts the PP–LL scatter; individual uncertainties vary by a factor of a few from target to target. The systematic difference for TRGB is due to intrinsic TRGB variation between the SN hosts and NGC 4258. This is discussed at length by [52], [46] and [4], and will be different for TRGB measured in the optical or NIR. We give a range of 0.01–0.08 mag. For JAGB, the range of 0.01–0.10 mag is given owing to the nature of choices in the analysis. As discussed by [27], there are variations up to the 0.10.1 mag level when applying different statistical techniques (e.g., mode/median).
+We find the statistical error from a comparison is likely to be ∼\sim0.06 mag but can range from 0.03-0.10 mag for the JWST sample, and the systematic contribution is 0.03–0.1 mag. For each technique, the uncertainty of the measurement for each method in NGC 4258 is the dominant source.
+F24 gives uncertainties in two-method comparisons which are a factor of ∼3\sim 3 smaller than those we derive from their data following standard error propagation (equation 4 and Table 1). We discuss this further in the Appendix B where we trace the origin to the non-propagation of the given measurement uncertainties (or any uncertainty) in the measurements of each distance indicator in NGC 4258.
+II.3 Distance Comparisons
+We show in Fig. 2 and Table 2 a comparison of distance measurements using HST Cepheid observations from 41 and those from other HST and JWST observations/techniques. We use the uncertainties as derived in Table 1 for the comparisons.
+We find that all techniques are in good accord at the ∼\sim1σ\sigma and an average level of ∼\sim0.03 mag.
+When comparing Cepheid measurements from JWST and HST, we see that the mean difference with the CCHP JWST Cepheid sample of 10 hosts is −0.027±0.10-0.027\pm 0.10 mag, in the sense of JWST being closer. We note that the CCHP measurements are obtained in F​115​WF115W, a different filter than used with HST, so systematic error cancellation does not apply which is part of the reason for the relatively large error. See Fig. 1 of [42] for sources of PP–LL dispersion.
+When we compare to the Cepheid measurements of the 8 SH0ES-selected hosts of 11 SNe Ia, we find a mean difference with the HST Cepheids of −0.02±0.03-0.02\pm 0.03 mag. The uncertainty here is smaller owing to Cepheid samples in the SH0ES hosts which are a factor of ∼\sim3 larger, PP–LL scatter which is 40% smaller due to multiple epochs and colors, and the matching of wavelength between JWST and HST (and hence the PP–LL slope). The JWST and HST Cepheid comparisons presented by [43] included 15 variants (i.e., choices) including no period limits, P>15P>15 d limits, steeper and shallower PP–LL slope, no or double metallicity correction, most crowded and least crowded halves, no phase correction or single random phase, and the use of Cepheid colors (for dereddening) from HST or from JWST NIR or JWST mid-IR. The mean differences ranged from −0.030-0.030 to 0.017 mag, with the fluctuations all less than 1σ\sigma. We conclude that HST and JWST Cepheid measurements are robustly consistent (which is also true of the individual team samples).
+For comparisons between JWST JAGB and HST Cepheids, we measure a difference with the CCHP JWST sample of 0.047±0.0660.047\pm 0.066 mag, and for the SH0ES JWST sample we measure a difference of −0.015±0.064-0.015\pm 0.064 mag, though this can vary between 0.02 and −0.04-0.04 depending on whether the JAGB mode, median or mean statistic is used which remains an arbitrary choice [27]. L24 find that if they apply the mean or median instead of the mode, the JAGB distances would decrease (due to the greater skew of NGC 4258); the agreement would then be 0.01±0.0550.01\pm 0.055 mag. F24 noted a larger difference of 0.08 mag between Cepheids and JAGB, but
+the Cepheid reference was their JWST Cepheids, not the HST Cepheids compared here. As discussed in Appendix B, with the measurement errors in NGC 4258 included, even the JWST-to-JWST difference is only 1σ\sigma. The CCHP JWST JAGB-Cepheid difference also matches the size and direction of the difference between CCHP JAGB and CCHP HST TRGB in common, 0.07 mag.
+When we compare HST Cepheid distances to TRGB, we measure differences of 0.032, 0.02, and 0.01 mag for JWST CCHP, JWST SH0ES, and HST CCHP, respectively, each with a total uncertainty of ∼\sim0.05−-0.06 mag.
+The JWST I-TRGB measurements are presented by [28], and here limited to the 6 hosts of 8 SNe Ia with D≤25D\leq 25 Mpc. All of these comparisons are in good accord at the ∼\sim1σ\sigma level.
+Table 1: Representative Error Budget for Comparing two JWST Distance Method Samples (∼\sim10 hosts calibrated to NGC 4258)
+Term
+σ⁡(stat)\sigma(\textrm{stat})
+σ⁡(sys)\sigma(\textrm{sys})
+[mag]
+Cepheids |
+|
+|
+Method Calibration Measurement: intercept in NGC 4258 (∼\sim100 Cepheids) |
+0.03 |
+– |
+SN Host Sample means: intercepts, [∼σ(P−L)/⟨NCeph⟩1/2]×N hosts−1/2[\sim\sigma(P-L)/\langle N_{\textrm{Ceph}}\rangle^{1/2}]\times N_{\textrm{ hosts}}^{-1/2} |
+0.02 |
+– |
+Systematic between SN hosts and NGC 4258, PP–LL slope: ΔlogP×∼0.3σ\Delta\log\,P\ \times\ \sim 0.3\sigma(slope), other (a) |
+– |
+0.01-0.05 |
+Cepheid Subtotal |
+0.04 |
+0.03 |
+TRGB |
+|
+|
+Method Calibration Measurement: TRGB mag in NGC 4258 |
+0.04 |
+– |
+SN Host Sample means: ∼\sim0.06×Nhosts−1/2\times N_{\textrm{hosts}}^{-1/2} |
+0.02 |
+– |
+Systematic between SN hosts and NGC 4258, Intrinsic TRGB variation (b) |
+– |
+0.01-0.08 |
+TRGB Subtotal |
+0.045 |
+0.01-0.08 |
+JAGB |
+|
+|
+Method Calibration Measurement: JAGB mag in NGC 4258 |
+0.05 |
+– |
+SN Host Sample means: ∼\sim0.06×Nhosts−1/2\times N_{\textrm{hosts}}^{-1/2} |
+0.02 |
+– |
+Systematic between SN hosts and NGC 4258, Intrinsic JAGB Method (c) |
+– |
+0.01-0.10 |
+JAGB Subtotal |
+0.055 |
+0.01-0.10 |
+Comparison between two methods (d) |
+0.06 |
+∼\sim0.03-0.10 |
+Total |
+0.07-0.12 |
+|
+Note. — An uncertainty budget for the present analysis. Uncertainties are listed separately for each distance method (Cepheids, TRGB, JAGB) and their individual subtotals are given. (a) a mean difference in log⁡P\log\,P between NGC 4258 and an SN Ia host of ∼\sim0.3 times a slope uncertainty of ∼\sim0.05; “other” leaves room for other choices but R24 show a range of <<0.03 mag for a wide range of choices. (b) Term highly dependent on the bands and colors used to measure; the low end would be suitable for II-band where TRGB is least sensitive to metallicity and age and the high end for NIR.(c) Level of differences for different measures, e.g., mode vs. mean vs. median of JAGB LF.(d) Depends on (a) and (b), which also will impact the weights; optimistic case here.
+Table 2: Comparing SN Ia Host Distances
+Sample
+Team
+μ𝐽𝑊𝑆𝑇\mu_{\it JWST}
+σ\sigma
+−μ𝐻𝑆𝑇-\mu_{\it HST}
+[mag]
+HST Cepheids vs. JWST Cepheids |
+10 Hosts |
+CCHP |
+−0.027-0.027 |
+0.10 |
+8 Hosts (D≤25D\leq 25 Mpc) |
+SH0ES |
+−0.02-0.02 |
+0.03 |
+14 Unique Hosts |
+Both |
+−0.02-0.02 |
+0.03 |
+HST Cepheids vs. JWST JAGB |
+7 Hosts (mode) |
+CCHP |
+0.047 |
+0.066 |
+5 Hosts |
+SH0ES |
+-0.015 |
+0.064 |
+HST Cepheids vs. JWST NIR-TRGB |
+10 Hosts |
+CCHP |
+0.032 |
+0.056 |
+HST Cepheids vs. JWST I-TRGB |
+6 Hosts (D≤25D\leq 25 Mpc) |
+SH0ES |
+0.02 |
+0.067 |
+HST Cepheids vs. I-TRGB |
+11 Hosts |
+CCHP |
+0.010.01 |
+0.057 |
+HST Cepheids vs. HST Miras |
+2 Hosts |
+|
+−0.08-0.08 |
+0.078 |
+|
+|
+|
+|
+Note. — (*): SH0ES D≤25D\leq 25 Mpc sample includes NGC 4038, M101 and NGC 3447 and excludes NGC 5468 as discussed in text. CCHP distances from F24 Table 2 and including uncertainties in F24 Table 5. Errors in last column follow from equation 4 and use the minimum systematic uncertainties listed in Table 1.
+II.3.1 Cepheid Distance Linearity
+There are 59 independent distance measurements between NGC 4258 and SN Ia hosts in common with the same measured with HST Cepheids (R22) (we will refer to here as μ𝐻𝑆𝑇\mu_{\it HST}) which can be used to obtain a new constraint on the linearity of the Cepheid distance measurements — that is, the ratio μ𝐻𝑆𝑇/μ𝑜𝑡ℎ𝑒𝑟{\mu_{\it HST}/\mu_{{\it other}}}. In Fig. 3 we perform a linear fit, μi​t​H​S​T=𝑠𝑙𝑜𝑝𝑒×μ𝑜𝑡ℎ𝑒𝑟−𝑜𝑓𝑓𝑠𝑒𝑡\mu_{itHST}={\it slope}\times\mu_{\it other}-{\it offset} between HST Cepheid distances. We also can simultaneously include the 37 host measures from SNe Ia. For SNe we replace μ𝑜𝑡ℎ𝑒𝑟\mu_{\it other} with the SN standardized magnitude (mB0m^{0}_{B}) and allow for a unique SN offset which is MB0M^{0}_{B}. It is critical (and we take care) to perform this fit with independent measurements and uncertainties for both axes (i.e., two dimensions and averaging the other methods before comparing to the HST Cepheid result). We find μ𝐻𝑆𝑇/μ𝑜𝑡ℎ𝑒𝑟=0.994±0.010{\mu_{\it HST}/\mu_{{\it other}}}=0.994\pm 0.010 and an offset of the non-SN data of −0.01±0.03-0.01\pm 0.03 mag, referenced to μ=29.4\mu=29.4 mag, the geometric distance of NGC 4258. The slope matches unity at 0.6σ\sigma and the offset is consistent with zero. This is the strongest constraint measured for the linearity of HST Cepheid distances and there is no evidence of a non-linearity. It is also the strongest constraint on an offset between HST Cepheid distances and all other (non SN) measures, a precision of 0.02 mag. That is, there is no evidence for either a multiplicative or additive bias in the HST Cepheid distances when compared to all other measures, simultaneously.
+[41] analyzed the Cepheid distance linearity against only SNe Ia and found it consistent with unity at 1.5σ\sigma but this was a weaker constraint due to the lack of the non-SN distances now available. We note that the additional, non-SN Ia, primary distance indicator data provide a stronger constraint than the SN data alone owing to the smaller errors of the former per object, about half the size or a 4-to-1 weight advantage.
+While there is no evidence for a non-linearity, the constraint also strongly out rules a non-linearity as a resolution of the Hubble Tension. A non-linearity would have to produce a change of 5×log⁡(73.2/67.5)∼5\times\log(73.2/67.5)\sim0.18 mag between the distance of NGC 4258 and the mean HST-calibrated SN Ia host (μ=29.4\mu=29.4 to 31.931.9), a span of 2.5 magnitudes, or a needed bias of 0.07 magnitudes in distance per magnitude which is excluded by the constraint at ∼\sim7σ\sigma. A combination of multiplicative and additive HST Cepheid bias would require 0.18=(2.5×(1−CLOSECLOSE0.18=(2.5\times(1-slopeOPEN)+)+offset) which as shown in Fig. 3 is ruled out well beyond the 5σ\sigma confidence contour.
+F24 claimed a 3σ\sigma correlation by regressing individual HST Cepheid distances from R22, (μ𝐻𝑆𝑇\mu_{\it HST}), versus SN Ia MB0=mB0−μ𝐻𝑆𝑇M^{0}_{B}=m^{0}_{B}-\mu_{\it HST} (i.e., included in the above), however, this correlation as appears to be invalid as it includes the same (i.e., fully correlated) variable, μ𝐻𝑆𝑇\mu_{\it HST}, in both the dependent and independent axis (which is used to determine a SN MB0M^{0}_{B}). We discuss this in Appendix B.
+III Measuring H0
+III.1 Expected Differences in H0 from JWST Subsamples
+Figure 3: HST Cepheid distance linearity assessed by comparing to all other indicators. The comparison is a linear fit μ𝐻𝑆𝑇=slope×μ𝑜𝑡ℎ𝑒𝑟−𝑜𝑓𝑓𝑠𝑒𝑡\mu_{\it HST}={\rm slope}\times\mu_{\it other}-{\it offset} between each method (non-SN) and HST Cepheids (relative to the distance of NGC 4258, 29.4 mag) with one additional offset term for including SNe (MB0M^{0}_{B}), a total of one linearity term and two offsets. The HST Cepheid linearity is measured to be 0.994±0.0100.994\pm 0.010, in good agreement with unity. There is also no evidence of an offset (non-SN) relative to all other indicators, with HST Cepheids in good accord with the mean. In the inset we show the combined constraint out to 5σ\sigma confidence and compared to the region that would be necessary to produce an 0.18 mag mean bias between NGC 4258 and the mean HST SN Ia host, a range of 2.5 mag.
+The measurement of H0 from JWST host sub-samples alone will show relatively large variations, due to the small number of SNe they contain, coupled to the substantial SN Ia intrinsic scatter. The selection differences and their impacts are illustrated in Fig. 4, where we show the difference in H0 we would expect based on the full sample of host HST Cepheid measurements in R22 and the variation introduced by the anchor. These differences due to selection are often referred to as ‘‘subsample bias,” because they measure how the subsample represents the full sample. The driver of this variation is the inherent scatter in the luminosity of individual SNe Ia,55
+5
+These variations are known to be intrinsic to SNe Ia, as they are seen not only in comparison with the Hubble flow, but also in “siblings” (multiple SNe in the same host, so independent of distance to the host; 45). which is a factor of 2-3 times larger than the uncertainty in the distance estimate to a typical host. For example, the 10 SN Ia calibrated with JWST in the CCHP sample and analyzed with the Carnegie Supernova Program (CSP) data, where the intrinsic SN Ia dispersion is found to be 0.19 mag [49], produces a 1​σ1\sigma uncertainty in H0 of 2.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}.
+Another difference in H0H_{0} between a JWST-only measurement and the full HST samples results from the availability of anchors. NGC 4258, the sole anchor available for JWST, produces the lowest value of H0 of the 4 anchors, decreasing H0 from the 4-anchor mean of Breuval et al. [6] by Δ​H0≈0.7\Delta H_{0}\approx 0.7 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}.
+Determining H0 requires the standardized apparent magnitudes of the SN Ia (mB0m_{B}^{0}) in the relevant hosts and absolute magnitudes (MB0M_{B}^{0}) determined as MB0=mB0−μ0M_{B}^{0}=m_{B}^{0}-\mu_{0}. For a well-measured mean MB0M_{B}^{0}, H0 may be determined from
+|
+5​log​(H0/72.5)=MB0−(−19.28).5\,\textrm{log}({\rm H}_{0}/72.5)=M_{B}^{0}-(-19.28)\,. |
+|
+(6) |
+This is a useful approximation to the empirical calibration for the Pantheon+ SNe Ia sample from 41 (this simplified approximation rather than the full, simultaneous distance-ladder fit including covariance is accurate to ∼\sim0.01 mag). Calibrating all 42 SNe Ia with HST Cepheids and the single anchor, NGC 4258, produces a mean MB=−19.28M_{B}=-19.28 mag and H0=72.5±1.5{}_{0}=72.5\pm 1.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, matching fit #10 given by 41.
+Figure 4: Anchors and SN Ia hosts selected to cross-check HST and JWST distances from the full HST sample of 4 anchors and 42 SNe Ia. We show the value of H0 indicated by HST alone for each SN Ia. Small samples will produce large fluctuations in the value of H0.
+(HST also indicates the selection by both teams of the anchor NGC 4258 will produce a lower value of H0 by −0.7-0.7km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}.) The JWST subsample selected by each team may be directly compared to the same from HST (i.e., “apples to apples”) without bias, but if used alone to determine H0 the subsample value is seen to be biased with respect to the full HST sample mean with the values calculated from HST Cepheids indicated on the right. A larger sample, both teams combined (red and blue, N=15N=15 SNe Ia), is found to be minimally biased, and nearly complete in distance to D<25D<25 Mpc.
+Table 3: H0 Error Budget for ∼\sim10 SN Ia Measured with JWST by 3 Methods Calibrated by NGC 4258
+Term
+σ⁡(stat)\sigma(\textrm{stat})
+σ⁡(sys)\sigma(\textrm{sys})
+[mag]
+Cepheid Subtotal (see Table 1) |
+0.04 |
+0.03 |
+TRGB Subtotal (see Table 1) |
+0.045 |
+0.01–0.08 |
+JAGB Subtotal (see Table 1) |
+0.055 |
+0.01–0.10 |
+Combining Three Methods (c,d) |
+0.02 |
+∼\sim0.02 |
+Common Uncertainties, Independent of Distance Method |
+1st rung: Geometric Distance to NGC 4258 |
+– |
+0.032 |
+2nd rung: SN distances to hosts,a (0.13–0.17)e×Nhosts−1/2{}^{e}\times N_{\textrm{hosts}}^{-1/2} |
+0.043–0.056 |
+– |
+3rd rung: SNe Ia in Hubble Flow |
+– |
+0.01 |
+Common Uncertainty Subtotal |
+0.047–0.059 |
+0.04 |
+Cepheids and Common Total |
+0.068–0.075 |
+0.044 |
+TRGB and Common Total |
+0.065–0.072 |
+0.044 |
+JAGB and Common Total |
+0.065–0.072 |
+0.044 |
+3 Methods and Common Total |
+0.052–0.063 |
+0.044 |
+3 method stat+sys error in H0: 0.062–0.072 mag or 2.0–2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}; |
+individual methods ∼\sim2.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} |
+|
+|
+|
+Note. — An uncertainty budget for the present analysis. Uncertainties are listed separately for each distance method (Cepheids, TRGB, JAGB) and their individual subtotals are given. We derive the uncertainties when combining the three in the “Averaging between methods.” A separate list of uncertainties, which are common to each distance method (e.g., the uncertainties from SN measurements) are also given. Finally, we combine the Averaged Uncertainty with the Common Uncertainty to derive a total H0 uncertainty. (a) Pantheon + SN sample [7] has a mean per SN Ia error of 0.13 mag, CSP SN sample [49] finds σint=0.17\sigma_{\rm int}=0.17 per SN for CSP I & II.
+We now predict differences in H0 due only to the selection of a JWST subsample by comparing the MB0M_{B}^{0} subsample means determined from the HST Cepheid distances using equation 6. In Table A1 we list the relevant quantities for the full sample of 42 SNe Ia from 41 as well as the SN Ia host subsamples selected for JWST studies. The comparisons between expected (HST) and actual (JWST) measure of H0H_{0} are shown in Fig. 5.
+III.2 CCHP JWST Sample Difference
+For the 10 hosts of 11 SNe Ia selected by the CCHP for JWST observations, HST Cepheids gave MB0=−19.32±0.05M_{B}^{0}=-19.32\pm 0.05 mag (where the uncertainty includes the measurement of NGC 4258, ±0.04\pm 0.04 without it) and a corresponding value of H0=71.2{}_{0}=71.2 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, thus 2.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} lower than the full HST sample—simply due to the choice of SN hosts and anchor.
+An even larger sample difference is expected for the smaller subsample of 7 SN Ia hosts for which the CCHP JWST JAGB measurements are provided [26]. A priori, HST Cepheid measurements (see Table 1) find MB=−19.34±0.05M_{B}=-19.34\pm 0.05 mag and H0=70.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} for this JAGB subset, an expected reduction of 3.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}from the full HST sample due to selection. The use of CSP instead of the Pantheon++ SN samples reduces this by another 0.7 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} according to L24, and the selection of the mode statistic rather than the mean or median reduces H0H_{0} by another 1.1 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}. The CCHP JAGB analysis excludes 3 SN Ia hosts (NGC 3972, 4038, and 4424) from the CCHP sample of 10, and these 3 excluded objects have a higher expected average, H0=75{}_{0}=75 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, based on their HST Cepheid measurements; among the three excluded objects are the two with the highest H0 from the CCHP sample (NGC 3972 and 4038).
+The subsample chosen for the CCHP JAGB measurements produces an unusual combination of draws from the full HST sample, being both low in H0 and in a very tight cluster, each a ∼\sim2σ\sigma level fluctuation. The SN Ia dispersion in MBM_{B} of the set is uncommonly low at 0.06 mag, less than half the typical SN Ia population dispersion [7, 46]. As shown in Fig. 6, only ∼\sim5% of randomly-selected samples of 8 SNe Ia from the 42 yield an HST Cepheid predicted value of H0 this low, and ∼\sim5% of samples have SNe with such a small variation in luminosity. These subsample characteristics seen from HST Cepheid measurements are well matched in the actual JWST JAGB measurements (L24). Because the subsample is unusual a priori, a standard uncertainty propagated to H0 will not account for the uncommonly high difference between this subsample and the full sample mean. This illustrates the greater value of comparing distance measures with one method to distance measures with another for subsamples rather than comparing H0 or SN scatter which avoids the issue of uncommon or unrepresentative subsamples.
+The value of H0 found by F24, which is lower than that of R22, is anticipated by the difference of the selected subsample relative to the HST full sample mean and the exclusion of three galaxies for JAGB measurements (see Fig. 2, vertical blue line). F24 report JWST Cepheids in the CCHP-selected sample give a value of ∼\sim72 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} and NIR-TRGB ∼\sim70 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, both near the HST-expected ∼\sim71 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} for the subsample, and JWST JAGB gives ∼\sim69 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, near the HST measured for that subsample (with three excluded) of 70.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}; see Fig. 6, all with the Pantheon++ SN sample. For the combination of these three methods, F24 reports 7070 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, near the HST-expected value of ∼\sim70.8±2.3\pm 2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}. In summary, the difference of this selected SN subsample relative to the mean and the exclusion of several hosts for JAGB measurements reduce H0 as expected by the full sample. In Fig. 4 we show the individual SN Ia values of H0 for the full HST sample and the differences from anchor choice as a full summary.
+For the SH0ES JWST host selection of 11 SNe Ia in 8 hosts, HST Cepheids predict MB0=−19.25±0.05M_{B}^{0}=-19.25\pm 0.05 mag and H0=73.9±2.3{}_{0}=73.9\pm 2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} (or −19.26-19.26 mag and 73.6 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} for 9 SNe Ia with D≤25D\leq 25 Mpc). This represents a ∼\sim1σ\sigma fluctuation due to the SN selection in the other direction (a higher H0). This compares well with the JWST Cepheid measurement of H0=74.2H_{0}=74.2 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}.
+The full error bars in Fig. 5 include the noise from the small subsample of SN measurements. Thus for a new measurement with JWST in comparison to HST, the differential errors as given in Table 2, can range from 0.03−-0.10 mag or 1−-3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}.
+Figure 5: Comparisons of H0 between HST Cepheids and
+other measures (JWST Cepheids, JWST JAGB, and JWST NIR-TRGB) for SN Ia host subsamples selected by different teams and for the different methods. The top section shows the values for H0 using 4 geometric anchors, and also using only NGC 4258. Below, for each selected subsample (by Team or method), we show the value of H0 based on the HST Cepheid measurements (from R22) and from the JWST distance measurements. The smaller capped error bars indicate the uncertainty from the distance measures between the first/second rung distance-measure (Cepheids/TRGB/JAGB) alone and the full error bar includes the SN data. The CCHP and SH0ES subsamples selected for JWST observations produce a large difference of 3–4 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} in H0 a priori owing to selection. The HST Cepheid and JWST distance measurements themselves are in good agreement.
+Table 4: Comparison of Measured and Expected Values of H0 (with Pantheon+ SN)
+Sample
+Telescope
+H0
+σ⁡(CLOSE\sigma(H)0{}_{0})
+Total
+HST/
+JWST
+Baseline: HST Cepheids, Pantheon+ |
+42 SN Ia |
+4 Anchors |
+HST |
+73.17 |
+0.86 |
+0.30 |
+42 SN Ia |
+NGC 4258 Anchor |
+HST |
+72.54 |
+1.54 |
+0.90 |
+JWST Cepheids Measured & HST Cepheid Expected |
+11 SN Ia |
+CCHP Selected |
+HST |
+71.2 |
+|
+|
+|
+|
+JWST |
+72.0 |
+2.4 |
+1.8 |
+9 SN Ia |
+SH0ES Selected |
+HST |
+73.6 |
+|
+|
+|
+(D≤25D\leq 25 Mpc) |
+JWST |
+74.2 |
+2.3 |
+1.1 |
+16 SN Ia |
+Both Unique SN |
+HST |
+72.9 |
+|
+|
+|
+(D≤25D\leq 25 Mpc) |
+JWST |
+73.4 |
+2.1 |
+1.1 |
+JWST JAGB (Mode) & HST Cepheid Expected |
+8 SN Ia |
+CCHP Selected |
+HST |
+70.3 |
+|
+|
+|
+mode |
+JWST |
+68.9 |
+2.4 |
+1.5 |
+|
+mean/median |
+JWST |
+70.0 |
+2.4 |
+1.5 |
+7 SN Ia |
+SH0ES Selected |
+HST |
+74.1 |
+|
+|
+|
+|
+JWST |
+75.4 |
+3.1 |
+1.5 |
+13 SN Ia |
+Both Unique SN |
+HST |
+72.4 |
+|
+|
+|
+|
+JWST |
+72.2 |
+2.3 |
+1.3 |
+JWST NIR-TRGB & HST Cepheid Expected |
+11 SN Ia |
+CCHP Selected |
+HST |
+71.2 |
+|
+|
+|
+|
+JWST |
+70.1 |
+2.4 |
+1.5 |
+JWST I-TRGB (D≤D\leq 25 Mpc) & HST Cepheid Expected |
+8 SN Ia |
+SH0ES Selected |
+HST |
+73.8 |
+|
+|
+|
+|
+JWST |
+73.5 |
+2.4 |
+1.5 |
+17 SN Ia |
+Both Unique SN |
+HST |
+72.7 |
+|
+|
+|
+|
+JWST |
+72.1 |
+2.2 |
+1.2 |
+JWST All Methods (D≤D\leq 25 Mpc) & HST Cepheid Expected |
+13-17 SN Ia |
+All |
+HST |
+72.8 |
+|
+|
+|
+|
+JWST |
+72.6 |
+2.0 |
+1.0 |
+|
+|
+|
+|
+|
+|
+Note. — Subsample uncertainties do not include 1.1 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} error from maser distance to NGC 4258.
+III.3 H0 from Joint Samples
+To avoid a selection bias relative to the SN Ia population, it is important to define a (combined) sample which is complete to some distance (a common method to avoid magnitude bias and also to avoid the vagaries of human selection). We note that a near-complete sample of SN Ia (in R22) to D≤25D\leq 25 Mpc with JWST observations is formed by combining both the above SH0ES and CCHP samples for a total of 14 (unique) hosts of 16 SNe Ia, missing only SN 1998aq (NGC 3982) D≤25D\leq 25 Mpc which neither team targeted. A combined D≤25D\leq 25 Mpc JWST sample excludes one host of two SNe Ia, NGC 5468 from the SH0ES JWST sample which is at D=40D=40 Mpc. The CCHP sample of 10 alone does not include hosts of 6 SNe Ia at distances ≤\leq 25 Mpc or at distances nearer than their most distant (NGC 4639, μ≤32.0\mu\leq 32.0 at 95% confidence): SN 2005df, SN 2007af, SN 2001el, SN 2012ht, SN 2021pit, and SN 1998aq. The merged JWST D≤25D\leq 25 Mpc sample of 16 SN Ia is also seen to be more representative of the full HST sample of 42 SN Ia than either group’s selected sub-sample, an expected consequence of “reversion to the mean” as the samples grow. HST Cepheids predict H0=72.9±2.1{}_{0}=72.9\pm 2.1 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} for the JWST D≤25D\leq 25 Mpc sample.
+For the merged D≤D\leq 25 Mpc sample of 16 SNe Ia, we find from JWST Cepheids H0=73.4±2.0{}_{0}=73.4\pm 2.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, similar to the HST result from this same sample.
+The joint sample of JWST JAGB and TRGB measurements yield H0=72.2±2.3{}_{0}=72.2\pm 2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} and H0=72.1±2.3{}_{0}=72.1\pm 2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, respectively. The HST Cepheid expectation for the JAGB H0H_{0} is somewhat smaller at 72.4 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} due to the exclusion of several hosts in L24. Finally, we can combine all three methods, which yields H0=72.6±2.0{}_{0}=72.6\pm 2.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, in good agreement with the value expected from HST Cepheids for the same sample of H0=72.8±2.0{}_{0}=72.8\pm 2.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}. The uncertainties for this combination are explained in Table 3. For these estimates we used the minimum systematic error listed in Table 1 for each method. For an expanded JWST sample of SN Ia hosts with smaller statistical uncertainty we would advocate a more comprehensive analysis of systematic uncertainties.
+When we compare the HST predicted values of H0 to those found with JWST measurements, we find the values inferred using JWST are consistent with expectations for every subsample. We can see that the measured values are at or within 1​σ1\sigma of these smaller uncertainties, i.e., between HST and JWST excluding SNe, for each comparison set. We reiterate that the HST expectations above all come from the use of NGC 4258 as a single anchor, yielding lower values of H0H_{0} by 0.5 than the three anchor calibrations in R22.
+For the merged sample, the averaging of distance methods occurs before the use of SN data to avoid double-counting66
+6
+The small quoted errors of ±1\pm 1 for H0H_{0} in F24 via their Bayesian route appear to be a consequence of directly multiplying the H0 likelihood for each method. Since each method calibrates the very same set of SNe, this treats 10 SNe Ia as equivalent to the statistical power of 30 and therefore underestimates the uncertainty in H0 by ∼3\sim\sqrt{3}. See Appendix B for further discussion.. It is interesting to examine the much larger sample of all SN Ia hosts observed to date with JWST which includes 24 of the 42 HST SNe Ia. The full SN sample with JWST observations (to date) is highly representative of the HST SN sample as shown in Fig. 6 in terms of expected H0 and variance with little sample bias. When increasing the number of SN hosts, we can see from the widths of the middle panels in Fig. 6 how the second-rung uncertainty from SNe will decrease. The impact of selection when comparing HST and JWST will diminish with the growing samples.
+Figure 6: Distribution of H0 values for each calibrator SN Ia as calibrated by HST Cepheids (left panel). The mean of the complete set of 42, in blue, results in H0=73{}_{0}=73 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, and the standard deviation is a result of SN Ia dispersion with σ\sigma of 6% in distance. We show the subsample selected by the CCHP (10 hosts of 11 SNe Ia) and after their exclusion of 3 hosts for JAGB measurements. The remaining set of 8 SNe Ia used for JAGB, in red, are biased low with respect to the mean, with HST Cepheids expecting H0=70.5{}_{0}=70.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} for this set. Selecting every unique combination of 8 SNe Ia from the original 42 shows the selected JAGB sample to be unusual, both low in H0 (middle panel, only 5% are lower) and with little variation in H0 (right panel, only 5% are lower), with <0.1<0.1% of samples both lower and tighter. This selection is the primary reason for the low value of H0 from CCHP JAGB, not from a difference in measured distances.
+IV Discussion
+A complete JWST ladder, still “under construction,” is necessarily weaker than the one built by HST over decades as it is limited to a single anchor rather than 4 [6], resulting in less precision, loss of redundancy, and a reduction in resolution of the tension at inception. Limiting the HST ladder to the same single anchor as JWST, NGC 4258, results in H0=72.5±1.5{}_{0}=72.5\pm 1.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} [41], a reduction of the tension to 3​σ3\sigma before any comparison with JWST. Limiting to one anchor and the 17 SNe Ia at D<25D<25 Mpc trivially further reduces the significance of the tension, H0=72.3±1.8{}_{0}=72.3\pm 1.8 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, but only masks the tension rather than offering any explanation. The situation is illustrated in Fig. 7. While JWST is enormously powerful for checking HST distances, it only weakly constrains the tension due to its lack of statistics from SNe and anchors.
+Simply summarized, JWST offers the means to test HST on the second rung, but given their demonstrated consistency, there is no reason not to use the full HST ladder — its SN sample is complete, it has superior statistics, and it uses multiple, redundant anchors to measure H0. However, the expanding JWST sample will gradually remedy the disparity. We show here that a combination of all JWST subsamples is already nearly complete to D≤25D\leq 25 Mpc, reaches 40% of the HST SN sample, and reduces the a priori bias, an expected consequence of reversion to the mean of larger samples.
+Figure 7: Comparisons of H0 between HST Cepheids and
+other subsamples of JWST Cepheids and anchors.
+Finally, we remark that the present circumstance is not unusual in observational cosmology; a comparable situation was seen for CMB measurements. The South Pole Telescope (SPT) has measured CMB fluctuations on finer angular scales than Planck but over smaller patches of the sky, including 2500 square degrees in the initial SPT-SZ survey [47], and 500 square degrees for the SPTpol survey [19]. Fitting the Λ\LambdaCDM model to these data sets the SPT team found H0=75.0±3.5{}_{0}=75.0\pm 3.5 and 71.3±2.171.3\pm 2.1 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, respectively, higher than the Planck constraints and in good agreement with the SH0ES distance ladder. However, where the SPT and Planck measurements were directly comparable (i.e., on the SPT patch, for the range of angular scales accessible to both instruments), they were found to agree well with one another, with a null-test PTE of 0.30 [20]. The conclusion, therefore, was not that the SPT data indicated a problem with the full-sky Planck data or vice-versa, but that the SPT data provided a valuable new consistency check of the Planck measurements, which was passed, and that the SPT H0 results differed from the Planck results because of sample variance on that patch of sky (i.e., it was not exactly representative of the full sky).
+Future data might help resolve the Hubble tension problem, but not simply by yielding a high or low value of H0H_{0} (or even an intermediate result). Instead, we think it will be necessary to understand why different types of measurements have yielded inconsistent results for a decade. If there is an observational or data analysis error with the CMB or local distance ladder, it is far from clear what it might be. Studies that provide consistency tests are an important part of seeking a solution. Measurements from two different CMB space missions agree [1], ruling out a number of potential candidate causes of an erroneous Hubble constant. The community-wide effort to seek cosmological solutions to the tension are valuable, but so far have largely demonstrated the difficulty in explaining the tension. Whatever the explanation it seems fair to say that it is elusive and that we, as a community, are missing something.
+V Conclusion
+A major success of the first years of JWST has been its ability to provide a number of cross-checks on the local distance ladder as measured using HST. In this paper, we surveyed measurements using HST and JWST with multiple techniques including Cepheids, TRGB, and JAGB to search for any systematic biases in these measurements. We find that HST Cepheid measurements are consistent at the 0.03 mag and 1​σ1\sigma level with all other techniques from the two telescopes. By comparing all distance indicators to common hosts, HST Cepheids versus others, we find the strongest constraint to date on the linearity in the HST Cepheid measurements, 0.994±0.0100.994\pm 0.010, with no significant evidence of non-linearity, and more than 5σ\sigma from either a multiplicative or additive bias needed to resolve the Hubble Tension. We show that different values found for H0 based solely on JWST can be traced to differences in the small samples of SN hosts (and their SNe) and anchors selected for early JWST observations. When combining all the JWST measurements for each technique, we find 73.4±2.173.4\pm 2.1, 72.2±2.272.2\pm 2.2, and 72.1±2.272.1\pm 2.2 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} for JWST Cepheids, JAGB, and TRGB, respectively. When we combine all the methods (but each SN measurement included only once), we determine H0=72.6±2.0{}_{0}=72.6\pm 2.0 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1}, in good agreement with 72.8km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} that HST Cepheids would yield for the same sample. While it will still take multiple years for the JWST sample of SN hosts to be as large as the HST sample, we show that the current JWST measurements have already ruled out systematic biases from the first rungs of the distance ladder at a much smaller level than the Hubble tension.
+VI Acknowledgments
+We are indebted to all of those who spent years and even decades bringing JWST to fruition. This research has made use of NASA’s Astrophysics Data System. D.S. is supported by Department of Energy grant DE-SC0010007, the David and Lucile Packard Foundation, the Templeton Foundation and Sloan Foundation. G.S.A acknowledges financial support from JWST GO–1685 and GO-2875. C.D.H. acknowledges financial support from HST GO-16744 and GO-17312. A.V.F. is grateful for support from the Christopher R. Redlich Fund and many other donors.
+If something does not make sense, please email ariess@stsci.edu with questions.
+References
+[1]
+Addison, G. E., Watts, D. J., Bennett, C. L., et al. 2018, ApJ, 853, 119, doi: 10.3847/1538-4357/aaa1ed
+[2]
+Anand, G. S., Tully, R. B., Rizzi, L., Riess, A. G., & Yuan, W. 2022, ApJ, 932, 15, doi: 10.3847/1538-4357/ac68df
+[3]
+Anand, G. S., Riess, A. G., Yuan, W., et al. 2024, ApJ, 966, 89, doi: 10.3847/1538-4357/ad2e0a
+[4]
+Anderson, R. I., Koblischke, N. W., & Eyer, L. 2024, ApJ, 963, L43, doi: 10.3847/2041-8213/ad284d
+[5]
+Beaton, R. L., Bono, G., Braga, V. F., et al. 2018, Space Sci. Rev., 214, 113, doi: 10.1007/s11214-018-0542-1
+[6]
+Breuval, L., Riess, A. G., Casertano, S., et al. 2024, arXiv e-prints, arXiv:2404.08038, doi: 10.48550/arXiv.2404.08038
+[7]
+Brout, D., Scolnic, D., Popovic, B., et al. 2022, ApJ, 938, 110, doi: 10.3847/1538-4357/ac8e04
+[8]
+Chandar, R., Bolatto, A., Dale, D., et al. 2021, Come Out, Come Out, Wherever You Are: Seeking All the Massive Young Clusters Hidden in the Antennae, JWST Proposal. Cycle 1, ID. #2581
+[9]
+Dalcanton, J. J., Williams, B. F., Lang, D., et al. 2012, ApJS, 200, 18, doi: 10.1088/0067-0049/200/2/18
+[10]
+Di Valentino, E., Mena, O., Pan, S., et al. 2021, Classical and Quantum Gravity, 38, 153001, doi: 10.1088/1361-6382/ac086d
+[11]
+Dolphin, A. 2016, DOLPHOT: Stellar photometry, Astrophysics Source Code Library, record ascl:1608.013
+[12]
+Durbin, M. J., Beaton, R. L., Dalcanton, J. J., Williams, B. F., & Boyer, M. L. 2020, ApJ, 898, 57, doi: 10.3847/1538-4357/ab9cbb
+[13]
+Freedman, W. L. 2021, ApJ, 919, 16, doi: 10.3847/1538-4357/ac0e95
+[14]
+Freedman, W. L., & Madore, B. F. 2023, J. Cosmology Astropart. Phys, 2023, 050, doi: 10.1088/1475-7516/2023/11/050
+[15]
+Freedman, W. L., Madore, B. F., Hoyt, T., et al. 2021, Answering the Most Important Problem in Cosmology Today: Is the Tension in the Hubble Constant Real?, JWST Proposal. Cycle 1, ID. #1995
+[16]
+Freedman, W. L., Madore, B. F., Jang, I. S., et al. 2024, arXiv e-prints, arXiv:2408.06153, doi: 10.48550/arXiv.2408.06153
+[17]
+Freedman, W. L., Madore, B. F., Hatt, D., et al. 2019, ApJ, 882, 34, doi: 10.3847/1538-4357/ab2f73
+[18]
+Freedman, W. L., Madore, B. F., Hoyt, T., et al. 2020, ApJ, 891, 57, doi: 10.3847/1538-4357/ab7339
+[19]
+Henning, J. W., Sayre, J. T., Reichardt, C. L., et al. 2018, ApJ, 852, 97, doi: 10.3847/1538-4357/aa9ff4
+[20]
+Hou, Z., Aylor, K., Benson, B. A., et al. 2018, ApJ, 853, 3, doi: 10.3847/1538-4357/aaa3ef
+[21]
+Hoyt, T. J., Jang, I. S., Freedman, W. L., et al. 2024, arXiv e-prints, arXiv:2407.07309, doi: 10.48550/arXiv.2407.07309
+[22]
+Huang, C., Marengo, M., Breuval, L., et al. 2023, Refining the Mira Distance Ladder with NIRCam Observations of M101, JWST Proposal. Cycle 2, ID. #4087
+[23]
+Huang, C. D., Yuan, W., Riess, A. G., et al. 2024, ApJ, 963, 83, doi: 10.3847/1538-4357/ad1ff8
+[24]
+Jang, I. S., Hoyt, T. J., Beaton, R. L., et al. 2021, ApJ, 906, 125, doi: 10.3847/1538-4357/abc8e9
+[25]
+Lee, A. J. 2023, ApJ, 956, 15, doi: 10.3847/1538-4357/acee69
+[26]
+Lee, A. J., Freedman, W. L., Madore, B. F., et al. 2024, arXiv e-prints, arXiv:2408.03474, doi: 10.48550/arXiv.2408.03474
+[27]
+Li, S., Riess, A. G., Casertano, S., et al. 2024a, arXiv e-prints, arXiv:2401.04777, doi: 10.48550/arXiv.2401.04777
+[28]
+Li, S., Anand, G. S., Riess, A. G., et al. 2024b, arXiv e-prints, arXiv:2408.00065, doi: 10.48550/arXiv.2408.00065
+[29]
+Madore, B. F., & Freedman, W. L. 2020, ApJ, 899, 66, doi: 10.3847/1538-4357/aba045
+[30]
+Madore, B. F., Freedman, W. L., & Owens, K. 2023, AJ, 166, 224, doi: 10.3847/1538-3881/ad022c
+[31]
+McQuinn, K. B. W., Boyer, M., Skillman, E. D., & Dolphin, A. E. 2019, ApJ, 880, 63, doi: 10.3847/1538-4357/ab2627
+[32]
+Newman, M. J. B., McQuinn, K. B. W., Skillman, E. D., et al. 2024, arXiv e-prints, arXiv:2403.03086, doi: 10.48550/arXiv.2403.03086
+[33]
+Parada, J., Heyl, J., Richer, H., Ripoche, P., & Rousseau-Nepton, L. 2021, MNRAS, 501, 933, doi: 10.1093/mnras/staa3750
+[34]
+Reid, M. J., Pesce, D. W., & Riess, A. G. 2019, ApJ, 886, L27, doi: 10.3847/2041-8213/ab552d
+[35]
+Riess, A., Anderson, R. I., Breuval, L., et al. 2021, Uncrowding the Cepheids for an Improved Determination of the Hubble Constant, JWST Proposal. Cycle 1, ID. #1685
+[36]
+—. 2023a, Scrutinizing the Dirtiest Cepheids, a Test of the Hubble Tension, JWST Proposal. Cycle 2, ID. #2875
+[37]
+Riess, A. G., Casertano, S., Yuan, W., Macri, L. M., & Scolnic, D. 2019, ApJ, 876, 85, doi: 10.3847/1538-4357/ab1422
+[38]
+Riess, A. G., Macri, L., Casertano, S., et al. 2011, ApJ, 730, 119, doi: 10.1088/0004-637X/730/2/119
+[39]
+Riess, A. G., Macri, L. M., Hoffmann, S. L., et al. 2016, ApJ, 826, 56, doi: 10.3847/0004-637X/826/1/56
+[40]
+Riess, A. G., Casertano, S., Yuan, W., et al. 2018, ApJ, 861, 126, doi: 10.3847/1538-4357/aac82e
+[41]
+Riess, A. G., Yuan, W., Macri, L. M., et al. 2022, ApJ, 934, L7, doi: 10.3847/2041-8213/ac5c5b
+[42]
+Riess, A. G., Anand, G. S., Yuan, W., et al. 2023b, ApJ, 956, L18, doi: 10.3847/2041-8213/acf769
+[43]
+—. 2024, ApJ, 962, L17, doi: 10.3847/2041-8213/ad1ddd
+[44]
+Ripoche, P., Heyl, J., Parada, J., & Richer, H. 2020, MNRAS, 495, 2858, doi: 10.1093/mnras/staa1346
+[45]
+Scolnic, D., Smith, M., Massiah, A., et al. 2020, ApJ, 896, L13, doi: 10.3847/2041-8213/ab8735
+[46]
+Scolnic, D., Brout, D., Carr, A., et al. 2022, ApJ, 938, 113, doi: 10.3847/1538-4357/ac8b7a
+[47]
+Story, K. T., Reichardt, C. L., Hou, Z., et al. 2013, ApJ, 779, 86, doi: 10.1088/0004-637X/779/1/86
+[48]
+Tully, R. B. 2023, arXiv e-prints, arXiv:2305.11950, doi: 10.48550/arXiv.2305.11950
+[49]
+Uddin, S. A., Burns, C. R., Phillips, M. M., et al. 2023, arXiv e-prints, arXiv:2308.01875, doi: 10.48550/arXiv.2308.01875
+[50]
+Verde, L., Schöneberg, N., & Gil-Marín, H. 2023, arXiv e-prints, arXiv:2311.13305, doi: 10.48550/arXiv.2311.13305
+[51]
+Weisz, D. R., Dolphin, A. E., Savino, A., et al. 2024, ApJS, 271, 47, doi: 10.3847/1538-4365/ad2600
+[52]
+Wu, J., Scolnic, D., Riess, A. G., et al. 2023, ApJ, 954, 87, doi: 10.3847/1538-4357/acdd7b
+[53]
+Wu, P.-F., Tully, R. B., Rizzi, L., et al. 2014, AJ, 148, 7, doi: 10.1088/0004-6256/148/1/7
+Appendix A Data tables
+Here we include all the distance measurements discussed in this paper from [41], [16], [27], [28], [13] and others. They are presented in Tables A1 & A2.
+We show an example plot that can be made using the data table. NGC 5643 has the largest number of measurements from different teams and techniques. We show the agreement of these results in Fig. A1. We augment the plot with data from [48].
+Figure A1: Distance comparisons for NGC 5643 from multiple analyses. The SH0ES measurements can be found in R22 and [43] for Cepheids, [27] for JAGB, and here for JWST TRGB. EDD measurements are from [2]. The CCHP measurements can be found in [13] and [16] All measurements are anchored to NGC 4258 in the first rung. We plot a consensus mean of μ=30.52±0.03\mu=30.52\pm 0.03 mag.
+Table A1: Mean SN Ia MB0M_{B}^{0} derived from Subsamples Calibrated by HST Cepheids, NGC 4258, and Pantheon++ [41]
+Host
+μCeph\mu_{\rm Ceph}
+σ\sigma
+SN
+mB,i0m_{B,i}^{0}
+σ\sigma
+MB,i0M_{B,i}^{0}
+σ\sigma
+H0
+σ\sigma
+[mag]
+[mag]
+[km/s/Mpc]
+N4258 |
+29.398 |
+0.025a |
+– |
+– |
+– |
+– |
+– |
+– |
+– |
+CCHP JWST Selected Targets, N=11N=11 |
+N7250 |
+31.642 |
+0.130 |
+2013dy |
+12.283 |
+0.178 |
+-19.357 |
+0.222 |
+|
+|
+N4536 |
+30.870 |
+0.061 |
+1981B |
+11.551 |
+0.133 |
+-19.320 |
+0.147 |
+|
+|
+N3972b |
+31.644 |
+0.096 |
+2011by |
+12.548 |
+0.094 |
+-19.103 |
+0.136 |
+|
+|
+N4424b |
+30.854 |
+0.133 |
+2012cg |
+11.487 |
+0.192 |
+-19.376 |
+0.236 |
+|
+|
+N4639 |
+31.823 |
+0.091 |
+1990N |
+12.454 |
+0.124 |
+-19.373 |
+0.155 |
+|
+|
+N4038b |
+31.612 |
+0.121 |
+2007sr |
+12.409 |
+0.106 |
+-19.212 |
+0.164 |
+|
+|
+M101 |
+29.188 |
+0.055 |
+2011fe |
+9.7800 |
+0.115 |
+-19.421 |
+0.127 |
+|
+|
+N2442 |
+31.459 |
+0.073 |
+2015F |
+12.234 |
+0.082 |
+-19.230 |
+0.111 |
+|
+|
+N1365 |
+31.378 |
+0.061 |
+2012fr |
+11.900 |
+0.092 |
+-19.478 |
+0.112 |
+|
+|
+N5643 |
+30.553 |
+0.063 |
+2013aa |
+11.252 |
+0.079 |
+-19.322 |
+0.101 |
+|
+|
+N5643 |
+30.553 |
+0.063 |
+2017cbv |
+11.208 |
+0.074 |
+-19.366 |
+0.097 |
+|
+|
+Mean |
+-19.32 |
+0.05 |
+71.2 |
+2.0 |
+For JAGB (N=8N=8): Mean |
+-19.34 |
+0.05 |
+70.3 |
+2.0 |
+SH0ES JWST Selected/System Targets, N=11N=11 |
+N1559 |
+31.500 |
+0.071 |
+2005df |
+12.141 |
+0.086 |
+-19.367 |
+0.112 |
+|
+|
+N1448 |
+31.298 |
+0.051 |
+2001el |
+12.254 |
+0.136 |
+-19.046 |
+0.146 |
+|
+|
+N1448 |
+31.298 |
+0.051 |
+2021pit |
+11.752 |
+0.200 |
+-19.548 |
+0.207 |
+|
+|
+N5584 |
+31.766 |
+0.062 |
+2007af |
+12.804 |
+0.079 |
+-18.963 |
+0.102 |
+|
+|
+N5643 |
+30.553 |
+0.063 |
+2013aa |
+11.252 |
+0.079 |
+-19.322 |
+0.101 |
+|
+|
+N5643 |
+30.553 |
+0.063 |
+2017cbv |
+11.208 |
+0.074 |
+-19.366 |
+0.097 |
+|
+|
+N5468 |
+33.127 |
+0.082 |
+1999cp |
+13.880 |
+0.080 |
+-19.248 |
+0.116 |
+|
+|
+N5468 |
+33.127 |
+0.082 |
+2002cr |
+13.993 |
+0.072 |
+-19.135 |
+0.111 |
+|
+|
+N4038b |
+31.612 |
+0.121 |
+2007sr |
+12.409 |
+0.106 |
+-19.212 |
+0.164 |
+|
+|
+N3447 |
+31.947 |
+0.049 |
+2012ht |
+12.736 |
+0.089 |
+-19.213 |
+0.102 |
+|
+|
+M101c |
+29.188 |
+0.055 |
+2011fe |
+9.7800 |
+0.115 |
+-19.421 |
+0.127 |
+|
+|
+Mean |
+-19.25 |
+0.05 |
+73.9 |
+2.0 |
+Mean all JWST D≤25D\leq 25 Mpc, 16 SNe Ia |
+-19.27 |
+0.04 |
+72.8 |
+1.8 |
+SH0ES JWST Cycle 2 observed |
+N2525 |
+32.059 |
+0.105 |
+2018gv |
+12.728 |
+0.074 |
+-19.344 |
+0.130 |
+|
+|
+N3370 |
+32.132 |
+0.062 |
+1994ae |
+12.937 |
+0.082 |
+-19.196 |
+0.104 |
+|
+|
+N5861 |
+32.232 |
+0.105 |
+2017erp |
+12.945 |
+0.107 |
+-19.294 |
+0.152 |
+|
+|
+N3147 |
+33.173 |
+0.163 |
+2021hpr |
+13.843 |
+0.159 |
+-19.358 |
+0.230 |
+|
+|
+N3147 |
+33.173 |
+0.163 |
+1997bq |
+13.821 |
+0.141 |
+-19.380 |
+0.218 |
+|
+|
+N3147 |
+33.173 |
+0.163 |
+2008fv |
+13.936 |
+0.200 |
+-19.264 |
+0.260 |
+|
+|
+Mean all JWST observed, 24 SNe Ia |
+-19.26 |
+0.03 |
+73.1 |
+1.6 |
+Remaining HST Subsample |
+N3021 |
+32.473 |
+0.162 |
+1995al |
+13.114 |
+0.116 |
+-19.368 |
+0.203 |
+|
+|
+N1309 |
+32.552 |
+0.069 |
+2002fk |
+13.209 |
+0.082 |
+-19.345 |
+0.108 |
+|
+|
+N3982 |
+31.736 |
+0.080 |
+1998aq |
+12.252 |
+0.078 |
+-19.484 |
+0.113 |
+|
+|
+N1015 |
+32.691 |
+0.077 |
+2009ig |
+13.350 |
+0.094 |
+-19.346 |
+0.123 |
+|
+|
+N5917 |
+32.377 |
+0.125 |
+2005cf |
+13.079 |
+0.095 |
+-19.297 |
+0.160 |
+|
+|
+U9391 |
+32.861 |
+0.075 |
+2003du |
+13.525 |
+0.084 |
+-19.335 |
+0.114 |
+|
+|
+N3583 |
+32.814 |
+0.087 |
+ASASSN-15so |
+13.509 |
+0.093 |
+-19.308 |
+0.129 |
+|
+|
+N2608 |
+32.620 |
+0.158 |
+2001bg |
+13.443 |
+0.166 |
+-19.191 |
+0.232 |
+|
+|
+N7541 |
+32.512 |
+0.124 |
+1998dh |
+13.418 |
+0.128 |
+-19.095 |
+0.181 |
+|
+|
+N0691 |
+32.838 |
+0.114 |
+2005W |
+13.602 |
+0.139 |
+-19.250 |
+0.182 |
+|
+|
+N3254 |
+32.343 |
+0.084 |
+2019np |
+13.201 |
+0.074 |
+-19.141 |
+0.114 |
+|
+|
+N5728 |
+33.101 |
+0.208 |
+2009Y |
+13.514 |
+0.115 |
+-19.607 |
+0.242 |
+|
+|
+N7678 |
+33.196 |
+0.157 |
+2002dp |
+14.090 |
+0.093 |
+-19.113 |
+0.187 |
+|
+|
+M1337 |
+33.060 |
+0.121 |
+2006D |
+13.655 |
+0.106 |
+-19.406 |
+0.164 |
+|
+|
+N4680 |
+32.609 |
+0.208 |
+1997bp |
+13.173 |
+0.205 |
+-19.440 |
+0.296 |
+|
+|
+N7329 |
+33.252 |
+0.122 |
+2006bh |
+14.030 |
+0.079 |
+-19.248 |
+0.146 |
+|
+|
+N0976 |
+33.719 |
+0.153 |
+1999dq |
+14.250 |
+0.103 |
+-19.475 |
+0.188 |
+|
+|
+N0105 |
+34.538 |
+0.252 |
+2007A |
+15.250 |
+0.133 |
+-19.290 |
+0.292 |
+|
+|
+Mean of all, unique 42 SNe Ia |
+-19.28 |
+0.03 |
+72.5 |
+1.5 |
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+Note. — (a) Includes intercept uncertainty from Cepheid sample and tie to NGC 4258 sample with different mean period; see Table 3. (b) Hosts excluded by CCHP JAGB analysis. (c) JWST program GO-2581. (d) JWST program GO-4087. Sample errors in mean include measurement errors for NGC 4258 but not geometric distance error of 0.032 mag. H0 follows from <MB0><M_{B}^{0}> with Pantheon+ SNe as 5 log(H/072.5)=MB0−(−19.28){}_{0}/72.5)=M_{B}^{0}-(-19.28).
+Table A2: Distance Moduli for Comparison
+|
+HST Cepheids
+JWST Cepheids
+JWST TRGB
+HST TRGB
+JWST JAGB
+Miras
+Host
+R22
+err
+CCHP
+err
+SH0ES
+err
+CCHP
+err
+SH0ES
+err
+F21
+err
+CCHP
+err
+SH0ES
+err
+H24
+err
+N4258
+29.4
+0.025
+29.4
+0.087
+29.4
+0.03
+29.4
+0.035
+29.4
+0.05
+29.4
+0.04
+29.4
+0.05
+29.4
+0.05
+29.4
+0.04
+M101 |
+29.188 |
+0.055 |
+29.14 |
+0.08 |
+29.12 |
+0.03 |
+29.18 |
+0.04 |
+- |
+- |
+29.08 |
+0.04 |
+29.22 |
+0.04 |
+- |
+- |
+29.1 |
+0.06 |
+N1309 |
+32.552 |
+0.069 |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+32.49 |
+0.07b |
+- |
+- |
+- |
+- |
+- |
+- |
+N1365 |
+31.378 |
+0.061 |
+31.26 |
+0.1 |
+- |
+- |
+31.33 |
+0.07 |
+- |
+- |
+31.36 |
+0.05 |
+31.39 |
+0.04 |
+- |
+- |
+- |
+- |
+N1448 |
+31.298∗ |
+0.051 |
+- |
+- |
+31.289 |
+0.03 |
+- |
+- |
+31.38 |
+0.07 |
+31.32 |
+0.06 |
+- |
+- |
+31.29 |
+0.04 |
+- |
+- |
+N1559 |
+31.500∗ |
+0.071 |
+- |
+- |
+31.371 |
+0.03 |
+- |
+- |
+31.5 |
+0.05 |
+- |
+- |
+- |
+- |
+31.39 |
+0.04 |
+31.41 |
+0.08 |
+N2442 |
+31.459 |
+0.073 |
+31.47 |
+0.09 |
+- |
+- |
+31.61 |
+0.09 |
+- |
+- |
+- |
+- |
+31.61 |
+0.04 |
+- |
+- |
+- |
+- |
+N2525 |
+32.059 |
+0.11 |
+- |
+- |
+- |
+- |
+- |
+- |
+31.81 |
+0.08 |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+N3021 |
+32.473 |
+0.162 |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+32.22b |
+0.05 |
+- |
+- |
+- |
+- |
+- |
+- |
+N3370 |
+32.130 |
+0.06 |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+32.27b |
+0.05 |
+- |
+- |
+- |
+- |
+- |
+- |
+N3447 |
+31.947 |
+0.05 |
+- |
+- |
+31.95 |
+0.03 |
+- |
+- |
+31.92 |
+0.09 |
+- |
+- |
+- |
+- |
+31.85 |
+0.07 |
+- |
+- |
+N3972 |
+31.644 |
+0.096 |
+31.67 |
+0.1 |
+- |
+- |
+31.74 |
+0.07 |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+N4038 |
+31.612 |
+0.121 |
+31.7 |
+0.12 |
+31.67 |
+0.035 |
+31.61 |
+0.08 |
+- |
+- |
+31.68 |
+0.05 |
+- |
+- |
+- |
+- |
+- |
+- |
+N4424 |
+30.854 |
+0.133 |
+30.91 |
+0.22 |
+- |
+- |
+30.93 |
+0.05 |
+- |
+- |
+31.0 |
+0.06 |
+- |
+- |
+- |
+- |
+- |
+- |
+N4536 |
+30.870 |
+0.061 |
+30.95 |
+0.12 |
+- |
+- |
+30.94 |
+0.06 |
+- |
+- |
+30.96 |
+0.05 |
+30.98 |
+0.03 |
+- |
+- |
+- |
+- |
+N4639 |
+31.823 |
+0.091 |
+31.8 |
+0.12 |
+- |
+- |
+31.75 |
+0.07 |
+- |
+- |
+- |
+- |
+31.74 |
+0.04 |
+- |
+- |
+- |
+- |
+N5468 |
+33.127∗ |
+0.082 |
+- |
+- |
+32.975 |
+0.03 |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+- |
+N5584 |
+31.766∗ |
+0.062 |
+- |
+- |
+31.838 |
+0.03 |
+- |
+- |
+31.81b |
+0.09 |
+31.82 |
+0.1 |
+- |
+- |
+31.85 |
+0.04 |
+- |
+- |
+N5643 |
+30.553∗ |
+0.063 |
+30.51 |
+0.08 |
+30.52 |
+0.03 |
+30.61 |
+0.07 |
+30.56 |
+0.06 |
+30.475 |
+0.08 |
+30.59 |
+0.04 |
+30.49 |
+0.04 |
+- |
+- |
+N7250 |
+31.642 |
+0.13 |
+31.41 |
+0.12 |
+- |
+- |
+31.62 |
+0.04 |
+- |
+- |
+- |
+- |
+31.6 |
+0.08 |
+- |
+- |
+- |
+- |
+∗R24 Table 3 refit R22 HST Cepheids to a common PP–LL slope with JWST at the same wavelength to negate common error. These HST distance-modulus values (mag) improve the Cepheid comparison with JWST and are N5643, 30.518±0.03330.518\pm 0.033; N5584, 31.828±0.03731.828\pm 0.037; N1559, 31.473±0.04531.473\pm 0.045; N1448, 31.236±0.03431.236\pm 0.034; N5468, 33.058±0.05233.058\pm 0.052. aN2525 qualifies for the D<25D<25 Mpc TRGB sample based on its distance. The uncertainties for the CCHP JWST measures in NGC 4258 were derived from table 5 in F24 after removing the 1.5% geometric distance uncertainty. b The HST TRGB distances given in F21 for NGC 1309, 3021, 3370, and 5584, all at the far end of the measurable range, are contentious as [2] have reanalyzed them and could not detect the TRGB. We include them here to keep the F21 sample complete.
+Appendix B Differences with Analyses in F24
+Here we discuss a few points which we believe may be in error in the F24 (as initially posted to the arxiv) analysis based on the considerations below.
+We fully recognize that these issues may evolve with additional work.
+1.
+Method for correlated errors and H0H_{0}:
+There are two types of uncertainties in the determination of H0H_{0} which are correlated across distance methods (i.e., the same error) and so not reduced by combining distance measuring methods: the SNe uncertainty (due to the ∼\sim10 SN in the hosts, and the ∼\sim300 which measure the Hubble flow) and the 1.5% uncertainty geometric distance of NGC 4258. Table 5 in F24 presents random and systematic errors for each of 3 methods before fully reducing their combination. However, the random errors given in F24 Table 3 for each method include the same ∼\sim10 SN Ia (and Hubble flow SNe) and the dominant error is the fit SN intrinsic scatter of 0.19 mag (Table 3 in F24) divided by 10−1\sqrt{10-1}, 2.9% in H0H_{0} and is the same uncertainty for all distance methods. F24 reduces this by ∼3\sim\sqrt{3} as though independent. This also occurs in Figure 11 of F24 where the PDFs for the three method results, including the SNe in common, are combined by multiplying them together.
+A similar situation occurs in the reduction of the systematic errors for each method. F24 gives these in their Table 5 as the sum of the irreducible 1.5% geometric error for NGC 4258 and the individual uncertainties in measuring each method in NGC 4258 (e.g., TRGB fitting, smoothing parameters, Cepheid PP–LL cutoff, etc). Here too the method combination fully reduces these errors which also reduces the geometric distance error though it is the same for all methods. To illustrate this we separate the reducible and irreducible error terms for the F24 H0H_{0} error budget in Table 7 and recalculate the error in H0H_{0}. We find a method combined error of 3.3% or ±\pm 2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} which matches the independent calculation of the expected uncertainty in Table 3. It is higher than the combined error of ±\pm 1.5 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} from the method combination in F24 which is a consequence of neglecting the method-correlated errors in their reduction.
+2.
+Method for measurement Uncertainties in NGC 4258 and Distance Comparisons:
+In the point above, we separated the measurement uncertainties for each method in NGC 4258 from the 1.5% geometric distance uncertainty as provided in F24 (see Table 5, 3rd column). In magnitudes these are 0.035, 0.05, 0.087 for TRGB, JAGB and Cepheids, respectively. As given in §2.2, the measurement uncertainty of each method in NGC 4258 is the largest component of the total comparison uncertainty because they do not average down with more SN hosts. For example, the 0.087 mag uncertainty for measuring Cepheids with JWST in NGC 4258 alone is already larger than the size of the JAGB-Cepheid difference. Likewise, the mean difference between the CCHP JAGB distances (L24) and those from CCHP HST TRGB [13] of 0.073 mag would be even more significant than JAGB-Cepheids, but not so including the NGC 4258 measurement errors. In Table 8 we use the data in F24 (Table 2 and 5) to calculate the weighted mean differences and their uncertainties without these terms (following F24) and with them. As shown, all of the distance comparisons are in good accord. We conclude that the difference between the mean CCHP JWST JAGB and CCHP JWST Cepheid distances are not significant after including the neglected NGC 4258 method measurement errors.
+3.
+Linearity of Cepheid Distances:
+F24 claimed a 3σ\sigma correlation or Cepheid-distance non-linearity by comparing HST Cepheid distances from R22, μ𝐻𝑆𝑇\mu_{\it HST}, and SN Ia absolute luminosity, MBM_{B}. However, the values of MB0M^{0}_{B} (also from R22) were formed from mB0−μ𝐻𝑆𝑇m^{0}_{B}-\mu_{\it HST} so that the measured quantity, μ𝐻𝑆𝑇\mu_{\it HST}, appears on both sides of the regression (axes), and thus are intrinsically correlated. In the uncorrelated space of HST Cepheid distance vs SN Ia mBm_{B} we calculate a slope ranging from 0.032 to 0.039 ±0.022\pm 0.022 or 1.5σ\sigma to 1.7σ\sigma significance, depending on the regression method used, and thus we do not detect a significant dependence. Likewise, we find the difference for the near and far SN mean MBM_{B} in Figure 16 of F24 to be 0.04±0.05\pm 0.05 mag(0.9σ\sigma) and 0.07±0.11\pm 0.11 mag(0.6σ\sigma) for the high and low SNR split, respectively, and thus not significantly different. A stronger test of HST Cepheid distances is given in §2.3.1 using all independent measures produces a relation of (1-slope) which is -0.006 ±\pm 0.01.
+Table B1: Reducible and irreducible H0 Uncertainties from F24
+Source of Error
+SN Meanf
+Hosts Mean
+N4258g
+N4258
+Error
+Measures
+Measures
+Geom. D
+TRGB zero point |
+2.6% |
+1.0% |
+1.6%a |
+1.5%e |
+JAGB zero point |
+2.6% |
+1.0% |
+2.4%b |
+1.5% |
+Cepheid zero point |
+2.6% |
+1.3% |
+4.0%c |
+1.5% |
+Combined methodsd |
+2.6% |
+0.6% |
+1.3% |
+1.5% |
+Combined |
+3.3% or 2.3 km​s−1​Mpc−1\,\rm km\,s^{-1}\,Mpc^{-1} |
+Note. — (a) as per F24: NGC 4258 uncertainty in color term, TRGB fitting, extinction, photometry calibration. (b) as per F24: NGC 4258 Uncertainty in the mode, smoothing parameter, convergence error, extinction. (c) as per F24: Uncertainty in NGC 4258 reddening law fit zero-point, NGC 4258 PL cutoff, aperture correction uncertainty, including cross matching the HST catalogs, photometric zero point uncertainty and metallicity. (d) Cepheid, TRGB and JAGB combined errors, first and last columns do not reduce because they use the same SNe and NGC 4258 geometric distance. (e) Uncertainty of 1.5% in NGC 4258 distance [34] (f) error from 10 SN Ia with intrinsic scatter 0.19 mag from Table 3 in F24 and error in Hubble flow SNe, host distance measures were removed from the random error in F24 Table 5 and put in column 2 (g) Errors in each methods measurement in NGC 4258 after removing the geometric distance error now placed in column 4.
+Table B2: CCHP Distance Method Comparisons without and with Method Measurement Errors in NGC 4258
+Comparison
+N
+weighted diffa (mag)
+error
+w/ NGC 4258 measurement errors
+CCHP: JWST JAGB-JWST Cepheids |
+7 |
+0.086 |
+±0.040\pm 0.040 (2.2σ\sigma) |
+±\pm 0.108(0.8σ\sigma) |
+CCHP: JWST JAGB-JWST TRGB |
+10 |
+0.019 |
+±0.029\pm 0.029 (0.7σ\sigma) |
+±\pm 0.067(0.8σ\sigma) |
+CCHP: JWST Cepheids-JWST TRGB |
+10 |
+-0.059 |
+±0.039\pm 0.039(1.5σ\sigma) |
+±\pm 0.101(0.3σ\sigma) |
+CCHP: JWST JAGB-HST TRGB(F21) |
+4 |
+0.073 |
+±0.032\pm 0.032(2.3σ\sigma) |
+±\pm 0.072(1.0σ\sigma) |
+|
+|
+|
+|
+|
+Note. — (a) We note some numerical differences between the weighted mean error given in F24 and what we calculate from their data Table 2. Most significant is JAGB vs Cepheids where F24 gives 0.028 and we find 0.040 which reduces the significance of the claimed difference from 3σ\sigma claimed by F24 to 2σ\sigma and then 0.8σ\sigma including the measurement errors for each method in NGC 4258 in Table 5 here and Table 5 in F24.
+Experimental support, please
+view the build logs
+for errors. Generated by
+L
+A
+T
+E
+xml
+.
+Instructions for reporting errors
+We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+methods listed below:
+Click the "Report Issue" (
+) button, located in the page header.
+Tip: You can select the relevant text first, to include it in your report.
+Our team has already identified the following issues. We appreciate your time reviewing and reporting rendering errors we
+may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+all.
+Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion, and welcome developer contributions.
+We gratefully acknowledge support from
+our major funders,
+member institutions, ,
+and all contributors.
+About
+·
+Help
+·
+Contact
+·
+Subscribe
+·
+Copyright
+·
+Privacy
+·
+Accessibility
+·
+Operational Status (opens in new tab)
+Major funding support from

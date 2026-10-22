@@ -1,0 +1,395 @@
+{
+  "schema": "P3_DOCUMENTARY_DESIGN_PROPOSAL_V1",
+  "proposal_id": "41cf86b3-74e5-40e1-ab05-fd0ab0caa659",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "selected_for_recommendation_only": "A",
+  "frozen_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_qualified_003\\CONTRATO_P3.json",
+    "relative": "preregistros/conjunto_d/p3_init_qualified_003/CONTRATO_P3.json",
+    "bytes": 21134,
+    "sha256": "b4d570c60a5a9bdad6c0e9682f817f51b838698e7779320fd9572244df6c2b36",
+    "role": "Frozen scientific and resource reference",
+    "access": "READ_BYTES_ONLY_NO_IMPORT_NO_EXECUTION"
+  },
+  "frozen_scientific_metadata": {
+    "hypothesis": "Same aligned-spin pSEOBNRv4HM_PA IMR model for both synthetic datasets; DTau220 only free QNM deformation; DOmega220=DTau440=DOmega440=0.",
+    "free_parameters": [
+      "mass_1",
+      "mass_2",
+      "chi_1",
+      "chi_2",
+      "dtau220",
+      "luminosity_distance",
+      "theta_jn",
+      "ra",
+      "dec",
+      "psi",
+      "phase",
+      "geocent_time"
+    ],
+    "fixed_parameters": {
+      "domega220": 0.0,
+      "dtau440": 0.0,
+      "domega440": 0.0
+    },
+    "priors": {
+      "mass_1": {
+        "kind": "Uniform",
+        "minimum": 35.0,
+        "maximum": 110.0
+      },
+      "mass_2": {
+        "kind": "Uniform",
+        "minimum": 20.0,
+        "maximum": 80.0
+      },
+      "mass_ratio": {
+        "kind": "Constraint",
+        "minimum": 0.2,
+        "maximum": 1.0
+      },
+      "chi_1": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 0.95
+      },
+      "chi_2": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 0.95
+      },
+      "dtau220": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 2.0
+      },
+      "domega220": 0.0,
+      "dtau440": 0.0,
+      "domega440": 0.0,
+      "luminosity_distance": {
+        "kind": "Uniform",
+        "minimum": 10.0,
+        "maximum": 10000.0
+      },
+      "theta_jn": {
+        "kind": "Sine",
+        "minimum": 0.0,
+        "maximum": 3.141592653589793
+      },
+      "ra": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "dec": {
+        "kind": "Cosine",
+        "minimum": -1.5707963267948966,
+        "maximum": 1.5707963267948966
+      },
+      "psi": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 3.141592653589793,
+        "boundary": "periodic"
+      },
+      "phase": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "geocent_time": {
+        "kind": "Uniform",
+        "minimum": 999999999.9,
+        "maximum": 1000000000.1
+      }
+    },
+    "mass_prior_normalization": {
+      "description": "Uniform rectangular m1 [35,110], m2 [20,80], conditioned on 0.2<=m2/m1<=1; normalized analytic inverse CDF. No likelihood rejection or evidence renormalization ambiguity.",
+      "area_solar_mass_squared": 3477.5,
+      "rectangle_area": 4500.0,
+      "m1_density": "(min(80,m1)-max(20,0.2*m1))/3477.5",
+      "m2_given_m1": "Uniform(max(20,0.2*m1),min(80,m1))",
+      "piecewise_integral_areas": [
+        1687.5,
+        1200.0,
+        590.0
+      ],
+      "mass_frame": "detector",
+      "parameterization": "No chirp-mass/Jacobian substitution"
+    },
+    "grid": {
+      "duration_s": 32.0,
+      "sample_rate_hz": 4096,
+      "generation_sample_rate_hz": 8192,
+      "generation_maximum_frequency_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "roll_off_s": 0.4,
+      "geocenter_seconds_after_segment_start": 16.0
+    },
+    "geometry": {
+      "theta_jn": 0.7,
+      "ra": 1.0,
+      "dec": 0.2,
+      "psi": 0.4,
+      "phase": 1.2,
+      "geocent_time": 1000000000.0
+    },
+    "detectors": [
+      "H1",
+      "L1"
+    ],
+    "analytic_psd": "LAL_ANALYTIC_aLIGOZeroDetHighPower",
+    "noise": {
+      "seed": 180601,
+      "paired_between_jobs": true,
+      "independent_realizations": false,
+      "network_optimal_full_IMR_SNR": 20.0,
+      "regenerate": false
+    },
+    "cases": [
+      {
+        "label": "GR_GAUSS",
+        "sampler_seed": 180602,
+        "truth": {
+          "mass_1": 50.0,
+          "mass_2": 35.0,
+          "chi_1": 0.3,
+          "chi_2": 0.1,
+          "luminosity_distance": 1522.5263947349845,
+          "dtau220": 0.0,
+          "domega220": 0.0,
+          "dtau440": 0.0,
+          "domega440": 0.0,
+          "theta_jn": 0.7,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "phase": 1.2,
+          "geocent_time": 1000000000.0
+        },
+        "old_id_reference_only": "P3_GR_INIT_QUALIFIED_003"
+      },
+      {
+        "label": "RB_GAUSS",
+        "sampler_seed": 180603,
+        "truth": {
+          "mass_1": 50.0,
+          "mass_2": 35.0,
+          "chi_1": 0.3,
+          "chi_2": 0.1,
+          "luminosity_distance": 1473.5287789752256,
+          "dtau220": -0.42461995389788576,
+          "domega220": 0.0,
+          "dtau440": 0.0,
+          "domega440": 0.0,
+          "theta_jn": 0.7,
+          "ra": 1.0,
+          "dec": 0.2,
+          "psi": 0.4,
+          "phase": 1.2,
+          "geocent_time": 1000000000.0
+        },
+        "old_id_reference_only": "P3_RB_INIT_QUALIFIED_003"
+      }
+    ]
+  },
+  "array_integrity_status": "HISTORICAL_METADATA_ONLY_NOT_REHASHED; raw external access remains unapproved in this unit",
+  "alternatives": [
+    {
+      "id": "A",
+      "recommended": true,
+      "sampler": {
+        "library": "dynesty",
+        "version": "3.1.0",
+        "method": "static NestedSampler",
+        "nlive": 256,
+        "bound": "multi",
+        "sample": "rwalk",
+        "walks": 25,
+        "dlogz": 0.1,
+        "ndim": 12,
+        "periodic_indices": [
+          7,
+          9,
+          10
+        ],
+        "pool": null,
+        "queue_size": 1,
+        "checkpoint": false,
+        "resume": false,
+        "marginalizations": [],
+        "log_likelihood": "bilby GravitationalWaveTransient.log_likelihood_ratio, Gaussian independent H1/L1; absolute noise-only normalization omitted equally in the same job; no cross-dataset Bayes-factor interpretation"
+      },
+      "limits_proposed": {
+        "max_likelihood_calls": 100000,
+        "native_waveform_calls_at_most": 100000,
+        "wall_soft_s": 14400,
+        "supervisor_wall_s": 14410,
+        "cpu_soft_s": 13200,
+        "cpu_hard_s": 13205,
+        "address_space_bytes": 8589934592,
+        "workers": 1,
+        "threads": 1,
+        "parallel_jobs": 1,
+        "jobs_at_most": 2,
+        "no_retry": true
+      },
+      "delta_vs_consumed": {
+        "sampler": "unchanged",
+        "sampler_seeds": "unchanged",
+        "likelihood_call_cap": "10000 -> 100000",
+        "waveform_call_cap": "10000 -> 100000",
+        "work_seconds": "3600 -> 14400",
+        "supervisor_seconds": "3610 -> 14410",
+        "CPU_soft_hard_seconds": "3300/3305 -> 13200/13205",
+        "recovery_reporting": "new explicit documentary criterion; not automatic truth-inclusion pass"
+      },
+      "rationale": "Change resource allocation without changing exploration method; adequacy unmeasured"
+    },
+    {
+      "id": "B",
+      "recommended": false,
+      "sampler": {
+        "library": "dynesty",
+        "version": "3.1.0",
+        "method": "static NestedSampler",
+        "nlive": 256,
+        "bound": "multi",
+        "sample": "rslice",
+        "dlogz": 0.1,
+        "ndim": 12,
+        "periodic_indices": [
+          7,
+          9,
+          10
+        ],
+        "pool": null,
+        "queue_size": 1,
+        "checkpoint": false,
+        "resume": false,
+        "marginalizations": [],
+        "log_likelihood": "bilby GravitationalWaveTransient.log_likelihood_ratio, Gaussian independent H1/L1; absolute noise-only normalization omitted equally in the same job; no cross-dataset Bayes-factor interpretation",
+        "slices": 15
+      },
+      "limits_proposed": {
+        "max_likelihood_calls": 100000,
+        "native_waveform_calls_at_most": 100000,
+        "wall_soft_s": 14400,
+        "supervisor_wall_s": 14410,
+        "cpu_soft_s": 13200,
+        "cpu_hard_s": 13205,
+        "address_space_bytes": 8589934592,
+        "workers": 1,
+        "threads": 1,
+        "parallel_jobs": 1,
+        "jobs_at_most": 2,
+        "no_retry": true
+      },
+      "rationale": "Change constrained-prior exploration to random slice; no local efficiency evidence; mutually exclusive alternative, not fallback"
+    },
+    {
+      "id": "C",
+      "recommended": false,
+      "action": "NO_NEW_EXECUTION_KEEP_INCOMPLETE_RESULT",
+      "additional_consumption": 0
+    }
+  ],
+  "aggregate_maxima_proposed": {
+    "jobs": 2,
+    "likelihood_calls": 200000,
+    "waveform_wrapper_calls": 200000,
+    "sum_supervisor_nominal_seconds": 28820,
+    "sum_CPU_hard_seconds": 26410,
+    "concurrency": 1,
+    "resources_are_policy_not_cost_prediction": true
+  },
+  "stopping_and_acceptance": {
+    "numerical_criteria_retained": {
+      "numerical_stop": "delta_logz<0.1 before final live points, non-flat live likelihood, below hard call cap, no error.",
+      "sampling_diagnostic": "weighted ESS>=100 after final live points; ESS low is explicitly incomplete.",
+      "not_sufficient_for": [
+        "coverage",
+        "global-mode discovery",
+        "population bias",
+        "D readiness",
+        "physical verdict"
+      ],
+      "posterior_summary_rule": "Driver saves weighted raw diagnostics only; independent review interprets recovery. No automatic pass from truth inclusion."
+    },
+    "validity": "No audit violation, unknown read, native/EDOM/None/nonfinite/temporal error, identity/pin mismatch; exact finalized receipts and certain process termination. Partial operational receipt is not scientific success.",
+    "paired_numerical_acceptance": "Both cases clean; delta_logz<0.1 before final live addition, non-flat likelihood, below external hard call cap, weighted ESS>=100 after addition; no global-mode certificate claimed.",
+    "budget": "External pre-evaluation counters include initial live points. No extensions. Cooperative budget partial only when clean and terminal identity certain.",
+    "second_case": "Preplanned RB after clean converged or clean incomplete GR; any failure or uncertainty stops remaining campaign. No threshold/seed/algorithm adaptation.",
+    "no_retry_resume_fallback": true,
+    "recovery": {
+      "target": "dtau220 only",
+      "weighted_quantile_definition": "inf{x:F_w(x)>=p}; normalize weights; sort by dtau220; no random resampling or interpolation",
+      "fields": [
+        "q05",
+        "q50",
+        "q95",
+        "q95_minus_q05",
+        "q50_minus_truth",
+        "F_w_truth",
+        "mass_lower_prior_edge",
+        "mass_upper_prior_edge",
+        "W90_divided_by_2p52"
+      ],
+      "prior_edge_intervals": [
+        [
+          -0.8,
+          -0.66
+        ],
+        [
+          1.86,
+          2.0
+        ]
+      ],
+      "edge_endpoints": "included",
+      "proposed_favorable_diagnostic": "truth in [q05,q95] AND W90<2.52; only after clean numerical convergence and independent interpretation of shape/edges/limitations",
+      "strength": "Weak case-specific compatibility plus contraction; not automatic scientific pass; near-prior width may still qualify weakly and must be reported",
+      "ESS_limit": "ESS100 does not certify quantile accuracy or tails",
+      "if_not_met": "RECOVERY_NOT_ESTABLISHED_FOR_THIS_REALIZATION, not physical falsification or coverage result",
+      "operator_decision_required_before_future_posterior": "accept or alter this visible new diagnostic before execution"
+    }
+  },
+  "cost_accounting": "Use measured per-case and campaign receipts only; no calls-to-convergence inference from delta_logz, no fourteen-event D extrapolation, no historical RB progress as final total",
+  "guards_preserved": [
+    "latch",
+    "journal",
+    "checkpoints",
+    "fail-closed recognized/indeterminate native classification",
+    "exact allowlist",
+    "no silent negative infinity",
+    "no retry",
+    "one thread",
+    "serial cases"
+  ],
+  "prohibited_by_this_document": [
+    "execution",
+    "candidate import",
+    "WSL",
+    "scientific function calls",
+    "array/NPZ/PSD/ASD bytes or hashes",
+    "observed data",
+    "authorization",
+    "CLAIM",
+    "ROOT_DECISION",
+    "d72 workaround",
+    "new provider call",
+    "v388 scientific-base migration"
+  ],
+  "decision_and_integration_remaining": [
+    "Operator decision on scientific design/resources and new recovery diagnostic",
+    "Resolve precise permission for future raw input integrity; no circumvention",
+    "Separate exact contract/package delta and independent review",
+    "Specific new execution authorization; new IDs alone authorize nothing"
+  ],
+  "coverage_claim": false,
+  "D_readiness_claim": false,
+  "empirical_confirmation_claim": false
+}

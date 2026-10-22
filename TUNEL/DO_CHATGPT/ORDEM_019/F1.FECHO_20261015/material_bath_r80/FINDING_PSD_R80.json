@@ -1,0 +1,23 @@
+{
+  "status": "MATERIAL_FINDING_REQUIRES_CORRECTION",
+  "reviewer": "/root/r68_independent_review",
+  "created_utc": "2026-10-19T08:09:02.725342+00:00",
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\material_bath_r80\\material_contract_r80.py",
+      "sha256": "6a782a67065bbe4cbd117e33aea189376a752efa78ecefd4dd6f4cf1673f3fbc"
+    }
+  ],
+  "checks": [
+    "Mission project/check revision543 ready.",
+    "Gram, relative phase/time averaging and bright-subspace algebra consistent in named scope."
+  ],
+  "finding": {
+    "id": "PSD_UNDERFLOW_FALSE_ACCEPT",
+    "severity": "material",
+    "example": "gamma_lambda=1e-198, C11=C22=lambda, C12=2lambda, bath_relative tolerance2; positive lambda approximately1.20313e-200. PSD products underflow, yet result MODEL_MATCH_WITHIN_INPUT_TOLERANCES. Eigenvalues are3lambda and -lambda.",
+    "secondary": "C12=lambda*(1+1e-15) also accepted with standard fixture tolerances by fixed1e-14 PSD allowance, despite declared no tolerance repairs positivity.",
+    "correction": "Separate physical-match tolerances from PSD validity. Use scaled/exact-safe positivity comparison and refuse genuinely negative or numerically unresolved PSD; add adversarial cases in new R2 artifacts."
+  },
+  "execution_scope": "Two direct evaluate probes only in a no-bytecode process; original immutable runner not rerun; no trajectories, providers, production or memory writes."
+}

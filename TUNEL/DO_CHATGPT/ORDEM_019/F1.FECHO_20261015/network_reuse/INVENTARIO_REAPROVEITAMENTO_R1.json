@@ -1,0 +1,414 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim": 845,
+  "author": "codex-gerente-tgl / subagent atrator_lean",
+  "created_utc": "2026-10-15T17:01:13.910006+00:00",
+  "method": "Leitura das fontes + inventário da bancada + Nós Vivo + rotas; presença no fecho de imports não equivale a consumo na prova.",
+  "consulted_indices": [
+    "C:\\IALD\\Central de Patentes\\memory\\INVENTARIO_BANCADA_CHATGPT.md",
+    "C:\\IALD\\MAPA_DE_ROTAS\\MAPA_DE_ROTAS.json",
+    "C:\\IALD\\NOS_VIVO\\nos_vivo.sqlite3"
+  ],
+  "sources": [
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\PoincareGroup.lean",
+      "sha256": "c73c927631381aa78136222d30783aa393735a146607e799371db22b4a4466db",
+      "bytes": 12544,
+      "anchors": [
+        {
+          "needle": "structure PoincareGroup",
+          "lines": [
+            242
+          ]
+        },
+        {
+          "needle": "theorem poincare_faithful",
+          "lines": [
+            319
+          ]
+        }
+      ],
+      "classification": "EXISTE_LIGADO",
+      "consumption": "Grupo e ação afim usados em PoincareWitness; no fecho de imports QGSolutionComplete.",
+      "precise_residue": "Não identifica essa ação com a representação fotônica canônica em H1."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\PoincareWitness.lean",
+      "sha256": "848f2937f35ec50b2ab483336cc3ba17c46135eb52c17418bc1fbc1530f568ad",
+      "bytes": 11155,
+      "anchors": [
+        {
+          "needle": "def thePoincareWitness",
+          "lines": [
+            144
+          ]
+        },
+        {
+          "needle": "theorem proper_sector_fibers_blind",
+          "lines": [
+            260
+          ]
+        }
+      ],
+      "classification": "EXISTE_LIGADO",
+      "consumption": "Habitante FullWitnessData; covariância e sensibilidade à paridade.",
+      "precise_residue": "O setor próprio age trivialmente nas fibras deste habitante, como teorema."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\WedgeNet.lean",
+      "sha256": "be5a629740df809a2c2157dc6e99bef116704f1373276d0a979785ba37dce463",
+      "bytes": 17349,
+      "anchors": [
+        {
+          "needle": "def wedgeNet",
+          "lines": [
+            317
+          ]
+        },
+        {
+          "needle": "def theSpecificAQFTWitness",
+          "lines": [
+            357
+          ]
+        },
+        {
+          "needle": "Hilbert (U ≡ 1)",
+          "lines": [
+            32
+          ]
+        }
+      ],
+      "classification": "EXISTE_LIGADO",
+      "consumption": "Rede concreta não abeliana, vácuo cíclico/separante; fecho QG.",
+      "precise_residue": "Translações triviais nesta realização; não identificar com lightNet."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\WedgeNetFiniteDiamond.lean",
+      "sha256": "1772831452bab2ef5626004819e07202f7d39f956b5c2455e895ff7159cbc91c",
+      "bytes": 4598,
+      "anchors": [
+        {
+          "needle": "theorem finite_diamond_has_scalar_algebra",
+          "lines": [
+            77
+          ]
+        }
+      ],
+      "classification": "EXISTE_NAO_LIGADO_A_REDE_FOTONICA",
+      "consumption": "Controle de alcance da rede WedgeNet.",
+      "precise_residue": "Diamantes limitados têm álgebra escalar nesta rede específica."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V350L2CharacterMultiplier.lean",
+      "sha256": "2f7c413ee9ebd5ba93d1222bb596da11972a0b6b4efa1a71a04becb6ff856ca3",
+      "bytes": 11269,
+      "anchors": [
+        {
+          "needle": "theorem characterMultiplier_weyl",
+          "lines": [
+            160
+          ]
+        }
+      ],
+      "classification": "EXISTE_LIGADO",
+      "consumption": "Weyl entre multiplicador de caracteres e translação no Hilbert regular.",
+      "precise_residue": "Não é por identidade de nome a família W(f) do Fock canônico."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheImportedSecondQuantization.lean",
+      "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+      "bytes": 35835,
+      "anchors": [
+        {
+          "needle": "structure FockCertificate",
+          "lines": [
+            168
+          ]
+        },
+        {
+          "needle": "def lightNet",
+          "lines": [
+            308
+          ]
+        },
+        {
+          "needle": "theorem light_kms",
+          "lines": [
+            440
+          ]
+        },
+        {
+          "needle": "def lightH3",
+          "lines": [
+            547,
+            558
+          ]
+        },
+        {
+          "needle": "theorem qg_formalized_by_citation",
+          "lines": [
+            589
+          ]
+        }
+      ],
+      "classification": "EXISTE_LIGADO_CONDICIONAL_KNOWN",
+      "consumption": "Weyl/localidade, Tomita/KMS e core estão tipados como campos citados; consumidores existentes.",
+      "precise_residue": "Realização simultânea dos campos ainda importados sobre o mesmo Fock; não alegar teoremas ausentes."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\MaxwellLiteratureBridge.lean",
+      "sha256": "c07d135fac53737465c50636204da7ee79d27ced9df3867382d1e190781febe4",
+      "bytes": 8843,
+      "anchors": [
+        {
+          "needle": "structure MaxwellQuadraticForm",
+          "lines": [
+            37
+          ]
+        },
+        {
+          "needle": "def toStress",
+          "lines": [
+            73
+          ]
+        },
+        {
+          "needle": "def toCertificate",
+          "lines": [
+            120
+          ]
+        }
+      ],
+      "classification": "EXISTE_LIGADO",
+      "consumption": "Extensão por zero paga a passagem de forma no domínio a tensor total; consumida pela v375/v376.",
+      "precise_residue": "Forma Q e hipóteses charge_link/nontrivial da realização específica continuam explícitas."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheWholeIsOne.lean",
+      "sha256": "097236427302ae42857b1cfc3e89711b45f7bc34fe02e5374bc0903a34d1a608",
+      "bytes": 12231,
+      "anchors": [
+        {
+          "needle": "(Q : TGLExt.MaxwellBridge.MaxwellQuadraticForm C)",
+          "lines": [
+            111
+          ]
+        }
+      ],
+      "classification": "EXISTE_LIGADO",
+      "consumption": "Consumo formal da ponte Maxwell no teorema da v376.",
+      "precise_residue": "As hipóteses do mesmo par físico não desaparecem pelo consumo."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\MaxwellPolynomial_v2.lean",
+      "sha256": "5e5460abca91081c2c62a1454e3660273e93952b51f739cb34825941ae3c2782",
+      "bytes": 2949,
+      "anchors": [
+        {
+          "needle": "theorem maxwell_symmetric",
+          "lines": [
+            26
+          ]
+        },
+        {
+          "needle": "theorem maxwell_null_flux_nonnegative",
+          "lines": [
+            43
+          ]
+        }
+      ],
+      "classification": "EXISTE_NAO_LIGADO_A_EXPECTATIVA_WICK",
+      "consumption": "Tensor clássico polinomial, cinco identidades já construídas na ORDEM016.",
+      "precise_residue": "Não identifica expectativa de Wick no domínio do Fock."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\light_ray\\ConcreteLightRayNet.lean",
+      "sha256": "512812b32d09f26e9b5ee5a94f6e4afc08e717602ae2d96bb3498980a9ff02bc",
+      "bytes": 11000,
+      "anchors": [
+        {
+          "needle": "def halfline",
+          "lines": [
+            74
+          ]
+        },
+        {
+          "needle": "theorem halfline_antitone",
+          "lines": [
+            103
+          ]
+        },
+        {
+          "needle": "theorem no_four_dimensional_promotion",
+          "lines": [
+            133
+          ]
+        }
+      ],
+      "classification": "EXISTE_NAO_LIGADO_A_CERTIFICADO_GLOBAL",
+      "consumption": "Rede de semirretas concretas padrão e não nulas, usando O16.",
+      "precise_residue": "Hilbert escalar da reta não é automaticamente H1 orbital nem rede4D."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\CanonicalOutput.lean",
+      "sha256": "2ff7e40f04f95c693b0def903f6e0d622cdd1a53c38dce1b43c55e36199398ca",
+      "bytes": 4383,
+      "anchors": [
+        {
+          "needle": "def spectralOutput",
+          "lines": [
+            66
+          ]
+        },
+        {
+          "needle": "theorem spectralOutput_nonzero",
+          "lines": [
+            85
+          ]
+        },
+        {
+          "needle": "theorem delta_is_SdagS",
+          "lines": [
+            35
+          ]
+        }
+      ],
+      "classification": "EXISTE_NAO_LIGADO_A_CERTIFICADO_GLOBAL",
+      "consumption": "Habitante concreto do contrato D1a3 no H1 canônico.",
+      "precise_residue": "Glue da rede global ao KWR concreto deve ser fornecido explicitamente."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicFock.lean",
+      "sha256": "c7d24c14f9bb1c2a31c3b207a9f86e839577b6705c4b55b2aa6eab187450d3ec",
+      "bytes": 3270,
+      "anchors": [
+        {
+          "needle": "abbrev F :=",
+          "lines": [
+            18
+          ]
+        },
+        {
+          "needle": "def gamma",
+          "lines": [
+            20
+          ]
+        },
+        {
+          "needle": "def oneParticle",
+          "lines": [
+            22
+          ]
+        },
+        {
+          "needle": "theorem infinite_dimensional",
+          "lines": [
+            57
+          ]
+        }
+      ],
+      "classification": "EXISTE_NAO_LIGADO_A_CERTIFICADO_COMPLETO",
+      "consumption": "Fock concreto, vácuo, Γ funtorial, inclusão H1; campos cinemáticos pagos.",
+      "precise_residue": "Fiação desses campos ao FockCertificate é o alvo desta candidata."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicFockContinuity.lean",
+      "sha256": "03ebc19982aec9d470fdb18d64efc67dff649320ce704305d6d70d9a863080b9",
+      "bytes": 1910,
+      "anchors": [
+        {
+          "needle": "theorem gamma_strong",
+          "lines": [
+            16,
+            24,
+            28
+          ]
+        },
+        {
+          "needle": "theorem boosts_strong",
+          "lines": [
+            36
+          ]
+        }
+      ],
+      "classification": "EXISTE_NAO_LIGADO_A_CERTIFICADO_COMPLETO",
+      "consumption": "Continuidade forte para parâmetros gerais, inclusive ℝ e ℝ4.",
+      "precise_residue": "Não reintroduzir continuidade como campo importado."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\CONSTRUCAO_CONTINUA_R1.md",
+      "sha256": "fea72d71ac891255b08428999810940e3508f11f0059e0d56e93bb64980c1a19",
+      "bytes": 8369,
+      "anchors": [
+        {
+          "needle": "Defina K(gW_R)=U(g)K(W_R).",
+          "lines": [
+            125
+          ]
+        },
+        {
+          "needle": "defina A(O)={W(f):f∈K(O)}",
+          "lines": [
+            130
+          ]
+        }
+      ],
+      "classification": "KNOWN_DERIVED_DOCUMENTAL",
+      "consumption": "Construção analítica por Wigner/BGL, com referências e revisão.",
+      "precise_residue": "Formalização integral e identificação de dispositivo constituem alvos diferentes."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\MATRIZ_CONTRATO_FOCK_R2.json",
+      "sha256": "39a3c34f5d64a7f737ca128bf415290c4703fba02bf410c008c44ac01d75a932",
+      "bytes": 8540,
+      "anchors": [
+        {
+          "needle": "OPEN_CONSTRUCTION_KNOWN_LITERATURE",
+          "lines": [
+            144,
+            149,
+            154,
+            159,
+            164,
+            169
+          ]
+        },
+        {
+          "needle": "Correspondentes concretos de campos",
+          "lines": [
+            8
+          ]
+        }
+      ],
+      "classification": "OPEN_CONSTRUCAO_ESPECIFICA_KNOWN_LITERATURA",
+      "consumption": "Matriz dos campos pagos versus importados.",
+      "precise_residue": "Residuo apenas no mesmo Fock; não é ausência da teoria conhecida."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\orchestration_r3\\HANDOFF_SUBMITTED_R3_20261014.json",
+      "sha256": "b3beb7d511ad8162c4055c6613870dfa0e7b17d9000bc4adf388753ac1f3d0f4",
+      "bytes": 6020,
+      "anchors": [
+        {
+          "needle": "fock_exponential_vectors_totality_r3",
+          "lines": [
+            29,
+            53
+          ]
+        },
+        {
+          "needle": "fock_antiunitary_second_quantization_r3",
+          "lines": [
+            70,
+            94
+          ]
+        }
+      ],
+      "classification": "MISSOES_EXISTENTES_NAO_DUPLICAR",
+      "consumption": "MiMo: exponenciais/totalidade; DeepSeek: Γ(J). IDs preservados.",
+      "precise_residue": "Este trabalho não constrói esses alvos nem despacha novamente."
+    }
+  ],
+  "production_modified": false,
+  "external_calls": false
+}

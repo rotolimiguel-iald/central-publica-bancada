@@ -1,0 +1,39 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T012739_775393Z\MaxwellCanonicalWedgeR1.lean:31:55: error: unsolved goals
+n : ℕ
+f : SchwartzTensor
+hr :
+  ∀ᵐ (x : Transverse) (y : ℝ),
+    ↑↑(toRapidity (RapidityGaussian.regularize n (circularSmear f))) (x, y) =
+      (fun z => WedgeLaplace.lowerGaussian (width n) ↑z.2 • ↑↑(toRapidity (circularSmear f)) z) (x, y)
+hc :
+  ∀ᵐ (x : Transverse) (y : ℝ),
+    ↑↑(toRapidity (circularSmear f)) (x, y) =
+      (fun y => circularFiber.symm (globalCoefficient (physicalFourierCLM f) (rapidityChart 0 y))) (x, y)
+⊢ ∀ᵐ (q : Transverse), ¬q = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T012739_775393Z\MaxwellCanonicalWedgeR1.lean:53:56: error: unsolved goals
+n : ℕ
+f : SchwartzTensor
+hf : supportedTensorRight f
+hreal : IsRealTest f
+hs :
+  ∀ᵐ (q : Transverse),
+    (fun r => ↑↑(toRapidity (regulatedCircular n f)) (q, r)) =ᵐ[volume] fun r =>
+      circularFiber.symm (regularizedVector (width n) q f r)
+hn :
+  ∀ᵐ (x : Transverse),
+    (fun r => ↑↑(toRapidity (regulatedCircular n f)) (-x, r)) =ᵐ[volume] fun r =>
+      circularFiber.symm (regularizedVector (width n) (-x) f r)
+⊢ ∀ᵐ (q : Transverse), ¬q = 0
+'F1Fecho.MaxwellLocalization.regulatedCircular_sections' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellLocalization.regulatedCircular_section_balance' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellLocalization.regulatedCircular_mem_KWR' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellLocalization.circularSmear_mem_KWR' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

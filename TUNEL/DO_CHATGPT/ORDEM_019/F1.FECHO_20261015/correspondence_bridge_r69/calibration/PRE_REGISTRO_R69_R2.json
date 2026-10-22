@@ -1,0 +1,84 @@
+{
+  "status": "PREREGISTERED_SYNTHETIC_ONLY",
+  "created_utc": "2026-10-18T13:28:30.601261+00:00",
+  "tolerance": 1e-12,
+  "source_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\run_prepared_readout_r62_r2.py",
+      "sha256": "25d25154153e7399a3e0878ac072ecfbc8a4781190cb9a2660d81d59d36f813a"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\calibration\\CONTRATO_CALIBRACAO_R65.md",
+      "sha256": "245f97e48ad2da218ad4fe744e4a573c71e56b1aca72c12966ff2b50b58ff85f"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\calibration_r65\\IDENTIFIABILITY_COMPLETION_R65.txt",
+      "sha256": "47b4a788c480499c7bd6c8761b0269131a82de80a862c84da7baabcadc740997"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\output_field_r64\\output\\CONTRATO_OUTPUT_R64.md",
+      "sha256": "bb759be867d71b68b47154e46db2596e3e0b1926f01dfcc5128912cfee4767a1"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\anchored_contour_r68\\ADENDO_R68_CORRESPONDENCIA_INTEGRAL.md",
+      "sha256": "4bf3578f67be2466df58c2c74ce32f8b29b5cc999c60e28868704fdf618c353f"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\correspondence_bridge_r69\\AUDIT_NUMERICAL_RANGE_R69.json",
+      "sha256": "a72bd1fb57baca2ba028c5a2e68d20cb6602c39a7e017beb3c4294383b45066d"
+    }
+  ],
+  "decoder_source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\run_prepared_readout_r62_r2.py",
+    "sha256": "25d25154153e7399a3e0878ac072ecfbc8a4781190cb9a2660d81d59d36f813a"
+  },
+  "calibration": {
+    "kind": "SYNTHETIC_INPUT",
+    "J0": "a_o_dag*sigma_minus + sigma_plus*a_i; ordered=(i,o,OH); unit_coefficients",
+    "time_unit": "s",
+    "rate_unit": "s^-1",
+    "quadrature_unit": "dimensionless",
+    "t0_seconds": 0.2,
+    "gain_i": 2.0,
+    "gain_o": 3.0,
+    "lo_i_radians": 0.31,
+    "lo_o_radians": -0.22,
+    "filter_l2_norm": 1.0,
+    "port_model": "H_MARKOV_VACUUM_PORTS",
+    "same_preparation_four_runs": true
+  },
+  "falsifiers": [
+    "Known gain/LO inversion changes selected moments",
+    "Time and filter transport do not preserve the same normalized signal",
+    "Four cross-correlations uniquely determine the two-mode density in counterexample",
+    "Isometric/pullback-metric transport changes full vector residual",
+    "Wrong coefficient incorrectly satisfies exact target",
+    "Missing or dependent Gamma produces beta",
+    "NaN/bool/unit mismatch passes admission",
+    "Selected moments accepted as full-state tomography"
+  ],
+  "scope": "Finite algebra and synthetic schema only, no ODE, no observed data, no physical Gamma, no betaTGL estimation, no 5sigma, no Fock/temporal extrapolation",
+  "pass_rule": "All frozen controls pass; any failure leaves a visible failure result; no automatic rerun.",
+  "version": "R2_ADDITIVE_NUMERICAL_GUARDS",
+  "previous_preregistration": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\correspondence_bridge_r69\\calibration\\PRE_REGISTRO_R69.json",
+    "sha256": "9c95f4932171a69d533b56b7ae339dd3d2c364c8a78ad86f64a6ce006e9e4fdb"
+  },
+  "previous_result": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\correspondence_bridge_r69\\calibration\\RESULT_R69.json",
+    "sha256": "1ea0241592a2c66872e75b393d00e945586ed393d57bb871cf49b010af663f1f"
+  },
+  "adversarial_evidence": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\correspondence_bridge_r69\\AUDIT_NUMERICAL_RANGE_R69.json",
+    "sha256": "a72bd1fb57baca2ba028c5a2e68d20cb6602c39a7e017beb3c4294383b45066d"
+  },
+  "additional_controls": [
+    "finite gains overflow product: refuse",
+    "finite gains underflow product: refuse",
+    "finite ratio overflow/underflow and subnormal denominator: refuse",
+    "C=1e200I retains residual one",
+    "transport/decoder/difference overflow: refuse",
+    "large finite residual computed safely"
+  ],
+  "expected_check_count": 50
+}

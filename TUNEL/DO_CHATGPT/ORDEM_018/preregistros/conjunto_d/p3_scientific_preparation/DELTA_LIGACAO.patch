@@ -1,0 +1,125 @@
+--- sealed/driver_p3.py
++++ candidate/driver_p3.py
+@@ -24,22 +24,18 @@
+     def get_lock(self):return self.lock
+ 
+ def main():
+-    raise RuntimeError("PREPARATION_ONLY: no runnable campaign contract or execution permission")
+-    if len(sys.argv)!=3:raise ValueError("Exact contract hash and job id required")
+-    pin,job_id=sys.argv[1:]
++    if len(sys.argv)!=4:raise ValueError("Exact contract hash, job id and decision hash required")
++    pin,job_id,decision_pin=sys.argv[1:]
++    from science_admission import admit
++    c,authorization=admit(ROOT,pin,decision_pin,job_id=job_id)
+     cp=ROOT/"CONTRATO_P3.json"
+-    if sha(cp)!=pin:raise ValueError("Contract hash differs")
+-    c=json.loads(cp.read_text())
+-    if c["state"]!="PREPARED_NOT_EXECUTED" or job_id not in [j["id"] for j in c["jobs"]]:
+-        raise ValueError("Unregistered job")
+-    auth=json.loads((ROOT/"AUTORIZACAO_COORDENACAO.json").read_text())
+-    if (auth.get("contract_sha256")!=pin or auth.get("action")!="EXECUTE_EXACT_TWO_SYNTHETIC_JOBS"
+-            or auth.get("jobs")!=[j["id"] for j in c["jobs"]] or auth.get("authorized") is not True):
+-        raise ValueError("Matching explicit coordination authorization required")
+     job=next(j for j in c["jobs"] if j["id"]==job_id)
+     out=ROOT/c["execution_directory"]/job_id
+     claim=json.loads((out/"CLAIM.json").read_text())
+-    if claim!={"contract_sha256":pin,"job_id":job_id}:raise ValueError("Supervisor claim differs")
++    expected_claim={"contract_sha256":pin,"decision_sha256":decision_pin,
++                    "execution_id":authorization["execution_id"],"job_id":job_id,
++                    "supervisor_pid":os.getppid()}
++    if claim!=expected_claim:raise ValueError("Supervisor identity/decision claim differs")
+     if (out/"RESULT.json").exists() or (out/"CHILD_STARTED.json").exists():raise FileExistsError("No repeat or resume")
+     for rel,p in c["inputs"].items():
+         path=(ROOT/rel).resolve()
+@@ -73,7 +69,7 @@
+         raise ValueError("Pinned synthetic target differs")
+     archive=ROOT/c["qualified_arrays"]
+     allowed_data={str((ROOT/rel).resolve()) for rel in c["inputs"]}
+-    allowed_data|={str(cp),str(ROOT/"AUTORIZACAO_COORDENACAO.json"),str(out/"CLAIM.json")}
++    allowed_data|={str(cp),str(ROOT/"ROOT_DECISION.json"),str(out/"CLAIM.json")}
+     runtime_paths={str(Path(x["path"]).resolve()) for x in runtime["files"]}
+     allowed_data|=runtime_paths
+     allowed_data|={str(ROOT/"driver_p3.py"),str(ROOT/"prior_transform.py")}
+@@ -220,7 +216,9 @@
+         if guard.snapshot()["latched"]:
+             status="AUDIT_VIOLATION"
+         result={"status":status,"pid":os.getpid(),"job_id":job_id,"label":job["label"],"contract_sha256":pin,
+-                "scope":"Synthetic cost/recovery feasibility only; neither coverage nor a D verdict",
++                "scope":"Operational candidate under inherited envelope; partial exit zero is not convergence, recovery or F3 qualification",
++                "preparation_id":c["preparation_id"],"execution_id":authorization["execution_id"],
++                "decision_sha256":decision_pin,"scientific_qualification":False,
+                 "error":error,"wall_s":time.perf_counter()-started,"cpu_s":time.process_time()-cpu0,
+                 "cpu_process_total_s":time.process_time(),"likelihood_calls":ll_calls,
+                 "native_calls":int(counts[0]),"native_wall_s":float(counts[1]),
+--- sealed/launch_p3.py
++++ candidate/launch_p3.py
+@@ -2,8 +2,10 @@
+ import sys,os,json,hashlib,subprocess,time,signal
+ from pathlib import Path
+ from datetime import datetime,timezone
++ROOT=Path(__file__).resolve().parent
++sys.dont_write_bytecode=True
++sys.path.insert(0,str(ROOT))
+ from result_acceptance import assess, campaign_exit
+-ROOT=Path(__file__).resolve().parent
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def fresh(path,raw):
+     if path.exists():raise FileExistsError(str(path))
+@@ -13,20 +15,17 @@
+     os.replace(temp,path)
+ def js(path,obj):fresh(path,(json.dumps(obj,indent=2,allow_nan=False)+"\n").encode())
+ def main():
+-    raise RuntimeError("PREPARATION_ONLY: no runnable campaign contract or execution permission")
+-    if len(sys.argv)!=2:raise ValueError("Exact contract SHA256 required")
+-    cp=ROOT/"CONTRATO_P3.json";pin=sys.argv[1]
+-    if sha(cp)!=pin:raise ValueError("Contract mismatch")
+-    c=json.loads(cp.read_text());auth_path=ROOT/"AUTORIZACAO_COORDENACAO.json"
+-    auth=json.loads(auth_path.read_text())
+-    if (auth.get("authorized") is not True or auth.get("contract_sha256")!=pin
+-        or auth.get("action")!="EXECUTE_EXACT_TWO_SYNTHETIC_JOBS"
+-        or auth.get("jobs")!=[j["id"] for j in c["jobs"]]):raise ValueError("Matching coordination receipt required")
+-    if Path(sys.executable).absolute()!=Path("/opt/lal_env/bin/python").absolute():
+-        raise ValueError("Pinned WSL environment required")
+-    for rel,p in c["inputs"].items():
+-        path=(ROOT/rel).resolve()
+-        if sha(path)!=p["sha256"] or path.stat().st_size!=p["bytes"]:raise ValueError("Input mismatch: "+rel)
++    if len(sys.argv)!=3:raise ValueError("Exact contract and external ROOT decision hashes required")
++    pin,decision_pin=sys.argv[1:]
++    from science_admission import admit
++    c,authorization=admit(ROOT,pin,decision_pin)
++    auth_path=ROOT/"ROOT_DECISION.json"
++    # No automatic retry: reserve the entire collection before any child.
++    fd=os.open(ROOT/"CAMPAIGN_CLAIM.json",os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
++    with os.fdopen(fd,"wb") as f:
++        f.write((json.dumps({"contract_sha256":pin,"decision_sha256":decision_pin,
++                            "execution_id":authorization["execution_id"],"pid":os.getpid()})+"\n").encode())
++        f.flush();os.fsync(f.fileno())
+     run=ROOT/c["execution_directory"];run.mkdir(exist_ok=False)
+     js(run/"LAUNCH_STARTED.json",{"contract_sha256":pin,"authorization_sha256":sha(auth_path),
+                                   "at":datetime.now(timezone.utc).isoformat(),"pid":os.getpid()})
+@@ -34,8 +33,10 @@
+     results=[];assessments=[];t0=time.perf_counter()
+     for job in c["jobs"]:
+         out=run/job["id"];out.mkdir(exist_ok=False)
+-        js(out/"CLAIM.json",{"contract_sha256":pin,"job_id":job["id"]})
+-        cmd=["/opt/lal_env/bin/python","-I","-B",str(ROOT/"driver_p3.py"),pin,job["id"]]
++        js(out/"CLAIM.json",{"contract_sha256":pin,"decision_sha256":decision_pin,
++                             "execution_id":authorization["execution_id"],
++                             "job_id":job["id"],"supervisor_pid":os.getpid()})
++        cmd=["/opt/lal_env/bin/python","-I","-B",str(ROOT/"driver_p3.py"),pin,job["id"],decision_pin]
+         start=time.perf_counter()
+         with (out/"stdout.log").open("xb") as fo,(out/"stderr.log").open("xb") as fe:
+             p=subprocess.Popen(cmd,stdin=subprocess.DEVNULL,stdout=fo,stderr=fe,env=env,
+@@ -70,7 +71,11 @@
+                                     "started_jobs":len(results),"planned_jobs":len(c["jobs"]),"no_retry":True,
+                                     "exit_code":campaign_exit(assessments,len(c["jobs"])),
+                                     "status":"CLEAN_PROTOCOL_COMPLETION" if campaign_exit(assessments,len(c["jobs"]))==0 else "TERMINAL_FAILURE_OR_INCOMPLETE",
+-                                    "coverage_claim":False,"D_read_authorized":False})
++                                    "coverage_claim":False,"D_read_authorized":False,
++                                    "scientific_qualification":False,
++                                    "scope":"Operational completion may accept clean partials; not F3 qualification",
++                                    "preparation_id":c["preparation_id"],
++                                    "execution_id":authorization["execution_id"],"decision_sha256":decision_pin})
+     print(json.dumps(results))
+     return campaign_exit(assessments,len(c["jobs"]))
+ if __name__=="__main__":sys.exit(main())

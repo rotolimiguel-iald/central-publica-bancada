@@ -1,0 +1,44 @@
+R88 — Reaproveitamento por covariância: toda carta P5 admissível no ramo sigma especificado
+codex-gerente-tgl, 19/10/2026. [DERIVED — demonstração analítica; não novo teorema Lean].
+
+1. Alvo e hipóteses que permanecem nomeadas
+
+O resultado abaixo amplia o uso do habitante09/09 para a classe inteira de cartas positivas de cinco probabilidades, sem escolher uma nova ação. Usa a ação ambiente Einstein–sigma S³ explicitamente escolhida em OPERADOR_JACOBI_GAUGE_E_ESCOPO.md e HABITANTE_CURVO_SIGMA_E_AREA.md. Não substitui a ação completa do Custo nem sua identificação de Psi.
+
+Seja U aberto em R4 e P:U→R5 suave, P_i>0, sum_i P_i=1, rank dP=4 em U. O rótulo0 é selecionado. Fixe c>0 constante e os mesmos acoplamentos c nos quatro canais condicionados. Defina
+F_P=sum_i dP_i tensor dP_i/P_i,
+g_P=2 dP_0 tensor dP_0 / F_P^{-1}(dP_0,dP_0) - F_P,
+phi_j=sqrt(P_j/(1-P_0)), j=1,...,4.
+O parâmetro c pode ser o fornecedor c=k/(pi*cosh(k)^2), com k>0 constante, mas essa identificação não é necessária para a demonstração geométrica. Não se introduz medida de beta nem ajuste a dado.
+
+2. A transformação de coordenadas é demonstrada, não pressuposta pelo nome
+
+Considere f=(P_0,P_1,P_2,P_3). Se df_x(v)=0, então dP_i(v)=0 para i<4 e dP_4(v)=-sum_{i<4}dP_i(v)=0. Como dP_x é injetivo, v=0. Logo df_x:R4→R4 é um isomorfismo. Pelo teorema da função inversa, para cada x existe uma vizinhança onde f é difeomorfismo para um aberto do simplex V={p_i>0, sum_{i<4}p_i<1}. A construção não exige que f seja globalmente injetiva.
+
+No simplex, escreva p_4=1-sum_{i<4}p_i e use os objetos g_*,phi_* do exemplo09/09. As fórmulas acima e a lei de transformação da norma dual dão
+F_P=f*F_*, g_P=f*g_*, phi_P=phi_* composto com f.
+Em particular dP_0 nunca é zero nessas cartas: é uma linha nãozero da matriz invertível df. A divisão na reflexão é admissível porque F_P é positiva definida.
+
+3. As equações ambientes são transportadas, não deduzidas da variação restrita
+
+Use r=2arcsin sqrt(p_0), a=2cos(r/2), g_*=dr²-a² h_S³, phi_*=z. A fonte09/09 calculou
+Box_g phi=3phi/a², lambda=3c/a², sum phi²=1,
+T_rr=3c/(2a²), T_AB=-c h_AB/2,
+G_rr=6/a²-3/4, G_AB=(-2+3a²/4)h_AB.
+Para kappa=4/c, Lambda=3/4, os coeficientes de Euler ambientes da ação −EH+sigma+lambda se anulam. Ricci, g, a contração sigma e Box são naturais sob difeomorfismos; portanto a mesma anulação vale para (g_P,phi_P,lambda_P) em cada carta acima. As equações são locais e coincidem nas interseções, logo valem em todo U. Nenhuma afirmação de hiperbolicidade global, completude, borda física ou existência para dados iniciais arbitrários é feita.
+
+Pela identidade de primeira variação compacta de REUSE_STATIONARY_BRANCH_R87.txt, segue delta S=0 para quaisquer variações AMBIENTES suaves compactamente suportadas no interior de U (sob integrabilidade local habitual das densidades). A prova não usa 'variar P alcança todas as variações g e phi': isso seria falso. Usa equações ambientes verificadas na carta canônica e sua covariância. A estacionariedade restrita a P também segue, mas não é a razão para inferir as equações.
+
+4. Equivalência exata dos coeficientes nesse ramo
+
+Para a mesma fonte T de c constante e qualquer vetor nulo nãozero, H=h_S³(k_sp,k_sp)>0,
+Ric(k,k)=4H e T(k,k)=cH.
+Assim Ric(k,k)=kappa T(k,k) em todas as direções nulas se e somente se kappa*c=4. Isso vale em qualquer carta P5 admissível, pois df transporta o cone nulo bijetivamente.
+Se também exigimos G+Lambda*g=kappa*T, a componente rr, depois de kappa*c=4, reduz a Lambda=3/4. Reciprocamente esses dois coeficientes anulam todas as componentes já calculadas.
+Portanto, para a ação AMBIENTE desse ramo, o exemplo seleciona exatamente a compatibilidade (kappa*c=4,Lambda=3/4). Não deriva os valores físicos de kappa ou Lambda a partir de sumP=1; os parâmetros da ação têm de satisfazer essa compatibilidade. No registro original ambos foram escolhidos assim. A escala Fisher e as unidades não foram calibradas.
+
+5. Relação com o objetivo integral e limite que não se pode apagar
+
+Há, portanto, uma classe completa de construções P5 estacionárias para o ramo sigma já existente, e não apenas uma fórmula isolada em coordenadas particulares. Essa classe resolve a questão de mudar a carta da mesma construção. Não resolve a seleção física da ação completa nem o mapa Psi↔Psi_mu↔phi. Não se estende a números arbitrários de probabilidades: P6/Clifford deR84 e P16/S14 deR85–R86 já exibem por que essa generalização seria inválida.
+
+O objetivo R16 continua aberto: todas as fontes da ação pretendida devem ser identificadas e compatíveis com o mesmo registro. Este resultado não transforma uma escolha de truncamento em conclusão sobre o modelo completo. Não houve nova simulação, novo experimento, prova Lean deste transporte, alteração de originais, dado, OH, produção ou gate.

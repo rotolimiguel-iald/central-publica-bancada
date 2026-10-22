@@ -1,0 +1,42 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:30:16: error(lean.unknownIdentifier): Unknown identifier `inner_zero`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:28:4: error: Type mismatch: After simplification, term
+  hv
+ has type
+  ∑ x ∈ c.support, c x * Complex.exp (inner ℂ h x + (starRingEnd ℂ) (star z) * inner ℂ f x) =
+    inner ℂ (exponential (h + star z • f)) 0
+but is expected to have type
+  ∑ g ∈ c.support, c g * Complex.exp (inner ℂ h g + z * inner ℂ f g) = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:36:4: error: Type mismatch: After simplification, term
+  HasDerivAt.const_mul (c g)
+    (HasDerivAt.cexp (HasDerivAt.const_add (inner ℂ h g) (HasDerivAt.mul_const (hasDerivAt_id 0) (inner ℂ f g))))
+ has type
+  HasDerivAt (fun y => c g * Complex.exp (inner ℂ h g + id y * inner ℂ f g))
+    (c g * (Complex.exp (inner ℂ h g + id 0 * inner ℂ f g) * inner ℂ f g)) 0
+but is expected to have type
+  HasDerivAt (fun y => c g * Complex.exp (inner ℂ h g + y * inner ℂ f g))
+    (c g * (Complex.exp (inner ℂ h g) * inner ℂ f g)) 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:92:2: error: Type mismatch
+  Finsupp.range_linearCombination
+has type
+  ∀ (R : Type ?u.7) [inst : Semiring R] [inst_1 : AddCommMonoid ?m.10] [inst_2 : Module R ?m.10] {v : ?m.9 → ?m.10},
+    (Finsupp.linearCombination R v).range = Submodule.span R (Set.range v)
+but is expected to have type
+  domain = Submodule.span ℂ (Set.range exponential)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:103:31: error(lean.unknownIdentifier): Unknown identifier `inner_zero`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:103:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  ↑(annihilation f) ⟨vacuum, ⋯⟩ = inner ℂ f 0 • vacuum
+but is expected to have type
+  ↑(annihilation f) ⟨vacuum, vacuum_mem_domain⟩ = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:108:8: error(lean.unknownIdentifier): Unknown identifier `inner_zero`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T221040_773104Z\ExponentialAnnihilationR1.lean:105:60: error: unsolved goals
+g : ↥H1
+h : exponential g = 0
+hi : inner ℂ 0 0 = Complex.exp (inner ℂ g g)
+⊢ False
+'F1Fecho.Annihilation.weighted_kernel' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Annihilation.annihilation_exponential' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Annihilation.domain_dense' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Annihilation.annihilation_vacuum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.Annihilation.annihilation_nonzero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

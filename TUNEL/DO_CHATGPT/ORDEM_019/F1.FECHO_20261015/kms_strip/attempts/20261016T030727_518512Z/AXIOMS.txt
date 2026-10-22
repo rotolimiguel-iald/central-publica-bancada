@@ -1,0 +1,523 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:29:2: error: unsolved goals
+g : MomentumCoordinates → Fin 2 → ℂ
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hv : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → g y = 0
+j : Fin 2
+y : MomentumCoordinates
+hy : y.1 = 0
+hn : ∀ᶠ (z : MomentumCoordinates) in 𝓝 y, ‖z.1‖ < ε
+z : MomentumCoordinates
+hz : ‖z.1‖ < ε
+⊢ 0 = ?m.131
+
+g : MomentumCoordinates → Fin 2 → ℂ
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hv : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → g y = 0
+j : Fin 2
+y : MomentumCoordinates
+hy : y.1 = 0
+hn : ∀ᶠ (z : MomentumCoordinates) in 𝓝 y, ‖z.1‖ < ε
+⊢ ℂ
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:36:7: error(lean.unknownIdentifier): Unknown constant `Complex.contDiff_ofReal.contDiffAt.comp`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:35:4: error: Tactic `apply` failed: could not unify the type of `ContDiffAt.div ?m.196 sorry`
+  ?m.194 ?m.192 ≠ 0 → ContDiffAt ?m.187 ?m.195 (fun x => ?m.193 x / ?m.194 x) ?m.192
+with the goal
+  ContDiffAt ℝ ∞ (fun y => g y j / ↑(transverseMass 0 y.1)) y
+
+case neg
+g : MomentumCoordinates → Fin 2 → ℂ
+hg : ContDiff ℝ ∞ g
+ε : ℝ
+hε : 0 < ε
+hv : ∀ (y : MomentumCoordinates), ‖y.1‖ ≤ ε → g y = 0
+j : Fin 2
+y : MomentumCoordinates
+hy : ¬y.1 = 0
+⊢ ContDiffAt ℝ ∞ (fun y => g y j / ↑(transverseMass 0 y.1)) y
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:35:10: error: Application type mismatch: The argument
+  ContDiff.contDiffAt (contDiff_pi.mp hg j)
+has type
+  ContDiffAt ℝ ∞ (fun x => g x j) ?m.185
+but is expected to have type
+  ContDiffAt ?m.187 ?m.195 ?m.193 ?m.192
+in the application
+  ContDiffAt.div (ContDiff.contDiffAt (contDiff_pi.mp hg j))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨0, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩ ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨0, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨1, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩ ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨1, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨2, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩ ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨2, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨3, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩ ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨0, ⋯⟩ ⟨3, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨0, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩ ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨0, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨1, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩ ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨1, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨2, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩ ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨2, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨3, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩ ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨1, ⋯⟩ ⟨3, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨0, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩ ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨0, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨1, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩ ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨1, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨2, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩ ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨2, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨3, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩ ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨2, ⋯⟩ ⟨3, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨0, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩ ⟨0, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨0, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨1, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩ ⟨1, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨1, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨2, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩ ⟨2, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨2, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:61: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨3, ⋯⟩`
+
+Issues:
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩ ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3 ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x3 => of x3`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+    -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+    0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+    0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩`
+  No theorems found for `Matrix.of` in order to prove `ContDiff ℝ ∞ fun x =>
+  !![0, g x 0 / ↑(transverseMass 0 x.1), 0, 0;
+      -(g x 0 / ↑(transverseMass 0 x.1)), 0, 0, 0;
+      0, 0, 0, g x 1 / ↑(transverseMass 0 x.1);
+      0, 0, -(g x 1 / ↑(transverseMass 0 x.1)), 0]
+    ⟨3, ⋯⟩ ⟨3, ⋯⟩`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:4: warning: This simp argument is unused:
+  Matrix.cons_val_zero'
+
+Hint: Omit it from the simp argument list.
+  simp only [screenDualTensor, M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵'̵,̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵s̵u̵c̵c̵'̵,̵n̵e̵g̵_̵d̵i̵v̵]̵M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲s̲u̲c̲c̲'̲,̲ ̲n̲e̲g̲_̲d̲i̲v̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:50:26: warning: This simp argument is unused:
+  Matrix.cons_val_succ'
+
+Hint: Omit it from the simp argument list.
+  simp only [screenDualTensor, M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵z̵e̵r̵o̵'̵,̵M̵a̵t̵r̵i̵x̵.̵c̵o̵n̵s̵_̵v̵a̵l̵_̵s̵u̵c̵c̵'̵,̵n̵e̵g̵_̵d̵i̵v̵]̵M̲a̲t̲r̲i̲x̲.̲c̲o̲n̲s̲_̲v̲a̲l̲_̲z̲e̲r̲o̲'̲,̲ ̲n̲e̲g̲_̲d̲i̲v̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T030727_518512Z\SmoothScreenDualTensorR2.lean:54:69: error: unsolved goals
+g : MomentumCoordinates → Fin 2 → ℂ
+hc : HasCompactSupport g
+y : MomentumCoordinates
+hy : y ∉ Function.support g
+hz : g y = 0
+⊢ (fun μ ν =>
+      vecCons (![0, 0, 0, 0] ν)
+        (fun i => vecCons (![0, 0, 0, 0] ν) (fun i => vecCons (![0, 0, 0, 0] ν) (fun i => ![0, 0, 0, 0] ν) i) i) μ) =
+    0
+'F1Fecho.MaxwellGlobal.screenRatio_smooth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.screenDualProfile_smooth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.screenDualProfile_compact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,300 @@
+{
+  "id": "ORDEM018_F3_D_SYNTHETIC_PILOT_PROPOSAL",
+  "status": "PROPOSTA_NAO_RATIFICADA_NAO_EXECUTAVEL_COMO_JOB",
+  "created_utc": "2026-10-06T01:00:27.602213+00:00",
+  "authorized_now": "Metadata preparation, static code audit and pilot planning only.",
+  "requires_new_concrete_contract_before_execution": true,
+  "V1_sha256": "86f98fcc124dd9cae04fdb06bd10c14175893253d5b139496bd4c05f109feee0",
+  "scope": {
+    "synthetic_only": true,
+    "event_D_GPS_used_in_pilot": false,
+    "observed_D_strain_or_posterior_used": false,
+    "data_mock_note": "Only analytic PSD and independently seeded Gaussian noise; no offsource noise read either.",
+    "hypothesis": "Full IMR pSEOBNRv4HM_PA with DTau220 as the only free deformation. GR higher modes remain in the waveform.",
+    "fixed_deformations": {
+      "domega220": 0.0,
+      "dtau440": 0.0,
+      "domega440": 0.0
+    },
+    "test_claim": "Algorithm/cost pilot only; no event verdict, composite, precision or coverage claim."
+  },
+  "synthetic_design": {
+    "source_fixtures": [
+      {
+        "id": "SYN_A",
+        "mass_1_detector_solar": 50.0,
+        "mass_2_detector_solar": 35.0,
+        "chi_1": 0.3,
+        "chi_2": 0.1
+      },
+      {
+        "id": "SYN_B_RESERVED",
+        "mass_1_detector_solar": 90.0,
+        "mass_2_detector_solar": 60.0,
+        "chi_1": 0.7,
+        "chi_2": 0.3
+      }
+    ],
+    "mass_spin_note": "Arbitrary simulation fixtures. Not estimates from D. SYN_B is a reserved stress/cost case, not an automatic second PE.",
+    "geometry": {
+      "theta_jn": 0.7,
+      "ra": 1.0,
+      "dec": 0.2,
+      "psi": 0.4,
+      "phase": 1.2,
+      "geocent_time_synthetic_GPS": 1000000000.0
+    },
+    "grid": {
+      "duration_s": 32.0,
+      "sample_rate_hz": 4096,
+      "generation_sample_rate_hz": 8192,
+      "generation_maximum_frequency_hz": 4096,
+      "minimum_frequency_hz": 20.0,
+      "maximum_frequency_hz": 1024.0,
+      "reference_frequency_hz": 20.0,
+      "roll_off_s": 0.4,
+      "geocenter_seconds_after_segment_start": 16.0
+    },
+    "grid_condition": "Validate conservative temporal margins over entire proposed prior before freeze. If too short, widen registered segment for every paired case before PE; do not reject prior samples as a fix.",
+    "detectors": [
+      "H1",
+      "L1"
+    ],
+    "PSD": {
+      "kind": "Analytic design PSD",
+      "proposed_function": "lalsimulation.SimNoisePSDaLIGOZeroDetHighPower",
+      "pin_required": "installed module/version and generated numeric PSD hash; verify function availability; no install",
+      "qualification": "Strictly positive finite in analysis band; synthetic strain variance and one-sided normalization checks"
+    },
+    "SNR_definition": "Full IMR network optimal SNR in fixed synthetic PSD/band, not ringdown SNR.",
+    "target_network_SNR_pilot": 20.0,
+    "reserved_SNR_stress": [
+      12.0,
+      30.0
+    ],
+    "noise_and_pairing": "Stage source checks in zero noise; two paired pilot jobs use the same synthetic Gaussian noise seed and signal-source fixture, one GR and one RB. This is correlated by design, not two independent events.",
+    "proposed_seeds": {
+      "noise": 180601,
+      "sampler_GR": 180602,
+      "sampler_RB": 180603
+    },
+    "seed_policy": "Freeze before waveform/recovery; known synthetic truth stored separately from any future D blind seed.",
+    "RB_truth": "Compute remnant spin from the frozen GR remnant-conversion function for the synthetic progenitor; calculate DTau220 from V1 beta*k*N and exact -x/(1+x). Do not inject an arbitrary envelope or infer truth from a recovered posterior.",
+    "remnant_condition": "Hash/freeze exact remnant fit and units in copied driver before generating truth. Mf_det used consistently; mass cancels in x for M_X=M_f.",
+    "beta": {
+      "ALPHA_FINE_CODATA_2018": 0.0072973525693,
+      "formula_runtime": "ALPHA_FINE_CODATA_2018 * sqrt(e)",
+      "computed": 0.012031300400803142
+    },
+    "analytic_spin_illustrations_not_D_and_not_injection_results": [
+      {
+        "synthetic_remnant_spin": 0.0,
+        "beta_runtime": 0.012031300400803142,
+        "k": 25.132741228718345,
+        "F_BCW": 0.36829999999999985,
+        "Q_BCW": 2.1187,
+        "x": 0.2359519743224278,
+        "delta_tau220": -0.190907073433643
+      },
+      {
+        "synthetic_remnant_spin": 0.68,
+        "beta_runtime": 0.012031300400803142,
+        "k": 29.705163635540615,
+        "F_BCW": 0.5266561249456173,
+        "Q_BCW": 3.2050749810576367,
+        "x": 0.6032673943493713,
+        "delta_tau220": -0.3762737248169297
+      },
+      {
+        "synthetic_remnant_spin": 0.9,
+        "beta_runtime": 0.012031300400803142,
+        "k": 41.39560198018589,
+        "F_BCW": 0.6659711958308377,
+        "Q_BCW": 5.176005059181584,
+        "x": 1.7167889564356635,
+        "delta_tau220": -0.6319184095506754
+      }
+    ],
+    "recovery_priors_proposed": {
+      "mass_1": {
+        "kind": "Uniform",
+        "minimum": 35.0,
+        "maximum": 110.0
+      },
+      "mass_2": {
+        "kind": "Uniform",
+        "minimum": 20.0,
+        "maximum": 80.0
+      },
+      "mass_ratio": {
+        "kind": "Constraint",
+        "minimum": 0.2,
+        "maximum": 1.0
+      },
+      "chi_1": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 0.95
+      },
+      "chi_2": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 0.95
+      },
+      "dtau220": {
+        "kind": "Uniform",
+        "minimum": -0.8,
+        "maximum": 2.0
+      },
+      "domega220": 0.0,
+      "dtau440": 0.0,
+      "domega440": 0.0,
+      "luminosity_distance": {
+        "kind": "Uniform",
+        "minimum": 10.0,
+        "maximum": 10000.0
+      },
+      "theta_jn": {
+        "kind": "Sine",
+        "minimum": 0.0,
+        "maximum": 3.141592653589793
+      },
+      "ra": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "dec": {
+        "kind": "Cosine",
+        "minimum": -1.5707963267948966,
+        "maximum": 1.5707963267948966
+      },
+      "psi": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 3.141592653589793,
+        "boundary": "periodic"
+      },
+      "phase": {
+        "kind": "Uniform",
+        "minimum": 0.0,
+        "maximum": 6.283185307179586,
+        "boundary": "periodic"
+      },
+      "geocent_time": {
+        "kind": "Uniform",
+        "minimum": 999999999.9,
+        "maximum": 1000000000.1
+      }
+    },
+    "prior_conditions": "Proposal for synthetic cost pilot only; not an amendment of V1 D priors. Verify rescaled distance and synthetic RB truth are strictly inside support before freeze. No posterior-driven prior change.",
+    "sampler_proposal": {
+      "backend": "bilby/dynesty",
+      "nlive": 256,
+      "walks": 25,
+      "dlogz": 0.1,
+      "maxcall_per_job": 10000,
+      "workers": 1,
+      "wall_cap_seconds_per_job": 3600,
+      "check_point": false,
+      "check_point_plot": false
+    },
+    "convergence_scope": "A maxcall/deadline exit is a cost measurement, not a converged posterior. No C2 acceptance or coverage from an unconverged pilot."
+  },
+  "ordered_stages": [
+    {
+      "stage": "P0_CONTRATO",
+      "action": "Review proposal, approve synthetic-only copied-driver contract and resource caps; preserve V1 and D holds.",
+      "continue_if": "Exact instrument/PSD/remnant/config/seed hashes frozen; no D data paths admitted."
+    },
+    {
+      "stage": "P1_ADAPTADOR_COPIADO",
+      "action": "In a new authorized working copy, add a separate synthetic-noise path, fix numeric fixed-prior handling, forward generation fields. Keep real-data guards intact. No changes now.",
+      "controls": [
+        "Reject real data paths and real event identifiers in synthetic mode",
+        "Truth validation supports numeric fixed values and rejects disagreement",
+        "All three fixed deformations remain exactly zero in injection and recovery",
+        "Fresh LAL dictionaries; GR->RB->GR call sequence reproduces first GR waveform",
+        "Adapter transfers generation8192/max4096 and exact common FFT bins",
+        "Cost/deadline counters and atomic failure receipts; no hidden restart"
+      ],
+      "planned_native_calls_at_most": 120,
+      "native_CPU_proxy_seconds": 10.173077793103447,
+      "planning_wall_cap_seconds": 900
+    },
+    {
+      "stage": "P2_INJECAO_FONTE",
+      "action": "Generate SYN_A GR/RB and one reserved stress fixture; measure PSD normalization, temporal margins, finite/nonzero polarization, exact injected deformation and SNR scaling. Generate no event data.",
+      "controls": [
+        "GR at DTau220=0 has exact parameter identity; numerical residual tolerance frozen before measurement",
+        "RB truth from runtime beta and preregistered law, not from fit",
+        "Units, reference frequency, data/generation grids equal between injection/recovery",
+        "SNR target reached to rtol1e-8/atol1e-10 as in resident adapter",
+        "No truncation of tail or event labels; retain failure cases"
+      ],
+      "planned_native_calls_at_most": 32,
+      "native_CPU_proxy_seconds": 2.712820744827586,
+      "planning_wall_cap_seconds": 600
+    },
+    {
+      "stage": "P3_DOIS_PE_SINTETICOS_CUSTO",
+      "action": "Only after P0-P2 and authorized launch: paired SYN_A GR/RB, 2 jobs, at most10000 likelihood calls each, one worker, 3600s per-job cap.",
+      "native_CPU_proxy_seconds": 1695.5129655172414,
+      "planning_wall_cap_seconds": 7200,
+      "outputs": [
+        "versions/config/seed/code/PSD hashes",
+        "commands/return codes/log hashes",
+        "likelihood and waveform call counts",
+        "CPU/wall/RSS",
+        "convergence/ESS/evidence error diagnostics",
+        "synthetic-only bias diagnostics with uncertainty",
+        "finite failure list"
+      ]
+    },
+    {
+      "stage": "P4_REPLANEJAR_C2",
+      "action": "Use measured pilot call rate/convergence to propose a separate injection campaign and prefreeze its sample count and tests; do not extrapolate success from two draws.",
+      "sizing": "For binomial coverage p~0.9 and desired SE<=0.03, n>=ceil(0.9*0.1/0.03^2)=100 independent recoveries per cell is a planning proxy only. Exact binomial interval and target precision must be ratified.",
+      "C2_bias": "Require |mean bias|<=0.2*|delta_pred| with a prespecified uncertainty criterion. A single successful injection does not establish it.",
+      "not_executed": true
+    }
+  ],
+  "failure_tree": [
+    "If the synthetic path cannot reject real data or preserve fixed zeros, record measured failing control; correct only the authorized copy and repeat affected controls.",
+    "If source EDOM occurs at qualified8192/max4096, retain parameters/return code/log/cost, consult existing R5 case identity and temporal margins; do not silently shrink prior or change waveform family.",
+    "If temporal bounds fail, compute required registered duration and its cost, amend the synthetic contract before any paired recovery; preserve equal conditions.",
+    "If PE hits call/time limit, report actual calls/CPU/ESS/return code as a partial cost measurement; no automatic extension, restart or event-D fallback.",
+    "If the tree reaches its registered cap, deliver the measurement and remaining alternatives to management. This is not a declaration of a physical/technical wall."
+  ],
+  "cost": {
+    "basis": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_013_RINGDOWN\\bis\\015\\t03\\R5\\generation_4096\\RESULT.json",
+      "sha256": "d4a94b0dbcbcf53487d38f9cf4315f895caf36daad727e0eddc6ce5432eb9657",
+      "status": "R5_SOURCE_ONLY_QUALIFIED",
+      "n_source_items": 1015,
+      "historical_CPU_seconds": 86.047283,
+      "historical_wall_seconds": 89.403866284
+    },
+    "historical_CPU_seconds_per_source_item": 0.08477564827586206,
+    "historical_wall_seconds_per_source_item": 0.08808262688078818,
+    "total_P1_P2_P3_source_calls_proxy": 20152,
+    "total_native_CPU_proxy_seconds": 1708.3988640551722,
+    "three_times_native_proxy_for_planning_seconds": 5125.196592165517,
+    "planning_multiplier": 3.0,
+    "multiplier_status": "INPUT allowance, not measured likelihood overhead or guarantee",
+    "proposed_total_wall_cap_seconds_P1_P2_P3": 8700,
+    "actual_waveforms_injections_PE_this_delivery": 0,
+    "actual_compute_for_new_pilot_seconds": 0.0,
+    "new_remote_calls": 0,
+    "paid_infrastructure": "Not contracted or installed. Local-only proposal; no cloud cost commitment.",
+    "limitations": "Historical source-only CPU/wall is not a new pilot, likelihood benchmark, full PE cost or cost of 14 D events. No linear event-count promise.",
+    "next_estimator": "For each proposed future campaign, measured T_wave+likelihood overhead, observed Ncalls distribution and job wall/CPU/RSS replace this proxy; account for repeated seeds and concurrency explicitly."
+  },
+  "data_readiness_remaining": [
+    "Ratify GPS metadata completion and exact GR source-table provenance; keep V1 list and four holds.",
+    "Freeze D PSD/DQ/offsource/exclusion artifacts in a distinct authorized stage. No PSD file was identified in named manifests; do not equate a32s strain slice with a ready PSD.",
+    "Qualify exact copied synthetic adapter/driver and registration before PE.",
+    "A pilot and any future blinded D sigma collection are distinct steps. Do not read D centers to plan either."
+  ]
+}

@@ -1,0 +1,43 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203347_099077Z\TensorContractionR3.lean:57:56: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑?r ^ ?n
+in the target expression
+  RCLike.re (if i ∈ Finset.univ then ↑‖inner ℂ (J x) (v i)‖ ^ 2 else 0) = ‖inner ℂ (J x) (v i)‖ ^ 2
+
+E : Type u_1
+G : Type u_2
+inst✝³ : NormedAddCommGroup E
+inst✝² : InnerProductSpace ℂ E
+inst✝¹ : NormedAddCommGroup G
+inst✝ : InnerProductSpace ℂ G
+J : E ≃ₗᵢ⋆[ℂ] E
+z : E ⊗[ℂ] G
+x : E
+V : Submodule ℂ G
+hV : Module.Finite ℂ ↥V
+hz : {z} ⊆ ↑(LinearMap.lTensor E V.subtype).range
+this : Module.Finite ℂ ↥V := hV
+y : E ⊗[ℂ] ↥V
+hy : (LinearMap.lTensor E V.subtype) y = z
+e : OrthonormalBasis (Fin (Module.finrank ℂ ↥V)) ℂ ↥V := stdOrthonormalBasis ℂ ↥V
+v : Fin (Module.finrank ℂ ↥V) →₀ E
+hv : (v.sum fun i m => m ⊗ₜ[ℂ] e.toBasis i) = y
+hr : z = ∑ i, v i ⊗ₜ[ℂ] ↑(e i)
+he : Orthonormal ℂ fun i => ↑(e i)
+hm : ((raw J) z) x = ∑ i, inner ℂ (J x) (v i) • ↑(e i)
+i : Fin (Module.finrank ℂ ↥V)
+hi : i ∈ Finset.univ
+⊢ RCLike.re (if i ∈ Finset.univ then ↑‖inner ℂ (J x) (v i)‖ ^ 2 else 0) = ‖inner ℂ (J x) (v i)‖ ^ 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203347_099077Z\TensorContractionR3.lean:119:43: warning: `ContinuousLinearMap.coe_add` has been deprecated: Use `ContinuousLinearMap.toLinearMap_add` instead
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_no_fixed\attempts\20261015T203347_099077Z\TensorContractionR3.lean:119:4: error: Type mismatch: After simplification, term
+  IsCompactOperator.add ha hb
+ has type
+  @IsCompactOperator E (Completion G) inst✝³.toAddCommMonoid.toAddZeroClass.toZero
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace (Completion.uniformSpace G).toTopologicalSpace
+    (⇑((contraction J) ↑a) + ⇑((contraction J) ↑b))
+but is expected to have type
+  @IsCompactOperator E (Completion G) SubtractionMonoid.toSubNegZeroMonoid.toNegZeroClass.toZero
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace (Completion.uniformSpace G).toTopologicalSpace
+    ⇑((contraction J) ↑a + (contraction J) ↑b)
+'F1Fecho.TensorContraction.norm_raw_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.TensorContraction.contraction_tmul' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.TensorContraction.contraction_compact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

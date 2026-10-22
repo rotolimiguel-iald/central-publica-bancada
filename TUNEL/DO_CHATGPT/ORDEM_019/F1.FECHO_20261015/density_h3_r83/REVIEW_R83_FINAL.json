@@ -1,0 +1,165 @@
+{
+  "schema": "iald-independent-review/r83",
+  "status": "PASS_WITH_SCOPE",
+  "reviewer": "/root/r69_locality_bridge",
+  "created_utc": "2026-10-19T12:32:08.015986+00:00",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "mission_revision_observed": 558,
+  "preflight_ready": true,
+  "claim": 991,
+  "task_id": "R15_DENSITY_VARIATION_SCOPE",
+  "independence": "Revisor distinto do construtor /root/r69_calibration_bridge; realizou levantamento previo de fontes, nao escreveu esta prova. Inspecao do codigo, fontes e recibos; sem recompilacao independente.",
+  "findings": [],
+  "checks": [
+    {
+      "name": "product_rule_and_signs",
+      "passed": true,
+      "detail": "Variacao covariante g+t h: parcela de volume com +1/2 tr(h g^-1), produto xi du R e variacao de curvatura; norma de covetor fixo tem du=-w^T g^-1 h g^-1 w. Materia usa -1/2 tr(g^-1 h g^-1 T)."
+    },
+    {
+      "name": "same_probability_record_and_scope",
+      "passed": true,
+      "detail": "SelectedFisherGibbsBridge e SelectedProbabilitySigma ja constroem metrica e fonte do mesmo P. Normalizacao soma phi^2=1 torna u constante apenas sob identificacao adicional Psi=a phi, a fixo; nao elimina -2 xi u G. Variar P nao fornece automaticamente todas as variacoes metricas."
+    },
+    {
+      "name": "final_build_receipts",
+      "passed": true,
+      "detail": "Tentativa 1 falhou e foi preservada. Tentativa 2 exit 0, 7 declaracoes (3 definicoes e 4 teoremas), axiomas restritos ao trio, zero sorry na fonte e sorryAx no log; correcao de simp sem enfraquecer enunciados. Hashes do fonte, olean, logs e recibos medidos."
+    },
+    {
+      "name": "source_custody",
+      "passed": true,
+      "detail": "10 fontes/configuracoes pinadas conferidas byte a byte; configuracoes verificadas por hash."
+    },
+    {
+      "name": "memory_plan",
+      "passed": true,
+      "detail": "8 superficies: baselines atuais e after_sha256 de bytes atuais mais append conferidos. Conteudo mantem limite local, ausencia de estacionariedade/H3 e OH adiado."
+    },
+    {
+      "name": "delivery_guards",
+      "passed": true,
+      "detail": "Revisao distinta com evidence pinada, fonte/build conferidos, check.ready is True, backups imediatos de bytes xb+fsync, temporario com tamanho/hash, rechecagem baseline antes de replace; CAS de missao/ACOM; submit sem aceite automatico. support_r83.py incluido na evidencia."
+    }
+  ],
+  "scope": [
+    "DERIVED: derivada local de densidade nao minimal, com dependencia escalar explicita, especializacao de norma de covetor e soma com materia escalar.",
+    "REAL: inspecao independente dos artefatos e consistencia dos recibos de build; nao houve nova execucao Lean por este revisor.",
+    "OPEN: acao integrada, integracao por partes, estacionariedade independente, identificacao da fonte nao minimal no mesmo registro e H3 universal.",
+    "Parametros, regularidade e invertibilidade sao hipoteses explicitas; interpretacao fisica Lorentziana exige as restricoes correspondentes, nao impostas por nomes."
+  ],
+  "operational_limits": [
+    "Substituicao de arquivos e verificacoes de hash nao constituem CAS atomico do filesystem nem transacao multi-arquivo. Execucao depende de exclusividade da reivindicacao; falha parcial exige reconciliacao pelos backups/recibos, sem rerun cego.",
+    "Parecer tecnico nao aplica memoria nem aceita administrativamente a missao; nenhum kernel, um.py, producao ou gate alterado pelo revisor."
+  ],
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\GeneralSourceResponseReconstruction.lean",
+      "sha256": "a27d1c0963daffadc845120fd892d46a47f41ffcd022c10ae67888d1bc18c468"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\GravitationalResponseRecord.lean",
+      "sha256": "6ec37ca79051152da8c36f26e73bf767d15b2a0c8b1ea73f2f32d3389c5aa9c6"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\MetricEinsteinVariation.lean",
+      "sha256": "b6ec0383b49f4bfb3e6b4e3f91b19341f62330aac0ac4532b527d40147bd8bfe"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\MetricRicciVariation.lean",
+      "sha256": "ba322f76127f39a026e69673de38dc1b08b0af7fe8ce828ffa0cc38312ee5017"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ScalarMatterDensityVariation.lean",
+      "sha256": "83f515e8d9444894c213b814617602d49e2753f09e7373b5909b60e297158345"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedFisherGibbsBridge.lean",
+      "sha256": "c84db761541c7fec5cc7f4713305c315810a323a04827f819bfe3f2d4f7f4ff6"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedFisherLorentzMetric.lean",
+      "sha256": "346db9497cbebf1824b279972d2cc342abed90b9df13874d439ffd7737533a3d"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedProbabilitySigma.lean",
+      "sha256": "889e6c7dc0564ad7dcaf787e922b48744130d6b6b083e043bab661045bf167b7"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\lake-manifest.json",
+      "sha256": "31a94eb76a8370ae8d75999ccec510f1ef7b994e369beebee2a3ea0088eee235"
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\lean-toolchain",
+      "sha256": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\AXIOMS_VERIFIED_2.json",
+      "sha256": "f8a33d0babd1898b9092435697598fe89d46c068e449c08f039231b1a8030114"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\BUILDER_DELIVERY_R83.json",
+      "sha256": "ddf57ecf686602c5ab023c6000758a499b3c94242a8a7f0cffa1316c272a63bf"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\BUILD_1.json",
+      "sha256": "fb6611abe86244fab66296cec331c4e1a5de819ef0856883f70870eafb071c1c"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\BUILD_1.log",
+      "sha256": "2dd4763766e3d6b0ce844d1ea95fad8fb2529c91d9a51879f02fb47005cd0223"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\BUILD_2.json",
+      "sha256": "f9d672b1eeffe1ac8f4a897a07c8223f8a50b70f22e9b60b288825da2d8c48d0"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\BUILD_2.log",
+      "sha256": "3164de373d9a7fe7215b1a037fec9fb83d3e30dcd71e53448e303c04f8bcfd23"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\FINAL_BUILD_R83.json",
+      "sha256": "42a0470dc1078ad9c368d3f2a37139ae2920a19fa8eeab0461cba4640576e25d"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\MEMORY_APPEND_R83.txt",
+      "sha256": "4bf0eef8f22873a9372b3d93459950ad06573bca5e6005227129ad1ea0ef8309"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\MEMORY_PLAN_R83.json",
+      "sha256": "2946695c54bc5b15621f4fdd2bab1a251269a820a8c195eec44e1d8c59c40139"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\NonminimalLocalDensityR83_1.lean",
+      "sha256": "3513be9ad9e283b624e0184f87d34a086c0935e911c9c8f4636891cba012d08f"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\NonminimalLocalDensityR83_2.lean",
+      "sha256": "63fdb4f0b95fee4aae26926645408ad19a318b2e377b756031f0338e917b5e1f"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\NonminimalLocalDensityR83_2.olean",
+      "sha256": "96fa6dbe96ebb8d964f7d095fe279afba4595919de5800539d1d5568ae263572"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\RELATORIO_R83.txt",
+      "sha256": "aabe541f529e5925b40fb466c8dea3cc9085db9cb866e632bb0fed774287f62b"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\SOURCE_PINS_R83.json",
+      "sha256": "b7203be05afb6e101f4aeadbc5825b9517f5f375e0850ff6f0a157969cc22a43"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\build_r83.py",
+      "sha256": "71c061ef922e45fc8fc7f7464cdbeb1e8881d26268b598d564d5e9f17598d862"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\deliver_r83.py",
+      "sha256": "7b8dd269f275c715eac887583b0acc9d3d8905cbf125d7122b92919a611740fe"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\density_h3_r83\\support_r83.py",
+      "sha256": "19b9f3019857ef2d9a3a043e9e1b97c2b71746aae2fb9008678e1b6dbf1b44de"
+    }
+  ]
+}

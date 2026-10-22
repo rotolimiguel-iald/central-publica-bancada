@@ -1,0 +1,193 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "created_utc": "2026-10-15T17:34:39.266562+00:00",
+  "reviewer": "/root/atrator_skeptic",
+  "verdict": "PASSA_COMPONENTES_CONDICIONAIS",
+  "material_blocking_findings": [],
+  "binary_scope_note": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\FLOW_BINARY_NOTE_R1.json",
+    "sha256": "94e1c6579788e61f3e247c5ada5c50f7f4591d899567c505deb03d89646e145b",
+    "bytes": 1385
+  },
+  "builds": [
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\net\\RECEIPT_R1.json",
+        "sha256": "85daeeff96042269ecf28e4d78bd154f90a38b984a0bf205751ab7745192bf03",
+        "bytes": 7496
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\net\\src\\WeylNetWiringR1.lean",
+        "sha256": "d3a42a2727be0399e820c9e32e49126a433a09a1e90e579f73478ad6e54d3d4b",
+        "bytes": 6898
+      },
+      "exit": 0,
+      "seconds": 69.51850099999865,
+      "axiom_count": 16,
+      "olean_identical_to_accepted": true,
+      "source_exact": true
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\flow\\RECEIPT_R1.json",
+        "sha256": "95cf5a641172cc25ac207990bb8278966b1eecfc057357e2df4b3993074691de",
+        "bytes": 18133
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\flow\\src\\WeylFlowWiringR4.lean",
+        "sha256": "fdd096c039511e1781222f4d20c1d88fea6ec2d9acfb67695ceb9cf3ae365e6e",
+        "bytes": 4599
+      },
+      "exit": 0,
+      "seconds": 81.59323769999901,
+      "axiom_count": 46,
+      "olean_identical_to_accepted": false,
+      "source_exact": true
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\maxwell\\RECEIPT_R1.json",
+        "sha256": "1fc714036a9d7a9f7fd329455015d3e3c252121aebfb2fa9111634580a88d553",
+        "bytes": 5930
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\maxwell\\src\\TGLExt\\MaxwellBoostChargeAssemblyR1.lean",
+        "sha256": "82af7de6151b6e24096370d873ff71436f935dc031fca3777afac6fbd674dee3",
+        "bytes": 3945
+      },
+      "exit": 0,
+      "seconds": 67.34980859999996,
+      "axiom_count": 6,
+      "olean_identical_to_accepted": true,
+      "source_exact": true
+    }
+  ],
+  "all_axioms_subset": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "claims": [
+    {
+      "topic": "rede",
+      "verdict": "PASSA_CONDICIONAL",
+      "statute": "REAL",
+      "finding": "R(W,K) é o duplo comutante dos geradores W(K) quando hstar garante fecho por star. R_mono usa monotonicidade do bicomutante; R_local usa comutação dos geradores e colapso do triplo comutante; R_cov usa o transporte pelo star-algebra equivalence e hcov nos geradores. As conclusões R_* não são hipóteses."
+    },
+    {
+      "topic": "fluxo",
+      "verdict": "PASSA_CONDICIONAL",
+      "statute": "REAL",
+      "finding": "A ação é a conjugação pela gamma concreta de B0(-2*pi*t), no mesmo Fock F. L.K_boost e hcov dão invariância da álgebra da cunha; restrictAutomorphism produz a restrição com inversa e leis de grupo. Não substitui por automorfismo abstrato sem implementação."
+    },
+    {
+      "topic": "Maxwell",
+      "verdict": "PASSA_CONDICIONAL",
+      "statute": "REAL",
+      "finding": "BoostChargeIdentity afirma derivada de coeficiente matricial do boost efetivo igual a i vezes a carga integrada. linked_modular_charge deriva o fator 2*pi pela reparametrização BW e unicidade da derivada. Não recebe charge_link pronto. NonzeroChargeState fornece carga diferente de zero em Regular, que inclui norma 1; a testemunha modular não nula é derivada."
+    },
+    {
+      "topic": "tipos",
+      "verdict": "PASSA",
+      "statute": "REAL",
+      "finding": "Maxwell preserva o mesmo C:FockCertificate L, Q:MaxwellQuadraticForm C, relógio N, domínio e tensor toStress Q. assembled_tensor_is_original é rfl; on_domain usa a extensão existente por zero somente fora do domínio. standardWedgeH3 usa exatamente esse tensor, não outro substituto."
+    }
+  ],
+  "limits": [
+    "Nenhuma família concreta W/CCR foi construída: hstar, comutação local e covariância de geradores são entradas. O critério não abeliano requer um par de geradores não comutantes; não produz esse par.",
+    "Nenhum habitante físico LightNetData/FockCertificate/MaxwellQuadraticForm com essas novas hipóteses foi exibido. A tipagem das pontes não demonstra sua existência conjunta.",
+    "O fluxo restrito tem leis algébricas de grupo e implementação concreta; esta pedra não prova continuidade forte, KMS, ciclicidade/separação do vácuo ou igualdade com o grupo modular do vácuo.",
+    "O nome MaxwellQuadraticForm é o registro herdado; fornecer Q físico/Wick, a identidade diferencial boost-carga e estado regular de carga não nula continua obrigação, não consequência desta fiação.",
+    "A forma zero está excluída pelo requisito explícito de carga não nula; isso não substitui a exibição de um estado físico que o satisfaça.",
+    "H3 entregue refere-se à cunha padrão e direção nula fixa. Não fecha por si só família de Lorentz de todas as cunhas nem H3 curvo em toda direção.",
+    "Flow R4 recompila com os mesmos 46 registros de axiomas (incluindo auxiliares), mas seu .olean difere: 317656 versus 317672 bytes. Os dois serializam caminhos de fonte diferentes no offset 313472, junto ao aviso de linter. Não se alega identidade binária nem decodificação completa dessa diferença.",
+    "WeylFlow R1/R2/R3 falharam no construtor e ficam fora do aceite. A revisão recompilou apenas o fonte aceito indicado no recibo próprio; originais e tentativas históricas preservados.",
+    "Revisão em sandbox de componentes. Não executou rito integral, main, memória, produção, kernel original, dado observado ou gate."
+  ],
+  "source_context": [
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V350DualFixedCore.lean",
+      "sha256": "2c120aeaa01da764d94370d273bf16e9e5f5a1ae7d3a91f9066e48a745e09582",
+      "bytes": 5443
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheOathOnTheTower.lean",
+      "sha256": "ef0634a160a9d22ecfab7e2cd865de2a9b6f9a61e524d9eac7c17b25932d4dab",
+      "bytes": 20026
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheConjugationMapsCommutants.lean",
+      "sha256": "0fd2461d9db0668341779a4950dd0f10770b80e512329cb9c4f553c1550d331b",
+      "bytes": 3511
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\Commutant.lean",
+      "sha256": "114782c4fb991da15ae22e3e053ecf6a8c4a5f68e7152afd40102a66c44db19a",
+      "bytes": 3824
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\QGSolutionComplete.lean",
+      "sha256": "8c3a4bc82c5c4308515063254744cfaefcc7e7b926038221be2e7de6293dc598",
+      "bytes": 10419
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\FlagNetV31.lean",
+      "sha256": "1c93dc3ba5f792580cbd148dc85b5b0727a0b8587820204f4003f7476ce59d2b",
+      "bytes": 9964
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheImportedSecondQuantization.lean",
+      "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+      "bytes": 35835
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\MaxwellLiteratureBridge.lean",
+      "sha256": "c07d135fac53737465c50636204da7ee79d27ced9df3867382d1e190781febe4",
+      "bytes": 8843
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ContratoQG_v31.lean",
+      "sha256": "2f2c6561a5a5d832b43f11f7bacccf4811eb4392f1832f78cf4a5838a72a4808",
+      "bytes": 24897
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ContratoQG_v31_Teoremas.lean",
+      "sha256": "4fa0eff792110ff5c076a83a60532636502e8c3335b5a7af2ab29994abee4ee1",
+      "bytes": 65168
+    }
+  ],
+  "delivery_maxwell": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\matter_h3_inventory\\DELIVERY_R1.json",
+    "sha256": "dffcd42620c54b4045ad4d44f1fb6c672334690b27ab97f09e7abb887ad1f4f8",
+    "bytes": 3519
+  },
+  "failed_flow_attempts": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\attempts\\20261015T172222_147367Z\\RECEIPT.json",
+      "sha256": "b3ba9888bc9aef863d98744aaee7ad189dd4db11b851e79e4595644eda303c47",
+      "bytes": 10422
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\attempts\\20261015T172445_492485Z\\RECEIPT.json",
+      "sha256": "b7ebf4de6f0253ae82891e76851be36e7cc04d896b6d9358065e828ca3de7b2d",
+      "bytes": 10421
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\weyl_net_wiring\\attempts\\20261015T172637_595596Z\\RECEIPT.json",
+      "sha256": "dad87554ba48fe9247b9a95aee80d72ce76568394c890d8d3c08d7d1fb3f52e4",
+      "bytes": 10421
+    }
+  ],
+  "markdown": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\REVISAO_REDE_MATERIA_R1.md",
+    "sha256": "46a81e9ea9bdbe36826efcd72dd53243b8850a84eacf05556d562d6b17ad56f6",
+    "bytes": 3145
+  },
+  "sealing_script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_wiring_review\\seal_review_r3.py",
+    "sha256": "593b4eb3e1e1fa91a4fe8a5f40242644063dc4876763bc1acb13fa3820216c35",
+    "bytes": 9056
+  },
+  "originals_memory_production_gate_touched": false
+}

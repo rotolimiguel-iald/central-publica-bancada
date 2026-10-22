@@ -1,0 +1,186 @@
+{
+  "schema": "iald-lean-repair/v1",
+  "created_utc": "2026-10-16T20:43:58.588800+00:00",
+  "status": "DECLARADO_PENDING_BUILD_AND_INDEPENDENT_REVIEW",
+  "requirement": "R8",
+  "requirement_satisfied": false,
+  "author": {
+    "kind": "agent",
+    "id": "codex-r51-wick-local-identification"
+  },
+  "handle": "r51-wick-local-identification",
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "mission_receipt": {
+    "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+    "scope": {
+      "house": "IALD",
+      "principal": "luiz-antonio-rotoli-miguel"
+    },
+    "revision": 371,
+    "event_id": "track-flow-build-20261016T204127_892966Z-failed",
+    "event_hash": "3c8b29dfa86cb8455d883debdb0c961f6b1e8d4cc00aa65320ccb7ccdda0796c",
+    "objective_sha256": "f57ee2d752f8f8b2226baaf45307f91c485298d2a42758739e4c18ee08cb516e",
+    "anchor_sha256": "6fc1dab76ae9ec6ae35ad68b45e8b82fc2829156e1761945f257d030ae0589c7",
+    "state_sha256": "bf0b3c0932c1a84eb1c15041c3deb377e8231d7c4ae6f94dc1d69934f0dba943",
+    "replayed": false
+  },
+  "projection_sha256": "5417b9182a101b03568ead4b58b0249855bcaffdb0aaa4aa9369bc052211e1fd",
+  "criterion": "Realizacao conjunta de Maxwell e tensor de materia. Campos do certificado completo nao triviais na mesma rede; simetria/conservacao e fonte geometrica ligados.",
+  "lease_observed": {
+    "expires_at": 1792185306.0734692,
+    "id": "aa3cd719-d85c-4e7b-9276-1b582bdb4277",
+    "owner": "codex-gerente-tgl",
+    "task_epoch": 5
+  },
+  "previous_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\LOCAL_WICK_IDENTIFICATION_CANDIDATES_R51_R2.json",
+    "sha256": "6152b4dc1a226bcb0709edbcea0bf3f9139a2a194af62f6a3823d5b83a4d52b4",
+    "bytes": 26920
+  },
+  "sources": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\LocalWickStressIdentificationR3.lean",
+        "sha256": "1b33904f57734d387455b0d02f8fda5fc4a41bc7e88e4865a071ac2d6e0ae1d2",
+        "bytes": 8495
+      },
+      "imports": [
+        "RegularPointAnnihilationR2",
+        "CalibratedFockStressDomainBridgeR1",
+        "RegularFockStressContinuityR4"
+      ],
+      "prints": [
+        "F1Fecho.MaxwellGlobal.pointWick_exponential",
+        "F1Fecho.MaxwellGlobal.pointWick_finiteKernel",
+        "F1Fecho.MaxwellGlobal.pointWick_continuous",
+        "F1Fecho.MaxwellGlobal.contractWick_product",
+        "F1Fecho.MaxwellGlobal.contractWick_finiteKernel",
+        "F1Fecho.MaxwellGlobal.localWickStress_eq_unitaryFourierPointStressForm",
+        "F1Fecho.MaxwellGlobal.localWickStress_eq_calibrated",
+        "F1Fecho.MaxwellGlobal.normalizedCircularWick_eq_pointSmear"
+      ]
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\PointAnnihilationSmearingR3.lean",
+        "sha256": "43b8bf561bb131a667f88a3f4bc3f38f7e818b460bc583984595d8abc3dfbe39",
+        "bytes": 8376
+      },
+      "imports": [
+        "LocalWickStressIdentificationR3"
+      ],
+      "prints": [
+        "F1Fecho.MaxwellGlobal.regularDiagonal_add_eigenvalue",
+        "F1Fecho.MaxwellGlobal.regularDiagonal_smul_eigenvalue",
+        "F1Fecho.MaxwellGlobal.regularDiagonal_value_expansion",
+        "F1Fecho.MaxwellGlobal.regularDiagonal_integrable",
+        "F1Fecho.MaxwellGlobal.regularDiagonal_integral",
+        "F1Fecho.MaxwellGlobal.scalarTest_profileWave_integrable",
+        "F1Fecho.MaxwellGlobal.pointTestEigenvalue_eq",
+        "F1Fecho.MaxwellGlobal.pointTestEigenvalue_integrable",
+        "F1Fecho.MaxwellGlobal.pointAnnihilation_test_integrable",
+        "F1Fecho.MaxwellGlobal.normalizedPointSmearEigenvalue_integrals",
+        "F1Fecho.MaxwellGlobal.normalizedPhysical_annihilation_point_integral"
+      ]
+    }
+  ],
+  "green_supplier": {
+    "source": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularPointAnnihilationR2.lean",
+      "sha256": "4098487d0d9d8150d65f90df396cd212cfe88eef119c4101956205dab31ef69d",
+      "bytes": 10937
+    },
+    "status": "COMPILED_EXIT0_NOT_INDEPENDENTLY_REVIEWED_HERE",
+    "receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T203933_770584Z\\RECEIPT.json",
+      "sha256": "67e1e1717474bcd2f989744e521d992d291c297d44400b06f7d71e7fd95a5530",
+      "bytes": 154099
+    },
+    "axioms": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T203933_770584Z\\AXIOMS.txt",
+      "sha256": "b5d773b0e0084650b4902fb86d0b2153d6665deb9837ce84da069637d49ff8ac",
+      "bytes": 3314
+    },
+    "seconds": 66.68820189998951,
+    "exit_code": 0,
+    "axiom_declarations": [
+      "F1Fecho.MaxwellGlobal.regularDiagonal_exponential",
+      "F1Fecho.MaxwellGlobal.regular_decomposition",
+      "F1Fecho.MaxwellGlobal.regularLinearMap_expansion",
+      "F1Fecho.MaxwellGlobal.regularLinearMap_ext",
+      "F1Fecho.MaxwellGlobal.regularInner_expansion",
+      "F1Fecho.MaxwellGlobal.regularDiagonal_annihilation",
+      "F1Fecho.MaxwellGlobal.regularDiagonal_invariant",
+      "F1Fecho.MaxwellGlobal.regularWick_eq_existing",
+      "F1Fecho.MaxwellGlobal.regularWick_exponential",
+      "F1Fecho.MaxwellGlobal.regularWick_finiteKernel",
+      "F1Fecho.MaxwellGlobal.raise_lowerProfileWave",
+      "F1Fecho.MaxwellGlobal.pointSmearEigenvalue_eq_inner",
+      "F1Fecho.MaxwellGlobal.pointSmear_annihilation",
+      "F1Fecho.MaxwellGlobal.normalizedPointSmearEigenvalue_eq_inner",
+      "F1Fecho.MaxwellGlobal.normalizedPointSmear_Wick"
+    ],
+    "only_standard_trio": true,
+    "source_matches_attempt": true
+  },
+  "failed_source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\LocalWickStressIdentificationR2.lean",
+    "sha256": "b560bb54c10cb44e2e4bdb0979e6271c2e7acb93e934f7d9adf2c7e7b52c3333",
+    "bytes": 8043
+  },
+  "failed_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T204127_892966Z\\RECEIPT.json",
+    "sha256": "52bdc9a86d911d39fb977d66d16574924bc9564418ad7168430dea59d9d2b320",
+    "bytes": 252794
+  },
+  "failed_axioms": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T204127_892966Z\\AXIOMS.txt",
+    "sha256": "e19fcdbb5e6703949d5dd354338a3eee900bfdb039ea9d31be46b0bc8d8e6b55",
+    "bytes": 3125
+  },
+  "local_diff": [
+    "--- \n",
+    "+++ \n",
+    "@@ -57,6 +57,13 @@\n",
+    "           coherentProfileWave h.val k.val μ ν x * coherentProfileWave h.val k.val ρ σ y)",
+    "         (regularCoefficients ψ) (regularCoefficients χ) := by",
+    "-  rw [pointWick, regularWick_finiteKernel]",
+    "-  simp only [← pointWick, pointWick_exponential]",
+    "+  calc",
+    "+    _ = finiteKernel (fun h k : RegularLabel =>",
+    "+        pointWick μ ν ρ σ x y (regularExponential h) (regularExponential k))",
+    "+        (regularCoefficients ψ) (regularCoefficients χ) :=",
+    "+      regularWick_finiteKernel (normalizedPointEigenvalue μ ν x)",
+    "+        (normalizedPointEigenvalue ρ σ y) ψ χ",
+    "+    _ = _ := congrArg (fun M : RegularLabel → RegularLabel → ℂ =>",
+    "+        finiteKernel M (regularCoefficients ψ) (regularCoefficients χ))",
+    "+      (funext (fun h => funext (fun k => pointWick_exponential μ ν ρ σ x y h k)))",
+    " ",
+    " theorem pointWick_continuous (μ ν ρ σ : Fin 4) (ψ χ : regularFockDomain) :"
+  ],
+  "repair": "Somente pointWick_finiteKernel: calc usa diretamente regularWick_finiteKernel e congrArg sobre igualdade de funções obtida por funext e pointWick_exponential. Sem refold por simp nem alteração dos enunciados.",
+  "smearing_change": "Somente import de LocalWickStressIdentificationR2 para R3; demais bytes preservados.",
+  "new_hypotheses": [],
+  "scientific_changes": false,
+  "scope_limits": [
+    "R8 integral permanece aberto.",
+    "Igualdade local e smearing ainda candidatos até compilações e revisão independente.",
+    "Não há campo pontual limitado nem nova premissa de identificação Wick.",
+    "Fator, sinais, medida, Fock, domínio, fontes verdes e limites preservados."
+  ],
+  "verified_pin_pairs": 884,
+  "verified_bytes": 86283727,
+  "author_builds": 0,
+  "provider_calls": 0,
+  "production_changes": false,
+  "mission_mutations": false,
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\pin_local_wick_repair_r51_r3.py",
+    "sha256": "590a920bb2d9d5b1a257f80b124719c6e90890cc9f693ce2b44bce5d18da53e2",
+    "bytes": 6215
+  }
+}

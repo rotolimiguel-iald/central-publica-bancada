@@ -1,0 +1,58 @@
+import took 18s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T103208_626785Z\GenericSmearSymplecticR2.lean:18:15: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ℂ ?x (↑?r • ?y)
+in the target expression
+  (inner ℂ (T f) (↑r • T g)).im = r * (inner ℂ (T f) (T g)).im
+
+X H : Type
+inst✝³ : NormedAddCommGroup X
+inst✝² : NormedSpace ℂ X
+inst✝¹ : NormedAddCommGroup H
+inst✝ : InnerProductSpace ℂ H
+T : X →L[ℂ] H
+f : X
+r : ℝ
+g : X
+ht : T (r • g) = ↑r • T g
+⊢ (inner ℂ (T f) (↑r • T g)).im = r * (inner ℂ (T f) (T g)).im
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T103208_626785Z\GenericSmearSymplecticR2.lean:31:11: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ℂ (↑?r • ?x) ?y
+in the target expression
+  (inner ℂ (↑r • T f) (T g)).im = r * (inner ℂ (T f) (T g)).im
+
+X H : Type
+inst✝³ : NormedAddCommGroup X
+inst✝² : NormedSpace ℂ X
+inst✝¹ : NormedAddCommGroup H
+inst✝ : InnerProductSpace ℂ H
+T : X →L[ℂ] H
+r : ℝ
+f g : X
+ht : T (r • f) = ↑r • T f
+⊢ (inner ℂ (↑r • T f) (T g)).im = r * (inner ℂ (T f) (T g)).im
+'F1Fecho.GenericSmearSymplectic.pairing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0117ms
+	blocked (unaccounted) 15.8ms
+	compilation (IR) 0.0809ms
+	compilation (LCNF base) 2.66ms
+	compilation (LCNF impure) 0.35ms
+	compilation (LCNF mono) 1.76ms
+	congr simp thm 0.152ms
+	elaboration 13.8ms
+	fix level params 0.133ms
+	import 18s
+	initialization 28.9ms
+	instantiate metavars 0.179ms
+	interpretation 3.53s
+	let-to-have transformation 0.0732ms
+	linting 1.32ms
+	overlappingInstancesLinter 18.7ms
+	parsing 1.21ms
+	process pre-definitions 6.06ms
+	share common exprs 0.494ms
+	simp 4.17ms
+	tactic execution 34.8ms
+	tacticAnalysis 20.8ms
+	type checking 10.4ms
+	typeclass inference 192ms

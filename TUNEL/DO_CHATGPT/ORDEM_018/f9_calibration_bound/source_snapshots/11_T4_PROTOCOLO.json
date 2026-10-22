@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "created_utc": "2026-10-06T01:24:12.827641+00:00",
+  "identity": "chatgpt-codex/ordem-018/derivacoes",
+  "scope": "F1b_HISTORICAL_T_F4_D1B_DETERMINISTIC_ONLY_NO_SCIENTIFIC_VERDICT",
+  "authorization": "ORDEM018 F1(b), unidade delegada explicitamente: reprodução histórica independente T/F4; demais famílias/evidências após verificação.",
+  "families": [
+    "T_dr2_cc"
+  ],
+  "kernel": "d1b",
+  "datasets": [
+    "planck_comp",
+    "desi_dr2",
+    "cc_moresco"
+  ],
+  "contains_ladder": false,
+  "models": [
+    "lcdm",
+    "tgl",
+    "livre"
+  ],
+  "beta_rule": "ALPHA_FINE_CODATA_2018 * sqrt(e) runtime, not fitted in TGL model",
+  "z_star_law": 1089.95,
+  "parameter_names": [
+    "H0",
+    "ombh2",
+    "omch2",
+    "beta"
+  ],
+  "c_fixed": 0,
+  "declared_limits": {
+    "H0": [
+      50,
+      90
+    ],
+    "ombh2": [
+      0.015,
+      0.03
+    ],
+    "omch2": [
+      0.08,
+      0.18
+    ],
+    "beta": [
+      -0.05,
+      0.05
+    ]
+  },
+  "camb_support": {
+    "H0": [
+      60,
+      76
+    ],
+    "ombh2": [
+      0.02025,
+      0.02475
+    ],
+    "omch2": [
+      0.102,
+      0.138
+    ]
+  },
+  "prior": "Uniform declared broad limits; likelihood zero outside actual CAMB support. No evidence or prior renormalization in this unit.",
+  "likelihood": {
+    "planck": "Chen2019 full3x3",
+    "desi_dr2": "full13x13",
+    "cc": "32point diagonal sigma^2; historical full systematic covariance absent; F7 not substituted",
+    "cross_blocks": "block factorization historical INPUT"
+  },
+  "independence": "New NumPy/SciPy implementation; no imports/execution of original motor, backups, um.py or original fitting helpers; frozen public numerical table reused as input.",
+  "numerics": {
+    "distance": "independent Gauss-Legendre64 with128 convergence at archived and fitted points; original Simpson20001 not silently represented as same algorithm",
+    "table": "independent 6node degree5 separable Lagrange interpolation with original support mask",
+    "optimization": "TRF least_squares, historical scaled coordinates and central Jacobian h=.001, tolerances1e-12, max_nfev200; LCDM first, TGL/free start from LCDM",
+    "uncertainty": "inverse JtJ scaled to physical units, no reduced-chi2 rescaling"
+  },
+  "targets": {
+    "source_result": {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase4_desvio_30set\\RESULTADO_FASE4_DESVIO_20260930.json",
+      "bytes": 44444,
+      "sha256": "10683b334d28d84acdd8a086fe91fcbeaa46e747b0e3b51dc4192c270d8e6219"
+    },
+    "target_path": "/familias/T_dr2_cc/nucleos/d1b",
+    "objects": [
+      "chi2_min_by_model",
+      "chi2_by_block",
+      "theta_tgl",
+      "theta_livre",
+      "H0_K_H0local",
+      "sigma_beta_JtJ",
+      "delta",
+      "z_delta",
+      "z_perfil",
+      "z_ganho",
+      "custo_por_nat"
+    ],
+    "not_in_scope": [
+      "D1a",
+      "evidences",
+      "posteriors",
+      "new_Sidak_book",
+      "P_Q_R_S_families",
+      "Phase9_compound",
+      "scientific_verdict"
+    ]
+  },
+  "tolerances": {
+    "table_relative": 1e-05,
+    "chi2_block_abs": 0.01,
+    "chi2_total_abs": 0.01,
+    "quadrature_residual_abs": 1e-07,
+    "H0_abs": 0.001,
+    "density_abs": 1e-06,
+    "beta_abs": 1e-05,
+    "sigma_beta_relative": 0.01,
+    "z_abs": 0.02
+  },
+  "tolerance_status": "Engineering reproduction thresholds fixed before first numerical run, not scientific decision thresholds; pre-read historic target values declared.",
+  "resources": {
+    "wall_seconds_max": 300,
+    "threads": 1,
+    "optimizer_max_nfev_per_model": 200,
+    "maximum_models": 3,
+    "design_array_working_memory_MiB_below": 64,
+    "peak_working_set_reporting": "Windows GetProcessMemoryInfo; process total includes Python libraries",
+    "gpu": false
+  },
+  "stop_rule": "Any hash error, source support excursion, holdout/fixed-point divergence, optimizer failure or threshold mismatch -> preserve local failure output and STOP before extending batch.",
+  "source_origins": {
+    "T4_camb_lcdm_v1.npz": {
+      "path": "C:\\IALD\\Bancada_Um\\tabelas\\camb_lcdm_v1.npz",
+      "bytes": 223602,
+      "sha256": "6bc4dd4a092325007ed05504401d6722d2f849956f3168a72b474786b4ce7363"
+    },
+    "T4_desi_mean.txt": {
+      "path": "C:\\IALD\\Artigo\\teste_acustico_beta_tgl_v1\\_originais\\desi_gaussian_bao_ALL_GCcomb_mean.txt",
+      "bytes": 472,
+      "sha256": "9ac154ab583ce759c0f7eef3c978c7c70a6ead2d18774caceadf1a350a640585"
+    },
+    "T4_desi_cov.txt": {
+      "path": "C:\\IALD\\Artigo\\teste_acustico_beta_tgl_v1\\_originais\\desi_gaussian_bao_ALL_GCcomb_cov.txt",
+      "bytes": 2547,
+      "sha256": "252a143274c8a07c78694c119617d36594f6d7965d00319ca611c6ffb886e509"
+    }
+  },
+  "file_pins": {
+    "ENTRADAS_HISTORICAS_E_COVARIANCIAS.json": "f2521084b5b5eaffde38646b8f082bc523eb9360713b824c13f90153f831ebf3",
+    "T4_camb_lcdm_v1.npz": "6bc4dd4a092325007ed05504401d6722d2f849956f3168a72b474786b4ce7363",
+    "T4_desi_mean.txt": "9ac154ab583ce759c0f7eef3c978c7c70a6ead2d18774caceadf1a350a640585",
+    "T4_desi_cov.txt": "252a143274c8a07c78694c119617d36594f6d7965d00319ca611c6ffb886e509",
+    "T4_ALVO_HISTORICO.json": "2d99efaa94ddc1073abfe2b4e7e105c9273dd76c81d74a88d23342300f5575e5"
+  },
+  "rollback": "no original write; new outputs refuse overwrite"
+}

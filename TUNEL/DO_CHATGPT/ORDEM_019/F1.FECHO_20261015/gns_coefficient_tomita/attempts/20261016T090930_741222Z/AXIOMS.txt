@@ -1,0 +1,87 @@
+import took 48s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T090930_741222Z\GenericRightTomitaResolventR2.lean:32:72: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  A.operator ⟨(U ?t) ↑?x, ⋯⟩
+in the target expression
+  inner ℂ ((V t) (A.operator x)) ↑z = inner ℂ (A.operator (domainInput A U hd t x)) ↑z
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A : Input H
+U V : ℝ → H →L[ℂ] H
+hU : ∀ (t : ℝ), star (U t) = U (-t)
+hV : ∀ (t : ℝ), star (V t) = V (-t)
+hd : ∀ (t : ℝ) (x : ↥A.domain), (U t) ↑x ∈ A.domain
+hs : ∀ (t : ℝ) (x : ↥A.domain), A.operator ⟨(U t) ↑x, ⋯⟩ = (V t) (A.operator x)
+t : ℝ
+z : ↥(scalarTomitaAdjointDomain A)
+x : ↥A.domain
+⊢ inner ℂ ((V t) (A.operator x)) ↑z = inner ℂ (A.operator (domainInput A U hd t x)) ↑z
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T090930_741222Z\GenericRightTomitaResolventR2.lean:56:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  A.operator ⟨(U ?t) ↑?x, ⋯⟩
+in the target expression
+  A.operator (domainInput A U hd t ((scalarTomitaSquareInput A) x)) ∈ scalarTomitaAdjointDomain A
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A : Input H
+U V : ℝ → H →L[ℂ] H
+hU : ∀ (t : ℝ), star (U t) = U (-t)
+hV : ∀ (t : ℝ), star (V t) = V (-t)
+hd : ∀ (t : ℝ) (x : ↥A.domain), (U t) ↑x ∈ A.domain
+hs : ∀ (t : ℝ) (x : ↥A.domain), A.operator ⟨(U t) ↑x, ⋯⟩ = (V t) (A.operator x)
+t : ℝ
+x : ↥(scalarTomitaSquareDomain A)
+⊢ A.operator (domainInput A U hd t ((scalarTomitaSquareInput A) x)) ∈ scalarTomitaAdjointDomain A
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T090930_741222Z\GenericRightTomitaResolventR2.lean:71:4: error: Type mismatch: After simplification, term
+  hs t ((scalarTomitaSquareInput A) x)
+ has type
+  @Eq H (A.operator ⟨(U t) ↑((scalarTomitaSquareInput A) x), ⋯⟩) ((V t) (A.operator ((scalarTomitaSquareInput A) x)))
+but is expected to have type
+  @Eq H (A.operator (domainInput A U hd t ((scalarTomitaSquareInput A) x)))
+    ((V t) (A.operator ((scalarTomitaSquareInput A) x)))
+'F1Fecho.GenericRightTomitaResolvent.adjoint_pairing' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GenericRightTomitaResolvent.adjoint_maximal' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GenericRightTomitaResolvent.square_mem' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.GenericRightTomitaResolvent.square_commutes' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GenericRightTomitaResolvent.resolvent_commutes' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.0629ms
+	blocked (unaccounted) 97.2ms
+	compilation (IR) 0.147ms
+	compilation (LCNF base) 2.67ms
+	compilation (LCNF impure) 0.626ms
+	compilation (LCNF mono) 1.56ms
+	congr simp thm 1.7ms
+	elaboration 123ms
+	fix level params 0.486ms
+	import 48s
+	initialization 29.1ms
+	instantiate metavars 0.233ms
+	interpretation 6.24s
+	let-to-have transformation 0.486ms
+	linting 6.88ms
+	overlappingInstancesLinter 21.2ms
+	parsing 4.37ms
+	process pre-definitions 4.81ms
+	share common exprs 2.66ms
+	simp 6.73ms
+	tactic execution 72.2ms
+	tacticAnalysis 26.3ms
+	type checking 45.6ms
+	typeclass inference 526ms

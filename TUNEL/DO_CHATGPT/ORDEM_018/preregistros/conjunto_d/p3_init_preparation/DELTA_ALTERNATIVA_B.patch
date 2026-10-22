@@ -1,0 +1,32 @@
+--- frozen_p3_codec_002/driver_p3.py
++++ PROPOSAL_ONLY_B/driver_p3.py
+@@ -76,6 +76,10 @@
+     allowed_data|={str(ROOT/"driver_p3.py"),str(ROOT/"prior_transform.py")}
+     from preload_npz_codec import preload_npz_codec
+     preload_npz_codec(json.loads((ROOT/"CODEC_CP437_PIN.json").read_text()))
++    from init_detectors import build_B, verify_analytic_state
++    geometry=json.loads((ROOT/"GEOMETRIA_PINADA.json").read_text())
++    init_dependency=json.loads((ROOT/"DEPENDENCIA_FACTORY_PIN.json").read_text())
++    allowed_data.add(init_dependency["runtime_path"])
+     audit_paths=set();blocked=[]
+     def audit(event,args):
+         if event in ("socket.connect","socket.bind","subprocess.Popen","os.system","os.fork","os.forkpty","os.posix_spawn"):
+@@ -107,7 +111,7 @@
+             mask=(f>=20)&(f<=1024)
+             if not np.isfinite(psd[mask]).all() or np.any(psd[mask]<=0) or not np.isinf(psd[~mask]).all():
+                 raise ValueError("Qualified analytic PSD differs")
+-            ifos=bilby.gw.detector.InterferometerList(["H1","L1"]);snr2=0.
++            ifos,initialization_defaults=build_B(bilby,f,psd,geometry,init_dependency);snr2=0.
+             for ifo in ifos:
+                 norm=job["normalization"][ifo.name]
+                 n=np.array(a[job["label"]+"_"+ifo.name+"_noise_fd"])
+@@ -116,8 +120,8 @@
+                     if array_sha(arr)!=norm[key]:raise ValueError("Synthetic array hash differs: "+key)
+                 snr2+=4/32*float(np.sum(abs(s[mask])**2/psd[mask]))
+                 ifo.minimum_frequency=20.;ifo.maximum_frequency=1024.
+-                ifo.power_spectral_density=bilby.gw.detector.PowerSpectralDensity(frequency_array=f,psd_array=psd)
+                 ifo.set_strain_data_from_frequency_domain_strain(d,sampling_frequency=4096,duration=32,start_time=999999984.)
++                verify_analytic_state(np,ifo,f,psd,geometry)
+             if not np.isclose(math.sqrt(snr2),20.,rtol=1e-8,atol=1e-10):raise ValueError("Qualified SNR differs")
+         wf=generator(cfg)
+         wf.frequency_domain_source_model=failures.wrap(

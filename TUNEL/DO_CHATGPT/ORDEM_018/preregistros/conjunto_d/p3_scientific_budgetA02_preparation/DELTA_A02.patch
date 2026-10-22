@@ -1,0 +1,635 @@
+--- SEALED_A/process_supervision.py
++++ A02/process_supervision.py
+@@ -1,34 +1,68 @@
+-"""Bounded wait/cleanup using injected process doubles or owned child handles."""
++"""Cooperative cancellation and bounded cleanup of one owned child.
++
++Pure stdlib, injectable process doubles. No child is created at import time.
++Nominal deadlines cannot contain blocking OS calls, SIGKILL, or host loss.
++"""
+ import subprocess
+ 
+ 
+-class SupervisorInterrupted(BaseException):
+-    pass
++class SupervisorCancelled(Exception):
++    """Raised synchronously outside owned-child cleanup, never by a handler."""
+ 
+ 
+-def supervise(spawn, *, wait_deadline, cleanup_deadline, clock, kill_owned_group,
+-              cleanup_context, ownership_context):
+-    """No retry. Only the child returned by spawn may be signalled/reaped.
++class Cancellation:
++    def __init__(self):
++        self.requested = False
++        self.signal_number = None
+ 
+-    Deadlines are nominal. SIGKILL/host failure cannot run Python cleanup.
+-    No successful return is inferred from a label or from sending a signal.
++    def request(self, signum):
++        # A handler only records state; it never raises, does IO, or changes masks.
++        self.requested = True
++        self.signal_number = signum
++
++
++def supervise(spawn, *, wait_deadline, cleanup_deadline, clock,
++              kill_owned_group, cancellation, wait_quantum=0.25):
++    """Spawn at most once; retain ownership through every controllable exit.
++
++    SIGINT/SIGTERM must use the caller's non-raising recorder throughout.
++    Sending SIGKILL is not evidence of termination: a successful wait/poll is
++    required. Errors, cancellation, and late cleanup always refuse acceptance.
+     """
+     proc = None
+     rc = None
+     state = "SPAWN_NOT_COMPLETED"
+     errors = []
++    spawn_attempted = False
+     cleanup_attempted = False
+     try:
++        if type(wait_quantum) not in (int, float) or not 0 < wait_quantum <= 1:
++            raise ValueError("Finite wait quantum in (0, 1] required")
++        if cancellation.requested:
++            raise SupervisorCancelled("Cancellation before spawn")
+         if clock() >= wait_deadline:
+-            raise TimeoutError("No work interval remains before spawn")
+-        # Defer SIGINT/SIGTERM until the owned handle is assigned.
+-        with ownership_context():
+-            proc = spawn()
+-        remaining = wait_deadline - clock()
+-        if remaining <= 0:
+-            raise subprocess.TimeoutExpired("owned child", 0)
+-        rc = proc.wait(timeout=remaining)
+-        state = "PROCESS_RETURNED"
++            raise subprocess.TimeoutExpired("before spawn", 0)
++        # Cancellation during spawn only sets a flag. The returned handle is
++        # assigned before that flag is interpreted; there is no mask inheritance.
++        spawn_attempted = True
++        proc = spawn()
++        while True:
++            if cancellation.requested:
++                raise SupervisorCancelled("Cancellation after spawn or during wait")
++            remaining = wait_deadline - clock()
++            if remaining <= 0:
++                raise subprocess.TimeoutExpired("owned child", 0)
++            try:
++                rc = proc.wait(timeout=min(wait_quantum, remaining))
++            except subprocess.TimeoutExpired:
++                continue
++            if type(rc) is not int:
++                raise TypeError("Owned child returned a non-integer exit status")
++            state = "PROCESS_RETURNED"
++            break
++    except SupervisorCancelled as exc:
++        state = "SUPERVISOR_CANCELLED"
++        errors.append(str(exc))
+     except subprocess.TimeoutExpired as exc:
+         state = "SUPERVISOR_TIMEOUT"
+         errors.append(type(exc).__name__ + ": " + str(exc))
+@@ -37,35 +71,57 @@
+         errors.append(type(exc).__name__ + ": " + str(exc))
+     finally:
+         if proc is not None:
+-            # Temporarily defer controllable interruptions only during cleanup.
+-            # The caller keeps the failure state and returns nonzero afterward.
+-            with cleanup_context():
+-                try:
+-                    observed = proc.poll()
+-                    if observed is None:
+-                        cleanup_attempted = True
+-                        kill_owned_group(proc.pid)
+-                    else:
+-                        rc = observed
+-                except BaseException as exc:
+-                    errors.append("KILL_OR_POLL:" + type(exc).__name__ + ": " + str(exc))
+-                try:
++            # No context-manager entry or handler transition can escape here.
++            # Recorder remains active during poll, kill and bounded reaping.
++            try:
++                observed = proc.poll()
++                if observed is None:
++                    cleanup_attempted = True
++                    kill_owned_group(proc.pid)
++                elif type(observed) is int:
++                    rc = observed
++                else:
++                    raise TypeError("Owned child poll returned a non-integer status")
++            except BaseException as exc:
++                errors.append("KILL_OR_POLL:" + type(exc).__name__ + ": " + str(exc))
++            try:
++                while True:
+                     remaining = cleanup_deadline - clock()
+-                    if remaining > 0:
+-                        rc = proc.wait(timeout=remaining)
+-                    else:
++                    if remaining <= 0:
+                         rc = proc.poll()
+                         errors.append("CLEANUP_DEADLINE_EXHAUSTED")
+-                except BaseException as exc:
+-                    rc = None
+-                    errors.append("REAP:" + type(exc).__name__ + ": " + str(exc))
++                        break
++                    try:
++                        rc = proc.wait(timeout=min(wait_quantum, remaining))
++                        if type(rc) is not int:
++                            raise TypeError("Reap returned a non-integer exit status")
++                        break
++                    except subprocess.TimeoutExpired:
++                        continue
++            except BaseException as exc:
++                rc = None
++                errors.append("REAP:" + type(exc).__name__ + ": " + str(exc))
++    # Includes a cancellation recorded during cleanup, even if exit status is 0.
++    if cancellation.requested:
++        state = "SUPERVISOR_CANCELLED"
++        errors.append("CANCEL_REQUESTED")
+     certain = proc is not None and type(rc) is int
+     within = clock() < cleanup_deadline
+     if not within:
+         errors.append("CLEANUP_OR_RETURN_LATE")
+-    return {"pid": None if proc is None else proc.pid,
+-            "returncode": rc, "supervisor_status": state,
+-            "termination_certain": certain, "within_cleanup_deadline": within,
+-            "cleanup_attempted": cleanup_attempted, "supervision_errors": errors,
+-            "process_accepted": certain and within and not errors
+-                                and state == "PROCESS_RETURNED" and rc == 0}
++    return {
++        "pid": None if proc is None else proc.pid,
++        "returncode": rc,
++        "supervisor_status": state,
++        "spawn_attempted": spawn_attempted,
++        "no_child_started": proc is None and not spawn_attempted,
++        "spawn_result_uncertain": proc is None and spawn_attempted,
++        "termination_certain": certain,
++        "within_cleanup_deadline": within,
++        "cleanup_attempted": cleanup_attempted,
++        "cancellation_requested": cancellation.requested,
++        "cancellation_signal": cancellation.signal_number,
++        "supervision_errors": errors,
++        "process_accepted": certain and within and not errors
++                            and state == "PROCESS_RETURNED" and rc == 0,
++    }
+--- SEALED_A/launch_p3.py
++++ A02/launch_p3.py
+@@ -1,5 +1,5 @@
+-"""Prepared A supervisor; no consumption without the exact external decision."""
+-import sys, os, json, hashlib, subprocess, time, signal, contextlib
++"""Prepared A02 cooperative supervisor; no consumption without the exact external decision."""
++import sys, os, json, hashlib, subprocess, time, signal
+ from pathlib import Path
+ from datetime import datetime, timezone
+ 
+@@ -7,7 +7,7 @@
+ sys.dont_write_bytecode = True
+ sys.path.insert(0, str(ROOT))
+ from result_acceptance import assess, campaign_exit, paired_numerical
+-from process_supervision import supervise, SupervisorInterrupted
++from process_supervision import supervise, Cancellation, SupervisorCancelled
+ 
+ 
+ def sha(path):
+@@ -37,46 +37,37 @@
+     fresh(path, (json.dumps(obj, indent=2, allow_nan=False) + "\n").encode())
+ 
+ 
+-def check_deadline(deadline):
++def check_deadline(deadline, cancellation):
++    if cancellation.requested:
++        raise SupervisorCancelled("CANCELLATION_RECORDED_NO_RETRY")
+     if time.perf_counter() >= deadline:
+         raise TimeoutError("NOMINAL_DEADLINE_INCLUDING_FINALIZATION_EXCEEDED")
+-
+-
+-@contextlib.contextmanager
+-def ownership_context():
+-    previous = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
+-    try:
+-        yield
+-    finally:
+-        # Pending interruption arrives after supervise owns the returned handle.
+-        signal.pthread_sigmask(signal.SIG_SETMASK, previous)
+-
+-
+-@contextlib.contextmanager
+-def cleanup_context():
+-    old = {s: signal.getsignal(s) for s in (signal.SIGINT, signal.SIGTERM)}
+-    try:
+-        for s in old:
+-            signal.signal(s, signal.SIG_IGN)
+-        yield
+-    finally:
+-        for s, handler in old.items():
+-            signal.signal(s, handler)
+ 
+ 
+ def main():
+     t0 = time.perf_counter()
+     run = None
++    cancellation = Cancellation()
++    exit_code = 2
++    old = {}
+     def interrupted(sig, frame):
+-        raise SupervisorInterrupted("SIGNAL_" + str(sig))
+-    old = {s: signal.signal(s, interrupted) for s in (signal.SIGINT, signal.SIGTERM)}
++        cancellation.request(sig)
+     try:
++        for sig in (signal.SIGINT, signal.SIGTERM):
++            old[sig] = signal.signal(sig, interrupted)
++        # Query only: do not block/unblock anything in parent or child.
++        inherited_mask = signal.pthread_sigmask(signal.SIG_BLOCK, set())
++        if inherited_mask.intersection({signal.SIGINT, signal.SIGTERM}):
++            raise RuntimeError("Preblocked cancellation signals require explicit review")
++        if cancellation.requested:
++            raise SupervisorCancelled("CANCELLATION_BEFORE_ADMISSION")
+         if len(sys.argv) != 3:
+             raise ValueError("Exact contract and external decision hashes required")
+         pin, decision_pin = sys.argv[1:]
+         from science_admission import admit
+         c, authorization = admit(ROOT, pin, decision_pin)
+         campaign_deadline = t0 + c["limits"]["supervisor_wall_s"] * len(c["jobs"])
++        check_deadline(campaign_deadline, cancellation)
+         fd = os.open(ROOT / "CAMPAIGN_CLAIM.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+         with os.fdopen(fd, "wb") as f:
+             f.write((json.dumps({"contract_sha256": pin, "decision_sha256": decision_pin,
+@@ -100,7 +91,7 @@
+             # 14400 work; 5 child-finalization grace; 4 kill/reap; 1 receipt reserve.
+             wait_deadline = min(start + c["limits"]["wall_soft_s"] + 5, total_deadline - 5)
+             cleanup_deadline = total_deadline - 1
+-            check_deadline(wait_deadline)
++            check_deadline(wait_deadline, cancellation)
+             out = run / job["id"]
+             out.mkdir(exist_ok=False)
+             js(out / "CLAIM.json", {"contract_sha256": pin, "decision_sha256": decision_pin,
+@@ -115,7 +106,7 @@
+                 row = supervise(spawn, wait_deadline=wait_deadline,
+                                 cleanup_deadline=cleanup_deadline, clock=time.perf_counter,
+                                 kill_owned_group=lambda pid: os.killpg(pid, signal.SIGKILL),
+-                                cleanup_context=cleanup_context, ownership_context=ownership_context)
++                                cancellation=cancellation, wait_quantum=0.25)
+             row.update(job_id=job["id"], wall_s=time.perf_counter() - start,
+                        stdout_sha256=sha(out / "stdout.log"), stderr_sha256=sha(out / "stderr.log"))
+             result, journal = None, None
+@@ -150,12 +141,15 @@
+                             "reasons": ["RECEIPT_READ_OR_VALIDATION_ERROR"],
+                             "error": type(exc).__name__ + ": " + str(exc)}
+             row["acceptance"] = decision
+-            check_deadline(total_deadline)
++            # Record a cancellation receipt when possible. No cancelled row can
++            # become success or advance to the second case.
++            if time.perf_counter() >= total_deadline:
++                raise TimeoutError("CASE_FINALIZATION_DEADLINE_EXCEEDED")
+             assessments.append(decision)
+             results.append(row)
+             js(out / "PROCESS_RECEIPT.json", row)
+             # A receipt written just before a slow IO overrun is provisional.
+-            check_deadline(total_deadline)
++            check_deadline(total_deadline, cancellation)
+             if decision["accepted"] is not True:
+                 break
+         code = campaign_exit(assessments, len(c["jobs"]))
+@@ -168,27 +162,35 @@
+                     "D_read_authorized": False, "preparation_id": c["preparation_id"],
+                     "execution_id": authorization["execution_id"], "decision_sha256": decision_pin,
+                     "acceptance_requires": "External exit 0, exact receipt pins and no FINALIZATION_FAILURE.json"}
+-        check_deadline(campaign_deadline)
++        check_deadline(campaign_deadline, cancellation)
+         js(run / "CAMPAIGN_RECEIPT.json", terminal)
+         receipt_pin = sha(run / "CAMPAIGN_RECEIPT.json")
+-        check_deadline(campaign_deadline)
++        check_deadline(campaign_deadline, cancellation)
+         print(json.dumps({"status": terminal["status"], "receipt_sha256": receipt_pin,
+                           "scientific_qualification": False}), flush=True)
+-        check_deadline(campaign_deadline)
+-        return code
++        check_deadline(campaign_deadline, cancellation)
++        exit_code = code
+     except BaseException as exc:
+         # Never change a prior provisional success into silent success after failure.
+         if run is not None:
+             try:
+                 js(run / "FINALIZATION_FAILURE.json",
+                    {"status": "TERMINAL_FAILURE_NO_RETRY", "type": type(exc).__name__,
+-                    "message": str(exc), "wall_s": time.perf_counter() - t0})
++                    "message": str(exc), "wall_s": time.perf_counter() - t0,
++                    "cancellation_requested": cancellation.requested,
++                    "cancellation_signal": cancellation.signal_number})
+             except BaseException:
+                 pass  # Missing failure receipt is not acceptance; external exit stays nonzero.
+-        return 2
++        exit_code = 2
+     finally:
+         for s, handler in old.items():
+             signal.signal(s, handler)
++    # Restoring handlers is also finalization: a delayed restoration cannot
++    # preserve provisional exit 0. Nonzero external exit invalidates the receipt.
++    if exit_code == 0 and time.perf_counter() >= campaign_deadline:
++        exit_code = 2
++    # Cancellation during receipt/handler finalization cannot retain exit 0.
++    return 2 if cancellation.requested else exit_code
+ 
+ 
+ if __name__ == "__main__":
+--- SEALED_A/science_admission.py
++++ A02/science_admission.py
+@@ -7,8 +7,8 @@
+ import uuid
+ from budget_counters import validate_limits
+ 
+-PREPARATION_ID = "6a99afd6-831c-4fa5-9190-cef5db67e52c"
+-EXPECTED_LINUX_ROOT = "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA_preparation"
++PREPARATION_ID = "078a3c05-d30f-4c9c-a31a-8a78ca9b6893"
++EXPECTED_LINUX_ROOT = "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA02_preparation"
+ ACTION = "EXECUTE_EXACT_TWO_SYNTHETIC_JOBS_BUDGET_A"
+ 
+ 
+--- SEALED_A/CONTRATO_P3.json
++++ A02/CONTRATO_P3.json
+@@ -1,5 +1,5 @@
+ {
+-  "id": "P3_A_PREPARATION_6a99afd6-831c-4fa5-9190-cef5db67e52c",
++  "id": "P3_A02_PREPARATION_078a3c05-d30f-4c9c-a31a-8a78ca9b6893",
+   "state": "PREPARED_NOT_EXECUTED",
+   "created_utc": "2026-10-06T18:32:09.586644+00:00",
+   "authorization_scope": "Static preparation only. Root external decision and separately reviewed scientific/operational justification required. Existing terminal units are not reopened.",
+@@ -285,11 +285,46 @@
+     "posterior_summary_rule": "Expose weighted raw diagnostics and proposed dtau220 summaries; label numerical-only/weak-descriptive. Never auto-pass science, coverage or D."
+   },
+   "cost": {
+-    "measured_reference": "P0-P2 RUN_002: six native waveform generations for fixed cases, not PE benchmark.",
+-    "reference_native_calls": 6,
+-    "reference_native_wall_s": 0.33295305783394724,
+-    "source_only_proxy_seconds_for_10000": 554.9217630565787,
+-    "warning": "Prior-dependent evaluation cost and likelihood overhead unmeasured. Proxy is neither budget guarantee nor a measured PE pilot.",
++    "status": "PROPOSED_A_UNCONSUMED_NOT_A_COST_MEASUREMENT",
++    "hard_envelope_two_jobs": {
++      "supervisor_wall_s": 28820,
++      "child_cpu_hard_s": 26410,
++      "total_likelihood_calls": 200000,
++      "total_waveform_wrapper_calls": 200000
++    },
++    "envelope_semantics": "Wall is nominal inclusive of cleanup/finalization, not hard real time. CPU is sum of per-child hard RLIMIT_CPU ceilings. Two sequential cases; 8GiB maximum concurrent child address space. Counts are ceilings, not predicted use.",
++    "historical_reference_not_current_budget": {
++      "source_preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
++      "source_contract": {
++        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA_preparation\\CONTRATO_P3.json",
++        "bytes": 32224,
++        "sha256": "a7128ab6d0dd7f89af4a3d76284798c1c25a05651cbf242f3e6f0cdea54671d4"
++      },
++      "label": "INHERITED_OLD_ENVELOPE_AND_PROXY_NOT_APPLICABLE_AS_CURRENT_A_COST",
++      "verbatim_fields": {
++        "measured_reference": "P0-P2 RUN_002: six native waveform generations for fixed cases, not PE benchmark.",
++        "reference_native_calls": 6,
++        "reference_native_wall_s": 0.33295305783394724,
++        "source_only_proxy_seconds_for_10000": 554.9217630565787,
++        "warning": "Prior-dependent evaluation cost and likelihood overhead unmeasured. Proxy is neither budget guarantee nor a measured PE pilot.",
++        "report": [
++          "process wall",
++          "process CPU user+system",
++          "all likelihood calls including initialization",
++          "native waveform calls and wall",
++          "classified failure_receipt: None, recognized domain exception, indeterminate source/native exception, temporal/budget/application events",
++          "status/stop reason",
++          "delta_logz",
++          "ESS"
++        ],
++        "hard_envelope_two_jobs": {
++          "supervisor_wall_s": 7220,
++          "child_cpu_hard_s": 6610,
++          "total_likelihood_calls": 20000
++        },
++        "projection_rule": "Report measured sums and rates only; no extrapolation to fourteen observed events as validated cost."
++      }
++    },
+     "report": [
+       "process wall",
+       "process CPU user+system",
+@@ -300,12 +335,9 @@
+       "delta_logz",
+       "ESS"
+     ],
+-    "hard_envelope_two_jobs": {
+-      "supervisor_wall_s": 7220,
+-      "child_cpu_hard_s": 6610,
+-      "total_likelihood_calls": 20000
+-    },
+-    "projection_rule": "Report measured sums and rates only; no extrapolation to fourteen observed events as validated cost."
++    "projection_rule": "Report measured sums and rates only; no extrapolation to fourteen observed events as validated cost.",
++    "current_cost_prediction": null,
++    "warning": "No measurement of A cost or convergence; old six-waveform proxy is not extrapolated into a new PE prediction."
+   },
+   "isolation": {
+     "python_read_allowlist": "Same exact 1162 runtime files and synthetic/source pins, plus the one hash-pinned installed ASD demanded by official H1/L1 factory. No directory wildcard. Qualification metadata are exact pinned inputs.",
+@@ -431,20 +463,20 @@
+       "sha256": "81d3076eb826c66a1795ead510febc12fd7d55738cab2bc52113b4845a887e8a"
+     },
+     "science_admission.py": {
+-      "bytes": 6539,
+-      "sha256": "59258e35d78401e213c2a047248c096aece845bb137c178727a9cafa57db4d65"
++      "bytes": 6541,
++      "sha256": "704696cea00dbb99d4692db4a04190700f37c31d2455ba0748432abbdad7db54"
+     },
+     "driver_p3.py": {
+       "bytes": 17410,
+       "sha256": "280add270e8fb475f87694359c76e5364c2b46e7a970daa08a32c0e7c9f1e764"
+     },
+     "launch_p3.py": {
+-      "bytes": 9685,
+-      "sha256": "fd5a8f0883499820273b0d34a074d7362dd3343688c60d3b42ba7deb039de488"
++      "bytes": 10516,
++      "sha256": "3110010bf1f8c2171fbb4b3cbf39ab01401619fb124a8a6582ea2d8b6cbcd726"
+     },
+     "PREHOOK_PLAN.json": {
+-      "bytes": 5438,
+-      "sha256": "93a87d82a7145255413c7be47d15a895bce64907a302fcc8ac89a5a69e175018"
++      "bytes": 5443,
++      "sha256": "ad664be2189ff62cd45d41675ed9e4f14b18dca382a92b163a85bfefb96eacee"
+     },
+     "../p3_startup_pin_preparation/RECIBO_ROOT_ACEITE_IMPORTS.json": {
+       "bytes": 2545,
+@@ -459,12 +491,12 @@
+       "sha256": "0f0aaccd64301d3843530c6754fbe39446400644e54fe167cd1cbc11e7751cf9"
+     },
+     "process_supervision.py": {
+-      "bytes": 3061,
+-      "sha256": "5359850abd4cbee0ab6aac0687b8834552b69acbc65e3a1c34be9c50797f896c"
++      "bytes": 5392,
++      "sha256": "dee36b24e9c7135bc9ebcd3a70efcdd5815539caab0685c1aa13c1993ed5ff4b"
+     },
+     "PLANO_ACESSO_REQUERIDO.json": {
+-      "bytes": 261798,
+-      "sha256": "92d60f33f885d27e349619c34db0a1e83d56de976f46cca2b8d8f05d5b4b15da"
++      "bytes": 261961,
++      "sha256": "610ce96eb115303cb8cf957e6e7538f08aa7a2aca16b79bf8649d588ab07b93b"
+     }
+   },
+   "coordination_receipt_required": {
+@@ -490,8 +522,8 @@
+     ]
+   },
+   "allowed_status_claim": "REAL static package and documentary comparisons; OPEN input integrity, candidate execution, posterior recovery/convergence, coverage and PE D.",
+-  "revision": "Proposal A only; limits and visible recovery summaries plus P3-01/P3-02 correction. No scientific source/prior/seed/data alteration, no v388 migration.",
+-  "revised_utc": "2026-10-06T18:51:47.518418+00:00",
++  "revision": "A02: cooperative cancellation and explicit current/historical cost only",
++  "revised_utc": "2026-10-06T19:16:50.238595+00:00",
+   "failure_receipt_policy": {
+     "source_returned_none": "Count independently; raw P0-P2 EDOM counter means None returns only and is named source_returned_none_counter_raw. Preserved EDOM_LOG.jsonl filename is not a total of all domain failures.",
+     "recognized_domain_exception": "After a counted native attempt, errno EDOM or explicit Input domain error is classified as recognized, with type/message/parameters.",
+@@ -581,10 +613,10 @@
+     "dynamic_boundary": "Previous control evaluated no waveform/likelihood/sampler. This package has not been executed; initial sampling and prior-dependent waveform validity remain unmeasured.",
+     "execution_permission": false
+   },
+-  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
++  "preparation_id": "078a3c05-d30f-4c9c-a31a-8a78ca9b6893",
+   "mode": "SYNTHETIC_ONLY",
+   "observed_data_allowed": false,
+-  "expected_linux_root": "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA_preparation",
++  "expected_linux_root": "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA02_preparation",
+   "consumption_justification": {
+     "status": "PROPOSED_AWAITING_SPECIFIC_OPERATOR_DECISION",
+     "alternative": "A",
+@@ -710,11 +742,14 @@
+     "total_collection_nominal_s": 28820,
+     "start": "supervisor main before admission; per-case before output/CLAIM IO",
+     "cpu": "RLIMIT_CPU counts total child process CPU; soft13200/hard13205, same limits also used at cooperative budget",
+-    "finalization": "check monotonic deadline after result/process receipt persistence, hashing and flushed terminal output; external nonzero or failure marker invalidates any provisional success",
++    "finalization": "check monotonic deadline after result/process receipt persistence, hashing and flushed terminal output; external nonzero or failure marker invalidates any provisional success Monotonic deadline rechecked after restoring handlers and before final exit; external nonzero invalidates provisional receipt.",
+     "uncertain_termination": "stop entire collection, no retry/remaining case",
+-    "uncontrollable_limit": "SIGKILL, process creation interruption before an owned Popen handle, host failure and uninterruptible OS I/O are not hard-contained; absence of conclusive external exit/receipts remains uncertain",
++    "uncontrollable_limit": "SIGKILL of supervisor, host failure, blocking OS IO and process creation/foreign asynchronous exception before Popen returns a handle cannot be hard-contained. A spawn exception without handle is uncertain, terminal and never retried. OS scheduling means deadlines are nominal; late/uncertain outcomes cannot be accepted.",
+     "logs": "stdout/stderr file capture preserved; not described as a hard disk/output quota",
+-    "posix_signal_mask": "Parent defers SIGINT/SIGTERM around Popen→handle assignment. Child inherits their blocked mask; Popen.restore_signals does not restore it. Current cleanup intentionally uses unmaskable SIGKILL for the owned group. Child SIGALRM/SIGXCPU remain unblocked. No preexec_fn. Verified by source inspection only, not a real POSIX-process test."
++    "cooperative_cancellation": "SIGINT/SIGTERM handler only records a flag; it never raises, performs IO, ignores signals or alters masks. Single spawn and <=0.25s nominal wait slices check cancellation. Recorder stays active throughout poll/kill/reap; observed cancellation refuses success and second case.",
++    "signal_mask_query": "Read-only pthread_sigmask(SIG_BLOCK, empty set) checks initial mask; preblocked SIGINT/SIGTERM refuses admission path before spawn. No SIG_SETMASK, SIG_UNBLOCK, preexec_fn or inherited mask change.",
++    "wait_quantum_s": 0.25,
++    "cancel_after_IO": "Check recorder/deadline before claims, each case, after case receipt, after campaign persist/hash/flush; final return refuses zero if cancellation recorded during finalization."
+   },
+   "aggregate_maxima_proposed": {
+     "jobs": 2,
+@@ -726,5 +761,20 @@
+     "resources_are_policy_not_cost_prediction": true
+   },
+   "configuration_32_semantics": "CONFIG_SYNTHETIC.max_native_calls=32 belongs to frozen P0/P2 adapter metadata checked by validate_config. generator does not use it as P3 counter; unchanged. P3 external counters in driver and source_before_waveform enforce100000.",
+-  "base_contract_id_reference_only": "ORDEM018_F3_OPERATIONAL_CANDIDATE_3249312d-d7b6-4a04-93d6-81f65d4f4945"
++  "base_contract_id_reference_only": "ORDEM018_F3_OPERATIONAL_CANDIDATE_3249312d-d7b6-4a04-93d6-81f65d4f4945",
++  "A02_delta_scope": {
++    "parent_preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
++    "findings": [
++      "P3A-01",
++      "P3A-02"
++    ],
++    "review_manifest": {
++      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_budgetA_independent_review\\MANIFESTO_REVISAO.json",
++      "bytes": 2147,
++      "sha256": "45bcae5d946b25ab82fdec274e93b17fb82a194c53bd2a3247376dd65aa1d64c"
++    },
++    "scientific_contract_unchanged": true,
++    "new_execution_authorized": false,
++    "A_byte_preservation_required": true
++  }
+ }
+--- SEALED_A/PREHOOK_PLAN.json
++++ A02/PREHOOK_PLAN.json
+@@ -1,6 +1,6 @@
+ {
+   "schema": "P3_EXPLICIT_PREHOOK_PLAN_V1",
+-  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
++  "preparation_id": "078a3c05-d30f-4c9c-a31a-8a78ca9b6893",
+   "alternative": "B",
+   "targets": [
+     "lal",
+@@ -62,8 +62,8 @@
+       "sha256": "95dfef3df297d981a1a56fda4e617a0595768c98bee96979dfc208db55dd8890"
+     },
+     "launch_p3.py": {
+-      "bytes": 9685,
+-      "sha256": "fd5a8f0883499820273b0d34a074d7362dd3343688c60d3b42ba7deb039de488"
++      "bytes": 10516,
++      "sha256": "3110010bf1f8c2171fbb4b3cbf39ab01401619fb124a8a6582ea2d8b6cbcd726"
+     },
+     "prehook_imports.py": {
+       "bytes": 6696,
+@@ -78,8 +78,8 @@
+       "sha256": "adac7ad3036121eb9c192c37abb305ac088c9a530da04f2bf17f79f8b8a3ebe2"
+     },
+     "process_supervision.py": {
+-      "bytes": 3061,
+-      "sha256": "5359850abd4cbee0ab6aac0687b8834552b69acbc65e3a1c34be9c50797f896c"
++      "bytes": 5392,
++      "sha256": "dee36b24e9c7135bc9ebcd3a70efcdd5815539caab0685c1aa13c1993ed5ff4b"
+     },
+     "recovery_diagnostics.py": {
+       "bytes": 3666,
+@@ -90,8 +90,8 @@
+       "sha256": "78dec147fd613a57af749e5167f1f85a52ebc271a4576be352fb759d18006a9a"
+     },
+     "science_admission.py": {
+-      "bytes": 6539,
+-      "sha256": "59258e35d78401e213c2a047248c096aece845bb137c178727a9cafa57db4d65"
++      "bytes": 6541,
++      "sha256": "704696cea00dbb99d4692db4a04190700f37c31d2455ba0748432abbdad7db54"
+     },
+     "src/pseob_source.py": {
+       "bytes": 8204,
+@@ -107,7 +107,7 @@
+     }
+   },
+   "runtime_snapshot": {
+-    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA_preparation\\RUNTIME_P3_READONLY.json",
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA02_preparation\\RUNTIME_P3_READONLY.json",
+     "bytes": 259011,
+     "sha256": "281eb3c4fb6d3e78a6405d7da6e051c2480efc98424e766260510e10bacce11e"
+   },
+@@ -134,7 +134,7 @@
+     "sha256": "19781398cff4d55ffd9c00445c69f012205fecaecfbc0df7a83d1418bf0ac341"
+   },
+   "system_startup_pin_source": {
+-    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA_preparation\\SYSTEM_STARTUP_PIN.json",
++    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_budgetA02_preparation\\SYSTEM_STARTUP_PIN.json",
+     "bytes": 882,
+     "sha256": "81d3076eb826c66a1795ead510febc12fd7d55738cab2bc52113b4845a887e8a"
+   },
+--- SEALED_A/PLANO_ACESSO_REQUERIDO.json
++++ A02/PLANO_ACESSO_REQUERIDO.json
+@@ -1,6 +1,6 @@
+ {
+   "schema": "P3_A_REQUIRED_ACCESS_PLAN_NOT_AUTHORIZATION_V1",
+-  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
++  "preparation_id": "078a3c05-d30f-4c9c-a31a-8a78ca9b6893",
+   "status": "PROPOSED_ONLY_PREVIOUS_ACCESS_REFUSAL_PRESERVED",
+   "classification": "DOCUMENTARY_NOT_RAW_INSPECTION",
+   "nominal_external_entries": [
+@@ -6118,5 +6118,6 @@
+     "classification": "PREVIOUS_IMPORTS_ONLY_ACCEPTANCE_DOCUMENTARY_RECEIPT_NOT_RAW_ARRAY",
+     "use": "Future exact admission reads/validates this documentary receipt; not part of the11 denied raw-integrity inventory, not a live scientific object or new permission",
+     "reopened_now": false
+-  }
++  },
++  "A02_scope_note": "Only documentary successor identity. Nominal external inventory is inherited, not re-read/hash-verified or authorized; old refusal remains."
+ }
+--- SEALED_A/COMANDO_CANDIDATO_NAO_EXECUTAR.json
++++ A02/COMANDO_CANDIDATO_NAO_EXECUTAR.json
+@@ -1,6 +1,6 @@
+ {
+   "status": "PREPARATION_ONLY_NO_INVOCATION_AUTHORIZED",
+-  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
++  "preparation_id": "078a3c05-d30f-4c9c-a31a-8a78ca9b6893",
+   "command_candidate": [
+     "wsl.exe",
+     "--distribution",
+@@ -15,7 +15,7 @@
+     "/opt/lal_env/bin/python",
+     "-I",
+     "-B",
+-    "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA_preparation/launch_p3.py",
++    "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA02_preparation/launch_p3.py",
+     "<contract_sha256_after_independent_review>",
+     "<future_exact_ROOT_DECISION_sha256>"
+   ],
+@@ -27,5 +27,6 @@
+   ],
+   "not_a_launch": true,
+   "not_a_provider_request": true,
+-  "D_allowed": false
++  "D_allowed": false,
++  "A02_precondition": "Review this exact successor and its final pins; A review was blocked. No decision/claim or execution identity exists."
+ }

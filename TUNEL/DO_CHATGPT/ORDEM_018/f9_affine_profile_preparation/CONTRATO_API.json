@@ -1,0 +1,158 @@
+{
+  "schema": "F9_AFFINE_PROFILE_PREPARATION_CONTRACT_V1",
+  "request_id": "4eea0cfb-0a3e-4b38-abcd-37bddbf5bbe3",
+  "status": "PREPARATION_ONLY_NOT_EXECUTED",
+  "module": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_affine_profile_preparation\\affine_profile.py",
+    "bytes": 17121,
+    "sha256": "003d118e64a40ef58448b70296a4c25467bbf1fb7650a27ebdb422a419aa3b7f"
+  },
+  "entry": "profile_at_fixed_theta",
+  "positional": [
+    "joint",
+    "assembly_json"
+  ],
+  "keyword_only_required": [
+    "assembly_sha256",
+    "background_json",
+    "consumer_module",
+    "physical_prior_module",
+    "caller_verification_reference"
+  ],
+  "source_pins": {
+    "dependency_board": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\f9_completion_dependencies\\QUADRO_F9_ATE_V1.md",
+      "bytes": 36718,
+      "sha256": "c965992156debd0508eaf2f4afeb937ecca1ceb96b5aba7577881d35d5813d56"
+    },
+    "physical_prior": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_physical_prior_preparation\\physical_prior.py",
+      "bytes": 21629,
+      "sha256": "4fbae1160282875c4ed61c242361c14db9434416a1886d41905c79f0a4f7a3f6"
+    },
+    "prior_derivation": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_physical_prior_preparation\\DERIVACAO.md",
+      "bytes": 12288,
+      "sha256": "1dd3d81dc735799050d3cf055342ab498e2a37f0932a6044e3e2e785265367ad"
+    },
+    "prior_api": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_physical_prior_preparation\\API_CONTRATO.md",
+      "bytes": 10781,
+      "sha256": "9cb26ecd71dcdf54c7d8989cb21c03e1a92c0fb76e8026886862906bbd4b87b7"
+    },
+    "consumer": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_likelihood_consumer_preparation\\likelihood_consumer.py",
+      "bytes": 24982,
+      "sha256": "6776bb660f6b8565c7282f937ecdc5239d5b941cce3e257aa6155379c9ccd6a5"
+    },
+    "consumer_api": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_likelihood_consumer_preparation\\API_CONTRATO.md",
+      "bytes": 14238,
+      "sha256": "449e4ffb95a4af757384db4e1277741d37ffc1a7ab8d47d980910e6a5baabc77"
+    },
+    "prior_review": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_f9_physical_prior\\PARECER_PRIORS_FISICOS_F9.md",
+      "bytes": 8641,
+      "sha256": "9bc6d2b8b94ddd46e966f8eaa63a1f90394923225c327be9890b229c0da70f6b"
+    },
+    "certificate_interface": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_numerical_certification_preparation\\INTERFACE_CERTIFICADOS_F9.json",
+      "bytes": 11018,
+      "sha256": "df431bf0919b87dcbd9620f8852fac8192591f16efe23d51a7b7b12644cbd9ba"
+    },
+    "linear_gaussian": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\linear_gaussian.py",
+      "bytes": 3772,
+      "sha256": "7dc486b5568876385f4b2e6647e0f449accfea0862c3b0d46ce90d657fba2736"
+    },
+    "singular_gaussian": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\singular_gaussian_v2.py",
+      "bytes": 4953,
+      "sha256": "98264bdd57aaad0904bd342631fd3c147fa19f90e8922f0ad6b15ac1b3b93374"
+    }
+  },
+  "models": [
+    "H1_TGL",
+    "H2_LCDM",
+    "H3_beta_free",
+    "H4_Cepheid",
+    "H5_rd_free"
+  ],
+  "theta_names": [
+    "H0",
+    "ombh2",
+    "omch2"
+  ],
+  "theta_bounds": [
+    [
+      50.0,
+      90.0
+    ],
+    [
+      0.015,
+      0.03
+    ],
+    [
+      0.08,
+      0.18
+    ]
+  ],
+  "dependency_fields": {
+    "consumer": [
+      "PreparedJoint",
+      "evaluate_five",
+      "_np",
+      "_engine",
+      "_y",
+      "_origin",
+      "_structure",
+      "_admission_sha256"
+    ],
+    "physical_prior": [
+      "_Curve",
+      "peak",
+      "mean",
+      "log_likelihood",
+      "BETA_LIMITS",
+      "S_LIMITS",
+      "RD_LIMITS"
+    ],
+    "backend": [
+      "residualize",
+      "support.evaluate",
+      "log_integral"
+    ]
+  },
+  "minimum_formula": "xref+clip(B/A,[lo-xref,hi-xref]); flat only if projected direction zero",
+  "prior_shift_in_profile": false,
+  "H4_inverse": "s=expm1(-(ln10/5)*delta)",
+  "H5_coordinate": "x=1/rd_Mpc; physical rd=1/x; BAO indices3:16 only",
+  "roundtrip_policy": "evaluate mean at forward coordinate of returned physical point; retain difference from chosen affine vertex",
+  "source_method_reuse": "df482 has no exported curve factory; only its argument construction is repeated; _Curve/R/support/log-integral reused",
+  "certificate_defaults": {
+    "conditional_minimum": {
+      "status": "UNAVAILABLE",
+      "lower": null,
+      "upper": null,
+      "certificate": null,
+      "verified": false
+    },
+    "global_theta_minimum": {
+      "status": "NOT_SEARCHED",
+      "estimate": null,
+      "lower": null,
+      "upper": null,
+      "certificate": null,
+      "verified": false
+    }
+  },
+  "external_certificate_checker_implemented": false,
+  "scope": "engineering feasible profile estimates at fixed theta; no global minimum",
+  "MM": "CONDITIONAL_UNRATIFIED",
+  "numerical_controls": 0,
+  "candidate_imports": 0,
+  "observed_reads": 0,
+  "solver_calls": 0,
+  "AUTH": false,
+  "CLAIM": false
+}

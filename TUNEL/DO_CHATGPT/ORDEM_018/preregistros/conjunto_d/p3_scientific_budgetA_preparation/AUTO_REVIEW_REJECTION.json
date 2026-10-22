@@ -1,0 +1,17 @@
+{
+  "schema": "P3_STATIC_PREPARATION_ACCESS_REJECTION_V1",
+  "preparation_id": "3249312d-d7b6-4a04-93d6-81f65d4f4945",
+  "tool": "exec_command",
+  "sandbox_permissions": "require_escalated",
+  "requested_justification": "Posso ler as implementações/configuração sintéticas já autorizadas e conferir por bytes os arquivos sintéticos pinados, sem decodificar arrays ou executar bibliotecas científicas?",
+  "requested_python_stdin": "from pathlib import Path\nimport json,hashlib\nb=Path(r'C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d')\ns=b/'p3_startup_pin_preparation';orig=b/'p3_init_qualified_003'\nfor n in ['init_detectors.py','result_acceptance.py','CONFIG_SYNTHETIC.json','DEPENDENCIA_FACTORY_PIN.json']:\n p=s/n;raw=p.read_bytes();print('FILE',n,len(raw),hashlib.sha256(raw).hexdigest());print(raw.decode())\nfor mn in ['MANIFESTO_PREPARACAO.json','MANIFESTO_CONSUMO_IMPORTS.json']:\n m=json.loads((s/mn).read_bytes())\n for row in m['files']:\n  q=s/row['relative_path'];v=q.read_bytes();assert len(v)==row['bytes'] and hashlib.sha256(v).hexdigest()==row['sha256']\n print('MANIFEST_VERIFIED',mn,len(m['files']))\nc=json.loads((orig/'CONTRATO_P3.json').read_bytes())\nexternal=[]\nfor name,row in c['inputs'].items():\n if name.startswith('../') or name.startswith('sources/'):\n  q=(orig/name).resolve();data=q.read_bytes();actual={'relative_to_old':name,'path':str(q),'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()};assert actual['bytes']==row['bytes'] and actual['sha256']==row['sha256'];external.append(actual)\nprint('EXTERNAL_RAW_PINS_ONLY',json.dumps(external,ensure_ascii=False))\n",
+  "transport": "PowerShell literal here-string to C:\\Python314\\python.exe -X utf8 -",
+  "command_executed": false,
+  "exact_rejection": "This action was rejected due to unacceptable risk.\nReason: The command reads raw bytes from external contract inputs, which may include arrays, PSD/ASD, or observed data explicitly excluded by the current static-only scope; no trusted authorization covers that access.\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.",
+  "affected_scope": "Whole-file read_bytes of external frozen input targets, even only to calculate SHA256 without decoding.",
+  "response_taken": "No retry, no WSL/alternative transport, no copy or raw read. Continue only named local code and documentary metadata preparation.",
+  "nominal_input_inventory": "INVENTARIO_ENTRADAS_EXTERNAS.json",
+  "required_if_coordinator_later_seeks_access": "Scope-specific approval for listed nominal bytes and declared purpose; classification is based on contract metadata, not a new raw inspection. No observed data or scientific execution implied.",
+  "scientific_execution_authorized": false,
+  "d72_not_circumvented": true
+}

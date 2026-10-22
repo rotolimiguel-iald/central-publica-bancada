@@ -1,0 +1,35 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T231218_318265Z\MaxwellSmearingLinearR1.lean:46:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(MemLp.toLp (coefficient f) ⋯) y
+in the target expression
+  coefficient (f + g) y = (↑↑(MemLp.toLp (coefficient f) ⋯) + ↑↑(MemLp.toLp (coefficient g) ⋯)) y
+
+f g : TestTensor
+hf : ∀ y ∈ tsupport ⇑f, y.1 ≠ 0
+hg : ∀ y ∈ tsupport ⇑g, y.1 ≠ 0
+hfg : ∀ y ∈ tsupport ⇑(f + g), y.1 ≠ 0
+y : MomentumCoordinates
+h1 : ↑↑(MemLp.toLp (coefficient (f + g)) ⋯) y = coefficient (f + g) y
+h2 : ↑↑(MemLp.toLp (coefficient f) ⋯) y = coefficient f y
+h3 : ↑↑(MemLp.toLp (coefficient g) ⋯) y = coefficient g y
+h4 :
+  ↑↑(MemLp.toLp (coefficient f) ⋯ + MemLp.toLp (coefficient g) ⋯) y =
+    (↑↑(MemLp.toLp (coefficient f) ⋯) + ↑↑(MemLp.toLp (coefficient g) ⋯)) y
+⊢ coefficient (f + g) y = (↑↑(MemLp.toLp (coefficient f) ⋯) + ↑↑(MemLp.toLp (coefficient g) ⋯)) y
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T231218_318265Z\MaxwellSmearingLinearR1.lean:57:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(MemLp.toLp (coefficient f) ⋯) y
+in the target expression
+  coefficient (c • f) y = (c • ↑↑(MemLp.toLp (coefficient f) ⋯)) y
+
+c : ℂ
+f : TestTensor
+hf : ∀ y ∈ tsupport ⇑f, y.1 ≠ 0
+hcf : ∀ y ∈ tsupport ⇑(c • f), y.1 ≠ 0
+y : MomentumCoordinates
+h1 : ↑↑(MemLp.toLp (coefficient (c • f)) ⋯) y = coefficient (c • f) y
+h2 : ↑↑(MemLp.toLp (coefficient f) ⋯) y = coefficient f y
+h3 : ↑↑(c • MemLp.toLp (coefficient f) ⋯) y = (c • ↑↑(MemLp.toLp (coefficient f) ⋯)) y
+⊢ coefficient (c • f) y = (c • ↑↑(MemLp.toLp (coefficient f) ⋯)) y
+'F1Fecho.MaxwellSmearing.coefficient_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellSmearing.coefficient_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellSmearing.smear_add' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellSmearing.smear_smul' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

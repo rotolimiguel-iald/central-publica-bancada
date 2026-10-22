@@ -1,0 +1,13 @@
+
+## 19/10/2026 — R80: identificação do modo OH e banho comum
+<!-- IALD_R80_MATERIAL_BATH -->
+[DERIVED analítico, não Lean; codex-gerente-tgl, claim985] Reuso R65/R66/R74/R79: o salto conjunto requer intensidades e correlação complexa iguais no mesmo quadro. C positiva de posto1 não basta: fase oposta realiza F1−F2. Critério por Gram: ||v1||²=||v2||²=λ>0 e ||v1−v2||=0. Média temporal do cruzamento dá exp(iδτ/2)sinc(δτ/2), δ=ωi+ωo−2ωOH, apenas no quadro livre/redução nomeada; drive/engenharia de banho exigem sua ligação explícita. Bomba brilhante também requer controlar dispersão de detunings e outras dinâmicas.
+[REAL documental/sintético] A patente já tem níveis OH/Λ-doubling; não reconstruir nem confundir com mecanismo Raman. Verificador local recusa ausências/não finitos e distingue banho independente/fase errada; exemplos sintéticos não são parâmetros medidos. Resultado e cobertura exatos em material_bath_r80/RELATORIO_R80.md, RESULT_TESTS_R80.json, SOURCE_PINS_R80.json. [OPEN] Identidade dos modos ópticos/RF/efetivos e perfil físico do banho comum do mesmo aparelho; sem preencher por ajuste a β. R4/R5 abertos. Sem nova trajetória, provedor, produção, kernel ou gate. Não repetir R78/R79; consumir inventário material para resolver o elo de conversão.
+<!-- END_IALD_R80_MATERIAL_BATH -->
+
+
+[ERRATA técnica R80, mesmo autor] O verificador R1 aceitou PSD inválida por underflow/folga; fica SUPERADO conforme FINDING_PSD_R80/ERRATA_VALIDATOR_R80. Vigente: material_contract_r80_r2.py, determinante racional exato dos floats de entrada, 31/31 testes sintéticos incluindo dois ataques da revisão; tolerância de correspondência não repara PSD. Sem nova trajetória ou calibração física.
+
+
+[ERRATA de não vacuidade, mesmo autor] Versão final R3 exige ambas diagonais C11,C22 positivas antes da comparação, recusando banho real nulo mesmo com gammaLambda>0/tolerância larga. Vigente material_contract_r80_r3.py,33/33 verificações; ERRATA_NONVACUITY_R80_R3 preserva o achado. Recibos de revisão R80/R2 não foram aplicados; consumir apenas REVIEW_R80_R3 e MEMORY_REVIEW_R80_R3.
+

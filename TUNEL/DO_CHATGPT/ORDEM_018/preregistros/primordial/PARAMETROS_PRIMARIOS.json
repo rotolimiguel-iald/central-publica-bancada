@@ -1,0 +1,130 @@
+{
+  "status": "PRIMARY_SOURCE_TRANSCRIPTION_FOR_DESIGN_ONLY",
+  "observed_central_values_in_calculation": false,
+  "fields2020": {
+    "source_file": "fields2020.pdf",
+    "url": "https://arxiv.org/pdf/1912.01132v1",
+    "anchors": "Eqs.15-17, Table II; PDF pages19-22 (1-based)",
+    "fiducial_Yp_theory": 0.24696,
+    "fiducial_DH_theory": 2.559e-05,
+    "eta10_theory_input": 6.129,
+    "tau_n_seconds": 879.4,
+    "N_nu": 3.0,
+    "log_derivatives": {
+      "G_N": {
+        "Yp": 0.357,
+        "DH": 0.952
+      },
+      "eta": {
+        "Yp": 0.039,
+        "DH": -1.597
+      },
+      "tau_n": {
+        "Yp": 0.729,
+        "DH": 0.409
+      },
+      "N_nu": {
+        "Yp": 0.163,
+        "DH": 0.396
+      }
+    },
+    "speedup_derivation": "H^2 proportional G_N at fixed rho; G_N/G_N0=S^2; dln abundance/dlnS=2*dln abundance/dlnG_N.",
+    "limitation": "Local power-law response; not a newly run BBN network or a proven exact TGL prediction."
+  },
+  "pitrou2018": {
+    "source_file": "pitrou2018.html",
+    "url": "https://arxiv.org/html/1801.08023v2",
+    "anchors": "Eq.145/Table6; Table7; sectionVI.4",
+    "N_nu": 3.0,
+    "fiducial_Yp_theory": 0.24709,
+    "fractional_series_coefficients_N_nu": {
+      "Yp": [
+        0.163552,
+        -0.036124,
+        0.009938
+      ],
+      "DH": [
+        0.40901,
+        -0.00599,
+        0.00224
+      ]
+    },
+    "log_derivatives": {
+      "omega_b": {
+        "Yp": 0.039039,
+        "DH": -1.6455
+      },
+      "tau_n": {
+        "Yp": 0.731614,
+        "DH": 0.4222
+      },
+      "N_nu": {
+        "Yp": 0.163552,
+        "DH": 0.40901
+      }
+    },
+    "theory_fractional_sigma_fixed_omega_b": {
+      "Yp": 0.00068,
+      "DH": 0.0149
+    },
+    "limitation": "Table6 varies N_nu, not a constant uniform S; conversion at one epoch cannot be used as an exact whole-BBN map. Table7 is the 2018 nuclear/weak-rate model, not a current universal floor."
+  },
+  "observational_sigmas": [
+    {
+      "id": "Aver2021",
+      "observable": "Yp",
+      "sigma": 0.0034,
+      "source_file": "aver2021.html",
+      "url": "https://arxiv.org/abs/2010.04180v1",
+      "anchor": "abstract; publication JCAP2021/03/027",
+      "selection": "Historical comparison only; not independent replication of Aver2026."
+    },
+    {
+      "id": "Aver2026",
+      "observable": "Yp",
+      "sigma": 0.0013,
+      "source_file": "aver2026.html",
+      "url": "https://arxiv.org/abs/2601.22238v1",
+      "anchor": "abstract, submitted2026-01-29",
+      "selection": "Candidate target for operator ratification; public preprint, not claimed journal-certified."
+    },
+    {
+      "id": "Cooke2018",
+      "observable": "log10_DH",
+      "sigma": 0.0052,
+      "source_file": "cooke2018.html",
+      "url": "https://arxiv.org/abs/1710.11129v3",
+      "anchor": "abstract, seven-absorber combination",
+      "selection": "Use log-sigma without dividing by observed DH center."
+    }
+  ],
+  "cmb_design_scenarios": [
+    {
+      "id": "Planck_BAO_declared_local",
+      "sigma_Neff": 0.17,
+      "status": "LOCAL_INPUT_FROM_FASE8; parent independently checking primary Planck source",
+      "calendar": null
+    },
+    {
+      "id": "CMB_S4_BBN_consistency_historical",
+      "sigma_Neff": 0.03,
+      "status": "KNOWN historical forecast, Fields2020 sectionVI; requires assumed BBN relation",
+      "calendar": null
+    },
+    {
+      "id": "CMB_S4_Yp_free_historical",
+      "sigma_Neff": 0.09,
+      "status": "KNOWN historical forecast, Fields2020 Eq45; not a current project guarantee",
+      "calendar": null
+    }
+  ],
+  "future_calendar": {
+    "CMB_S4": null,
+    "Simons_Observatory": null,
+    "status": "UNKNOWN_UNTIL_CURRENT_RELIABLE_SOURCE"
+  },
+  "source_download_notes": [
+    "Initial default socket blocked; restricted escalation allowed public arXiv retrieval.",
+    "A guessed Fields v2 download returned HTTP404; arXiv history established v1; v1 bytes then archived. No remote model calls."
+  ]
+}

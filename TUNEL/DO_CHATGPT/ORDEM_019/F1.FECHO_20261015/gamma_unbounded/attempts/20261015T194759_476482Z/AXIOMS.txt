@@ -1,0 +1,46 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T194759_476482Z\BoundedGammaPropertiesR1.lean:17:13: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T194759_476482Z\BoundedGammaPropertiesR1.lean:30:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ⟪↑A f, g⟫_ℂ
+in the target expression
+  Complex.exp ⟪f, A g⟫_ℂ - Complex.exp ⟪A f, g⟫_ℂ = 0
+
+A : ↥H1 →L[ℂ] ↥H1
+hA : ‖A‖ ≤ 1
+hs : IsSelfAdjoint A
+f g : ↥H1
+⊢ Complex.exp ⟪f, A g⟫_ℂ - Complex.exp ⟪A f, g⟫_ℂ = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T194759_476482Z\BoundedGammaPropertiesR1.lean:36:27: error: Type mismatch
+  IsClosed.preimage ConcreteWeyl.exponential_continuous (Submodule.isClosed_topologicalClosure M)
+has type
+  IsClosed (exponential ⁻¹' ↑M.topologicalClosure)
+but is expected to have type
+  IsClosed {x | exponential x ∈ M}
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T194759_476482Z\BoundedGammaPropertiesR1.lean:37:11: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+case refine_1
+A : ↥H1 →L[ℂ] ↥H1
+hA : ‖A‖ ≤ 1
+hd : DenseRange ⇑A
+M : Submodule ℂ ↥F := (↑(gamma A hA)).range.topologicalClosure
+f : ↥H1
+⊢ IsClosed {x | exponential x ∈ M}
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T194759_476482Z\BoundedGammaPropertiesR1.lean:53:62: error: Application type mismatch: The argument
+  gamma_denseRange A hA hd
+has type
+  DenseRange ⇑(gamma A hA)
+but is expected to have type
+  Dense ↑?m.52
+in the application
+  Submodule.dense_iff_topologicalClosure_eq_top.mp (gamma_denseRange A hA hd)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T194759_476482Z\BoundedGammaPropertiesR1.lean:51:84: error: unsolved goals
+A : ↥H1 →L[ℂ] ↥H1
+hA : ‖A‖ ≤ 1
+hs : IsSelfAdjoint A
+hd : DenseRange ⇑A
+⊢ (↑(gamma A hA)).ker = ⊥
+'F1Fecho.BoundedGamma.gamma_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.BoundedGamma.gamma_selfadjoint' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.BoundedGamma.gamma_denseRange' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.BoundedGamma.gamma_injective' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

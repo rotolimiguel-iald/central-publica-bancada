@@ -1,0 +1,340 @@
+{
+  "scope": "All four consumed instruments, primary and cleanup receipts; no other protocol assumed",
+  "sources": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\common.py",
+        "bytes": 4567,
+        "sha256": "b5d51aecf197163924beb25a8234c08844150e5fb4566169bee516731065ee38",
+        "mtime_utc": "2026-10-06T06:31:06.955253+00:00"
+      },
+      "relevant_lines": [
+        {
+          "line": 8,
+          "text": "LINUX = Path(\"/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2\")"
+        },
+        {
+          "line": 9,
+          "text": "BASE = WIN if os.name == \"nt\" else LINUX"
+        },
+        {
+          "line": 10,
+          "text": "PY = \"/opt/lal_env/bin/python\""
+        },
+        {
+          "line": 51,
+          "text": "            \"exe\":str((p/\"exe\").resolve(strict=True)),\"argv\":(p/\"cmdline\").read_bytes().split(b\"\\0\")[:-1],"
+        },
+        {
+          "line": 53,
+          "text": "def serial_identity(x): return {**x,\"argv\":[s.decode() for s in x[\"argv\"]]}"
+        },
+        {
+          "line": 54,
+          "text": "def matches(x, argv):"
+        },
+        {
+          "line": 55,
+          "text": "    return x[\"exe\"]==\"/usr/bin/python3.12\" and x[\"argv\"]==[s.encode() for s in argv]"
+        },
+        {
+          "line": 56,
+          "text": "def exact_signal(pid, argv):"
+        },
+        {
+          "line": 60,
+          "text": "        x=proc_identity(pid); need(matches(x,argv), \"Process identity changed; no signal\")"
+        },
+        {
+          "line": 64,
+          "text": "def argv_for(role, nonce):"
+        },
+        {
+          "line": 66,
+          "text": "    return [PY,*FLAGS,str(LINUX/script),role,REQUEST,nonce]"
+        },
+        {
+          "line": 68,
+          "text": "    targets=[argv_for(\"--supervisor\",nonce),argv_for(\"--child\",nonce)]; found=[]"
+        }
+      ],
+      "literal_root_flag_occurrences": 0
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\launch_windows.py",
+        "bytes": 8994,
+        "sha256": "49b65462f64125ee5afce32bfac4a73d82daabefe25e359fab897a0af4deac32",
+        "mtime_utc": "2026-10-06T06:31:07.003714+00:00"
+      },
+      "relevant_lines": [
+        {
+          "line": 6,
+          "text": "BASE=Path(r\"C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\")"
+        },
+        {
+          "line": 7,
+          "text": "WSL=r\"C:\\Windows\\System32\\wsl.exe\""
+        },
+        {
+          "line": 50,
+          "text": "    argv=[WSL,\"--distribution\",\"Ubuntu-24.04\",\"--exec\",*g.argv_for(mode,nonce)]"
+        },
+        {
+          "line": 51,
+          "text": "    proc=subprocess.Popen(argv,cwd=BASE,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,"
+        },
+        {
+          "line": 53,
+          "text": "    return proc,Capture(proc),argv"
+        },
+        {
+          "line": 67,
+          "text": "    g,c=load();g.need(os.name==\"nt\" and sys.argv[1:]==[\"--run-once\"],\"Fixed Windows entry\")"
+        },
+        {
+          "line": 80,
+          "text": "        primary,pcap,pargv=launch(g,\"--supervisor\",nonce)"
+        },
+        {
+          "line": 81,
+          "text": "        g.fresh(run/\"WSL_PROCESS.json\",{\"request_id\":g.REQUEST,\"nonce\":nonce,\"pid\":primary.pid,\"argv\":pargv,\"handle_owned_by_this_launcher\":True})"
+        },
+        {
+          "line": 84,
+          "text": "        linux=json.loads(pcap.text(\"stdout\"));g.need(linux==g.read(run/\"LINUX_RESULT.json\"),\"Linux result stream mismatch\")"
+        },
+        {
+          "line": 95,
+          "text": "            cleaner,ccap,cargv=launch(g,\"--cleanup\",nonce)"
+        },
+        {
+          "line": 96,
+          "text": "            g.fresh(run/\"CLEANUP_WSL_PROCESS.json\",{\"request_id\":g.REQUEST,\"nonce\":nonce,\"pid\":cleaner.pid,\"argv\":cargv})"
+        }
+      ],
+      "literal_root_flag_occurrences": 0
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\linux_control.py",
+        "bytes": 9734,
+        "sha256": "b1be6a937997cd6983a4280d6da12380bd8e30515e982bee919f6569fccd673c",
+        "mtime_utc": "2026-10-06T06:31:06.987696+00:00"
+      },
+      "relevant_lines": [
+        {
+          "line": 6,
+          "text": "BASE=Path(\"/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2\")"
+        },
+        {
+          "line": 22,
+          "text": "def stop_child(g,proc,argv,deadline):"
+        },
+        {
+          "line": 24,
+          "text": "        try:g.exact_signal(proc.pid,argv)"
+        },
+        {
+          "line": 29,
+          "text": "def capture(g,proc,argv,deadline):"
+        },
+        {
+          "line": 64,
+          "text": "    g.fresh(BASE/\"RUN/LINUX_CLAIM.json\",{\"request_id\":g.REQUEST,\"nonce\":nonce,\"process\":me,"
+        },
+        {
+          "line": 66,
+          "text": "    proc=None;argv=g.argv_for(\"--child\",nonce);status=\"FAILED\";error=None;streams=None;child=None;clean=False"
+        },
+        {
+          "line": 72,
+          "text": "            proc=subprocess.Popen(argv,cwd=BASE,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,"
+        },
+        {
+          "line": 75,
+          "text": "            g.need(g.matches(g.proc_identity(proc.pid),argv),\"Child identity after Popen\")"
+        },
+        {
+          "line": 76,
+          "text": "            g.fresh(BASE/\"RUN/CHILD_PROCESS.json\",{\"request_id\":g.REQUEST,\"nonce\":nonce,\"process\":childid,\"argv\":argv})"
+        },
+        {
+          "line": 78,
+          "text": "        streams=capture(g,proc,argv,work)"
+        },
+        {
+          "line": 86,
+          "text": "                if proc.poll() is None:stop_child(g,proc,argv,deadline);status=\"FAILED\""
+        },
+        {
+          "line": 95,
+          "text": "    g.fresh(BASE/\"RUN/LINUX_RESULT.json\",receipt)"
+        },
+        {
+          "line": 109,
+          "text": "        for x,argv in g.scoped_processes(nonce):"
+        },
+        {
+          "line": 111,
+          "text": "            try:stopped.append(g.exact_signal(x[\"pid\"],argv))"
+        },
+        {
+          "line": 119,
+          "text": "            for x,argv in live:"
+        },
+        {
+          "line": 120,
+          "text": "                try:stopped.append(g.exact_signal(x[\"pid\"],argv))"
+        },
+        {
+          "line": 135,
+          "text": "    g,c=load();g.need(len(sys.argv)==4 and sys.argv[1] in (\"--supervisor\",\"--cleanup\") and sys.argv[2]==g.REQUEST,\"Exact mode/identity\")"
+        },
+        {
+          "line": 136,
+          "text": "    nonce=sys.argv[3];g.check_pins(c,linux=True);_,ah=g.authorization(c);w=g.read(BASE/\"CLAIM.json\")"
+        },
+        {
+          "line": 141,
+          "text": "    if sys.argv[1]==\"--supervisor\":return supervise(g,c,w,nonce)"
+        }
+      ],
+      "literal_root_flag_occurrences": 0
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\worker.py",
+        "bytes": 7255,
+        "sha256": "bf59d27fc41cfb01bc0613212be5377ec8eb0b160476dcd046a93ec5e97766c5",
+        "mtime_utc": "2026-10-06T06:31:06.971777+00:00"
+      },
+      "relevant_lines": [
+        {
+          "line": 5,
+          "text": "BASE=Path(\"/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2\")"
+        },
+        {
+          "line": 13,
+          "text": "    g,c=load_common();g.need(len(sys.argv)==4 and sys.argv[1:3]==[\"--child\",g.REQUEST],\"Exact child argv\")"
+        },
+        {
+          "line": 14,
+          "text": "    nonce=sys.argv[3];g.check_pins(c,linux=True);_,ah=g.authorization(c)"
+        },
+        {
+          "line": 15,
+          "text": "    w=g.read(BASE/\"CLAIM.json\");s=g.read(BASE/\"RUN/LINUX_CLAIM.json\")"
+        },
+        {
+          "line": 18,
+          "text": "    parent=g.proc_identity(os.getppid());g.need(g.matches(parent,g.argv_for(\"--supervisor\",nonce)),\"Exact parent\")"
+        }
+      ],
+      "literal_root_flag_occurrences": 0
+    }
+  ],
+  "observed": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\RUN\\WSL_PROCESS.json",
+        "bytes": 560,
+        "sha256": "14c6ba945e569a7414eec9371655abb222601e79d787100c3c6fc1342c528138",
+        "mtime_utc": "2026-10-06T06:42:11.130221+00:00"
+      },
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "--distribution",
+        "Ubuntu-24.04",
+        "--exec",
+        "/opt/lal_env/bin/python",
+        "-I",
+        "-S",
+        "-B",
+        "-X",
+        "utf8",
+        "\\mnt\\c\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\linux_control.py",
+        "--supervisor",
+        "4f5d0b21-e1d2-4906-a6ce-eb70e60bc6cf",
+        "2b09460f-4c25-4048-88f2-e0054ce8c37a"
+      ],
+      "broken_script_index": 10,
+      "broken_script_token": "\\mnt\\c\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\linux_control.py"
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\RUN\\CLEANUP_WSL_PROCESS.json",
+        "bytes": 519,
+        "sha256": "d93eb916ebf2528da9dc721cbe06d22c80fb548d0cc7954a5a447b7e83febbb4",
+        "mtime_utc": "2026-10-06T06:42:11.335210+00:00"
+      },
+      "argv": [
+        "C:\\Windows\\System32\\wsl.exe",
+        "--distribution",
+        "Ubuntu-24.04",
+        "--exec",
+        "/opt/lal_env/bin/python",
+        "-I",
+        "-S",
+        "-B",
+        "-X",
+        "utf8",
+        "\\mnt\\c\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\linux_control.py",
+        "--cleanup",
+        "4f5d0b21-e1d2-4906-a6ce-eb70e60bc6cf",
+        "2b09460f-4c25-4048-88f2-e0054ce8c37a"
+      ],
+      "broken_script_index": 10,
+      "broken_script_token": "\\mnt\\c\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation_v2\\linux_control.py"
+    }
+  ],
+  "token_roles": [
+    {
+      "positions": "Windows outer0",
+      "type": "Windows executable path",
+      "rule": "Keep concrete Windows backslashes for wsl.exe; do not POSIX-normalize the host executable."
+    },
+    {
+      "positions": "Windows outer1..3",
+      "type": "--distribution, Ubuntu-24.04, --exec",
+      "rule": "Literals unchanged."
+    },
+    {
+      "positions": "Linux inner0 / outer4",
+      "type": "/opt/lal_env/bin/python",
+      "rule": "Already absolute POSIX literal; unchanged."
+    },
+    {
+      "positions": "Linux inner1..5 / outer5..9",
+      "type": "-I -S -B -X utf8",
+      "rule": "Literals unchanged."
+    },
+    {
+      "positions": "Linux inner6 / outer10",
+      "type": "Script path",
+      "rule": "PurePosixPath explicit; absolute, forward slashes, spaces preserved in one element; no embedded shell quotes."
+    },
+    {
+      "positions": "Linux inner7..9 / outer11..13",
+      "type": "Role/request/nonce",
+      "rule": "Unchanged positions; no new IDs generated. Historical IDs remain terminal."
+    },
+    {
+      "positions": "--root",
+      "type": "Absent in this protocol",
+      "rule": "Do not add it. Any future separately approved root value follows same POSIX token boundary."
+    }
+  ],
+  "dependent_identity_consumers": [
+    "Windows supervisor launch",
+    "Windows cleanup launch",
+    "Linux child launch",
+    "worker parent identity comparison",
+    "cleanup scoped_processes expected argv"
+  ],
+  "io_paths_not_argv": [
+    "WIN/BASE on Windows remains concrete Path",
+    "LINUX/BASE on Linux remains concrete Path",
+    "Linux /proc and fixture/journal IO unchanged"
+  ]
+}

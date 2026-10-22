@@ -1,0 +1,78 @@
+{
+  "start_utc": "2026-10-16T01:14:50.918046+00:00",
+  "end_utc": "2026-10-16T01:15:40.943030+00:00",
+  "seconds": 50.024982199996884,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-j2",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T011450_851136Z\\MaxwellStressJetAlgebraR1.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T011450_851136Z\\MaxwellStressJetAlgebraR1.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T011450_851136Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T011450_851136Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T011450_851136Z\\MaxwellStressJetAlgebraR1.lean",
+    "sha256": "54a099181ed74481ed23c0d3ea7943647679c4493a8a091af41e19c2a6c4a5f7",
+    "bytes": 3890
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T011450_851136Z\MaxwellStressJetAlgebraR1.lean:28:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  dF ν μ α
+in the target expression
+  dF μ ν α + dF ν α μ + dF α μ ν = 0
+
+ι : Type u_1
+inst✝¹ : Fintype ι
+inst✝ : DecidableEq ι
+s : ι → ℂ
+F : ι → ι → ℂ
+dF : ι → ι → ι → ℂ
+ha : ∀ (μ ν : ι), F ν μ = -F μ ν
+hd : ∀ (ρ μ ν : ι), dF ρ ν μ = -dF ρ μ ν
+hb : ∀ (ρ μ ν : ι), dF ρ μ ν + dF μ ν ρ + dF ν ρ μ = 0
+ν μ α : ι
+h : dF μ ν α + dF ν α μ + dF α μ ν = 0
+⊢ dF μ ν α = dF ν μ α + dF α ν μ
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T011450_851136Z\MaxwellStressJetAlgebraR1.lean:43:13: error: Tactic `simp` failed with a nested error:
+maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T011450_851136Z\MaxwellStressJetAlgebraR1.lean:79:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ μ, s μ * ((1 / 2 * if μ = ν then s μ else 0) * ∑ α, ∑ β, s α * s β * F α β * dF μ α β)
+in the target expression
+  -(∑ x, ∑ i, s x * (s i * (dF x x i * F ν i)) + ∑ x, ∑ i, s x * (s i * (F x i * dF x ν i))) +
+      ∑ x, ∑ x_1, ∑ i, s x * ((1 / 2 * if x = ν then s x else 0) * (s x_1 * s i * F x_1 i * dF x x_1 i)) =
+    -∑ μ, ∑ α, s μ * s α * dF μ μ α * F ν α - ∑ μ, ∑ α, s μ * s α * F μ α * dF μ ν α +
+      ∑ x, ∑ i, 1 / 2 * (s x * s i * F x i * dF ν x i)
+
+ι : Type u_1
+inst✝¹ : Fintype ι
+inst✝ : DecidableEq ι
+s : ι → ℂ
+hs : ∀ (μ : ι), s μ * s μ = 1
+F : ι → ι → ℂ
+dF : ι → ι → ι → ℂ
+ha : ∀ (μ ν : ι), F ν μ = -F μ ν
+hd : ∀ (ρ μ ν : ι), dF ρ ν μ = -dF ρ μ ν
+hb : ∀ (ρ μ ν : ι), dF ρ μ ν + dF μ ν ρ + dF ν ρ μ = 0
+hdiv : ∀ (ν : ι), ∑ μ, s μ * dF μ μ ν = 0
+ν : ι
+hz : ∑ μ, ∑ α, s μ * s α * dF μ μ α * F ν α = 0
+hδ :
+  ∑ μ, s μ * ((1 / 2 * if μ = ν then s μ else 0) * ∑ α, ∑ β, s α * s β * F α β * dF μ α β) =
+    1 / 2 * ∑ α, ∑ β, s α * s β * F α β * dF ν α β
+⊢ -(∑ x, ∑ i, s x * (s i * (dF x x i * F ν i)) + ∑ x, ∑ i, s x * (s i * (F x i * dF x ν i))) +
+      ∑ x, ∑ x_1, ∑ i, s x * ((1 / 2 * if x = ν then s x else 0) * (s x_1 * s i * F x_1 i * dF x x_1 i)) =
+    -∑ μ, ∑ α, s μ * s α * dF μ μ α * F ν α - ∑ μ, ∑ α, s μ * s α * F μ α * dF μ ν α +
+      ∑ x, ∑ i, 1 / 2 * (s x * s i * F x i * dF ν x i)
+'F1Fecho.MaxwellStress.bianchi_contraction' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStress.stressJet_conserved' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

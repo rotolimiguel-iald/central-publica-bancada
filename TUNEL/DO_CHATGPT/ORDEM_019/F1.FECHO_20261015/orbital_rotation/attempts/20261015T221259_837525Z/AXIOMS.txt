@@ -1,0 +1,51 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221259_837525Z\OrbitalSpatialCovarianceR1.lean:23:6: error: Invalid rewrite argument: The pattern to be substituted is a metavariable (`?A`) in this equality
+  ?A = !![?A 0 0, ?A 0 1; ?A 1 0, ?A 1 1]
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221259_837525Z\OrbitalSpatialCovarianceR1.lean:28:97: error: unsolved goals
+m : ℝ
+a : Fin 4 → ℝ
+p : MomentumCoordinates
+⊢ a 0 * energy (transverseMass m p.1) p.2 - a 1 * p.2 - a 2 * p.1 0 - a 3 * p.1 1 =
+    a 0 * energy (transverseMass m p.1) p.2 -
+        inner ℝ (((MeasurableEquiv.toLp 2 Transverse).prodCongr (MeasurableEquiv.refl ℝ)) (![a 2, a 3], a 1)).1
+          (((MeasurableEquiv.toLp 2 Transverse).prodCongr (MeasurableEquiv.refl ℝ)) p).1 -
+      (((MeasurableEquiv.toLp 2 Transverse).prodCongr (MeasurableEquiv.refl ℝ)) p).2 *
+        (((MeasurableEquiv.toLp 2 Transverse).prodCongr (MeasurableEquiv.refl ℝ)) (![a 2, a 3], a 1)).2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221259_837525Z\OrbitalSpatialCovarianceR1.lean:31:4: warning: This simp argument is unused:
+  EuclideanSpace.inner_toLp_toLp
+
+Hint: Omit it from the simp argument list.
+  simp [̵s̵p̵a̵c̵e̵t̵i̵m̵e̵S̵p̵a̵t̵i̵a̵l̵,̵s̵p̵a̵t̵i̵a̵l̵C̵h̵a̵r̵t̵,̵W̵i̵t̵h̵L̵p̵.̵p̵r̵o̵d̵_̵i̵n̵n̵e̵r̵_̵a̵p̵p̵l̵y̵,̵
+  ̵ ̵ ̵ ̵ ̵E̵u̵c̵l̵i̵d̵e̵a̵n̵S̵p̵a̵c̵e̵.̵i̵n̵n̵e̵r̵_̵t̵o̵L̵p̵_̵t̵o̵L̵p̵,̵d̵o̵t̵P̵r̵o̵d̵u̵c̵t̵,̵F̵i̵n̵.̵s̵u̵m̵_̵u̵n̵i̵v̵_̵t̵w̵o̵]̵[̲s̲p̲a̲c̲e̲t̲i̲m̲e̲S̲p̲a̲t̲i̲a̲l̲,̲ ̲s̲p̲a̲t̲i̲a̲l̲C̲h̲a̲r̲t̲,̲ ̲W̲i̲t̲h̲L̲p̲.̲p̲r̲o̲d̲_̲i̲n̲n̲e̲r̲_̲a̲p̲p̲l̲y̲,̲ ̲d̲o̲t̲P̲r̲o̲d̲u̲c̲t̲,̲ ̲F̲i̲n̲.̲s̲u̲m̲_̲u̲n̲i̲v̲_̲t̲w̲o̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221259_837525Z\OrbitalSpatialCovarianceR1.lean:31:35: warning: This simp argument is unused:
+  dotProduct
+
+Hint: Omit it from the simp argument list.
+  simp [spacetimeSpatial, ̲spatialChart, ̲WithLp.prod_inner_apply,
+  ̵  ̵ ̵ ̵EuclideanSpace.inner_toLp_toLp,d̵o̵t̵P̵r̵o̵d̵u̵c̵t̵,̵
+  ̲ ̲ ̲ ̲ ̲Fin.sum_univ_two]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T221259_837525Z\OrbitalSpatialCovarianceR1.lean:31:46: warning: This simp argument is unused:
+  Fin.sum_univ_two
+
+Hint: Omit it from the simp argument list.
+  simp [̵s̵p̵a̵c̵e̵t̵i̵m̵e̵S̵p̵a̵t̵i̵a̵l̵,̵s̵p̵a̵t̵i̵a̵l̵C̵h̵a̵r̵t̵,̵W̵i̵t̵h̵L̵p̵.̵p̵r̵o̵d̵_̵i̵n̵n̵e̵r̵_̵a̵p̵p̵l̵y̵,̵
+  ̵ ̵ ̵ ̵ ̵E̵u̵c̵l̵i̵d̵e̵a̵n̵S̵p̵a̵c̵e̵.̵i̵n̵n̵e̵r̵_̵t̵o̵L̵p̵_̵t̵o̵L̵p̵,̵d̵o̵t̵P̵r̵o̵d̵u̵c̵t̵,̵F̵i̵n̵.̵s̵u̵m̵_̵u̵n̵i̵v̵_̵t̵w̵o̵]̵[̲s̲p̲a̲c̲e̲t̲i̲m̲e̲S̲p̲a̲t̲i̲a̲l̲,̲ ̲s̲p̲a̲t̲i̲a̲l̲C̲h̲a̲r̲t̲,̲ ̲W̲i̲t̲h̲L̲p̲.̲p̲r̲o̲d̲_̲i̲n̲n̲e̲r̲_̲a̲p̲p̲l̲y̲,̲ ̲E̲u̲c̲l̲i̲d̲e̲a̲n̲S̲p̲a̲c̲e̲.̲i̲n̲n̲e̲r̲_̲t̲o̲L̲p̲_̲t̲o̲L̲p̲,̲
+  ̲ ̲ ̲ ̲ ̲d̲o̲t̲P̲r̲o̲d̲u̲c̲t̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.OrbitalSpatial.spacetimeSpatial_rotation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatial_orbitalPhase' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.spatialUnitary_translation_covariance' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.OrbitalSpatial.scalarOrthogonalH1_U1' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

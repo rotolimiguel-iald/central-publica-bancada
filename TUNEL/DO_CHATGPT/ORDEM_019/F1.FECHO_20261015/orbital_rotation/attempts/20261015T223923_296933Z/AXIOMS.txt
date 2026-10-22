@@ -1,0 +1,42 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223923_296933Z\LorentzTimeStabilizerR2.lean:25:4: error: 'change' tactic failed, pattern
+  spatialChart (c • (![x 2, x 3], x 1)) = c • spatialChart (![x 2, x 3], x 1)
+is not definitionally equal to target
+  spacetimeSpatial (c • x) = (RingHom.id ℝ) c • spacetimeSpatial x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223923_296933Z\LorentzTimeStabilizerR2.lean:23:18: error: Type mismatch
+  rfl
+has type
+  ?m.26 = ?m.26
+but is expected to have type
+  spacetimeSpatial (x + y) = spacetimeSpatial x + spacetimeSpatial y
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223923_296933Z\LorentzTimeStabilizerR2.lean:29:2: error: 'change' tactic failed, pattern
+  spatialChart (![(spatialChart.symm v).1 0, (spatialChart.symm v).1 1], (spatialChart.symm v).2) = v
+is not definitionally equal to target
+  spatialPart (spatialEmbed v) = v
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223923_296933Z\LorentzTimeStabilizerR2.lean:40:2: error: 'change' tactic failed, pattern
+  spatialChart (0, 0) = 0
+is not definitionally equal to target
+  spatialPart timeBasis = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223923_296933Z\LorentzTimeStabilizerR2.lean:46:4: error: Type mismatch
+  MeasurableEquiv.symm_apply_apply spatialChart ?m.41
+has type
+  spatialChart.symm (spatialChart ?m.41) = ?m.41
+but is expected to have type
+  spatialChart.symm (spatialPart a) = (![a 2, a 3], a 1)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223923_296933Z\LorentzTimeStabilizerR2.lean:77:2: error: 'change' tactic failed, pattern
+  0 * 0 - inner ℝ ((spatialRestriction L) v) ((spatialRestriction L) v) =
+    0 * 0 - inner ℝ (spatialPart (spatialEmbed v)) (spatialPart (spatialEmbed v))
+is not definitionally equal to target
+  0 * 0 -
+      inner ℝ (spacetimeSpatial ((lorentzLinear L) (spatialEmbed v)))
+        (spacetimeSpatial ((lorentzLinear L) (spatialEmbed v))) =
+    0 * 0 - inner ℝ (spacetimeSpatial (spatialEmbed v)) (spacetimeSpatial (spatialEmbed v))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223923_296933Z\LorentzTimeStabilizerR2.lean:107:6: error: 'change' tactic failed, pattern
+  spatialPart ((lorentzLinear L) a) = (spatialRestriction L) (spatialPart a)
+is not definitionally equal to target
+  spacetimeSpatial (↑L *ᵥ a) = (spatialRestrictionEquiv L hL) (spacetimeSpatial a)
+'F1Fecho.OrbitalSpatial.spatialRestriction_norm' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.lorentz_fixed_time_spatial' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.lorentz_fixed_time_mem_generated' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

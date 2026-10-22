@@ -1,0 +1,51 @@
+{
+  "source_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation\\MANIFESTO_PREPARACAO_WSL.json",
+    "bytes": 9845,
+    "sha256": "e0f88e1cc3ccdf932ccf768fbba3c5216747a2b198371639469d832c062a93a5"
+  },
+  "request_id": "4f5d0b21-e1d2-4906-a6ce-eb70e60bc6cf",
+  "findings": [
+    {
+      "id": "WSL-01",
+      "priority": "P2",
+      "blocking_before_consumption": true,
+      "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation\\launch_windows.py",
+      "lines": [
+        18,
+        26
+      ],
+      "title": "Exceção da thread de captura não invalida o launcher",
+      "condition": "stream.read(4096) lança OSError no leitor stderr; stdout é recebido integralmente e subprocesso termina0. O leitor stderr termina sem EOF confirmado e deixa buffer vazio.",
+      "trace": [
+        "Capture.read não possui try/except que transporte a falha ao estado de Capture.",
+        "Capture.join retorna somente not any(thread.is_alive()); erro e EOF são indistinguíveis.",
+        "wait checa overflow e join, mas não falha do leitor ou EOF por fluxo.",
+        "main aceita not pcap.text(stderr) / not ccap.text(stderr) e pode manter PASS, persistir RESULT e retornar0.",
+        "O traceback padrão da thread vai ao stderr do próprio launcher, fora dos buffers verificados. Exame externo pode percebê-lo, mas isso não faz o status/exit do código falharem como contratado."
+      ],
+      "effect": "Ausência de bytes de stderr deixa de comprovar captura íntegra. Caminho fail-open de erro operacional, inferido estaticamente; não reproduzido.",
+      "recommendation": "Registrar erro por fluxo e EOF explícito. join/wait devem exigir duas threads encerradas normalmente por EOF, sem erro e sem overflow. Em exceção registrar falha, completar somente limpeza autorizada e retornar nãozero. Preservar caso/60s/request e proibição de retry.",
+      "alternatives": [
+        "A: manter threads e adicionar estado de erro/EOF consumido pelo supervisor; alteração mínima recomendada.",
+        "B: substituir mecanismo de captura por transporte com erro explícito; maior delta, não necessário para o achado."
+      ]
+    },
+    {
+      "id": "WSL-02",
+      "priority": "P3",
+      "blocking_before_consumption": false,
+      "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\guard_wsl_integration_preparation\\linux_control.py",
+      "lines": [
+        37,
+        40
+      ],
+      "title": "Buffer Linux ultrapassa o teto nominal antes de rejeitar overflow",
+      "condition": "Buffer chega a32768 bytes e os.read retorna outro chunk de4096. extend ocorre antes de need(len<=32768).",
+      "effect": "Retenção lógica transitória pode chegar a36864 bytes por fluxo. Continua limitada e falha em overflow; não corresponde à alegação exata de32768 retidos. Não é crescimento sem limite nem medição de RSS.",
+      "recommendation": "Calcular room, reter somente chunk[:room] e falhar caso len(chunk)>room; ou declarar o teto real no contrato, se ROOT aceitar. A primeira opção preserva limite contratado.",
+      "statute": "DERIVED do fluxo, sem execução."
+    }
+  ],
+  "no_execution": true
+}

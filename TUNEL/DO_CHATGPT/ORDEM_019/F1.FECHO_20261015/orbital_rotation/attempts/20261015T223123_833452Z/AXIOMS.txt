@@ -1,0 +1,50 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223123_833452Z\OrbitalGeneratedUnitaryR2.lean:74:38: error: Type mismatch: After simplification, term
+  generatedPullback_inverse L⁻¹ f
+ has type
+  @Eq (↥H1) ((generatedPullback L⁻¹) ((generatedPullback L) f)) f
+but is expected to have type
+  @Eq (↥H1) (((generatedPullback L⁻¹).toLinearMap ∘ₗ (generatedPullback L).toLinearMap) f) (LinearMap.id f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223123_833452Z\OrbitalGeneratedUnitaryR2.lean:81:24: error: Type mismatch
+  generatedPullback_one f
+has type
+  (generatedPullback 1) f = f
+but is expected to have type
+  ↑↑((generatedUnitary 1) f) =ᵐ[orbitalMeasure 0] ↑↑(1 f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223123_833452Z\OrbitalGeneratedUnitaryR2.lean:82:28: error: Type mismatch
+  generatedPullback_mul L M f
+has type
+  (generatedPullback (L * M)) f = (generatedPullback L) ((generatedPullback M) f)
+but is expected to have type
+  ↑↑((generatedUnitary (L * M)) f) =ᵐ[orbitalMeasure 0] ↑↑((generatedUnitary L * generatedUnitary M) f)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223123_833452Z\OrbitalGeneratedUnitaryR2.lean:99:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((spatialUnitary 0 (Unitary.linearIsometryEquiv q)) f) p
+in the target expression
+  ↑↑f (shellAction (↑(generatedSpatial q)⁻¹) p) = ↑↑((scalarOrthogonalH1 q) f) p
+
+q : ↥SpatialOrthogonal
+f : ↥H1
+h : shellAction (orthogonalLorentzHom q⁻¹) =ᵐ[orbitalMeasure 0] ⇑(spatialAction (Unitary.linearIsometryEquiv q⁻¹))
+p : MomentumCoordinates
+h1 : ↑↑((generatedUnitary (generatedSpatial q)) f) p = ↑↑f (shellAction (↑(generatedSpatial q)⁻¹) p)
+h2 :
+  ↑↑((spatialUnitary 0 (Unitary.linearIsometryEquiv q)) f) p =
+    ↑↑f ((spatialAction (Unitary.linearIsometryEquiv q).symm) p)
+h3 : shellAction (orthogonalLorentzHom q⁻¹) p = (spatialAction (Unitary.linearIsometryEquiv q⁻¹)) p
+⊢ ↑↑f (shellAction (↑(generatedSpatial q)⁻¹) p) = ↑↑((scalarOrthogonalH1 q) f) p
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223123_833452Z\OrbitalGeneratedUnitaryR2.lean:111:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((orbitalScalarBoost 0 s) f) p
+in the target expression
+  ↑↑f (shellAction (↑(generatedBoost s)⁻¹) p) = ↑↑((B0 s) f) p
+
+s : ℝ
+f : ↥H1
+h : shellAction (theBoost (-s)) =ᵐ[orbitalMeasure 0] coordinateBoost 0 (-s)
+p : MomentumCoordinates
+h1 : ↑↑((generatedUnitary (generatedBoost s)) f) p = ↑↑f (shellAction (↑(generatedBoost s)⁻¹) p)
+h2 : ↑↑((orbitalScalarBoost 0 s) f) p = ↑↑f (coordinateBoost 0 (-s) p)
+h3 : shellAction (theBoost (-s)) p = coordinateBoost 0 (-s) p
+⊢ ↑↑f (shellAction (↑(generatedBoost s)⁻¹) p) = ↑↑((B0 s) f) p
+'F1Fecho.OrbitalSpatial.shellAction_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.generatedUnitaryHom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.generatedUnitary_spatial' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.generatedUnitary_boost' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,730 @@
+{
+  "id": "P3_A_PREPARATION_6a99afd6-831c-4fa5-9190-cef5db67e52c",
+  "state": "PREPARED_NOT_EXECUTED",
+  "created_utc": "2026-10-06T18:32:09.586644+00:00",
+  "authorization_scope": "Static preparation only. Root external decision and separately reviewed scientific/operational justification required. Existing terminal units are not reopened.",
+  "purpose": "Concrete proposed A budget/diagnostic candidate for independent review; not selected for consumption. Adequate scientific recovery remains unmeasured.",
+  "hypothesis": "Same aligned-spin pSEOBNRv4HM_PA IMR model for both synthetic datasets; DTau220 only free QNM deformation; DOmega220=DTau440=DOmega440=0.",
+  "free_parameters": [
+    "mass_1",
+    "mass_2",
+    "chi_1",
+    "chi_2",
+    "dtau220",
+    "luminosity_distance",
+    "theta_jn",
+    "ra",
+    "dec",
+    "psi",
+    "phase",
+    "geocent_time"
+  ],
+  "fixed_parameters": {
+    "domega220": 0.0,
+    "dtau440": 0.0,
+    "domega440": 0.0
+  },
+  "priors": {
+    "mass_1": {
+      "kind": "Uniform",
+      "minimum": 35.0,
+      "maximum": 110.0
+    },
+    "mass_2": {
+      "kind": "Uniform",
+      "minimum": 20.0,
+      "maximum": 80.0
+    },
+    "mass_ratio": {
+      "kind": "Constraint",
+      "minimum": 0.2,
+      "maximum": 1.0
+    },
+    "chi_1": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 0.95
+    },
+    "chi_2": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 0.95
+    },
+    "dtau220": {
+      "kind": "Uniform",
+      "minimum": -0.8,
+      "maximum": 2.0
+    },
+    "domega220": 0.0,
+    "dtau440": 0.0,
+    "domega440": 0.0,
+    "luminosity_distance": {
+      "kind": "Uniform",
+      "minimum": 10.0,
+      "maximum": 10000.0
+    },
+    "theta_jn": {
+      "kind": "Sine",
+      "minimum": 0.0,
+      "maximum": 3.141592653589793
+    },
+    "ra": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 6.283185307179586,
+      "boundary": "periodic"
+    },
+    "dec": {
+      "kind": "Cosine",
+      "minimum": -1.5707963267948966,
+      "maximum": 1.5707963267948966
+    },
+    "psi": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 3.141592653589793,
+      "boundary": "periodic"
+    },
+    "phase": {
+      "kind": "Uniform",
+      "minimum": 0.0,
+      "maximum": 6.283185307179586,
+      "boundary": "periodic"
+    },
+    "geocent_time": {
+      "kind": "Uniform",
+      "minimum": 999999999.9,
+      "maximum": 1000000000.1
+    }
+  },
+  "mass_prior_normalization": {
+    "description": "Uniform rectangular m1 [35,110], m2 [20,80], conditioned on 0.2<=m2/m1<=1; normalized analytic inverse CDF. No likelihood rejection or evidence renormalization ambiguity.",
+    "area_solar_mass_squared": 3477.5,
+    "rectangle_area": 4500.0,
+    "m1_density": "(min(80,m1)-max(20,0.2*m1))/3477.5",
+    "m2_given_m1": "Uniform(max(20,0.2*m1),min(80,m1))",
+    "piecewise_integral_areas": [
+      1687.5,
+      1200.0,
+      590.0
+    ],
+    "mass_frame": "detector",
+    "parameterization": "No chirp-mass/Jacobian substitution"
+  },
+  "grid": {
+    "duration_s": 32.0,
+    "sample_rate_hz": 4096,
+    "generation_sample_rate_hz": 8192,
+    "generation_maximum_frequency_hz": 4096,
+    "minimum_frequency_hz": 20.0,
+    "maximum_frequency_hz": 1024.0,
+    "reference_frequency_hz": 20.0,
+    "roll_off_s": 0.4,
+    "geocenter_seconds_after_segment_start": 16.0
+  },
+  "geometry": {
+    "theta_jn": 0.7,
+    "ra": 1.0,
+    "dec": 0.2,
+    "psi": 0.4,
+    "phase": 1.2,
+    "geocent_time": 1000000000.0
+  },
+  "detectors": [
+    "H1",
+    "L1"
+  ],
+  "analytic_psd": "LAL_ANALYTIC_aLIGOZeroDetHighPower",
+  "qualified_arrays": "../piloto_sintetico/RUN_002/SYNTHETIC_ARRAYS.npz",
+  "qualified_result": "../piloto_sintetico/RUN_002/RESULT.json",
+  "data_rule": "Read only exact pinned NPZ allow_pickle=False; reconstruct noise+signal and check all six hashes per job. No data finder, event ids, input override, observed strain, D posterior or GR posterior.",
+  "noise": {
+    "seed": 180601,
+    "paired_between_jobs": true,
+    "independent_realizations": false,
+    "network_optimal_full_IMR_SNR": 20.0,
+    "regenerate": false
+  },
+  "jobs": [
+    {
+      "id": "GR_GAUSS",
+      "label": "GR_GAUSS",
+      "sampler_seed": 180602,
+      "truth": {
+        "mass_1": 50.0,
+        "mass_2": 35.0,
+        "chi_1": 0.3,
+        "chi_2": 0.1,
+        "luminosity_distance": 1522.5263947349845,
+        "dtau220": 0.0,
+        "domega220": 0.0,
+        "dtau440": 0.0,
+        "domega440": 0.0,
+        "theta_jn": 0.7,
+        "ra": 1.0,
+        "dec": 0.2,
+        "psi": 0.4,
+        "phase": 1.2,
+        "geocent_time": 1000000000.0
+      },
+      "normalization": {
+        "H1": {
+          "noise_quadratic": 64401.02866412935,
+          "dof": 64258,
+          "z": 0.39897389672961137,
+          "noise_sha256": "fc0de0eed39afb1dd18b17b1fe03e9d632b11b5b9d6927ba2ad4e4d583b97db5",
+          "signal_sha256": "ffe025cd68b38dc4a777597a346096928f5e2bee1f3c9cce2adea869c2254ea5",
+          "injected_sha256": "557128b6c46a1334dd72ae19da7eebca286b69dd93ca410d0e4f270cf190b4d0"
+        },
+        "L1": {
+          "noise_quadratic": 64082.783819217395,
+          "dof": 64258,
+          "z": -0.48875994782203286,
+          "noise_sha256": "9a8de0f66128eb04ce76a299084791500882ebebf171524d019802ec3adfa510",
+          "signal_sha256": "c220103a0d025b1941179e2c31d8c966221c9bb89aefb50efe088a8f4c033148",
+          "injected_sha256": "8988b97c163774d10071cd79f73033acc5375894758c2915b84063d3de70a788"
+        }
+      },
+      "base_case_id_reference_only": "P3_GR_GAUSS_3249312d-d7b6-4a04-93d6-81f65d4f4945"
+    },
+    {
+      "id": "RB_GAUSS",
+      "label": "RB_GAUSS",
+      "sampler_seed": 180603,
+      "truth": {
+        "mass_1": 50.0,
+        "mass_2": 35.0,
+        "chi_1": 0.3,
+        "chi_2": 0.1,
+        "luminosity_distance": 1473.5287789752256,
+        "dtau220": -0.42461995389788576,
+        "domega220": 0.0,
+        "dtau440": 0.0,
+        "domega440": 0.0,
+        "theta_jn": 0.7,
+        "ra": 1.0,
+        "dec": 0.2,
+        "psi": 0.4,
+        "phase": 1.2,
+        "geocent_time": 1000000000.0
+      },
+      "normalization": {
+        "H1": {
+          "noise_quadratic": 64401.02866412935,
+          "dof": 64258,
+          "z": 0.39897389672961137,
+          "noise_sha256": "fc0de0eed39afb1dd18b17b1fe03e9d632b11b5b9d6927ba2ad4e4d583b97db5",
+          "signal_sha256": "db881e460d2f40dbc6fcacbd47b6a705e2a981cc4e4849c0299e63ac5ff1b9ba",
+          "injected_sha256": "77148ae4ed94356d26cdc13a1b2b6087792d1ba2ca53653ee19adfca746c78d8"
+        },
+        "L1": {
+          "noise_quadratic": 64082.783819217395,
+          "dof": 64258,
+          "z": -0.48875994782203286,
+          "noise_sha256": "9a8de0f66128eb04ce76a299084791500882ebebf171524d019802ec3adfa510",
+          "signal_sha256": "9e42b48affffa5da2fda5237fdb3f877a6a2a7d7f7305e8d196afcccd209e26a",
+          "injected_sha256": "8ed069f9e1ab6d99430acf8e95f6fc1801078f3dc874ac2f784c440486cebeed"
+        }
+      },
+      "base_case_id_reference_only": "P3_RB_GAUSS_3249312d-d7b6-4a04-93d6-81f65d4f4945"
+    }
+  ],
+  "execution_directory": "EXECUTION",
+  "sampler": {
+    "library": "dynesty",
+    "version": "3.1.0",
+    "method": "static NestedSampler",
+    "nlive": 256,
+    "bound": "multi",
+    "sample": "rwalk",
+    "walks": 25,
+    "dlogz": 0.1,
+    "ndim": 12,
+    "periodic_indices": [
+      7,
+      9,
+      10
+    ],
+    "pool": null,
+    "queue_size": 1,
+    "checkpoint": false,
+    "resume": false,
+    "marginalizations": [],
+    "log_likelihood": "bilby GravitationalWaveTransient.log_likelihood_ratio, Gaussian independent H1/L1; absolute noise-only normalization omitted equally in the same job; no cross-dataset Bayes-factor interpretation"
+  },
+  "limits": {
+    "max_likelihood_calls": 100000,
+    "native_waveform_calls_at_most": 100000,
+    "wall_soft_s": 14400,
+    "supervisor_wall_s": 14410,
+    "cpu_soft_s": 13200,
+    "cpu_hard_s": 13205,
+    "address_space_bytes": 8589934592,
+    "workers": 1,
+    "threads": 1,
+    "parallel_jobs": 1,
+    "jobs_at_most": 2,
+    "no_retry": true
+  },
+  "stop_rules": [
+    "Counter checked before every likelihood, including 256 live-point initialization; Dynesty maxcall additionally applied but not trusted as hard cap.",
+    "Abort job and campaign on EDOM, native failure, nonfinite likelihood, window-bound violation, unknown read/write, pin mismatch or uncaught process failure. Never map an invalid waveform to a prior rejection.",
+    "Graceful maxcall/wall/CPU exhaustion writes partial diagnostics and permits the second planned job; no restart/resume. Supervisor timeout/kill is uncertain partial and halts remaining job.",
+    "No extension of call/time/CPU/prior/grid/seed limits based on the observed pilot outcome."
+  ],
+  "convergence": {
+    "numerical_stop": "delta_logz<0.1 before final live points, non-flat live likelihood, below hard call cap, no error.",
+    "sampling_diagnostic": "weighted ESS>=100 after final live points; ESS low is explicitly incomplete.",
+    "not_sufficient_for": [
+      "coverage",
+      "global-mode discovery",
+      "population bias",
+      "D readiness",
+      "physical verdict"
+    ],
+    "posterior_summary_rule": "Expose weighted raw diagnostics and proposed dtau220 summaries; label numerical-only/weak-descriptive. Never auto-pass science, coverage or D."
+  },
+  "cost": {
+    "measured_reference": "P0-P2 RUN_002: six native waveform generations for fixed cases, not PE benchmark.",
+    "reference_native_calls": 6,
+    "reference_native_wall_s": 0.33295305783394724,
+    "source_only_proxy_seconds_for_10000": 554.9217630565787,
+    "warning": "Prior-dependent evaluation cost and likelihood overhead unmeasured. Proxy is neither budget guarantee nor a measured PE pilot.",
+    "report": [
+      "process wall",
+      "process CPU user+system",
+      "all likelihood calls including initialization",
+      "native waveform calls and wall",
+      "classified failure_receipt: None, recognized domain exception, indeterminate source/native exception, temporal/budget/application events",
+      "status/stop reason",
+      "delta_logz",
+      "ESS"
+    ],
+    "hard_envelope_two_jobs": {
+      "supervisor_wall_s": 7220,
+      "child_cpu_hard_s": 6610,
+      "total_likelihood_calls": 20000
+    },
+    "projection_rule": "Report measured sums and rates only; no extrapolation to fourteen observed events as validated cost."
+  },
+  "isolation": {
+    "python_read_allowlist": "Same exact 1162 runtime files and synthetic/source pins, plus the one hash-pinned installed ASD demanded by official H1/L1 factory. No directory wildcard. Qualification metadata are exact pinned inputs.",
+    "writes": "Only exact new execution/job tree after hook; local reservation/receipts before hook. Not native syscall containment.",
+    "runtime_caveat": "Fixed imports/pin verification precede hook. Python audit is not native syscall or OS security containment. -I -B limits environment/bytecode effects; no installation.",
+    "source_fresh_lal_dict": "Preserved unchanged P0-P2 source makes lal.CreateDict per waveform and inserts all four deformation values.",
+    "no_PE_during_preparation": true,
+    "no_original_execution": true,
+    "no_D_access": true,
+    "V1_and_four_holds_unchanged": true
+  },
+  "inputs": {
+    "../piloto_sintetico/MANIFESTO_PILOTO_SINTETICO.json": {
+      "sha256": "87bcef2f93a1f1ecd8e153229ab704b6f4696e5d5922bfc6f316c8f2f2ee6d72",
+      "bytes": 12742
+    },
+    "../piloto_sintetico/CONTRATO_P0_P2_V2.json": {
+      "sha256": "23f9013c5139f5480a18fce103ea802750e020706808b5f52256e5ee478c1415",
+      "bytes": 3770
+    },
+    "../piloto_sintetico/RUN_002/RESULT.json": {
+      "sha256": "02293a030529b43190b87b7d37940e3969fcf3d977e6c664f244d4969fd251a5",
+      "bytes": 18515
+    },
+    "../piloto_sintetico/RUN_002/SYNTHETIC_ARRAYS.npz": {
+      "sha256": "a54e8b4af0b63343910d8702f197a10c2ee4b6b2f7662aeb39082680f007020b",
+      "bytes": 5218208
+    },
+    "../piloto_sintetico/ENVIRONMENT_NATIVE_HASHES.json": {
+      "sha256": "c60bac88a6f893039466afe9a8c8a27421620148ac36af5d080b873f7207c1f7",
+      "bytes": 38789
+    },
+    "../piloto_sintetico/ERRATA_ALLOWLIST_RUN002.json": {
+      "sha256": "e10edcbe874f8ca9f5e843165eb9cdfd16b5147a72ab4c2083962149f5653187",
+      "bytes": 1036
+    },
+    "../../../proveniencia/REVISAO_PILOTO_SINTETICO_F3.md": {
+      "sha256": "dcc29357f11d0bbed33a2b6510d58f0da525e6b79610f66acdf606cae26ab368",
+      "bytes": 9135
+    },
+    "../p3_init_qualified_003/sources/gw/detector/noise_curves/aLIGO_O4_high_asd.txt": {
+      "sha256": "eb5ec9b081c3d86d2f4257b9aff6a57566d168b8a95e5e57b7909eebad021780",
+      "bytes": 71136
+    },
+    "../p3_init_preparation/CONTRATO_CONTROLE_INIT.json": {
+      "sha256": "ec8ca95137da8f27ffeb1636cbe6fe779463286d62b341387a23b33649ced6a9",
+      "bytes": 12962
+    },
+    "../p3_init_preparation/CONTROL_INIT_001/RESULT.json": {
+      "sha256": "dfd9318a2bfdfe6681968eb6cf814081ee1b874caa4321e43a401c99c18efe09",
+      "bytes": 5480
+    },
+    "../p3_init_preparation/MANIFESTO_RESULTADO_INIT.json": {
+      "sha256": "717e566264c9c7af2a9e80fd24721f07f0e083ba9f84fc84ca71e7937e972fd9",
+      "bytes": 4342
+    },
+    "audit_guard.py": {
+      "bytes": 4142,
+      "sha256": "ba7e8870e5935ce420013a5a123152bf2f99acc637dc33a139e9b776092f0d8c"
+    },
+    "result_acceptance.py": {
+      "bytes": 8235,
+      "sha256": "78dec147fd613a57af749e5167f1f85a52ebc271a4576be352fb759d18006a9a"
+    },
+    "src/pseob_source.py": {
+      "bytes": 8204,
+      "sha256": "4aa20038c1666156fb5a490a493c937930b0603c0932e51375a5b151c788fd60"
+    },
+    "prior_transform.py": {
+      "bytes": 1367,
+      "sha256": "adac7ad3036121eb9c192c37abb305ac088c9a530da04f2bf17f79f8b8a3ebe2"
+    },
+    "failure_audit.py": {
+      "bytes": 4329,
+      "sha256": "a521e7bdf047a7a3b6146e418cc6f82f8d5fc0a0193d0ef0fb88e33d7154d8ae"
+    },
+    "src/synthetic_adapter_v2.py": {
+      "bytes": 11883,
+      "sha256": "31b34a86a9f033b1f395139c7f20154284ede2a6bfe0f9adcb8d7fa312e98fd5"
+    },
+    "src/temporal_contract.py": {
+      "bytes": 1859,
+      "sha256": "c8f4ecbc28d4312e3885d61c14f174062c6055eee0bbd54897e725a18240b605"
+    },
+    "preload_npz_codec.py": {
+      "bytes": 1149,
+      "sha256": "7014b22f36ba9be21dc73fc63e562498ff19d24c964c84c77ebbb1846e7c5c02"
+    },
+    "init_detectors.py": {
+      "bytes": 4261,
+      "sha256": "95dfef3df297d981a1a56fda4e617a0595768c98bee96979dfc208db55dd8890"
+    },
+    "CONFIG_SYNTHETIC.json": {
+      "bytes": 2242,
+      "sha256": "844c11c27368fb9c321dd342272347a18636bcd56d6d0aea6ea1642610958093"
+    },
+    "RUNTIME_P3_READONLY.json": {
+      "bytes": 259011,
+      "sha256": "281eb3c4fb6d3e78a6405d7da6e051c2480efc98424e766260510e10bacce11e"
+    },
+    "INTERPRETER_PIN.json": {
+      "bytes": 254,
+      "sha256": "56d105948065500ac63c7be9f71a7e433f8026bdb64a0129bb0d997cd9a250cb"
+    },
+    "CODEC_CP437_PIN.json": {
+      "bytes": 322,
+      "sha256": "fd09b00998b1c2d77952a35eb14f91b71a9ee1da6a2d353f863e05c4f503c4ab"
+    },
+    "GEOMETRIA_PINADA.json": {
+      "bytes": 2604,
+      "sha256": "2ae02847448f609ded06c2f514d701157a66b7f1a70d22adf5d636b8a3c8cc78"
+    },
+    "DEPENDENCIA_FACTORY_PIN.json": {
+      "bytes": 291,
+      "sha256": "85ef4e61929308ae0d2ce236dfb380255dfa159d223c8c90dd86bb5a733afe64"
+    },
+    "prehook_imports.py": {
+      "bytes": 6696,
+      "sha256": "9486e3ff019011de4949c4174f92ca283fa9ca5902719396a58be5129166a84f"
+    },
+    "SYSTEM_STARTUP_PIN.json": {
+      "bytes": 882,
+      "sha256": "81d3076eb826c66a1795ead510febc12fd7d55738cab2bc52113b4845a887e8a"
+    },
+    "science_admission.py": {
+      "bytes": 6539,
+      "sha256": "59258e35d78401e213c2a047248c096aece845bb137c178727a9cafa57db4d65"
+    },
+    "driver_p3.py": {
+      "bytes": 17410,
+      "sha256": "280add270e8fb475f87694359c76e5364c2b46e7a970daa08a32c0e7c9f1e764"
+    },
+    "launch_p3.py": {
+      "bytes": 9685,
+      "sha256": "fd5a8f0883499820273b0d34a074d7362dd3343688c60d3b42ba7deb039de488"
+    },
+    "PREHOOK_PLAN.json": {
+      "bytes": 5438,
+      "sha256": "93a87d82a7145255413c7be47d15a895bce64907a302fcc8ac89a5a69e175018"
+    },
+    "../p3_startup_pin_preparation/RECIBO_ROOT_ACEITE_IMPORTS.json": {
+      "bytes": 2545,
+      "sha256": "366a9bfd1912b6581925cc9dd316335a7bf64af41a53435e73857217bf04a4c5"
+    },
+    "budget_counters.py": {
+      "bytes": 1982,
+      "sha256": "c151177c872be06fff834c8a673a18b562b3132676c0999ae8a348e6f5fcf572"
+    },
+    "recovery_diagnostics.py": {
+      "bytes": 3666,
+      "sha256": "0f0aaccd64301d3843530c6754fbe39446400644e54fe167cd1cbc11e7751cf9"
+    },
+    "process_supervision.py": {
+      "bytes": 3061,
+      "sha256": "5359850abd4cbee0ab6aac0687b8834552b69acbc65e3a1c34be9c50797f896c"
+    },
+    "PLANO_ACESSO_REQUERIDO.json": {
+      "bytes": 261798,
+      "sha256": "92d60f33f885d27e349619c34db0a1e83d56de976f46cca2b8d8f05d5b4b15da"
+    }
+  },
+  "coordination_receipt_required": {
+    "path": "ROOT_DECISION.json",
+    "created": false,
+    "schema_enforced_in": "science_admission.admit",
+    "binding": [
+      "approved",
+      "action",
+      "preparation_id",
+      "execution_id",
+      "contract_sha256",
+      "manifest_sha256",
+      "root_linux",
+      "execution_directory",
+      "jobs",
+      "data_access",
+      "design_choice",
+      "resource_envelope_approved",
+      "recovery_diagnostic_approved",
+      "input_access_plan_sha256",
+      "operator_approval_reference"
+    ]
+  },
+  "allowed_status_claim": "REAL static package and documentary comparisons; OPEN input integrity, candidate execution, posterior recovery/convergence, coverage and PE D.",
+  "revision": "Proposal A only; limits and visible recovery summaries plus P3-01/P3-02 correction. No scientific source/prior/seed/data alteration, no v388 migration.",
+  "revised_utc": "2026-10-06T18:51:47.518418+00:00",
+  "failure_receipt_policy": {
+    "source_returned_none": "Count independently; raw P0-P2 EDOM counter means None returns only and is named source_returned_none_counter_raw. Preserved EDOM_LOG.jsonl filename is not a total of all domain failures.",
+    "recognized_domain_exception": "After a counted native attempt, errno EDOM or explicit Input domain error is classified as recognized, with type/message/parameters.",
+    "indeterminate_exception": "Other exceptions after a native attempt remain indeterminate; a completed native-call counter alone does not prove the exception originated in C.",
+    "guards": "Pre-native temporal/budget failures are separate; failures outside the source wrapper are application events.",
+    "no_double_count": "Same exception object propagated from source to outer handler is recorded once. None guard raises and is likewise deduplicated. Counts across categories are not added as EDOM.",
+    "total_EDOM": "domain_error_total=null; never infer a total from None or generic exceptions.",
+    "behavior": "Keep catch_waveform_errors=False and propagate/abort. The wrapper binds to wf.frequency_domain_source_model, preserves signature/args/kwargs/fixed zeros, never returns -inf and does not retry.",
+    "budget_status": "Use the recorded exception kind with its native-attempt stage; never reclassify a generic native timeout as a pre-native budget event. Native reservations occur before the unchanged native-call boundary; completion count is separate."
+  },
+  "prior_design_lineage": {
+    "sha256": "dddeeae653965bf67375b22eb2b65e1ede93a54f01dbddbb1588a52273fc981f",
+    "bytes": 13717
+  },
+  "derived_from_failed_V2": {
+    "contract": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_preparacao\\CONTRATO_P3.json",
+      "sha256": "8a52cc075cd7dfb3102f47f40f854ca89366a0636f78153abb42706adfcc91e4",
+      "bytes": 15666
+    },
+    "failure_receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_preparacao\\RECIBO_EXECUCAO_P3_V2.json",
+      "sha256": "d8b601584a0bde4690bbd0a1056b5437b637c6a575770b5f7c0e663ccee07d2c",
+      "bytes": 13693
+    },
+    "old_jobs": [
+      "P3_GR_001",
+      "P3_RB_001"
+    ],
+    "old_state_preserved": true,
+    "old_jobs_reopened": false
+  },
+  "codec_review": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_p3\\REVISAO_P3_CODEC_RECIBO.json",
+    "sha256": "d1a53d950bad04d6a7f1d4c255b43d44efdc51d8be5c64d046d883f0503b225e",
+    "bytes": 22013
+  },
+  "codec_candidate_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_reparo_inicializacao\\MANIFESTO_CANDIDATO_REPARO.json",
+    "sha256": "48e620b29bac696c2a6ea900bb8d57d679f525068f897249438be20515e574ea",
+    "bytes": 6237
+  },
+  "codec_preload": {
+    "helper": "preload_npz_codec.py",
+    "pin": "CODEC_CP437_PIN.json",
+    "stage": "After exact runtime checks and fixed imports, before installing the unchanged read hook.",
+    "no_directory_grant": true
+  },
+  "derived_from_failed_CODEC002": {
+    "contract": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\CONTRATO_P3.json",
+      "bytes": 17581,
+      "sha256": "6d2b6be5224b16bb8c267838f8bbe4023b17c9bd0b4614421146e4f5685fef3a"
+    },
+    "terminal_receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\RECIBO_EXECUCAO_P3_CODEC_002.json",
+      "bytes": 8306,
+      "sha256": "840092e44a578070850b6a15973d2c7095bf60bad9530726ef2720f0f17023d3"
+    },
+    "old_jobs": [
+      "P3_GR_CODEC_002",
+      "P3_RB_CODEC_002"
+    ],
+    "old_jobs_reopened": false,
+    "old_files_unchanged": true
+  },
+  "qualified_initialization": {
+    "map_sequence": 465,
+    "alternative": "B",
+    "result": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_preparation\\CONTROL_INIT_001\\RESULT.json",
+      "bytes": 5480,
+      "sha256": "dfd9318a2bfdfe6681968eb6cf814081ee1b874caa4321e43a401c99c18efe09"
+    },
+    "manifest": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_preparation\\MANIFESTO_RESULTADO_INIT.json",
+      "bytes": 4342,
+      "sha256": "717e566264c9c7af2a9e80fd24721f07f0e083ba9f84fc84ca71e7937e972fd9"
+    },
+    "helper": "init_detectors.py",
+    "geometry": "GEOMETRIA_PINADA.json",
+    "dependency": "DEPENDENCIA_FACTORY_PIN.json",
+    "dependency_scope": "Exact default ASD is initialization-only; replaced by qualified analytic NPZ PSD before likelihood construction and rechecked afterward.",
+    "control_zero_blocks_transported": false,
+    "no_monkeypatch": true,
+    "source_signature_policy": "Unchanged adapter: generator constructor binds original synthetic_only220 and computes source_parameter_keys before the unchanged FailureAudit wrapper is assigned. No compatibility shim.",
+    "dynamic_boundary": "Previous control evaluated no waveform/likelihood/sampler. This package has not been executed; initial sampling and prior-dependent waveform validity remain unmeasured.",
+    "execution_permission": false
+  },
+  "preparation_id": "6a99afd6-831c-4fa5-9190-cef5db67e52c",
+  "mode": "SYNTHETIC_ONLY",
+  "observed_data_allowed": false,
+  "expected_linux_root": "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_scientific_budgetA_preparation",
+  "consumption_justification": {
+    "status": "PROPOSED_AWAITING_SPECIFIC_OPERATOR_DECISION",
+    "alternative": "A",
+    "selected_for_consumption": false,
+    "consumption_authorized": false,
+    "material_delta": "Tenfold external likelihood/native-call caps, fourfold work/CPU limits; same sampler, prior, seed, source and frozen inputs; no empirical efficiency claim",
+    "admission_guard": "Exact future external decision must approve design A, envelope, weak diagnostic and exact access plan, pin contract/manifest and reference the operator approval; no force/bypass/fallback",
+    "scientific_gain": "Opportunity for additional constrained-prior exploration; adequate convergence/recovery not demonstrated; null/incomplete outcome remains possible"
+  },
+  "imports_qualification_evidence": {
+    "qualification_id": "5e391d57-ae76-4aa7-8dfe-648c349c3994",
+    "acceptance_relative_path": "../p3_startup_pin_preparation/RECIBO_ROOT_ACEITE_IMPORTS.json",
+    "acceptance_pin": {
+      "bytes": 2545,
+      "sha256": "366a9bfd1912b6581925cc9dd316335a7bf64af41a53435e73857217bf04a4c5"
+    },
+    "use": "Documentary evidence only, not imported object or permission to run PE"
+  },
+  "operational_acceptance_not_scientific": {
+    "validator": "result_acceptance.py revised for P3-02",
+    "exit_zero_may_mean": [
+      "CLEAN_PARTIAL",
+      "CLEAN_CONVERGED_NUMERICAL_ONLY"
+    ],
+    "both_cases_needed_for_paired_numerical_criteria": true,
+    "recovery_independent_review_required": true,
+    "F3_completed": false,
+    "recovery_qualified": false,
+    "D_ready": false
+  },
+  "external_integrity": "Historical expected pins only, raw targets not accessed in this preparation. Prior input rejection remains operative until exact separate permission.",
+  "case_id_semantics": "GR_GAUSS and RB_GAUSS are descriptive slots only, not issued jobs/request IDs. Future execution UUID belongs solely to separately approved external decision.",
+  "numeric_thresholds": {
+    "dlogz": 0.1,
+    "weighted_ESS_min": 100,
+    "nonflat_live_span_strict_min": 0
+  },
+  "stopping_and_acceptance": {
+    "numerical_criteria_retained": {
+      "numerical_stop": "delta_logz<0.1 before final live points, non-flat live likelihood, below hard call cap, no error.",
+      "sampling_diagnostic": "weighted ESS>=100 after final live points; ESS low is explicitly incomplete.",
+      "not_sufficient_for": [
+        "coverage",
+        "global-mode discovery",
+        "population bias",
+        "D readiness",
+        "physical verdict"
+      ],
+      "posterior_summary_rule": "Driver saves weighted raw diagnostics only; independent review interprets recovery. No automatic pass from truth inclusion."
+    },
+    "validity": "No audit violation, unknown read, native/EDOM/None/nonfinite/temporal error, identity/pin mismatch; exact finalized receipts and certain process termination. Partial operational receipt is not scientific success.",
+    "paired_numerical_acceptance": "Both cases clean; delta_logz<0.1 before final live addition, non-flat likelihood, below external hard call cap, weighted ESS>=100 after addition; no global-mode certificate claimed.",
+    "budget": "External pre-evaluation counters include initial live points. No extensions. Cooperative budget partial only when clean and terminal identity certain.",
+    "second_case": "Preplanned RB after clean converged or clean incomplete GR; any failure or uncertainty stops remaining campaign. No threshold/seed/algorithm adaptation.",
+    "no_retry_resume_fallback": true,
+    "recovery": {
+      "target": "dtau220 only",
+      "weighted_quantile_definition": "inf{x:F_w(x)>=p}; normalize weights; sort by dtau220; no random resampling or interpolation",
+      "fields": [
+        "q05",
+        "q50",
+        "q95",
+        "q95_minus_q05",
+        "q50_minus_truth",
+        "F_w_truth",
+        "mass_lower_prior_edge",
+        "mass_upper_prior_edge",
+        "W90_divided_by_2p52"
+      ],
+      "prior_edge_intervals": [
+        [
+          -0.8,
+          -0.66
+        ],
+        [
+          1.86,
+          2.0
+        ]
+      ],
+      "edge_endpoints": "included",
+      "proposed_favorable_diagnostic": "truth in [q05,q95] AND W90<2.52; only after clean numerical convergence and independent interpretation of shape/edges/limitations",
+      "strength": "Weak case-specific compatibility plus contraction; not automatic scientific pass; near-prior width may still qualify weakly and must be reported",
+      "ESS_limit": "ESS100 does not certify quantile accuracy or tails",
+      "if_not_met": "RECOVERY_NOT_ESTABLISHED_FOR_THIS_REALIZATION, not physical falsification or coverage result",
+      "operator_decision_required_before_future_posterior": "accept or alter this visible new diagnostic before execution"
+    }
+  },
+  "diagnostic_proposal_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_scientific_design_proposal\\DESENHO_PROPOSTO.json",
+    "bytes": 13066,
+    "sha256": "8d5c083d2afca30a5b06cc85d52915cd3d1892d9f5c894e2aaf5c56c5866dfa8"
+  },
+  "prior_consumption_justification_history": {
+    "status": "NOT_JUSTIFIED_UNDER_INHERITED_ENVELOPE",
+    "admission_guard": "admit refuses before external input reads; enabling requires separately reviewed contract with status JUSTIFIED_BY_SEPARATE_REVIEW and explicit ROOT decision, never this preparation message",
+    "material_operational_delta": "Persistent audit latch/checkpoints/FD journal, strict result acceptance, known pinned pre-hook including exact startup, root/manifest/decision/parent-process binding",
+    "scientific_gain_demonstrated": false,
+    "root_assessment": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\RECIBO_ROOT_P3_ADEQUACAO_ENVELOPE.json",
+      "bytes": 6531,
+      "sha256": "525487bbeeda8bd82d586341bf87eec5dbdafeeef3f347e7c404f359a5058e11"
+    },
+    "prior_result": {
+      "status": "STOPPED_NOT_CONVERGED",
+      "likelihood_calls": 9738,
+      "native_calls": 9738,
+      "wall_s": 857.9152041240595,
+      "cpu_s": 857.333447926,
+      "delta_logz_before_live_addition": 57.275736336318445,
+      "weighted_ESS": null,
+      "blocked_operation_count": 5,
+      "scientifically_accepted": false
+    },
+    "limitation": "Prior run not operationally accepted; no assertion future trajectory bitwise identical or that convergence is impossible. No evidence repairs improve posterior exploration.",
+    "preferred_next": "Review separate documentary recovery design, not a repeat of the inherited envelope by default."
+  },
+  "supervisor_policy": {
+    "work_s": 14400,
+    "child_finalization_grace_s": 5,
+    "kill_reap_reserved_s": 4,
+    "receipt_reserve_s": 1,
+    "total_per_case_nominal_s": 14410,
+    "total_collection_nominal_s": 28820,
+    "start": "supervisor main before admission; per-case before output/CLAIM IO",
+    "cpu": "RLIMIT_CPU counts total child process CPU; soft13200/hard13205, same limits also used at cooperative budget",
+    "finalization": "check monotonic deadline after result/process receipt persistence, hashing and flushed terminal output; external nonzero or failure marker invalidates any provisional success",
+    "uncertain_termination": "stop entire collection, no retry/remaining case",
+    "uncontrollable_limit": "SIGKILL, process creation interruption before an owned Popen handle, host failure and uninterruptible OS I/O are not hard-contained; absence of conclusive external exit/receipts remains uncertain",
+    "logs": "stdout/stderr file capture preserved; not described as a hard disk/output quota",
+    "posix_signal_mask": "Parent defers SIGINT/SIGTERM around Popen→handle assignment. Child inherits their blocked mask; Popen.restore_signals does not restore it. Current cleanup intentionally uses unmaskable SIGKILL for the owned group. Child SIGALRM/SIGXCPU remain unblocked. No preexec_fn. Verified by source inspection only, not a real POSIX-process test."
+  },
+  "aggregate_maxima_proposed": {
+    "jobs": 2,
+    "likelihood_calls": 200000,
+    "waveform_wrapper_calls": 200000,
+    "sum_supervisor_nominal_seconds": 28820,
+    "sum_CPU_hard_seconds": 26410,
+    "concurrency": 1,
+    "resources_are_policy_not_cost_prediction": true
+  },
+  "configuration_32_semantics": "CONFIG_SYNTHETIC.max_native_calls=32 belongs to frozen P0/P2 adapter metadata checked by validate_config. generator does not use it as P3 counter; unchanged. P3 external counters in driver and source_before_waveform enforce100000.",
+  "base_contract_id_reference_only": "ORDEM018_F3_OPERATIONAL_CANDIDATE_3249312d-d7b6-4a04-93d6-81f65d4f4945"
+}

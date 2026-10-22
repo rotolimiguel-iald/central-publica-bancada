@@ -1,0 +1,83 @@
+import took 27.2s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T094226_688763Z\CompactSchwartzPartitionR1.lean:29:63: error: Application type mismatch: The argument
+  ∞
+has type
+  ℕ∞ω
+but is expected to have type
+  ℕ∞
+in the application
+  smooth f ∞
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T094226_688763Z\CompactSchwartzPartitionR1.lean:39:17: warning: `SchwartzMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T094226_688763Z\CompactSchwartzPartitionR1.lean:39:45: error(lean.unknownIdentifier): Unknown constant `HasCompactSupport.toSchwartzMap_apply`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T094226_688763Z\CompactSchwartzPartitionR1.lean:35:4: error: unsolved goals
+case neg
+F ι : Type
+inst✝² : NormedAddCommGroup F
+inst✝¹ : NormedSpace ℝ F
+inst✝ : Fintype ι
+f : 𝓢(E, F)
+hf : HasCompactSupport ⇑f
+U : ι → Set E
+ho : ∀ (i : ι), IsOpen (U i)
+hcover : tsupport ⇑f ⊆ ⋃ i, U i
+ρ : SmoothPartitionOfUnity ι 𝓘(ℝ, E) E (closure (support ⇑f))
+hρ : ρ.IsSubordinate U
+g : ι → E → F := fun i x => (ρ i) x • f x
+hc : ∀ (i : ι), HasCompactSupport (g i)
+hd : ∀ (i : ι), ContDiff ℝ ∞ (g i)
+parts : ι → 𝓢(E, F) := fun i => ⋯.toSchwartzMap ⋯
+x : E
+hx : ¬f x = 0
+hsum : ∑ i, (ρ i) x = 1
+⊢ ∑ i, (⋯.toSchwartzMap ⋯) x = f x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T094226_688763Z\CompactSchwartzPartitionR1.lean:40:8: warning: This simp argument is unused:
+  ← Finset.sum_smul
+
+Hint: Omit it from the simp argument list.
+  simp only [̵S̵c̵h̵w̵a̵r̵t̵z̵M̵a̵p̵.̵s̵u̵m̵_̵a̵p̵p̵l̵y̵,̵p̵a̵r̵t̵s̵,̵H̵a̵s̵C̵o̵m̵p̵a̵c̵t̵S̵u̵p̵p̵o̵r̵t̵.̵t̵o̵S̵c̵h̵w̵a̵r̵t̵z̵M̵a̵p̵_̵a̵p̵p̵l̵y̵,̵g̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵←̵ ̵F̵i̵n̵s̵e̵t̵.̵s̵u̵m̵_̵s̵m̵u̵l̵,̵h̵s̵u̵m̵,̵o̵n̵e̵_̵s̵m̵u̵l̵]̵[̲S̲c̲h̲w̲a̲r̲t̲z̲M̲a̲p̲.̲s̲u̲m̲_̲a̲p̲p̲l̲y̲,̲ ̲p̲a̲r̲t̲s̲,̲ ̲H̲a̲s̲C̲o̲m̲p̲a̲c̲t̲S̲u̲p̲p̲o̲r̲t̲.̲t̲o̲S̲c̲h̲w̲a̲r̲t̲z̲M̲a̲p̲_̲a̲p̲p̲l̲y̲,̲ ̲g̲,̲ ̲h̲s̲u̲m̲,̲
+  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲o̲n̲e̲_̲s̲m̲u̲l̲]̲
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T094226_688763Z\CompactSchwartzPartitionR1.lean:40:26: warning: This simp argument is unused:
+  hsum
+
+Hint: Omit it from the simp argument list.
+  simp only [SchwartzMap.sum_apply, ̲parts, ̲HasCompactSupport.toSchwartzMap_apply, ̲g,
+          ← Finset.sum_smul,h̵s̵u̵m̵,̵ ̲one_smul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T094226_688763Z\CompactSchwartzPartitionR1.lean:40:31: warning: This simp argument is unused:
+  one_smul
+
+Hint: Omit it from the simp argument list.
+  simp only [SchwartzMap.sum_apply, ̲parts, ̲HasCompactSupport.toSchwartzMap_apply, ̲g,
+          ← Finset.sum_smul, ̲hsum,̵o̵n̵e̵_̵s̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.CompactSchwartzPartition.finite_partition' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0818ms
+	blocked (unaccounted) 414ms
+	congr simp thm 1.18ms
+	elaboration 13.8ms
+	fix level params 0.0943ms
+	import 27.2s
+	initialization 30.4ms
+	instantiate metavars 0.3ms
+	interpretation 4.12s
+	let-to-have transformation 0.0488ms
+	linting 3.48ms
+	overlappingInstancesLinter 24.4ms
+	parsing 1.65ms
+	process pre-definitions 0.959ms
+	share common exprs 1.01ms
+	simp 27.3ms
+	tactic execution 53.6ms
+	tacticAnalysis 15.6ms
+	type checking 14.4ms
+	typeclass inference 348ms

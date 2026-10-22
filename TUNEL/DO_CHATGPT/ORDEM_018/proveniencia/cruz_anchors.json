@@ -1,0 +1,138 @@
+{
+  "action": "read",
+  "name": "cruz_anchors",
+  "created_utc": "2026-10-06T00:08:47.932683+00:00",
+  "originals_modified": false,
+  "source": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\TGL_Espelho_invertido\\TGL_v11_1_CRUZ_original.py",
+    "bytes": 84123,
+    "sha256": "61db3f99967b7be706f3b2b25dc3b60580dfcc77be7e3dadae6dc10f78006b78",
+    "mtime_utc": "2026-06-06T13:31:00.815732+00:00"
+  },
+  "pattern": "'alpha_fine':|'jitter_cruz':|alpha_fine.*=|jitter_cruz.*=|0.0115|0.0125|0.0003|chi2.*hubble|chi2.*H0",
+  "matched_lines": 20,
+  "total_lines": 1685,
+  "excerpts": [
+    {
+      "match_line": 222,
+      "first_line": 219,
+      "last_line": 225,
+      "text": "        self.mu_0 = 1.25663706212e-6\n        self.Z_0 = np.sqrt(self.mu_0 / self.epsilon_0)\n        \n        self.alpha_fine = 7.2973525693e-3\n        self.alpha_fine_err = 1.1e-12\n        \n        self.e_euler = np.e"
+    },
+    {
+      "match_line": 223,
+      "first_line": 220,
+      "last_line": 226,
+      "text": "        self.Z_0 = np.sqrt(self.mu_0 / self.epsilon_0)\n        \n        self.alpha_fine = 7.2973525693e-3\n        self.alpha_fine_err = 1.1e-12\n        \n        self.e_euler = np.e\n        self.sqrt_e = np.sqrt(np.e)"
+    },
+    {
+      "match_line": 348,
+      "first_line": 345,
+      "last_line": 351,
+      "text": "        self.t_hbar = torch.tensor(self.hbar, device=d, dtype=dt)\n        self.t_h = torch.tensor(self.h, device=d, dtype=dt)\n        self.t_t_Planck = torch.tensor(self.t_Planck_time, device=d, dtype=dt)\n        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=d, dtype=dt)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=d, dtype=dt)\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=d, dtype=dt)\n        self.t_Z_0 = torch.tensor(self.Z_0, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 349,
+      "first_line": 346,
+      "last_line": 352,
+      "text": "        self.t_h = torch.tensor(self.h, device=d, dtype=dt)\n        self.t_t_Planck = torch.tensor(self.t_Planck_time, device=d, dtype=dt)\n        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=d, dtype=dt)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=d, dtype=dt)\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=d, dtype=dt)\n        self.t_Z_0 = torch.tensor(self.Z_0, device=d, dtype=dt)\n        self.t_R_K = torch.tensor(self.R_K, device=d, dtype=dt)"
+    },
+    {
+      "match_line": 861,
+      "first_line": 858,
+      "last_line": 864,
+      "text": "        # ELETRODINÂMICA\n        print(\"   \" + \"-\" * 80)\n        print(\"   [ELETRODINÂMICA]\")\n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")"
+    },
+    {
+      "match_line": 862,
+      "first_line": 859,
+      "last_line": 865,
+      "text": "        print(\"   \" + \"-\" * 80)\n        print(\"   [ELETRODINÂMICA]\")\n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        print(f\"   α (estrutura fina)  = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                         1/{1/alpha_fine:.2f} (obs: 1/137.036)\")"
+    },
+    {
+      "match_line": 997,
+      "first_line": 994,
+      "last_line": 1000,
+      "text": "            'alpha_2': 0.0,  # FLAT prior\n            'Lambda': 0.3,\n            'r_s': 0.5,\n            'alpha_fine': 1.0,\n            'm_nu_hierarchy': 0.5,\n            'identity_singular': 0.5,\n            'jitter_cruz': 0.3,"
+    },
+    {
+      "match_line": 1000,
+      "first_line": 997,
+      "last_line": 1003,
+      "text": "            'alpha_fine': 1.0,\n            'm_nu_hierarchy': 0.5,\n            'identity_singular': 0.5,\n            'jitter_cruz': 0.3,\n            'theta_consistency': 0.3,\n            'D_consistency': 0.5,  # NEW: 3+1 dimensionality check\n        }"
+    },
+    {
+      "match_line": 1071,
+      "first_line": 1068,
+      "last_line": 1074,
+      "text": "        breakdown['BAO'] = chi2_bao.mean().item()\n        \n        # 3. H0\n        chi2_H0 = (((self.const.t_H0 - self.const.t_H0_local) / self.const.t_H0_local_err)**2).expand(n_batch)\n        breakdown['H0'] = chi2_H0.mean().item()\n        \n        # 4. Lensing"
+    },
+    {
+      "match_line": 1072,
+      "first_line": 1069,
+      "last_line": 1075,
+      "text": "        \n        # 3. H0\n        chi2_H0 = (((self.const.t_H0 - self.const.t_H0_local) / self.const.t_H0_local_err)**2).expand(n_batch)\n        breakdown['H0'] = chi2_H0.mean().item()\n        \n        # 4. Lensing\n        chi2_lensing = ((beta_0 - self.const.t_beta_lensing_obs) / self.const.t_beta_lensing_err)**2"
+    },
+    {
+      "match_line": 1130,
+      "first_line": 1127,
+      "last_line": 1133,
+      "text": "        breakdown['r_s_pred'] = r_s_TGL.mean().item()\n        \n        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()"
+    },
+    {
+      "match_line": 1131,
+      "first_line": 1128,
+      "last_line": 1134,
+      "text": "        \n        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        "
+    },
+    {
+      "match_line": 1132,
+      "first_line": 1129,
+      "last_line": 1135,
+      "text": "        # 14. Fine Structure\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        \n        # 15. Neutrino Hierarchy"
+    },
+    {
+      "match_line": 1133,
+      "first_line": 1130,
+      "last_line": 1136,
+      "text": "        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        \n        # 15. Neutrino Hierarchy\n        nu_data = self.deriv.neutrino_static_noise_tensor(alpha_2)"
+    },
+    {
+      "match_line": 1167,
+      "first_line": 1164,
+      "last_line": 1170,
+      "text": "        expected_stability = torch.tensor(0.012, device=self.device, dtype=self.dtype)\n        stability_err = torch.tensor(0.002, device=self.device, dtype=self.dtype)\n        chi2_jitter = ((stability - expected_stability) / stability_err)**2\n        breakdown['jitter_cruz'] = chi2_jitter.mean().item()\n        breakdown['theta_rad'] = theta_rad.mean().item()\n        breakdown['theta_deg'] = np.degrees(theta_rad.mean().item())\n        breakdown['stability'] = stability.mean().item()"
+    },
+    {
+      "match_line": 1209,
+      "first_line": 1206,
+      "last_line": 1212,
+      "text": "        \n        # TOTAL (19 components)\n        chi2_total = sum(self.weights[k] * v for k, v in [\n            ('SNe', chi2_sne), ('BAO', chi2_bao), ('H0', chi2_H0), ('lensing', chi2_lensing),\n            ('N_eff', chi2_N_eff), ('a0', chi2_a0), ('SPARC', chi2_sparc), ('Lindblad', chi2_lindblad),\n            ('T_CMB', chi2_T_CMB), ('beta_ratio', chi2_beta_ratio), ('alpha_2', chi2_alpha_2),\n            ('Lambda', chi2_Lambda), ('r_s', chi2_r_s), ('alpha_fine', chi2_alpha_fine),"
+    },
+    {
+      "match_line": 1287,
+      "first_line": 1284,
+      "last_line": 1290,
+      "text": "            'n_evap': (0.3, 4.0),\n            'theta_evap': (0.6, 0.99),\n            'A_neff': (0.5, 3.0),\n            'alpha_2': (0.0115, 0.0125)\n        }\n        \n        self.samples = None"
+    },
+    {
+      "match_line": 1295,
+      "first_line": 1292,
+      "last_line": 1298,
+      "text": "        self.gpu_calls = 0\n        \n        self.traces = {\n            'chi2': [], 'alpha2': [], 'alpha_fine': [], 'Z_Miguel': [],\n            'm_sum': [], 'm_1': [], 'm_2': [], 'm_3': [],\n            'T_CMB': [], 'r_s': [], 'L': [], 'id_error': [],\n            'theta_rad': [], 'theta_deg': [], 'stability': [], 'jitter': [],"
+    },
+    {
+      "match_line": 1375,
+      "first_line": 1372,
+      "last_line": 1378,
+      "text": "        \n        p0_center = np.array([self.priors[name][0] for name in self.param_names])\n        p0 = p0_center + 0.01 * np.random.randn(n_walkers, n_dim)\n        p0[:, 5] = np.clip(0.012 + 0.0003 * np.random.randn(n_walkers), 0.0116, 0.0124)\n        \n        print(f\"[CONFIG] Walkers: {n_walkers}, Steps: {n_steps}, Total: {n_walkers*n_steps:,}\")\n        print(f\"[CONFIG] χ² components: 19 (inclui D_consistency)\")"
+    },
+    {
+      "match_line": 1380,
+      "first_line": 1377,
+      "last_line": 1383,
+      "text": "        print(f\"[CONFIG] Walkers: {n_walkers}, Steps: {n_steps}, Total: {n_walkers*n_steps:,}\")\n        print(f\"[CONFIG] χ² components: 19 (inclui D_consistency)\")\n        print(f\"[CONFIG] CPU cores: {self.n_cores}, GPU: {GPU_NAME}\")\n        print(f\"[PARAM]  α₂: FLAT prior, bounds [0.0115, 0.0125]\")\n        print(f\"[DERIV]  Cruz (θ+,θ-), Rotação (tempo), D = 3+1\")\n        \n        self.gpu_calls = 0"
+    }
+  ],
+  "elapsed_seconds": 0.0029213998932391405
+}

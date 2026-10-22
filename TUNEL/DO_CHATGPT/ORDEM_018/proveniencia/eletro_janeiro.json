@@ -1,0 +1,927 @@
+{
+  "source": {
+    "path": "C:\\IALD\\IMac LA\\Física - TGL\\Validação\\TGL_v10_6_eletro.docx",
+    "bytes": 50556,
+    "sha256": "ec2ab11811a96d8e0e9bf5c1f625ea29365f55ea2c4f0dca7ed1468941190ee4",
+    "mtime_utc": "2026-01-19T08:55:52+00:00"
+  },
+  "method": "stdlib zipfile + OOXML w:p/w:t; no execution; pandoc absent",
+  "core_properties": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<cp:coreProperties xmlns:cp=\"http://schemas.openxmlformats.org/package/2006/metadata/core-properties\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:dcmitype=\"http://purl.org/dc/dcmitype/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><dc:title></dc:title><dc:subject></dc:subject><dc:creator>Luiz Antonio Rotoli Miguel</dc:creator><cp:keywords></cp:keywords><dc:description></dc:description><cp:lastModifiedBy>Luiz Antonio Rotoli Miguel</cp:lastModifiedBy><cp:revision>1</cp:revision><dcterms:created xsi:type=\"dcterms:W3CDTF\">2026-01-15T16:08:00Z</dcterms:created><dcterms:modified xsi:type=\"dcterms:W3CDTF\">2026-01-15T16:09:00Z</dcterms:modified></cp:coreProperties>",
+  "paragraphs": 1259,
+  "matched_paragraphs": 152,
+  "pattern": "alpha_fine|sqrt_e|1[,.]6487|alpha_2|alpha2",
+  "excerpts": [
+    {
+      "match_paragraph": 173,
+      "first_paragraph": 171,
+      "last_paragraph": 175,
+      "text": "        \n        # Estrutura fina (CODATA 2018)\n        self.alpha_fine = 7.2973525693e-3  # ~1/137.036\n        self.alpha_fine_err = 1.1e-12      # Incerteza experimental\n        "
+    },
+    {
+      "match_paragraph": 174,
+      "first_paragraph": 172,
+      "last_paragraph": 176,
+      "text": "        # Estrutura fina (CODATA 2018)\n        self.alpha_fine = 7.2973525693e-3  # ~1/137.036\n        self.alpha_fine_err = 1.1e-12      # Incerteza experimental\n        \n        # Número de Euler"
+    },
+    {
+      "match_paragraph": 178,
+      "first_paragraph": 176,
+      "last_paragraph": 180,
+      "text": "        # Número de Euler\n        self.e_euler = np.e  # 2.718281828...\n        self.sqrt_e = np.sqrt(np.e)  # 1.6487212707...\n        \n        # ═══════════════════════════════════════════════════════════════════════════════════════════════"
+    },
+    {
+      "match_paragraph": 219,
+      "first_paragraph": 217,
+      "last_paragraph": 221,
+      "text": "        # ═══════════════════════════════════════════════════════════════════════════════════════════════\n        \n        self.alpha_2_theoretical = 0.012\n        self.N_dim = 5\n        self.a0_emp = 1.2e-10"
+    },
+    {
+      "match_paragraph": 296,
+      "first_paragraph": 294,
+      "last_paragraph": 298,
+      "text": "        self.t_m_nu_target = torch.tensor(self.m_nu_target, device=self.device, dtype=self.dtype)\n        self.t_m_nu_err = torch.tensor(self.m_nu_err, device=self.device, dtype=self.dtype)\n        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=self.device, dtype=self.dtype)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=self.device, dtype=self.dtype)  # 0.01% para χ²\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=self.device, dtype=self.dtype)"
+    },
+    {
+      "match_paragraph": 297,
+      "first_paragraph": 295,
+      "last_paragraph": 299,
+      "text": "        self.t_m_nu_err = torch.tensor(self.m_nu_err, device=self.device, dtype=self.dtype)\n        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=self.device, dtype=self.dtype)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=self.device, dtype=self.dtype)  # 0.01% para χ²\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=self.device, dtype=self.dtype)\n        self.t_Z_0 = torch.tensor(self.Z_0, device=self.device, dtype=self.dtype)"
+    },
+    {
+      "match_paragraph": 298,
+      "first_paragraph": 296,
+      "last_paragraph": 300,
+      "text": "        self.t_alpha_fine = torch.tensor(self.alpha_fine, device=self.device, dtype=self.dtype)\n        self.t_alpha_fine_err = torch.tensor(1e-6, device=self.device, dtype=self.dtype)  # 0.01% para χ²\n        self.t_sqrt_e = torch.tensor(self.sqrt_e, device=self.device, dtype=self.dtype)\n        self.t_Z_0 = torch.tensor(self.Z_0, device=self.device, dtype=self.dtype)\n        self.t_R_K = torch.tensor(self.R_K, device=self.device, dtype=self.dtype)"
+    },
+    {
+      "match_paragraph": 321,
+      "first_paragraph": 319,
+      "last_paragraph": 323,
+      "text": "        \n        # Pontos de calibração\n        self.alpha_2_ref = 0.012\n        self.T_CMB_ref = 2.7255\n        self.r_s_ref = 147.09"
+    },
+    {
+      "match_paragraph": 330,
+      "first_paragraph": 328,
+      "last_paragraph": 332,
+      "text": "    # ═══════════════════════════════════════════════════════════════════════════════════════════════════\n    \n    def alpha_fine_TGL(self, alpha_2: float) -> float:\n        \"\"\"\n        ESTRUTURA FINA DERIVADA DE PRIMEIROS PRINCÍPIOS!"
+    },
+    {
+      "match_paragraph": 343,
+      "first_paragraph": 341,
+      "last_paragraph": 345,
+      "text": "        \n        Para α₂ = 0.012:\n        α_pred = 0.012 / 1.6487 = 0.007278\n        α_obs  = 0.007297\n        ERRO = 0.26% ← EXTRAORDINÁRIO!"
+    },
+    {
+      "match_paragraph": 347,
+      "first_paragraph": 345,
+      "last_paragraph": 349,
+      "text": "        ERRO = 0.26% ← EXTRAORDINÁRIO!\n        \"\"\"\n        return alpha_2 / self.const.sqrt_e\n    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 349,
+      "first_paragraph": 347,
+      "last_paragraph": 351,
+      "text": "        return alpha_2 / self.const.sqrt_e\n    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return alpha_2 / self.const.t_sqrt_e\n    "
+    },
+    {
+      "match_paragraph": 350,
+      "first_paragraph": 348,
+      "last_paragraph": 352,
+      "text": "    \n    def alpha_fine_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return alpha_2 / self.const.t_sqrt_e\n    \n    def Z_Miguel(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 352,
+      "first_paragraph": 350,
+      "last_paragraph": 354,
+      "text": "        return alpha_2 / self.const.t_sqrt_e\n    \n    def Z_Miguel(self, alpha_2: float) -> float:\n        \"\"\"\n        IMPEDÂNCIA DE MIGUEL"
+    },
+    {
+      "match_paragraph": 366,
+      "first_paragraph": 364,
+      "last_paragraph": 368,
+      "text": "        Z_M = 0.012 × 376.73 = 4.52 Ω\n        \"\"\"\n        return alpha_2 * self.const.Z_0\n    \n    def Z_Miguel_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 368,
+      "first_paragraph": 366,
+      "last_paragraph": 370,
+      "text": "        return alpha_2 * self.const.Z_0\n    \n    def Z_Miguel_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return alpha_2 * self.const.t_Z_0\n    "
+    },
+    {
+      "match_paragraph": 369,
+      "first_paragraph": 367,
+      "last_paragraph": 371,
+      "text": "    \n    def Z_Miguel_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return alpha_2 * self.const.t_Z_0\n    \n    def epsilon_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 371,
+      "first_paragraph": 369,
+      "last_paragraph": 373,
+      "text": "        return alpha_2 * self.const.t_Z_0\n    \n    def epsilon_TGL(self, alpha_2: float) -> float:\n        \"\"\"\n        PERMISSIVIDADE DO SUBSTRATO (Capacitância)"
+    },
+    {
+      "match_paragraph": 380,
+      "first_paragraph": 378,
+      "last_paragraph": 382,
+      "text": "        Inversamente proporcional a α₂ (mais resistência = menos armazenamento).\n        \"\"\"\n        return self.const.epsilon_0 / alpha_2\n    \n    def mu_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 382,
+      "first_paragraph": 380,
+      "last_paragraph": 384,
+      "text": "        return self.const.epsilon_0 / alpha_2\n    \n    def mu_TGL(self, alpha_2: float) -> float:\n        \"\"\"\n        PERMEABILIDADE DO SUBSTRATO (Indutância)"
+    },
+    {
+      "match_paragraph": 391,
+      "first_paragraph": 389,
+      "last_paragraph": 393,
+      "text": "        Proporcional a α₂ (mais resistência = mais inércia).\n        \"\"\"\n        return self.const.mu_0 * alpha_2\n    \n    def conductivity_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 393,
+      "first_paragraph": 391,
+      "last_paragraph": 395,
+      "text": "        return self.const.mu_0 * alpha_2\n    \n    def conductivity_TGL(self, alpha_2: float) -> float:\n        \"\"\"\n        CONDUTIVIDADE ONTOLÓGICA"
+    },
+    {
+      "match_paragraph": 401,
+      "first_paragraph": 399,
+      "last_paragraph": 403,
+      "text": "        A facilidade com que a luz atravessa o substrato.\n        \"\"\"\n        return 1.0 / self.Z_Miguel(alpha_2)\n    \n    def V_psionic(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 403,
+      "first_paragraph": 401,
+      "last_paragraph": 405,
+      "text": "        return 1.0 / self.Z_Miguel(alpha_2)\n    \n    def V_psionic(self, alpha_2: float) -> float:\n        \"\"\"\n        VOLTAGEM PSIÔNICA"
+    },
+    {
+      "match_paragraph": 411,
+      "first_paragraph": 409,
+      "last_paragraph": 413,
+      "text": "        A diferença de potencial criada pela ligação psiônica (ψ₊ψ₋).\n        \"\"\"\n        return self.const.E_Planck * alpha_2\n    \n    def I_parity(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 413,
+      "first_paragraph": 411,
+      "last_paragraph": 415,
+      "text": "        return self.const.E_Planck * alpha_2\n    \n    def I_parity(self, alpha_2: float) -> float:\n        \"\"\"\n        CORRENTE DE PARIDADE"
+    },
+    {
+      "match_paragraph": 424,
+      "first_paragraph": 422,
+      "last_paragraph": 426,
+      "text": "        return self.const.E_Planck / self.const.Z_0\n    \n    def P_light(self, alpha_2: float) -> float:\n        \"\"\"\n        POTÊNCIA DA LUZ"
+    },
+    {
+      "match_paragraph": 432,
+      "first_paragraph": 430,
+      "last_paragraph": 434,
+      "text": "        A luz como manifestação cinética da ligação psiônica.\n        \"\"\"\n        return self.const.E_Planck**2 * alpha_2 / self.const.Z_0\n    \n    # ═══════════════════════════════════════════════════════════════════════════════════════════════════"
+    },
+    {
+      "match_paragraph": 438,
+      "first_paragraph": 436,
+      "last_paragraph": 440,
+      "text": "    # ═══════════════════════════════════════════════════════════════════════════════════════════════════\n    \n    def a0_TGL(self, alpha_2: float) -> float:\n        \"\"\"a0 = c × H0 × √α₂\"\"\"\n        H0_si = self.const.H0_base * 1000 / 3.086e22"
+    },
+    {
+      "match_paragraph": 441,
+      "first_paragraph": 439,
+      "last_paragraph": 443,
+      "text": "        \"\"\"a0 = c × H0 × √α₂\"\"\"\n        H0_si = self.const.H0_base * 1000 / 3.086e22\n        return self.const.c_ms * H0_si * np.sqrt(alpha_2)\n    \n    def a0_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 443,
+      "first_paragraph": 441,
+      "last_paragraph": 445,
+      "text": "        return self.const.c_ms * H0_si * np.sqrt(alpha_2)\n    \n    def a0_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        H0_si = self.const.t_H0 * 1000 / 3.086e22\n        return self.const.t_c_ms * H0_si * torch.sqrt(alpha_2)"
+    },
+    {
+      "match_paragraph": 445,
+      "first_paragraph": 443,
+      "last_paragraph": 447,
+      "text": "    def a0_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        H0_si = self.const.t_H0 * 1000 / 3.086e22\n        return self.const.t_c_ms * H0_si * torch.sqrt(alpha_2)\n    \n    def r_entangle_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 447,
+      "first_paragraph": 445,
+      "last_paragraph": 449,
+      "text": "        return self.const.t_c_ms * H0_si * torch.sqrt(alpha_2)\n    \n    def r_entangle_TGL(self, alpha_2: float) -> float:\n        \"\"\"r_ent = R_universe × α₂\"\"\"\n        return self.const.R_Universe * alpha_2 / 3.086e22"
+    },
+    {
+      "match_paragraph": 449,
+      "first_paragraph": 447,
+      "last_paragraph": 451,
+      "text": "    def r_entangle_TGL(self, alpha_2: float) -> float:\n        \"\"\"r_ent = R_universe × α₂\"\"\"\n        return self.const.R_Universe * alpha_2 / 3.086e22\n    \n    def r_entangle_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 451,
+      "first_paragraph": 449,
+      "last_paragraph": 453,
+      "text": "        return self.const.R_Universe * alpha_2 / 3.086e22\n    \n    def r_entangle_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return self.const.t_R_Universe * alpha_2 / 3.086e22\n    "
+    },
+    {
+      "match_paragraph": 452,
+      "first_paragraph": 450,
+      "last_paragraph": 454,
+      "text": "    \n    def r_entangle_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return self.const.t_R_Universe * alpha_2 / 3.086e22\n    \n    def T_CMB_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 454,
+      "first_paragraph": 452,
+      "last_paragraph": 456,
+      "text": "        return self.const.t_R_Universe * alpha_2 / 3.086e22\n    \n    def T_CMB_TGL(self, alpha_2: float) -> float:\n        \"\"\"T_CMB calibrada\"\"\"\n        delta = alpha_2 - self.alpha_2_ref"
+    },
+    {
+      "match_paragraph": 456,
+      "first_paragraph": 454,
+      "last_paragraph": 458,
+      "text": "    def T_CMB_TGL(self, alpha_2: float) -> float:\n        \"\"\"T_CMB calibrada\"\"\"\n        delta = alpha_2 - self.alpha_2_ref\n        if abs(delta) < 1e-6:\n            return self.T_CMB_ref"
+    },
+    {
+      "match_paragraph": 464,
+      "first_paragraph": 462,
+      "last_paragraph": 466,
+      "text": "            return self.T_CMB_ref * np.exp(delta * 1500)\n    \n    def T_CMB_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        delta = alpha_2 - self.alpha_2_ref\n        rate = torch.where(delta < 0, "
+    },
+    {
+      "match_paragraph": 465,
+      "first_paragraph": 463,
+      "last_paragraph": 467,
+      "text": "    \n    def T_CMB_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        delta = alpha_2 - self.alpha_2_ref\n        rate = torch.where(delta < 0, \n                          torch.tensor(2000.0, device=alpha_2.device, dtype=alpha_2.dtype),"
+    },
+    {
+      "match_paragraph": 467,
+      "first_paragraph": 465,
+      "last_paragraph": 469,
+      "text": "        delta = alpha_2 - self.alpha_2_ref\n        rate = torch.where(delta < 0, \n                          torch.tensor(2000.0, device=alpha_2.device, dtype=alpha_2.dtype),\n                          torch.tensor(1500.0, device=alpha_2.device, dtype=alpha_2.dtype))\n        exp_arg = torch.clamp(delta * rate, -50, 50)"
+    },
+    {
+      "match_paragraph": 468,
+      "first_paragraph": 466,
+      "last_paragraph": 470,
+      "text": "        rate = torch.where(delta < 0, \n                          torch.tensor(2000.0, device=alpha_2.device, dtype=alpha_2.dtype),\n                          torch.tensor(1500.0, device=alpha_2.device, dtype=alpha_2.dtype))\n        exp_arg = torch.clamp(delta * rate, -50, 50)\n        return self.T_CMB_ref * torch.exp(exp_arg)"
+    },
+    {
+      "match_paragraph": 472,
+      "first_paragraph": 470,
+      "last_paragraph": 474,
+      "text": "        return self.T_CMB_ref * torch.exp(exp_arg)\n    \n    def amplification(self, alpha_2: float) -> float:\n        return 1.0 / alpha_2\n    "
+    },
+    {
+      "match_paragraph": 473,
+      "first_paragraph": 471,
+      "last_paragraph": 475,
+      "text": "    \n    def amplification(self, alpha_2: float) -> float:\n        return 1.0 / alpha_2\n    \n    # SOM ONTOLÓGICO"
+    },
+    {
+      "match_paragraph": 476,
+      "first_paragraph": 474,
+      "last_paragraph": 478,
+      "text": "    \n    # SOM ONTOLÓGICO\n    def tau_tension_TGL(self, alpha_2: float) -> float:\n        \"\"\"τ = α₂ × τ_Planck\"\"\"\n        return alpha_2 * self.const.tau_Planck"
+    },
+    {
+      "match_paragraph": 478,
+      "first_paragraph": 476,
+      "last_paragraph": 480,
+      "text": "    def tau_tension_TGL(self, alpha_2: float) -> float:\n        \"\"\"τ = α₂ × τ_Planck\"\"\"\n        return alpha_2 * self.const.tau_Planck\n    \n    def c_sound_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 480,
+      "first_paragraph": 478,
+      "last_paragraph": 482,
+      "text": "        return alpha_2 * self.const.tau_Planck\n    \n    def c_sound_TGL(self, alpha_2: float) -> float:\n        \"\"\"c_s = √α₂ × c\"\"\"\n        return np.sqrt(alpha_2) * self.const.c_ms"
+    },
+    {
+      "match_paragraph": 482,
+      "first_paragraph": 480,
+      "last_paragraph": 484,
+      "text": "    def c_sound_TGL(self, alpha_2: float) -> float:\n        \"\"\"c_s = √α₂ × c\"\"\"\n        return np.sqrt(alpha_2) * self.const.c_ms\n    \n    def c_sound_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 484,
+      "first_paragraph": 482,
+      "last_paragraph": 486,
+      "text": "        return np.sqrt(alpha_2) * self.const.c_ms\n    \n    def c_sound_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return torch.sqrt(alpha_2) * self.const.t_c_ms\n    "
+    },
+    {
+      "match_paragraph": 485,
+      "first_paragraph": 483,
+      "last_paragraph": 487,
+      "text": "    \n    def c_sound_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return torch.sqrt(alpha_2) * self.const.t_c_ms\n    \n    def sound_horizon_TGL(self, alpha_2: float) -> float:"
+    },
+    {
+      "match_paragraph": 487,
+      "first_paragraph": 485,
+      "last_paragraph": 489,
+      "text": "        return torch.sqrt(alpha_2) * self.const.t_c_ms\n    \n    def sound_horizon_TGL(self, alpha_2: float) -> float:\n        \"\"\"r_s = r_s_ref × √(α₂/α₂_ref)\"\"\"\n        return self.r_s_ref * np.sqrt(alpha_2 / self.alpha_2_ref)"
+    },
+    {
+      "match_paragraph": 489,
+      "first_paragraph": 487,
+      "last_paragraph": 491,
+      "text": "    def sound_horizon_TGL(self, alpha_2: float) -> float:\n        \"\"\"r_s = r_s_ref × √(α₂/α₂_ref)\"\"\"\n        return self.r_s_ref * np.sqrt(alpha_2 / self.alpha_2_ref)\n    \n    def sound_horizon_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 491,
+      "first_paragraph": 489,
+      "last_paragraph": 493,
+      "text": "        return self.r_s_ref * np.sqrt(alpha_2 / self.alpha_2_ref)\n    \n    def sound_horizon_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return self.r_s_ref * torch.sqrt(alpha_2 / self.alpha_2_ref)\n    "
+    },
+    {
+      "match_paragraph": 492,
+      "first_paragraph": 490,
+      "last_paragraph": 494,
+      "text": "    \n    def sound_horizon_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return self.r_s_ref * torch.sqrt(alpha_2 / self.alpha_2_ref)\n    \n    # CONSTANTE COSMOLÓGICA"
+    },
+    {
+      "match_paragraph": 495,
+      "first_paragraph": 493,
+      "last_paragraph": 497,
+      "text": "    \n    # CONSTANTE COSMOLÓGICA\n    def rho_Lambda_TGL(self, alpha_2: float) -> float:\n        \"\"\"ρ_Λ = α₂ × ρ_P × (ℓ_P/R_H)² × D(D-1)/4\"\"\"\n        D = self.const.N_dim"
+    },
+    {
+      "match_paragraph": 500,
+      "first_paragraph": 498,
+      "last_paragraph": 502,
+      "text": "        ratio = self.const.ell_Planck / self.const.R_Hubble\n        geometric_factor = D * (D - 1) / 4.0\n        return alpha_2 * self.const.rho_Planck * (ratio ** 2) * geometric_factor\n    \n    def rho_Lambda_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 502,
+      "first_paragraph": 500,
+      "last_paragraph": 504,
+      "text": "        return alpha_2 * self.const.rho_Planck * (ratio ** 2) * geometric_factor\n    \n    def rho_Lambda_TGL_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        D = self.const.t_N_dim\n        ratio = self.const.t_ell_Planck / self.const.t_R_Hubble"
+    },
+    {
+      "match_paragraph": 506,
+      "first_paragraph": 504,
+      "last_paragraph": 508,
+      "text": "        ratio = self.const.t_ell_Planck / self.const.t_R_Hubble\n        geometric_factor = D * (D - 1) / 4.0\n        return alpha_2 * self.const.t_rho_Planck * (ratio ** 2) * geometric_factor\n    \n    # NEUTRINOS"
+    },
+    {
+      "match_paragraph": 509,
+      "first_paragraph": 507,
+      "last_paragraph": 511,
+      "text": "    \n    # NEUTRINOS\n    def m_neutrino_eV(self, alpha_2: float) -> float:\n        \"\"\"m_ν = m_ν_ref × (α₂/α₂_ref)\"\"\"\n        return self.m_nu_ref * (alpha_2 / self.alpha_2_ref)"
+    },
+    {
+      "match_paragraph": 511,
+      "first_paragraph": 509,
+      "last_paragraph": 513,
+      "text": "    def m_neutrino_eV(self, alpha_2: float) -> float:\n        \"\"\"m_ν = m_ν_ref × (α₂/α₂_ref)\"\"\"\n        return self.m_nu_ref * (alpha_2 / self.alpha_2_ref)\n    \n    def m_neutrino_eV_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:"
+    },
+    {
+      "match_paragraph": 513,
+      "first_paragraph": 511,
+      "last_paragraph": 515,
+      "text": "        return self.m_nu_ref * (alpha_2 / self.alpha_2_ref)\n    \n    def m_neutrino_eV_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return self.const.t_m_nu_target * (alpha_2 / self.alpha_2_ref)\n    "
+    },
+    {
+      "match_paragraph": 514,
+      "first_paragraph": 512,
+      "last_paragraph": 516,
+      "text": "    \n    def m_neutrino_eV_tensor(self, alpha_2: torch.Tensor) -> torch.Tensor:\n        return self.const.t_m_nu_target * (alpha_2 / self.alpha_2_ref)\n    \n    # EVAPORAÇÃO"
+    },
+    {
+      "match_paragraph": 517,
+      "first_paragraph": 515,
+      "last_paragraph": 519,
+      "text": "    \n    # EVAPORAÇÃO\n    def Gamma_evaporation(self, alpha_2: float) -> float:\n        \"\"\"Γ_evap = α₂ × c / R_H\"\"\"\n        return alpha_2 * self.const.c_ms / self.const.R_Hubble"
+    },
+    {
+      "match_paragraph": 519,
+      "first_paragraph": 517,
+      "last_paragraph": 521,
+      "text": "    def Gamma_evaporation(self, alpha_2: float) -> float:\n        \"\"\"Γ_evap = α₂ × c / R_H\"\"\"\n        return alpha_2 * self.const.c_ms / self.const.R_Hubble\n    \n    def H_from_evaporation(self, alpha_2: float, z: float = 0) -> float:"
+    },
+    {
+      "match_paragraph": 521,
+      "first_paragraph": 519,
+      "last_paragraph": 523,
+      "text": "        return alpha_2 * self.const.c_ms / self.const.R_Hubble\n    \n    def H_from_evaporation(self, alpha_2: float, z: float = 0) -> float:\n        \"\"\"H(z) = (Γ_evap/α₂) × E(z)\"\"\"\n        Gamma = self.Gamma_evaporation(alpha_2)"
+    },
+    {
+      "match_paragraph": 523,
+      "first_paragraph": 521,
+      "last_paragraph": 525,
+      "text": "    def H_from_evaporation(self, alpha_2: float, z: float = 0) -> float:\n        \"\"\"H(z) = (Γ_evap/α₂) × E(z)\"\"\"\n        Gamma = self.Gamma_evaporation(alpha_2)\n        E_z = np.sqrt(self.const.Omega_m * (1+z)**3 + \n                     self.const.Omega_r * (1+z)**4 + "
+    },
+    {
+      "match_paragraph": 527,
+      "first_paragraph": 525,
+      "last_paragraph": 529,
+      "text": "                     self.const.Omega_r * (1+z)**4 + \n                     self.const.Omega_Lambda)\n        return (Gamma / alpha_2) * E_z\n    \n    # GRBs"
+    },
+    {
+      "match_paragraph": 539,
+      "first_paragraph": 537,
+      "last_paragraph": 541,
+      "text": "        return result * self.const.c_ms / self.const.H0_SI\n    \n    def predict_GRB_dispersion(self, alpha_2: float, z: float, E1_GeV: float, E2_GeV: float) -> float:\n        D = self.comoving_distance(z)\n        return alpha_2 * (D / self.const.c_ms) * abs(E1_GeV - E2_GeV) / self.const.E_Planck_GeV"
+    },
+    {
+      "match_paragraph": 541,
+      "first_paragraph": 539,
+      "last_paragraph": 543,
+      "text": "    def predict_GRB_dispersion(self, alpha_2: float, z: float, E1_GeV: float, E2_GeV: float) -> float:\n        D = self.comoving_distance(z)\n        return alpha_2 * (D / self.const.c_ms) * abs(E1_GeV - E2_GeV) / self.const.E_Planck_GeV\n    \n    def show_derivations(self, alpha_2: float):"
+    },
+    {
+      "match_paragraph": 543,
+      "first_paragraph": 541,
+      "last_paragraph": 545,
+      "text": "        return alpha_2 * (D / self.const.c_ms) * abs(E1_GeV - E2_GeV) / self.const.E_Planck_GeV\n    \n    def show_derivations(self, alpha_2: float):\n        \"\"\"Mostra todas as derivações — v10.6 ELETRODINÂMICA\"\"\"\n        print(f\"\\n   DERIVAÇÕES TGL v10.6 ELETRODINÂMICA para α₂ = {alpha_2:.6f}\")"
+    },
+    {
+      "match_paragraph": 545,
+      "first_paragraph": 543,
+      "last_paragraph": 547,
+      "text": "    def show_derivations(self, alpha_2: float):\n        \"\"\"Mostra todas as derivações — v10.6 ELETRODINÂMICA\"\"\"\n        print(f\"\\n   DERIVAÇÕES TGL v10.6 ELETRODINÂMICA para α₂ = {alpha_2:.6f}\")\n        print(\"   \" + \"=\" * 70)\n        "
+    },
+    {
+      "match_paragraph": 551,
+      "first_paragraph": 549,
+      "last_paragraph": 553,
+      "text": "        print(\"   [ELETRODINÂMICA ONTOLÓGICA - NOVO v10.6]\")\n        \n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)"
+    },
+    {
+      "match_paragraph": 552,
+      "first_paragraph": 550,
+      "last_paragraph": 554,
+      "text": "        \n        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        eps_TGL = self.epsilon_TGL(alpha_2)"
+    },
+    {
+      "match_paragraph": 553,
+      "first_paragraph": 551,
+      "last_paragraph": 555,
+      "text": "        alpha_fine = self.alpha_fine_TGL(alpha_2)\n        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        eps_TGL = self.epsilon_TGL(alpha_2)\n        mu_TGL = self.mu_TGL(alpha_2)"
+    },
+    {
+      "match_paragraph": 554,
+      "first_paragraph": 552,
+      "last_paragraph": 556,
+      "text": "        alpha_fine_err = abs(alpha_fine - self.const.alpha_fine) / self.const.alpha_fine * 100\n        Z_M = self.Z_Miguel(alpha_2)\n        eps_TGL = self.epsilon_TGL(alpha_2)\n        mu_TGL = self.mu_TGL(alpha_2)\n        sigma = self.conductivity_TGL(alpha_2)"
+    },
+    {
+      "match_paragraph": 555,
+      "first_paragraph": 553,
+      "last_paragraph": 557,
+      "text": "        Z_M = self.Z_Miguel(alpha_2)\n        eps_TGL = self.epsilon_TGL(alpha_2)\n        mu_TGL = self.mu_TGL(alpha_2)\n        sigma = self.conductivity_TGL(alpha_2)\n        "
+    },
+    {
+      "match_paragraph": 556,
+      "first_paragraph": 554,
+      "last_paragraph": 558,
+      "text": "        eps_TGL = self.epsilon_TGL(alpha_2)\n        mu_TGL = self.mu_TGL(alpha_2)\n        sigma = self.conductivity_TGL(alpha_2)\n        \n        print(f\"   α (estrutura fina) = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")"
+    },
+    {
+      "match_paragraph": 558,
+      "first_paragraph": 556,
+      "last_paragraph": 560,
+      "text": "        sigma = self.conductivity_TGL(alpha_2)\n        \n        print(f\"   α (estrutura fina) = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                        1/{1/alpha_fine:.2f} (obs: 1/137.036)\")\n        print(f\"                        ERRO: {alpha_fine_err:.2f}%\")"
+    },
+    {
+      "match_paragraph": 559,
+      "first_paragraph": 557,
+      "last_paragraph": 561,
+      "text": "        \n        print(f\"   α (estrutura fina) = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                        1/{1/alpha_fine:.2f} (obs: 1/137.036)\")\n        print(f\"                        ERRO: {alpha_fine_err:.2f}%\")\n        print(f\"   Z_Miguel    = {Z_M:.3f} Ω (α₂ × Z₀)\")"
+    },
+    {
+      "match_paragraph": 560,
+      "first_paragraph": 558,
+      "last_paragraph": 562,
+      "text": "        print(f\"   α (estrutura fina) = {alpha_fine:.7f} (obs: {self.const.alpha_fine:.7f})\")\n        print(f\"                        1/{1/alpha_fine:.2f} (obs: 1/137.036)\")\n        print(f\"                        ERRO: {alpha_fine_err:.2f}%\")\n        print(f\"   Z_Miguel    = {Z_M:.3f} Ω (α₂ × Z₀)\")\n        print(f\"   ε_TGL       = {eps_TGL:.3e} F/m (ε₀/α₂)\")"
+    },
+    {
+      "match_paragraph": 574,
+      "first_paragraph": 572,
+      "last_paragraph": 576,
+      "text": "        print(\"   [COSMOLOGIA]\")\n        \n        a0 = self.a0_TGL(alpha_2)\n        r_ent = self.r_entangle_TGL(alpha_2)\n        T_CMB = self.T_CMB_TGL(alpha_2)"
+    },
+    {
+      "match_paragraph": 575,
+      "first_paragraph": 573,
+      "last_paragraph": 577,
+      "text": "        \n        a0 = self.a0_TGL(alpha_2)\n        r_ent = self.r_entangle_TGL(alpha_2)\n        T_CMB = self.T_CMB_TGL(alpha_2)\n        "
+    },
+    {
+      "match_paragraph": 576,
+      "first_paragraph": 574,
+      "last_paragraph": 578,
+      "text": "        a0 = self.a0_TGL(alpha_2)\n        r_ent = self.r_entangle_TGL(alpha_2)\n        T_CMB = self.T_CMB_TGL(alpha_2)\n        \n        print(f\"   a0_TGL      = {a0:.3e} m/s² (emp: {self.const.a0_emp:.3e})\")"
+    },
+    {
+      "match_paragraph": 586,
+      "first_paragraph": 584,
+      "last_paragraph": 588,
+      "text": "        print(\"   [SOM ONTOLÓGICO]\")\n        \n        c_s = self.c_sound_TGL(alpha_2)\n        r_s = self.sound_horizon_TGL(alpha_2)\n        "
+    },
+    {
+      "match_paragraph": 587,
+      "first_paragraph": 585,
+      "last_paragraph": 589,
+      "text": "        \n        c_s = self.c_sound_TGL(alpha_2)\n        r_s = self.sound_horizon_TGL(alpha_2)\n        \n        print(f\"   c_som       = {c_s/1000:.0f} km/s = {c_s/self.const.c_ms:.4f}c\")"
+    },
+    {
+      "match_paragraph": 596,
+      "first_paragraph": 594,
+      "last_paragraph": 598,
+      "text": "        print(\"   [EVAPORAÇÃO / NEUTRINOS]\")\n        \n        m_nu = self.m_neutrino_eV(alpha_2)\n        rho_Lambda = self.rho_Lambda_TGL(alpha_2)\n        "
+    },
+    {
+      "match_paragraph": 597,
+      "first_paragraph": 595,
+      "last_paragraph": 599,
+      "text": "        \n        m_nu = self.m_neutrino_eV(alpha_2)\n        rho_Lambda = self.rho_Lambda_TGL(alpha_2)\n        \n        print(f\"   m_ν         = {m_nu:.4f} eV (limite: < 0.04 eV)\")"
+    },
+    {
+      "match_paragraph": 715,
+      "first_paragraph": 713,
+      "last_paragraph": 717,
+      "text": "            'T_CMB': 0.5,\n            'beta_ratio': 0.3,\n            'alpha_2': 0.0,\n            'Lambda': 0.3,\n            'm_nu': 0.5,"
+    },
+    {
+      "match_paragraph": 719,
+      "first_paragraph": 717,
+      "last_paragraph": 721,
+      "text": "            'm_nu': 0.5,\n            'r_s': 0.5,\n            'alpha_fine': 1.0,  # NOVO v10.6 — estrutura fina!\n        }\n        "
+    },
+    {
+      "match_paragraph": 736,
+      "first_paragraph": 734,
+      "last_paragraph": 738,
+      "text": "        torch.cuda.synchronize()\n    \n    def _compute_distance_grid(self, alpha_2: torch.Tensor, beta_0: torch.Tensor):\n        z = self.data.t_z_grid\n        f_raw = (1 + alpha_2 * torch.log1p(z)) ** (2 * beta_0)"
+    },
+    {
+      "match_paragraph": 738,
+      "first_paragraph": 736,
+      "last_paragraph": 740,
+      "text": "    def _compute_distance_grid(self, alpha_2: torch.Tensor, beta_0: torch.Tensor):\n        z = self.data.t_z_grid\n        f_raw = (1 + alpha_2 * torch.log1p(z)) ** (2 * beta_0)\n        f_TGL = torch.clamp(f_raw, max=1.26)\n        E = torch.sqrt(self.const.t_Omega_m*(1+z)**3 + "
+    },
+    {
+      "match_paragraph": 756,
+      "first_paragraph": 754,
+      "last_paragraph": 758,
+      "text": "        \n        n_batch = params_batch.shape[0]\n        beta_0, kappa, n_evap, theta_evap, A_neff, alpha_2 = [params_batch[:, i] for i in range(6)]\n        \n        breakdown = {}"
+    },
+    {
+      "match_paragraph": 759,
+      "first_paragraph": 757,
+      "last_paragraph": 761,
+      "text": "        \n        breakdown = {}\n        alpha_2_mean, beta_0_mean = alpha_2.mean(), beta_0.mean()\n        dc_grid, E_grid = self._compute_distance_grid(alpha_2_mean, beta_0_mean)\n        "
+    },
+    {
+      "match_paragraph": 760,
+      "first_paragraph": 758,
+      "last_paragraph": 762,
+      "text": "        breakdown = {}\n        alpha_2_mean, beta_0_mean = alpha_2.mean(), beta_0.mean()\n        dc_grid, E_grid = self._compute_distance_grid(alpha_2_mean, beta_0_mean)\n        \n        # 1. SNe Ia"
+    },
+    {
+      "match_paragraph": 800,
+      "first_paragraph": 798,
+      "last_paragraph": 802,
+      "text": "        \n        # 6. a0\n        a0_TGL = self.deriv.a0_TGL_tensor(alpha_2)\n        chi2_a0 = ((a0_TGL - self.const.t_a0_emp) / self.const.t_a0_err)**2\n        breakdown['a0'] = chi2_a0.mean().item()"
+    },
+    {
+      "match_paragraph": 812,
+      "first_paragraph": 810,
+      "last_paragraph": 814,
+      "text": "        \n        # 8. Lindblad\n        r_ent = self.deriv.r_entangle_TGL_tensor(alpha_2)\n        chi2_lindblad = ((r_ent/self.const.t_r_d - self.const.t_r_ent_over_rd_target) / self.const.t_r_ent_over_rd_err)**2\n        breakdown['Lindblad'] = chi2_lindblad.mean().item()"
+    },
+    {
+      "match_paragraph": 817,
+      "first_paragraph": 815,
+      "last_paragraph": 819,
+      "text": "        \n        # 9. T_CMB\n        T_CMB_TGL = self.deriv.T_CMB_TGL_tensor(alpha_2)\n        T_CMB_err = torch.tensor(0.5, device=self.device, dtype=self.dtype)\n        chi2_T_CMB = ((T_CMB_TGL - self.const.t_T_CMB_obs) / T_CMB_err)**2"
+    },
+    {
+      "match_paragraph": 828,
+      "first_paragraph": 826,
+      "last_paragraph": 830,
+      "text": "        breakdown['beta_ratio'] = chi2_beta_ratio.mean().item()\n        \n        # 11. alpha_2 (FLAT)\n        chi2_alpha_2 = torch.zeros(n_batch, device=self.device, dtype=self.dtype)\n        breakdown['alpha_2'] = 0.0"
+    },
+    {
+      "match_paragraph": 829,
+      "first_paragraph": 827,
+      "last_paragraph": 831,
+      "text": "        \n        # 11. alpha_2 (FLAT)\n        chi2_alpha_2 = torch.zeros(n_batch, device=self.device, dtype=self.dtype)\n        breakdown['alpha_2'] = 0.0\n        breakdown['alpha_2_mean'] = alpha_2.mean().item()"
+    },
+    {
+      "match_paragraph": 830,
+      "first_paragraph": 828,
+      "last_paragraph": 832,
+      "text": "        # 11. alpha_2 (FLAT)\n        chi2_alpha_2 = torch.zeros(n_batch, device=self.device, dtype=self.dtype)\n        breakdown['alpha_2'] = 0.0\n        breakdown['alpha_2_mean'] = alpha_2.mean().item()\n        "
+    },
+    {
+      "match_paragraph": 831,
+      "first_paragraph": 829,
+      "last_paragraph": 833,
+      "text": "        chi2_alpha_2 = torch.zeros(n_batch, device=self.device, dtype=self.dtype)\n        breakdown['alpha_2'] = 0.0\n        breakdown['alpha_2_mean'] = alpha_2.mean().item()\n        \n        # 12. Lambda"
+    },
+    {
+      "match_paragraph": 834,
+      "first_paragraph": 832,
+      "last_paragraph": 836,
+      "text": "        \n        # 12. Lambda\n        rho_Lambda_TGL = self.deriv.rho_Lambda_TGL_tensor(alpha_2)\n        chi2_Lambda = ((rho_Lambda_TGL - self.const.t_rho_Lambda_obs) / self.const.t_rho_Lambda_err)**2\n        breakdown['Lambda'] = chi2_Lambda.mean().item()"
+    },
+    {
+      "match_paragraph": 840,
+      "first_paragraph": 838,
+      "last_paragraph": 842,
+      "text": "        \n        # 13. m_ν\n        m_nu_TGL = self.deriv.m_neutrino_eV_tensor(alpha_2)\n        chi2_m_nu = ((m_nu_TGL - self.const.t_m_nu_target) / self.const.t_m_nu_err)**2\n        breakdown['m_nu'] = chi2_m_nu.mean().item()"
+    },
+    {
+      "match_paragraph": 846,
+      "first_paragraph": 844,
+      "last_paragraph": 848,
+      "text": "        \n        # 14. r_s\n        r_s_TGL = self.deriv.sound_horizon_TGL_tensor(alpha_2)\n        r_s_err = torch.tensor(1.0, device=self.device, dtype=self.dtype)\n        chi2_r_s = ((r_s_TGL - self.const.t_r_d) / r_s_err)**2"
+    },
+    {
+      "match_paragraph": 853,
+      "first_paragraph": 851,
+      "last_paragraph": 855,
+      "text": "        \n        # 15. ESTRUTURA FINA (NOVO v10.6!)\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()"
+    },
+    {
+      "match_paragraph": 854,
+      "first_paragraph": 852,
+      "last_paragraph": 856,
+      "text": "        # 15. ESTRUTURA FINA (NOVO v10.6!)\n        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()"
+    },
+    {
+      "match_paragraph": 855,
+      "first_paragraph": 853,
+      "last_paragraph": 857,
+      "text": "        alpha_fine_TGL = self.deriv.alpha_fine_TGL_tensor(alpha_2)\n        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        "
+    },
+    {
+      "match_paragraph": 856,
+      "first_paragraph": 854,
+      "last_paragraph": 858,
+      "text": "        chi2_alpha_fine = ((alpha_fine_TGL - self.const.t_alpha_fine) / self.const.t_alpha_fine_err)**2\n        breakdown['alpha_fine'] = chi2_alpha_fine.mean().item()\n        breakdown['alpha_fine_pred'] = alpha_fine_TGL.mean().item()\n        \n        # Impedância de Miguel"
+    },
+    {
+      "match_paragraph": 859,
+      "first_paragraph": 857,
+      "last_paragraph": 861,
+      "text": "        \n        # Impedância de Miguel\n        Z_M = self.deriv.Z_Miguel_tensor(alpha_2)\n        breakdown['Z_Miguel'] = Z_M.mean().item()\n        "
+    },
+    {
+      "match_paragraph": 863,
+      "first_paragraph": 861,
+      "last_paragraph": 865,
+      "text": "        \n        # Velocidade do som\n        c_s_TGL = self.deriv.c_sound_TGL_tensor(alpha_2)\n        breakdown['c_s_pred'] = (c_s_TGL.mean() / self.const.t_c_ms).item()\n        "
+    },
+    {
+      "match_paragraph": 870,
+      "first_paragraph": 868,
+      "last_paragraph": 872,
+      "text": "            ('SNe', chi2_sne), ('BAO', chi2_bao), ('H0', chi2_H0), ('lensing', chi2_lensing),\n            ('N_eff', chi2_N_eff), ('a0', chi2_a0), ('SPARC', chi2_sparc), ('Lindblad', chi2_lindblad),\n            ('T_CMB', chi2_T_CMB), ('beta_ratio', chi2_beta_ratio), ('alpha_2', chi2_alpha_2),\n            ('Lambda', chi2_Lambda), ('m_nu', chi2_m_nu), ('r_s', chi2_r_s), ('alpha_fine', chi2_alpha_fine)\n        ])"
+    },
+    {
+      "match_paragraph": 871,
+      "first_paragraph": 869,
+      "last_paragraph": 873,
+      "text": "            ('N_eff', chi2_N_eff), ('a0', chi2_a0), ('SPARC', chi2_sparc), ('Lindblad', chi2_lindblad),\n            ('T_CMB', chi2_T_CMB), ('beta_ratio', chi2_beta_ratio), ('alpha_2', chi2_alpha_2),\n            ('Lambda', chi2_Lambda), ('m_nu', chi2_m_nu), ('r_s', chi2_r_s), ('alpha_fine', chi2_alpha_fine)\n        ])\n        breakdown['total'] = chi2_total.mean().item()"
+    },
+    {
+      "match_paragraph": 920,
+      "first_paragraph": 918,
+      "last_paragraph": 922,
+      "text": "        self.gpu_engine = GPULikelihoodEngine_v10_6() if (HAS_TORCH and DEVICE and DEVICE.type == 'cuda') else None\n        \n        self.param_names = ['beta_0', 'kappa', 'n_evap', 'theta_evap', 'A_neff', 'alpha_2']\n        self.param_labels = [r'$\\beta_0$', r'$\\kappa$', r'$n_{evap}$', r'$\\theta_{evap}$', r'$A_{N_{eff}}$', r'$\\alpha_2$']\n        "
+    },
+    {
+      "match_paragraph": 921,
+      "first_paragraph": 919,
+      "last_paragraph": 923,
+      "text": "        \n        self.param_names = ['beta_0', 'kappa', 'n_evap', 'theta_evap', 'A_neff', 'alpha_2']\n        self.param_labels = [r'$\\beta_0$', r'$\\kappa$', r'$n_{evap}$', r'$\\theta_{evap}$', r'$A_{N_{eff}}$', r'$\\alpha_2$']\n        \n        self.priors = {"
+    },
+    {
+      "match_paragraph": 929,
+      "first_paragraph": 927,
+      "last_paragraph": 931,
+      "text": "            'theta_evap': (0.89, 0.05),\n            'A_neff': (1.46, 0.5),\n            'alpha_2': (0.012, None)\n        }\n        "
+    },
+    {
+      "match_paragraph": 938,
+      "first_paragraph": 936,
+      "last_paragraph": 940,
+      "text": "            'theta_evap': (0.6, 0.99),\n            'A_neff': (0.5, 3.0),\n            'alpha_2': (0.0115, 0.0125)\n        }\n        "
+    },
+    {
+      "match_paragraph": 944,
+      "first_paragraph": 942,
+      "last_paragraph": 946,
+      "text": "        self.sampler = None\n        self.gpu_calls = 0\n        self.traces = {'chi2': [], 'alpha2': [], 'alpha_fine': [], 'Z_Miguel': [], 'm_nu': [], 'T_CMB': [], 'r_s': []}\n    \n    def log_prior(self, params):"
+    },
+    {
+      "match_paragraph": 970,
+      "first_paragraph": 968,
+      "last_paragraph": 972,
+      "text": "        if self.gpu_calls % 500 == 0:\n            self.traces['chi2'].append(chi2_val)\n            self.traces['alpha2'].append(params[5])\n            self.traces['alpha_fine'].append(breakdown.get('alpha_fine_pred', 0))\n            self.traces['Z_Miguel'].append(breakdown.get('Z_Miguel', 0))"
+    },
+    {
+      "match_paragraph": 971,
+      "first_paragraph": 969,
+      "last_paragraph": 973,
+      "text": "            self.traces['chi2'].append(chi2_val)\n            self.traces['alpha2'].append(params[5])\n            self.traces['alpha_fine'].append(breakdown.get('alpha_fine_pred', 0))\n            self.traces['Z_Miguel'].append(breakdown.get('Z_Miguel', 0))\n            self.traces['m_nu'].append(breakdown.get('m_nu_eV', 0))"
+    },
+    {
+      "match_paragraph": 1003,
+      "first_paragraph": 1001,
+      "last_paragraph": 1005,
+      "text": "        print(f\"[CONFIG] χ² components: 15 (inclui ESTRUTURA FINA α)\")\n        print(f\"[PARAM]  α₂: FLAT prior, bounds [0.0115, 0.0125]\")\n        print(f\"[DERIV]  α = α₂/√e → previsto: {0.012/np.sqrt(np.e):.7f} (obs: {self.const.alpha_fine:.7f})\")\n        \n        self.gpu_calls = 0"
+    },
+    {
+      "match_paragraph": 1006,
+      "first_paragraph": 1004,
+      "last_paragraph": 1008,
+      "text": "        \n        self.gpu_calls = 0\n        self.traces = {'chi2': [], 'alpha2': [], 'alpha_fine': [], 'Z_Miguel': [], 'm_nu': [], 'T_CMB': [], 'r_s': []}\n        \n        moves = [(StretchMove(a=stretch_a), 1.0-de_fraction), (DEMove(), de_fraction)] if StretchMove and DEMove else None"
+    },
+    {
+      "match_paragraph": 1043,
+      "first_paragraph": 1041,
+      "last_paragraph": 1045,
+      "text": "        print(f\"{'='*80}\")\n        \n        alpha2_samples = self.samples[:, 5]\n        alpha2_med = np.median(alpha2_samples)\n        alpha2_q16, alpha2_q84 = np.percentile(alpha2_samples, [16, 84])"
+    },
+    {
+      "match_paragraph": 1044,
+      "first_paragraph": 1042,
+      "last_paragraph": 1046,
+      "text": "        \n        alpha2_samples = self.samples[:, 5]\n        alpha2_med = np.median(alpha2_samples)\n        alpha2_q16, alpha2_q84 = np.percentile(alpha2_samples, [16, 84])\n        "
+    },
+    {
+      "match_paragraph": 1045,
+      "first_paragraph": 1043,
+      "last_paragraph": 1047,
+      "text": "        alpha2_samples = self.samples[:, 5]\n        alpha2_med = np.median(alpha2_samples)\n        alpha2_q16, alpha2_q84 = np.percentile(alpha2_samples, [16, 84])\n        \n        print(f\"\\n   α₂ = {alpha2_med:.6f} (+{alpha2_q84-alpha2_med:.6f} / -{alpha2_med-alpha2_q16:.6f})\")"
+    },
+    {
+      "match_paragraph": 1047,
+      "first_paragraph": 1045,
+      "last_paragraph": 1049,
+      "text": "        alpha2_q16, alpha2_q84 = np.percentile(alpha2_samples, [16, 84])\n        \n        print(f\"\\n   α₂ = {alpha2_med:.6f} (+{alpha2_q84-alpha2_med:.6f} / -{alpha2_med-alpha2_q16:.6f})\")\n        print(f\"   Teórico: 0.012000\")\n        print(f\"   Erro: {abs(alpha2_med - 0.012)/0.012*100:.2f}%\")"
+    },
+    {
+      "match_paragraph": 1049,
+      "first_paragraph": 1047,
+      "last_paragraph": 1051,
+      "text": "        print(f\"\\n   α₂ = {alpha2_med:.6f} (+{alpha2_q84-alpha2_med:.6f} / -{alpha2_med-alpha2_q16:.6f})\")\n        print(f\"   Teórico: 0.012000\")\n        print(f\"   Erro: {abs(alpha2_med - 0.012)/0.012*100:.2f}%\")\n        \n        self.deriv.show_derivations(alpha2_med)"
+    },
+    {
+      "match_paragraph": 1051,
+      "first_paragraph": 1049,
+      "last_paragraph": 1053,
+      "text": "        print(f\"   Erro: {abs(alpha2_med - 0.012)/0.012*100:.2f}%\")\n        \n        self.deriv.show_derivations(alpha2_med)\n        \n        print(f\"\\n{'='*80}\")"
+    },
+    {
+      "match_paragraph": 1077,
+      "first_paragraph": 1075,
+      "last_paragraph": 1079,
+      "text": "            print(f\"   {name:<15} {med:>12.6f} {q16-med:>+12.6f} {q84-med:>+12.6f}\")\n        \n        results['alpha2_median'] = alpha2_med\n        results['traces'] = self.traces\n        results['breakdown_stats'] = breakdown_stats"
+    },
+    {
+      "match_paragraph": 1096,
+      "first_paragraph": 1094,
+      "last_paragraph": 1098,
+      "text": "        json_results = {\n            'version': 'TGL v10.6 ELETRODINÂMICA',\n            'alpha2_median': results['alpha2_median'],\n            'acceptance': results['acceptance'],\n            'elapsed': results['elapsed'],"
+    },
+    {
+      "match_paragraph": 1120,
+      "first_paragraph": 1118,
+      "last_paragraph": 1122,
+      "text": "        # α₂ posterior\n        fig, ax = plt.subplots(figsize=(10, 6))\n        alpha2_samples = self.samples[:, 5]\n        ax.hist(alpha2_samples, bins=100, density=True, alpha=0.7, color='blue')\n        ax.axvline(0.012, color='red', linestyle='--', lw=2, label='Teórico (0.012)')"
+    },
+    {
+      "match_paragraph": 1121,
+      "first_paragraph": 1119,
+      "last_paragraph": 1123,
+      "text": "        fig, ax = plt.subplots(figsize=(10, 6))\n        alpha2_samples = self.samples[:, 5]\n        ax.hist(alpha2_samples, bins=100, density=True, alpha=0.7, color='blue')\n        ax.axvline(0.012, color='red', linestyle='--', lw=2, label='Teórico (0.012)')\n        ax.axvline(np.median(alpha2_samples), color='green', linestyle='-', lw=2,"
+    },
+    {
+      "match_paragraph": 1123,
+      "first_paragraph": 1121,
+      "last_paragraph": 1125,
+      "text": "        ax.hist(alpha2_samples, bins=100, density=True, alpha=0.7, color='blue')\n        ax.axvline(0.012, color='red', linestyle='--', lw=2, label='Teórico (0.012)')\n        ax.axvline(np.median(alpha2_samples), color='green', linestyle='-', lw=2,\n                   label=f'Mediana ({np.median(alpha2_samples):.6f})')\n        ax.set_xlabel(r'$\\alpha_2$ (Constante de Miguel)', fontsize=14)"
+    },
+    {
+      "match_paragraph": 1124,
+      "first_paragraph": 1122,
+      "last_paragraph": 1126,
+      "text": "        ax.axvline(0.012, color='red', linestyle='--', lw=2, label='Teórico (0.012)')\n        ax.axvline(np.median(alpha2_samples), color='green', linestyle='-', lw=2,\n                   label=f'Mediana ({np.median(alpha2_samples):.6f})')\n        ax.set_xlabel(r'$\\alpha_2$ (Constante de Miguel)', fontsize=14)\n        ax.set_ylabel('Densidade', fontsize=14)"
+    },
+    {
+      "match_paragraph": 1125,
+      "first_paragraph": 1123,
+      "last_paragraph": 1127,
+      "text": "        ax.axvline(np.median(alpha2_samples), color='green', linestyle='-', lw=2,\n                   label=f'Mediana ({np.median(alpha2_samples):.6f})')\n        ax.set_xlabel(r'$\\alpha_2$ (Constante de Miguel)', fontsize=14)\n        ax.set_ylabel('Densidade', fontsize=14)\n        ax.set_title(r'TGL v10.6 ELETRODINÂMICA — Posterior de $\\alpha_2$', fontsize=14)"
+    },
+    {
+      "match_paragraph": 1127,
+      "first_paragraph": 1125,
+      "last_paragraph": 1129,
+      "text": "        ax.set_xlabel(r'$\\alpha_2$ (Constante de Miguel)', fontsize=14)\n        ax.set_ylabel('Densidade', fontsize=14)\n        ax.set_title(r'TGL v10.6 ELETRODINÂMICA — Posterior de $\\alpha_2$', fontsize=14)\n        ax.legend()\n        plt.savefig(os.path.join(self.output_dir, f'{save_prefix}_alpha2.png'), dpi=150)"
+    },
+    {
+      "match_paragraph": 1129,
+      "first_paragraph": 1127,
+      "last_paragraph": 1131,
+      "text": "        ax.set_title(r'TGL v10.6 ELETRODINÂMICA — Posterior de $\\alpha_2$', fontsize=14)\n        ax.legend()\n        plt.savefig(os.path.join(self.output_dir, f'{save_prefix}_alpha2.png'), dpi=150)\n        plt.close()\n        print(f\"   [OK] {save_prefix}_alpha2.png\")"
+    },
+    {
+      "match_paragraph": 1131,
+      "first_paragraph": 1129,
+      "last_paragraph": 1133,
+      "text": "        plt.savefig(os.path.join(self.output_dir, f'{save_prefix}_alpha2.png'), dpi=150)\n        plt.close()\n        print(f\"   [OK] {save_prefix}_alpha2.png\")\n        \n        # Eletrodinâmica"
+    },
+    {
+      "match_paragraph": 1134,
+      "first_paragraph": 1132,
+      "last_paragraph": 1136,
+      "text": "        \n        # Eletrodinâmica\n        if self.traces['alpha_fine']:\n            fig, axes = plt.subplots(2, 2, figsize=(12, 10))\n            "
+    },
+    {
+      "match_paragraph": 1138,
+      "first_paragraph": 1136,
+      "last_paragraph": 1140,
+      "text": "            \n            ax = axes[0, 0]\n            ax.plot(np.array(self.traces['alpha_fine']), 'b-', lw=1)\n            ax.axhline(self.const.alpha_fine, color='red', linestyle='--', label=f'Obs: 1/137.036')\n            ax.set_ylabel(r'$\\alpha$ (estrutura fina)')"
+    },
+    {
+      "match_paragraph": 1139,
+      "first_paragraph": 1137,
+      "last_paragraph": 1141,
+      "text": "            ax = axes[0, 0]\n            ax.plot(np.array(self.traces['alpha_fine']), 'b-', lw=1)\n            ax.axhline(self.const.alpha_fine, color='red', linestyle='--', label=f'Obs: 1/137.036')\n            ax.set_ylabel(r'$\\alpha$ (estrutura fina)')\n            ax.set_title(r'Estrutura Fina: $\\alpha = \\alpha_2 / \\sqrt{e}$')"
+    },
+    {
+      "match_paragraph": 1141,
+      "first_paragraph": 1139,
+      "last_paragraph": 1143,
+      "text": "            ax.axhline(self.const.alpha_fine, color='red', linestyle='--', label=f'Obs: 1/137.036')\n            ax.set_ylabel(r'$\\alpha$ (estrutura fina)')\n            ax.set_title(r'Estrutura Fina: $\\alpha = \\alpha_2 / \\sqrt{e}$')\n            ax.legend()\n            "
+    },
+    {
+      "match_paragraph": 1184,
+      "first_paragraph": 1182,
+      "last_paragraph": 1186,
+      "text": "    print(\"\\n   UNIFICAÇÃO ELETROMAGNÉTICA:\")\n    print(\"   ═══════════════════════════════\")\n    print(f\"   √e = {const.sqrt_e:.10f}\")\n    print(f\"   α_obs = {const.alpha_fine:.10f} = 1/{1/const.alpha_fine:.6f}\")\n    print()"
+    },
+    {
+      "match_paragraph": 1185,
+      "first_paragraph": 1183,
+      "last_paragraph": 1187,
+      "text": "    print(\"   ═══════════════════════════════\")\n    print(f\"   √e = {const.sqrt_e:.10f}\")\n    print(f\"   α_obs = {const.alpha_fine:.10f} = 1/{1/const.alpha_fine:.6f}\")\n    print()\n    "
+    },
+    {
+      "match_paragraph": 1193,
+      "first_paragraph": 1191,
+      "last_paragraph": 1195,
+      "text": "    print(\"   ╠═══════════╬═══════════════╬═══════════════╬══════════╣\")\n    \n    for alpha_2 in [0.0118, 0.0119, 0.012, 0.0121, 0.0122]:\n        alpha_pred = deriv.alpha_fine_TGL(alpha_2)\n        inv_alpha = 1 / alpha_pred"
+    },
+    {
+      "match_paragraph": 1194,
+      "first_paragraph": 1192,
+      "last_paragraph": 1196,
+      "text": "    \n    for alpha_2 in [0.0118, 0.0119, 0.012, 0.0121, 0.0122]:\n        alpha_pred = deriv.alpha_fine_TGL(alpha_2)\n        inv_alpha = 1 / alpha_pred\n        erro = abs(alpha_pred - const.alpha_fine) / const.alpha_fine * 100"
+    },
+    {
+      "match_paragraph": 1196,
+      "first_paragraph": 1194,
+      "last_paragraph": 1198,
+      "text": "        alpha_pred = deriv.alpha_fine_TGL(alpha_2)\n        inv_alpha = 1 / alpha_pred\n        erro = abs(alpha_pred - const.alpha_fine) / const.alpha_fine * 100\n        marker = \" ←\" if alpha_2 == 0.012 else \"\"\n        print(f\"   ║  {alpha_2:.4f}  ║  {alpha_pred:.10f}  ║  {inv_alpha:>10.4f}   ║  {erro:>5.2f}%  ║{marker}\")"
+    },
+    {
+      "match_paragraph": 1197,
+      "first_paragraph": 1195,
+      "last_paragraph": 1199,
+      "text": "        inv_alpha = 1 / alpha_pred\n        erro = abs(alpha_pred - const.alpha_fine) / const.alpha_fine * 100\n        marker = \" ←\" if alpha_2 == 0.012 else \"\"\n        print(f\"   ║  {alpha_2:.4f}  ║  {alpha_pred:.10f}  ║  {inv_alpha:>10.4f}   ║  {erro:>5.2f}%  ║{marker}\")\n    "
+    },
+    {
+      "match_paragraph": 1198,
+      "first_paragraph": 1196,
+      "last_paragraph": 1200,
+      "text": "        erro = abs(alpha_pred - const.alpha_fine) / const.alpha_fine * 100\n        marker = \" ←\" if alpha_2 == 0.012 else \"\"\n        print(f\"   ║  {alpha_2:.4f}  ║  {alpha_pred:.10f}  ║  {inv_alpha:>10.4f}   ║  {erro:>5.2f}%  ║{marker}\")\n    \n    print(\"   ╠═══════════╬═══════════════╬═══════════════╬══════════╣\")"
+    },
+    {
+      "match_paragraph": 1201,
+      "first_paragraph": 1199,
+      "last_paragraph": 1203,
+      "text": "    \n    print(\"   ╠═══════════╬═══════════════╬═══════════════╬══════════╣\")\n    print(f\"   ║  OBSERVADO║  {const.alpha_fine:.10f}  ║  {1/const.alpha_fine:>10.4f}   ║    —     ║\")\n    print(\"   ╚═══════════╩═══════════════╩═══════════════╩══════════╝\")\n    "
+    },
+    {
+      "match_paragraph": 1216,
+      "first_paragraph": 1214,
+      "last_paragraph": 1218,
+      "text": "    \n    # Derivações para vários α₂\n    for alpha_2 in [0.011, 0.012, 0.013]:\n        deriv.show_derivations(alpha_2)\n    "
+    },
+    {
+      "match_paragraph": 1217,
+      "first_paragraph": 1215,
+      "last_paragraph": 1219,
+      "text": "    # Derivações para vários α₂\n    for alpha_2 in [0.011, 0.012, 0.013]:\n        deriv.show_derivations(alpha_2)\n    \n    if HAS_TORCH and DEVICE and DEVICE.type == 'cuda':"
+    },
+    {
+      "match_paragraph": 1226,
+      "first_paragraph": 1224,
+      "last_paragraph": 1228,
+      "text": "        \n        print(f\"   χ² total:       {breakdown['total']:.2f}\")\n        print(f\"   α pred:         {breakdown['alpha_fine_pred']:.7f} (obs: {const.alpha_fine:.7f})\")\n        print(f\"   Z_Miguel:       {breakdown['Z_Miguel']:.3f} Ω\")\n        print(f\"   T_CMB pred:     {breakdown['T_CMB_pred']:.4f} K\")"
+    }
+  ]
+}

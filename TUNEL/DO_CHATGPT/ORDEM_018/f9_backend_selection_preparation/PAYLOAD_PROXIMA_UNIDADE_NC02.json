@@ -1,0 +1,285 @@
+{
+  "schema": "F9_NC02_RATIONAL_UNIT_PROPOSAL_V1",
+  "preparation_request_id": "bf2a5692-1aff-423e-9345-7bfa256d5072",
+  "proposed_unit_identity": "bf2a5692-1aff-423e-9345-7bfa256d5072::NC02-RAT-01",
+  "status": "READY_FOR_IMPLEMENTATION_PREPARATION_NOT_EXECUTION",
+  "execution_request_id": null,
+  "claim_created": false,
+  "worker_source_sha256": null,
+  "execution_authorized": false,
+  "canonical_F9_contract_changed": false,
+  "target": "SYNTHETIC_NC02_ONLY_NOT_ANY_PHYSICAL_HYPOTHESIS",
+  "objective": "Implement then independently review a single rational dual-lower/feasible-upper certificate fixture and one non-annihilating negative, before any execution.",
+  "backend": "Pinned Windows Python integer arithmetic and Fraction over canonical integer pairs; no floating point",
+  "codec_dependency": "Read-only pinned tail_envelope._rational, return(a,b); import/call allowed only in a later authorized unit. No tail_upper/aggregate/worker call.",
+  "geometry": {
+    "C": [
+      [
+        {
+          "numerator": "1",
+          "denominator": "1"
+        },
+        {
+          "numerator": "0",
+          "denominator": "1"
+        }
+      ],
+      [
+        {
+          "numerator": "0",
+          "denominator": "1"
+        },
+        {
+          "numerator": "1",
+          "denominator": "1"
+        }
+      ]
+    ],
+    "X": [
+      [
+        {
+          "numerator": "1",
+          "denominator": "1"
+        }
+      ],
+      [
+        {
+          "numerator": "1",
+          "denominator": "1"
+        }
+      ]
+    ],
+    "data_dimension": 2,
+    "nuisance_dimension": 1,
+    "support": "R^2",
+    "nuisance_domain": "R",
+    "no_numerical_rank_or_tolerance": true
+  },
+  "cell": {
+    "coordinate": "u",
+    "closed_lower": {
+      "numerator": "0",
+      "denominator": "1"
+    },
+    "closed_upper": {
+      "numerator": "1",
+      "denominator": "2"
+    },
+    "b_constant": [
+      {
+        "numerator": "1",
+        "denominator": "1"
+      },
+      {
+        "numerator": "0",
+        "denominator": "1"
+      }
+    ],
+    "b_linear": [
+      {
+        "numerator": "0",
+        "denominator": "1"
+      },
+      {
+        "numerator": "1",
+        "denominator": "1"
+      }
+    ],
+    "cover": "this one closed interval is the entire toy domain"
+  },
+  "cases": [
+    {
+      "id": "NC02-RAT-01-POSITIVE",
+      "dual_v": [
+        {
+          "numerator": "1",
+          "denominator": "4"
+        },
+        {
+          "numerator": "-1",
+          "denominator": "4"
+        }
+      ],
+      "witness": {
+        "u": {
+          "numerator": "1",
+          "denominator": "2"
+        },
+        "eta": {
+          "numerator": "3",
+          "denominator": "4"
+        }
+      },
+      "required_checks": [
+        "X^T v exactly zero",
+        "dual affine bound valid over whole toy cell",
+        "feasible witness residual norm squared"
+      ],
+      "expected_analytic_not_run": {
+        "status": "CERTIFIED_TOY_MINIMUM",
+        "lower": {
+          "numerator": "1",
+          "denominator": "8"
+        },
+        "upper": {
+          "numerator": "1",
+          "denominator": "8"
+        }
+      }
+    },
+    {
+      "id": "NC02-RAT-01-NEGATIVE-ANNIHILATION",
+      "dual_v": [
+        {
+          "numerator": "1",
+          "denominator": "4"
+        },
+        {
+          "numerator": "-255",
+          "denominator": "1024"
+        }
+      ],
+      "required_checks": [
+        "reject nonzero X^T v before issuing a certificate; never tolerance cutoff"
+      ],
+      "expected_analytic_not_run": {
+        "status": "INVALID_DUAL_ANNIHILATION",
+        "annihilation_residual": {
+          "numerator": "1",
+          "denominator": "1024"
+        },
+        "lower": null,
+        "upper": null
+      }
+    }
+  ],
+  "builder_output_contract": [
+    "payload_sha256",
+    "dependency_hashes",
+    "case_id",
+    "exact_annihilation_witness",
+    "dual_affine_coefficients",
+    "lower_on_entire_cell",
+    "feasible_point_and_eta",
+    "upper_from_residual",
+    "certificate_status"
+  ],
+  "independent_verifier": "Recompute annihilation, affine endpoint lower, witness residual and integer comparisons from payload; never trust builder valid flag or hardcoded expected output.",
+  "arithmetic_proof_reference": {
+    "profile": "q(u)=(1-u)^2/2",
+    "completion_of_square": "||b-X eta||^2 = 2*(eta-(1+u)/2)^2+(1-u)^2/2",
+    "positive_dual": "2 v^T b-v^T C v=3/8-u/2>=1/8 for 0<=u<=1/2",
+    "statute": "DERIVED_SYMBOLIC_EXPECTATION_NOT_EXECUTED"
+  },
+  "dependencies_pinned_now": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\RECIBO_ROOT_CONTROLES_TAIL_V2_PASS.json",
+      "bytes": 34373,
+      "sha256": "2f323fcf9a8cc9b0e6f13716483309eb5c7ff31ec43c5ed6b586e43e73d407b7",
+      "role": "request_pin"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_numerical_certification_preparation\\CONTRATO_NUMERICO_F9.md",
+      "bytes": 20982,
+      "sha256": "f74d475fd16538f49853f8a32cb2532588bbdc5591872130a0185e32b030cc53",
+      "role": "accepted_interface_member"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_numerical_certification_preparation\\INTERFACE_CERTIFICADOS_F9.json",
+      "bytes": 11018,
+      "sha256": "df431bf0919b87dcbd9620f8852fac8192591f16efe23d51a7b7b12644cbd9ba",
+      "role": "accepted_interface_member"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_numerical_certification_preparation\\PLANO_SINTETICO_NUMERICO.json",
+      "bytes": 4224,
+      "sha256": "d90e9e181d253e95b813a12cca8e091f63dddce8102f222ee05ff1006a8318ef",
+      "role": "accepted_interface_member"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_certificacao_numerica_f9\\PARECER_CERTIFICACAO_NUMERICA_F9.md",
+      "bytes": 9913,
+      "sha256": "5aeb98ea47084862b1ee578e3570c8d2a225ae84aaa1ba8b893c76ea0bf3ae0d",
+      "role": "independent_review_member"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\RUNTIME_PINS.json",
+      "bytes": 25745,
+      "sha256": "9866b26713677755d9eb50d4cf629b4292822277163d4b804336f55cc88c46bf",
+      "role": "consumed_tail_dependency_read_only"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_tail_envelope_implementation_v2\\tail_envelope.py",
+      "bytes": 17472,
+      "sha256": "7238379e8828d3519de1911674d8977c0a42d7c9984d2d4c962686a1cad1e1bf",
+      "role": "consumed_tail_dependency_read_only"
+    },
+    {
+      "path": "C:\\Python314\\python.exe",
+      "bytes": 106328,
+      "sha256": "cce21c0e8710e304273e98ac4b2b0f5aceb639acbcd2343cbaa5c4e81619c45b",
+      "role": "installed_stdlib_or_runtime_bytes_not_imported"
+    },
+    {
+      "path": "C:\\Python314\\python314.dll",
+      "bytes": 6753112,
+      "sha256": "1ac15e2224581fc678bbd17728b9aa538d47b891b72c76499ef07e54cd74f151",
+      "role": "installed_stdlib_or_runtime_bytes_not_imported"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\fractions.py",
+      "bytes": 42531,
+      "sha256": "2fe5128f9198e3a09e223cfc10dde3b21b217e1bd893d55364dc313f1924d59b",
+      "role": "installed_stdlib_or_runtime_bytes_not_imported"
+    }
+  ],
+  "metadata_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_backend_selection_preparation\\METADADOS_BACKENDS_LOCAIS.json",
+    "bytes": 24635,
+    "sha256": "728395cb6983612444e1d90eb666e6bb9e10b5a2606aa58ca691b114aaa24350"
+  },
+  "dependencies_to_freeze_after_implementation": [
+    "new builder/verifier/worker source hashes",
+    "complete actually used runtime imports",
+    "explicit execution identity and supervisor binding"
+  ],
+  "resource_requirements_proposed": {
+    "worker_wall_s": 10,
+    "total_through_persistence_s": 30,
+    "threads": 1,
+    "RSS_MiB": 256,
+    "output_KiB": 128,
+    "input_bits_max_from_existing_codec": 512,
+    "intermediate_bits_max_proposed": 4096,
+    "fixed_case_count": 2,
+    "hard_OS_limits_qualified": false,
+    "do_not_claim_enforced_before_implementation": true
+  },
+  "forbidden": [
+    "observed inputs",
+    "CAMB",
+    "numpy/scipy/sympy/mpmath",
+    "exp/log/SF",
+    "quadrature",
+    "random sampling",
+    "tail_upper",
+    "aggregate_bounds",
+    "old tail controls",
+    "C01-C08",
+    "INIT003",
+    "WSL4f5d replay",
+    "provider call or metadata repair",
+    "kernel or gate change",
+    "new real F9 run",
+    "automatic retry"
+  ],
+  "execution_sequence_proposed": [
+    "Prepare builder/verifier/worker in separately authorized output directory with old files read-only",
+    "Freeze source/runtime/payload pins and obtain independent static review",
+    "ROOT creates own execution request/claim if approved; one run of exactly two cases",
+    "Review receipt and actual resource scope; no promotion to physical F9 certificates"
+  ],
+  "actual_result": null,
+  "actual_runs": 0,
+  "sigma": null
+}

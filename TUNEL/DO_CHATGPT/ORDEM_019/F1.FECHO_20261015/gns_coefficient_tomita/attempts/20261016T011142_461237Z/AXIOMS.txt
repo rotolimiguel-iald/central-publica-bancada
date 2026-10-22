@@ -1,0 +1,75 @@
+import took 118s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T011142_461237Z\GaussianResolventAverageR3.lean:32:35: error(lean.unknownIdentifier): Unknown identifier `hR`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T011142_461237Z\GaussianResolventAverageR3.lean:30:57: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+R : H →L[ℂ] H
+c : ℝ
+hc : c ≠ 0
+hb : 0 < c ^ 2 / 4
+⊢ ∫ (t : ℝ), ↑(gaussianWeight t) • resolventPhaseOperator R (c * t) =
+    spectral R (c ^ 2 / 4) * resolventDampingOperator R
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T011142_461237Z\GaussianResolventAverageR3.lean:55:68: error: Application type mismatch: The argument
+  hR
+has type
+  0 ≤ R
+of sort `Prop` but is expected to have type
+  ℝ
+of sort `Type` in the application
+  weighted_phase_operator R hR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T011142_461237Z\GaussianResolventAverageR3.lean:49:59: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+R : H →L[ℂ] H
+hR : 0 ≤ R
+h1 : R ≤ 1
+hi : Function.Injective ⇑R
+hj : Function.Injective ⇑(1 - R)
+c : ℝ
+hc : c ≠ 0
+x : H
+hint : Integrable (fun t => ↑(gaussianWeight t) • resolventPhaseOperator R (c * t)) volume
+he :
+  (∫ (x : ℝ), ↑(gaussianWeight x) • resolventPhaseOperator R (c * x)) x =
+    ∫ (x_1 : ℝ), (↑(gaussianWeight x_1) • resolventPhaseOperator R (c * x_1)) x
+⊢ ∫ (t : ℝ), gaussianWeight t • (resolventPhaseOperator R (c * t)) x =
+    (spectral R (c ^ 2 / 4)) ((resolventDampingOperator R) x)
+'F1Fecho.GaussianResolventAverage.weighted_phase_operator' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GaussianResolventAverage.average_eq_spectral' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GaussianResolventAverage.average_root_domain' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GaussianResolventAverage.average_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 2.27ms
+	blocked (unaccounted) 108ms
+	congr simp thm 1.11ms
+	elaboration 108ms
+	fix level params 0.37ms
+	import 118s
+	initialization 31.9ms
+	instantiate metavars 0.279ms
+	interpretation 6.34s
+	let-to-have transformation 0.388ms
+	linting 6.12ms
+	norm_num 16.1ms
+	overlappingInstancesLinter 21.2ms
+	parsing 4.22ms
+	process pre-definitions 5.78ms
+	share common exprs 2.32ms
+	simp 3.56ms
+	tactic execution 46.1ms
+	tacticAnalysis 23.8ms
+	type checking 61ms
+	typeclass inference 842ms

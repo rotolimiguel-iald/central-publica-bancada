@@ -1,0 +1,25 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T004454_364907Z\MaxwellStripCoefficientR3.lean:91:87: error: unsolved goals
+q : Fin 2 → ℝ
+hq : q ≠ 0
+f : SchwartzTensor
+hf : IsRealTest f
+j : Fin 2
+r : ℝ
+hn : -q ≠ 0
+hterm :
+  ∀ (μ ν : Fin 4),
+    analyticStrength q j μ ν (↑r - Complex.I * ↑Real.pi) *
+        scalarLaplace (transverseMass 0 q) (q 0) (q 1) (componentTest f μ ν) (↑r - Complex.I * ↑Real.pi) =
+      star
+        (analyticStrength (-q) j μ ν ↑r *
+          scalarLaplace (transverseMass 0 (-q)) ((-q) 0) ((-q) 1) (componentTest f μ ν) ↑r)
+⊢ 1 / 2 = ((starRingEnd ℂ) 2)⁻¹ ∨
+    ∑ x,
+        ∑ x_1,
+          (starRingEnd ℂ) (analyticStrength (-q) j x x_1 ↑r) *
+            (starRingEnd ℂ) (scalarLaplace (transverseMass 0 (-q)) (-q 0) (-q 1) (componentTest f x x_1) ↑r) =
+      0
+'F1Fecho.MaxwellStrip.maxwellLaplace_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_differentiable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_lower_real' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,49 @@
+{
+  "schema": "P3_A02_FOCUSED_SOFTWARE_ONLY_V2",
+  "preparation_id": "078a3c05-d30f-4c9c-a31a-8a78ca9b6893",
+  "utc_before_tests": "2026-10-06T19:20:52.070616+00:00",
+  "exact_test_count": 1,
+  "cases": [
+    "test_22_launcher_handler_records_only_no_mask_mutation"
+  ],
+  "pins": [
+    {
+      "relative_path": "test_A02_stdlib.py",
+      "bytes": 13139,
+      "sha256": "1bfd321b8655ac5b449f46ed0c2422974e6cbc51bc701a1fd7571c27beaaef1d"
+    },
+    {
+      "relative_path": "process_supervision.py",
+      "bytes": 5392,
+      "sha256": "dee36b24e9c7135bc9ebcd3a70efcdd5815539caab0685c1aa13c1993ed5ff4b"
+    },
+    {
+      "relative_path": "launch_p3.py",
+      "bytes": 10516,
+      "sha256": "3110010bf1f8c2171fbb4b3cbf39ab01401619fb124a8a6582ea2d8b6cbcd726"
+    }
+  ],
+  "interpreter": {
+    "path": "C:\\Python314\\python.exe",
+    "bytes": 106328,
+    "sha256": "cce21c0e8710e304273e98ac4b2b0f5aceb639acbcd2343cbaa5c4e81619c45b"
+  },
+  "purpose": "Only new cooperative cancellation/cleanup branches and meaningful local regressions; prior A tests not rerun.",
+  "allowed_imports": "Pure process_supervision and stdlib; launcher AST as data only",
+  "prohibited": [
+    "real child",
+    "real signals",
+    "WSL",
+    "driver/admission imports",
+    "NumPy/LAL/Bilby",
+    "external scientific inputs",
+    "AUTH/CLAIM"
+  ],
+  "limits": "22 tiny artificial cases, no sleep or real subprocess; normal Python314 -I -B",
+  "not_scientific_execution_or_qualification": true,
+  "delta_from_v1": "Same 22 cases; AST22 also checks monotonic deadline after restoring handlers before final exit. Prior result/pins preserved.",
+  "prior_protocol_sha256": "aa00c9c704420d4476f4174e9edbcec598a87d44a8116dc660c58d23b00144e5",
+  "defined_suite_count": 22,
+  "selection": "runpy loads definitions only; unittest suite selects AST22. Direct full-suite __main__ is not the command for this protocol.",
+  "parent_instruction": "Run only affected regression after final launcher change; 21 pure supervisor cases already measured against unchanged module."
+}

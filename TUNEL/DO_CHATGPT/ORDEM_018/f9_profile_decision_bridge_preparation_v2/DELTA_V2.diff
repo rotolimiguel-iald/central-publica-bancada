@@ -1,0 +1,45 @@
+--- v1/profile_decision_bridge.py
++++ v2/profile_decision_bridge.py
+@@ -196,6 +196,7 @@
+         self.checkpoint()
+         pins = {key: SOURCE_PINS[key] for key in self.modules}
+         result = self.object_verifier(self.modules, json.loads(canonical(pins)))
++        self.checkpoint()
+         accept_receipt(result, "LOADED_OBJECTS", pins,
+                        [p["sha256"] for p in pins.values()],
+                        self.object_verifier_sha256, "LOADED_OBJECTS_ONLY")
+--- v1/test_bridge_stdlib.py
++++ v2/test_bridge_stdlib.py
+@@ -1,7 +1,7 @@
+ """Prepared stdlib integration tests. NOT RUN in the preparation.
+ 
+ The semantic verifier below is a test double, never a scientific verifier.
+-It deliberately NEVER accepts REDUCER_THRESHOLD_AND_OUTPUT.
++It uses SYNTHETIC_CONTROL_ONLY and never publishes a scientific decision.
+ """
+ import ast
+ import copy
+@@ -368,5 +368,23 @@
+                 make().estimate_family(iter([row]),contexts=contexts(),level=1,max_records=16200)
+ 
+ 
++    def test_object_verifier_valid_receipt_after_deadline_is_rejected(self):
++        current = [0.0]
++        calls = [0]
++        def late_object_verifier(modules, pins):
++            receipt = object_verifier(modules, pins)
++            calls[0] += 1
++            if calls[0] == 2:
++                current[0] = 100.0
++            return receipt
++        b = bridge.Bridge(modules=MODULES, object_verifier=late_object_verifier,
++            object_verifier_sha256=PIN, deadline=100.0, clock=lambda: current[0])
++        # The same _objects path guards final estimate_family publication.
++        # No sleep, full profile rerun, solver or real deadline consumption.
++        with self.assertRaisesRegex(bridge.BridgeError, "COOPERATIVE_DEADLINE"):
++            b._objects()
++        self.assertEqual(calls[0], 2)
++
++
+ if __name__ == "__main__":
+     unittest.main()

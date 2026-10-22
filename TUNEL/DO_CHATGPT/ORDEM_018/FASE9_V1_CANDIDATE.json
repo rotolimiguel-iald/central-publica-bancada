@@ -1,0 +1,386 @@
+{
+  "id": "TUNEL018_FASE9_V1_CANDIDATE",
+  "status": "DRAFT_NOT_AUTHORIZED_FOR_COMPOSITE",
+  "scientific_verdict": null,
+  "source_order": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_018_o_discriminante.md",
+    "bytes": 17173,
+    "sha256": "57cff3a342573dab98a0f7e3e09e0fecff6d8b31b9ca987a078a2c9e913e3a0b"
+  },
+  "rules": {
+    "beta": "ALPHA_FINE_CODATA_2018 * sqrt(e) runtime, not fitted",
+    "K": "E_LCDM(z_star) ** (2*beta/3)",
+    "background": "proposal Planck+DESI_DR2 WITHOUT any distance ladder; Planck-only separate sensitivity; operator choice pending",
+    "double_beta": "forbidden: background convention and observable map explicit"
+  },
+  "common_data_contract": {
+    "components": [
+      "background observations",
+      "local distance calibrators",
+      "BAO observables for H5 rd-free"
+    ],
+    "avoid_duplicate": [
+      "compressed H0 plus same raw SH0ES",
+      "Planck+BAO plus same Planck/BAO",
+      "TRGB/JAGB sharing anchors or SNe treated independent",
+      "GWTC5 plus GW170817 separately"
+    ],
+    "covariance": "published joint covariance or source-backed D+A S A^T, counted once; missing cross-covariance is unresolved, not zero",
+    "compressions": "validity under all hypotheses must be verified"
+  },
+  "hypotheses": {
+    "H1_TGL": {
+      "beta": "fixed runtime",
+      "local": "K*b"
+    },
+    "H2_LCDM": {
+      "beta": 0,
+      "local": "b"
+    },
+    "H3_beta_free_diagnostic": {
+      "beta_prior_proposed": [
+        -0.05,
+        0.05
+      ],
+      "local": "exp(kappa*beta)*b",
+      "does_not_redefine_TGL": true
+    },
+    "H4_Cepheid_shift": {
+      "definition_proposed": "dimensionless fractional shift, local=b*(u+s*c)",
+      "s_prior_proposed": [
+        -0.15,
+        0.15
+      ],
+      "response_vector": "derive c for mixed calibrators before fit; c must not be parallel to u for identification"
+    },
+    "H5_rd_free": {
+      "rd_prior_Mpc_proposed": [
+        130,
+        160
+      ],
+      "requires": "BAO raw likelihood with consistent common data, rd parameter convention; not an EDE dynamics claim",
+      "implementation_status": "PENDING"
+    }
+  },
+  "verdict_proposal_order": [
+    "AWAITING_DATA if missing required verified inputs or ratification",
+    "INCONCLUSIVE_SYSTEMATICS if instrument/covariance/control gates fail",
+    "NOT_FALSIFIED_UNDERPOWERED if precomputed separation<5; always retain observed residual diagnostics without hiding tensions",
+    "FALSIFIED_AT_5SIGMA for route/map if |z_TGL|>=5 after gates",
+    "DISCRIMINATES_FROM_LCDM_AT_nSIGMA__ZERO_FREE_PARAMETERS__USE_NOVEL if |z_LCDM|>=5, lnB_TGL_LCDM>=5, lnB_TGL_free>=-1, and parameter provenance verified",
+    "otherwise NOT_FALSIFIED_POWERED with diagnostic TENSION_3_TO_5_SIGMA where applicable"
+  ],
+  "caveats": [
+    "this proposed rule is not frozen for opening",
+    "nuisance priors normalized and transported under reparameterization",
+    "model selection/calibration and use-novelty documented, no temporal novelty veto",
+    "forecast separation, observed residual, and Bayes factor are distinct and dependent outputs"
+  ],
+  "ratification_needed": [
+    "one background definition",
+    "five hypotheses and priors with full likelihood including rd",
+    "single verdict rule and treatment of tensions under an underpowered gate",
+    "joint sources/covariance complete and byte-pinned",
+    "operator decision to open composite by gerencia"
+  ],
+  "progress": [
+    "SN-only archived validation reproduced; no new composite",
+    "chronology audited with documentary limitations",
+    "MiMo critic prepared but locally blocked before dispatch"
+  ],
+  "proposed_amendments": [
+    {
+      "id": "H0DN_SUPPORT_AND_RESPONSE_20261006",
+      "status": "PROPOSED_NOT_RATIFIED",
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\REVISAO_H0DN_ACT.md",
+        "bytes": 12868,
+        "sha256": "88f804c6ac00242fa3fd0d0d39c6bb9310a8c07d00b9de743ced392ab7f4af96"
+      },
+      "map_seq": [
+        399,
+        403,
+        408
+      ],
+      "network_response": {
+        "universal": "h=log10(b)+log10(K); shift acts through A[:,ihub], not all observations",
+        "cepheid": "E[y_i]=mu_host+c_i*delta_C for explicitly admitted differential module bias; elementary measurements/anchors determine response before compression",
+        "common_zero_point": "may cancel host versus anchor; do not equate to differential delta_C",
+        "identifiability": "universal shift degenerate with free h in local-only network; independent background and nuisance-projected rank required",
+        "catalog_scope": "H0DN baseline excludes JAGB; F1 requires TRGB/JAGB test, so baseline-only H0DN does not fulfill that item; specify augmented source/selection and shared covariance before use"
+      },
+      "singular_covariance": {
+        "support": "N.T @ residual == 0 under fixed rank/units convention, plus residual.T C_pinv residual",
+        "latent_network": "prefer covariance and physical responses transported from elementary measurements through same B",
+        "normalization": "pseudo-determinant and support measure kept; unlike-dimensional support densities not comparable without common observation model",
+        "numerics": "IDL relative tolerance and Python absolute atol=1e-10 differ; qualify a fixed unit-aware rule before new model comparison",
+        "prototype_only": {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\MANIFESTO.json",
+          "bytes": 1557,
+          "sha256": "0d94e3847e7a557ee523b4b2c0b7fae33e40cd1f0edf6e36e32ca6c4f59dae92"
+        }
+      },
+      "prior_transport_proposal": {
+        "old_s_prior": [
+          -0.15,
+          0.15
+        ],
+        "restricted_example": "pure Cepheid ladder, other intercept/geometry fixed; positive delta_C is bias in published distance modulus",
+        "relation": "apparent H/b=1+s=10**(-delta_C/5); delta_C=-5*log10(1+s)",
+        "delta_C_endpoints_magnitude": [
+          -0.30348920176805827,
+          0.3529053714285364
+        ],
+        "density_if_preserving_uniform_s": "pi(delta_C)=ln(10)/[5*(0.15-(-0.15))]*10**(-delta_C/5) inside transformed support",
+        "not_for_mixed_network": "mixed network response must be computed from actual elementary equations; not apply pure ladder factor to compressed total",
+        "choice": "keep original proposed uniform-s prior via Jacobian, or choose a different physical prior explicitly before data; neither ratified"
+      },
+      "next_steps": [
+        "complete historical reproduction independently",
+        "derive and pin elementary responses for all admitted local indicators",
+        "choose independent background likelihood and common nuisance",
+        "verify rank/support/normalization and prior transport using synthetic controls",
+        "ratify final five-hypothesis contract before composite"
+      ],
+      "no_new_fit": true,
+      "no_change_to_frozen_V1": true
+    },
+    {
+      "id": "JAGB_V01_DOCUMENTARY_EXTENSION_20261006",
+      "status": "PROPOSED_NOT_RATIFIED",
+      "source_manifest": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\MANIFESTO_ENTREGA.json",
+        "bytes": 2068,
+        "sha256": "955a6e3e68c04b5be368cdbc8404d352b89246b620bb43c2e9e785350b405048"
+      },
+      "map_seq": 421,
+      "upstream_variant": "V01 Baseline + JAGB, distinct from preregistration V1",
+      "selection": "178 host-distance rows,53 hosts; +12 JAGB rows in11 hosts. Same55 SN,14 SBF and13 group rows; shared rows counted once.",
+      "candidate_response": "119 Cepheid host rows with c_C=1, other rows zero before network propagation. h response requires qualified common covariance and support.",
+      "covariance_unresolved": {
+        "cross_method_residual": null,
+        "cross_source_residual": null
+      },
+      "next": "Resolve relevant cross terms or justify and freeze a PSD sensitivity family before inference; qualify rank/support in explicit units.",
+      "no_new_fit": true
+    },
+    {
+      "id": "H5_ACOUSTIC_OPTIONS_REVIEWED_20261006",
+      "status": "OPTIONS_REVIEWED_NOT_CHOSEN_OR_RATIFIED",
+      "map_seq": [
+        417,
+        422
+      ],
+      "note": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h5_contract\\NOTA_H5_ESCALAS_ACUSTICAS.md",
+        "bytes": 5564,
+        "sha256": "4b4c49e675a69aa288c8fd13d92ae0a2573b1fe17aaeb960b07f5ddd2020870f"
+      },
+      "review": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\REVISAO_H5_ESCALAS_ACUSTICAS.json",
+        "bytes": 3344,
+        "sha256": "1fe68f57a752c301e2c673189cfa41a1d8f4a43661b716a3816b68e8314620c3"
+      },
+      "options": {
+        "A": "phenomenological BAO ruler only, rd=q*rd_CAMB(theta), fixed standard CMB rstar; no EDE claim",
+        "B": "physical primordial dynamics, consistent recombination and perturbations, qualified full/compressed CMB likelihood",
+        "C": "local multiplicative scale, reparameterizes beta-free only when all other blocks are independent of beta; not fifth data signature"
+      },
+      "prior_transport": "If preserving Uniform rd[130,160] Mpc, q|theta has bounds130/rdCAMB(theta),160/rdCAMB(theta) and density rdCAMB(theta)/30; not uniform q with fixed bounds.",
+      "data_identity": "same observations and measure in all five models; auxiliary reduced-data analysis separate"
+    },
+    {
+      "id": "STELLAR_PSD_FAMILY_PREPARATION_20261006",
+      "status": "NUMERIC_FAMILY_QUALIFIED_NOT_SCIENTIFICALLY_RATIFIED",
+      "sources": [
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\residual_systematics\\REVISAO_RESIDUAIS.md",
+          "bytes": 17430,
+          "sha256": "9d91a8435d099146c3a6c402718fe974ffa46e1faa360c1af9fe93b78fe11eb7"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\jagb_extension\\residual_systematics\\CONTRATO_PSD_CANDIDATO.json",
+          "bytes": 13840,
+          "sha256": "bff878e6b3f76fac11465b92af8aefe6cf00361bf54b87ce22f3bf5064ce956d"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\STELLAR_FAMILY_PROTOCOL.json",
+          "bytes": 3273,
+          "sha256": "873b80a42c90a56caf54c956f4e041cc7452188af1ce7608c349fb39eedc45d1"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\STELLAR_FAMILY_RESULT.json",
+          "bytes": 130606,
+          "sha256": "839b129690be927c68cfc19c5299a4a4fcba68248144194384332f668b755208"
+        }
+      ],
+      "map_seq": [
+        435,
+        439,
+        442
+      ],
+      "scientific_proposal": "Alternative B, all interior grid and sign cases as an explicitly restricted sensitivity envelope; Alternative A physical host-anchor component reconstruction remains separate. No scenario selected using fitted centres.",
+      "preserved": "Published marginal errors; common geometric anchors; repeated HMS; existing SN rows once.",
+      "not_covered": "General MAS-HMS cross-level error correlations; no 0.06 mag allowance added automatically.",
+      "preparation_result": "178 rows; rank106/nullity72;300 cases/283 distinct primitive designs; consistent nullspace and marginals; rank stability across three stated cutoffs.",
+      "robustness_rule_candidate": "Report every case and full ranges; primary baseline Rm=Rh=I labelled conditional. Strong claim requires same conclusion throughout specified interior family; any decision change is INCONCLUSIVE_SYSTEMATICS within this family, not evidence against all TGL. Do not optimize or average scenarios without declared prior. Boundary singular cases kept separate.",
+      "no_new_fit": true,
+      "no_opening_authority": true,
+      "map_sequence_correction": "Result sequence read from tool return442;440 belongs to E45 consolidation."
+    },
+    {
+      "id": "LINEAR_MEASURE_RECOMMENDATION_20261006",
+      "status": "CONCRETE_COORDINATION_PROPOSAL_NOT_OPENING_AUTHORIZATION",
+      "at": "2026-10-06T03:13:57.576692+00:00",
+      "sources": [
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\h0dn_documentary_review\\linear_design\\MANIFESTO_ENTREGA.json",
+          "bytes": 3911,
+          "sha256": "04cc8b0a45b63cb64f034c9c004bb681c1d6750305c2a5cb146fe294d3b24343"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_linear\\MANIFESTO_REVISAO_LINEAR.json",
+          "bytes": 1316,
+          "sha256": "b565ba22ac62c52a000b12244c0d7d69b35622565ce6a18d5945dfede0cc0fa6"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\h0dn_nonstellar_errors\\MANIFESTO_ERROS_NAO_ESTELARES.json",
+          "bytes": 2395,
+          "sha256": "86639ddf6c11a173b066927aa13395ed00acb21b7388f43533da52e0471a004e"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\LINEAR_GAUSSIAN_PROTOCOL.json",
+          "bytes": 1934,
+          "sha256": "9444fce335b9b1924ff7e81bde4e960cd6ff06cecaefcbc297e7121d6443bbee"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\LINEAR_GAUSSIAN_RESULT.json",
+          "bytes": 2136,
+          "sha256": "d8e2d56b91d467cc76981eb6e06c1dafab75abcdf843f96532056ac3a9b0e81f"
+        },
+        {
+          "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_linear_gaussian\\MANIFESTO_REVISAO_LINEAR_GAUSSIAN.json",
+          "bytes": 724,
+          "sha256": "20cb00daed8d6263392c9450ebf53cea8017bbf7eef3050b5fba8dd002682a14"
+        }
+      ],
+      "linear_design": {
+        "rows": 267,
+        "eta_dimension": 63,
+        "X_rank": 63,
+        "X_h_rank": 64,
+        "X_h_C_rank": 65,
+        "stellar_cycles": 72,
+        "centres_support_checked": false
+      },
+      "recommended_common_nuisance_measure": "Same Lebesgue d eta on R^63 in the same physical modulus/magnitude coordinates for all five models; compare finite nonzero relative integrals only, not absolute evidences",
+      "normalization": "Keep rank, pdet C, det Xw^T Xw and Jacobians explicitly; cancellation only within fixed covariance scenario and if independent of all integrated parameters",
+      "recommended_H5": "A: phenomenological free BAO rd with standard CMB rstar; not EDE or a complete modified early-universe model",
+      "recommended_background": "Shared standard flat background predictions with beta affecting only local R-A map, Planck compressed plus DESI DR2; cross-block factorization declared INPUT",
+      "proper_physical_prior_proposals": {
+        "H0": [
+          50,
+          90
+        ],
+        "ombh2": [
+          0.015,
+          0.03
+        ],
+        "omch2": [
+          0.08,
+          0.18
+        ],
+        "beta_diagnostic": [
+          -0.05,
+          0.05
+        ],
+        "s_Cepheid": [
+          -0.15,
+          0.15
+        ],
+        "rd_Mpc": [
+          130,
+          160
+        ]
+      },
+      "Cepheid_parameterization": "Use elementary c_C delta_C. Transport s prior by delta_C=-5log10(1+s), density ln(10)/1.5 * 10^(-delta_C/5); no pure-ladder shift applied to whole network",
+      "theory_domain": "Historical table is narrower than proposed prior. Do not silently set likelihood zero outside old table or renormalize; new theory-only qualification requested f132a1d5-7477-405d-963b-b1659db63328",
+      "nonstellar_frontiers": [
+        "SN 277-row covariance PSD/compression to qualify by errors only",
+        "SBF e(M110) composition versus common offset under primary-source review",
+        "MM variance symbolically specified pending permitted relative-error input/propagation",
+        "Fixed q0/j0 compression and finite cross-block assumptions stated once"
+      ],
+      "no_new_observed_fit": true,
+      "no_frozen_V1_changed": true
+    }
+  ],
+  "engineering_update_20261006": {
+    "at": "2026-10-06T03:44:28.032247+00:00",
+    "status": "PREPARATION_NOT_V1_ADOPTION_OR_OPENING",
+    "preflight262": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\preflight_262\\PREFLIGHT_262_RESULT.json",
+      "bytes": 9157,
+      "sha256": "507c91dc51928fcb9e2b9f3a5f9ed0b3a5146570abd78a938f130abc97e31910"
+    },
+    "flow_review": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\proveniencia\\revisao_flow_errors\\MANIFESTO_REVISAO_FLOW_ERRORS.json",
+      "bytes": 2737,
+      "sha256": "3c27c4c7d120a3649185b708a34d56a32a3d0e2106b935a724e868994418214f"
+    },
+    "background_original_delivery_receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\RECIBO_ACEITE_PREPARACAO_BACKGROUND.json",
+      "bytes": 4710,
+      "sha256": "e2aebfc7c4f5fee4ce06a8a01a95aa6a78f9fa8a7b6227a280e10b3f924cb637"
+    },
+    "background_correction_pending": true,
+    "verdict_request_id": "18dced03-6d38-4a2e-a2c8-a44ab39ed171",
+    "MM_remains_symbolic": true,
+    "scientific_verdict": null
+  },
+  "engineering_update_background_and_verdict_20261006": {
+    "at": "2026-10-06T04:01:10.075092+00:00",
+    "background": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_background_prediction\\THEORY_CONTROL_ROOT_RECEIPT.json",
+      "bytes": 14674,
+      "sha256": "e30ce77a2886cdcba1ee6f7687db8b41908eb74410f50bdf46ce37552c0b71d0"
+    },
+    "five_points_only": true,
+    "full_prior_qualified": false,
+    "scientific_ratification": false,
+    "verdict_contract_candidate": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_verdict_contract\\F9_VERDICT_CONTRACT_CANDIDATE.json",
+      "bytes": 12696,
+      "sha256": "b9186c67fcc0ded3add5a00321280dc00aecd50f9b51ff61077a27d743569d6b"
+    },
+    "status": "UNDER_INDEPENDENT_REVIEW_NOT_ADOPTED",
+    "opening_authorized": false,
+    "old_undefined_z_rule_not_executable": true
+  },
+  "current_documentary_companions_20261006": {
+    "at": "2026-10-06T04:40:52.507407+00:00",
+    "verdict": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_verdict_contract\\F9_VERDICT_CONTRACT_CANDIDATE_V2.json",
+      "bytes": 15895,
+      "sha256": "6b5118548490392a26eb43a8de9e5a252ae6e6fd28c3d0edbc2daa15c5813655"
+    },
+    "calibration": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\CALIBRATION_BOUND_CANDIDATE.json",
+      "bytes": 8941,
+      "sha256": "c5dfc055174fba6412488a8f63c9d32b1756602aa5dcb5ce7052b77c803b5641"
+    },
+    "independent_review": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\derivacoes\\revisao_cota_calibracao_f9\\RECIBO_REVISAO_COTA_F9.json",
+      "bytes": 19954,
+      "sha256": "a77dfe1e113f73bd1e0c7ac4697338790af17e8c35eeec0542f8c447abd3fe87"
+    },
+    "status": "REVIEWED_CONDITIONAL_PROPOSALS_NOT_FROZEN_V1",
+    "supersedes_for_future_draft": [
+      "top-level undefined z verdict_proposal_order",
+      "early underpowered return",
+      "aggregated pure-ladder H4 response"
+    ],
+    "opening_authorized": false,
+    "old_fields_retained_as_history": true
+  }
+}

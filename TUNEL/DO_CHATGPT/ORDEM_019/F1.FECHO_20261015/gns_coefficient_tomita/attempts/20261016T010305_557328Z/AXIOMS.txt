@@ -1,0 +1,59 @@
+import took 166s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T010305_557328Z\GaussianResolventRegularizerR3.lean:28:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  cfc (fun x => id x * gaussianRangeFactor b x) R
+in the target expression
+  cfc (fun x => x * gaussianRangeFactor b x) R = R * cfc (gaussianRangeFactor b) R
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+R : H →L[ℂ] H
+hR : 0 ≤ R
+h1 : R ≤ 1
+b : ℝ
+hb : 0 < b
+hs : IsSelfAdjoint R
+he : cfc (gaussianSymbol b) R = cfc (fun x => x * gaussianRangeFactor b x) R
+⊢ cfc (fun x => x * gaussianRangeFactor b x) R = R * cfc (gaussianRangeFactor b) R
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+tactic execution of Mathlib.Tactic.RingNF.ringNF took 108ms
+'F1Fecho.GaussianResolventRegularizer.spectral_factor' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GaussianResolventRegularizer.spectral_root_domain' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GaussianResolventRegularizer.gaussian_phase_integral' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.288ms
+	blocked (unaccounted) 492ms
+	congr simp thm 0.701ms
+	elaboration 58.4ms
+	fix level params 0.324ms
+	import 166s
+	initialization 32.7ms
+	instantiate metavars 0.384ms
+	interpretation 6.24s
+	let-to-have transformation 0.143ms
+	linting 5.52ms
+	norm_num 3ms
+	overlappingInstancesLinter 22.1ms
+	parsing 2.46ms
+	process pre-definitions 9.62ms
+	ring 40.3ms
+	share common exprs 2.95ms
+	simp 13.5ms
+	tactic execution 202ms
+	tacticAnalysis 20.4ms
+	type checking 172ms
+	typeclass inference 1.03s

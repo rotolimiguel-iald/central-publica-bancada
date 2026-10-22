@@ -1,0 +1,163 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "reviewer": "codex-atrator-skeptic",
+  "created_utc": "2026-10-15T19:19:33.514517+00:00",
+  "verdict": "REQUER_CORRECAO_VINCULO_CONTAGENS_LOG_RECIBO",
+  "material_findings": [
+    {
+      "id": "KH-R1",
+      "severity": "MEDIUM",
+      "anchor": "build_kh_n1_patch_r1.py:41-74",
+      "observation": "Hashes conferem, mas contagens do contrato não são reconstruídas nem comparadas ao conteúdo do log. Três mutações coerentes internamente foram aceitas com o mesmo log pinado, incluindo decl/report+1, thm+1 e lacuna de regex alterada. O recibo também só é lido para calcular hash; seu exit, ligação ao log e conjunto de fontes não são consumidos.",
+      "fix": "Validar uma única linha TOTAL, reconstruir entradas de axiomas e nomes não lidos com a mesma semântica do consumidor, conferir axiomas/sorry e comparar todos os totais; ler recibo de auditoria integral tipado e exigir exit inteiro zero, vínculo ao log e ao conjunto de fontes. Nada de expectativa derivada do futuro rito."
+    }
+  ],
+  "low_findings": [
+    {
+      "id": "KH-R2",
+      "observation": "audit_exit_code=False passa porque False==0. Exigir type(value) is int, como nas demais contagens."
+    }
+  ],
+  "checks": [
+    {
+      "name": "valid_historical_fixture",
+      "accepted": true,
+      "expected_correct_behavior_accept": true,
+      "passes_required_behavior": true,
+      "decl": 25415,
+      "thm": 20118,
+      "entries": 25411,
+      "unread": 4,
+      "audit_exit_code": 0
+    },
+    {
+      "name": "joint_counts_plus_one_same_pinned_log",
+      "accepted": true,
+      "expected_correct_behavior_accept": false,
+      "passes_required_behavior": false,
+      "decl": 25416,
+      "thm": 20118,
+      "entries": 25412,
+      "unread": 4,
+      "audit_exit_code": 0
+    },
+    {
+      "name": "theorem_count_plus_one_same_pinned_log",
+      "accepted": true,
+      "expected_correct_behavior_accept": false,
+      "passes_required_behavior": false,
+      "decl": 25415,
+      "thm": 20119,
+      "entries": 25411,
+      "unread": 4,
+      "audit_exit_code": 0
+    },
+    {
+      "name": "changed_regex_gap_same_pinned_log",
+      "accepted": true,
+      "expected_correct_behavior_accept": false,
+      "passes_required_behavior": false,
+      "decl": 25415,
+      "thm": 20118,
+      "entries": 25410,
+      "unread": 5,
+      "audit_exit_code": 0
+    },
+    {
+      "name": "boolean_exit_false",
+      "accepted": true,
+      "expected_correct_behavior_accept": false,
+      "passes_required_behavior": false,
+      "decl": 25415,
+      "thm": 20118,
+      "entries": 25411,
+      "unread": 4,
+      "audit_exit_code": false
+    },
+    {
+      "name": "boolean_decl",
+      "accepted": false,
+      "expected_correct_behavior_accept": false,
+      "passes_required_behavior": true,
+      "decl": true,
+      "thm": 20118,
+      "entries": 25411,
+      "unread": 4,
+      "audit_exit_code": 0
+    },
+    {
+      "name": "wrong_log_hash",
+      "accepted": false,
+      "expected_correct_behavior_accept": false,
+      "passes_required_behavior": true,
+      "decl": 25415,
+      "thm": 20118,
+      "entries": 25411,
+      "unread": 4,
+      "audit_exit_code": 0
+    },
+    {
+      "name": "outside_trio_contract",
+      "accepted": false,
+      "expected_correct_behavior_accept": false,
+      "passes_required_behavior": true,
+      "decl": 25415,
+      "thm": 20118,
+      "entries": 25411,
+      "unread": 4,
+      "audit_exit_code": 0
+    }
+  ],
+  "actual_fixture_totals_from_log": {
+    "decl": 25415,
+    "thm": 20118,
+    "fora_do_trio": 0
+  },
+  "existing_structural_checks": 14,
+  "positive_results": [
+    "As mutações do programa ficam somente nas três atribuições de dados; nenhuma função ou outro AST muda.",
+    "Especificação v393 original preservada em extras; h2/h3 históricos passam a pisos e a spec v394 cobra valores exatos.",
+    "Booleano em decl, hash do log alterado e fora_do_trio não zero foram recusados.",
+    "A expectativa não é lida do próximo rito, mas a origem prévia ainda precisa do vínculo semântico comprovado."
+  ],
+  "scope": "Revisão em memória do gerador e dos predicados; fixture histórica explicitamente marcada. Não rodou main, Lean, rito integral ou geração de candidato.",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\build_kh_n1_patch_r1.py",
+      "sha256": "3787fc7551f72f56f6026d30da8355377199dfe0c525cc5fccca90d141669890",
+      "bytes": 9486
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\kh_patch_tests_r1\\PATCH_TEST_RECEIPT_R1.json",
+      "sha256": "e6143606e00d0928ede039961b88b4861784e09f87584a0b5667a11459961205",
+      "bytes": 8691
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\kh_patch_tests_r1\\FIXTURE_ONLY_R3_PRIOR_RITE_CONTRACT.json",
+      "sha256": "69c69c7bfc5759829f559c98e0a950fe452b3a10613a26b5034005705282c0a5",
+      "bytes": 136687
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\um.py",
+      "sha256": "9ac3cdf7b6b40f636a3ecb7792339d999376b18369feb9427df21f869de7efcd",
+      "bytes": 35708503
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rite394_20261015\\r2\\tgl_kernel_audit_capture.txt",
+      "sha256": "6aa5c29a81956865195b9eea94dbfea5ff9c37d6700097de01096b9e142c04ad",
+      "bytes": 3815118
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rite394_20261015\\r2\\RITE_RECEIPT.json",
+      "sha256": "326e47dc019ea35b3a147dcf817e0fa271ade3722ec804bd520c8a4c2aabbf00",
+      "bytes": 5522
+    }
+  ],
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kh_patch_review\\review_patch_r1.py",
+    "sha256": "a6866b68c720282fdc03e5ca1cee0df410e333e2b4a5fe3d37e2c9902d7d3625",
+    "bytes": 7236
+  },
+  "production_memory_gate_changed": false
+}

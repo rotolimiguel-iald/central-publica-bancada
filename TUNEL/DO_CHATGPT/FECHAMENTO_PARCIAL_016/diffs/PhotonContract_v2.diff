@@ -1,0 +1,36 @@
+--- C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D4\PhotonContract_v2.lean
+
++++ C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\FECHAMENTO_PARCIAL\lean\PhotonContract_v2.lean
+
+@@ -1,6 +1,7 @@
+
+ -- predecessor_sha256: cd67282b68af5d74a813ec0c41d7e826dbeee830665917a146af5b9d75638416
+ -- ORDEM016 D4: isolated retyped copy, not a photon-network inhabitant.
+ -- Source SHA256: 2f2c6561a5a5d832b43f11f7bacccf4811eb4392f1832f78cf4a5838a72a4808
++import Lean
+ import PhotonMassiveTransport
+ import TGLExt.TheMasterFires
+ import TGLExt.StrongFrame
+@@ -409,3 +410,21 @@
+
+ end
+ 
+ end ORDEM016.Photon.Contract
++
++
++-- Engineering audit: all declarations introduced by this compilation unit.
++open Lean in
++run_cmd do
++  let env ← Elab.Command.liftCoreM getEnv
++  for (n, ci) in env.constants.map₂.toList do
++    let axs ← collectAxioms n
++    let kind := match ci with
++      | .axiomInfo _ => "axiom"
++      | .thmInfo _ => "theorem"
++      | .defnInfo _ => "definition"
++      | _ => "generated_or_type"
++    IO.println ("BENCH_DECL\t" ++ n.toString ++ "\t" ++ kind ++ "\t" ++
++      String.intercalate "," (axs.toList.map Name.toString))
++    unless axs.all (fun a => a == `propext || a == `Classical.choice || a == `Quot.sound) do
++      throwError "AXIOM_AUDIT_REFUSED: {n}"
++    if kind == "axiom" then throwError "NEW_AXIOM_REFUSED: {n}"

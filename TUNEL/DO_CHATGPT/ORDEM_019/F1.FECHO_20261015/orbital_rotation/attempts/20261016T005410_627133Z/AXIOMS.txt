@@ -1,0 +1,22 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005410_627133Z\FubiniTransposeR1.lean:22:0: warning: automatically included section variable(s) unused in theorem `F1Fecho.FubiniTranspose.flip_ae`:
+  [CompleteSpace E]
+  [TopologicalSpace.SeparableSpace E]
+  [MeasureTheory.IsSeparable μ]
+  [MeasureTheory.IsSeparable ν]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace
+  E] [TopologicalSpace.SeparableSpace E] [MeasureTheory.IsSeparable μ] [MeasureTheory.IsSeparable ν] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005410_627133Z\FubiniTransposeR1.lean:49:2: error: Type mismatch: After simplification, term
+  Integrable.mul_prod he ha
+ has type
+  @Integrable ℝ PseudoMetricSpace.toUniformSpace.toTopologicalSpace SeminormedAddGroup.toContinuousENorm (X × Y)
+    Prod.instMeasurableSpace (fun z => ‖↑↑e z.1‖ ^ 2 * ‖↑↑a z.2‖ ^ 2) (μ.prod ν)
+but is expected to have type
+  @Integrable ℝ PseudoMetricSpace.toUniformSpace.toTopologicalSpace SeminormedAddGroup.toContinuousENorm (X × Y)
+    Prod.instMeasurableSpace (fun x => ‖(↑↑e ∘ Prod.fst) x‖ ^ 2 * ‖(↑↑a ∘ Prod.snd) x‖ ^ 2) (μ.prod ν)
+'F1Fecho.FubiniTranspose.transpose_fubini_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.FubiniTranspose.product_memLp' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.FubiniTranspose.fubini_product' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.FubiniTranspose.transpose_rank_one_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

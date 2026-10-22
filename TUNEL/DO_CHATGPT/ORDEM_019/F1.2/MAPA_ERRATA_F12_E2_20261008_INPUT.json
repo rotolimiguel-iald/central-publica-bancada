@@ -1,0 +1,35 @@
+{
+  "tipo": "ERRATA",
+  "rota_id": "formal.f1_2.v351_dual_scaling_bridge",
+  "corrige": 853,
+  "dominio": "FORMAL",
+  "titulo": "F1.2.E2: preflight antes de compilar e vínculo pinado da seq 823",
+  "pergunta": "Como fechar as duas ressalvas menores da reauditoria c1 sem reabrir a F1.2.E1?",
+  "dados": [
+    "auditoria c1 a91f9500",
+    "seq 728, 823 e 853 extraídas do mapa",
+    "script E1 e variante E2",
+    "JSON selado BUILD_COMPLETION_RESULT.json"
+  ],
+  "metodo": "Variante aditiva do script com preflight antes de mkdir e subprocess; ast.parse e execução curta sob resultado existente; snapshots SHA/mtime de sete arquivos; snapshot tipado das três seq do mapa com sha próprio.",
+  "resultado": "A variante E2 recusa BUILD_COMPLETION_RESULT.json existente antes de qualquer compilação ou escrita de build. A seq 823 é referenciada pelo artefato de sua entrada e pelo snapshot pinado, junto às seq 728 e 853. A E1 e a F1.2 permanecem FECHADAS.",
+  "veredito": "F12_E2_PREFLIGHT_E_SEQ823_REFERENCIADOS__ORIGINAIS_INTACTOS__GATE_NONE",
+  "estatuto": "REAL documental e teste local",
+  "status": "EXAMINADA",
+  "olhou_dados": false,
+  "defeito": "A E1 verificava existência somente após compilar; a seq 853 citava a 823 apenas no texto, não em artefatos.",
+  "nao_refazer": "Não recompilar as pedras auditadas nem reabrir F1.2 ou F1.2.E1; não tocar BUILD_COMPLETION_RESULT.json ou o script E1 pinado.",
+  "proximo_passo": "A gerência c1 reaudita esta camada editorial derivada E2. Integração v392 segue da gerência.",
+  "onde": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.2",
+  "artefatos": [
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.2\\MAPA_ERRATA_EVIDENCIA_20261008.json",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.2\\MAPA_SEQ728_823_853_SNAPSHOT_E2_20261008.json",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.2\\sandbox\\build_completion_e2.py",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.2\\VALIDACAO_PREFLIGHT_BUILD_COMPLETION_E2_20261008.json",
+    "C:\\IALD\\PROGRAMA_IALD\\auditorias\\F1.2.E1\\AUDITORIA_F1_2_E1_C1_a91f9500.md"
+  ],
+  "refs": [
+    "formal.f1_2.dual_scaling_reuse_011"
+  ],
+  "nota": "Em nome de codex-gerente-tgl, sob despacho c1 de 08/10/2026. corrige=853; a seq 823 entra por artefato (input histórico e snapshot com sha). Sem alteração do gate."
+}

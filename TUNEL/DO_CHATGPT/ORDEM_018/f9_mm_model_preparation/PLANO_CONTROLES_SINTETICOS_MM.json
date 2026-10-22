@@ -1,0 +1,82 @@
+{
+  "request_id": "98a42877-3879-43a7-841c-8bb662be3d06",
+  "status": "PLAN_ONLY_NOT_EXECUTED",
+  "controls": [
+    {
+      "id": "MM-P01",
+      "target": "Identity/order/unit wiring",
+      "fixture": "Synthetic five rows with existing IDs and symbolic/native responses; no actual centres.",
+      "expected": "267 rows retained; MM X0,a_h1,c_C0; after magnitude scaling a_h5 and covariance congruence, no sixth N4258."
+    },
+    {
+      "id": "MM-P02",
+      "target": "Native versus magnitude likelihood",
+      "fixture": "Invented positive-definite covariance with nonzero MM-rest cross-block, synthetic residuals and means.",
+      "expected": "Same quadratic form after T; Jacobian common handled on support; scaling only diagonal variances must fail."
+    },
+    {
+      "id": "MM-P03",
+      "target": "Full versus upstream derivative",
+      "fixture": "Symbolic derivative and later synthetic finite-difference cases with fixed q0/j0.",
+      "expected": "b_full=(1+zFprime/F)/(ell*v); upstream b_up=1/(ell*v) distinguished; no silent recipe replacement."
+    },
+    {
+      "id": "MM-P04",
+      "target": "Signed cross-covariance",
+      "fixture": "Synthetic correlated D,V with known signed joint covariance and external shared component.",
+      "expected": "J Sigma J^T including mixed signs; adding the same peculiar budget twice refused."
+    },
+    {
+      "id": "MM-P05",
+      "target": "Asymmetric interval transformation",
+      "fixture": "Synthetic D and unequal positive lower/upper widths with valid domain.",
+      "expected": "Distance upper endpoint maps to lower y; exact widths unequal; D<=lower width produces explicit domain failure, no clipping."
+    },
+    {
+      "id": "MM-P06",
+      "target": "Exact nonlinear Jacobian and normalization",
+      "fixture": "Invented normalized positive-domain joint p(D,V), not an observed posterior.",
+      "expected": "(D,V)->(Y,V) uses product ln10*D; marginal over V normalizes; treating nonsquare Jacobian as determinant or counting Y and D independently fails."
+    },
+    {
+      "id": "MM-P07",
+      "target": "Working Gaussian pivot applicability",
+      "fixture": "Entirely synthetic fixed common C and X with known support, plus externally fixed Rstar.",
+      "expected": "Analytic Gaussian residual pivot applies; future simulations only sanity-check, not independent proof of rare5sigma coverage. Reuse covered C01-C08 results by receipt rather than rerun."
+    },
+    {
+      "id": "MM-P08",
+      "target": "Endogenous/estimated variance negative control",
+      "fixture": "Synthetic random variance built from same primitive sample and independently estimated variance with known sampling law.",
+      "expected": "No unconditional chi-square certificate from a frozen/known flag. Coverage requires the specified law, not conditional rhetoric."
+    },
+    {
+      "id": "MM-P09",
+      "target": "Support changes and positive MM block",
+      "fixture": "Synthetic rank-known rest block and MM positive block, then singular/correlated variants.",
+      "expected": "Independent positive block adds5dimensions; unsupported nuisance/kernel mismatch explicitly fails; never substitute preflight262 for full267."
+    },
+    {
+      "id": "MM-P10",
+      "target": "Parameter/model invariance",
+      "fixture": "Mock model iterator with declared hypothetical parameters, no cosmology evaluation.",
+      "expected": "Same reference/variance/hash/row vector across models and fit points. Attempt D_ref=U(v)/H0(theta) or model-specific q0/j0 in shared data transform rejected."
+    },
+    {
+      "id": "MM-P11",
+      "target": "Primitive positive-domain and mean bias",
+      "fixture": "Artificial positive/truncated primitive laws with declared normalization and asymmetric variants.",
+      "expected": "Nonlinearity can shift mean; no automatic common-C/global-span claim or Gaussian tail certificate. Positivity-based rejection changes law unless normalized."
+    },
+    {
+      "id": "MM-P12",
+      "target": "Custody and incomplete references",
+      "fixture": "Metadata doubles with changed source hash, missing D_ref/v_ref, wrongunits, nonfinite/nonpositive uncertainty.",
+      "expected": "Fail visibly; no raw file discovery, no model/provider fallback, no deletion of a selected maser."
+    }
+  ],
+  "real_values_allowed": false,
+  "execution_authorized_in_this_unit": false,
+  "C01_C08_consumed_controls": "Do not reopen/repeat. ROOT may cite existing verified coverage; this unit does not claim to have rerun it.",
+  "tail_limit": "Finite synthetic runs do not certify5sigma global tails by themselves; no alpha/MonteCarlo budget allocated here."
+}

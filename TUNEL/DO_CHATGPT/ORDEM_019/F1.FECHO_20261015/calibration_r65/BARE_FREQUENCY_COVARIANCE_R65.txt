@@ -1,0 +1,15 @@
+R65 — sonda algébrica da rota térmica no mesmo salto
+Em nome de codex-gerente-tgl. DERIVED candidato; revisor distinto confere. Sem execução numérica.
+
+Alvo restrito: dissipadorD[J] do corte0/1 já usado, relativo SOMENTE ao Hamiltoniano livre h0=omega_c(ni+no)+omegaOH*nOH. Não é o Hamiltoniano completo com gJC/Omega, nem o gerador modular/Poincare da rede. Não se infere deste diagnóstico impossibilidade geral do dispositivo ou daTGL.
+Defina A=ao†sigma-, B=sigma+ai, J=A+B, delta=omega_c-omegaOH. Com números de excitação usuais, [h0,A]=delta*A e [h0,B]=-delta*B. Em Ad(exp(i*h0*t)), as duas parcelas recebem fases opostas. Para delta!=0, J não é um único autooperador de frequência deBohr. B†A=A†B=0, mas as inserções cruzadas A*rho*B† e B*rho*A† não são mapas nulos.
+
+Prova explícita de falta de covariância livre no corte
+Ordene estados como (ni,no,nOH). Tome X=|001><100| e Y=|010><001|. Então D[J](X)=Y-X: J|001>=|010>, J|100>=|001> e J†J vale1 nos dois estados. Se U_t(X)=exp(i*h0*t)Xexp(-i*h0*t), U_t(X)=exp(-i*delta*t)X e U_t(Y)=exp(i*delta*t)Y.
+Logo (D[J] U_t - U_t D[J])(X) = -2i sin(delta*t)Y, não nulo para algumt se delta!=0. A matrizX não é estado: é teste de igualdade de mapas lineares; a igualdade em todos os estados também implicaria igualdade em sua extensão linear. Esta conta não usa ajuste nem o resultado numéricoR64.
+
+Consequência condicional para uma derivação por banho
+Se uma rota candidata exigir covariância temporal do dissipador em relação a h0 (por exemplo um modelo secular que separa frequências distintas), D[J] não a satisfaz fora da ressonância. Substituir D[J] por D[A]+D[B] apaga os termos cruzados e muda o modelo, portanto não é uma calibração silenciosa de gammaLambda.
+Uma construção com drive/banho não estacionário, aproximação não secular, degenerescência, outro Hamiltoniano de referência ou reservatório correlacionado deve ser especificada e verificada; nenhuma foi construída aqui. Emdelta=0 a sonda perde a obstrução, mas não prova balanço térmico nem calibração de taxa.
+A rota de correlações de banho localizada noCusto precisa identificar h,J,banho/couplagens e as aproximações antes de transportargamma(omega) ao aparelho. R5 pode prosseguir matematicamente com hipóteses nomeadas; esta nota não converte a calibração experimental em gate da prova formal.
+

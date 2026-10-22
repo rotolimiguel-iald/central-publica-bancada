@@ -1,0 +1,219 @@
+{
+  "unit": "F0.3.B2",
+  "claim_event": 632,
+  "reviewer": "nu2_data_sources",
+  "authorization": "Parent explicitly authorized fixes to motor/evidencia and DR1 provenance after independent findings",
+  "status": "FIXED_CANDIDATE_TESTS_PASS",
+  "before": {
+    "motor.py": {
+      "sha256": "9302ba8d3e1425b9198e656e2205d6b78659df60191046ce2828255a3886a749",
+      "bytes": 23003
+    },
+    "evidencia.py": {
+      "sha256": "9b286b86daf1f94087b780e7af7125ce9bce6226ea9fc66f74fa392bc56e6ae8",
+      "bytes": 17684
+    },
+    "regua.py": {
+      "sha256": "91b1a584f113f07e09131430a21439d56c206db3bfe54d5d26b69ef466baa33b",
+      "bytes": 6714
+    },
+    "camb_tabela.py": {
+      "sha256": "bbd414094d58398f44afc177858df41d1cdd944970fb85f7061e1b838bcad3e6",
+      "bytes": 4822
+    },
+    "pantheon_cov.py": {
+      "sha256": "0fe4552059b653480081e12d1273e433f74f7189bd5a292c97df2eacb670b9f2",
+      "bytes": 6702
+    },
+    "fontes.py": {
+      "sha256": "be7f5a8ff08b5ea7db270303c72542ce6dfc9dc4a7dad48fe73934123ac496f4",
+      "bytes": 12449
+    },
+    "amostrador.py": {
+      "sha256": "e66e089d8c0eb81ebda67658c8d1e30a1302d4cbecad7f164f50f5883fe66c76",
+      "bytes": 4247
+    }
+  },
+  "pre_fix_synthetic_probes": {
+    "profiled_M": {
+      "n_observations": 6,
+      "n_free_parameters": 3,
+      "profiled_nuisance_count": 1,
+      "reported_gl": 3,
+      "correct_gl": 2,
+      "residuals": "SYNTHETIC_CENTERED_DESIGN"
+    },
+    "default_local_combination": {
+      "selected": [
+        "cc_moresco"
+      ],
+      "options": {
+        "planck_cov": "chen2019",
+        "dr1_cov": "correlacionada",
+        "dm_star": "razao_camb",
+        "mapa_R": "eff",
+        "lei": "d1a",
+        "beta_no_fundo": "sim",
+        "lei_sn": "nenhuma",
+        "lei_cc": "acumulada",
+        "cc_cov": "diagonal"
+      }
+    },
+    "mixed_label": "artigo (fundo ΛCDM; β só na lei -- a convenção do artigo 1, Fase 4 de 30/09) · mapa de R: eff · lei: d1a · lei nas SNe: nenhuma · lei nos cronômetros: acumulada"
+  },
+  "after": {
+    "motor.py": {
+      "sha256": "dc8bdc0da972a4b548c3ca2240073d83c1d7f916e5f1e5b87746e83356e3922f",
+      "bytes": 23971
+    },
+    "evidencia.py": {
+      "sha256": "1e893fbf73517829d82df1a3c68847fca14d8c92670002ac592a16ae2d006078",
+      "bytes": 18052
+    },
+    "regua.py": {
+      "sha256": "91b1a584f113f07e09131430a21439d56c206db3bfe54d5d26b69ef466baa33b",
+      "bytes": 6714
+    },
+    "camb_tabela.py": {
+      "sha256": "bbd414094d58398f44afc177858df41d1cdd944970fb85f7061e1b838bcad3e6",
+      "bytes": 4822
+    },
+    "pantheon_cov.py": {
+      "sha256": "0fe4552059b653480081e12d1273e433f74f7189bd5a292c97df2eacb670b9f2",
+      "bytes": 6702
+    },
+    "fontes.py": {
+      "sha256": "647fdab73645662b0063520ba5e270b82dd2c8f69c6a588ebdf2020f8749f683",
+      "bytes": 12658
+    },
+    "amostrador.py": {
+      "sha256": "e66e089d8c0eb81ebda67658c8d1e30a1302d4cbecad7f164f50f5883fe66c76",
+      "bytes": 4247
+    }
+  },
+  "anchors": {
+    "motor.py": [
+      {
+        "line": 67,
+        "text": "def rotulo_opcoes(o):"
+      },
+      {
+        "line": 104,
+        "text": "def validar_modelo_para_conjuntos(conjuntos, opcoes=None):"
+      },
+      {
+        "line": 114,
+        "text": "        raise ValueError(\"lei_sn não implementada no Pantheon só-cosmologia; opção sem consumidor\")"
+      },
+      {
+        "line": 124,
+        "text": "        raise ValueError(\"dupla contagem de β: fundo modificado e transporte no mesmo leitor: \" + \", \".join(conflicts))"
+      },
+      {
+        "line": 315,
+        "text": "        o = validar_modelo_para_conjuntos(conjuntos, opcoes)"
+      },
+      {
+        "line": 347,
+        "text": "        o = validar_modelo_para_conjuntos(conjuntos, opcoes)"
+      }
+    ],
+    "evidencia.py": [
+      {
+        "line": 65,
+        "text": "        o = validar_modelo_para_conjuntos(cj, opcoes)"
+      },
+      {
+        "line": 125,
+        "text": "        o = validar_modelo_para_conjuntos(cj, opcoes)"
+      },
+      {
+        "line": 179,
+        "text": "        profiled = [\"M_supernova\"] if set(cj) & {\"pantheon\", \"pantheon_sh0es\"} else []"
+      },
+      {
+        "line": 181,
+        "text": "                    suporte_instrumental=self._support(), nfev=int(res.nfev), n_dados=self.m.n_dados(cj), gl=self.m.n_dados(cj) - len(livres) - len(profiled),"
+      },
+      {
+        "line": 182,
+        "text": "                    n_parametros_perfilados=len(profiled), parametros_perfilados=profiled, opcoes=o)"
+      },
+      {
+        "line": 188,
+        "text": "        o = validar_modelo_para_conjuntos(cj, opcoes)"
+      },
+      {
+        "line": 211,
+        "text": "        o = validar_modelo_para_conjuntos(cj, opcoes)"
+      },
+      {
+        "line": 236,
+        "text": "        o = validar_modelo_para_conjuntos(cj, opcoes)"
+      }
+    ],
+    "fontes.py": [
+      {
+        "line": 208,
+        "text": "                correlacoes=usadas, estatuto_origem=\"DECLARADO\", fonte_primaria_sha256=None,"
+      },
+      {
+        "line": 209,
+        "text": "                admissao_primaria_verificada=False,"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F0.3.B2\\tests_motor\\test_motor_synthetic.py"
+      ],
+      "start": "2026-10-09T20:52:48.105653+00:00",
+      "end": "2026-10-09T20:52:51.513056+00:00",
+      "seconds": 3.4073878000490367,
+      "exit": 0,
+      "log": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F0.3.B2\\tests_channels\\review_motor\\INDEPENDENT_MOTOR_HARNESS_R1.log",
+        "sha256": "07bf574d179c9878335a1a7508a999c4d5a61308ac58c6288498ccf747d139db",
+        "bytes": 1759
+      }
+    },
+    {
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F0.3.B2\\tests_channels\\review_motor\\test_material_r1.py"
+      ],
+      "start": "2026-10-09T20:52:51.519032+00:00",
+      "end": "2026-10-09T20:52:54.302412+00:00",
+      "seconds": 2.7833657001610845,
+      "exit": 0,
+      "log": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F0.3.B2\\tests_channels\\review_motor\\MATERIAL_REGRESSIONS_R1.log",
+        "sha256": "3f568ec093f4dd395142f108df8f6204c219e87780ff36e7d6de09d865304446",
+        "bytes": 1355
+      }
+    }
+  ],
+  "changes": [
+    "Subtract one M_supernova nuisance from gl for either supernova reader",
+    "Reject beta-background plus local/accumulated transport only for selected consuming readers",
+    "Reject unsupported lei_sn on plain Pantheon instead of silently ignoring it",
+    "Name artigo only for the exact preset; expose all mixed options",
+    "Mark DR1 primary-origin transcription DECLARADO, no primary SHA claimed"
+  ],
+  "limits": "No observed fit, original Motor construction, new CAMB, source admission or scientific confirmation. Canonical identity was mocked in synthetic harness; root owns final manifest/integration.",
+  "bancada_write": false,
+  "candidate_modified": [
+    "evidencia.py",
+    "fontes.py",
+    "motor.py"
+  ],
+  "gate_effect": "NONE"
+}

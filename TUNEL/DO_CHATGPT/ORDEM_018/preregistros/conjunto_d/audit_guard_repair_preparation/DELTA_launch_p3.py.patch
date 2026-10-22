@@ -1,0 +1,67 @@
+--- INIT003/launch_p3.py
++++ candidate/launch_p3.py
+@@ -2,6 +2,7 @@
+ import sys,os,json,hashlib,subprocess,time,signal
+ from pathlib import Path
+ from datetime import datetime,timezone
++from result_acceptance import assess, campaign_exit
+ ROOT=Path(__file__).resolve().parent
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def fresh(path,raw):
+@@ -12,6 +13,7 @@
+     os.replace(temp,path)
+ def js(path,obj):fresh(path,(json.dumps(obj,indent=2,allow_nan=False)+"\n").encode())
+ def main():
++    raise RuntimeError("PREPARATION_ONLY: no runnable campaign contract or execution permission")
+     if len(sys.argv)!=2:raise ValueError("Exact contract SHA256 required")
+     cp=ROOT/"CONTRATO_P3.json";pin=sys.argv[1]
+     if sha(cp)!=pin:raise ValueError("Contract mismatch")
+@@ -29,7 +31,7 @@
+     js(run/"LAUNCH_STARTED.json",{"contract_sha256":pin,"authorization_sha256":sha(auth_path),
+                                   "at":datetime.now(timezone.utc).isoformat(),"pid":os.getpid()})
+     env=dict(os.environ,OMP_NUM_THREADS="1",OPENBLAS_NUM_THREADS="1",MKL_NUM_THREADS="1",PYTHONDONTWRITEBYTECODE="1")
+-    results=[];t0=time.perf_counter()
++    results=[];assessments=[];t0=time.perf_counter()
+     for job in c["jobs"]:
+         out=run/job["id"];out.mkdir(exist_ok=False)
+         js(out/"CLAIM.json",{"contract_sha256":pin,"job_id":job["id"]})
+@@ -42,15 +44,33 @@
+                 rc=p.wait(timeout=c["limits"]["supervisor_wall_s"]);state="PROCESS_RETURNED"
+             except subprocess.TimeoutExpired:
+                 os.killpg(p.pid,signal.SIGKILL);rc=p.wait();state="SUPERVISOR_TIMEOUT_UNCERTAIN_PARTIAL"
+-        row={"job_id":job["id"],"returncode":rc,"supervisor_status":state,"wall_s":time.perf_counter()-start,
++        row={"pid":p.pid,"job_id":job["id"],"returncode":rc,"supervisor_status":state,"wall_s":time.perf_counter()-start,
+              "stdout_sha256":sha(out/"stdout.log"),"stderr_sha256":sha(out/"stderr.log")}
+         rp=out/"RESULT.json"
+-        if rp.exists():row.update(result_sha256=sha(rp),result_status=json.loads(rp.read_text())["status"])
++        result=None;journal=None
++        try:
++            if rp.exists():
++                raw=rp.read_bytes();result=json.loads(raw)
++                row.update(result_sha256=hashlib.sha256(raw).hexdigest(),result_status=result.get("status"))
++            jp=out/"AUDIT_EVENTS.jsonl"
++            if jp.exists():
++                journal=jp.read_bytes()
++                row.update(audit_journal_sha256=hashlib.sha256(journal).hexdigest(),audit_journal_bytes=len(journal))
++            decision=assess(result,journal,returncode=rc,process_state=state,
++                expected_job=job["id"],expected_label=job["label"],expected_contract=pin,
++                expected_pid=p.pid,max_calls=c["limits"]["max_likelihood_calls"])
++        except Exception as exc:
++            decision={"accepted":False,"disposition":"TERMINAL_FAILURE",
++                      "reasons":["RECEIPT_READ_OR_VALIDATION_ERROR"],"error":type(exc).__name__+": "+str(exc)}
++        row["acceptance"]=decision;assessments.append(decision)
+         results.append(row);js(out/"PROCESS_RECEIPT.json",row)
+-        if rc!=0 or state!="PROCESS_RETURNED" or row.get("result_status") not in ("DLOGZ_REACHED_ESS_OK","DLOGZ_REACHED_ESS_LOW","STOPPED_NOT_CONVERGED","BUDGET_EXHAUSTED_PARTIAL"):
+-            break # Preserve failed/uncertain job; never retry or replace it.
++        if not decision["accepted"]:
++            break # Terminal even for a partial label; no retry/resume/replacement.
+     js(run/"CAMPAIGN_RECEIPT.json",{"contract_sha256":pin,"jobs":results,"wall_s":time.perf_counter()-t0,
+-                                    "started_jobs":len(results),"planned_jobs":2,"no_retry":True,
++                                    "started_jobs":len(results),"planned_jobs":len(c["jobs"]),"no_retry":True,
++                                    "exit_code":campaign_exit(assessments,len(c["jobs"])),
++                                    "status":"CLEAN_PROTOCOL_COMPLETION" if campaign_exit(assessments,len(c["jobs"]))==0 else "TERMINAL_FAILURE_OR_INCOMPLETE",
+                                     "coverage_claim":False,"D_read_authorized":False})
+     print(json.dumps(results))
+-if __name__=="__main__":main()
++    return campaign_exit(assessments,len(c["jobs"]))
++if __name__=="__main__":sys.exit(main())

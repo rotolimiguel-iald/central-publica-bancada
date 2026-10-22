@@ -1,0 +1,114 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:18:44: error: Tactic `rfl` failed: The left-hand side
+  (let p := spatialChart.symm (x + y);
+    ![0, p.2, p.1 0, p.1 1])
+    ((fun i => i) ⟨0, ⋯⟩)
+is not definitionally equal to the right-hand side
+  ((let p := spatialChart.symm x;
+      ![0, p.2, p.1 0, p.1 1]) +
+      let p := spatialChart.symm y;
+      ![0, p.2, p.1 0, p.1 1])
+    ((fun i => i) ⟨0, ⋯⟩)
+
+case «0»
+x y : Spatial
+⊢ (let p := spatialChart.symm (x + y);
+      ![0, p.2, p.1 0, p.1 1])
+      ((fun i => i) ⟨0, ⋯⟩) =
+    ((let p := spatialChart.symm x;
+        ![0, p.2, p.1 0, p.1 1]) +
+        let p := spatialChart.symm y;
+        ![0, p.2, p.1 0, p.1 1])
+      ((fun i => i) ⟨0, ⋯⟩)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:19:45: error: Tactic `rfl` failed: The left-hand side
+  (let p := spatialChart.symm (c • x);
+    ![0, p.2, p.1 0, p.1 1])
+    ((fun i => i) ⟨0, ⋯⟩)
+is not definitionally equal to the right-hand side
+  ((RingHom.id ℝ) c •
+      let p := spatialChart.symm x;
+      ![0, p.2, p.1 0, p.1 1])
+    ((fun i => i) ⟨0, ⋯⟩)
+
+case «0»
+c : ℝ
+x : Spatial
+⊢ (let p := spatialChart.symm (c • x);
+      ![0, p.2, p.1 0, p.1 1])
+      ((fun i => i) ⟨0, ⋯⟩) =
+    ((RingHom.id ℝ) c •
+        let p := spatialChart.symm x;
+        ![0, p.2, p.1 0, p.1 1])
+      ((fun i => i) ⟨0, ⋯⟩)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:24:19: error: Type mismatch
+  rfl
+has type
+  ?m.32 = ?m.32
+but is expected to have type
+  spacetimeSpatial (c • x) = (RingHom.id ℝ) c • spacetimeSpatial x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:27:2: error: 'change' tactic failed, pattern
+  spatialChart (![(spatialChart.symm v).1 0, (spatialChart.symm v).1 1], (spatialChart.symm v).2) = v
+is not definitionally equal to target
+  spatialPart (spatialEmbed v) = v
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:37:0: error: Not a definitional equality: the left-hand side
+  spatialPart timeBasis
+is not definitionally equal to the right-hand side
+  0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:37:59: error: Type mismatch
+  rfl
+has type
+  ?m.6 = ?m.6
+but is expected to have type
+  spatialPart timeBasis = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:40:54: error: unsolved goals
+case «1»
+a : Fin 4 → ℝ
+⊢ a 1 = (((MeasurableEquiv.toLp 2 Transverse).prodCongr (MeasurableEquiv.refl ℝ)).symm (sorry a).ofLp).2
+
+case «2»
+a : Fin 4 → ℝ
+⊢ a 2 = (((MeasurableEquiv.toLp 2 Transverse).prodCongr (MeasurableEquiv.refl ℝ)).symm (sorry a).ofLp).1 0
+
+case «3»
+a : Fin 4 → ℝ
+⊢ a 3 = (((MeasurableEquiv.toLp 2 Transverse).prodCongr (MeasurableEquiv.refl ℝ)).symm (sorry a).ofLp).1 1
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:42:34: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:42:47: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:42:59: warning: This simp argument is unused:
+  spacetimeSpatial
+
+Hint: Omit it from the simp argument list.
+  simp [̵t̵i̵m̵e̵B̵a̵s̵i̵s̵,̵s̵p̵a̵t̵i̵a̵l̵E̵m̵b̵e̵d̵,̵s̵p̵a̵t̵i̵a̵l̵P̵a̵r̵t̵,̵s̵p̵a̵c̵e̵t̵i̵m̵e̵S̵p̵a̵t̵i̵a̵l̵,̵s̵p̵a̵t̵i̵a̵l̵C̵h̵a̵r̵t̵]̵[̲t̲i̲m̲e̲B̲a̲s̲i̲s̲,̲ ̲s̲p̲a̲t̲i̲a̲l̲E̲m̲b̲e̲d̲,̲ ̲s̲p̲a̲t̲i̲a̲l̲P̲a̲r̲t̲,̲ ̲s̲p̲a̲t̲i̲a̲l̲C̲h̲a̲r̲t̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:68:2: error: 'change' tactic failed, pattern
+  0 * 0 - inner ℝ ((spatialRestriction L) v) ((spatialRestriction L) v) =
+    0 * 0 - inner ℝ (spatialPart (spatialEmbed v)) (spatialPart (spatialEmbed v))
+is not definitionally equal to target
+  0 * 0 -
+      inner ℝ (spacetimeSpatial ((lorentzLinear L) (spatialEmbed v)))
+        (spacetimeSpatial ((lorentzLinear L) (spatialEmbed v))) =
+    0 * 0 - inner ℝ (spacetimeSpatial (spatialEmbed v)) (spacetimeSpatial (spatialEmbed v))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:87:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Eq Spatial (spatialPart ((lorentzLinear L) a)) (spatialPart ((lorentzLinear L) (spatialEmbed (spatialPart a))))
+but is expected to have type
+  @Eq Spatial (spatialPart ((lorentzLinear L) a)) ((spatialRestriction L) (spatialPart a))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:98:6: error: Type mismatch
+  spatialRestriction_all L hL a
+has type
+  spatialPart ((lorentzLinear L) a) = (spatialRestriction L) (spatialPart a)
+but is expected to have type
+  spacetimeSpatial (↑L *ᵥ a) = (spatialRestrictionEquiv L hL) (spacetimeSpatial a)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T223721_235757Z\LorentzTimeStabilizerR1.lean:102:2: error: Type mismatch: After simplification, term
+  hij
+ has type
+  @Eq ℝ (↑L i j) (spatialMatrix (spatialRestrictionEquiv L hL) i j)
+but is expected to have type
+  @Eq ℝ (↑L i j) (↑(spatialLorentz (spatialRestrictionEquiv L hL)) i j)
+'F1Fecho.OrbitalSpatial.spatialRestriction_norm' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.lorentz_fixed_time_spatial' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OrbitalSpatial.lorentz_fixed_time_mem_generated' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

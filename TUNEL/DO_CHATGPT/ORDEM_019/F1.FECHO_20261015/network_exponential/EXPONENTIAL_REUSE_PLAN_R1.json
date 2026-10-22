@@ -1,0 +1,146 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim": 845,
+  "created_utc": "2026-10-15T17:27:17.036922+00:00",
+  "status": "DERIVED_SOURCE_PLAN_BEFORE_CONSTRUCTION",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicSectors.lean",
+      "sha256": "83c5660c0505774c6899c8837f9719fabbf232403ae4fb10bd74d702633ed69b",
+      "anchors": {
+        "def pureAlgebraic": [
+          32
+        ],
+        "def symmetricSpace": [
+          106
+        ],
+        "def pureTensor": [
+          115
+        ],
+        "theorem pureTensor_norm": [
+          117
+        ]
+      },
+      "role": "Mesmos setores: fechamento do span diagonal; norma já construída."
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicFock.lean",
+      "sha256": "c7d24c14f9bb1c2a31c3b207a9f86e839577b6705c4b55b2aa6eab187450d3ec",
+      "anchors": {
+        "abbrev F :=": [
+          18
+        ],
+        "def vacuum": [
+          19
+        ],
+        "def gamma": [
+          20
+        ],
+        "def oneParticle": [
+          22
+        ]
+      },
+      "role": "Mesmo lp dos setores; não definir outro Fock."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\Completion.lean",
+      "sha256": "b6120bda6cf1c0b5dd913915ee524208da4d48efbd63aee9aa304ed4566432d0",
+      "anchors": {
+        "theorem inner_coe": [
+          66
+        ]
+      },
+      "role": "Transporta a identidade do produto interno algébrico para o setor completo."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\l2Space.lean",
+      "sha256": "42a1bdad00e8d233f5eab4c03c949b090e94d2ea3ef19966fd64a19ea8b3c323",
+      "anchors": {
+        "theorem inner_eq_tsum": [
+          147
+        ],
+        "theorem hasSum_inner": [
+          150,
+          457
+        ]
+      },
+      "role": "Produto interno/série no lp."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Normed\\Lp\\lpSpace.lean",
+      "sha256": "426b67120aba61f1e91f1272a0a36548b68ad0bdba55df5605b6b665a47b2762",
+      "anchors": {
+        "theorem memℓp_gen_iff": [
+          96,
+          124,
+          131
+        ]
+      },
+      "role": "Memℓp pela somabilidade da norma quadrada."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Normed\\Algebra\\Exponential.lean",
+      "sha256": "0afe7d2ace735e90bb81a8da4f4f18959b1806a0ca8977b337077e8ba60928bd",
+      "anchors": {
+        "theorem expSeries_div_hasSum_exp (x : 𝔸)": [
+          638
+        ]
+      },
+      "role": "Série inteira exp(z)=sum z^n/n! já existente."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\SpecialFunctions\\Exponential.lean",
+      "sha256": "e638a2c1c7c943f0480c63ba590bc9237b72db261328692dfb496eb650c08336",
+      "anchors": {
+        "theorem Complex.exp_eq_exp_ℂ": [
+          209
+        ],
+        "theorem Real.exp_eq_exp_ℝ": [
+          214
+        ]
+      },
+      "role": "Identifica a exponencial abstrata com Real/Complex exp."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Analytic\\Basic.lean",
+      "sha256": "532aea32663f679462e97145c06da7cb5144fe7ccccb16fd92fc965361cd53f1",
+      "anchors": {
+        "theorem hasFPowerSeriesAt_iff :": [
+          1107
+        ]
+      },
+      "role": "Converte HasSum numa vizinhança em série analítica, sem postular raio."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Analytic\\Uniqueness.lean",
+      "sha256": "530e362504f59ca913664a36ea56a482dcba9c0ffa972bb4d34bf637d2989462",
+      "anchors": {
+        "theorem HasFPowerSeriesAt.eq_zero ": [
+          106
+        ]
+      },
+      "role": "Extração de coeficientes pela unicidade da série da função zero."
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\Projection\\Submodule.lean",
+      "sha256": "ebf25e60ad12f03c72c241a3232c628d27706c597345e66ea6dbbab03a9b5168",
+      "anchors": {
+        "theorem topologicalClosure_eq_top_iff": [
+          162
+        ]
+      },
+      "role": "Totalidade pela trivialidade do complemento ortogonal."
+    }
+  ],
+  "construction": "e(f)_n=(sqrt(n!))^{-1} • pureTensor n f no F existente.",
+  "steps": [
+    "Provar inner(pureTensor n f,pureTensor n g)=inner(f,g)^n por indução tensorial/completação.",
+    "Norma quadrada por componente = ||f||^(2n)/n!: exp fornece Memℓp.",
+    "lp.hasSum_inner fornece kernel exp(inner(f,g)) e norma.",
+    "Para totalidade: inner(psi,e(zf))=0 para todo z; usar hasFPowerSeriesAt_iff e HasFPowerSeriesAt.eq_zero para anular cada coeficiente.",
+    "Como Sector n é o fechamento do span diagonal, cada psi_n=0; complemento ortogonal do span de e(f) é zero."
+  ],
+  "no_placeholder_hypothesis": "Totalidade será provada ou ficará explicitamente pendente; nunca campo assumido para declarar construção.",
+  "provider_provenance": "Alvo MiMo R3 já registrado; construção local autorizada, job preservado sem nova execução/cancelamento/substituição.",
+  "production_modified": false
+}

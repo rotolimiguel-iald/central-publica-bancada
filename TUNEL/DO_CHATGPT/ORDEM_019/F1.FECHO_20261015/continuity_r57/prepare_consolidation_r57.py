@@ -1,0 +1,55 @@
+"""Consolidate completed R57 components without claiming physical closure."""
+import json
+from pathlib import Path
+from support_r57 import ROOT, new, pin
+
+FROOT=ROOT.parent
+clock=FROOT/'device_clock_r57'/'DELIVERY_R57.json'
+continuum=FROOT/'device_continuum_r57'/'DELIVERY_R57.json'
+c=json.loads(clock.read_text(encoding='utf-8'))
+n=json.loads(continuum.read_text(encoding='utf-8'))
+assert c['lean']['exit_code']==0 and c['symbolic']['passed']==34
+assert len(n['components'])==3
+assert all(x['exit_code']==0 and x['trio_only'] for x in n['components'])
+report='''# R57 — relógio local, fronteira fixa e aproximação da rede
+
+Em nome de codex-gerente-tgl. Unidade F1.FECHO_20261015, reivindicação939.
+Esta camada complementa R56. Nenhum original científico, kernel do Nós, Bancada de produção, dado observado ou gate foi alterado.
+
+## O que foi construído
+
+1. [REAL — Lean] Uma inscrição escalar complexa sobre a fronteira fixa: Aβ(z)=z S(θM). A leitura vale z exp(iθM); a decodificação recupera Aβ(z), e reler não acrescenta. Os pesos são |z|²β e |z|²(1−β), preservando β. Isso evita transportar o sinal por S(θM+ωt), que varia a refletividade. Em z=0 a matriz é recuperada, mas fase e pesos normalizados não são definidos.
+2. [REAL — cálculo exato] 34 verificações simbólicas no modelo finito 2×2×2, mantendo bombeamento, Jaynes–Cummings e perdas. O observável candidato é z(ρ)=2Tr(ρσ+). Sua evolução não é universalmente a exp(iωOH t): depende também dos modos e do bombeamento. Estados com a mesma redução OH podem dar derivadas diferentes.
+3. [DERIVED — modelo finito analítico] Para a preparação documentada com z(0)=a>0, φ′(0)=ωOH e φ″(0)=2ΩRabi(γOH+λ)/a. Logo há inversa local do relógio de fase:
+   φ(t)=ωOH t + ΩRabi(γOH+λ)t²/a + O(t³),
+   t(φ)=φ/ωOH − ΩRabi(γOH+λ)φ²/(aωOH³) + O(φ³).
+   λ=βγΛ, com β calculado em runtime a partir da constante canônica. O tamanho do intervalo, a calibração do receptor e um relógio global não foram construídos. A inversão analítica é derivação matemática; o arquivo Lean desta rodada prova a leitura matricial, não todo esse cálculo de fase.
+4. [REAL — Lean] Pacotes finitos de geradores compactamente suportados, inclusões isométricas, composição dos refinamentos, fecho da união e covariância entre pacotes transportados. Sua complexificação tem união densa no mesmo H1 canônico; a localização permanece real. São aproximações da rede já construída, sem substituir H1 por um espaço abstrato de mesmo nome.
+5. [REAL — Lean, obstrução delimitada] Para a torre produto e o modularFlow existentes, qualquer operador linear contínuo V que entrelace esse fluxo com B0(s), mesmo com clock:ℝ→ℝ arbitrário, é zero. A prova usa a família total de autovetores da torre e a ausência de autovetores de B0. Isso impede esse entrelaçador particular; não impede todos os limites de células, estados não produto ou outras dinâmicas.
+
+## Reaproveitamento e custódia
+
+Recuperado o DOCX de janeiro do Supercondutor, incluindo sua tabela de correspondências, por cópia e hash dos bytes. MQC, Supercondutor e Ψ-NET mantêm papéis complementares: célula/geometria, dinâmica e protocolo. A tabela documental não constitui por si um entrelaçador físico. Os contratos R6 de rede/Fock, R7 de traço e R8 de Maxwell permanecem reaproveitados; não foram refeitos.
+
+Quatro compilações verdes nesta camada: seis verificações de axiomas da leitura fixa e 3+20+8 dos componentes da rede (37 no total), somente propext, Classical.choice e Quot.sound, sem sorry. As tentativas falhas anteriores ficam preservadas. Os avisos de simp sem uso são resíduos de estilo e não motivaram recompilação. A última compilação levou aproximadamente581s, majoritariamente importação; não foi duplicada após a interrupção por cota.
+
+## O que permanece aberto
+
+R4: construir a associação do receptor do dispositivo ao sinal complexo, a preparação e a calibração. A demodulação ideal relativa cancela a portadora externa; a faixa do lock-in descrita e a frequência OH exigem uma cadeia receptora explícita. ωOH, ΩRabi, V0/ℏ e κ não são identificados por homonímia.
+
+R5: construir, a partir dos observáveis microscópicos, as excitações e sua forma de duas pontas, os mapas de refinamento e sua compatibilidade, a convergência de estados/correlações e o entrelaçamento da dinâmica e localização com o alvo canônico. Os pacotes agora oferecem esse alvo concretamente. A densidade no alvo não demonstra que as células físicas o realizam. A igualdade regional exata de Q6 também não é substituída silenciosamente por convergência assintótica.
+
+R3 e R10: rito integral do candidato e revisão final dependem dessas ligações. H3 em todos os pontos/direções conserva seu alcance como hipótese nomeada; esta camada não o deriva do estado.
+
+Próxima ação delimitada: usar os observáveis já escritos para calcular uma forma de duas pontas do setor de excitação do dispositivo e compará-la à forma induzida por circularSmear. Coincidência/convergência precisa ser demonstrada; não será escolhida por uma isometria arbitrária. Nenhuma pergunta de escolha exclusiva dos três projetos é necessária para realizar esse levantamento.
+
+## Evidências
+
+device_clock_r57/DELIVERY_R57.json; device_continuum_r57/DELIVERY_R57.json e RETURN_R57.json; revisão conjunta em review_r57. Os hashes integrais, comandos, versões, caminhos Lean e tempos estão nos recibos. A revisão de conteúdo e pinos não equivale a uma nova compilação independente nesta rodada. Resultado parcial com alcance explícito; não se afirma realização física integral nem creditação pela natureza.
+'''
+new('RELATORIO_CONSOLIDADO_R57.txt',report)
+new('COMPONENTS_CONSOLIDATED_R57.json',{'unit':'F1.FECHO_20261015','claim':939,
+     'components':[pin(clock),pin(continuum)],'symbolic_checks':34,'axiom_reports':37,
+     'full_R4_satisfied':False,'full_R5_satisfied':False,'report':pin(ROOT/'RELATORIO_CONSOLIDADO_R57.txt'),
+     'scope':'Componentes compilados e derivação local; revisão conjunta pinada em recibo final separado.'})
+print(ROOT/'COMPONENTS_CONSOLIDATED_R57.json')

@@ -1,0 +1,49 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim_event": 845,
+  "reviewer": "codex-gerente-tgl/tempo_math_review",
+  "created_utc": "2026-10-15T23:00:20.594149+00:00",
+  "status": "PASS_WITH_STATED_SCOPE",
+  "review_type": "Independent source review of mechanical deltas only; no build or script execution",
+  "files": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\prepare_network_bundle_r8.py",
+      "sha256": "454a8269c73a9f96345f1b04aadb69aa62b73746992c073c01ec95e3484d3bac",
+      "bytes": 6787
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\stage_network_cache_r8.py",
+      "sha256": "9444f5edcec10ea37687f95c65b0e719d52c2d018a1874351a1c4e191a1bdc8e",
+      "bytes": 2040
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\compile_network_bundle_r8.py",
+      "sha256": "050cf7f639ee26e3ff17300c1e5f21e738f6b9e357fa03688f7022b23fccb81a",
+      "bytes": 9748
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\prepare_network_bundle_r7.py",
+      "sha256": "a6b561201500b1819271d163d379e79239fcc147a612da3a166b0993313af0fd",
+      "bytes": 6070
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\work\\rede_quantica_20261013\\compile_network_bundle_r7c.py",
+      "sha256": "a25385c2ff9ce386730ef2e2d16cb0142a4d41a693225a5d4111fda8c8e11b7b",
+      "bytes": 9421
+    }
+  ],
+  "findings": [
+    "R8 uses a new exclusive destination, a pinned R7 candidate baseline and prior successful compilation receipt; existing embedded module bodies must remain identical, with only the previously explicit import whitespace normalization admitted.",
+    "Prior source and object custody is followed through prior_receipt when R7 itself reused an older build. Both path-specific pins are checked, then cross-generation SHA equality; actual prior dependency pins are rechecked.",
+    "Cache staging copies bytes under the resolved prior lib to the resolved new lib, checks containment, exclusive temporary creation, hash and exclusive target absence. It neither mutates prior files nor creates junctions.",
+    "Compilation reuses a binary only with its actual successful receipt, source/object and dependency custody, then checks the new copy. Reused modules are forbidden to depend on unbuilt new modules.",
+    "The local import DAG and final fresh namespace audit remain mandatory; triad and positive exact count checks remain, with final cache recheck. Old failed attempts and prior compilation evidence are preserved."
+  ],
+  "scope_limits": [
+    "No mathematical review is repeated here.",
+    "This is review of prepared Python sources, not evidence that R8 compilation has executed or passed.",
+    "The readonly canonical Lean/package fallback and per-build dependency scope are inherited from the reviewed R7 procedure; no new OS isolation guarantee is claimed."
+  ],
+  "production_modified": false,
+  "gate_modified": false
+}

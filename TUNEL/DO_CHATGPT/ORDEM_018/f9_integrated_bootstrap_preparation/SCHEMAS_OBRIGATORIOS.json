@@ -1,0 +1,72 @@
+{
+  "scope": "SCHEMA_DOCUMENTATION_ONLY_NOT_OPERATIONAL_DOCUMENTS",
+  "deployment": {
+    "schema": "F9_INTEGRATED_DEPLOYMENT_V1",
+    "fields": [
+      "package_root",
+      "preparation_manifest_pin",
+      "recipe_pin",
+      "runtime_inventory:{path,pin}",
+      "independent_review:{path,pin}",
+      "root_binding:{path,pin}",
+      "scope=F9_FULL_PRIOR_SYNTHETIC_ENGINEERING_ONLY"
+    ]
+  },
+  "runtime": {
+    "schema": "F9_CURRENT_POSIX_RUNTIME_INVENTORY_V1",
+    "required_fields": [
+      "status=MEASURED_CURRENT_AUTHORIZED_INVENTORY",
+      "python_executable",
+      "python_version",
+      "python_search_path",
+      "files:path->{bytes,sha256}",
+      "absent_paths",
+      "scan_directories",
+      "native_map_pins:path->{bytes,sha256}",
+      "trust_scope=TRUSTED_PINNED_NATIVE_COOPERATIVE_PYTHON_NOT_OS_ISOLATION",
+      "measurement_reference"
+    ],
+    "restriction": "Current measured trusted Python/NumPy/CAMB closure only; exclude observed/credential/provider files. Exact nofollow paths and explicit absent probes. No runtime inventory generated now."
+  },
+  "root_binding": {
+    "schema": "F9_STABLE_ROOT_BINDING_V1",
+    "fields": [
+      "execution_unit_id",
+      "stable_consumption_root",
+      "registry_reference:{id,sha256}",
+      "status=ROOT_REGISTERED_ONCE_NO_ALTERNATE_ROOT_REPLAY"
+    ]
+  },
+  "independent_review": {
+    "minimum_fields": [
+      "review_id",
+      "preparation_manifest_sha256",
+      "status=ACCEPTED_FOR_SYNTHETIC_INTEGRATED_QUALIFICATION",
+      "reviewer_is_author=false",
+      "I02_99e2_review_accepted=true"
+    ],
+    "meaning": "Actual signed-off independent receipt supplied/pinned by ROOT, not synthesized in bootstrap. Additional evidence fields may be retained."
+  },
+  "ROOT_decision": {
+    "schema": "F9_INTEGRATED_ROOT_DECISION_V1",
+    "fields": [
+      "preparation_request_id",
+      "execution_unit_id",
+      "preparation_manifest_sha256",
+      "input_recipe_sha256",
+      "authorize_single_execution",
+      "scope",
+      "may_read_observations=false",
+      "supervisor_adapter_pin",
+      "independent_review_reference",
+      "runtime_inventory_sha256",
+      "deployment_sha256",
+      "root_binding_sha256"
+    ],
+    "created_here": false
+  },
+  "native_progress": "Exact existing protocol in native_progress.py; sequence250 on complete positive unit, strict ENTER-before-ACK persistence",
+  "local_files_are_preparation_only": true,
+  "runtime_actual_measurements": null,
+  "authorization_issued": false
+}

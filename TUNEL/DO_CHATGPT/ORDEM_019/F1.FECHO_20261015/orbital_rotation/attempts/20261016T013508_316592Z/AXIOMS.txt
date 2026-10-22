@@ -1,0 +1,38 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T013508_316592Z\RealSubspaceRegularizerUniquenessR1.lean:17:0: warning: automatically included section variable(s) unused in theorem `F1Fecho.RealSubspaceRegularizerUniqueness.symmetrized_range_mem`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T013508_316592Z\RealSubspaceRegularizerUniquenessR1.lean:64:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (R n) x + (R n) x
+in the target expression
+  Membership.mem ↑M = Membership.mem M
+
+case e
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+M K : Submodule ℝ H
+hM : IsClosed[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] ↑M
+hMK : M ≤ K
+hd : (Submodule.span ℂ ↑M).topologicalClosure = ⊤
+R : ℕ → H →L[ℂ] H
+B : ℕ → H →L⋆[ℂ] H
+hR : ∀ (n : ℕ), ∀ x ∈ M, (R n) x ∈ M
+hB : ∀ (n : ℕ), ∀ x ∈ K, (B n) x = (R n) x
+hlim : ∀ (x : H), Tendsto (fun n => (R n) x) atTop (𝓝 x)
+x : H
+hx : x ∈ K
+n : ℕ
+hs : (R n) x + (R n) x ∈ M
+hh : (1 / 2) • ((R n) x + (R n) x) ∈ M
+⊢ Membership.mem ↑M = Membership.mem M
+'F1Fecho.RealSubspaceRegularizerUniqueness.symmetrized_range_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.RealSubspaceRegularizerUniqueness.eq_of_regularizers' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

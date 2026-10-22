@@ -1,0 +1,9 @@
+R75 — leitor bosônico com erro de corte controlado
+
+1. Reuso: R66 construiu o gerador bosônico completo; R64 os momentos filtrados; R74 o transporte coerente das fases; R57 o reconhecimento/releitura. A presente camada controla a passagem ao limite dos momentos, sem reconstruir o mecanismo.
+2. [DERIVED — demonstração analítica revisável, não Lean] Entrada suportada em N≤m0, T finito, cinco dissipadores, banho comum e bomba coerente. Com q=2|Omega|T, a diferença entre corte m e limite é dominada por caudas ponderadas de sum(q^n/n!), n>m−m0. O peso é sqrt(m0+n) para uma inserção e m0+n para duas. Isso permite controlar observáveis ilimitados sem inferir seus momentos apenas de convergência em norma-traço.
+3. [INPUT] Valores, estado inicial, filtros, tolerâncias e cortes devem ser lidos no PLAN_R75 pinado antes da execução. Gamma é sintético, não taxa medida. Beta calculado em runtime.
+4. [REAL sintético] Inserir apenas números de RESULT_R75.json após a execução única. Maior corte não representa solução infinita exata. Controles algébricos não são experimentos físicos independentes.
+5. [OPEN] A prova é de limites de primeiros/segundos momentos e covariâncias com suporte inicial finito e tempo finito. Não constrói unidade HP ilimitada, distribuição completa das trajetórias, identificação física do aparelho, calibração independente de Gamma nem fechamento integral R4/R5.
+6. Busca focal: ver FOCAL_ACERVO_SCOPE_R75.txt; não houve evidência adicional de calibração nos parágrafos consultados. Não é levantamento integral nem prova de ausência.
+

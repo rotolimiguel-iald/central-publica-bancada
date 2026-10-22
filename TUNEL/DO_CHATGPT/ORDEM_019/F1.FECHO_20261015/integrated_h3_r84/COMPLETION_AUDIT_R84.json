@@ -1,0 +1,37 @@
+{
+  "goal_complete": false,
+  "previous_goal_turn": "progress",
+  "current_goal_turn": "progress",
+  "requirements": [
+    {
+      "id": 1,
+      "requirement": "Passar da variação local à ação integrada, tratando os termos de contorno.",
+      "status": "PARTIAL",
+      "evidence": ["action_builder/IntegratedDensityR84_1.lean", "action_builder/BUILD_1.json", "INTEGRATED_DERIVATION_R84.txt", "BOUNDARY_CONTROLS.json"],
+      "proves": "Diferenciação sob integral com condições analíticas nomeadas; divergência/fluxo em caixa 4D; decomposição curva desenvolvida analiticamente e sinais controlados em fundo plano.",
+      "remaining": "Ligar formalmente a corrente específica da variação da curvatura ao teorema de fluxo; construir/admitir condições de domínio e borda no mesmo sistema. O problema global e bordas nulas/cantos não estão resolvidos."
+    },
+    {
+      "id": 2,
+      "requirement": "Demonstrar a estacionariedade na construção baseada em P.",
+      "status": "INCOMPLETE_NONTRIVIAL_DYNAMICS",
+      "evidence": ["p_variations/P_VARIATIONS_AND_COUNTEREXAMPLE_R84.md", "SOURCE_ACTION_RECONCILIATION_R84.txt"],
+      "proves": "A condição variacional projetada foi explicitada. Em P5, estacionariedade de ação difeocovariante pode decorrer apenas de mudança de coordenadas.",
+      "remaining": "Identificar a dinâmica e a mesma ação completa que selecionam P; demonstrar estacionariedade com conteúdo além da identidade de Noether. Não acrescentar stationary como hipótese e declarar objetivo concluído."
+    },
+    {
+      "id": 3,
+      "requirement": "Identificar a fonte completa e demonstrar que as variações disponíveis sustentam a equação pretendida em todas as direções nulas.",
+      "status": "INCOMPLETE_WITH_VERIFIED_OBSTRUCTION_TO_WEAKER_CLAIM",
+      "evidence": ["p_variations/P_VARIATIONS_AND_COUNTEREXAMPLE_R84.md", "SOURCE_ACTION_RECONCILIATION_R84.txt", "INTEGRATED_DERIVATION_R84.txt"],
+      "proves": "Fonte cinética escalar e contribuição não minimal distinguidas; exemplo same-P conservado mostra que esses dados não implicam H3 universal. Rank de jets não garante cobertura de campos.",
+      "remaining": "Compor a variação de todos os setores efetivamente identificados; demonstrar levantamento das variações nulas compactas com matéria controlada, ou uma condição alternativa suficiente derivada da dinâmica. Nenhum contraexemplo foi declarado solução física da teoria completa."
+    }
+  ],
+  "next_actions": [
+    "Reaproveitar a variação da conexão/Ricci para formalizar a corrente gravitacional ponderada e o caso de suporte compacto.",
+    "Examinar a lei de seleção/evolução existente para P e seus campos, distinguindo o funcional de Gibbs da ação gravitacional.",
+    "Investigar levantamento de testes nulos compactos; usar o exemplo P6 como controle negativo obrigatório e preservar a rota positiva esférica sem ajustar coeficientes."
+  ],
+  "restrictions": "Sem produção, kernel original, um.py, OH material, dados observados ou gate. Não reduzir o objetivo aos componentes já aprovados."
+}

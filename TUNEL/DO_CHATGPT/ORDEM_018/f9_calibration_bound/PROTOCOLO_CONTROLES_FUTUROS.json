@@ -1,0 +1,63 @@
+{
+  "request_id": "6273a822-5880-4742-a82c-b7cf93f7c128",
+  "status": "PROTOCOL_ONLY_NOT_EXECUTED_NOT_AUTHORIZED_TO_RUN",
+  "purpose": "Implementation guards specific to new analytic envelopes; not proof by Monte Carlo",
+  "scope": "At most8 deterministic tiny synthetic controls after separate authorization",
+  "max_cases": 8,
+  "matrix_dimension_max": 8,
+  "max_wall_seconds": 30,
+  "worker_threads": 1,
+  "max_execution_count_per_identity": 1,
+  "random_simulation_count": 0,
+  "scientific_catalogues": [],
+  "CAMB_runs": 0,
+  "observed_data_allowed": false,
+  "remote_calls": 0,
+  "controls": [
+    {
+      "id": "C01_FIXED_QUOTIENT",
+      "requirement": "Tiny rational fixed Gaussian geometry, supported full-rank X; verify RX=0, RCRt=I and pointwise base inequality; no reused integral test"
+    },
+    {
+      "id": "C02_GLOBAL_NONLINEAR_SPAN",
+      "requirement": "Curved mean family entirely inside prescribed V; verify distance relaxation and gain bound with deterministic vectors"
+    },
+    {
+      "id": "C03_TANGENT_IS_NOT_GLOBAL_SPAN",
+      "requirement": "Nonlinear curve with one-dimensional tangent but larger affine span; reject tangent-only certificate"
+    },
+    {
+      "id": "C04_DIRECTED_SIGN_AND_ZERO_DF",
+      "requirement": "Negative/zero gain maps to p1; rank-zero pivot handled as atom0; no scipy df0 call"
+    },
+    {
+      "id": "C05_MINIMUM_CERTIFICATE_DIRECTION",
+      "requirement": "Fabricated local residual upper value must not be accepted as lower bound; Lnull-Ucomp ordering required"
+    },
+    {
+      "id": "C06_DIFFERENT_COVARIANCE",
+      "requirement": "Analytic epsilon covariance counterexample must block reuse of RSS-based likelihood envelope"
+    },
+    {
+      "id": "C07_COMPLETE_SCENARIOS",
+      "requirement": "Missing scenario leaves robust unavailable, but another complete valid rejection survives; no silent best-case selection"
+    },
+    {
+      "id": "C08_TAIL_CERTIFICATE",
+      "requirement": "Integer/half-integer SF recurrences compared with certified enclosures, no underflow-zero or unbudgeted certificate failure"
+    }
+  ],
+  "failure_policy": "Visible terminal failure, no repeated uncertain unit and no covariance/model repair",
+  "does_not_validate": [
+    "physical Gaussian errors",
+    "complete-domain CAMB prediction bounds",
+    "actual F9 optimizer minima",
+    "actual5sigma power",
+    "observed hypothesis"
+  ],
+  "do_not_repeat": [
+    "qualified flat-nuisance integral controls",
+    "preflight262",
+    "five paired background controls"
+  ]
+}

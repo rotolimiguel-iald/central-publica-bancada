@@ -1,0 +1,70 @@
+{
+  "start_utc": "2026-10-16T02:50:40.013255+00:00",
+  "end_utc": "2026-10-16T02:51:02.833558+00:00",
+  "seconds": 22.820297400001436,
+  "command": [
+    "C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\bin\\lean.exe",
+    "-j2",
+    "-o",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T025039_941032Z\\SchwartzCutoffDerivativeR1.olean",
+    "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T025039_941032Z\\SchwartzCutoffDerivativeR1.lean"
+  ],
+  "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T025039_941032Z",
+  "toolchain": "Lean (version 4.31.0, x86_64-w64-windows-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+  "LEAN_PATH": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T025039_941032Z;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\rotol\\.elan\\toolchains\\leanprover--lean4---v4.31.0\\lib\\lean",
+  "exit_code": 1,
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T025039_941032Z\\SchwartzCutoffDerivativeR1.lean",
+    "sha256": "dcd4fcf9dc86ec04cb3ba9faeee9aaf1af71247a6539e08dcdb040dc3a9ab485",
+    "bytes": 3259
+  },
+  "dependencies": [],
+  "readonly_dependencies_unchanged": true,
+  "no_junction": true,
+  "production_modified": false
+}
+
+STDOUT+STDERR
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T025039_941032Z\SchwartzCutoffDerivativeR1.lean:22:43: error: expected token
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T025039_941032Z\SchwartzCutoffDerivativeR1.lean:33:67: error: Type mismatch: After simplification, term
+  hb
+ has type
+  @LE.le ℝ Real.instLE ‖iteratedFDeriv ℝ n (⇑bumpSchwartz) (s • x)‖ ((SchwartzMap.seminorm ℝ 0 n) bumpSchwartz)
+but is expected to have type
+  @LE.le ℝ Real.instPreorder.toLE ‖iteratedFDeriv ℝ n (↑bump) (s • x)‖ ((SchwartzMap.seminorm ℝ 0 n) bumpSchwartz)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T025039_941032Z\SchwartzCutoffDerivativeR1.lean:45:27: error: Application type mismatch: The argument
+  ContDiff.smul contDiff_const contDiff_id
+has type
+  ContDiff ?m.181 ?m.186 ((fun x => ?m.163) • id)
+but is expected to have type
+  ContDiff ℝ (↑↑n) (HSMul.hSMul s)
+in the application
+  ContDiff.comp (ContDiffBump.contDiff bump) (ContDiff.smul contDiff_const contDiff_id)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T025039_941032Z\SchwartzCutoffDerivativeR1.lean:51:28: error: unsolved goals
+s : ℝ
+x : E
+hx : ‖s • x‖ < 1
+h : ↑bump =ᶠ[𝓝 (s • x)] 1
+hc : Continuous fun y => s • y
+y : E
+hy : y ∈ (fun y => s • y) ⁻¹' {x | ↑bump x = 1 x}
+⊢ 1 - ↑bump (s • y) = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T025039_941032Z\SchwartzCutoffDerivativeR1.lean:55:36: warning: This simp argument is unused:
+  hy
+
+Hint: Omit it from the simp argument list.
+  simp only [residual, ̲Pi.zero_apply,h̵y̵,̵ ̲sub_self]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T025039_941032Z\SchwartzCutoffDerivativeR1.lean:55:39: warning: This simp argument is unused:
+  sub_self
+
+Hint: Omit it from the simp argument list.
+  simp only [̵r̵e̵s̵i̵d̵u̵a̵l̵,̵P̵i̵.̵z̵e̵r̵o̵_̵a̵p̵p̵l̵y̵,̵h̵y̵,̵s̵u̵b̵_̵s̵e̵l̵f̵]̵[̲r̲e̲s̲i̲d̲u̲a̲l̲,̲ ̲P̲i̲.̲z̲e̲r̲o̲_̲a̲p̲p̲l̲y̲,̲ ̲h̲y̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.SchwartzCutoff.residual_derivative_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.SchwartzCutoff.residual_product_derivative_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

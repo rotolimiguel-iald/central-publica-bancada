@@ -1,0 +1,191 @@
+{
+  "audit": {
+    "audited_operations": [
+      "Python open",
+      "Python socket events",
+      "Python subprocess/fork events",
+      "Python filesystem mutation events",
+      "Python ctypes.dlopen"
+    ],
+    "evidence_scope": "PYTHON_AUDIT_EVENTS_COOPERATIVE_ONLY",
+    "journal": "negação latched em memória antes de escrita; journal físico deve estar vazio para caso positivo; não captura syscalls não auditadas",
+    "module_checks": "caminhos+hashes dos módulos carregados; não atesta integridade de todos os objetos vivos",
+    "native_IO_isolation": false,
+    "native_file_operations": null,
+    "native_network_operations": null,
+    "native_syscall_interception": false,
+    "secrets": "não entram no conjunto read_pins; nenhum segredo consultado; hook cooperativo não é prova universal contra biblioteca nativa hostil"
+  },
+  "authority_limit": "O chamador confiável aporta os pins originais; código não prova autoria ROOT por criptografia nem concede autoridade a texto de modelo. Registro/decisão têm de ficar fora da escrita do candidato. Nenhum desses documentos operacionais foi criado nesta preparação.",
+  "estatuto": "REAL de artefatos locais; INPUT de contrato e recursos; OPEN de integração/qualificação",
+  "execution_entry": {
+    "Q02_science_callable_bound": false,
+    "actual_prepared_mode": "STDLIB_PROCESS_QUALIFICATION",
+    "bool_alone_grants_execution": false,
+    "default": "REFUSED",
+    "fixed_behaviors": [
+      "RETURN",
+      "WAIT_FOR_KILL",
+      "OUTPUT_OVERFLOW"
+    ],
+    "future_successor_scope": "SYNTHETIC_ONLY",
+    "modes_allowed": [
+      "STDLIB_PROCESS_QUALIFICATION"
+    ],
+    "observations_release_supported": false,
+    "required_future_inputs": [
+      "decisão explícita específica original pinada por chamador confiável",
+      "plano integral pinado",
+      "revisão independente aceita para identidade desta preparação",
+      "registro protegido de root estável por unidade fora da escrita do candidato",
+      "inventário runtime atual e pacote integral conferidos",
+      "novas identidades não consumidas",
+      "recursos nominais e prazo próprios"
+    ]
+  },
+  "implemented_source_links": [
+    {
+      "binding": "argv fixo derivado do próprio pacote; intérprete exato aferido no preflight futuro; stdin GO/nonce; nenhum shell; close_fds/start_new_session",
+      "from": "process_supervisor.execute_once",
+      "to": "qualification_child.py"
+    },
+    {
+      "binding": "root existente0700 não root, percurso O_NOFOLLOW, reserva exclusiva por hash(unit), fsync, publicação por hardlink sem overwrite, consumo não apagado",
+      "from": "process_supervisor",
+      "to": "posix_protocol.ProtectedDirectory"
+    },
+    {
+      "binding": "pid/start_ticks/exe/argv/boot_id; captura limitada; deadline monotônico; SIGKILL do filho exato; wait/reap e resultado incerto sem retry",
+      "from": "process_supervisor",
+      "to": "pidfd e /proc"
+    },
+    {
+      "binding": "journal preaberto, hook Python sticky, fds pinados, módulos por caminhos/bytes; recepção de limites RLIMIT",
+      "from": "qualification_child",
+      "to": "cooperative_policy.CooperativePolicy"
+    },
+    {
+      "binding": "cópia byte a byte da fonte existente; latch grava em memória antes de tentar journal",
+      "from": "cooperative_policy",
+      "to": "audit_guard.AuditLatch/PreopenedJournal"
+    },
+    {
+      "binding": "assinaturas exatas; recusa da declaração universal de IO nativo; nenhuma admissão científica permitida",
+      "from": "supervisor_adapter.POSIXSupervisor39",
+      "to": "supervisor_port.QualifiedSupervisor"
+    },
+    {
+      "binding": "validador estrito de receipt scoped, proposta gerada de bytes39; diff não aplicado",
+      "from": "supervisor_port_cooperative_proposal.validate_terminal",
+      "to": "CONTROLLER_COOPERATIVE_PROPOSAL.diff"
+    },
+    {
+      "binding": "nomes/nonce reais conferidos; ENTER persistente antes de ACK, sequência, timeout do pai e proibição de novo nonce repetido; ligação dos FDs/loop ainda pendente",
+      "from": "native_progress.NativeProgressWindow/exchange",
+      "to": "BEFORE_NATIVE_BACKGROUND/AFTER_NATIVE_BACKGROUND do fornecedor39"
+    }
+  ],
+  "limits": {
+    "RLIMIT_AS": "limite de espaço virtual, não RSS",
+    "RLIMIT_CORE": 0,
+    "RLIMIT_CPU": "limite CPU do filho, não wallclock",
+    "RLIMIT_FSIZE": "tamanho de arquivos regulares, não total do store nem pipe",
+    "RLIMIT_NOFILE": "descritores do filho",
+    "global_store_quota": "não implementada por RLIMIT_FSIZE; requer contabilização/quota explícita no sucessor antes da admissãoQ02",
+    "hostile_same_uid_or_ACL_containment": false,
+    "per_native_call": "protocolo ACK preparado; ainda não conectado ao supervisor científico; não medido",
+    "stdout_stderr": "captura limitada no pai; excesso termina filho; hashes de bytes retidos, não de stream integral descartado",
+    "wall": "nominal monotônico supervisionado por pai; scheduler/IO do host podem atrasar; total cobre reap/persistência/stdout mas sucesso exige verificação externa de exit0 e receipt",
+    "whole_tree_OS_containment": false
+  },
+  "material_gaps": [
+    {
+      "field_or_signature": "supervisor_port.py admit/terminal_audit: no network/read allowlist versus números nativos zero",
+      "id": "G1",
+      "resolution": "proposta scoped dos diffs, ou isolamento OS qualificado distinto; nenhuma flag autoriza afirmar cobertura universal"
+    },
+    {
+      "field_or_signature": "bootstrap científico novo que carregue bindings reais e instancie controlador/supervisor revisados sob guard",
+      "id": "G2",
+      "resolution": "não invocar main c435; implementar composição revisada sobre prediction_worker com identidades novas. Código desta entrega só lança worker stdlib fixo."
+    },
+    {
+      "field_or_signature": "CooperativePolicy._audit versus DurableStore._exclusive_write/_publish/_flush_dir/_read",
+      "id": "G3",
+      "resolution": "guard atual recusa writes/mkdir/link após hook. Sucessor deve autorizar exatamente os dois roots já protegidos e tipos claim/result/failure/pending, com fsync/link/read e ownership; nunca allowlist de toda pasta arbitrária."
+    },
+    {
+      "field_or_signature": "NativeProgressWindow.receive + exchange(request_fd,ack_fd,...) + capture loop",
+      "id": "G4",
+      "resolution": "conectar pipes preabertos e deadline ativo ao mesmo pai watchdog; source inclui protocolo mas supervisor stdlib não lê estes FDs; não alegar timeout por chamada já operacional"
+    },
+    {
+      "field_or_signature": "runtime_inventory/loaded_objects_receipt/native maps/single science thread",
+      "id": "G5",
+      "resolution": "qualificar instancia Linux atual autorizada; inventários existentes são referências históricas de bytes; conferir objetos carregados e mapas, incluindo backend/Python/BLAS; não repetir unidades consumidas"
+    },
+    {
+      "field_or_signature": "nominal_store_bytes e encerramento externo",
+      "id": "G6",
+      "resolution": "contabilização persistente/quota total Q02 e aceitação externa de exit/reap/persistência; teto de arquivo e check wall não substituem a medição"
+    }
+  ],
+  "not_a_gap": {
+    "bytes_interface": "consumer aceita f64le bytes e row_ids JSON bytes, confirmado por leitura da fonte; hipótese inicial descartada e correção ao lado preservada"
+  },
+  "not_actions": {
+    "AUTH_created": false,
+    "CLAIM_created": false,
+    "ROOT_DECISION_created": false,
+    "WSL_started": false,
+    "candidate_modules_imported": false,
+    "observed_catalog_opened": false,
+    "providers_called": false,
+    "shared_ledgers_memories_modified": false,
+    "solver_called": false
+  },
+  "preserved_dependencies": {
+    "I02": "99e2bfa7-36b8-4e0f-92e7-1a6918e80591",
+    "consumed_c435_entrypoint_used": false,
+    "controller": "39f88c04-76b0-44dd-bf6f-11f937048fa9",
+    "originals_modified": false
+  },
+  "request_id": "f7e2ffb8-6efb-4d0d-85c1-59c7a8f932bc",
+  "runtime": {
+    "current_Linux_availability": "NOT_CHECKED",
+    "current_import_closure": "NOT_QUALIFIED",
+    "historical_inventory_reference": {
+      "bytes": 1204713,
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_engine_import_closure_repair_preparation\\RUNTIME_INVENTORY.json",
+      "sha256": "18864bec682704fac44e655b03976db706348b9793bb13f39cafc5e91d2bef01"
+    },
+    "historical_pin_count": 5101,
+    "native_trust": "Para sucessor científico: código/bibliotecas nativos explicitamente confiáveis e pinados; maps/loaded objects devem ser conferidos na instância. Pin de fonte não é identidade de objeto carregado.",
+    "no_current_Linux_paths_asserted": true
+  },
+  "schema": "F9_POSIX_SUPERVISOR_PREPARATION_CONTRACT_V1",
+  "status": "PREPARATION_ONLY_NOT_REVIEWED_NOT_EXECUTED",
+  "successor_proposal": {
+    "external_exit_cleanup_verified_in_child": false,
+    "files": [
+      "supervisor_port_cooperative_proposal.py",
+      "CONTROLLER_COOPERATIVE_PROPOSAL.diff",
+      "PORT_COOPERATIVE_PROPOSAL.diff",
+      "SUCESSOR_DERIVACAO.json"
+    ],
+    "native_zero_forbidden": true,
+    "purpose": "tornar explícito o contrato que o serviço Python cooperativo pode cumprir, sem inventar isolamento nativo nem exigir novo consentimento automático por essa distinção",
+    "required_rebuild": "novo pacote sucessor completo com cópias/pins, manifesto e referências controller/supplier/porta coerentes; diffs não podem ser aplicados ao pacote39f88 preservado",
+    "retained_science_constraints": [
+      "mesmos modelos/priors/ordemMM upstream/T único/d0",
+      "ENGINEERING_ONLY sem p/sigma/veredito",
+      "sem observado por bool",
+      "mesma cobertura integral do prior e ordem de cenários",
+      "mesma idempotência e pins por admissão",
+      "sem substituição de solver/backend"
+    ],
+    "status": "PROPOSED_DIFF_ONLY_NOT_APPLIED",
+    "terminal_schema": "F9_CONTROLLER_COOPERATIVE_TERMINAL_V1",
+    "terminal_status": "PYTHON_AUDIT_ACCEPTED_SCOPED"
+  }
+}

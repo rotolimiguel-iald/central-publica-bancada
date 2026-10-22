@@ -1,0 +1,529 @@
+{
+  "schema": "F9_BOUND_EIGHT_CONTROLS_PREPARATION_V1",
+  "request_id": "8b53f7c0-9f5f-49e1-87bc-cf73a7e1f79d",
+  "parent_request_id": "6273a822-5880-4742-a82c-b7cf93f7c128",
+  "status": "PREPARED_NOT_EXECUTED_NOT_AUTHORIZED_PROOF_REVIEW_PENDING",
+  "created_utc": "2026-10-06T04:42:24.057321+00:00",
+  "scope": "Exactly C01-C08 deterministic tiny synthetic controls; independent proof acceptance and specific ROOT execution authorization required.",
+  "limits": {
+    "cases": 8,
+    "matrix_dimension_max": 8,
+    "worker_threads": 1,
+    "max_wall_seconds": 30,
+    "cooperative_worker_seconds": 23,
+    "execution_count_per_identity_max": 1,
+    "random_simulations": 0,
+    "CAMB_runs": 0,
+    "catalogue_reads": 0,
+    "observed_reads": 0,
+    "remote_calls": 0,
+    "scientific_imports": 0,
+    "max_rational_component_bits": 524288,
+    "max_worker_stdout_bytes": 4194304,
+    "max_worker_stderr_bytes": 65536,
+    "collection_reserve_seconds_within_total": 5,
+    "work_deadline_offset_seconds": 25,
+    "extra_wait_budget_after_total_seconds": 0
+  },
+  "alternatives_before_measurement": [
+    {
+      "id": "A_SELECTED",
+      "implementation": "Python stdlib Fraction, exact rational matrix operations, explicit series remainders and interval algebra; exact sqrt enclosure via isqrt.",
+      "advantage": "Auditable exact bounds and positive tiny tails; no scientific packages needed.",
+      "limitation": "Potential integer cost, not benchmarked; timeout or size guard yields failure."
+    },
+    {
+      "id": "B_NOT_SELECTED",
+      "implementation": "Decimal directed rounding with proven series remainders and outward arithmetic contexts, same8cases.",
+      "advantage": "Bounded precision can reduce large integer cost.",
+      "limitation": "Must qualify every outward-rounded operation/context separately; ordinary mpmath/SciPy/float is not a rigorous interval certificate. No alternate code/run prepared."
+    }
+  ],
+  "selected_implementation": "A",
+  "cases": [
+    {
+      "id": "C01_FIXED_QUOTIENT",
+      "inputs": {
+        "C": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            0,
+            9,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "X": [
+          [
+            2
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ],
+        "R": [
+          [
+            0,
+            "1/3",
+            0
+          ]
+        ],
+        "Y": [
+          10,
+          6,
+          0
+        ],
+        "mu": "(0,3a,0), a in [-1,1]; true a=0"
+      },
+      "expected": {
+        "RX": 0,
+        "RCRt": 1,
+        "residual_rank": 1,
+        "q_true": 4,
+        "g_null": 1
+      },
+      "justification": "C range is first two coordinates; X has rank1 within it; R erases X and whitens second coordinate. Min (2-a)^2 on [-1,1] is1. Thus0<=g<=qtrue=4. Fixed nuisance only, no reused integration control.",
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    },
+    {
+      "id": "C02_GLOBAL_NONLINEAR_SPAN",
+      "inputs": {
+        "z": [
+          0,
+          2,
+          3
+        ],
+        "mu_null": [
+          0,
+          0,
+          0
+        ],
+        "mu_comp": "(a,a^2,0), a in [-1,1]",
+        "V": "span(e1,e2)"
+      },
+      "expected": {
+        "g_null": 13,
+        "g_comp": 11,
+        "distance_relaxation": 9,
+        "gain": 2,
+        "projection_bound": 4
+      },
+      "justification": "All polynomial coefficients lie in fixed V globally. Setting u=a² in[0,1], q=13-3u+u² has derivative -3+2u<0; minimum11 at u1. Distance to V is9, gain2<=4.",
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    },
+    {
+      "id": "C03_TANGENT_IS_NOT_GLOBAL_SPAN",
+      "inputs": {
+        "curve": "(a,a²,0)",
+        "tangent_at0": [
+          1,
+          0,
+          0
+        ],
+        "witness_at1": [
+          1,
+          1,
+          0
+        ]
+      },
+      "expected": {
+        "tangent_certificate": "REJECTED",
+        "tangent_dimension": 1,
+        "global_span_dimension": 2
+      },
+      "justification": "The e2 coefficient is nonzero globally and cannot lie in span(e1). One tangent is not a global certificate.",
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    },
+    {
+      "id": "C04_DIRECTED_SIGN_AND_ZERO_DF",
+      "inputs": {
+        "signed_values": [
+          "-3/2",
+          0
+        ],
+        "rank_zero_values": [
+          0,
+          1
+        ]
+      },
+      "expected": {
+        "nonpositive_p": 1,
+        "atom0_inclusive_tail_at0": 1,
+        "atom0_tail_at1": 0,
+        "positive_rank0": "CONTRACT_INCOHERENCE_NOT_VALID_REJECTION"
+      },
+      "justification": "S<=0 is p1 by directed definition. Rank0 pivot has atom0; positive S under valid rank0 null impossible. No SciPy df0.",
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    },
+    {
+      "id": "C05_MINIMUM_CERTIFICATE_DIRECTION",
+      "inputs": {
+        "local_only_U_null": 9,
+        "true_synthetic_g_null": 1,
+        "true_synthetic_g_comp": 0,
+        "global_null_interval": [
+          0,
+          9
+        ],
+        "global_comp_interval": [
+          0,
+          2
+        ]
+      },
+      "expected": {
+        "local_U_as_L": "REJECTED",
+        "ell_G": 0,
+        "ell_Q_nested": 0,
+        "ell_T": -2,
+        "second_exact_interval_example": "Lnull=3,Ucomp=2 => ell=1"
+      },
+      "justification": "A feasible local value is U>=g, never automatically L. Lnull-Ucomp is -2. Truncate Q only under nested qualification. Synthetic exact minima make intervals checkable; no optimizer run.",
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    },
+    {
+      "id": "C06_DIFFERENT_COVARIANCE",
+      "inputs": {
+        "variance_null": 1,
+        "variance_comp": "1/4",
+        "epsilon": "1/2",
+        "y": 0
+      },
+      "expected": {
+        "RSS_true": 0,
+        "directed_T": "2 log2 >1",
+        "RSS_likelihood_envelope": "REJECTED"
+      },
+      "justification": "T=-2log epsilon+(1-epsilon^-2)y². Integral_1^2 dt/t>1/2 proves log2>1/2 without float; T>1>0=RSS. Covariance equality guard must block reuse.",
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    },
+    {
+      "id": "C07_COMPLETE_SCENARIOS",
+      "inputs": {
+        "required_scenarios": [
+          "a",
+          "b",
+          "c"
+        ],
+        "G": {
+          "a": "1/1000",
+          "b": "1/2000",
+          "c": "1/4000"
+        },
+        "Q": {
+          "a": "1/1000",
+          "b": "1/2000"
+        },
+        "synthetic_alpha": "1/100",
+        "family_factor": 5
+      },
+      "expected": {
+        "G_FWER": "1/200",
+        "Q_FWER": null,
+        "valid_H1_rejection": true,
+        "H1_nonrejection_available": false
+      },
+      "justification": "Complete maxG=1/1000; Bonferroni5=1/200<=synthetic alpha. Missing c makes Q unavailable without discarding complete valid G rejection. No best-case selection; no numerical5sigma claim.",
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    },
+    {
+      "id": "C08_TAIL_CERTIFICATE",
+      "inputs": {
+        "recurrence_pairs": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            2,
+            2000
+          ]
+        ],
+        "integer_terms": 32,
+        "alternate_terms_plus_next": 33,
+        "exp_reduction": 1024,
+        "sqrt_scale_power10": 50
+      },
+      "expected": {
+        "Q_half_1": "[15/100,16/100]",
+        "Q_1_1": "[36/100,37/100]",
+        "Q_3half_1": "[57/100,58/100]",
+        "Q_2_1": "[73/100,74/100]",
+        "extreme_e_minus_1000": "strictly between 10^-500 and10^-400, positive",
+        "small_tail_interval_width_max": "10^-25",
+        "extreme_relative_width_max": "10^-20",
+        "certified_enclosures": "overlap recurrence vs integrated-series certificate; extreme vs unit-exponential power"
+      },
+      "justification": "Exact integer/half-integer upper-gamma recurrences. Independently enclose lower-gamma integral at x1 by alternating exp series; Gamma half via certified sqrt(pi). pi uses exact Machin identity and alternating remainders. exp(-1000) via reciprocal positive-exp Taylor geometric remainder and range reduction; cross-check [exp(-1)]^1000. Rational intervals, not float values, carry certificate.",
+      "certificate_rules": {
+        "alternating": "Retain32 terms plus next; mathematical decreasing terms tend to0, enclosure between consecutive partial sums.",
+        "positive_exp": "For0<=y<=1, S=sum0..32 y^k/k!, next=y^33/33!, tail <= next/(1-y/34). Hence exp(-y) lies[1/(S+tail),1/S].",
+        "sqrt": "isqrt(floor(q*10^100))/10^50 gives lower endpoint; upper integer+1 gives strict upper. Interval endpoints use rational arithmetic.",
+        "Machin": "pi=16atan(1/5)-4atan(1/239), exact identity; alternating arctan terms.",
+        "output": "Exact numerator/denominator hexadecimal; no ordinary floating SF or decimal rounded value called certificate.",
+        "failure": "Visible failure on domain/size/time/certification mismatch; no float fallback, no rerun."
+      },
+      "expected_statute": "DERIVED_A_PRIORI_SYNTHETIC_CONDITIONAL_NOT_MEASURED"
+    }
+  ],
+  "execution_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\controls.py",
+      "bytes": 10614,
+      "sha256": "7ddb3cf8f2d646995c6b61ee056ccd492ce2d3ca8b1417b2446afea5fdea0c95"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\controls_preparation\\supervisor.py",
+      "bytes": 7470,
+      "sha256": "1acedeafeb47befeaabaf98532077af2774e00fcda561f28ea01b49b6f2b5f46"
+    },
+    {
+      "path": "C:\\Python314\\python.exe",
+      "bytes": 106328,
+      "sha256": "cce21c0e8710e304273e98ac4b2b0f5aceb639acbcd2343cbaa5c4e81619c45b"
+    },
+    {
+      "path": "C:\\Python314\\python314.dll",
+      "bytes": 6753112,
+      "sha256": "1ac15e2224581fc678bbd17728b9aa538d47b891b72c76499ef07e54cd74f151"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\fractions.py",
+      "bytes": 42531,
+      "sha256": "2fe5128f9198e3a09e223cfc10dde3b21b217e1bd893d55364dc313f1924d59b"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\json\\__init__.py",
+      "bytes": 14431,
+      "sha256": "0439e6546415d4147396afac324beadb7a8dc2c1e2391dcb541fb34c83986d8f"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\hashlib.py",
+      "bytes": 9714,
+      "sha256": "271b00a30d27c3cdd99b7f70962680f8455d3057b3c103f028e2da31141b91ee"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\subprocess.py",
+      "bytes": 93037,
+      "sha256": "d4db1dbd8de9762fba2ddfb05367d974df8bd6596bef78630896f67b89da519e"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\ast.py",
+      "bytes": 26159,
+      "sha256": "897e3e83094135d3eb4b30a32df40873d928db152686648481896d23140f93e6"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\decimal.py",
+      "bytes": 2935,
+      "sha256": "8e2c8f5b6a30f488597a17216a54b5a5090d97c0662451c280b1fb4779f9c6c3"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\pathlib\\__init__.py",
+      "bytes": 48114,
+      "sha256": "208546aa566ca8df4b8e1259f30209c0f803c3f920e6d080ae1b10d53d05bd72"
+    },
+    {
+      "path": "C:\\Python314\\Lib\\datetime.py",
+      "bytes": 344,
+      "sha256": "8262c677654011417ae08751ae9c38edc8ca802d21c65232452529248a17aae9"
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\PROTOCOLO_CONTROLES_FUTUROS.json",
+      "bytes": 2538,
+      "sha256": "f5a3fdd93495533919a830060cadee4a48581f7956c05e48b867ed4344db2dbd"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\PROVA_COTA_CALIBRACAO_F9.md",
+      "bytes": 19270,
+      "sha256": "3f3f9deb07563acad114cff2ad4d6d3da71e6027cc44b48891afb320d881cd47"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\CALIBRATION_BOUND_CANDIDATE.json",
+      "bytes": 8941,
+      "sha256": "c5dfc055174fba6412488a8f63c9d32b1756602aa5dcb5ce7052b77c803b5641"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\f9_calibration_bound\\MANIFESTO_ENTREGA.json",
+      "bytes": 6991,
+      "sha256": "5fb401ec78fcf824be689d8599df117cc659e8728dc0b656b14d64a2f995ce19"
+    }
+  ],
+  "dependencies": {
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "direct_metadata": [
+      {
+        "module": "fractions",
+        "origin": "C:\\Python314\\Lib\\fractions.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\fractions.py",
+          "bytes": 42531,
+          "sha256": "2fe5128f9198e3a09e223cfc10dde3b21b217e1bd893d55364dc313f1924d59b"
+        },
+        "read_only": true
+      },
+      {
+        "module": "math",
+        "origin": "built-in",
+        "pin": null,
+        "read_only": true
+      },
+      {
+        "module": "json",
+        "origin": "C:\\Python314\\Lib\\json\\__init__.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\json\\__init__.py",
+          "bytes": 14431,
+          "sha256": "0439e6546415d4147396afac324beadb7a8dc2c1e2391dcb541fb34c83986d8f"
+        },
+        "read_only": true
+      },
+      {
+        "module": "hashlib",
+        "origin": "C:\\Python314\\Lib\\hashlib.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\hashlib.py",
+          "bytes": 9714,
+          "sha256": "271b00a30d27c3cdd99b7f70962680f8455d3057b3c103f028e2da31141b91ee"
+        },
+        "read_only": true
+      },
+      {
+        "module": "subprocess",
+        "origin": "C:\\Python314\\Lib\\subprocess.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\subprocess.py",
+          "bytes": 93037,
+          "sha256": "d4db1dbd8de9762fba2ddfb05367d974df8bd6596bef78630896f67b89da519e"
+        },
+        "read_only": true
+      },
+      {
+        "module": "ast",
+        "origin": "C:\\Python314\\Lib\\ast.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\ast.py",
+          "bytes": 26159,
+          "sha256": "897e3e83094135d3eb4b30a32df40873d928db152686648481896d23140f93e6"
+        },
+        "read_only": true
+      },
+      {
+        "module": "decimal",
+        "origin": "C:\\Python314\\Lib\\decimal.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\decimal.py",
+          "bytes": 2935,
+          "sha256": "8e2c8f5b6a30f488597a17216a54b5a5090d97c0662451c280b1fb4779f9c6c3"
+        },
+        "read_only": true
+      },
+      {
+        "module": "pathlib",
+        "origin": "C:\\Python314\\Lib\\pathlib\\__init__.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\pathlib\\__init__.py",
+          "bytes": 48114,
+          "sha256": "208546aa566ca8df4b8e1259f30209c0f803c3f920e6d080ae1b10d53d05bd72"
+        },
+        "read_only": true
+      },
+      {
+        "module": "os",
+        "origin": "frozen",
+        "pin": null,
+        "read_only": true
+      },
+      {
+        "module": "sys",
+        "origin": "built-in",
+        "pin": null,
+        "read_only": true
+      },
+      {
+        "module": "time",
+        "origin": "built-in",
+        "pin": null,
+        "read_only": true
+      },
+      {
+        "module": "datetime",
+        "origin": "C:\\Python314\\Lib\\datetime.py",
+        "pin": {
+          "path": "C:\\Python314\\Lib\\datetime.py",
+          "bytes": 344,
+          "sha256": "8262c677654011417ae08751ae9c38edc8ca802d21c65232452529248a17aae9"
+        },
+        "read_only": true
+      }
+    ],
+    "closure_limit": "Pins cover entry interpreter/DLL and named direct stdlib sources; not a complete transitive runtime attestation. No packages installed or scientific modules imported."
+  },
+  "identity_policy": {
+    "request_id": "8b53f7c0-9f5f-49e1-87bc-cf73a7e1f79d",
+    "run_once": "Exclusive CLAIM.json and new RUN directory, terminal consumption including uncertainty. No resume/fallback/relaunch.",
+    "required_authorization_file": "AUTORIZACAO_ROOT.json — absent; not generated here",
+    "authorization_fields": [
+      "request_id",
+      "contract_sha256",
+      "authorized=true",
+      "scope=C01_C08_SYNTHETIC_ONLY_ONCE",
+      "max_execution_count=1",
+      "max_wall_seconds=30",
+      "worker_threads=1",
+      "independent_proof_review.path/sha256/accepted_for_these_controls=true"
+    ],
+    "proof_review_path_constraint": "Existing .md/.json under ORDEM_018/derivacoes, exact hash verified. ROOT explicitly attests acceptance for these controls; file presence alone is not acceptance.",
+    "worker": "Single sequential worker, no pool/threads; thread environment1. Supervisor waits and enforces wall timeout; on timeout kills once and preserves receipt.",
+    "wall": "Single monotonic nominal total deadline30s starts after exclusive CLAIM persistence, before environment setup/Popen; pin/auth prevalidation and identity persistence precede it. Work deadline=total-5s, worker cooperative<=23s. Collection communicates only for remaining total time. No fresh/additional5s. OS scheduling/kill/write timing not guaranteed; terminal uncertainty is persisted immediately even if nominal deadline has elapsed.",
+    "collection_failure": "TimeoutExpired or other collection failure is caught and yields terminal PROCESS_STATE_UNCERTAIN, exit2, no PASS/retry. Receipt write is an immediate persistence attempt, not added wait/computation budget."
+  },
+  "current_execution_count": 0,
+  "claim_exists": false,
+  "authorization_exists": false,
+  "results_exist": false,
+  "does_not_validate": [
+    "physical Gaussian errors",
+    "complete-domain CAMB prediction bounds",
+    "actual F9 optimizer minima",
+    "actual5sigma power",
+    "observed hypothesis"
+  ],
+  "prohibitions": [
+    "qualified flat-nuisance integral controls",
+    "preflight262",
+    "five paired background controls"
+  ],
+  "not_modified": [
+    "parent proof/protocol/candidate6273",
+    "consumed packages",
+    "Atlas",
+    "kernel",
+    "gate"
+  ],
+  "review_condition": "Any proof-review correction affecting controls requires separate version/delta and new pins before authorization; no automatic adoption.",
+  "operational_revision": 2
+}

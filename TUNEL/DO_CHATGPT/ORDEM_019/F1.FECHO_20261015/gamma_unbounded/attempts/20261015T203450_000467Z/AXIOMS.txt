@@ -1,0 +1,30 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T203450_000467Z\CanonicalOneParticleBWR1.lean:38:6: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => (↑u, ↑_a u) ∈ _a.graph
+Error: Application type mismatch: The argument
+  u
+has type
+  ↥(partialOperatorSquare TW).domain
+but is expected to have type
+  ↥_a.domain
+in the application
+  ↑u
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+x : ↥H1
+u : ↥(partialOperatorSquare TW).domain
+hu : ↑u = (selfadjointSquareResolvent TW TW_selfadjoint) x
+he : ↑u + ↑(partialOperatorSquare TW) u = x
+hg : (↑u, ↑(partialOperatorSquare TW) u) ∈ (partialOperatorSquare TW).graph
+⊢ R x = (selfadjointSquareResolvent TW TW_selfadjoint) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T203450_000467Z\CanonicalOneParticleBWR1.lean:51:29: error(lean.unknownIdentifier): Unknown identifier `TransverseFiber`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gamma_unbounded\attempts\20261015T203450_000467Z\CanonicalOneParticleBWR1.lean:52:5: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (1500000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+'F1Fecho.OneParticleBW.square_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.OneParticleBW.R_is_actual' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.OneParticleBW.modularFlow_eq_boost' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

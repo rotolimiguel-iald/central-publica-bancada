@@ -1,0 +1,11 @@
+--- executed_V2/driver_p3.py
++++ candidate/driver_p3_candidate.py
+@@ -74,6 +74,8 @@
+     runtime_paths={str(Path(x["path"]).resolve()) for x in runtime["files"]}
+     allowed_data|=runtime_paths
+     allowed_data|={str(ROOT/"driver_p3.py"),str(ROOT/"prior_transform.py")}
++    from preload_npz_codec import preload_npz_codec
++    preload_npz_codec(json.loads((ROOT/"CODEC_CP437_PIN.json").read_text()))
+     audit_paths=set();blocked=[]
+     def audit(event,args):
+         if event in ("socket.connect","socket.bind","subprocess.Popen","os.system","os.fork","os.forkpty","os.posix_spawn"):

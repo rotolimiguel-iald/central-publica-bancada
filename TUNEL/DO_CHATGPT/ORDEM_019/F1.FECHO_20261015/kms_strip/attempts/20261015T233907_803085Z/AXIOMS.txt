@@ -1,0 +1,27 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T233907_803085Z\SchwartzMaxwellLinearR2.lean:45:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(MemLp.toLp (globalCoefficient (f + g)) ⋯) y
+in the target expression
+  ↑↑(momentumSmear (f + g)) y = ↑↑(momentumSmear f + momentumSmear g) y
+
+f g : SchwartzTensor
+y : MomentumCoordinates
+h1 : ↑↑(MemLp.toLp (globalCoefficient (f + g)) ⋯) y = globalCoefficient (f + g) y
+h2 : ↑↑(MemLp.toLp (globalCoefficient f) ⋯) y = globalCoefficient f y
+h3 : ↑↑(MemLp.toLp (globalCoefficient g) ⋯) y = globalCoefficient g y
+h4 : ↑↑(momentumSmear f + momentumSmear g) y = (↑↑(momentumSmear f) + ↑↑(momentumSmear g)) y
+⊢ ↑↑(momentumSmear (f + g)) y = ↑↑(momentumSmear f + momentumSmear g) y
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T233907_803085Z\SchwartzMaxwellLinearR2.lean:55:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑(MemLp.toLp (globalCoefficient (c • f)) ⋯) y
+in the target expression
+  ↑↑(momentumSmear (c • f)) y = ↑↑(c • momentumSmear f) y
+
+c : ℂ
+f : SchwartzTensor
+y : MomentumCoordinates
+h1 : ↑↑(MemLp.toLp (globalCoefficient (c • f)) ⋯) y = globalCoefficient (c • f) y
+h2 : ↑↑(MemLp.toLp (globalCoefficient f) ⋯) y = globalCoefficient f y
+h3 : ↑↑(c • momentumSmear f) y = (c • ↑↑(momentumSmear f)) y
+⊢ ↑↑(momentumSmear (c • f)) y = ↑↑(c • momentumSmear f) y
+'F1Fecho.MaxwellGlobal.globalCoefficient_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.globalCoefficient_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.spacetimeSmearLinear' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,65 @@
+import took 86.6s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001656_031360Z\LpPairTransportR1.lean:36:33: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f) a
+in the target expression
+  (↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f) + ↑↑((ContinuousLinearMap.compLpL 2 volume rightMap) g)) a =
+    WithLp.toLp 2 (↑↑f a, ↑↑g a)
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+f g : ↥(RegularHilbert H)
+a : ℝ
+hb : ↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f) a = leftMap (↑↑f a)
+hc : ↑↑((ContinuousLinearMap.compLpL 2 volume rightMap) g) a = rightMap (↑↑g a)
+ha :
+  ↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f + (ContinuousLinearMap.compLpL 2 volume rightMap) g) a =
+    (↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f) + ↑↑((ContinuousLinearMap.compLpL 2 volume rightMap) g)) a
+⊢ (↑↑((ContinuousLinearMap.compLpL 2 volume leftMap) f) + ↑↑((ContinuousLinearMap.compLpL 2 volume rightMap) g)) a =
+    WithLp.toLp 2 (↑↑f a, ↑↑g a)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001656_031360Z\LpPairTransportR1.lean:42:2: warning: 'change fstMap (pair f g) a = _' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001656_031360Z\LpPairTransportR1.lean:50:2: warning: 'change sndMap (pair f g) a = _' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T001656_031360Z\LpPairTransportR1.lean:79:2: error: Type mismatch: After simplification, term
+  congrArg (fun x => WithLp.toLp 2 (↑↑f a, (B.U (1 * a)) x)) hc
+ has type
+  @Eq (WithLp 2 (H × H)) (WithLp.toLp 2 (↑↑f a, (B.U a) (↑↑(CoefficientConjugation.reflectionMap g) a)))
+    (WithLp.toLp 2 (↑↑f a, (B.U a) (↑↑g (-a))))
+but is expected to have type
+  @Eq (PairH H) (WithLp.toLp 2 (↑↑f a, (B.U a) (↑↑(CoefficientConjugation.reflection g) a)))
+    (WithLp.toLp 2 (↑↑f a, (B.U a) (↑↑g (-a))))
+'F1Fecho.LpPairTransport.pair_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.fst_pair' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.snd_pair' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.decode_encode' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.LpPairTransport.encode_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.18ms
+	blocked (unaccounted) 85.2ms
+	compilation (IR) 0.155ms
+	compilation (LCNF base) 4.43ms
+	compilation (LCNF impure) 0.599ms
+	compilation (LCNF mono) 3.17ms
+	congr simp thm 0.891ms
+	dsimp 23.5ms
+	elaboration 213ms
+	fix level params 1.09ms
+	import 86.6s
+	initialization 29.6ms
+	instantiate metavars 0.904ms
+	interpretation 7s
+	let-to-have transformation 0.402ms
+	linting 6.72ms
+	overlappingInstancesLinter 83.5ms
+	parsing 5.06ms
+	process pre-definitions 18.6ms
+	share common exprs 6.91ms
+	simp 10.4ms
+	tactic execution 145ms
+	tacticAnalysis 200ms
+	type checking 96.7ms
+	typeclass inference 1.47s

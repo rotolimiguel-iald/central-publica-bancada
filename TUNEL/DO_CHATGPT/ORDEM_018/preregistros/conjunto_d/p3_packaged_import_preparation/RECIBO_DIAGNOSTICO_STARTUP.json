@@ -1,0 +1,97 @@
+{
+  "schema": "P3_STARTUP_DIAGNOSTIC_RECEIPT_V1",
+  "at_utc": "2026-10-06T16:23:55.623647+00:00",
+  "qualification_still_terminal": "4a0d70f2-be3c-4d21-9257-9b0c4d7e537b",
+  "diagnostic_authorization": "ROOT requested bytes/hash/sitecustomize as data and all initial module/sys.path categories under nobody; no candidate/scientific imports.",
+  "snapshot": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_packaged_import_preparation\\DIAGNOSTICO_STARTUP_BRUTO.json",
+    "bytes": 10066,
+    "sha256": "19781398cff4d55ffd9c00445c69f012205fecaecfbc0df7a83d1418bf0ac341"
+  },
+  "startup_count": 33,
+  "category_counts": {
+    "DIAGNOSTIC_STDIN_PSEUDO_ORIGIN_NOT_PACKAGE_RUNTIME": 1,
+    "NO_FILE_BUILTIN_OR_FROZEN": 15,
+    "STDLIB_FRESH_METADATA_NOT_HISTORICAL_PIN": 16,
+    "REJECTED_BY_CURRENT_PREHOOK": 1
+  },
+  "rejected": [
+    {
+      "module": "sitecustomize",
+      "file": "/usr/lib/python3.12/sitecustomize.py",
+      "spec_origin": "/usr/lib/python3.12/sitecustomize.py",
+      "path": "/etc/python3.12/sitecustomize.py",
+      "bytes": 155,
+      "sha256": "43d81125d92376b1a69d53a71126a041cc9a18d8080e92dea0a2ae23be138b1e",
+      "category": "REJECTED_BY_CURRENT_PREHOOK"
+    }
+  ],
+  "causal_scope": "The logical stdlib path resolves through an observed symlink to /etc; current guard classifies canonical paths and deliberately rejects that unpinned destination.",
+  "file_content_analysis": {
+    "ast_only": true,
+    "imports": [
+      "import apport_python_hook"
+    ],
+    "calls": [
+      "apport_python_hook.install()"
+    ],
+    "behavior": "Attempts apport_python_hook; ImportError is suppressed, otherwise invokes its install(). No explicit execution of this text during diagnosis.",
+    "startup_semantics": "Python normal site startup may execute this module automatically; -I omits user site and environment but does not imply -S.",
+    "apport_python_hook_in_snapshot": false,
+    "installed_handler_or_general_availability_inferred": false
+  },
+  "path_coverage": [
+    {
+      "path": "/usr/lib/python312.zip",
+      "resolved": "/usr/lib/python312.zip",
+      "exists": false,
+      "category": "STDLIB_ZIP_SEARCH_ENTRY"
+    },
+    {
+      "path": "/usr/lib/python3.12",
+      "resolved": "/usr/lib/python3.12",
+      "exists": true,
+      "category": "STDLIB_SEARCH_ROOT"
+    },
+    {
+      "path": "/usr/lib/python3.12/lib-dynload",
+      "resolved": "/usr/lib/python3.12/lib-dynload",
+      "exists": true,
+      "category": "STDLIB_SEARCH_ROOT"
+    },
+    {
+      "path": "/opt/lal_env/lib/python3.12/site-packages",
+      "resolved": "/opt/lal_env/lib/python3.12/site-packages",
+      "exists": true,
+      "category": "RUNTIME_SEARCH_ROOT_FILE_PINS_REQUIRED"
+    }
+  ],
+  "limits": [
+    "33 modules at startup, before diagnostic imports; not complete later scientific import closure",
+    "Frozen module files are hashed as backing metadata, not proof that Python executed source rather than embedded frozen code",
+    "__main__ stdin pseudo-origin belongs to inspection harness, not the actual candidate module"
+  ],
+  "diagnostic_invocations": {
+    "read_only_count": 4,
+    "first_failed_on_virtual_stdin_path": true,
+    "one_full_snapshot_used_X_utf8": true,
+    "exact_I_B_first_output_truncated_by_tool": true,
+    "final_exact_I_B_snapshot_persisted_to_avoid_truncation": true,
+    "candidate_calls_during_diagnostic": 0,
+    "scoped_paths_or_account_changes": false
+  },
+  "proposal": {
+    "minimal_A": "Add only exact module-name/path/content pin for sitecustomize canonical destination and record the observed stdlib symlink; use a successor package with new preparation identity.",
+    "alternative_B": "Disable site startup via an explicitly rebuilt -S import path policy; broader boundary change, not selected.",
+    "not_proposed": [
+      "whitelist /etc",
+      "relax general stdlib category",
+      "change account/permissions",
+      "execute apport_python_hook explicitly",
+      "retry consumed unit"
+    ]
+  },
+  "parent_subsequent_decision": "ROOT authorized preparation-only successor p3_startup_pin_preparation using minimal_A; no execution decision.",
+  "sealed_package_members_unchanged": 30,
+  "execution_of_new_candidate": false
+}

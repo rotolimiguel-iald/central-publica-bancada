@@ -1,0 +1,80 @@
+import took 203s
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004026_882645Z\GaussianLogScalarR1.lean:18:77: error: unsolved goals
+case e_a
+a : ℝ
+ha : 0 < a
+l t : ℝ
+⊢ Complex.exp (-(↑a * ↑t ^ 2)) = Complex.exp (↑t * Complex.I * ↑l)
+
+case e_a
+a : ℝ
+ha : 0 < a
+l t : ℝ
+⊢ Complex.exp (↑t * ↑l * Complex.I) = Complex.exp (-(↑t ^ 2 * ↑a))
+tactic execution of Mathlib.Tactic.RingNF.ringNF took 183ms
+interpretation of Mathlib.Tactic.FieldSimp._aux_Mathlib_Tactic_FieldSimp___elabRules_Mathlib_Tactic_FieldSimp_fieldSimp_1._boxed took 243ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004026_882645Z\GaussianLogScalarR1.lean:40:2: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+interpretation of Mathlib.Tactic._aux_Mathlib_Tactic_Convert___elabRules_Mathlib_Tactic_convert_1._boxed took 204ms
+ring took 181ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004026_882645Z\GaussianLogScalarR1.lean:55:58: error: `fun_prop` was unable to prove `ContinuousAt (fun x => Real.log (1 - x)) 0`
+
+Issues:
+  Failed to prove necessary assumption `1 - 0 ≠ 0` when applying theorem `ContinuousAt.log`.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004026_882645Z\GaussianLogScalarR1.lean:57:13: error(lean.invalidField): Invalid field `sub_atBot`: The environment does not contain `Function.sub_atBot`, so it is not possible to project the field `sub_atBot` from an expression
+  h1
+of type
+  ?m.235 ∈ 𝓝 0 → ?m.235 ∈ map (fun x => Real.log (1 - x)) (𝓝[≠] 0)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004026_882645Z\GaussianLogScalarR1.lean:53:73: error: unsolved goals
+h1 : Tendsto (fun x => Real.log (1 - x)) (𝓝[≠] 0) (𝓝 0)
+⊢ Tendsto logCoordinate (𝓝[≠] 0) atTop
+interpretation of Mathlib.Meta.FunProp.funPropTac._boxed took 240ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T004026_882645Z\GaussianLogScalarR1.lean:71:10: error: Application type mismatch: The argument
+  Tendsto.comp Real.tendsto_log_nhdsNE_zero hn
+has type
+  Tendsto (Real.log ∘ fun x => 1 - x) (𝓝[≠] 1) atBot
+but is expected to have type
+  Tendsto ?m.226 (𝓝[≠] 1) (𝓝 ?m.229)
+in the application
+  Tendsto.sub (Tendsto.comp Real.tendsto_log_nhdsNE_zero hn)
+'F1Fecho.GaussianLogScalar.gaussian_fourier' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.GaussianLogScalar.gaussian_linear_atTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.GaussianLogScalar.gaussian_linear_atBot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.GaussianLogScalar.compactify_continuous' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.0622ms
+	blocked (unaccounted) 597ms
+	congr simp thm 1.55ms
+	dsimp 4.69ms
+	elaboration 32.1ms
+	fix level params 0.374ms
+	import 203s
+	initialization 36.3ms
+	instantiate metavars 1.03ms
+	interpretation 8.91s
+	let-to-have transformation 0.0938ms
+	linting 11.9ms
+	norm_num 226ms
+	overlappingInstancesLinter 34.3ms
+	parsing 5.91ms
+	process pre-definitions 5.11ms
+	ring 280ms
+	share common exprs 4.98ms
+	simp 39.5ms
+	tactic execution 364ms
+	tacticAnalysis 151ms
+	type checking 30.4ms
+	typeclass inference 229ms

@@ -1,0 +1,58 @@
+--- V2_after_identity_and_root/common.py
++++ corrected_transport/common.py
+@@ -1,11 +1,13 @@
+ """Pure stdlib protocol helpers. Importing this module runs no control."""
+ import os, sys, json, hashlib, time
+-from pathlib import Path
++from pathlib import Path, PurePosixPath
+ REQUEST = "5b67deb6-fec2-43d6-af61-347f1a3e5b83"
+ SCOPE = "WSL312_ONE_STDLIB_CACHE_LATCH_CONTROL"
+ CASE = "WSL_CACHE_LATCH_POSIX_002"
+ WIN = Path(r"C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_018\preregistros\conjunto_d\guard_wsl_corrected_transport_preparation")
+-LINUX = Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_corrected_transport_preparation")
++LINUX_ARGV_ROOT = PurePosixPath('/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_corrected_transport_preparation')
++# POSIX representation for transported tokens; concrete Path is only for host IO.
++LINUX = Path(LINUX_ARGV_ROOT.as_posix())
+ BASE = WIN if os.name == "nt" else LINUX
+ PY = "/opt/lal_env/bin/python"
+ FLAGS = ["-I", "-S", "-B", "-X", "utf8"]
+@@ -63,7 +65,7 @@
+     finally: os.close(fd)
+ def argv_for(role, nonce):
+     script="worker.py" if role=="--child" else "linux_control.py"
+-    return [PY,*FLAGS,str(LINUX/script),role,REQUEST,nonce]
++    return [PY,*FLAGS,(LINUX_ARGV_ROOT/script).as_posix(),role,REQUEST,nonce]
+ def scoped_processes(nonce):
+     targets=[argv_for("--supervisor",nonce),argv_for("--child",nonce)]; found=[]
+     for p in Path("/proc").iterdir():
+@@ -77,3 +79,30 @@
+         for target in targets:
+             if matches(x,target): found.append((x,target))
+     return found
++
++def observed_argv(role, nonce):
++    """Observe this Linux receiver before any control/hook; never infer delivery."""
++    expected = argv_for(role, nonce)
++    process = serial_identity(proc_identity(os.getpid()))
++    received = process["argv"]
++    script_received = list(sys.argv)
++    script_expected = expected[6:]
++    return {"request_id": REQUEST, "nonce": nonce, "role": role, "process": process,
++            "expected_process_argv": expected, "received_process_argv": received,
++            "expected_script_argv": script_expected, "received_script_argv": script_received,
++            "process_argv_matches": received == expected,
++            "script_argv_matches": script_received == script_expected}
++
++def validate_observed_argv(row, role, nonce):
++    """Recompute expectations in each parent; the receiver's booleans are not proof."""
++    expected = argv_for(role, nonce)
++    need(row["request_id"] == REQUEST and row["nonce"] == nonce and row["role"] == role,
++         "Received argv receipt identity")
++    need(row["expected_process_argv"] == expected and row["received_process_argv"] == expected,
++         "Received process argv differs from exact expected tokens")
++    need(row["process"]["argv"] == expected and row["process"]["exe"] == "/usr/bin/python3.12",
++         "Received argv process identity")
++    need(row["expected_script_argv"] == expected[6:] and row["received_script_argv"] == expected[6:],
++         "Received sys.argv differs from exact expected tokens")
++    need(row["process_argv_matches"] is True and row["script_argv_matches"] is True,
++         "Received argv equality flags")

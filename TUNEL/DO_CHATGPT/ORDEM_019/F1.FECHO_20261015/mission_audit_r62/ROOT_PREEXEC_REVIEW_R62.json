@@ -1,0 +1,40 @@
+{
+  "status": "PASS_PLAN_WITH_SCOPE",
+  "reviewer": "codex-gerente-tgl",
+  "author_reviewed": "codex-pair-readout-plan-r62",
+  "utc": "2026-10-17T21:05:24.123276+00:00",
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\PREPARED_READOUT_PLAN_R62.json",
+      "sha256": "862458a7b7f8b8797a2a2f71aa5ed674abbef0488af6acb41bd0e3aa908f3bea"
+    }
+  ],
+  "checks": [
+    {
+      "name": "normalization_and_inverse",
+      "passed": true,
+      "reason": "For X=(a+a†)/sqrt2,P=(a-a†)/(i sqrt2), a=(X+iP)/sqrt2 gives stated C and B signs; cross-mode factors commute."
+    },
+    {
+      "name": "quadratic_polarization",
+      "passed": true,
+      "reason": "For commuting selfadjoint cross-mode X,Y, (X+Y)^2-(X-Y)^2=4XY. No CCR identity needed."
+    },
+    {
+      "name": "finite_vs_physical_scope",
+      "passed": true,
+      "reason": "Cutoff observables only; no photodetector POVM, physical preparation, gammaLambda calibration or beta inference claimed."
+    },
+    {
+      "name": "full_state_and_sources",
+      "passed": true,
+      "reason": "Reuse pinned pure generator functions; keep all joint state and five dissipators. Do not import/run original main."
+    },
+    {
+      "name": "preregistered_controls",
+      "passed": true,
+      "reason": "Parameters, states, times, tolerances, wrong sign/normalization/loss/zero-phase controls fixed before run. Phase refuses below1e-8."
+    }
+  ],
+  "execution_scope": "One new synthetic readout test after freeze of runner/helper and successful current R4 preflight; this reviews plan, not unbuilt code or future result."
+}

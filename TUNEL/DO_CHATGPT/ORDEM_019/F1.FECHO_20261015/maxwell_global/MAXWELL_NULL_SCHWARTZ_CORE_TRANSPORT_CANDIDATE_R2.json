@@ -1,0 +1,184 @@
+{
+  "schema": "iald.r8.null_schwartz_core_transport_candidate.v2",
+  "created_utc": "2026-10-16T16:16:00.225262+00:00",
+  "actor": "codex-fock-r6-review",
+  "role": "component_builder_not_reviewer",
+  "status": "DECLARADO_NOT_COMPILED",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "task_id": "R8",
+  "handle_reference": "r43-r8-null-schwartz-fix",
+  "sync": {
+    "revision": 126,
+    "projection_sha256": "41fc1b68c5bd62e1f1c97c4980e982dd99e94f47105ef54694d47f9fbdc104ba",
+    "hold": false,
+    "criterion": "Realizacao conjunta de Maxwell e tensor de materia. Campos do certificado completo nao triviais na mesma rede; simetria/conservacao e fonte geometrica ligados."
+  },
+  "failed_R1": {
+    "attempt": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T153954_162725Z",
+    "exit_code": 1,
+    "seconds": 92.01468670000031,
+    "errors_at_lines": [
+      53,
+      54,
+      57,
+      61,
+      144,
+      181
+    ],
+    "source_matches_receipt": true
+  },
+  "candidate": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullSchwartzCoreTransportR2.lean",
+    "sha256": "fcb5adc9b1bf05ae167a27d0b35419feb1ab363f8fdaae403e2236942fcde383",
+    "bytes": 14554
+  },
+  "delta": [
+    "Explicit Complex.ofRealCLM.contDiff composition after proving real coordinate smoothness.",
+    "Replace convert on ContDiff by explicit function equalities and rw before applying closure under multiplication, negation, addition/subtraction.",
+    "Supply explicit p=2 and beta=(fun _:Fin 3 => Real) to PiLp.continuous_toLp and continuous_apply."
+  ],
+  "static_verification": {
+    "declaration_signatures_equal": true,
+    "declarations_checked": 24,
+    "print_axioms_count": 14,
+    "sorry_admit_axiom_tokens": 0,
+    "all_four_selected_dependency_pins_match_failed_receipt": true,
+    "compiled_here": false,
+    "independent_review": false
+  },
+  "scope": {
+    "S1": "Same nullPolarization applied to existing smooth compact g with existing axis cutoff; smoothness is proved.",
+    "S2": "Uniform delta>0 on tsupport g is derived from compactness and transverse cutoff.",
+    "S3": "Explicit inverse chart and zero extension; global smoothness and compact support are conclusions, constructing the Schwartz map.",
+    "same_h": "R2 preserves the original g used as an orbital a.e. representative of h. Moving h=ae g through the inverse chart is still S4; no new h, regularity-field or charge_link hypothesis is added."
+  },
+  "next_S4": {
+    "status": "OPEN_NOT_IMPLEMENTED",
+    "target": "QuasiMeasurePreserving (fun z : Transverse × Real => nullMomentumCoordinates z.1 z.2) ((volume : Measure Transverse).prod (volume.restrict (Ioi 0))) (orbitalMeasure 0)",
+    "construction": [
+      "Use longitudinal_null_lintegral and inverseLongitudinal_null at r=transverseMass 0 q, for a.e. q with r>0, then Tonelli and the orbital withDensity definition.",
+      "Identify pushforward of dq du/u on u>0 with orbitalMeasure 0; positivity of 1/u gives absolute continuity from dq du to the weighted measure.",
+      "Pull orbital h=ae g through that quasi-measure-preserving map and apply the R2 pointwise nullCoreSchwartzProfile_null equality to discharge NullSchwartzData.null_ae.",
+      "Use h=ae g, transverse-axis nullity, and nullCoreSchwartzProfile_orbital for orbital_ae on the same h."
+    ],
+    "anchors": [
+      {
+        "file": "NullFrequencyCoordinatesR3.lean",
+        "line": 50,
+        "declaration": "longitudinal_null_lintegral"
+      },
+      {
+        "file": "NullFrequencyBochnerR2.lean",
+        "line": 119,
+        "declaration": "nullMomentumCoordinates"
+      },
+      {
+        "file": "MaxwellNullSchwartzConsumerR2.lean",
+        "line": 82,
+        "declaration": "NullSchwartzData"
+      }
+    ]
+  },
+  "still_open": [
+    "S4 arbitrary orbital a.e. transport and S5 assembly of inhabited NullSchwartzData for same h",
+    "Strong H1 boost derivative on the resulting domain",
+    "Actual charge_link, nonzero modular energy, complete MaxwellCertificate and geometric source",
+    "R7 trace/PF input remains separate and open"
+  ],
+  "green_suppliers": [
+    {
+      "module": "MaxwellNullSchwartzConsumerR2",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T152225_637794Z\\RECEIPT.json",
+        "sha256": "55f8feff1c5deb7b0d7a1fa2f0b1f8bf5ce26219094955bd8897e37a062907e5",
+        "bytes": 121874
+      },
+      "exit_code": 0,
+      "seconds": 80.35806030000094
+    },
+    {
+      "module": "SmoothScreenDualTensorR5",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T031738_974582Z\\RECEIPT.json",
+        "sha256": "f404352152ef410ad57053e0862decd8aa2f312318a34586d37fcf027d475979",
+        "bytes": 8812
+      },
+      "exit_code": 0,
+      "seconds": 136.60312729999714
+    }
+  ],
+  "measured_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullSchwartzCoreTransportR1.lean",
+      "sha256": "a63751efe17cfaca8a8ed0948d11f27ccc5764ac8400ed175eb5341345c905fa",
+      "bytes": 13675
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullSchwartzCoreTransportR2.lean",
+      "sha256": "fcb5adc9b1bf05ae167a27d0b35419feb1ab363f8fdaae403e2236942fcde383",
+      "bytes": 14554
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T153954_162725Z\\RECEIPT.json",
+      "sha256": "4db1c48a68d367138ab708d7036efcbe5bd5f54460f90b1405b570bc5032d87f",
+      "bytes": 124265
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T153954_162725Z\\BUILD.log",
+      "sha256": "45ec9d00cb4c7f22ce290f6babd54a6d1ef45dc1f7f6926c7f1dc17b8d7925c3",
+      "bytes": 128847
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Normed\\Lp\\PiLp.lean",
+      "sha256": "c65b27c2a29c0cea06b953eb457ea526145c4ab8d3cceb542f7a670d382bc714",
+      "bytes": 57134
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\SmoothScreenDualTensorR5.lean",
+      "sha256": "714dcf9ec7a4f4cff0df65da3c09b5042ba7d6b1016968eec13eb754e9542d31",
+      "bytes": 3163
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullSchwartzConsumerR2.lean",
+      "sha256": "70524b1a7b6cee5435e5b5840172a20d729bbb60cf1b588b3ed250eacbdb73b5",
+      "bytes": 12668
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullFrequencyCoordinatesR3.lean",
+      "sha256": "ac1e97354b7ab15f831e227e785b30a7a493ab7c4b95cf91b7a9f311c8622f49",
+      "bytes": 2421
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullFrequencyBochnerR2.lean",
+      "sha256": "418edc14ba27630d692a8488aa603d9af837e2fe4ce09edc4734ac9a853e894c",
+      "bytes": 9284
+    }
+  ],
+  "verified_dependencies": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T152225_637794Z\\MaxwellNullSchwartzConsumerR2.olean",
+      "sha256": "b51a3d1250cfaa4bae8e23b88aad084a6608666053aaa0161bbc95b84ce14635",
+      "bytes": 607816
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T152225_637794Z\\MaxwellNullSchwartzConsumerR2.lean",
+      "sha256": "70524b1a7b6cee5435e5b5840172a20d729bbb60cf1b588b3ed250eacbdb73b5",
+      "bytes": 12668
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T031738_974582Z\\SmoothScreenDualTensorR5.olean",
+      "sha256": "775959e1aedddde09bb5031d0ddc0e26a53768a4798abc286e072ddcd4fae617",
+      "bytes": 681064
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T031738_974582Z\\SmoothScreenDualTensorR5.lean",
+      "sha256": "714dcf9ec7a4f4cff0df65da3c09b5042ba7d6b1016968eec13eb754e9542d31",
+      "bytes": 3163
+    }
+  ],
+  "restrictions_observed": [
+    "No compilation or provider call",
+    "No original source, mission state, memory, production or gate edits",
+    "No independent acceptance by this builder"
+  ]
+}

@@ -1,0 +1,72 @@
+import took 228s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T002423_865172Z\CoefficientGraphCoreR2.lean:41:10: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  InnerProductSpace ℝ (PairH H)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T002423_865172Z\CoefficientGraphCoreR2.lean:41:24: error: Application type mismatch: The argument
+  ContinuousLinearMap.restrictScalars ℝ (WithLp.fstL 2 ℂ H H)
+has type
+  @ContinuousLinearMap ℝ ℝ Real.semiring Real.semiring (RingHom.id ℝ) (WithLp 2 (H × H))
+    (WithLp.instProdTopologicalSpace 2 H H) (WithLp.instAddCommGroup 2 (H × H)).toAddCommMonoid H
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace inst✝².toAddCommMonoid (WithLp.instModule 2 ℝ (H × H))
+    NormedSpace.complexToReal.toModule
+but is expected to have type
+  @ContinuousLinearMap ℝ ℝ Real.semiring Real.semiring (RingHom.id ℝ) (PairH H)
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace (WithLp.instProdNormedAddCommGroup 2 H H).toAddCommMonoid ?m.50
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace NormedAddCommGroup.toAddCommGroup.toAddCommMonoid
+    InnerProductSpace.toNormedSpace.toModule InnerProductSpace.toNormedSpace.toModule
+in the application
+  interval_lift (ContinuousLinearMap.restrictScalars ℝ (WithLp.fstL 2 ℂ H H))
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T002423_865172Z\CoefficientGraphCoreR2.lean:45:6: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  InnerProductSpace ℝ (PairH H)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T002423_865172Z\CoefficientGraphCoreR2.lean:45:20: error: Application type mismatch: The argument
+  ContinuousLinearMap.restrictScalars ℝ (WithLp.sndL 2 ℂ H H)
+has type
+  @ContinuousLinearMap ℝ ℝ Real.semiring Real.semiring (RingHom.id ℝ) (WithLp 2 (H × H))
+    (WithLp.instProdTopologicalSpace 2 H H) (WithLp.instAddCommGroup 2 (H × H)).toAddCommMonoid H
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace inst✝².toAddCommMonoid (WithLp.instModule 2 ℝ (H × H))
+    NormedSpace.complexToReal.toModule
+but is expected to have type
+  @ContinuousLinearMap ℝ ℝ Real.semiring Real.semiring (RingHom.id ℝ) (PairH H)
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace (WithLp.instProdNormedAddCommGroup 2 H H).toAddCommMonoid ?m.119
+    PseudoMetricSpace.toUniformSpace.toTopologicalSpace NormedAddCommGroup.toAddCommGroup.toAddCommMonoid
+    InnerProductSpace.toNormedSpace.toModule InnerProductSpace.toNormedSpace.toModule
+in the application
+  interval_lift (ContinuousLinearMap.restrictScalars ℝ (WithLp.sndL 2 ℂ H H))
+tactic execution of Lean.Parser.Tactic.exact took 930ms
+tactic execution of Lean.Parser.Tactic.refine took 1.51s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T002423_865172Z\CoefficientGraphCoreR2.lean:48:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (1400000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+typeclass inference of LinearMap.CompatibleSMul took 146ms
+tactic execution of Lean.Parser.Tactic.refine took 55.2s
+elaboration took 512ms
+'F1Fecho.CoefficientGraphCore.interval_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.CoefficientGraphCore.decode_interval' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.CoefficientGraphCore.coefficient_mem_of_dense_intervals' does not depend on any axioms
+cumulative profiling times:
+	attribute application 0.0264ms
+	blocked (unaccounted) 57.3s
+	congr simp thm 0.427ms
+	dsimp 8.25ms
+	elaboration 588ms
+	fix level params 0.28ms
+	import 228s
+	initialization 35.2ms
+	instantiate metavars 0.343ms
+	interpretation 6.79s
+	let-to-have transformation 0.175ms
+	linting 6.01ms
+	overlappingInstancesLinter 38.4ms
+	parsing 2.99ms
+	process pre-definitions 1.89ms
+	share common exprs 1.55ms
+	simp 22.3ms
+	tactic execution 57.7s
+	tacticAnalysis 145ms
+	type checking 17.1ms
+	typeclass inference 2.05s

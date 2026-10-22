@@ -1,0 +1,51 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T223641_349066Z\WeylSegalDenseDomainR2.lean:33:4: error: 'change' tactic failed, pattern
+  synthesize c = ↑x
+is not definitionally equal to target
+  ↑(∑ g ∈ c.support, c g • y g) = ↑x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T223641_349066Z\WeylSegalDenseDomainR2.lean:38:4: error: Tactic `apply` failed: could not unify the conclusion of `@funext`
+  ?f = ?g
+with the goal
+  F.toAddCommGroup = lp.normedAddCommGroup.toAddCommGroup
+
+Note: The full type of `@funext` is
+  ∀ {α : Sort ?u.74} {β : α → Sort ?u.73} {f g : (x : α) → β x}, (∀ (x : α), f x = g x) → f = g
+
+case e'_4
+f : ↥H1
+x : ↥domain
+c : ↥H1 →₀ ℂ := preimage x
+y : ↥H1 → ↥domain := fun g => ⟨exponential g, ⋯⟩
+hy : ∑ g ∈ c.support, c g • y g = x
+hd :
+  HasDerivAt (fun y => ∑ i ∈ c.support, (c i • fun t => (FieldWeyl.W (↑t • f)) (exponential i)) y)
+    (∑ i ∈ c.support, c i • (Complex.I * ↑√2) • ↑(segal f) ⟨exponential i, ⋯⟩) 0
+⊢ F.toAddCommGroup = lp.normedAddCommGroup.toAddCommGroup
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T223641_349066Z\WeylSegalDenseDomainR2.lean:42:4: error: 'change' tactic failed, pattern
+  (Complex.I * ↑√2) • (segal f).toFun x = ?m.430
+is not definitionally equal to target
+  lp.instModuleSubtypePreLpMemAddSubgroup = lp.instNormedSpace.toModule
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T223641_349066Z\WeylSegalDenseDomainR2.lean:27:55: error: unsolved goals
+case e'_8
+f : ↥H1
+x : ↥domain
+c : ↥H1 →₀ ℂ := preimage x
+y : ↥H1 → ↥domain := fun g => ⟨exponential g, ⋯⟩
+hy : ∑ g ∈ c.support, c g • y g = x
+hd :
+  HasDerivAt (fun y => ∑ i ∈ c.support, (c i • fun t => (FieldWeyl.W (↑t • f)) (exponential i)) y)
+    (∑ i ∈ c.support, c i • (Complex.I * ↑√2) • ↑(segal f) ⟨exponential i, ⋯⟩) 0
+⊢ (fun t => (FieldWeyl.W (↑t • f)) ↑x) = fun y =>
+    ∑ i ∈ c.support, (c i • fun t => (FieldWeyl.W (↑t • f)) (exponential i)) y
+
+case e'_9
+f : ↥H1
+x : ↥domain
+c : ↥H1 →₀ ℂ := preimage x
+y : ↥H1 → ↥domain := fun g => ⟨exponential g, ⋯⟩
+hy : ∑ g ∈ c.support, c g • y g = x
+hd :
+  HasDerivAt (fun y => ∑ i ∈ c.support, (c i • fun t => (FieldWeyl.W (↑t • f)) (exponential i)) y)
+    (∑ i ∈ c.support, c i • (Complex.I * ↑√2) • ↑(segal f) ⟨exponential i, ⋯⟩) 0
+⊢ (Complex.I * ↑√2) • ↑(segal f) x = ∑ i ∈ c.support, c i • (Complex.I * ↑√2) • ↑(segal f) ⟨exponential i, ⋯⟩
+'F1Fecho.Creation.Weyl_preserves_domain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.Creation.Weyl_domain_hasDerivAt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

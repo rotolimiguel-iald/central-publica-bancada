@@ -1,0 +1,40 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim": 845,
+  "reviewer": "codex-root, independent of weight constructor",
+  "created_utc": "2026-10-15T20:35:53.170185+00:00",
+  "status": "PASS_WITH_SCOPE",
+  "kind": "SOURCE_SEMANTIC_REVIEW_NO_NEW_REBUILD",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\RegularCoreAverageR2.lean",
+      "sha256": "4a8a55ada15fa7d1cc9c0ec258609fd3a4ab38e6b601fbbebff77fdc7e2b1c9d",
+      "bytes": 5257
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\RegularCoreFiniteWeightR3.lean",
+      "sha256": "7bef0ea52e13f6ad0e9c89c8dc306f191f08d0c7fe8fabb9a36ef1916f580d1a",
+      "bytes": 7405
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\CanonicalFockFiniteWeightR4.lean",
+      "sha256": "5528af81e1e5f004d2e7cbbedcd0240a5453a9d1482d080090d7e73703fbacf8",
+      "bytes": 4686
+    }
+  ],
+  "construction_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\takesaki_fock\\FOCK_FINITE_WEIGHT_RECEIPT_R1.json",
+    "sha256": "2ec4667d88407b71cc98278f770e6f000bdac5638cdb796ccf7b2cd6d85bd76a",
+    "bytes": 2854
+  },
+  "findings": [],
+  "scope": [
+    "The generic average uses the existing regular unitary group and strong operator integral; bicommutant membership is inherited from the actual generated core. Strong convergence uses the fundamental theorem of calculus on vectors, not assumed operator norm continuity.",
+    "The norm and Fourier evaluation retain the h>0 premise and the original dual Haar normalization. Plancherel yields integral of the squared dual orbit =2pi/h times norm(v)^2, hence dualQuadraticIntegral=norm(v)^2/h.",
+    "The actual normalized regular Fock vacuum gives weight(averageSquare(1))=1. This supplies a nonzero finite positive input; the infinite unit is not passed off as finite.",
+    "The finite-square left ideal is closed under left multiplication and strongly dense by A*average(h) as h approaches zero from above. This statement is not a claim of norm density or trace cyclicity.",
+    "Order normality invokes the existing internal directed-supremum theorem on positive elements of the same core. No equality of this dual-invariant weight to the exp(-s) scaled trace is asserted."
+  ],
+  "production_modified": false,
+  "gate_moved": false
+}

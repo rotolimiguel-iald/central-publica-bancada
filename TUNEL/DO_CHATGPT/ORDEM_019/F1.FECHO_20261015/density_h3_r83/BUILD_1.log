@@ -1,0 +1,81 @@
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\density_h3_r83\NonminimalLocalDensityR83_1.lean:49:52: error: unsolved goals
+case e'_9
+U : Set Coordinate4
+hU : IsOpen U
+g h : TensorField4
+hg : SmoothMatrixOn U g
+hh : SmoothMatrixOn U h
+hi : ∀ x ∈ U, IsUnit (g x)
+x : Coordinate4
+hx : x ∈ U
+c0 xi : ℝ
+u : ℝ → ℝ
+du : ℝ
+hu : HasDerivAt u du 0
+Hv : HasDerivAt (fun t => metricVolumeDensity (g x + t • h x)) (metricVolumeDensity (g x) / 2 * (h x * (g x)⁻¹).trace) 0
+Hu : HasDerivAt (fun x => c0 + xi * u x) (xi * du) 0
+Hr :
+  HasDerivAt (fun t => coordinateScalarCurvature (perturbedMetricInverse g h t) (perturbedLeviCivita g h t) x)
+    (scalarMetricVariation g h x) 0
+⊢ metricVolumeDensity (g x) * (h x * (g x)⁻¹).trace * c0 *
+                coordinateScalarCurvature (fun y => (g y)⁻¹) (leviCivitaField g fun y => (g y)⁻¹) x *
+              (1 / 2) +
+            metricVolumeDensity (g x) * (h x * (g x)⁻¹).trace * xi * u 0 *
+                coordinateScalarCurvature (fun y => (g y)⁻¹) (leviCivitaField g fun y => (g y)⁻¹) x *
+              (1 / 2) +
+          metricVolumeDensity (g x) * c0 * scalarMetricVariation g h x +
+        metricVolumeDensity (g x) * xi * u 0 * scalarMetricVariation g h x +
+      metricVolumeDensity (g x) * xi *
+          coordinateScalarCurvature (fun y => (g y)⁻¹) (leviCivitaField g fun y => (g y)⁻¹) x *
+        du =
+    metricVolumeDensity (g x) * (h x * (g x)⁻¹).trace * c0 *
+              coordinateScalarCurvature (perturbedMetricInverse g h 0) (leviCivitaField g fun y => (g y)⁻¹) x *
+            (1 / 2) +
+          metricVolumeDensity (g x) * (h x * (g x)⁻¹).trace * xi * u 0 *
+              coordinateScalarCurvature (perturbedMetricInverse g h 0) (leviCivitaField g fun y => (g y)⁻¹) x *
+            (1 / 2) +
+        metricVolumeDensity (g x) * xi * du *
+          coordinateScalarCurvature (perturbedMetricInverse g h 0) (leviCivitaField g fun y => (g y)⁻¹) x +
+      scalarMetricVariation g h x * ((fun t => metricVolumeDensity (g x + t • h x)) * fun x => c0 + xi * u x) 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\density_h3_r83\NonminimalLocalDensityR83_1.lean:56:4: warning: This simp argument is unused:
+  perturbedMetricInverse
+
+Hint: Omit it from the simp argument list.
+  simp only [zero_smul, add_zero, perturbed_levi_civita_at_zero, p̵e̵r̵t̵u̵r̵b̵e̵d̵M̵e̵t̵r̵i̵c̵I̵n̵v̵e̵r̵s̵e̵,̵ ̵metricPerturbation]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\density_h3_r83\NonminimalLocalDensityR83_1.lean:56:28: warning: This simp argument is unused:
+  metricPerturbation
+
+Hint: Omit it from the simp argument list.
+  simp only [zero_smul, add_zero, perturbed_levi_civita_at_zero, p̵e̵r̵t̵u̵r̵b̵e̵d̵M̵e̵t̵r̵i̵c̵I̵n̵v̵e̵r̵s̵e̵,̵ ̵m̵e̵t̵r̵i̵c̵P̵e̵r̵t̵u̵r̵b̵a̵t̵i̵o̵n̵]̵p̲e̲r̲t̲u̲r̲b̲e̲d̲M̲e̲t̲r̲i̲c̲I̲n̲v̲e̲r̲s̲e̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'ChatgptAudit.NonminimalDensityR83.baseScalar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.NonminimalDensityR83.localDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.NonminimalDensityR83.densityDerivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.NonminimalDensityR83.local_density_first_variation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.NonminimalDensityR83.constant_scalar_first_variation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.NonminimalDensityR83.covector_norm_first_variation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.NonminimalDensityR83.with_scalar_matter_first_variation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+
+STDERR:
+

@@ -1,0 +1,169 @@
+[
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedFisherLorentzMetric.lean",
+    "sha256": "346db9497cbebf1824b279972d2cc342abed90b9df13874d439ffd7737533a3d",
+    "excerpts": [
+      {
+        "start": 39,
+        "end": 43,
+        "text": "39: def reflectedMetric (F : Tensor4) (c : Coordinate4) : Tensor4 :=\n40:   (2 / tensorQuad F⁻¹ c) • vecMulVec c c - F\n41: \n42: def reflectedInverse (F : Tensor4) (c : Coordinate4) : Tensor4 :=\n43:   (2 / tensorQuad F⁻¹ c) • vecMulVec (F⁻¹ *ᵥ c) (F⁻¹ *ᵥ c) - F⁻¹"
+      },
+      {
+        "start": 243,
+        "end": 261,
+        "text": "243: structure SelectedProbabilityData (ι : Type) [Fintype ι] (U : Set Coordinate4) where\n244:   probabilities : Coordinate4 → ι → ℝ\n245:   normalized : ∀ x, ∑ i, probabilities x i=1\n246:   positive : ∀ x∈U, ∀ i, 0<probabilities x i\n247:   smooth : ∀ i, ContDiffOn ℝ ∞ (fun x => probabilities x i) U\n248:   differential_injective : ∀ x∈U, Function.Injective (directionalVariation probabilities x)\n249:   selected : ι\n250:   clock_nonzero : ∀ x∈U, probabilityDifferential probabilities x selected≠0\n251: \n252: variable {ι : Type} [Fintype ι] {U : Set Coordinate4}\n253: \n254: def selectedFisher (P : SelectedProbabilityData ι U) : TensorField4 :=\n255:   fisherTensorField P.probabilities\n256: \n257: def selectedClock (P : SelectedProbabilityData ι U) : CovectorField4 :=\n258:   fun x => probabilityDifferential P.probabilities x P.selected\n259: \n260: def selectedMetric (P : SelectedProbabilityData ι U) : TensorField4 :=\n261:   fun x => reflectedMetric (selectedFisher P x) (selectedClock P x)"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedProbabilitySigma.lean",
+    "sha256": "889e6c7dc0564ad7dcaf787e922b48744130d6b6b083e043bab661045bf167b7",
+    "excerpts": [
+      {
+        "start": 44,
+        "end": 51,
+        "text": "44: def conditionalProbability (P : SelectedProbabilityData (Option J) U) (j : J) (x : Coordinate4) : ℝ :=\n45:   P.probabilities x (some j)/selectedComplement P x\n46: \n47: def sigmaPotential (P : SelectedProbabilityData (Option J) U) (j : J) (x : Coordinate4) : ℝ :=\n48:   Real.sqrt (conditionalProbability P j x)\n49: \n50: def sigmaCovectors (P : SelectedProbabilityData (Option J) U) : J → CovectorField4 :=\n51:   potentialFamily (sigmaPotential P)"
+      },
+      {
+        "start": 104,
+        "end": 108,
+        "text": "104: theorem sigma_potential_normalized (P : SelectedProbabilityData (Option J) U)\n105:     (hsel : P.selected=none) (x : Coordinate4) (hx : x∈U) :\n106:     ∑ j, (sigmaPotential P j x)^2=1 := by\n107:   simp_rw [sigma_potential_square P hsel _ x hx]\n108:   exact conditional_probability_normalized P hsel x hx"
+      },
+      {
+        "start": 132,
+        "end": 150,
+        "text": "132: /-- Geometry and sigma probes are both derived from P before imposing field/area equations. -/\n133: def selectedSigmaRecord (P : SelectedProbabilityData (Option J) U)\n134:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) : GravitationalResponseRecord U :=\n135:   sigmaGibbsRecord hU (selectedLorentzRecord P hU)\n136:     (sigmaPotential P) (sigma_potential_smooth P hsel) k\n137: \n138: theorem selected_sigma_metric (P : SelectedProbabilityData (Option J) U)\n139:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) :\n140:     recordMetric (selectedSigmaRecord P hsel hU k)=selectedMetric P :=\n141:   selected_record_decodes_derived_metric P hU\n142: \n143: theorem selected_sigma_source (P : SelectedProbabilityData (Option J) U)\n144:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) (hk : 0<k) :\n145:     recordSource (selectedSigmaRecord P hsel hU k)=\n146:       finiteCovectorStressField (selectedMetric P) (metricInverse (selectedMetric P))\n147:         (sigmaCovectors P) (fun _ => 1) (fun _ => k/(Real.pi*Real.cosh k^2)) := by\n148:   have h := sigma_gibbs_source hU (selectedLorentzRecord P hU)\n149:     (sigmaPotential P) (sigma_potential_smooth P hsel) k hk\n150:   simpa only [selectedSigmaRecord,sigmaCovectors,selected_record_decodes_derived_metric] using h"
+      },
+      {
+        "start": 170,
+        "end": 218,
+        "text": "170: /-- The sigma equations are a condition on P; conservation is derived, not a second input. -/\n171: theorem selected_sigma_conserved (P : SelectedProbabilityData (Option J) U)\n172:     (hsel : P.selected=none) (hU : IsOpen U) (k : ℝ) (hk : 0<k)\n173:     (lambda : Coordinate4 → ℝ)\n174:     (heigen : ∀ j, ∀ x∈U, covectorDivergence (metricInverse (selectedMetric P))\n175:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P)))\n176:       (sigmaCovectors P j) x=lambda x*sigmaPotential P j x) :\n177:     ∀ x∈U, ∀ i, tensorFieldDivergence (metricInverse (selectedMetric P))\n178:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P)))\n179:       (recordSource (selectedSigmaRecord P hsel hU k)) x i=0 := by\n180:   have hh : ∀ j, ∀ x∈U, covectorDivergence\n181:       (metricInverse (decodeRecord (selectedLorentzRecord P hU).data))\n182:       (leviCivitaField (decodeRecord (selectedLorentzRecord P hU).data)\n183:         (metricInverse (decodeRecord (selectedLorentzRecord P hU).data)))\n184:       (potentialFamily (sigmaPotential P) j) x=lambda x*sigmaPotential P j x := by\n185:     simpa only [selected_record_decodes_derived_metric,sigmaCovectors] using heigen\n186:   have h := sigma_gibbs_conserved hU (selectedLorentzRecord P hU)\n187:     (sigmaPotential P) (sigma_potential_smooth P hsel)\n188:     (sigma_potential_normalized P hsel) lambda k hk hh\n189:   simpa only [selectedSigmaRecord,selected_record_decodes_derived_metric] using h\n190: \n191: /-- Area matching remains an explicit postulate of physical correspondence. -/\n192: theorem selected_sigma_einstein_from_area\n193:     (P : SelectedProbabilityData (Option J) U) (hsel : P.selected=none)\n194:     (hU : IsOpen U) (hconn : IsPreconnected U) (k : ℝ) (hk : 0<k)\n195:     (lambda : Coordinate4 → ℝ)\n196:     (heigen : ∀ j, ∀ x∈U, covectorDivergence (metricInverse (selectedMetric P))\n197:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P)))\n198:       (sigmaCovectors P j) x=lambda x*sigmaPotential P j x)\n199:     (screens : MetricScreenFamily U (recordMetric (selectedSigmaRecord P hsel hU k)))\n200:     (eta : ℝ) (heta : eta≠0)\n201:     (harea : ∀ x (hx : x∈U) v (hv : v≠0)\n202:       (hn : tensorQuad (recordMetric (selectedSigmaRecord P hsel hU k) x) v=0),\n203:       Tendsto (fun t => (gibbsEntropyIncrement (fun _ : J => k) (fun j => sigmaCovectors P j x) v t-eta*\n204:         (inducedArea (recordMetric (selectedSigmaRecord P hsel hU k)) (screens x hx v hv hn).curve\n205:           (screens x hx v hv hn).screen.vectors t-\n206:          inducedArea (recordMetric (selectedSigmaRecord P hsel hU k)) (screens x hx v hv hn).curve\n207:           (screens x hx v hv hn).screen.vectors 0))/t^2) (𝓝[<] (0:ℝ)) (𝓝 0)) :\n208:     ∃ cosmological : ℝ, ∀ x∈U,\n209:       geometricEinsteinTensor (selectedMetric P) (metricInverse (selectedMetric P))\n210:         (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P))) x +\n211:         cosmological • selectedMetric P x =\n212:           (2*Real.pi/eta) • recordSource (selectedSigmaRecord P hsel hU k) x := by\n213:   have h : ∃ cosmological : ℝ, ∀ x∈U,\n214:       geometricEinsteinTensor (recordMetric (selectedSigmaRecord P hsel hU k))\n215:         (metricInverse (recordMetric (selectedSigmaRecord P hsel hU k)))\n216:         (leviCivitaField (recordMetric (selectedSigmaRecord P hsel hU k))\n217:           (metricInverse (recordMetric (selectedSigmaRecord P hsel hU k)))) x +\n218:         cosmological • recordMetric (selectedSigmaRecord P hsel hU k) x ="
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\SelectedFisherGibbsBridge.lean",
+    "sha256": "c84db761541c7fec5cc7f4713305c315810a323a04827f819bfe3f2d4f7f4ff6",
+    "excerpts": [
+      {
+        "start": 41,
+        "end": 70,
+        "text": "41: /-- The source covectors are derivatives of the same input probability observations. -/\n42: def probabilityCovectors (P : SelectedProbabilityData ι U) : ι → CovectorField4 :=\n43:   fun i => potentialCovector (fun x => P.probabilities x i)\n44: \n45: theorem probability_covectors_smooth (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n46:     (i : ι) : SmoothVectorOn U (probabilityCovectors P i) :=\n47:   potential_covector_smooth U hU _ (P.smooth i)\n48: \n49: theorem probability_covectors_closed (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n50:     (i : ι) : ClosedCovectorOn U (probabilityCovectors P i) :=\n51:   potential_covector_closed U hU _ (P.smooth i)\n52: \n53: /-- Both metric and source probes are constructed from P before any balance law is imposed. -/\n54: def selectedGibbsRecord (P : SelectedProbabilityData ι U) (hU : IsOpen U) (k : ι → ℝ) :\n55:     GravitationalResponseRecord U :=\n56:   gibbsRecord (selectedLorentzRecord P hU) k (probabilityCovectors P)\n57:     (probability_covectors_smooth P hU)\n58: \n59: theorem selected_gibbs_metric (P : SelectedProbabilityData ι U) (hU : IsOpen U) (k : ι → ℝ) :\n60:     recordMetric (selectedGibbsRecord P hU k)=selectedMetric P :=\n61:   selected_record_decodes_derived_metric P hU\n62: \n63: theorem selected_gibbs_source (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n64:     (k : ι → ℝ) (hk : ∀ i, 0<k i) :\n65:     recordSource (selectedGibbsRecord P hU k)=\n66:       finiteCovectorStressField (selectedMetric P) (metricInverse (selectedMetric P))\n67:         (probabilityCovectors P) (fun _ => 1) (fun i => k i/(Real.pi*Real.cosh (k i)^2)) := by\n68:   have h := gibbs_record_source (selectedLorentzRecord P hU) k hk\n69:     (probabilityCovectors P) (probability_covectors_smooth P hU)\n70:   simpa only [selectedGibbsRecord,selected_record_decodes_derived_metric] using h"
+      },
+      {
+        "start": 91,
+        "end": 114,
+        "text": "91: theorem selected_gibbs_source_conserved (P : SelectedProbabilityData ι U) (hU : IsOpen U)\n92:     (k : ι → ℝ)\n93:     (hwave : ∀ i, CovectorWaveOn U (metricInverse (selectedMetric P))\n94:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P))) (probabilityCovectors P i)) :\n95:     ∀ x∈U, ∀ j, tensorFieldDivergence (metricInverse (recordMetric (selectedGibbsRecord P hU k)))\n96:       (leviCivitaField (recordMetric (selectedGibbsRecord P hU k))\n97:         (metricInverse (recordMetric (selectedGibbsRecord P hU k))))\n98:       (recordSource (selectedGibbsRecord P hU k)) x j=0 := by\n99:   apply probe_record_conserved hU (selectedLorentzRecord P hU) (fun i => gibbsSlope (k i))\n100:     (probabilityCovectors P) (probability_covectors_smooth P hU) (probability_covectors_closed P hU)\n101:   simpa only [selected_record_decodes_derived_metric] using hwave\n102: \n103: /-- Conditional Einstein equation for data P. This is not variation of an action in P. -/\n104: theorem selected_gibbs_einstein_from_wave_area\n105:     (P : SelectedProbabilityData ι U) (hU : IsOpen U) (hconn : IsPreconnected U)\n106:     (k : ι → ℝ) (hk : ∀ i, 0<k i)\n107:     (hwave : ∀ i, CovectorWaveOn U (metricInverse (selectedMetric P))\n108:       (leviCivitaField (selectedMetric P) (metricInverse (selectedMetric P))) (probabilityCovectors P i))\n109:     (screens : MetricScreenFamily U (recordMetric (selectedGibbsRecord P hU k)))\n110:     (eta : ℝ) (heta : eta≠0)\n111:     (harea : ∀ x (hx : x∈U) v (hv : v≠0)\n112:       (hn : tensorQuad (recordMetric (selectedGibbsRecord P hU k) x) v=0),\n113:       Tendsto (fun t => (gibbsEntropyIncrement k (fun i => probabilityCovectors P i x) v t-eta*\n114:         (inducedArea (recordMetric (selectedGibbsRecord P hU k)) (screens x hx v hv hn).curve"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\FisherInformationTensor.lean",
+    "sha256": "cd8e3fc1c0cdf003a2d26e5457874de490a421ca8a24c61b72e83d65a08eab0e",
+    "excerpts": [
+      {
+        "start": 41,
+        "end": 60,
+        "text": "41: def fisherTensorAt (p : ι → ℝ) (dp : ι → Coordinate4) : Tensor4 :=\n42:   ∑ i, (p i)⁻¹ • Matrix.vecMulVec (dp i) (dp i)\n43: \n44: /-- Actual coordinate differential of the probability field. -/\n45: def probabilityDifferential (P : Coordinate4 → ι → ℝ) (x : Coordinate4) (i : ι) : Coordinate4 :=\n46:   potentialCovector (fun y => P y i) x\n47: \n48: def directionalVariation (P : Coordinate4 → ι → ℝ) (x v : Coordinate4) : ι → ℝ :=\n49:   fun i => covectorRead (probabilityDifferential P x i) v\n50: \n51: def fisherTensorField (P : Coordinate4 → ι → ℝ) : TensorField4 :=\n52:   fun x => fisherTensorAt (P x) (probabilityDifferential P x)\n53: \n54: theorem fisher_tensor_entries (p : ι → ℝ) (dp : ι → Coordinate4) (a b : Fin 4) :\n55:     fisherTensorAt p dp a b = ∑ i, dp i a * dp i b / p i := by\n56:   simp only [fisherTensorAt, Matrix.sum_apply, Matrix.smul_apply, Matrix.vecMulVec,\n57:     Matrix.of_apply, smul_eq_mul]\n58:   apply Finset.sum_congr rfl\n59:   intro i _\n60:   ring"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\FiniteCoherentSources.lean",
+    "sha256": "4b71fe49ae505d3017a3c2d05395de95f6c64f9630ea27c56de8ed024d94416b",
+    "excerpts": [
+      {
+        "start": 72,
+        "end": 74,
+        "text": "72: def finiteCovectorStressField (g gInv : TensorField4) (w : J → CovectorField4)\n73:     (weight coupling : J → ℝ) : TensorField4 :=\n74:   fun x => ∑ q, weight q • covectorStressField g gInv (w q) (coupling q) x"
+      },
+      {
+        "start": 94,
+        "end": 112,
+        "text": "94:         ((covectorRead (w q x) d)^2 -\n95:           (tensorQuad (gInv x) (w q x)/2)*tensorQuad (g x) d) := by\n96:   simp only [finiteCovectorStressField, tensorQuad, Matrix.sum_mulVec, dotProduct_sum,\n97:     Matrix.smul_mulVec, dotProduct_smul, smul_eq_mul]\n98:   change (∑ q, weight q * tensorQuad\n99:     (covectorStress (g x) (gInv x) (w q x) (coupling q)) d) = _\n100:   simp only [covector_stress_quad]\n101:   apply Finset.sum_congr rfl\n102:   intro q _\n103:   dsimp only [tensorQuad]\n104:   ring\n105: \n106: theorem finite_covector_stress_null (g gInv : TensorField4) (w : J → CovectorField4)\n107:     (weight coupling : J → ℝ) (x d : Coordinate4)\n108:     (hn : tensorQuad (g x) d = 0) :\n109:     tensorQuad (finiteCovectorStressField g gInv w weight coupling x) d =\n110:       ∑ q, weight q * coupling q * (covectorRead (w q x) d)^2 := by\n111:   rw [finite_covector_stress_quad]\n112:   simp only [hn, mul_zero, sub_zero]"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\CurvatureJetAlgebra.lean",
+    "sha256": "85287748b45debe315c72f1154d28875e3bd200763f5454ba3d5fde63ac74004",
+    "excerpts": [
+      {
+        "start": 27,
+        "end": 29,
+        "text": "27: def connectionCurvatureJet (Gamma : ConnectionMatrix4) (dGamma : ConnectionDerivative4)\n28:     (i j : Fin 4) : Matrix (Fin 4) (Fin 4) ℝ :=\n29:   dGamma i j-dGamma j i+Gamma i*Gamma j-Gamma j*Gamma i"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\CoordinateCurvature.lean",
+    "sha256": "8a3af4a1c80c18f4670377ab35ab6e661b724120a359a3150c9b68e30024e68a",
+    "excerpts": [
+      {
+        "start": 28,
+        "end": 37,
+        "text": "28:   ∀ i, SmoothMatrixOn U (fun x => Gamma x i)\n29: \n30: def connectionFirstJet (Gamma : ConnectionField4) (x : Coordinate4) : ConnectionDerivative4 :=\n31:   fun i j => tensorFieldJet (fun y => Gamma y j) x i\n32: \n33: def connectionSecondJet (Gamma : ConnectionField4) (x : Coordinate4) : ConnectionSecondDerivative4 :=\n34:   fun k i j => tensorFieldJet (fun y => connectionFirstJet Gamma y i j) x k\n35: \n36: def coordinateCurvature (Gamma : ConnectionField4) (x : Coordinate4) (i j : Fin 4) :\n37:     Matrix (Fin 4) (Fin 4) ℝ := connectionCurvatureJet (Gamma x) (connectionFirstJet Gamma x) i j"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\MetricCurvatureSymmetries.lean",
+    "sha256": "6070daffdf63f24ee64157c11da8cbcf43765b6ce2c42069780a09b140064db7",
+    "excerpts": [
+      {
+        "start": 31,
+        "end": 39,
+        "text": "31: def coordinateRicci (Gamma : ConnectionField4) (x : Coordinate4) : Matrix (Fin 4) (Fin 4) ℝ :=\n32:   fun b j => ∑ a, coordinateCurvature Gamma x a j a b\n33: \n34: def coordinateScalarCurvature (gInv : TensorField4) (Gamma : ConnectionField4) (x : Coordinate4) : ℝ :=\n35:   ∑ i, ∑ j, gInv x i j*coordinateRicci Gamma x i j\n36: \n37: def geometricEinsteinTensor (g gInv : TensorField4) (Gamma : ConnectionField4) (x : Coordinate4) :\n38:     Matrix (Fin 4) (Fin 4) ℝ :=\n39:   coordinateRicci Gamma x-(coordinateScalarCurvature gInv Gamma x/2) • g x"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\VariationalInhabitant.lean",
+    "sha256": "2af4afbc660fdd9c1ca9f8c66a8ad073fbea252949d64b503ed2e8cb81b6c27e",
+    "excerpts": [
+      {
+        "start": 15,
+        "end": 24,
+        "text": "15: \n16: * ★ **O GIBBS É O PONTO CRÍTICO DE LEGENDRE** (`gibbs_is_critical`): para\n17:   pesos de Gibbs `pᵢ = e^{−hᵢ}/Z`, a derivada da ENERGIA LIVRE\n18:   `F(ε) = S(p+εq) − ⟨h⟩_{p+εq}` é ZERO em ε = 0 para TODA perturbação de\n19:   traço zero — o habitante é caracterizado pelo MOVIMENTO (a variação),\n20:   não pelo léxico (composição da primeira lei v51 com o termo linear);\n21: * ★ **E SÓ O GIBBS** (`critical_iff_gibbs`): se a variação de F anula\n22:   para TODA direção de traço zero, então `log pᵢ + hᵢ` é CONSTANTE — os\n23:   pesos são Gibbs. Criticalidade ⟺ KMS, com UNICIDADE (a face finita da\n24:   ergodicidade que a Pergunta Id pedia);"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\VariationalFlow.lean",
+    "sha256": "061b6d105f0792ba86d64e5f888993d5e166087ebc7890ad8398204d812d36e8",
+    "excerpts": [
+      {
+        "start": 28,
+        "end": 30,
+        "text": "28: def variationalDomain (Q : Set E) : Set (VariationalState E) := {z | z.1∈Q}\n29: \n30: def variationalField (f : E → E) (z : VariationalState E) : VariationalState E :="
+      },
+      {
+        "start": 47,
+        "end": 53,
+        "text": "47: def variationalLocalFlow (Q : Set E) (hQ : IsOpen Q)\n48:     (f : E → E) (hf : ContDiffOn ℝ ∞ f Q) (p : E) (hp : p∈Q) :\n49:     LipschitzLocalFlow (variationalField f) (variationalDomain Q) (p,ContinuousLinearMap.id ℝ E) :=\n50:   lipschitzLocalFlow (variationalDomain Q) (variational_domain_open Q hQ)\n51:     (variationalField f) (p,ContinuousLinearMap.id ℝ E) hp\n52:     ((((variational_field_smooth Q hQ f hf) (p,ContinuousLinearMap.id ℝ E) hp).contDiffAt\n53:       ((variational_domain_open Q hQ).mem_nhds hp)).of_le (by simp))"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheSameBetaReadsFourFaces.lean",
+    "sha256": "bf70420d7b6fdf3ad7a7cc501210986f84d7e67d5a2194b6fffc21312cf9c570",
+    "excerpts": [
+      {
+        "start": 20,
+        "end": 42,
+        "text": "20: structure ActionCouplingData (X : Type*) where\n21:   boxOperator : (X → ℂ) →ₗ[ℝ] (X → ℂ)\n22:   mass : ℝ\n23:   xi : ℝ\n24:   scalarCurvature : X → ℝ\n25:   K_boundary : (X → ℂ) →ₗ[ℝ] (X → ℂ)\n26: \n27: namespace ActionCouplingData\n28: noncomputable section\n29: variable {X : Type*}\n30: \n31: def curvatureTerm (D : ActionCouplingData X) (psi : X → ℂ) : X → ℂ :=\n32:   fun x => D.scalarCurvature x • psi x\n33: \n34: def fieldOperator (D : ActionCouplingData X) (psi : X → ℂ) : X → ℂ :=\n35:   D.boxOperator psi - D.mass ^ 2 • psi - D.xi • D.curvatureTerm psi\n36: \n37: def modularSource (D : ActionCouplingData X) (c : TGLCoupling)\n38:     (psi : X → ℂ) : X → ℂ := c.beta • D.K_boundary psi\n39: \n40: /-- INPUT: the field equation; the data structure alone does not supply it. -/\n41: def EOM (D : ActionCouplingData X) (c : TGLCoupling) (psi : X → ℂ) : Prop :=\n42:   D.fieldOperator psi = D.modularSource c psi"
+      }
+    ]
+  },
+  {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ActionCouplingControls.lean",
+    "sha256": "7be4b6cf1726d3e068fa7bc515901ce8e6b4873de7f6775c05f5bb67cb6876e1",
+    "excerpts": [
+      {
+        "start": 41,
+        "end": 55,
+        "text": "41: \n42: /-- Same data shape and nonzero source, but a different box gain refutes EOM. -/\n43: theorem scalar_model_rejects_wrong_gain (c : TGLCoupling) (xi gain : ℝ)\n44:     (hg : gain ≠ c.beta) : ¬ (scalarModel xi gain).EOM c unitSection := by\n45:   intro h\n46:   have heq : gain • unitSection = c.beta • unitSection :=\n47:     (scalar_model_field xi gain).symm.trans h\n48:   exact hg (smul_left_injective ℝ unitSection_ne_zero heq)\n49: \n50: /-- In particular the three readings and the operator data do not supply EOM. -/\n51: theorem data_alone_does_not_supply_eom (c : TGLCoupling) (xi : ℝ) :\n52:     ¬ (scalarModel xi (-c.beta)).EOM c unitSection := by\n53:   apply scalar_model_rejects_wrong_gain\n54:   linarith [c.beta_pos]\n55: "
+      }
+    ]
+  }
+]

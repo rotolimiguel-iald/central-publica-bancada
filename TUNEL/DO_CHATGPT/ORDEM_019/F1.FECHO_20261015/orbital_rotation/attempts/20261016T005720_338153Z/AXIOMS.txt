@@ -1,0 +1,50 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005720_338153Z\MaxwellStripCoefficientR4.lean:91:87: error: unsolved goals
+q : Fin 2 → ℝ
+hq : q ≠ 0
+f : SchwartzTensor
+hf : IsRealTest f
+j : Fin 2
+r : ℝ
+hn : -q ≠ 0
+hterm :
+  ∀ (μ ν : Fin 4),
+    analyticStrength q j μ ν (↑r - Complex.I * ↑Real.pi) *
+        scalarLaplace (transverseMass 0 q) (q 0) (q 1) (componentTest f μ ν) (↑r - Complex.I * ↑Real.pi) =
+      star
+        (analyticStrength (-q) j μ ν ↑r *
+          scalarLaplace (transverseMass 0 (-q)) ((-q) 0) ((-q) 1) (componentTest f μ ν) ↑r)
+⊢ 1 / 2 *
+      ∑ x,
+        ∑ x_1,
+          (starRingEnd ℂ) (analyticStrength (-q) j x x_1 ↑r) *
+            (starRingEnd ℂ) (scalarLaplace (transverseMass 0 (-q)) ((-q) 0) ((-q) 1) (componentTest f x x_1) ↑r) =
+    (starRingEnd ℂ) (1 / 2) *
+      ∑ x,
+        ∑ x_1,
+          (starRingEnd ℂ) (analyticStrength (-q) j x x_1 ↑r) *
+            (starRingEnd ℂ) (scalarLaplace (transverseMass 0 (-q)) ((-q) 0) ((-q) 1) (componentTest f x x_1) ↑r)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005720_338153Z\MaxwellStripCoefficientR4.lean:104:46: warning: This simp argument is unused:
+  map_div
+
+Hint: Omit it from the simp argument list.
+  simp only [Complex.star_def, ̲map_mul, ̲map_sum, ̲map_d̵i̵v̵,̵m̵a̵p̵_̵one, ̲map_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005720_338153Z\MaxwellStripCoefficientR4.lean:104:54: warning: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [Complex.star_def, ̲map_mul, ̲map_sum, ̲map_div, ̲map_on̵e̵,̵m̵a̵p̵_̵o̵fNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T005720_338153Z\MaxwellStripCoefficientR4.lean:104:62: warning: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [̵C̵o̵m̵p̵l̵e̵x̵.̵s̵t̵a̵r̵_̵d̵e̵f̵,̵m̵a̵p̵_̵m̵u̵l̵,̵m̵a̵p̵_̵s̵u̵m̵,̵m̵a̵p̵_̵d̵i̵v̵,̵m̵a̵p̵_̵o̵n̵e̵,̵m̵a̵p̵_̵o̵f̵N̵a̵t̵]̵[̲C̲o̲m̲p̲l̲e̲x̲.̲s̲t̲a̲r̲_̲d̲e̲f̲,̲ ̲m̲a̲p̲_̲m̲u̲l̲,̲ ̲m̲a̲p̲_̲s̲u̲m̲,̲ ̲m̲a̲p̲_̲d̲i̲v̲,̲ ̲m̲a̲p̲_̲o̲n̲e̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.MaxwellStrip.maxwellLaplace_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_differentiable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_lower_real' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

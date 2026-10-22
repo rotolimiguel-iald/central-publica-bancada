@@ -1,0 +1,72 @@
+{
+  "source_id": "calibration_readme",
+  "DCC_document": "LIGO-T2500288-v5",
+  "document_url": "https://dcc.ligo-wa.caltech.edu/LIGO-T2500288/public",
+  "readme_version_url": "https://dcc.ligo-wa.caltech.edu/public/0202/T2500288/005/README.txt",
+  "archive_names_documented": [
+    "LIGO_O4a_cal_uncertainty.tgz",
+    "LIGO_O4b_cal_uncertainty.tgz"
+  ],
+  "archives_fetched_or_opened": false,
+  "exact_archive_payload_hashes": null,
+  "filename_pattern_only": "calibration_uncertainty_[IFO]_[GPS].txt",
+  "IFO": [
+    "H1",
+    "L1"
+  ],
+  "documented_cadence": "hourly",
+  "epoch_rule": "nearest GPS to analyzed event",
+  "event_exact_member_names": null,
+  "documented_valid_frequency_range_hz": [
+    10,
+    5000
+  ],
+  "columns_zero_based": [
+    {
+      "i": 0,
+      "quantity": "frequency",
+      "unit": "Hz"
+    },
+    {
+      "i": 1,
+      "quantity": "median magnitude R_true/R_model",
+      "unit": "dimensionless ratio"
+    },
+    {
+      "i": 2,
+      "quantity": "median phase R_true/R_model",
+      "unit": "rad"
+    },
+    {
+      "i": 3,
+      "quantity": "lower -1 sigma magnitude boundary",
+      "unit": "dimensionless ratio"
+    },
+    {
+      "i": 4,
+      "quantity": "lower -1 sigma phase boundary",
+      "unit": "rad"
+    },
+    {
+      "i": 5,
+      "quantity": "upper +1 sigma magnitude boundary",
+      "unit": "dimensionless ratio"
+    },
+    {
+      "i": 6,
+      "quantity": "upper +1 sigma phase boundary",
+      "unit": "rad"
+    }
+  ],
+  "convention": "Complex multiplicative response ratio R_true/R_model; median magnitude near 1, not fractional error near 0. The documented systematic estimate remains uncorrected in released strain.",
+  "not_established": [
+    "A complete covariance across frequency/detectors",
+    "Gaussianity or independence of envelope columns",
+    "Actual envelopes for each selected file/detector/label",
+    "Per-file GPS coverage/gaps and exact frequency grids"
+  ],
+  "low_latency_warning": "Preliminary low-latency PE envelopes are a distinct product; do not substitute automatically.",
+  "historical_link_warning": "README points to record16053484 as an example; it does not replace the pinned17602505 release.",
+  "literal_date_warning": "README O4b prose ends January28,2024 after April10,2024; chronological typo preserved as source defect. No GPS/event reconciliation attempted; use explicit release/epochs after separate verification.",
+  "frequency_scope_note": "10–5000Hz describes calibration, not the admissible bandwidth of 4096Hz strain. O4 technical docs recommend16384Hz data around1700Hz and above. No band or sampling policy changed."
+}

@@ -1,0 +1,83 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:18:2: error: Type mismatch
+  ContinuousLinearMap.proj ν ∘SL ?m.52
+has type
+  ?m.32 →SL[?m.31] ?m.19 ν
+but is expected to have type
+  TensorValue →L[ℂ] ℂ
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:23:0: error: Not a definitional equality: the left-hand side
+  (componentTest f μ ν) x
+is not definitionally equal to the right-hand side
+  f x μ ν
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:24:37: error: Type mismatch
+  rfl
+has type
+  ?m.9 = ?m.9
+but is expected to have type
+  (componentTest f μ ν) x = f x μ ν
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:27:49: error: Type mismatch
+  hf x μ ν
+has type
+  (f x μ ν).im = 0
+but is expected to have type
+  ((componentTest f μ ν) x).im = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:51:2: error: Tactic `rfl` failed: The left-hand side
+  ((postcompCLM (componentProjection μ ν)) (𝓕⁻ f)) ((2 * Real.pi)⁻¹ • metricFlip (shellEmbedding (rapidityChart 0 y)))
+is not definitionally equal to the right-hand side
+  (physicalFourierCLM f) (shellEmbedding (rapidityChart 0 y)) μ ν
+
+y : MomentumCoordinates
+hy : y.1 ≠ 0
+f : SchwartzTensor
+μ ν : Fin 4
+⊢ ((postcompCLM (componentProjection μ ν)) (𝓕⁻ f)) ((2 * Real.pi)⁻¹ • metricFlip (shellEmbedding (rapidityChart 0 y))) =
+    (physicalFourierCLM f) (shellEmbedding (rapidityChart 0 y)) μ ν
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:90:87: error: unsolved goals
+q : Fin 2 → ℝ
+hq : q ≠ 0
+f : SchwartzTensor
+hf : IsRealTest f
+j : Fin 2
+r : ℝ
+hn : -q ≠ 0
+hterm :
+  ∀ (μ ν : Fin 4),
+    analyticStrength q j μ ν (↑r - Complex.I * ↑Real.pi) *
+        scalarLaplace (transverseMass 0 q) (q 0) (q 1) (componentTest f μ ν) (↑r - Complex.I * ↑Real.pi) =
+      star
+        (analyticStrength (-q) j μ ν ↑r *
+          scalarLaplace (transverseMass 0 (-q)) ((-q) 0) ((-q) 1) (componentTest f μ ν) ↑r)
+⊢ 1 / 2 *
+      ∑ x,
+        ∑ x_1,
+          (starRingEnd ℂ) (analyticStrength (-q) j x x_1 ↑r) *
+            (starRingEnd ℂ) (scalarLaplace (transverseMass 0 (-q)) ((-q) 0) ((-q) 1) (componentTest f x x_1) ↑r) =
+    (starRingEnd ℂ) (1 / 2) *
+      ∑ x,
+        ∑ x_1,
+          (starRingEnd ℂ) (analyticStrength (-q) j x x_1 ↑r) *
+            (starRingEnd ℂ) (scalarLaplace (transverseMass 0 (-q)) ((-q) 0) ((-q) 1) (componentTest f x x_1) ↑r)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:103:46: warning: This simp argument is unused:
+  map_div
+
+Hint: Omit it from the simp argument list.
+  simp only [Complex.star_def, ̲map_mul, ̲map_sum, ̲map_d̵i̵v̵,̵m̵a̵p̵_̵one, ̲map_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:103:54: warning: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  simp only [Complex.star_def, ̲map_mul, ̲map_sum, ̲map_div, ̲map_on̵e̵,̵m̵a̵p̵_̵o̵fNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T003343_560039Z\MaxwellStripCoefficientR2.lean:103:62: warning: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  simp only [̵C̵o̵m̵p̵l̵e̵x̵.̵s̵t̵a̵r̵_̵d̵e̵f̵,̵m̵a̵p̵_̵m̵u̵l̵,̵m̵a̵p̵_̵s̵u̵m̵,̵m̵a̵p̵_̵d̵i̵v̵,̵m̵a̵p̵_̵o̵n̵e̵,̵m̵a̵p̵_̵o̵f̵N̵a̵t̵]̵[̲C̲o̲m̲p̲l̲e̲x̲.̲s̲t̲a̲r̲_̲d̲e̲f̲,̲ ̲m̲a̲p̲_̲m̲u̲l̲,̲ ̲m̲a̲p̲_̲s̲u̲m̲,̲ ̲m̲a̲p̲_̲d̲i̲v̲,̲ ̲m̲a̲p̲_̲o̲n̲e̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'F1Fecho.MaxwellStrip.maxwellLaplace_real' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_differentiable' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_continuous' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellStrip.maxwellLaplace_lower_real' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

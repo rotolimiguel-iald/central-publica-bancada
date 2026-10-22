@@ -1,0 +1,190 @@
+{
+  "schema": "iald.r7.conversion_boundary_candidate.r4",
+  "created_utc": "2026-10-16T16:32:11.881561+00:00",
+  "actor": "codex-fock-r6-review",
+  "role": "component_builder_not_acceptor",
+  "mission_reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+  "task_id": "R7",
+  "handle_reference": "r43-r7-elaboration-analysis",
+  "sync": {
+    "revision": 137,
+    "projection_sha256": "1adececb77e39ca78b6567659b19a951f2f0cabe7e1d9643ee5875ed32b0ddb6",
+    "hold": false,
+    "criterion": "Takesaki na representacao pretendida. Produto cruzado, acao/peso/traco entrelacados por termos ou derivacao identificada; escalaV351 reutilizada."
+  },
+  "status": "DECLARADO_NOT_COMPILED",
+  "candidate": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockConversionBoundaryProbeR4.lean",
+    "sha256": "12bba918f3a51881030d5ad8e5e25f85caba74243524514488cbb839e9f2889e",
+    "bytes": 8411
+  },
+  "observed_boundary": {
+    "source_line": 69,
+    "expression": "obtain ⟨hmem, raw⟩ := hb A",
+    "stage_log_snapshot": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T161251_564901Z\\R7_conversion_probe_R3.log",
+      "sha256": "4bf5b16a33bfb677e749e4706532e1a748010b0a6ef604045987e1dba27b0b76",
+      "bytes": 98,
+      "text": "112227987 generic transports returned; norm begins\n112229001 norm before native witness inference\n",
+      "live_file_can_change": true
+    },
+    "terminal_receipt_present_at_read": false,
+    "limitation": "Markers bracket the whole obtain command. They do not distinguish hb A application inference, definitional conversion and rcases internal case analysis. No measured speedup is claimed."
+  },
+  "adjustment": {
+    "helper": "exists_norm_from_polar_identity",
+    "generic_parameters": "H with the existing Hilbert instances; P : Prop; u : P → H; J, B, v and the existing existential identity.",
+    "proof": "Exists.elim h (fun p hp => Exists.intro p (norm_from_polar_identity J B (u p) v hp))",
+    "specialization": "H := GNSHilbert; P := A.val * b ∈ scalarWeightLeftIdeal; u := fun hmem => lambda ⟨A.val * b,hmem⟩; B := pi (star b); v := lambda A; witness := hb A",
+    "why_distinct": "Only an abstract proposition is eliminated inside the generic helper. Concrete proof uses one exact application; no obtain/rcases on the concrete ideal, no generic rightProduct term and no quantification of the whole star algebra.",
+    "instances": "CompleteSpace, endomorphismStar and Loewner PartialOrder copied unchanged from R3."
+  },
+  "comparison": [
+    {
+      "version": "ActualModularBalance R1",
+      "observation": "Failed with ambiguous J/R and type mismatches; not a successful balance proof."
+    },
+    {
+      "version": "ActualModularBalance R2",
+      "observation": "Qualified names and Hilbert parameters, explicit representation complement; cancelled after 665.5035 s without a terminal Lean error."
+    },
+    {
+      "version": "ActualModularBalance R3",
+      "observation": "Instrumentation reaches conjugate_right before h; have supplier and rw are in the same unseparated block. Cancelled after 642.4985 s."
+    },
+    {
+      "version": "ActualModularBalance R4",
+      "observation": "Source uses explicitly typed h, congrArg and Eq.trans to split conjugation; this does not address the current native existential obtain. No build outcome claimed for it."
+    },
+    {
+      "version": "ConversionBoundaryProbe R1",
+      "observation": "Generic rightProduct in target and inferred aliases produced concrete representation type mismatches."
+    },
+    {
+      "version": "ConversionBoundaryProbe R2",
+      "observation": "Native existential target adopted, but actual build has unresolved Norm/inferred types; preserving R3 explicit instance corrections avoids reverting it."
+    },
+    {
+      "version": "ConversionBoundaryProbe R3",
+      "observation": "Reached norm proof then stopped at native witness obtain; current proposal removes that concrete tactic decomposition."
+    }
+  ],
+  "static_checks": {
+    "public_signatures_unchanged": 3,
+    "print_axioms_count": 3,
+    "no_sorry_admit_axiom_declaration": true,
+    "prior_script_lexical_scan": "Initially matched word axiom in the documentation comment; source was already created, preserved, then scan rerun excluding comments. All three public signatures compare equal.",
+    "compiled_here": false
+  },
+  "next_step": "Root may compile R4 only after terminalizing/custody of the existing R3 attempt. New stage marker will locate exact specialization; performance remains unverified.",
+  "scope": "Full actual trace/PF and R7 criterion remain open. No execution duplicated, stopped or launched; no mission state, memory, production, providers or gate touched.",
+  "previous_attempts": [
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T142729_627093Z\\RECEIPT.json",
+        "sha256": "76fc240f30c005e73fcc338db5df1a06da553de9e38430eb94716ffd96e9d0f8",
+        "bytes": 208645
+      },
+      "exit_code": 1,
+      "seconds": 90.99517720000586
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T144438_506902Z\\RECEIPT.json",
+        "sha256": "29c103ca5fe3c9621135767a501ee05d3f85a26c2ac43646e089c680e9612d61",
+        "bytes": 208650
+      },
+      "exit_code": 4294967295,
+      "seconds": 665.5035193000076
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T150503_386413Z\\RECEIPT.json",
+        "sha256": "8b4cbf4413189718fbc25e4ab3d3dadc697f331d97ecc97676712e7ec99d00b6",
+        "bytes": 208952
+      },
+      "exit_code": 4294967295,
+      "seconds": 642.4984534000105
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T153113_490978Z\\RECEIPT.json",
+        "sha256": "e4e6510e99cef32fcd0e93d16ff93a6279f721aa16f728476964254ddb427317",
+        "bytes": 197912
+      },
+      "exit_code": 1,
+      "seconds": 106.40269149999949
+    },
+    {
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T153924_574512Z\\RECEIPT.json",
+        "sha256": "130046b692beec3abe40c573923df8a228548d7b15f0fd94f0ed57080daaaf82",
+        "bytes": 197912
+      },
+      "exit_code": 1,
+      "seconds": 117.53604620000988
+    }
+  ],
+  "measured_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockConversionBoundaryProbeR3.lean",
+      "sha256": "d19cf2e07f792c6d5379236fcb6c67668e279fc95eb703ab4628cacd957f5a5f",
+      "bytes": 8392
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockConversionBoundaryProbeR4.lean",
+      "sha256": "12bba918f3a51881030d5ad8e5e25f85caba74243524514488cbb839e9f2889e",
+      "bytes": 8411
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockActualModularBalanceR1.lean",
+      "sha256": "814cc7b5ef0434ca46c8decea38e12ec46e15d6b788a6ae3587c1e5a3da44445",
+      "bytes": 5783
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockActualModularBalanceR2.lean",
+      "sha256": "5199b206e6b405967b6c38e0e99e6edc6494e4d79a8843cc2c9d34925c8f7b5e",
+      "bytes": 8847
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockActualModularBalanceR3.lean",
+      "sha256": "22f21bca7273e0ae948c7a0bbaf76a0a056b871e299c245e4233fb1c42945a10",
+      "bytes": 16039
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockActualModularBalanceR4.lean",
+      "sha256": "be7553a3b0f5afef3e6cc798cdfe3ea8b7753605496dc6d419fe6d247eda86eb",
+      "bytes": 18798
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockRightPolarBridgeR5.lean",
+      "sha256": "cd545df96f9904312cf08217de0a51572721582ad9497e28e0a9999692b287d8",
+      "bytes": 6110
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\CanonicalFockPolarRightAlgebraR6.lean",
+      "sha256": "ac4d93377b40480f7748c8da557c576333136c04c8745e7dc35e879fd90500cb",
+      "bytes": 2174
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\GenericPolarRightNormR1.lean",
+      "sha256": "f8d5c12b94fd79dcc0dc1d46747aea65b95ec4ec46f21bd7e0804356b91a0b31",
+      "bytes": 2645
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\GenericPolarRightAlgebraR2.lean",
+      "sha256": "051a177d585ce2850396af343916bc931140340982d1cb77b6340a143ec766cc",
+      "bytes": 5208
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gns_coefficient_tomita\\GenericPolarModularBalanceR1.lean",
+      "sha256": "a75c3355cba6b79c100d74c14dfb9a73900fbf6126b48caafdc6ae01fd865382",
+      "bytes": 4719
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R43_R7_ANALYSIS_HANDOFF_20261016T162822_630514Z_d0e02aab_RECEIPT.json",
+      "sha256": "5c752db8334379dff67e021ffe2e47f67a4d370c358ac77dacf5965816fef05b",
+      "bytes": 119431
+    }
+  ]
+}

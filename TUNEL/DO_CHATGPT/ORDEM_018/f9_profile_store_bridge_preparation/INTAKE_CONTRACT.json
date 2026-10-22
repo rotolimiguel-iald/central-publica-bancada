@@ -1,0 +1,26 @@
+{
+  "schema": "F9_PROFILE_READBACK_INTAKE_CONTRACT_DESCRIPTION_V1",
+  "is_an_authorization": false,
+  "required": {
+    "schema": "literal F9_PROFILE_READBACK_INTAKE_V1",
+    "scope": "literal SYNTHETIC_ENGINEERING_READBACK_ONLY",
+    "execution_unit_id": "original producer unit; not a new scientific ID",
+    "level": "integer explicitly admitted; equal all original last_level",
+    "max_records": "exact 600*(2**level+1)**3",
+    "roots": "unit/nodes/runs each path and original externally admitted [dev,ino,uid,mode]",
+    "reader_bindings": "role -> actual reader path/bytes/sha256; roles enforced in recovery.py",
+    "external_pins": "admission/terminal/seal/child_stdout/parent_stdout/parent_exit -> independently admitted bytes/sha256",
+    "parent_exit_pointers": "actual outer receipt JSON pointers for execution_unit_id/completion_seal_sha256/parent_stdout_sha256/exit_code/reaped",
+    "run_claim_sha256": "externally admitted original global claim pin",
+    "run_result_sha256": "externally admitted original global result pin"
+  },
+  "supplied_separately": [
+    "original intake SHA from trusted caller",
+    "metadata bytes matching original request",
+    "external_evidence original bytes",
+    "loaded reader registry/module/bridge",
+    "existing stores/protected handles",
+    "explicit cooperative read deadline"
+  ],
+  "missing": "refuse; never generate defaults/receipts/recompute"
+}

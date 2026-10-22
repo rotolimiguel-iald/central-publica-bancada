@@ -1,0 +1,278 @@
+{
+  "schema": "r72-device-profile-mathematics-pins/v1",
+  "created_at": "2026-10-18T20:32:48.193012+00:00",
+  "scope": "Analytic candidate, NOT_LEAN, no numerical campaign or observed data",
+  "mission": {
+    "reference": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "revision": 506,
+    "task_id": "R5",
+    "lease_id": "ec98434f-b7cf-4bfb-b311-a6810dda408b",
+    "preflight_ready": true,
+    "projection_sha256": "595f20ae8c350997097203e17512451211f1aef13547cb7068eb203dbabe52fb"
+  },
+  "sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\PhysicalSchwartzMaxwellR1.lean",
+      "sha256": "a7ac6222b588273cd37a276a98128eb680f479b44e4e7f8a2ca13cfe93d0202e",
+      "bytes": 4358,
+      "anchors": [
+        {
+          "marker": "def physicalFourierCLM",
+          "line": 27,
+          "through": 39,
+          "excerpt": "def physicalFourierCLM : SchwartzTensor →L[ℂ] SchwartzTensor :=\n  (SchwartzMap.compCLMOfContinuousLinearEquiv ℂ physicalFourierArgument).comp\n    (FourierTransform.fourierInvCLM ℂ SchwartzTensor)\n\ntheorem physicalFourier_apply (f : SchwartzTensor) (p : Spacetime) :\n    physicalFourierCLM f p=(𝓕⁻ f) ((2*Real.pi)⁻¹ • metricFlip p) := rfl\n\ntheorem physicalFourier_surjective : Function.Surjective physicalFourierCLM := by\n  intro g\n  let h:=SchwartzMap.compCLMOfContinuousLinearEquiv ℂ physicalFourierArgument.symm g\n  refine ⟨𝓕 h,?_⟩\n  ext p : 1\n  change (𝓕⁻ (𝓕 h)) (physicalFourierArgument p)=g p"
+        },
+        {
+          "marker": "def physicalSmearCLM",
+          "line": 44,
+          "through": 56,
+          "excerpt": "def physicalSmearCLM : SchwartzTensor →L[ℂ] H1 := momentumSmearCLM.comp physicalFourierCLM\n\ntheorem physicalSmear_ae (f : SchwartzTensor) :\n    physicalSmearCLM f =ᵐ[ChatgptAudit.WignerRapidityMeasure016.orbitalMeasure 0]\n      globalCoefficient (physicalFourierCLM f) :=\n  (globalCoefficient_memLp (physicalFourierCLM f)).coeFn_toLp\n\ntheorem exists_nonzero_real_physicalSmear : ∃ f : RealTest,physicalSmearCLM f.val≠0 := by\n  obtain ⟨g,hg⟩:=exists_nonzero_momentumSmear\n  obtain ⟨f,hf⟩:=physicalFourier_surjective g\n  have hn : physicalSmearCLM f≠0 := by\n    change momentumSmear (physicalFourierCLM f)≠0\n    rwa [hf]"
+        },
+        {
+          "marker": "theorem physicalSmear_ae",
+          "line": 46,
+          "through": 58,
+          "excerpt": "theorem physicalSmear_ae (f : SchwartzTensor) :\n    physicalSmearCLM f =ᵐ[ChatgptAudit.WignerRapidityMeasure016.orbitalMeasure 0]\n      globalCoefficient (physicalFourierCLM f) :=\n  (globalCoefficient_memLp (physicalFourierCLM f)).coeFn_toLp\n\ntheorem exists_nonzero_real_physicalSmear : ∃ f : RealTest,physicalSmearCLM f.val≠0 := by\n  obtain ⟨g,hg⟩:=exists_nonzero_momentumSmear\n  obtain ⟨f,hf⟩:=physicalFourier_surjective g\n  have hn : physicalSmearCLM f≠0 := by\n    change momentumSmear (physicalFourierCLM f)≠0\n    rwa [hf]\n  by_cases hr : physicalSmearCLM (realPart f)=0\n  · refine ⟨⟨imagPart f,imagPart_real f⟩,?_⟩"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\SchwartzMaxwellCoefficientR5.lean",
+      "sha256": "92e356b99750a3a27a94a02f932927a3fdadab7e90c58072c96abac95402b651",
+      "bytes": 3294,
+      "anchors": [
+        {
+          "marker": "def globalCoefficient (",
+          "line": 18,
+          "through": 30,
+          "excerpt": "def globalCoefficient (f : SchwartzTensor) (y : MomentumCoordinates) : Fib :=\n  WithLp.toLp 2 (fun j => (1/2:ℂ)*∑ μ,∑ ν,\n    (cartesianStrength y j μ ν:ℂ)*f (shellEmbedding y) μ ν)\n\ntheorem globalCoefficient_measurable (f : SchwartzTensor) : Measurable (globalCoefficient f) := by\n  apply (PiLp.continuous_toLp 2 (fun _ : Fin 2 => ℂ)).measurable.comp\n  apply measurable_pi_lambda\n  intro j\n  apply measurable_const.mul\n  apply Finset.measurable_sum\n  intro μ _\n  apply Finset.measurable_sum\n  intro ν _"
+        },
+        {
+          "marker": "theorem globalCoefficient_sq_bound",
+          "line": 57,
+          "through": 68,
+          "excerpt": "theorem globalCoefficient_sq_bound (f : SchwartzTensor) (y : MomentumCoordinates) :\n    ‖globalCoefficient f y‖^2 ≤ 128*shellEnergy y^2*‖f (shellEmbedding y)‖^2 := by\n  rw [PiLp.norm_sq_eq_of_L2]\n  have hs:=Finset.sum_le_sum (fun (j : Fin 2) (_ : j∈Finset.univ) =>\n    pow_le_pow_left₀ (norm_nonneg _) (globalCoefficient_component_bound f y j) 2)\n  norm_num at hs ⊢\n  nlinarith only [hs]\n\nend F1Fecho.MaxwellGlobal\n#print axioms F1Fecho.MaxwellGlobal.globalCoefficient_measurable\n#print axioms F1Fecho.MaxwellGlobal.globalCoefficient_component_bound\n#print axioms F1Fecho.MaxwellGlobal.globalCoefficient_sq_bound"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalSmearTranslationR2.lean",
+      "sha256": "b0e417274dcf136a78189ec7aa656a34e470b90ad02708405ea968378ac61935",
+      "bytes": 3623,
+      "anchors": [
+        {
+          "marker": "def circularSmear (",
+          "line": 59,
+          "through": 71,
+          "excerpt": "def circularSmear (f : SchwartzTensor) : H1 := circularH1.symm (physicalSmearCLM f)\n\ntheorem circularSmear_translate (a : Spacetime) (f : SchwartzTensor) :\n    circularSmear (translateTest a f)=U1 (fun i => a i) (circularSmear f) := by\n  unfold circularSmear\n  rw [physicalSmear_translate,circularH1_symm_U1]\n\ntheorem exists_nonzero_real_circularSmear : ∃ f : RealTest,circularSmear f.val≠0 := by\n  obtain ⟨f,hf⟩:=exists_nonzero_real_physicalSmear\n  refine ⟨f,?_⟩\n  intro hz\n  apply hf\n  exact circularH1.symm.injective (by simpa [circularSmear] using hz)"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CircularPhysicalFieldTransportR1.lean",
+      "sha256": "e6d97d5a50da58ae4b8d4d6a904404f5ac045d3a93f92cd77733c23b59c71983",
+      "bytes": 9744,
+      "anchors": [
+        {
+          "marker": "def unitaryFourierFieldAmplitude :",
+          "line": 110,
+          "through": 122,
+          "excerpt": "def unitaryFourierFieldAmplitude : ℝ := Real.sqrt unitaryFourierStressScale\n\ntheorem unitaryFourierFieldAmplitude_pos : 0 < unitaryFourierFieldAmplitude :=\n  Real.sqrt_pos.mpr unitaryFourierStressScale_pos\n\ntheorem unitaryFourierFieldAmplitude_sq :\n    unitaryFourierFieldAmplitude ^ 2 = unitaryFourierStressScale :=\n  Real.sq_sqrt (le_of_lt unitaryFourierStressScale_pos)\n\ndef normalizedPhysicalSmearCLM : SchwartzTensor →L[ℂ] H1 :=\n  (unitaryFourierFieldAmplitude : ℂ) • physicalSmearCLM\n\ndef normalizedCircularSmearCLM : SchwartzTensor →L[ℂ] H1 :="
+        },
+        {
+          "marker": "def normalizedCircularSmearCLM :",
+          "line": 122,
+          "through": 134,
+          "excerpt": "def normalizedCircularSmearCLM : SchwartzTensor →L[ℂ] H1 :=\n  (unitaryFourierFieldAmplitude : ℂ) • circularSmearCLM\n\ntheorem circularH1_normalizedCircularSmear (f : SchwartzTensor) :\n    circularH1 (normalizedCircularSmearCLM f) = normalizedPhysicalSmearCLM f := by\n  change circularH1 ((unitaryFourierFieldAmplitude : ℂ) • circularSmearCLM f) =\n    (unitaryFourierFieldAmplitude : ℂ) • physicalSmearCLM f\n  rw [map_smul, circularH1_circularSmear]\n\ndef normalizedPhysicalField (f : RealTest) : F →ₗ.[ℂ] F :=\n  segal (normalizedPhysicalSmearCLM f.val)\n\ndef normalizedCircularField (f : RealTest) : F →ₗ.[ℂ] F :="
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalCompactNetCovarianceR1.lean",
+      "sha256": "2512d049b0851947ad605a25b3ba47d049e37946baa861e13a8db23ece252fe1",
+      "bytes": 7208,
+      "anchors": [
+        {
+          "marker": "def compactSupportedGenerators",
+          "line": 15,
+          "through": 27,
+          "excerpt": "def compactSupportedGenerators (O : Set Spacetime) : Set H1 :=\n  {v | ∃ f : SchwartzTensor, IsRealTest f ∧\n    HasCompactSupport (f : Spacetime → TensorValue) ∧\n    tsupport (f : Spacetime → TensorValue) ⊆ O ∧ circularSmear f=v}\n\ndef compactLocalized (O : Set Spacetime) : Submodule ℝ H1 :=\n  (Submodule.span ℝ (compactSupportedGenerators O)).topologicalClosure\n\ntheorem compactLocalized_closed (O : Set Spacetime) :\n    IsClosed (compactLocalized O : Set H1) := Submodule.isClosed_topologicalClosure _\n\ntheorem compactLocalized_mono {O P : Set Spacetime} (h : O ⊆ P) :\n    compactLocalized O ≤ compactLocalized P := by"
+        },
+        {
+          "marker": "def compactLocalized (",
+          "line": 20,
+          "through": 32,
+          "excerpt": "def compactLocalized (O : Set Spacetime) : Submodule ℝ H1 :=\n  (Submodule.span ℝ (compactSupportedGenerators O)).topologicalClosure\n\ntheorem compactLocalized_closed (O : Set Spacetime) :\n    IsClosed (compactLocalized O : Set H1) := Submodule.isClosed_topologicalClosure _\n\ntheorem compactLocalized_mono {O P : Set Spacetime} (h : O ⊆ P) :\n    compactLocalized O ≤ compactLocalized P := by\n  apply Submodule.topologicalClosure_mono\n  apply Submodule.span_mono\n  rintro v ⟨f,hr,hc,hs,hv⟩\n  exact ⟨f,hr,hc,hs.trans h,hv⟩\n"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\network_bundle_r7\\src\\TGLExt\\F1Fecho394\\FieldWeylR3.lean",
+      "sha256": "e86e512b80f10c2ccd55eee55aa41ff0a48a873af708c11845f2aa407ffb3433",
+      "bytes": 4745,
+      "anchors": [
+        {
+          "marker": "def W (f :",
+          "line": 30,
+          "through": 42,
+          "excerpt": "def W (f : H1) : F →L[ℂ] F := ConcreteWeyl.W (rotate f)\n\ntheorem W_zero : W 0 = 1 := by simp [W,rotate,ConcreteWeyl.W_zero]\n\ntheorem W_strongly_continuous (v : F) : Continuous (fun f : H1 => W f v) :=\n  (ConcreteWeyl.W_strongly_continuous v).comp (continuous_const.smul continuous_id)\n\n\ntheorem W_star (f : H1) : star (W f) = W (-f) := by\n  simp only [W,ConcreteWeyl.W_star,rotate_neg]\n\ntheorem W_ccr (f g : H1) : W f * W g = phase f g • W (f+g) := by\n  simp only [W,ConcreteWeyl.W_ccr,phase,rotate_inner,rotate_add]"
+        },
+        {
+          "marker": "theorem W_mem_R (",
+          "line": 74,
+          "through": 86,
+          "excerpt": "theorem W_mem_R (K : Submodule ℝ H1) (f : H1) (hf : f ∈ K) : W f ∈ R K :=\n  F1Fecho.WeylNet.generators_mem _ (F1Fecho.WeylNet.generators_star_closed W W_star K) ⟨f,hf,rfl⟩\n\ndef wedgeFlow (L : TGLExt.QGSolution.LightNetData) (t : ℝ) :\n    (R (L.K TGL.SpecificAQFT.rightWedge)).toStarSubalgebra ≃⋆ₐ[ℂ]\n    (R (L.K TGL.SpecificAQFT.rightWedge)).toStarSubalgebra :=\n  F1Fecho.WeylFlow.wedgeFlow W W_star W_covariance L t\n\ntheorem wedgeFlow_zero (L : TGLExt.QGSolution.LightNetData) :\n    wedgeFlow L 0 = StarAlgEquiv.refl := F1Fecho.WeylFlow.wedgeFlow_zero W W_star W_covariance L\n\ntheorem wedgeFlow_add (L : TGLExt.QGSolution.LightNetData) (s t : ℝ) :\n    wedgeFlow L (s+t) = (wedgeFlow L s).trans (wedgeFlow L t) :="
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularMaxwellEnergyR2.lean",
+      "sha256": "c8dd50d6dade584ab3a1c0f6bc567defad72dc2d161fae627a3f6af1cd2ae1d9",
+      "bytes": 4640,
+      "anchors": [
+        {
+          "marker": "def EnergySquareProfile (",
+          "line": 16,
+          "through": 28,
+          "excerpt": "def EnergySquareProfile (h : H1) : Prop :=\n  ∀ m : ℕ,Integrable (fun y=>shellEnergy y^m*‖h y‖^2) (orbitalMeasure 0)\n\ndef StrongRegularProfile (h : H1) : Prop := RegularProfile h ∧ EnergySquareProfile h\n\ntheorem shell_square_moment_integrable (f : SchwartzTensor) (m : ℕ) :\n    Integrable (fun y=>shellEnergy y^m*‖f (shellEmbedding y)‖^2) momentumMeasure := by\n  letI : momentumMeasure.IsAddHaarMeasure := by unfold momentumMeasure; infer_instance\n  exact energy_moment_square_restriction_integrable f shellEmbedding shellEnergy\n    (by norm_num : (0:ℝ)≤2) shellEmbedding_proper_bound energy_le_twice_coordinate_norm\n    shellEnergy_nonneg shellEmbedding_continuous.measurable shellEnergy_continuous.measurable m\n\ntheorem coefficient_square_moment_density_bound (f : SchwartzTensor) (m : ℕ)"
+        },
+        {
+          "marker": "theorem coefficient_square_moment_density_bound",
+          "line": 28,
+          "through": 40,
+          "excerpt": "theorem coefficient_square_moment_density_bound (f : SchwartzTensor) (m : ℕ)\n    (y : MomentumCoordinates) :\n    ‖(orbitalWeight 0 y).toReal • (shellEnergy y^m*‖globalCoefficient f y‖^2)‖≤\n      128*(shellEnergy y^(m+1)*‖f (shellEmbedding y)‖^2) := by\n  have hp:=shellEnergy_nonneg y\n  have hw : (orbitalWeight 0 y).toReal=1/shellEnergy y := by\n    unfold orbitalWeight shellEnergy\n    exact ENNReal.toReal_ofReal (by positivity)\n  rw [hw,smul_eq_mul,Real.norm_of_nonneg\n    (mul_nonneg (div_nonneg zero_le_one hp) (mul_nonneg (pow_nonneg hp _) (sq_nonneg _)))]\n  by_cases hz : shellEnergy y=0\n  · simp [hz]\n  · calc"
+        },
+        {
+          "marker": "theorem physicalSmear_strongRegular",
+          "line": 65,
+          "through": 77,
+          "excerpt": "theorem physicalSmear_strongRegular (f : SchwartzTensor) :\n    StrongRegularProfile (physicalSmearCLM f) :=\n  ⟨physicalSmear_regular f,momentumSmear_energySquare (physicalFourierCLM f)⟩\n\ntheorem energySquareProfile_zero : EnergySquareProfile (0:H1) := by\n  intro m\n  apply (integrable_zero _ _ _).congr\n  filter_upwards [Lp.coeFn_zero Fib 2 (orbitalMeasure 0)] with y hy\n  simp only [hy,norm_zero,zero_pow (by norm_num : (2:ℕ)≠0),mul_zero,Pi.zero_apply]\n\ntheorem strongRegularProfile_zero : StrongRegularProfile (0:H1) :=\n  ⟨regularProfile_zero,energySquareProfile_zero⟩\n"
+        },
+        {
+          "marker": "theorem strongRegular_finite_energy",
+          "line": 82,
+          "through": 91,
+          "excerpt": "theorem strongRegular_finite_energy (h : H1) (hh : StrongRegularProfile h) :\n    Integrable (fun y=>shellEnergy y*‖h y‖^2) (orbitalMeasure 0) := by\n  simpa only [pow_one] using hh.2 1\n\nend F1Fecho.MaxwellGlobal\n#print axioms F1Fecho.MaxwellGlobal.momentumSmear_energySquare\n#print axioms F1Fecho.MaxwellGlobal.physicalSmear_strongRegular\n#print axioms F1Fecho.MaxwellGlobal.strongRegularProfile_zero\n#print axioms F1Fecho.MaxwellGlobal.exists_nonzero_strongRegularProfile\n#print axioms F1Fecho.MaxwellGlobal.strongRegular_finite_energy"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\RegularCoefficientBoundaryR3.lean",
+      "sha256": "e37e0f3c8b93fc2344e816dbd333561e9172f47585d1381d80251bf8be65179b",
+      "bytes": 4046,
+      "anchors": [
+        {
+          "marker": "theorem circularSmear_energySquare",
+          "line": 19,
+          "through": 31,
+          "excerpt": "theorem circularSmear_energySquare (f : SchwartzTensor) :\n    EnergySquareProfile (circularSmear f) := by\n  intro m\n  apply ((physicalSmear_strongRegular f).2 m).congr\n  filter_upwards [fiberLiftMap_ae circularFiber.symm (physicalSmearCLM f)] with y hy\n  change shellEnergy y^m*‖physicalSmearCLM f y‖^2=\n    shellEnergy y^m*‖fiberLiftMap circularFiber.symm (physicalSmearCLM f) y‖^2\n  rw [hy,circularFiber.symm.norm_map]\n\ntheorem coefficient_first_moment (p : MomentumCoordinates→ℝ) (hp : Measurable p)\n    (hn : ∀y,0≤p y) (hb : ∀y,p y≤2*shellEnergy y)\n    (ξ ψ : H1) (hψ : EnergySquareProfile ψ) :\n    Integrable (fun y=>p y*‖inner ℂ (ξ y) (ψ y)‖) (orbitalMeasure 0) := by"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\SchwartzRestrictionSquareMomentsR1.lean",
+      "sha256": "fca51a474271aae045ede5ec78949feb00a252c26c6f1a7ca665ce8240ebb4ca",
+      "bytes": 2522,
+      "anchors": [
+        {
+          "marker": "theorem energy_moment_square_restriction_integrable",
+          "line": 28,
+          "through": 40,
+          "excerpt": "theorem energy_moment_square_restriction_integrable (f : 𝓢(E,V)) (j : X→E) (w : X→ℝ)\n    {C : ℝ} (hC : 0≤C) (hj : ∀ x,‖x‖≤‖j x‖) (hw : ∀ x,w x≤C*‖x‖)\n    (hwp : ∀ x,0≤w x) (hjm : Measurable j) (hwm : Measurable w) (m : ℕ) :\n    Integrable (fun x=>w x^m*‖f (j x)‖^2) μ := by\n  have hn (x : X) : ‖w x^m*‖f (j x)‖^2‖=w x^m*‖f (j x)‖^2 :=\n    Real.norm_of_nonneg (mul_nonneg (pow_nonneg (hwp x) _) (sq_nonneg _))\n  have hm : AEStronglyMeasurable (fun x=>w x^m*‖f (j x)‖^2) μ :=\n    ((hwm.pow_const m).mul ((f.continuous.measurable.comp hjm).norm.pow_const 2)).aestronglyMeasurable\n  have hi:=integrable_of_le_of_pow_mul_le (μ:=μ) (k:=0)\n    (f:=fun x=>w x^m*‖f (j x)‖^2)\n    (fun x=>by simpa [hn x] using weighted_restriction_square_moment_decay f j w hC hj hw hwp m 0 x)\n    (fun x=>by simpa [hn x] using weighted_restriction_square_moment_decay f j w hC hj hw hwp m μ.integrablePower x) hm\n  simpa only [pow_zero,one_mul,hn] using hi"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellShellGeometryR3.lean",
+      "sha256": "b03132b661f0e7ffcf113bd3e7309b9ea28ae66b1d8f8d162bae90f8d16f837d",
+      "bytes": 3449,
+      "anchors": [
+        {
+          "marker": "def shellEnergy (",
+          "line": 13,
+          "through": 25,
+          "excerpt": "def shellEnergy (y : MomentumCoordinates) : ℝ := energy (transverseMass 0 y.1) y.2\nabbrev Spacetime := EuclideanSpace ℝ (Fin 4)\ndef shellEmbedding (y : MomentumCoordinates) : Spacetime := WithLp.toLp 2 (shellMomentum 0 y)\n\ntheorem shellEnergy_nonneg (y : MomentumCoordinates) : 0≤ shellEnergy y := Real.sqrt_nonneg _\ntheorem shellEnergy_sq (y : MomentumCoordinates) :\n    shellEnergy y^2=y.1 0^2+y.1 1^2+y.2^2 := by\n  rw [shellEnergy,energy,Real.sq_sqrt (by positivity),transverseMass_sq]\n  ring\n\ntheorem shellEnergy_continuous : Continuous shellEnergy := by\n  unfold shellEnergy energy transverseMass\n  fun_prop"
+        },
+        {
+          "marker": "theorem shellEnergy_sq",
+          "line": 18,
+          "through": 30,
+          "excerpt": "theorem shellEnergy_sq (y : MomentumCoordinates) :\n    shellEnergy y^2=y.1 0^2+y.1 1^2+y.2^2 := by\n  rw [shellEnergy,energy,Real.sq_sqrt (by positivity),transverseMass_sq]\n  ring\n\ntheorem shellEnergy_continuous : Continuous shellEnergy := by\n  unfold shellEnergy energy transverseMass\n  fun_prop\n\ntheorem abs_spatial_le_energy (y : MomentumCoordinates) :\n    |y.1 0|≤ shellEnergy y ∧ |y.1 1|≤ shellEnergy y ∧ |y.2|≤ shellEnergy y := by\n  have hs := shellEnergy_sq y\n  have hn := shellEnergy_nonneg y"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\local_error_r71\\locality\\BOGOLIUBOV_CAVITY_R71.md",
+      "sha256": "15b4d08765740831a6ea1b91c1dda72d72236836f0ddfaad60de45996130a14a",
+      "bytes": 13083,
+      "anchors": [
+        {
+          "marker": "## 2. Implementação",
+          "line": 33,
+          "through": 45,
+          "excerpt": "## 2. Implementação Bogoliubov finita e referência nova\n\nSeja E o span **complexo** dos quatro vetores locais e dos dois modos ortonormais f_i,f_o já escolhidos em R63/R66, dimensão finita d≤6. Incluí-los evita trocar silenciosamente os modos de partida; se fossem escolhidos agora dentro do span dos quatro vetores, bastaria d≤4. Seu espaço real subjacente tem forma simplética não degenerada Im⟨·,·⟩. O span real dos quatro vetores de (S) é um subespaço simplético de dimensão quatro. Complete essa base simplética para E e obtenha S∈Sp(E_ℝ), levando os pares (f_i,if_i),(f_o,if_o) aos pares locais. Estenda S por identidade em E⊥. A parte antilinear dessa transformação tem posto finito; não se supõe um squeezing arbitrário em infinitos modos.\n\n**Construção explícita da implementação finita.** Identifique Γ_s(E) com L²(ℝ^d) pela base de ocupação/Hermite. Uma matriz simplética finita se decompõe por eliminação simplética em:\n\n- mudanças lineares de coordenadas, implementadas por ψ(x)↦|det A|^(−1/2)ψ(A⁻¹x);\n- cisalhamentos simpléticos, implementados por multiplicação e^{i xᵀBx/2}, B real simétrica;\n- trocas coordenada/momento, implementadas por Fourier nos eixos necessários.\n\nTodos são unitários por mudança de variável, módulo um ou Plancherel, respectivamente. A conjugação dos operadores q_j,p_j verifica cada bloco; seus produtos implementam S. Quando o bloco A é invertível, a fatoração em três blocos usa CA⁻¹ e A⁻¹B simétricas; quando singular, escolhem-se trocas Fourier de pivôs antes da eliminação. O sinal global da implementação não importa. Tensorizando com identidade em Γ_s(E⊥), obtém-se uma unitária U no Fock existente. Esta é uma construção analítica finita; a identificação Hermite e o algoritmo simplético não foram formalizados em Lean nesta camada.\n\nEscolha a orientação de U de modo que os dois aniquiladores originais c₁,c₂ sejam transportados para"
+        },
+        {
+          "marker": "## 4. Transporte",
+          "line": 86,
+          "through": 98,
+          "excerpt": "## 4. Transporte exato do gerador completo, incluindo reservatório e bomba\n\nAmplifique o semigrupo conservativo R66 pelo canal identidade do espectador. Essa amplificação age também em estados entrelaçados, não só produtos: os canais são normais e completamente positivos; a extensão é obtida inicialmente em matrizes de posto finito no espectador e por densidade em classe-traço, mantendo contração. Conjugue por U⊗I_OH:\n\n\\[\nT_b(t)=\\operatorname{Ad}_{U\\otimes I}\\circ\n\\bigl(T_{R66}(t)\\otimes\\operatorname{Id}_{spec}\\bigr)\n\\circ\\operatorname{Ad}_{U^\\dagger\\otimes I}.\n\\tag{T}\n\\]\n\nEsse é um semigrupo CPTP fortemente contínuo. Seu gerador fechado é a conjugação do gerador R66 amplificado, com domínio transportado. No core transportado, a fórmula é **exatamente** R66 com a_r substituído por b_r, mesmos coeficientes, mesmo OH, mesmo J=b_o†σ₋+σ₊b_i e mesma bomba. Não se apagam os termos cruzados de J. A realização de colisões também é conjugada pelo mesmo U; os estados das ancillas, o canal OH coerente e a ordem dos limites permanecem os de R66.\n"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\BOSONIC_CONTINUUM_R66.txt",
+      "sha256": "ce231991f651be507bb5ff33600208b22231e004729c903e25eac577cd64aace",
+      "bytes": 9332,
+      "anchors": [
+        {
+          "marker": "h_0=",
+          "line": 8,
+          "through": 20,
+          "excerpt": "h_0=ω_c(n_i+n_o)+ω_OH n_e+g(a_i†σ_-+σ_+a_i), n_e=σ_+σ_-;\nh_d=Ω(σ_++σ_-), Ω real; h=h_0+h_d.\nL=(sqrt(κ_i)a_i, sqrt(κ_o)a_o, sqrt(γ_OH)σ_-, sqrt(γ_φ)Z, sqrt(λ)J),\nJ=A+B=a_o†σ_-+σ_+a_i, λ=βγ_Λ, β=ALPHA_FINE_CODATA_2018 sqrt(e) em runtime.\nTodas as taxas são finitas e não negativas; nenhuma taxa física é calibrada por esta construção.\nG(X)=-i[h,X]+Σ_j(L_j X L_j†-{L_j†L_j,X}/2).\nR64 já construiu instrumento de saída de duas portas sob dilataçãoHP escolhida; R65 fixou normalização, relógio e identificabilidade. Preservamos esses contratos. A nova construção finita de colisões explicita uma realização do reservatório, não demonstra que todo banho microscópico da patente a realiza.\n\n2. Estrutura que permite retirar o corte — prova algébrica\nN=n_i+n_o+n_e, P_m=1_[0,m](N), dimP_mH=(m+1)².\n[N,h_0]=[N,J]=[N,Z]=0; a_i,a_o,σ_- baixamN por1.\nEm particular A e B preservamN separadamente. A†B=B†A=0, mas A X B†+B X A† não é zero como superoperador: usar dois canais independentes muda G.\nJ†J=(n_o+1)n_e+n_i(1-n_e)≤N. Cada L_j†L_j comutaN."
+        },
+        {
+          "marker": "J=A+B=",
+          "line": 11,
+          "through": 23,
+          "excerpt": "J=A+B=a_o†σ_-+σ_+a_i, λ=βγ_Λ, β=ALPHA_FINE_CODATA_2018 sqrt(e) em runtime.\nTodas as taxas são finitas e não negativas; nenhuma taxa física é calibrada por esta construção.\nG(X)=-i[h,X]+Σ_j(L_j X L_j†-{L_j†L_j,X}/2).\nR64 já construiu instrumento de saída de duas portas sob dilataçãoHP escolhida; R65 fixou normalização, relógio e identificabilidade. Preservamos esses contratos. A nova construção finita de colisões explicita uma realização do reservatório, não demonstra que todo banho microscópico da patente a realiza.\n\n2. Estrutura que permite retirar o corte — prova algébrica\nN=n_i+n_o+n_e, P_m=1_[0,m](N), dimP_mH=(m+1)².\n[N,h_0]=[N,J]=[N,Z]=0; a_i,a_o,σ_- baixamN por1.\nEm particular A e B preservamN separadamente. A†B=B†A=0, mas A X B†+B X A† não é zero como superoperador: usar dois canais independentes muda G.\nJ†J=(n_o+1)n_e+n_i(1-n_e)≤N. Cada L_j†L_j comutaN.\nLogo h_0 e todos L_j preservamP_mH, e L_j†L_j P_m=P_m L_j†L_j P_m. Embora L_j† isolado possa sair deP_m, seu produto L_j†L_j não sai.\n\n3. Construção conservativa sem bombeamento — não supor um limite"
+        },
+        {
+          "marker": "6. Ponte ao Fock",
+          "line": 45,
+          "through": 57,
+          "excerpt": "6. Ponte ao Fock já construído — além dos quatro vetores0/1\nEscolham fi,fo∈H1 ortonormais, como já admitido emR63. Para n_i+n_o=n, usem os tensores simétricos normalizados\nv_(n_i,n_o)=sqrt(n!/(n_i!n_o!)) Sym(fi^⊗n_i⊗fo^⊗n_o),\nonde Sym é a média das n! permutações. Sua norma é1 e vetores de ocupações distintas são ortogonais: entre termos permutados só sobrevivem as n_i!n_o! permutações que preservam os rótulos. Setoresn distintos já são ortogonais no Fock existente.\nO mapa V∞|n_i,n_o,e>=v_(n_i,n_o)⊗|e> estende a uma isometria de H numa subestrutura fechada S⊗C² deF1Rede.BosonicFock.F⊗C². Reaproveita os setores simétricos e sua somaHilbert; não recompila nem declara novos teoremasLean. Não necessita identificar aqui um fator espectador por um teorema de fatorização ainda não localizado.\nNo domínio de partículas finitas, os aniquiladores nas direçõesfi/fo dão os coeficientes sqrt(n_i),sqrt(n_o). Logo V∞ entrelaça h_0,h_d e os cincoL_j com seus operadores sobreS; os domínios fechados são transportados porV∞. O coreD_0 e o semigrupo construído dão então a identidade dinâmica\nT_S(t)(V∞ X V∞†)=V∞ T(t)(X) V∞†.\nIsto realiza a dinâmica bosônica de dois modos eOH na estruturaFock existente, não apenas transporta uma trajetória semgerador. Não identifica essa dinâmica com a representação de translações livres nem com o gerador modular de uma cunha.\n\n7. Covariância de família e resíduo espacial precisamente tipado\nA segunda quantização gamma(u) já disponível transporta v_(n_i,n_o)(fi,fo) em v_(n_i,n_o)(ufi,ufo). Assim W_u=gamma(u)⊗I_OH entrelaça o dispositivo na dupla(fi,fo) com o dispositivo transportado(ufi,ufo), com os coeficientes e relógio declarados mantidos: T_(ufi,ufo)(t) AdW_u=AdW_u T_(fi,fo)(t), sobre os respectivos setores fechados.\nÉ covariância da FAMÍLIA de modos e geradores, não invariância de um aparelho fixo sobtodoPoincaré e não uma lei relativística de transformação de seu relógio. Um g de Poincaré pode fornecer u pela representação existente; não se confunde g com g_JC.\nPermaneceOPEN a identificação de fi/fo e acoplamentos com subespaços localizados K(O)/álgebras locais da rede, a compatibilidade causal da interação/pump e o entrelaçamento com o relógio/gerador físico pretendido. Uma projeção em poucos modos não prova pertença a uma álgebra local. A realizaçãoHP temporal Γ(L²(R+;C5)) do banho e oFock(H1) espacial têm espaçosdeuma-partícula distintos; nenhum sinaldeigualdade entreeles foi presumido."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\reservoir_bridge_r66\\JOINT_RESERVOIR_CONTINUUM_LIMIT_R66.txt",
+      "sha256": "6bb2ca8cc944250056f852240714672b167eb66ec31497a428dce38277d40194",
+      "bytes": 3455,
+      "anchors": [
+        {
+          "marker": "Fixe as taxas",
+          "line": 6,
+          "through": 18,
+          "excerpt": "Fixe as taxas e o hamiltoniano deBOSONIC_CONTINUUM_R66; γ_OH>0 para a realização do bombeamento pelo mesmo canalOH. Seja X de traço-classe suportado emP_m0. Em cada P_mH, m≥m0, use os cinco L_j,m comprimidos e a construção de colisão deCONSTRUCTION_R66: ancilaC6, V_m=Σ(L_j,m⊗|j><0|−L_j,m†⊗|0><j|), U_m,δ=exp(sqrtδ V_m−iδ h_0,m⊗I), ancilaψδ=(|0>+sqrtδ α|3>)/sqrt(1+δ|α|²), α=iΩ/sqrtγ_OH. Seja Φ_m,δ o canal reduzidoCPTP de uma colisão fresca.\n\nA expansão e paridade da construção mostram Φ_m,0=I e derivada emδ=0 igual ao gerador COMPLETO G_m (combomba e todos os dissipadores). Para m fixo, Φ_m,δ é duas vezes diferenciável emδ≥0 perto de0: exp é analítica emepsilon=sqrtδ, a normalização é analítica perto deepsilon0, e a simetria de paridade elimina os termosímpares no canal. Em qualquer intervalo compacto suficientemente pequeno [0,δ0], existe C_m finito tal que\n||Φ_m,δ−exp(δG_m)||_(1→1) ≤ C_m δ².\nPor exemplo C_m pode ser definido como metade do supremo da norma da segunda derivada da diferença no intervalo. É uma constante de matrizes finitas, sem alegação de uniformidade emm ou valor já medido. A norma é a norma induzida na classe-traço; a campanha da implementação reporta Frobenius, não a substitui por igual.\n\nPara δ=t/n, estabilidadeCPTP e telescopagem dão\n||Φ_m,t/n^n X−T_m(t)X||_1 ≤ C_m t² ||X||_1/n.\nCom a inclusão E_m para o espaço bosônico, a desigualdade triangular e a cotaDyson já demonstrada dão\n||E_m Φ_m,t/n^n X−T(t)X||_1\n ≤ ||X||_1 [C_m t²/n + 2 Σ_(k=m-m0+1)^∞ (2|Ω|t)^k/k!].\n\nAssim, para qualquer precisão positiva, escolhe-se PRIMEIRO m para a cauda bosônica e DEPOIS n para as colisões. O limite iterado m→∞ após n→∞ é o semigrupo bosônico completoT(t), e uma sequência diagonal controlada também converge. Para estados gerais emT1, a densidade deP_m0 X P_m0 e a contração das duas famílias completam a passagem."
+        },
+        {
+          "marker": "É uma realização construída",
+          "line": 20,
+          "through": 23,
+          "excerpt": "É uma realização construída por reservatórios repetidos, com a bomba proveniente da entrada coerente, do MESMO geradorbosônico completo; não só uma hipótese abstrata de banho que tem esse gerador. A estrutura escolhe banhos engenheiradosMarkov/frescos e acoplamentos INPUT. Não demonstra que o banho térmico natural do dispositivo patenteado seja esse banho, nem que γ_Λ esteja calibrado.\nSe γ_OH=0 e Ω≠0, a fórmulaα é inválida: use a realização alternativa com bomba explícita no hamiltoniano; não declarar bombeamento coerente pelo canal ausente. SeΩ=0, usa-se ancila emvácuo, inclusive quandoγ_OH=0.\n\nO limite é dos CANAIS REDUZIDOS. Não se infere convergência de unitárias estocásticas comcoeficientesilimitados, troca livre de limites, uniformidade emt→∞ ou convergência de observáveisilimitados a partir da norma-traço. A identificação do campo de saída no limitebosônico pede controle de momentos adicional. O entrelaçamento V∞ deBOSONIC_CONTINUUM_R66 transporta esta dinâmica reduzida ao subespaço de modos da redeFock já existente; causalidade/localização e relógioPoincaré permanecem seus requisitos próprios."
+        }
+      ]
+    }
+  ],
+  "report": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_profiles_r72\\mathematics\\DEVICE_PROFILE_BRIDGE_R72.md",
+    "sha256": "4c7f13d802827d0bf18e4626ec09f4b6a9b066416b592c68449e178c0877fa3e",
+    "bytes": 13363
+  },
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\device_profiles_r72\\mathematics\\pin_device_profiles_r72.py",
+    "sha256": "f03214c4e166536fe8743092c9bfab475669f9e367e5b084863189c15f7c3569",
+    "bytes": 3167
+  }
+}

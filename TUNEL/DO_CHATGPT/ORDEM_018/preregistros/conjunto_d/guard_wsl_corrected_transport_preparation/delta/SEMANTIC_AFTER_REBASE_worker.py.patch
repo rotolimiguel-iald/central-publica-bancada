@@ -1,0 +1,23 @@
+--- V2_after_identity_and_root/worker.py
++++ corrected_transport/worker.py
+@@ -18,8 +18,10 @@
+     parent=g.proc_identity(os.getppid());g.need(g.matches(parent,g.argv_for("--supervisor",nonce)),"Exact parent")
+     g.need(parent["start_ticks"]==s["process"]["start_ticks"] and parent["pid"]==s["process"]["pid"],"Parent incarnation")
+     g.need(time.time()<w["work_deadline_epoch"] and not (BASE/"RUN/STOP.json").exists(),"Launch expired/stopped")
++    transport=g.observed_argv("--child",nonce)
++    g.fresh(BASE/"RUN/ARGV_CHILD.json",transport);g.validate_observed_argv(transport,"--child",nonce)
+     out=BASE/"RUN/CASE";out.mkdir(exist_ok=False)
+-    self_id=g.serial_identity(g.proc_identity(os.getpid()))
++    self_id=transport["process"]
+     g.fresh(out/"CASE_CLAIM.json",{"request_id":g.REQUEST,"nonce":nonce,"case_id":g.CASE,"process":self_id,
+             "parent_pid":os.getppid(),"contract_sha256":g.pin(BASE/"CONTRATO_WSL.json")["sha256"],"retry_allowed":False})
+     raw=(BASE/"sources/audit_guard.py").read_bytes();m=types.ModuleType("qualified_audit_guard")
+@@ -78,7 +80,7 @@
+     snap=latch.snapshot();jraw=journal_path.read_bytes();rows=[json.loads(x) for x in jraw.splitlines()]
+     if rows!=snap["events"] or len(rows)!=1:status="FAILED";error={"type":"JournalMismatch"}
+     result={"status":status,"request_id":g.REQUEST,"case_id":g.CASE,"nonce":nonce,"process":self_id,"parent_pid":os.getppid(),
+-        "error":error,"import_returned_normally":returned,"next_blocked":next_blocked,"final_blocked":final_blocked,
++        "argv_transport":transport,"error":error,"import_returned_normally":returned,"next_blocked":next_blocked,"final_blocked":final_blocked,
+         "callbacks":callbacks[0],"audit_snapshot":snap,"unexpected_operations":unexpected,"hook_seen":seen,
+         "profile_real_os_calls":calls,"journal":{"path":str(journal_path),"bytes":len(jraw),"sha256":g.digest(jraw)},
+         "runtime":{"version":sys.version,"executable":sys.executable,"loader_code":importlib.machinery.SourceFileLoader.get_code.__code__.co_filename},

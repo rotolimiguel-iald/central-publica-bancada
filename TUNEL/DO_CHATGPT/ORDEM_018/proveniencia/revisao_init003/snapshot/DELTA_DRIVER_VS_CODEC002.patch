@@ -1,0 +1,63 @@
+--- frozen_p3_codec_002/driver_p3.py
++++ p3_init_qualified_003/driver_p3.py
+@@ -76,6 +76,10 @@
+     allowed_data|={str(ROOT/"driver_p3.py"),str(ROOT/"prior_transform.py")}
+     from preload_npz_codec import preload_npz_codec
+     preload_npz_codec(json.loads((ROOT/"CODEC_CP437_PIN.json").read_text()))
++    from init_detectors import build_B, verify_analytic_state
++    geometry=json.loads((ROOT/"GEOMETRIA_PINADA.json").read_text())
++    init_dependency=json.loads((ROOT/"DEPENDENCIA_FACTORY_PIN.json").read_text())
++    allowed_data.add(init_dependency["runtime_path"])
+     audit_paths=set();blocked=[]
+     def audit(event,args):
+         if event in ("socket.connect","socket.bind","subprocess.Popen","os.system","os.fork","os.forkpty","os.posix_spawn"):
+@@ -95,6 +99,7 @@
+     source.set_edom_log(out/"EDOM_LOG.jsonl")
+     ll_calls=0;sampler=None;last=None;status="FAILED";error=None;delta=None;ess=None
+     failures=FailureAudit();last_parameters=None
++    initialization_defaults=[];initialization_before=[];initialization_after=[]
+     def budget():
+         if ll_calls>=c["limits"]["max_likelihood_calls"]:raise BudgetStop("MAXCALL_INCLUDING_INITIALIZATION")
+         if time.perf_counter()-started>=c["limits"]["wall_soft_s"]:raise BudgetStop("WALL")
+@@ -107,7 +112,7 @@
+             mask=(f>=20)&(f<=1024)
+             if not np.isfinite(psd[mask]).all() or np.any(psd[mask]<=0) or not np.isinf(psd[~mask]).all():
+                 raise ValueError("Qualified analytic PSD differs")
+-            ifos=bilby.gw.detector.InterferometerList(["H1","L1"]);snr2=0.
++            ifos,initialization_defaults=build_B(bilby,f,psd,geometry,init_dependency);snr2=0.
+             for ifo in ifos:
+                 norm=job["normalization"][ifo.name]
+                 n=np.array(a[job["label"]+"_"+ifo.name+"_noise_fd"])
+@@ -116,8 +121,10 @@
+                     if array_sha(arr)!=norm[key]:raise ValueError("Synthetic array hash differs: "+key)
+                 snr2+=4/32*float(np.sum(abs(s[mask])**2/psd[mask]))
+                 ifo.minimum_frequency=20.;ifo.maximum_frequency=1024.
+-                ifo.power_spectral_density=bilby.gw.detector.PowerSpectralDensity(frequency_array=f,psd_array=psd)
+                 ifo.set_strain_data_from_frequency_domain_strain(d,sampling_frequency=4096,duration=32,start_time=999999984.)
++                initialization_before.append(verify_analytic_state(np,ifo,f,psd,geometry))
++                if not np.array_equal(ifo.strain_data.frequency_domain_strain,d):
++                    raise ValueError("Stored synthetic strain differs")
+             if not np.isclose(math.sqrt(snr2),20.,rtol=1e-8,atol=1e-10):raise ValueError("Qualified SNR differs")
+         wf=generator(cfg)
+         wf.frequency_domain_source_model=failures.wrap(
+@@ -125,6 +132,9 @@
+         likelihood=bilby.gw.likelihood.GravitationalWaveTransient(ifos,wf,
+             time_marginalization=False,distance_marginalization=False,phase_marginalization=False,
+             calibration_marginalization=False,jitter_time=False,reference_frame="sky",time_reference="geocenter")
++        initialization_after=[verify_analytic_state(np,ifo,f,psd,geometry) for ifo in likelihood.interferometers]
++        if initialization_after!=initialization_before:raise ValueError("Analytic detector state changed in likelihood constructor")
++        if blocked:raise ValueError("Initialization swallowed a blocked operation")
+         def logl(v):
+             nonlocal ll_calls,last_parameters
+             last_parameters=parameters(v)
+@@ -177,6 +187,10 @@
+                 "cpu_process_total_s":time.process_time(),"likelihood_calls":ll_calls,
+                 "native_calls":int(counts[0]),"native_wall_s":float(counts[1]),
+                 "failure_receipt":failures.summary(counts),
++                "initialization_defaults":initialization_defaults,
++                "initialization_analytic_before_likelihood":initialization_before,
++                "initialization_analytic_after_likelihood":initialization_after,
++                "initialization_qualified":len(initialization_after)==2 and initialization_after==initialization_before,
+                 "delta_logz_before_live_addition":delta,"weighted_ESS":ess,"diagnostics":artifact,
+                 "filesystem_read_write_paths_after_hook":sorted(audit_paths),"blocked_operations":blocked,
+                 "audit_scope":"Python open/process/socket hook after fixed imports and pin checks; not OS/native syscall containment",

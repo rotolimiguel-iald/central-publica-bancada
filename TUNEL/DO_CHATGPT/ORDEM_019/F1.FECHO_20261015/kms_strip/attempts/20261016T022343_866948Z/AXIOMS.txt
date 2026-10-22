@@ -1,0 +1,34 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T022343_866948Z\ProfileWaveFourierPairingR2.lean:36:6: warning: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T022343_866948Z\ProfileWaveFourierPairingR2.lean:36:6: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261016T022343_866948Z\ProfileWaveFourierPairingR2.lean:87:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : ?m.165), ?f a * ?r ∂?m.167
+in the target expression
+  (fun a => ∫ (x : Spacetime), (starRingEnd ℂ) (f x) * wavePhase x a * profileDensity h μ ν a ∂volume) y =
+    (fun a => (starRingEnd ℂ) ((scalarPhysicalFourier f) (shellEmbedding a)) * profileDensity h μ ν a) y
+
+f : 𝓢(Spacetime, ℂ)
+h : ↥H1
+hh : RegularProfile h
+μ ν : Fin 4
+hs :
+  ∫ (x : Spacetime),
+      ∫ (y : MomentumCoordinates),
+        (starRingEnd ℂ) (f x) * wavePhase x y * profileDensity h μ ν y ∂orbitalMeasure 0 ∂volume =
+    ∫ (y : MomentumCoordinates),
+      ∫ (x : Spacetime), (starRingEnd ℂ) (f x) * wavePhase x y * profileDensity h μ ν y ∂volume ∂orbitalMeasure 0
+he :
+  (fun x =>
+      ∫ (y : MomentumCoordinates), (starRingEnd ℂ) (f x) * (wavePhase x y * profileDensity h μ ν y) ∂orbitalMeasure 0) =
+    fun x =>
+    ∫ (y : MomentumCoordinates), (starRingEnd ℂ) (f x) * wavePhase x y * profileDensity h μ ν y ∂orbitalMeasure 0
+y : MomentumCoordinates
+⊢ (fun a => ∫ (x : Spacetime), (starRingEnd ℂ) (f x) * wavePhase x a * profileDensity h μ ν a ∂volume) y =
+    (fun a => (starRingEnd ℂ) ((scalarPhysicalFourier f) (shellEmbedding a)) * profileDensity h μ ν a) y
+'F1Fecho.MaxwellGlobal.scalarPhysicalFourier_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.scalarPhysicalFourier_conj_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.profileWave_pairing_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellGlobal.profileWave_fourier_pairing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

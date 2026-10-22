@@ -1,0 +1,141 @@
+{
+  "schema": "P3_ROOT_SCIENTIFIC_ENVELOPE_ASSESSMENT_V1",
+  "at": "2026-10-06T17:02:38.423524+00:00",
+  "author": "ROOT",
+  "scope": "Existing terminal JSON, contracts and source code only; no raw external inputs, arrays, PSD/ASD or scientific execution.",
+  "source_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_qualified_003\\CONTRATO_P3.json",
+      "bytes": 21134,
+      "sha256": "b4d570c60a5a9bdad6c0e9682f817f51b838698e7779320fd9572244df6c2b36"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_qualified_003\\EXECUTION_INIT_QUALIFIED_003\\P3_GR_INIT_QUALIFIED_003\\RESULT.json",
+      "bytes": 8921,
+      "sha256": "82111caa2b7cd4b78c9a4c8cc9614e3d22273e00cb903ce43bdad68c910275af"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_init_qualified_003\\RECIBO_ROOT_ENCERRAMENTO_INIT003.json",
+      "bytes": 13251,
+      "sha256": "9ae3fae7696fca9a2e0c593d1bbf87cbd45da68d1e775e4cddf8119372650cf9"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_startup_pin_preparation\\result_acceptance.py",
+      "bytes": 5525,
+      "sha256": "7263cc8cb86374fc1a354a6b0a7c9b1863c04700f2373ed607d009c19d5bc664"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_startup_pin_preparation\\RECIBO_ROOT_ACEITE_IMPORTS.json",
+      "bytes": 2545,
+      "sha256": "366a9bfd1912b6581925cc9dd316335a7bf64af41a53435e73857217bf04a4c5"
+    }
+  ],
+  "prior_result": {
+    "status": "STOPPED_NOT_CONVERGED",
+    "likelihood_calls": 9738,
+    "native_calls": 9738,
+    "wall_s": 857.9152041240595,
+    "cpu_s": 857.333447926,
+    "delta_logz_before_live_addition": 57.275736336318445,
+    "weighted_ESS": null,
+    "blocked_operation_count": 5,
+    "scientifically_accepted": false
+  },
+  "inherited_design": {
+    "sampler": {
+      "library": "dynesty",
+      "version": "3.1.0",
+      "method": "static NestedSampler",
+      "nlive": 256,
+      "bound": "multi",
+      "sample": "rwalk",
+      "walks": 25,
+      "dlogz": 0.1,
+      "ndim": 12,
+      "periodic_indices": [
+        7,
+        9,
+        10
+      ],
+      "pool": null,
+      "queue_size": 1,
+      "checkpoint": false,
+      "resume": false,
+      "marginalizations": [],
+      "log_likelihood": "bilby GravitationalWaveTransient.log_likelihood_ratio, Gaussian independent H1/L1; absolute noise-only normalization omitted equally in the same job; no cross-dataset Bayes-factor interpretation"
+    },
+    "limits": {
+      "max_likelihood_calls": 10000,
+      "native_waveform_calls_at_most": 10000,
+      "wall_soft_s": 3600,
+      "supervisor_wall_s": 3610,
+      "cpu_soft_s": 3300,
+      "cpu_hard_s": 3305,
+      "address_space_bytes": 8589934592,
+      "workers": 1,
+      "threads": 1,
+      "parallel_jobs": 1,
+      "jobs_at_most": 2,
+      "no_retry": true
+    },
+    "job_labels_and_seeds": [
+      {
+        "label": "GR_GAUSS",
+        "sampler_seed": 180602
+      },
+      {
+        "label": "RB_GAUSS",
+        "sampler_seed": 180603
+      }
+    ],
+    "convergence": {
+      "numerical_stop": "delta_logz<0.1 before final live points, non-flat live likelihood, below hard call cap, no error.",
+      "sampling_diagnostic": "weighted ESS>=100 after final live points; ESS low is explicitly incomplete.",
+      "not_sufficient_for": [
+        "coverage",
+        "global-mode discovery",
+        "population bias",
+        "D readiness",
+        "physical verdict"
+      ],
+      "posterior_summary_rule": "Driver saves weighted raw diagnostics only; independent review interprets recovery. No automatic pass from truth inclusion."
+    }
+  },
+  "assessment": {
+    "status": "DO_NOT_AUTHORIZE_UNCHANGED_ENVELOPE_AS_COMPLETE_SCIENTIFIC_QUALIFICATION",
+    "statute": "INFERENCE_FROM_MEASURED_TERMINAL_AND_STATIC_CONTRACT",
+    "reason": "Import/guard repairs do not supply evidence that the inherited seeds, sampler and 10000-call envelope achieve recovery/convergence. The earlier GR trial stopped with delta_logZ well above 0.1 and ESS unavailable. New identity alone is not scientific justification for replay.",
+    "limitation": "Not a proof that every future runtime is bitwise identical, and not a prediction of the calls needed to converge. The old run had audit violations and remains terminal, not a validated posterior.",
+    "operational_vs_scientific": "result_acceptance accepts CLEAN_PARTIAL as an honest operational result and campaign_exit may be zero for accepted partials. That is not convergence or fulfillment of F3.",
+    "source_lines": [
+      {
+        "line": 73,
+        "text": "    return {\"accepted\": accepted, \"disposition\": (\"CLEAN_PARTIAL\" if status in {\"STOPPED_NOT_CONVERGED\", \"BUDGET_EXHAUSTED_PARTIAL\", \"DLOGZ_REACHED_ESS_LOW\"} else \"CLEAN_CONVERGED\") if accepted else \"TERMINAL_FAILURE\", \"reasons\": reasons}"
+      },
+      {
+        "line": 77,
+        "text": "    return 0 if len(assessments)==planned and all(x.get(\"accepted\") is True for x in assessments) else 2"
+      }
+    ]
+  },
+  "alternatives": [
+    {
+      "id": "A",
+      "action": "Retain the inherited envelope as an operational candidate only, without another launch now.",
+      "scientific_completion_possible_to_claim": false,
+      "required_before_new_launch": "Concrete nonduplicative operational need and specific one-shot authorization."
+    },
+    {
+      "id": "B",
+      "action": "Prepare a distinct scientific recovery/convergence design preserving the frozen physical model and documenting proposed resources and acceptance; use the failed pilot as design evidence, never as an accepted result.",
+      "scientific_completion_possible_to_claim": "Only after actual authorized converged recovery and remaining controls.",
+      "required_before_new_launch": "Complete reviewable design, independent review, exact input integrity authorization and specific execution decision; no automatic increase or retry."
+    }
+  ],
+  "execution_authorized": false,
+  "raw_external_hash_read_authorized": false,
+  "old_unit_reopened": false,
+  "D_opened": false,
+  "d72_approval_unchanged": true,
+  "next": "Author of preparation 3249312d must state scope honestly and deliver a scientific continuation option before any new consumption."
+}

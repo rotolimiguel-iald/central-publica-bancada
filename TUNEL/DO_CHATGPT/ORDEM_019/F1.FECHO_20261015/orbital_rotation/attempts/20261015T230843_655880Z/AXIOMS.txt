@@ -1,0 +1,32 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T230843_655880Z\ScreenLorentzCocycleR2.lean:26:4: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  lorentzLinear (?L * ?M)
+in the target expression
+  coefficientMatrix (lorentzLinear ↑(L * M)) (inverseRapidityChart 0 (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p)))
+      (inverseRapidityChart 0 p) =
+    coefficientMatrix (lorentzLinear ↑L) (inverseRapidityChart 0 (shellAction (↑L⁻¹) p)) (inverseRapidityChart 0 p) *
+      coefficientMatrix (lorentzLinear ↑M) (inverseRapidityChart 0 (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p)))
+        (inverseRapidityChart 0 (shellAction (↑L⁻¹) p))
+
+L M : ↥generatedLorentz
+mL : Measure.QuasiMeasurePreserving (shellAction ↑L⁻¹) (orbitalMeasure 0) (orbitalMeasure 0)
+mM : Measure.QuasiMeasurePreserving (shellAction ↑M⁻¹) (orbitalMeasure 0) (orbitalMeasure 0)
+p : MomentumCoordinates
+hp : p.1 ≠ 0
+hq : (shellAction (↑L⁻¹) p).1 ≠ 0
+hr : (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p)).1 ≠ 0
+hpc : rapidityChart 0 (inverseRapidityChart 0 p) = id p
+hqc : rapidityChart 0 (inverseRapidityChart 0 (shellAction (↑L⁻¹) p)) = id (shellAction (↑L⁻¹) p)
+hrc :
+  rapidityChart 0 (inverseRapidityChart 0 (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p))) =
+    id (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p))
+hLp : (lorentzLinear ↑L) (shellMomentum 0 (shellAction (↑L⁻¹) p)) = shellMomentum 0 p
+hMq :
+  (lorentzLinear ↑M) (shellMomentum 0 (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p))) =
+    shellMomentum 0 (shellAction (↑L⁻¹) p)
+hc : shellAction (↑(M⁻¹ * L⁻¹)) p = (shellAction ↑M⁻¹ ∘ shellAction ↑L⁻¹) p
+⊢ coefficientMatrix (lorentzLinear ↑(L * M)) (inverseRapidityChart 0 (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p)))
+      (inverseRapidityChart 0 p) =
+    coefficientMatrix (lorentzLinear ↑L) (inverseRapidityChart 0 (shellAction (↑L⁻¹) p)) (inverseRapidityChart 0 p) *
+      coefficientMatrix (lorentzLinear ↑M) (inverseRapidityChart 0 (shellAction (↑M⁻¹) (shellAction (↑L⁻¹) p)))
+        (inverseRapidityChart 0 (shellAction (↑L⁻¹) p))
+'F1Fecho.OrbitalScreen.transportMatrix_mul_ae' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

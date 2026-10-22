@@ -1,0 +1,7 @@
+[REAL — orçamento v3 lido; DERIVED — aritmética condicional; OPEN — veredito/custo terminal de C]
+
+27/09/2026. Abertura016SHA256: `216a1a7d6b29548a4a47f5aa22f67e953d04f56d2e00bc3e505487d68df0f57a`. Fonte: `ORCAMENTO_015_v3.json`, SHA256 `be8dde137351c5add245daca8bd68b6ad5f6238708a230fbaab829dc6788b4ea`. Esta nota **não** altera o orçamento nem autoriza novo job. O campo `job_started=false` de C no orçamento v3 é retrato pré-lançamento; o handle 97042 confirma C em execução.
+
+Teto total 35,01724298083333 h; alocação v3 34,96690831932667 h; saldo não alocado 0,05033466150666044 h. C tem reserva de 8 h. Seja `c` o custo terminal medido de C em horas de máquina e suponha, apenas condicionalmente, que a árvore mande reservar até 8 h para D ou H. Devolvendo a parcela não usada da reserva de C, a alocação dos demais itens é 26,96690831932667 h. Logo a redução necessária em alguma reserva existente, para manter esse ramo de 8 h, é `max(0, c − 0,05033466150666044)` h. Se `c=8`, a redução é 7,94966533849334 h.
+
+Caso se preservem integralmente R3, T07, T08, T14, T15 e a reserva final, uma opção aritmética seria reduzir T10 de 12 h para `12 − max(0, c − 0,05033466150666044)` h; no caso-limite `c=8`, restariam 4,05033466150666 h para T10. Isso é **cenário, não escolha de prioridade**. O ramo efetivo, o custo `c`, a disponibilidade da máquina, o novo `ORCAMENTO_015_v<k>.json` e a testemunha devem ser medidos/registrados após o recibo terminal de C e antes de qualquer lançamento. Nenhum sigma ou posterior é inferido desta conta.

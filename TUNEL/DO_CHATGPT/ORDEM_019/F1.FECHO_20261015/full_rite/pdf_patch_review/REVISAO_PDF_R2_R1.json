@@ -1,0 +1,550 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim": 845,
+  "reviewer": "codex-atrator-skeptic",
+  "created_utc": "2026-10-15T18:53:39.697778+00:00",
+  "verdict": "PASSA_COM_ESCOPO_MIKTEX_LOCAL",
+  "material_findings": [],
+  "independent_mock_tests": [
+    {
+      "name": "absent_engine",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "calls": [],
+      "messages": "   [PDF] pdflatex ausente -> .tex gerado; compile com MiKTeX/TeX Live.\n"
+    },
+    {
+      "name": "miktex_two_success",
+      "passed": true,
+      "actual": true,
+      "expected": true,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\miktex_two_success",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\miktex_two_success",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\miktex_two_success",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] fixture.pdf OK\n"
+    },
+    {
+      "name": "identify_failure",
+      "passed": true,
+      "actual": false,
+      "expected": false,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\identify_failure",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        }
+      ],
+      "messages": "   [PDF] nao foi possivel identificar o motor offline.\n"
+    },
+    {
+      "name": "first_pass_fails_old_pdf",
+      "passed": true,
+      "actual": false,
+      "expected": false,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\first_pass_fails_old_pdf",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\first_pass_fails_old_pdf",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] motor terminou com codigo 1 (ver fixture.log)\n"
+    },
+    {
+      "name": "second_pass_fails_old_pdf",
+      "passed": true,
+      "actual": false,
+      "expected": false,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\second_pass_fails_old_pdf",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\second_pass_fails_old_pdf",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\second_pass_fails_old_pdf",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] motor terminou com codigo 1 (ver fixture.log)\n"
+    },
+    {
+      "name": "two_success_no_pdf",
+      "passed": true,
+      "actual": false,
+      "expected": false,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\two_success_no_pdf",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\two_success_no_pdf",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\two_success_no_pdf",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] fixture.pdf FALHOU (ver fixture.log)\n"
+    },
+    {
+      "name": "timeout_refused",
+      "passed": true,
+      "actual": false,
+      "expected": false,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\timeout_refused",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\timeout_refused",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] erro: Command '['PINNED_pdflatex.exe', '--disable-installer', '--disable-write18', '-interaction=nonstopmode', '-halt-on-error', 'fixture.tex']' timed out after 180 seconds\n"
+    },
+    {
+      "name": "unknown_engine_scope",
+      "passed": true,
+      "actual": true,
+      "expected": true,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\unknown_engine_scope",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\unknown_engine_scope",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\unknown_engine_scope",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] fixture.pdf OK\n"
+    },
+    {
+      "name": "legacy_online_mode",
+      "passed": true,
+      "actual": true,
+      "expected": true,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\legacy_online_mode",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\legacy_online_mode",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] fixture.pdf OK\n"
+    },
+    {
+      "name": "miktex_identity_stderr",
+      "passed": true,
+      "actual": true,
+      "expected": true,
+      "calls": [
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--version"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\miktex_identity_stderr",
+            "capture_output": "True",
+            "text": "True",
+            "encoding": "utf-8",
+            "errors": "replace",
+            "timeout": "15"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\miktex_identity_stderr",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        },
+        {
+          "command": [
+            "PINNED_pdflatex.exe",
+            "--disable-installer",
+            "--disable-write18",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "fixture.tex"
+          ],
+          "kwargs": {
+            "cwd": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\miktex_identity_stderr",
+            "stdout": "-3",
+            "stderr": "-3",
+            "timeout": "180"
+          }
+        }
+      ],
+      "messages": "   [PDF] fixture.pdf OK\n"
+    }
+  ],
+  "independent_mock_pass_count": 10,
+  "builder_native_checks_verified": 11,
+  "native_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\PDF_PATCH_RECEIPT_R2.json",
+    "sha256": "503de55da3a6803d23d54717666814b10a2640ddc3823e8fb5c387bfe1624472",
+    "bytes": 13108
+  },
+  "patch": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\compile_pdf_offline_r2.py",
+    "sha256": "b1ceb37721bcd7f8fe18be62a741d8240cc544f80898f698349cb6db2c15ca64",
+    "bytes": 2083
+  },
+  "verified_native_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\candidate_r3\\um.py",
+      "sha256": "9ac3cdf7b6b40f636a3ecb7792339d999376b18369feb9427df21f869de7efcd",
+      "bytes": 35708503
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\compile_pdf_offline_r2.py",
+      "sha256": "b1ceb37721bcd7f8fe18be62a741d8240cc544f80898f698349cb6db2c15ca64",
+      "bytes": 2083
+    },
+    {
+      "path": "C:\\Users\\rotol\\AppData\\Local\\Programs\\MiKTeX\\doc\\miktex\\manual\\miktex-pdftex.html",
+      "sha256": "afa770ee062a95a27eaa503e2843610a5c115cf7a4bce6694e5f5c19f6a8e5c8",
+      "bytes": 25387
+    },
+    {
+      "path": "C:\\Users\\rotol\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.exe",
+      "sha256": "de48c5ef651d2ded45e8d82188af22aaeebf0055d679b090609aff1881d97d30",
+      "bytes": 2739712
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_0_stdout.log",
+      "sha256": "e114ea4a56e00fb76a6a40062264ca1826f120156c2621c365260fa7c2ac1ef4",
+      "bytes": 859
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_0_stderr.log",
+      "sha256": "012783386ed349afcd334070a3fc854c1868b8e664f19d77cca430855268686a",
+      "bytes": 72
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_1_stdout.log",
+      "sha256": "51151ab62647851c081c3a67f5c2c035139d5498b8657740c274efc6b57c290a",
+      "bytes": 821
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_1_stderr.log",
+      "sha256": "49f853203483e5a3b14ec9e1c21f3e8121a2b9270fc54c72b312711434035538",
+      "bytes": 73
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_2_stdout.log",
+      "sha256": "8e4fb16f3f3c10c8c5792854c66abe6f4ec4af9ccbb3db5e987823be714c6c8c",
+      "bytes": 812
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_2_stderr.log",
+      "sha256": "49f853203483e5a3b14ec9e1c21f3e8121a2b9270fc54c72b312711434035538",
+      "bytes": 73
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_3_stdout.log",
+      "sha256": "e114ea4a56e00fb76a6a40062264ca1826f120156c2621c365260fa7c2ac1ef4",
+      "bytes": 859
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_3_stderr.log",
+      "sha256": "012783386ed349afcd334070a3fc854c1868b8e664f19d77cca430855268686a",
+      "bytes": 72
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_4_stdout.log",
+      "sha256": "588951c224c8b2ed95577b67a5cdfbcc75ff5ff77da7e8de119b966478353705",
+      "bytes": 884
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_4_stderr.log",
+      "sha256": "49f853203483e5a3b14ec9e1c21f3e8121a2b9270fc54c72b312711434035538",
+      "bytes": 73
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_5_stdout.log",
+      "sha256": "e114ea4a56e00fb76a6a40062264ca1826f120156c2621c365260fa7c2ac1ef4",
+      "bytes": 859
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_5_stderr.log",
+      "sha256": "012783386ed349afcd334070a3fc854c1868b8e664f19d77cca430855268686a",
+      "bytes": 72
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_6_stdout.log",
+      "sha256": "b4f5bf767181e84fab855c37bb7b292f7b6d8c0e242e4217a203867a39d644f1",
+      "bytes": 884
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_r2\\engine_6_stderr.log",
+      "sha256": "49f853203483e5a3b14ec9e1c21f3e8121a2b9270fc54c72b312711434035538",
+      "bytes": 73
+    }
+  ],
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\full_rite\\pdf_patch_review\\review_pdf_r2.py",
+    "sha256": "841d4a543c46516397e44f603befe8377439baaa9972164f210cd010cbaba298",
+    "bytes": 7328
+  },
+  "findings": [
+    "R2 exige exit 0 nas duas passagens, antes de consultar existência do PDF. PDF velho não mascara falha da primeira ou segunda passagem.",
+    "Identificação MiKTeX consulta stdout e stderr de --version; falha de identificação ou timeout retorna False. Motor ausente retorna None.",
+    "Apenas MiKTeX identificado com TGL_NO_NETWORK=1 recebe as opções documentadas --disable-installer e --disable-write18.",
+    "O recibo nativo contém duas passagens bem sucedidas e duas recusas por pacote ausente; 11 verificações e seus pinos conferem. Nesta revisão não se relançou motor nativo: 10 casos independentes com subprocess substituído verificam os ramos.",
+    "A fonte de patch contém uma única definição compile_pdf. Aplicação ao candidato completo e comparação das demais funções são responsabilidade da integração posterior."
+  ],
+  "scope": [
+    "Não é firewall/sandbox do processo nativo.",
+    "Outros motores e modo sem TGL_NO_NETWORK mantêm opções anteriores; o contrato auditado é o MiKTeX identificado nesta máquina.",
+    "True exige dois exits zero e PDF existente; não valida conteúdo, frescor ou renderização do PDF.",
+    "Os testes independentes não executaram processos externos, provedor, rede, um.py nem dados científicos."
+  ],
+  "production_memory_gate_modified": false
+}

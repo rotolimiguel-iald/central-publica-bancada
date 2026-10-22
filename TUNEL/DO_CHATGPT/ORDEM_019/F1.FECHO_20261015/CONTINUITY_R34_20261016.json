@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-10-16T10:57:58.664116+00:00",
+  "unit": "F1.FECHO_20261015",
+  "claim": 881,
+  "acom_revision": 63,
+  "last_progress": "PROGRESS_R34.json",
+  "map_seq": 1159,
+  "board_event": 889,
+  "production_modified": false,
+  "goal_complete": false,
+  "active": [
+    {
+      "session": 16916,
+      "attempt": "gns_coefficient_tomita/attempts/20261016T105602_440341Z",
+      "module": "CanonicalFockRightPolarBridgeR5",
+      "pid": 150604,
+      "receipt_present": false,
+      "log_bytes": 0
+    },
+    {
+      "session": 94558,
+      "attempt": "gns_coefficient_tomita/attempts/20261016T105344_102192Z",
+      "module": "CanonicalFockPolarRightCutoffOrderR10",
+      "pid": 165856,
+      "chain": "build_polar_closure_cutoff_chain_r1.py",
+      "receipt_present": false,
+      "log_bytes": 0
+    },
+    {
+      "session": 77391,
+      "attempt": "orbital_rotation/attempts/20261016T105257_008492Z",
+      "module": "PhysicalSymplecticPairingR7",
+      "pid": 185504,
+      "chain": "build_compact_spacelike_chain_r4.py -> PhysicalCompactSpacelikeR7",
+      "receipt_present": false,
+      "log_bytes": 0
+    },
+    {
+      "session": 79772,
+      "attempt": "orbital_rotation/attempts/20261016T105021_400439Z",
+      "module": "PhysicalCompactNetCovarianceR1",
+      "pid": 176196,
+      "receipt_present": false,
+      "log_bytes": 0
+    },
+    {
+      "session": 53302,
+      "watch": "takesaki_fock/build_inverse_positive_after_cutoff_r1.py",
+      "module": "CanonicalFockInversePositiveLawsR2",
+      "parent": "gns_coefficient_tomita/attempts/20261016T105344_102192Z/RECEIPT.json"
+    },
+    {
+      "session": 3766,
+      "watch": "orbital_rotation/build_compact_wedge_after_covariance_r1.py",
+      "module": "PhysicalCompactWedgeComparisonR1",
+      "parent": "orbital_rotation/attempts/20261016T105021_400439Z/RECEIPT.json"
+    }
+  ],
+  "prepared_not_launched": [
+    "orbital_rotation/PhysicalCompactNetLocalityR1.lean (imports failed PhysicalCompactSpacelikeR6; make NEW revision importing green R7 or successor before use)"
+  ],
+  "known_failures": {
+    "CanonicalFockRightPolarBridgeR4": "first and third theorem pass; missing H := GNSHilbert in antiunitary result, giant rw in right action, native/generic membership mismatch. R5 fixes all three; first dense-root proof itself passed.",
+    "PhysicalSymplecticPairingR6": "Generic source incorrectly required NormedAddCommGroup/NormedSpace X, but Schwartz is Frechet. GenericSmearSymplecticR6 now only AddCommGroup + Module, with T a LinearMap; EXIT0, trio. PairingR7 consumes .toLinearMap.",
+    "CanonicalFockPolarRightClosureOrderR9": "Stopped after confirmed type error and timeouts. Complete termination receipt. ClosureR10 green; remaining cutoff/order separated."
+  },
+  "green_new": [
+    "CanonicalFockPolarFlipR4 (2 prints; TF103516_288941Z)",
+    "PhysicalFrameWedgeLocalityR2 (3 prints; ORBIT103202_691262Z)",
+    "GenericClosedEquationsCFCR5 (5 prints; GNS104658_597906Z)",
+    "GenericSmearSymplecticR6 (1 print; ORBIT105223_467607Z)",
+    "CanonicalFockPolarRightClosureR10 (5 prints; GNS104804_321967Z)"
+  ],
+  "pending_original_scope": [
+    "scaled faithful normal semifinite trace/PF on SAME Fock representation",
+    "full physical region net and prove comparison to canonical wedge, no redefinition by fiat",
+    "Maxwell charge_link with same tensor and unitary",
+    "actual joint final candidate run and independent audit"
+  ],
+  "process_notes": [
+    "No provider call this stage. No independent audit claimed. Do not spawn exhausted agents without checking current availability.",
+    "Active chain watchers fail closed on failed parent; do not duplicate uncertain/live launches.",
+    "R34 review checks1177 pins,5 modules16prints; own review. V393 program/seal hashes re-read and matched."
+  ]
+}

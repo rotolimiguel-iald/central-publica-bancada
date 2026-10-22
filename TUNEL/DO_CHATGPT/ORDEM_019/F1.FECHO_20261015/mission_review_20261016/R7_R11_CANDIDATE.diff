@@ -1,0 +1,159 @@
+--- CanonicalFockPolarRightCutoffOrderR10.lean
++++ CanonicalFockPolarRightCutoffOrderR11Candidate.lean
+@@ -1,22 +1,32 @@
+ import CanonicalFockPolarRightClosureR10
++
++/-! Experimental source-only candidate, DECLARADO, NOT COMPILED.
++Alternative to R10: do not import both modules with duplicate declaration names.
++Explicit ambient CFC carrier and arguments; remove GNS instances only from CFC block.
++Mathematical statement text and the two GNS consumer proof bodies are preserved. -/
+ 
+ set_option autoImplicit false
+ noncomputable section
+ namespace F1Fecho.CanonicalFockPolarRight
+-local instance : CompleteSpace F1Fecho.CanonicalFockGNS.GNSHilbert := F1Fecho.CanonicalFockGNS.gnsCompleteSpace
+-local instance : Star (F1Fecho.CanonicalFockGNS.GNSHilbert →L[ℂ] F1Fecho.CanonicalFockGNS.GNSHilbert) :=
+-  F1Fecho.ClosedSubmoduleRestriction.endomorphismStar F1Fecho.CanonicalFockGNS.GNSSubspace
+ open MeasureTheory Filter
+ open TGLV350.Regular (hilbertPositiveSqrt inverseCutoffFunction)
+ open F1Fecho.CanonicalFockRegular F1Fecho.CanonicalFockWeight F1Fecho.CanonicalFockGNS
+ open F1Fecho.CanonicalFockRegularRightGNS F1Fecho.CanonicalFockWeightDomain
+ open F1Fecho.RegularPositiveFlow
+ open scoped Topology
++#eval do
++  IO.println "R7_STAGE regularSineWindowCore"
++  (← IO.getStdout).flush
++
+ /-- An explicit bounded combination of the original regular translations. -/
+ def regularSineWindowCore (m : ℝ) :
+     (core).toStarSubalgebra :=
+   (1/2 : ℂ) • 1 + (1/(4*Complex.I) : ℂ) •
+     (regularRightCoreElement (-1/m) - regularRightCoreElement (1/m))
++
++#eval do
++  IO.println "R7_STAGE regularSineWindowCore_right"
++  (← IO.getStdout).flush
+ 
+ theorem regularSineWindowCore_right (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (hreg : ∀t, regularRightCoreElement t ∈ scalarPolarRightAlgebra J) (m : ℝ) :
+@@ -27,16 +37,27 @@
+       (hreg (-1/m))
+       (hreg (1/m))) _
+ 
++#eval do
++  IO.println "R7_STAGE regularSineResolvent_right"
++  (← IO.getStdout).flush
++
+ theorem regularSineResolvent_right (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (hreg : ∀t, regularRightCoreElement t ∈ scalarPolarRightAlgebra J) (m : ℝ) :
+     ∃ h : regularSineResolvent fockFlow m ∈ core,
+       (⟨regularSineResolvent fockFlow m,h⟩ : (core).toStarSubalgebra) ∈
+         scalarPolarRightAlgebra J := by
+-  exact GenericClosedEquationsCFC.closed_subalgebra_cfc_of_eq core.toStarSubalgebra
++  exact GenericClosedEquationsCFC.closed_subalgebra_cfc_of_eq
++    (H := TGLV350.Regular.RegularHilbert F1Rede.BosonicFock.F) core.toStarSubalgebra
+     (RegularScalarGNSContinuity.algebra_norm_closed core)
+     (scalarPolarRightAlgebra J) (scalarPolarRightAlgebra_isClosed J)
+-    (regularSineWindowCore m) (regularSineWindowCore_right J hreg m) _ _
++    (regularSineWindowCore m) (regularSineWindowCore_right J hreg m)
++    (fun z : ℂ => (Real.sigmoid (m * (2 * z.re - 1)) : ℂ))
++    (regularSineResolvent fockFlow m)
+     (regularSineResolvent_cfc fockFlow m)
++
++#eval do
++  IO.println "R7_STAGE regularSpectralResolvent_right"
++  (← IO.getStdout).flush
+ 
+ theorem regularSpectralResolvent_right (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (hreg : ∀t, regularRightCoreElement t ∈ scalarPolarRightAlgebra J) :
+@@ -66,11 +87,16 @@
+ 
+ 
+ 
++#eval do
++  IO.println "R7_STAGE regularInverseGeneratorCutoff_right"
++  (← IO.getStdout).flush
++
+ theorem regularInverseGeneratorCutoff_right (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (hreg : ∀t, regularRightCoreElement t ∈ scalarPolarRightAlgebra J) (ε : ℝ) (hε : 0 < ε) :
+     (⟨regularInverseGeneratorCutoff fockFlow ε,regularInverseGeneratorCutoff_mem fockFlow M ε⟩ :
+       (core).toStarSubalgebra) ∈ scalarPolarRightAlgebra J := by
+-  exact GenericClosedEquationsCFC.closed_subalgebra_mem_of_eq_cfc core.toStarSubalgebra
++  exact GenericClosedEquationsCFC.closed_subalgebra_mem_of_eq_cfc
++    (H := TGLV350.Regular.RegularHilbert F1Rede.BosonicFock.F) core.toStarSubalgebra
+     (RegularScalarGNSContinuity.algebra_norm_closed core)
+     (scalarPolarRightAlgebra J) (scalarPolarRightAlgebra_isClosed J)
+     ⟨regularSpectralResolvent fockFlow,regularSpectralResolvent_mem fockFlow M⟩
+@@ -78,6 +104,10 @@
+     ⟨regularInverseGeneratorCutoff fockFlow ε,regularInverseGeneratorCutoff_mem fockFlow M ε⟩
+     (regularInverseGeneratorCutoff_cfc fockFlow ε hε)
+ 
++
++#eval do
++  IO.println "R7_STAGE hilbertPositiveSqrt_complex_cfc"
++  (← IO.getStdout).flush
+ 
+ /-- Consume the standard real/complex CFC bridges for the original positive
+ square root; no independent root is introduced. -/
+@@ -89,16 +119,26 @@
+     cfcₙ_eq_cfc Real.continuous_sqrt.continuousOn Real.sqrt_zero,
+     cfc_real_eq_complex Real.sqrt (IsSelfAdjoint.of_nonneg h0)]
+ 
++#eval do
++  IO.println "R7_STAGE scalarRightAction_sqrt"
++  (← IO.getStdout).flush
++
+ theorem scalarRightAction_sqrt (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (b : (core).toStarSubalgebra)
+     (hb : b ∈ scalarPolarRightAlgebra J) (h0 : 0 ≤ b.val) :
+     ∃ h : hilbertPositiveSqrt b.val ∈ core,
+       (⟨hilbertPositiveSqrt b.val,h⟩ : (core).toStarSubalgebra) ∈
+         scalarPolarRightAlgebra J := by
+-  exact GenericClosedEquationsCFC.closed_subalgebra_cfc_of_eq core.toStarSubalgebra
++  exact GenericClosedEquationsCFC.closed_subalgebra_cfc_of_eq
++    (H := TGLV350.Regular.RegularHilbert F1Rede.BosonicFock.F) core.toStarSubalgebra
+     (RegularScalarGNSContinuity.algebra_norm_closed core)
+-    (scalarPolarRightAlgebra J) (scalarPolarRightAlgebra_isClosed J) b hb _ _
++    (scalarPolarRightAlgebra J) (scalarPolarRightAlgebra_isClosed J) b hb
++    (fun z : ℂ => (Real.sqrt z.re : ℂ)) (hilbertPositiveSqrt b.val)
+     (hilbertPositiveSqrt_complex_cfc b.val h0)
++
++#eval do
++  IO.println "R7_STAGE regularInverseGeneratorCutoff_sqrt_right"
++  (← IO.getStdout).flush
+ 
+ theorem regularInverseGeneratorCutoff_sqrt_right (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (hreg : ∀t, regularRightCoreElement t ∈ scalarPolarRightAlgebra J) (ε : ℝ) (hε : 0 < ε) :
+@@ -138,6 +178,10 @@
+ open F1Fecho.CanonicalFockGNSRepresentation F1Fecho.CanonicalFockWeightCompletion
+ open F1Fecho.CanonicalFockWeightSandwich F1Fecho.CanonicalFockRegular
+ local instance : CompleteSpace GNSHilbert := F1Fecho.CanonicalFockGNS.gnsCompleteSpace
++#eval do
++  IO.println "R7_STAGE scalarPolarRight_commutes_left"
++  (← IO.getStdout).flush
++
+ theorem scalarPolarRight_commutes_left
+     (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (b : core.toStarSubalgebra) (hb : ScalarPolarRight J b)
+@@ -193,6 +237,10 @@
+ local instance : CompleteSpace GNSHilbert := F1Fecho.CanonicalFockGNS.gnsCompleteSpace
+ local instance : PartialOrder (GNSHilbert →L[ℂ] GNSHilbert) :=
+   ContinuousLinearMap.instLoewnerPartialOrder (𝕜 := ℂ) (E := GNSHilbert)
++#eval do
++  IO.println "R7_STAGE scalarWeight_right_perturbed_norm"
++  (← IO.getStdout).flush
++
+ theorem scalarWeight_right_perturbed_norm (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (b : core.toStarSubalgebra)
+     (hb : b ∈ scalarPolarRightAlgebra J) (A : scalarWeightLeftIdeal) :
+@@ -217,6 +265,10 @@
+           (J.symm (scalarWeightGNSEmbedding A))))
+ 
+ 
++#eval do
++  IO.println "R7_STAGE scalarWeight_right_perturbed_mono"
++  (← IO.getStdout).flush
++
+ theorem scalarWeight_right_perturbed_mono (J : GNSHilbert ≃ₛₗᵢ[starRingEnd ℂ] GNSHilbert)
+     (b c : core.toStarSubalgebra)
+     (hb : b ∈ scalarPolarRightAlgebra J) (hc : c ∈ scalarPolarRightAlgebra J)

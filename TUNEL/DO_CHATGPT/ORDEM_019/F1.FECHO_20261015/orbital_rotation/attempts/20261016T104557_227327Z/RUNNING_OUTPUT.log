@@ -1,0 +1,47 @@
+import took 343s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T104557_227327Z\PhysicalSymplecticPairingR6.lean:19:2: error: Type mismatch
+  GenericSmearSymplectic.pairing ?m.27
+has type
+  ?m.19 →ₗ[ℝ]
+    @LinearMap ℝ ℝ Real.semiring Real.semiring (RingHom.id ℝ) ?m.19 ℝ
+      (@AddCommGroup.toAddCommMonoid ?m.19 NormedAddCommGroup.toAddCommGroup) Real.instAddCommMonoid
+      NormedSpace.toModule Semiring.toModule
+but is expected to have type
+  SchwartzTensor →ₗ[ℝ]
+    @LinearMap ℝ ℝ Real.semiring Real.semiring (RingHom.id ℝ) SchwartzTensor ℝ
+      (@AddCommGroup.toAddCommMonoid SchwartzTensor SchwartzMap.instAddCommGroup) Real.instAddCommMonoid
+      SchwartzMap.instModule Semiring.toModule
+elaboration took 108ms
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T104557_227327Z\PhysicalSymplecticPairingR6.lean:21:0: error: Not a definitional equality: the left-hand side
+  (physicalTestPairing f) g
+is not definitionally equal to the right-hand side
+  (inner ℂ (circularSmear f) (circularSmear g)).im
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T104557_227327Z\PhysicalSymplecticPairingR6.lean:22:82: error: Type mismatch
+  rfl
+has type
+  ?m.7 = ?m.7
+but is expected to have type
+  (physicalTestPairing f) g = (inner ℂ (circularSmear f) (circularSmear g)).im
+'F1Fecho.MaxwellLocalization.physicalTestPairing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 3.06ms
+	blocked (unaccounted) 11.5ms
+	compilation (IR) 0.108ms
+	compilation (LCNF base) 1.27ms
+	compilation (LCNF impure) 0.485ms
+	compilation (LCNF mono) 0.649ms
+	elaboration 147ms
+	fix level params 0.163ms
+	import 343s
+	initialization 30ms
+	instantiate metavars 0.047ms
+	interpretation 5.99s
+	let-to-have transformation 0.611ms
+	linting 1.37ms
+	overlappingInstancesLinter 7.7ms
+	parsing 0.772ms
+	process pre-definitions 7.95ms
+	share common exprs 0.738ms
+	tacticAnalysis 13.7ms
+	type checking 55.3ms
+	typeclass inference 374ms

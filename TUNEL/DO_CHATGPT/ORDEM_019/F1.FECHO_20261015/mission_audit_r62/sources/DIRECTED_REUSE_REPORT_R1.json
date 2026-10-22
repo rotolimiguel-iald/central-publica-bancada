@@ -1,0 +1,121 @@
+{
+  "kind": "R62_DIRECTED_PREPARATION_READOUT_REUSE",
+  "author": "codex-directed-sources-r62",
+  "created_utc": "2026-10-17T21:03:17.073261+00:00",
+  "status": "DECLARADO_PENDING_INDEPENDENT_REVIEW",
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "bytes": 672,
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11"
+  },
+  "requirement_satisfied": false,
+  "sources": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_audit_r62\\sources\\SOURCE_PINS_AND_ANCHORS_R1.json",
+    "bytes": 50349,
+    "sha256": "614a37830ed6ff3e825e45c78485e46715776e70e13a115f35480145de33e5a3"
+  },
+  "findings": [
+    {
+      "id": "R62-S1",
+      "class": "EXISTE_LIGADO_FINITO",
+      "anchors": [
+        "finite_runner:101-108",
+        "finite_runner:163-186",
+        "finite_runner:201-206"
+      ],
+      "fact": "Hilbert dimension8; vectorized density dimension64. Existing liouvillian(h,jumps) constructs the full64x64 generator, retaining OH, JC, pump and five jumps. Existing expm(t*gen) propagates the full joint state.",
+      "scope": "Bounded hard-core2x2x2 model. The existing142 checks are synthetic prior evidence; not rerun here. Conventional dissipators and dimensionless rates are INPUT, patent specifies H and holographic J but does not fix all rate values."
+    },
+    {
+      "id": "R62-S2",
+      "class": "REDUNDANCIA_EVITAVEL",
+      "anchors": [
+        "finite_runner:25-26",
+        "finite_runner:101-114",
+        "R61_pair_runner:19-26"
+      ],
+      "fact": "A complete64-observable moment representation is a basis transform of the existing density generator, or a representation of its adjoint. It does not construct new dynamics or solve the physical reduction by itself.",
+      "scope": "For moments m_A=Tr(rho A), define T rows vec(A^T)^T; if full basis, M=T L T^-1. Complex non-Hermitian coordinates require this bilinear trace convention, not an unqualified conjugate transpose. No matrixM or rank was computed here. A minimal invariant/Krylov subspace would be genuinely additional, but not necessary for full-state readout."
+    },
+    {
+      "id": "R62-S3",
+      "class": "EXISTE_PREPARO_INPUT_NAO_FISICO",
+      "anchors": [
+        "finite_runner:174-181",
+        "R61_pair_runner:32-39",
+        "R61_report:section4",
+        "R57_runner:126-149"
+      ],
+      "fact": "Existing finite tests use synthetic mixed/pure/basis states. R59/R61 already specifies psi_q=(|00>+q|11>)/sqrt(1+q^2) tensor one of five OH states. R57 uses optical vacuum tensor a named OH density.",
+      "scope": "These are complete joint mathematical preparations, no need to invent another. They are not derived preparation channels of the patented apparatus; product structure and q are INPUT. Correlated rho+/- fromR61 demonstrate why marginals alone do not determine subsequent reduced evolution."
+    },
+    {
+      "id": "R62-S4",
+      "class": "EXISTE_PROTOCOLO_MATERIAL_NAO_DENSIDADE",
+      "anchors": [
+        "patent_v2:833-885",
+        "patent_JAN09_extract:157-175"
+      ],
+      "fact": "Patent prescribes purge/vacuum, water injection, RF excitation and plasma activation, followed by modulated light input. It names OH/optical hardware and operational sequence.",
+      "scope": "No joint normalized optical-OH density, preparation channel, initial correlation control or assurance of the R61 product preparation was located in these passages. This is a bounded documentary finding, not absence throughout C:\\IALD."
+    },
+    {
+      "id": "R62-S5",
+      "class": "EXISTE_INGREDIENTE_RECEPTOR",
+      "anchors": [
+        "graviton_appendices:311-333",
+        "graviton:464-475",
+        "graviton:505-510",
+        "patent_JAN09_extract:153-184",
+        "patent_v2:800-828"
+      ],
+      "fact": "Articles prescribe balanced50/50 homodyne, adjustable phase-locked LO, quadrature scanning and density tomography; heterodyne g1 and HBTg2 are distinct proposals. Patent specifies laser/EOM/APD/lock-in, including relative output/input phase.",
+      "scope": "Two synchronized channel quadratures and their relation to OH-device C/B are not thereby implemented. eta(tau) inJAN09 is a normalized voltage correlation at two times, not automatically either equal-time C or B. C, B, g1, g2 and sigma+ must stay distinct; article modes are Psi modes, not an already demonstrated optical/OH identification."
+    },
+    {
+      "id": "R62-S6",
+      "class": "PROXIMA_PONTE_TIPADA",
+      "anchors": [
+        "graviton_appendices:124-127",
+        "graviton_appendices:318-331",
+        "R61_report:section2"
+      ],
+      "fact": "Shortest next component: specify X_j(theta)=(exp(-i theta)a_j+exp(i theta)a_j_dagger)/sqrt2 and read H(theta,eta)=Tr(rho X_i(theta)X_o(eta)) on the same joint state. Four phase pairs (0,0),(0,pi/2),(pi/2,0),(pi/2,pi/2) can be used to verify a linear inverse for C/B.",
+      "scope": "Proposed algebraic adapter for explicit synthetic state, pending its own verification; not a located ready physical detector equation. Requires phase convention, calibration/gain/loss/noise and two-channel access. For truncated operators, a physical homodyne POVM/compression needs its own justification; do not silently declare finite spin quadrature to be the full bosonic detector."
+    },
+    {
+      "id": "R62-S7",
+      "class": "EXISTE_OBSTRUCAO_REDUZIDA_NAO_GLOBAL",
+      "anchors": [
+        "R61_report:sections3-5",
+        "R61_pair_runner:14-31",
+        "R57_derivation:118-129"
+      ],
+      "fact": "R61 gives Ldag C=-(d+2i wc)C-i g Zi ao sigma-, Ldag B=-dB+i g Zi ao sigma+, d=(ki+ko+lambda)/2. The full density propagation already transports those auxiliary correlations.",
+      "scope": "No need to close C/B alone; zeroing pump/coupling or discarding OH would change the source. Finite CCR is [a,a_dagger]=Z, notI; lambda/2 and n(1-n) must not be transplanted into infinite bosonic formulas."
+    },
+    {
+      "id": "R62-S8",
+      "class": "RESIDUO_FISICO_EXPLICITO",
+      "anchors": [
+        "patent_v2:474-516",
+        "old_superconductor:103-116",
+        "old_superconductor:190-206",
+        "R57_derivation:198-221",
+        "R61_report:section6"
+      ],
+      "fact": "G_OH=e^(i omegaOH t)tanh(PMW/Pth) is written multiplicatively in the patent; the older runner samples tanh/approach-to-plateau laws directly. These do not derive the signal from the joint GKLS.",
+      "scope": "Retain unproved mapping of physical preparation/readout, units/gammaLambda/loss separation, V0/Eref/kappa and Maxwell/network identification. A detector adapter plus full finite propagation is useful progress; no R4/R5 completion or beta measurement follows."
+    }
+  ],
+  "next_step": "Reuse existing full generator and a named R61 joint preparation. Verify only the two-channel quadrature/C-B readout adapter and its phase convention, then compare its traces against the same full state. Keep physical realization and calibrated units explicit. Do not reconstruct full64-moment dynamics merely to rediscover closure.",
+  "execution": {
+    "simulation": false,
+    "source_import_or_execution": false,
+    "new_math_tests": 0,
+    "providers": 0,
+    "observed_data": false,
+    "original_changes": false,
+    "mission_or_memory_changes": false
+  }
+}

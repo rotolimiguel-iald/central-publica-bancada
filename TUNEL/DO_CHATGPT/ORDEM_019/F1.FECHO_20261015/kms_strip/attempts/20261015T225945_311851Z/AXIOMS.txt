@@ -1,0 +1,50 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\kms_strip\attempts\20261015T225945_311851Z\MaxwellScreenIntertwinerR1.lean:32:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  orbitPairing (screenOne y) (g (screen x j))
+in the target expression
+  shellMomentum 0 (rapidityChart 0 y) μ *
+        (orbitPairing (g (![screenOne x, screenTwo x] j)) (nullCompanion y) * shellMomentum 0 (rapidityChart 0 y) ν -
+            orbitPairing (g (![screenOne x, screenTwo x] j)) (screenOne y) * screenOne y ν -
+          orbitPairing (g (![screenOne x, screenTwo x] j)) (screenTwo y) * screenTwo y ν) -
+      shellMomentum 0 (rapidityChart 0 y) ν *
+        (orbitPairing (g (![screenOne x, screenTwo x] j)) (nullCompanion y) * shellMomentum 0 (rapidityChart 0 y) μ -
+            orbitPairing (g (![screenOne x, screenTwo x] j)) (screenOne y) * screenOne y μ -
+          orbitPairing (g (![screenOne x, screenTwo x] j)) (screenTwo y) * screenTwo y μ) =
+    -orbitPairing (screenOne y) (g (![screenOne x, screenTwo x] j)) *
+        (shellMomentum 0 (rapidityChart 0 y) μ * screenOne y ν -
+          shellMomentum 0 (rapidityChart 0 y) ν * screenOne y μ) +
+      -orbitPairing (screenTwo y) (g (![screenOne x, screenTwo x] j)) *
+        (shellMomentum 0 (rapidityChart 0 y) μ * screenTwo y ν - shellMomentum 0 (rapidityChart 0 y) ν * screenTwo y μ)
+
+g : (Fin 4 → ℝ) →ₗ[ℝ] Fin 4 → ℝ
+x y : MomentumCoordinates
+hx : x.1 ≠ 0
+hy : y.1 ≠ 0
+gp : g (shellMomentum 0 (rapidityChart 0 x)) = shellMomentum 0 (rapidityChart 0 y)
+gm : ∀ (a b : Fin 4 → ℝ), orbitPairing (g a) (g b) = orbitPairing a b
+j : Fin 2
+μ ν : Fin 4
+ht : orbitPairing (g (screen x j)) (shellMomentum 0 (rapidityChart 0 y)) = 0
+hd :
+  g (screen x j) =
+    orbitPairing (g (screen x j)) (nullCompanion y) • shellMomentum 0 (rapidityChart 0 y) -
+        orbitPairing (g (screen x j)) (screenOne y) • screenOne y -
+      orbitPairing (g (screen x j)) (screenTwo y) • screenTwo y
+⊢ shellMomentum 0 (rapidityChart 0 y) μ *
+        (orbitPairing (g (![screenOne x, screenTwo x] j)) (nullCompanion y) * shellMomentum 0 (rapidityChart 0 y) ν -
+            orbitPairing (g (![screenOne x, screenTwo x] j)) (screenOne y) * screenOne y ν -
+          orbitPairing (g (![screenOne x, screenTwo x] j)) (screenTwo y) * screenTwo y ν) -
+      shellMomentum 0 (rapidityChart 0 y) ν *
+        (orbitPairing (g (![screenOne x, screenTwo x] j)) (nullCompanion y) * shellMomentum 0 (rapidityChart 0 y) μ -
+            orbitPairing (g (![screenOne x, screenTwo x] j)) (screenOne y) * screenOne y μ -
+          orbitPairing (g (![screenOne x, screenTwo x] j)) (screenTwo y) * screenTwo y μ) =
+    -orbitPairing (screenOne y) (g (![screenOne x, screenTwo x] j)) *
+        (shellMomentum 0 (rapidityChart 0 y) μ * screenOne y ν -
+          shellMomentum 0 (rapidityChart 0 y) ν * screenOne y μ) +
+      -orbitPairing (screenTwo y) (g (![screenOne x, screenTwo x] j)) *
+        (shellMomentum 0 (rapidityChart 0 y) μ * screenTwo y ν - shellMomentum 0 (rapidityChart 0 y) ν * screenTwo y μ)
+'F1Fecho.MaxwellOnShell.real_strength_screen_transport' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellOnShell.strength_of_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.MaxwellOnShell.strength_screen_transport' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

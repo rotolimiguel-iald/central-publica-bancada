@@ -1,0 +1,437 @@
+{
+  "schema": "iald-lean-candidate/v1",
+  "created_utc": "2026-10-16T20:05:48.218811+00:00",
+  "status": "DECLARADO_PENDING_COMPLETE_BUILD_AND_INDEPENDENT_REVIEW",
+  "author": {
+    "kind": "agent",
+    "id": "codex-r50-circular-field-transport"
+  },
+  "requirement": "R8",
+  "handle": "r50-circular-field-transport",
+  "requirement_satisfied": false,
+  "mission_reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "mission_receipt": {
+    "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+    "scope": {
+      "house": "IALD",
+      "principal": "luiz-antonio-rotoli-miguel"
+    },
+    "revision": 327,
+    "event_id": "track-flow-build-20261016T200456_963162Z-running",
+    "event_hash": "b3e0ef4fd677e094952fb8b425ecbcffaedd6d16eb6f8264e4964010ccfab8cb",
+    "objective_sha256": "f57ee2d752f8f8b2226baaf45307f91c485298d2a42758739e4c18ee08cb516e",
+    "anchor_sha256": "6fc1dab76ae9ec6ae35ad68b45e8b82fc2829156e1761945f257d030ae0589c7",
+    "state_sha256": "7998c84380c412d7bf92aa913e6f338e7b211afc75720505c2244128fec19350",
+    "replayed": false
+  },
+  "projection_sha256": "77d76ca2b742fe4db990f67a2b09f793b6a2f308ad9598fe327119d362d6481c",
+  "criterion": "Realizacao conjunta de Maxwell e tensor de materia. Campos do certificado completo nao triviais na mesma rede; simetria/conservacao e fonte geometrica ligados.",
+  "lease_observed": {
+    "expires_at": 1792185306.0734692,
+    "id": "aa3cd719-d85c-4e7b-9276-1b582bdb4277",
+    "owner": "codex-gerente-tgl",
+    "task_epoch": 5
+  },
+  "handoff": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_resume_20261016\\LIVE_R50_HANDOFF_R8_20261016T195704_412427Z_efeee276_RECEIPT.json",
+    "sha256": "557016021acd74d1450e0501a9a5576788fe79c2c7e93467e673402648f11ba9",
+    "bytes": 127877
+  },
+  "sources": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\FockSegalUnitaryTransportR1.lean",
+        "sha256": "0831edc3cb43b2b7a23daa5a1dddff3216d54aca73140306de457e239a60c328",
+        "bytes": 6438
+      },
+      "imports": [
+        "WeakSegalDistributionR3",
+        "WickQuadraticFormR6",
+        "BosonicFockGroupActions"
+      ],
+      "expected_print_count": 11,
+      "public_print_declarations": [
+        "F1Fecho.FockSegalTransport.synthesize_equivMapDomain",
+        "F1Fecho.FockSegalTransport.gamma_mem_exponentialDomain",
+        "F1Fecho.FockSegalTransport.domainGamma_value",
+        "F1Fecho.FockSegalTransport.domainGamma_symm_apply",
+        "F1Fecho.FockSegalTransport.weighted_equivMapDomain",
+        "F1Fecho.FockSegalTransport.annihilation_gamma",
+        "F1Fecho.FockSegalTransport.creation_gamma",
+        "F1Fecho.FockSegalTransport.segal_gamma",
+        "F1Fecho.FockSegalTransport.invariant_annihilation_gamma",
+        "F1Fecho.FockSegalTransport.doubleAnnihilate_gamma",
+        "F1Fecho.FockSegalTransport.wick_quadratic_gamma"
+      ]
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CircularPhysicalFieldTransportR1.lean",
+        "sha256": "e6d97d5a50da58ae4b8d4d6a904404f5ac045d3a93f92cd77733c23b59c71983",
+        "bytes": 9744
+      },
+      "imports": [
+        "FockSegalUnitaryTransportR1",
+        "RegularCircularTransportR2",
+        "PhysicalSmearTranslationR2",
+        "UnitaryFourierRealStressR2"
+      ],
+      "expected_print_count": 20,
+      "public_print_declarations": [
+        "F1Fecho.MaxwellGlobal.circularSmearCLM_apply",
+        "F1Fecho.MaxwellGlobal.circularH1_circularSmear",
+        "F1Fecho.MaxwellGlobal.regularFockDomain_le_exponentialDomain",
+        "F1Fecho.MaxwellGlobal.domainGamma_regularCircular",
+        "F1Fecho.MaxwellGlobal.regularCircular_left_inverse",
+        "F1Fecho.MaxwellGlobal.regularCircular_right_inverse",
+        "F1Fecho.MaxwellGlobal.regularCircular_norm",
+        "F1Fecho.MaxwellGlobal.gamma_circular_U1",
+        "F1Fecho.MaxwellGlobal.gamma_circular_B0",
+        "F1Fecho.MaxwellGlobal.circularField_essentially_selfadjoint",
+        "F1Fecho.MaxwellGlobal.circularField_intertwines",
+        "F1Fecho.MaxwellGlobal.circularField_intertwines_regular",
+        "F1Fecho.MaxwellGlobal.unitaryFourierFieldAmplitude_pos",
+        "F1Fecho.MaxwellGlobal.unitaryFourierFieldAmplitude_sq",
+        "F1Fecho.MaxwellGlobal.circularH1_normalizedCircularSmear",
+        "F1Fecho.MaxwellGlobal.normalizedPhysicalField_eq_amplitude",
+        "F1Fecho.MaxwellGlobal.normalizedCircularField_essentially_selfadjoint",
+        "F1Fecho.MaxwellGlobal.normalizedCircularField_intertwines_regular",
+        "F1Fecho.MaxwellGlobal.normalizedCircularWick_transport",
+        "F1Fecho.MaxwellGlobal.exists_nonzero_normalizedCircularField_vacuum"
+      ]
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactCircularTransportR1.lean",
+        "sha256": "8b0331c7fdbd48487f3416ef9f9477a5dff23554d4e97c5be183a5ef2ff17c08",
+        "bytes": 4882
+      },
+      "imports": [
+        "CircularPhysicalFieldTransportR1",
+        "AxisCompactFockTranslationR2"
+      ],
+      "expected_print_count": 8,
+      "public_print_declarations": [
+        "F1Fecho.MaxwellGlobal.axisCompactProfile_fiberLift",
+        "F1Fecho.MaxwellGlobal.axisCompactProfile_circular",
+        "F1Fecho.MaxwellGlobal.axisCompactProfile_circular_symm",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_fiberLift",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_circular",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_circular_iff",
+        "F1Fecho.MaxwellGlobal.gamma_fiberLift_mem_axisCompactFockDomain",
+        "F1Fecho.MaxwellGlobal.axisCompactFockDomain_circular"
+      ]
+    }
+  ],
+  "existing_suppliers": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularCircularTransportR2.lean",
+        "sha256": "26c9f6084fe49e84011e6ab902fc3cae053eecefea388b061437feafc25b8aba",
+        "bytes": 2238
+      },
+      "status": "COMPILED_EXIT0_NOT_INDEPENDENTLY_REVIEWED_HERE",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T040742_822768Z\\RECEIPT.json",
+        "sha256": "03b30b216980db3845a0c1c5801e52199bb23f431538c023fdb411d10daabbd7",
+        "bytes": 112449
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\kms_strip\\attempts\\20261016T040742_822768Z\\AXIOMS.txt",
+        "sha256": "ed20c1e41a94e2822b80d340887a9e16741c18ae2e37100f6395d19f089023b4",
+        "bytes": 448
+      },
+      "seconds": 211.36133159999736,
+      "exit_code": 0,
+      "axiom_declarations": [
+        "F1Fecho.MaxwellGlobal.strongRegularProfile_fiberLift",
+        "F1Fecho.MaxwellGlobal.strongRegularProfile_circular_symm",
+        "F1Fecho.MaxwellGlobal.regularCircular_value",
+        "F1Fecho.MaxwellGlobal.regularCircular_exponential"
+      ],
+      "only_standard_trio": true,
+      "source_matches_attempt": true
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\PhysicalSmearTranslationR2.lean",
+        "sha256": "b0e417274dcf136a78189ec7aa656a34e470b90ad02708405ea968378ac61935",
+        "bytes": 3623
+      },
+      "status": "COMPILED_EXIT0_NOT_INDEPENDENTLY_REVIEWED_HERE",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261015T235727_985847Z\\RECEIPT.json",
+        "sha256": "ce71e0c46dcc87936e2c0501790f55530ec687ec41bfbea3652793e31018f7cc",
+        "bytes": 100209
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261015T235727_985847Z\\AXIOMS.txt",
+        "sha256": "e1c65c1b68ce03357a8f8368608cf0b2b220bafadbab82b74eff3bddb16d3848",
+        "bytes": 577
+      },
+      "seconds": 110.94332669999858,
+      "exit_code": 0,
+      "axiom_declarations": [
+        "F1Fecho.MaxwellLocalization.physicalFourier_translate",
+        "F1Fecho.MaxwellLocalization.coefficient_translate",
+        "F1Fecho.MaxwellLocalization.physicalSmear_translate",
+        "F1Fecho.MaxwellLocalization.circularSmear_translate",
+        "F1Fecho.MaxwellLocalization.exists_nonzero_real_circularSmear"
+      ],
+      "only_standard_trio": true,
+      "source_matches_attempt": true
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\UnitaryFourierRealStressR2.lean",
+        "sha256": "24e43c4b466132d00b97a51fd4eb9de129a384eab5755528f1fe8a045be6eff3",
+        "bytes": 3423
+      },
+      "status": "COMPILED_EXIT0_NOT_INDEPENDENTLY_REVIEWED_HERE",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T173910_273248Z\\RECEIPT.json",
+        "sha256": "bdff86060ce82870182ef5377a67a42bab40ed3ee4cef40203c24994d8c5ab40",
+        "bytes": 138054
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T173910_273248Z\\AXIOMS.txt",
+        "sha256": "e270640adab09bdde83ef2d41b316b8c91038ea514deb4468f785d6780a869b2",
+        "bytes": 1704
+      },
+      "seconds": 73.1611045999889,
+      "exit_code": 0,
+      "axiom_declarations": [
+        "F1Fecho.MaxwellGlobal.unitaryFourierStressScale_pos",
+        "F1Fecho.MaxwellGlobal.axisCompact_unitaryFourierRealNullStress_nonneg",
+        "F1Fecho.MaxwellGlobal.axisCompact_unitaryFourierRealNullStress_moment_integrable",
+        "F1Fecho.MaxwellGlobal.axisCompact_unitaryFourierRealNullStress_moment"
+      ],
+      "only_standard_trio": true,
+      "source_matches_attempt": true
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactFockTranslationR2.lean",
+        "sha256": "593db75d839b2b7a2d74ca2f7ea494424f25fede72db895a50b5127f88de1b28",
+        "bytes": 11694
+      },
+      "status": "COMPILED_EXIT0_NOT_INDEPENDENTLY_REVIEWED_HERE",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T185416_973527Z\\RECEIPT.json",
+        "sha256": "0e620dd2805df04f3eb2a403458c5737bc2b7cb51c20e5dbd7e3da72c4bfd52b",
+        "bytes": 152455
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T185416_973527Z\\AXIOMS.txt",
+        "sha256": "a2090391323bbc0139485ae26b13fe082e7a8951faa914e810e7c670686fdfa4",
+        "bytes": 3545
+      },
+      "seconds": 78.13163189998886,
+      "exit_code": 0,
+      "axiom_declarations": [
+        "F1Fecho.MaxwellGlobal.orbitalPhase_contDiffAt_off_axis",
+        "F1Fecho.MaxwellGlobal.orbitalPhase_smul_axisGap_contDiff",
+        "F1Fecho.MaxwellGlobal.axisCompactProfile_U1",
+        "F1Fecho.MaxwellGlobal.axisCompactProfile_U1_iff",
+        "F1Fecho.MaxwellGlobal.axisCompactProfile_zero",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_zero",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_add",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_smul",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_vacuum",
+        "F1Fecho.MaxwellGlobal.axisCompactFock_translate",
+        "F1Fecho.MaxwellGlobal.axisCompactFockDomain_le_regular",
+        "F1Fecho.MaxwellGlobal.mem_axisCompactFockDomain_iff",
+        "F1Fecho.MaxwellGlobal.vacuum_mem_axisCompactFockDomain",
+        "F1Fecho.MaxwellGlobal.gamma_U1_mem_axisCompactFockDomain",
+        "F1Fecho.MaxwellGlobal.axisCompactFockDomain_translate",
+        "F1Fecho.MaxwellGlobal.exponential_mem_axisCompactFockDomain",
+        "F1Fecho.MaxwellGlobal.axisCompactFockDomain_dense"
+      ],
+      "only_standard_trio": true,
+      "source_matches_attempt": true
+    }
+  ],
+  "root_builds_observed": [
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\FockSegalUnitaryTransportR1.lean",
+        "sha256": "0831edc3cb43b2b7a23daa5a1dddff3216d54aca73140306de457e239a60c328",
+        "bytes": 6438
+      },
+      "status": "COMPILED_EXIT0_NOT_INDEPENDENTLY_REVIEWED_HERE",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T200236_367496Z\\RECEIPT.json",
+        "sha256": "811f8036f462b341d0a4947655b540ee3e5c731a5f1ca3999aa55342176a4af2",
+        "bytes": 56391
+      },
+      "axioms": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T200236_367496Z\\AXIOMS.txt",
+        "sha256": "5183cd969124feea70bd3a77d94009c5fe42162139a338db888b1695c9115ea3",
+        "bytes": 1942
+      },
+      "seconds": 62.741442099999404,
+      "exit_code": 0,
+      "axiom_declarations": [
+        "F1Fecho.FockSegalTransport.synthesize_equivMapDomain",
+        "F1Fecho.FockSegalTransport.gamma_mem_exponentialDomain",
+        "F1Fecho.FockSegalTransport.domainGamma_value",
+        "F1Fecho.FockSegalTransport.domainGamma_symm_apply",
+        "F1Fecho.FockSegalTransport.weighted_equivMapDomain",
+        "F1Fecho.FockSegalTransport.annihilation_gamma",
+        "F1Fecho.FockSegalTransport.creation_gamma",
+        "F1Fecho.FockSegalTransport.segal_gamma",
+        "F1Fecho.FockSegalTransport.invariant_annihilation_gamma",
+        "F1Fecho.FockSegalTransport.doubleAnnihilate_gamma",
+        "F1Fecho.FockSegalTransport.wick_quadratic_gamma"
+      ],
+      "only_standard_trio": true,
+      "source_matches_attempt": true
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CircularPhysicalFieldTransportR1.lean",
+        "sha256": "e6d97d5a50da58ae4b8d4d6a904404f5ac045d3a93f92cd77733c23b59c71983",
+        "bytes": 9744
+      },
+      "status": "DECLARADO_PENDING_BUILD"
+    },
+    {
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactCircularTransportR1.lean",
+        "sha256": "8b0331c7fdbd48487f3416ef9f9477a5dff23554d4e97c5be183a5ef2ff17c08",
+        "bytes": 4882
+      },
+      "status": "DECLARADO_PENDING_BUILD"
+    }
+  ],
+  "direct_reuse": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\WeakSegalDistributionR3.lean",
+      "sha256": "372f5f0c4f7ebfb607e80c862300d375c7a3345bfde16e67dd23338ef4307cc8",
+      "bytes": 5056
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\WickQuadraticFormR6.lean",
+      "sha256": "fe43f649a0e2dc18f1caa35cda64af2f6d5bc1c82bc324f417ef1a46923aa58d",
+      "bytes": 4073
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularCoherentTransportR1.lean",
+      "sha256": "c5c7421a82471342b7f60e97e6c4e49b525dfb8b3d8995f33b787c61884afb6a",
+      "bytes": 2673
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\PhysicalSchwartzMaxwellR1.lean",
+      "sha256": "a7ac6222b588273cd37a276a98128eb680f479b44e4e7f8a2ca13cfe93d0202e",
+      "bytes": 4358
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularMaxwellFockDomainR5.lean",
+      "sha256": "2613bb3eee560b1b04a38aa4305b0dbaa91a698be3903174ae69430d7288c729",
+      "bytes": 5212
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactProfileDensityR4.lean",
+      "sha256": "d5022e6a5554204d5e123610ccd25a0c831f8dea961fc0f6a96e379875579077",
+      "bytes": 1825
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\SmoothLinearMomentumCutoffR3.lean",
+      "sha256": "a5691c8cfedcc94f359c8e49b8095c513946ef038a05ed10cc27130bc6f3fa00",
+      "bytes": 7834
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\CompactFockBoostDerivativeR2.lean",
+      "sha256": "4b844ad594c99a5ea841edd19e8aef1daf08bf38fba501d0af2dd7394a3679ab",
+      "bytes": 8747
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\ScreenCircularBasisR2.lean",
+      "sha256": "83f77c886819ba15e52143311cacb60087ab6c9edf337bab7a4915a7e4aa5efc",
+      "bytes": 4133
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_annihilation\\ExponentialAnnihilationR2.lean",
+      "sha256": "a9e9690e8cdbe9d5a3236a5dae39b445175f8aaef18c3babbd3e903f99f5e099",
+      "bytes": 5368
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_annihilation\\CreationAndSegalR2.lean",
+      "sha256": "a8af9a4f1b453b345c440d19b2a4ed882fc0d9d61b6f5774febf53560a1e5c3d",
+      "bytes": 6863
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_annihilation\\AnnihilationDomainR1.lean",
+      "sha256": "3b96499fc14a8fd2e42b4d82541be98cbbb932022e43435f2888726789e06cd4",
+      "bytes": 1808
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicFock.lean",
+      "sha256": "c7d24c14f9bb1c2a31c3b207a9f86e839577b6705c4b55b2aa6eab187450d3ec",
+      "bytes": 3270
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\fock_construction\\BosonicFockGroupActions.lean",
+      "sha256": "0de93539839cb2086245b1eb9949744c4777bb7f77d359ffb95ed2eb3aab3975",
+      "bytes": 3254
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\InnerProductSpace\\LinearMap.lean",
+      "sha256": "ab1c30da0e74743b1a93c50431ef732bc6916f9b3280e43e5bd8a89ccdd1af14",
+      "bytes": 17850
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Topology\\Algebra\\Support.lean",
+      "sha256": "3e12421fc4ddb0d915a5a78af22be94ef2ae4cdc6ebcd8a7fb87a3140787742b",
+      "bytes": 22911
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\Analysis\\Normed\\Operator\\LinearIsometry.lean",
+      "sha256": "1276c4fcab67b1889f31e80495c03e38f17e8e56a716b010d5485fb4c9724f38",
+      "bytes": 43385
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\R49_MAXWELL_GAP_INVENTORY_R1.json",
+      "sha256": "eef0d1b2d54013b7d9a07406906c7c6f8fa5f05a568b949424edc2ba9f599bcf",
+      "bytes": 34633
+    }
+  ],
+  "supplier_receipt_pins_verified": 527,
+  "supplier_receipt_bytes_verified": 52504755,
+  "verification_scope": "Cada par path/sha256 embutido nos recibos verdes observados foi conferido, além dos pinos diretos. O autor não compilou. Recibos de dependências não foram recursivamente reabertos para auditoria científica.",
+  "mathematics": [
+    "O gamma existente transporta o domínio exponencial concreto por reindexação das sínteses finitas. Aniquilação é entrelaçada nessa síntese; criação é identificada por totalidade exponencial e preservação do produto interno.",
+    "Segal é transportado por linearidade do mesmo gamma. A saída de criação/Segal não é declarada membro do domínio exponencial.",
+    "circularSmearCLM é exatamente circularH1.symm composto com physicalSmearCLM; circularField é o Segal desse rótulo. A igualdade inclui gamma circularH1 no vetor e no domínio.",
+    "regularFockDomain entra no domínio exponencial por inclusão provada. regularCircular e o inverso usam regularGamma existente, preservando norma; gamma circularH1 entrelaça U1/B0.",
+    "A amplitude é sqrt(unitaryFourierStressScale), com quadrado igual ao fator já fixado ((2*pi)^3)^(-1). Não há parâmetro ajustável. physicalField antigo fica intacto; normalizedPhysicalField é sua amplitude real fixa.",
+    "O Wick bilocal é transportado no domínio exponencial inteiro e, por inclusão, em todas as somas coerentes regulares. As duas funções teste e os vetores transformados permanecem explícitos.",
+    "A mesma fibra circular leva representantes compactos suaves ao mesmo suporte com a mesma lacuna de eixo. Reindexação dos coeficientes únicos transporta AxisCompactFock e o próprio axisCompactFockDomain."
+  ],
+  "new_mathematical_premises": [],
+  "scope_limits": [
+    "A identificação local de Wick no ponto coincidente com unitaryFourierPointStressForm não é provada nem assumida.",
+    "Não se afirma que o tensor de perfil é invariante sob circularH1 mantendo os vetores fixos; os teoremas transportam os estados.",
+    "A testemunha nova é somente de excitação não nula do campo normalizado; não substitui a testemunha de energia nem Regular completos já construídos.",
+    "R8 integral, incluindo tensor/campo/rede/fonte geométrica, permanece aberto. A existência de RemainingModularCoreInput e a seleção de relógio físico não são produzidas."
+  ],
+  "next_exact_obligation": "Identificar a restrição Wick local construída do normalizedPhysicalField (ou do normalizedCircularField com regularCircular nos estados) e a contração de Maxwell com unitaryFourierPointStressForm, usando unitaryFourierFieldAmplitude_sq; sem hipótese da igualdade almejada.",
+  "limits": {
+    "maxHeartbeats": 400000,
+    "synthInstance.maxHeartbeats": 500000
+  },
+  "original_sources_modified": false,
+  "author_builds": 0,
+  "provider_calls": 0,
+  "production_changes": false,
+  "mission_mutations": false,
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\pin_circular_field_transport_r50_r1.py",
+    "sha256": "d8cedd2fa6a6a7c607b9dc18aefd1c13f7ab5abb7ef6d5abed441c477006649f",
+    "bytes": 9344
+  }
+}

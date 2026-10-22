@@ -1,0 +1,126 @@
+{
+  "schema": "iald-independent-review/v1",
+  "verdict": "PASS_COMPONENT_WITH_SCOPE",
+  "requirement": "R8",
+  "requirement_satisfied": false,
+  "created_utc": "2026-10-16T19:21:07.998905+00:00",
+  "reviewer": {
+    "kind": "agent",
+    "id": "codex-r48-regular-independent-review"
+  },
+  "source_author": "codex-mission-memory-review",
+  "independence": "Reviewer did not construct AxisCompactRegularR1/R2. Reviewer authored prior charge-coordinate and boost components; this review is limited to the separate Regular construction and the bytes of its suppliers.",
+  "reference": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+    "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+    "bytes": 672
+  },
+  "mission_receipt": {
+    "context_id": "34290aaa-3dcc-51d5-b224-f3eeec93509b",
+    "scope": {
+      "house": "IALD",
+      "principal": "luiz-antonio-rotoli-miguel"
+    },
+    "revision": 295,
+    "event_id": "r48-cut-review-returned",
+    "event_hash": "5f240e3ce4bbeaba046272bdfc63b9ed4fb9aff87c7f42d1f622f438a7c0b1db",
+    "objective_sha256": "f57ee2d752f8f8b2226baaf45307f91c485298d2a42758739e4c18ee08cb516e",
+    "anchor_sha256": "6fc1dab76ae9ec6ae35ad68b45e8b82fc2829156e1761945f257d030ae0589c7",
+    "state_sha256": "d9dd3143cacd17121279abb11e33bfdf4dc1d0609eeb0ffc814ee00ddcd0946b",
+    "replayed": false
+  },
+  "projection_sha256": "6b9bc4edbc5c65ba575ebd35373037b5020e8a4e875d57dc4c6637b3e0d9a96a",
+  "handle": "r48-regular-independent-review",
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AxisCompactRegularR2.lean",
+    "sha256": "59f1ac8049daf3479b72afa0f8a89a9cf150a2884b7e8e96ec3238dc12f6564f",
+    "bytes": 9993
+  },
+  "candidate_manifest": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AXIS_COMPACT_REGULAR_CANDIDATE_R2.json",
+    "sha256": "e68be0b59858b56d8c31f8f6ff10015e0ea659879e12ff1c90714232a53814ec",
+    "bytes": 3677
+  },
+  "build": {
+    "receipt": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T191655_039766Z\\RECEIPT.json",
+      "sha256": "04e70a8e60fdc26e89bc2926df4cd30d7747da5bbf90b9d501d45dd72b4fb746",
+      "bytes": 253248
+    },
+    "exit_code": 0,
+    "seconds": 73.12264620000497,
+    "axioms": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\orbital_rotation\\attempts\\20261016T191655_039766Z\\AXIOMS.txt",
+      "sha256": "df59bbee58de0848afbda31ed18e022cc0e0671ce54442dddfade7a72eecd9d3",
+      "bytes": 2292
+    },
+    "declarations": [
+      "F1Fecho.MaxwellGlobal.axisCompact_nullStress_ray_schwartz",
+      "F1Fecho.MaxwellGlobal.axisCompact_calibrated_nullRay_regular",
+      "F1Fecho.MaxwellGlobal.calibrated_nullEnergy_translate_base",
+      "F1Fecho.MaxwellGlobal.axisCompact_calibrated_regular"
+    ],
+    "only_standard_trio": true,
+    "source_bytes_match_attempt": true
+  },
+  "pin_verification": {
+    "unique_path_hash_pairs": 1129,
+    "bytes_hashed": 161500339,
+    "mismatches": 0,
+    "coverage": "All path+sha256 pins recursively present in the R2 candidate manifest, build receipt and dependency-cache manifest; every original and copied cache module pin was read. This is not a new Lean rebuild."
+  },
+  "literal_regular_clauses": [
+    {
+      "clause": "psi in Dom",
+      "proof": "mem_axisCompactFockDomain_iff from the existing exact AxisCompact coefficient predicate, inside the unchanged Fock."
+    },
+    {
+      "clause": "For every base point x, product-plane first-moment integrability",
+      "proof": "axisCompact_calibrated_nullCharge_integrable applied to the actual U1(-x) translated vector; translation preserves AxisCompactFock and tensor covariance identifies the entire integrand for every x."
+    },
+    {
+      "clause": "norm psi = 1",
+      "proof": "Exact explicit hn premise, unchanged in the final Regular conjunction."
+    },
+    {
+      "clause": "For every x, continuity along u -> x + u*nullDir",
+      "proof": "At zero base point the actual stress restriction is a Schwartz function; translation covariance extends to arbitrary x."
+    },
+    {
+      "clause": "For every x and l, unweighted integrability on Ioi l",
+      "proof": "The zero-base ray is full-line integrable as a Schwartz restriction; translated vectors supply each x, and Integrable.integrableOn supplies every Ioi l."
+    },
+    {
+      "clause": "For every x and l, weighted integrability of u*Tnn on Ioi l",
+      "proof": "Multiplication of the Schwartz ray by the polynomial u is integrable; the same covariance and restriction discharge every x,l."
+    }
+  ],
+  "adversarial_checks": [
+    "The Fourier restriction uses a nonzero line direction and proves the proper-growth bound; an arbitrary non-proper restriction is not assumed Schwartz.",
+    "Finite coherent sums retain all mixed terms and the actual unique coefficients, using both AxisCompact supports.",
+    "The covariance argument uses the negative state translation and identifies x+y with the contract base-point shift; no quantifier is limited to x=0.",
+    "The final theorem consumes only A, psi in regularFockDomain, AxisCompactFock psi and the stated unit norm. No Regular clause, tail estimate, charge equality or nonzero-energy premise is added.",
+    "The global calibrated tensor is reused and is not made zero outside a newly invented domain. The final domain is exactly axisCompactFockDomain."
+  ],
+  "scope_limits": [
+    "RemainingModularCoreInput A is an explicit assembly premise; this component does not construct its unresolved trace/PF data.",
+    "Unit norm is an explicit condition. This theorem does not itself construct a normalized state or a nonzero modular-energy witness.",
+    "No physical clock selection, complete MaxwellCertificate, full R8 acceptance or gate change is certified here."
+  ],
+  "findings": [],
+  "nonblocking_residue": [
+    "Deprecation and unused-simplifier warnings in the existing successful build do not change theorem statements or axioms."
+  ],
+  "consulted_contract": {
+    "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\TheImportedSecondQuantization.lean",
+    "sha256": "ef35478400ef07f20476f2bb937d8fbe2df7b9e506139f54dc5a37401e7d5242",
+    "bytes": 35835
+  },
+  "review_script": {
+    "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\review_r48_regular_independent_r1.py",
+    "sha256": "21d97fc9cf8c671e33299915e3ef67b84490ae27e81044fc9f43f4805f38d8e9",
+    "bytes": 7860
+  },
+  "own_builds": 0,
+  "accept_transition_performed": false
+}

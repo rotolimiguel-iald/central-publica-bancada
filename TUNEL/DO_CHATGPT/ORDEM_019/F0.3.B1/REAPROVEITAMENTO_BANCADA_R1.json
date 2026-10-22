@@ -1,0 +1,91 @@
+{
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\IALD\\MAPA_DE_ROTAS\\rotas.py",
+    "consultar",
+    "bancada|implantacao|compatibilidade"
+  ],
+  "exit": 0,
+  "map_head": "abd26691980c5e9e",
+  "map_records": 982,
+  "routes": [
+    {
+      "rota_id": "cmb.neff_e_rho_mais_p",
+      "dominio": "D1_FUNDO_COSMOLOGICO",
+      "status": "EXAMINADA",
+      "titulo": "F5.2 R3 — errata ao canal N_eff instalado, por fonte congelada (seq 606)",
+      "estatuto": "REAL",
+      "veredito": "ERRATA_DOCUMENTAL_F52_R3__D8_X16_OPEN__CANDIDATE_SANDBOX__GATE_UNTOUCHED",
+      "resultado": "CMB-SPA: v1 Yp BBN 2,81±0,12; Yp livre 2,99 +0,22/−0,26. v2 Yp BBN 2,82±0,12; Yp livre 2,96 +0,21/−0,24. O 2,97±0,12 do frozen/V1 combina linhas diferentes e não existe na Tabela 5.",
+      "defeito": "O canal instalado lê a fonte congelada que contém CMB-SPA 2,97±0,12; o literal não está no código do canal. Candidato R3 ainda não instalado.",
+      "nao_refazer": "Não editar frozen, V1, canal instalado, Bancada, memória ou gate; não selecionar Yp sem X16 nem admitir fonte sem D8.",
+      "proximo_passo": "c1 audita esta camada; admissão D8 e escolha Yp X16 permanecem atos do operador antes de uso decisório ou instalação.",
+      "n_registros": 4,
+      "atualizada": "2026-10-08T13:23:23-03:00",
+      "por": "codex-gerente-tgl"
+    },
+    {
+      "rota_id": "d1.fase9.f3_auditoria_cetica_c1_07out",
+      "dominio": "D1_FUNDO_COSMOLOGICO",
+      "status": "EXAMINADA",
+      "titulo": "Auditoria cética c1 das entregas F3.1 (proposta V1.x) e F3.2 (f9_reader_gate.py) da Fase 9: hashes, recusas e poder só com σ nas duas pontas da faixa de covariância",
+      "estatuto": "REAL",
+      "veredito": "F3_1_APROVA_COM_RESSALVAS__BASE_SEMANTICA_NAO_CONGELAVEL_SEM_AS_CORRECOES__F3_2_APROVA_COM_RESSALVAS__PODER_BG1_SO_SIGMA_5P47_A_6P63_SEIS_MASERS_5P72_A_6P62_CINCO__COTA_GLS_5P27__NENHUM_COMPOSTO__GATE_INTOCADO",
+      "resultado": "Hashes: todos batem (F3.1 072bb829/68c9c340/8438a01a; F3.2 ce4d4a12/f023510e/5b57d850/23ec6843; V1 1893261e, spec d956c8db e função 5940bf16 recalculados; vínculo d37d7507, cinco fontes, PDF c9f2d2b6, CCHP integral e32d6083 e quatro janelas). F3.2: 6/6 testes originais e 14/14 recusas extras passam na cópia (pin de fonte errado, contagem de bytes, pin do V1, fonte, vínculo e V1 ausentes de verdad…",
+      "defeito": "F3.1 não congelável como está (as correções 1–4, 6–8 e 10 do despacho de 22:18 são posteriores à entrega de 21:10–21:22). F3.2: a âncora não amarra o número; erro de esquema não tipado; official_archive_check() amarra o vínculo ao V1 antigo (o runner V1.x precisa de vínculo novo pinando o JSON V1.x…",
+      "nao_refazer": "Os hashes, os 22 testes na cópia e o poder só com σ nas duas pontas estão feitos e por hash (saidas_auditoria.txt). Não recalcular sem mudança de σ, de fundo ou de família. O z_disc e o lnB sob a semântica nova NÃO foram calculados: exigem a V2 congelada e a palavra do operador (F3.3).",
+      "proximo_passo": "Gerência: fixar a semântica (recomendação: cinco masers decisório e seis ao lado; caixa [0, teto] sem primária central; falsificação no σ_comb mínimo; discriminação e poder no σ_comb máximo achado por grade pré-registrada; dispersão INCONCLUSIVE se falhar em qualquer ponta); V2 por gerador novo com…",
+      "n_registros": 1,
+      "atualizada": "2026-10-07T22:47:22-03:00",
+      "por": "claude-code/central-de-patentes (gerencia c1, sessao 6da8f00d; auditor cetico)"
+    },
+    {
+      "rota_id": "infra.bancada_oficial.investigacao_28set",
+      "dominio": "INFRAESTRUTURA",
+      "status": "EXAMINADA",
+      "titulo": "Investigação de prioridades da bancada oficial (28/09): onde concentrar a busca",
+      "estatuto": "[DECLARADO — relatório da bancada oficial de 28/09; conferência independente pela auditoria de 28/09 em curso]",
+      "veredito": "",
+      "resultado": "**Resultado:** a bancada facilita uma investigação conjunta com agentes, e isso foi medido em execução. A rodada identificou uma comparação sem sensibilidade por construção no ensaio ACT, quantificou a degenerescência do fundo BAO e conferiu a degenerescência de um único modo de ringdown. Não produziu nova significância física nem alterou o kernel ou o gate.",
+      "defeito": "",
+      "nao_refazer": "",
+      "proximo_passo": "",
+      "n_registros": 1,
+      "atualizada": "2026-09-28T17:27:34-03:00",
+      "por": "claude-code/central-de-patentes (gerência) sessão 6da8f00d"
+    },
+    {
+      "rota_id": "infra.bancada_um.programa_pesquisa_autonoma",
+      "dominio": "INFRAESTRUTURA",
+      "status": "PROPOSTA",
+      "titulo": "A decisão pendente do mapa de R foi respondida pelo operador em 30/09 (leitura: eff); falta a linha de ratificação",
+      "estatuto": "INPUT",
+      "veredito": "",
+      "resultado": "Verbatim e leitura na memória permanencia-e-verbo-mapa-de-R-30set.md e no Atlas §X (30/09). Até a linha, os dois mapas correm como ramos [INPUT].",
+      "defeito": "",
+      "nao_refazer": "",
+      "proximo_passo": "abrir a sessão em C:\\IALD\\Bancada_Um com o prompt do handoff; fase 0 primeiro; decisão do operador sobre o mapa de R [INPUT]",
+      "n_registros": 2,
+      "atualizada": "2026-09-30T08:35:17-03:00",
+      "por": "claude-code/central-de-patentes (gerência) sessão 6da8f00d"
+    },
+    {
+      "rota_id": "infra.bancada_um.validacao",
+      "dominio": "INFRAESTRUTURA",
+      "status": "EXAMINADA",
+      "titulo": "A Bancada Um reproduz o D1 V3 selado (fundo, χ², MCMC)",
+      "estatuto": "[REAL — lido de validacao_corrigido.json]",
+      "veredito": "BANCADA_UM_MODO_CORRIGIDO_REPRODUZ_O_VERIFICADOR_D1",
+      "resultado": "ADEQUAÇÃO DA BANCADA DE TESTE (28/09/2026, noite; ordem do operador «adequarmos a bancada de teste»). A Bancada Um ganhou OPÇÕES declaradas de modelo/verossimilhança, por chamada (interface, API e MCP), com o modo padrão «selado» (reprodução da V3 do D1) e o modo «corrigido» (a covariância do Planck da Tabela I de Chen, Huang & Wang 2019, lida do PDF arquivado em fontes_externas com sha256; as co…",
+      "defeito": "",
+      "nao_refazer": "validação gravada; refazer só se o motor, a tabela do CAMB ou as fontes mudarem",
+      "proximo_passo": "ligar a covariância do Pantheon+ (existe em disco); refazer o DR2 (P1/P2) no modo corrigido sob pré-registro novo",
+      "n_registros": 3,
+      "atualizada": "2026-09-28T19:27:56-03:00",
+      "por": "claude-code/central-de-patentes (gerência) sessão 6da8f00d"
+    }
+  ]
+}

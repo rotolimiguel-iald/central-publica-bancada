@@ -1,0 +1,265 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim": 845,
+  "reviewer": "codex-atrator-skeptic",
+  "created_utc": "2026-10-15T19:00:04.613420+00:00",
+  "verdict": "PASSA_COM_ESCOPO_OPERADORES_CONSTRUIDOS",
+  "material_findings": [],
+  "low_findings": [],
+  "builds": [
+    {
+      "name": "lift",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_review\\lift\\RECEIPT_R1.json",
+        "sha256": "8f78e0cd5792f9b14d56245a276c2a17611181b289fb147c550e80e9cf9967b9",
+        "bytes": 29873
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\ExponentialLiftR2.lean",
+        "sha256": "dc50fdbad34447d085b0a16d975d8e227ea87cdb281ae4d23111dc58ba900b13",
+        "bytes": 9784
+      },
+      "seconds": 62.02043990000675,
+      "print_axioms": 12,
+      "olean_identical": true,
+      "source_theorem_count": 20
+    },
+    {
+      "name": "positive",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_review\\positive\\RECEIPT_R1.json",
+        "sha256": "e1fd9071e367f03a93155a5dc353f08521c126e5d32998eb4abf2c9e8ae8f061",
+        "bytes": 30264
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\ExponentialLiftPositiveR2.lean",
+        "sha256": "d03bcdd3a324b17e1c2d83e571048e39d4ee478f6b50692e5e79a15e3a79b8f0",
+        "bytes": 4278
+      },
+      "seconds": 50.801211900005,
+      "print_axioms": 6,
+      "olean_identical": true,
+      "source_theorem_count": 9
+    },
+    {
+      "name": "tomita",
+      "receipt": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_review\\tomita\\RECEIPT_R1.json",
+        "sha256": "fb383bcc4c1bd71b9701953da51186ea1d18e4ffa31f88232271959949130ca3",
+        "bytes": 30190
+      },
+      "source": {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\ExponentialTomitaR2.lean",
+        "sha256": "e6d00e62e669ca07e0a50c60db70b777c892192d114430ff17b173b682d96649",
+        "bytes": 5761
+      },
+      "seconds": 50.24647189999814,
+      "print_axioms": 9,
+      "olean_identical": true,
+      "source_theorem_count": 12
+    }
+  ],
+  "all_local_audit": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_review\\all_local\\RECEIPT_R1.json",
+    "sha256": "848be851173365e4220b21caff7671d003a25e76939b8a68b86455679c782006",
+    "bytes": 19723
+  },
+  "all_module_declarations": 79,
+  "counts": {
+    "F1Fecho.ExponentialLift": 43,
+    "F1Fecho.ExponentialLiftPositive": 15,
+    "F1Fecho.ExponentialTomita": 21
+  },
+  "source_theorem_count": 41,
+  "print_axioms_count": 27,
+  "zero_sorry": true,
+  "trio_only": true,
+  "mathematical_analysis": [
+    {
+      "component": "ExponentialLiftR2",
+      "result": "PASSA",
+      "text": "O gerador do grafo é o conjunto efetivo (e(f),e(Tf)), f em D(T), seguido do span complexo e clausura no produto F×F. A hipótese geral é T auto-adjunto no H1 existente. Ela fornece densidade do domínio e emparelhamento; combinados com totalidade exponencial, provam funcionalidade da clausura. Essa funcionalidade não é campo assumido."
+    },
+    {
+      "component": "Core e domínio",
+      "result": "PASSA",
+      "text": "O domínio é a projeção da clausura do grafo; o valor é escolhido e provado único. O LinearPMap resultante tem grafo igual à clausura, domínio denso e simetria. core_graph_sequence aproxima simultaneamente x e o valor do operador em F×F, portanto fornece um core de grafo genuíno. A ação exponencial e cada setor são calculados por termo. Isso não prova auto-adjunção da elevação nem identidade com toda construção espectral de segunda quantização."
+    },
+    {
+      "component": "ExponentialLiftPositiveR2",
+      "result": "PASSA",
+      "text": "A positividade é do operador canônico, não um enunciado sobre todo T auto-adjunto. WT(rootParameter/2), já construído e auto-adjunto, fornece um fator h com (f,h) e (h,TWf) em seu grafo pelo lema WT_double_graph_iff. O emparelhamento transforma a matriz inner(e(f),e(TWg)) em Gram dos e(h). Somas finitas dão inner(x,Lx) real não negativo; o conjunto dessa desigualdade é fechado, estendendo-a à clausura do grafo."
+    },
+    {
+      "component": "ExponentialTomitaR2",
+      "result": "PASSA",
+      "text": "Sexp=JF composto com canonicalLift tem o domínio efetivo da elevação. A identidade TW(SWf)=Jcandidate f e a fórmula de JF nos exponenciais preservam o core por flipJ(x,y)=(JFy,JFx); conjugação dos coeficientes é tratada. Continuidade preserva a clausura. Funcionalidade dá Sexp(D) contido em D e Sexp²=I em D. A descrição do grafo como pré-imagem por (x,y)↦(x,JFy) prova fechamento; densidade é herdada. Não há hipótese de involução da elevação disfarçada de conclusão."
+    },
+    {
+      "component": "Limite da identificação",
+      "result": "ESCOPO_EXPLICITO",
+      "text": "Sexp é um operador construído, fechado, densamente definido e involutivo, com Sexp e(f)=e(SWf). Igualdade Sexp=S_par, auto-adjunção de canonicalLift, suas identificações polares/modulares e KMS permanecem sem prova nestes três arquivos."
+    }
+  ],
+  "nonvacuity": "[DERIVED] TW_selfadjoint é um termo previamente construído, não uma hipótese sem habitante. O domínio contém e(0)=Omega por exponential_mem_domain; Omega tem norma 1 na construção anterior. Não é um operador definido apenas no vetor zero.",
+  "builder_receipts": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\FINAL_EXPONENTIAL_LIFT_RECEIPT_R1.json",
+      "sha256": "f402f088f6e944ab62488efbd39f51c3a623b428ac92976ce9df5ef7dd11e855",
+      "bytes": 5009
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\FINAL_LIFT_POSITIVITY_RECEIPT_R1.json",
+      "sha256": "04f2f1f9109cc46b73b639b6176eca39737ab65a324788c2f03b297e20833694",
+      "bytes": 3430
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\FINAL_EXPONENTIAL_TOMITA_RECEIPT_R1.json",
+      "sha256": "e618dd7fd3ed6165ac86a1e67c03ec962101cb767fce09edfe97881ff07c8411",
+      "bytes": 3663
+    }
+  ],
+  "verified_builder_pins": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\ExponentialLiftR2.lean",
+      "sha256": "dc50fdbad34447d085b0a16d975d8e227ea87cdb281ae4d23111dc58ba900b13",
+      "bytes": 9784
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184152_368451Z\\RECEIPT.json",
+      "sha256": "8c6cb0384362d97ba29fe2728573a29840f74b106a7c32a4e1ae4566e5b8b902",
+      "bytes": 26824
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184152_368451Z\\BUILD.log",
+      "sha256": "c0fb9626c8726f26d9c798c5c88d5994c73ee84965c75639a288430486ea5fa0",
+      "bytes": 26927
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184152_368451Z\\AXIOMS.txt",
+      "sha256": "c96a6581a85135df81bc01e0449c307a99417cdd704c01eea5dc3b23608c1861",
+      "bytes": 1280
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184152_368451Z\\ExponentialLiftR2.olean",
+      "sha256": "957c43af76a1be760783f4667a91d66e6197b1887298cd55e92bca4a0599e6b1",
+      "bytes": 287704
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\GAMMA_UNBOUNDED_SURVEY_R1.json",
+      "sha256": "44a658175f79f4143ee92c478dd26ee20ff47c3a7c072eb04085697e632c8582",
+      "bytes": 4657
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T183943_382136Z\\RECEIPT.json",
+      "sha256": "a44be395637301de8c829db669f3a8b778a7b4dd66239504878676a4df18b608",
+      "bytes": 26524
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T183943_382136Z\\ExponentialLiftR1.lean",
+      "sha256": "80704bd492c8e09195267c571c069457971e04728cabdd526235ea843ae6c40e",
+      "bytes": 8417
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T183943_382136Z\\BUILD.log",
+      "sha256": "1465e0b5c827d38d269fa6633a935c8eb57eb1c3dd258a65edccf7043a485325",
+      "bytes": 28474
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\ExponentialLiftPositiveR2.lean",
+      "sha256": "d03bcdd3a324b17e1c2d83e571048e39d4ee478f6b50692e5e79a15e3a79b8f0",
+      "bytes": 4278
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184909_064045Z\\RECEIPT.json",
+      "sha256": "c16d31c07d68224f464495558713be3e95ca65ae0f9eee77844527ee33d537d7",
+      "bytes": 27892
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184909_064045Z\\BUILD.log",
+      "sha256": "cdaa8d020ffeff0d24a03854d326deaf16cf755ca8c2eb158cf44a52df4f453b",
+      "bytes": 27382
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184909_064045Z\\AXIOMS.txt",
+      "sha256": "6756c00473250439495577e01bb1db6a2cef3d026e3be5e68f51b42376070179",
+      "bytes": 682
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184909_064045Z\\ExponentialLiftPositiveR2.olean",
+      "sha256": "4cf8281f1523efa076465e3f51adccf552a9181fdcb842ed7cb9a77a135c7c56",
+      "bytes": 188456
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\FINAL_EXPONENTIAL_LIFT_RECEIPT_R1.json",
+      "sha256": "f402f088f6e944ab62488efbd39f51c3a623b428ac92976ce9df5ef7dd11e855",
+      "bytes": 5009
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T184727_145718Z\\RECEIPT.json",
+      "sha256": "6e873b0f4882d7722a5f46eee3a73f9b4a033f1c5024b0da54b918492b86c7e6",
+      "bytes": 27583
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\ExponentialTomitaR2.lean",
+      "sha256": "e6d00e62e669ca07e0a50c60db70b777c892192d114430ff17b173b682d96649",
+      "bytes": 5761
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T185228_420022Z\\RECEIPT.json",
+      "sha256": "1d3779500e7a3cb4c3a06b6f7bb90e11b2f0a0419d7ff817f1d1a60325fb0f8f",
+      "bytes": 27861
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T185228_420022Z\\BUILD.log",
+      "sha256": "aa08a5e25c4bea42cac8fa881ca8cd60b37179e603da1d0feb752dc2fdc579bb",
+      "bytes": 27592
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T185228_420022Z\\AXIOMS.txt",
+      "sha256": "08c402e10fd4d31ce2c8bf6e960acc22dd49db3bf4753a85b8911490b186ed97",
+      "bytes": 911
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T185228_420022Z\\ExponentialTomitaR2.olean",
+      "sha256": "b8fb2eb7d173e2e9ce8bfc71a41a0fdba05394db584c3adab1b73eb075cab388",
+      "bytes": 148880
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_unbounded\\attempts\\20261015T185102_059794Z\\RECEIPT.json",
+      "sha256": "d38dea97d9eea88aaf5d760d600a682204d2c2b6ab9f95dea562c66a5bdd0a40",
+      "bytes": 27560
+    }
+  ],
+  "support_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\CanonicalOutput.lean",
+      "sha256": "2ff7e40f04f95c693b0def903f6e0d622cdd1a53c38dce1b43c55e36199398ca",
+      "bytes": 4383
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.REDE\\modular_wedge\\CanonicalWedge.lean",
+      "sha256": "b495679fd55ffa40913a73f5e562d9e5d6688500ed9c7f586797e5034b27ee67",
+      "bytes": 8601
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\wedge_review\\REVISAO_CUNHA_R1.json",
+      "sha256": "5d004e214fef62378d61b49ac4dddfa376cbe13e600d22f272ec7c73ca847cba",
+      "bytes": 20411
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\exponential_review\\REVISAO_EXPONENCIAIS_R1.json",
+      "sha256": "f0d83c73ec66c20076c8a6c60fef29218b91edb195d6e67942154b7e2d136d02",
+      "bytes": 10719
+    }
+  ],
+  "script": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\gamma_review\\assemble_review_r1.py",
+    "sha256": "836b34a1160514fc90baadea0d29e2a8deb9b7aba9ced81f0ad96019e936d897",
+    "bytes": 7539
+  },
+  "audit_method": "Declarações pertencentes aos três módulos selecionadas por getModuleIdxFor? no ambiente completo, incluindo helpers privados; recusa de axioma local, sorryAx e qualquer dependência fora do trio.",
+  "originals_memory_production_gate_modified": false,
+  "provider_calls": false,
+  "management_status_changed": false
+}

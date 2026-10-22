@@ -1,0 +1,4 @@
+# Errata em nome de codex-gerente-tgl — R80
+O RESULT_TESTS_R80.json registra29 casos reais de teste, mas sua aprovação não cobria a vulnerabilidade de PSD descoberta pela revisão independente em FINDING_PSD_R80.json. O verificador R1 está SUPERADO; não consumir material_contract_r80.py como validado. A frase do RELATORIO_R80.md sobre recusar toda matriz não positiva era excessiva.
+A versão material_contract_r80_r2.py calcula o determinante2x2 usando Fraction dos floats fornecidos, sem produtos subnormais nem folga de aceitação PSD. É positividade exata dos valores binários recebidos, não certificação de incerteza física nem recuperação de decimais originais. Um valor arredondado negativo é recusado, mesmo que a intenção fosse positividade. PREREG_TESTS_R80_R2 adiciona os dois ataques e mantém a regressão. Nenhuma trajetória da R79 foi repetida ou modificada. Demais conclusões algébricas/documentais não dependem desse bug.
+

@@ -1,0 +1,41 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T015408_238973Z\SpacetimeLorentzFourierR1.lean:26:4: error: Type mismatch: After simplification, term
+  Eq.symm h
+ has type
+  @Eq (Fin 4 → ℝ) ((lorentzLinear L⁻¹) ((lorentzLinear L) x)) x
+but is expected to have type
+  @Eq (Fin 4 → ℝ) ((lorentzLinear L⁻¹) ((lorentzLinear L).toFun x)) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T015408_238973Z\SpacetimeLorentzFourierR1.lean:30:4: error: Type mismatch: After simplification, term
+  Eq.symm h
+ has type
+  @Eq (Fin 4 → ℝ) ((lorentzLinear L) ((lorentzLinear L⁻¹) x)) x
+but is expected to have type
+  @Eq (Fin 4 → ℝ) ((lorentzLinear L).toFun ((lorentzLinear L⁻¹) x)) x
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T015408_238973Z\SpacetimeLorentzFourierR1.lean:42:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  LinearMap.det (↑?e ∘ₗ ?f ∘ₗ ↑(LinearEquiv.symm ?e))
+in the target expression
+  LinearMap.det (↑coordinateEquiv.symm ∘ₗ lorentzLinear L ∘ₗ ↑coordinateEquiv) = (↑L).det
+
+L : LorentzGrp
+⊢ LinearMap.det (↑coordinateEquiv.symm ∘ₗ lorentzLinear L ∘ₗ ↑coordinateEquiv) = (↑L).det
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    L
+  has type
+    LorentzGrp
+  but is expected to have type
+    { A // IsLorentz A }
+  in the application
+    ↑L
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T015408_238973Z\SpacetimeLorentzFourierR1.lean:52:6: error(lean.unknownIdentifier): Unknown identifier `map_linearMap_addHaar_eq_smul_addHaar`
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T015408_238973Z\SpacetimeLorentzFourierR1.lean:46:50: error: unsolved goals
+L : LorentzGrp
+hs : (↑L).det ^ 2 = 1
+hn : (↑L).det ≠ 0
+ha : |(↑L).det| = 1
+⊢ Measure.map (⇑↑↑(action L)) volume = volume
+'F1Fecho.SpacetimeLorentz.lorentzEquiv' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.SpacetimeLorentz.action_measurePreserving' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.SpacetimeLorentz.pairing_transfer' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.SpacetimeLorentz.angular_inverse_lorentz' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,129 @@
+{
+  "scope": "SYNTHETIC_ONLY_NO_REAL_FIT_OR_VERDICT",
+  "protocol": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\PROTOCOL_V1.json",
+    "bytes": 2007,
+    "sha256": "46297774111a04bc440f3f0a537c354703a5171e6c18501baa018a03a0a64d6a"
+  },
+  "scripts": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\singular_gaussian.py",
+      "bytes": 3615,
+      "sha256": "9e5956667b109750c231e5b58ce5776be993a330ceb55bdc53e3010c2e5f5163"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\covariance_support\\verify_support.py",
+      "bytes": 4596,
+      "sha256": "7406fa8132e8a7c022d1edb2b918cfb6b90d4ba32c15051c8ce23eb4922674c6"
+    }
+  ],
+  "checks": [
+    {
+      "name": "duplicate-rank",
+      "passed": true
+    },
+    {
+      "name": "pseudoinverse-cost-alone-misses-violation",
+      "passed": true
+    },
+    {
+      "name": "support-rejects-antisymmetric-shift",
+      "passed": true
+    },
+    {
+      "name": "on-support-cost-is-elementary",
+      "passed": true
+    },
+    {
+      "name": "duplicated-likelihood-ratio",
+      "passed": true,
+      "error": -1.1102230246251565e-16
+    },
+    {
+      "name": "duplicated-likelihood-ratio",
+      "passed": true,
+      "error": 1.7763568394002505e-15
+    },
+    {
+      "name": "duplicated-likelihood-ratio",
+      "passed": true,
+      "error": 1.0408340855860843e-16
+    },
+    {
+      "name": "elementary-map-preserves-ratio",
+      "passed": true,
+      "error": -3.3306690738754696e-16
+    },
+    {
+      "name": "elementary-map-support",
+      "passed": true
+    },
+    {
+      "name": "orthogonal-density-invariance",
+      "passed": true
+    },
+    {
+      "name": "orthogonal-support-invariance",
+      "passed": true
+    },
+    {
+      "name": "reject-negative",
+      "passed": true
+    },
+    {
+      "name": "reject-asymmetry",
+      "passed": true
+    },
+    {
+      "name": "reject-nan",
+      "passed": true
+    },
+    {
+      "name": "dirac-at-zero",
+      "passed": true
+    },
+    {
+      "name": "dirac-away-rejected",
+      "passed": true
+    },
+    {
+      "name": "normalized-prior-convolution",
+      "passed": true
+    },
+    {
+      "name": "declared-cutoff-recorded",
+      "passed": true
+    }
+  ],
+  "passed": 18,
+  "numpy_version": "2.4.3",
+  "elapsed_seconds": 0.0012614000588655472,
+  "cpu_seconds": 0.0,
+  "counterexample": {
+    "ordinary": {
+      "rank": 1,
+      "nullity": 1,
+      "threshold": 2e-12,
+      "null_residual_norm": 0.0,
+      "support_tolerance": 1e-10,
+      "support_ok": true,
+      "chi2_pseudoinverse": 0.9999999999999998,
+      "log_density": -1.7655121234846454
+    },
+    "off_support": {
+      "rank": 1,
+      "nullity": 1,
+      "threshold": 2e-12,
+      "null_residual_norm": 1.414213562373095,
+      "support_tolerance": 1e-10,
+      "support_ok": false,
+      "chi2_pseudoinverse": 0.9999999999999998,
+      "log_density": "-infinity"
+    }
+  },
+  "limitations": [
+    "prototype cutoff applies to dimensionless examples only",
+    "likelihood ratios compare one fixed data space/support; unlike-dimensional support densities are not Bayes factors",
+    "no real H0DN matrices assembled, no uniform-prior integration or scientific-contract ratification"
+  ]
+}

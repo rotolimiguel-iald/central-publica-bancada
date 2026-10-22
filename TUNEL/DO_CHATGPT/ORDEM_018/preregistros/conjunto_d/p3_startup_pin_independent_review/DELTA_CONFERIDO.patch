@@ -1,0 +1,37 @@
+--- terminal_parent/prehook_imports.py
++++ startup_successor/prehook_imports.py
+@@ -80,6 +80,9 @@
+     # Account for actual file-backed modules. Runtime metadata remains historical
+     # until these exact files are read here. Python stdlib is a distinct class.
+     stdlib = Path(sysconfig.get_path("stdlib")).resolve()
++    startup_index = plan["system_startup_file_pins"]
++    if set(startup_index) != {"/etc/python3.12/sitecustomize.py"}:
++        raise ValueError("Only the registered nominal system startup file is allowed")
+     rows = []
+     for name, module in sorted(tuple(sys.modules.items())):
+         origin = getattr(module, "__file__", None)
+@@ -89,6 +92,13 @@
+         if str(path) in runtime_index:
+             row = require_pin(path, runtime_index[str(path)])
+             scope = "HISTORICAL_RUNTIME_PIN_RECHECKED"
++        elif str(path) in startup_index:
++            expected = startup_index[str(path)]
++            if (name != expected["module"]
++                    or str(Path(expected["logical_path"]).resolve()) != str(path)):
++                raise ValueError("Pinned system startup module/alias differs")
++            row = _module_pin(module, path, expected)
++            scope = "EXACT_SYSTEM_STARTUP_PIN_RECHECKED"
+         elif path == root or root in path.parents:
+             relative = path.relative_to(root).as_posix()
+             expected = plan["package_python_pins"].get(relative)
+--- terminal_parent/qualify_imports.py
++++ startup_successor/qualify_imports.py
+@@ -12,7 +12,7 @@
+ import uuid
+ 
+ ROOT = Path(__file__).resolve().parent
+-PREPARATION_ID = "2bfd4665-a7e7-410a-aeb3-0406f90a596f"
++PREPARATION_ID = "d50bb889-1682-4320-8106-9bdbd8368257"
+ RUN = ROOT / "IMPORT_QUALIFICATION"
+ TOTAL_SECONDS = 120.0
+ WORK_SECONDS = 110.0

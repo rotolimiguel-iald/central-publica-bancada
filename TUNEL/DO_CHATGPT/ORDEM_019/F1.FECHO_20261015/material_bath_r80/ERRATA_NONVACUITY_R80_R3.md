@@ -1,0 +1,3 @@
+# Errata em nome de codex-gerente-tgl — canal ativo
+R2 corrigiu PSD, mas verificar somente gammaLambda>0 não recusava C=0 quando tolerancia bath_relative>=1; igualmente poderia aceitar uma componente inativa. Achado da raiz antes do aceite final. R3 exige C11>0 e C22>0 para testemunhar as duas parcelas ativas do salto, independentemente da tolerância de correspondência. Não nega que C=0 seja um gerador válido: recusa-o para este contrato não vácuo. R1/R2 e seus testes permanecem históricos, superados por material_contract_r80_r3.py/RESULT_TESTS_R80_R3.json. Não há alteração de resultados científicos R79.
+

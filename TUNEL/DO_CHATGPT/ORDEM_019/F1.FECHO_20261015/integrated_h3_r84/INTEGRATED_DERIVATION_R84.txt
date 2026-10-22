@@ -1,0 +1,114 @@
+R84 — Variação integrada, contorno e a diferença entre estacionariedade e equação métrica
+Autor: codex-gerente-tgl. 19/10/2026. Unidade F1.FECHO_20261015, reivindicação993.
+Estatuto: DERIVED — cálculo tensorial analítico. A certificação Lean tem o alcance
+dos enunciados e recibos próprios; este texto não é uma prova Lean da identidade curva.
+
+1. OBJETO E REAPROVEITAMENTO
+R83 calcula d/dt da densidade v_t f_t R_t para g_t=g+t h,
+v=sqrt(|det g|), f=c0+xi*u. A derivada de volume e a de Ricci já existem
+em ScalarMatterDensityVariation e MetricEinsteinVariation. As construções
+SelectedFisherGibbsBridge e SelectedProbabilitySigma usam a MESMA P para métrica
+e fonte. Não se parte de uma suposta ausência dessa ligação.
+O objetivo integral continua: ação com contorno, estacionariedade em P e
+alcance suficiente para a equação em TODAS as direções nulas. Um teorema de
+diferenciação sob integral não substitui os dois últimos objetivos.
+
+2. CORRENTE DE CONTORNO EXPLÍCITA
+Assuma métrica simétrica não degenerada suave, conexão de Levi-Civita,
+convenção de Ricci δR=−Ric^{ab}h_ab+∇_a V^a, e domínio orientado regular.
+Defina htr=g^{ab}h_ab, H^{ab}=g^{ac}g^{bd}h_cd,
+V^a=∇_b H^{ab}−∇^a htr e
+B^a=f V^a−(∇_b f)H^{ab}+(∇^a f)htr.
+Pela regra do produto e compatibilidade métrica:
+ f ∇_a V^a
+ = ∇_a B^a + (∇_a∇_b f)H^{ab} − (□f)htr.
+O cancelamento dos termos de primeira derivada é direto:
+ (∇_a f)∇_b H^{ab} cancela −(∇_b f)∇_a H^{ab}
+ após renomear índices; os dois termos de ∇f·∇htr também cancelam.
+Assim, com df=δf:
+ δ(v f R) = v[−f G^{ab}+∇^a∇^b f−g^{ab}□f]h_ab
+             +v R df + ∂_a(v B^a).
+Esta é a decomposição a ligar ao código de curvatura, não uma nova hipótese
+de que o tensor de Einstein já coincide com a fonte.
+
+3. AÇÃO INTEGRADA E CLASSES DE CONTORNO
+Para ação finita Sg(t)=∫Ω v_t f_t R_t d^4x, a troca derivada/integral requer
+condições analíticas: derivadas pontuais, mensurabilidade, integrabilidade
+e majorante integrável uniforme de diferenças/derivadas perto de t=0.
+Então a integral de R83 é δSg. Sob Stokes e regularidade suficiente:
+ δSg=∫Ω v[−fG^{ab}+∇^a∇^bf−g^{ab}□f]h_ab
+       +∫Ω vR df + ∫∂Ω v B^a dΣ_a (notação coordenada de fluxo).
+Em borda não nula, a última parcela pode ser expressa com normal e medida
+induzida, incluindo o sinal de orientação. Não se usa normal unitária em
+borda nula por analogia; essa classe exige contrato próprio.
+
+Classe A: variações compactamente suportadas no INTERIOR. h e suas
+derivadas são zero numa vizinhança da borda, logo B=0 ali. Isso permite
+obter equações interiores; não resolve um problema global de contorno.
+Classe B: apenas h|borda=0. Isso NÃO implica V=0, pois suas derivadas
+normais podem sobreviver. É necessário preservar o fluxo ou completar
+a ação com termo de borda e dados compatíveis. Para fR e borda suave
+não nula, o termo GHY ponderado tem coeficiente relativo2, sob convenções
+consistentes de normal/K e condições também sobre f. Não se reivindica
+que esse termo já esteja integrado ao programa, nem que cubra cantos
+ou bordas nulas. Fonte primária consultada: Jacobson–Satz, arXiv:1308.2746v2,
+Introdução e §2, https://arxiv.org/html/1308.2746v2 . Consulta web, sem
+custódia local dos bytes. A fórmula tensorial acima foi desenvolvida aqui.
+
+4. SINAL E FONTE COMPLETA
+O kernel define scalarMatterDensity = v/2 Σ_j c_j g^{-1}(w_j,w_j).
+Seu teorema dá δDm=−v/2 T_sigma^{ab}h_ab, com w fixo na variação
+da métrica. Portanto soma +Dm à densidade +fR dá, na estacionariedade
+métrica independente, fG=Hess(f)−g□f−T_sigma/2.
+Para a equação alvo com +T_sigma/2 e EH de sinal +c0R, a combinação
+correspondente é fR−Dm; sua variação dá:
+ f G_ab = T_sigma_ab/2 + Hess_ab(f)−g_ab□f.
+Isto explicita convenções, NÃO decreta qual ação física o autor escolheu.
+A soma da R83 é uma identidade algébrica correta, não um erro de build.
+O acervo precisa identificar a ação física, seus sinais e campos.
+
+No caso f=1/(2κ²)+xi*u, com u escalar independente da métrica,
+G_ab=κ²[T_sigma_ab−2xi*u G_ab+2xi(Hess_ab(u)−g_ab□u)].
+O termo entre colchetes é a fonte total deste contrato. Não é lícito
+substituí-lo por T_sigma sem justificar o desaparecimento das parcelas.
+Na direção nula k, a condição equivalente é
+(1+2κ²xi*u)Ric(k,k)=κ²[T_sigma(k,k)+2xi Hess(u)(k,k)].
+Para covetor fixo w e u=g^{-1}(w,w), df=−xi H^{ab}w_aw_b
+acrescenta −xi R w^a w^b ao coeficiente covariante. No contrato de
+sinal acima, a fonte total ganha −2xi R w_aw_b. Campo complexo/vetorial
+completo, variação de seus componentes e outros termos da ação exigem
+o próprio tipo; não se identificam ao covetor real por nomenclatura.
+
+5. VARIAR P É VARIAR SIMULTANEAMENTE MÉTRICA E MATÉRIA
+Para F(P)=(g(P),phi(P),...), S_hat(P)=S(F(P)):
+ D S_hat(P)[Q]=D S(F(P))[D F(P)[Q]].
+Após integração por partes, estacionariedade em P significa que a
+derivada adjunta de F anula o conjunto de resíduos Euler–Lagrange.
+Não significa automaticamente que cada resíduo métrico é zero.
+Seria suficiente provar que D F permite testar arbitrariamente o
+setor métrico requerido, controlando as variações materiais, ou que
+o anulador pertinente se reduz exatamente às ambiguidades de traço
+invisíveis à projeção nula. Uma contagem de componentes num ponto
+não prova essa propriedade para campos compactamente suportados.
+
+Gibbs_is_critical em VariationalInhabitant prova estacionariedade de
+uma energia livre finita com Hamiltoniano fixo e perturbações de traço
+zero. Não identifica essa energia livre à ação gravitacional integrada.
+O mesmo cuidado vale para estacionariedade modular: não trocar o objeto.
+
+6. CONTROLES E LIMITE DE CERTIFICAÇÃO
+boundary_controls.py usa SymPy exato no fundo Minkowski diag(1,−1,−1,−1),
+caixa[-1,1]^4. Testa a identidade ponderada de duas integrações por partes,
+incluindo caso com h e primeiro jato nulos na borda e caso com fluxo não
+nulo. Esses controles detectam sinal/omissão da corrente, não certificam
+curvatura geral, existência de solução, H3 universal ou significância5sigma.
+Fonte do resultado e hashes: BOUNDARY_CONTROLS.json.
+
+7. O QUE NÃO PODE SER PROMOVIDO
+Hipótese técnica de dominação para trocar integral não é H3. Hipótese
+de estacionariedade, no entanto, seria parte essencial do objetivo e não
+pode ser acrescentada e chamada de demonstração da mesma. Uma família
+particular que satisfaz H3 só fecha o seu alcance; uma família conservada
+que não o satisfaz evidencia a necessidade de seleção dinâmica, não uma
+refutação de toda a TGL. O levantamento de variações P está em p_variations.
+O acervo e a revisão determinam os próximos passos; OH permanece adiado.

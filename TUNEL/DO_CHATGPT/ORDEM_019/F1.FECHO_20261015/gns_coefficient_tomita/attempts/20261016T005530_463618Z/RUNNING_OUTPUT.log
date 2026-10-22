@@ -1,0 +1,46 @@
+import took 75s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T005530_463618Z\GaussianProbabilityKernelR2.lean:18:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Integrable ℝ PseudoMetricSpace.toUniformSpace.toTopologicalSpace SeminormedAddGroup.toContinuousENorm ℝ
+    Real.measureSpace.toMeasurableSpace (fun x => (√Real.pi)⁻¹ * Real.exp (-x ^ 2)) volume
+but is expected to have type
+  @Integrable ℝ PseudoMetricSpace.toUniformSpace.toTopologicalSpace SeminormedAddGroup.toContinuousENorm ℝ
+    Real.measureSpace.toMeasurableSpace gaussianWeight volume
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\gns_coefficient_tomita\attempts\20261016T005530_463618Z\GaussianProbabilityKernelR2.lean:36:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (x : ?m.78), ↑(?m.83 x) ∂?m.80
+in the target expression
+  ∫ (t : ℝ), ↑(Real.exp (-t ^ 2)) = ↑Real.pi ^ (1 / 2)
+
+hr : ∫ (t : ℝ), Real.exp (-t ^ 2) = √Real.pi
+h : ∫ (t : ℝ), ↑(Real.exp (-t ^ 2)) = ↑Real.pi ^ (1 / 2)
+⊢ ↑Real.pi ^ (1 / 2) = ↑√Real.pi
+'F1Fecho.GaussianLogScalar.gaussianWeight_integrable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.GaussianLogScalar.gaussianWeight_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F1Fecho.GaussianLogScalar.gaussianWeight_fourier' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+cumulative profiling times:
+	attribute application 0.05ms
+	blocked (unaccounted) 316ms
+	congr simp thm 0.743ms
+	elaboration 17.4ms
+	fix level params 0.182ms
+	import 75s
+	initialization 32.4ms
+	instantiate metavars 0.398ms
+	interpretation 6.46s
+	let-to-have transformation 0.0666ms
+	linting 3.21ms
+	norm_num 57.2ms
+	overlappingInstancesLinter 18.1ms
+	parsing 2.75ms
+	process pre-definitions 2.14ms
+	ring 109ms
+	share common exprs 1.79ms
+	simp 23.8ms
+	tactic execution 50.7ms
+	tacticAnalysis 21.2ms
+	type checking 24.5ms
+	typeclass inference 83.5ms

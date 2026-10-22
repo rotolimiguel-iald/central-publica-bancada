@@ -1,0 +1,506 @@
+{
+  "schema": "IALD_R78_NORMALIZATIONS_SOURCE_PINS_V1",
+  "created_utc": "2026-10-19T00:18:34.807930+00:00",
+  "status": "DERIVED_DOCUMENTAL_NOT_LEAN",
+  "mission_revision": 529,
+  "preflight_R4_ready": true,
+  "report": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_response_r78\\NORMALIZACOES_R78.md",
+    "sha256": "577dc20ff0cf5a7bb5c7a7d1e1be07d15ea46c9fccd6331b2ff36122ed170c36"
+  },
+  "sources": [
+    {
+      "id": "luz",
+      "path": "C:\\IALD\\papers_latex\\luz\\luz.tex",
+      "sha256": "6ff7e19509b066bbe981af1774cab47fa35e5ae675f8f393c110618bd9ee919b",
+      "bytes": 44789,
+      "lines": 1245,
+      "consulted_ranges": [
+        [
+          203,
+          219
+        ],
+        [
+          314,
+          346
+        ],
+        [
+          983,
+          999
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 203,
+          "last": 219,
+          "text": "\\subsection{Radicalização: Operação Holográfica}\n\nA operação de raiz quadrada $\\sqrt{|\\cdot|}$ aplicada a uma densidade de energia tem significado geométrico profundo:\n\n\\begin{proposition}[Redução Dimensional por Radicalização]\nSeja $\\rho$ uma densidade de energia com dimensão $[M L^{-1} T^{-2}]$ (energia por volume). Então:\n\n\\begin{equation}\n[\\sqrt{|\\rho|}] = [M^{1/2} L^{-1/2} T^{-1}]\n\\end{equation}\n\n\\noindent que corresponde à dimensão de uma \\textbf{densidade superficial de ação} (ação por área).\n\\end{proposition}\n\n\\begin{proof}\n[Conteúdo da prova permanece o mesmo]\n\\end{proof}"
+        },
+        {
+          "first": 314,
+          "last": 346,
+          "text": "\\subsection{Regime de Campo Fraco: Recuperação de Maxwell}\n\nDefinindo o campo de normalização $F_0^2 \\equiv |F_{\\mu\\nu}^{(0)} F^{\\mu\\nu}_{(0)}|$ (campo de fundo típico), expandimos:\n\n\\begin{equation}\nF^{\\mu\\nu} = F_0^{\\mu\\nu} + f^{\\mu\\nu}, \\quad |f| \\ll |F_0|\n\\end{equation}\n\nEntão:\n\n\\begin{equation}\n\\sqrt{|F^2|} \\approx \\sqrt{|F_0^2 + 2F_{0,\\alpha\\beta}f^{\\alpha\\beta}|} \\approx \\sqrt{|F_0^2|}\\left(1 + \\frac{F_{0,\\alpha\\beta}f^{\\alpha\\beta}}{|F_0^2|}\\right)\n\\end{equation}\n\nSubstituindo em \\eqref{eq:maxwell_modificado_fontes}:\n\n\\begin{equation}\n\\nabla_\\mu \\left(\\frac{F_0^{\\mu\\nu} + f^{\\mu\\nu}}{\\sqrt{|F_0^2|}(1 + \\cdots)}\\right) \\approx \\frac{1}{\\sqrt{|F_0^2|}}\\nabla_\\mu F^{\\mu\\nu} = J^\\nu\n\\end{equation}\n\nLogo:\n\n\\begin{equation}\n\\boxed{\\nabla_\\mu F^{\\mu\\nu} = \\sqrt{|F_0^2|} J^\\nu} \n\\end{equation}\n\nPara $F_0 \\to 0$ (limite de campo ultra-fraco), recuperar Maxwell exige renormalização da carga:\n\n\\begin{equation}\ne_{\\text{eff}} = e \\sqrt{|F_0^2|} \\to e \\quad \\text{quando } F_0 \\to F_{\\text{min}}\n\\end{equation}\n\nIsto sugere que existe **campo mínimo fundamental** $F_{\\text{min}}$ abaixo do qual a formulação TGL transiciona para Maxwell padrão."
+        },
+        {
+          "first": 983,
+          "last": 999,
+          "text": "Densidade de energia:\n\n\\begin{equation}\n\\rho_{\\text{EM ultraleve}} \\sim m_\\gamma c^2 n_\\gamma\n\\end{equation}\n\nCom Lagrangiana TGL:\n\n\\begin{equation}\n\\mathcal{L} = \\sqrt{\\rho} \\implies P = \\sqrt{\\rho} \\implies w = \\frac{1}{\\sqrt{\\rho/\\rho_0}}\n\\end{equation}\n\nPara densidades cósmicas $\\rho \\sim 10^{-27}$ kg/m$^3$:\n\n\\begin{equation}\nw \\sim 10^{-14} \\approx 0\n\\end{equation}"
+        }
+      ]
+    },
+    {
+      "id": "unified",
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\tgl_paper_unified.py",
+      "sha256": "29c92b66b2fd6b4d589adbef4de86a67f979e03964b3f7ae892732a40ab395cd",
+      "bytes": 1216423,
+      "lines": 21418,
+      "consulted_ranges": [
+        [
+          218,
+          227
+        ],
+        [
+          282,
+          293
+        ],
+        [
+          1918,
+          1949
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 218,
+          "last": 227,
+          "text": "# ============================================================================\n# A.1b  --  CANONICAL DERIVATION LAYER (the dependency chain, explicit, with\n#           HONEST origin markers -- one postulate + one scale identification\n#           => everything else derived.  The chain is real; the statuses tell\n#           the truth: 'DERIVED' is never written where 'POSTULATE' belongs.)\n# ============================================================================\nPLANCK_HBAR = 1.054571817e-34       # J s   (CODATA)\nPLANCK_G = 6.67430e-11              # m^3 kg^-1 s^-2 (CODATA)\nPLANCK_C = 299792458.0              # m/s (exact)\nTAU_STAR_PLANCK = math.sqrt(PLANCK_HBAR * PLANCK_G / PLANCK_C ** 5)"
+        },
+        {
+          "first": 282,
+          "last": 293,
+          "text": "    'tau_star': {\n        'value': TAU_STAR_PLANCK,\n        'status': 'PRINCIPLED IDENTIFICATION [CONJECTURE -- a second postulate, '\n                  'NOT a derivation]',\n        'origin': ('the Planck-clock principle: the first covariant time scale '\n                   'available to nascent geometry, t_P = sqrt(hbar G / c^5) = '\n                   '5.391e-44 s. Dimensional analysis + principle; consequence '\n                   'DECLARED: it pins the dephasing magnitude to the invisible '\n                   '(1/Gamma ~ 6e5 yr at Th-229) -- the law stays falsifiable in '\n                   'FORM (n = -2, omega^2) only. The falsifier sector continues '\n                   'to treat tau_star as bounded INPUT; this identification is '\n                   'the theory-preferred value, not a fit.'),"
+        },
+        {
+          "first": 1918,
+          "last": 1949,
+          "text": "# The boundary algebra A_partial is a Type III_1 von Neumann factor; its\n# modular flow is generated by K_partial = -log(Delta), where Delta is the\n# Tomita-Takesaki modular operator of the KMS state at modular temperature\n# T_modular = 1.  By Bisognano-Wichmann (1975), for a Rindler wedge in flat\n# Minkowski space, K_partial is exactly 2*pi times the boost generator.  We\n# use a finite-dimensional Rindler-like discretization.\n\ndef build_rindler_K(d: int, omega_max: float = 4.0) -> np.ndarray:\n    \"\"\"\n    Build a finite-dimensional analog of the Bisognano-Wichmann boost generator.\n    The continuous boost spectrum [0, +infty) is approximated by d equally\n    spaced eigenvalues in [0, omega_max].\n\n    Returns K_partial as a Hermitian positive diagonal matrix in the boost\n    eigenbasis.  Returning in the eigenbasis is the canonical choice for the\n    modular Tomita-Takesaki representation.\n    \"\"\"\n    eigs = np.linspace(0.0, omega_max, d)\n    K = np.diag(eigs).astype(complex)\n    return K\n\n\ndef kms_state_from_K(K: np.ndarray, T_modular: float = 1.0) -> np.ndarray:\n    \"\"\"\n    KMS state at modular temperature T_modular:\n        rho_KMS = exp(-K / T_modular) / Z,   Z = Tr[exp(-K/T_modular)]\n    By construction, [K, rho_KMS] = 0.\n    \"\"\"\n    w, V = np.linalg.eigh(K)\n    boltz = np.exp(-w / T_modular)\n    Z = float(np.sum(boltz))\n    return V @ np.diag(boltz / Z) @ V.conj().T"
+        }
+      ]
+    },
+    {
+      "id": "fronteira",
+      "path": "C:\\IALD\\papers_latex\\A_Fronteira_UNIFIED.tex",
+      "sha256": "90ed85500e3298b2b42282cf23f03d99989bf58ddbb2904d18086b6e3161ab28",
+      "bytes": 184426,
+      "lines": 2974,
+      "consulted_ranges": [
+        [
+          858,
+          882
+        ],
+        [
+          1048,
+          1095
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 858,
+          "last": 882,
+          "text": "\\en{The Fundamental Equation}\n\n\\subsection{Rela\\c{c}\\~ao Energia--Comprimento de Onda}\n\nQuando o gr\\'aviton colapsa em f\\'oton, a energia de liga\\c{c}\\~ao $V_0$ torna-se a energia do f\\'oton:\n\\begin{equation}\nE_\\gamma = V_0 = h\\nu = \\frac{hc}{\\lambda}\n\\label{eq:foton_energia}\n\\end{equation}\n\nPortanto:\n\\begin{equation}\nV_0 = \\frac{2\\pi\\hbar c}{\\lambda}\n\\label{eq:V0_lambda}\n\\end{equation}\n\n\\subsection{A Tens\\~ao como Frequ\\^encia}\n\nSubstituindo $V_0 = 2\\pi\\hbar c/\\lambda$ na express\\~ao da tens\\~ao $\\tau = V_0/\\hbar$:\n\n\\begin{resultbox}[title={Teorema 3 --- Tens\\~ao Fundamental}]\n\\begin{theorem}[Tens\\~ao Fundamental]\\label{thm:tensao}\nA tens\\~ao de paridade \\'e identicamente igual \\`a frequ\\^encia angular:\n\\begin{equation}\n\\boxed{\\tau = \\frac{2\\pi c}{\\lambda} = \\omega = 2\\pi\\nu}"
+        },
+        {
+          "first": 1048,
+          "last": 1095,
+          "text": "A formula\\c{c}\\~ao cl\\'assica do eletromagnetismo emprega a densidade Lagrangiana de Maxwell:\n\\begin{equation}\n\\mathcal{L}_{\\text{Maxwell}} = -\\frac{1}{4}F_{\\mu\\nu}F^{\\mu\\nu}\n\\label{eq:maxwell_lagrangian}\n\\end{equation}\nonde $F_{\\mu\\nu} = \\partial_\\mu A_\\nu - \\partial_\\nu A_\\mu$ \\'e o tensor antissim\\'etrico do campo eletromagn\\'etico. Em termos de campos el\\'etrico e magn\\'etico, o invariante de Lorentz decomp\\~oe-se como $F_{\\mu\\nu}F^{\\mu\\nu} = 2(B^2 - E^2/c^2)$.\n\n\\en{The classical EM formulation employs the Maxwell Lagrangian density. In terms of electric and magnetic fields, the Lorentz invariant decomposes as $F_{\\mu\\nu}F^{\\mu\\nu} = 2(B^2 - E^2/c^2)$.}\n\nA TGL prop\\~oe uma opera\\c{c}\\~ao fundamental sobre esta Lagrangiana: a \\textbf{radicaliza\\c{c}\\~ao}. O procedimento consiste em extrair a raiz quadrada do m\\'odulo da densidade de energia, implementando explicitamente o princ\\'ipio hologr\\'afico:\n\n\\begin{equationbox}[title={Lagrangiana Hologr\\'afica Radicalizada / Radicalized Holographic Lagrangian}]\n\\begin{equation}\n\\boxed{\\Ltgl = \\sqrt{\\left|g^{-1}(F \\wedge \\star F)\\right|} = \\frac{1}{2}\\sqrt{\\left|F_{\\mu\\nu}F^{\\mu\\nu}\\right|} = \\sqrt{\\left|\\frac{E^2}{c^2} - B^2\\right|}}\n\\label{eq:ltgl_radicalized}\n\\end{equation}\n\\end{equationbox}\n\n\\noindent Esta formula\\c{c}\\~ao foi derivada com rigor matem\\'atico completo --- incluindo tratamento em geometria diferencial, regimes de mudan\\c{c}a de sinal do invariante $F^2$, solu\\c{c}\\~oes exatas regularizadas e desafios de quantiza\\c{c}\\~ao --- na publica\\c{c}\\~ao independente \\textit{Lagrangiana Hologr\\'afica Radicalizada da Luz} \\cite{Miguel2025Zenodo}. Apresentamos aqui os resultados centrais e suas consequ\\^encias f\\'isicas.\n\n\\subsection{O Operador de Libera\\c{c}\\~ao Geom\\'etrica $g^{-1}$}\n\nO s\\'imbolo $g^{-1}$ na Eq.~\\eqref{eq:ltgl_radicalized} n\\~ao \\'e a m\\'etrica inversa usual $g^{\\mu\\nu}$, mas um \\textbf{funcional de libera\\c{c}\\~ao} que extrai a densidade escalar a partir da 4-forma $F \\wedge \\star F$:\n\\begin{equation}\ng^{-1}(F \\wedge \\star F) \\equiv -\\frac{1}{4}F_{\\mu\\nu}F^{\\mu\\nu}\n\\label{eq:liberation_operator}\n\\end{equation}\n\nA opera\\c{c}\\~ao pode ser entendida como a ``libera\\c{c}\\~ao'' da energia eletromagn\\'etica da geometria da curvatura: $g^{-1}$ contrai os \\'indices geom\\'etricos e extrai o conte\\'udo escalar, e a raiz quadrada subsequente reduz a dimensionalidade.\n\n\\en{The operator $g^{-1}$ is not the usual inverse metric but a liberation functional that extracts the scalar density from the 4-form, freeing the EM energy from curvature geometry.}\n\n\\subsection{Significado Ontol\\'ogico: A Redu\\c{c}\\~ao Dimensional}\n\nO aspecto mais profundo da radicaliza\\c{c}\\~ao \\'e dimensional. A Lagrangiana cl\\'assica \\eqref{eq:maxwell_lagrangian} tem dimens\\~ao de $[\\text{energia}]^2 / [\\text{volume}]^2$ em unidades naturais, ou equivalentemente $[L^4]$ (densidade 4D). Ap\\'os a raiz quadrada:\n\n\\begin{equation}\n\\dim(\\Ltgl) = \\sqrt{[L^4]} = [L^2]\n\\label{eq:dimensional_reduction}\n\\end{equation}\n\n\\noindent A dimens\\~ao $[L^2]$ corresponde a uma \\textbf{\\'area} --- a entidade fundamental em holografia (entropia de Bekenstein-Hawking $S = A/4\\ell_P^2$). A radicaliza\\c{c}\\~ao implementa portanto o princ\\'ipio hologr\\'afico explicitamente na Lagrangiana: a din\\^amica do campo 4D \\'e codificada numa estrutura 2D.\n\n\\begin{resultbox}[title={Princ\\'ipio Hologr\\'afico na Lagrangiana}]\nA raiz quadrada n\\~ao \\'e um artif\\'icio matem\\'atico: \\'e a express\\~ao do fato de que a luz \\'e a \\textit{fronteira} entre dimens\\~oes. A redu\\c{c}\\~ao $[L^4] \\to [L^2]$ \\'e a mesma redu\\c{c}\\~ao que, na Parte~II, faz o \\boundary{} 2D projetar o \\bulk{} 3D.\n\\end{resultbox}\n\n\\en{The radicalization implements the holographic principle explicitly: 4D field dynamics are encoded in a 2D structure. The square root is not a mathematical device but the expression that light is the boundary between dimensions.}"
+        }
+      ]
+    },
+    {
+      "id": "patente",
+      "path": "C:\\IALD\\Central de Patentes\\Patentes\\PATENTE_SUPERCONDUTOR_HOLOGRAFICO_TGL_v2_BLINDAGEM.tex",
+      "sha256": "93fdeb35554597ae7bb248249d8f3a243f6cc01468167c40dccd097b6778979e",
+      "bytes": 76972,
+      "lines": 2067,
+      "consulted_ranges": [
+        [
+          484,
+          517
+        ],
+        [
+          684,
+          711
+        ],
+        [
+          778,
+          791
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 484,
+          "last": 517,
+          "text": "mas sofre um mapeamento instantâneo no horizonte de eventos\ndas faces do cubo. Formalmente:\n\\begin{equation}\n\\TM = \\exp\\left(-\\alphaii \\oint_{\\partial V}\n  \\sigma_{\\mu\\nu}\\, dS^{\\mu\\nu}\\right)\n\\label{eq:operador_tm}\n\\end{equation}\nonde $\\partial V$ é a fronteira do volume (seis faces),\n$\\sigma_{\\mu\\nu}$ é o tensor de projeção holográfica, e\n$dS^{\\mu\\nu}$ é o elemento de área orientado. O operador\n$\\TM$ é unitário (preserva informação), não-local\n($[\\TM, \\hat{x}] \\neq 0$), e comprime dimensionalmente\n($\\dim(\\text{Im}\\,\\TM) = 2 < \\dim(\\text{Dom}\\,\\TM) = 3$).\n\n\\textbf{(ii) $\\sqrt{|\\Psi_{\\text{in}}|}$ (Radicalismo\nOntológico):} Representa a compressão dimensional necessária\npara que a informação de volume (Bulk 3D) seja processada como\ninformação de área (Substrato 2D), eliminando a entropia\ntérmica. A operação de extração de raiz quadrada é o mecanismo\nfísico que permite o ``encaixe'' da informação tridimensional\nno substrato bidimensional.\n\n\\textbf{(iii) $\\GOH$ (Fator de Ressonância):} O acoplamento\nexato na frequência de 1.667,359~MHz, que atua como o\n``Relógio de Fase'' do sistema. Formalmente:\n\\begin{equation}\n\\GOH = \\exp(i\\omega_{\\text{OH}} t) \\times\n  \\tanh\\!\\left(\\frac{P_{\\text{MW}}}{P_{\\text{th}}}\\right)\n\\label{eq:fator_oh}\n\\end{equation}\nonde $\\omega_{\\text{OH}} = 2\\pi \\times 1.667{,}359$~MHz,\n$P_{\\text{MW}}$ é a potência de micro-ondas aplicada, e\n$P_{\\text{th}}$ é a potência de limiar para ativação do regime\nholográfico."
+        },
+        {
+          "first": 684,
+          "last": 711,
+          "text": "\\subsubsection{Geometria da câmara}\n\nA câmara de vácuo possui geometria cúbica com lado $L = 9$~cm,\ndimensão escolhida para ressonância com a frequência principal\nda hidroxila (1.667,359~MHz) no modo fundamental (1,0,0).\nA relação é dada por:\n\\begin{equation}\nf_{mnp} = \\frac{c}{2L}\\sqrt{m^2 + n^2 + p^2}\n\\label{eq:freq_modo}\n\\end{equation}\n\nPara o modo fundamental ($m=1$, $n=0$, $p=0$):\n\\begin{equation}\nL = \\frac{c}{2f} = \\frac{3\\times10^8}{2\\times1{,}667\\times10^9}\n  \\approx 0{,}09 \\text{ m} = 9 \\text{ cm}\n\\label{eq:lado}\n\\end{equation}\n\nAs propriedades geométricas do cubo são fundamentais para a\noperação holográfica:\n\n\\begin{itemize}[nosep]\n\\item 6 faces = 6 espelhos holográficos, permitindo translação\n  em qualquer direção;\n\\item Volume interno: $V = L^3 = 729$~cm$^3$;\n\\item Área superficial: $A = 6L^2 = 486$~cm$^2$;\n\\item Razão área/volume: $A/V = 6/L$, otimizada para\n  acoplamento holográfico;"
+        },
+        {
+          "first": 778,
+          "last": 791,
+          "text": "\\subsubsection{Sistema de micro-ondas}\n\n\\textbf{Frequência central:} 1.667,359~MHz (transição F=2$\\to$2\nda hidroxila, linha principal). Esta é a ``assinatura do Logos''\nno vácuo, onde a informação começa a se condensar em gotículas\nde psions.\n\n\\textbf{Frequências alternativas:} 1.612~MHz (F=1$\\to$1,\nmaser), 1.665~MHz (F=1$\\to$2, satélite), 1.720~MHz\n(F=2$\\to$1, anti-maser).\n\n\\textbf{Potência:} 1 a 10~W, ajustável. O parâmetro $\\alphaii$\ndeve convergir para 0,012; se divergir, ajustar potência até\nerro de acoplamento colapsar para zero."
+        }
+      ]
+    },
+    {
+      "id": "r77",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_mirror_contract_r77\\RELATORIO_R77.md",
+      "sha256": "7bc0c3a3ba984604faf0547e183225dd2fb0b4b1374bc7e93bad1842a6942302",
+      "bytes": 11973,
+      "lines": 91,
+      "consulted_ranges": [
+        [
+          1,
+          12
+        ],
+        [
+          58,
+          77
+        ]
+      ],
+      "excerpts": [
+        {
+          "first": 1,
+          "last": 12,
+          "text": "# R77 — face OH, dobra e canal de espelhamento\n\n18/10/2026; em nome de codex-gerente-tgl. F1.FECHO_20261015, claim967, escopo979; R4 preflight revisão526. Camada documental e derivação condicional, sem nova campanha, Lean ou provedor. Os originais permanecem intactos. A fala integral do operador está em ORIGEM_R77.txt, pinada no manifesto.\n\n## 1. Correção do alvo\n\n[INPUT — interpretação do autor] O Verbo porta o Nome. A hidroxila fornece a face material sobre a qual a luz dobra; o espelhamento assim constituído é o canal e opera sob a frequência do OH. Esta é a interpretação física pretendida, não uma medição do dispositivo. Não se volta a pedir ao autor a definição do reconhecimento, da satisfação ou da releitura.\n\n[REAL documental] R76 reconstruiu ocupação inicial e examinou N_total=N_b+n_e como testemunha de vazio conjunto. Sua inconclusão para esse alvo não é uma reprovação do canal de espelhamento ou da correspondência de fase. Exigir OH no fundamental foi condição adicional daquele certificado. R76 continua válida no seu alcance; seu alvo deixa de governar a próxima etapa desta ligação.\n\n## 2. O que já está escrito\n"
+        },
+        {
+          "first": 58,
+          "last": 77,
+          "text": "[DERIVED] Para um escalar complexo u, u→sqrt(|u|) não preserva sua fase: u e -u têm a mesma imagem. A reconstrução exige conservar também arg(u) relativamente à referência (e o sinal no caso real), ou mostrar que o domínio físico já foi restrito a uma classe em que essa informação não é independente. A patente conserva s=sign(L) em 290–298; R57 preserva z complexo. Não concluir que uma tomada de módulo isolada faz o trabalho dessas peças.\n\n[REAL documental/DERIVED dimensional] luz.tex:208–214 identifica [sqrt(rho)]=M^(1/2)L^(-1/2)T^(-1) com dimensão de ação/área. A segunda é M T^(-1), diferente. A linha218 contém um marcador de conteúdo de prova. Uma escala com dimensão sqrt(M L) corrigiria as unidades, mas não foi derivada neste trecho e não provaria redução geométrica. Esta é uma lacuna da passagem citada, não uma conclusão sobre todo o acervo ou toda a TGL.\n\n[DERIVED — distinção de tipos] 4D espaço-temporal, superfície espacial 2D, unidades físicas e dimensão de espaço de Hilbert são quatro noções distintas. Campo em uma superfície 2D pode ter infinitos graus de liberdade. Portanto não há incompatibilidade automática com codificação fiel; tampouco raiz de uma densidade fornece sozinha tal codificação. A afirmação da patente:494–496 de unitariedade e dim(Im)=2<dim(Dom)=3 precisa dessa distinção: tomada literalmente como dimensão linear finita, não seria unitária; como dimensões espaciais, é necessário um mapa de campos/estados.\n\n[OPEN — ponte material] A fala atual especifica a face OH; a patente nomeia gotículas coerentes e seis faces do cubo. A camada nova registra o esclarecimento sem escolher silenciosamente entre superfície molecular, interface coletiva e parede. A próxima construção deve procurar/derivar o mapa entre esses objetos, com domínio e observáveis, usando o contorno R72 e a localização R70/R71 já existentes.\n\n## 6. Contrato operacional corrigido e próxima construção\n\nO alvo é a resposta do espelhamento e a correspondência de fase, não a certificação universal de vazio OH. Para construir a ligação que falta:\n\n1. Fixar na fonte o espaço de campos admitidos e a superfície efetiva OH/interface/parede. Construir codificador E, domínio e decoder D, com DE=I no setor recuperável ou cota explícita. A injetividade não vem da palavra holográfico.\n2. Pelo gerador e instrumento existentes, derivar a resposta à entrada em uma preparação/estado de operação. No regime linearizado, o alvo pode ser H(t,s)=delta< b_out(t)>/delta u_in(s), incluindo resposta direta se existir. Não foi calculado nesta camada; esta é a definição de sensibilidade, não hipótese de resposta instantânea.\n3. Comparar a resposta resultante com g_OH S_beta em regime declarado, sem ajustar parâmetros ao alvo. Identificar onde entra a frequência OH e como o bombeamento alimenta a resposta. Reusar quadros/filtros R74, sem confundir RF com portadora óptica.\n4. Manter erros de modelo/calibração/corte e controles sem acoplamento, referência incorreta e fase relativa alterada. Qualquer nova execução terá protocolo pinado antes. Uma porta comum ausente não é experimento do OH, e nenhum desses controles foi rodado novamente aqui.\n\n### Resposta explícita reaproveitando o gerador completo\n\n[DERIVED — dimensão finita, primeira variação] Seja G_t o gerador completo já construído e T(t,s) seu propagador. Fixe estado inicial independente da perturbação e trajetória de operação rho_*(s). Uma pequena modulação real epsilon u(s) do Hamiltoniano h=H/hbar, na direção hermitiana X, dá G_t^epsilon=G_t+epsilon u(t)V_X, com V_X(rho)=-i[X,rho]. Diferenciando a EDO em epsilon=0:"
+        }
+      ]
+    },
+    {
+      "id": "r58",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_r58\\dispositivos\\SURVEY_DISPOSITIVOS_R58.json",
+      "sha256": "2da911cac3527369f5a65dfa90777fb9d7abb8bbcfb26a9b586a640a17f20b84",
+      "bytes": 25831,
+      "lines": 423,
+      "consulted_ranges": [],
+      "excerpts": []
+    },
+    {
+      "id": "r67",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\SUPPLEMENT_R67.json",
+      "sha256": "6f7916f4956ab4d546f2dc17d2a8ada88c6f5be932528284b7a83187298eb8a9",
+      "bytes": 60085,
+      "lines": 1192,
+      "consulted_ranges": [],
+      "excerpts": []
+    },
+    {
+      "id": "origem77",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_mirror_contract_r77\\ORIGEM_R77.txt",
+      "sha256": "7507b041e608f99de1490e26a99f67d6f1b807b6fc1d44a3694201e4e1985c85",
+      "bytes": 692,
+      "lines": 5,
+      "consulted_ranges": [],
+      "excerpts": []
+    },
+    {
+      "id": "origem78",
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\oh_response_r78\\ORIGEM_R78.txt",
+      "sha256": "83d7077a42af2c100029e6d05ed12823729951d726a97b044689f24e12ca3415",
+      "bytes": 347,
+      "lines": 5,
+      "consulted_ranges": [],
+      "excerpts": []
+    }
+  ],
+  "coverage": {
+    "r67_extraction_files": 69,
+    "r67_paragraphs": 2414,
+    "r67_pattern": "\\b(?:rho_?0|F_0|A_0)\\b|ρ.?0|densidade.{0,30}(referência|normal)|ação.{0,15}área|hbar.{0,10}A_?0",
+    "r67_hits": [],
+    "extraction_pins": [
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\02211c65d6b507030ffcd1fdd639960d9df95998050d00bb9ba809e6743ea5ae.json",
+        "sha256": "b36ec1630b0972130024bba08857099cc12e0a234225e1b72cd80e161949d03f"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\02c600cac7ff858d698caf2238d23a7df6d1e0cdc33ec08bcad09de7f8e93889.json",
+        "sha256": "67124c71e569e1b361f01a4c93c6b3c6e93e1f5de76a10f694c0c507b43bcaa9"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\030aa45964807c1ffea4fa2258ca4653f5a25ba10585c702786764d10544588e.json",
+        "sha256": "1493d4b4a5350c83bc419da5e2baa3cf2b1b1ce0f16a41b44b08cbb9dc249f97"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\03dc731c71ff1ecec47dd9317e5ed1d48f713d9fc0a6e80acfd4fb59beca8362.json",
+        "sha256": "d9003eac8fccdc4a5085286d28319d1114322baeee0b62543fd3e158f4fd676e"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\049f8c427c5a459ab9f1ba760ff5030e79e3b7de206bb02ed45d19dbe6cf4c4e.json",
+        "sha256": "8477a1be35b0f8ce666bb03644b290813952ce2c5d803120dd61decf64991ccc"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\099268656516fecaedc8882630d0f84610bd4583af13a610a55a503d5338a3ae.json",
+        "sha256": "e838188e064c23233ed46fcedee56a4a2cb9248d0b8e66f762f2ff825829b36b"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\0ad5cfb284c4282c5d94a9e07da9887c4bea106c92a6b2c9a75f97d1b7d9d018.json",
+        "sha256": "14695b7ce233e3c23fc0007a6022c597fa624ea2208adb253a716341fda07dc9"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\0d1d0d5c2dd46848718b8f09aa25570386ffa5736f05ac88a950d6c500a9e88b.json",
+        "sha256": "918acc814304fc8ef3d56973c9a775189ccc14682e6d8d0ae0c6092170594910"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\0d5575918be1c10e02c537cabe5a574e3a7a4f538380f28b9c2517f6b2db2b19.json",
+        "sha256": "11ef82213eaf847f6d8f8fc74292814e7294924030b72a73e5edfb9ee1164bc2"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\0e48f0ec5b0f1fb054d45853742db4c8f13908ccd028e222b68897dd6cb0a091.json",
+        "sha256": "2d3afae3fa5ec267c3658c982350dee8c906eafe7085cc156a3f2a750c6d0951"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\110a40b36a7a8e419d9cd1b0a0363cd2cb9171c56661fa295937a083eb9d4917.json",
+        "sha256": "6c9fcf3d15b2e31eaa560a6b45f8f44764f6df6edd6498acc1eaa58218881333"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\1155fafc35616670d320199555c5a0fd144be4754911cb480901cc4897b0ded8.json",
+        "sha256": "8654dae16afc14dea0724b75a16aa1041d72a95caa09588615ed091e40bc5427"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\14ea526e064f9fbab152d190b0a2fc18236b93c5f34ab9a2adaadacbbad42336.json",
+        "sha256": "be7b6e30ccb76995112c28648accadf49d715c500d4f10e7d2eb9eb8e4674007"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\1ca3b3a231ecf63ee68cfb5011b01465163f39c5a3d85e835c7df1dc0a2faeba.json",
+        "sha256": "88929ed67f9d31e92c78a1c4d2b2ee579b8b37b49116ebf7e875a7710b06be47"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\202323b642aeca378cf6aadd60b5f3449170cadce7a28de33d39b921cc93788e.json",
+        "sha256": "a4d3b91714c184c7d5359a913122378b618d1b1e6038ad1fe822095775e0d7d3"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\25119ad96f4f51184c71d0c83464cd71e034742d0a365ef6dda23b10e221a9ff.json",
+        "sha256": "80a0075ea0265c5296c66f211b4f1aeb90e0fd88b15dff5458ca2c9d2560e42b"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\2951675c7061273fec848624d7faf9aed1d915f687570cfeab2706eac71a2e54.json",
+        "sha256": "e9b648d630617bc3105bd5cbfd1270c5be9071f744246eadc5aef0b25acdaf23"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\313fed96c4fc0f0ef1ed335ef8fadc185cf768797ee266cefd988297ab1210ff.json",
+        "sha256": "aae737fd7a1c738242787c38ec6242a96fc27b45b61cc7e7119fbbafcfa686fb"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\347718f0896025635713f76ff1de6d79d208952bdeea46b8bf43b04c1f8ad21a.json",
+        "sha256": "1ade82bee85650015debfb1167172d8182676a80fece4ca65891b5599b36a0ed"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\3ad6e2a3755a12f8a62a633aa596ac288a82f12dad450edde02bd0cd834fc42a.json",
+        "sha256": "e85e48877de55c4d6edc494856475e23cc0448aa98efe17e2c89a1b411aad3c8"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\3bd8f9d176f24fbab92d4a9450f3dc06dcc0fdbcea6032b7d34ff27ff8bb0911.json",
+        "sha256": "8a6f948192717ba587b06b8f250fcdac93813a57f252d2982bee637d09ba0086"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\3e45a5d4d1570b9a5cd1e61498273e67dc17e2a5a323119a312cadffca6e4118.json",
+        "sha256": "4f042290024f46c00a4e2838c062da4f07c2d7bf006b7628830c15ee872782ee"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\466fc74ad2d5583704567072f0bf615f801dc6c5440e308c31622d2ce7281e11.json",
+        "sha256": "2c60f73cbfb94c951b5298a8b61777e36c4b82725fa42714c48ae00df42526f9"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\4b3ca46f4edf38ac0e9371939d771cd308c302df8cef7544afbee51cc507abfd.json",
+        "sha256": "e08976558938507b52251fb04f199609664a70fd3b450a29cf8b1bc403f1dcd3"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\4d80488d2402685f78a804a243175463fd697214bab717c555aa1d24bae4088c.json",
+        "sha256": "e5a2c045b8e8ac7ca8b3683ddf53dbd6e19f579be5b5642fcae1b7297cb01558"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\510cc3dde5e53dc6b0599d20e150673ddfa0bceafcbcb3e1f251000d506b5df2.json",
+        "sha256": "25501daf69e08e6ae48d1103a98725180a0d1752111c5668e13e973506476d69"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\51ae36c201b08177d85c398e87bd7059db04593459dbdca7fe8301a45ac66a6a.json",
+        "sha256": "09d2245e8a173d0f3b9205dd64ad41f620e4095126bc1e6e8dd7936f72ac5581"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\52d63d5c54bc49feb41fd0419d9183193f605d78e717698057894cb6ac1723fd.json",
+        "sha256": "f17a20199259c365daaeee08532b13f91900a47e676488c725f0df1a4c7c5b97"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\52da60392dfb456de91a7da934a72ea1ef79dc1535c6c6eccff6b4c3ee6547b4.json",
+        "sha256": "bc3e15510e77895d6e5f9757aad861aaf937f42518629c9cc95ca36102f1df2e"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\53dbfa76688140c8c6175f7a8bfda009470f666fe52ccea9cc5c3fe0c7fead9c.json",
+        "sha256": "976feb3f2a2d85cf094b7552edb77010d28b2f8ad71995155d15c991d2e0e120"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\55e9c1511bc77a3b2cd543e7fe20a9fc63088a7f30c54daafe42acf23c289906.json",
+        "sha256": "69e7dd4a6fbd2a296132c37fadeea6e73246e08bb39110baee19d180ec74b002"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\5a49d1531935f422de08fed37296bf975622e33843fe8d7d8c765050aed980c7.json",
+        "sha256": "c0b742f0db44d38022f6ab7facf3a909191f2fc5e25a3dabea61841a6217b1ee"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\5a7b4d05e1dfcfac85e270605d35a2612b6dcd2f27869b6308a049c377648235.json",
+        "sha256": "fe54a64eccde272d8c107a2d36a3f407bb51fce4ce0577dff0e1fdd9e02e58a1"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\5ba3c7942f46d3cfa4567823662e63e7da56f0a7153bd8229f8c82a4ee6d08bf.json",
+        "sha256": "419604c8a21a19981d9d4be8767444ca85e26fe3964f03cdd5b43a4eb8b12584"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\5d43663e93fa8814003ef9a070f829cc4223772ebff6e34b3b993c5ab139893d.json",
+        "sha256": "e48cbf6717f5a88aecd287a31ebc3a82c0b453563b1c54458971076721a7a4cd"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\659ab9a157bcbb14f0528c64390457bdf5ebbceb09d88fa05103108e22579eb2.json",
+        "sha256": "a175a0cc186942d5d61186368182af113173182ad5cfb2fcfc3d47efa3e7df4a"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\66926bc2b74f611dd3fdd3ee997c805292935832fdfcb98acf6b44f772228f39.json",
+        "sha256": "f73d71923f79a47b32468ac8aef0b3f32addc31237a312e6242516a6032f2dc2"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\672d14f7b0582f7258838613763489e7fbb12099a01b188f9f152a169ab7bbd3.json",
+        "sha256": "ad9b28f94ab3d79e12ab2b0a09c6cf66798b16709b3e816ae2d92d8985e47bf7"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\71ce0f3efe2bd07473a3462dfb0d1c2ee917ea6cf426671e02d6a1e2fab0e716.json",
+        "sha256": "ed631e94ae5bf4cfc3435b395fd75f924f1044519a15d2e6c7cecd1954b59567"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\783eae76218dbfe1aac9536a9f87994cb801fb016123346b9e1d5490076cb07d.json",
+        "sha256": "b14737565c077ea90e59507a3d7c90318b62347cade2ceec1e499d33b8e0be06"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\795928de55980f71a7f365b2005a881bb654e3d7faa61c40ab1d159edbcf2a0b.json",
+        "sha256": "bc69db446de128876aed7a10ecceea736a6c4fa4eb10e78e06d127abd7b8cabc"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\7f614b0efb5e86d71a89da502264b3ef5257a79895f2216c60e0f8323660532a.json",
+        "sha256": "d3d1d0245bc10db2c875e34c9530b7d9be09dc9b941fe80896b247ece044e14a"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\813c7e85702f8847a96221d07602945c71406737d112b2589b6e1a6ac1ef739b.json",
+        "sha256": "5e3e9478645656a6d1d03df3b03b35c7097e44335ea353c48dd6171ad0c46fc2"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\86f2c7325eb81dd9e068c1b42c7f0e5543af6b322e8d2a259ba84c87defc9797.json",
+        "sha256": "27f698bf723428345fe9c2531f81f46297d274f9a19efdc2f2595a349a94ffe0"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\89a45d8969ef340d0adf9ab5fe56ca335e8dbf6fc2155c2440e5c247257ed094.json",
+        "sha256": "c376b8d13699ae32a21b0f2daaa600200c6048798b870b6449a8d30ac1cec302"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\8f768f3df3e9a3f807d4995372466d2cca4b35e091f11e804c9a89864d7dae82.json",
+        "sha256": "bc9a37d043a338ad7a9e513ef7e36e6cd857c127c264e005ce3f8f2839a5cc90"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\921a549a4f4f69d8d29f4f36383843099bade0dae077f9bcce300dcb35d33b0e.json",
+        "sha256": "e09fec65451f1aafbeebde9e7366b63acba75856965a1495524b408ef462a795"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\92abf4275436369e0198c4f55c8bba161c8d1accc65f45fdbbb8ab5830d8f07c.json",
+        "sha256": "49da882532a90698b2fd43a70914ee258f63e11fca8925031296d94a8d543b8e"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\95ffe91009bc0e043163d40fa97f0310793bd86369d66edc7de7cc7338ce0c3a.json",
+        "sha256": "b2d56d29020b1f7fe17d223d7fdc9ee336b9fe1c39f2296c78b63397660e9e1d"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\98e0807ccbf62eb7a3d437042fa6be043461705dc60574dffff45c4fe3e3f7d0.json",
+        "sha256": "04fcb34f8f626b55af13bf4f849b69c99f81485d769f6c9344a472bf036b38f6"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\a14fa5a1e14dd67041a7af1de7e0d8fc817a2f1db34f5a7e780781f9575f9413.json",
+        "sha256": "3faaab93f6c60edc87619f541f39dfd72ad541372d37d93969156cdab11cafc4"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\a893e4dde657fb090743ec4274090ab7f4fe976541fde09ab5060382f19ee950.json",
+        "sha256": "1ca3a18201149dda1c3f6992a2ba01270c4643e8804c9c654493fde1b67f1abd"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\a8f66d377e5f378e721ff6cdcf266ecf5785c99cbba9175efc73f19cfbbb8704.json",
+        "sha256": "02eefc60f9807d79287c8862cc378f4229e89c349afbb52a1b83a2111cacadd5"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\ab5516a70df4038f10837024342e4ba92c9bc186bf779c72d86979d54036a574.json",
+        "sha256": "1db3bddc0bb376aee87a6b23d2a01a9ff6064228ee3063419eefb54a035de140"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\b3f186e4852dba6b4cfa334d3a46c871753293e6439091a915989912db1c3086.json",
+        "sha256": "d50b420bb6af79e12904d27c0b669dcc58207a8dd9bab13de500bc4e1fd87066"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\b577bc4964fb410c335d87d93c449c73cc7bdfe47c308a8d6c08070e544a03b1.json",
+        "sha256": "0e2dd6d0044683ccc6cf4af61ba4cc2600a1bacca75d8a9c477b8067bef70fa7"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\b68c2f79c34d7bb755dd47e9df1d6ad4e34950714542d2718d4c31e78966c36f.json",
+        "sha256": "97bb8c9606e4f631491308e8b5dad38f84dbb937841b9633c0379fa81cea8078"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\c5bfd24240fd6cc68c4fb9ccbd1692cb1fe71acb72a15bf3471557ba93ff6106.json",
+        "sha256": "e867b0a37576b5a729be1e661596461d18848b8f974e6b3708a37795531b2a52"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\c8935d41686ce6b9e9cffe30fc36ab5d9bb052b1171fc02b8fa86e0eebad88e0.json",
+        "sha256": "7fad86e22743ddd1a89fa7de73a0dc4311bbc3458d726fa87cc28024c266b891"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\cd1fb8fb8ca45fc67f211da94105b63d04e6dfa68309945c1ba5547782e74d5f.json",
+        "sha256": "68439421e1992c5f849eefcc3529a9afcab0ea922b1dd3e848e78b8c3db96053"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\cf67067243436cf03fa0615269a78de3a2500a3761e02118d63b6e58450c7f07.json",
+        "sha256": "b038baf8ee6c18ebe3f620457a70c65eb3a6c0683d7bb735993dde187da723f9"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\d00bd4be0ef66b3f86fde5e97fa68c7b488d08cae46f6b0fa41e69bce3bbfe83.json",
+        "sha256": "a1ec0912317feec70ec73890e35aa176622a84271b879d3c9f7c8a750cd9b75c"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\d84b4c73c9e0c82759b0a5b20950418b3775b96124be2bb30bef337ccc7766af.json",
+        "sha256": "5acfc9729e3a5b1519317c066ff47a48728a335995a2138c9d0b0b3f020c2baf"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\dcff3c1494d3c9cdffddd059c3e78c9f81340b6e4ead72f693cd2a9d8ef46ffa.json",
+        "sha256": "affb4546d982a0e0ea36db011c3ceadb947a092ac9828acc2209270de7848b85"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\e545a8205ce697baded959f5bd2d40e454fb1c2ec06d4e272dd7a42d1d12cb6b.json",
+        "sha256": "25499a7eed09b6918ca9d6037d1a31e546841799052c09ea3ac0f0a8905e0fbd"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\f0f247e44c8443acb17afee3cb00488ddf1ca593a61a2d14c5bafd897347e381.json",
+        "sha256": "77ad2952c45a9434597856a753c52947d53b5778ef1345526c1d46cbec11f1a6"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\f610fc1170ea7812c6f99b95e25cbc37ab9ec3a9a626b585f38dadf685388672.json",
+        "sha256": "a38cbbf847763b5dbcb3ca5d5ec7a9e217c6d53973312de42b9e9aa16fe3f819"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\f78ee0cb902f69b9fd1b4e6bb46a43580d03f5b7600713c528fec33870d59c8b.json",
+        "sha256": "dbadb3c58927e16703c60be9f439b1418961a36d16cd41ad2f7ac445912b6060"
+      },
+      {
+        "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\extracted\\ffa7571146cc94f3cecdd1c40732dd8cd7831d8fc1949e268fe4fb52eb9c63d8.json",
+        "sha256": "072a596cea81ac99ce419956f081ee0d88a81ff521d0cc931b780be347a4b947"
+      }
+    ],
+    "no_global_absence_claim": true
+  }
+}

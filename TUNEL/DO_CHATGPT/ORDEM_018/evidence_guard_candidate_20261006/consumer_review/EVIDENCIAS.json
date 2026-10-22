@@ -1,0 +1,292 @@
+{
+  "schema": "BANCADA_CONSUMER_REVIEW_EVIDENCE_V1",
+  "recorded_at_utc": "2026-10-06T22:42:33.878471+00:00",
+  "method": "Text inspection and SHA256 of bytes; no candidate imports/execution",
+  "sources": [
+    {
+      "path": "C:\\IALD\\Bancada_Um\\ui\\app.js",
+      "bytes": 34029,
+      "sha256": "c85b9e69cb908dbe0aed7281654af682cb2599b97cdbfdfb7fb1d20bf9cdb518",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 24,
+          "last_line": 30,
+          "text": "24: async function api(caminho, corpo) {\n25:   const op = corpo ? { method: \"POST\", headers: { \"Content-Type\": \"application/json\", \"X-Cliente\": \"interface\" }, body: JSON.stringify(corpo) } : {};\n26:   const r = await fetch(caminho, op);\n27:   const j = await r.json();\n28:   if (!r.ok) throw new Error(j.erro || r.status);\n29:   return j;\n30: }"
+        },
+        {
+          "first_line": 141,
+          "last_line": 167,
+          "text": "141: // ---------------- evidência ----------------\n142: function travar(v) { [\"#b-ajustar\", \"#b-comparar\", \"#b-amostrar\"].forEach((s) => ($(s).disabled = v)); }\n143: function sig(s) {\n144:   if (!s) return \"\";\n145:   return `<div class=\"card\">significância local: z = <b>${s.z_local.toFixed(2)}</b> (p = ${s.p_local.toExponential(2)})<br>\n146:     corrigida por <b>${s.n_familias}</b> família(s) de teste do livro: z = <b>${s.z_global.toFixed(2)}</b> (p = ${s.p_global.toExponential(2)})</div>`;\n147: }\n148: $(\"#b-ajustar\").onclick = async () => {\n149:   travar(true); $(\"#ev-texto\").textContent = \"ajustando…\";\n150:   try {\n151:     const r = await api(\"/api/ajustar\", { conjuntos: conjuntos(\"#conj-ev input\"), beta: \"livre\", c_livre: $(\"#c-livre\").checked, opcoes: opcoes() });\n152:     const a = r.ajuste, s = a.sigma_JtJ;\n153:     $(\"#ev-texto\").innerHTML = `<span class=\"estatuto\">${r.estatuto}</span>\\n<span class=\"grande\">β = ${a.theta.beta.toFixed(5)} ± ${(s.beta || 0).toFixed(5)}</span>\\n` +\n154:       `χ² = ${a.chi2.toFixed(3)} com ${a.gl} g.l. · H₀ = ${a.theta.H0.toFixed(2)} ± ${(s.H0 || 0).toFixed(2)}\\nα√e = ${r.beta_tgl.toFixed(6)} está a ${(r.beta_tgl_em_sigma_JtJ || 0).toFixed(2)} σ (JᵀJ)` + sig(r.significancia);\n155:   } catch (e) { $(\"#ev-texto\").textContent = \"falhou: \" + e.message; }\n156:   travar(false); carregarLivro();\n157: };\n158: $(\"#b-comparar\").onclick = async () => {\n159:   travar(true); $(\"#ev-texto\").textContent = \"ajustando os três modelos…\";\n160:   try {\n161:     const r = await api(\"/api/comparar\", { conjuntos: conjuntos(\"#conj-ev input\"), c_livre: $(\"#c-livre\").checked, opcoes: opcoes() });\n162:     const d = r.delta_chi2;\n163:     $(\"#ev-texto\").innerHTML = `<span class=\"estatuto\">${r.estatuto}</span>\\n` +\n164:       `ΛCDM (β = 0)        χ² = ${r.lcdm.chi2.toFixed(3)}\\nTGL (β = α√e)      χ² = ${r.tgl_beta_fixo.chi2.toFixed(3)}\\nβ livre            χ² = ${r.beta_livre.chi2.toFixed(3)}  (β̂ = ${r.beta_livre.theta.beta.toFixed(5)})\\n\\n` +\n165:       `<span class=\"grande\">Δχ²(TGL − ΛCDM) = ${d.tgl_menos_lcdm.toFixed(3)}</span>\\n${r.leitura}` + sig(r.significancia);\n166:   } catch (e) { $(\"#ev-texto\").textContent = \"falhou: \" + e.message; }\n167:   travar(false); carregarLivro();"
+        },
+        {
+          "first_line": 176,
+          "last_line": 198,
+          "text": "176:       const t = await api(\"/api/tarefas/\" + tarefa);\n177:       $(\"#progresso div\").style.width = (100 * t.progresso).toFixed(1) + \"%\";\n178:       $(\"#ev-texto\").textContent = `${t.estado} · ${(100 * t.progresso).toFixed(0)}% · ${((Date.now() - t0) / 1000).toFixed(0)} s`;\n179:       if (t.estado === \"pronta\") { mostrarPosterior(t.resultado); travar(false); carregarLivro(); return; }\n180:       if (t.estado === \"falhou\") { $(\"#ev-texto\").textContent = \"falhou: \" + t.erro; travar(false); return; }\n181:       setTimeout(loop, 700);\n182:     };\n183:     loop();\n184:   } catch (e) { $(\"#ev-texto\").textContent = \"falhou: \" + e.message; travar(false); }\n185: };\n186: function mostrarPosterior(r) {\n187:   const b = r.resumo.beta, hb = r.hist_beta;\n188:   const xs = hb.bordas.slice(0, -1).map((v, i) => (v + hb.bordas[i + 1]) / 2), w = hb.bordas[1] - hb.bordas[0], mx = Math.max(...hb.contagens);\n189:   const barras = xs.map((x, i) => ({ x, y: hb.contagens[i] / mx, w: 0, cor: COR.azul }));\n190:   grafico($(\"#g-post\"), {\n191:     series: [{ x: xs, y: hb.contagens.map((c) => c / mx), cor: COR.azul, larg: 2 }], ylim: [0, 1.08], xlim: [Math.min(hb.bordas[0], -0.001), Math.max(hb.bordas.at(-1), r.beta_tgl * 1.15)],\n192:     vlinhas: [{ x: 0, cor: COR.cinza, dash: [4, 4], rot: \"0\" }, { x: r.beta_tgl, cor: COR.ouro, rot: \"α√e\" }, { x: b.median, cor: COR.azul, dash: [2, 3] }], xrot: \"β\",\n193:   });\n194:   const h2 = r.hist_beta_H0;\n195:   mapa($(\"#g-2d\"), h2.contagens, h2.bordas_beta, h2.bordas_H0, { vlinhas: [{ x: 0, cor: COR.cinza, dash: [4, 4] }, { x: r.beta_tgl, cor: COR.ouro }], xrot: \"β\", yrot: \"H₀\" });\n196:   $(\"#ev-texto\").innerHTML = `<span class=\"estatuto\">${r.estatuto}</span>\\n<span class=\"grande\">β = ${b.median.toFixed(5)} (+${b.sigma_upper.toFixed(5)} / −${b.sigma_lower.toFixed(5)})</span>\\n` +\n197:     `H₀ = ${r.resumo.H0.median.toFixed(2)} · ${r.walkers} walkers × ${r.passos} passos em ${r.segundos} s · aceitação ${r.aceitacao_media.toFixed(2)} · amostras efetivas ≈ ${Math.round(r.amostras_efetivas)}\\n` +\n198:     `fração do posterior com β ≥ α√e: ${(100 * r.fracao_beta_acima_de_beta_tgl).toFixed(3)}% · com β ≥ 0: ${(100 * r.fracao_beta_acima_de_zero).toFixed(1)}%` + sig(r.significancia);"
+        },
+        {
+          "first_line": 323,
+          "last_line": 329,
+          "text": "323: async function carregarLivro() {\n324:   try {\n325:     const l = await api(\"/api/livro\");\n326:     $(\"#livro\").innerHTML = `<div class=\"card\">${l.total} registros · <b>${l.familias_de_teste}</b> famílias de teste (a correção de significância usa este número)</div>\n327:       <table><tr><td>quando</td><td>quem</td><td>operação</td><td>conjuntos</td><td>estatuto</td><td>p local</td></tr>` +\n328:       l.ultimas.map((u) => `<tr><td>${u.ts}</td><td>${u.cliente}</td><td>${u.operacao}</td><td>${u.conjuntos.join(\", \")}</td><td>${u.estatuto}</td><td>${u.p_local === null ? \"—\" : (+u.p_local).toExponential(2)}</td></tr>`).join(\"\") + \"</table>\";\n329:   } catch (e) { }"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\ui\\index.html",
+      "bytes": 5454,
+      "sha256": "a68c12751523ce218b88bbbc5fd18d8e8f02e84086213e64c2861b921d0a3cc8",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 84,
+          "last_line": 89,
+          "text": "84:     <div class=\"painel\">\n85:       <h3>Posterior de β</h3><canvas id=\"g-post\"></canvas>\n86:       <h3>β × H₀</h3><canvas id=\"g-2d\"></canvas>\n87:       <p class=\"nota\">Linhas: <span class=\"l-zero\">0 (ΛCDM)</span> e <span class=\"l-ouro\">α√e (TGL)</span>. Toda significância vem ao lado da <b>corrigida</b> pelo número de famílias de teste do livro.</p>\n88:     </div>\n89:   </div>"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\um_bancada.py",
+      "bytes": 20339,
+      "sha256": "13a393654139bc9f0468969690a689cc12aba3cbf5ab11e6df146bf34df25ab6",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 164,
+          "last_line": 171,
+          "text": "164:     def _json(self, obj, code=200):\n165:         b = json.dumps(obj, ensure_ascii=False, default=str).encode(\"utf-8\")\n166:         self.send_response(code)\n167:         self.send_header(\"Content-Type\", \"application/json; charset=utf-8\")\n168:         self.send_header(\"Content-Length\", str(len(b)))\n169:         self.send_header(\"Cache-Control\", \"no-store\")\n170:         self.end_headers()\n171:         self.wfile.write(b)"
+        },
+        {
+          "first_line": 270,
+          "last_line": 273,
+          "text": "270:                 return self._json(dict(erro=repr(e)), 500)\n271:         if not B.pronta:\n272:             return self._json(dict(erro=\"motor carregando\", detalhe=B.erro), 503)\n273:         try:"
+        },
+        {
+          "first_line": 286,
+          "last_line": 299,
+          "text": "286:             if caminho == \"/api/avaliar\":\n287:                 return self._json(B.ev.avaliar(corpo.get(\"theta\", {}), corpo.get(\"conjuntos\"), bool(corpo.get(\"curvas\", True)), op))\n288:             if caminho == \"/api/ajustar\":\n289:                 return self._json(B.ev.ajustar(corpo.get(\"conjuntos\"), corpo.get(\"beta\", \"livre\"), corpo.get(\"c_livre\", False), cliente, op))\n290:             if caminho == \"/api/comparar\":\n291:                 return self._json(B.ev.comparar(corpo.get(\"conjuntos\"), corpo.get(\"c_livre\", False), cliente, op))\n292:             if caminho == \"/api/amostrar\":\n293:                 return self._json(B.ev.amostrar(corpo.get(\"conjuntos\"), corpo.get(\"c_livre\", False), corpo.get(\"walkers\", 256), corpo.get(\"passos\", 2000),\n294:                                                 corpo.get(\"queima\", 500), corpo.get(\"semente\", 42), cliente, op))\n295:             return self._json(dict(erro=\"rota desconhecida\"), 404)\n296:         except ValueError as e:\n297:             return self._json(dict(erro=str(e)), 400)\n298:         except Exception as e:\n299:             return self._json(dict(erro=repr(e)), 500)"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\mcp_um.py",
+      "bytes": 15730,
+      "sha256": "ff3c893f9769abce5c89e3fa66e45e7bfa468a3c1daa78f9ca96365d76fd18e9",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 23,
+          "last_line": 32,
+          "text": "23: def _req(caminho, corpo=None, timeout=600):\n24:     dados = None if corpo is None else json.dumps(corpo).encode(\"utf-8\")\n25:     r = urllib.request.Request(URL + caminho, data=dados, headers={\"Content-Type\": \"application/json\", \"X-Cliente\": CLIENTE})\n26:     try:\n27:         with urllib.request.urlopen(r, timeout=timeout) as f:\n28:             return json.loads(f.read().decode(\"utf-8\"))\n29:     except urllib.error.HTTPError as e:\n30:         return dict(erro=e.read().decode(\"utf-8\", \"replace\")[:2000], codigo=e.code)\n31:     except Exception as e:\n32:         return dict(erro=\"Bancada Um fora do ar ou inacessível em %s: %r\" % (URL, e))"
+        },
+        {
+          "first_line": 69,
+          "last_line": 100,
+          "text": "69: @mcp.tool(description=\"Melhor ajuste (mínimos quadrados, σ por JᵀJ). beta ∈ {'livre', 'tgl' (= α√e), 'zero'} ou um número. ENTRA NO LIVRO; traz a \"\n70:                       \"significância corrigida.\" + OPCOES_DOC)\n71: def ajustar(conjuntos: list[str] = [\"planck_comp\", \"desi_dr1\"], beta: str = \"livre\", c_livre: bool = False, opcoes: dict = {}) -> dict:\n72:     \"\"\"Ajuste de máxima verossimilhança (ver a descrição da ferramenta).\"\"\"\n73:     return _req(\"/api/ajustar\", dict(conjuntos=conjuntos, beta=beta, c_livre=c_livre, opcoes=opcoes or {}))\n74: \n75: \n76: @mcp.tool(description=\"Ajusta ΛCDM (β = 0), TGL (β = α√e) e β livre e devolve os Δχ² (Wilks, 1 g.l.). ENTRA NO LIVRO; traz a significância corrigida.\"\n77:                       + OPCOES_DOC)\n78: def comparar(conjuntos: list[str] = [\"planck_comp\", \"desi_dr1\"], c_livre: bool = False, opcoes: dict = {}) -> dict:\n79:     \"\"\"Comparação de modelos por Δχ² (ver a descrição da ferramenta).\"\"\"\n80:     return _req(\"/api/comparar\", dict(conjuntos=conjuntos, c_livre=c_livre, opcoes=opcoes or {}))\n81: \n82: \n83: @mcp.tool(description=\"Posterior de (H0, ω_b, ω_c, β[, c]) por ensemble afim-invariante na GPU; espera terminar e devolve o resumo (medianas, 16–84%, \"\n84:                       \"τ, aceitação, fração do posterior além de α√e). ENTRA NO LIVRO; traz a significância corrigida.\" + OPCOES_DOC)\n85: def amostrar_posterior(conjuntos: list[str] = [\"planck_comp\", \"desi_dr1\"], walkers: int = 256, passos: int = 2000, queima: int = 500,\n86:                        semente: int = 42, c_livre: bool = False, opcoes: dict = {}) -> dict:\n87:     \"\"\"Amostragem do posterior (ver a descrição da ferramenta).\"\"\"\n88:     t = _req(\"/api/amostrar\", dict(conjuntos=conjuntos, walkers=walkers, passos=passos, queima=queima, semente=semente, c_livre=c_livre, opcoes=opcoes or {}))\n89:     if \"tarefa\" not in t:\n90:         return t\n91:     t0 = time.time()\n92:     while time.time() - t0 < 3600:\n93:         s = _req(\"/api/tarefas/\" + t[\"tarefa\"])\n94:         if s.get(\"estado\") in (\"pronta\", \"falhou\"):\n95:             if s.get(\"resultado\"):\n96:                 r = dict(s[\"resultado\"]); r.pop(\"hist_beta_H0\", None)\n97:                 return r\n98:             return s\n99:         time.sleep(1.0)\n100:     return dict(erro=\"tempo esgotado\", tarefa=t[\"tarefa\"])"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\evidencia.py",
+      "bytes": 13633,
+      "sha256": "92b0c9eeb6370bd835d8c34324409ee1e66b5b0b564aa60d5ba5b6164de19eb9",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 130,
+          "last_line": 174,
+          "text": "130:         chi2 = float(r0 @ r0)\n131:         try:\n132:             cov = np.linalg.inv(J.T @ J) * np.outer(esc, esc)\n133:             sig = {k: float(math.sqrt(cov[i, i])) for i, k in enumerate(livres)}\n134:         except np.linalg.LinAlgError:\n135:             sig = {}\n136:         return dict(theta=dict(zip(NOMES_THETA, th.tolist())), chi2=chi2, livres=livres, sigma_JtJ=sig, sucesso=bool(res.success),\n137:                     nfev=int(res.nfev), n_dados=self.m.n_dados(cj), gl=self.m.n_dados(cj) - len(livres), opcoes=o)\n138: \n139:     def ajustar(self, conjuntos=None, beta=\"livre\", c_livre=False, cliente=\"?\", opcoes=None):\n140:         cj = _conj(conjuntos)\n141:         o = opcoes_de(opcoes)\n142:         bf = self._ajuste(cj, self._beta(beta), bool(c_livre), opcoes=o)\n143:         modelo = dict(beta=str(beta), c_livre=bool(c_livre), opcoes=o)\n144:         out = dict(conjuntos=cj, beta=beta, c_livre=bool(c_livre), opcoes=o, modo=rotulo_opcoes(o), ajuste=bf, beta_tgl=self.m.beta_tgl,\n145:                    estatuto=\"AJUSTE_DE_MAXIMA_VEROSSIMILHANCA\", estatuto_texto=ESTATUTOS[\"AJUSTE_DE_MAXIMA_VEROSSIMILHANCA\"])\n146:         if self._beta(beta) is None and \"beta\" in bf[\"sigma_JtJ\"]:\n147:             s = bf[\"sigma_JtJ\"][\"beta\"]; b = bf[\"theta\"][\"beta\"]\n148:             z = (self.m.beta_tgl - b) / s\n149:             out[\"beta_tgl_em_sigma_JtJ\"] = z\n150:             out[\"significancia\"] = self.livro.corrige(p_de_z(z), self.livro.familia(\"ajustar\", cj, modelo))\n151:         guarda(out)\n152:         self.livro.registra(cliente, \"ajustar\", cj, modelo, dict(conjuntos=cj), out, out[\"estatuto\"],\n153:                             bf[\"chi2\"], out.get(\"significancia\", {}).get(\"p_local\"))\n154:         return out\n155: \n156:     def comparar(self, conjuntos=None, c_livre=False, cliente=\"?\", opcoes=None):\n157:         cj = _conj(conjuntos)\n158:         o = opcoes_de(opcoes)\n159:         l = self._ajuste(cj, 0.0, bool(c_livre), opcoes=o)\n160:         t = self._ajuste(cj, self.m.beta_tgl, bool(c_livre), x0=[l[\"theta\"][k] for k in NOMES_THETA], opcoes=o)\n161:         f = self._ajuste(cj, None, bool(c_livre), x0=[l[\"theta\"][k] for k in NOMES_THETA], opcoes=o)\n162:         d_tgl_livre = t[\"chi2\"] - f[\"chi2\"]\n163:         d_lcdm_livre = l[\"chi2\"] - f[\"chi2\"]\n164:         p_tgl = float(math.erfc(math.sqrt(max(d_tgl_livre, 0.0) / 2.0)))\n165:         modelo = dict(c_livre=bool(c_livre), opcoes=o)\n166:         out = dict(conjuntos=cj, c_livre=bool(c_livre), opcoes=o, modo=rotulo_opcoes(o), lcdm=l, tgl_beta_fixo=t, beta_livre=f, beta_tgl=self.m.beta_tgl,\n167:                    delta_chi2=dict(tgl_menos_lcdm=t[\"chi2\"] - l[\"chi2\"], tgl_menos_livre=d_tgl_livre, lcdm_menos_livre=d_lcdm_livre),\n168:                    leitura=(\"Δχ²(β = α√e contra β livre) = %.3f ⇒ z_local = %.2f (Wilks, 1 g.l.); Δχ²(β = 0 contra β livre) = %.3f [%s]\"\n169:                             % (d_tgl_livre, math.sqrt(max(d_tgl_livre, 0.0)), d_lcdm_livre, rotulo_opcoes(o))),\n170:                    significancia=self.livro.corrige(p_tgl, self.livro.familia(\"comparar\", cj, modelo)),\n171:                    estatuto=\"COMPARACAO_DE_MODELOS_DELTA_CHI2\", estatuto_texto=ESTATUTOS[\"COMPARACAO_DE_MODELOS_DELTA_CHI2\"])\n172:         guarda(out)\n173:         self.livro.registra(cliente, \"comparar\", cj, modelo, dict(conjuntos=cj), out, out[\"estatuto\"], d_tgl_livre, p_tgl)\n174:         return out"
+        },
+        {
+          "first_line": 213,
+          "last_line": 229,
+          "text": "213:             hb, eb = np.histogram(b, bins=70)\n214:             h2, ex, ey = np.histogram2d(b, plano[:, 0], bins=48)\n215:             modelo = dict(c_livre=t[\"c_livre\"], opcoes=t[\"opcoes\"])\n216:             out = dict(conjuntos=t[\"conjuntos\"], c_livre=t[\"c_livre\"], opcoes=t[\"opcoes\"], modo=t[\"modo\"], walkers=t[\"walkers\"], passos=t[\"passos\"],\n217:                        queima=t[\"queima\"], semente=t[\"semente\"],\n218:                        segundos=round(seg, 1), aceitacao_media=float(acc.mean()), tau=dict(zip(nomes, taus)),\n219:                        amostras_efetivas=float(plano.shape[0] / max(taus)), resumo=res, beta_tgl=self.m.beta_tgl,\n220:                        fracao_beta_acima_de_beta_tgl=frac, fracao_beta_acima_de_zero=frac0,\n221:                        beta_tgl_pela_cauda=dict(p_bilateral=p2, z=z_de_p(p2), nota=\"pela fração do posterior além de α√e (bilateral)\"),\n222:                        significancia=self.livro.corrige(p2, self.livro.familia(\"amostrar\", t[\"conjuntos\"], modelo)),\n223:                        hist_beta=dict(contagens=hb.tolist(), bordas=eb.tolist()),\n224:                        hist_beta_H0=dict(contagens=h2.tolist(), bordas_beta=ex.tolist(), bordas_H0=ey.tolist()),\n225:                        estatuto=\"POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS\", estatuto_texto=ESTATUTOS[\"POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS\"])\n226:             guarda(out)\n227:             self.livro.registra(cliente, \"amostrar\", t[\"conjuntos\"], modelo,\n228:                                 dict(walkers=t[\"walkers\"], passos=t[\"passos\"], queima=t[\"queima\"], semente=t[\"semente\"]), out, out[\"estatuto\"],\n229:                                 res[\"beta\"][\"median\"], p2)"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\bancada\\regua.py",
+      "bytes": 5569,
+      "sha256": "743a6b22a289c697ac1546dfa4ad9bf28eb5d4c7e12d3155bbffcb0acbde1cf4",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 19,
+          "last_line": 26,
+          "text": "19: PROIBIDO = re.compile(r\"(?<!NOT_)(?<!UN)CONFIRMED|(?<!AP)PROVED_BY|TGL_PROVED|CONSCIOUSNESS_PROVED|\\bconfirmad[oa]s?\\b\", re.I)\n20: \n21: ESTATUTOS = {\n22:     \"DIAGNOSTICO_DE_AVALIACAO\": \"avaliação de um ponto do modelo contra os dados: não é ajuste nem inferência\",\n23:     \"AJUSTE_DE_MAXIMA_VEROSSIMILHANCA\": \"melhor ajuste por mínimos quadrados; σ pela matriz JᵀJ (aproximação gaussiana local)\",\n24:     \"COMPARACAO_DE_MODELOS_DELTA_CHI2\": \"Δχ² entre ajustes aninhados; significância local por Wilks (1 grau de liberdade), ao lado da corrigida\",\n25:     \"POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS\": \"amostras do posterior sob priors uniformes nos limites do pipeline; não é confirmação\",\n26: }"
+        },
+        {
+          "first_line": 58,
+          "last_line": 61,
+          "text": "58:         self.lock = threading.Lock()\n59:         with self._con() as c:\n60:             c.execute(\"CREATE TABLE IF NOT EXISTS consultas (id INTEGER PRIMARY KEY, ts TEXT, cliente TEXT, operacao TEXT, familia TEXT, \"\n61:                       \"conjuntos TEXT, modelo TEXT, pedido TEXT, resultado_sha TEXT, estatuto TEXT, estatistica REAL, p_local REAL)\")"
+        },
+        {
+          "first_line": 71,
+          "last_line": 106,
+          "text": "71:     def registra(self, cliente, operacao, conjuntos, modelo, pedido, resultado, estatuto, estatistica=None, p_local=None):\n72:         sha = hashlib.sha256(json.dumps(resultado, sort_keys=True, default=str).encode()).hexdigest()\n73:         with self.lock, self._con() as c:\n74:             c.execute(\"INSERT INTO consultas (ts, cliente, operacao, familia, conjuntos, modelo, pedido, resultado_sha, estatuto, estatistica, p_local) \"\n75:                       \"VALUES (?,?,?,?,?,?,?,?,?,?,?)\",\n76:                       (time.strftime(\"%Y-%m-%dT%H:%M:%S\"), cliente, operacao, self.familia(operacao, conjuntos, modelo), json.dumps(sorted(conjuntos)),\n77:                        json.dumps(modelo, sort_keys=True), json.dumps(pedido, sort_keys=True, default=str), sha, estatuto, estatistica, p_local))\n78:         return sha\n79: \n80:     def n_familias_de_teste(self, incluir=None):\n81:         \"\"\"Famílias distintas de teste no livro; `incluir` soma a família do teste corrente se ela ainda não estiver lá.\"\"\"\n82:         with self._con() as c:\n83:             fams = {r[0] for r in c.execute(\"SELECT DISTINCT familia FROM consultas WHERE p_local IS NOT NULL\")}\n84:         if incluir:\n85:             fams.add(incluir)\n86:         return len(fams)\n87: \n88:     def corrige(self, p_local, familia=None):\n89:         \"\"\"p local -> p global pelo número de famílias de teste, INCLUINDO a do teste corrente (Šidák).\"\"\"\n90:         n = max(1, self.n_familias_de_teste(incluir=familia))\n91:         p_local = min(max(float(p_local), 0.0), 1.0)\n92:         if n * p_local < 1e-10:\n93:             pg = n * p_local                                    # primeira ordem exata a 1e-10\n94:         else:\n95:             pg = -math.expm1(n * math.log1p(-p_local)) if p_local < 1.0 else 1.0\n96:         return dict(p_local=p_local, z_local=z_de_p(p_local), n_familias=n, p_global=pg, z_global=z_de_p(pg),\n97:                     metodo=\"Šidák sobre as famílias de teste do livro\")\n98: \n99:     def resumo(self, n=30):\n100:         with self._con() as c:\n101:             tot = c.execute(\"SELECT COUNT(*) FROM consultas\").fetchone()[0]\n102:             ult = c.execute(\"SELECT ts, cliente, operacao, conjuntos, modelo, estatuto, estatistica, p_local, resultado_sha FROM consultas \"\n103:                             \"ORDER BY id DESC LIMIT ?\", (n,)).fetchall()\n104:         return dict(total=int(tot), familias_de_teste=self.n_familias_de_teste(),\n105:                     ultimas=[dict(ts=a, cliente=b, operacao=o, conjuntos=json.loads(cj), modelo=json.loads(mo), estatuto=e, estatistica=s,\n106:                                   p_local=p, resultado_sha=h[:16]) for a, b, o, cj, mo, e, s, p, h in ult])"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\README.md",
+      "bytes": 7910,
+      "sha256": "1a592d9d0fe652a08a9d54b7ab4ea981b2bcd8efad75209825158f906699f8f6",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 35,
+          "last_line": 41,
+          "text": "35: \n36: - Toda saída traz o **estatuto** (`DIAGNOSTICO_DE_AVALIACAO`, `AJUSTE_DE_MAXIMA_VEROSSIMILHANCA`, `COMPARACAO_DE_MODELOS_DELTA_CHI2`,\n37:   `POSTERIOR_CONDICIONAL_AO_MODELO_E_AOS_DADOS`); nenhuma saída diz «confirmado» (guarda de palavras proibidas).\n38: - **Livro de tentativas** (`estado\\livro.sqlite3`, só acréscimo): toda busca de evidência é registrada por família, com o cliente\n39:   (interface, IA); a significância **local** vem sempre ao lado da **corrigida** pelo número de famílias já testadas (Šidák).\n40: - β nunca literal: α do CODATA 2018 lido do `um.py` canônico (conferido com o pipeline D1), β = α·√e em runtime.\n41: - Só `127.0.0.1`; Host conferido; corpo POST ≤ 64 KB; a Bancada só escreve em `estado\\`; os originais nunca são escritos."
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\ferramentas\\testar_mcp.py",
+      "bytes": 2738,
+      "sha256": "9e699d4264df25e210c08975a9ec55bc3352ac4724f532fb034523beee40864f",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 43,
+          "last_line": 48,
+          "text": "43:             e, t = await chama(\"estado\")\n44:             print(\"estado: pronta=%s gpu=%s beta_tgl=%s (%.2fs)\" % (e.get(\"pronta\"), e.get(\"gpu\", {}).get(\"nome\"), e.get(\"motor\", {}).get(\"beta_tgl\"), t))\n45:             c, t = await chama(\"comparar\", conjuntos=[\"planck_comp\", \"desi_dr1\"])\n46:             print(\"comparar: dchi2(TGL-LCDM)=%.4f  %s  z_global=%.2f (n=%d) (%.2fs)\" % (c[\"delta_chi2\"][\"tgl_menos_lcdm\"], c[\"leitura\"], c[\"significancia\"][\"z_global\"], c[\"significancia\"][\"n_familias\"], t))\n47:             for i in range(2):\n48:                 h, t = await chama(\"lago_histograma\", caminho=kids, coluna=\"Z_B\")"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\registrar_no_mapa.py",
+      "bytes": 11415,
+      "sha256": "e7d5cb45de26748fd101331c486989f41f061d6d89684434eb91bec35e9d8bfb",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 28,
+          "last_line": 29,
+          "text": "28: def rot(x, n=5):\n29:     return (\"%%.%df\" % n) % x"
+        },
+        {
+          "first_line": 52,
+          "last_line": 65,
+          "text": "52:     dict(tipo=\"RESULTADO\", rota_id=\"investigacao.bancada_um_28set\", status=\"EM_CURSO\", olhou_dados=True, estatuto=EST, artefatos=[A(\"P2_comparar_planck_dr2.json\")],\n53:          resultado=(\"P2 (comparar, Planck comprimido + DESI DR2): χ² ΛCDM %s (%d g.l.); χ² β = α√e %s; β livre %s ± %s com χ² %s; Δχ²(α√e − livre) = %s ⟹ \"\n54:                     \"z_local %s (Wilks); Δχ²(0 − livre) = %s; global (Šidák, %d famílias no livro) z = %s\") % (\n55:              rot(p2[\"lcdm\"][\"chi2\"], 3), p2[\"lcdm\"][\"gl\"], rot(p2[\"tgl_beta_fixo\"][\"chi2\"], 3), rot(p2[\"beta_livre\"][\"theta\"][\"beta\"]),\n56:              rot(p2[\"beta_livre\"][\"sigma_JtJ\"][\"beta\"]), rot(p2[\"beta_livre\"][\"chi2\"], 3), rot(p2[\"delta_chi2\"][\"tgl_menos_livre\"], 3),\n57:              rot(p2[\"significancia\"][\"z_local\"], 2), rot(p2[\"delta_chi2\"][\"lcdm_menos_livre\"], 3), p2[\"significancia\"][\"n_familias\"], rot(p2[\"significancia\"][\"z_global\"], 2))),\n58:     dict(tipo=\"RESULTADO\", rota_id=\"investigacao.bancada_um_28set\", status=\"EM_CURSO\", olhou_dados=True, estatuto=EST, artefatos=[A(\"P1_posterior_planck_dr2.json\")],\n59:          veredito=\"INV_BANCADA_UM_20260928_V1__P1_PLANCK_COMP_DESI_DR2__%s__INDICIO_FORTE_NAO__BELOW_THE_5SIGMA_FALSIFICATION_THRESHOLD__NOT_BLIND__GATE_UNTOUCHED\" % leitura(zt1),\n60:          resultado=(\"P1 (posterior primário, 512 × 4000, queima 1500, τ ≈ %s, %d amostras efetivas): β = %s ± %s (σ simétrico); z_TGL = %s; z_0 = %s; \"\n61:                     \"fração do posterior acima de α√e = %s ⟹ z_local pela cauda %s, global (Šidák, %d famílias) %s. Leitura pré-registrada: %s. \"\n62:                     \"Critério de indício forte (|z_TGL| < 1 e z_0 ≥ 3): NÃO atendido.\") % (\n63:              rot(max(p1[\"tau\"].values()), 1), int(p1[\"amostras_efetivas\"]), rot(b1), rot(s1_), rot(zt1, 2), rot(z01, 2),\n64:              \"%.2e\" % p1[\"fracao_beta_acima_de_beta_tgl\"], rot(p1[\"significancia\"][\"z_local\"], 2), p1[\"significancia\"][\"n_familias\"],\n65:              rot(p1[\"significancia\"][\"z_global\"], 2), leitura(zt1)),"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\p_real_dr2.py",
+      "bytes": 3776,
+      "sha256": "d0778882a773b0a2d55422b60a30192731c6fcdf05f362ee40cc76f6be7c159a",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 20,
+          "last_line": 24,
+          "text": "20: def req(caminho, corpo=None, timeout=3600):\n21:     dados = None if corpo is None else json.dumps(corpo).encode(\"utf-8\")\n22:     r = urllib.request.Request(URL + caminho, data=dados, headers={\"Content-Type\": \"application/json\", \"X-Cliente\": CLIENTE})\n23:     with urllib.request.urlopen(r, timeout=timeout) as f:\n24:         return json.loads(f.read().decode(\"utf-8\"))"
+        },
+        {
+          "first_line": 49,
+          "last_line": 69,
+          "text": "49: r = req(\"/api/comparar\", dict(conjuntos=F[\"P2\"][\"conjuntos\"], c_livre=F[\"P2\"][\"c_livre\"]))\n50: saidas[\"P2\"] = dict(arquivo=\"P2_comparar_planck_dr2.json\", sha256=grava(\"P2_comparar_planck_dr2.json\", r), segundos=round(time.time() - t0, 1))\n51: print(\"P2:\", r[\"leitura\"], \"| Δχ²(TGL−ΛCDM) = %.3f\" % r[\"delta_chi2\"][\"tgl_menos_lcdm\"], \"| β livre = %.5f ± %.5f\" % (\n52:     r[\"beta_livre\"][\"theta\"][\"beta\"], r[\"beta_livre\"][\"sigma_JtJ\"].get(\"beta\", float(\"nan\"))), \"| global:\", r[\"significancia\"])\n53: t1 = time.time()\n54: s = amostra(F[\"P1\"])\n55: assert s[\"estado\"] == \"pronta\", s.get(\"erro\")\n56: saidas[\"P1\"] = dict(arquivo=\"P1_posterior_planck_dr2.json\", sha256=grava(\"P1_posterior_planck_dr2.json\", s[\"resultado\"]), segundos=round(time.time() - t1, 1))\n57: b = s[\"resultado\"][\"resumo\"][\"beta\"]\n58: print(\"P1: β = %.5f (−%.5f/+%.5f); τ = %s; efetivas %.0f; global: %s\" % (b[\"median\"], b[\"sigma_lower\"], b[\"sigma_upper\"], s[\"resultado\"][\"tau\"],\n59:                                                                         s[\"resultado\"][\"amostras_efetivas\"], s[\"resultado\"][\"significancia\"]))\n60: t2 = time.time()\n61: r = req(\"/api/comparar\", dict(conjuntos=F[\"S2\"][\"conjuntos\"], c_livre=F[\"S2\"][\"c_livre\"]))\n62: saidas[\"S2\"] = dict(arquivo=\"S2_comparar_planck_dr2_c_livre.json\", sha256=grava(\"S2_comparar_planck_dr2_c_livre.json\", r), segundos=round(time.time() - t2, 1))\n63: print(\"S2:\", r[\"leitura\"], \"| β livre = %.5f\" % r[\"beta_livre\"][\"theta\"][\"beta\"])\n64: t3 = time.time()\n65: s = amostra(F[\"S1\"])\n66: assert s[\"estado\"] == \"pronta\", s.get(\"erro\")\n67: saidas[\"S1\"] = dict(arquivo=\"S1_posterior_planck_dr2_sh0es.json\", sha256=grava(\"S1_posterior_planck_dr2_sh0es.json\", s[\"resultado\"]), segundos=round(time.time() - t3, 1))\n68: b = s[\"resultado\"][\"resumo\"][\"beta\"]\n69: print(\"S1: β = %.5f (−%.5f/+%.5f); global: %s\" % (b[\"median\"], b[\"sigma_lower\"], b[\"sigma_upper\"], s[\"resultado\"][\"significancia\"]))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase1_eff_30set\\rodar_fase1.py",
+      "bytes": 11155,
+      "sha256": "8cf1d8b74e65b9ebc7c98055dabbb8746867ec1f8a46306ca4541060e438eab1",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 47,
+          "last_line": 55,
+          "text": "47:         c = ev.comparar(cj, c_livre=False, cliente=CLI, opcoes=op)\n48:         f = c[\"beta_livre\"]; t = c[\"tgl_beta_fixo\"]; l = c[\"lcdm\"]\n49:         d = c[\"delta_chi2\"][\"tgl_menos_livre\"]; z = math.sqrt(max(d, 0.0))\n50:         bh = f[\"theta\"][\"beta\"]; sb = f[\"sigma_JtJ\"].get(\"beta\")\n51:         res = dict(modo=c[\"modo\"], chi2=dict(lcdm=l[\"chi2\"], tgl=t[\"chi2\"], livre=f[\"chi2\"]), n_dados=l[\"n_dados\"],\n52:                    delta_chi2=c[\"delta_chi2\"], z_perfil_beta_tgl=z, beta_livre=bh, sigma_beta_JtJ=sb, z_JtJ=((B - bh) / sb if sb else None),\n53:                    H0=dict(lcdm=l[\"theta\"][\"H0\"], tgl=t[\"theta\"][\"H0\"], livre=f[\"theta\"][\"H0\"]),\n54:                    Omega_m_tgl=(t[\"theta\"][\"ombh2\"] + t[\"theta\"][\"omch2\"] + 0.06 / 93.14) / (t[\"theta\"][\"H0\"] / 100.0) ** 2,\n55:                    significancia_livro=c.get(\"significancia\"), segundos_comparar=round(time.time() - t1, 1))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase2_dois_setores_30set\\rodar_fase2.py",
+      "bytes": 11076,
+      "sha256": "62792978fc3ad2283595f082dd7c3e629d037183662fd89f3f52fb471db01053",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 76,
+          "last_line": 85,
+          "text": "76:         c = ev.comparar(cj, c_livre=False, cliente=CLI, opcoes=op)\n77:         f = c[\"beta_livre\"]; t = c[\"tgl_beta_fixo\"]; l = c[\"lcdm\"]\n78:         d = c[\"delta_chi2\"][\"tgl_menos_livre\"]; z = math.sqrt(max(d, 0.0))\n79:         bh = f[\"theta\"][\"beta\"]; sb = f[\"sigma_JtJ\"].get(\"beta\")\n80:         pulls = dict(lcdm=pull_escada(l[\"theta\"], cj, op, beta=0.0), tgl=pull_escada(t[\"theta\"], cj, op, beta=B), livre=pull_escada(f[\"theta\"], cj, op))\n81:         res = dict(modo=c[\"modo\"], chi2=dict(lcdm=l[\"chi2\"], tgl=t[\"chi2\"], livre=f[\"chi2\"]), n_dados=l[\"n_dados\"], delta_chi2=c[\"delta_chi2\"], z_perfil_beta_tgl=z,\n82:                    beta_livre=bh, sigma_beta_JtJ=sb, z_JtJ=((B - bh) / sb if sb else None), H0=dict(lcdm=l[\"theta\"][\"H0\"], tgl=t[\"theta\"][\"H0\"], livre=f[\"theta\"][\"H0\"]),\n83:                    theta_tgl=t[\"theta\"], theta_livre=f[\"theta\"], pull_escada=pulls, perto_do_limite_tgl=perto_do_limite(t[\"theta\"], t[\"livres\"]),\n84:                    Omega_m_tgl=(t[\"theta\"][\"ombh2\"] + t[\"theta\"][\"omch2\"] + 0.06 / 93.14) / (t[\"theta\"][\"H0\"] / 100.0) ** 2,\n85:                    significancia_livro=c.get(\"significancia\"), segundos_comparar=round(time.time() - t1, 1))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase4_desvio_30set\\rodar_fase4.py",
+      "bytes": 13290,
+      "sha256": "bfe2fe44b9e136f8162569906d5047d33b7b1108e72928134277e4a8cf2459c9",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 80,
+          "last_line": 90,
+          "text": "80:     c = ev.comparar(cj, c_livre=False, cliente=CLI, opcoes=op)\n81:     f = c[\"beta_livre\"]; t = c[\"tgl_beta_fixo\"]; l = c[\"lcdm\"]\n82:     bh = f[\"theta\"][\"beta\"]; sb = f[\"sigma_JtJ\"].get(\"beta\"); delta = bh - B\n83:     d_tl = t[\"chi2\"] - f[\"chi2\"]; d_lt = l[\"chi2\"] - t[\"chi2\"]\n84:     pts = dict(lcdm=ponto(l[\"theta\"], cj, op, beta=0.0), tgl=ponto(t[\"theta\"], cj, op, beta=B), livre=ponto(f[\"theta\"], cj, op))\n85:     res = dict(modo=c[\"modo\"], opcoes=op, chi2=dict(lcdm=l[\"chi2\"], tgl=t[\"chi2\"], livre=f[\"chi2\"]), n_dados=l[\"n_dados\"], delta_chi2=c[\"delta_chi2\"],\n86:                z_perfil_beta_tgl=math.sqrt(max(d_tl, 0.0)), beta_livre=bh, sigma_beta_JtJ=sb, delta=delta, sigma_delta=sb, z_delta=((delta / sb) if sb else None),\n87:                z_ganho_da_lei=(math.copysign(math.sqrt(abs(d_lt)), d_lt)), pontos=pts, theta_tgl=t[\"theta\"], theta_livre=f[\"theta\"],\n88:                perto_do_limite_tgl=perto_do_limite(t[\"theta\"], t[\"livres\"]), perto_do_limite_livre=perto_do_limite(f[\"theta\"], f[\"livres\"]),\n89:                Omega_m_tgl=(t[\"theta\"][\"ombh2\"] + t[\"theta\"][\"omch2\"] + 0.06 / 93.14) / (t[\"theta\"][\"H0\"] / 100.0) ** 2,\n90:                custo_por_nat_medido=(bh * pts[\"livre\"][\"I\"] / math.log1p(PRE[\"z_star\"])), significancia_livro=c.get(\"significancia\"), segundos_comparar=round(time.time() - t1, 1))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase5_sh0es_01out\\rodar_fase5.py",
+      "bytes": 20309,
+      "sha256": "6e0981e3c6da1b7d948348eb0e579e2dc2f5fb8e9307d97baedaf86d83713cf7",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 78,
+          "last_line": 90,
+          "text": "78:     c = ev.comparar(cj, c_livre=False, cliente=CLI, opcoes=op)\n79:     f = c[\"beta_livre\"]; t = c[\"tgl_beta_fixo\"]; l = c[\"lcdm\"]\n80:     bh = f[\"theta\"][\"beta\"]; sb = f[\"sigma_JtJ\"].get(\"beta\"); delta = bh - B\n81:     d_tl = t[\"chi2\"] - f[\"chi2\"]; d_lt = l[\"chi2\"] - t[\"chi2\"]\n82:     pts = dict(lcdm=ponto(l[\"theta\"], cj, op, beta=0.0), tgl=ponto(t[\"theta\"], cj, op, beta=B), livre=ponto(f[\"theta\"], cj, op))\n83:     res = dict(modo=c[\"modo\"], opcoes=op, chi2=dict(lcdm=l[\"chi2\"], tgl=t[\"chi2\"], livre=f[\"chi2\"]), n_dados=l[\"n_dados\"], gl=l[\"gl\"], delta_chi2=c[\"delta_chi2\"],\n84:                z_perfil_beta_tgl=math.sqrt(max(d_tl, 0.0)), beta_livre=bh, sigma_beta_JtJ=sb, delta=delta, sigma_delta=sb, z_delta=((delta / sb) if sb else None),\n85:                z_tensao=(math.copysign(math.sqrt(abs(d_lt)), d_lt)), pontos=pts, theta_lcdm=l[\"theta\"], theta_tgl=t[\"theta\"], theta_livre=f[\"theta\"],\n86:                Omega_m_lcdm=(l[\"theta\"][\"ombh2\"] + l[\"theta\"][\"omch2\"] + 0.06 / 93.14) / (l[\"theta\"][\"H0\"] / 100.0) ** 2,\n87:                Omega_m_tgl=(t[\"theta\"][\"ombh2\"] + t[\"theta\"][\"omch2\"] + 0.06 / 93.14) / (t[\"theta\"][\"H0\"] / 100.0) ** 2,\n88:                sigma_H0_lcdm=l[\"sigma_JtJ\"].get(\"H0\"), sigma_H0_tgl=t[\"sigma_JtJ\"].get(\"H0\"),\n89:                perto_do_limite_tgl=perto_do_limite(t[\"theta\"], t[\"livres\"]), perto_do_limite_livre=perto_do_limite(f[\"theta\"], f[\"livres\"]), perto_do_limite_lcdm=perto_do_limite(l[\"theta\"], l[\"livres\"]),\n90:                significancia_livro=c.get(\"significancia\"), segundos_comparar=round(time.time() - t1, 1))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase7_cc_covariancia_01out\\rodar_fase7.py",
+      "bytes": 11015,
+      "sha256": "bad9b956f7f502c986851d4a86e7049f824ea99a7c951a177aedce3448825da6",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 38,
+          "last_line": 43,
+          "text": "38:     t1 = time.time(); c = ev.comparar(cj, c_livre=False, cliente=CLI, opcoes=op); f = c[\"beta_livre\"]; t = c[\"tgl_beta_fixo\"]; l = c[\"lcdm\"]\n39:     bh = f[\"theta\"][\"beta\"]; sb = f[\"sigma_JtJ\"].get(\"beta\"); delta = bh - B; d_tl = t[\"chi2\"] - f[\"chi2\"]; d_lt = l[\"chi2\"] - t[\"chi2\"]\n40:     pts = dict(lcdm=ponto(l[\"theta\"], cj, op, 0.0), tgl=ponto(t[\"theta\"], cj, op, B), livre=ponto(f[\"theta\"], cj, op))\n41:     res = dict(opcoes=op, chi2=dict(lcdm=l[\"chi2\"], tgl=t[\"chi2\"], livre=f[\"chi2\"]), n_dados=l[\"n_dados\"], delta_chi2=c[\"delta_chi2\"], z_perfil_beta_tgl=math.sqrt(max(d_tl, 0.0)), beta_livre=bh, sigma_delta=sb, delta=delta,\n42:                z_delta=((delta / sb) if sb else None), z_ganho_da_lei=math.copysign(math.sqrt(abs(d_lt)), d_lt), pontos=pts, theta_tgl=t[\"theta\"], theta_livre=f[\"theta\"],\n43:                perto_do_limite_tgl=perto_do_limite(t[\"theta\"], t[\"livres\"]), perto_do_limite_livre=perto_do_limite(f[\"theta\"], f[\"livres\"]), significancia_livro=c.get(\"significancia\"), segundos_comparar=round(time.time() - t1, 1))"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase1_eff_30set\\relatorio_fase1.py",
+      "bytes": 14310,
+      "sha256": "d01a5d9c51fc40141dbbd825856ea07be438cd009b2eb5dc53b178f2971fb665",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 136,
+          "last_line": 142,
+          "text": "136: md.extend(leitura)\n137: md.append(\"\\n## Estatuto, multiplicidade e pendências\\n\")\n138: md.append(\"- **Cego/não-cego:** \" + \"; \".join(\"%s: %s\" % (fam, \"cego até esta rodada\" if R[\"familias\"][fam][\"cego\"] else \"NÃO-CEGO\") for fam in FAM) + \".\")\n139: sig = At.get(\"significancia_livro\")\n140: md.append(\"- **Multiplicidade (livro da Bancada, Šidák sobre as famílias já testadas), família A modo tgl:** `%s`.\" % (json.dumps(sig, ensure_ascii=False)[:300] if sig else \"n/d\"))\n141: md.append(\"- **Pendência dita no pré-registro:** %s\" % PRE.get(\"pendencia_dita\", \"—\"))\n142: _idp = os.path.join(r\"C:\\IALD\\Bancada_Um\\estado\", \"identidade_pantheon_cov.json\")"
+        }
+      ]
+    },
+    {
+      "path": "C:\\IALD\\Bancada_Um\\investigacao\\fase2_dois_setores_30set\\relatorio_fase2.py",
+      "bytes": 11043,
+      "sha256": "052aa57ad0a24c784e952ef0f392c18c609712c482de1f9d2e1087448fb729ad",
+      "scope": "SOURCE_TEXT_ONLY_NOT_IMPORTED",
+      "excerpts": [
+        {
+          "first_line": 105,
+          "last_line": 111,
+          "text": "105: md.append(\"**Visto antes de pré-registrar:** %s\\n\" % PRE[\"visto_antes\"])\n106: md.append(\"## Estatuto, multiplicidade e pendências\\n\")\n107: md.append(\"- **Cego/não-cego:** \" + \"; \".join(\"%s: %s\" % (fam, \"cego até esta rodada\" if R[\"familias\"][fam][\"cego\"] else \"NÃO-CEGO\") for fam in FAM) + \".\")\n108: sig = Ft.get(\"significancia_livro\")\n109: md.append(\"- **Multiplicidade (livro da Bancada, Šidák), família F modo tgl:** `%s`.\" % (json.dumps(sig, ensure_ascii=False)[:300] if sig else \"n/d\"))\n110: md.append(\"- **O que este resultado NÃO diz:** não confirma β nem a lei D1a; a forma da lei foi cunhada conhecendo a razão SH0ES/Planck; não move o gate matemático. \"\n111:           \"O que diz: com a lei D1a e β = α√e fixo, o fundo (DR2) e a escada são ou não compatíveis (o pull), e com que fator de Bayes contra ΛCDM.\")"
+        }
+      ]
+    }
+  ],
+  "prohibited_actions_performed": [],
+  "scope_excluded": [
+    "mathematical reaudit",
+    "observed data",
+    "SQL/state",
+    "HTTP/provider",
+    "science/fit",
+    "shared memory/map edits"
+  ]
+}

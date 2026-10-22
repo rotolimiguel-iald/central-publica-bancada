@@ -1,0 +1,61 @@
+--- reviewed_V1/driver_p3.py
++++ P3_01_V2/driver_p3.py
+@@ -17,7 +17,7 @@
+ def js(path,obj):fresh(path,(json.dumps(obj,indent=2,allow_nan=False)+"\n").encode())
+ def array_sha(a):
+     return hashlib.sha256(a.tobytes(order="C")).hexdigest()
+-class BudgetStop(RuntimeError):pass
++from failure_audit import BudgetStop, FailureAudit
+ class Counter(list):
+     def __init__(self):super().__init__([0,0.,0]);self.lock=threading.RLock()
+     def get_lock(self):return self.lock
+@@ -92,6 +92,7 @@
+     source.set_deadline(time.time()+c["limits"]["wall_soft_s"]-(time.perf_counter()-started))
+     source.set_edom_log(out/"EDOM_LOG.jsonl")
+     ll_calls=0;sampler=None;last=None;status="FAILED";error=None;delta=None;ess=None
++    failures=FailureAudit();last_parameters=None
+     def budget():
+         if ll_calls>=c["limits"]["max_likelihood_calls"]:raise BudgetStop("MAXCALL_INCLUDING_INITIALIZATION")
+         if time.perf_counter()-started>=c["limits"]["wall_soft_s"]:raise BudgetStop("WALL")
+@@ -117,13 +118,16 @@
+                 ifo.set_strain_data_from_frequency_domain_strain(d,sampling_frequency=4096,duration=32,start_time=999999984.)
+             if not np.isclose(math.sqrt(snr2),20.,rtol=1e-8,atol=1e-10):raise ValueError("Qualified SNR differs")
+         wf=generator(cfg)
++        wf.frequency_domain_source_model=failures.wrap(
++            wf.frequency_domain_source_model,lambda:last_parameters,counts)
+         likelihood=bilby.gw.likelihood.GravitationalWaveTransient(ifos,wf,
+             time_marginalization=False,distance_marginalization=False,phase_marginalization=False,
+             calibration_marginalization=False,jitter_time=False,reference_frame="sky",time_reference="geocenter")
+         def logl(v):
+-            nonlocal ll_calls
++            nonlocal ll_calls,last_parameters
++            last_parameters=parameters(v)
+             budget();ll_calls+=1
+-            value=float(likelihood.log_likelihood_ratio(parameters(v)))
++            value=float(likelihood.log_likelihood_ratio(last_parameters))
+             if counts[2]!=0 or not math.isfinite(value) or abs(value)>1e100:
+                 raise RuntimeError("Native/domain/nonfinite likelihood abort; never a silent prior rejection")
+             return value
+@@ -150,8 +154,11 @@
+         else:status="STOPPED_NOT_CONVERGED"
+     except BudgetStop as exc:
+         status="BUDGET_EXHAUSTED_PARTIAL";error=str(exc)
++        failures.external(exc,last_parameters)
+     except Exception as exc:
+-        status="FAILED";error=type(exc).__name__+": "+str(exc)
++        failures.external(exc,last_parameters)
++        status="BUDGET_EXHAUSTED_PARTIAL" if failures.kind_for(exc)=="BUDGET_STOP" else "FAILED"
++        error=type(exc).__name__+": "+str(exc)
+     finally:
+         signal.setitimer(signal.ITIMER_REAL,0)
+         artifact=None
+@@ -166,7 +173,8 @@
+                 "scope":"Synthetic cost/recovery feasibility only; neither coverage nor a D verdict",
+                 "error":error,"wall_s":time.perf_counter()-started,"cpu_s":time.process_time()-cpu0,
+                 "cpu_process_total_s":time.process_time(),"likelihood_calls":ll_calls,
+-                "native_calls":int(counts[0]),"native_wall_s":float(counts[1]),"EDOM":int(counts[2]),
++                "native_calls":int(counts[0]),"native_wall_s":float(counts[1]),
++                "failure_receipt":failures.summary(counts),
+                 "delta_logz_before_live_addition":delta,"weighted_ESS":ess,"diagnostics":artifact,
+                 "filesystem_read_write_paths_after_hook":sorted(audit_paths),"blocked_operations":blocked,
+                 "audit_scope":"Python open/process/socket hook after fixed imports and pin checks; not OS/native syscall containment",

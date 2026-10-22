@@ -1,0 +1,178 @@
+{
+  "status": "CAMPAIGN_TERMINATED_AFTER_FIRST_JOB_FAILURE_NO_RETRY",
+  "recorded_utc": "2026-10-06T03:06:18.607697+00:00",
+  "authorization": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\AUTORIZACAO_COORDENACAO.json",
+    "sha256": "439a851d2ed4d7eb32c0c4efc0497f83c56f2eda1bc2dacfa20270b41839277a",
+    "bytes": 2612
+  },
+  "contract": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\CONTRATO_P3.json",
+    "sha256": "6d2b6be5224b16bb8c267838f8bbe4023b17c9bd0b4614421146e4f5685fef3a",
+    "bytes": 17581
+  },
+  "exact_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--",
+    "env",
+    "OMP_NUM_THREADS=1",
+    "OPENBLAS_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "/opt/lal_env/bin/python",
+    "-I",
+    "-B",
+    "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_codec_002/launch_p3.py",
+    "6d2b6be5224b16bb8c267838f8bbe4023b17c9bd0b4614421146e4f5685fef3a"
+  ],
+  "tool_launch_result": {
+    "chunk_id": "8c0b9a",
+    "wall_time_seconds": 3.575057,
+    "exit_code": 0,
+    "original_token_count": 101,
+    "output": "[{\"job_id\": \"P3_GR_CODEC_002\", \"returncode\": 2, \"supervisor_status\": \"PROCESS_RETURNED\", \"wall_s\": 3.0755442189984024, \"stdout_sha256\": \"162d4db9601b1e2f8a38b171c41196c2adcf24d0d72a8b78b2827e51a3414bab\", \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"result_sha256\": \"98fb453abb5afd534922ca2731a8c622165c9877c1353096cea25657d7233986\", \"result_status\": \"FAILED\"}]\n"
+  },
+  "identity": {
+    "supervisor_pid": 4659,
+    "child_pid": 4660,
+    "job": "P3_GR_CODEC_002",
+    "launch_utc": "2026-10-06T03:04:02.292040+00:00",
+    "child_start_utc": "2026-10-06T03:04:02.699015+00:00",
+    "session_id_returned": null,
+    "process_returned": true
+  },
+  "jobs": [
+    {
+      "job_id": "P3_GR_CODEC_002",
+      "status": "FAILED",
+      "child_returncode": 2,
+      "likelihood_calls": 0,
+      "native_waveform_calls": 0,
+      "native_wall_s": 0.0,
+      "child_wall_s": 2.572406232007779,
+      "child_CPU_s": 2.26453153,
+      "child_process_total_CPU_s": 2.501248534,
+      "supervisor_job_wall_s": 3.0755442189984024,
+      "error": "ValueError: Interferometer H1 not implemented",
+      "failure_receipt": {
+        "source_returned_none_count": 0,
+        "source_returned_none_counter_raw": 0,
+        "recognized_domain_exception_count": 0,
+        "indeterminate_exception_after_native_attempt_count": 0,
+        "pre_native_exception_count": 0,
+        "temporal_guard_count": 0,
+        "budget_abort_count": 0,
+        "application_exception_count": 1,
+        "events": [
+          {
+            "kind": "APPLICATION_EXCEPTION",
+            "exception_type": "builtins.ValueError",
+            "message": "Interferometer H1 not implemented",
+            "errno": null,
+            "parameters": null,
+            "native_attempts_before": null,
+            "native_attempts_after": null,
+            "source_none_counter_before": null,
+            "source_none_counter_after": null,
+            "origin_limit": "After-native-attempt does not by itself locate the exception inside C."
+          }
+        ],
+        "domain_error_total": null,
+        "domain_error_total_scope": "Not inferred: None and generic exceptions are not certified EDOM; explicit recognized count is reported separately."
+      },
+      "delta_logz": null,
+      "weighted_ESS": null
+    },
+    {
+      "job_id": "P3_RB_CODEC_002",
+      "status": "NOT_STARTED",
+      "reason": "Supervisor halted after first job failed; no output directory or CLAIM created."
+    }
+  ],
+  "campaign_wall_s": 3.1105281360214576,
+  "observed_failure_boundary": {
+    "stage": "Post-hook detector initialization before any likelihood/waveform evaluation",
+    "read_paths": [
+      "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/p3_codec_002/EXECUTION_CODEC_002/P3_GR_CODEC_002/EDOM_LOG.jsonl",
+      "/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/piloto_sintetico/RUN_002/SYNTHETIC_ARRAYS.npz",
+      "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/detector/detectors/H1.interferometer"
+    ],
+    "blocked_paths": [
+      "/opt/lal_env/lib/python3.12/site-packages/bilby/gw/detector/noise_curves/aLIGO_O4_high_asd.txt"
+    ],
+    "exception": "ValueError: Interferometer H1 not implemented",
+    "causal_limit": "Observed detector configuration/default-noise-file read was denied by exact allowlist. No native/domain failure or bad scientific fit is inferred. No unapproved read, allowlist edit or repair attempted."
+  },
+  "diagnosis": {
+    "scientific_convergence": "NOT_ASSESSED_NO_LIKELIHOOD_EVALUATIONS",
+    "PE_cost_measured": false,
+    "initialization_cost_measured": true,
+    "cp437_failure_repeated": false,
+    "cross_dataset_Bayes_factor": null,
+    "coverage_claim": false,
+    "D_verdict": null
+  },
+  "post_execution_input_checks": {
+    "contract_inputs": 19,
+    "manifest_artifacts_preserved": 89,
+    "all_match": true,
+    "old_V2_and_candidate_untouched": true
+  },
+  "artifacts": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\CAMPAIGN_RECEIPT.json",
+      "sha256": "028df3589219a5161a7fb0c9437ba87dc8e9dad6504be937e08c719faa825fd4",
+      "bytes": 718
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\LAUNCH_STARTED.json",
+      "sha256": "808546bab2b848a7f5f91353a17e49ab914b42a397a91e401b5c97a824693bf1",
+      "bytes": 245
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\P3_GR_CODEC_002\\CHILD_STARTED.json",
+      "sha256": "216fc3118843a3af8f67878e4858aaa4eb79d237531c90955b12726ce81fad98",
+      "bytes": 182
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\P3_GR_CODEC_002\\CLAIM.json",
+      "sha256": "8ae2abde35669d30e1e207f1e165ca249253c1aa812b44da268ae9a18c822f4c",
+      "bytes": 123
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\P3_GR_CODEC_002\\EDOM_LOG.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\P3_GR_CODEC_002\\PROCESS_RECEIPT.json",
+      "sha256": "7ff1b38702ce6c82ec7146e04c340865b307f6811937c05e6fc61d814b658725",
+      "bytes": 418
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\P3_GR_CODEC_002\\RESULT.json",
+      "sha256": "98fb453abb5afd534922ca2731a8c622165c9877c1353096cea25657d7233986",
+      "bytes": 2450
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\P3_GR_CODEC_002\\stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_018\\preregistros\\conjunto_d\\p3_codec_002\\EXECUTION_CODEC_002\\P3_GR_CODEC_002\\stdout.log",
+      "sha256": "162d4db9601b1e2f8a38b171c41196c2adcf24d0d72a8b78b2827e51a3414bab",
+      "bytes": 142
+    }
+  ],
+  "retry_performed": false,
+  "resume_performed": false,
+  "allowlist_modified": false,
+  "new_repair_package_created": false,
+  "Work_used": false,
+  "remote_executor_calls": 0,
+  "D_read": false,
+  "V1_or_four_holds_modified": false,
+  "next_step": "Coordination may read this preserved diagnostic and decide separately; no further execution or correction authorized by this receipt."
+}

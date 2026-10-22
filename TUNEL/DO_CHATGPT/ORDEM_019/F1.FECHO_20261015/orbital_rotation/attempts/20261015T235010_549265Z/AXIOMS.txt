@@ -1,0 +1,39 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T235010_549265Z\PhysicalFourierTranslationR1.lean:21:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Eq E (𝓕 (fun x => f (x + -a)) k)
+    (Complex.exp (-(2 * ↑Real.pi * ↑⟪a, k⟫ * Complex.I)) •
+      VectorFourier.fourierIntegral 𝐞 volume (innerₗ Spacetime) f k)
+but is expected to have type
+  @Eq E (𝓕 (fun x => f (x + -a)) k) (Complex.exp (-(2 * ↑Real.pi * ↑⟪a, k⟫ * Complex.I)) • 𝓕 f k)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T235010_549265Z\PhysicalFourierTranslationR1.lean:33:28: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ⟪metricFlip p, a⟫
+in the target expression
+  2 * Real.pi * ((2 * Real.pi)⁻¹ * ⟪a, metricFlip p⟫) = orbitPairing (fun i => a.ofLp i) fun i => p.ofLp i
+
+a p : Spacetime
+⊢ 2 * Real.pi * ((2 * Real.pi)⁻¹ * ⟪a, metricFlip p⟫) = orbitPairing (fun i => a.ofLp i) fun i => p.ofLp i
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T235010_549265Z\PhysicalFourierTranslationR1.lean:49:24: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ⟪metricFlip p, a⟫
+in the target expression
+  Complex.exp (↑(-2 * Real.pi * ⟪a, metricFlip p⟫) * Complex.I) • 𝓕 f (metricFlip p) =
+    phase (-2 * Real.pi * orbitPairing (fun i => a.ofLp i) fun i => p.ofLp i) • 𝓕 f (metricFlip p)
+
+E : Type u_1
+inst✝¹ : NormedAddCommGroup E
+inst✝ : NormedSpace ℂ E
+f : Spacetime → E
+a p : Spacetime
+⊢ Complex.exp (↑(-2 * Real.pi * ⟪a, metricFlip p⟫) * Complex.I) • 𝓕 f (metricFlip p) =
+    phase (-2 * Real.pi * orbitPairing (fun i => a.ofLp i) fun i => p.ofLp i) • 𝓕 f (metricFlip p)
+'F1Fecho.PhysicalFourier.fourier_translate' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PhysicalFourier.fourierInv_translate' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PhysicalFourier.angular_pairing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'F1Fecho.PhysicalFourier.angular_inverse_fourier_translate' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.PhysicalFourier.unscaled_forward_fourier_translate' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

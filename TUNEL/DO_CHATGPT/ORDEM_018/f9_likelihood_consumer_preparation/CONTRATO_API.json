@@ -1,0 +1,233 @@
+{
+  "schema": "F9_LIKELIHOOD_CONSUMER_PREPARATION_CONTRACT_V1",
+  "request_id": "a9874f79-9d71-48f5-824c-d51d6d819534",
+  "status": "PREPARATION_ONLY_NO_EXECUTION",
+  "module": "likelihood_consumer.py",
+  "execution_authorization": false,
+  "claim": false,
+  "dependencies": {
+    "selected": "caller-injected qualified FlatNuisanceGaussian plus numpy",
+    "imports_at_module_level": [
+      "hashlib",
+      "json",
+      "math",
+      "re",
+      "fractions.Fraction"
+    ],
+    "numerical_engine_copy": false,
+    "implicit_file_or_network_access": false
+  },
+  "functions": {
+    "extract_structure": {
+      "input": "assembly JSON bytes plus independently expected SHA256",
+      "output": "canonical JSON bytes for five structure fields",
+      "scientific_admission": false
+    },
+    "prepare_joint": {
+      "positional": [
+        "y",
+        "C",
+        "row_ids"
+      ],
+      "keyword_only": [
+        "affine_origin_native",
+        "structure_json",
+        "admission_json",
+        "admission_sha256",
+        "backend_receipt_json",
+        "numpy_module",
+        "flat_gaussian_class"
+      ],
+      "output": "PreparedJoint; fixed full covariance, structure, rank and measure"
+    },
+    "evaluate_five": {
+      "input": "assembly_json bytes and assembly_sha256 keyword",
+      "output": "five pointwise normalized log integrals over d_eta; no prior integration/evidence"
+    }
+  },
+  "shape": {
+    "n": 283,
+    "background": 16,
+    "local": 267,
+    "eta": 63,
+    "scale5_rows": 7,
+    "models": [
+      "H1_TGL",
+      "H2_LCDM",
+      "H3_beta_free",
+      "H4_Cepheid",
+      "H5_rd_free"
+    ],
+    "identity_binding": "ordered rows, eta column labels/units and full scale vector must match canonical hashes derived from pinned source metadata"
+  },
+  "array_encoding": {
+    "array": "exact numpy.ndarray, float64, fixed shape, finite; copied to <f8 C-order",
+    "bytes": "raw float64 little-endian C-order; no header; exact byte length; no pickle/NPZ/HDF5",
+    "y_bytes": 2264,
+    "C_bytes": 640712,
+    "origin_bytes": 2264,
+    "input_hash": "sha256 of canonical native <f8 C-order bytes",
+    "row_ids_hash": "sha256 UTF8 JSON list, ensure_ascii=True, sort_keys=True,separators=(',',':'), no newline",
+    "max_metadata_json_bytes": 4194304,
+    "max_rational_string_characters": 64,
+    "runtime_caps": "No launcher or runtime cap claimed by pure API; external execution contract required"
+  },
+  "admission": {
+    "schema": "F9_CONSUMER_ADMISSION_V1",
+    "exact_fields": [
+      "schema",
+      "scope",
+      "scenario_id",
+      "data_kind",
+      "input_sha256",
+      "structure_sha256",
+      "source_pins",
+      "backend_receipt_sha256",
+      "prediction_admission_sha256",
+      "coordinates",
+      "output_measure",
+      "common_measure_id",
+      "MM_status",
+      "expected_support_rank",
+      "tolerances",
+      "references"
+    ],
+    "scope": "ENGINEERING_POINTWISE_ONLY",
+    "data_kind": [
+      "SYNTHETIC",
+      "OPERATOR_RELEASED_OBSERVATIONS"
+    ],
+    "input_sha256_fields": [
+      "y_native_f64le",
+      "C_native_f64le",
+      "affine_origin_native_f64le",
+      "row_ids_canonical_json"
+    ],
+    "source_pins": "exact SOURCE_PINS mapping in candidate, generated from bytes",
+    "structure_sha256": "hash of independently admitted canonical structural projection, not self-admission",
+    "prediction_admission_sha256": "must equal pinned identity.admission_sha256 of every upstream prediction packet",
+    "coordinates": "NATIVE_EQUATION_Y_OFFSETS_ALREADY_INCLUDED",
+    "output_measure": "EUCLIDEAN_ON_FIXED_TRANSFORMED_SUPPORT",
+    "common_measure_id": "nonempty externally fixed identifier for common kappa d_eta in exact eta basis",
+    "MM_status": "CONDITIONAL_UNRATIFIED",
+    "expected_support_rank": "integer 63..283, bool rejected; equals backend rank, no adaptation",
+    "tolerances": {
+      "relative_cutoff": "finite 0<=v<1",
+      "absolute_cutoff": "finite v>=0",
+      "support_tolerance": "finite v>=0 in target units",
+      "design_relative_cutoff": "finite 0<=v<1"
+    },
+    "references": {
+      "format": {
+        "id": "nonempty string",
+        "sha256": "64 lowercase hex"
+      },
+      "always": [
+        "statistical_model",
+        "covariance_and_cross_blocks",
+        "fixed_affine_support",
+        "compression_and_offsets",
+        "common_nuisance_measure",
+        "MM_conditional_model",
+        "structure_review"
+      ],
+      "synthetic_extra": [
+        "synthetic_fixture"
+      ],
+      "observed_extra": [
+        "operator_release",
+        "V1"
+      ]
+    },
+    "authority_boundary": "Fields/hashes/reference names are not authorization or physical certificates; trusted caller must review actual references and external release before supplying observed bytes. This package grants none.",
+    "no_actual_data_admission_in_delivery": true
+  },
+  "backend_receipt": {
+    "schema": "F9_QUALIFIED_BACKEND_CALLER_RECEIPT_V1",
+    "exact_fields": [
+      "schema",
+      "source_pins",
+      "runtime_reference",
+      "class_module",
+      "class_name",
+      "caller_verification_reference"
+    ],
+    "source_pins": "exact linear_gaussian/support entries from SOURCE_PINS",
+    "class_name": "FlatNuisanceGaussian",
+    "class_module": "must match injected callable module metadata",
+    "runtime_reference": "id+sha256 referring to caller's verified numpy/runtime inventory",
+    "caller_verification_reference": "id+sha256 referring to actual loaded-object verification",
+    "limitation": "name/module checks do not authenticate arbitrary objects; trusted caller owns loaded-code provenance"
+  },
+  "transforms": {
+    "data": "y_out=T*y_native",
+    "covariance": "C_out=(T[:,None]*C_native)*T[None,:], including all cross-blocks",
+    "origin": "origin_out=T*origin_native",
+    "X_and_mu": "already transformed upstream; never apply T again",
+    "offsets": "canonical native equations already contain offsets such as alpha+5 and m110-M110_table; no reapplication",
+    "compression": "caller admits fixed reduction and full normalization; no inference from absent cross-covariance"
+  },
+  "support": {
+    "fixed_affine": "caller pins origin; require each mu-origin_out in covariance support before all five likelihoods",
+    "X": "qualified backend requires all 63 columns inside support and full whitened rank",
+    "outside_residual": "backend returns log_integral=-inf with explicit ZERO_DENSITY_OUTSIDE_FIXED_AFFINE_SUPPORT; retained as genuine density zero in admitted measure",
+    "engineering_failure": "exception, not -inf; abort complete five-model call; never omit model",
+    "tolerance": "explicit engineering float64 choice, not a scientific certificate; no jitter/fallback/rank repair"
+  },
+  "measure": {
+    "eta": "common kappa d_eta on same R^63 basis, log(kappa) omitted",
+    "data": "Euclidean measure on transformed fixed affine support",
+    "normalization": "all backend prefactors retained, not dropped",
+    "unit_conversion": "no ambient det(T) correction on singular support; native density conversion requires support Jacobian outside API",
+    "physical_priors": "metadata only, not multiplied/integrated",
+    "absolute_evidence": false
+  },
+  "failures": [
+    "SCHEMA_ERROR",
+    "PIN_ERROR",
+    "ROW_ERROR",
+    "UNIT_ERROR",
+    "MEASURE_ERROR",
+    "ADMISSION_ERROR",
+    "BACKEND_IDENTITY_ERROR",
+    "TOLERANCE_ERROR",
+    "RANK_ERROR",
+    "ARRAY_ERROR",
+    "TRANSFORM_ERROR",
+    "NUMERIC_ERROR",
+    "BACKEND_PREPARATION_FAILED",
+    "STRUCTURE_CHANGED",
+    "BACKEND_SUPPORT_FAILED",
+    "AFFINE_SUPPORT_CHANGED",
+    "BACKEND_EVALUATION_FAILED",
+    "BACKEND_DIAGNOSTIC_ERROR",
+    "BACKEND_VALUE_ERROR"
+  ],
+  "output": {
+    "schema": "F9_POINTWISE_FLAT_CONSUMER_RESULT_V1",
+    "status": "ENGINEERING_ONLY",
+    "log_integral_deta": "pointwise Python finite float or legitimate -inf, not logZ",
+    "preserved": "complete family, rank/prefactor, support diagnostics, params/prior metadata, source/assembly/admission/C_out pins",
+    "unset": [
+      "absolute_evidence",
+      "lnB",
+      "p",
+      "sigma",
+      "fit",
+      "verdict"
+    ],
+    "certification": "UNBOUNDED_THEORY_ERROR, certified=False; no numerical certificate",
+    "serialization": "external strict JSON encoder must explicitly label -inf, no implicit NaN serialization"
+  },
+  "delivery_activity": {
+    "candidate_imports": 0,
+    "numpy_imports": 0,
+    "backend_calls": 0,
+    "controls_executed": 0,
+    "observed_reads": 0,
+    "remote_calls": 0,
+    "solver_calls": 0,
+    "allowed": "read, AST, hashes, structural metadata only"
+  },
+  "future_review": "independent review and separate ROOT decision; not a campaign request or authority"
+}

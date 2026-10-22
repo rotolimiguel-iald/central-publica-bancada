@@ -1,0 +1,38 @@
+{
+  "status": "PASS_WITH_SCOPE",
+  "reviewer": "/root/r67_document_review",
+  "created_utc": "2026-10-18T12:32:29.474686+00:00",
+  "scope": "Static review and27plan/source hash-size checks; nothing applied by reviewer.",
+  "checks": {
+    "numeric_checks": 27,
+    "failed": 0,
+    "backup": "exclusive byte copy, fsync, reread equality before replace",
+    "writing": "exclusive temporary file, size check, atomic replace, post-write byte equality, per-surface receipt",
+    "dependencies": "helper pinned and guarded main has no import-time mutation",
+    "scope": "eight named existing memory surfaces; additive documentary entry; no kernel/program/gate writes",
+    "normalization": "q(0)=1 limitation corrected in R2"
+  },
+  "limitations": [
+    "Optimistic before/after hash checks are not an atomic cross-process CAS or lock. Apply only under the claimed single-writer scope; concurrent writer between final check and replace can cause lost update.",
+    "Multi-surface append is not transactional; on partial failure preserve receipts/backups, reconcile explicitly, do not blindly retry.",
+    "Review is technical, not gerência acceptance or authorization to change any other surface."
+  ],
+  "evidence": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\MEMORY_PLAN_R67_R2.json",
+      "sha256": "6afe642463659f45b65085eef4e6c7a6dfceaa4fc3cb3406d78c943bb56079e4"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\MEMORY_APPEND_R67_R2.txt",
+      "sha256": "4df8e47056fb8eedb5f5256b3e235c723ee401e3e319aba0bb1c3002fe83e3cd"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\memory_r67_r2.py",
+      "sha256": "b314eec5db0b827774f3f78fc75b73adcd112611f22186a4972faa7323bf54d0"
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\acervo_conjugacao_r67\\start_r67.py",
+      "sha256": "fbe62ed767b56edae22f75a3650276a8183855bd2a01aad5ce138a5445bd6ab2"
+    }
+  ]
+}

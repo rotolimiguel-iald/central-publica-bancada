@@ -1,0 +1,56 @@
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T231229_356352Z\ScreenMultiplierContinuityR1.lean:27:89: error(lean.invalidField): Invalid field `clm_apply`: The environment does not contain `Exists.clm_apply`, so it is not possible to project the field `clm_apply` from an expression
+  Measurable.aestronglyMeasurable (Measurable.comp (Continuous.measurable matrixFiberOperator_continuous) (hm y))
+of type
+  ∃ g, StronglyMeasurable g ∧ matrixFiberOperator ∘ A y =ᵐ[?m.90] g
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T231229_356352Z\ScreenMultiplierContinuityR1.lean:42:51: error: Application type mismatch: The argument
+  sq_nonneg ?m.433
+has type
+  @OfNat.ofNat ?m.427 0 (@Zero.toOfNat0 ?m.427 instMulZeroClassOfSemiring.toZero) ≤ ?m.433 ^ 2
+but is expected to have type
+  @OfNat.ofNat ?m.422 0 (@Zero.toOfNat0 ?m.422 SubtractionMonoid.toSubNegZeroMonoid.toNegZeroClass.toZero) ≤ ?m.425
+in the application
+  abs_of_nonneg (sq_nonneg ?m.433)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T231229_356352Z\ScreenMultiplierContinuityR1.lean:42:8: error: Type mismatch: After simplification, term
+  hp
+ has type
+  ‖g y p - g x p‖ ^ 2 ≤ 4 * ‖↑↑f p‖ ^ 2
+but is expected to have type
+  |‖g y p - g x p‖ ^ 2| ≤ 4 * ‖↑↑f p‖ ^ 2
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T231229_356352Z\ScreenMultiplierContinuityR1.lean:47:6: error: Type mismatch: After simplification, term
+  Tendsto.pow (Tendsto.norm (Tendsto.sub (ContinuousAt.tendsto hg) tendsto_const_nhds)) 2
+ has type
+  Tendsto (fun x => ‖g x p - ?m.534‖ ^ 2) (𝓝 x) (𝓝 (‖g x p - ?m.534‖ ^ 2))
+but is expected to have type
+  Tendsto (fun n => ‖g n p - g x p‖ ^ 2) (𝓝 x) (𝓝 0)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261015T231229_356352Z\ScreenMultiplierContinuityR1.lean:57:11: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑↑((matrixMultiplier (A y) ⋯ ⋯) f) p
+in the target expression
+  ‖(↑↑((matrixMultiplier (A y) ⋯ ⋯) f) - ↑↑((matrixMultiplier (A x) ⋯ ⋯) f)) p‖ ^ 2 = ‖g y p - g x p‖ ^ 2
+
+X : Type u_1
+inst✝¹ : TopologicalSpace X
+inst✝ : FirstCountableTopology X
+A : X → MomentumCoordinates → Matrix (Fin 2) (Fin 2) ℂ
+hm : ∀ (x : X), Measurable (A x)
+hu : ∀ (x : X), ∀ᵐ (p : MomentumCoordinates) ∂orbitalMeasure 0, A x p ∈ Matrix.unitaryGroup (Fin 2) ℂ
+x : X
+hc : ∀ᵐ (p : MomentumCoordinates) ∂orbitalMeasure 0, ContinuousAt (fun y => A y p) x
+f : ↥H1
+g : X → MomentumCoordinates → Fiber := fun y p => (matrixFiberOperator (A y p)) (↑↑f p)
+hgm : ∀ (y : X), AEStronglyMeasurable (g y) (orbitalMeasure 0)
+hb : ∀ (y : X), ∀ᵐ (p : MomentumCoordinates) ∂orbitalMeasure 0, ‖g y p - g x p‖ ^ 2 ≤ 4 * ‖↑↑f p‖ ^ 2
+hi :
+  Tendsto (fun y => ∫ (p : MomentumCoordinates), ‖g y p - g x p‖ ^ 2 ∂orbitalMeasure 0) (𝓝 x)
+    (𝓝 (∫ (_p : MomentumCoordinates), 0 ∂orbitalMeasure 0))
+y : X
+p : MomentumCoordinates
+hp :
+  ↑↑((matrixMultiplier (A y) ⋯ ⋯) f - (matrixMultiplier (A x) ⋯ ⋯) f) p =
+    (↑↑((matrixMultiplier (A y) ⋯ ⋯) f) - ↑↑((matrixMultiplier (A x) ⋯ ⋯) f)) p
+hy : ↑↑((matrixMultiplier (A y) ⋯ ⋯) f) p = (matrixFiberOperator (A y p)) (↑↑f p)
+hx : ↑↑((matrixMultiplier (A x) ⋯ ⋯) f) p = (matrixFiberOperator (A x p)) (↑↑f p)
+⊢ ‖(↑↑((matrixMultiplier (A y) ⋯ ⋯) f) - ↑↑((matrixMultiplier (A x) ⋯ ⋯) f)) p‖ ^ 2 = ‖g y p - g x p‖ ^ 2
+'F1Fecho.OrbitalScreen.matrixMultiplier_continuousAt' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

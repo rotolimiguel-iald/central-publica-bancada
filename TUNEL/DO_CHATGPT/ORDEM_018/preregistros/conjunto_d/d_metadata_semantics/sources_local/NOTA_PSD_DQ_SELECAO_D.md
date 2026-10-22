@@ -1,0 +1,28 @@
+# Proposta PSD/DQ/seleção D — preparação documental
+
+[REAL] Esta entrega preserva V1, os 14 candidatos na ordem original e os quatro holds. Reutiliza a reconciliação GPS existente. Não abre strain/HDF5/NPZ, posteriores, rede ou pacote INIT003; não mede PSD, não executa PE, não ratifica seleção e não concede autorização de abertura.
+
+[DERIVED sobre metadata DECLARADO] Os nomes dos 28 arquivos H1/L1 indicam 4.096 s a 4.096 Hz. A proposta usa os intervalos onsource de 32 s já declarados, com seus t0 alinhados à grade; não arredonda novamente GPS−16. O manifesto diz OK/nan=0 para esses recortes, não para offsource ou DQ. Os 28 descritores não têm campos PSD, DQ/flags ou calibração. A presença/tamanho dos arquivos é o stat histórico pinado; não foi repetido nem convertido em hash de conteúdo.
+
+| Alternativa proposta | Offsource | Estimador/grade | Limite documental |
+|---|---|---|---|
+| A | 256 s anteriores, exclusão 64 s | Welch mediana corrigida; segmentos 32 s, Hann periódico, 50% sobreposição; 15 periodogramas | Cabe geometricamente nos 14 arquivos por detector; DQ desconhecido. Helper existente suporta essa escolha. |
+| B | 512 s anteriores, mesma exclusão | Welch média; segmentos e grade iguais; 31 periodogramas | Cabe em 13/14; GW250118_170523 tem só 421,2 s anteriores no arquivo nomeado. Exige adaptador revisado, porque strain_io fixa mediana. |
+
+[INPUT, não ratificado] Recomenda-se A à revisão pela compatibilidade com o helper e pela geometria documental. Isso não demonstra qualidade ou precisão: a PSD mais curta tem incerteza maior. A escolha deve ser global, antes da abertura; B não permite encurtar um evento, buscar outro arquivo ou trocar estimador após olhar dados. Os periodogramas sobrepostos não são realizações independentes. A correção de viés da mediana no SciPy não certifica estacionariedade.
+
+A regra comum é o primeiro bloco inteiro que satisfaça flags registradas e finitude, do início do arquivo nomeado até min(GPS−64, t0 onsource), separadamente em H1/L1. Não se escolhe por amplitude de PSD, estacionariedade ou ajuste. O bloco selecionado pode estar afastado do evento dentro dos 4.096 s: esse é um limite explícito da proposta. H1/L1 formam um evento; a falta de um detector mantém HOLD, sem substituição por análise de detector único.
+
+A banda proposta é 20–1.024 Hz, inclusiva; Δf=1/32 Hz, FFT de 131.072 amostras, PSD unilateral em strain²/Hz, sem resampling, padding ou extrapolação. PSD recebe Hann; onsource recebe Tukey com roll-off 0,4 s (alpha=0,025), com window_factor contabilizado uma vez. Gating, clipping e notches escolhidos pelo sinal não são admitidos. A lista proposta de notches é vazia; a ausência de catálogo oficial de linhas nesta consulta precisa de decisão prévia explícita, sem inventar uma máscara.
+
+[INPUT, heurística ainda não qualificada] Diagnóstico de estacionariedade: dividir o offsource escolhido em duas metades; integrar PSD por bandas 20–64, 64–128, 128–256, 256–512 e 512–1.024 Hz, usando bordas semiabertas e última borda inclusiva. Exigir positividade/finitude e razão maior/menor ≤2 em todas. Falha gera HOLD_STATIONARITY sem procurar outro bloco. O limiar 2 não é nível de confiança nem tem taxa de falso alarme medida; requer qualificação sintética e ratificação prévias. Esse diagnóstico não prova estacionariedade no onsource nem resolve todas as linhas estreitas.
+
+[OPEN] Faltam nomes/semântica dos bits DQ e no-injection por época/detector, máscaras que cubram as janelas e validação do índice 1 Hz. O helper local exige listas não vazias e nomes exatos. Booleanos de máscaras no T07 não identificam nomes; seu ratio>10 era diagnóstico descritivo e não é importado como corte. Finitude não substitui DQ.
+
+[DECLARADO/OPEN] Os três snapshots Zenodo descrevem PSDs e envelopes de incerteza de calibração nas liberações PE. FONTES_E_LACUNAS.json preserva a descrição e os descritores exatos de arquivos por evento. Não foram lidos seus containers: caminhos internos, cobertura por detector/época, frequências, amplitude/fase e aplicação permanecem abertos. A identidade de calibração padrão não significa incerteza nula. Sem proveniência/envelopes e tratamento fixo, HOLD_CALIBRATION. Uma futura extração só de metadata exigirá escopo que continue vedando centros/arrays de posteriores.
+
+[REAL] Quatro holds preservados: GW240515_005301, GW240615_160735, GW240930_035959 e GW241102_144729. Os dez restantes não se tornam prontos por não terem o hold antigo. Os oito pendentes externos à lista não são incorporados. Os critérios de elegibilidade/publicação e a cláusula de congelamento por evento do V1 estão transcritos no contrato; nenhuma elegibilidade GR foi recalculada.
+
+Antes de qualquer veredito: revisão e escolha do contrato por metadata → decisão específica de abertura → inventário/DQ/calibração permitido → offsource autorizado e PSD pinada → revisão independente e seleção congelada por evento → autorização própria de PE/custo e controles de viés/cobertura/famílias/sistemáticos. Qualificação sintética não resolve esses requisitos reais. Incertezas com PSD plug-in são condicionais à estimativa e não uma afirmação de cobertura.
+
+A evidência desta entrega é documental: 18 verificações de identidade, preservação, pins e aritmética de intervalos/grade; zero amostras lidas, zero PSD, zero likelihood/waveform/sampler. O script de construção somente lê JSON e fontes locais nomeadas e escreve documentos nesta pasta; não é lote executável científico. Fontes exatas, hashes e recortes estão no manifesto e no arquivo de fontes. Não se afirma ausência global de PSD/envelopes, nem cobertura que não foi inspecionada.

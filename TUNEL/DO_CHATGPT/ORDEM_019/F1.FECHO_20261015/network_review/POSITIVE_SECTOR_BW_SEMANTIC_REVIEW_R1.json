@@ -1,0 +1,79 @@
+{
+  "unit": "F1.FECHO_20261015",
+  "claim": 845,
+  "reviewer": "tempo_math_review",
+  "created_utc": "2026-10-15T21:53:52.347705+00:00",
+  "status": "PASS_WITH_STATED_SCOPE",
+  "method": "Semantic reading of TensorResolventScalarsR4 and CanonicalTensorResolventR2 followed by full R2/R3 diff inspection; existing receipt/axiom/olean/source hashes verified. No independent rebuild.",
+  "input_receipt": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\FINAL_POSITIVE_SECTOR_BW_RECEIPT_R1.json",
+    "sha256": "f08815e24707a3b118bfb4fef99c772fb537ea3afb579593106641f00122ae2c",
+    "bytes": 6404
+  },
+  "checked_artifacts": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\TensorResolventScalarsR4.lean",
+      "sha256": "a29da0fcf1222a5f1cf32b48fb5ac12d252f3eedecc584713e6cc41163ae9547",
+      "bytes": 3686
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T214648_353795Z\\RECEIPT.json",
+      "sha256": "e0dc52fed761ea9c956d71da1bf83385e69b31115214decd62d5d1daf2acb5cb",
+      "bytes": 52335
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T214648_353795Z\\BUILD.log",
+      "sha256": "619b220e27cff7f2e6c9f4a842818a2fcc2526c7fc1fccdda3ef59533bededee",
+      "bytes": 51497
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T214648_353795Z\\AXIOMS.txt",
+      "sha256": "431a95c536f6ec43cd7b47ffc57144e0a838332c87c3044c4da6f262a8eecbdc",
+      "bytes": 328
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T214648_353795Z\\TensorResolventScalarsR4.olean",
+      "sha256": "dedea2c071b087823e69598c84f0c4d6c9789085af0b6e8718091fbecca9412c",
+      "bytes": 267488
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\CanonicalTensorResolventR3.lean",
+      "sha256": "7c9dfd2c13bd334896f5334522169a334a42bd42ad39f7a299e0701354295221",
+      "bytes": 3104
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T215040_984458Z\\RECEIPT.json",
+      "sha256": "0972cfd28f7539b923fc442712fc7b2be193af1cee320017b094a04010f8685a",
+      "bytes": 83411
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T215040_984458Z\\BUILD.log",
+      "sha256": "2d65e4d6fbaf3b91446e1ae469c4d5517ff10ae4afd4399f8c20937cec2b5649",
+      "bytes": 82559
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T215040_984458Z\\AXIOMS.txt",
+      "sha256": "3c64b0b86752e69b303a69c2749c02b0c01e320887bfe76340dd3761e8c109aa",
+      "bytes": 318
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\tensor_l2\\attempts\\20261015T215040_984458Z\\CanonicalTensorResolventR3.olean",
+      "sha256": "89a3f4637ccff8403925caafe9bae54f396de50ae93ab8b49a51943288165e37",
+      "bytes": 247328
+    }
+  ],
+  "findings": [
+    "Product B/A=exp(-c sum(xi)) is proved inductively; hence the resolvent multiplier is sigmoid(2c sum(xi)), not an unjustified tensor identity A²+B²=I.",
+    "The scalar coefficient A_product²+B_product² is strictly positive pointwise. Cancellation is applied almost everywhere to vector values; it does not assert a bounded inverse for that coefficient.",
+    "Q intertwines the actual Fock resolvent with the scalar multiplier as a proved equation. The bounded-intertwiner theorem then transports its damping-defined imaginary powers.",
+    "The phase sign matches the existing conventions: sumEnergy=-2c sum(xi), c=-2pi²; the boost parameter is -2pi t, and characterPhase contributes its own negative sign.",
+    "The conclusion is for every sector n+1 of the unchanged Fock. The vacuum sector n=0 remains outside this theorem and must be composed separately for a full operator equality.",
+    "R3 changes relative to the reviewed R2 are namespace/coercion elaboration and explicit equality composition; no conclusion is inserted as a new hypothesis."
+  ],
+  "scope_limits": [
+    "This receipt verifies the positive-sector BW identity only; the full Fock equality requires the separately handled vacuum sector.",
+    "No KMS strip analyticity, scalar dual-weight modular implementation or scaled trace is proved by these two sources."
+  ],
+  "printed_axioms_count": 6,
+  "production_modified": false
+}

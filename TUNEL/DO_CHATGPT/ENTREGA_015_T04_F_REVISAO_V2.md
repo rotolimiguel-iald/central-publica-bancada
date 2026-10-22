@@ -1,0 +1,11 @@
+[REAL] T04-F, adendo de revisão, 2026-09-27T07:49:36.815495+00:00. NÃO-CEGO. Supersedes: ENTREGA_015_T04_F_PREPARO.md sha256 0d3778c873efc379db8533c624206c6208d9f24715224f082de8a85d347e967f.
+
+Abertura 016 sha256 216a1a7d6b29548a4a47f5aa22f67e953d04f56d2e00bc3e505487d68df0f57a; abertura 015 sha256 dbd0a307438dda2969a21baf64665d54e8b70fb84c3fe10f8c233ddeac736610.
+Kimi K3 revisou os diffs reais de kerr_model.py, runner.py e CONFIG.json. Recibo sha256 1307a4d0b7ab44cdd5a235defbf7b7f05e7d11fe805084911b7620bbaab3dabb, pergunta sha256 c960db5a1499e5ae01dc0b06f279516abb74ee442b53da5d745141313444ae2b, resposta sha256 483bcd6dffe567c767f1ae49006a54accc68e955b79831b29ae3ec1b54cc1d82. Veredito do provedor [DECLARADO]: nenhum defeito bloqueante verificável nos diffs; não executou código nem leu runtime integral. As verificações independentes de fonte/execução continuam locais.
+
+P1, teto: config variants = ['public_psd']; public_psd = 6800 s; envelope = 7200 s. controller.py itera apenas cfg['variants'] e aplica end=min(start+envelope,deadline). Logo não há soma welch + public_psd neste job. Controller sha256 f34adbe5a5e801d80caf6296283d8e0ede57942c4abb6d6b55420cfc7e8c395b.
+P2, relógio: PART_015_BUDGET_START.json existe, sha256 087ede2068e14d70c1052f9a33036b755cda09d4f7401a7960c511fce0ff2661, e corresponde ao pin do manifesto F v2 sha256 9598d4d17abebf368664e86c5febe9d1acffa1839664b49dfbc755a07966cf60. Custódia verificará todos os pins novamente no WSL imediatamente antes do job.
+P3, teste: a razão medida é da FORMA DE ONDA h(t;δτ)/h(t;0), dependente de t, comparada a exp[t(1/τ−1/(1.5τ))]; não é uma razão constante de amplitudes. Ramas + e − testadas separadamente. Log WSL sha256 8eefac0435ad6cd6c8795434a081482b27af1710b94864ab39f05a68e7868b07, rc 0; nenhum posterior ou σ medido.
+P4: maxcall herdado = 3000000; convergência é aberta, sem prognóstico. Fisher livre de massa/spin, sha256 ef7a800369ba07328852b2ffe6a54c13f9b20476775f557113ca31fc50a5a22b, permanece NON_IDENTIFIABLE_SINGLE_220.
+
+Autorização limitada a UMA execução diagnóstica com teto 7200 s e novo manifesto. Não autoriza significância, gate, confirmação física, segunda execução ou mudança de prior. Axiomas Lean: N/A.

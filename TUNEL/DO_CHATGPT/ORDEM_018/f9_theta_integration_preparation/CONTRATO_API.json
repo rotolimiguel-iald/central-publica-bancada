@@ -1,0 +1,186 @@
+{
+  "schema": "F9_THETA_INTEGRATION_PREPARATION_CONTRACT_V1",
+  "request_id": "ad02511d-1536-4a1b-a6c4-fb3e5eb26550",
+  "status": "PREPARATION_ONLY_NO_EXECUTION",
+  "module": "theta_integrator.py",
+  "execution_authorization": false,
+  "claim": false,
+  "entry": "ThetaIntegrator(plan_json, *, plan_sha256, evaluate_node).run()",
+  "algorithm": {
+    "name": "POSITIVE_NESTED_COMPOSITE_SIMPSON_PRODUCT_LOGSUM",
+    "dimension": 3,
+    "levels": "all integers first_level..last_level, no early stop",
+    "intervals": "2^level",
+    "nodes_per_level": "(2^level+1)^3",
+    "unique_callbacks": "(2^last_level+1)^3",
+    "weights": "product of [1,4,2,...,4,1]/(3*n) in each axis",
+    "positive_weights": true,
+    "cache": "canonical common-denominator dyadic node; complete five-model returns only",
+    "alternative": "adaptive five-output cubature with explicit qualified service; not selected or implemented",
+    "no_automatic_fallback": true
+  },
+  "prior": {
+    "coordinates": [
+      "H0",
+      "ombh2",
+      "omch2"
+    ],
+    "bounds_exact": [
+      [
+        "50",
+        "90"
+      ],
+      [
+        "3/200",
+        "3/100"
+      ],
+      [
+        "2/25",
+        "9/50"
+      ]
+    ],
+    "density_exact": "50/3",
+    "box_jacobian_exact": "3/50",
+    "cube_density_exact": "1",
+    "box_truncated": false,
+    "physical_extra_integration": "provided by df482; never duplicated",
+    "nuisance_measure": "same common kappa d_eta; log kappa omitted, existing prefactors retained"
+  },
+  "plan": {
+    "schema": "F9_THETA_INTEGRATION_PLAN_V1",
+    "fields": [
+      "schema",
+      "preparation_request_id",
+      "execution_unit_id",
+      "source_pins",
+      "consumer_admission_sha256",
+      "assembly_admission_sha256",
+      "engine_configuration_sha256",
+      "callback_reference",
+      "controller_reference",
+      "first_level",
+      "last_level",
+      "max_callback_calls",
+      "absolute_log_refinement_target",
+      "common_measure_id"
+    ],
+    "no_defaults": true,
+    "levels": "1<=first_level<last_level<=6",
+    "callback_cap": "explicit integer1..300000, must cover complete finest grid before any call",
+    "refinement_target": "positive finite absolute log difference; diagnostic only",
+    "runtime_plan_created": false,
+    "limits_scope": "schema caps only; not execution budget, wall/CPU/RAM or a campaign"
+  },
+  "callback": {
+    "signature": "evaluate_node(descriptor) -> {conditional_result, receipt}",
+    "conditional_api": "df482198-56c4-4169-ae5e-3908f5d12f2c",
+    "models": [
+      "H1_TGL",
+      "H2_LCDM",
+      "H3_beta_free",
+      "H4_Cepheid",
+      "H5_rd_free"
+    ],
+    "one_shared_background_per_theta": true,
+    "counts_measured_here": "wrapper callback entries and complete validated returns",
+    "background_count_scope": "Original successful execution receipt1/1; NEW_EXECUTION has one new call, VERIFIED_DURABLE_CACHE has zero new calls. Counts declared and not independently instrumented by pure integrator.",
+    "receipt_fields": [
+      "node_id",
+      "execution_unit_id",
+      "callback_reference",
+      "conditional_result_reference",
+      "background_execution_reference",
+      "background_attempts",
+      "background_successes",
+      "background_origin",
+      "background_calls_this_callback",
+      "assembly_admission_sha256",
+      "engine_configuration_sha256"
+    ],
+    "canonical_conditional_digest": "JSON sort_keys/ensure_ascii/separators=(',',':')/no newline. Only models/<model>/log_conditional_integral negative infinity encodes as {'$float':'-inf'}. Hash SHA256.",
+    "durable_idempotence": "Controller/callback must atomically reserve and persist unit/node before science; no failed/pending/uncertain node repeat across processes",
+    "loaded_object_identity": "trusted caller verifies actual source/runtime; metadata names/hashes alone are not authentication"
+  },
+  "checks": {
+    "lineage": "fixed SOURCE_PINS and df482 PRIOR_SOURCE_PINS",
+    "theta": "exact three-element theta passed in descriptor, all model evaluations joint",
+    "context": "same consumer admission, output measure, rank63..283, eta63 and complete normalization across nodes",
+    "priors": "base theta uniform not already applied/integrated by callback",
+    "MM": "CONDITIONAL_UNRATIFIED",
+    "background": "same packet digest cannot be reused at distinct theta",
+    "family": "exact five, never omit rival",
+    "pointwise_status": "finite engineering/flat-extra or explicit support-complement zero only"
+  },
+  "failures": {
+    "in_process": "single-use PREPARED->RUNNING->COMPLETED or FAILED_TERMINAL; attempted before callback, complete cache only",
+    "interprocess": "not guaranteed by pure object; required in controller/callback",
+    "scientific_or_metadata_error": "abort whole collection; no partial evidence/renormalization",
+    "sampled_all_zero": "continue fixed refinements; if finest remains all-zero for any model, fail without inferring global zero mass",
+    "retry": false,
+    "underflow": "count terms/inner nodes; not certificate of missed mass"
+  },
+  "output": {
+    "schema": "F9_THETA_RELATIVE_INTEGRATION_RESULT_V1",
+    "status": "ENGINEERING_ONLY",
+    "relative_evidence": "five log_relative_evidence_without_common_log_kappa",
+    "ratios": "lnB_against_H2_same_context",
+    "diagnostics": [
+      "all levels",
+      "absolute log refinement gaps",
+      "largest weighted node fraction",
+      "boundary weight fraction",
+      "largest sampled log value/node ID",
+      "callback counts",
+      "conditional unassessed/nonconverged/underflow counts",
+      "completed node hash chain"
+    ],
+    "refinement_indicator": "heuristic only, not global convergence/certified error",
+    "unresolved_peak_mass_bound": null,
+    "global_convergence": null,
+    "absolute_evidence": null,
+    "p": null,
+    "sigma": null,
+    "verdict": null,
+    "certification": "UNBOUNDED_THEORY_ERROR; inner and theoretical errors not bounded by outer gaps"
+  },
+  "resources": {
+    "callback_size_formula": "(2^L+1)^3, no timing measured",
+    "cache": "O(5N) values plus Python keys/overhead",
+    "sum_workspace": "O(N) per model",
+    "supervision": "future controller owns runtime/RAM/cleanup; pure module makes no OS cap claim",
+    "node_counts_planning_metadata": {
+      "1": 27,
+      "2": 125,
+      "3": 729,
+      "4": 4913,
+      "5": 35937,
+      "6": 274625
+    }
+  },
+  "activity": {
+    "candidate_imports": 0,
+    "scientific_imports": 0,
+    "callbacks": 0,
+    "controls": 0,
+    "observed_reads": 0,
+    "solver_calls": 0,
+    "WSL": 0,
+    "remote_calls": 0
+  },
+  "preserved": [
+    "c435 consumed",
+    "ffd6 terminal",
+    "f820 services prepared separately by manager",
+    "original models/priors/nuisance/dataset contracts",
+    "shared memories and ledger unchanged"
+  ],
+  "global_configuration": {
+    "required_before_callbacks": "Frozen configuration containing full finite grid theta/point IDs; one common assembly admission binds config/runtime and consumer prediction_admission_sha256 binds assembly.",
+    "actual_worker": "prediction_worker selects point_id in config['points']; no motor change required.",
+    "no_reuse_of_single_point_admission": "c435 remains consumed; its single-point config/admission cannot stand for a new full grid.",
+    "checks_here": "plan/descriptor/receipt hashes equal; actual content/coverage/custody verified by controller",
+    "durable_cache": "May share exactly qualified same-theta background across compatible scenarios; never reuse likelihood across different C/admission.",
+    "configuration_generated": false,
+    "campaign_generated": false
+  }
+}

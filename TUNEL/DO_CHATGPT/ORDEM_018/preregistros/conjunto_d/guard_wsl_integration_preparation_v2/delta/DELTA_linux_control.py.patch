@@ -1,0 +1,23 @@
+--- snapshot514/linux_control.py
++++ v2/linux_control.py
+@@ -3,7 +3,7 @@
+ ENTRY=time.monotonic()
+ import sys,os,json,hashlib,types,subprocess,selectors,fcntl,signal
+ from pathlib import Path
+-BASE=Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation")
++BASE=Path("/mnt/c/IALD/Central de Patentes/Chatgpt/TUNEL/DO_CHATGPT/ORDEM_018/preregistros/conjunto_d/guard_wsl_integration_preparation_v2")
+ def load():
+     c=json.loads((BASE/"CONTRATO_WSL.json").read_bytes());raw=(BASE/"common.py").read_bytes()
+     q=next(x for x in c["local_pins"] if x["relative_path"]=="common.py")
+@@ -36,8 +36,9 @@
+             for key,_ in sel.select(min(.05,max(0,deadline-time.monotonic()))):
+                 chunk=os.read(key.fileobj.fileno(),4096)
+                 if not chunk:sel.unregister(key.fileobj);continue
+-                buffers[key.data].extend(chunk)
+-                g.need(len(buffers[key.data])<=32768,"Child output overflow")
++                room=32768-len(buffers[key.data])
++                buffers[key.data].extend(chunk[:room])
++                g.need(len(chunk)<=room,"Child output overflow")
+         proc.wait(timeout=.1)
+         return {k:bytes(v) for k,v in buffers.items()}
+     finally:sel.close()

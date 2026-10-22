@@ -1,0 +1,60 @@
+import took 571s
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T105846_827203Z\PhysicalCompactWedgeComparisonR1.lean:19:56: error: unsolved goals
+i : Fin 4
+⊢ (coordinateEquiv.symm fun i => 0).ofLp i = 0
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T105846_827203Z\PhysicalCompactWedgeComparisonR1.lean:37:33: error: Type mismatch
+  LT.lt.le ?m.95
+has type
+  ?m.93 ≤ ?m.94
+but is expected to have type
+  x ∈ {x | |x.ofLp 0| ≤ x.ofLp 1}
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T105846_827203Z\PhysicalCompactWedgeComparisonR1.lean:76:6: error: Type mismatch: After simplification, term
+  tendsto_one_div_add_atTop_nhds_zero_nat
+ has type
+  @Tendsto ℕ ℝ (fun n => (↑n + 1)⁻¹) atTop (𝓝 0)
+but is expected to have type
+  @Tendsto ℕ ℝ (fun i => (coordinateEquiv.symm fun i_1 => if i_1 = 1 then (↑i + 1)⁻¹ else 0).ofLp 1) atTop (𝓝 0)
+C:\IALD\Central de Patentes\Chatgpt\TUNEL\DO_CHATGPT\ORDEM_019\F1.FECHO_20261015\orbital_rotation\attempts\20261016T105846_827203Z\PhysicalCompactWedgeComparisonR1.lean:77:6: error: Type mismatch: After simplification, term
+  tendsto_const_nhds
+ has type
+  True
+but is expected to have type
+  Tendsto (fun i_1 => (coordinateEquiv.symm fun i => if i = 1 then (↑i_1 + 1)⁻¹ else 0).ofLp i) atTop (𝓝 0)
+'F1Fecho.MaxwellLocalization.shifted_compact_wedge_tsupport' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellLocalization.wedge_smear_mem_compact' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'F1Fecho.MaxwellLocalization.compactLocalized_rightWedge_eq' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+cumulative profiling times:
+	attribute application 0.0502ms
+	blocked (unaccounted) 713ms
+	compilation (IR) 0.197ms
+	compilation (LCNF base) 6.88ms
+	compilation (LCNF impure) 0.899ms
+	compilation (LCNF mono) 2.9ms
+	congr simp thm 0.839ms
+	elaboration 34.6ms
+	fix level params 0.251ms
+	import 571s
+	initialization 29.3ms
+	instantiate metavars 0.218ms
+	interpretation 6.38s
+	let-to-have transformation 0.21ms
+	linting 5.8ms
+	norm_num 3.24ms
+	overlappingInstancesLinter 8.53ms
+	parsing 3.97ms
+	process pre-definitions 2.78ms
+	share common exprs 2.02ms
+	simp 32.6ms
+	tactic execution 127ms
+	tacticAnalysis 18.3ms
+	type checking 97.5ms
+	typeclass inference 1.01s

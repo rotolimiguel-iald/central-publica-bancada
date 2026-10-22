@@ -1,0 +1,159 @@
+{
+  "schema": "iald-r8-bochner-candidate/v1",
+  "created_utc": "2026-10-16T14:43:59.621752+00:00",
+  "author": "codex-fock-r6-review",
+  "role": "component_builder",
+  "statute": "DECLARADO_UNCOMPILED_CANDIDATE",
+  "status": "SOURCE_READY_FOR_ROOT_PREFLIGHT_AND_ONE_BUILD",
+  "mission": {
+    "reference": {
+      "path": "C:\\IALD\\Central de Patentes\\work\\memoria_missao_20261016\\FECHO_MISSION_REFERENCE.json",
+      "sha256": "bf6466e16020ad3a24786d49f1f00b9633bce2397079407f2651904750947c11",
+      "bytes": 672
+    },
+    "start_revision": 72,
+    "source_preparation_revision": 73,
+    "final_revision": 74,
+    "projection_sha256": "fb7a56457c692b430f40d4316ae601ff2343ca5f6a45a4cd78d14000aae0ee6e",
+    "sync": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_review_20261016\\R8_BOCHNER_FINAL_SYNC_R1.json",
+      "sha256": "a904df19556e9372a43f638fce30587e774827be96c3819d2b51d01a30ecff42",
+      "bytes": 99821
+    },
+    "task": {
+      "id": "R8",
+      "attempts": 1,
+      "criterion": "Realizacao conjunta de Maxwell e tensor de materia. Campos do certificado completo nao triviais na mesma rede; simetria/conservacao e fonte geometrica ligados.",
+      "depends_on": [
+        "M0_MEMORIA"
+      ],
+      "epoch": 1,
+      "evidence": [],
+      "lease": {
+        "expires_at": 1792168174.8266604,
+        "id": "9cd31679-ce37-402e-bef8-e3d2fe61cc04",
+        "owner": "codex-gerente-tgl",
+        "task_epoch": 1
+      },
+      "note": "",
+      "review_evidence": [],
+      "reviewed_by": null,
+      "status": "working",
+      "submitted_by": null,
+      "ready": false
+    },
+    "mutations_by_this_stage": false,
+    "root_actor_used": false
+  },
+  "source": {
+    "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullFrequencyBochnerR1.lean",
+    "sha256": "e15ae4161d11d4f4b74b6f2e50d41d431904d36a7a2cf2a24e8a8fa05078fd23",
+    "bytes": 9139
+  },
+  "source_lines": 180,
+  "print_axioms_targets": 10,
+  "compile_attempts_here": 0,
+  "component": {
+    "purpose": "First effective Bochner measure transport required by the actual Maxwell null-plane wave. It replaces no certificate and assumes no charge or transport equality.",
+    "fiber": "dp/E -> rapidity -> du/u for positive transverse mass, using the existing smooth injective charts and Mathlib Bochner Jacobian theorem. The same constructions prove equivalences of integrability.",
+    "global": "For any complete real normed target G and f : MomentumCoordinates -> G integrable under orbitalMeasure 0, the orbital Bochner integral equals the iterated integral dq du/u at nullMomentumCoordinates(q,u). Fubini is used only under the stated actual integrability.",
+    "cancellation": "For f with (E-p) smul f integrable under orbitalMeasure 0, the orbital integral of (E-p) smul f equals integral dq integral_{u>0} f(q,(r(q)^2-u^2)/(2u)). The Jacobian weight is cancelled by proof using null_inverseLongitudinal.",
+    "domain": "Fiber r>0; global r(q)=transverseMass 0 q, positive almost everywhere by canonical transverseMass_pos_ae. u is restricted to Ioi 0. The q=0 axis is handled as measure-zero; it is not removed by a new physical postulate.",
+    "target_instances": "G=Complex or Fib are existing complete spaces; the generic theorem does not introduce a new physical Hilbert space.",
+    "no_vacuity_claim": "Raw Bochner identities can be written without integrability because Lean totalizes the integral. The candidate includes fiber integrability equivalences and requires actual integrability for the global Fubini/cancellation formulas."
+  },
+  "next_wave_specialization": {
+    "f": "f(y) = wavePhase x y * sum_j (nullPolarization y a j : Complex) * h y j, x=(lambda,lambda,z).",
+    "integrability_to_discharge": "Do not add it as a physical input: prove it for h with existing RegularProfile, using null_strength_factor and the sum of two already integrable lowered wave densities; equivalently use u<=2E and profile moment hh 1.",
+    "algebra": "Lowered wave contraction F_0a+F_1a has density u*nullPolarization*h by MaxwellNullPlaneAlgebraR2.null_strength_factor. Convert real smul on Complex to multiplication; orbital_nullFrequency_bochner_cancel then removes du/u.",
+    "phase": "Prove wavePhase (WithLp.toLp 2 ![lambda,lambda,z0,z1]) (nullMomentumCoordinates q u) = exp(I*(-u*lambda+q0*z0+q1*z1)) for u>0 using energy_inverseLongitudinal/null_inverseLongitudinal.",
+    "remaining_after": "Identify this as angularForward on the smooth compact null-frequency core, then weighted Parseval, same-sign term cancellation, coherent Fock generator, full-domain extension and nonzero modular-energy witness."
+  },
+  "inputs": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullFrequencyCoordinatesR3.lean",
+      "sha256": "ac1e97354b7ab15f831e227e785b30a7a493ab7c4b95cf91b7a9f311c8622f49",
+      "bytes": 2421
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\NullFrequencyMeasureR3.lean",
+      "sha256": "acae487a44471e2993bb62a76734aa8f79eed58eb758cf98ed5de67227de9001",
+      "bytes": 2648
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\MaxwellNullPlaneAlgebraR2.lean",
+      "sha256": "e50326da6bd138778bee08351ef764fb46ab7f96ddcaa86793694d721f875235",
+      "bytes": 2699
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\ProfileMaxwellLowerWaveR3.lean",
+      "sha256": "6cc16b8d31840eb5d779378edda852c9e8d4fa8dc7626dae2cfe189f477922c9",
+      "bytes": 5814
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\ProfileMaxwellWaveR5.lean",
+      "sha256": "4d5ca4ab8876758e69ea5268528af1c8416b62f96fdcc0fab1d1314c26a67211",
+      "bytes": 5069
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularMaxwellWaveR2.lean",
+      "sha256": "88a948d771fd4fbcca4a9d2d07e0ab83742cb8fcb612c0d7961a28844fec6b9b",
+      "bytes": 3268
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\AngularWeightedPlancherelR3.lean",
+      "sha256": "d73b5bf251c03c8e9c870336376c105e34ef07fcf4231b6692931032e47438c6",
+      "bytes": 3040
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\maxwell_global\\RegularFockMaxwellCalibratedR1.lean",
+      "sha256": "b43e055ea6707c06954fa31fe32c6fa193263a3d69dd2363638dd22dce11c3d1",
+      "bytes": 5136
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\DO_CHATGPT\\ORDEM_019\\F1.FECHO_20261015\\mission_review_20261016\\R8_CHARGE_ENERGY_NEXT_STEP_R1.json",
+      "sha256": "e81e0a8e6fd29928c5ce9390d83828f8819037cf2694da72f707d91d0ddf0838",
+      "bytes": 54891
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\RapidityJacobian_v2.lean",
+      "sha256": "5ffcabbd3f82e5a92e5e658869a09df50f233d371b88bc9d1461972b1f6004e3",
+      "bytes": 3517
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\O16\\OrbitalRapidityMeasure_v4.lean",
+      "sha256": "e5e6b7605009a17973d76a96a4449dabdde56be2086b6718770a2c5ef23600d3",
+      "bytes": 5118
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\MeasureTheory\\Function\\JacobianOneDim.lean",
+      "sha256": "5f3db86336c250975b65db1cb3eb9b6d9b590aadd75058ca211d69ac7fb3e03f",
+      "bytes": 31076
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\MeasureTheory\\Integral\\Bochner\\ContinuousLinearMap.lean",
+      "sha256": "b658d7d2987e8f2ae1e143348cce977554b9883eb9c345297b87c33177bee17e",
+      "bytes": 18509
+    },
+    {
+      "path": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\.lake\\packages\\mathlib\\Mathlib\\MeasureTheory\\Integral\\Prod.lean",
+      "sha256": "d65483383e0e8c8307818060030306bf98ba36b9d5be90b4dc74504653cf7e3a",
+      "bytes": 35192
+    }
+  ],
+  "limits": [
+    "Candidate source has not been elaborated or compiled here. Existing dependent proofs were read, not rebuilt.",
+    "No Maxwell wave equality, charge_link, full nontrivial witness or MaxwellCertificate inhabitant claimed.",
+    "Previously reviewed calibrated stress remains unchanged.",
+    "R7 A/21 trace-PF obligations and geometric source are still separate open obligations."
+  ],
+  "actions": {
+    "production_modified": false,
+    "kernel_modified": false,
+    "memory_modified": false,
+    "provider_calls": false,
+    "gate_moved": false,
+    "R8_accepted": false,
+    "build_started": false
+  }
+}
