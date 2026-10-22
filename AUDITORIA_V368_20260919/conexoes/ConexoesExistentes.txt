@@ -1,0 +1,13 @@
+TGLExt.the_master_fires :
+  (0 < ellTwoTraceSub.tau ellTwoSusy.ker ∧ ellTwoTraceSub.tau ellTwoSusy.ker < ⊤) ∧
+    ellTwoTraceSub.tau ellTwoSusy.ker / ellTwoTraceSub.tau ellTwoSusy.ker = 1 ∧
+      (modularFrame⁻¹ * modularFrame = 1 ∧ LorentzByCongruence (solderMetric4 modularFrame⁻¹)) ∧
+        theHorizon.dQ = theHorizon.kappa * theHorizon.dA / (8 * Real.pi * theHorizon.G)
+TGLExt.qgImport_H3_localHorizonEquilibrium_bridged (l : ℝ) (hl : 0 < l) (N : ℕ) :
+  (towerEquilibriumInput l hl N).flow 1 = 1 ∧
+    ∀ (a b : Matrix (chainIdx N) (chainIdx N) ℂ),
+      (towerEquilibriumInput l hl N).state (a * b) =
+        (towerEquilibriumInput l hl N).state (b * (towerEquilibriumInput l hl N).flow a)
+'RouteAudit.existingFrameNonconstant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RouteAudit.existingFrameSuppliesLorentzAtEveryPoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RouteAudit.existingHorizonSuppliesThermalCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
