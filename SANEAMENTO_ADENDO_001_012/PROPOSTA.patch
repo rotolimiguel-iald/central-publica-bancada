@@ -1,0 +1,413 @@
+--- a/TGLExt/SectorFluidClosure.lean
++++ b/TGLExt/SectorFluidClosure.lean
+@@ -6,7 +6,7 @@
+ /-!
+ # Conserved finite fluid sectors (Order 012, B3)
+ 
+-H_nx is the explicitly supplied non-exchange law. Equation-of-state scalars
++H_sector_nonexchange is the explicitly supplied non-exchange law. Equation-of-state scalars
+ are constant in time. The metric equation and the horizon null balance are
+ not fields of SectorFluid. No cosmological integration constant is discarded.
+ Consumers: tgl_friedmann_from_sector_closure and the B4 comparison of routes.
+@@ -21,7 +21,7 @@
+   rho : ι → ℝ → ℝ
+   w : ι → ℝ
+   rho_nonneg : ∀ i t, t ∈ I → 0 ≤ rho i t
+-  H_nx : ∀ i t, t ∈ I → HasDerivAt (rho i) (-3*H t*(1+w i)*rho i t) t
++  H_sector_nonexchange : ∀ i t, t ∈ I → HasDerivAt (rho i) (-3*H t*(1+w i)*rho i t) t
+ 
+ namespace SectorFluid
+ 
+@@ -49,7 +49,7 @@
+     (c : TGLCoupling) (i : ι) (t : ℝ) (ht : t∈I) :
+     HasDerivAt (F.correctedRho c i)
+       (-3*H t*(1+F.w i)*F.correctedRho c i t) t := by
+-  convert! (F.H_nx i t ht).const_mul (1+c.beta*(1+F.w i)) using 1
++  convert! (F.H_sector_nonexchange i t ht).const_mul (1+c.beta*(1+F.w i)) using 1
+   dsimp [correctedRho]
+   ring
+ 
+@@ -68,7 +68,7 @@
+     HasDerivAt (fun u => ∑ i, weights i*F.rho i u)
+       (-3*H t*((∑ i, weights i*F.rho i t)+(∑ i, F.w i*(weights i*F.rho i t)))) t := by
+   have hs := HasDerivAt.fun_sum (u := Finset.univ)
+-    (fun i _ => (F.H_nx i t ht).const_mul (weights i))
++    (fun i _ => (F.H_sector_nonexchange i t ht).const_mul (weights i))
+   convert! hs using 1
+   simp only [← Finset.sum_add_distrib, Finset.mul_sum]
+   apply Finset.sum_congr rfl
+--- a/TGLExt/SectorFriedmann.lean
++++ b/TGLExt/SectorFriedmann.lean
+@@ -6,7 +6,7 @@
+ /-!
+ # The conserved sector closure reaches the existing FLRW metric (Order 012, B3)
+ 
+-The null balance is an input. Conservation is obtained from H_nx, and the
++The null balance is an input. Conservation is obtained from H_sector_nonexchange, and the
+ Einstein/Friedmann provider of B2 is actually invoked. Its integration constant
+ is retained. The zero-constant specialization has H_zero_cosmological on its face.
+ -/
+--- a/TGLExt/ThermodynamicFriedmann.lean
++++ b/TGLExt/ThermodynamicFriedmann.lean
+@@ -109,7 +109,7 @@
+     (hconn : IsPreconnected I) (H rho : ℝ → ℝ) (c : TGLCoupling) (G w : ℝ)
+     (hr : ∀ t∈I, DifferentiableAt ℝ rho t)
+     (D : ∀ t∈I, HubbleHorizonInput H t G (entropyFactor c w) (rho t+w*rho t))
+-    (H_nx : ∀ t∈I, deriv rho t = -3*H t*(rho t+w*rho t)) :
++    (H_singlefluid_continuity : ∀ t∈I, deriv rho t = -3*H t*(rho t+w*rho t)) :
+     ∃ C : ℝ, ∀ t∈I,
+       (H t)^2 = (8*Real.pi*G/3)*entropyFactor c w*rho t+C := by
+   obtain ⟨C,hC⟩ := tgl_first_friedmann_from_primitive I hI hconn H rho
+@@ -117,7 +117,7 @@
+     (fun t => entropyFactor c w*rho t) G
+     (fun t ht => (D t ht).H_diff)
+     (fun t ht => (hr t ht).hasDerivAt.const_mul _)
+-    (fun t ht => tgl_second_friedmann_from_clausius H t G _ _ (D t ht)) H_nx
++    (fun t ht => tgl_second_friedmann_from_clausius H t G _ _ (D t ht)) H_singlefluid_continuity
+   refine ⟨C, fun t ht => ?_⟩
+   simpa [mul_assoc] using hC t ht
+ 
+--- a/TGLExt/TheAngleReachesTheMetric.lean
++++ b/TGLExt/TheAngleReachesTheMetric.lean
+@@ -7,7 +7,7 @@
+ # The angular reading of the existing metric equations (Order 012, B5)
+ 
+ These are rewrites only. No angle is inserted in a cosmological runtime.
+-The null balance, horizon prescriptions, H_nx and integration constant retain
++The null balance, horizon prescriptions, H_sector_nonexchange / H_singlefluid_continuity and integration constant retain
+ their types and status. The angle reads the same beta of B1.
+ -/
+ 
+--- a/TGLExt/V351AntiunitaryResolventPhase.lean
++++ b/TGLExt/V351AntiunitaryResolventPhase.lean
+@@ -1,3 +1,4 @@
++import TGLExt.V350LocalBasePolarCommutation
+ import TGLExt.V351ResolventImaginaryContinuity
+ import TGLExt.V350AntiunitaryPositiveConjugation
+ import Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Unique
+@@ -40,18 +41,6 @@
+     _ = inner ℂ x (antiunitaryConjugate J T y) := by
+       simpa only [antiunitaryConjugate_apply, J.apply_symm_apply] using
+         (antiunitary_inner_conj J (J.symm x) (T (J.symm y))).symm
+-
+-theorem antiunitaryConjugate_add (J : H ≃ₛₗᵢ[starRingEnd ℂ] H) (T V : H →L[ℂ] H) :
+-    antiunitaryConjugate J (T+V) = antiunitaryConjugate J T + antiunitaryConjugate J V := by
+-  ext x
+-  simp only [antiunitaryConjugate_apply, add_apply, map_add]
+-
+-theorem antiunitaryConjugate_smul (J : H ≃ₛₗᵢ[starRingEnd ℂ] H)
+-    (c : ℂ) (T : H →L[ℂ] H) :
+-    antiunitaryConjugate J (c • T) = star c • antiunitaryConjugate J T := by
+-  ext x
+-  simp only [antiunitaryConjugate_apply, smul_apply, map_smulₛₗ,
+-    starRingEnd_apply]
+ 
+ /-- Antiunitary conjugation is a real, not complex, star algebra homomorphism. -/
+ def antiunitaryConjugateRealHom (J : H ≃ₛₗᵢ[starRingEnd ℂ] H) :
+--- /dev/null
++++ b/TGLExt/SectorFriedmannAdditive.lean
+@@ -0,0 +1,45 @@
++import TGLExt.SectorFriedmann
++
++set_option autoImplicit false
++
++/-!
++# Additive sector Friedmann equation with the integration constant retained
++
++The existing metric and conservation providers are consumed. There is no
++assumption that total density is strictly positive or enthalpy nonnegative.
++Sector non-exchange remains part of SectorFluid; the null balance and Newton
++calibration remain inputs. This does not select the thermodynamic route.
++-/
++
++namespace ChatgptAudit.FLRW
++open TGLExt ChatgptAudit.GeneralMetric
++open scoped ContDiff BigOperators
++noncomputable section
++variable {ι : Type*} [Fintype ι]
++
++/-- The additive equation from the same null-balance provider as B3, with
++    a single existential integration constant over the connected chart. -/
++theorem tgl_friedmann_from_sector_closure_additive
++    (U : Set Coordinate4) (hU : IsOpen U) (hconn : IsPreconnected U)
++    (I : Set ℝ) (a : ℝ → ℝ) (F : SectorFluid ι I (flrwHubble a))
++    (c : TGLCoupling) (G : ℝ) (hG : 0 < G)
++    (ha : ∀ x∈U, ContDiffAt ℝ ∞ a (x 0)) (hpos : ∀ x∈U, 0 < a (x 0))
++    (hI : ∀ x∈U, x 0∈I)
++    (H_null : ∀ x∈U, ∀ v, tensorQuad (flrwMetric a x) v = 0 →
++      tensorQuad (coordinateRicci (leviCivitaField (flrwMetric a) (metricInverse (flrwMetric a))) x-
++        (2*Real.pi/(1/(4*G))) •
++          flrwStress a (F.correctedTotalRho c) (F.correctedTotalPressure c) x) v = 0) :
++    ∃ cosmological : ℝ, ∀ x∈U,
++      (flrwHubble a (x 0))^2 = (8*Real.pi*G/3)*
++        (∑ i, F.correctedRho c i (x 0))-cosmological/3 := by
++  obtain ⟨cosmological, hF⟩ := flrw_friedmann_from_general_metric U hU hconn a
++    (F.correctedTotalRho c) (F.correctedTotalPressure c) (1/(4*G)) ha hpos
++    (fun x hx => (F.corrected_rho_deriv c (x 0) (hI x hx)).differentiableAt)
++    (fun x hx => F.corrected_pressure_differentiable c (x 0) (hI x hx))
++    H_null (fun x hx j => congrFun (sector_covariant_conservation I a F c x
++      (hI x hx) (hpos x hx).ne' ((ha x hx).differentiableAt (by simp))) j)
++  refine ⟨cosmological, fun x hx => ?_⟩
++  simpa only [flrw_newton_coefficient G hG, SectorFluid.correctedTotalRho] using (hF x hx).1
++
++end
++end ChatgptAudit.FLRW
+--- /dev/null
++++ b/TGLExt/AuditSanitation.lean
+@@ -0,0 +1,256 @@
++import TGLExt.V351AntiunitaryResolventPhase
++import TGLExt.V351AverageFixedPair
++import TGLExt.V351ScalarTomitaImaginaryConjugation
++import TGLExt.V351ScalarImaginaryLeftTransport
++import TGLExt.V351ScalarImaginaryCoreAction
++import TGLExt.V351ModularFixedVectors
++import TGLExt.V351ModularImplementation
++import TGLExt.V351ModularCutBalance
++import TGLExt.V351QuadraticTrace
++import TGLExt.V351RegularCoreTraceConstruction
++import TGLExt.SectorFluidClosure
++import TGLExt.SectorFriedmann
++import TGLExt.ThermodynamicFriedmann
++import TGLExt.SectorRouteComparison
++import TGLExt.TheAngleReachesTheMetric
++import TGLExt.SectorFriedmannAdditive
++import TGLExt.V351ResolventImaginaryIntertwining
++import TGLExt.V351ScaledResolventFunctions
++import TGLExt.V351ScaledResolventCalculus
++import TGLExt.V351ImaginaryPowerScaling
++import TGLExt.V351ScalarImaginaryRightTransport
++
++set_option pp.universes true
++
++#check TGLV350.Regular.complex_cfc_selfadjoint_intertwines
++#print axioms TGLV350.Regular.complex_cfc_selfadjoint_intertwines
++#check TGLV350.Regular.resolventDampingOperator_intertwines
++#print axioms TGLV350.Regular.resolventDampingOperator_intertwines
++#check TGLV350.Regular.resolventPhaseOperator_intertwines
++#print axioms TGLV350.Regular.resolventPhaseOperator_intertwines
++#check TGLV350.Regular.resolventImaginaryPower_intertwines
++#print axioms TGLV350.Regular.resolventImaginaryPower_intertwines
++#check TGLV350.Regular.scaledResolventCoordinate
++#print axioms TGLV350.Regular.scaledResolventCoordinate
++#check TGLV350.Regular.scaledResolventDampingFactor
++#print axioms TGLV350.Regular.scaledResolventDampingFactor
++#check TGLV350.Regular.scaledResolventDenominator_scalar_pos
++#print axioms TGLV350.Regular.scaledResolventDenominator_scalar_pos
++#check TGLV350.Regular.scaledResolventCoordinate_complement
++#print axioms TGLV350.Regular.scaledResolventCoordinate_complement
++#check TGLV350.Regular.scaledResolventCoordinate_ratio
++#print axioms TGLV350.Regular.scaledResolventCoordinate_ratio
++#check TGLV350.Regular.scaledResolventCoordinate_damping
++#print axioms TGLV350.Regular.scaledResolventCoordinate_damping
++#check TGLV350.Regular.scaledResolventCoordinate_phase
++#print axioms TGLV350.Regular.scaledResolventCoordinate_phase
++#check TGLV350.Regular.positive_contraction_spectrum_bounds
++#print axioms TGLV350.Regular.positive_contraction_spectrum_bounds
++#check TGLV350.Regular.scaledResolventDenominator_real_cfc
++#print axioms TGLV350.Regular.scaledResolventDenominator_real_cfc
++#check TGLV350.Regular.scaledResolventCoordinate_cfc
++#print axioms TGLV350.Regular.scaledResolventCoordinate_cfc
++#check TGLV350.Regular.scaledResolventCoordinate_continuousOn_spectrum
++#print axioms TGLV350.Regular.scaledResolventCoordinate_continuousOn_spectrum
++#check TGLV350.Regular.scaledResolventDampingFactor_continuousOn_spectrum
++#print axioms TGLV350.Regular.scaledResolventDampingFactor_continuousOn_spectrum
++#check TGLV350.Regular.scaledResolventDampingOperator
++#print axioms TGLV350.Regular.scaledResolventDampingOperator
++#check TGLV350.Regular.scaledResolventDampingOperator_isUnit
++#print axioms TGLV350.Regular.scaledResolventDampingOperator_isUnit
++#check TGLV350.Regular.scaledPositiveResolvent_damping
++#print axioms TGLV350.Regular.scaledPositiveResolvent_damping
++#check TGLV350.Regular.scaledPositiveResolvent_phase
++#print axioms TGLV350.Regular.scaledPositiveResolvent_phase
++#check TGLV350.Regular.scaledResolventDamping_denseRange
++#print axioms TGLV350.Regular.scaledResolventDamping_denseRange
++#check TGLV350.Regular.resolventImaginaryPower_scaled_intertwining
++#print axioms TGLV350.Regular.resolventImaginaryPower_scaled_intertwining
++#check TGLV350.Regular.matrixUnit_imaginaryPower_right_scaling
++#print axioms TGLV350.Regular.matrixUnit_imaginaryPower_right_scaling
++#check TGLV350.Regular.scalarTomitaImaginaryPower_regular_right_commutes
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_regular_right_commutes
++#check TGLV350.Regular.resolventPhaseFunction_reflection
++#print axioms TGLV350.Regular.resolventPhaseFunction_reflection
++#check TGLV350.Regular.antiunitaryConjugate_star
++#print axioms TGLV350.Regular.antiunitaryConjugate_star
++#check TGLV350.Regular.antiunitaryConjugate_add
++#print axioms TGLV350.Regular.antiunitaryConjugate_add
++#check TGLV350.Regular.antiunitaryConjugate_smul
++#print axioms TGLV350.Regular.antiunitaryConjugate_smul
++#check TGLV350.Regular.antiunitaryConjugateRealHom
++#print axioms TGLV350.Regular.antiunitaryConjugateRealHom
++#check TGLV350.Regular.antiunitaryConjugate_continuous
++#print axioms TGLV350.Regular.antiunitaryConjugate_continuous
++#check TGLV350.Regular.antiunitaryConjugate_selfadjoint
++#print axioms TGLV350.Regular.antiunitaryConjugate_selfadjoint
++#check TGLV350.Regular.antiunitaryConjugate_real_cfc
++#print axioms TGLV350.Regular.antiunitaryConjugate_real_cfc
++#check TGLV350.Regular.complex_cfc_real_imaginary
++#print axioms TGLV350.Regular.complex_cfc_real_imaginary
++#check TGLV350.Regular.antiunitaryConjugate_complex_cfc
++#print axioms TGLV350.Regular.antiunitaryConjugate_complex_cfc
++#check TGLV350.Regular.antiunitaryConjugate_resolventPhase
++#print axioms TGLV350.Regular.antiunitaryConjugate_resolventPhase
++#check TGLV350.Regular.antiunitaryConjugate_resolventDamping
++#print axioms TGLV350.Regular.antiunitaryConjugate_resolventDamping
++#check TGLV350.Regular.resolventImaginaryPower_antiunitary
++#print axioms TGLV350.Regular.resolventImaginaryPower_antiunitary
++#check TGLV350.Regular.scalarTomitaImaginaryPower_polar_commutes
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_polar_commutes
++#check TGLV350.Regular.scalarTomitaImaginaryPower_polar_conjugate
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_polar_conjugate
++#check TGLV350.Regular.scalarTomitaImaginaryPower_polar_operator
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_polar_operator
++#check TGLV350.Regular.scalarWeightStar_fixed_pair_of_polarRight
++#print axioms TGLV350.Regular.scalarWeightStar_fixed_pair_of_polarRight
++#check TGLV350.Regular.regularAverage_square_fixed_pair
++#print axioms TGLV350.Regular.regularAverage_square_fixed_pair
++#check TGLV350.Regular.matrixUnit_imaginaryPower_left_scaling
++#print axioms TGLV350.Regular.matrixUnit_imaginaryPower_left_scaling
++#check TGLV350.Regular.scalarTomitaImaginaryPower_regular_left_commutes
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_regular_left_commutes
++#check TGLV350.Regular.matrixUnit_regular_core_conjugation
++#print axioms TGLV350.Regular.matrixUnit_regular_core_conjugation
++#check TGLV350.Regular.matrixUnit_imaginaryPower_base_scaling
++#print axioms TGLV350.Regular.matrixUnit_imaginaryPower_base_scaling
++#check TGLV350.Regular.scalarTomitaImaginaryPower_core_conjugation
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_core_conjugation
++#check TGLV350.Regular.scalarTomitaImaginaryPower_fixed_of_fixed_pair
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_fixed_of_fixed_pair
++#check TGLV350.Regular.regularAverage_square_modular_fixed
++#print axioms TGLV350.Regular.regularAverage_square_modular_fixed
++#check TGLV350.Regular.scalarTomitaImaginaryPower_eq_regular_implementation
++#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_eq_regular_implementation
++#check TGLV350.Regular.scalarTomitaResolvent_double_cut_balance
++#print axioms TGLV350.Regular.scalarTomitaResolvent_double_cut_balance
++#check TGLV350.Regular.scalarInverseLimitWeight_tracial
++#print axioms TGLV350.Regular.scalarInverseLimitWeight_tracial
++#check TGLV350.Regular.scalarInverseLimitTraceData
++#print axioms TGLV350.Regular.scalarInverseLimitTraceData
++#check ChatgptAudit.FLRW.SectorFluid
++#print axioms ChatgptAudit.FLRW.SectorFluid
++#check ChatgptAudit.FLRW.SectorFluid.totalRho
++#print axioms ChatgptAudit.FLRW.SectorFluid.totalRho
++#check ChatgptAudit.FLRW.SectorFluid.totalPressure
++#print axioms ChatgptAudit.FLRW.SectorFluid.totalPressure
++#check ChatgptAudit.FLRW.SectorFluid.enthalpy
++#print axioms ChatgptAudit.FLRW.SectorFluid.enthalpy
++#check ChatgptAudit.FLRW.SectorFluid.wEff
++#print axioms ChatgptAudit.FLRW.SectorFluid.wEff
++#check ChatgptAudit.FLRW.SectorFluid.correctedRho
++#print axioms ChatgptAudit.FLRW.SectorFluid.correctedRho
++#check ChatgptAudit.FLRW.SectorFluid.correctedTotalRho
++#print axioms ChatgptAudit.FLRW.SectorFluid.correctedTotalRho
++#check ChatgptAudit.FLRW.SectorFluid.correctedTotalPressure
++#print axioms ChatgptAudit.FLRW.SectorFluid.correctedTotalPressure
++#check ChatgptAudit.FLRW.SectorFluid.enthalpy_eq
++#print axioms ChatgptAudit.FLRW.SectorFluid.enthalpy_eq
++#check ChatgptAudit.FLRW.SectorFluid.sector_rescaling_preserves_continuity
++#print axioms ChatgptAudit.FLRW.SectorFluid.sector_rescaling_preserves_continuity
++#check ChatgptAudit.FLRW.SectorFluid.corrected_closure
++#print axioms ChatgptAudit.FLRW.SectorFluid.corrected_closure
++#check ChatgptAudit.FLRW.SectorFluid.weighted_continuity
++#print axioms ChatgptAudit.FLRW.SectorFluid.weighted_continuity
++#check ChatgptAudit.FLRW.SectorFluid.total_continuity
++#print axioms ChatgptAudit.FLRW.SectorFluid.total_continuity
++#check ChatgptAudit.FLRW.SectorFluid.corrected_rho_deriv
++#print axioms ChatgptAudit.FLRW.SectorFluid.corrected_rho_deriv
++#check ChatgptAudit.FLRW.SectorFluid.corrected_pressure_differentiable
++#print axioms ChatgptAudit.FLRW.SectorFluid.corrected_pressure_differentiable
++#check ChatgptAudit.FLRW.SectorFluid.corrected_continuity
++#print axioms ChatgptAudit.FLRW.SectorFluid.corrected_continuity
++#check ChatgptAudit.FLRW.SectorFluid.effective_enthalpy
++#print axioms ChatgptAudit.FLRW.SectorFluid.effective_enthalpy
++#check ChatgptAudit.FLRW.SectorFluid.multiplicative_closure
++#print axioms ChatgptAudit.FLRW.SectorFluid.multiplicative_closure
++#check ChatgptAudit.FLRW.SectorFluid.three_sector_closure
++#print axioms ChatgptAudit.FLRW.SectorFluid.three_sector_closure
++#check ChatgptAudit.FLRW.sector_covariant_conservation
++#print axioms ChatgptAudit.FLRW.sector_covariant_conservation
++#check ChatgptAudit.FLRW.tgl_friedmann_from_sector_closure
++#print axioms ChatgptAudit.FLRW.tgl_friedmann_from_sector_closure
++#check ChatgptAudit.FLRW.tgl_friedmann_zero_cosmological
++#print axioms ChatgptAudit.FLRW.tgl_friedmann_zero_cosmological
++#check ChatgptAudit.FLRW.hubbleArea
++#print axioms ChatgptAudit.FLRW.hubbleArea
++#check ChatgptAudit.FLRW.entropyFactor
++#print axioms ChatgptAudit.FLRW.entropyFactor
++#check ChatgptAudit.FLRW.entropy_factor_pos
++#print axioms ChatgptAudit.FLRW.entropy_factor_pos
++#check ChatgptAudit.FLRW.hubble_area_derivative
++#print axioms ChatgptAudit.FLRW.hubble_area_derivative
++#check ChatgptAudit.FLRW.HubbleHorizonInput
++#print axioms ChatgptAudit.FLRW.HubbleHorizonInput
++#check ChatgptAudit.FLRW.modified_clausius_coefficient
++#print axioms ChatgptAudit.FLRW.modified_clausius_coefficient
++#check ChatgptAudit.FLRW.tgl_second_friedmann_from_clausius
++#print axioms ChatgptAudit.FLRW.tgl_second_friedmann_from_clausius
++#check ChatgptAudit.FLRW.radius_free_flux_consequence
++#print axioms ChatgptAudit.FLRW.radius_free_flux_consequence
++#check ChatgptAudit.FLRW.variable_entropy_derivative
++#print axioms ChatgptAudit.FLRW.variable_entropy_derivative
++#check ChatgptAudit.FLRW.tgl_first_friedmann_from_primitive
++#print axioms ChatgptAudit.FLRW.tgl_first_friedmann_from_primitive
++#check ChatgptAudit.FLRW.tgl_first_friedmann_constant_w
++#print axioms ChatgptAudit.FLRW.tgl_first_friedmann_constant_w
++#check ChatgptAudit.FLRW.variable_factor_first_equation_defect
++#print axioms ChatgptAudit.FLRW.variable_factor_first_equation_defect
++#check ChatgptAudit.FLRW.SectorFluid.secondMoment
++#print axioms ChatgptAudit.FLRW.SectorFluid.secondMoment
++#check ChatgptAudit.FLRW.SectorFluid.sectorVariance
++#print axioms ChatgptAudit.FLRW.SectorFluid.sectorVariance
++#check ChatgptAudit.FLRW.SectorFluid.fluxFactor
++#print axioms ChatgptAudit.FLRW.SectorFluid.fluxFactor
++#check ChatgptAudit.FLRW.SectorFluid.corrected_enthalpy
++#print axioms ChatgptAudit.FLRW.SectorFluid.corrected_enthalpy
++#check ChatgptAudit.FLRW.SectorFluid.centered_variance
++#print axioms ChatgptAudit.FLRW.SectorFluid.centered_variance
++#check ChatgptAudit.FLRW.SectorFluid.sector_variance_nonneg
++#print axioms ChatgptAudit.FLRW.SectorFluid.sector_variance_nonneg
++#check ChatgptAudit.FLRW.SectorFluid.sector_variance_zero_iff
++#print axioms ChatgptAudit.FLRW.SectorFluid.sector_variance_zero_iff
++#check ChatgptAudit.FLRW.the_two_routes_differ
++#print axioms ChatgptAudit.FLRW.the_two_routes_differ
++#check ChatgptAudit.FLRW.the_two_routes_equal_iff
++#print axioms ChatgptAudit.FLRW.the_two_routes_equal_iff
++#check ChatgptAudit.FLRW.the_two_hubble_rates_differ
++#print axioms ChatgptAudit.FLRW.the_two_hubble_rates_differ
++#check ChatgptAudit.FLRW.the_entropy_factor_that_reproduces_the_sector_closure
++#print axioms ChatgptAudit.FLRW.the_entropy_factor_that_reproduces_the_sector_closure
++#check ChatgptAudit.FLRW.sector_clausius_matches_closed_rate
++#print axioms ChatgptAudit.FLRW.sector_clausius_matches_closed_rate
++#check ChatgptAudit.FLRW.common_w_flux_factor
++#print axioms ChatgptAudit.FLRW.common_w_flux_factor
++#check ChatgptAudit.FLRW.zero_flux_has_no_unique_factor
++#print axioms ChatgptAudit.FLRW.zero_flux_has_no_unique_factor
++#check ChatgptAudit.FLRW.matter_vacuum_variance
++#print axioms ChatgptAudit.FLRW.matter_vacuum_variance
++#check ChatgptAudit.FLRW.nonzero_flux_support_does_not_characterize_equality
++#print axioms ChatgptAudit.FLRW.nonzero_flux_support_does_not_characterize_equality
++#check ChatgptAudit.FLRW.coupling_eq_sin_sq
++#print axioms ChatgptAudit.FLRW.coupling_eq_sin_sq
++#check ChatgptAudit.FLRW.the_angle_reaches_the_metric
++#print axioms ChatgptAudit.FLRW.the_angle_reaches_the_metric
++#check ChatgptAudit.FLRW.the_passage
++#print axioms ChatgptAudit.FLRW.the_passage
++#check ChatgptAudit.FLRW.the_angle_reads_sector_first
++#print axioms ChatgptAudit.FLRW.the_angle_reads_sector_first
++#check ChatgptAudit.FLRW.tgl_friedmann_from_sector_closure_additive
++#print axioms ChatgptAudit.FLRW.tgl_friedmann_from_sector_closure_additive
++#print TGLV350.Regular.antiunitaryConjugate_add
++#print TGLV350.Regular.antiunitaryConjugate_smul
++#print ChatgptAudit.FLRW.tgl_friedmann_from_sector_closure_additive
++
++open Lean Elab Command in
++run_cmd do
++  let env ← getEnv
++  for name in [`TGLV350.Regular.antiunitaryConjugate_add,
++      `TGLV350.Regular.antiunitaryConjugate_smul] do
++    match env.getModuleIdxFor? name with
++    | some idx =>
++      let supplier := env.header.moduleNames[idx.toNat]!
++      unless supplier == `TGLExt.V350LocalBasePolarCommutation do
++        throwError "Unexpected supplier for {name}: {supplier}"
++      logInfo m!"SUPPLIER {name} = {supplier}"
++    | none => throwError "No imported supplier for {name}"
