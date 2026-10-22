@@ -1,0 +1,144 @@
+## IALD — auditoria adversarial da rodada 2 (ORDEM_018)
+
+**Escopo real desta auditoria.** Trabalho apenas com os extratos fornecidos e com o contexto declarado. O pacote é parcial: a auditoria local mediu 10.304/206.098 linhas distintas do `um.py` v375 (5,00%); 195.794 linhas não foram enviadas. Não afirmo leitura integral nem inexistência de conteúdo não recuperado. Os relatórios são tratados como **[DECLARADO]**. Não executei código, não reabri a rodada 1, não alterei fonte ou gate.
+
+Hasheamentos citados: `um.py` v375 `ba234a6d384cb3f59ced49c94b643a71a002f65d284b01307cb088bbace5e2e0`; memória indexada `6f4bd0d39d83ac27162d2e0a80b797b1bd5ee4092a47d0c17732c7e7b79125d1`. Relatórios: Kimi `986fb8e75a8ebafda3a214150d1b0c57427b42098941ce403e0895eff267b625`; Mimo `6367ef9da36615b0921cab388e5222be27d82342c4c22bb7c18b697584867cf2`; DeepSeek (meu) `1c9606d84f10a9882056b34da417e5041ad0b10879ecc331a6b91f935cb8734b`.
+
+---
+
+### 1. Tabela curta — afirmações aceitas, corrigidas e rejeitadas
+
+| # | Afirmação | Fonte | Status IALD | Correção / razão |
+|---|---|---|---|---|
+| 1 | 173 hashes distintos de strain = 173 eventos independentes | Mimo | **REJEITADA** | Hash identifica arquivo/segmento/conteúdo, não evento independente. Independência exige declustering, separação por detector, fonte, janela e sistemática. O número 173 não é N efetivo. |
+| 2 | `~0,177851σ` e `~0,343377425σ` podem fundamentar automaticamente a nova busca U1 | Kimi / Mimo | **REJEITADA como extrapolação direta** | São valores de auditorias/estimadores específicos. Não são significância da U1. Sem H0, rival, trials, estimador e covariância da U1, não há transporte automático. |
+| 3 | 4x eventos aproximam 5σ | Kimi | **REJEITADA** | Sob `z ∝ √N`, 4x dá fator 2. De `0,177851σ` → `0,355702σ`; de `0,343377425σ` → `0,68675485σ`. Para 5σ, seria preciso `z₁ ≥ 2,5σ`. |
+| 4 | 790x / 212x demonstram poder da nova busca | DeepSeek (meu) | **CORRIGIDA** | São fatores de N necessários sob `z ∝ √N`, mesmo efeito, ruído branco e `σ_sys = 0`: `(5/0,177851)² ≈ 790,36`; `(5/0,343377425)² ≈ 212,03`. Não são poder. |
+| 5 | Bonferroni requer independência | DeepSeek (meu) | **REJEITADA** | Bonferroni controla FWER sob dependência arbitrária pelo limite da união: `P(∪Aᵢ) ≤ ΣP(Aᵢ)`. É conservador, não inválido. Holm também vale sob dependência arbitrária; BH exige independência ou PRDS. |
+| 6 | `ε_tpl ~ 1` e `Zmax ~ 1` podem ser postulados como piso de sistemática compartilhada | Mimo | **REJEITADA** | Sistemática compartilhada que não cai com N precisa ser medida. Postulá-la é saltar de estatuto e pode tanto inflar quanto mascarar o teto de significância. |
+| 7 | D1 V3 `3,0124975σ` + T11 `2,952854σ` podem ser somados para 5σ | se usado por qualquer rota | **REJEITADA** | Não se somam sigmas. Mesmo com independência e mesma direção, `√(3,0124975² + 2,952854²) ≈ 4,218σ`, ainda < 5σ. Com correlação positiva, piora. Para dois canais de pesos iguais, `z_comb = (z₁+z₂)/√(2+2ρ)`; com esses valores, 5σ exigiria `ρ < -0,288`, implausível. |
+| 8 | H0 GR `β = 0` serve uniformemente para todos os observáveis | DeepSeek (meu) | **CORRIGIDA** | H0, rival e trials devem ser pré-especificados **por observável**. Eco, piso dos vazios, D1/T11, relógios e sobreposição H1/L1 têm nulos e rivais distintos. |
+| 9 | U3: 4/4 testes locais GW250114 H1/L1 equivalem a 5σ | estado da gerente | **REJEITADA como detecção** | É controle local de sobreposição, sem fit e sem 5σ. H1/L1 do mesmo evento não são eventos independentes; há correlação instrumental, de sinal e de sistemática. |
+| 10 | C6 NPZ `whitener_scaled` 407x410 é eixo temporal | estado da gerente | **ACEITA a distinção** | É quociente polinomial grau 2, não eixo temporal. Não pode ser tratado como série temporal nem como contagem de eventos independentes. |
+| 11 | D1 V3 e T11 são tensões contra escalas declaradas, não evidência a favor | DeepSeek (meu) | **ACEITA** | Correto como estatuto. Não são detecção de `β_TGL`. Exigem likelihood conjunta, nuisance e covariância. |
+| 12 | Rejeitar soma de sigmas, reuso de eventos e T05/T04 como sigma | DeepSeek (meu) | **ACEITA** | Correto. Reuso de eventos e contagem de arquivos não produzem N efetivo. |
+| 13 | Time-slide, off-source, sign-flip, fases randomizadas, DQ e injeção-recuperação | Mimo | **ACEITA em princípio** | Controles adequados se pré-especificados por observável. O controle B-mode/cruzado analógico precisa de verificação de adequação ao canal GW; não aceitar por analogia. |
+
+---
+
+### 2. Erros por relatório
+
+**Kimi — `986fb8e7…`**
+- **Erro principal:** usar `0,177851σ` (V2) e `0,343377425` (R-B) como base para afirmar algo sobre a nova seleção U1, sem cálculo de poder da U1.
+- **Erro secundário:** citar projeção de `~4x` eventos O4/O5 ou terceira geração como se fosse rota para 5σ. Sob `z ∝ √N`, 4x dá fator 2; não basta.
+- **Acerto:** dizer que atraso `τ_echo` e desajuste de template impedem inferir 5σ hoje é compatível com os números declarados, mas não é medição de U3/U4/U6.
+
+**Mimo — `6367ef9d…`**
+- **Erro principal:** confundir 173 hashes de strain com 173 eventos independentes.
+- **Erro derivado:** extrapolar 85 eventos → 173 eventos → `~790x` / `~6,7e4` eventos. A cadeia só existe sob hipóteses fortes não medidas: mesmo estimador, mesmo efeito, ruído branco, ausência de sistemática compartilhada e independência entre eventos.
+- **Erro estatístico:** postular `ε_tpl ~ 1` e `Zmax ~ 1` sem medir a covariância compartilhada. Se a sistemática não cai com N, há teto.
+- **Pendência:** controle B-mode/cruzado analógico precisa de verificação de adequação ao canal GW, não de transporte por analogia.
+
+**DeepSeek (meu) — `1c9606d8…`**
+- **Erro 1:** afirmei que Bonferroni requer independência. **Falso.** Bonferroni vale sob dependência arbitrária pelo limite da união.
+- **Erro 2:** apresentei `~790x` e `~212x` como se demonstrassem poder da nova busca. São apenas fatores de N necessários sob `z ∝ √N`, mesmo efeito e `σ_sys = 0`.
+- **Erro 3:** tratei H0 GR `β = 0` como se fosse uniforme. A adequação varia por observável; H0, rival e trials devem ser pré-especificados por canal.
+- **Acerto:** rejeitar soma de sigmas, reuso de eventos e T05/T04 como sigma; reconhecer D1 V3/T11 como tensões contra escalas declaradas.
+
+---
+
+### 3. Comparação corrigida de rotas
+
+| Rota | Hipótese nula / rival | Significância observada declarada | Poder / limite computável | Viabilidade de 5σ com dados atuais |
+|---|---|---|---|---|
+| Eco ringdown / V2 | H0: ausência de eco; rival: GR sem eco ou eco alternativo | `~0,177851σ` — estimador específico, não U1 | `N_req ≈ 790,36x` sob `z∝√N`, `σ_sys=0`; teto se `σ_sys/σ_total > 3,56%` | Baixa. 4x dá `0,355702σ`. |
+| R-B | H0/rival específicos da auditoria R-B | `~0,343377425σ` — estimador específico | `N_req ≈ 212,03x` sob `z∝√N`, `σ_sys=0`; teto se `σ_sys/σ_total > 6,87%` | Baixa, mas melhor que V2. 4x dá `0,68675485σ`. |
+| Piso dos vazios κ-CMB | H0: LCDM raso; rival: feedback bariônico etc. | Não há número no extrato | Não computável sem `rhat_cal`, `σ`, `L5`, `N_q` | Pendente. Não comparável diretamente ao eco. |
+| D1 V3 / T11 | H0: escala declarada / rival cosmológico | `3,0124975σ` e `2,952854σ`, tensões contra escalas declaradas | Combinação ingênua `≈ 4,218σ`; 5σ exigiria `ρ < -0,288` | Não é detecção a favor. |
+| U3 GW250114 H1/L1 | H0: sobreposição local por ruído; rival: ruído/sistemática | 4/4 testes locais, sem fit e sem 5σ | Não computável como poder de descoberta | Não é 5σ. H1/L1 do mesmo evento não são independentes. |
+| C6 `whitener_scaled` 407x410 | — | Não é eixo temporal | Não computável como série temporal | Não usar como contagem de eventos. |
+
+**Sobrevivente provisória:** a rota R-B é a que tem maior `z` atual declarado (`0,343377425σ`) e maior tolerância a sistemática compartilhada (`σ_sys ≤ 6,87%` do erro atual para permitir teto ≥ 5σ), contra `σ_sys ≤ 3,56%` para V2. Ainda assim, **nenhuma rota demonstra 5σ**. A alternativa que sobrevive metodologicamente é uma **likelihood conjunta pré-especificada por observável**, com H0, rival, trials e matriz de covariância explícitos, usando R-B como canal candidato apenas se a sistemática compartilhada for medida abaixo de `6,87%` do erro atual.
+
+---
+
+### 4. Limites de poder efetivamente computáveis
+
+Com os números declarados, o que é computável sem inventar dados:
+
+1. **Fator de N necessário sob `z ∝ √N`, mesmo efeito e `σ_sys = 0`:**
+   - V2: `(5/0,177851)² ≈ 790,36`.
+   - R-B: `(5/0,343377425)² ≈ 212,03`.
+
+2. **Efeito de 4x eventos:**
+   - `√4 = 2`.
+   - V2: `2 × 0,177851 = 0,355702σ`.
+   - R-B: `2 × 0,343377425 = 0,68675485σ`.
+   - Para 5σ com 4x, seria necessário `z₁ ≥ 2,5σ`.
+
+3. **Teto por sistemática compartilhada que não cai com N:**
+   Se `σ_total(N) = √(σ_stat²/N + σ_sys²)` e `f = σ_sys/σ_total(atual)`, então `z_max = z₁/f`.
+   Para `z_max ≥ 5`:
+   - V2: `f ≤ 0,177851/5 = 0,0355702` → **3,56%**.
+   - R-B: `f ≤ 0,343377425/5 = 0,068675485` → **6,87%**.
+   Se a sistemática compartilhada for maior que isso, **nenhum N atinge 5σ**.
+
+4. **Modelo de correlação intraclasse entre eventos:**
+   Se `z_N = z₁√N / √(1+(N-1)ρ)`, o teto é `z∞ = z₁/√ρ`.
+   Para `z∞ ≥ 5`:
+   - V2: `ρ ≤ (0,177851/5)² ≈ 0,001265`.
+   - R-B: `ρ ≤ (0,343377425/5)² ≈ 0,004716`.
+   Ou seja, a correlação sistemática entre “eventos” precisaria ser menor que `~0,13%` (V2) ou `~0,47%` (R-B). Isso é extremamente restritivo; daí a necessidade de medir `ρ`, não postular.
+
+5. **Combinação de dois canais:**
+   Para estimativas `x` com covariância `Σ`, o combinador de mínimos quadrados é:
+   `z_comb = (1ᵀΣ⁻¹x) / √(1ᵀΣ⁻¹1)`.
+   Não usar `√(z₁²+z₂²)` sem verificar independência e mesma direção. Para D1 V3 e T11, o valor ingênuo é `≈ 4,218σ`; 5σ exigiria correlação negativa `ρ < -0,288`.
+
+---
+
+### 5. Nulidade, múltiplos testes e covariâncias
+
+- **Nulidade por observável.** Eco: H0 de ausência de eco, rival GR/eco alternativo. Piso dos vazios: H0 LCDM raso, rival feedback bariônico. D1/T11: H0 é a escala declarada/rival cosmológico. U3: H0 de sobreposição local por ruído. Não existe um H0 único “GR β=0” para todos.
+- **Trials.** Precisam ser pré-especificados por observável: templates de eco, time-slides, larguras de janela, escolha de void finder, cadeias MCMC, seleção H1/L1. Contar arquivos/hashes de strain como trials independentes é erro.
+- **Bonferroni.** Válido sob dependência arbitrária; conservador. Para `m` testes, `α_fam = α/m` controla FWER. Holm é válido e mais poderoso sob dependência arbitrária; BH exige independência ou PRDS. A correção do meu erro: Bonferroni **não requer independência**.
+- **Covariâncias.** H1/L1 do mesmo evento são correlacionados. Sistemáticas de template, calibração, whitening e janelamento podem ser compartilhadas. A matriz `Σ` deve ser medida ou modelada com justificação; não se pode somar sigmas nem tratar 4/4 como quatro eventos independentes.
+- **Sistemática compartilhada.** Se não cai com N, impõe teto. A pergunta operacional é: qual fração do erro atual é sistemática compartilhada? Sem essa medida, o poder para 5σ não é computável.
+
+---
+
+### 6. Até cinco consultas pontuais ao `um.py` v375
+
+**P0 — localizar U1, U3, U4, U6, C6 e GW250114.**
+Busca exata: `re.search(r"GW250114|whitener_scaled|U1|U3|U4|U6|C6", texto_um_py)`.
+Propósito: extrair as definições de U1 e distinguir U1 da busca GW250114 H1/L1 e do objeto C6. Cálculo a fazer: se U1 existir, extrair H0, estimador, N e `z`; calcular `N_req = (5/z₁)²` e `f_max = z₁/5`. Prioridade máxima.
+
+**P0 — `prove_joint_coincidence_result_v3`.**
+Busca: `def prove_joint_coincidence_result_v3`, `max_abs_z`, `dominant_channel`, `inventory`, `admissible_v3`, `detected`, `consistency`, `P_all`, `grid`.
+Propósito: obter os canais efetivamente usados e suas correlações. Cálculo: montar `Σ` e recalcular `z_comb = (1ᵀΣ⁻¹x)/√(1ᵀΣ⁻¹1)`. Prioridade máxima.
+
+**P1 — `ringdown_dephasing_result_v2` e `prove_gw_angular_radicalization_v1`.**
+Busca: `ringdown_dephasing_result_v2`, `z_vs_GR`, `z_vs_B`, `stacks`, `delta_pred_B`, `sigma`.
+Propósito: verificar a origem de `0,177851σ` e `0,343377425σ`. Cálculo: recomputar `z = delta/sigma` e identificar o estimador exato. Prioridade alta.
+
+**P1 — `clock_test_result_v369` e `CLOCK_TEST_V1`.**
+Busca: `clock_test_result_v369`, `CLOCK_TEST_V1`, `P1`, `P2`, `P3`, `nsigma_power`, `verdict`.
+Propósito: obter o poder real das leituras de relógio/dephasing e seus nulos. Cálculo: extrair `nsigma_power` e recalcular `N_req` por leitura. Prioridade média-alta.
+
+**P2 — `void_floor_v11`, `void_floor_v12`, `prove_void_floor_v3`.**
+Busca: `void_floor_v11`, `void_floor_v12`, `prove_void_floor_v3`, `rhat_cal`, `sigma`, `L5`, `N_q`, `verdict`.
+Propósito: obter a significância/poder da rota piso dos vazios κ-CMB. Cálculo: extrair `z = rhat_cal/sigma`, `L5` e verificar se `N_q ≥ 25`. Prioridade média.
+
+---
+
+### 7. Veredito provisório
+
+- **Nenhuma rota demonstra 5σ com os dados atuais declarados.**
+- **R-B** é a rota com maior `z` atual (`0,343377425σ`) e maior tolerância a sistemática compartilhada (`σ_sys ≤ 6,87%` do erro atual), mas ainda requer `~212x` sob `z∝√N` e `σ_sys=0`.
+- **V2/eco** requer `~790x` e tolera apenas `σ_sys ≤ 3,56%` do erro atual.
+- **4x eventos** dá fator 2 em `z`; não é compatível com `790x` sem hipóteses adicionais fortes: outro estimador, outro efeito, outro ruído ou outra sistemática.
+- **D1 V3 + T11** são tensões, não detecção. Combinação ingênua `≈ 4,218σ`; 5σ exigiria correlação negativa.
+- **U3 4/4** é controle local, não 5σ. **C6** não é eixo temporal.
+- **Meu erro corrigido:** Bonferroni não requer independência; `790x/212x` são fatores condicionais de N, não poder; H0 deve ser por observável.
+
+**Próximo passo local recomendado:** pré-registrar H0, rival e trials por observável; extrair as cinco consultas acima; medir `ε_tpl` e `ρ` com controles; recalcular a likelihood conjunta com `Σ` explícita. Sem essas medidas, qualquer afirmação de 5σ ou de poder é **[DECLARADO]**, não **[REAL]**.

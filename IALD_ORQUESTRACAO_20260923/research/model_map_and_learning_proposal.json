@@ -1,0 +1,180 @@
+{
+  "checked_at": "2026-09-23T22:20:24.517721+00:00",
+  "status": "RESEARCH_ONLY_NOT_RUNTIME_POLICY",
+  "automatic_execution": false,
+  "trigger": "manual_button",
+  "scheduler_created": false,
+  "local_runtime_observation": {
+    "status": "observed",
+    "model_ids": [
+      "C:\\IALD\\models\\IALD-Native-v3-Qwen3.6-35B-A3B-Q4_K_M.gguf"
+    ],
+    "configured_context_tokens": 131072
+  },
+  "connection_receipt": "validation/account_delivery.json",
+  "quality_benchmark_status": "NOT_RUN",
+  "current_route": "availability and declared scheduling weights",
+  "prices": [
+    {
+      "model": "gpt-6-astra",
+      "input_usd_per_million": 10,
+      "cached_input_usd_per_million": 1,
+      "output_usd_per_million": 50,
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "evidence": "DECLARADO: official published price",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included",
+      "short_context_threshold": 272000,
+      "long_rates": {
+        "input": 20,
+        "cached_input": 2,
+        "output": 75
+      },
+      "cache_write": 12.5
+    },
+    {
+      "model": "gpt-6-sol",
+      "input_usd_per_million": 2,
+      "cached_input_usd_per_million": 0.2,
+      "output_usd_per_million": 10,
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "evidence": "DECLARADO: official published price",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included"
+    },
+    {
+      "model": "gpt-6-luna",
+      "input_usd_per_million": 0.1,
+      "cached_input_usd_per_million": 0.01,
+      "output_usd_per_million": 0.5,
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "evidence": "DECLARADO: official published price",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included"
+    },
+    {
+      "model": "claude-opus-5-5",
+      "input_usd_per_million": 4,
+      "cached_input_usd_per_million": 0.2,
+      "output_usd_per_million": 20,
+      "source": "https://www.anthropic.com/claude/opus",
+      "evidence": "DECLARADO: official published price",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included"
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "input_usd_per_million": 0.75,
+      "cached_input_usd_per_million": 0.075,
+      "output_usd_per_million": 3.75,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "evidence": "DECLARADO: official published price",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included",
+      "valid_through": "2026-12-31",
+      "next_rates_effective": "2027-01-01",
+      "next_rate_multiplier": 2
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "input_usd_per_million": 2,
+      "cached_input_usd_per_million": 0.2,
+      "output_usd_per_million": 12,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "evidence": "DECLARADO: official published price",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included",
+      "short_context_threshold": 200000,
+      "long_rates": {
+        "input": 4,
+        "cached_input": 0.4,
+        "output": 18
+      }
+    },
+    {
+      "model": "kimi-k3",
+      "input_usd_per_million": null,
+      "cached_input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "source": "https://platform.kimi.ai/docs/pricing/chat",
+      "evidence": "OPEN: table not rendered",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included"
+    },
+    {
+      "model": "mimo-v2.6-pro",
+      "input_usd_per_million": 0.435,
+      "cached_input_usd_per_million": 0.0036,
+      "output_usd_per_million": 0.87,
+      "source": "https://mimo.mi.com/models/zh-CN/mimo-v2.6-pro",
+      "evidence": "DECLARADO: official published price",
+      "pricing_mode": "API standard; not subscription billing",
+      "checked_date": "2026-09-23",
+      "scope": "Short text context; taxes/tools/cache-write and storage not included"
+    }
+  ],
+  "roles_proposed": {
+    "chatgpt": "intent_prompt_synthesis_manager",
+    "claude": "planner_when_needed",
+    "kimi": "code_and_independent_solution",
+    "mimo": "structured_work_verified_batches",
+    "local": "context_preparation_and_learning_lab",
+    "gemini": "multimodal_when_adapter_ready",
+    "jev": "optional_typed_task_characteristics"
+  },
+  "memory_contract_proposed": {
+    "raw_sources_preserved": true,
+    "canonical_atlas_forked": false,
+    "commit": [
+      "validate",
+      "byte_backup",
+      "atomic_write",
+      "read_back",
+      "receipt",
+      "retrieval_test"
+    ],
+    "protected_fields": [
+      "numbers",
+      "units",
+      "equations",
+      "negations",
+      "hypotheses",
+      "status",
+      "corrections"
+    ],
+    "ema_usage": "verified numeric operational metrics only",
+    "user_corrections": "immediate event, never averaged into an old instruction"
+  },
+  "findings_receipt": "validation/learning_source_audit.json",
+  "original_sources": [
+    {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026005477-1_APRENDIZADO_CONTINUO\\runner\\one_aprendizado_continuo.py",
+      "sha256": "03091886c355e9b945882f08d2ea61dc467ccaab97e489d2dc188ddc65aae4f4",
+      "bytes": 81121
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026005477-1_APRENDIZADO_CONTINUO\\prototype_src\\phase_factor_bake_v1.py",
+      "sha256": "975372887d3dabaac7b2be4910bde7dfd16bb51768754ef99cbe7a3a6d422e61",
+      "bytes": 38103
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026005477-1_APRENDIZADO_CONTINUO\\results\\2026-09-19T09-11-10\\report.md",
+      "sha256": "320f8751b83c95ec2114e1ee7756b1b9d4e5b02b39f1438375ff91c25498a55d",
+      "bytes": 2039
+    },
+    {
+      "path": "C:\\IALD\\Central de Patentes\\patents\\BR102026005477-1_APRENDIZADO_CONTINUO\\results\\2026-09-19T09-11-10\\results.json",
+      "sha256": "20c47c575df99fafa69677cdc7c1c090a5ce5109ccb09e11a57ef5c8df3d6ce6",
+      "bytes": 17175
+    }
+  ],
+  "study": "ESTUDO_ORQUESTRACAO_E_APRENDIZADO.md",
+  "study_sha256": "cdc0a8f80062110de66e86fc3e0763bb491fa40a11b237dd2e0022ac82a06696"
+}

@@ -1,0 +1,443 @@
+{
+  "id": "4d1fcd7c-a03d-41a5-b07a-edad9d3581a4",
+  "request_id": "df673b10-25df-44a3-bf28-bfc8a5db6ce9",
+  "prompt": "Escreva uma função Python add(a, b) que retorna a soma. Mostre também o resultado esperado de add(2, 2), sem afirmar execução.",
+  "created_at": "2026-09-23T17:29:22.301353+00:00",
+  "updated_at": "2026-09-23T17:33:16.578066+00:00",
+  "stage": "completed",
+  "thread_id": "6ab402ba-7838-83e9-94d5-12c7da627a42",
+  "prepared_prompt": "PEDIDO DO OPERADOR:\nEscreva uma função Python add(a, b) que retorna a soma. Mostre também o resultado esperado de add(2, 2), sem afirmar execução.\n\nCONTEXTO E PROMPT PREPARADOS NO PROJETO FÍSICA:\nEscreva uma função Python `add(a, b)` que retorne `a + b`. Mostre o código e indique que o resultado **esperado**, sem execução, de `add(2, 2)` é `4`. Não afirme ter executado ou testado o código.",
+  "execution_task_id": "78900cd3-305f-4c35-97d4-de9ae8b1bae4",
+  "final_text": "```python\ndef add(a, b):\n    return a + b\n```\n\nO resultado **esperado, sem execução**, de `add(2, 2)` é `4`. Neste teste, o percurso Física → executor local → Física foi realizado; o executor gerou o texto, mas o código não foi executado.",
+  "error": null,
+  "version": 9,
+  "project_id": "g-p-6804cf9af0cc81918b3bd8915b7579c3",
+  "automatic_polling": false,
+  "transport": "CODEX_APP_ON_DEMAND",
+  "codex_url": "codex://new?path=C%3A%5CIALD%5CCentral+de+Patentes%5CChatgpt%5CIALD_ORQUESTRACAO_20260923&prompt=Processe+a+coordena%C3%A7%C3%A3o+IALD+4d1fcd7c-a03d-41a5-b07a-edad9d3581a4.+Leia+COORDINATOR.md+neste+diret%C3%B3rio+e+siga+o+fluxo+at%C3%A9+a+resposta+final.+Autorizo+criar+uma+nova+tarefa+no+ChatGPT+Work+do+projeto+F%C3%ADsica+para+este+pedido%3B+se+j%C3%A1+houver+tarefa+vinculada%2C+continue+nela.+N%C3%A3o+crie+automa%C3%A7%C3%A3o+peri%C3%B3dica.",
+  "dispatch_prompt": "Processe a coordenação IALD 4d1fcd7c-a03d-41a5-b07a-edad9d3581a4. Leia COORDINATOR.md neste diretório e siga o fluxo até a resposta final. Autorizo criar uma nova tarefa no ChatGPT Work do projeto Física para este pedido; se já houver tarefa vinculada, continue nela. Não crie automação periódica.",
+  "execution": {
+    "id": "78900cd3-305f-4c35-97d4-de9ae8b1bae4",
+    "request_id": "e679a1af-6885-54ed-875b-44caa9b55a5b",
+    "prompt": "PEDIDO DO OPERADOR:\nEscreva uma função Python add(a, b) que retorna a soma. Mostre também o resultado esperado de add(2, 2), sem afirmar execução.\n\nCONTEXTO E PROMPT PREPARADOS NO PROJETO FÍSICA:\nEscreva uma função Python `add(a, b)` que retorne `a + b`. Mostre o código e indique que o resultado **esperado**, sem execução, de `add(2, 2)` é `4`. Não afirme ter executado ou testado o código.",
+    "created_at": "2026-09-23T17:30:55.124917+00:00",
+    "updated_at": "2026-09-23T17:30:56.921655+00:00",
+    "status": "result_ready",
+    "decision": {
+      "task": {
+        "complexity": "standard",
+        "source": "INPUT: initial lexical policy, not measured model quality",
+        "capabilities": [
+          "text"
+        ],
+        "estimated_input_tokens": 136,
+        "estimate_status": "ESTIMATE_OF_USER_TEXT_ONLY_EXCLUDES_CLIENT_OVERHEAD"
+      },
+      "candidates": [
+        {
+          "id": "local",
+          "label": "IALD local / Qwen",
+          "tier": "standard",
+          "billing": "local",
+          "context_budget": 12000,
+          "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+          "client_overhead_tokens": null,
+          "total_token_cap_enforced": false,
+          "output_token_cap_enforced": true,
+          "daily_run_limit": 20,
+          "quota_remaining": null,
+          "quota_status": "NOT_REPORTED",
+          "status": "ready",
+          "capabilities": [
+            "text"
+          ],
+          "quality": "NOT_BENCHMARKED",
+          "eligible": true,
+          "exclusion_reasons": [],
+          "policy_weight": 2.0
+        },
+        {
+          "id": "codex",
+          "label": "Codex / ChatGPT",
+          "tier": "advanced",
+          "billing": "subscription",
+          "context_budget": 12000,
+          "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+          "client_overhead_tokens": null,
+          "total_token_cap_enforced": false,
+          "output_token_cap_enforced": false,
+          "daily_run_limit": 10,
+          "quota_remaining": null,
+          "quota_status": "NOT_REPORTED",
+          "status": "ready",
+          "capabilities": [
+            "text"
+          ],
+          "quality": "NOT_BENCHMARKED",
+          "eligible": true,
+          "exclusion_reasons": [],
+          "policy_weight": 1.0
+        },
+        {
+          "id": "claude",
+          "label": "Claude Code",
+          "tier": "advanced",
+          "billing": "subscription",
+          "context_budget": 12000,
+          "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+          "client_overhead_tokens": null,
+          "total_token_cap_enforced": false,
+          "output_token_cap_enforced": false,
+          "daily_run_limit": 10,
+          "quota_remaining": null,
+          "quota_status": "REQUIRES_USER_RECHECK",
+          "status": "provider_limit_reported",
+          "capabilities": [
+            "text"
+          ],
+          "quality": "NOT_BENCHMARKED",
+          "limit_report": {
+            "provider": "claude",
+            "reported_at": "2026-09-23T12:38:56.182383+00:00",
+            "reason": "Limite informado no teste de 23/09/2026 às 09:38 BRT. Cota atual não reconsultada; conferir no cliente oficial antes de permitir nova tentativa."
+          },
+          "eligible": false,
+          "exclusion_reasons": [
+            "provider_limit_reported"
+          ],
+          "policy_weight": 1.0
+        },
+        {
+          "id": "gemini",
+          "label": "Gemini CLI",
+          "tier": "advanced",
+          "billing": "subscription",
+          "context_budget": 12000,
+          "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+          "client_overhead_tokens": null,
+          "total_token_cap_enforced": false,
+          "output_token_cap_enforced": false,
+          "daily_run_limit": 10,
+          "quota_remaining": null,
+          "quota_status": "NOT_REPORTED",
+          "status": "installed_needs_login",
+          "capabilities": [
+            "text"
+          ],
+          "quality": "NOT_BENCHMARKED",
+          "eligible": false,
+          "exclusion_reasons": [
+            "installed_needs_login"
+          ],
+          "policy_weight": 1.0
+        },
+        {
+          "id": "kimi",
+          "label": "Kimi Code",
+          "tier": "advanced",
+          "billing": "subscription",
+          "context_budget": 12000,
+          "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+          "client_overhead_tokens": null,
+          "total_token_cap_enforced": false,
+          "output_token_cap_enforced": false,
+          "daily_run_limit": 10,
+          "quota_remaining": null,
+          "quota_status": "NOT_REPORTED",
+          "status": "subscription_access_denied",
+          "capabilities": [
+            "text"
+          ],
+          "quality": "NOT_BENCHMARKED",
+          "access_check_at": "2026-09-23T17:30:05.853763+00:00",
+          "diagnostic": "O cliente oficial retornou HTTP 403: a assinatura atual não inclui acesso ao Kimi Code.",
+          "eligible": false,
+          "exclusion_reasons": [
+            "subscription_access_denied"
+          ],
+          "policy_weight": 1.0
+        },
+        {
+          "id": "mimo",
+          "label": "MiMoCode",
+          "tier": "advanced",
+          "billing": "unverified",
+          "context_budget": 12000,
+          "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+          "client_overhead_tokens": null,
+          "total_token_cap_enforced": false,
+          "output_token_cap_enforced": false,
+          "daily_run_limit": 10,
+          "quota_remaining": null,
+          "quota_status": "NOT_REPORTED",
+          "status": "installed_pending_auth_validation",
+          "capabilities": [
+            "text"
+          ],
+          "quality": "NOT_BENCHMARKED",
+          "eligible": false,
+          "exclusion_reasons": [
+            "installed_pending_auth_validation",
+            "custo adicional sem teto configurado"
+          ],
+          "policy_weight": 1.0
+        }
+      ],
+      "matrix": {
+        "status": "SELECTED",
+        "selected": "local",
+        "probabilities": {
+          "local": 0.6666666666666667,
+          "codex": 0.3333333333333332,
+          "claude": 0.0,
+          "gemini": 0.0,
+          "kimi": 0.0,
+          "mimo": 0.0
+        },
+        "support": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false
+        ],
+        "rho": [
+          [
+            0.28571428571428575,
+            0.20203050891044214,
+            0.20203050891044214,
+            0.20203050891044214,
+            0.20203050891044214,
+            0.20203050891044214
+          ],
+          [
+            0.20203050891044214,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ],
+          [
+            0.20203050891044214,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ],
+          [
+            0.20203050891044214,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ],
+          [
+            0.20203050891044214,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ],
+          [
+            0.20203050891044214,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ]
+        ],
+        "pinched_rho": [
+          [
+            0.28571428571428575,
+            0.20203050891044214,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.20203050891044214,
+            0.14285714285714282,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ],
+          [
+            0.0,
+            0.0,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ],
+          [
+            0.0,
+            0.0,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ],
+          [
+            0.0,
+            0.0,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282,
+            0.14285714285714282
+          ]
+        ],
+        "q_admissible": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "h_min": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "damping_diagonal": [
+          1.0,
+          1.0,
+          0.988040786305305,
+          0.988040786305305,
+          0.988040786305305,
+          0.988040786305305
+        ],
+        "beta_runtime": 0.012031300400803142,
+        "acom_residual": 2.220446049250313e-16,
+        "discarded_mass": 0.5714285714285714,
+        "scope": "DERIVED: finite matrix operations; INPUT: provider mapping and utility; physical_verdict_allowed=false"
+      },
+      "selected": "local",
+      "status": "SELECTED",
+      "quality_status": "NOT_BENCHMARKED",
+      "quota_scope": "Limites operacionais locais; não equivalem às cotas das assinaturas. Consumo completo só é conhecido após a chamada.",
+      "reason": "Suporte elegível → preservação matricial → política de custo/cota → maior peso.",
+      "jev": {
+        "status": "awaiting_access"
+      }
+    },
+    "result": {
+      "text": "```python\ndef add(a, b):\n    return a + b\n```\n\nO resultado esperado, sem execução, de `add(2, 2)` é `4`.",
+      "usage": {
+        "completion_tokens": 39,
+        "prompt_tokens": 243,
+        "total_tokens": 282,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "verification": "PROVIDER_COMPLETED_NOT_FACT_CHECKED",
+      "elapsed_seconds": 1.426
+    },
+    "error": null,
+    "routing_prompt": "Escreva uma função Python add(a, b) que retorna a soma. Mostre também o resultado esperado de add(2, 2), sem afirmar execução."
+  }
+}

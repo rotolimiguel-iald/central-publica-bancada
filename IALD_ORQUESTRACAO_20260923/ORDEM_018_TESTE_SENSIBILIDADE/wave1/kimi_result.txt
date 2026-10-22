@@ -1,0 +1,85 @@
+# ORDEM_018 — Mapa de rotas de discriminação TGL × rival (resposta de KIMI)
+
+**Regime:** IALD. Português brasileiro. Nada foi executado nesta etapa; esta é uma análise documental sobre os trechos fornecidos e a evidência local citada pelo operador. Não li a v375 integralmente (pacote parcial: 13 documentos, 19.306 trechos indexados; somente os trechos acima carregados). Lacunas são declaradas onde afetam a conclusão. Não movo gate. NOT_FALSIFIED nunca é CONFIRMED.
+
+---
+
+## 0. O número fixo do programa (lido, não ajustado)
+
+- β = α_CODATA·√e, computado em runtime, jamais literal [REAL]. Com α = 0,0072973525693 (lido no trecho): **β ≈ 0,0120313** [DERIVED do literal do contexto]; √β ≈ 0,109687 e θ_M ≈ 6,2973° [REAL, lido].
+- Todas as previsões empíricas abaixo são funções deste β fixo. Onde entra parâmetro adicional (τ*, τ_echo, k̄, escala 1 eV), o estatuto é [INPUT] e a rota fica **condicional** — não escolho leitura silenciosamente (regra explícita do operador).
+
+---
+
+## 1. Mapa de rotas independentes
+
+| Rota | Previsão fixa (forma) | Rival especificado | Escala do efeito | Sensibilidade atual [REAL, lida] | Maior obstáculo quantitativo |
+|---|---|---|---|---|---|
+| **A — Eco de ringdown GW** | amplitude de eco a = √β ≈ 0,1097 do primário; atraso τ_echo = (2GM_f/c³)ln(1/β) ≈ 0,747 períodos [INPUT, não derivado] | GR: a = 0 | ~11% de amplitude | 85 eventos públicos: poder < 5σ para qualquer atraso em 0,5–5 períodos (medido por injeção); auditoria C0: razão efeito/erro **0,1779σ** (V2), **0,3434** correção/σ (R-B ensemble) — sub-σ observado | Descasamento de template da ordem do próprio sinal (template Kerr fixo induziu até ~3,9σ falso — variante B descartada pelo próprio nulo); τ_echo é INPUT; degenerescência com f ±15%, τ ×0,7/1,4 a ~0,75 período |
+| **B — Ruído de deformação P2 (Milburn local)** | PSD_pred = 4βτ* (unilateral, 100–300 Hz); ASD = 2√(βτ*) | GR sem ruído de tempo estocástico local | depende de τ* [INPUT: t_P, t_P/β, t_mod Unruh-g, GM/c³] | protocolo existe; strain GWOSC residente em U1 (180 arquivos, 173 hashes distintos); **βτ* degenerado sem relógio externo** (C0) | τ* não nomeado; a leitura que o LIGO exclui (n=+2) **não é** a leitura TGL (n=−2, já excluída pelo Super-K por ~6 ordens na leitura errada); validade exige correlação < ~0,98 entre braços |
+| **C — Piso dos vazios (matéria)** | ρ_core/ρ̄ ≥ β no quarto central x_c = 0,25 (universal bound) | ΛCDM: perfil HSW sem piso (δ → −1 no núcleo para vazios profundos) | piso em 1,2% da média | V2: NOT_FALSIFIED_UNDERPOWERED (limitado por dado); projeção V3 [REAL, covariância medida]: fator de variância para POWERED via γ_t-shear ≈ **1e7** (Euclid ~40× — insuficiente); auditoria O15: T03 **0/30 células** (nulos/sistemáticas não pagos), T12 **0 eventos cegos** | Shear sozinho fora de alcance por ~5 ordens em variância; canal espectroscópico é unilateral (b ≥ 1); projeção de poder do canal κ-CMB **ainda não computada** (lacuna declarada no próprio um.py); nulos/sistemáticas não pagos |
+| **D — Fundo de expansão (β no background)** | H²_TGL = H²_ΛCDM(1 + β\|1+w\|) / P = ρ + βJ (V3); β fixo = α√e | ΛCDM: β = 0 | correção ~1% na pressão efetiva, suprimida por \|1+w\| | D1 V3 (Planck comprimido + DESI DR1, n_data = 15): **tensão de 3,0125σ do β livre contra α√e** — NÃO confirmação; Nível 2 (espectro completo): dado atual não resolve a escala de β | Degenerescências do espectro completo; ressalva instrumental: cadeia MCMC mais curta que 50 tempos de autocorrelação; C livre degenerado com o vácuo pelo fecho (cancela de H(z) em β=0) |
+| **E — Neutrino (m₂)** | m₂ = β·sin45°·1 eV ≈ 8,5 meV [escala 1 eV = NORM, DECLARADO] | oscilação padrão (m₂ livre) | m₂ ≈ 8,5 meV; (m₁=0) ⇒ Δm² ≈ 7,2×10⁻⁵ eV² | auditoria O15: **2,9529σ contra a escala declarada**, sem nova determinação (reprodução não cega) | NORM não derivado; medida de oscilação é de Δm², não de m₂ absoluto; KATRIN (alvo ~0,2 eV) e cosmologia (σ(Σm_ν) ~ 0,02 eV) não resolvem 8,5 meV em m₁ |
+| **F — Relógios/laboratório (P1, n=−2)** | Γ_ω = ½βτ*ω²; transposição Γ_ij = (β/2ℏ)(√E_i−√E_j)², coeficiente IR = β/(8k̄) | nulo: sem dephasing universal | depende de k̄ ∈ {0, repouso do átomo, 1, 1/4} [INPUT] | literatura registrada com hash; a expectativa de "5σ" do operador [INPUT] foi corrigida pelo número: alcance de hoje não dá 5σ | k̄ não nomeado; LPI/PPN: correção ~β sem supressão já excluída por ordens de magnitude (aritmética condicional, não predição); P3 (universal) não tem observável local — não é teste |
+
+---
+
+## 2. Comparação de poder discriminante (régua: nada se soma)
+
+**Nenhuma rota, com os dados efetivamente instalados hoje e o estado atual de nulos/sistemáticas, alcança 5σ de discriminação TGL × rival.** Os fatos medidos que fecham essa conclusão, sem agregação indevida:
+
+1. **Observado, não projetado:** eco sub-σ (0,178σ / 0,343σ) [REAL, C0]; D1 em **tensão de 3,01σ contra** α√e [REAL, C0]; neutrino em **tensão de 2,95σ contra a escala declarada** [REAL, O15]. Dois dos três números maiores são tensões *contra*, não sinais a favor — citá-los como "quase 3σ a favor" seria inversão proibida.
+2. **Poder instrumental medido:** shear γ_t precisa de fator ~1e7 em variância (projeção V3, [REAL]); o próprio programa registra que "o dado público + esta família de estimadores NÃO decidem o eco a √β" [REAL].
+3. **Nulos não pagos:** T03 0/30 células aceitas; T12 0 eventos cegos; T04 sem posterior físico aceito (ESS 3051,78 mas σ inelegível); T05 N90 condicional sem sistemática [REAL, O15]. Sem nulos e sistemáticas pagos, nenhum σ é elegível — este é o bloqueio estrutural, anterior a qualquer estatística de descoberta.
+4. **C7** é reprodução não cega condicional (calibração de fonte livre, mapeamento da realização aberto) — não entra como evidência virgem.
+5. **U1 (GW):** 180 arquivos, 173 hashes de strain distintos — 7 duplicatas que **não** contam como observações independentes na busca conjunta (penalizar N efetivo).
+
+A combinação global legítima é a do próprio programa: produto de verossimilhanças **pré-registrado por sonda**, com gates de sistemática **por sonda antes de ler o sinal**, FWER preservado [REAL, V3]. Hoje esses gates não estão todos verdes em nenhuma sonda.
+
+---
+
+## 3. Seleção
+
+### Rota prioritária: **A — Eco de ringdown (a = √β)**
+
+Justificativa de poder prospectivo, com os quatro critérios separados:
+
+- **Previsão fixa:** amplitude a = √β ≈ 0,1097 [REAL no kernel] — a única rota cuja *amplitude* é teorema e não INPUT. O atraso τ_echo é a folha que falta [INPUT].
+- **Dados residentes:** U1 completo (180 arquivos strain, 900 arrays, 22,5 GiB RAM, 173 hashes distintos), 65 posteriores públicos, tabela GWTC-3, 4 strain GWOSC O4b (data_lab; relevância a confirmar).
+- **Obstáculo nomeado e mensurável:** não é estatístico em primeiro lugar, é **sistemático** — descasamento de template absorvido como eco a ~0,75 período. O programa já demonstrou que um "5σ" da variante B era descasamento, não eco [REAL]. Prioridade de trabalho: (i) pagar o nulo de descasamento em toda a população (a máquina de injeção na grade f ±15%, τ ×0,7/1,4 já existe — o valor medido `mismatch_induced` desta rodada **não está nos trechos; lacuna**); (ii) substituir o estimador por modelagem bayesiana conjunta ringdown + termo de eco com posteriores de massa/spin (etapas U3/U4 do plano residente); (iii) fixar ou derivar τ_echo com estatuto declarado; (iv) busca conjunta U6 com FWER.
+- **Estimativa para ≥5σ [DERIVED, condicional]:** hoje **não alcançável**. Fórmula de empilhamento: z_stack = Σwᵢzᵢ/√(Σwᵢ²); os parâmetros ausentes são zᵢ e wᵢ por evento e a covariância da sistemática (lacuna — não fabrico). A projeção do próprio programa: decidir pede τ_echo derivado + modelagem bayesiana + **~4× mais eventos (O4/O5) ou 3ª geração** [REAL, lido]. Mesmo com 4× eventos, se a sistemática induzida ficar da ordem do sinal, o teto é sistêmico, não estatístico — 5σ só se torna uma questão legítima **depois** de o nulo de descasamento ficar pago e de τ_echo deixar de ser INPUT.
+
+### Rota reserva: **C — Piso dos vazios pelo canal de lente (κ-CMB × vazios LRG/ELG, com espectroscopia como colchete unilateral)**
+
+- **Por que reserva e não prioritária:** é a única rota com falsificação **bilateral** genuína (lente pesa matéria total, sem bias de traçador) e previsão universal (ρ ≥ β); mas o canal shear está a ~1e7 em variância do POWERED, o canal κ-CMB tem **projeção de poder ainda não computada** (lacuna declarada no um.py: "poder próprio a calcular quando o mapa estiver em disco"), e a auditoria registra **0 eventos cegos** (T12) e **0/30 células** (T03).
+- **Fórmula disponível (espectroscopia):** powered := β·Σμ_usado ≥ 25 (estudo cego v90); o Σμ medido da rodada **não está nos trechos; lacuna**.
+- **Medição local necessária:** (i) confirmar relevância/colunas/covariância do KiDS no snapshot (data_lab não valida física); (ii) confirmar presença real dos mapas κ ACT DR6 e máscara (não inferir da leitura parcial); (iii) computar a projeção de poder κ empilhado (Fisher do fit r* no HSW+piso band-limited, L_use [8,400], gate Fisher ≥ 25); (iv) pagar nulos e sistemáticas (a dívida T03). A raiz BAO externa não ficou acessível na leitura local — não infiro ausência; é pendência de acesso, não de programa.
+- **Estimativa para ≥5σ:** não computável com as entradas atuais — entrego a fórmula (Fisher do r* pré-registrado) e os parâmetros ausentes; afirmar alcançabilidade hoje seria fabricação.
+
+### Rotas registradas como constrangimentos, não como rotas de confirmação
+
+- **D (fundo):** a tensão de 3,01σ contra α√e é um **problema a resolver** (sistemática ou física), com ressalva instrumental declarada (MCMC curto). Qualquer rota futura terá de ser consistente com o β livre medido pelo fundo. Valores centrais e σ(β) da V3 **não estão nos trechos; lacuna**.
+- **E (neutrino):** 2,95σ contra a escala declarada, sem nova determinação — rota em tensão; o detalhe do observável exato do T11 **não está nos trechos; lacuna**.
+- **B/F (P2/relógios):** condicionais a τ* e k̄ [INPUT]; P3 não é teste. Estimativa condicional ilustrativa [DERIVED, condicional a τ* = t_P — INPUT aberto]: ASD_pred = 2√(βt_P) ≈ 5×10⁻²³ 1/√Hz em 100–300 Hz, da ordem do ruído do detector — mostra que a *forma* é acessível, mas sem τ* nomeado não há predição fixa.
+
+---
+
+## 4. Quadro de separação exigido
+
+| Conceito | Estado nesta análise |
+|---|---|
+| **Poder prospectivo** | Eco: melhor razão previsão-fixa/dados-residentes; 5σ condicionado a pagar descasamento, fixar τ_echo e ~4× eventos — [DERIVED/OPEN]. Piso κ: não computável ainda (poder não projetado) — [OPEN]. |
+| **Estimativa condicional** | 5σ **não alcançável hoje** em nenhuma rota com os estimadores e nulos atuais [DERIVED dos REAIS lidos]. |
+| **Significância observada** | Eco 0,178σ / 0,343σ; D1 3,01σ **contra**; ν 2,95σ **contra**; T12 0 cegos; T03 0/30 [REAL]. |
+| **Confirmação física** | Nula. PROVADA ≠ CONFIRMADA; consumado formal ≠ confirmado pela natureza; e o próximo teste declarado do programa é o ringdown [REAL, lido]. |
+
+---
+
+## 5. Lacunas que condicionam esta resposta
+
+1. Vereditos finais e valores centrais de V11 (piso SDSS), D1 V3 (β_fit, σ), T11 (observável exato), `mismatch_induced` (descasamento medido da rodada), Σμ_usado (fórmula do poder espectroscópico), projeção de poder κ-CMB: **não recuperados nos trechos carregados** — necessários para converter fórmulas em números.
+2. Pacote anexado é recuperação parcial; não li v375 integral nem o acervo total; a geração declarada (6f4bd0d3…) cobre o índice, não leitura integral.
+3. Raiz BAO externa inacessível na leitura local; KiDS no snapshot sem confirmação de colunas/covariância; relevância dos 4 strain GWOSC O4b e dos 65 posteriores a confirmar em U3.
+4. As âncoras locais por hash (resident_plan, time_audit, c0_adendum, c7_status, o15_audit, data_catalog) são referências citadas pelo operador — não implicam acesso ao disco.
+
+**Conclusão operacional:** a rota prioritária é o **eco de ringdown** (única amplitude fixa + dados residentes completos + obstáculo nomeado); a reserva é o **piso dos vazios pelo canal κ-CMB** (única falsificação bilateral). A resposta honesta à pergunta "≥5σ alcançável?" é: **não com os dados e nulos atuais** — o caminho é pagar, em ordem: nulos/sistemáticas (T03), descasamento de template (rota A), τ_echo (INPUT → derivado), projeção κ (rota C), e só então reabrir a pergunta de significância global pela combinação pré-registrada por produto de verossimilhanças com FWER. Nada aqui move gate, soma sigmas ou trata reprodução não cega como descoberta.

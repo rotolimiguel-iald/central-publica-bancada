@@ -1,0 +1,181 @@
+# Revisão Independente — Contrato D10 / CMB–BAO Acústico
+## MiMo — Pedido do operador via ORDEM_018 / D10
+
+**Estatuto desta entrega:** REVISÃO DOCUMENTAL DO CONTRATO; NÃO EXECUTADA; NÃO É CÁLCULO NOVO; NÃO DECLARA SIGNIFICÂNCIA.
+**Escopo:** apenas as quatro frentes numeradas do contrato D10/CMB–BAO e os artefatos solicitados (tabela origem→uso, checklist de precisão, lacunas).
+**Limites declarados:** não executo MCMC; não afirmo covariância que não li; não afirmo código canônico atual; não declaro 5σ; arquivos `C:/IALD/Artigo` não foram legíveis neste worker (anexos fornecidos por excerpt são tratados como dados).
+
+---
+
+## 1. Mapa de medições CMB/BAO reutilizadas: D9 × D10 × N2
+
+### 1.1 O que os trechos mostram
+
+| Módulo | Fonte lida | Medição | Origem declarada | n pontos | r_d | Erros |
+|---|---|---|---|---|---|---|
+| **D9** (`tgl_paper_unified.py`, L4231–4273) | excerpt verificado | DESI **DR2** BAO: D_M/r_d, D_H/r_d, D_V/r_d em 9 redshifts efetivos | "13 DESI DR2 BAO measurements" (docstring) | **13** | Fiducial fixo 147.05 Mpc | Diagonais (soma `(val−pred)²/sig²`) |
+| **D10** (`tgl_paper_unified.py`, L4286–4383) | excerpt verificado | r_s, r_drag (integrais), l_A, R, θ_*; compara com **Planck** (l_A=301.471, R=1.7502) e **DESI** (r_d) | Planck 2018 TT,TE,EE+lowE+lensing (comprimido Wang-Mukherjee); Z_DRAG_PLANCK=1059.4 fixo | n/a (escalas) | Calculado integralmente | lA_sigma=0.090, R_sigma=0.0048 (comprimidos) |
+| **N2 frozen** (`12_nivel2_frozen.json`) | excerpt verificado | "DESI BAO 12 pontos (**os mesmos do Nível 1**)" | Release não especificada no frozen | **12** | r_d = rdrag do CAMB da própria cosmologia | Diagonais (via `LikeN2.log_post`) |
+
+### 1.2 Reconciliação 13 × 12 — o problema central
+
+**Achado:** D9 descreve explicitamente **13 medidas DESI DR2**; o frozen N2 declara **12 pontos DESI** sem nomear release. O contrato e a âncora ordenam rastrear identidade de medição por release antes de qualquer combinação.
+
+**Cenários possíveis (nenhum confirmado com as fontes disponíveis):**
+
+1. **Releases diferentes:** D9 usa DR2; N2 pode usar DR1 (o LikeN2 aponta array `DESI[:, 0..3]` com 4 colunas; o número 12 é compatível com subconjuntos DR1). Se confirmado, são linhagens distintas — mas **não independentes** (o céu é o mesmo, os tracers sobrepõem-se parcialmente).
+2. **Mesma release, subconjuntos distintos:** um ponto excluído/incluído por corte de qualidade, tipo de observável ou redshift.
+3. **Re-binning ou re-categorização:** 13 pode incluir um ponto adicional de DV/r_d que N2 omite.
+
+**Ação obrigatória antes de qualquer produto combinado:** construir tabela linha-a-linha `(release, tracer, z_eff, obs_type, value, sigma)` para ambos os conjuntos, confrontar por hash do arquivo de medição. **Não somar, não multiplicar, não presumir independência.**
+
+### 1.3 R_d: três tratamentos distintos e incompatíveis entre si sem declaração
+
+| Módulo | Tratamento r_d | Implicação |
+|---|---|---|
+| D9 | Fixo fiducial 147.05 Mpc (consistente com H0_anchor=67.35) | Apropriado para comparação a fundo fixo; **não** é ajuste cosmológico |
+| D10 | Integral `sound_horizon(β, Z_DRAG_PLANCK)` | Auto-consistente com o H_TGL; mas Z_DRAG_PLANCK=1059.4 é **input fixo**, não derivado da recombinação |
+| N2 | r_d = `rdrag` do CAMB da própria cosmologia | Auto-consistente; mas acoplado ao executor CAMB |
+
+**Risco:** D9 fixa r_d; N2 o deixa variar com a cosmologia. Se os 12/13 pontos forem os mesmos, os dois módulos respondem a perguntas diferentes e seus χ² **não são combináveis** nem comparáveis ponto-a-ponto.
+
+---
+
+## 2. Planck, nuisance, lenteamento, BBN/r_d e covariâncias
+
+### 2.1 Planck primário vs. resumos
+
+| Item | Implementação N2 (LikeN2) | Risco identificado | Ação |
+|---|---|---|---|
+| **Primário** | `planck-lite-py` 2018 TTTEEE (l≥30) + 2 bins low-ℓ TT (2≤l<30) | `plik_lite` **já marginaliza** certos nuisance (A_planck, A_sz, etc.) | Não reaplicar esses nuisance como likelihood extra; para reajustá-los explicitamente, migrar para `plik` full |
+| **lowE / τ** | Prior Gaussiano τ = 0.0544 ± 0.0073 (lowE 2018) | Se o `plik_lite` já usa informação de baixo-ℓ que correlaciona com τ, há dupla contagem potencial | Verificar que low-ℓ TT bins e lowE EE **não se sobrepõem** em informação sobre τ; documentar a independência |
+| **Comprimido D10** | l_A = 301.471 ± 0.090, R = 1.7502 ± 0.0048 (Wang-Mukherjee) | São **resumos** do espectro primário. **Proibido** multiplicar pelo espectro completo N2 no mesmo ajuste | D10 é teste de consistência/fundamental; nunca likelihood adicional |
+| **Lenteamento** | `lens_potential_accuracy=1` no CAMB; **nenhuma likelihood de lenteamento** explícita em N2 | D10 cita "Planck 2018 TT,TE,EE+lowE+lensing" para a compressão, mas N2 não inclui lenteamento | Se a análise final incluir lenteamento, verificar compatibilidade e não-duplicação; hoje está ausente em N2 |
+| **BBN (ombh2)** | Prior Gaussiano 0.02218 ± 0.00055 (Cooke+2018) | É **dado de abundância primordial**, não espectro CMB. Legítimo como prior externo, mas não é independente de r_d se r_d depender de ω_b | Registrar a dependência: BBN fixa ω_b → ω_b entra em r_s → r_d; o prior não é independente da calibração acústica |
+
+### 2.2 DESI / BOSS / eBOSS — releases e covariâncias cruzadas
+
+- **LikeN2** usa **erros diagonais** (`np.sum(((bao−DESI[:,2])/DESI[:,3])**2)`). Isso **ignora** correlações entre tracers (LRG, ELG, QSO) e binagens adjacentes.
+- DESI DR1/DR2 publicam **matrizes de covariância** e likelihoods comprimidas com tratamento adequado. A aproximação diagonal é aceitável para diagnóstico rápido, **não** para inferência final.
+- **Sobreposição DESI–BOSS–eBOSS:** os releases sobrepõem-se em volume/tracers. Não tratar como independentes sem covariância cruzada validada. Quando faltarem produtos cruzados, escolher **um conjunto sem duplicação** e registrar a limitação.
+
+### 2.3 BBN / r_d / calibração
+
+O prior BBN de ω_b em N2 é de-circularizado [EXT], mas sua interação com o cálculo de r_d precisa ser explícita:
+
+```
+BBN → ω_b fixo → c_s(z) = c/√(3(1+R_b)) com R_b ∝ ω_b
+     → r_s(z*) e r_drag(z_drag) dependem de ω_b
+     → BAO = D/r_d tem r_d correlacionado com o prior BBN
+```
+
+Se o r_d for calculado pelo CAMB (N2), a dependência está no modelo. Se for fixo (D9), a dependência está no fiducial. Ambas as escolhas devem ser declaradas.
+
+---
+
+## 3. Checks numéricos e critérios de parada
+
+### 3.1 Checklist de precisão
+
+| # | Check | O que verificar | Tolerância proposta (congelar antes da inferência) | Status nas fontes |
+|---|---|---|---|---|
+| N1 | **Cl vs Dl** | `get_cmb_power_spectra(CMB_unit="muK")` retorna Dl = l(l+1)Cl/2π. `planck-lite-py` espera Dl. Confirmar que a passagem `cl[2:, 0]` (TT), `cl[2:, 1]` (EE), `cl[2:, 3]` (TE) está em Dl, μK² | Identidade exata (unidade), sem tolerância | **Implementado, verificável** pelo código |
+| N2 | **l(l+1)Cl/2π vs Cl** | Se qualquer downstream usar Cl diretamente, documentar a conversão | Conversão exata | **Lacuna: não vi conversão explícita** |
+| N3 | **r_s(z*) vs r_drag(z_drag)** | D10 calcula ambos. z*=1089.95, z_drag=1059.4 (fixo). Confirmar que a comparação com BAO usa r_drag (o correto) e não r_s(z*) | Conceitual: nunca confundir | **Parcialmente verificado:** D10 tem `rdrag_LCDM`/`rdrag_TGL`; D9 usa `r_d_fiducial` |
+| N4 | **Z_DRAG derivado vs fixo** | D10 usa Z_DRAG_PLANCK=1059.4 fixo. CAMB deriva rdrag internamente. Divergência típica: O(1) em z_drag → O(0.1%) em r_d | Congelar: \|z_drag_CAMB − 1059.4\| < 2 | **Não verificado nas fontes** |
+| N5 | **Distâncias comóveis vs físicas** | D9: `comoving_distance(z)`. D10: `comoving_distance(z_star)`. N2: `angular_diameter_distance(z)*(1+z)` = comóvel. Confirmar consistência de convenção (Mpc, não Mpc/h) | Identidade de convenção | **Parcialmente verificado** |
+| N6 | **H(z) em z alto** | D10 usa `H_TGL_arr` "radiation-aware". Confirmar que inclui fótons+neutrinos corretamente nos regimes r_dom e m_dom | Verificar limites: H(z)→H0√(Ω_r(1+z)⁴) para z→∞ | **Declarado no código, não numericamente auditado** |
+| N7 | **Integração r_s** | D10: `n=4000` pontos uniformes em ln(1+z), z_hi=1e7. Variar n→8000, z_hi→1e8; verificar convergência | Δr_s/r_s < 1e-5 entre refinamentos | **Declarado ~0.3% precisão absoluta; convergência não demonstrada** |
+| N8 | **Spectra CAMB: convergência** | `lmax`, `lens_potential_accuracy=1`, accuracy boost do CAMB. Comparar espectros com config de referência e config mais precisa | max\|ΔDl\|/Dl < 1e-4 em l∈[2,2500]; < 1e-3 em l>2500 | **Não verificado** |
+| N9 | **log-likelihood convergence** | No best-fit ΛCDM (β=0) e no ponto β=β*, variar precisão do CAMB e do integrador; comparar ΔlnL | \|ΔlnL\| < 0.1 entre configurações | **Não verificado** |
+| N10 | **S vs L em β=0** | Frozen declara: "β=0: variantes S e L coincidem (mesmo CAMB) em loglike a <0.05". Confirmar que este gate é aplicado | \|ΔlnL\| < 0.05 | **Declarado como validação obrigatória; resultado não lido** |
+| N11 | **planck-lite-py self-test** | Frozen declara como validação obrigatória | Valores publicados do pacote | **Declarado; resultado não lido** |
+| N12 | **CAMB vs CLASS** | Cross-check de espectros e distâncias | \|ΔDl\|/Dl < 1e-3 (em l relevante); \|Δr_drag\|/r_drag < 1e-3 | **NÃO IMPLEMENTADO — lacuna total** |
+
+### 3.2 Critérios de parada
+
+1. **Parar refinamento numérico** quando N8 e N9 estiverem dentro das tolerâncias congeladas por dois refinamentos consecutivos independentes.
+2. **Parar e declarar lacuna** se N12 (CAMB/CLASS) não puder ser executado com a versão instalada.
+3. **Parar e não inferir** se N10 (S=L em β=0) falhar — isso indicaria erro de implementação, não física.
+
+---
+
+## 4. O que está efetivamente implementado vs. fechamento S/L fenomenológico
+
+### 4.1 Implementação real (código lido)
+
+| Componente | Status | Fonte |
+|---|---|---|
+| Background H(z) com fator β(1+w) | **Implementado** (D10: `H_TGL_arr`; N2-S: via `omch2_eff`+`nnu`; N2-L: via w(a) table) | Trechos verificados |
+| r_s como integral | **Implementado** em D10 (`sound_horizon`) | Trecho L4317–4333 |
+| Spectra TT/TE/EE | **Via CAMB** (N2: `get_cmb_power_spectra`) | Trecho verificado |
+| Perturbações TGL | **Fenomenológicas**: S ajusta N_eff e omch2; L injeta fluido PPF. **Não** é derivação de primeiros princípios das perturbações TGL | Trecho verificado |
+| Likelihood Planck | **plik-lite** (nuisance marginalizados) + 2 bins low-ℓ TT + prior τ | Trecho verificado |
+| Likelihood BAO | **Diagonal** (erros independentes) | Trecho verificado + auditoria fonte |
+| Lenteamento | **Parcial** (CAMB calcula; likelihood de lenteamento ausente) | Inferência do código |
+| r_d auto-consistente | **Sim** em N2 (CAMB rdrag); **Não** em D9 (fiducial fixo) | Trechos verificados |
+| D10: l_A, R, θ_* | **Implementado** mas com precisão ~0.3% declarada | Trecho L4375–4381 |
+
+### 4.2 Fechamento fenomenológico (NÃO promover a previsão canônica)
+
+| Item | O que é | O que NÃO é |
+|---|---|---|
+| **Variante S** | Ajuste de N_eff = N_SM + 9.9296β e omch2_eff = omch2 + β(ω_b+ω_c). Perturbações padrão CAMB | Não é derivação das perturbações TGL; é um mapeamento fenomenológico da peça de fundo para os parâmetros efetivos do CAMB |
+| **Variante L** | Fluido perfeito com w(a) tabelado, PPF. Peça β(ρ+p) somada a Λ | Não é equação de campo TGL; é um fluido escuro ad hoc que reproduz o efeito de fundo |
+| **D10 l_A, R** | Escalas acústicas calculadas a fundo fixo com integral de r_s | Não é predição marginalizada; é teste de consistência de fundo. As linhas 4375–4381 **declaram** que o σ absoluto tem limitação de precisão |
+| **D9 χ²** | Comparações ponto-a-ponto a fundo fixo (H0, Om0, r_d fixos) | Não é likelihood cosmológica; não marginaliza; não é combinável com N2 |
+
+---
+
+## 5. Tabela origem → uso permitido / vedado
+
+| Origem da medição | Uso em D9 | Uso em D10 | Uso em N2 | **Combinável?** | Regra |
+|---|---|---|---|---|---|
+| **DESI DR2 BAO (13 pts)** | ✅ Principal (χ² diagonal) | ✅ r_d como referência | ❌ (N2 tem 12 pts, release não nomeada) | **Não somar D9+N2** | Rastrear identidade linha-a-linha antes de qualquer produto conjunto |
+| **DESI BAO (12 pts, N2)** | ❌ | ❌ | ✅ Principal (χ² diagonal) | **Não somar com D9** | Verificar se são os mesmos 12 dos 13; se sim, é o mesmo dado |
+| **Planck l_A comprimido (301.471±0.090)** | ❌ | ✅ Contexto (σ limitado) | ❌ | **Proibido** combinar comprimido com espectro completo | É resumo do espectro primário |
+| **Planck R comprimido (1.7502±0.0048)** | ❌ | ✅ Contexto | ❌ | **Proibido** idem | Idem |
+| **Planck plik_lite TTTEEE (l≥30)** | ❌ | ❌ | ✅ Principal | D10 usa comprimido, N2 usa completo — **não combinar** | Escolher UMA implementação Planck primária |
+| **Planck low-ℓ TT (2 bins)** | ❌ | ❌ | ✅ (via `use_low_ell_bins=True`) | Não duplicar com lowE | Confirmar não-sobreposição com prior τ |
+| **Planck lowE → prior τ** | ❌ | ❌ | ✅ Prior Gaussiano | **Não combinar lowE com prior τ derivado do lowE** | Verificar independência com os bins low-ℓ TT |
+| **BBN ω_b (Cooke+2018)** | ❌ | ❌ | ✅ Prior Gaussiano | Legítimo como prior externo | Registrar dependência: ω_b → r_s → r_d |
+| **BOSS/eBOSS** | ❌ | ❌ | ❌ | **Não incluir** sem covariância cruzada com DESI | Se necessário, escolher um conjunto sem duplicação |
+
+---
+
+## 6. Lacunas que exigem fonte local
+
+| # | Lacuna | O que falta | Prioridade |
+|---|---|---|---|
+| G1 | **Identidade 13 vs 12** | Arquivos de medição DESI usados por D9 e por N2 (`DESI[:, 0..3]`): release, tracer, z_eff, obs_type | **Crítica** — bloqueia qualquer produto combinado |
+| G2 | **Covariância BAO** | Matriz de covariância oficial DESI para os pontos usados; ou likelihood comprimida oficial | **Alta** — diagonal é aproximação |
+| G3 | **plik-lite: quais nuisance** | Documentação/versão exata do `planck-lite-py` instalado: lista de nuisance marginalizados | **Alta** — previne dupla contagem |
+| G4 | **CAMB vs CLASS** | CLASS instalado e configurado para cross-check | **Média** — validação independente do executor |
+| G5 | **z_drag derivado** | Saída do CAMB: `z_drag` efetivo para cada cosmologia testada | **Média** — comparar com fixo 1059.4 |
+| G6 | **S=L gate β=0** | Resultado do teste de convergência S vs L em β=0 (declaração obrigatória no frozen, resultado não lido) | **Alta** — gate de validação |
+| G7 | **Precisão l_A (D10)** | Valores numéricos de l_A_TGL, l_A_LCDM, lA_induced_shift_pct (só vimos o código, não a saída) | **Média** — para calibrar a tolerância de N7 |
+| G8 | **DESI release em N2** | O frozen diz "os mesmos do Nível 1"; o Nível 1 provavelmente é D9 ou derivado. Confirmar qual release | **Crítica** — idem G1 |
+| G9 | **Likelihood de lenteamento** | Se a análise final incluir lenteamento: qual produto (Planck lensing? ACT?) e como combinar com primário sem duplicação | **Média** — hoje ausente em N2 |
+| G10 | **DESI DR1 vs DR2** | O contrato original cita DR1 em alguns lugares e DR2 em D9. Qual release é a referência para a rota D10? | **Alta** — coerência do contrato |
+
+---
+
+## 7. Resumo das recomendações ao contrato
+
+1. **Congelar a identidade das medições antes de qualquer inferência.** A tabela de origem (§5) deve ser preenchida com dados reais (hashes, releases, tipos) antes do passo 6 da sequência.
+
+2. **Não combinar D9 e N2** nem como likelihoods multiplicativas nem como sigmas somados. São implementações distintas sobre possivelmente o mesmo dado.
+
+3. **Escolher UMA implementação Planck primária** (recomendação: plik_lite como está em N2 para diagnóstico; migrar para full se nuisance forem objeto de ajuste). Remover qualquer referência simultânea a comprimido + espectro completo.
+
+4. **Substituir erros diagonais por covariância** na likelihood BAO para inferência final. Se a covariância não estiver disponível localmente, registrar a limitação explicitamente.
+
+5. **Congelar tolerâncias numéricas** (N8, N9) antes de qualquer rodada de inferência. Usar os critérios de parada (§3.2).
+
+6. **Declarar S e L como fechamentos fenomenológicos**, não como implementação canônica das perturbações TGL. O contrato deve dizer explicitamente: "a ponte entre o fundo TGL e as perturbações é fenomenológica; uma derivação de primeiros princípios permanece [OPEN]."
+
+7. **Não reaproveitar** os "5σ" do resultado antigo como significância de descoberta. Os quantis do MCMC N2 não calibram p_global.
+
+---
+
+*Fim da revisão MiMo. Nenhum gate foi tocado. Nenhuma execução foi realizada. Os itens G1–G10 são pendências documentadas, não afirmações de inexistência no acervo.*

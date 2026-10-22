@@ -1,0 +1,121 @@
+## Análise cética da estatística conjunta — ORDEM_018 / DeepSeek
+
+**Escopo e limites.** Não executei código, não li integralmente o `um.py` v375 nem toda a TGL; o pacote recuperado é parcial. Os números abaixo são tratados como **[DECLARADO]** nas evidências locais fornecidas. Não movo gate, não some sigmas e não trato catálogo não cego como descoberta virgem. A âncora `um.py v375` tem SHA-256 `ba234a6d...25d1` e 32.604.664 bytes **[DECLARADO]**, mas isso não substitui leitura integral nem autoriza inferir conteúdo ausente.
+
+---
+
+### 1. Hipóteses, rival e teste
+
+Para um teste de descoberta TGL contra rival especificado, separe duas famílias:
+
+- **H0_rival [DECLARADO/INPUT]:** relatividade geral / Kerr / ΛCDM com **β = 0**; para neutrinos, escala padrão de três neutrinos. `τ*` e demais parâmetros seguem a física padrão.
+- **H1_TGL [DECLARADO no um.py]:** TGL com **β = α_CODATA·√e** (runtime, nunca literal), e `τ*` fixado por relógio externo independente ou marginalizado sob prior externo. Sem relógio externo, `βτ*` é degenerado.
+- **Teste de consistência D1 V3:** H0′: β = α√e; H1′: β livre. Isso **não** é o mesmo que H0_rival β=0 contra H1_TGL. A tensão de 3,0124975σ é de β livre contra α√e **[DECLARADO]**, portanto é tensão contra a TGL fixa, não confirmação TGL.
+
+**Estatística.** Use razão de verossimilhança perfilada:
+\[
+q_0=-2\ln\frac{\sup_{H_0}L(\theta,\eta)}{\sup_{H_1}L(\theta,\eta)}
+\]
+e, para combinação, somente com verossimilhança conjunta e covariância:
+\[
+L_{\rm joint}=L_{\rm GW}(\beta,\tau^*,\eta_{\rm GW})\,L_{\rm cosmo}(\beta,\eta_{\rm cosmo})\,L_{\rm nu}(\beta,\eta_{\rm nu})\,L_{\rm corr}.
+\]
+Sem `L_corr`, multiplicar domínios é inválido. A calibração global deve ser feita por Monte Carlo sob H0, maximizando sobre a família de trials pré-registrada. Limiar 5σ unilateral: p ≈ 2,87×10⁻⁷.
+
+---
+
+### 2. Insumos atuais e o que eles permitem
+
+**[DECLARADO]:**
+- U1: 180 arquivos strain GWOSC, 900 arrays, 22,50550 GiB em RAM; **173 hashes distintos**; 7 cópias não são observações independentes.
+- U3 (PSD/DQ, projeção do detector, posterior por evento), U4 (likelihood/controles) e U6 (busca conjunta) ainda são etapas dependentes no plano.
+- C0: GW V2 razão efeito/erro **0,177851σ**.
+- R-B ensemble correção/σ **0,343377425**.
+- D1 V3: tensão **3,0124975σ** de β livre contra α√e.
+- ORDEM_015: T03 0/30 células aceitas; T04 sem posterior físico aceito, ESS 3051,78 mas sigma inelegível; T05 N90 O5/R-B 2289,94 condicional e sem sistemática; T11 **2,952854σ** contra a escala declarada de neutrino, sem nova determinação; T12 **0 eventos cegos**.
+- C7: reprodução não cega condicional, calibração de fonte livre e mapeamento da realização ainda abertos.
+- `data_lab.py` cataloga fontes instaladas, não valida física. Na leitura sandbox: 856 elegíveis, incluindo 610 do snapshot v350, 176 strain 013BIS, 4 GWOSC O4b, 65 posteriores e 1 GWTC-3. A raiz BAO externa não ficou acessível nessa leitura; não inferir ausência.
+
+---
+
+### 3. Parâmetros nuisance, correlações e trials
+
+**Nuisance mínimos [OPEN]:**
+- GW: massas, spins, distância, inclinação, posição, calibração por detector, PSD, glitches, forma de onda, início do ringdown, atraso τ*, população.
+- Cosmologia: Ω_m, H0, r_d, calibração BAO/CMB, covariância, dados reaproveitados.
+- Neutrinos: Δm², ângulos, escala, covariância.
+- βτ*: relógio externo; sem ele, qualquer significância em β deve perfilar τ* com prior independente.
+
+**Correlações.** C0, C7, T05 e T12 podem reusar os mesmos strains/eventos. D1 V3 reusa BAO/CMB; T11 reusa dados de oscilação. Sem matriz de covariância, não há estatística conjunta. Os 173 hashes distintos não equivalem a 173 eventos independentes: múltiplos detectores por evento são correlacionados.
+
+**Trials/look-elsewhere.** A família inclui R-A, R-B, R-MOD, atrasos, bandas, bins, cortes, catálogos, células (T03: 30) e escolhas de prior. A calibração global deve ser max-over-trials sob H0. Bonferroni só é válido com independência conhecida; caso contrário, Monte Carlo preservando correlações.
+
+**Seleção pós-observação.** T11 2,952854σ, D1 V3 3,0124975σ e T05 2289,94 foram obtidos em análises já existentes. Se o canal/hypótese foi escolhido depois de ver os dados, o p nominal não vale. C7 não cego não pode ser descoberta. T03 0/30 não gera célula vencedora. T04 ESS 3051,78 não é sigma. T05 condicional sem sistemática não é 5σ.
+
+---
+
+### 4. Rotas falsas para ≥5σ
+
+1. **Somar sigmas** de D1 V3 e T11: são tensões contra escalas diferentes, sem modelo conjunto. Proibido.
+2. **Contar 180 arquivos como 180 eventos independentes**: há 7 cópias e múltiplos detectores por evento; o N_eff é menor.
+3. **Usar T05 2289,94 ou T04 ESS 3051,78 como significância**: sem dof/covariância/sistemática, não convertem para σ.
+4. **Usar C7 não cego com calibração livre**: pode ser ajustado para produzir significância; não é descoberta.
+5. **Usar T11 2,952854σ como confirmação TGL**: é tensão contra a escala declarada, não a favor.
+6. **Usar D1 V3 3,0124975σ como confirmação TGL**: é tensão de β livre contra α√e; se algo, aponta contra a TGL fixa.
+7. **Escolher o melhor entre R-A/R-B/R-MOD depois de ver os dados**: exige penalidade max-over-trials.
+8. **Ignorar βτ***: sem relógio externo, pode-se mover τ* para fabricar β significativo.
+9. **Combinar GW + cosmologia + neutrinos sem covariância**: produto de verossimilhanças inválido.
+10. **Tratar 0/30 células T03 como “quase detecção”**: zero células aceitas não é sinal.
+
+---
+
+### 5. Poder prospectivo e estimativa condicional
+
+Para um efeito padronizado δ por unidade independente e erro dominado por estatística:
+\[
+Z \approx \delta\sqrt{N_{\rm eff}},\qquad
+N_{\rm eff,req}\approx (Z_{\rm alvo}/\delta)^2.
+\]
+Com nuisance, use Fisher perfilado:
+\[
+F_{\rm prof}=F_{\beta\beta}-F_{\beta\eta}F_{\eta\eta}^{-1}F_{\eta\beta}.
+\]
+
+**Estimativa condicional [DERIVED a partir de números DECLARADOS]:**
+- Se C0 0,177851σ for um Z de ensemble e o erro escalar como \(1/\sqrt{N_{\rm eff}}\), seriam necessários ~7,9×10² vezes mais dados independentes para 5σ.
+- Se R-B 0,343377425σ for análogo, seriam necessários ~2,1×10² vezes mais dados independentes.
+- Isso ignora sistemáticas; com sistemáticas dominantes, o fator pode ser inalcançável.
+
+**Conclusão prospectiva:** com os dados atuais, **não há base para afirmar que ≥5σ global em favor da TGL seja alcançável**. O único teste que chega a ~3σ é D1 V3, e ele é tensão contra α√e. T11 é ~3σ contra a escala declarada. Os efeitos limpos C0/R-B são sub-sigma. Para cálculo quantitativo conjunto, faltam U3/U4/U6, covariância, likelihoods por evento e modelo conjunto.
+
+---
+
+### 6. Regra adversarial de parada
+
+Antes de qualquer alegação de 5σ:
+
+1. **Pré-registrar e hashear** H0, H1, rival, parâmetros, priors, estatística, dados, seleção, família de trials e limiar global.
+2. **Definir N_eff** após deduplicar hashes, agrupar por evento/detector e remover reuso.
+3. **Exigir sistemática paga** em cada canal. T03/T05/T04 sem isso ficam fora da descoberta.
+4. **Exigir modelo conjunto com covariância** para combinar GW, cosmologia e neutrinos. Sem isso, reportar p separados.
+5. **Calibrar globalmente** por Monte Carlo max-over-trials sob H0.
+6. **Blindar descoberta**: C7 não cego, T05 condicional e T11 pós-selecionado não contam como validação.
+7. **Validar em conjunto independente** não usado na descoberta. Se não houver, rebaixar para indicação.
+8. **Parar imediatamente** se: βτ* degenerado sem relógio externo; calibração livre; sigma inelegível; 0 eventos cegos; trial não pré-registrado; seleção pós-observação; domínio sem covariância.
+9. **Red-team independente**: reproduzir o p global com pipeline/código independente antes de publicar 5σ.
+10. **5σ estatístico ≠ confirmação física**. `NOT_FALSIFIED` nunca vira `CONFIRMED`.
+
+---
+
+### 7. Lacunas importantes
+
+**[OPEN]:**
+- N_eff real dos 180 arquivos/173 hashes/900 arrays.
+- Covariância C0–C7–T05–T12 e D1 V3–T11.
+- Curva de likelihood de β no D1 V3 (central, σ, correlação com α).
+- Significado e dof de T05 2289,94; ESS e sigma inelegível de T04.
+- Sistemática de T03 e T05; razão de T12 0 cegos.
+- Relógio externo para βτ*.
+- Modelo conjunto GW+cosmologia+neutrinos.
+
+Sem esses itens, a resposta honesta é: **fórmula sim; 5σ global atual não; falsas rotas identificadas e bloqueadas**.

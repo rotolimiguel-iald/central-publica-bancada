@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "created_at": "2026-09-24T15:54:13.006361+00:00",
+  "status": "DEFERRED_BY_OPERATOR_FOCUS_SISTER_MISSION",
+  "user_authorization": "Criar nossos modelos via fine-tuning em todos que admitirem; 50 dólares para o piloto; Qwen local não precisa mexer.",
+  "budget": {
+    "currency": "USD",
+    "total_limit": "50.00",
+    "training_envelope": "35.00",
+    "evaluation_envelope": "5.00",
+    "storage_fees_taxes_reserve": "10.00",
+    "scope": "TOTAL_PILOT_ALL_PROVIDERS_NOT_PER_PROVIDER",
+    "remote_training_jobs_launched": 0,
+    "training_committed_usd": "0.00",
+    "billing_invoice_verified": false
+  },
+  "candidate": {
+    "provider": "google_vertex_ai",
+    "model": "gemini-3.5-flash",
+    "project_id": "iald-tgl-ft-20260924",
+    "region": "us-central1",
+    "epochs": 2,
+    "adapter_size": 4,
+    "learning_rate_multiplier": 1,
+    "training_usd_per_million_tokens": "10.00",
+    "byte_proxy_training_usd": "4.9232",
+    "estimate_status": "UTF8_BYTE_PROXY_NOT_EXACT_TOKENS_OR_PROVIDER_QUOTE",
+    "provider_token_count": null,
+    "remote_job_id": null,
+    "training_file": {
+      "file": "datasets\\train.vertex.jsonl",
+      "sha256": "ce5ef8044ecb04a12e57e50ec1091970279ab606a396ac5fa397afd069ec5da8",
+      "bytes": 246160,
+      "records": 86,
+      "format": "vertex",
+      "split": "train"
+    },
+    "validation_file": {
+      "file": "datasets\\validation.vertex.jsonl",
+      "sha256": "8362ee535d66da4c0bd51c558d4195ec0f093bb9ceae5e347ce08110370e8c5b",
+      "bytes": 34734,
+      "records": 14,
+      "format": "vertex",
+      "split": "validation"
+    },
+    "test_file_kept_local": {
+      "file": "datasets\\test.vertex.jsonl",
+      "sha256": "3b2ca39ddb04eec72a501525281b04690810e7203ee5285c568469174b97f3f1",
+      "bytes": 34638,
+      "records": 13,
+      "format": "vertex",
+      "split": "test"
+    },
+    "pricing_source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+    "project_number": "821783483062",
+    "project_creation_verified": true,
+    "api_enabled": false,
+    "remote_uploads": 0
+  },
+  "launch_checks": [
+    "Actual model is offered for tuning in this account/region",
+    "Provider token count/price fits total budget including evaluation and fees",
+    "Only train and validation exports uploaded; held-out test remains local",
+    "No duplicate/uncertain job; persist identity immediately after creation"
+  ],
+  "evaluation": {
+    "held_out_examples": 13,
+    "compare": "Base model versus fine-tuned model with identical held-out prompts",
+    "rubric": [
+      "Preserve equations and signs",
+      "State hypotheses and source scope",
+      "Answer the actual question",
+      "No invented compilation, hash or physical confirmation"
+    ],
+    "activation": "No automatic promotion before comparison and critical-regression review",
+    "current_status": "NOT_RUN"
+  },
+  "exclusions": [
+    "Existing local Qwen is untouched",
+    "No GPU rental or provisioned throughput",
+    "No confidential code, credential, legal archive or canonical-original edit",
+    "No claim of full TGL memorization or independent scientific validation"
+  ],
+  "providers": [
+    {
+      "id": "gemini",
+      "status": "PILOT_CANDIDATE",
+      "route": "Managed supervised tuning in Google Cloud"
+    },
+    {
+      "id": "claude",
+      "status": "DATA_FORMAT_READY_ACCOUNT_AND_FULL_COST_UNVERIFIED",
+      "route": "Claude 3 Haiku on Amazon Bedrock; not the current Claude subscription model",
+      "source": "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-model-fine-tuning.html",
+      "deployment": "Provisioned throughput; no verified full pilot quote; no resource purchased",
+      "deployment_source": "https://docs.aws.amazon.com/bedrock/latest/userguide/deploy-custom-model-on-demand.html"
+    },
+    {
+      "id": "kimi",
+      "status": "OPEN_WEIGHTS_TRAINING_INFRASTRUCTURE_NOT_PROVISIONED",
+      "route": "Separate copy of Kimi K3; Ultra subscription is inference access",
+      "source": "https://huggingface.co/moonshotai/Kimi-K3"
+    },
+    {
+      "id": "mimo",
+      "status": "OPEN_WEIGHTS_TRAINING_INFRASTRUCTURE_NOT_PROVISIONED",
+      "route": "Separate copy of MiMo V2.6 Pro RL; current inference API has no verified tuning route",
+      "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+    },
+    {
+      "id": "deepseek",
+      "status": "OPEN_WEIGHTS_TRAINING_INFRASTRUCTURE_NOT_PROVISIONED",
+      "route": "Separate copy of DeepSeek V4.1 Flash; current inference API has no verified tuning route",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+    },
+    {
+      "id": "openai",
+      "status": "NEW_SELF_SERVICE_ACCESS_NOT_AVAILABLE",
+      "route": "Deprecation/access restrictions require account eligibility; subscription models are not fine-tuned this way",
+      "source": "https://developers.openai.com/api/docs/deprecations"
+    },
+    {
+      "id": "jev",
+      "status": "NO_CUSTOMER_WEIGHT_FINE_TUNING",
+      "route": "Instructions/state/criteria customization does not train Jev weights",
+      "source": "https://docs.typesafe.ai/models"
+    },
+    {
+      "id": "qwen_local",
+      "status": "EXCLUDED_BY_OPERATOR",
+      "modified": false
+    }
+  ],
+  "updated_at": "2026-09-26T15:47:44.346937+00:00",
+  "previous_status": "LOCAL_PACKAGE_REVIEWED_REMOTE_TRAINING_UNAVAILABLE",
+  "deferred_at": "2026-09-26T15:47:44.346916+00:00",
+  "resumption_requires_new_operator_request": true,
+  "deferred_reason": "Suspender essa missão; terminar a da sessão irmã e depois focar no treinamento.",
+  "resumed_scope": "MiMo pilot first; Kimi and DeepSeek preparation only; preserve Qwen; budget50 total",
+  "claude_request": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\fine_tuning\\mimo_iald_pilot_20260925\\request.json",
+  "mimo_first_delivery": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\fine_tuning\\mimo_iald_pilot_20260925\\delivery.json",
+  "current_blocker": "Hosted MiMo V2.6 Pro fine-tuning tunability/account not verified; no Fireworks account logged in; no job or upload launched."
+}

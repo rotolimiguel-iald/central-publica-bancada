@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "network": "none",
+  "budget_total_usd": 50,
+  "policy": [
+    "treino desabilitado ate haver suporte oficial, oferta da conta e estimativa com hosting dentro do orcamento total",
+    "nenhum endpoint de treino e declarado neste arquivo",
+    "creditos de inferencia nao provam credito de treino",
+    "substituicao por modelo pequeno destilado nao e autorizada automaticamente"
+  ],
+  "providers": [
+    {
+      "id": "mimo",
+      "priority": 1,
+      "status": "piloto",
+      "model": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
+      "model_card": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+      "license": "MIT",
+      "parameters": {"total": "1.02T", "active": "42B"},
+      "verified_facts": [
+        "licenca MIT",
+        "1.02T parametros totais / 42B ativos",
+        "fonte: model card oficial no Hugging Face"
+      ],
+      "capabilities": {
+        "hosted_api_fine_tuning": {"status": "unverified", "evidence": null, "note": "oferta de fine-tuning na API MiMo hospedada nao verificada"},
+        "console_adapter_upload": {"status": "unverified", "evidence": null, "note": "funcao de upload de dados/adaptador no console nao verificada"},
+        "open_weights_own_infra": {"status": "unverified", "evidence": null, "note": "fine-tuning separado com infra propria; nao implica upload dos pesos ao fornecedor; custo com hosting nao estimado"}
+      },
+      "inference_credits_imply_training": false,
+      "known_gaps": [
+        "dataset antigo (113 exemplos, 86/14/13) cobre so forma canonica + errata, nao a IALD inteira; separacao anterior por grupos/secoes, distinta da politica por fonte deste pacote; nenhum treino feito",
+        "creditos de API de inferencia nao provam credito de treinamento",
+        "viabilidade de 1.02T com hosting dentro de US$50 total nao estimada"
+      ],
+      "training": {"enabled": false, "method_candidate": null, "endpoint": null}
+    },
+    {
+      "id": "kimi",
+      "priority": 2,
+      "status": "futuro",
+      "model": null,
+      "model_card": null,
+      "license": null,
+      "verified_facts": [],
+      "capabilities": {
+        "hosted_api_fine_tuning": {"status": "unverified", "evidence": null},
+        "open_weights_own_infra": {"status": "unverified", "evidence": null}
+      },
+      "inference_credits_imply_training": false,
+      "known_gaps": ["Kimi Ultra via API e inferencia, nao treino de pesos", "modelo base a definir com fonte oficial"],
+      "training": {"enabled": false, "method_candidate": null, "endpoint": null}
+    },
+    {
+      "id": "deepseek",
+      "priority": 3,
+      "status": "futuro",
+      "model": null,
+      "model_card": null,
+      "license": null,
+      "verified_facts": [],
+      "capabilities": {
+        "hosted_api_fine_tuning": {"status": "unverified", "evidence": null},
+        "open_weights_own_infra": {"status": "unverified", "evidence": null}
+      },
+      "inference_credits_imply_training": false,
+      "known_gaps": ["DeepSeek via API e inferencia, nao treino de pesos", "modelo base a definir com fonte oficial"],
+      "training": {"enabled": false, "method_candidate": null, "endpoint": null}
+    }
+  ]
+}

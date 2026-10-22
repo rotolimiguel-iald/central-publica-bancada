@@ -1,0 +1,116 @@
+# PARECER CIENTÍFICO — ORDEM_018
+## Projeto estatístico mínimo para o setor de ringdown e cosmologia (TGL_BANCADA_OFICIAL)
+
+**Natureza do documento:** parecer de desenho estatístico. Sem execução, sem alteração de gate, sem estimativa de σ a partir de Δχ² fixo, sem significância declarada. Extratos e hashes fornecidos; memória integral não alegada.
+
+---
+
+## 1. Escopo e estatutos
+
+| Item | Estatuto | Conteúdo |
+|---|---|---|
+| Γ = βτ_★ω²/2, β = α_CODATA·√e | **[INPUT]** da gerente | predição de dephasing; α e √e são entradas, não derivados |
+| τ_★ R-B = GM_det/c³; R-A = t_P | **[INPUT]** | escolha binária pré-fixada de relógio |
+| x = Γτ_GR = 0.021156 (spin 0.7); 0.062514 (spin 0.95); M65, z0.1; M20 conserva x | **[REAL]** | saídas de modelo do controle local R-B, não fit |
+| 180 arquivos / 22,505 GiB; 32 identidades com sobreposição detector/intervalo | **[REAL]** | inventário local; identidade ≠ arquivo |
+| 13 pontos BAO DR2 + covariância completa; r_d entrada | **[REAL]** | vetor e covariância com hash |
+| β entra na propagação (dephasing), não como modificação de G local | **[DERIVED]** sob tipagem | errata v367/v369; leitura vigente |
+| Distribuição do teste sob H₀ e poder a 5σ | **[OPEN]** | exige simulação; não derivável de Δχ² fixo |
+| Solver perturbativo completo (cosmologia) | **[OPEN]** | dito no cenário |
+
+---
+
+## 2. Fórmula operacional
+
+### 2.1 Ringdown — ensemble com dephasing
+
+**Modelo de sinal** (por evento *k*, série de detector *d*):
+
+$$h_{k,d}(t) = A_{k,d}\,e^{-t/\tau_{\mathrm{GR},k}}\cos(\omega_k t + \phi_{k,d})\;e^{-\Gamma_k t}$$
+
+com $\Gamma_k = \tfrac{1}{2}\beta\,\tau_\star\,\omega_k^2$ e $\tau_{\mathrm{GR},k} = \tau_{\mathrm{GR}}(a_k, M_k)$ por QNM de Kerr.
+
+**Observável de primeira ordem:** o desvio fracionário do tempo de decaimento
+
+$$\delta_k \;=\; \frac{\tau_{\mathrm{obs},k}}{\tau_{\mathrm{GR},k}} - 1 \;=\; -\,\Gamma_k\,\tau_{\mathrm{GR},k} \;=\; -\,x_k.$$
+
+Os valores de *x* do banco são **saídas do modelo sob R-B**, não estimativas: servem para dimensionar o poder, não para calibrar o teste.
+
+**Estatística de teste** (verossimilhança perfilada, não Δχ² de vetores fixos):
+
+$$\Lambda \;=\; 2\Big[\ln \mathcal{L}\big(\hat{\hat\theta},\hat{\hat{x}}\big) - \ln \mathcal{L}\big(\hat\theta,\,x{=}0\big)\Big],$$
+
+onde $\theta = (a, M, z, t_0, A, \phi, \text{calib}, \text{glitch})$ é marginalizado sob cada hipótese, e $\hat{\hat{x}}$ é o valor de *x* sob a hipótese alternativa (fixo em $x_{\mathrm{pred}}$ do relógio escolhido, ou perfilado).
+
+**Residual branqueado** (regra de decisão):
+
+$$\tilde{r} \;=\; C^{-1/2}\big(d - \mu(\hat{\hat\theta})\big), \qquad C = \mathrm{PSD}\otimes I_{\mathrm{amostras}} + C_{\mathrm{calib}},$$
+
+com projeção no **subespaço identificável**: seja $J = \partial\mu/\partial\theta$ a jacobiana; o residual projetado é $P_\perp \tilde{r}$ com $P_\perp = I - J(J^\top C^{-1}J)^{-1}J^\top C^{-1}$. A dimensão efetiva é $\mathrm{rank}(J^\top C^{-1}J)$ — se decair abaixo do esperado (degenerescência spin–massa–z–t₀), a análise é **INCONCLUSIVE** por construção, não "baixo sinal".
+
+### 2.2 Cosmologia BAO — 13 pontos
+
+$$\chi^2(\theta) = \big(d - \mu(\theta)\big)^\top C_{\mathrm{BAO}}^{-1}\big(d - \mu(\theta)\big),$$
+
+com $\theta = (H_0, \Omega_m, \Omega_\Lambda, r_d, \beta)$; $r_d$ **entra como entrada com prior**, não como derivado (solver perturbativo aberto). A correção TGL no fundo é $\Phi = 1 + \beta|1+w_{\mathrm{eff}}|$ sobre o fluido total **[INPUT ratificado, v366]**.
+
+**Regra de independência:** D9, D10 e Planck **não são somáveis** quando reutilizam os mesmos dados ou covariâncias compartilhadas. A matriz de covariância conjunta deve ser reconstruída ou os blocos declarados como **dependentes** e analisados por verossimilhança conjunta com a covariância cruzada incluída.
+
+---
+
+## 3. Checklist de bancada
+
+### 3.1 Antes de qualquer simulação de cauda
+
+| # | Check | Critério de passagem |
+|---|---|---|
+| C1 | **Relógio pré-fixado** | R-B OU R-A escolhido por escrito, com hash, antes de ler o dado de teste. Sensibilidade ao outro relógio = análise separada, nunca p-value combinado |
+| C2 | **Partição exploração/teste** | por **identidade de evento** (não por arquivo). ≥ 1 identidade em cada braço; sobreposição detector/intervalo não duplica identidade |
+| C3 | **Covariância explícita** | $C$ construída e invertida; número de condição registrado; projeção $P_\perp$ com rank reportado |
+| C4 | **Injeção–recuperação** | sinal com $x = x_{\mathrm{pred}}$ injetado em ruído real (offsource): recuperação dentro de 1σ do valor injetado em ≥ 95% das realizações |
+| C5 | **Ruído / offsource** | mesma pipeline em janelas sem evento: $\Lambda_{\mathrm{off}}$ deve ser consistente com a distribuição nula calibrada |
+| C6 | **Controle de seleção** | os 32 eventos foram selecionados por SNR/qualidade; a calibração do teste deve usar a **mesma regra de seleção** nos mocks |
+| C7 | **Degenerescências** | matriz de correlação dos parâmetros perfilados; se $\|\rho(a,M)\| > 0{,}95$ ou $\|\rho(x, t_0)\| > 0{,}95$ → INCONCLUSIVE |
+| C8 | **Calibração da distribuição nula** | $\Lambda$ sob $x = 0$ por bootstrap paramétrico (≥ 10⁴ realizações); **não usar** $\chi^2_1$ de Wilks sem validar |
+| C9 | **Cosmologia: covariância cruzada** | se D10 reutiliza pontos de D9 ou Planck, a covariância conjunta existe ou os blocos são declarados dependentes |
+
+### 3.2 Checks de cobertura
+
+- **Cobertura do intervalo de confiança:** em injeções, o IC nominal 95% cobre o valor verdadeiro em 95% ± tolerância (binomial).
+- **Poder antes do go/no-go:** com os 32 eventos, estimar o poder por simulação para detectar $x = x_{\mathrm{pred}}$ ao nível 5σ. Se o poder for < 0.5, o veredito é **UNDERPOWERED** por construção.
+
+---
+
+## 4. Condições de parada
+
+| Condição | Ação |
+|---|---|
+| **Poder simulado < 0.5** para $x_{\mathrm{pred}}$ a 5σ | PARAR. Emitir `UNDERPOWERED`. Não simular cauda. |
+| **Rank da jacobiana < dimensão dos parâmetros de interesse** | PARAR. `INCONCLUSIVE_DEGENERATE`. |
+| **Injeção–recuperação falha** (viés > 1σ ou cobertura fora do nominal) | PARAR. `PIPELINE_INVALID`. Corrigir antes de prosseguir. |
+| **Ruído offsource produz $\Lambda$ acima do limiar** em > 5% das janelas | PARAR. `FALSE_ALARM_RATE_EXCEEDED`. |
+| **Escolha de relógio mudar o veredito** entre R-A e R-B | Emitir ambos os vereditos lado a lado. **Não escolher o favorável.** `CLOCK_DEPENDENT`. |
+| **Qualquer tentativa de tratar Δχ² de dois vetores fixos como σ** | PROIBIDO pela régua. O parâmetro de significância só vem da distribuição calibrada de $\Lambda$. |
+| **Contagem de arquivos/hashes como eventos** | PROIBIDO. A unidade estatística é a **identidade de evento** (32, não 180). |
+
+---
+
+## 5. Menor conjunto de artefatos verificáveis
+
+1. **Protocolo pré-registrado** (hash antes do dado de teste): relógio escolhido, regra de seleção, modelo de sinal, parâmetros perfilados, limiar de decisão.
+2. **Script de injeção–recuperação** com seeds e configuração gravada.
+3. **Matriz de covariância** (ringdown: PSD + calib; cosmologia: $C_{\mathrm{BAO}}$ com hash) + rank de $P_\perp$.
+4. **Distribuição nula calibrada** de $\Lambda$ (histograma + número de realizações).
+5. **Tabela de vereditos** por relógio (R-A, R-B) e por setor (ringdown, cosmologia), com estatuto explícito.
+
+---
+
+## 6. Síntese operacional
+
+$$\boxed{\;\Lambda = 2\big[\ln\mathcal{L}(\hat{\hat\theta},\hat{\hat{x}}) - \ln\mathcal{L}(\hat\theta,\,x{=}0)\big],\quad \tilde{r} = P_\perp C^{-1/2}(d - \mu(\hat{\hat\theta}))\;}$$
+
+com: relógio pré-fixado; identidade de evento como unidade; covariância explícita; injeção antes de teste; distribuição nula calibrada por bootstrap; poder estimado antes de qualquer cauda; e condições de parada fail-closed.
+
+**Nada aqui é significância, execução ou nova física.** É o desenho que permite que, quando o dado e o instrumento existirem, o número que sair seja um número honesto.
+
+`NOT_FALSIFIED ≠ CONFIRMED`. `PROVADA ≠ CONFIRMADA`.

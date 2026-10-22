@@ -1,0 +1,90 @@
+# ORDEM_018 — Revisão cruzada adversarial (rodada 2), unidade independente
+
+**Declaração de método e de estatuto.** Nada aqui foi executado, reaberto ou alterado (fonte/gate intactos). Os três relatórios são tratados como **[DECLARADO]**; as fontes canônicas são os trechos carregados do um.py v375 (sha `ba234a6d…`), que cubro parcialmente (5,00% das linhas na rodada 1; não afirmo leitura integral nem inexistência do não recuperado). O que verifiquei por leitura direta dos trechos está marcado **[VERIFICADO]**; o que é aritmética manual simples, **[ARIT]**; o que depende de trecho ausente, **[LACUNA]** com consulta nomeada. Nenhum [DECLARADO] vira [REAL] por repetição.
+
+---
+
+## 1. Tabela de afirmações: aceitas / corrigidas / rejeitadas
+
+| Provedor (hash) | Afirmação | Veredito | Motivo |
+|---|---|---|---|
+| KIMI `986fb8e7…` | \|R\| = √β ≈ 0,1097 | **Aceita** [VERIFICADO] | β ≈ 0,01203; √β ≈ 0,10969 [ARIT]. No kernel: `normSq_reflection`, `the_pruning_threshold_is_the_reflection_amplitude`, amplitude √β com sinal −1. |
+| KIMI | Piso dos vazios via κ‑CMB como reserva | **Aceita** [VERIFICADO] | O artefato declara o canal de matéria (κ) como o único com `FALSIFIED` alcançável hoje (v98/V3). |
+| KIMI | Eco 0,177851σ (V2); R‑B 0,343377425 | **Aceita com estatuto** | São σ de estimadores/auditorias específicos [DECLARADO]; **não transportáveis** à busca U1 (ponto local do operador, correto). |
+| KIMI | τ_echo e desajuste de template impedem 5σ hoje | **Aceita com precisão** [VERIFICADO] | τ_eco = (2GM/c³)ln(1/β) = 0,747 período do ringdown é **entrada declarada — nem o kernel nem a bancada o derivam** (v341). Busca de picos a 3σ é cega a eco de 0,11: chega <1σ (v347). |
+| KIMI | Projeção ~4× eventos (O4/O5, 3G) sem cálculo de poder | **Corrigida** | 4× em N ⇒ ×2 em σ sob √N ideal: 0,3557σ (V2) / 0,6868σ (R‑B) [ARIT]. Falta fator ~14/~7 em σ. Incompatível com 5σ sem hipóteses adicionais declaradas. |
+| MIMO `6367ef9d…` | "173 hashes de strain = 173 eventos distintos" | **Rejeitada** | Hashes de arquivos/strain não são eventos independentes (um evento gera múltiplos arquivos/detectores/janelas). O artefato conta **eventos ancorados H1/L1**, não arquivos. Erro de base que invalida toda a cadeia. |
+| MIMO | 85 eventos × 0,177851σ → 173 → ~790× / ~6,7e4 eventos | **Rejeitada (cadeia); aritmética interna correta** [ARIT] | (5/0,177851)² = 790,35; 85 × 790,35 ≈ 6,7e4. Mas pressupõe √N ideal, mesmo estimador, σ/evento constante, **sem teto de sistemática** — hipóteses não medidas. Base 173 inválida. |
+| MIMO | Piso de sistemática ε_tpl~1 e Zmax~1 postulados | **Rejeitada como postulado** | Sistemática compartilhada que não cai com N **precisa ser medida** (covariância do erro de template entre eventos), não postulada. Com ε_tpl correlacionado, σ_teto = sinal/ε_tpl independe de N — e isso precisa vir de injeção‑recuperação, não de decreto. |
+| MIMO | Bateria: time‑slide, off‑source, sign‑flip, fases randomizadas, DQ, injeção‑recuperação | **Aceita como desenho de nulos** | Reutilizável. Controle B‑mode/cruzado: **pendente de especificação** para GW (projeção F+×F× só é nulo com a malha de projeção correta na análise coerente; não é análogo automático ao CMB). |
+| DEEPSEEK `1c9606d8…` | Proibido somar sigmas; reuso de eventos; T05/T04 como σ | **Aceita** | Coerente com a régua da casa; estatística de template não é σ de detecção sem nulo calibrado. |
+| DEEPSEEK | D1 V3 = 3,0124975σ e T11 = 2,952854σ são tensões **contra** escalas declaradas | **Aceita com precisão** [VERIFICADO] | D1 V3: z simétrico 3,01 / lado da previsão 3,12, banda `at_threshold` (\|z_sim−3,0\|<0,1); o D1 **não detecta** na conjunta V3 — entra em consistência, não em coincidência. T11 = NuFIT pós‑JUNO (2,95σ) na escada m2 1,64→2,21→2,95σ, tensão **contra** o m2 previsto. |
+| DEEPSEEK | "Bonferroni requer independência" | **Corrigida (erro)** | Bonferroni é *union bound*: controla FWER sob **dependência arbitrária**; pode ser conservador. Quem exige independência é Šidák/Fisher; BH/FDR exige modelar dependência. |
+| DEEPSEEK | ~790× a partir de C0; ~212× a partir de R‑B | **Corrigida (estatuto)** | Aritmética exata sob √N ideal [ARIT: (5/0,343377425)²=212,0], mas são **extrapolações condicionais** [DERIVED condicional], não demonstração de poder da busca nova. |
+| DEEPSEEK | H0: RG com β=0 | **Corrigida (escopo)** | H0/rival/trials devem ser **pré‑especificados por observável**: eco → "sem eco"; piso → "ΛCDM raso sem piso"; NMC → "atraso fóton−neutrino = 0"; dephasing → "Γ_extra = 0". β=0 como ponto único é inadequado onde o rival é família (amplitude livre). |
+| DEEPSEEK | Likelihood conjunta, nuisance, trials, blinding, relógio externo para βτ* | **Aceita** | O artefato já pratica pré‑registro com hash e não‑cegueira declarada; a exigência é metodologicamente correta. |
+
+**Minha proposta da rodada 1** — **[LACUNA declarada]**: o texto integral não foi recuperado neste contexto; não o reconstruo por memória. A autocrítica aplicável pelos pontos fixados pelo operador: (i) se priorizei o eco, cai a mesma correção — sem ponte (τ_eco é INPUT; template) e sem teto de sistemática medido, eco não é rota de 5σ; (ii) os σ 0,177851/0,343377425 não se transportam a U1 (estimadores e seleções distintos); (iii) **U3**: 4/4 testes locais de sobreposição GW250114 H1/L1 são consistência local, **sem fit contra nulo e sem trials — não é detecção nem 5σ** [DECLARADO da gerente; preservado]; (iv) **C6 NPZ whitener_scaled 407×410** é quociente polinomial grau 2, **não eixo temporal** — qualquer leitura como varredura temporal é rejeitada [DECLARADO da gerente; não verifiquei a estrutura interna].
+
+---
+
+## 2. Comparação corrigida de rotas
+
+| Rota | Ponte física | H0 / rival / trials (pré‑específicos) | Poder hoje | 5σ viável? |
+|---|---|---|---|---|
+| Eco ringdown \|R\|=√β | **Incompleta**: amplitude √β [KERNEL]; τ_eco [INPUT não derivado]; template não construído | H0 "sem eco" vs rival (template com τ_eco varrido, amplitude √β fixa vs livre); trials por observável — **a definir** | Busca 3σ cega a 0,11 (<1σ) [VERIFICADO v347] | **Não hoje.** 790× (V2) ou 212× (R‑B) sob √N ideal + hipóteses não medidas; 4× catálogo ⇒ ≤0,69σ |
+| Ringdown‑dephasing (v2, core) | Canal que a v375 reserva: "resta somente o ringdown" [VERIFICADO] | Depende de trecho ausente → **Consulta 1** | z_vs_GR / z_vs_B / delta_pred_B / sigma **[LACUNA]** | Indeterminado sem a Consulta 1 — é o canal decisivo nomeado pelo próprio artefato |
+| NMC‑Shapiro (fóton vs neutrino) | **Declarada**: termo α₂RF² no setor EM; fóton atrasa, neutrino (ξ≈0) segue RG [VERIFICADO] | H0 atraso = RG; rival excesso fóton 10–100 ms (⟨Δt⟩=50 ms); N≥25, timing <10 ms — **pré‑registrado** `NEUTRINO_SHAPIRO_NMC_V1` | SN1987A reconciliado (~5–6 ordens de headroom); Δχ²=−1,8 (p=0,18) fraco, declarado | **Sim, por construção**: ~21σ projetado (IceCube‑Gen2 + ET + LSST, 2030–2035). Hoje: N=0 (AWAITING_DATA) |
+| m2 neutrino (JUNO) | Declarada: m2 = β·sin45°·1 eV [NORM], escala não ajustada | Kill rule: 5σ em **duas determinações independentes**; JUNO meta 0,5% vs precisão‑que‑mata 0,784% | Tensão 1,64→2,21→2,95σ **crescente contra** | **Sim — contra a TGL**: 7,83σ projetado ~2031 se o centro não se mover. Rota de falsificação mais curta |
+| Piso dos vazios via κ‑CMB (matéria) | Declarada: piso ρ/ρ̄ ≥ β; κ pesa matéria (não tracador) | H0 ΛCDM raso; rival piso β; FWER 2,87e‑7 pré‑registrado | V11 unilateral NOT_FALSIFIED_POWERED (ΛCDM raso também respeita: não discrimina); V12 bilateral: TRACER_EMPTY_CORE_REGIME | **Único canal com FALSIFIED alcançável hoje** [declarado pelo artefato]; projeção de poder computável (Consulta 3) |
+| Relógios Γ=(1/2)βτ*ω² | τ*=t_Planck [PRINCIPLED IDENTIFICATION] | P1 por partícula; P2 por modo; P3 sem observável | P1: déficit ≥12,46 ordens; P2: EXCLUDED_IN_READING (a leitura excluída usa n=+2; a TGL usa n=−2 nos neutrinos) | **Não.** Inviável; não reabrir sem nova partição física |
+| Coma (paridade inversa) | Trava: âncora dimensional exigida | Protocolo cego existente | DISTANCE_NOT_IDENTIFIABLE; revelação não está no core desta rodada | Não hoje |
+| Conjunta V3 | — (não é canal) | Limiar 1e‑30 [INPUT]; booleana com classes | Leitura re‑emitida a cada rodada | **Fora da disputa de rotas** (regra da casa) |
+
+---
+
+## 3. Limites de poder efetivamente computáveis (aritmética com hipóteses explícitas)
+
+Sob **√N ideal** (mesmo estimador, σ/evento constante, estacionariedade, **zero teto de sistemática correlacionada**):
+
+- Estimador V2 (0,177851σ): N_req = (5/0,177851)² ≈ **790×** [ARIT]. Com 4× catálogo: **0,356σ**.
+- Estimador R‑B (0,343377425σ): N_req = (5/0,343377425)² ≈ **212×** [ARIT]. Com 4× catálogo: **0,687σ**.
+- Com sistemática compartilhada ε_tpl **medida**: σ_teto = A_sinal/ε_tpl, **independente de N** — hoje ε_tpl não está medido; qualquer N_req citado sem ele é cota inferior ideal, não limite de poder.
+- NMC‑Shapiro: poder **pré‑registrado** por construção (N≥25 lenteados, timing <10 ms) ⇒ separação ~21σ; depende de taxa de transientes 2030–2035, não de extrapolação de σ.
+- m2: precisão JUNO 0,5% ⇒ z ≈ 7,83σ (projetado, **contra**); kill a 5σ exige duas determinações autônomas.
+- κ‑CMB: projeção V3 (Fisher da covariância V2 medida, `power_fisher_separation_sigma2`, `F_inner`) — **computável**, valores **[LACUNA]** → Consulta 3.
+- Relógios P1: déficit ≥12,46 ordens no melhor relógio — poder **não computável para 5σ** (inviável), resultado, não lacuna.
+
+---
+
+## 4. Alternativas que os três omitiram (papel específico) e a ponte exigida
+
+Os três convergiram no eco. Omissões físicas: **(a)** NMC‑Shapiro — única rota com mecanismo em ponte declarada, nulo nítido e poder pré‑registrado; **(b)** κ‑CMB — único canal com falsificação alcançável hoje; **(c)** m2/JUNO — a rota que mata a teoria mais cedo; omiti‑la é viés de seleção a favor; **(d)** **ringdown‑dephasing (v2)** — que não é o "eco": o canal dephasing do ringdown (Γ_ω na fonte) é o que a v375 nomeia como decisivo pendente, enquanto o eco depende de τ_eco INPUT. Confundir os dois é salto de estatuto.
+
+**Ponte mínima para o eco virar previsão observacional** (sem ela, permanece hipótese de busca): (i) derivação de τ_eco dentro do formalismo (hoje INPUT declarado); (ii) família de templates (trem de ecos: amplitude √β, sinal −1, espaçamento τ_eco, decaimento); (iii) resposta instrumental + matched filter; (iv) H0/rival/trials/blinding pré‑especificados; (v) ε_tpl medido. Itens (i)–(ii) são o gargalo; (iii)–(v) são engenharia de rito.
+
+---
+
+## 5. Consultas complementares ao um.py v375 (máx. 5, com busca EXATA, propósito, prioridade)
+
+1. **`def prove_ringdown_dephasing_result_v2`** (ou chave de core `"ringdown_dephasing_result_v2"`) — extrair `z_vs_GR`, `z_vs_B`, `stacks["3.0"]` (`delta_pred_B`, `sigma`) e o pré‑registro (H0/rival/trials). **Propósito:** determinar se o canal decisivo da v375 tem poder computado e qual. **Prioridade 1.**
+2. **`def prove_gw_echo_rite`** e **v347** (buscar `the_pruning_threshold_is_the_reflection_amplitude`, `tau_eco`, `N_on`, `B_exp`, `mean_eff`) — separar eco (amplitude, τ INPUT) de ringdown‑dephasing; obter **N de eventos ancorados H1/L1** (não hashes) e o veredito exato de poder. **Prioridade 2.**
+3. **`def prove_void_floor_v3`** (buscar `power_fisher_separation_sigma2`, `F_inner`, `F_now`) — projeção de poder κ‑CMB/κ nos centros e a variância faltante para POWERED por survey (DES Y3, HSC, Planck κ). **Prioridade 3.**
+4. **`def prove_neutrino_shapiro_protocol` / `"nmc_shapiro"`** (buscar `headroom`, `margin_s`, `frozen_hash`, veredito) — confirmar números do headroom SN1987A e o status atual. **Prioridade 4.**
+5. **`def prove_void_floor_protocol` (V11) e o canal κ v98** (buscar `rhat_cal`, `sigma`, `L5`, `frozen_kappa_hash`) — estado numérico do único FALSIFIED alcançável hoje e do κ. **Prioridade 5.**
+
+---
+
+## 6. Veredito provisório e próximos cálculos locais
+
+**Veredito provisório (não move gate; NOT_FALSIFIED ≠ CONFIRMED).** Sobrevivem como rotas honestas: **NMC‑Shapiro** (única com ponte + poder pré‑registrado, ~21σ em 2030–2035; N=0 hoje), **m2/JUNO** (5σ alcançável ~2031 — **contra** a TGL; inclusão obrigatória por simetria de seleção), **piso via κ‑CMB** (único falsificável com dados atuais; poder a computar). **Eco ringdown não sobrevive como rota de 5σ hoje**: falta a ponte (τ_eco INPUT; template), ε_tpl não medido, e as escalas 790×/212×/6,7e4 são ideais condicionais; a rota GW correta a aguardar é **ringdown‑dephasing** (Consulta 1). Relógios: inviável (resultado, não lacuna). MIMO perde a base (173 hashes ≠ eventos); KIMI sobrevive com estatuto corrigido; DEEPSEEK sobrevive com duas correções (Bonferroni; escopo do H0).
+
+**Próximos cálculos locais (sem tocar fonte/gate):**
+1. Tabela evento×arquivos: N de eventos ancorados H1/L1 vs arquivos de strain (fecha a correção MIMO).
+2. ε_tpl: covariância do erro de template por injeção‑recuperação na mesma população ⇒ σ_teto = A/ε_tpl.
+3. Projeção de poder κ‑CMB (após Consulta 3): variância faltante → profundidade de survey equivalente.
+4. Sensibilidade do eco **só após a ponte**: template family com τ_eco varrido, amplitude √β fixa vs livre; trials por observável; então recalcular N_req.
+5. U3: estender as 4/4 sobreposições a fit com H0 ("sem eco") vs rival (com ponte), trials e blinding — antes disso, permanece consistência local.
+6. Recomputar e republicar as três escalas (4×, 212×, 790×) com as hipóteses listadas ao lado de cada número; proibir transporte de σ entre estimadores.
+
+**Pendências externas (ações não disponíveis nesta etapa):** as cinco consultas ao original; a medida de ε_tpl; o fit de U3. Declaro não ter executado nenhuma delas.

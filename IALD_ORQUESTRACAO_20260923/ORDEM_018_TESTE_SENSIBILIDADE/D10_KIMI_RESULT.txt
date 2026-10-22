@@ -1,0 +1,119 @@
+# PARECER CRÍTICO INDEPENDENTE — ORDEM_018 / D10 · CMB–BAO acústico
+
+**Papel:** revisão estatística independente (o item "Kimi" da divisão preparada — [INPUT] do contrato, não execução).
+**Base lida:** o contrato D10 verbatim (SHA-256 `79f230b6…` [DECLARADO pelo pacote]), o excerto verificado `12_nivel2_frozen_e_verossimilhanca.py` (linhas 141–256) e o excerto verificado `12_nivel2_frozen.json` (linhas 1–49), mais os trechos canônicos de `um.py` carregados nesta chamada. Os ficheiros históricos `C:/IALD/Artigo/...` **não** foram lidos além desses dois excertos; nada aqui alega tê-los inspecionado por inteiro. **Nenhum fit foi executado, nenhum número novo é declarado, nenhum resultado observacional é afirmado.** Estatutos marcados por item. `NOT_FALSIFIED ≠ CONFIRMED` vale em toda a linha.
+
+---
+
+## 0. Achado central (o teste fonte-específico, respondido primeiro porque determina o resto)
+
+**[DERIVED — condicional à cobertura de suportes e ao determinismo do executor; verificável pela correção C1]**
+
+A variante histórica **S** envia ao CAMB, e **somente** (lido no excerto, [REAL — leitura]):
+
+```
+nnu       = NEFF_SM + DNDB·β          (DNDB = 9.9296, [DECLARADO no frozen verificado])
+omch2_eff = omch2 + β·(ombh2 + omch2)
+mnu       = 0.06 (fixo); demais parâmetros ΛCDM usuais; perturbações padrão
+```
+
+Seja Θ_S o suporte do `log_post` lido no excerto: β ∈ (−0.05, 0.10), H0 ∈ (55, 85), ω_b ∈ (0.017, 0.028), ω_c ∈ (0.08, 0.17), n_s ∈ (0.90, 1.05), logA ∈ (2.6, 3.4), τ ∈ (0.01, 0.12). O mapa da S para parâmetros CAMB é
+
+Φ(β, θ) = (H0, ω_b, ω_c + β(ω_b+ω_c), n_s, 10⁻¹⁰·e^logA, τ, N_eff = N_SM + 9.9296·β, m_ν = 0.06).
+
+Os observáveis são O = CAMB(Φ(β,θ)) — mesma função do executor que o rival usaria. A imagem Φ(Θ_S) satisfaz, com N_SM = 3.046 (convenção [KNOWN]; **o valor numérico de `NEFF_SM` não aparece no excerto** — instanciação marcada, a confirmar em C1):
+
+- N_eff ∈ 3.046 + 9.9296·(−0.05, 0.10) = **(2.5495, 4.0390)**;
+- ω_c^eff ∈ [0.08 − 0.05·(0.017+0.08), 0.17 + 0.10·(0.028+0.17)] = **[0.07515, 0.1898]**;
+- m_ν = 0.06 (um ponto de qualquer suporte Σm_ν ≥ 0.06);
+- os demais parâmetros varrem os mesmos intervalos nos dois lados.
+
+Todo esse conjunto está **dentro** do domínio do rival ΛCDM+N_eff(+Σm_ν) com suportes padrão. Como o observável é a mesma função do executor nos mesmos parâmetros, vale **deterministicamente, para qualquer dado**:
+
+> **ΛCDM (m_ν=0.06) ⊂ TGL-S ⊂ ΛCDM+N_eff(+Σm_ν)**,
+> portanto **sup_η∈Rival log L ≥ sup_(β,θ) log L_S ≥ sup log L_ΛCDM**.
+
+A primeira desigualdade é o que o teste fonte-específico pede para verificar: **verificada por inclusão estrutural** (cada ponto S *é* um ponto do rival com o mesmo valor de likelihood). A segunda segue de β=0 ∈ S ser exatamente o ΛCDM — coerente com a validação obrigatória lida no frozen ("β=0: variantes S e L coincidem… em loglike a <0.05", [REAL — leitura]).
+
+**Corolários que o contrato precisa absorver:**
+
+**(a) O relatório (iv) degenera para este rival.** T_j = 2[sup log L(TGL fixa) − sup log L(R_j)] ≤ 0 **com certeza** quando R_j = ΛCDM+N_eff. Não existe "evidência contra o rival" neste par; o sinal assinado importa e o contrato já prevê que T_j pode ser negativo — aqui ele é *estruturalmente* não-positivo, não por acidente de dados.
+
+**(b) O 5σ global é inatingível nesta rota com esta implementação.** Com a construção conservadora que o próprio contrato propõe, p_global = max_j p_j, e com um rival que *contém* a família testada, p_j = 1 nesse componente — logo p_global = 1 sempre. **Não é questão de dados nem de estatística Monte Carlo: é geometria da inclusão.** [DERIVED]
+
+**(c) Poder ≤ tamanho nos pontos incluídos — e a distinção pedida.** Seja θ₀ ∈ TGL-S ⊂ Rival e um teste de "rejeitar o rival" com erro tipo I uniformemente controlado em α. Então P_{θ₀}(rejeitar) = erro tipo I ≤ α: **o poder avaliado em pontos TGL incluídos não pode exceder o tamanho do teste**. Isto é *ausência de poder discriminante*, que é coisa distinta de *impossibilidade de rejeição*: rejeição pode ocorrer por (i) falso positivo (tipo I), ou (ii) má calibração (covariância diagonal, prior oculto no "χ²", quantil MCMC lido como p) — e essas falhas **inflam** um falso 5σ. As duas leituras têm consequências opostas e o relatório deve separá-las nominalmente. [DERIVED; [KNOWN] estatística padrão]
+
+**(d) O único contraste bem-posto do par (S, ΛCDM+N_eff) tem a direção invertida.** A S é uma **curva 1-dimensional** no plano (ω_c^eff, N_eff): ΔN_eff = 9.9296·Δω_c^eff/(ω_b+ω_c) ≈ 69.7·Δω_c^eff (com ω_b+ω_c ≈ 0.1424). O teste discriminante real da variante S é **curva vs. plano**: T_lig = 2[sup_plano − sup_curva], calibrado sob a curva (composta). Rejeitar a curva em favor do plano = os dados pedem (N_eff, ω_c) fora da ligação TGL. É o único lugar onde este par de modelos pode morrer — e quem morre é a S, não o rival. Recomendo formalizá-lo como relatório **(iv′)**. [DERIVED]
+
+**(e) Contra ΛCDM puro, a previsão fixa é não-aninhada.** A fatia β=β* e a fatia β=0 são **disjuntas** no espaço CAMB (N_eff 3.046 vs. 3.046+9.9296β* ≈ 3.165), com o mesmo número de parâmetros livres. Δlog L é diretamente comparável, mas **Wilks não se aplica**; a significância exige simulação sob cada hipótese, nos dois sentidos, como o contrato já pede. [DERIVED]
+
+**(f) Contra w0waCDM: genuinamente não-aninhados** (interseção ⊃ ΛCDM, nenhum contém o outro). T_j tem sinal livre; os assintóticos falham perto da interseção; simulação sob grade do rival composto é obrigatória (Algeri–Conrad–van Dyk, já citado pelo contrato). [KNOWN]
+
+**(g) Escopo.** Isto é uma **verificação de identificabilidade condicional sobre a variante S histórica** — não refuta a TGL canônica atual, cuja ponte de perturbações não está nos excertos e **não foi inspecionada**; nada aqui infere que tal derivação inexista no acervo. [DECLARADO pelo pacote; respeitado]
+
+---
+
+## 1. Problemas fatais (ordenados)
+
+**F1 — Inclusão da variante S no rival estendido (o achado central).** Torna (iv) degenerado para ΛCDM+N_eff, impõe p_global = 1 por construção e limita o poder ao tamanho do teste nos pontos TGL incluídos. Correção: C1 + re-enquadramento (iv′); o conjunto de rivais para (iv) deve excluir qualquer modelo que contenha a família testada, ou o relatório deve declarar a degenerescência antes dos dados. [DERIVED]
+
+**F2 — A previsão fixa completa da TGL canônica é [OPEN] e bloqueia a rota fora da re-parametrização S.** O contrato diz corretamente: "Existência de um cálculo de H(z), r_s ou l_A não demonstra implementação completa de TT/TE/EE/lenteamento". Nos excertos, **a única ponte CMB completa lida é a S histórica** (CAMB padrão re-parametrizado) e a L (PPF fenomenológico, que o frozen declara "quase cega" e que o histórico registra como não convergida — [DECLARADO, não reexecutado]). Para a TGL canônica, a ponte de perturbações é [OPEN] neste pacote. **Bloqueio:** sem ela, qualquer likelihood de espectro que não seja a S é nomenclatura, e a rota inteira vale apenas como exercício metodológico sobre a S — assim rotulado, nunca como teste da TGL canônica. **Não invento aqui implementação de perturbações** (proibido pelo pedido). [OPEN]
+
+**F3 — Violações de linhagem presentes no desenho herdado** (lidas no excerto, [REAL — leitura]):
+- `log_post` soma `−0.5·((τ−0.0544)/0.0073)²` **e** usa `use_low_ell_bins=True`. O contrato proíbe combinar lowE com prior em τ derivado do próprio lowE como medidas independentes. Aqui o low-ℓ é TT (não lowEE), logo a dupla contagem é **parcial** — mas a independência não está demonstrada: [OPEN] até quantificação; regra mínima em C4.
+- BAO entra como `−0.5·Σ((bao − DESI[:,2])/DESI[:,3])²`: **covariância diagonal assumida**, sem validação contra mocks nem covariância oficial. Viola a regra do contrato ("não fabricar blocos nulos por conveniência"). E a pendência 12 vs. 13 pontos DESI (D9: 13 medidas em 9 redshifts; frozen N2: 12) permanece [OPEN — reconciliação], como o próprio contrato registra.
+- Priors gaussianos (τ, ω_b BBN) somados ao loglikelihood dentro de um objeto chamado depois de "χ²"/qβ/T_j. O contrato proíbe esconder priors bayesianos em qui-quadrado frequentista — o design herdado faz exatamente isso. F4 trata da consequência.
+- Ponto a favor, registrado: `rd = rdrag` do CAMB da **própria cosmologia** (autoconsistente), e o prior BBN é Cooke 2018 declarado de-circularizado [EXT]. E o D10 histórico de fundo fixo declarou que seu sigma não era tensão medida ([REAL — leitura das âncoras do contrato]).
+
+**F4 — Posterior e likelihood misturados na mesma estatística.** qβ e T_j definidos no contrato são likelihood ratios; o objeto computado no histórico é um **log-posterior**. Calibrar um posterior ratio por simulação é possível (gerar dados, reajustar com os mesmos priors), mas produz a frequência de uma estatística bayesiana — papel distinto, que o contrato já exige separar. **Correção mínima: computar e publicar as duas versões; qβ/T_j somente sobre log L puro; a versão com priors rotulada como posterior ratio calibrado, nunca como p de likelihood.** [DERIVED do excerto + INPUT do contrato]
+
+**F5 — Identificabilidade fraca já registrada no histórico.** O frozen declara, [DECLARADO]: S convergida e **N2_INCAPAZ** (σ(β) > β); L não convergiu; expectativa Fisher da L: σ(β) ~ 0.24 ante β ≈ 0.012. Com σ(β) > β, β não é identificado na escala do sinal: Wilks falha, a calibração no melhor ajuste é condicional (não uniforme), e a cobertura no espaço de nuisance que o contrato exige permanece [OPEN] sem desenho concreto. **Regra de parada associada (P5): se a projeção de poder com a covariância medida confirmar σ(β) > β/2, a rota aborta em UNDERPOWERED declarado antes de abrir sinal — e isso é um resultado, não uma falha de execução.**
+
+**F6 — Quantis de cadeia MCMC não são p — reforço com dentes.** O contrato já o diz; acrescento o mecanismo de viés: os gates de convergência do frozen (aceitação 0.1–0.65, Rhat ≤ 1.02, ESS ≥ 400, [REAL — leitura]) são **seleção**. Réplicas de simulação que falham nesses gates são resultado da cauda; descartá-las silenciosamente enviesa a cauda que se quer medir. Toda simulação de calibração deve rodar **a pipeline inteira, gates incluídos**, e reportar a fração de réplicas não convergidas como dado. E os intervalos "5σ equal-tailed" do histórico são credibilidade, não significância — não reaproveitar (o contrato já manda; eu selo). [DERIVED/INPUT]
+
+**F7 — Aritmética da cauda: conferida, com uma precisão.** [DERIVED — aritmética] p_5σ unilateral = erfc(5/√2)/2 ≈ 2.8665157×10⁻⁷. Com zero excedências em N réplicas independentes, p_u(95%) = 1 − 0.05^(1/N) ≈ 2.995732/N; exigir p_u < p_5σ ⇒ **N ≳ 1.04507×10⁷** — confere com o "N ≥ 10.450.778" do contrato na precisão mostrada. Precisão a acrescentar: esse N garante apenas um *bound* sob independência e modelo de simulação correto; não estima a forma da cauda nem cobre incerteza de modelagem — daí importance sampling / assintóticos validados, cruzando 1–3σ com Monte Carlo comum (o contrato já aponta; eu subscrevo e torno obrigatório em P4).
+
+---
+
+## 2. Correções mínimas testáveis
+
+Cada correção vem com o teste que a verifica. Nenhuma exige abrir sinal cosmológico.
+
+- **C1 — Congelar o mapa de inclusão.** Escrever Φ(β,θ) explicitamente, verificar por código: (i) S(β=0,θ) ≡ CAMB ΛCDM (igualdade de espectros, não só de loglike, estendendo a validação já declarada); (ii) a imagem de Φ sobre o suporte lido está dentro dos suportes declarados do rival (listar os seis intervalos acima contra o manifesto); (iii) o valor numérico de `NEFF_SM` usado (3.046 assumido aqui; **não lido do excerto**). **Teste:** igualdade ponto a ponto de C_ℓ e BAO em uma grade de (β,θ) entre a chamada S e a chamada rival equivalente.
+- **C2 — Separar likelihood de posterior.** qβ, T_j, T_lig computados sobre log L **sem** priors; a versão com priors publicada ao lado, rotulada. **Teste:** os dois números impressos em todo ponto de referência; divergência esperada e reportada.
+- **C3 — DESI com covariância.** Usar a covariância oficial da combinação (ou correlação validada por mocks); documentar a escolha 12/13 pontos contra os arquivos de medição. **Teste:** Δlog L com e sem covariância cruzada em ponto de referência; se desprezível, a justificativa fica registrada — senão, a diagonal é proibida.
+- **C4 — τ sem dupla contagem.** Ou lowEE completo (que traz τ) e nenhum prior em τ, ou prior de fonte demonstradamente independente, com a sobreposição low-ℓ TT ↔ τ quantificada e registrada. **Teste:** likelihood com e sem o prior em τ no bestfit; a diferença entra no manifesto.
+- **C5 — Calibração com a pipeline inteira.** Toda simulação sob cada hipótese refaz ajustes, cortes, **gates de convergência** e seleções; fração de réplicas não convergidas reportada; descarte silencioso proibido. **Teste:** o código de simulação é o mesmo binário do ajuste real, hasheado.
+- **C6 — Rivais finitos e regra de combinação declarados antes.** Conjunto fixado: ΛCDM; w0waCDM; ΛCDM+N_eff+Σm_ν **somente via (iv′)**; curvatura/EDE só por justificativa prévia. p_global = max_j p_j com cobertura validada; a seleção da rota acústica (posterior a análises vistas) registrada como [INPUT], com a significância rotulada "condicional ao protocolo congelado agora" onde a seleção não puder ser simulada.
+- **C7 — Cauda e formato do p.** Z unilateral; intervalo Monte Carlo no p sempre (Clopper–Pearson ou equivalente); zero excedências ⇒ reportar p_u = 1−0.05^(1/N) e o N necessário; **jamais p = 0, jamais quantil de posterior como Z**. IS/assintóticos validados cruzando 1–3σ com MC comum.
+- **C8 — Poder honesto.** Curvas P_TGL(rejeitar R_j) sobre grade/distribuição declarada de θ, **com a inclusão reconhecida**: reportar explicitamente que em pontos TGL-S ⊂ rival o poder não excede o tamanho; e separar, em todo relatório, "sem poder discriminante" de "rejeição por falso positivo ou má calibração".
+
+---
+
+## 3. Protocolo condicionado
+
+Ordem condicional; cada passo tem critério de parada e condição de aborto. **Nada disto foi executado aqui.**
+
+- **P0 — Manifesto congelado (bloqueante).** Fontes, hashes, versões de executor/likelihood, suportes, convenções (C_ℓ vs. D_ℓ, r_s(z*) vs. r_d(z_drag)), o mapa Φ de C1 e o valor de `NEFF_SM`. **Sem manifesto congelado, nenhum ajuste.** O contrato declara que o manifesto ainda não está congelado — este parecer o trata como bloqueio formal. [INPUT respeitado]
+- **P1 — Reprodução e inclusão.** ΛCDM de referência reproduzido; C1 executado; se a inclusão falhar (suportes do rival não cobrem a imagem, ou executor diverge), registrar e **declarar** — a desigualdade de supremos deixa de ser estrutural e vira questão aberta. [OPEN até P1]
+- **P2 — Auditoria da likelihood.** C2–C4 aplicados; tabela de linhagem por medição original (o contrato manda; a pendência D9-13 vs. N2-12 é resolvida **aqui**, pelos arquivos, nunca somando conjuntos).
+- **P3 — Ajustes fixos e livres.** (i) adequação da previsão fixa com β=α_CODATA·√e **computado em runtime** (a casa já o impõe; β nunca literal); (ii) β livre como diagnóstico; (iii) qβ sobre log L puro, calibrado sob TGL fixa. Nenhuma palavra de confirmação; β livre favorecido ≠ previsão confirmada.
+- **P4 — Calibração e cauda.** Simulações sob cada hipótese com pipeline completa (C5); IS/assintóticos validados (C7); **parada técnica:** falha de executor/tolerância ⇒ INCONCLUSIVE_SYSTEMATICS, nunca descarte.
+- **P5 — Poder antes de sinal.** C8; **parada de poder:** se σ(β) projetado/medido > β/2 mesmo em dados ideais, a rota emite UNDERPOWERED e para — sem abrir sinal, sem "estender cadeias para acumular amostras" (o contrato já proíbe; subscrevo).
+- **P6 — 5σ global.** p_global = max_j p_j sobre o conjunto de C6; **parada de inclusão:** se algum rival contém a família testada (F1), (iv) contra ele é abortado e substituído por (iv′), e o relatório diz por escrito que o 5σ global era estruturalmente inatingível naquela rota — o número corrige a frase. **NOT_FALSIFIED ≠ CONFIRMED em qualquer desfecho; o veredito vai ao operador; nenhum gate se move.**
+
+---
+
+## 4. Lacunas deste parecer (declaradas, sem fingir acesso)
+
+1. Não executei fits, simulações nem verificação de hashes; os SHA-256 do pacote são tomados como dados do [INPUT], não recomputados por mim.
+2. Dos ficheiros históricos `C:/IALD/Artigo/...` li **somente** os dois excertos fornecidos e verificados; o restante do acervo (incluindo uma eventual ponte de perturbações canônica) **não foi inspecionado** — nada aqui afirma sua inexistência.
+3. O valor numérico de `NEFF_SM` não consta do excerto (usei 3.046 como convenção [KNOWN], marcado); `DNDB = 9.9296` é [DECLARADO] no frozen verificado; os limites de suporte são [REAL — leitura] do `log_post`.
+4. A cobertura dos suportes do rival sobre a imagem de Φ é condição a verificar em P1; se falhar, o corolário (b) precisa ser re-emitido.
+5. O contrato menciona uma divisão preparada entre bancadas (Kimi/MiMo/DeepSeek/Fermat): registro-a como [INPUT] de coordenação; **não a executo, não a delego, não a agendo** — este texto é apenas o parecer do item de revisão.
+
+## 5. Veredito do parecer
+
+O desenho do contrato é estatisticamente sóbrio e já antecipa a maioria das armadilhas (linhagem única, proibição de somar sigmas, max_j p_j, recusa de quantis MCMC como p, importance sampling, covariâncias oficiais). **Aprovado com correções.** Os problemas fatais não estão no que o contrato escreve, mas no que ele herda: a **inclusão estrutural da variante S histórica no rival ΛCDM+N_eff** (F1), que torna o 5σ global inatingível por construção nessa rota e exige o re-enquadramento (iv′) curva-vs-plano; e a **ponte de perturbações da TGL canônica [OPEN]** (F2), sem a qual a rota testa apenas a re-parametrização S — assim rotulada, ou não roda. F3–F7 são corrigíveis por C1–C8 antes de qualquer desblinding.
+
+*[DERIVED onde a lógica e a aritmética dos excertos bastam; INPUT onde o contrato e o operador falam; DECLARADO onde o pacote afirma sem que eu reexecute; OPEN onde falta inspeção ou prova; KNOWN onde é estatística consolidada. Nenhum resultado observado declarado; nenhum fit executado; nenhuma implementação de perturbações inventada.]*

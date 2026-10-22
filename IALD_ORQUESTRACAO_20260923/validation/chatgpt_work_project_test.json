@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-09-23T16:54:05.499Z",
+  "project_id": "g-p-6804cf9af0cc81918b3bd8915b7579c3",
+  "thread_id": "6ab402ba-7838-83e9-94d5-12c7da627a42",
+  "title": "Preparar prompt TGL IALD",
+  "turns": [
+    {
+      "id": "32e94f4e-3c38-4d0c-bf15-cfc05dce6bd7",
+      "status": "completed",
+      "error": null,
+      "startedAt": 1790182072.176,
+      "completedAt": 1790182132.848637,
+      "durationMs": null,
+      "items": [
+        {
+          "type": "userMessage",
+          "id": "32e94f4e-3c38-4d0c-bf15-cfc05dce6bd7",
+          "content": [
+            {
+              "type": "text",
+              "text": "Luiz autorizou esta nova tarefa de teste no ChatGPT Work do projeto Física para coordenar a integração local IALD. Use as fontes e a memória disponíveis deste projeto. Foram adicionados hoje: 00_LEIA_PRIMEIRO_TGL_v369.md; v369_um.py; v369_um_absoluto_forma_canonica.md; v369_um_absoluto_selo.json; v369_um_absoluto.json; v369_tgl_kernel_proof_manifest.json; v369_um_absoluto_manifest.md; v369_A_PROVA_DA_QG_TGL_arvore.md; v369_DESENHO_DO_FECHAMENTO_QG.md; v369_MEMORIA_DA_LINHAGEM.md; v369_DA_IRMA.md; A_Ponte_Einstein_Cartan_Miguel.pdf e .tex.txt; O_Custo_Geometrico_do_Zero_Absoluto_Haja_Luz.pdf e .tex.txt; ERRATA_20260919_sinal_do_acoplamento_nao_minimo.md. Primeiro, confira quais dessas fontes consegue realmente abrir: ler o índice, a primeira seção da forma canônica, o selo e a errata; citar uma informação verificável de cada um. Não execute um.py, não presuma leitura integral nem memória ilimitada e não faça nova prova/compilação. Em até 800 palavras, entregue: (1) fontes efetivamente consultadas e lacunas; (2) distinção entre TGL como teoria física e IALD como regime operacional, preservando estatutos; (3) um prompt pronto para um executor local avaliar uma fila de tarefas com elegibilidade, orçamento e seleção inspirada nas operações finitas de suporte/pinching do Supercondutor, deixando explícito que a correspondência entre provedores e matrizes é uma adaptação de engenharia, sem benchmark de qualidade ainda. Não altere fontes, configurações ou memórias e não envie nada para terceiros. O objetivo deste teste é validar consulta ao acervo e preparação do prompt. Responda aqui nesta tarefa."
+            }
+          ]
+        },
+        {
+          "type": "agentMessage",
+          "id": "fef3ee3c-af12-5365-97ab-8b281ffd845f",
+          "text": "## 1. Consulta ao acervo\n\nConsegui abrir e consultar diretamente quatro arquivos da v369:\n\n| Fonte | Informação verificável |\n|---|---|\n| :chatgpt-content-reference{index=\"0\"} | Manda distinguir `REAL`, `DERIVED`, `INPUT`, `ONTO` e `OPEN`; registra que `NOT_FALSIFIED` não significa `CONFIRMED`. |\n| :chatgpt-content-reference{index=\"1\"} | A cadeia apresentada vai de \\(\\omega(I)=1\\) à meia-nat, a \\(\\sqrt e\\) e a \\(\\beta_{\\rm TGL}=\\sqrt e\\,\\alpha_{\\rm obs}\\approx0{,}0120313\\). É uma afirmação do artefato; não a recomputei. |\n| :chatgpt-content-reference{index=\"2\"} | Registra `full_static_witness_exists: false` e descreve o veredito com dados públicos como **não refutado na sensibilidade disponível, não confirmado**. Li campos do registro, sem validar a rodada. |\n| :chatgpt-content-reference{index=\"3\"} | Corrige o termo não mínimo para \\(-\\xi R|\\Psi|^2\\), com \\(\\xi=1/6\\), e mantém **aberta** a orientação do sinal na passagem à métrica. |\n\nOs demais anexos estão disponíveis, mas não foram examinados nesta tarefa. Também não localizei, nos textos pesquisados, uma especificação identificável do **Supercondutor**; portanto, o prompt abaixo usa apenas a ideia solicitada de suporte finito e pinching como inspiração. Não executei `um.py`, compilei provas ou verifiquei experimentalmente os vereditos do selo.\n\n## 2. Estatutos\n\n**TGL** designa a teoria física do autor, com construções matemáticas, hipóteses, interpretações e testes que precisam conservar seus respectivos estatutos. **IALD** designa o regime operacional de coerência e reconhecimento recursivo da identidade, conforme o índice. Um escalonador de tarefas inspirado em operações da TGL é uma implementação de engenharia da IALD: seu funcionamento não prova a teoria física nem confirma suas previsões.\n\n## 3. Prompt para o executor local\n\n```text\nAvalie, em modo somente leitura, uma fila finita de tarefas para execução local.\nNão execute tarefas, altere configurações ou contate provedores.\n\nEntradas: lista de tarefas com ID, objetivo, prazo, requisitos de capacidade,\ndependências, sensibilidade dos dados, custo estimado em tokens/dinheiro/tempo\ne critério observável de conclusão; lista de provedores com capacidades,\nlimites e custos conhecidos; orçamento total em cada dimensão. Marque campos\nausentes como DESCONHECIDO, sem inventar valores.\n\n1. Forme o suporte finito: tarefas recebidas e provedores explicitamente\n   cadastrados. Itens fora dele ficam AUSENTES, sem custo atribuído.\n2. Aplique elegibilidade antes de pontuar: requisitos, dependências,\n   disponibilidade, limites de dados e capacidade. Registre a razão de cada\n   exclusão ou suspensão.\n3. Faça um “pinching” operacional: separe opções elegíveis por restrições\n   verificáveis, preservando tarefa, proveniência e razão da decisão. Não use\n   uma pontuação alta para atravessar uma restrição impeditiva.\n4. Entre opções elegíveis, selecione uma atribuição que respeite\n   simultaneamente os orçamentos. Exponha custos estimados, margem restante,\n   critérios de prioridade e empates. Se estimativas forem insuficientes,\n   recomende um teste limitado ou peça o dado faltante.\n5. Produza uma tabela por tarefa: estado (selecionada, adiada, inelegível ou\n   indeterminada), provedor candidato, custo, motivo e próximo dado necessário.\n   Inclua o orçamento agregado e hipóteses utilizadas.\n\nA correspondência “provedores ↔ matrizes” é apenas uma adaptação de engenharia\ninspirada em suporte finito e pinching; não é identidade matemática ou física\ndemonstrada. Ainda não há benchmark de qualidade entre provedores. Não declare\num provedor superior sem medidas comparáveis na mesma classe de tarefas.\n```"
+        }
+      ]
+    }
+  ],
+  "scope": "Teste de acesso às fontes e preparação de prompt; sem transporte desassistido para o painel.",
+  "uploaded_files_count": 16,
+  "ui_verified_date": "2026-09-23"
+}

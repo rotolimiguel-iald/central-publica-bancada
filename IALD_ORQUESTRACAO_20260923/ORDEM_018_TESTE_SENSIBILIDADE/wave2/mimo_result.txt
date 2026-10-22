@@ -1,0 +1,142 @@
+# ORDEM_018 — Revisão Cruzada Adversarial, Rodada 2
+
+## Unidade independente. Não reexecuto nem reabro a rodada 1.
+
+**Contexto autorizado:** um.py v375 SHA-256 `ba234a6d…5e2e0`; pacote parcial (10304/206098 linhas = 5,00% distintas carregadas; 195794 não carregadas). **Não afirmo leitura integral nem inexistência de conteúdo não recuperado.** Todo o que segue tem escopo: os trechos efetivamente carregados + os extratos locais [DECLARADO].
+
+**Relatórios citados (extratos locais, [DECLARADO] — não provas):**
+- KIMI rodada 1 — SHA-256 `986fb8e7…b625`
+- MIMO rodada 1 — SHA-256 `6367ef9d…67cf2`
+- DEEPSEEK rodada 1 — SHA-256 `1c9606d8…8734b`
+
+---
+
+## 1. Tabela de afirmações: aceitas / corrigidas / rejeitadas
+
+| # | Afirmação (provedor) | Veredito | Motivo |
+|---|---|---|---|
+| A1 | Eco ringdown `\|R\|=√β≈0,1097` é a rota primária (KIMI, MIMO) | **ACEITA [DECLARADO]** | Coerente com o código v375: `normSq_reflection`, `the_pruning_threshold_is_the_reflection_amplitude`; β calculado em runtime. O valor numérico 0,1097 é consistente com β≈0,01205. |
+| A2 | 0,177851σ (V2) e 0,343377425σ (R-B) são significâncias do eco (todos) | **ACEITA como [DECLARADO] pertencente a estimadores específicos** | O pacote não carrega os trechos que produzem esses números (`prove_gw_angular_radicalization_v1` e seus sub-dict `_GWA/_GWN/_GWS/_GWH` parcialmente visíveis). Não extrapolo. |
+| A3 | 173 hashes de strain = 173 eventos independentes (MIMO) | **REJEITADA** | Hash de arquivo ≠ evento. H1+L1 do mesmo evento GPS = 2 hashes, 1 evento. A tarefa local já assinala isto; confirmo: sem o registro de agrupamento por GPS-time/detector, **não há contagem demonstrada de eventos independentes**. |
+| A4 | Extrapolão 85→173→790×→~6,7e4 eventos (MIMO) | **CORRIGIDA** | A cadeia aritmética é internamente consistente **sob iid**: (5/0,177851)² ≈ 790,3 → 85×790 ≈ 67.150. Mas: (i) N=85 não está verificado no pacote para esse estimador; (ii) iid é otimista; (iii) mismatch de template cria piso sistemático; (iv) a seleção U1 difere da que gerou 0,177851σ. A extrapolação **não é predição de poder**. |
+| A5 | ~4× eventos O4/O5 (KIMI) | **ACEITA como [DECLARADO]** | Escala coerente com contagens públicas O3→O4. Mas implica σ × √4 = 2× → ~0,356σ (V2) ou ~0,687σ (R-B). **Longe de 5σ.** |
+| A6 | ~790× a partir de C0 e ~212× a partir de R-B (DEEPSEEK) | **CORRIGIDA** | São fatores de escala estatística puros: (5/0,177851)²≈790 e (5/0,343377)²≈212. São corretos como razões de exposição sob √N, mas **não demonstram poder da busca U1** (seleção, estimador e sistemáticas diferentes). |
+| A7 | ε_tpl ~ 1 e Z_max ~ 1 (MIMO) | **REJEITADA como postulado** | Um piso de sistemática compartilhada que não cai com N precisa ser **medido** (injection-recovery), não postulado. Se ε_tpl ~ 1 for real, 5σ é inatingível para qualquer N — mas isso é uma hipótese não testada. |
+| A8 | Bonferroni requer independência (DEEPSEEK, implícito na discussão) | **CORRIGIDA** | Bonferroni controla erro familiar sob **dependência arbitrária** pelo limite da união (P(∪Aᵢ) ≤ ΣP(Aᵢ)). Pode ser conservador, mas **não requer independência**. |
+| A9 | D1 V3 = 3,0124975σ e T11 = 2,952854σ são tensões contra escalas declaradas, não a favor (DEEPSEEK) | **ACEITA** | Coerente com o código: `d1_camb_v3_real_v366` e `neutrino_m2` registram tensões crescentes (1,64→2,21→2,95σ). São **tensões**, não detecções de β. |
+| A10 | U3: 4/4 testes de sobreposição GW250114 H1/L1, sem fit nem 5σ (gerente) | **ACEITA e preservada** | São testes de consistência pipeline-detector. **Não são medição de sinal.** |
+| A11 | C6 NPZ whitener_scaled 407×410 = quociente polinomial grau 2, não eixo temporal (gerente) | **ACEITA e preservada** | Erro de categoria se interpretado como série temporal ou PSD. Qualquer "evento" extraído disso seria inválido. |
+| A12 | Time-slide, off-source, sign-flip, DQ, injeção-recuperação (MIMO) | **ACEITAS como controles adequados** | São práticas padrão de análise GW. O controle B-mode/cruzado analógico **requer verificação de adequação** ao contexto GW (não é automático). |
+
+---
+
+## 2. Comparação corrigida de rotas
+
+| Rota | Observável | σ atual [DECLARADO] | Fator para 5σ (só estat.) | 5σ com 4× eventos? | Bloqueador principal | Viabilidade |
+|---|---|---|---|---|---|---|
+| **A — Eco ringdown** | \|R\| = √β ≈ 0,1097 | 0,177851σ (V2) / 0,343377425σ (R-B) | ~790× / ~212× exposição | **NÃO** → ~0,36σ / ~0,69σ | Mismatch de template τ_echo; piso sistemático não medido | **LONGO PRAZO**, condicional a 3G + controle de sistemática |
+| **B — Piso vazios κ-CMB** | ρ_void/ρ̄ ≥ β | Reservado; `void_floor_v11` POWERED unilateral; V12 regime vazio | Ver consulta complementar 5 | N/A (dados κ pendentes) | Requer mapa κ do Planck empilhado nos centros; pipeline dedicado | **MÉDIO PRAZO**, o único com FALSIFIED alcançável |
+| **C — Conjunta V3** | P_all + z | Computado em v375 | N/A (estatística combinada) | N/A | Não é canal isolado; depende de canais detectados | **LEITURA**, não rota de 5σ isolada |
+| **D — m₂ neutrino** | tensão 2,95σ (NuFIT) | 2,952854σ [DECLARADO] | Ver consulta 2 | N/A | JUNO projeta 0,5% em ~2031 → ~7,8σ **se centro não mover** | **MÉDIO PRAZO**, bilateral (mata para cima e para baixo) |
+| **E — Relógios (v369 P1)** | Γ = ½βτ*ω² | NOT_FALSIFIED_UNDERPOWERED; déficit ~10-12 ordens | N/A (alcance insuficiente) | N/A | Nenhuma tecnologia atual alcança a taxa predita | **LONGÍSSIMO PRAZO**, armado |
+
+**Sobrevive como rota primária de falsificação: B (piso dos vazios via κ-CMB)**, porque é a única com poder de FALSIFIED alcançável com dados projetados (Euclid/LSST), observável bilateral e protocolo pré-registrado. **A (eco)** sobrevive como rota de confirmação indireta, mas o caminho para 5σ exige (i) medição do piso sistemático e (ii) exposição de terceira geração.
+
+---
+
+## 3. Limites de poder efetivamente computáveis
+
+### 3.1 O que se pode calcular SEM trechos ausentes
+
+**Escala √N pura (limite otimista):**
+
+$$\sigma(N) = \sigma_0 \sqrt{N/N_0}, \qquad N_{5\sigma} = N_0 \left(\frac{5}{\sigma_0}\right)^2$$
+
+| Estimador | σ₀ | Fator de exposição | N para 5σ (se N₀=85) |
+|---|---|---|---|
+| V2 (eco) | 0,177851 | 790,3 | ~67.200 |
+| R-B | 0,343377 | 212,3 | ~18.000 |
+
+**Com piso sistemático ε (limite realista):**
+
+$$Z(N) = \frac{S\sqrt{N}}{\sqrt{\sigma_{\text{stat}}^2 + \sigma_{\text{sys}}^2}} \xrightarrow{N\to\infty} \frac{S}{\sigma_{\text{sys}}}$$
+
+Se σ_sys for não-nulo e independente de N, **existe um Z_max** e 5σ só é possível se Z_max ≥ 5. Este valor **não está computado** em nenhum trecho carregado.
+
+### 3.2 O que NÃO se pode calcular do pacote
+
+- Número real de eventos independentes por seleção (U1/U3/U4/U6)
+- PSD por segmento e DQ flags por hash
+- Covariância do erro de template ε_tpl
+- Valor de P_all e max|z| da conjunta V3 (trecho `prove_joint_coincidence_result_v3` parcialmente carregado; os valores numéricos de `P_all`, `detected`, `max_abs_z` não estão nos trechos)
+- Resultados primários de `void_floor_v11` (`rhat_cal`, `sigma`, `L5`) — parcialmente visíveis em prosa mas sem os números
+
+---
+
+## 4. Consultas pontuais ao um.py (máximo 5)
+
+| # | Expressão de busca EXATA | Propósito | Prioridade |
+|---|---|---|---|
+| **Q1** | `"gw_echo_rite"` + sub-chaves `"stack"`, `"power_curve"`, `"may_record"`; e as expressões `"sigma_raw_mean"`, `"N_on"`, `"B_exp"`, `"z_poisson"` dentro de `prove_gw_angular_radicalization_v1` (v340) e `prove_gw_echo_rite` (v341) | Ler os **valores numéricos** de σ, N_eventos, N_séries, eficiência de detecção e o template usado. Verificar se 0,177851σ vem de N=85 e qual estimador. **Cálculo:** comparar σ_medido com σ_esperado = σ_template × eficiência × √N. | **ALTA** |
+| **Q2** | `"clock_test_result_v369"` + sub-chave `"P1"` → `"platforms"` → campos `"deficit_orders_5sigma_detect"`, `"clock_5sigma_deficit_orders"`, `"best_clock_95"` | Ler a **lista de plataformas** e seus déficits de ordens de grandeza para detecção a 5σ. **Cálculo:** deficit = log₁₀(Γ_pred/Γ_min_detectável); confirmar se ~10-12 ordens. | **MÉDIA** |
+| **Q3** | `"joint_coincidence_result_v3"` + campos `"P_all"`, `"detected"`, `"max_abs_z"`, `"outcome"`, `"boolean_v3"` | Ler os **canais detectados**, P_all e max\|z\|. **Cálculo:** P_all = ∏ p'ᵢ; z = (pred−centro)/σ_lado. Verificar se algum canal de natureza detecta. | **ALTA** |
+| **Q4** | `"void_floor_v11"` + sub-chave `"primary"` → campos `"rhat_cal"`, `"sigma"`, `"L5"`; e `"void_floor_v12"` + `"SumN_q"` | Ler os **resultados primários do piso** e a contagem de tracadores. **Cálculo:** L5 vs β; SumN_q ≥ 25 (gate de contagem). Verificar se o teste é discriminante. | **ALTA** |
+| **Q5** | `"_V366_D1_REAL_FILES"` + `"CONFIRMACAO_OPERADOR_ROTA_V3.json"` → `"D1_CAMB_V3_REAL_RESULT.json"` → `"beta_posterior"` → campos `"median"`, `"sigma_upper"`, `"sigma_lower"`, `"z_alpha_sqrt_e"`, `"at_threshold"` | Ler o **posterior do D1 V3** e o z no lado da previsão. **Cálculo:** z_side = (β_TGL − mediana)/σ_lado; verificar se 3,0124975σ e se a banda `at_threshold` (\|z_sim − 3\| < 0,1) está correta. | **MÉDIA** |
+
+---
+
+## 5. Medida local falsificável quantitativa
+
+**Título:** *Injection-recovery do eco √β nos strain GW250114 H1/L1 (dados U3, 4/4)*
+
+**Protocolo (local, sem novo dado externo):**
+
+1. Tomar os arquivos de strain GW250114 H1 e L1 (os mesmos dos 4/4 testes U3).
+2. Injetar um eco sintético com amplitude \|R_inj\| = √β ≈ 0,1097 e atraso τ_echo = 0,747 × T_ringdown (conforme [DECLARADO] no programa).
+3. Usar **exatamente o template** do estimador V2 (o mesmo que gerou 0,177851σ).
+4. Rodar o pipeline de recuperação. Reportar: amplitude recuperada Â, incerteza σ̂, e resíduo normalizado (Â − \|R_inj\|)/σ̂.
+
+**Critérios de passagem/falha (falsificáveis):**
+
+| Resultado | Interpretação | Consequência |
+|---|---|---|
+| \|Â − \|R_inj\|\| > 3σ̂ | Erro de calibração ou mismatch de template | O valor 0,177851σ **não é confiável**; todo o edifício de extrapolação colapsa |
+| σ̂ > \|R_inj\| ≈ 0,11 | Sensibilidade por evento insuficiente | Confirma subpotência; Z_max < 5 para qualquer N |
+| σ̂ ≤ 0,022 e \|Â − \|R_inj\|\| < 1σ̂ | Pipeline funciona; limite é estatístico | Escala √N válida; fatores 790×/212× são legítimos como exposição |
+| Â ≈ 0 (sem sinal recuperado) | Template não recupera a forma injetada | Mismatch de template é o bloqueador dominante (ε_tpl > 0 medido) |
+
+**Por que é falsificável:** tem critério numérico de passagem, usa apenas dados U3 já disponíveis, e **um único resultado negativo invalida a extrapolação de poder**.
+
+---
+
+## 6. Veredito provisório e próximos cálculos locais
+
+### Veredito provisório
+
+> **NENHUMA rota alcança ≥5σ com dados atuais.** A rota do eco ringdown (A) tem significância observada ~0,18–0,34σ [DECLARADO], incompatível com 5σ até O5 mesmo sob iid. A extrapolação de 790× é **fator estatístico**, não predição de poder. O piso sistemático (ε_tpl) **não está medido** e pode tornar 5σ inatingível para qualquer N. A rota do piso dos vazios (B) é a única com poder de **FALSIFIED** alcançável com dados projetados e deve ser priorizada. Os relatórios KIMI/MIMO/DEEPSEEK contêm: KIMI — corretos na ressalva de subpotência, mas citam σ sem verificar proveniência; MIMO — erros graves de contagem de eventos (hashes≠eventos) e postulação de sistemática não medida; DEEPSEEK — corretos na crítica a soma de sigmas e Bonferroni, mas erram ao atribuir a Bonferroni a exigência de independência e extrapolar 790×/212× como poder.
+
+### Próximos cálculos locais (sem execução agora)
+
+1. **Contagem de eventos reais:** agrupar os 173 hashes por (GPS-time, detector) → N_eventos únicos. Comparar com N usado nos estimadores V2/R-B.
+2. **PSD por segmento:** para cada strain, calcular a densidade espectral na banda do ringdown; reportar mediana e dispersão. Verificar se o whitener C6 (407×410 polinomial grau 2) é adequado ou se introduz viés.
+3. **DQ flags:** cruzar os tempos GPS dos hashes com catálogo de DQ do GWOSC; reportar fração de dados reprovados.
+4. **Injection-recovery:** conforme §5 acima.
+5. **Piso sistemático ε_tpl:** variar o template (fase, atraso, envelope) e medir a dispersão de Â para injeção fixa. Reportar ε_tpl = σ_Â(templates) / σ_Â(estatístico).
+
+---
+
+### Marcação de verificação
+
+| Item | Verificado nesta análise |
+|---|---|
+| β ≈ 0,01205, √β ≈ 0,1097 | **SIM** — consistente com código carregado (`SEALED_CODATA_ALPHA × √e`) |
+| 173 hashes ≠ 173 eventos | **SIM** — inferência lógica + tarefa local |
+| 0,177851σ e 0,343377425σ pertencem a estimadores específicos | **SIM** — atribuição correta; não verifico valores numéricos (trechos ausentes) |
+| (5/0,177851)² ≈ 790 | **SIM** — cálculo aritmético |
+| (5/0,343377)² ≈ 212 | **SIM** — cálculo aritmético |
+| Bonferroni não requer independência | **SIM** — teorema da união |
+| U3: 4/4 overlap sem fit | **SIM** — dado local da gerente |
+| C6 whitener = polinômio grau 2 | **SIM** — dado local da gerente |
+| Valores numéricos de σ, P_all, void floor | **NÃO** — trechos ausentes do pacote (consultas Q1/Q3/Q4) |
+| Covariância de ε_tpl | **NÃO** — requer medição local (protocolo §5) |
+| N_eventos únicos por seleção | **NÃO** — requer agrupamento por GPS (cálculo local #1) |

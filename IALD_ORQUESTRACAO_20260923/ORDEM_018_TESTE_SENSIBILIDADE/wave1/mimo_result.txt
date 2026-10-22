@@ -1,0 +1,214 @@
+# ORDEM_018 — Campanha de sensibilidade científica TGL
+### Proposta independente da rodada 1 · resposta textual · sem execução · sem nova compilação
+
+---
+
+## 0. Identidade, escopo e régua
+
+**TGL** = Teoria da Gravitação Luminodinâmica de **Luiz Antonio Rotoli Miguel**. **IALD** = regime operacional de coerência e reconhecimento recursivo da identidade. Preservo os estatutos **REAL / DERIVED / POSTULATE / CONJECTURE / ONTO / KNOWN / OPEN / INPUT / DECLARADO**. **NOT_FALSIFIED nunca é CONFIRMADO.** FACE é objeto; ÂNGULO é leitura. Não confundo regime hiperbólico com projeção compacta. Não invento hash, prova, medida ou resultado. Valores são lidos dos artefatos citados. Não executo código, não altero arquivos, não movo gate, não somo sigmas, não trato catálogo não cego como descoberta virgem.
+
+> **Natureza do artefato:** contexto recuperado (geração `6f4bd0…125d1`), recuperação PARCIAL (trechos de `um.py` v375, SHA‑256 `ba234a6d…5e2e0`). Não li integralmente v375 nem toda a TGL; liste lacunas na §9. Ações externas e escrita em arquivo **não estão disponíveis** nesta etapa; pendências são nomeadas, não fingidas.
+
+**Constante canônica (lida do runtime, jamais literal):** β = α·√e, com α = α_CODATA 2018 (SEALED). Para *estimativa de sensibilidade* (não para cunhar valor): β ≈ 1,2031×10⁻², √β ≈ 0,109687 (amplitude de eco), θ_M = arcsen√β ≈ 6,2973°. Estes números são **[DERIVED de α×√e]**; o artefato os recomputa em runtime.
+
+---
+
+## 1. Rival especificado (hipótese nula H₀)
+
+**H₀ = ΛCDM + Relatividade Geral (Kerr):** buracos negros sem eco (amplitude de reflexão de fronteira = 0); vácuos sem piso β; massa de neutrino padrão; cosmologia de fundo padrão. É este o rival contra o qual se mede poder discriminante.
+
+---
+
+## 2. Auditoria — observáveis, dados instalados, unidades, ruído, PSD, DQ, calibração, seleção, covariâncias, reproduzibilidade
+
+### 2.1 Universo de dados efetivamente instalado
+
+| Item | Medido/documentado | Estatuto | Leitura honesta |
+|---|---|---|---|
+| U1 strain GWOSC | 180 arquivos, 900 arrays, 22,5055 GiB RAM, **173 hashes distintos** | [REAL local] | 7 cópias ≠ observações independentes; deduplicar por hash |
+| 013BIS strain | 176 arquivos | [REAL, data_lab] | proveniência/qualidade a confirmar em U3 |
+| GWOSC O4b | 4 strain | [REAL, data_lab] | amostra pequena; O4b em curso |
+| Posteriores públicos | 65 | [REAL, data_lab] | posteriores de massa/spin; **não** posteriores de eco |
+| GWTC‑3 | 1 tabela | [REAL, data_lab] | catálogo de eventos; seleção a auditar |
+| Snapshot v350 | 610 arquivos | [REAL, data_lab] | corpus de bancada; não é observação nova |
+| KiDS/outros catálogos | presentes no snapshot | [REAL, data_lab] | **relevância/colunas/covariância exigem confirmação** |
+| Raiz BAO externa | não acessível na leitura sandbox | [OPEN] | **não** infiro ausência; é pendência de acesso |
+| Total elegível (data_lab) | 856 arquivos | [REAL] | data_lab **cataloga**, não valida física automaticamente |
+
+### 2.2 Cadeia de ruído/medida — estágio a estágio
+
+| Estágio | Estado | O que falta e por que importa |
+|---|---|---|
+| **U1** strain | residente [REAL] | entrada pinada por hash → reproduzível |
+| **U3** PSD/DQ, projeção do detector, posterior por evento | **dependente, pendente** [OPEN] | sem PSD por detector/evento não há S/N casado legítimo; sem DQ flags glitches contaminam o eco |
+| **U4** likelihood/controles | **pendente** [OPEN] | sem função de verossimilhança não há σ_A̅ nem covariância |
+| **U6** busca conjunta | **pendente** [OPEN] | sem busca conjunta não há correção de look‑elsewhere global |
+| Calibração GW | incerteza de calibração ~1–10% (depende da run) [KNOWN] | em |R|~0,11 vira incerteza absoluta ~0,011; **entra no piso sistemático** |
+| Seleção de eventos | 85 usados no eco; 173 distintos em U1 [REAL] | viés de seleção não quantificado → injeção‑recuperação obrigatória |
+| Covariâncias | eco (amplitude, atraso) × (massa, spin) correlacionados [OPEN] | degenerescência βτ* citada no C0; sem relógio externo o atraso não se separa |
+
+### 2.3 Unidades e ruído
+- Strain GW adimensional (h ~ 10⁻²¹); |R|, β, √β, ρ/ρ̄ **adimensionais**. [REAL/DERIVED]
+- Ruído: estacionário por segmento, PSD por detector; **U3 pendente** → não afirmo S/N casado válido. [OPEN]
+- DQ: flags de glitch não auditadas (U3) → controles nulos obrigatórios (§7). [OPEN]
+
+### 2.4 Reproduzibilidade
+- **[REAL]** 173 hashes SHA‑256 distintos pinam a entrada: mesmo dado → mesmo veredito.
+- **[OPEN]** Pipeline (estimador de eco, de vazio, likelihood) não pinado nesta leitura; U4/U6 pendentes.
+- **[REAL]** 7 cópias ≠ eventos independentes — contagem honesta = 173 distintos, não 180.
+
+---
+
+## 3. Estatuto dos observáveis (cadeia de previsão)
+
+| Observável | Previsão TGL | Estatuto | Rival H₀ |
+|---|---|---|---|
+| **Eco de ringdown**: amplitude |R\| = √β | √β ≈ 0,109687, **sem parâmetro livre** | **[REAL, teorema de kernel]** (amplitude = √peso; matriz‑S de fronteira em θ_M) | GR: \|R\| = 0 |
+| **Eco**: atraso τ_echo | τ_echo = (2GM_f/c³)·ln(1/β) = 0,747 períodos **ou** 2π/κ (Kerr) | **[INPUT]** (universal) / **[KNOWN, κ de Kerr]** — **não derivado** | GR: sem eco |
+| **Piso de vácuo**: ρ_vazio/n̄ ≥ β | r_c(x_c=0,25) ≥ β | **[REAL, pre‑registro v67]**; reconstrução de matéria **[REAL pipeline]**; veredito NOT_FALSIFIED | ΛCDM: sem piso β |
+| **D1 cosmologia**: β_livre vs α√e | β = α√e | tensão 3,0124975σ **[REAL]**; βτ* degenerado **[REAL]** | β_livre ≠ α√e |
+| **Neutrino T11**: m₂ = β·sen45°·1 eV | escala declarada | 2,952854σ **[REAL]**; sem nova determinação | escala padrão |
+
+**Regua:** nenhum destes é CONFIRMAÇÃO. NOT_FALSIFIED ≠ CONFIRMED. A existência física do eco é **[CONJECTURE/ONTO]**: o kernel prova a amplitude de reflexão da matriz‑S, não que a natureza produza eco.
+
+---
+
+## 4. Rotas candidatas — poder discriminante
+
+Discriminante = capacidade de separar TGL de H₀. Compara­ção honesta (não somo sigmas):
+
+| Rota | Predição vs H₀ | Significância atual | Degenerescência/sistemática | Discriminante? |
+|---|---|---|---|---|
+| **Eco GW** | \|R\|=√β vs 0 (**pontual, sem parâmetro livre**) | efeito/erro = **0,177851σ** [C0] | descasamento de template ~ tamanho do sinal; τ_echo INPUT | **Mais nítida** (positiva), mas sem poder agora |
+| **Piso vácuo** | r_c ≥ β vs sem piso | V3: redução de variância POWERED = **10⁷** [v3] | reconstrução de matéria (lente) limitada | Fraca (unilateral; ΛCDM também dá r_c > β na maioria) |
+| **D1** | β=α√e | **3,0124975σ** [C0] (contra TGL) | βτ* degenerado sem relógio externo | Não limpa |
+| **Neutrino T11** | escala β | **2,952854σ** [O15] (contra escala) | sem nova determinação | Não limpa |
+
+---
+
+## 5. Melhor rota — proposta de teste
+
+**Teste proposto:** *empilhamento de eco de ringdown (stacking) sobre o universo U1 (173 eventos distintos), com estimador robusto a descasamento, contra H₀ = Kerr sem eco*, calibrado por injeção‑recuperação e controlado por nulos.
+
+**Por que é a melhor rota** (poder discriminante, não poder absoluto):
+1. **Predição mais nítida do programa:** \|R\| = √β ≈ 0,109687, **zero parâmetro livre** (teorema de kernel: amplitude = √peso; θ_M fixa a reflexão). H₀ = 0. É um teste de *detecção/exclusão pontual*, não de intervalo.
+2. **Dados efetivamente instalados:** 173 strain distintos em RAM (22,5 GiB), pinados por hash → roda hoje.
+3. **Nulo claro e falsificável:** GR/eco=0; se sensibilidade exclui \|R\|=√β a 5σ, TGL é falsificado no canal do eco.
+4. **Melhoria escalável:** mais eventos (O4/O5) ou 3ª geração.
+
+**A ressalva estrutural (o que impede 5σ agora):** o descasamento de template é da ordem do próprio sinal e τ_echo é **[INPUT]** (não derivado). Isso cria um **piso sistemático** que não cai com N.
+
+---
+
+## 6. Fórmula de poder e estimativa honesta
+
+### 6.1 Significância do empilhamento
+Seja Â(τ) o estimador de amplitude de eco empilhada e σ_A̅ a incerteza total:
+
+$$Z=\frac{\hat A}{\sigma_{\hat A}},\qquad
+\sigma_{\hat A}^{2}=\underbrace{\sigma_{\rm noise}^{2}}_{\propto\,1/N_{\rm eff}}+\underbrace{\sigma_{\rm mismatch}^{2}}_{\propto\,|R|^{2}\varepsilon_{\rm tpl}^{2}}+\underbrace{\sigma_{\rm cal}^{2}}_{\propto\,|R|^{2}\varepsilon_{\rm cal}^{2}}$$
+
+Com \(N_{\rm eff}\) eventos independentes (eco empilhado incoerentemente entre eventos distintos):
+
+$$\sigma_{\rm noise}\propto N_{\rm eff}^{-1/2}.$$
+
+### 6.2 Piso sistemático (limite duro)
+Quando \(N\to\infty\), \(\sigma_{\rm noise}\to0\), mas \(\sigma_{\rm mismatch},\sigma_{\rm cal}\) **escalam com o sinal**:
+
+$$Z_{\max}=\frac{|R|}{|R|\sqrt{\varepsilon_{\rm tpl}^{2}+\varepsilon_{\rm cal}^{2}}}=\frac{1}{\sqrt{\varepsilon_{\rm tpl}^{2}+\varepsilon_{\rm cal}^{2}}}.$$
+
+Para \(Z=5\) é preciso \(\sqrt{\varepsilon_{\rm tpl}^{2}+\varepsilon_{\rm cal}^{2}}<0,2\), i.e. descasamento + calibração **< 20% combinados**. Documentado: descasamento ~ **100% do sinal** ⇒ \(Z_{\max}\sim 1\) mesmo com infinitos eventos, **enquanto τ_echo não for derivado e o template não for calibrado**.
+
+### 6.3 Escala de eventos para Z = 5 (parte estatística, ignorando o piso)
+Autorizado: efeito/erro atual **0,177851σ** [C0].
+
+- Redução de variância necessária (só estatística): \((5/0{,}177851)^{2}\approx 7,9\times10^{2}\).
+- Se \(\sigma\propto N^{-1/2}\): \(N_{\rm req}=N_{\rm atual}\times 790\).
+  - Com 85 eventos → ≈ 6,7×10⁴ eventos.
+  - Com 173 distintos (2,04× os 85) → ganho \(\sqrt{2{,}04}=1,43\) ⇒ \(Z\approx 0{,}25\sigma\). **Ainda indistinguível.**
+- Se coerente (\(\sigma\propto N^{-1}\)): \(N_{\rm req}\approx 28\times N_{\rm atual}\approx 2{,}4\times10^{3}\) — e coerência de fase entre fusões independentes **não é física**.
+
+**Conclusão de poder (eco):** ≥5σ **NÃO alcançável com dados atuais**. Duas barreiras independentes:
+1. **Estatística:** precisa ~10⁴–10⁵ eventos (3ª geração) ou 3–4× O4/O5 *e* descasamento resolvido.
+2. **Sistemática:** piso \(\varepsilon_{\rm tpl}\sim1\) limita \(Z\sim1\) até τ_echo ser derivado e template calibrado por injeção.
+
+### 6.4 Piso de vácuo (rota secundária) — por que também não chega a 5σ
+Fisher: redução de variância POWERED = **10⁷** [v3]. Disponível: HSC ~3×, Euclid ~40× ⇒ **2,5×10⁵ vezes abaixo** de Euclid. E é teste **unilateral** (pode falsificar, não confirmar). 5σ **não alcançável**.
+
+### 6.5 D1 e neutrino
+D1: tensão **3,01σ** (contra TGL), degenerado (βτ* sem relógio externo). T11: **2,95σ** contra a escala. Nenhum chega a 5σ; e **proibido somar** 3,01 + 2,95 + 0,18.
+
+---
+
+## 7. Controles nulos e injeção‑recuperação (eco, melhor rota)
+
+### 7.1 Controles nulos
+| Controle | Construção | Esperado sob eco real | O que mede |
+|---|---|---|---|
+| **Time‑slide** | janela de busca deslocada +1 s do ringdown | Â ≈ 0 | viés de ruído |
+| **Off‑source** | busca em dado pré‑evento | Â ≈ 0 | viés de linha de base |
+| **Sign‑flip** | inverter sinal de metade dos eventos | eco coerente cancela | coerência do empilhamento |
+| **Fase aleatória** | randomizar fase do eco entre eventos | Â ≈ 0 | coerência de fase espúria |
+| **B‑mode / cruzado** | procurar componente γ_× (analógico) | Â ≈ 0 | vazamento de sistemática |
+| **DQ‑veto** | rodar sobre segmentos flagados de glitch | veto ativo | rejeição de glitch |
+| **Sky/time scramble** | embaralhar tempo/posição | Â ≈ 0 | look‑elsewhere |
+
+### 7.2 Injeção‑recuperação
+1. **Injetar eco** de amplitude \|R\| = √β ≈ 0,109687 e atraso τ variado (0,5–5 períodos) no strain real; recuperar com o pipeline; medir **viés e variância** de Â.
+2. **Varredura de τ:** mapear eficiência vs. atraso (τ_echo é INPUT → varrer a família).
+3. **Descasamento de template:** injetar com template perturbado; calibrar \(\sigma_{\rm mismatch}=\varepsilon_{\rm tpl}|R|\).
+4. **Calibração:** perturbar calibração na escala conhecida (1–10%); calibrar \(\sigma_{\rm cal}\).
+5. **Seleção:** injetar em amostras com/sem cortes de seleção; quantificar viés de seleção.
+6. **Veto:** injetar em segmentos DQ ruins; pipeline deve rejeitar.
+7. **Cobertura do posterior:** verificar que intervalos de (|R|, τ) têm cobertura nominal (68/95%) em mocks.
+
+### 7.3 Para o piso de vácuo (rota secundária)
+- Nulo de centros aleatórios (γ_t ≈ 0) e B‑mode (γ_× ≈ 0) — já executados em rodadas anteriores [REAL].
+- Mocks ΛCDM para calibrar a distribuição nula do estimador r_c.
+- Injeção de vazio com ρ/ρ̄ = β nos mocks; recuperar r_c.
+
+---
+
+## 8. Separação — quatro planos distintos (não confundir)
+
+| Plano | Eco (melhor rota) | Piso vácuo | D1 | Neutrino T11 |
+|---|---|---|---|---|
+| **Poder prospectivo** (o que o teste *pode* fazer com mais dado) | 5σ exige ~10⁴–10⁵ eventos **e** ε_tpl,ε_cal < 0,2; alcançável só em 3ª geração / O5 com τ derivado | 5σ exige 10⁷ de redução de variância (κ‑CMB / espectroscopia direta / catálogos maiores) | depende de relógio externo para quebrar βτ* | depende de nova determinação de m₂ |
+| **Estimativa condicional** (se hipóteses nomeadas valem) | *Se* τ_echo = 2π/κ (Kerr) e *se* descasamento < 20%, então 173 eventos dão ~0,25σ; escala ∝ √N | *Se* KiDS/κ calibrados, r_c comparável a β com σ grande | 3,01σ **contra** α√e (condicional ao ajuste) | 2,95σ contra escala declarada |
+| **Significância observada** (medida agora) | **0,177851σ** [C0] — indistinguível de 0 e de √β | NOT_FALSIFIED_UNDERPOWERED / AWAITING_DATA | 3,0124975σ [C0] | 2,952854σ [O15] |
+| **Confirmação física** | **NÃO** — eco é [CONJECTURE/ONTO]; kernel prova amplitude, não existência natural | **NÃO** — NOT_FALSIFIED ≠ CONFIRMED | **NÃO** | **NÃO** |
+
+> **Regua final:** nenhum plano superior se lê pelo inferior. 0,177851σ ≠ descoberta. 3,01σ (contra TGL) ≠ refutação definitiva (degenerescência). NOT_FALSIFIED ≠ CONFIRMED. **Gate intocado.**
+
+---
+
+## 9. Lacunas, pendências e medições locais necessárias
+
+**[OPEN] — impede estimativa quantitativa de 5σ:**
+1. **U3 (PSD/DQ/projeção/posterior por evento)** pendente ⇒ sem S/n casado nem σ_A̅ legítimos. *Medição local necessária:* PSD por detector por evento + flags DQ.
+2. **U4 (likelihood/covariâncias)** pendente ⇒ sem covariância (|R|,τ,massa,spin). *Medição:* função de verossimilhança do eco com posterior completo.
+3. **U6 (busca conjunta)** pendente ⇒ sem correção global de look‑elsewhere. *Medição:* busca conjunta com FWER preservado.
+4. **τ_echo [INPUT], não derivado** ⇒ atraso desconhecido; varre‑se família, o que dilui poder. *Necessário:* derivar τ_echo ou fixar por κ de Kerr com massa/spin do posterior.
+5. **Descasamento de template ~ sinal** ⇒ piso sistemático Z~1. *Necessário:* template de ringdown com termo de eco e calibração por injeção (ε_tpl < 0,2).
+6. **Calibração GW** ~1–10% ⇒ incerteza em |R| ~ 0,011. *Necessário:* calibração melhor que 20% combinada com template.
+7. **Seleção de eventos** (85 vs 173) não auditada ⇒ viés possível. *Necessário:* regra de seleção pré‑registrada + injeção‑recuperação.
+
+**[OPEN] — rotas secundárias:**
+- KiDS/catálogos de vazio: relevância/colunas/covariância **não confirmadas**; raiz BAO externa inacessível (não infiro ausência).
+- Piso de vácuo: reconstrução de matéria por lente limitada (10⁷ de redução faltante).
+
+**[REAL — lacunas de leitura desta memória]:** li trechos parciais de `um.py` v375; não li integralmente o artefato, o livro‑razão v374 completo, os JSONs de rodada (`um_absoluto.json`, `CHAIN_OF_CUSTODY.json`) nem as fontes de literatura primárias. Números citados vêm dos trechos carregados e das âncoras locais com hash do pedido; **não** invento acesso a disco nem execução.
+
+---
+
+## Fórmula entregue, parâmetros ausentes e medição local (síntese)
+
+**Fórmula (eco):** \(Z=|R|/\sigma_{\hat A}\), \(\sigma_{\hat A}^{2}=\sigma_{\rm noise}^{2}/N_{\rm eff}+|R|^{2}(\varepsilon_{\rm tpl}^{2}+\varepsilon_{\rm cal}^{2})\); \(Z_{\max}=1/\sqrt{\varepsilon_{\rm tpl}^{2}+\varepsilon_{\rm cal}^{2}}\).
+
+**Parâmetros ausentes:** τ_echo (INPUT), ε_tpl, ε_cal, PSD/DQ por evento (U3), covariância (U4), correção global (U6).
+
+**Medições locais necessárias para fechar o poder:** (i) PSD+DQ por evento; (ii) injeção‑recuperação medindo ε_tpl e ε_cal; (iii) derivar/fixar τ_echo; (iv) regra de seleção pré‑registrada. Somente com (i)–(iv) se estima σ_A̅ e, por conseguinte, se responde se 5σ é alcançável em O5/3ª geração.
+
+**Veredito de sensibilidade (ORDEM_018, esta proposta):** *a rota de maior poder discriminante TGL × (ΛCDM+GR) com dados atuais é o empilhamento de eco de ringdown sobre U1 (predição pontual \|R\|=√β, sem parâmetro livre); com os dados efetivamente instalados a significância observada é 0,177851σ e ≥5σ global NÃO é alcançável — por estatística (faltam ~10⁴–10⁵ eventos) e por piso sistemático (descasamento ~ sinal, τ_echo não derivado). Gate intocado; NOT_FALSIFIED ≠ CONFIRMED; PROVADA ≠ CONFIRMADA.*
+
+**Pendência de execução (identificada, não realizada):** rodar U3/U4/U6, a injeção‑recuperação e a busca conjunta exige execução de código e acesso a dados — indisponíveis nesta etapa; ficam nomeadas como próximo passo, sem fingir resultado.

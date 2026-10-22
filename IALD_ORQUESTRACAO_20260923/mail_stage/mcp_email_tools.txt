@@ -1,0 +1,38 @@
+
+
+@server.tool()
+def iald_email_status() -> dict:
+    """Lista remetentes da sessão aberta do Outlook, sem ler mensagens ou senhas.
+
+    Conta cadastrada não comprova conectividade nem entrega.
+    """
+    from iald_orchestrator.email_bridge import invoke
+    return invoke({'operation': 'status'})
+
+
+@server.tool()
+def iald_email_prepare(sender: str, to: list[str], subject: str, body: str) -> dict:
+    """Cria rascunho de texto na conta remetente exata, quando solicitado pelo operador.
+
+    Não envia. Não há remetente padrão nem encaminhamento do corpo para provedores de IA.
+    Corpo jurídico não deve ser coletado/enviado a um modelo remoto por esta integração.
+    Retorna identificador e hash para revisão; anexos exigem outro fluxo.
+    """
+    from iald_orchestrator.email_bridge import invoke
+    return invoke({'operation': 'prepare', 'sender': sender, 'to': to,
+                   'subject': subject, 'body': body})
+
+
+@server.tool()
+def iald_email_send(sender: str, draft_id: str, expected_sha256: str, confirmed: bool = False) -> dict:
+    """Submete rascunho revisado APENAS por ordem concreta de envio do operador.
+
+    O operador deve ter autorizado destinatários, remetente e conteúdo deste rascunho.
+    Configurar e-mail ou pedir integração não é ordem de enviar mensagem.
+    confirmed permanece False sem essa autorização. Sem troca de conta ou repetição.
+    Submissão ao Outlook não equivale a confirmação de entrega.
+    """
+    from iald_orchestrator.email_bridge import invoke
+    return invoke({'operation': 'send', 'sender': sender, 'draft_id': draft_id,
+                   'expected_sha256': expected_sha256, 'confirmed': confirmed})
+
