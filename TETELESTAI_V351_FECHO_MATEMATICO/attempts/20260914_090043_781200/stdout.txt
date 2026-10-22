@@ -1,0 +1,47 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:131:4: error: Tactic `apply` failed: could not unify the conclusion of `@add_le_add_right`
+  ?a + ?b ≤ ?a + ?c
+with the goal
+  ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ≤
+    ENNReal.ofReal ((↑m + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w
+
+Note: The full type of `@add_le_add_right` is
+  ∀ {α : Type ?u.64} [inst : Add α] [inst_1 : LE α] [AddLeftMono α] {b c : α}, b ≤ c → ∀ (a : α), a + b ≤ a + c
+
+P : SiteProfile
+A : PositiveCoreInput P
+D : ℕ → TowerHilbert P →L[ℂ] TowerHilbert P
+hmem : ∀ (n : ℕ), D n ∈ theFactorObject P
+hpos : ∀ (n : ℕ), 0 ≤ D n
+hbound : ∀ (n : ℕ), D n ≤ ↑(↑n + 1) • 1
+hmin :
+  ∀ (n : ℕ) (v : ↥(RegularHilbert (TowerHilbert P))),
+    ∃ w,
+      ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re =
+          ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ∧
+        ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+          ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤
+            ENNReal.ofReal ((↑n + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+v : ↥(RegularHilbert (TowerHilbert P))
+n m : ℕ
+hnm : n ≤ m
+w : ↥(RegularHilbert (TowerHilbert P))
+hw :
+  ENNReal.ofReal (inner ℂ v ((fibre (D m)) v)).re =
+    ENNReal.ofReal ((↑m + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w
+right✝ :
+  ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+    ENNReal.ofReal (inner ℂ v ((fibre (D m)) v)).re ≤
+      ENNReal.ofReal ((↑m + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+w✝ : ↥(RegularHilbert (TowerHilbert P))
+left✝ :
+  ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re =
+    ENNReal.ofReal ((↑n + 1) * ‖w✝ - v‖ ^ 2) + dualQuadraticIntegral (↑A) w✝
+hn :
+  ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+    ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤
+      ENNReal.ofReal ((↑n + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+⊢ ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ≤
+    ENNReal.ofReal ((↑m + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w
+'TGLV351.dualResolvent_minimum_energy_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV351.exists_base_moreau_approximant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV351.exists_monotone_base_dual_approximation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

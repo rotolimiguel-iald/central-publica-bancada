@@ -1,0 +1,29 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\A2_012\src\TGLExt\V354FiniteEqualSplit.lean:45:43: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a * (?b * ?c)
+in the target expression
+  ↑a * ↑q * star ↑a = ↑a * star ↑a
+
+P : SiteProfile
+e : PositiveCoreInput P
+v : ↥(regularCoreAlgebra P).toStarSubalgebra
+he : IsStarProjection ↑e
+hene : e ≠ PositiveCoreInput.zero P
+hv : star ↑v * ↑v = ↑e
+hev : ↑e * ↑v = 0
+q : PositiveCoreInput P
+hq : IsStarProjection ↑q
+hpos : 0 < scalarInverseLimitWeight P q
+hfin : scalarInverseLimitWeight P q < ⊤
+hqe : ↑q * ↑e = ↑q
+a : ↥(regularCoreAlgebra P).toStarSubalgebra := v * ⟨↑q, ⋯⟩
+hqs : star ↑q = ↑q
+hqq : ↑q * ↑q = ↑q
+ha2 : star ↑a * ↑a = ↑q
+haq : ↑a * ↑q = ↑a
+hqv : ↑q * ↑v = 0
+hqa : ↑q * ↑a = 0
+r : PositiveCoreInput P := positiveSquare P (star a)
+hrv : ↑r = ↑a * star ↑a
+⊢ ↑a * ↑q * star ↑a = ↑a * star ↑a
+'TGLV350.Regular.scalarTrace_finite_equal_split' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.scalarTrace_finite_split_support' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

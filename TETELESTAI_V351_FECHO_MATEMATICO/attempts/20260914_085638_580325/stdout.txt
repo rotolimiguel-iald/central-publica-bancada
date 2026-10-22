@@ -1,0 +1,34 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:33:13: warning: `ContinuousLinearMap.sub_apply` has been deprecated: Use `sub_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sub_apply` to `sub_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:35:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  RCLike.re (inner ?m.150 ?x ?x)
+in the target expression
+  ‖R v‖ ^ 2 - 2 * RCLike.re (inner ℂ (R v) v) + ‖v‖ ^ 2 + ((inner ℂ (R v) v).re - (inner ℂ (R v) (R v)).re) =
+    (inner ℂ v v).re - (inner ℂ v (R v)).re
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A R : ↥(RegularHilbert H) →L[ℂ] ↥(RegularHilbert H)
+hA : 0 ≤ A
+hlim : ∀ (v : ↥(RegularHilbert H)), Tendsto (fun n => (dualCutResolvent n A) v) atTop (𝓝 (R v))
+v : ↥(RegularHilbert H)
+hf : dualQuadraticIntegral A (R v) ≠ ∞
+he : (dualQuadraticIntegral A (R v)).toReal = (inner ℂ (R v) (v - R v)).re
+hq : dualQuadraticIntegral A (R v) = ENNReal.ofReal (inner ℂ (R v) (v - R v)).re
+hp : 0 ≤ (inner ℂ (R v) (v - R v)).re
+⊢ ‖R v‖ ^ 2 - 2 * RCLike.re (inner ℂ (R v) v) + ‖v‖ ^ 2 + ((inner ℂ (R v) v).re - (inner ℂ (R v) (R v)).re) =
+    (inner ℂ v v).re - (inner ℂ v (R v)).re
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:69:10: error: failed to synthesize
+  DistribSMul ℝ (↥(RegularHilbert (TowerHilbert P)) →L[ℂ] ↥(RegularHilbert (TowerHilbert P)))
+(deterministic) timeout at `typeclass`, maximum number of heartbeats (20000) has been reached
+
+Note: Use `set_option synthInstance.maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+'TGLV351.dualResolvent_minimum_energy_value' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV351.exists_base_moreau_approximant' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

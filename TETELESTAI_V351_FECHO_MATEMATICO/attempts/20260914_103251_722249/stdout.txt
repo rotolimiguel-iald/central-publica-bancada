@@ -1,0 +1,89 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ScaledResolventCalculus.lean:57:2: error: `fun_prop` was unable to prove `ContinuousAt (fun z => ↑(r / (r + (1 - r) * z.re) ^ 2)) z`
+
+Issues:
+  Failed to prove necessary assumption `(r + (1 - r) * z.re) ^ 2 ≠ 0` when applying theorem `ContinuousAt.div₀`.
+  No theorems found for `Complex.re` in order to prove `ContinuousAt (fun self => self.re) z`
+  No theorems found for `Complex.ofReal` in order to prove `ContinuousAt (fun z0 => ↑z0) (r / (r + (1 - r) * z.re) ^ 2)`
+  No theorems found for `Complex.ofReal` in order to prove `ContinuousAt (fun z => ↑(r / (r + (1 - r) * z.re) ^ 2)) z`
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ScaledResolventCalculus.lean:89:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  resolventDamping (scaledResolventCoordinate r z.re)
+in the target expression
+  (fun z => ↑(resolventDamping (scaledResolventCoordinate r z.re))) z =
+    (fun z => ↑(resolventDamping z.re) * ↑(scaledResolventDampingFactor r z.re)) z
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+hT : 0 ≤ T
+h1 : T ≤ 1
+r : ℝ
+hr : 0 < r
+z : ℂ
+hz : z ∈ spectrum ℂ T
+⊢ (fun z => ↑(resolventDamping (scaledResolventCoordinate r z.re))) z =
+    (fun z => ↑(resolventDamping z.re) * ↑(scaledResolventDampingFactor r z.re)) z
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ScaledResolventCalculus.lean:113:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  resolventPhaseFunction t (scaledResolventCoordinate r z.re)
+in the target expression
+  (fun z => resolventPhaseFunction t (scaledResolventCoordinate r z.re)) z =
+    (fun z => modularPhase t (Real.log r) * (resolventPhaseFunction t z.re * ↑(scaledResolventDampingFactor r z.re))) z
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+hT : 0 ≤ T
+h1 : T ≤ 1
+r : ℝ
+hr : 0 < r
+t : ℝ
+z : ℂ
+hz : z ∈ spectrum ℂ T
+⊢ (fun z => resolventPhaseFunction t (scaledResolventCoordinate r z.re)) z =
+    (fun z => modularPhase t (Real.log r) * (resolventPhaseFunction t z.re * ↑(scaledResolventDampingFactor r z.re))) z
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ScaledResolventCalculus.lean:115:9: error: Function expected at
+  cfc_const_mul ?m.210 ?m.211 T ?m.212
+but this term has type
+  cfc (fun x => ?m.210 * ?m.211 x) T = ?m.210 • cfc ?m.211 T
+
+Note: Expected a function because this term is being applied to the argument
+  (IsSelfAdjoint.of_nonneg hT).isStarNormal
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ScaledResolventCalculus.lean:99:105: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+hT : 0 ≤ T
+h1 : T ≤ 1
+r : ℝ
+hr : 0 < r
+t : ℝ
+he :
+  cfc (fun z => resolventPhaseFunction t (scaledResolventCoordinate r z.re)) T =
+    cfc
+      (fun z => modularPhase t (Real.log r) * (resolventPhaseFunction t z.re * ↑(scaledResolventDampingFactor r z.re)))
+      T
+⊢ cfc (fun z => modularPhase t (Real.log r) * (resolventPhaseFunction t z.re * ↑(scaledResolventDampingFactor r z.re)))
+      T =
+    modularPhase t (Real.log r) • (cfc (fun z => resolventPhaseFunction t z.re) T * scaledResolventDampingOperator T r)
+'TGLV350.Regular.positive_contraction_spectrum_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.scaledResolventDenominator_real_cfc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.scaledResolventCoordinate_cfc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.scaledResolventCoordinate_continuousOn_spectrum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLV350.Regular.scaledResolventDampingFactor_continuousOn_spectrum' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLV350.Regular.scaledResolventDampingOperator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.scaledResolventDampingOperator_isUnit' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLV350.Regular.scaledPositiveResolvent_damping' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.scaledPositiveResolvent_phase' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

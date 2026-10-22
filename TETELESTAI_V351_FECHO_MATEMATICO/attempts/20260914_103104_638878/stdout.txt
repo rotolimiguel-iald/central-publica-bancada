@@ -1,0 +1,96 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:46:41: warning: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:43:0: warning: automatically included section variable(s) unused in theorem `TGLV350.Regular.antiunitaryConjugate_add`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:52:41: warning: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:48:0: warning: automatically included section variable(s) unused in theorem `TGLV350.Regular.antiunitaryConjugate_smul`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:63:15: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+J : H ≃ₗᵢ⋆[ℂ] H
+r : ℝ
+x : H
+⊢ J (r • J.symm x) = r • x
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:66:70: warning: This simp argument is unused:
+  map_smulₛₗ
+
+Hint: Omit it from the simp argument list.
+  simp [antiunitaryConjugate_apply, Algebra.algebraMap_eq_smul_one,̵ ̵m̵a̵p̵_̵s̵m̵u̵l̵ₛ̵ₗ̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:72:2: error: `fun_prop` was unable to prove `Continuous fun T => J.toLinearIsometry.toContinuousLinearMap ∘SL T ∘SL J.symm.toLinearIsometry.toContinuousLinearMap`
+
+Issues:
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:96:20: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  cfc (fun x => ↑(?m.564 x.re)) T
+in the target expression
+  cfc (fun z => ↑(f z.re).re) T + Complex.I • cfc (fun z => ↑(f z.re).im) T =
+    cfc (fun x => (f x).re) T + Complex.I • cfc (fun x => (f x).im) T
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+T : H →L[ℂ] H
+hT : IsSelfAdjoint T
+f : ℝ → ℂ
+hf : Continuous f
+hr : Continuous fun z => ↑(f z.re).re
+hi : Continuous fun z => ↑(f z.re).im
+⊢ cfc (fun z => ↑(f z.re).re) T + Complex.I • cfc (fun z => ↑(f z.re).im) T =
+    cfc (fun x => (f x).re) T + Complex.I • cfc (fun x => (f x).im) T
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351AntiunitaryResolventPhase.lean:104:4: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  antiunitaryConjugate J (cfc (Complex.re ∘ f) T)
+in the target expression
+  antiunitaryConjugate J (cfc (fun x => (f x).re) T) +
+      star Complex.I • antiunitaryConjugate J (cfc (fun x => (f x).im) T) =
+    cfc (fun z => star (f z.re)) (antiunitaryConjugate J T)
+
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+J : H ≃ₗᵢ⋆[ℂ] H
+T : H →L[ℂ] H
+hT : IsSelfAdjoint T
+f : ℝ → ℂ
+hf : Continuous f
+⊢ antiunitaryConjugate J (cfc (fun x => (f x).re) T) +
+      star Complex.I • antiunitaryConjugate J (cfc (fun x => (f x).im) T) =
+    cfc (fun z => star (f z.re)) (antiunitaryConjugate J T)
+'TGLV350.Regular.resolventPhaseFunction_reflection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugateRealHom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_continuous' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_selfadjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_real_cfc' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.complex_cfc_real_imaginary' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_complex_cfc' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_resolventPhase' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLV350.Regular.antiunitaryConjugate_resolventDamping' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLV350.Regular.resolventImaginaryPower_antiunitary' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,165 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:129:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ENNReal.ofReal (inner ℂ v ((fibre (D m)) v)).re
+in the target expression
+  ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ≤
+    (fun n => ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re) m
+
+P : SiteProfile
+A : PositiveCoreInput P
+D : ℕ → TowerHilbert P →L[ℂ] TowerHilbert P
+hmem : ∀ (n : ℕ), D n ∈ theFactorObject P
+hpos : ∀ (n : ℕ), 0 ≤ D n
+hbound : ∀ (n : ℕ), D n ≤ ↑(↑n + 1) • 1
+hmin :
+  ∀ (n : ℕ) (v : ↥(RegularHilbert (TowerHilbert P))),
+    ∃ w,
+      ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re =
+          ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ∧
+        ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+          ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤
+            ENNReal.ofReal ((↑n + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+v : ↥(RegularHilbert (TowerHilbert P))
+n m : ℕ
+hnm : n ≤ m
+w : ↥(RegularHilbert (TowerHilbert P))
+hw :
+  ENNReal.ofReal (inner ℂ v ((fibre (D m)) v)).re =
+    ENNReal.ofReal ((↑m + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w
+right✝ :
+  ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+    ENNReal.ofReal (inner ℂ v ((fibre (D m)) v)).re ≤
+      ENNReal.ofReal ((↑m + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+w✝ : ↥(RegularHilbert (TowerHilbert P))
+left✝ :
+  ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re =
+    ENNReal.ofReal ((↑n + 1) * ‖w✝ - v‖ ^ 2) + dualQuadraticIntegral (↑A) w✝
+hn :
+  ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+    ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤
+      ENNReal.ofReal ((↑n + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+⊢ ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ≤
+    (fun n => ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re) m
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:146:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  RCLike.re (inner ℂ ((D m - D n) v) v)
+in the target expression
+  0 ≤ (inner ℂ ((D m - D n) v) v).re
+
+case refine_1
+P : SiteProfile
+A : PositiveCoreInput P
+D : ℕ → TowerHilbert P →L[ℂ] TowerHilbert P
+hmem : ∀ (n : ℕ), D n ∈ theFactorObject P
+hpos : ∀ (n : ℕ), 0 ≤ D n
+hbound : ∀ (n : ℕ), D n ≤ ↑(↑n + 1) • 1
+hmin :
+  ∀ (n : ℕ) (v : ↥(RegularHilbert (TowerHilbert P))),
+    ∃ w,
+      ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re =
+          ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ∧
+        ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+          ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤
+            ENNReal.ofReal ((↑n + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+hmonoQ : ∀ (v : ↥(RegularHilbert (TowerHilbert P))), Monotone fun n => ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re
+n m : ℕ
+hnm : n ≤ m
+v : TowerHilbert P
+hq : ENNReal.ofReal (inner ℂ v ((D n) v)).re ≤ ENNReal.ofReal (inner ℂ v ((D m) v)).re
+hp : 0 ≤ (inner ℂ v ((D m) v)).re
+hr : (inner ℂ v ((D n) v)).re ≤ (inner ℂ v ((D m) v)).re
+⊢ 0 ≤ (inner ℂ ((D m - D n) v) v).re
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:163:57: error: Application type mismatch: The argument
+  n
+has type
+  ℝ
+but is expected to have type
+  ℕ
+in the application
+  w n
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:166:45: error: Application type mismatch: The argument
+  n
+has type
+  ℝ
+but is expected to have type
+  ℕ
+in the application
+  w n
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:167:43: error: Application type mismatch: The argument
+  n
+has type
+  ℝ
+but is expected to have type
+  ℕ
+in the application
+  w n
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:168:48: error: Application type mismatch: The argument
+  n
+has type
+  ℝ
+but is expected to have type
+  ℕ
+in the application
+  D n
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:168:65: error: Application type mismatch: The argument
+  n
+has type
+  ℝ
+but is expected to have type
+  ℕ
+in the application
+  he n
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:169:82: error: Application type mismatch: The argument
+  n
+has type
+  ℝ
+but is expected to have type
+  ℕ
+in the application
+  le_iSup (fun k => ENNReal.ofReal (inner ℂ v ((fibre (D k)) v)).re) n
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:191:39: error: linarith failed to find a contradiction
+P : SiteProfile
+A : PositiveCoreInput P
+D : ℕ → TowerHilbert P →L[ℂ] TowerHilbert P
+hmem : ∀ (n : ℕ), D n ∈ theFactorObject P
+hpos : ∀ (n : ℕ), 0 ≤ D n
+hbound : ∀ (n : ℕ), D n ≤ ↑(↑n + 1) • 1
+hmin :
+  ∀ (n : ℕ) (v : ↥(RegularHilbert (TowerHilbert P))),
+    ∃ w,
+      ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re =
+          ENNReal.ofReal ((↑n + 1) * ‖w - v‖ ^ 2) + dualQuadraticIntegral (↑A) w ∧
+        ∀ (z : ↥(RegularHilbert (TowerHilbert P))),
+          ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤
+            ENNReal.ofReal ((↑n + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+hmonoQ : ∀ (v : ↥(RegularHilbert (TowerHilbert P))), Monotone fun n => ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re
+v : ↥(RegularHilbert (TowerHilbert P))
+s : ℝ≥0∞ := ⨆ n, ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re
+hu : ∀ (n : ℕ), ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤ dualQuadraticIntegral (↑A) v
+hs : ¬s = ∞
+w : ℕ → ↥(RegularHilbert (TowerHilbert P))
+he :
+  ∀ (n : ℕ),
+    ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re =
+      ENNReal.ofReal ((↑n + 1) * ‖w n - v‖ ^ 2) + dualQuadraticIntegral (↑A) (w n)
+a✝¹ :
+  ∀ (n : ℕ) (z : ↥(RegularHilbert (TowerHilbert P))),
+    ENNReal.ofReal (inner ℂ v ((fibre (D n)) v)).re ≤
+      ENNReal.ofReal ((↑n + 1) * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+hwBound : ∀ (n : ℝ), ENNReal.ofReal ((n + 1) * ‖w sorry - v‖ ^ 2) ≤ s
+hqBound : ∀ (n : ℕ), dualQuadraticIntegral (↑A) (w n) ≤ s
+ε : ℝ
+hε : ε > 0
+N : ℕ
+hN : s.toReal / ε ^ 2 < ↑N
+n : ℕ
+hn : n ≥ N
+hc : s.toReal / ε ^ 2 < ↑n + 1
+hε2 : 0 < ε ^ 2
+hc' : s.toReal < (↑n + 1) * ε ^ 2
+hb : (↑n + 1) * ‖w sorry - v‖ ^ 2 ≤ s.toReal
+hnpos : 0 < ↑n + 1
+a✝ : ε ^ 2 ≤ ‖w n - v‖ ^ 2
+⊢ False
+failed
+'TGLV351.dualResolvent_minimum_energy_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV351.exists_base_moreau_approximant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV351.exists_monotone_base_dual_approximation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,57 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ResolventPhaseFunctions.lean:22:32: warning: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  simp [resolventPhaseFunction, n̵o̵r̵m̵_̵m̵u̵l̵,̵ ̵modularPhase_norm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ResolventPhaseFunctions.lean:35:73: error: unsolved goals
+case e_a
+t x : ℝ
+⊢ Complex.exp (-(↑t * ↑(Real.log ((1 - x) / x)) * Complex.I)) = ↑(resolventDamping x)
+
+case e_a
+t x : ℝ
+⊢ ↑(resolventDamping x) = Complex.exp (↑(-t * Real.log ((1 - x) / x)) * Complex.I)
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ResolventPhaseFunctions.lean:37:4: warning: This simp argument is unused:
+  map_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [resolventPhaseFunction, star_mul, Complex.star_def,
+  ̵  ̵ ̵ ̵m̵a̵p̵_̵m̵u̵l̵,̵ ̵Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ResolventPhaseFunctions.lean:59:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  resolventPhaseFunction p.1 p.2
+in the target expression
+  Tendsto (fun p => resolventPhaseFunction p.1 p.2) (𝓝 p) (𝓝 ((fun p => resolventPhaseFunction p.1 p.2) p))
+
+case pos
+p : ℝ × ℝ
+hp : p.2 = 0 ∨ p.2 = 1
+hz : resolventDamping p.2 = 0
+hg : resolventPhaseFunction p.1 p.2 = 0
+⊢ Tendsto (fun p => resolventPhaseFunction p.1 p.2) (𝓝 p) (𝓝 ((fun p => resolventPhaseFunction p.1 p.2) p))
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ResolventPhaseFunctions.lean:65:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351ResolventPhaseFunctions.lean:71:70: error(lean.invalidField): Invalid field `complex_ofReal`: The environment does not contain `Continuous.complex_ofReal`, so it is not possible to project the field `complex_ofReal` from an expression
+  Continuous.mul continuous_snd (Continuous.sub continuous_const continuous_snd)
+of type
+  Continuous[instTopologicalSpaceProd, ?m.222] (Prod.snd * fun x => ?m.210 - x.2)
+'TGLV350.Regular.resolventDamping' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction_zero_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction_star' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction_gram' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction_joint_continuous' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLV350.Regular.resolventPhaseFunction_continuous' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

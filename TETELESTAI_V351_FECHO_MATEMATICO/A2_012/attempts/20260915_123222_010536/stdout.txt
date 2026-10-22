@@ -1,0 +1,42 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\A2_012\src\TGLExt\V354SpectralThreshold.lean:104:14: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  scalarInverseLimitWeight ?P (PositiveCoreInput.zero ?P)
+in the target expression
+  0 < (scalarInverseLimitTraceData P).value (PositiveCoreInput.zero P)
+
+P : SiteProfile
+e : PositiveCoreInput P
+heproj : IsStarProjection ↑e
+hene : e ≠ PositiveCoreInput.zero P
+Y : PositiveCoreInput P
+hYle : Y ≤ e
+hYpos : 0 < (scalarInverseLimitTraceData P).value (PositiveCoreInput.zero P)
+hYfin : (scalarInverseLimitTraceData P).value Y < ∞
+hz : ↑Y = 0
+hzero : Y = PositiveCoreInput.zero P
+⊢ False
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\A2_012\src\TGLExt\V354SpectralThreshold.lean:128:7: error: failed to synthesize
+  PosSMulMono ℝ (↥(RegularHilbert (TowerHilbert P)) →L[ℂ] ↥(RegularHilbert (TowerHilbert P)))
+(deterministic) timeout at `typeclass`, maximum number of heartbeats (20000) has been reached
+
+Note: Use `set_option synthInstance.maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\A2_012\src\TGLExt\V354SpectralThreshold.lean:137:21: error: Application type mismatch: The argument
+  IsStarProjection.one
+has type
+  ∀ (R : Type ?u.12) [inst : MulOneClass R] [inst_1 : StarMul R], IsStarProjection 1
+but is expected to have type
+  IsStarProjection ↑(positiveUnit P)
+in the application
+  scalarTrace_finite_subprojection_exists P (positiveUnit P) IsStarProjection.one
+'TGLV350.Regular.positive_operator_has_threshold_projection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLV350.Regular.scalarTrace_finite_subprojection_exists' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLV350.Regular.scalarTrace_finite_projection_exists' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

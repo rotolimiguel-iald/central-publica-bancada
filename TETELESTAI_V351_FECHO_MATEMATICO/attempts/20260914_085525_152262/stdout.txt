@@ -1,0 +1,58 @@
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:20:22: error: Application type mismatch: The argument
+  dualResolvent_limit_range_finite A R hA hlim v
+has type
+  R v ∈ (dualClosedPositiveForm A hA).finiteDomain
+but is expected to have type
+  ?m.69 < ?m.70
+in the application
+  ne_of_lt (dualResolvent_limit_range_finite A R hA hlim v)
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:63:48: error: mod_cast has type
+  (0 : ℝ) ≤ c
+but is expected to have type
+  (0 : ℂ) ≤ ↑(algebraMap ℝ ℂ).toMonoidWithZeroHom c
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:68:10: error: failed to synthesize
+  DistribSMul ℝ (↥(RegularHilbert (TowerHilbert P)) →L[ℂ] ↥(RegularHilbert (TowerHilbert P)))
+(deterministic) timeout at `typeclass`, maximum number of heartbeats (20000) has been reached
+
+Note: Use `set_option synthInstance.maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:72:10: error: mod_cast has type
+  (0 : ℝ) ≤ c
+but is expected to have type
+  (0 : ℂ) ≤ ↑(algebraMap ℝ ℂ).toMonoidWithZeroHom c
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:97:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  c * c⁻¹
+in the target expression
+  ENNReal.ofReal (c * ‖z - v‖ ^ 2) + ENNReal.ofReal c * ENNReal.ofReal c⁻¹ * dualQuadraticIntegral (↑A) z =
+    ENNReal.ofReal (c * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+
+P : SiteProfile
+A : PositiveCoreInput P
+c : ℝ
+hc : 0 < c
+A' : PositiveCoreInput P := PositiveCoreInput.scale ⟨c⁻¹, ⋯⟩ A
+R : ↥(RegularHilbert (TowerHilbert P)) →L[ℂ] ↥(RegularHilbert (TowerHilbert P))
+hmR : R ∈ regularCoreAlgebra P
+hR : 0 ≤ R
+hone : R ≤ 1
+hlim : ∀ (v : ↥(RegularHilbert (TowerHilbert P))), Tendsto (fun n => (dualCutResolvent n ↑A') v) atTop (𝓝 (R v))
+hfix : ∀ (s : ℝ), (dualAmbient s) R = R
+B : ↥(RegularHilbert (TowerHilbert P)) →L[ℂ] ↥(RegularHilbert (TowerHilbert P)) := c • (1 - R)
+hRF : R ∈ dualFixedCore P
+hBF : B ∈ dualFixedCore P
+hB : 0 ≤ B
+hBbound : B ≤ c • 1
+D : TowerHilbert P →L[ℂ] TowerHilbert P
+hD : D ∈ theFactorObject P
+hBD : B = fibre D
+v : ↥(RegularHilbert (TowerHilbert P))
+he : ENNReal.ofReal (inner ℂ v ((fibre D) v)).re = ENNReal.ofReal c * dualEnergy (↑A') v (R v)
+z : ↥(RegularHilbert (TowerHilbert P))
+⊢ ENNReal.ofReal (c * ‖z - v‖ ^ 2) + ENNReal.ofReal c * ENNReal.ofReal c⁻¹ * dualQuadraticIntegral (↑A) z =
+    ENNReal.ofReal (c * ‖z - v‖ ^ 2) + dualQuadraticIntegral (↑A) z
+C:\IALD\Central de Patentes\Chatgpt\TETELESTAI_V351_FECHO_MATEMATICO\kernel\TGLExt\V351BaseMoreauApproximants.lean:102:10: warning: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+'TGLV351.dualResolvent_minimum_energy_value' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV351.exists_base_moreau_approximant' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
