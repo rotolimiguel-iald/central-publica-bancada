@@ -1,0 +1,75 @@
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:17:0: warning: automatically included section variable(s) unused in theorem `ModularDephasingBridge.spectral_preserves_every_diagonal`:
+  [Fintype n]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype n] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:30:28: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  diagonal fun i => -?d i
+in the target expression
+  specExpect d (-diagonal fun i => ↑(Real.log (d i))) = -diagonal fun i => ↑(Real.log (d i))
+
+n : Type
+inst✝¹ : Fintype n
+inst✝ : DecidableEq n
+d : n → ℝ
+hd : ∀ (i : n), 0 < d i
+⊢ specExpect d (-diagonal fun i => ↑(Real.log (d i))) = -diagonal fun i => ↑(Real.log (d i))
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:45:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Q + R
+in the target expression
+  -logRho (rhoD d) = specExpect d Q + specExpect d R
+
+n : Type
+inst✝¹ : Fintype n
+inst✝ : DecidableEq n
+d : n → ℝ
+hd : ∀ (i : n), 0 < d i
+Q R : Matrix n n ℂ
+h : -logRho (rhoD d) = Q + R
+hp : specExpect d (Q + R) = Q + R
+⊢ -logRho (rhoD d) = specExpect d Q + specExpect d R
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:51:40: error: unsolved goals
+A : Type u_1
+inst✝ : Ring A
+K Q R X : A
+h : K = Q + R
+hK : Commute K X
+hc : (Q + R) * X = X * (Q + R)
+⊢ Q * X + -1 • (X * Q) = -1 • (R * X) + X * R
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:53:15: error: unexpected token 'at'; expected command
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:62:31: error: `noncomm_ring` simp lemmas don't apply; try `abel` instead
+case mp
+A : Type u_1
+inst✝ : Ring A
+K Q R X : A
+h : K = Q + R
+he : (Q + R) * X - X * (Q + R) = Q * X - X * Q
+⊢ R * X = X * R
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:59:51: error: unsolved goals
+case mpr
+A : Type u_1
+inst✝ : Ring A
+K Q R X : A
+h : K = Q + R
+he : R * X = X * R
+⊢ Q * X + (R * X + (-1 • (X * Q) + -1 • (X * R))) = Q * X + -1 • (X * Q)
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularDephasingBridge.lean:62:44: error: unexpected token 'at'; expected command
+'ModularDephasingBridge.spectral_preserves_every_diagonal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularDephasingBridge.spectral_preserves_density' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularDephasingBridge.spectral_preserves_modular_generator' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ModularDephasingBridge.spectral_reading_is_stationary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularDephasingBridge.spectral_preserves_remainder_balance' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ModularDephasingBridge.stationary_generator_balance' depends on axioms: [propext, sorryAx]
+'ModularDephasingBridge.generator_bridge_iff' depends on axioms: [propext, sorryAx]
+'ModularDephasingBridge.coarse_dephasing_flow_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularDephasingBridge.coarse_preserves_vacuum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularDephasingBridge.coarse_remainder_survives' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularDephasingBridge.coarse_remainder_is_invisible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularDephasingBridge.tower_prefix_reading_stationary' depends on axioms: [propext, Classical.choice, Quot.sound]

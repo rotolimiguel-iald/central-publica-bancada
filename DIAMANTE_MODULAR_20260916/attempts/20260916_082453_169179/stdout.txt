@@ -1,0 +1,72 @@
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularRemainderDensity.lean:113:2: error: unsolved goals
+case neg
+H : Type u_1
+inst✝¹ : NormedAddCommGroup H
+inst✝ : InnerProductSpace ℂ H
+R : H →ₗ[ℂ] H
+c : ℝ
+h : ∀ (v : H), ‖v‖ = 1 → inner ℂ (R v) v = ↑c
+v : H
+hv : ¬v = 0
+hw : inner ℂ (R (NormedSpace.normalize v)) (NormedSpace.normalize v) = ↑c
+he : ↑‖v‖ • NormedSpace.normalize v = v
+hi : ↑‖v‖ * ↑‖v‖ * inner ℂ (R (NormedSpace.normalize v)) (NormedSpace.normalize v) = ↑‖v‖ * ↑‖v‖ * ↑c
+hinner : inner ℂ (R v) v = ↑‖v‖ * ↑‖v‖ * ↑c
+⊢ ↑‖v‖ ^ 2 * ↑c = ↑c * ↑‖v‖ ^ 2
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularRemainderDensity.lean:130:2: error: unsolved goals
+case mpr
+H : Type u_1
+inst✝¹ : NormedAddCommGroup H
+inst✝ : InnerProductSpace ℂ H
+c : ℝ
+v : H
+hv : ‖v‖ = 1
+⊢ ↑c * ↑1 ^ 2 = ↑c
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularRemainderDensity.lean:132:59: warning: This simp argument is unused:
+  one_pow
+
+Hint: Omit it from the simp argument list.
+  simp only [LinearMap.smul_apply, LinearMap.id_apply, inner_smul_left,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_ofReal,
+  ̲  ̲ ̲ ̲ ̲ ̲inner_self_eq_norm_sq_to_K, hv, o̵n̵e̵_̵p̵o̵w̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Complex.ofReal_one, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularRemainderDensity.lean:133:6: warning: This simp argument is unused:
+  Complex.ofReal_one
+
+Hint: Omit it from the simp argument list.
+  simp only [LinearMap.smul_apply, LinearMap.id_apply, inner_smul_left, Complex.conj_ofReal,
+  ̲  ̲ ̲ ̲ ̲ ̲inner_self_eq_norm_sq_to_K, hv, one_pow, C̵o̵m̵p̵l̵e̵x̵.̵o̵f̵R̵e̵a̵l̵_̵o̵n̵e̵,̵ ̵mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularRemainderDensity.lean:133:26: warning: This simp argument is unused:
+  mul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [LinearMap.smul_apply, LinearMap.id_apply, inner_smul_left,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.conj_ofReal,
+  ̲  ̲ ̲ ̲ ̲ ̲inner_self_eq_norm_sq_to_K, hv, one_pow,
+  ̵  ̵ ̵ ̵ ̵ ̵Complex.ofReal_one,̵ ̵m̵u̵l̵_̵o̵n̵e̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'ModularRemainderDensity.remainder_isSelfAdjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.modular_generator_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.remainder_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.remainder_change_reference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.remainder_antisymmetric' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.cocycle_intertwines' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.relative_entropy_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.scalar_normalization_cancels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.residual_entropy_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.all_quadratic_forms_constant_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.all_unit_expectations_constant_iff' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,38 @@
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularRemainderDensity.lean:87:4: error: Tactic `rfl` failed: The left-hand side
+  -Complex.I • remainder rho reference
+is not definitionally equal to the right-hand side
+  modPow rho 0 * Complex.I • logRho rho * (modPow reference ∘ Neg.neg) 0 +
+    modPow rho 0 * -1 • (modPow reference (-0) * Complex.I • logRho reference)
+
+case e'_9
+n : Type
+inst✝¹ : Fintype n
+inst✝ : DecidableEq n
+rho reference : Matrix n n ℂ
+hn : HasDerivAt (modPow reference ∘ Neg.neg) (-1 • (modPow reference (-0) * Complex.I • logRho reference)) 0
+hp :
+  HasDerivAt (modPow rho * modPow reference ∘ Neg.neg)
+    (modPow rho 0 * Complex.I • logRho rho * (modPow reference ∘ Neg.neg) 0 +
+      modPow rho 0 * -1 • (modPow reference (-0) * Complex.I • logRho reference))
+    0
+⊢ -Complex.I • remainder rho reference =
+    modPow rho 0 * Complex.I • logRho rho * (modPow reference ∘ Neg.neg) 0 +
+      modPow rho 0 * -1 • (modPow reference (-0) * Complex.I • logRho reference)
+C:\IALD\Central de Patentes\Chatgpt\DIAMANTE_MODULAR_20260916\ModularRemainderDensity.lean:88:2: error: No goals to be solved
+'ModularRemainderDensity.remainder_isSelfAdjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.modular_generator_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.remainder_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.remainder_change_reference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.remainder_antisymmetric' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.cocycle_intertwines' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.modular_power_derivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.cocycle_derivative_remainder' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ModularRemainderDensity.gibbs_reference_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.relative_entropy_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.scalar_normalization_cancels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.residual_entropy_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.all_quadratic_forms_constant_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ModularRemainderDensity.all_unit_expectations_constant_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
