@@ -1,0 +1,32 @@
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354SelfAdjointPowerKernel.lean:27:6: error: Tactic `apply` failed: could not unify the conclusion of `hy`
+  A ((A ^ k) x) = 0
+with the goal
+  (A ^ (k + 1)) x = 0
+
+Note: The full type of `hy` is
+  A (A ((A ^ k) x)) = 0 → A ((A ^ k) x) = 0
+
+case succ
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A : H →L[ℂ] H
+hA : IsSelfAdjoint A
+n : ℕ
+hn : 0 < n
+hsq : ∀ (x : H), A (A x) = 0 → A x = 0
+x : H
+k : ℕ
+ih : (A ^ (k + 1)) x = 0 → A x = 0
+hx : (A ^ (k + 1 + 1)) x = 0
+hy : A (A ((A ^ k) x)) = 0 → A ((A ^ k) x) = 0
+⊢ (A ^ (k + 1)) x = 0
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354SelfAdjointPowerKernel.lean:35:25: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+'TGLV354.TraceCompletion.selfAdjoint_pow_ker' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.TraceCompletion.selfAdjoint_pow_closedRange' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

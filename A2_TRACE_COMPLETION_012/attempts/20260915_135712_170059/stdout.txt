@@ -1,0 +1,10 @@
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:141:0: error: declaration `TGLV354.TraceCompletion.cyclicTraceCandidate_positive_faithful` contains universe level metavariables at the expression
+  RegularCoreTraceData.value.{?u.10} (scalarInverseLimitTraceData.{?u.10} P) p
+in the declaration body
+  fun P p =>
+    {
+      mp := fun h =>
+        have hle := positiveTrace_le_cyclicTraceCandidate P p;
+        (RegularCoreTraceData.faithful.{?u.10} (scalarInverseLimitTraceData.{?u.10} P) p).mp
+          (le_antisymm (Eq.mp (congrArg (fun _a => scalarInverseLimitWeight P p ≤ _a) h) hle) zero_le),
+      mpr := fun a => Eq.symm a ▸ cyclicTraceCandidate_zero P }

@@ -1,0 +1,573 @@
+def TGLV354.TraceCompletion.ShiftRelated.{u_1} : {A : Type u_1} → [Monoid.{u_1} A] → A → A → Prop :=
+fun {A} [Monoid.{u_1} A] a b =>
+  ∃ n,
+    LT.lt.{0} 0 n ∧
+      ∃ r s,
+        Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} a r) (HMul.hMul.{u_1, u_1, u_1} r b) ∧
+          Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} s a) (HMul.hMul.{u_1, u_1, u_1} b s) ∧
+            Eq.{u_1 + 1} (HPow.hPow.{u_1, 0, u_1} a n) (HMul.hMul.{u_1, u_1, u_1} r s) ∧
+              Eq.{u_1 + 1} (HPow.hPow.{u_1, 0, u_1} b n) (HMul.hMul.{u_1, u_1, u_1} s r)
+theorem TGLV354.TraceCompletion.ShiftRelated.refl.{u_1} : ∀ {A : Type u_1} [inst : Monoid.{u_1} A] (a : A),
+  TGLV354.TraceCompletion.ShiftRelated.{u_1} a a :=
+fun {A} [Monoid.{u_1} A] a =>
+  Exists.intro.{1} 1
+    ⟨Nat.one_pos,
+      Exists.intro.{u_1 + 1} 1
+        (Exists.intro.{u_1 + 1} a
+          ⟨of_eq_true
+              (Eq.trans.{1}
+                (congr.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (mul_one.{u_1} a)) (one_mul.{u_1} a))
+                (eq_self.{u_1 + 1} a)),
+            ⟨of_eq_true (eq_self.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} a a)),
+              ⟨of_eq_true
+                  (Eq.trans.{1}
+                    (congr.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (pow_one.{u_1} a)) (one_mul.{u_1} a))
+                    (eq_self.{u_1 + 1} a)),
+                of_eq_true
+                  (Eq.trans.{1}
+                    (congr.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (pow_one.{u_1} a)) (mul_one.{u_1} a))
+                    (eq_self.{u_1 + 1} a))⟩⟩⟩)⟩
+theorem TGLV354.TraceCompletion.ShiftRelated.symm.{u_1} : ∀ {A : Type u_1} [inst : Monoid.{u_1} A] {a b : A},
+  TGLV354.TraceCompletion.ShiftRelated.{u_1} a b → TGLV354.TraceCompletion.ShiftRelated.{u_1} b a :=
+fun {A} [Monoid.{u_1} A] {a b} h =>
+  Exists.casesOn.{1} h fun n h =>
+    And.casesOn.{0} h fun hn right =>
+      Exists.casesOn.{u_1 + 1} right fun r h =>
+        Exists.casesOn.{u_1 + 1} h fun s h =>
+          And.casesOn.{0} h fun hr right =>
+            And.casesOn.{0} right fun hs right =>
+              And.casesOn.{0} right fun ha hb =>
+                Exists.intro.{1} n
+                  ⟨hn,
+                    Exists.intro.{u_1 + 1} s
+                      (Exists.intro.{u_1 + 1} r ⟨Eq.symm.{u_1 + 1} hs, ⟨Eq.symm.{u_1 + 1} hr, ⟨hb, ha⟩⟩⟩)⟩
+theorem TGLV354.TraceCompletion.ShiftRelated.trans.{u_1} : ∀ {A : Type u_1} [inst : Monoid.{u_1} A] {a b c : A},
+  TGLV354.TraceCompletion.ShiftRelated.{u_1} a b →
+    TGLV354.TraceCompletion.ShiftRelated.{u_1} b c → TGLV354.TraceCompletion.ShiftRelated.{u_1} a c :=
+fun {A} [Monoid.{u_1} A] {a b c} h k =>
+  Exists.casesOn.{1} h fun n h =>
+    And.casesOn.{0} h fun hn right =>
+      Exists.casesOn.{u_1 + 1} right fun r h =>
+        Exists.casesOn.{u_1 + 1} h fun s h =>
+          And.casesOn.{0} h fun hr right =>
+            And.casesOn.{0} right fun hs right =>
+              And.casesOn.{0} right fun ha hb =>
+                Exists.casesOn.{1} k fun m h =>
+                  And.casesOn.{0} h fun hm right =>
+                    Exists.casesOn.{u_1 + 1} right fun u h =>
+                      Exists.casesOn.{u_1 + 1} h fun v h =>
+                        And.casesOn.{0} h fun hu right =>
+                          And.casesOn.{0} right fun hv right =>
+                            And.casesOn.{0} right fun hb' hc =>
+                              have hp := fun j =>
+                                Eq.symm.{u_1 + 1}
+                                  (SemiconjBy.eq.{u_1}
+                                    (SemiconjBy.pow_right.{u_1}
+                                      (have this := Eq.symm.{u_1 + 1} hr;
+                                      this)
+                                      j));
+                              have hq := fun j =>
+                                SemiconjBy.eq.{u_1}
+                                  (SemiconjBy.pow_right.{u_1}
+                                    (have this := hv;
+                                    this)
+                                    j);
+                              Exists.intro.{1} (HAdd.hAdd.{0, 0, 0} n m)
+                                ⟨Decidable.byContradiction fun a =>
+                                    TGLV354.TraceCompletion.ShiftRelated.trans._proof_1_1 n hn m hm a,
+                                  Exists.intro.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} r u)
+                                    (Exists.intro.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} v s)
+                                      ⟨Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                          (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                            (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                              (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                (Eq.symm.{u_1 + 1} (mul_assoc.{u_1} a r u))
+                                                (Eq.mpr.{0}
+                                                  (id.{0}
+                                                    (congrArg.{u_1 + 1, 1}
+                                                      (fun _a =>
+                                                        Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} _a u)
+                                                          (HMul.hMul.{u_1, u_1, u_1} (HMul.hMul.{u_1, u_1, u_1} r b) u))
+                                                      hr))
+                                                  (Eq.refl.{u_1 + 1}
+                                                    (HMul.hMul.{u_1, u_1, u_1} (HMul.hMul.{u_1, u_1, u_1} r b) u))))
+                                              (mul_assoc.{u_1} r b u))
+                                            (Eq.mpr.{0}
+                                              (id.{0}
+                                                (congrArg.{u_1 + 1, 1}
+                                                  (fun _a =>
+                                                    Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} r _a)
+                                                      (HMul.hMul.{u_1, u_1, u_1} r (HMul.hMul.{u_1, u_1, u_1} u c)))
+                                                  hu))
+                                              (Eq.refl.{u_1 + 1}
+                                                (HMul.hMul.{u_1, u_1, u_1} r (HMul.hMul.{u_1, u_1, u_1} u c)))))
+                                          (Eq.symm.{u_1 + 1} (mul_assoc.{u_1} r u c)),
+                                        ⟨Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                            (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                              (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                  (mul_assoc.{u_1} v s a)
+                                                  (Eq.mpr.{0}
+                                                    (id.{0}
+                                                      (congrArg.{u_1 + 1, 1}
+                                                        (fun _a =>
+                                                          Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} v _a)
+                                                            (HMul.hMul.{u_1, u_1, u_1} v
+                                                              (HMul.hMul.{u_1, u_1, u_1} b s)))
+                                                        hs))
+                                                    (Eq.refl.{u_1 + 1}
+                                                      (HMul.hMul.{u_1, u_1, u_1} v (HMul.hMul.{u_1, u_1, u_1} b s)))))
+                                                (Eq.symm.{u_1 + 1} (mul_assoc.{u_1} v b s)))
+                                              (Eq.mpr.{0}
+                                                (id.{0}
+                                                  (congrArg.{u_1 + 1, 1}
+                                                    (fun _a =>
+                                                      Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} _a s)
+                                                        (HMul.hMul.{u_1, u_1, u_1} (HMul.hMul.{u_1, u_1, u_1} c v) s))
+                                                    hv))
+                                                (Eq.refl.{u_1 + 1}
+                                                  (HMul.hMul.{u_1, u_1, u_1} (HMul.hMul.{u_1, u_1, u_1} c v) s))))
+                                            (mul_assoc.{u_1} c v s),
+                                          ⟨Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                              (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                  (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                    (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                      (Eq.mpr.{0}
+                                                        (id.{0}
+                                                          (congrArg.{1, 1}
+                                                            (fun _a =>
+                                                              Eq.{u_1 + 1} (HPow.hPow.{u_1, 0, u_1} a _a)
+                                                                (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} a m)
+                                                                  (HPow.hPow.{u_1, 0, u_1} a n)))
+                                                            (Nat.add_comm n m)))
+                                                        (Eq.mpr.{0}
+                                                          (id.{0}
+                                                            (congrArg.{u_1 + 1, 1}
+                                                              (fun _a =>
+                                                                Eq.{u_1 + 1} _a
+                                                                  (HMul.hMul.{u_1, u_1, u_1}
+                                                                    (HPow.hPow.{u_1, 0, u_1} a m)
+                                                                    (HPow.hPow.{u_1, 0, u_1} a n)))
+                                                              (pow_add.{u_1} a m n)))
+                                                          (Eq.refl.{u_1 + 1}
+                                                            (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} a m)
+                                                              (HPow.hPow.{u_1, 0, u_1} a n)))))
+                                                      (Eq.mpr.{0}
+                                                        (id.{0}
+                                                          (congrArg.{u_1 + 1, 1}
+                                                            (fun _a =>
+                                                              Eq.{u_1 + 1}
+                                                                (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} a m)
+                                                                  _a)
+                                                                (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} a m)
+                                                                  (HMul.hMul.{u_1, u_1, u_1} r s)))
+                                                            ha))
+                                                        (Eq.refl.{u_1 + 1}
+                                                          (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} a m)
+                                                            (HMul.hMul.{u_1, u_1, u_1} r s)))))
+                                                    (Eq.symm.{u_1 + 1}
+                                                      (mul_assoc.{u_1} (HPow.hPow.{u_1, 0, u_1} a m) r s)))
+                                                  (Eq.mpr.{0}
+                                                    (id.{0}
+                                                      (congrArg.{u_1 + 1, 1}
+                                                        (fun _a =>
+                                                          Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} _a s)
+                                                            (HMul.hMul.{u_1, u_1, u_1}
+                                                              (HMul.hMul.{u_1, u_1, u_1} r
+                                                                (HPow.hPow.{u_1, 0, u_1} b m))
+                                                              s))
+                                                        (hp m)))
+                                                    (Eq.refl.{u_1 + 1}
+                                                      (HMul.hMul.{u_1, u_1, u_1}
+                                                        (HMul.hMul.{u_1, u_1, u_1} r (HPow.hPow.{u_1, 0, u_1} b m))
+                                                        s))))
+                                                (Eq.mpr.{0}
+                                                  (id.{0}
+                                                    (congrArg.{u_1 + 1, 1}
+                                                      (fun _a =>
+                                                        Eq.{u_1 + 1}
+                                                          (HMul.hMul.{u_1, u_1, u_1} (HMul.hMul.{u_1, u_1, u_1} r _a) s)
+                                                          (HMul.hMul.{u_1, u_1, u_1}
+                                                            (HMul.hMul.{u_1, u_1, u_1} r
+                                                              (HMul.hMul.{u_1, u_1, u_1} u v))
+                                                            s))
+                                                      hb'))
+                                                  (Eq.refl.{u_1 + 1}
+                                                    (HMul.hMul.{u_1, u_1, u_1}
+                                                      (HMul.hMul.{u_1, u_1, u_1} r (HMul.hMul.{u_1, u_1, u_1} u v))
+                                                      s))))
+                                              (of_eq_true
+                                                (Eq.trans.{1}
+                                                  (congr.{u_1 + 1, 1}
+                                                    (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1}
+                                                      (Eq.trans.{u_1 + 1}
+                                                        (mul_assoc.{u_1} r (HMul.hMul.{u_1, u_1, u_1} u v) s)
+                                                        (congrArg.{u_1 + 1, u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} r)
+                                                          (mul_assoc.{u_1} u v s))))
+                                                    (mul_assoc.{u_1} r u (HMul.hMul.{u_1, u_1, u_1} v s)))
+                                                  (eq_self.{u_1 + 1}
+                                                    (HMul.hMul.{u_1, u_1, u_1} r
+                                                      (HMul.hMul.{u_1, u_1, u_1} u (HMul.hMul.{u_1, u_1, u_1} v s)))))),
+                                            Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                              (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                  (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                    (Trans.trans.{0, 0, 0, u_1 + 1, u_1 + 1, u_1 + 1}
+                                                      (pow_add.{u_1} c n m)
+                                                      (Eq.mpr.{0}
+                                                        (id.{0}
+                                                          (congrArg.{u_1 + 1, 1}
+                                                            (fun _a =>
+                                                              Eq.{u_1 + 1}
+                                                                (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} c n)
+                                                                  _a)
+                                                                (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} c n)
+                                                                  (HMul.hMul.{u_1, u_1, u_1} v u)))
+                                                            hc))
+                                                        (Eq.refl.{u_1 + 1}
+                                                          (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} c n)
+                                                            (HMul.hMul.{u_1, u_1, u_1} v u)))))
+                                                    (Eq.symm.{u_1 + 1}
+                                                      (mul_assoc.{u_1} (HPow.hPow.{u_1, 0, u_1} c n) v u)))
+                                                  (Eq.mpr.{0}
+                                                    (id.{0}
+                                                      (congrArg.{u_1 + 1, 1}
+                                                        (fun _a =>
+                                                          Eq.{u_1 + 1}
+                                                            (HMul.hMul.{u_1, u_1, u_1}
+                                                              (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} c n)
+                                                                v)
+                                                              u)
+                                                            (HMul.hMul.{u_1, u_1, u_1} _a u))
+                                                        (hq n)))
+                                                    (Eq.refl.{u_1 + 1}
+                                                      (HMul.hMul.{u_1, u_1, u_1}
+                                                        (HMul.hMul.{u_1, u_1, u_1} (HPow.hPow.{u_1, 0, u_1} c n) v)
+                                                        u))))
+                                                (Eq.mpr.{0}
+                                                  (id.{0}
+                                                    (congrArg.{u_1 + 1, 1}
+                                                      (fun _a =>
+                                                        Eq.{u_1 + 1}
+                                                          (HMul.hMul.{u_1, u_1, u_1} (HMul.hMul.{u_1, u_1, u_1} v _a) u)
+                                                          (HMul.hMul.{u_1, u_1, u_1}
+                                                            (HMul.hMul.{u_1, u_1, u_1} v
+                                                              (HMul.hMul.{u_1, u_1, u_1} s r))
+                                                            u))
+                                                      hb))
+                                                  (Eq.refl.{u_1 + 1}
+                                                    (HMul.hMul.{u_1, u_1, u_1}
+                                                      (HMul.hMul.{u_1, u_1, u_1} v (HMul.hMul.{u_1, u_1, u_1} s r))
+                                                      u))))
+                                              (of_eq_true
+                                                (Eq.trans.{1}
+                                                  (congr.{u_1 + 1, 1}
+                                                    (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1}
+                                                      (Eq.trans.{u_1 + 1}
+                                                        (mul_assoc.{u_1} v (HMul.hMul.{u_1, u_1, u_1} s r) u)
+                                                        (congrArg.{u_1 + 1, u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} v)
+                                                          (mul_assoc.{u_1} s r u))))
+                                                    (mul_assoc.{u_1} v s (HMul.hMul.{u_1, u_1, u_1} r u)))
+                                                  (eq_self.{u_1 + 1}
+                                                    (HMul.hMul.{u_1, u_1, u_1} v
+                                                      (HMul.hMul.{u_1, u_1, u_1} s
+                                                        (HMul.hMul.{u_1, u_1, u_1} r u))))))⟩⟩⟩)⟩
+theorem TGLV354.TraceCompletion.ShiftRelated.cyclic.{u_1} : ∀ {A : Type u_1} [inst : Monoid.{u_1} A] (x y : A),
+  TGLV354.TraceCompletion.ShiftRelated.{u_1} (HMul.hMul.{u_1, u_1, u_1} x y) (HMul.hMul.{u_1, u_1, u_1} y x) :=
+fun {A} [Monoid.{u_1} A] x y =>
+  Exists.intro.{1} 1
+    ⟨Nat.one_pos,
+      Exists.intro.{u_1 + 1} x
+        (Exists.intro.{u_1 + 1} y
+          ⟨of_eq_true
+              (Eq.trans.{1}
+                (congrFun'.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (mul_assoc.{u_1} x y x))
+                  (HMul.hMul.{u_1, u_1, u_1} x (HMul.hMul.{u_1, u_1, u_1} y x)))
+                (eq_self.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} x (HMul.hMul.{u_1, u_1, u_1} y x)))),
+            ⟨of_eq_true
+                (Eq.trans.{1}
+                  (congrArg.{u_1 + 1, 1} (Eq.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} y (HMul.hMul.{u_1, u_1, u_1} x y)))
+                    (mul_assoc.{u_1} y x y))
+                  (eq_self.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} y (HMul.hMul.{u_1, u_1, u_1} x y)))),
+              ⟨of_eq_true
+                  (Eq.trans.{1}
+                    (congrFun'.{u_1 + 1, 1}
+                      (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (pow_one.{u_1} (HMul.hMul.{u_1, u_1, u_1} x y)))
+                      (HMul.hMul.{u_1, u_1, u_1} x y))
+                    (eq_self.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} x y))),
+                of_eq_true
+                  (Eq.trans.{1}
+                    (congrFun'.{u_1 + 1, 1}
+                      (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (pow_one.{u_1} (HMul.hMul.{u_1, u_1, u_1} y x)))
+                      (HMul.hMul.{u_1, u_1, u_1} y x))
+                    (eq_self.{u_1 + 1} (HMul.hMul.{u_1, u_1, u_1} y x)))⟩⟩⟩)⟩
+theorem TGLV354.TraceCompletion.ShiftRelated.map.{u_1, u_2} : ∀ {A : Type u_1} [inst : Monoid.{u_1} A] {a b : A}
+  {B : Type u_2} [inst_1 : Monoid.{u_2} B] (f : MonoidHom.{u_1, u_2} A B),
+  TGLV354.TraceCompletion.ShiftRelated.{u_1} a b → TGLV354.TraceCompletion.ShiftRelated.{u_2} (f a) (f b) :=
+fun {A} [Monoid.{u_1} A] {a b} {B} [Monoid.{u_2} B] f h =>
+  Exists.casesOn.{1} h fun n h =>
+    And.casesOn.{0} h fun hn right =>
+      Exists.casesOn.{u_1 + 1} right fun r h =>
+        Exists.casesOn.{u_1 + 1} h fun s h =>
+          And.casesOn.{0} h fun hr right =>
+            And.casesOn.{0} right fun hs right =>
+              And.casesOn.{0} right fun ha hb =>
+                Exists.intro.{1} n
+                  ⟨hn,
+                    Exists.intro.{u_2 + 1} (f r)
+                      (Exists.intro.{u_2 + 1} (f s)
+                        ⟨Eq.mp.{0}
+                            (congr.{u_2 + 1, 1}
+                              (congrArg.{u_2 + 1, u_2 + 1} Eq.{u_2 + 1} (map_mul.{u_1, u_2, max u_1 u_2} f a r))
+                              (map_mul.{u_1, u_2, max u_1 u_2} f r b))
+                            (congrArg.{u_1 + 1, u_2 + 1} (⇑f) hr),
+                          ⟨Eq.mp.{0}
+                              (congr.{u_2 + 1, 1}
+                                (congrArg.{u_2 + 1, u_2 + 1} Eq.{u_2 + 1} (map_mul.{u_1, u_2, max u_1 u_2} f s a))
+                                (map_mul.{u_1, u_2, max u_1 u_2} f b s))
+                              (congrArg.{u_1 + 1, u_2 + 1} (⇑f) hs),
+                            ⟨Eq.mp.{0}
+                                (congr.{u_2 + 1, 1}
+                                  (congrArg.{u_2 + 1, u_2 + 1} Eq.{u_2 + 1} (map_pow.{u_1, u_2, max u_1 u_2} f a n))
+                                  (map_mul.{u_1, u_2, max u_1 u_2} f r s))
+                                (congrArg.{u_1 + 1, u_2 + 1} (⇑f) ha),
+                              Eq.mp.{0}
+                                (congr.{u_2 + 1, 1}
+                                  (congrArg.{u_2 + 1, u_2 + 1} Eq.{u_2 + 1} (map_pow.{u_1, u_2, max u_1 u_2} f b n))
+                                  (map_mul.{u_1, u_2, max u_1 u_2} f s r))
+                                (congrArg.{u_1 + 1, u_2 + 1} (⇑f) hb)⟩⟩⟩)⟩
+theorem TGLV354.TraceCompletion.ShiftRelated.star_transport.{u_1} : ∀ {A : Type u_1} [inst : Monoid.{u_1} A] {a b : A}
+  [inst_1 : StarMul.{u_1} A],
+  TGLV354.TraceCompletion.ShiftRelated.{u_1} a b →
+    TGLV354.TraceCompletion.ShiftRelated.{u_1} (star.{u_1} a) (star.{u_1} b) :=
+fun {A} [Monoid.{u_1} A] {a b} [StarMul.{u_1} A] h =>
+  Exists.casesOn.{1} h fun n h =>
+    And.casesOn.{0} h fun hn right =>
+      Exists.casesOn.{u_1 + 1} right fun r h =>
+        Exists.casesOn.{u_1 + 1} h fun s h =>
+          And.casesOn.{0} h fun hr right =>
+            And.casesOn.{0} right fun hs right =>
+              And.casesOn.{0} right fun ha hb =>
+                Exists.intro.{1} n
+                  ⟨hn,
+                    Exists.intro.{u_1 + 1} (star.{u_1} s)
+                      (Exists.intro.{u_1 + 1} (star.{u_1} r)
+                        ⟨Eq.mp.{0}
+                            (congr.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (star_mul.{u_1} s a))
+                              (star_mul.{u_1} b s))
+                            (congrArg.{u_1 + 1, u_1 + 1} star.{u_1} hs),
+                          ⟨Eq.mp.{0}
+                              (congr.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (star_mul.{u_1} a r))
+                                (star_mul.{u_1} r b))
+                              (congrArg.{u_1 + 1, u_1 + 1} star.{u_1} hr),
+                            ⟨Eq.mp.{0}
+                                (congr.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (star_pow.{u_1} a n))
+                                  (star_mul.{u_1} r s))
+                                (congrArg.{u_1 + 1, u_1 + 1} star.{u_1} ha),
+                              Eq.mp.{0}
+                                (congr.{u_1 + 1, 1} (congrArg.{u_1 + 1, u_1 + 1} Eq.{u_1 + 1} (star_pow.{u_1} b n))
+                                  (star_mul.{u_1} s r))
+                                (congrArg.{u_1 + 1, u_1 + 1} star.{u_1} hb)⟩⟩⟩)⟩
+def TGLV354.TraceCompletion.cyclicTraceCandidate : (P : TGLExt.SiteProfile) →
+  ↥(VonNeumannAlgebra.toStarSubalgebra.{0} (TGLV350.Regular.regularCoreAlgebra P)) → ENNReal :=
+fun P a =>
+  ⨆ p,
+    ⨆ (_ : TGLV354.TraceCompletion.ShiftRelated.{0} (TGLV354.TraceCompletion.asCore✝ p) a),
+      TGLV350.Regular.scalarInverseLimitWeight P p
+theorem TGLV354.TraceCompletion.positiveTrace_le_cyclicTraceCandidate : ∀ (P : TGLExt.SiteProfile)
+  (p : TGLV350.Regular.PositiveCoreInput P),
+  LE.le.{0} (TGLV350.Regular.scalarInverseLimitWeight P p)
+    (TGLV354.TraceCompletion.cyclicTraceCandidate P (TGLV354.TraceCompletion.asCore✝ p)) :=
+fun P p =>
+  le_iSup_of_le.{0, 1} p
+    (le_iSup_of_le.{0, 0} (TGLV354.TraceCompletion.ShiftRelated.refl.{0} (TGLV354.TraceCompletion.asCore✝ p))
+      le_rfl.{0})
+theorem TGLV354.TraceCompletion.cyclicTraceCandidate_related : ∀ (P : TGLExt.SiteProfile)
+  {a b : ↥(VonNeumannAlgebra.toStarSubalgebra.{0} (TGLV350.Regular.regularCoreAlgebra P))},
+  TGLV354.TraceCompletion.ShiftRelated.{0} a b →
+    Eq.{1} (TGLV354.TraceCompletion.cyclicTraceCandidate P a) (TGLV354.TraceCompletion.cyclicTraceCandidate P b) :=
+fun P {a b} h =>
+  le_antisymm.{0}
+    (iSup_le.{0, 1} fun p =>
+      iSup_le.{0, 0} fun hp =>
+        le_iSup_of_le.{0, 1} p (le_iSup_of_le.{0, 0} (TGLV354.TraceCompletion.ShiftRelated.trans.{0} hp h) le_rfl.{0}))
+    (iSup_le.{0, 1} fun p =>
+      iSup_le.{0, 0} fun hp =>
+        le_iSup_of_le.{0, 1} p
+          (le_iSup_of_le.{0, 0}
+            (TGLV354.TraceCompletion.ShiftRelated.trans.{0} hp (TGLV354.TraceCompletion.ShiftRelated.symm.{0} h))
+            le_rfl.{0}))
+theorem TGLV354.TraceCompletion.cyclicTraceCandidate_cyclic : ∀ (P : TGLExt.SiteProfile)
+  (x y : ↥(VonNeumannAlgebra.toStarSubalgebra.{0} (TGLV350.Regular.regularCoreAlgebra P))),
+  Eq.{1} (TGLV354.TraceCompletion.cyclicTraceCandidate P (HMul.hMul.{0, 0, 0} x y))
+    (TGLV354.TraceCompletion.cyclicTraceCandidate P (HMul.hMul.{0, 0, 0} y x)) :=
+fun P x y =>
+  TGLV354.TraceCompletion.cyclicTraceCandidate_related P (TGLV354.TraceCompletion.ShiftRelated.cyclic.{0} x y)
+theorem TGLV354.TraceCompletion.cyclicTraceCandidate_star : ∀ (P : TGLExt.SiteProfile)
+  (a : ↥(VonNeumannAlgebra.toStarSubalgebra.{0} (TGLV350.Regular.regularCoreAlgebra P))),
+  Eq.{1} (TGLV354.TraceCompletion.cyclicTraceCandidate P (star.{0} a))
+    (TGLV354.TraceCompletion.cyclicTraceCandidate P a) :=
+fun P a =>
+  le_antisymm.{0} (TGLV354.TraceCompletion.candidate_star_le✝ P a)
+    (Eq.mp.{0}
+      (congrFun'.{1, 1}
+        (congrArg.{1, 1} LE.le.{0} (congrArg.{1, 1} (TGLV354.TraceCompletion.cyclicTraceCandidate P) (star_star.{0} a)))
+        (TGLV354.TraceCompletion.cyclicTraceCandidate P (star.{0} a)))
+      (TGLV354.TraceCompletion.candidate_star_le✝ P (star.{0} a)))
+theorem TGLV354.TraceCompletion.cyclicTraceCandidate_dual : ∀ (P : TGLExt.SiteProfile) (s : ℝ)
+  (a : ↥(VonNeumannAlgebra.toStarSubalgebra.{0} (TGLV350.Regular.regularCoreAlgebra P))),
+  Eq.{1} (TGLV354.TraceCompletion.cyclicTraceCandidate P ((TGLV350.Regular.regularDualAction P s) a))
+    (HMul.hMul.{0, 0, 0} (ENNReal.ofReal (Real.exp (Neg.neg.{0} s)))
+      (TGLV354.TraceCompletion.cyclicTraceCandidate P a)) :=
+fun P s a =>
+  let c := ENNReal.ofReal (Real.exp (Neg.neg.{0} s));
+  le_antisymm.{0}
+    (iSup_le.{0, 1} fun p =>
+      iSup_le.{0, 0} fun hp =>
+        have hq :=
+          have h :=
+            TGLV354.TraceCompletion.ShiftRelated.map.{0, 0}
+              (RingEquiv.toMonoidHom.{0, 0}
+                (StarRingEquiv.toRingEquiv.{0, 0}
+                  (StarAlgEquiv.toStarRingEquiv.{0, 0, 0} (TGLV350.Regular.regularDualAction P (Neg.neg.{0} s)))))
+              hp;
+          id.{0}
+            (fun h =>
+              have hc :=
+                Eq.mp.{0}
+                  (congrFun'.{1, 1}
+                    (congrArg.{1, 1} Eq.{1}
+                      (congrArg.{1, 1} (⇑(TGLV350.Regular.regularDualAction P (Neg.neg.{0} s)))
+                        (congrFun'.{1, 1}
+                          (congrArg.{1, 1} DFunLike.coe.{1, 1, 1}
+                            (congrArg.{1, 1} (TGLV350.Regular.regularDualAction P) (neg_neg.{0} s)))
+                          a)))
+                    a)
+                  (TGLV354.TraceCompletion.dual_cancel✝ P (Neg.neg.{0} s) a);
+              Eq.mp.{0}
+                (congrArg.{1, 1}
+                  (TGLV354.TraceCompletion.ShiftRelated.{0}
+                    (TGLV354.TraceCompletion.asCore✝ (TGLV351.positiveDual P (Neg.neg.{0} s) p)))
+                  hc)
+                h)
+            h;
+        have hw :=
+          have h := TGLV350.Regular.scalarInverseLimitWeight_dual P s (TGLV351.positiveDual P (Neg.neg.{0} s) p);
+          Eq.mp.{0}
+            (congrArg.{1, 1}
+              (fun _a =>
+                Eq.{1} (TGLV350.Regular.scalarInverseLimitWeight P _a)
+                  (HMul.hMul.{0, 0, 0} (ENNReal.ofReal (Real.exp (Neg.neg.{0} s)))
+                    (TGLV350.Regular.scalarInverseLimitWeight P (TGLV351.positiveDual P (Neg.neg.{0} s) p))))
+              (TGLV354.TraceCompletion.positive_dual_cancel✝ P s p))
+            h;
+        Eq.mpr.{0}
+          (id.{0}
+            (congrArg.{1, 1}
+              (fun _a =>
+                LE.le.{0} _a
+                  (HMul.hMul.{0, 0, 0} (ENNReal.ofReal (Real.exp (Neg.neg.{0} s)))
+                    (TGLV354.TraceCompletion.cyclicTraceCandidate P a)))
+              hw))
+          (have hbound :=
+            le_iSup_of_le.{0, 1} (TGLV351.positiveDual P (Neg.neg.{0} s) p) (le_iSup_of_le.{0, 0} hq le_rfl.{0});
+          mul_le_mul_right.{0} hbound c))
+    (id.{0}
+      (Eq.mpr.{0}
+        (id.{0}
+          (congrArg.{1, 1}
+            (fun _a =>
+              LE.le.{0} _a (TGLV354.TraceCompletion.cyclicTraceCandidate P ((TGLV350.Regular.regularDualAction P s) a)))
+            (ENNReal.mul_iSup.{1} c fun p =>
+              ⨆ (_ : TGLV354.TraceCompletion.ShiftRelated.{0} (TGLV354.TraceCompletion.asCore✝ p) a),
+                TGLV350.Regular.scalarInverseLimitWeight P p)))
+        (iSup_le.{0, 1} fun p =>
+          Eq.mpr.{0}
+            (id.{0}
+              (congrArg.{1, 1}
+                (fun _a =>
+                  LE.le.{0} _a
+                    (TGLV354.TraceCompletion.cyclicTraceCandidate P ((TGLV350.Regular.regularDualAction P s) a)))
+                (ENNReal.mul_iSup.{0} c fun x => TGLV350.Regular.scalarInverseLimitWeight P p)))
+            (iSup_le.{0, 0} fun hp =>
+              have hq :=
+                TGLV354.TraceCompletion.ShiftRelated.map.{0, 0}
+                  (RingEquiv.toMonoidHom.{0, 0}
+                    (StarRingEquiv.toRingEquiv.{0, 0}
+                      (StarAlgEquiv.toStarRingEquiv.{0, 0, 0} (TGLV350.Regular.regularDualAction P s))))
+                  hp;
+              have hw := TGLV350.Regular.scalarInverseLimitWeight_dual P s p;
+              id.{0}
+                (fun hw =>
+                  Eq.mpr.{0}
+                    (id.{0}
+                      (congrArg.{1, 1}
+                        (fun _a =>
+                          LE.le.{0} _a
+                            (TGLV354.TraceCompletion.cyclicTraceCandidate P
+                              ((TGLV350.Regular.regularDualAction P s) a)))
+                        (Eq.symm.{1} hw)))
+                    (le_iSup_of_le.{0, 1} (TGLV351.positiveDual P s p) (le_iSup_of_le.{0, 0} hq le_rfl.{0})))
+                hw))))
+theorem TGLV354.TraceCompletion.cyclicTraceCandidate_zero : ∀ (P : TGLExt.SiteProfile),
+  Eq.{1} (TGLV354.TraceCompletion.cyclicTraceCandidate P 0) 0 :=
+fun P =>
+  le_antisymm.{0}
+    (iSup_le.{0, 1} fun p =>
+      iSup_le.{0, 0} fun hp =>
+        have hz := TGLV354.TraceCompletion.selfAdjoint_related_zero✝.{0} (TGLV354.TraceCompletion.star_asCore✝ p) hp;
+        have hpz := Subtype.ext.{1} (congrArg.{1, 1} (fun x => ↑x) hz);
+        Eq.mpr.{0}
+          (id.{0} (congrArg.{1, 1} (fun _a => LE.le.{0} (TGLV350.Regular.scalarInverseLimitWeight P _a) 0) hpz))
+          (Eq.mpr.{0}
+            (id.{0} (congrArg.{1, 1} (fun _a => LE.le.{0} _a 0) (TGLV350.Regular.scalarInverseLimitWeight_zero P)))
+            (le_refl.{0} 0)))
+    zero_le.{0}
+theorem TGLV354.TraceCompletion.cyclicTraceCandidate_positive_faithful : ∀ (P : TGLExt.SiteProfile)
+  (p : TGLV350.Regular.PositiveCoreInput P),
+  Eq.{1} (TGLV354.TraceCompletion.cyclicTraceCandidate P (TGLV354.TraceCompletion.asCore✝ p)) 0 ↔
+    Eq.{1} p (TGLV350.Regular.PositiveCoreInput.zero P) :=
+fun P p =>
+  {
+    mp := fun h =>
+      have hle := TGLV354.TraceCompletion.positiveTrace_le_cyclicTraceCandidate P p;
+      (TGLV351.RegularCoreTraceData.faithful.{0} (TGLV350.Regular.scalarInverseLimitTraceData.{0} P) p).mp
+        (le_antisymm.{0}
+          (Eq.mp.{0} (congrArg.{1, 1} (fun _a => LE.le.{0} (TGLV350.Regular.scalarInverseLimitWeight P p) _a) h) hle)
+          zero_le.{0}),
+    mpr := fun a => Eq.ndrec.{0, 1} (TGLV354.TraceCompletion.cyclicTraceCandidate_zero P) (Eq.symm.{1} a) }
+theorem TGLV354.TraceCompletion.cyclicTraceCandidate_positive_of_compatibility : ∀ (P : TGLExt.SiteProfile),
+  (∀ (p q : TGLV350.Regular.PositiveCoreInput P),
+      TGLV354.TraceCompletion.ShiftRelated.{0} (TGLV354.TraceCompletion.asCore✝ p) (TGLV354.TraceCompletion.asCore✝ q) →
+        Eq.{1} (TGLV350.Regular.scalarInverseLimitWeight P p) (TGLV350.Regular.scalarInverseLimitWeight P q)) →
+    ∀ (p : TGLV350.Regular.PositiveCoreInput P),
+      Eq.{1} (TGLV354.TraceCompletion.cyclicTraceCandidate P (TGLV354.TraceCompletion.asCore✝ p))
+        (TGLV350.Regular.scalarInverseLimitWeight P p) :=
+fun P compatible p =>
+  le_antisymm.{0} (iSup_le.{0, 1} fun q => iSup_le.{0, 0} fun hq => le_of_eq.{0} (compatible q p hq))
+    (TGLV354.TraceCompletion.positiveTrace_le_cyclicTraceCandidate P p)
+'TGLV354.TraceCompletion.ShiftRelated' does not depend on any axioms
+'TGLV354.TraceCompletion.ShiftRelated.refl' depends on axioms: [propext]
+'TGLV354.TraceCompletion.ShiftRelated.symm' does not depend on any axioms
+'TGLV354.TraceCompletion.ShiftRelated.trans' depends on axioms: [propext, Quot.sound.{u}]
+'TGLV354.TraceCompletion.ShiftRelated.cyclic' depends on axioms: [propext]
+'TGLV354.TraceCompletion.ShiftRelated.map' does not depend on any axioms
+'TGLV354.TraceCompletion.ShiftRelated.star_transport' depends on axioms: [propext, Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'TGLV354.TraceCompletion.positiveTrace_le_cyclicTraceCandidate' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate_related' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate_cyclic' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate_star' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate_dual' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate_zero' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate_positive_faithful' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'TGLV354.TraceCompletion.cyclicTraceCandidate_positive_of_compatibility' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

@@ -1,0 +1,35 @@
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:56:54: error(lean.unknownIdentifier): Unknown constant `StarAlgEquiv.refl_apply`
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:56:2: error: Type mismatch: After simplification, term
+  Eq.symm h
+ has type
+  @Eq (↥(regularCoreAlgebra P).toStarSubalgebra) ((regularDualAction P s) ((regularDualAction P (-s)) a))
+    (StarAlgEquiv.refl a)
+but is expected to have type
+  @Eq (↥(regularCoreAlgebra P).toStarSubalgebra) ((regularDualAction P s) ((regularDualAction P (-s)) a)) a
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:62:29: error: Application type mismatch: The argument
+  dual_cancel P s (asCore p)
+has type
+  (regularDualAction P s) ((regularDualAction P (-s)) (asCore p)) = asCore p
+but is expected to have type
+  positiveDual P s (positiveDual P (-s) p) = p
+in the application
+  congrArg Subtype.val (dual_cancel P s (asCore p))
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:75:6: error: Tactic `simp` failed with a nested error:
+maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:82:10: warning: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:83:6: error: Application type mismatch: The argument
+  le_iSup_of_le hq le_rfl
+has type
+  ?m.115 hq ≤ iSup ?m.115
+but is expected to have type
+  scalarInverseLimitWeight P (positiveDual P (-s) p) ≤
+    ⨆ (_ : ShiftRelated (asCore (positiveDual P (-s) p)) a), scalarInverseLimitWeight P (positiveDual P (-s) p)
+in the application
+  le_iSup_of_le (positiveDual P (-s) p) (le_iSup_of_le hq le_rfl)
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354CyclicTraceCompletion.lean:95:8: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.

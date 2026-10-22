@@ -1,0 +1,22 @@
+C:\IALD\Central de Patentes\Chatgpt\A2_TRACE_COMPLETION_012\src\TGLExt\V354PolarIntertwining.lean:35:29: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+A B r : H →L[ℂ] H
+hA : IsSelfAdjoint A
+hB : IsSelfAdjoint B
+hr : A * r = r * B
+hkr : (↑r).ker ≤ (↑B).ker
+d : H →L[ℂ] H := CFC.sqrt (star r * r)
+u : H →L[ℂ] H := boundedPolar r
+C : H →L[ℂ] H := A * u - u * B
+hstar : star r * A = B * star r
+hcomm : star r * r * B = B * (star r * r)
+hd : d * B = B * d
+⊢ C * d = A * (u * d) + -1 • (u * (B * d))
+'TGLV354.TraceCompletion.boundedPolar_intertwines' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLV354.TraceCompletion.boundedPolar_transports_shift_factors' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
