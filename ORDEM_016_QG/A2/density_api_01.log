@@ -1,0 +1,21 @@
+MeasureTheory.MeasurePreserving.integrable_comp.{u_1, u_4, u_5} {α : Type u_1} {δ : Type u_4} {ε : Type u_5}
+  {m : MeasurableSpace α} {μ : Measure α} [MeasurableSpace δ] [TopologicalSpace ε] [ContinuousENorm ε] {ν : Measure δ}
+  {g : δ → ε} {f : α → δ} (hf : MeasurePreserving f μ ν) (hg : AEStronglyMeasurable g ν) :
+  Integrable (g ∘ f) μ ↔ Integrable g ν
+MeasureTheory.Integrable.comp_neg.{u_4, u_6} {G : Type u_4} {F : Type u_6} [MeasurableSpace G] [NormedAddCommGroup F]
+  {μ : Measure G} [AddGroup G] [MeasurableNeg G] [μ.IsNegInvariant] {f : G → F} (hf : Integrable f μ) :
+  Integrable (fun t => f (-t)) μ
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensityAPI.lean:6:7: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Integrable.star`
+MeasureTheory.MemLp.integrable_mul.{u_1, u_8} {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {𝕜 : Type u_8}
+  [NormedRing 𝕜] {p q : ENNReal} {f g : α → 𝕜} (hf : MemLp f p μ) (hg : MemLp g q μ) [p.HolderTriple q 1] :
+  Integrable (f * g) μ
+MeasureTheory.MemLp.star.{u_1, u_5} {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {R : Type u_5}
+  [NormedAddCommGroup R] [StarAddMonoid R] [NormedStarGroup R] {p : ENNReal} {f : α → R} (hf : MemLp f p μ) :
+  MemLp (star f) p μ
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensityAPI.lean:9:7: error(lean.unknownIdentifier): Unknown constant `Complex.inner_def`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensityAPI.lean:10:7: error(lean.unknownIdentifier): Unknown constant `Complex.inner_def'`
+MeasureTheory.Measure.measurePreserving_neg.{u_1} {G : Type u_1} [MeasurableSpace G] [Neg G] [MeasurableNeg G]
+  (μ : Measure G) [μ.IsNegInvariant] : MeasurePreserving Neg.neg μ μ
+measurableEmbedding_neg.{u_3} {α : Type u_3} {m : MeasurableSpace α} [InvolutiveNeg α] [MeasurableNeg α] :
+  MeasurableEmbedding Neg.neg
+RCLike.conjLIE.{u_1} {K : Type u_1} [RCLike K] : K ≃ₗᵢ[ℝ] K

@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\polys\polyutils.py", line 231, in _parallel_dict_from_expr_if_gens
+    monom[indices[base]] = exp
+          ~~~~~~~^^^^^^
+KeyError: 1/z
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A7\position_metric_second_curvature_check.py", line 19, in <module>
+    point=(1,2,0,-1);zv=sum(t*t for t in point);G,GL,den=second_integer(point)
+                                                         ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A7\position_metric_second_curvature_engine.py", line 30, in second_integer
+    z=sum(t*t for t in x);denom,entries=second_data();G,GL=empty(),empty()
+                                        ~~~~~~~~~~~^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A7\position_metric_second_curvature_engine.py", line 23, in second_data
+    terms=s.Poly(s.expand(sz**2*M[a,b]),*sx,sz,sL).terms()
+          ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\polys\polytools.py", line 190, in __new__
+    return cls._from_expr(rep, opt)
+           ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\polys\polytools.py", line 319, in _from_expr
+    rep, opt = _dict_from_expr(rep, opt)
+               ~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\polys\polyutils.py", line 388, in _dict_from_expr
+    rep, gens = _dict_from_expr_if_gens(expr, opt)
+                ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\polys\polyutils.py", line 327, in _dict_from_expr_if_gens
+    (poly,), gens = _parallel_dict_from_expr_if_gens((expr,), opt)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\polys\polyutils.py", line 236, in _parallel_dict_from_expr_if_gens
+    raise PolynomialError("%s contains an element of "
+                          "the set of generators." % factor)
+sympy.polys.polyerrors.PolynomialError: 1/z contains an element of the set of generators.

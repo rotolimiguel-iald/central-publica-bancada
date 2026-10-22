@@ -1,0 +1,30 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail.lean:38:32: error(lean.invalidField): Invalid field `mul`: The environment does not contain `HasFDerivAtFilter.mul`, so it is not possible to project the field `mul` from an expression
+  hasDerivAt_id x
+of type
+  HasFDerivAtFilter id (ContinuousLinearMap.toSpanSingleton ℝ 1) (nhds x ×ˢ pure x)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail.lean:36:49: error: unsolved goals
+f : ℝ → ℝ
+hf : Continuous f
+hint : ∀ (x : ℝ), IntegrableOn f (Ioi x) volume
+hmoment : ∀ (x : ℝ), IntegrableOn (fun u => u * f u) (Ioi x) volume
+x : ℝ
+hd1 : HasDerivAt (tail fun u => u * f u) (-(x * f x)) x
+⊢ HasDerivAt (weightedTail f) (-tail f x) x
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail.lean:51:58: error(lean.invalidField): Invalid field `const_mul`: The environment does not contain `HasFDerivAtFilter.const_mul`, so it is not possible to project the field `const_mul` from an expression
+  weightedTail_hasDerivAt f hf hint hmoment x
+of type
+  HasFDerivAtFilter (weightedTail f) (ContinuousLinearMap.toSpanSingleton ℝ (-tail f x)) (nhds x ×ˢ pure x)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail.lean:52:42: error(lean.invalidField): Invalid field `const_mul`: The environment does not contain `HasFDerivAtFilter.const_mul`, so it is not possible to project the field `const_mul` from an expression
+  tail_hasDerivAt f hf hint x
+of type
+  HasFDerivAtFilter (tail f) (ContinuousLinearMap.toSpanSingleton ℝ (-f x)) (nhds x ×ˢ pure x)
+'ChatgptAudit.Teleological016.tail_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.Teleological016.weightedTail_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.Teleological016.weightedTail_hasDerivAt' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.Teleological016.teleological_equations' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

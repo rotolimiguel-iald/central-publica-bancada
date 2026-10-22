@@ -1,0 +1,31 @@
+import PhotonContract
+
+set_option autoImplicit false
+noncomputable section
+namespace ORDEM016.Photon.WeightControls
+open ORDEM016.Photon.SpecificAQFT
+
+theorem massless_scalar_rejected (W : TGLSpecificAQFTWitness)
+    (hm : W.m=0) (hh : W.helicity=0) : False := by
+  have h := W.peso_do_nome
+  simp [hm,hh] at h
+
+/-- Admission of these spectral values is not existence of a photon AQFT net. -/
+theorem photon_plus_weight : (0 : ℝ)<0 ∨ (1 : ℤ)≠0 := Or.inr (by decide)
+theorem photon_minus_weight : (0 : ℝ)<0 ∨ (-1 : ℤ)≠0 := Or.inr (by decide)
+
+theorem massless_requires_nonzero_helicity (W : TGLSpecificAQFTWitness) (hm : W.m=0) :
+    W.helicity≠0 := by
+  simpa [hm] using W.peso_do_nome
+
+/-- Exact scope diagnostic: the requested disjunction alone does not prohibit
+negative mass in a nonzero-helicity sector. No physical witness is asserted. -/
+theorem disjunction_alone_allows_negative_mass :
+    (0 : ℝ)< -1 ∨ (1 : ℤ)≠0 := Or.inr (by decide)
+
+#print axioms massless_scalar_rejected
+#print axioms photon_plus_weight
+#print axioms photon_minus_weight
+#print axioms massless_requires_nonzero_helicity
+#print axioms disjunction_alone_allows_negative_mass
+end ORDEM016.Photon.WeightControls

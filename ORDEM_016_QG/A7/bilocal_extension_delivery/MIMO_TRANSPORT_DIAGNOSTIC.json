@@ -1,0 +1,117 @@
+{
+  "at": "2026-09-25T09:40:20.795735+00:00",
+  "scope": "LOCAL_READ_ONLY_NO_NETWORK_NO_RETRY",
+  "attempts": [
+    {
+      "job_id": "4bdcaf7f-031c-473c-ac20-fe31208e261d",
+      "execution_id": "809fc1f2-2f3b-40c2-9d5c-ae62ed9a513b",
+      "created_at": "2026-09-25T08:42:21.872478+00:00",
+      "updated_at": "2026-09-25T08:57:28.533477+00:00",
+      "creation_to_update_seconds": 906.661,
+      "status": "failed",
+      "error": "IncompleteRead",
+      "stored_prompt_utf8_bytes": 14388,
+      "routing_prompt_utf8_bytes": 14388,
+      "result_available": false,
+      "decision_keys": [
+        "task",
+        "candidates",
+        "matrix",
+        "selected",
+        "status",
+        "quality_status",
+        "quota_scope",
+        "reason",
+        "execution_constraints",
+        "cost_reservation",
+        "canonical_memory",
+        "jev"
+      ],
+      "canonical_memory_size_metadata": {
+        "context_bytes": 909019,
+        "coverage": "PARTIAL_RETRIEVAL_NOT_FULL_CORPUS"
+      }
+    },
+    {
+      "job_id": "88e54d74-32e7-469a-8ba3-f8e8a408946b",
+      "execution_id": "65b91988-90d5-48a5-a435-2b321ae80ddb",
+      "created_at": "2026-09-25T08:59:30.655146+00:00",
+      "updated_at": "2026-09-25T09:14:36.695500+00:00",
+      "creation_to_update_seconds": 906.04,
+      "status": "failed",
+      "error": "IncompleteRead",
+      "stored_prompt_utf8_bytes": 17127,
+      "routing_prompt_utf8_bytes": 17127,
+      "result_available": false,
+      "decision_keys": [
+        "task",
+        "candidates",
+        "matrix",
+        "selected",
+        "status",
+        "quality_status",
+        "quota_scope",
+        "reason",
+        "execution_constraints",
+        "cost_reservation",
+        "canonical_memory",
+        "jev"
+      ],
+      "canonical_memory_size_metadata": {
+        "context_bytes": 909092,
+        "coverage": "PARTIAL_RETRIEVAL_NOT_FULL_CORPUS"
+      }
+    },
+    {
+      "job_id": "7f606d88-ac59-4940-9bb0-d7be6ba306ea",
+      "execution_id": "e431babd-ad49-426c-bb63-86a296e88937",
+      "created_at": "2026-09-25T09:18:34.439751+00:00",
+      "updated_at": "2026-09-25T09:33:40.585182+00:00",
+      "creation_to_update_seconds": 906.145,
+      "status": "failed",
+      "error": "IncompleteRead",
+      "stored_prompt_utf8_bytes": 8708,
+      "routing_prompt_utf8_bytes": 8708,
+      "result_available": false,
+      "decision_keys": [
+        "task",
+        "candidates",
+        "matrix",
+        "selected",
+        "status",
+        "quality_status",
+        "quota_scope",
+        "reason",
+        "execution_constraints",
+        "cost_reservation",
+        "canonical_memory",
+        "jev"
+      ],
+      "canonical_memory_size_metadata": {
+        "context_bytes": 909094,
+        "coverage": "PARTIAL_RETRIEVAL_NOT_FULL_CORPUS"
+      }
+    }
+  ],
+  "active_job_status": "running",
+  "adapter": {
+    "stream": false,
+    "timeout_seconds": 7200,
+    "response_cap_bytes": 32000000,
+    "max_completion_tokens": 131072
+  },
+  "findings": [
+    "Falha recorrente de leitura HTTP incompleta; corpo interrompido nao e resposta valida.",
+    "read(MAX_RESPONSE_BYTES+1) limita bytes lidos; exceder limite completo produz RuntimeError distinto. IncompleteRead nao demonstra estouro desse teto.",
+    "Adapter usa resposta nao streaming; interrupcao em intermediario ou servidor durante geracao longa e hipotese, nao causa provada.",
+    "Runtime preserva apenas classe IncompleteRead; sem headers, bytes parciais/esperados ou request ID, nao se pode distinguir defeito sistematico local de corte remoto.",
+    "Historico inclui respostas completas no mesmo adaptador; nao prova confiabilidade em chamadas longas.",
+    "Nao alterados prompts/configuracao nem interrompido all_order. Antes de proximo MiMo, manter revisao de transporte pendente; nao reabrir falhas."
+  ],
+  "source_hashes": {
+    "mimo.py": "61e420658117f12b9da30080464f680b63015df9ed92a7d6b5ebd84e78ea2893",
+    "runtime.py": "5e6c2dba096007a278980615c36c21f779df6697246f2379d66a43c4013f9796"
+  },
+  "next_mimo_dispatch": "HOLD_PENDING_TRANSPORT_REVIEW_AFTER_CURRENT_CALL",
+  "source_thread_id": "01a070fc-9484-7e13-a654-c6b5f61093a4"
+}

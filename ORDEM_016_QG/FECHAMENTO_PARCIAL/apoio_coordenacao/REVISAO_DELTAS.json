@@ -1,0 +1,95 @@
+{
+  "status": "INDEPENDENT_STATIC_DELTA_REVIEW_NO_EXECUTION",
+  "at_utc": "2026-09-26T14:25:20.588694+00:00",
+  "examined": {
+    "assemble_package.py": {
+      "sha256": "f3ff635ae1d22c9f2a5b5722eb65a16ed7fccb10054b2eed3d63882dd1072a4c",
+      "bytes": 17036
+    },
+    "PROPOSTA_RUNTIME.py": {
+      "sha256": "32496fd5629d91532c11dbe7ccb0801bcafc75b5e4910bf4c27ac6af44e279a6",
+      "bytes": 7990
+    },
+    "reproduzir.py": {
+      "sha256": "c1fbe1435c9c12b6990e40b27d31940db53e806e210b9cccf6a2ec908364a7a6",
+      "bytes": 4411
+    },
+    "lean/ContratoQG_v32_Proposta.lean": {
+      "sha256": "3ab863dddd41f7583156ab6d9335c04cec3d431c6c182a58c224ddd9646ca4a4",
+      "bytes": 5449
+    },
+    "test_runtime_proposal.py": {
+      "sha256": "740cffc17e7e00f1604c2d1448d705500282af570ae7110101ae0d9ba53268f7",
+      "bytes": 4407
+    },
+    "RUNTIME_CONTROLS.json": {
+      "sha256": "388e02a2c8ceffa7231fe4318b2fa2028401aa4b9a95d72fa01e3e981a1124ef",
+      "bytes": 28553
+    }
+  },
+  "method": [
+    "byte SHA256 measured from files",
+    "Python AST parse only",
+    "source and recorded synthetic-control inspection",
+    "no Lean compilation, batch duplication, provider call or source modification"
+  ],
+  "closed_from_prior_review": [
+    {
+      "id": "F1",
+      "basis": "assemble_package.py:46 requires ContratoQG_v32_Proposta in joint.modules; collect_unit plus all rc==0 covers its successful unit."
+    },
+    {
+      "id": "F3-assembly",
+      "basis": "assemble_package.py:145 checks the historical source against its indexed SHA before copying; seal checks unchanged flags."
+    },
+    {
+      "id": "F5-partial",
+      "basis": "PROPOSTA_RUNTIME.py:76-103 binds unit rc/source/log hashes to receipt and declaration names/axioms/count to BENCH_DECL lines."
+    },
+    {
+      "id": "F6",
+      "basis": "reproduzir.py:19-25 requires an independent expected PRONTO SHA before copying or compiling."
+    },
+    {
+      "id": "F4",
+      "basis": "assemble_package.py:108 extracts TGL/TGLExt imports from actual copied unit source files, including supplemental units."
+    },
+    {
+      "id": "P3-consumer",
+      "basis": "ContratoQG_v32_Proposta.lean contains #check applying the D6 consumer to h2.Δit and produce.light_horizon.Δit; this is a source query, with compilation still pending."
+    }
+  ],
+  "remaining_findings": [
+    {
+      "id": "R1",
+      "severity": "MEDIUM",
+      "title": "P8 seal trusts a stale unchanged flag",
+      "location": "assemble_package.py:171",
+      "evidence": "seal checks each P8_COPIAS.unchanged boolean but does not rehash P/evidence path against sha256 and previously_indexed_sha256. A copied historical report changed after assembly and before seal could be included in PRONTO without a fresh P8 discrepancy.",
+      "suggestion": "At seal, require sha(P/x[path]) == x[sha256] == x[previously_indexed_sha256] for every P8 row."
+    },
+    {
+      "id": "R2",
+      "severity": "LOW",
+      "title": "Runtime does not bind declaration kinds to BENCH_DECL",
+      "location": "PROPOSTA_RUNTIME.py:84-103",
+      "evidence": "The parser reads kind and rejects axiom but does not compare each kind to unit.declaration_kinds. A package internally repinned with theorem changed to definition in the unit metadata may pass while reporting an inaccurate kind.",
+      "suggestion": "Collect log kinds and require exact equality to unit.declaration_kinds; add a repinned_bad_kind synthetic control."
+    }
+  ],
+  "pending_dependency": {
+    "file": "PACKAGING_ADJUDICATION.json",
+    "observed": "absent at review time",
+    "effect": "assemble_package.py:154 copies this file unconditionally; assembly will fail if still absent after batch. This may be a planned work-in-progress artifact, not evidence of a completed-package defect."
+  },
+  "controls_recorded": {
+    "cases": 15,
+    "all_passed_recorded": true,
+    "independently_executed_here": false
+  },
+  "limits": [
+    "No package assembly or end-to-end reproduction was run",
+    "P3 #check has not been observed to compile in this review",
+    "No scientific or gate claim follows from static review"
+  ]
+}

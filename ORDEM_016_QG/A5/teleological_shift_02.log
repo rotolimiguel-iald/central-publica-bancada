@@ -1,0 +1,26 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalShift_v2.lean:16:63: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  indicator (Real.lt✝ 0) ?f u
+in the target expression
+  f (l + u) = (Ioi 0).indicator (fun u => f (l + u)) u
+
+case pos
+f : ℝ → ℝ
+l : ℝ
+h : ∫ (x : ℝ), (Ioi l).indicator f (l + x) = ∫ (x : ℝ), (Ioi l).indicator f x
+u : ℝ
+hu : 0 < u
+⊢ f (l + u) = (Ioi 0).indicator (fun u => f (l + u)) u
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalShift_v2.lean:17:68: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  indicator (Real.lt✝ 0) ?f u
+in the target expression
+  0 = (Ioi 0).indicator (fun u => f (l + u)) u
+
+case neg
+f : ℝ → ℝ
+l : ℝ
+h : ∫ (x : ℝ), (Ioi l).indicator f (l + x) = ∫ (x : ℝ), (Ioi l).indicator f x
+u : ℝ
+hu : ¬0 < u
+⊢ 0 = (Ioi 0).indicator (fun u => f (l + u)) u
+'ChatgptAudit.Teleological016.tail_shift' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.Teleological016.weighted_tail_shift' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

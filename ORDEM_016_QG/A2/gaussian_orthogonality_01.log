@@ -1,0 +1,24 @@
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayGaussianOrthogonality.lean:37:85: error: unsolved goals
+b : ℝ
+hb : 0 < b
+r : ℝ
+h : ↥SpectralHilbert
+p : ℝ
+hp : ↑↑(fourierUnitary (productCore 0 b r ⋯ hb)) p = ↑(gaussianSpectralWeight b p) * cexp (-2 * ↑Real.pi * I * ↑r * ↑p)
+⊢ ↑(gaussianSpectralWeight b p) * cexp (-(↑Real.pi * I * ↑r * ↑p * 2)) * (starRingEnd ℂ) (↑↑(fourierUnitary h) p) =
+    ↑(gaussianSpectralWeight b p) * cexp (-(↑Real.pi * I * ↑r * ↑p * 2)) * star (↑↑(fourierUnitary h) p)
+'ChatgptAudit.LightRayCore016.gaussian_core_fourier_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_core_inner_fourier' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_core_real_orthogonal_separates' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

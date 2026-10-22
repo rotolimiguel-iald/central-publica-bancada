@@ -1,0 +1,66 @@
+{
+  "at": "2026-09-25T08:41:08.087146+00:00",
+  "status": "ACTIVE_TWO_DISTINCT_PROVIDERS_RUNNING",
+  "legacy_job": "96648157-7424-49ad-b606-6cafe72b9988",
+  "legacy_status": "result_ready",
+  "policy": {
+    "global_max": 3,
+    "per_provider": 1,
+    "providers": [
+      "kimi",
+      "mimo",
+      "deepseek"
+    ],
+    "max_nonterminal": 5
+  },
+  "tests": {
+    "focused": {
+      "passed": 34,
+      "failed": 0
+    },
+    "initial_regression": {
+      "passed": 52,
+      "environment_errors": 4,
+      "error": "Flask unavailable in Python314; web tests not run"
+    }
+  },
+  "files": {
+    "iald_orchestrator\\runtime.py": "5e6c2dba096007a278980615c36c21f779df6697246f2379d66a43c4013f9796",
+    "iald_orchestrator\\transport.py": "51689027caf1b5246d54b6c7c73b2e3148ee98e9719aefd0a9112e9e3bda2b67",
+    "validation\\test_provider_parallelism.py": "f3156669489e6dc0ac07084f8e912dcb7ffd90fc499ea4ecb69829ca2d92c7c8"
+  },
+  "limits": [
+    "No live concurrency measured yet",
+    "Activation after legacy call completes; no interruption",
+    "Old processes retain serial code; new CLI uses current code",
+    "No provider capacity guarantee; same quotas, memory and authorization",
+    "Transport next prioritizes completed results and available provider; same-provider FIFO"
+  ],
+  "surfaces": {
+    "local_worker": "updated",
+    "web_public": "unchanged",
+    "ios": "not_applicable",
+    "android": "not_applicable"
+  },
+  "activated_at": "2026-09-25T08:42:55.599394+00:00",
+  "activation_evidence": [
+    {
+      "at": "2026-09-25T08:42:54.881168+00:00",
+      "job_id": "4bdcaf7f-031c-473c-ac20-fe31208e261d",
+      "stage": "execution_waiting",
+      "execution_task_id": "809fc1f2-2f3b-40c2-9d5c-ae62ed9a513b",
+      "execution_status": "running",
+      "exec_session_id": 48008,
+      "instruction": "Shared session; poll/sync only, never execute again."
+    },
+    {
+      "at": "2026-09-25T08:42:55.590712+00:00",
+      "job_id": "b323257e-1d28-4689-a393-2ded69cfe5cd",
+      "stage": "execution_waiting",
+      "execution_task_id": "901fffdb-5550-436f-8891-070d42b377f2",
+      "execution_status": "running",
+      "exec_session_id": 48008,
+      "instruction": "Shared session; poll/sync only, never execute again."
+    }
+  ]
+}

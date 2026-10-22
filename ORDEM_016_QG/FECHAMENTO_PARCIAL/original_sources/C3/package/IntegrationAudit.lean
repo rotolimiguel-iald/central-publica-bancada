@@ -1,0 +1,144 @@
+import TheEquationOfTruth_T20_v3
+import QubitScalarEntropy
+import IdempotentDephasing_v2
+import InfiniteLimitUniformControl_v2
+import ModularGeneratorControl
+import InscriptionBridge
+import PenaltyThreeLocksBridge_v2
+import QubitEntropyDerivative_v3
+import FiniteGapRate_v2
+import OperatorContourBridge_v2
+import TheEquationOfTruth_T20_controles_v3
+import NegativeControlsCompleteness_v2
+
+-- All twelve sources coexist; no new theorem or physical identification.
+#print axioms TGLExt.EquationOfTruth.H_mul_proj
+#print axioms TGLExt.EquationOfTruth.IdempotentDephasing.exp_complement_idempotent
+#print axioms TGLExt.EquationOfTruth.IdempotentDephasing.exp_mul_of_eigenfactor
+#print axioms TGLExt.EquationOfTruth.InfiniteLimitControl.no_uniform_small_error
+#print axioms TGLExt.EquationOfTruth.InfiniteLimitControl.scalar_pointwise_limit
+#print axioms TGLExt.EquationOfTruth.InfiniteLimitControl.uniform_error_lower_bound
+#print axioms TGLExt.EquationOfTruth.ModularGeneratorControl.example_generator_nonzero
+#print axioms TGLExt.EquationOfTruth.ModularGeneratorControl.exists_normalized_nonzero_generator
+#print axioms TGLExt.EquationOfTruth.ModularGeneratorControl.modularGen_zero_iff_commute
+#print axioms TGLExt.EquationOfTruth.ModularGeneratorControl.rhoExample_posDef
+#print axioms TGLExt.EquationOfTruth.ModularGeneratorControl.rhoExample_trace
+#print axioms TGLExt.EquationOfTruth.ModularGeneratorControl.scalar_modularGen_zero
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_1_oblique_algebra
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_1_oblique_flow_fails
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_2_kernel_selected
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_2_nonsymmetric
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_3a_indefinite_no_limit
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_3b_product_conserved
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_3b_reader_continuous
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_3b_reader_not_factor
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_4_not_continuous
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_4_reader_conserved
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_4_reader_not_factor
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_5_constant_false_positive
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_6_outside_bits
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_7_bad_pruning
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_8_signed_penalty
+#print axioms TGLExt.EquationOfTruth.NegativeControls.C1_9_invalid_qubit
+#print axioms TGLExt.EquationOfTruth.NegativeControls.constant_reader_always_conserved
+#print axioms TGLExt.EquationOfTruth.NegativeControls.diagonalFlow_eq
+#print axioms TGLExt.EquationOfTruth.NegativeControls.diagonalFlow_mulVec
+#print axioms TGLExt.EquationOfTruth.NegativeControls.fixedP_idempotent
+#print axioms TGLExt.EquationOfTruth.NegativeControls.fixedP_selects_kernel
+#print axioms TGLExt.EquationOfTruth.NegativeControls.indefinite_kernel_zero
+#print axioms TGLExt.EquationOfTruth.NegativeControls.invalidDensity_determinant
+#print axioms TGLExt.EquationOfTruth.NegativeControls.invalidDensity_not_positive
+#print axioms TGLExt.EquationOfTruth.NegativeControls.invalidDensity_trace_one
+#print axioms TGLExt.EquationOfTruth.NegativeControls.negative_unit_flow
+#print axioms TGLExt.EquationOfTruth.NegativeControls.negative_unit_kernel
+#print axioms TGLExt.EquationOfTruth.QubitScalar.asymptotic_argument_mem
+#print axioms TGLExt.EquationOfTruth.QubitScalar.deficit_antitoneOn
+#print axioms TGLExt.EquationOfTruth.QubitScalar.deficit_nonneg
+#print axioms TGLExt.EquationOfTruth.QubitScalar.deriv_entropy
+#print axioms TGLExt.EquationOfTruth.QubitScalar.entropy_abs_identity
+#print axioms TGLExt.EquationOfTruth.QubitScalar.entropy_argument_mem
+#print axioms TGLExt.EquationOfTruth.QubitScalar.entropy_le_diagonal
+#print axioms TGLExt.EquationOfTruth.QubitScalar.entropy_log_ratio
+#print axioms TGLExt.EquationOfTruth.QubitScalar.entropy_monotoneOn
+#print axioms TGLExt.EquationOfTruth.QubitScalar.entropy_strictMonoOn
+#print axioms TGLExt.EquationOfTruth.QubitScalar.hasDerivAt_entropy
+#print axioms TGLExt.EquationOfTruth.QubitScalar.hasDerivAt_radius
+#print axioms TGLExt.EquationOfTruth.QubitScalar.radicand_nonneg
+#print axioms TGLExt.EquationOfTruth.QubitScalar.radius_antitone
+#print axioms TGLExt.EquationOfTruth.QubitScalar.radius_lower_bound
+#print axioms TGLExt.EquationOfTruth.QubitScalar.radius_lt_one
+#print axioms TGLExt.EquationOfTruth.QubitScalar.radius_nonneg
+#print axioms TGLExt.EquationOfTruth.QubitScalar.radius_strictAnti
+#print axioms TGLExt.EquationOfTruth.T_add
+#print axioms TGLExt.EquationOfTruth.T_apply_eigen
+#print axioms TGLExt.EquationOfTruth.T_decomp
+#print axioms TGLExt.EquationOfTruth.T_fix_of_mem_ker
+#print axioms TGLExt.EquationOfTruth.apply_eq_apply_iff
+#print axioms TGLExt.EquationOfTruth.conserved_iff_factors
+#print axioms TGLExt.EquationOfTruth.conserved_iff_factors_T
+#print axioms TGLExt.EquationOfTruth.conserved_iff_factors_of_nonneg
+#print axioms TGLExt.EquationOfTruth.conserved_iff_factors_penalty
+#print axioms TGLExt.EquationOfTruth.diagonal_norm_bound
+#print axioms TGLExt.EquationOfTruth.distinguishing_reading_iff
+#print axioms TGLExt.EquationOfTruth.distinguishing_verdict_eq
+#print axioms TGLExt.EquationOfTruth.equation_criterion_can_fail
+#print axioms TGLExt.EquationOfTruth.equation_of_truth_is_not_static
+#print axioms TGLExt.EquationOfTruth.exp_apply_of_eigen
+#print axioms TGLExt.EquationOfTruth.exp_mul_eq_of_mul_eq_zero
+#print axioms TGLExt.EquationOfTruth.finite_gap_norm_rate
+#print axioms TGLExt.EquationOfTruth.flowTendsToFamily_of_finiteDimensional
+#print axioms TGLExt.EquationOfTruth.flow_derivative_ne_zero_at_zero
+#print axioms TGLExt.EquationOfTruth.flow_identity_of_kernel_top
+#print axioms TGLExt.EquationOfTruth.flow_mul_proj
+#print axioms TGLExt.EquationOfTruth.flow_preserves_inscription_form
+#print axioms TGLExt.EquationOfTruth.hasDerivAt_flow
+#print axioms TGLExt.EquationOfTruth.hasDerivAt_flow_apply
+#print axioms TGLExt.EquationOfTruth.hasDerivAt_profA
+#print axioms TGLExt.EquationOfTruth.hasDerivAt_profQ
+#print axioms TGLExt.EquationOfTruth.hasDerivAt_reading_T
+#print axioms TGLExt.EquationOfTruth.hasDerivAt_reading_flow
+#print axioms TGLExt.EquationOfTruth.inscription_form_survives
+#print axioms TGLExt.EquationOfTruth.isSelfAdjoint_penalty
+#print axioms TGLExt.EquationOfTruth.iterate_T_eq_nat_time
+#print axioms TGLExt.EquationOfTruth.ker_penalty
+#print axioms TGLExt.EquationOfTruth.ker_threeLocks
+#print axioms TGLExt.EquationOfTruth.mem_range_iff_fixed
+#print axioms TGLExt.EquationOfTruth.mul_exp_eq_of_mul_eq_zero
+#print axioms TGLExt.EquationOfTruth.name_verifies_T
+#print axioms TGLExt.EquationOfTruth.name_verifies_T_iterate
+#print axioms TGLExt.EquationOfTruth.operator_zero_of_kernel_top
+#print axioms TGLExt.EquationOfTruth.penalty_eq_kernel_H3L
+#print axioms TGLExt.EquationOfTruth.positive_time_changes_nonfixed_content
+#print axioms TGLExt.EquationOfTruth.pow_eq_self
+#print axioms TGLExt.EquationOfTruth.profA_deriv_zero
+#print axioms TGLExt.EquationOfTruth.profA_second_deriv_zero
+#print axioms TGLExt.EquationOfTruth.profA_zero
+#print axioms TGLExt.EquationOfTruth.profQ_deriv_zero
+#print axioms TGLExt.EquationOfTruth.profQ_zero
+#print axioms TGLExt.EquationOfTruth.proj_mul_H
+#print axioms TGLExt.EquationOfTruth.proj_mul_T
+#print axioms TGLExt.EquationOfTruth.proj_mul_flow
+#print axioms TGLExt.EquationOfTruth.re_inner_adjoint_mul_self
+#print axioms TGLExt.EquationOfTruth.re_inner_penalty
+#print axioms TGLExt.EquationOfTruth.reading_T
+#print axioms TGLExt.EquationOfTruth.reading_eigen_zero
+#print axioms TGLExt.EquationOfTruth.reading_eq_kernel_PF
+#print axioms TGLExt.EquationOfTruth.reading_zero_of_kernel_bot
+#print axioms TGLExt.EquationOfTruth.same_form_changed_name
+#print axioms TGLExt.EquationOfTruth.sampling_zero_conserves_every_reader
+#print axioms TGLExt.EquationOfTruth.selector_nonpos
+#print axioms TGLExt.EquationOfTruth.single_time_conserved_iff_factors
+#print axioms TGLExt.EquationOfTruth.starProjection_range_iff_fixed
+#print axioms TGLExt.EquationOfTruth.transportedInscription
+#print axioms TGLExt.EquationOfTruth.transported_name_eq_flow
+#print axioms TGLExt.EquationOfTruth.truthBit_bivalent
+#print axioms TGLExt.EquationOfTruth.truthBit_eq_one_iff
+#print axioms TGLExt.EquationOfTruth.truthBit_eq_zero_iff
+#print axioms TGLExt.EquationOfTruth.truthValue_table
+#print axioms TGLExt.EquationOfTruth.unit_operator_flow_real
+#print axioms TGLExt.EquationOfTruth.verdict_T
+#print axioms TGLExt.EquationOfTruth.verdict_eq_one_iff
+#print axioms TGLExt.EquationOfTruth.verdict_one_of_kernel_bot
+#print axioms TGLExt.EquationOfTruth.zero_operator_reading_real
+#print axioms TGLExt.the_criterion_can_fail
+#print axioms TGLExt.truth_is_not_static_equality

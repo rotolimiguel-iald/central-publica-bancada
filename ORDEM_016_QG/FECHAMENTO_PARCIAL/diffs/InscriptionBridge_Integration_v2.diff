@@ -1,0 +1,36 @@
+--- InscriptionBridge
++++ InscriptionBridge_Integration_v2
+@@ -23,19 +23,19 @@
+ 
+ def transportedInscription (H : E →L[𝕜] E) [H.ker.HasOrthogonalProjection]
+     (hH : IsSelfAdjoint H) (r : E) (s : ℝ) :
+-    NameIsTheContent.Inscricao E (inscriptionForm H r) :=
+-  NameIsTheContent.travessia (T H s) (flow_preserves_inscription_form H hH r s) ⟨r,rfl⟩
++    TGLExt.NameIsTheContent.Inscricao E (inscriptionForm H r) :=
++  TGLExt.NameIsTheContent.travessia (T H s) (flow_preserves_inscription_form H hH r s) ⟨r,rfl⟩
+ 
+ theorem inscription_form_survives (H : E →L[𝕜] E)
+     [H.ker.HasOrthogonalProjection] (hH : IsSelfAdjoint H) (r : E) (s : ℝ) :
+-    NameIsTheContent.identidade E (inscriptionForm H r)
++    TGLExt.NameIsTheContent.identidade E (inscriptionForm H r)
+       (transportedInscription H hH r s).conteudo :=
+-  NameIsTheContent.the_form_survives_the_crossing (T H s)
++  TGLExt.NameIsTheContent.the_form_survives_the_crossing (T H s)
+     (flow_preserves_inscription_form H hH r s) ⟨r,rfl⟩
+ 
+ theorem transported_name_eq_flow (H : E →L[𝕜] E)
+     [H.ker.HasOrthogonalProjection] (hH : IsSelfAdjoint H) (r : E) (s : ℝ) :
+-    NameIsTheContent.nome (transportedInscription H hH r s) = T H s r := rfl
++    TGLExt.NameIsTheContent.nome (transportedInscription H hH r s) = T H s r := rfl
+ 
+ theorem positive_time_changes_nonfixed_content [FiniteDimensional 𝕜 E]
+     (H : E →L[𝕜] E) (hH : IsSelfAdjoint H)
+@@ -57,7 +57,7 @@
+     (hpos : ∀ x, 0 ≤ RCLike.re ⟪x,H x⟫_𝕜) (r : E) (hr : r ∉ H.ker) :
+     ∃ s : ℝ, 0 < s ∧
+       inscriptionForm H r (transportedInscription H hH r s).conteudo ∧
+-      NameIsTheContent.nome (transportedInscription H hH r s) ≠ r := by
++      TGLExt.NameIsTheContent.nome (transportedInscription H hH r s) ≠ r := by
+   obtain ⟨s,hs,hchange⟩ := positive_time_changes_nonfixed_content H hH hpos r hr
+   exact ⟨s,hs,inscription_form_survives H hH r s,hchange⟩
+ 

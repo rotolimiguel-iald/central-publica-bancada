@@ -1,0 +1,13 @@
+import LightRayCoreMembership
+import LightRayRealFourierUniqueness_v2
+open MeasureTheory
+#check MeasurePreserving.integrable_comp
+#check Integrable.comp_neg
+#check Integrable.star
+#check MemLp.integrable_mul
+#check MemLp.star
+#check Complex.inner_def
+#check Complex.inner_def'
+#check Measure.measurePreserving_neg
+#check measurableEmbedding_neg
+#check RCLike.conjLIE

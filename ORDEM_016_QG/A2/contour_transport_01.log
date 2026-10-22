@@ -1,0 +1,20 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayContourTransport.lean:46:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  fun T => ∫ (x : ℝ) in -T..T, F (↑x + ↑w * I)
+in the target expression
+  Tendsto (fun i => ∫ (x : ℝ) in -i..id i, F (↑x + ↑w * I)) atTop (𝓝 (∫ (x : ℝ), F (↑x + ↑w * I) ∂volume))
+
+F : ℂ → ℂ
+hF : Differentiable ℂ F
+w : ℝ
+h0 : Integrable (fun x => F ↑x) volume
+hw : Integrable (fun x => F (↑x + ↑w * I)) volume
+hv : Tendsto (verticalDifference F w) atTop (𝓝 0)
+ht : Tendsto (fun i => ∫ (x : ℝ) in -i..id i, F (↑x + ↑w * I)) atTop (𝓝 (∫ (x : ℝ), F (↑x + ↑w * I) ∂volume))
+hb : Tendsto (fun i => ∫ (x : ℝ) in -i..id i, F ↑x) atTop (𝓝 (∫ (x : ℝ), F ↑x ∂volume))
+he : (fun T => ∫ (x : ℝ) in -T..T, F (↑x + ↑w * I)) = fun T => (∫ (x : ℝ) in -T..T, F ↑x) + verticalDifference F w T
+⊢ ∫ (x : ℝ), F (↑x + ↑w * I) = ∫ (x : ℝ), F ↑x
+'ChatgptAudit.LightRayCore016.rectangle_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.horizontal_integral_eq_of_vertical_limit' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

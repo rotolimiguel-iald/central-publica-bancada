@@ -1,0 +1,33 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\InfiniteLimitUniformControl.lean:18:4: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\InfiniteLimitUniformControl.lean:20:4: error: Type mismatch: After simplification, term
+  Tendsto.comp Real.tendsto_exp_neg_atTop_nhds_zero (Tendsto.atTop_mul_const hp tendsto_id)
+ has type
+  Tendsto ((fun x => Real.exp (-x)) ∘ fun x => x * u) atTop (𝓝 0)
+but is expected to have type
+  Tendsto (fun x => x * u) atTop atTop
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\InfiniteLimitUniformControl.lean:34:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a * ?b / ?c
+in the target expression
+  s * (1 / (s + 1)) < 1
+
+s : ℝ
+hs : 0 ≤ s
+u : ℝ := 1 / (s + 1)
+hd : 0 < s + 1
+hu : 0 < u
+hu1 : u ≤ 1
+⊢ s * (1 / (s + 1)) < 1
+'TGLExt.EquationOfTruth.InfiniteLimitControl.scalar_pointwise_limit' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.EquationOfTruth.InfiniteLimitControl.uniform_error_lower_bound' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.EquationOfTruth.InfiniteLimitControl.no_uniform_small_error' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

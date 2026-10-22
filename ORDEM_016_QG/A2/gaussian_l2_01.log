@@ -1,0 +1,21 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayGaussianL2.lean:36:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ‖twistedGaussian ?b ?r (↑?x + Complex.I * ↑?y)‖
+in the target expression
+  MeasurableSet x ↔ MeasurableSet x
+
+case e'_5
+b : ℝ
+hb : 0 < b
+r y : ℝ
+hm : AEStronglyMeasurable (fun x => twistedGaussian b r (↑x + Complex.I * ↑y)) volume
+hi :
+  Integrable
+    (fun x =>
+      RCLike.re (Complex.exp (-↑(2 * b) * ↑x ^ 2 + ↑(4 * b * r) * ↑x + ↑(2 * b * ((y - Real.pi / 2) ^ 2 - r ^ 2)))))
+    volume
+x : Set ℝ
+⊢ MeasurableSet x ↔ MeasurableSet x
+'ChatgptAudit.LightRayCore016.gaussian_slice_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_slice_memLp' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_strip_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.product_slice_memLp' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

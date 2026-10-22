@@ -1,0 +1,29 @@
+ValueError: Error from parse_expr with transformed code: 'Lambda ((/Integer (32 )+Integer (43 )/Integer (960 )))'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Lambda ((/Integer (32 )+Integer (43 )/Integer (960 )))
+             ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A7\finite_relative_normalization.py", line 39, in <module>
+    coefs=[s.sympify(c).subs(lam,relative) for c in prior['combined_hc_coefficients']]
+           ~~~~~~~~~^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A4\symbolic_runtime\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'lambda/32 + 43/960'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)

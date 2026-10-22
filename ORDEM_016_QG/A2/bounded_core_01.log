@@ -1,0 +1,107 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:13:45: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  PartialOrder (H →L[ℂ] H)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:17:40: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  LE (H →L[ℂ] H)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:18:37: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  PartialOrder (H →L[ℂ] H)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:21:3: error: typeclass instance problem is stuck
+  T2Space ?m.20
+
+Note: Lean will not try to resolve this typeclass instance problem because the first and second type arguments to `T2Space` are metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:23:8: warning: declaration uses `sorry`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:28:2: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  PartialOrder (H →L[ℂ] H)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:28:2: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  StarOrderedRing (H →L[ℂ] H)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:28:2: error: Application type mismatch: The argument
+  CFC.sqrt_nonneg ?m.35
+has type
+  0 ≤ CFC.sqrt ?m.35
+but is expected to have type
+  0 ≤ graphRoot D
+in the application
+  LE.le.isSelfAdjoint (CFC.sqrt_nonneg ?m.35)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:32:2: error: Type mismatch
+  Ring.mul_inverse_cancel ?m.34
+has type
+  IsUnit ?m.34 → ?m.34 * Ring.inverse ?m.34 = 1
+but is expected to have type
+  graphRoot D * graphInverseRoot D = 1
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:32:26: error: Application type mismatch: The argument
+  graphRoot_unit D
+has type
+  IsUnit (graphRoot D)
+of sort `Prop` but is expected to have type
+  ?m.28
+of sort `Type ?u.24` in the application
+  Ring.mul_inverse_cancel (graphRoot_unit D)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:36:2: error: Type mismatch
+  Ring.inverse_mul_cancel ?m.34
+has type
+  IsUnit ?m.34 → Ring.inverse ?m.34 * ?m.34 = 1
+but is expected to have type
+  graphInverseRoot D * graphRoot D = 1
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:36:26: error: Application type mismatch: The argument
+  graphRoot_unit D
+has type
+  IsUnit (graphRoot D)
+of sort `Prop` but is expected to have type
+  ?m.28
+of sort `Type ?u.24` in the application
+  Ring.inverse_mul_cancel (graphRoot_unit D)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:48:19: warning: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:48:50: warning: `ContinuousLinearMap.one_apply` has been deprecated: Use `one_apply_eq_self` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.one_apply` to `one_apply_eq_self x`).
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:49:10: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:50:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  inner ℂ ((ContinuousLinearMap.adjoint D) ?y) ?x
+in the target expression
+  inner ℂ x x + inner ℂ ((star D) (D x)) x = inner ℂ x x + inner ℂ (D x) (D x)
+
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →L[ℂ] H
+x : H
+⊢ inner ℂ x x + inner ℂ ((star D) (D x)) x = inner ℂ x x + inner ℂ (D x) (D x)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\BoundedTransformCore.lean:58:36: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+'ChatgptAudit.BoundedTransform016.graphPositive' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.BoundedTransform016.graphRoot_unit' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.BoundedTransform016.graphRoot_square' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.BoundedTransform016.graphRoot_selfadjoint' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.BoundedTransform016.graphRoot_inverse_right' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.BoundedTransform016.graphRoot_inverse_left' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.BoundedTransform016.graphRoot_norm_sq' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.BoundedTransform016.transform_energy_identity' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

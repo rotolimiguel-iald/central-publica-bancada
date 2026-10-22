@@ -1,0 +1,65 @@
+
+namespace TGLExt.EquationOfTruth
+section SingleTime
+variable {𝕜 E : Type*} [RCLike 𝕜] [NormedAddCommGroup E]
+  [InnerProductSpace 𝕜 E] [CompleteSpace E]
+
+theorem T_add (H : E →L[𝕜] E) (s t : ℝ) : T H (s+t) = T H s * T H t := by
+  unfold T flow
+  have he : (-((s+t : ℝ) : 𝕜)) • H = (-(s : 𝕜)) • H + (-(t : 𝕜)) • H := by
+    push_cast
+    rw [neg_add, add_smul]
+  rw [he]
+  apply NormedSpace.exp_add_of_commute
+  unfold Commute SemiconjBy
+  simp only [smul_mul_assoc, mul_smul_comm, smul_smul]
+  congr 1
+  ring
+
+theorem iterate_T_eq_nat_time (H : E →L[𝕜] E) (s : ℝ) (n : ℕ) (x : E) :
+    (fun y => T H s y)^[n] x = T H ((n : ℝ)*s) x := by
+  induction n with
+  | zero => simp [T,flow]
+  | succ n ih =>
+    rw [Function.iterate_succ_apply', ih]
+    have ht : ((n+1 : ℕ) : ℝ)*s = s+(n : ℝ)*s := by push_cast; ring
+    rw [ht,T_add]
+    rfl
+
+theorem single_time_conserved_iff_factors [FiniteDimensional 𝕜 E]
+    (H : E →L[𝕜] E) (hH : IsSelfAdjoint H)
+    (hpos : ∀ x, 0 ≤ RCLike.re ⟪x,H x⟫_𝕜)
+    (s0 : ℝ) (hs0 : 0 < s0)
+    {Y : Type*} [TopologicalSpace Y] [T2Space Y] (l : E → Y) (hl : Continuous l) :
+    (∀ x, l (T H s0 x) = l x) ↔ ∀ x, l x = l (reading H x) := by
+  constructor
+  · intro hc x
+    have hi : ∀ n : ℕ, ∀ y : E, l ((fun z => T H s0 z)^[n] y) = l y := by
+      intro n y
+      induction n with
+      | zero => rfl
+      | succ n ih => rw [Function.iterate_succ_apply',hc,ih]
+    have hn : Tendsto (fun n : ℕ => (n : ℝ)*s0) atTop atTop :=
+      tendsto_natCast_atTop_atTop.atTop_mul_const hs0
+    have hlim : Tendsto (fun n : ℕ => l (T H ((n : ℝ)*s0) x))
+        atTop (𝓝 (l (reading H x))) :=
+      (hl.tendsto _).comp ((flowTendsToFamily_of_finiteDimensional H hH hpos x).comp hn)
+    have hconst : Tendsto (fun n : ℕ => l (T H ((n : ℝ)*s0) x)) atTop (𝓝 (l x)) := by
+      apply tendsto_const_nhds.congr'
+      exact Filter.Eventually.of_forall fun n => by
+        rw [← iterate_T_eq_nat_time]
+        exact (hi n x).symm
+    exact tendsto_nhds_unique hconst hlim
+  · intro hf x
+    rw [hf (T H s0 x), reading_T H hH, ← hf x]
+
+theorem sampling_zero_conserves_every_reader (H : E →L[𝕜] E)
+    {Y : Type*} (l : E → Y) (x : E) : l (T H 0 x) = l x := by
+  simp [T,flow]
+end SingleTime
+end TGLExt.EquationOfTruth
+
+#print axioms TGLExt.EquationOfTruth.T_add
+#print axioms TGLExt.EquationOfTruth.iterate_T_eq_nat_time
+#print axioms TGLExt.EquationOfTruth.single_time_conserved_iff_factors
+#print axioms TGLExt.EquationOfTruth.sampling_zero_conserves_every_reader

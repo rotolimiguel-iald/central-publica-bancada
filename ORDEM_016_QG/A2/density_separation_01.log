@@ -1,0 +1,71 @@
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensitySeparation.lean:40:87: error: unsolved goals
+c : ℝ
+H : ↥SpectralHilbert
+g : ℝ → ℝ
+hH : H ∈ (continuousStandardSubspace c).toClosedSubmodule
+hg : ∀ (p : ℝ), g (-p) = Real.exp (-c * p) * g p
+hneg : ∀ᵐ (x : ℝ), ↑↑H (-x) = (fun p => ↑(Real.exp (c * p)) * star (↑↑H (-p))) (-x)
+p : ℝ
+hp : ↑↑H (-p) = ↑(Real.exp (c * -p)) * star (↑↑H (- -p))
+hp' : ↑↑H (-p) = ↑(Real.exp (-c * p)) * star (↑↑H p)
+⊢ -(c * p * 2) = c * p * ↑(Int.negSucc 1)
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensitySeparation.lean:47:36: error: unsolved goals
+c : ℝ
+H : ↥SpectralHilbert
+g : ℝ → ℝ
+hH : H ∈ (continuousStandardSubspace c).toClosedSubmodule
+hg : ∀ (p : ℝ), g (-p) = Real.exp (-c * p) * g p
+hneg : ∀ᵐ (x : ℝ), ↑↑H (-x) = (fun p => ↑(Real.exp (c * p)) * star (↑↑H (-p))) (-x)
+p : ℝ
+hp : ↑↑H (-p) = ↑(Real.exp (c * -p)) * star (↑↑H (- -p))
+hp' : ↑↑H (-p) = ↑(Real.exp (-c * p)) * star (↑↑H p)
+he : ↑(Real.exp (-c * p)) * ↑(Real.exp (-c * p)) = ↑(Real.exp (-2 * c * p))
+⊢ cexp (-(↑c * ↑p)) * ↑(g p) * (starRingEnd ℂ) ((starRingEnd ℂ) (cexp (-(↑c * ↑p)) * star (↑↑H p))) =
+    ↑(g p) * star (↑↑H p) * ↑(Real.exp (-(c * p))) ^ 2
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensitySeparation.lean:48:13: error: unsolved goals
+c : ℝ
+H : ↥SpectralHilbert
+g : ℝ → ℝ
+hH : H ∈ (continuousStandardSubspace c).toClosedSubmodule
+hg : ∀ (p : ℝ), g (-p) = Real.exp (-c * p) * g p
+hneg : ∀ᵐ (x : ℝ), ↑↑H (-x) = (fun p => ↑(Real.exp (c * p)) * star (↑↑H (-p))) (-x)
+p : ℝ
+hp : ↑↑H (-p) = ↑(Real.exp (c * -p)) * star (↑↑H (- -p))
+hp' : ↑↑H (-p) = ↑(Real.exp (-c * p)) * star (↑↑H p)
+he : ↑(Real.exp (-c * p)) * ↑(Real.exp (-c * p)) = ↑(Real.exp (-2 * c * p))
+⊢ ↑(Real.exp (-2 * c * p)) * (star (↑↑H p) * ↑(g p)) = cexp (-2 * ↑c * ↑p) * ((starRingEnd ℂ) (↑↑H p) * ↑(g p))
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensitySeparation.lean:37:23: warning: This simp argument is unused:
+  star_star
+
+Hint: Omit it from the simp argument list.
+  simp only [star_mul, s̵t̵a̵r̵_̵s̵t̵a̵r̵,̵ ̵Complex.star_def, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayDensitySeparation.lean:68:2: error: Type mismatch: After simplification, term
+  congrArg star hs
+ has type
+  @Eq ℂ (↑↑H p) 0
+but is expected to have type
+  @Eq ℂ (↑↑H p) (0 p)
+'ChatgptAudit.LightRayCore016.continuous_standard_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.reflected_conjugate_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.spectral_weighted_product_reflection' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.LightRayCore016.weighted_real_fourier_separates_standard' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

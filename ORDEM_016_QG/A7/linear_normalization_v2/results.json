@@ -1,0 +1,104 @@
+{
+  "statute": "REAL_EXACT_CAS_METRIC_LINEAR_FAMILY_CONTACT_NOT_ANOMALY",
+  "source_sha256": "67919500a4236c1384717677da1cc94d6d4f9725b93319db0c47d3c8d7764278",
+  "plan_sha256": "19b4964b10577719c38d7d4695a67aa962895566245df07a72d63ce86b7ba523",
+  "sympy_version": "1.14.0",
+  "checks": [
+    {
+      "name": "conformal_Ricci_derivative_trace",
+      "passed": true
+    },
+    {
+      "name": "conformal_Ricci_quadratic_trace",
+      "passed": true
+    },
+    {
+      "name": "metric_linear_split_Euler_contact",
+      "passed": true
+    },
+    {
+      "name": "integration_by_parts_with_cutoff",
+      "passed": true
+    },
+    {
+      "name": "localized_background_contact",
+      "passed": true
+    },
+    {
+      "name": "exact_interaction_after_original_linear_split",
+      "passed": true
+    },
+    {
+      "name": "interaction_contact_closed_form",
+      "passed": true
+    },
+    {
+      "name": "original_metric_vertex_3_contact_2",
+      "passed": true
+    },
+    {
+      "name": "original_metric_vertex_4_contact_3",
+      "passed": true
+    },
+    {
+      "name": "original_metric_vertex_5_contact_4",
+      "passed": true
+    },
+    {
+      "name": "original_metric_vertex_6_contact_5",
+      "passed": true
+    },
+    {
+      "name": "original_metric_vertex_7_contact_6",
+      "passed": true
+    },
+    {
+      "name": "original_metric_vertex_8_contact_7",
+      "passed": true
+    },
+    {
+      "name": "cosmological_trace_family_has_no_cubic_vertex",
+      "passed": true
+    },
+    {
+      "name": "box_cutoff_belongs_to_linear_action_not_cubic_interaction",
+      "passed": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "name": "dropping_localized_background_contact",
+      "detected": true
+    },
+    {
+      "name": "missing_cutoff_gradient_in_interaction_contact",
+      "detected": true
+    },
+    {
+      "name": "interaction_contact_must_not_include_free_contact",
+      "detected": true
+    },
+    {
+      "name": "wrong_interaction_kinetic_sign",
+      "detected": true
+    }
+  ],
+  "checks_passed": 15,
+  "negative_controls_detected": 4,
+  "full_contact": "-(-8*Lambda*f*u**3 - 24*Lambda*f*u**2 - 24*Lambda*f*u - 8*Lambda*f + 2*R*f*u**2 + 4*R*f*u + 2*R*f + 3*f*p0**2 - 3*f*p1**2 - 3*f*p2**2 - 3*f*p3**2 - 6*f*u*u00 + 6*f*u*u11 + 6*f*u*u22 + 6*f*u*u33 - 6*f*u00 + 6*f*u11 + 6*f*u22 + 6*f*u33 - 6*f0*p0*u - 6*f0*p0 - 6*f00*u**2 - 12*f00*u - 6*f00 + 6*f1*p1*u + 6*f1*p1 + 6*f11*u**2 + 12*f11*u + 6*f11 + 6*f2*p2*u + 6*f2*p2 + 6*f22*u**2 + 12*f22*u + 6*f22 + 6*f3*p3*u + 6*f3*p3 + 6*f33*u**2 + 12*f33*u + 6*f33)/(4*kappa*(u + 1)**2)",
+  "interaction": "3*f*u*(p0**2 - p1**2 - p2**2 - p3**2)/(4*kappa*(u + 1))",
+  "interaction_contact": "-3*(f*p0**2 - f*p1**2 - f*p2**2 - f*p3**2 + 2*f*u**2*u00 - 2*f*u**2*u11 - 2*f*u**2*u22 - 2*f*u**2*u33 + 2*f*u*u00 - 2*f*u*u11 - 2*f*u*u22 - 2*f*u*u33 + 2*f0*p0*u**2 + 2*f0*p0*u - 2*f1*p1*u**2 - 2*f1*p1*u - 2*f2*p2*u**2 - 2*f2*p2*u - 2*f3*p3*u**2 - 2*f3*p3*u)/(4*kappa*(u + 1)**2)",
+  "action_vertex_coefficients": {
+    "3": "3*f*p0**2*u/(4*kappa) - 3*f*p1**2*u/(4*kappa) - 3*f*p2**2*u/(4*kappa) - 3*f*p3**2*u/(4*kappa)",
+    "4": "-3*f*p0**2*u**2/(4*kappa) + 3*f*p1**2*u**2/(4*kappa) + 3*f*p2**2*u**2/(4*kappa) + 3*f*p3**2*u**2/(4*kappa)",
+    "5": "3*f*p0**2*u**3/(4*kappa) - 3*f*p1**2*u**3/(4*kappa) - 3*f*p2**2*u**3/(4*kappa) - 3*f*p3**2*u**3/(4*kappa)",
+    "6": "-3*f*p0**2*u**4/(4*kappa) + 3*f*p1**2*u**4/(4*kappa) + 3*f*p2**2*u**4/(4*kappa) + 3*f*p3**2*u**4/(4*kappa)",
+    "7": "3*f*p0**2*u**5/(4*kappa) - 3*f*p1**2*u**5/(4*kappa) - 3*f*p2**2*u**5/(4*kappa) - 3*f*p3**2*u**5/(4*kappa)",
+    "8": "-3*f*p0**2*u**6/(4*kappa) + 3*f*p1**2*u**6/(4*kappa) + 3*f*p2**2*u**6/(4*kappa) + 3*f*p3**2*u**6/(4*kappa)"
+  },
+  "complete_temporal_prescription": false,
+  "quantum_anomaly_computed": false,
+  "gate_changed": false,
+  "wall_seconds": 1.642552400007844,
+  "cpu_seconds": 1.640625
+}

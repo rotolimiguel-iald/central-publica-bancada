@@ -1,0 +1,37 @@
+{
+  "utc": "2026-09-24T13:54:00.923205+00:00",
+  "status": "SOURCE_ANCHORS_VERIFIED_NOT_NEW_COMPILATION",
+  "anchors": [
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_016_INSUMOS\\A1_CONTRATO_V3\\v31\\ContratoQG_v31_Teoremas.lean",
+      "sha256": "f4983661f5c3b76399d2adf8657a95e13887cc5e9ba37e7e716744501938cdc8",
+      "line": 74,
+      "excerpt": "theorem Δit_vac (C : ContratoH2 W R N) (t : ℝ) : C.Δit t W.vac = W.vac := by\n  rw [C.bw]; exact C.boost.V_vac _\n\n/-- [DERIVED] Ad(Δ^{it}) é GEOMÉTRICO na rede: net(O) ↦ net(Λ(−2πt)O). -/\ntheorem bw_covariance (C : ContratoH2 W R N) (t : ℝ) (O : Set (Fin 4 → ℝ)) (T : W.H →L[ℂ] W.H)"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_016_INSUMOS\\A1_CONTRATO_V3\\v31\\ContratoQG_v31.lean",
+      "sha256": "e44e485a79dacf01a3d4516e346b393ab77ba2098a1936d843ebc1ae2bfda4ba",
+      "line": 222,
+      "excerpt": "  bw : ∀ t : ℝ, Δit t = boost.V (-(2 * Real.pi * t))\n  /-- (P) translações fortemente contínuas. -/\n  translations_continuous : ∀ ψ : W.H, Continuous (fun a : Fin 4 → ℝ => W.U a ψ)\n  /-- (P) O DENTE DE FIDELIDADE: só a translação nula age trivialmente. -/\n  translations_faithful : ∀ a : Fin 4 → ℝ, W.U a = 1 → a = 0"
+    },
+    {
+      "source": "C:\\IALD\\Central de Patentes\\Chatgpt\\TUNEL\\PARA_CHATGPT\\ORDEM_016_INSUMOS\\A1_CONTRATO_V3\\v31\\ContratoQG_v31.lean",
+      "sha256": "e44e485a79dacf01a3d4516e346b393ab77ba2098a1936d843ebc1ae2bfda4ba",
+      "line": 185,
+      "excerpt": "  V_vac : ∀ s : ℝ, V s W.vac = W.vac\n  V_translations : ∀ (s : ℝ) (a : Fin 4 → ℝ),\n    (V s).conjStarAlgEquiv (W.U a) = W.U (wedgeBoostMap s a)\n  V_net : ∀ (s : ℝ) (O : Set (Fin 4 → ℝ)) (T : W.H →L[ℂ] W.H),\n    T ∈ W.net O → (V s).conjStarAlgEquiv T ∈ W.net (wedgeBoostMap s '' O)"
+    },
+    {
+      "source": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\ModularPower.lean",
+      "sha256": "54beb442c52e9127f1cf42f77539c82a6b9ff72c04c79c8a95ef9e84cd67acf0",
+      "line": 49,
+      "excerpt": "theorem modularFlow_fixes_omega (t : ℝ) : modularFlow P t (hOmega P) = hOmega P := by\n  change modularFlow P t ((tof P 0 1 : TowerPre P) : TowerHilbert P) = _\n  rw [modularFlow_coe, flowPre_tof, flowLevel_one]\n  rfl\n"
+    },
+    {
+      "source": "C:\\IALD\\Artigo\\Haja_Luz\\A Ponte e o Um\\Nós\\tgl_kernel\\TGLExt\\V354BoundedPolar.lean",
+      "sha256": "65ec2d9b95bba9281c2d30ab94632339021d6257a73fc86a493ac4f7d7469dd6",
+      "line": 81,
+      "excerpt": "private theorem boundedAbsolute_ker (T : H →L[ℂ] H) :\n    (CFC.sqrt (star T*T)).ker = T.ker := by\n  ext x\n  change CFC.sqrt (star T*T) x=0 ↔ T x=0\n  exact (norm_eq_zero.symm.trans ((boundedAbsolute_norm T x).congr_left.trans norm_eq_zero))"
+    }
+  ],
+  "next": "A-2.5.a finite bounded transform; inspect V354BoundedPolar existing kernel identity before implementation"
+}

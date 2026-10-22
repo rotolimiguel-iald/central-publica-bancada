@@ -1,0 +1,53 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A3\OrbitalRapidityMeasure.lean:46:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A3\OrbitalRapidityMeasure.lean:56:55: error: unsolved goals
+m : ℝ
+⊢ ∀ᵐ (q : Transverse), ¬q = 0
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A3\OrbitalRapidityMeasure.lean:89:4: error: Application type mismatch: The argument
+  orbitalWeight_measurable m
+has type
+  Measurable (orbitalWeight m)
+of sort `Prop` but is expected to have type
+  Measure ?m.15
+of sort `Type ?u.14` in the application
+  @lintegral_withDensity_eq_lintegral_mul ?m.15 ?m.16 (orbitalWeight_measurable m)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A3\OrbitalRapidityMeasure.lean:87:54: error: unsolved goals
+m : ℝ
+g : MomentumCoordinates → ℝ≥0∞
+hg : Measurable g
+⊢ ∫⁻ (p : MomentumCoordinates), g p ∂momentumMeasure.withDensity (orbitalWeight m) =
+    ∫⁻ (x : MomentumCoordinates), g (rapidityChart m x) ∂momentumMeasure
+'ChatgptAudit.WignerRapidityMeasure016.transverseMass_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.transverseMass_pos_of_mass' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.transverseMass_pos_of_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.transverseMass_pos_ae' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.orbital_iterated_lintegral' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.exceptional_axis_null' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.exceptional_axis_orbital_null' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.orbitalWeight_measurable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.rapidityChart_continuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.orbital_lintegral' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

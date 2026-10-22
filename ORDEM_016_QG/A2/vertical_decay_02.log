@@ -1,0 +1,29 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay_v2.lean:92:40: error: Type mismatch
+  spectral_vertical_integral_bound a b ha hb r p (-T)
+has type
+  ‖∫ (y : ℝ) in 0..Real.pi, spectralIntegrand a b r p (↑(-T) + ↑y * I)‖ ≤
+    Real.exp (2 * Real.pi * |p| * Real.pi) * ‖twistedGaussian b r ↑(-T)‖ * Real.pi
+but is expected to have type
+  ‖∫ (y : ℝ) in 0..Real.pi, spectralIntegrand a b r p (↑(-T) + ↑y * I)‖ ≤
+    Real.exp (2 * Real.pi * |p| * Real.pi) * ‖twistedGaussian b r (-↑T)‖ * Real.pi
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay_v2.lean:93:2: error: Type mismatch: After simplification, term
+  Tendsto.sub (Tendsto.const_mul I hpos) (Tendsto.const_mul I hneg)
+ has type
+  Tendsto
+    (fun x =>
+      (I * ∫ (y : ℝ) in 0..Real.pi, spectralIntegrand a b r p (↑x + ↑y * I)) -
+        I * ∫ (y : ℝ) in 0..Real.pi, spectralIntegrand a b r p (-↑x + ↑y * I))
+    atTop (𝓝 0)
+but is expected to have type
+  Tendsto (verticalDifference (spectralIntegrand a b r p) Real.pi) atTop (𝓝 0)
+'ChatgptAudit.LightRayCore016.spectralIntegrand_entire' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.spectralIntegrand_strip_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_norm_atTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_norm_neg_atTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.spectral_vertical_integral_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.LightRayCore016.spectral_vertical_limit' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

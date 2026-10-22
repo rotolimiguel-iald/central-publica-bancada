@@ -1,0 +1,53 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A1\probes\AnalyticBoundaryControl.lean:25:26: error: Type mismatch: After simplification, term
+  LT.lt.le hb
+ has type
+  0 ≤ b
+but is expected to have type
+  0 ≤ w.re
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A1\probes\AnalyticBoundaryControl.lean:25:54: error: Tactic `assumption` failed
+
+f : ℂ → ℂ
+b : ℝ
+hb : 0 < b
+hd : DiffContOnCl ℂ f (verticalStrip 0 b)
+hedge : ∀ (z : ℂ), z.re = 0 → f z = 0
+z : ℂ
+hz0 : 0 ≤ z.re
+hzb : z.re < b
+M : ℝ
+hM : ∀ (z : ℂ), 0 ≤ z.re → z.re ≤ b → ‖f z‖ ≤ M
+hbdd : BddAbove (norm ∘ f '' verticalClosedStrip 0 b)
+he : 0 < 1 - z.re / b
+w : ℂ
+hw : w ∈ re ⁻¹' {b}
+⊢ w.re ≤ b
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A1\probes\AnalyticBoundaryControl.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `zero_rpow`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A1\probes\AnalyticBoundaryControl.lean:27:28: error: Application type mismatch: The argument
+  hn
+has type
+  ‖f z‖ ≤ 0 ^ (1 - z.re / b) * M ^ (z.re / b)
+but is expected to have type
+  ‖f z‖ ≤ 0
+in the application
+  norm_le_zero_iff.mp hn
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A1\probes\AnalyticBoundaryControl.lean:26:48: warning: This simp argument is unused:
+  zero_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [sub_zero, zero_rpow (ne_of_gt he),̵ ̵z̵e̵r̵o̵_̵m̵u̵l̵] at hn
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A1\probes\AnalyticBoundaryControl.lean:38:4: error: Type mismatch: After simplification, term
+  hw
+ has type
+  w ∈ verticalStrip 0 b
+but is expected to have type
+  0 < w.re ∧ w.re < b
+'ChatgptAudit.AnalyticBoundary.vertical_zero_of_zero_edge' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.AnalyticBoundary.horizontal_zero_of_zero_edge' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

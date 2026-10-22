@@ -1,0 +1,58 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D1prime\PhotonScreenCharacters.lean:28:2: error: Type mismatch: After simplification, term
+  hd
+ has type
+  orbitPairing w v =
+    orbitPairing w
+      (orbitPairing v (nullCompanion y) • shellMomentum 0 (rapidityChart 0 y) -
+          orbitPairing v (screenOne y) • screenOne y -
+        orbitPairing v (screenTwo y) • screenTwo y)
+but is expected to have type
+  orbitPairing w v =
+    -(orbitPairing v (screenOne y) * orbitPairing w (screenOne y)) -
+      orbitPairing v (screenTwo y) * orbitPairing w (screenTwo y)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D1prime\PhotonScreenCharacters.lean:53:2: error: linarith failed to find a contradiction
+case h1
+g : (Fin 4 → ℝ) →ₗ[ℝ] Fin 4 → ℝ
+x y : MomentumCoordinates
+hx : x.1 ≠ 0
+hy : y.1 ≠ 0
+gp : g (shellMomentum 0 (rapidityChart 0 x)) = shellMomentum 0 (rapidityChart 0 y)
+gm : ∀ (a b : Fin 4 → ℝ), orbitPairing (g a) (g b) = orbitPairing a b
+i j : Fin 2
+ht : ∀ (k : Fin 2), orbitPairing (g (screen x k)) (shellMomentum 0 (rapidityChart 0 y)) = 0
+h :
+  (-if i = j then 1 else 0) =
+    -(orbitPairing (g (screen x i)) (screenOne y) * orbitPairing (g (screen x j)) (screenOne y)) -
+      orbitPairing (g (screen x i)) (screenTwo y) * orbitPairing (g (screen x j)) (screenTwo y)
+a✝ :
+  orbitPairing (g (![screenOne x, screenTwo x] i)) (screenOne y) *
+        orbitPairing (g (![screenOne x, screenTwo x] j)) (screenOne y) +
+      orbitPairing (g (![screenOne x, screenTwo x] i)) (screenTwo y) *
+        orbitPairing (g (![screenOne x, screenTwo x] j)) (screenTwo y) <
+    if i = j then 1 else 0
+⊢ False
+failed
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D1prime\PhotonScreenCharacters.lean:72:47: warning: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D1prime\PhotonScreenCharacters.lean:72:47: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D1prime\PhotonScreenCharacters.lean:81:55: error: unsolved goals
+f : MomentumCoordinates → ℂ
+y : MomentumCoordinates
+i : Fin 4
+⊢ circularScreen (-1) y i * star (f y) = star (f y) * circularScreen (-1) y i
+'ORDEM016.D1prime.pairing_sub_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.pairing_smul_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.transverse_pairing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.screen_metric' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.screen_columns_orthonormal' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.oriented_two_frame' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.photon_phase_unit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.photon_phase_composes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.conjugation_reverses_character' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D1prime.conjugation_exchanges_wave_sections' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

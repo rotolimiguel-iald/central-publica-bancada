@@ -1,0 +1,44 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\IdempotentDephasing.lean:26:4: error: Tactic `apply` failed: could not unify the conclusion of `@funext`
+  ?f = ?g
+with the goal
+  NonUnitalSeminormedRing.toSeminormedAddCommGroup.toAddCommMonoid = inst✝².toAddCommMonoid
+
+Note: The full type of `@funext` is
+  ∀ {α : Sort ?u.91} {β : α → Sort ?u.90} {f g : (x : α) → β x}, (∀ (x : α), f x = g x) → f = g
+
+case e'_3
+A : Type u_1
+inst✝² : NormedRing A
+inst✝¹ : NormedAlgebra ℝ A
+inst✝ : CompleteSpace A
+a b : A
+u : ℝ
+h : a * b = u • b
+hp : ∀ (n : ℕ), a ^ n * b = u ^ n • b
+h1 :
+  HasSum (fun b_1 => ((ContinuousLinearMap.mul ℝ A).flip b) ((↑b_1.factorial)⁻¹ • a ^ b_1))
+    (((ContinuousLinearMap.mul ℝ A).flip b) (NormedSpace.exp a))
+h2 : HasSum (fun z => ((↑z.factorial)⁻¹ • u ^ z) • b) (NormedSpace.exp u • b)
+⊢ NonUnitalSeminormedRing.toSeminormedAddCommGroup.toAddCommMonoid = inst✝².toAddCommMonoid
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\IdempotentDephasing.lean:28:14: error(lean.unknownIdentifier): Unknown constant `Real.exp_eq_exp_ℝ`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\IdempotentDephasing.lean:28:2: error: Type mismatch: After simplification, term
+  he
+ has type
+  NormedSpace.exp a * b = NormedSpace.exp u • b
+but is expected to have type
+  NormedSpace.exp a * b = Real.exp u • b
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\IdempotentDephasing.lean:34:10: warning: This simp argument is unused:
+  smul_mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [̵s̵m̵u̵l̵_̵m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵ ̵s̵u̵b̵_̵m̵u̵l̵,̵[̲s̲u̲b̲_̲m̲u̲l̲,̲ he]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'TGLExt.EquationOfTruth.IdempotentDephasing.exp_mul_of_eigenfactor' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.EquationOfTruth.IdempotentDephasing.exp_complement_idempotent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

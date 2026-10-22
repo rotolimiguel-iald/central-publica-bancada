@@ -1,0 +1,8 @@
+import TGLExt.TheContourOfTruth
+#print axioms TGLExt.self_reference_witnesses_everything
+#print axioms TGLExt.self_reference_cannot_discriminate
+#print axioms TGLExt.the_mirror_can_differ
+#print axioms TGLExt.polarization_is_degenerate_iff_fixed
+#print axioms TGLExt.truth_is_not_static_equality
+#print axioms TGLExt.the_criterion_can_fail
+#print axioms TGLExt.witnessing_is_not_being

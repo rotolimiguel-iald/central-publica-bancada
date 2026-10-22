@@ -1,0 +1,13 @@
+{
+  "operation": "submit",
+  "request_id": "df4ae610-56dd-46e1-b550-40b6748fb331",
+  "prompt": "ORDEM_016, unidade A6 da bancada 01a070fc-9484-7e13-a654-c6b5f61093a4.\nNova unidade cientifica explicitamente autorizada pelo operador, que prioriza Kimi em capacidade maxima.\nReceba a memoria canonica comum pelo adaptador. Entregue somente texto/provas/codigo candidato,\nsem ferramentas, sem editar arquivos e sem alegar compilacao. Resultado DECLARADO ate verificacao\nlocal. Nao promover resultado a gate ou confirmacao fisica. Nao criar novas camadas de funcoes:\nreutilizar lemas existentes, expor hipoteses e eventual lacuna precisa. O fluxo dissipativo\nexp(-sH) deste alvo nao e o fluxo modular unitario. Nomes de APIs nao consultados sao candidatos.\nEntregue prova escrita completa e decomposicao minima em lemas Lean 4.31 para os cinco\nitens ESCALARES de B3a transcritos abaixo. Inclua p=1/2, kappa=0 e s=0 nos dominios corretos.\nPrefira monotonicidade/simetria de binEntropy, raiz e exponencial a derivacao se isso reduzir\ndependencias. Mostre cada desigualdade necessaria, especialmente r<1 e S(s)<=binEntropy(p).\nNao assumir como hipoteses as conclusoes; nao identificar entropia binaria com entropia de\nvon Neumann sem decomposicao matricial, que e trabalho separado do harness. Derivada B3b\nsomente como observacao opcional, fora do escopo da entrega obrigatoria.\nSOURCE A6_RECEITA__ADENDO_001_NUNCA_PUBLICADO.md; sha256=88a80b461fcc3d5cac617fe37403708628746d8c8a46bf33e80caf7294f86b17; lines=334-343\n334: - **B3 — a entropia do exemplo (§6 do texto).** Em Lean onde couber; o que não couber, no harness do ramo D.\n335:   - **B3a — a face ESCALAR em Lean** (≤ 3 h).\n336:     - Hipóteses: p ∈ (0,1), κ = |c|² ≥ 0 e κ < p(1−p). Defina r(s) = √((2p−1)² + 4κe^{−2s}). Prove:\n337:       - (i) 0 ≤ r(s) < 1 para s ≥ 0;\n338:       - (ii) r antítona em [0,∞) (estrita se κ > 0);\n339:       - (iii) S(s) := `binEntropy ((1 + r s)/2)` monótona em [0,∞), por `binEntropy_strictAntiOn` em Icc ½ 1 (`BinaryEntropy.lean` l.427 [REAL — V2]);\n340:       - (iv) `binEntropy ((1+|2p−1|)/2) = binEntropy p`, por `binEntropy_one_sub`;\n341:       - (v) D(s) := `binEntropy p − S(s)` ≥ 0 e antítona.\n342:     - **HOMONÍMIA/FACE DITA:** isto é a entropia binária do autovalor maior. Que S(ρ_s) seja esse número exige a decomposição espectral da matriz, que fica no harness D [DERIVED]. A mathlib não tem entropia de von Neumann [REAL — grep V2]. `binEntropy` usa `Real.log` (nats).\n343:   - **B3b — a fórmula fechada em Lean** (opcional, ≤ 2 h).",
+  "execution_constraints": {
+    "mission_id": "ORDEM_016",
+    "branch_id": "A-6.B3a",
+    "lemma_id": "kimi_qubit_entropy_scalar",
+    "role": "draft",
+    "required_provider": "kimi",
+    "max_calls": 1
+  }
+}

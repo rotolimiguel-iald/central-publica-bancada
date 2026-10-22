@@ -1,0 +1,37 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D6\RecognitionGraph.lean:34:6: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => (R.U.conjStarAlgEquiv A) _a = R.U (A omega)
+Error: Application type mismatch: The argument
+  R
+has type
+  ReconhecimentoPeloConteudo M N omega omega'
+but is expected to have type
+  ReconhecimentoPeloConteudo M N omega _a
+in the application
+  R.U
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+H : Type u_1
+K : Type u_2
+inst✝⁵ : NormedAddCommGroup H
+inst✝⁴ : InnerProductSpace ℂ H
+inst✝³ : CompleteSpace H
+inst✝² : NormedAddCommGroup K
+inst✝¹ : InnerProductSpace ℂ K
+inst✝ : CompleteSpace K
+M : StarSubalgebra ℂ (H →L[ℂ] H)
+N : StarSubalgebra ℂ (K →L[ℂ] K)
+omega : H
+omega' : K
+R : ReconhecimentoPeloConteudo M N omega omega'
+A : H →L[ℂ] H
+⊢ (R.U.conjStarAlgEquiv A) omega' = R.U (A omega)
+'ORDEM016.D6.recognition_on_vector' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.recognition_on_star_vector' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.recognition_tomita_graph' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.recognition_closed_tomita_graph' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.recognition_closed_graph_membership' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.recognition_identifies_closed_operator' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.identityByConstruction' depends on axioms: [propext, Classical.choice, Quot.sound]

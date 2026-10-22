@@ -1,0 +1,17 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\FECHAMENTO_PARCIAL\lean\OperatorContourBridge_v2_Integration_v2.lean:18:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'ORDEM016.EquationOfTruth.equation_of_truth_is_not_static' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.EquationOfTruth.zero_operator_reading_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.EquationOfTruth.unit_operator_flow_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.EquationOfTruth.equation_criterion_can_fail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.truth_is_not_static_equality' depends on axioms: [propext, Quot.sound]
+'TGLExt.the_criterion_can_fail' depends on axioms: [propext]
+BENCH_DECL	ORDEM016.EquationOfTruth.unit_operator_flow_real	theorem	propext,Classical.choice,Quot.sound
+BENCH_DECL	ORDEM016.EquationOfTruth.zero_operator_reading_real	theorem	propext,Classical.choice,Quot.sound
+BENCH_DECL	ORDEM016.EquationOfTruth.equation_criterion_can_fail	theorem	propext,Classical.choice,Quot.sound
+BENCH_DECL	ORDEM016.EquationOfTruth.equation_of_truth_is_not_static	theorem	propext,Classical.choice,Quot.sound

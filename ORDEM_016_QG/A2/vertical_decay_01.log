@@ -1,0 +1,66 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:30:21: error: unexpected token '|*'; expected '|' or '|ₘ'
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:29:4: error: No goals to be solved
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:23:80: error: unsolved goals
+case hpy
+a b : ℝ
+ha : 0 ≤ a
+hb : 0 < b
+r p x y : ℝ
+hy0 : 0 ≤ y
+hy : y ≤ Real.pi
+he : ‖cexp (-2 * ↑Real.pi * I * ↑p * (↑x + ↑y * I))‖ = Real.exp (2 * Real.pi * p * y)
+⊢ p * y ≤ |p|
+
+a b : ℝ
+ha : 0 ≤ a
+hb : 0 < b
+r p x y : ℝ
+hy0 : 0 ≤ y
+hy : y ≤ Real.pi
+he : ‖cexp (-2 * ↑Real.pi * I * ↑p * (↑x + ↑y * I))‖ = Real.exp (2 * Real.pi * p * y)
+hpy : p * y ≤ |p|
+⊢ ‖spectralIntegrand a b r p (↑x + ↑y * I)‖ ≤ Real.exp (2 * Real.pi * |p| * Real.pi) * ‖twistedGaussian b r ↑x‖
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:48:56: error: Application type mismatch: The argument
+  Tendsto.sub_const tendsto_id r
+has type
+  Tendsto (fun x => id x - r) (𝓝 ?m.102) (𝓝 (?m.102 - r))
+but is expected to have type
+  Tendsto (fun x => x - r) atTop atTop
+in the application
+  Tendsto.atTop_mul_atTop₀ ?m.94 (Tendsto.sub_const tendsto_id r)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:49:8: error: Application type mismatch: The argument
+  Tendsto.comp tendsto_neg_atTop_atBot h
+has type
+  Tendsto (Neg.neg ∘ fun x => b * (x - r) ^ 2) atTop atBot
+but is expected to have type
+  Tendsto ?m.128 ?m.129 (𝓝 ?m.130)
+in the application
+  Tendsto.add_const ?m.131 (Tendsto.comp tendsto_neg_atTop_atBot h)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:66:29: error: unexpected token '|*'; expected '|' or '|ₘ'
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:80:31: error: unexpected token '|*'; expected '|' or '|ₘ'
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:78:4: error: Identifier <missing> not found
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayVerticalDecay.lean:74:84: error: unsolved goals
+a b : ℝ
+ha : 0 ≤ a
+hb : 0 < b
+r p : ℝ
+hpos : Tendsto (fun T => ∫ (y : ℝ) in 0..Real.pi, spectralIntegrand a b r p (↑T + ↑y * I)) atTop (𝓝 0)
+⊢ Tendsto (verticalDifference (spectralIntegrand a b r p) Real.pi) atTop (𝓝 0)
+'ChatgptAudit.LightRayCore016.spectralIntegrand_entire' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.spectralIntegrand_strip_bound' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_norm_atTop' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_norm_neg_atTop' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.LightRayCore016.spectral_vertical_integral_bound' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.LightRayCore016.spectral_vertical_limit' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

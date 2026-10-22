@@ -1,0 +1,108 @@
+{
+  "at": "2026-09-25T17:50:59.491695+00:00",
+  "checks": 31,
+  "cpu_seconds": 0.40625,
+  "identity": "(q+t R_W,total) exp(t B_H) - exp(t B_H)(q+t R_W,x+t R_W,y) = t exp(t B_H)[q,B_F]",
+  "definitions": "B_H=B_F-B_W,cross; R_W,total=[q,C_W,x+C_W,y+B_W,cross]",
+  "source_identity": "[q,B_H]+R_W,cross=[q,B_F]",
+  "negative_residuals": {
+    "x": [
+      {
+        "odd": [
+          0,
+          3,
+          5
+        ],
+        "coefficient": "hy*m*t*wx"
+      },
+      {
+        "odd": [
+          0,
+          3,
+          4
+        ],
+        "coefficient": "hy*m*t*wx"
+      },
+      {
+        "odd": [
+          3
+        ],
+        "coefficient": "-fg*hy*m*t**2*wx + hy*m*t**2*wg*wx"
+      }
+    ],
+    "y": [
+      {
+        "odd": [
+          0,
+          2,
+          3
+        ],
+        "coefficient": "hx*m*t*wy"
+      },
+      {
+        "odd": [
+          0,
+          1,
+          3
+        ],
+        "coefficient": "hx*m*t*wy"
+      },
+      {
+        "odd": [
+          0
+        ],
+        "coefficient": "-fg*hx*m*t**2*wy + hx*m*t**2*wg*wy"
+      }
+    ],
+    "output": [
+      {
+        "odd": [
+          0,
+          3,
+          5
+        ],
+        "coefficient": "-hx*m*t*wxy"
+      },
+      {
+        "odd": [
+          0,
+          3,
+          4
+        ],
+        "coefficient": "-hx*m*t*wxy"
+      },
+      {
+        "odd": [
+          0,
+          2,
+          3
+        ],
+        "coefficient": "-hy*m*t*wxy"
+      },
+      {
+        "odd": [
+          0,
+          1,
+          3
+        ],
+        "coefficient": "-hy*m*t*wxy"
+      },
+      {
+        "odd": [
+          3
+        ],
+        "coefficient": "fg*hx*m*t**2*wxy - hx*m*t**2*wg*wxy"
+      },
+      {
+        "odd": [
+          0
+        ],
+        "coefficient": "fg*hy*m*t**2*wxy - hy*m*t**2*wg*wxy"
+      }
+    ]
+  },
+  "interpretation": "Input arity-one terms cancel the spurious cross Wick-change source, not the full dressed contact",
+  "remaining_contact": "exp(t B_H)[q,B_F] contains singular composite Euler contacts requiring the declared extension",
+  "full_Q2": false,
+  "gate_changed": false
+}

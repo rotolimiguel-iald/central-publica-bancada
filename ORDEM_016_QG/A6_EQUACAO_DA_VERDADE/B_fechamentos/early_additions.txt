@@ -1,0 +1,65 @@
+
+namespace TGLExt.EquationOfTruth
+section EarlyClosures
+variable {𝕜 E : Type*} [RCLike 𝕜] [NormedAddCommGroup E]
+  [InnerProductSpace 𝕜 E] [CompleteSpace E]
+
+theorem reading_zero_of_kernel_bot (H : E →L[𝕜] E)
+    [H.ker.HasOrthogonalProjection] (hk : H.ker = ⊥) : reading H = 0 := by
+  unfold reading
+  simp [hk]
+
+theorem verdict_one_of_kernel_bot (H : E →L[𝕜] E)
+    [H.ker.HasOrthogonalProjection] (hk : H.ker = ⊥) (x y : E) :
+    verdict (reading H) x y = 1 := by
+  simp [verdict, reading_zero_of_kernel_bot H hk]
+
+theorem operator_zero_of_kernel_top (H : E →L[𝕜] E)
+    (hk : H.ker = ⊤) : H = 0 := by
+  ext x
+  have hx : x ∈ H.ker := by rw [hk]; trivial
+  exact LinearMap.mem_ker.mp hx
+
+theorem flow_identity_of_kernel_top (H : E →L[𝕜] E)
+    (hk : H.ker = ⊤) (s : ℝ) : T H s = 1 := by
+  rw [operator_zero_of_kernel_top H hk]
+  simp [T, flow]
+
+variable [FiniteDimensional 𝕜 E]
+
+theorem conserved_iff_factors_of_nonneg (H : E →L[𝕜] E)
+    (hH : IsSelfAdjoint H) (hpos : ∀ x, 0 ≤ RCLike.re ⟪x,H x⟫_𝕜)
+    {Y : Type*} [TopologicalSpace Y] [T2Space Y] (l : E → Y) (hl : Continuous l) :
+    (∀ s, 0 ≤ s → ∀ x, l (T H s x) = l x) ↔ ∀ x, l x = l (reading H x) :=
+  conserved_iff_factors_T H hH (flowTendsToFamily_of_finiteDimensional H hH hpos) l hl
+
+theorem distinguishing_reading_iff (H : E →L[𝕜] E)
+    (hH : IsSelfAdjoint H) (hpos : ∀ x, 0 ≤ RCLike.re ⟪x,H x⟫_𝕜)
+    {Y : Type*} [TopologicalSpace Y] [T2Space Y] (l : E → Y) (hl : Continuous l)
+    (hc : ∀ s, 0 ≤ s → ∀ x, l (T H s x) = l x)
+    (hinj : Set.InjOn l (H.ker : Set E)) (x y : E) :
+    l x = l y ↔ reading H x = reading H y := by
+  have hf := (conserved_iff_factors_of_nonneg H hH hpos l hl).mp hc
+  rw [hf x, hf y]
+  exact ⟨fun h => hinj (H.ker.starProjection_apply_mem x)
+    (H.ker.starProjection_apply_mem y) h, congrArg l⟩
+
+/-- Equality of binary comparisons, not equality of numerical distances. -/
+theorem distinguishing_verdict_eq (H : E →L[𝕜] E)
+    (hH : IsSelfAdjoint H) (hpos : ∀ x, 0 ≤ RCLike.re ⟪x,H x⟫_𝕜)
+    {Y : Type*} [TopologicalSpace Y] [T2Space Y] (l : E → Y) (hl : Continuous l)
+    (hc : ∀ s, 0 ≤ s → ∀ x, l (T H s x) = l x)
+    (hinj : Set.InjOn l (H.ker : Set E)) (x y : E) :
+    verdict l x y = verdict (reading H) x y := by
+  unfold verdict
+  rw [distinguishing_reading_iff H hH hpos l hl hc hinj y x]
+end EarlyClosures
+end TGLExt.EquationOfTruth
+
+#print axioms TGLExt.EquationOfTruth.reading_zero_of_kernel_bot
+#print axioms TGLExt.EquationOfTruth.verdict_one_of_kernel_bot
+#print axioms TGLExt.EquationOfTruth.operator_zero_of_kernel_top
+#print axioms TGLExt.EquationOfTruth.flow_identity_of_kernel_top
+#print axioms TGLExt.EquationOfTruth.conserved_iff_factors_of_nonneg
+#print axioms TGLExt.EquationOfTruth.distinguishing_reading_iff
+#print axioms TGLExt.EquationOfTruth.distinguishing_verdict_eq

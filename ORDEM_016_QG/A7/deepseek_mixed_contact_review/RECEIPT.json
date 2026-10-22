@@ -1,0 +1,1716 @@
+{
+  "at": "2026-09-25T11:40:41.246404+00:00",
+  "job_id": "a4738454-4565-4fcc-8976-eb593b61b4b4",
+  "execution_task_id": "d998ad26-3a85-42e1-ad40-b140686c5f07",
+  "stage": "completed",
+  "result": {
+    "text": "**ORDEM_016 / A-7.b — resultado DECLARADO, não auditado localmente.**  \nNão executei código nem li arquivos locais. Refaço a álgebra a partir dos trechos/scripts fornecidos. O alcance é: contato misto plano de 2ª ordem, linha suave constante, referência definida por derivação, com `C_E` e prefatores comuns removidos. Não é prova de cancelamento diagramático completo, nem admissibilidade da QME, nem seleção de estado/horizonte.\n\n## 1. Convenções usadas\n\nSejam \\(p\\in\\mathbb R^4\\), \\(p^2=p\\cdot p\\), \\(s=p\\cdot v\\), \\(I=\\delta\\), e \\(h\\) simétrico. Escrevo a aplicação de quatro coeficientes invariantes como\n\n\\[\nN_{a,b,c,d}(h)=\na\\,p^2h\n+b\\,p^2\\operatorname{tr}(h)I\n+c\\bigl(pp^T\\operatorname{tr}h+I\\,p^T h p\\bigr)\n+\\frac d2\\bigl(pp^T h+hpp^T\\bigr).\n\\]\n\nO gerador de gauge/ghost do recorte é\n\n\\[\nG(v)=p v^T+v p^T.\n\\]\n\nA ação de Einstein linearizada usada no script é\n\n\\[\nE(h)=-p^2h+p^2\\operatorname{tr}(h)I+pp^Th+hpp^T-\\operatorname{tr}(h)pp^T-I\\,p^Thp,\n\\]\n\nisto é, na notação acima,\n\n\\[\nE=N_{-1,1,-1,2},\\qquad EG=0.\n\\]\n\nPara cada setor métrico,\n\n\\[\nL^{(I/T)}(h)=l_a h+l_b I\\operatorname{tr}h,\n\\]\n\ncom\n\n\\[\n(l_a,l_b)_{I}=(-1/2,-1/8),\\qquad\n(l_a,l_b)_{T}=(-1/2,+1/4).\n\\]\n\nA linha suave é \\(W_I\\) ou \\(W_T\\); a linha de contato é \\(J\\). O fator métrico efetivo no script é \\(-1/32=(-1/2)(1/16)\\), e o ghost tem fator \\(+1\\) com transposição do vértice da segunda ponta. O emparelhamento da delta põe \\(q=-p\\): no script, `A1` usa \\(+p_i\\), `B1` usa \\(-p_i\\).\n\n## 2. Checagem independente de um componente métrico \\(I\\) e um \\(T\\)\n\nUso a identidade geral\n\n\\[\nN(G(v)) =\n\\left(a+\\frac d2\\right)p^2G(v)\n+2(b+c)p^2s\\,I\n+(2c+d)s\\,pp^T.\n\\tag{1}\n\\]\n\nAlém disso, como \\(EG=0\\) e\n\n\\[\nE(sI)=2p^2s\\,I-2s\\,pp^T,\n\\]\n\ntemos\n\n\\[\nE L G = E(l_aG+2l_b sI)\n=4l_b p^2s\\,I-4l_b s\\,pp^T.\n\\tag{2}\n\\]\n\nLogo, na base\n\n\\[\n\\bigl[\\,I\\,p^2s,\\quad p^2G(v),\\quad pp^T s\\,\\bigr],\n\\]\n\no resíduo\n\n\\[\nN_{\\rm bubble}G+E L G\n\\]\n\ntem coeficientes\n\n\\[\n\\bigl(2(b+c)+4l_b,\\; a+d/2,\\; 2c+d-4l_b\\bigr).\n\\]\n\n### Setor \\(I\\)\n\n\\[\n(a,b,c,d)_I=(23/8,-13/16,1,-2),\\qquad l_b=-1/8.\n\\]\n\nEntão\n\n\\[\n2(b+c)+4l_b\n=2(-13/16+1)+4(-1/8)\n=-\\frac18,\n\\]\n\n\\[\na+d/2=23/8-1=15/8,\n\\]\n\n\\[\n2c+d-4l_b=2-2+4/8=1/2.\n\\]\n\nPortanto\n\n\\[\n\\boxed{W_I:\\quad (-1/8,\\;15/8,\\;1/2)}\n\\]\n\nna base \\([I p^2s,\\;p^2G(v),\\;pp^Ts]\\). Confere com a nota.\n\n### Setor \\(T\\)\n\n\\[\n(a,b,c,d)_T=(3/4,-3/8,1/2,-1),\\qquad l_b=1/4.\n\\]\n\n\\[\n2(b+c)+4l_b\n=2(-3/8+1/2)+1\n=1/4+1=5/4,\n\\]\n\n\\[\na+d/2=3/4-1/2=1/4,\n\\]\n\n\\[\n2c+d-4l_b=1-1-1=-1.\n\\]\n\nLogo\n\n\\[\n\\boxed{W_T:\\quad (5/4,\\;1/4,\\;-1)}.\n\\]\n\nTambém confere.\n\n## 3. Tabela \\(N_{\\rm bubble}G+E L G\\) e \\(N_{\\rm eff}\\)\n\nA primitiva é\n\n\\[\nN_{\\rm eff}=N_{\\rm bubble}+E L+L E.\n\\]\n\nCalculando \\(EL+LE\\), com \\(L(h)=l_a h+l_b I\\operatorname{tr}h\\), obtém-se a correção\n\n\\[\n\\Delta(a,b,c,d)=\n\\bigl(-2l_a,\\;2l_a+4l_b,\\;-2l_a-2l_b,\\;4l_a\\bigr).\n\\tag{3}\n\\]\n\nAssim:\n\n| setor | \\(N_{\\rm bubble}\\) | \\((l_a,l_b)\\) | \\(N_{\\rm bubble}G+E L G\\) | \\(N_{\\rm eff}\\) |\n|---|---:|---:|---:|---:|\n| \\(W_I\\) | \\((23/8,-13/16,1,-2)\\) | \\((-1/2,-1/8)\\) | \\((-1/8,15/8,1/2)\\) | \\((31/8,-37/16,9/4,-4)\\) |\n| \\(W_T\\) | \\((3/4,-3/8,1/2,-1)\\) | \\((-1/2,1/4)\\) | \\((5/4,1/4,-1)\\) | \\((7/4,-3/8,1,-3)\\) |\n| \\(W_G\\) | \\((0,0,0,0)\\) | — | \\((0,0,0,0)\\) | \\((0,0,0,0)\\) |\n\nA propriedade fundamental é\n\n\\[\nN_{\\rm eff}G\n=N_{\\rm bubble}G+E L G+L E G\n=N_{\\rm bubble}G+E R_W,\n\\]\n\npois \\(EG=0\\) e \\(R_W=L G\\). Portanto a primitiva reproduz exatamente o resíduo medido na direção \\(G\\); o termo \\(LE\\) não muda \\(N G\\), mas é necessário para a adjunção.\n\n## 4. Núcleo dos quatro coeficientes em \\(N G\\)\n\nPor (1), a aplicação\n\n\\[\n(a,b,c,d)\\longmapsto N_{a,b,c,d}G\n\\]\n\ntem coeficientes\n\n\\[\nK_1=2(b+c),\\qquad K_2=a+d/2,\\qquad K_3=2c+d\n\\]\n\nna base \\([I p^2s,\\;p^2G(v),\\;pp^Ts]\\). O núcleo é dado por\n\n\\[\nb=-c,\\qquad a=-d/2,\\qquad d=-2c.\n\\]\n\nLogo\n\n\\[\n(a,b,c,d)=c(1,-1,1,-2).\n\\]\n\nMas\n\n\\[\nE=N_{-1,1,-1,2},\n\\]\n\nde modo que o núcleo é exatamente\n\n\\[\n\\boxed{\\ker\\bigl(N\\mapsto NG\\bigr)=\\operatorname{span}\\{E\\}}\n\\]\n\nna classe dos quatro invariantes \\(p^2\\operatorname{tr}AB\\), \\(p^2\\operatorname{tr}A\\operatorname{tr}B\\), \\((pAp)\\operatorname{tr}B+(pBp)\\operatorname{tr}A\\), \\(pABp\\). Portanto, **dentro dessa classe**, a ambiguidade exibida \\(\\eta E\\) é toda a ambiguidade de \\(NG\\). Fora dessa classe, há outros operadores que podem anular \\(G\\); a nota não os cobre.\n\n## 5. Transposição, multiplicidade e o erro por omitir \\(LE\\)\n\nEm fibra simétrica, se \\(a<b\\), a entrada fora da diagonal aparece duas vezes. O script da primitiva evita erro de multiplicidade construindo a base com\n\n\\[\nv[a,b]=v[b,a]=1\n\\]\n\npara \\(a<b\\), e testando\n\n\\[\n\\operatorname{tr}\\bigl(v\\,N(w)-N(v)\\,w\\bigr)=0.\n\\]\n\nIsso está correto para matrizes simétricas completas. Se se usar apenas o triângulo superior com peso unitário, é preciso multiplicar os termos fora da diagonal por \\(2\\) no produto interno; caso contrário o teste de adjunção fica errado.\n\nSe omitirmos \\(LE\\), definindo\n\n\\[\nN'=N_{\\rm bubble}+E L,\n\\]\n\nentão\n\n\\[\nN'G=N_{\\rm eff}G,\n\\]\n\nporque \\(LEG=0\\). O erro não aparece no resíduo de Ward. Ele aparece na adjunção:\n\n\\[\nN'-N'^\\dagger\n=E L-L E\n=-2l_b\\bigl(\\operatorname{tr}(h)pp^T-I\\,p^Thp\\bigr).\n\\tag{4}\n\\]\n\nExemplo concreto: tome \\(h=I\\), \\(p=(1,0,0,0)\\). Para \\(W_I\\), \\(l_b=-1/8\\), logo\n\n\\[\nN'-N'^\\dagger\n=\\frac14(4pp^T-I)\n=\\operatorname{diag}(3/4,-1/4,-1/4,-1/4)\\neq 0.\n\\]\n\nPara \\(W_T\\), \\(l_b=1/4\\),\n\n\\[\nN'-N'^\\dagger\n=-\\frac12(4pp^T-I)\n=\\operatorname{diag}(-3/2,1/2,1/2,1/2)\\neq 0.\n\\]\n\nPortanto omitir \\(LE\\) passa num teste de Ward mas falha no teste de adjunção. O teste relevante é a adjunção, como o operador observou.\n\n## 6. Ghost-1, ghost0 e anomalia ghost1\n\nO setor ghost neste recorte tem \\(W_G=\\delta_{ab}\\) e coeficientes medidos\n\n\\[\n(0,0,0,0).\n\\]\n\nO ghost usa fator \\(+1\\) e transposição do vértice da segunda ponta. Se alguém confundir:\n\n- **gerador de ghost-1** com \\(L_W\\);\n- **variação de ação ghost0** com fonte ghost-1;\n- **anomalia ghost1** com um coeficiente local de contato;\n\nintroduz uma linha ghost não nula que não existe no cálculo medido. O erro é detectável exatamente pela tabela ghost \\((0,0,0,0)\\): qualquer coeficiente ghost diferente de zero, ou qualquer falha em cancelar o bloco ghost após a transposição, indica mistura de setores. A anomalia ghost1 é um objeto cohomológico/BRST separado; não é o mesmo que a variação de ação ghost0, nem substitui \\(L_W\\) no contato misto.\n\n## 7. Sinais de integração por partes e \\(q=-p\\)\n\nNo script, a segunda ponta usa `-p_i`. Isso não é escolha opcional: é a codificação de \\(q=-p\\) no emparelhamento da delta. Se se usar \\(+p\\) na segunda ponta, a bilinear métrica, que é bilinear nos dois vértices derivados, troca de sinal globalmente; a linha \\(W_I\\), por exemplo, deixaria de ser \\((23/8,-13/16,1,-2)\\) e apareceria com sinal oposto. Portanto o \\(q=-p\\) é testável já na tabela de coeficientes. Também não se deve substituir \\(\\partial\\) por \\(ip\\) “sem avisar”: neste recorte \\(p\\) é símbolo de derivada real. A troca de sinal em integração por partes é absorvida por \\(q=-p\\); omiti-la altera os termos lineares em \\(p\\) e quebra o ajuste sobredeterminado.\n\n## 8. Resposta à pergunta única\n\n**Dentro dos trechos fornecidos e das convenções anexas**, os coeficientes e a primitiva seguem algebraicamente, sem ajuste escondido visível:\n\n- as tabelas \\(W_I,W_T,W_G\\) e os resíduos \\(N_{\\rm bubble}G+E L G\\) se reproduzem;\n- \\(N_{\\rm eff}=N_{\\rm bubble}+E L+L E\\) reproduz \\(N_{\\rm eff}G=N_{\\rm bubble}G+E R_W\\);\n- o núcleo de \\(N\\mapsto NG\\) na classe de quatro invariantes é exatamente \\(\\operatorname{span}\\{E\\}\\);\n- omitir \\(LE\\) é invisível a \\(NG\\), mas detectável por adjunção;\n- o setor ghost deve permanecer zero, e a transposição ghost é parte da convenção;\n- \\(q=-p\\) e o fator métrico \\(-1/32=(-1/2)(1/16)\\) são consistentes com o script.\n\n**Lacuna declarada:** não é possível refazer a contração diretamente “desde os vértices brutos” com os trechos carregados, porque não estão presentes os módulos importados que definem `vertex_data`, `sandwich`, `lincomb`, `transpose`, `position_metric_bubble_engine`, `ghost_direct_position_engine`, etc. O resultado permanece **DECLARADO** até auditoria local com esses arquivos e com os `results.json` correspondentes.\n\n**Alcance exato:** isto estabelece uma primitiva local de 2ª ordem de contato misto plano, com linha suave constante, relativa à referência definida por derivação, não uma prova de cancelamento diagramático completo, não uma prova de admissibilidade física de toda primitiva, não uma seleção de estado físico, não uma continuação lorentziana e não um fechamento da QME.",
+    "usage": {
+      "prompt_tokens": 232535,
+      "completion_tokens": 28948,
+      "total_tokens": 261483,
+      "prompt_tokens_details": {
+        "cached_tokens": 225536
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 25770
+      },
+      "prompt_cache_hit_tokens": 225536,
+      "prompt_cache_miss_tokens": 6999
+    },
+    "model": "deepseek-flash",
+    "documented_version": "DeepSeek-V4.1-Flash",
+    "version_status": "DOCUMENTED_ALIAS_NOT_IMMUTABLE_VERSION",
+    "thinking_effort_requested": "max",
+    "cost_estimate_usd": "0.038190516",
+    "cost_estimate_range_usd": [
+      "0.019095258",
+      "0.038190516"
+    ],
+    "cost_status": "PEAK_RATE_UPPER_ESTIMATE_NOT_INVOICE",
+    "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "pricing_checked_at": "2026-09-24",
+    "verification": "PROVIDER_COMPLETED_NOT_FACT_CHECKED",
+    "elapsed_seconds": 132.713,
+    "canonical_memory": {
+      "generation": "53c43fddbf3a32578b5466f43afe49372e3fac0795d93bfe1a549ed03de023e2",
+      "built_at": "2026-09-24T11:50:27.051312+00:00",
+      "freshness": "SOURCE_METADATA_CHECKED",
+      "sources": [
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1,
+          "last_line": 32,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 33,
+          "last_line": 66,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 67,
+          "last_line": 85,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 86,
+          "last_line": 95,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 96,
+          "last_line": 103,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 104,
+          "last_line": 111,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 112,
+          "last_line": 119,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 120,
+          "last_line": 143,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 144,
+          "last_line": 164,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 165,
+          "last_line": 179,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 180,
+          "last_line": 192,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 193,
+          "last_line": 210,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 211,
+          "last_line": 230,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 231,
+          "last_line": 231,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 231,
+          "last_line": 231,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 232,
+          "last_line": 250,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 251,
+          "last_line": 265,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 266,
+          "last_line": 277,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 278,
+          "last_line": 287,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 288,
+          "last_line": 307,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 308,
+          "last_line": 323,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 324,
+          "last_line": 342,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 343,
+          "last_line": 367,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 368,
+          "last_line": 390,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 391,
+          "last_line": 415,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 416,
+          "last_line": 430,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 431,
+          "last_line": 455,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 456,
+          "last_line": 479,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 480,
+          "last_line": 500,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 501,
+          "last_line": 529,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 530,
+          "last_line": 539,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 540,
+          "last_line": 556,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 557,
+          "last_line": 577,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 578,
+          "last_line": 587,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 588,
+          "last_line": 594,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 595,
+          "last_line": 600,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 601,
+          "last_line": 605,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 606,
+          "last_line": 612,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 613,
+          "last_line": 620,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 621,
+          "last_line": 628,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 629,
+          "last_line": 637,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 638,
+          "last_line": 651,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 652,
+          "last_line": 666,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 667,
+          "last_line": 679,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 680,
+          "last_line": 691,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 692,
+          "last_line": 706,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 707,
+          "last_line": 717,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 718,
+          "last_line": 732,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 733,
+          "last_line": 751,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 752,
+          "last_line": 770,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 771,
+          "last_line": 787,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 788,
+          "last_line": 809,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 810,
+          "last_line": 822,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 823,
+          "last_line": 848,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 849,
+          "last_line": 864,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 865,
+          "last_line": 879,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 880,
+          "last_line": 895,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 896,
+          "last_line": 916,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 917,
+          "last_line": 930,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 931,
+          "last_line": 946,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 947,
+          "last_line": 964,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 965,
+          "last_line": 983,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 984,
+          "last_line": 1001,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1002,
+          "last_line": 1015,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1016,
+          "last_line": 1031,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1032,
+          "last_line": 1045,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1046,
+          "last_line": 1063,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1064,
+          "last_line": 1083,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1084,
+          "last_line": 1093,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 1,
+          "last_line": 25,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 26,
+          "last_line": 58,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 59,
+          "last_line": 83,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 84,
+          "last_line": 109,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 110,
+          "last_line": 131,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 132,
+          "last_line": 147,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 148,
+          "last_line": 158,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 159,
+          "last_line": 160,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 161,
+          "last_line": 163,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 164,
+          "last_line": 165,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 166,
+          "last_line": 167,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 168,
+          "last_line": 170,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 171,
+          "last_line": 171,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 172,
+          "last_line": 172,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 173,
+          "last_line": 174,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 175,
+          "last_line": 175,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 176,
+          "last_line": 176,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 177,
+          "last_line": 177,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 178,
+          "last_line": 178,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 179,
+          "last_line": 179,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 180,
+          "last_line": 180,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 181,
+          "last_line": 181,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 182,
+          "last_line": 184,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 185,
+          "last_line": 186,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 187,
+          "last_line": 195,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 196,
+          "last_line": 199,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 200,
+          "last_line": 205,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 206,
+          "last_line": 208,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 209,
+          "last_line": 209,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 210,
+          "last_line": 210,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 211,
+          "last_line": 211,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 212,
+          "last_line": 213,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 214,
+          "last_line": 214,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 215,
+          "last_line": 216,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 217,
+          "last_line": 218,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 219,
+          "last_line": 219,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 220,
+          "last_line": 220,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 221,
+          "last_line": 221,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 222,
+          "last_line": 222,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 223,
+          "last_line": 223,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 224,
+          "last_line": 224,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 225,
+          "last_line": 225,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 226,
+          "last_line": 230,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 231,
+          "last_line": 234,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "ERRATA_20260919_sinal_do_acoplamento_nao_minimo.md",
+          "first_line": 1,
+          "last_line": 48,
+          "sha256": "060c82abee57a5d0dd94f2108f8647d273cec17a7f44848b0d58b15b3332a44f"
+        },
+        {
+          "file": "ERRATA_20260919_sinal_do_acoplamento_nao_minimo.md",
+          "first_line": 49,
+          "last_line": 49,
+          "sha256": "060c82abee57a5d0dd94f2108f8647d273cec17a7f44848b0d58b15b3332a44f"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1,
+          "last_line": 58,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 59,
+          "last_line": 90,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 91,
+          "last_line": 126,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 127,
+          "last_line": 168,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 169,
+          "last_line": 219,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 220,
+          "last_line": 263,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 264,
+          "last_line": 308,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 309,
+          "last_line": 349,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 350,
+          "last_line": 397,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 398,
+          "last_line": 441,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 442,
+          "last_line": 486,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 487,
+          "last_line": 531,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 532,
+          "last_line": 575,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 576,
+          "last_line": 611,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 612,
+          "last_line": 653,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 654,
+          "last_line": 697,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 698,
+          "last_line": 743,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 744,
+          "last_line": 783,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 784,
+          "last_line": 826,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 827,
+          "last_line": 874,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 875,
+          "last_line": 916,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 917,
+          "last_line": 956,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 957,
+          "last_line": 997,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 998,
+          "last_line": 1038,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1039,
+          "last_line": 1083,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1084,
+          "last_line": 1130,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1131,
+          "last_line": 1171,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1172,
+          "last_line": 1211,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1212,
+          "last_line": 1249,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1250,
+          "last_line": 1287,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1288,
+          "last_line": 1322,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1323,
+          "last_line": 1361,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1362,
+          "last_line": 1397,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1398,
+          "last_line": 1434,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1435,
+          "last_line": 1470,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1471,
+          "last_line": 1516,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1517,
+          "last_line": 1556,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1557,
+          "last_line": 1598,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1599,
+          "last_line": 1639,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1640,
+          "last_line": 1682,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1683,
+          "last_line": 1730,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1731,
+          "last_line": 1772,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1773,
+          "last_line": 1811,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1812,
+          "last_line": 1856,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1857,
+          "last_line": 1902,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1903,
+          "last_line": 1939,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1940,
+          "last_line": 1984,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1985,
+          "last_line": 2023,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2024,
+          "last_line": 2062,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2063,
+          "last_line": 2096,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2097,
+          "last_line": 2129,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2130,
+          "last_line": 2162,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2163,
+          "last_line": 2213,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2214,
+          "last_line": 2253,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2254,
+          "last_line": 2288,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1,
+          "last_line": 68,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 69,
+          "last_line": 99,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 100,
+          "last_line": 144,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 145,
+          "last_line": 191,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 192,
+          "last_line": 236,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 237,
+          "last_line": 274,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 275,
+          "last_line": 307,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 308,
+          "last_line": 354,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 355,
+          "last_line": 393,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 394,
+          "last_line": 428,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 429,
+          "last_line": 466,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 467,
+          "last_line": 510,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 511,
+          "last_line": 558,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 559,
+          "last_line": 605,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 606,
+          "last_line": 657,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 658,
+          "last_line": 704,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 705,
+          "last_line": 757,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 758,
+          "last_line": 797,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 798,
+          "last_line": 846,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 847,
+          "last_line": 891,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 892,
+          "last_line": 935,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 936,
+          "last_line": 977,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 978,
+          "last_line": 1014,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1015,
+          "last_line": 1052,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1053,
+          "last_line": 1088,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1089,
+          "last_line": 1129,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1130,
+          "last_line": 1156,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1157,
+          "last_line": 1198,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1199,
+          "last_line": 1234,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1235,
+          "last_line": 1277,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1278,
+          "last_line": 1323,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1324,
+          "last_line": 1356,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1357,
+          "last_line": 1400,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1401,
+          "last_line": 1436,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1437,
+          "last_line": 1479,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1480,
+          "last_line": 1515,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1516,
+          "last_line": 1547,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1548,
+          "last_line": 1577,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1578,
+          "last_line": 1620,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1621,
+          "last_line": 1656,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1657,
+          "last_line": 1693,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1694,
+          "last_line": 1737,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1738,
+          "last_line": 1777,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1778,
+          "last_line": 1810,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1811,
+          "last_line": 1843,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1844,
+          "last_line": 1879,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1880,
+          "last_line": 1921,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1922,
+          "last_line": 1952,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1953,
+          "last_line": 1982,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1983,
+          "last_line": 2020,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2021,
+          "last_line": 2056,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2057,
+          "last_line": 2105,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2106,
+          "last_line": 2159,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2160,
+          "last_line": 2203,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2204,
+          "last_line": 2239,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2240,
+          "last_line": 2278,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2279,
+          "last_line": 2317,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2318,
+          "last_line": 2355,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2356,
+          "last_line": 2392,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2393,
+          "last_line": 2440,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2441,
+          "last_line": 2476,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2477,
+          "last_line": 2512,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2513,
+          "last_line": 2553,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2554,
+          "last_line": 2593,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2594,
+          "last_line": 2628,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2629,
+          "last_line": 2668,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2669,
+          "last_line": 2704,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2705,
+          "last_line": 2742,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2743,
+          "last_line": 2795,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2796,
+          "last_line": 2835,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2836,
+          "last_line": 2875,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2876,
+          "last_line": 2912,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2913,
+          "last_line": 2950,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2951,
+          "last_line": 2984,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2985,
+          "last_line": 3013,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3014,
+          "last_line": 3040,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3041,
+          "last_line": 3066,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3067,
+          "last_line": 3074,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3075,
+          "last_line": 3075,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3075,
+          "last_line": 3075,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3076,
+          "last_line": 3102,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3103,
+          "last_line": 3111,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3112,
+          "last_line": 3117,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3118,
+          "last_line": 3124,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3125,
+          "last_line": 3125,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3125,
+          "last_line": 3125,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3126,
+          "last_line": 3136,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3137,
+          "last_line": 3148,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3149,
+          "last_line": 3160,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3161,
+          "last_line": 3170,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3171,
+          "last_line": 3179,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3180,
+          "last_line": 3185,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3186,
+          "last_line": 3189,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3190,
+          "last_line": 3200,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3201,
+          "last_line": 3204,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3205,
+          "last_line": 3207,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3208,
+          "last_line": 3213,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3214,
+          "last_line": 3216,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3217,
+          "last_line": 3219,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3220,
+          "last_line": 3220,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3220,
+          "last_line": 3220,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3221,
+          "last_line": 3221,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3222,
+          "last_line": 3222,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3262,
+          "last_line": 3262,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        }
+      ],
+      "packet_sha256": "a1fd81add5d1d081a4a78a31679c279f4dc0018edf97b8799feb89d346220e94",
+      "context_bytes": 647053,
+      "coverage": "PARTIAL_RETRIEVAL_NOT_FULL_CORPUS",
+      "blocked_passages": 1,
+      "weights_modified": false,
+      "memory_mode": "deepseek_maximum",
+      "packing": "CONSERVATIVE_UTF8_BYTES"
+    },
+    "request_cost_accounting": {
+      "accounted_usd": "0.038190516",
+      "usage": {
+        "prompt_tokens": 232535,
+        "completion_tokens": 28948,
+        "total_tokens": 261483,
+        "prompt_tokens_details": {
+          "cached_tokens": 225536
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 25770
+        },
+        "prompt_cache_hit_tokens": 225536,
+        "prompt_cache_miss_tokens": 6999
+      },
+      "status": "PEAK_RATE_UPPER_ESTIMATE_NOT_INVOICE"
+    }
+  },
+  "review_scope": "LIMITED_TEXTUAL_REVIEW_NOT_INDEPENDENT_SCIENTIFIC_VALIDATION",
+  "local_review": [
+    "A secao 2 parte dos coeficientes fornecidos e verifica NG; nao refaz a contracao dos vertices pedida. O proprio executor declara a lacuna ao final.",
+    "Resultado DECLARADO; sem reproducao local, sem assistencia Work, sem promocao ao canone."
+  ]
+}

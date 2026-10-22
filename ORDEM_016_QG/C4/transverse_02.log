@@ -1,0 +1,46 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\C4\TransverseCocycle_v2.lean:57:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  orbitPairing (h (screen x j)) (screenOne y)
+in the target expression
+  -(-(orbitPairing (h (![screenOne x, screenTwo x] j)) (screenOne y) *
+            orbitPairing (![screenOne z, screenTwo z] i) (g (screenOne y))) -
+        orbitPairing (h (![screenOne x, screenTwo x] j)) (screenTwo y) *
+          orbitPairing (![screenOne z, screenTwo z] i) (g (screenTwo y))) =
+    -orbitPairing (![screenOne z, screenTwo z] i) (g (screenOne y)) *
+        -orbitPairing (screenOne y) (h (![screenOne x, screenTwo x] j)) +
+      -orbitPairing (![screenOne z, screenTwo z] i) (g (screenTwo y)) *
+        -orbitPairing (screenTwo y) (h (![screenOne x, screenTwo x] j))
+
+g h : (Fin 4 → ℝ) →ₗ[ℝ] Fin 4 → ℝ
+x y z : MomentumCoordinates
+hx : x.1 ≠ 0
+hy : y.1 ≠ 0
+hz : z.1 ≠ 0
+hp : h (shellMomentum 0 (rapidityChart 0 x)) = shellMomentum 0 (rapidityChart 0 y)
+gp : g (shellMomentum 0 (rapidityChart 0 y)) = shellMomentum 0 (rapidityChart 0 z)
+hm : ∀ (a b : Fin 4 → ℝ), orbitPairing (h a) (h b) = orbitPairing a b
+i j : Fin 2
+ht : orbitPairing (h (screen x j)) (shellMomentum 0 (rapidityChart 0 y)) = 0
+hd :
+  h (screen x j) =
+    orbitPairing (h (screen x j)) (nullCompanion y) • shellMomentum 0 (rapidityChart 0 y) -
+        orbitPairing (h (screen x j)) (screenOne y) • screenOne y -
+      orbitPairing (h (screen x j)) (screenTwo y) • screenTwo y
+he :
+  -orbitPairing (screen z i) (g (h (screen x j))) =
+    -(-(orbitPairing (h (screen x j)) (screenOne y) * orbitPairing (screen z i) (g (screenOne y))) -
+        orbitPairing (h (screen x j)) (screenTwo y) * orbitPairing (screen z i) (g (screenTwo y)))
+⊢ -(-(orbitPairing (h (![screenOne x, screenTwo x] j)) (screenOne y) *
+            orbitPairing (![screenOne z, screenTwo z] i) (g (screenOne y))) -
+        orbitPairing (h (![screenOne x, screenTwo x] j)) (screenTwo y) *
+          orbitPairing (![screenOne z, screenTwo z] i) (g (screenTwo y))) =
+    -orbitPairing (![screenOne z, screenTwo z] i) (g (screenOne y)) *
+        -orbitPairing (screenOne y) (h (![screenOne x, screenTwo x] j)) +
+      -orbitPairing (![screenOne z, screenTwo z] i) (g (screenTwo y)) *
+        -orbitPairing (screenTwo y) (h (![screenOne x, screenTwo x] j))
+'ChatgptAudit.WignerRapidityMeasure016.screen_transverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.pairing_sub_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.pairing_smul_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.WignerRapidityMeasure016.screenCoefficient_comp' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

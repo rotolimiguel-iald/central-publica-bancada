@@ -1,0 +1,97 @@
+# PARECER D6 — crítica independente de `RecognitionGraph_v2.lean` e `recognition_control.py`
+
+**Escopo deste parecer:** crítica das fontes já produzidas (unidade nova). Nada aqui executou Lean, Python ou build — toda leitura é por inspeção dos textos fornecidos; as poucas contas refeitas à mão estão marcadas `[DERIVED por inspeção]`. Não redijo teoria nova, não escolho partição, não prometo compilação. A identificação luz/gráviton (INPUT/ONTO) não é tocada. Nenhum gate é referenciado como movível.
+
+---
+
+## 0. Veredito em uma frase
+
+A construção prova **transporte de grafos (pré-Tomita e seus fechos) e identificação pontual unidirecional dos operadores fechados que os realizam** — corretamente, sem conclusão nos campos — mas **não contém J, Δ ou Δ^{it}**, e a lacuna formal mínima é: **(i)** a simetria da estrutura (R.symm) para igualdade de domínios e de operadores, mais **(ii)** dois lemas gerais — naturalidade do cálculo funcional sob conjugação unitária (entrega Δ^{it}) e unicidade da decomposição polar na convenção antiunitária (entrega J) — tendo como ponte o lema da adjunta da conjugação. A hipótese `target_graph` é **derivável** de `source_graph` e deve sair: o resíduo analítico irredutível é unilateral.
+
+---
+
+## 1. O alcance exato das sete declarações
+
+Os campos da estrutura (`U : H ≃ₗᵢ[ℂ] K`, `reference : U ω = ω'`, `algebra : A ∈ M ↔ U A U⁻¹ ∈ N`) não contêm nenhuma equação modular — o docstring é **preciso** nesse ponto. Sobre eles:
+
+1. `recognition_on_vector` / `recognition_on_star_vector` — algebra da conjugação: `(U A U⁻¹) ω' = U(Aω)` e a versão com `star`. Conteúdo: os campos bastam; nenhuma estrutura modular usada.
+2. `recognition_tomita_graph` — **igualdade de conjuntos** entre o grafo pré-Tomita transportado e o grafo pré-Tomita do par alvo, sobre **operadores limitados** de sub-⋆-álgebras. É a peça central e está bem provada (nos dois sentidos, via `conjStarAlgEquiv.symm`).
+3. `recognition_closed_tomita_graph` — o fecho comuta com o transporte. Conteúdo **topológico** (`Homeomorph.image_closure` via produto de equivalências isométricas), não modular.
+4. `recognition_closed_graph_membership` — forma pontual de 3.
+5. `recognition_identifies_closed_operator` — dados operadores fechados S (em D) e T (em E) **cujos grafos são os fechos dos grafos dos pares**, conclui: `x ∈ D ⟹ ∃ y ∈ E, y = Ux ∧ T(Ux) = U(Sx)`. **Unidirecional.**
+6. `identityByConstruction` — habitabilidade trivial (U = refl). Sanidade, não conteúdo.
+
+**O que isto é, dito sem excesso:** o transporte por U leva o *fecho do grafo pré-Tomita da fonte* no *fecho do grafo pré-Tomita do alvo*, e quaisquer realizadores fechados desses fechos são entrelaçados por U, ponto a ponto, numa direção. É o nível **algébrico-topológico** do problema. As conclusões modulares (existência/unicidade de J, Δ, Δ^{it} e seu entrelaçamento) **não estão** no arquivo — a frase do pedido está correta, e o §2–§4 abaixo dizem exatamente por quê.
+
+---
+
+## 2. Dependências escondidas
+
+**H1 — O pacote escondido em `source_graph`/`target_graph`.** A hipótese `Set.range (grafo de S) = closure (pairTomitaGraph M ω)` empacota **três fatos analíticos distintos**: (a) o mapa pré-Tomita `Aω ↦ A*ω` é **bem-definido** (⟺ ω separante para M); (b) ele é **fechável** (o fecho do grafo é grafo de uma função — o coração do teorema de Tomita); (c) S é **exatamente** o fecho. O docstring declara as hipóteses (honesto), mas elas são o lugar onde mora o teorema de Tomita inteiro. Sem ω cíclico **e** separante, a hipótese é **insatisfazível** (ver o controle negativo que falta, §5).
+
+**H2 — `target_graph` é redundante (redução real).** Dados `source_graph` e os teoremas deste arquivo: `closure (pairTomitaGraph N ω') = pairTransport '' closure (pairTomitaGraph M ω) = pairTransport '' (grafo de S) = grafo de T̃ := U S U⁻¹` com domínio `U '' D` — porque imagem homeomorfa de grafo de operador fechado é grafo do operador transportado (fechado, pois U é homeomorfismo). Logo `target_graph` **segue** de `source_graph`; e se T é dado independentemente com `target_graph`, igualdade de grafos (conjuntos) ⟹ igualdade de operadores. **O resíduo analítico irredutível é unilateral** (uma só fechabilidade). Retirar `target_graph` das premissas fortalece a propriedade "sem conclusão nas premissas". `[DERIVED por inspeção]`
+
+**H3 — Densidades necessárias adiante.** A unicidade polar (passo que falta) exige S injetivo com alcance denso e domínio denso — para Tomita, decorre de ω cíclico e separante e da involutividade de S no seu domínio. Nada disso está tipado aqui; entra como parte dos "dados previamente dados" da fonte (face finita: o programa já tem a escada Tomita finita em kernel, conforme o selo do acervo — verificável, não suposto por mim) ou como hipótese a nomear.
+
+**H4 — Generalidade vs. intenção.** `pairTomitaGraph` é sobre uma `StarSubalgebra` de operadores **limitados** — correto como ponto de partida (S₀ clássico vive nos elementos limitados da álgebra), mas nada exige completude von Neumann; as hipóteses de grafo carregam implicitamente esse conteúdo quando se quer a leitura "Tomita". Vale uma linha de estatuto no docstring.
+
+**H5 — Δ e J não existem no arquivo.** Não há objeto Δ, objeto J, decomposição polar, nem cálculo funcional. O passo "entrelaçamento de S ⟹ entrelaçamento de J e Δ^{it}" **não é** corolário do que está provado — exige os lemas do §6. É esta a resposta curta ao "isso não afirma as conclusões modulares".
+
+---
+
+## 3. Ataque à tautologia
+
+- **Campos:** limpos (§1). Nenhuma equação modular é campo — verificado linha a linha.
+- **Concentração de hipótese ≠ tautologia:** `recognition_identifies_closed_operator` assume as realizações dos grafos; é o pacote H1 declarado, não circularidade. Após a redução H2, a concentração fica unilateral e explícita — a forma honesta máxima que este nível algébrico pode ter.
+- **Controle finito:** o check 48 (`recognized_J_intertwines`) é **definicional** (J2 foi *definido* como U J U\*; o check confere a definição). A carga não-tautológica está em: 39/40 (a regra de Tomita computada *diretamente* de cada par — desenho correto, anti-tautológico), **42** (o S' direto fatora pelas peças polares *transportadas*), 45/46 (positividade e quadrado do meio-peso transportado), 47 (S' direto = S transportado). Lidos em conjunto (42+43+44+45+46+47), os checks **instanciam o padrão da rota correta**: decomposição transportada da S' *direta* + positividade + unicidade polar finito-dimensional (usada como teorema, não enumerada — suficiente como testemunha finita).
+
+---
+
+## 4. Ataque aos domínios
+
+- **Unidirecionalidade:** a identificação é `D → E`. A igualdade de operadores fechados (que é o que `U S U⁻¹ = S'` significa) exige `U D = E`, que segue da direção inversa — **mas a estrutura inversa não está definida no arquivo**. É a menor lacuna *estrutural*: `ReconhecimentoPeloConteudo.symm` (campos: U⁻¹; a referência inversa lê-se de `reference`; a álgebra inversa lê-se do bicondicional + `apply_symm`) e a versão bidirecional da identificação. Conteúdo: boilerplate estrutural, não análise.
+- **Adjunta da conjugação:** a rota curta para Δ passa por `Δ' := S'^* S' = U S^* S U⁻¹ = U Δ U⁻¹`, que usa `(U T U⁻¹)^* = U T^* U⁻¹` para T **não limitado** fechado densamente definido (com domínios). Verdadeiro padrão (conjugação unitária preserva a relação de grafo que define a adjunta); **ausente** aqui e, segundo o próprio acervo registra, a infraestrutura de operadores não limitados na mathlib é a fronteira nomeada. Sem promessa de elaboração.
+- **Fecho de grafo = grafo de fecho:** vale **sse** fechável — o conteúdo de H1(b). Nada no arquivo mascara isso; o ponto é que a hipótese é o lugar onde Tomita mora.
+
+---
+
+## 5. Suficiência do controle finito (18 checks)
+
+**O que ele estabelece, com força real:** aritmética diádica exata (sem ruído de ponto flutuante); S' computado **diretamente do novo par** (não definido como transporte — a propriedade anti-circular correta); a fatoração polar do S' direto pelas peças transportadas; e dois controles negativos que **mordem** — refeitos à mão `[DERIVED por inspeção]`: com testemunha `e₁₂`, "manter o J velho (adj)" dá `e₁₂ − e₂₁`, defeito² = **2**; "manter o Δ velho" dá `e₁₂ − 4e₁₂`, defeito² = **9**, onde o fator 4 é **exatamente a razão de autovalores de ρ = diag(4,1)** — ou seja, o controle pega a armadilha canônica desta teoria: **J (e a escala de Δ) dependem do vetor de referência**; ω' = Xω não é positivo, logo o J' correto do novo par é `X·adj·X`, não `adj`. Isto é o oposto de um check que não pode falhar.
+
+**Onde ele é insuficiente (nomeado, não fatal):**
+
+1. **U = U⁻¹ (Pauli X).** A direção inversa (symm/domínios) não é exercitada — o controle é **cego** à lacuna do §4. Uma variante com U ≠ U⁻¹ (uma rotação racional 3-4-5 mantém a exatidão diádica) a tornaria carregada.
+2. **Δ^{it} não é testado em lugar nenhum** — o check 49 é Δ, não o grupo modular. A naturalidade do cálculo funcional (lema-chave para Δ^{it}) não tem eco finito aqui; um check espectral finito (autovalores diádicos 4 e 1: Δ^{it} por log/expoente) exercitaria o padrão.
+3. **O campo `algebra` só é exercitado trivialmente** (M = N = álgebra cheia). Falta um negativo com subálgebra própria onde U não leve M em N (o transporte de grafo deve falhar).
+4. **Sem negativo de não-separação.** Com ω = e₁₁ (não separante: e₁₂e₁₁ = 0 mas e₂₁e₁₁ = e₂₁ ≠ 0), o "grafo" do par contém `(0, e₂₁)` — não é grafo de função, e a hipótese `source_graph` falha. Esse negativo provaria que a hipótese H1 está fazendo trabalho real.
+5. Assimetria menor: os análogos do lado velho (involução/antiunitaridade de J=adj; positividade do meio-peso velho) não são checados; trivialmente verdadeiros, mas a simetria deixaria o padrão mais limpo.
+
+O `scope` declarado ("No AQFT net existence or J/Delta uniqueness theorem claimed") é honesto e corresponde ao medido.
+
+---
+
+## 6. A menor lacuna formal e a rota curta (sem a conclusão entre premissas)
+
+**Duas leituras do alvo, e o que cada uma custa.** Se J', Δ' são **construídos por transporte** (S' := U S U⁻¹ etc.), as equações-alvo são definicionais e o trabalho vira verificar os axiomas de Tomita no primo — cuja peça principal já está neste arquivo (igualdade de grafos) mais a correspondência de comutantes `U M' U⁻¹ = N'` (um lema a partir do campo `algebra`). Se — como o pedido indica ("de dados previamente dados") — o **par alvo é dado e seus objetos modulares existem por direito próprio** (Tomita no alvo, KNOWN ou prévio), o conteúdo é a **identificação** dos dois: para S', a igualdade de grafos já provada + "operador fechado é seu grafo" (trivial); para J' e Δ'^{it}, os lemas abaixo.
+
+**Lacuna formal mínima — estrutural:** **L0 (symm).** Definir `R.symm` e a identificação bidirecional ⟹ `U D = E` e a igualdade de operadores `U S U⁻¹ = S'`. É a menor lacuna: tudo o mais no nível de grafos já está pago.
+
+**Lemas necessários — analíticos, gerais, sem J' nem Δ' no enunciado:**
+
+- **L1 (adjunta da conjugação):** `(U T U⁻¹)^* = U T^* U⁻¹` (T fechado, densamente definido). ⟹ `Δ' = S'^*S' = U Δ U⁻¹` **sem** unicidade polar. (Rota de Δ por álgebra de adjunta.)
+- **L2 (naturalidade do cálculo funcional sob conjugação unitária):** para A positivo auto-adjunto e f boreliana, `f(U A U⁻¹) = U f(A) U⁻¹`; instância `f(λ)=λ^{it}` ⟹ **`Δ'^{it} = U Δ^{it} U⁻¹`**. Formas equivalentes: medidas espectrais entrelaçam (`E_{UAU⁻¹}(B) = U E_A(B) U⁻¹`, por unicidade da medida espectral), ou resolventes + Stone. Face finita: cálculo contínuo de matrizes hermitianas basta. **Este é o único lema genuinamente analítico no ramo de Δ^{it}.**
+- **L3 (o transporte da decomposição é decomposição):** `ŨJŨ⁻¹` antiunitário involutivo (álgebra pura); `ŨΔ^{1/2}Ũ⁻¹` positivo auto-adjunto (positividade por conjugação; auto-adjunção por L1) de quadrado Δ'; produto = S' (por L0).
+- **L4 (unicidade polar, convenção antiunitária):** se `T = W P` com W antiunitário e P positivo auto-adjunto injetivo, então `P = (T^*T)^{1/2}` — via **L4a, unicidade da raiz quadrada positiva** — e W é determinado no fecho do alcance de P (denso por injetividade). Aplicada às duas decomposições de S' ⟹ **`J' = U J U⁻¹`** (e Δ'^{1/2} transporta, redundando com L1).
+
+**Inventário de premissas da rota:** dados Tomita da **fonte** (S = JΔ^{1/2} fechado, Δ = S\*S positivo injetivo, J antiunitário involutivo — previamente dados; na face finita, o acervo os registra em kernel), a estrutura R, e os lemas gerais L1/L2/L4 (enunciados sobre operadores arbitrários — nenhum menciona J' ou Δ'). A conclusão não é premissa em nenhum ponto; `target_graph` sai (H2). **Conjuntos mínimos de dependência:** `U Δ^{it} U* = Δ'^{it}` ← L0+L1+L2; `U J U* = J'` ← L0+L3+L4 (com L4a como chave).
+
+**Se a fonte não trouxer Tomita dado:** o resíduo irredutível é a fechabilidade de Tomita **unilateral** (H1) — importável como KNOWN pela régua da casa, com a ponte sendo a verificação de ω cíclico e separante no par (na face finita: decidível).
+
+**Honestidade de infraestrutura (sem prometer compilação):** para operadores **não limitados**, L1/L2/L4 são o custo real e a cobertura mathlib é a fronteira que o próprio acervo nomeia como ausente; na **face finita** (matrizes), L1 é álgebra de adjunta de composição, L2 é cálculo contínuo hermitiano (exp/log), L4a é unicidade da raiz de positivas — todos elementares. A rota cabe na face finita primeiro, com a face contínua nomeada OPEN. Só o build do ROOT decide.
+
+---
+
+## 7. Estatutos e limites deste parecer
+
+`[REAL no fonte]` — o conteúdo das sete declarações e os 18 checks conforme escritos. `[DERIVED por inspeção]` — a redundância de `target_graph` (H2), a leitura dos defeitos 2 e 9, a cegueira U = U⁻¹, a análise das rotas L0–L4: são argumentos de leitura, não compilação nem execução. `[OPEN]` — disponibilidade dos lemas na mathlib e a face contínua. `[INPUT/ONTO]` — a identificação luz/gráviton do ADENDO 016-003-ter, aqui **não tratada** (D6 veio primeiro, conforme ordenado). Este parecer não é módulo do programa, não move gate algum, e sua própria régua espelha a da casa: **rc0 + axiomas no trio ≠ conclusões modulares** — confirmado e afiado: o que está provado é transporte de grafos; o que falta tem nome, é curto, e está decomposto acima sem conclusão entre premissas. `NOT_FALSIFIED` nunca é `CONFIRMED`; parecer crítico nunca é build.

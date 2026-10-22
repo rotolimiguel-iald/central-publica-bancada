@@ -1,0 +1,39 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\ClosedLinearGraphResolvent.lean:17:21: warning: Variable name `p` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\ClosedLinearGraphResolvent.lean:19:0: warning: automatically included section variable(s) unused in theorem `ChatgptAudit.UnboundedTransform016.linearL2Graph_closed`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Try this:
+  [apply] abel_nf
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\ClosedLinearGraphResolvent.lean:50:45: error: unsolved goals
+H : Type
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+D : H →ₗ.[ℂ] H
+hs : IsSelfAdjoint D
+z : H
+x : ↥D.domain
+hx : ∀ (u : ↥D.domain), inner ℂ (z - ↑x) ↑u = inner ℂ (↑D x) (↑D u)
+hm : ↑D x ∈ D.adjoint.domain
+ha : ↑D.adjoint ⟨↑D x, hm⟩ = z - ↑x
+hg : (↑D x, z - ↑x) ∈ D.graph
+hsq : (↑x, z - ↑x) ∈ (partialOperatorSquare D).graph
+u : ↥(partialOperatorSquare D).domain
+hu : ↑u = (↑x, z - ↑x).1
+hDu : ↑(partialOperatorSquare D) u = (↑x, z - ↑x).2
+⊢ ↑x + (-1 • ↑x + z) = z
+'ChatgptAudit.UnboundedTransform016.linearL2Graph_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.UnboundedTransform016.closedLinear_weak_resolvent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.UnboundedTransform016.selfadjoint_one_add_square_onto' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

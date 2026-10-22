@@ -1,0 +1,15 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\InscriptionBridge.lean:45:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'TGLExt.EquationOfTruth.flow_preserves_inscription_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.EquationOfTruth.transportedInscription' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.EquationOfTruth.inscription_form_survives' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.EquationOfTruth.transported_name_eq_flow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.EquationOfTruth.positive_time_changes_nonfixed_content' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TGLExt.EquationOfTruth.same_form_changed_name' depends on axioms: [propext, Classical.choice, Quot.sound]

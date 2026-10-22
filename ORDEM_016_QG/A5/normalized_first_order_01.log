@@ -1,0 +1,57 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\NormalizedFirstOrder.lean:13:63: error: unsolved goals
+a b c r : ℝ
+⊢ HasDerivAt (fun ε => a + 2 * b * ε + c * ε ^ 2) (2 * b) 0 ↔
+    HasFDerivAtFilter (((fun x => a) + fun y => 2 * b * y) + fun y => c * y ^ 2)
+      (ContinuousLinearMap.toSpanSingleton ℝ (2 * b)) (Filter.map (fun x => (x, 0)) (nhds 0))
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\NormalizedFirstOrder.lean:17:53: error: unsolved goals
+a b c r : ℝ
+hu : HasDerivAt (fun ε => a + 2 * b * ε + c * ε ^ 2) (2 * b) 0
+⊢ HasDerivAt (fun ε => 1 + r * ε ^ 2) 0 0 ↔
+    HasFDerivAtFilter ((fun x => 1) + fun y => r * y ^ 2) 0 (Filter.map (fun x => (x, 0)) (nhds 0))
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\NormalizedFirstOrder.lean:12:44: error: unsolved goals
+case e'_4
+a b c r : ℝ
+hu : HasDerivAt (fun ε => a + 2 * b * ε + c * ε ^ 2) (2 * b) 0
+hv : HasDerivAt (fun ε => 1 + r * ε ^ 2) 0 0
+⊢ Real.instAddCommGroup = NormedField.toNormedCommRing.toAddCommGroup
+
+case e'_5
+a b c r : ℝ
+hu : HasDerivAt (fun ε => a + 2 * b * ε + c * ε ^ 2) (2 * b) 0
+hv : HasDerivAt (fun ε => 1 + r * ε ^ 2) 0 0
+e_4✝ : Real.instAddCommGroup = NormedField.toNormedCommRing.toAddCommGroup
+⊢ Semiring.toModule = (NormedAlgebra.toNormedSpace ℝ).toModule
+
+case e'_8
+a b c r : ℝ
+hu : HasDerivAt (fun ε => a + 2 * b * ε + c * ε ^ 2) (2 * b) 0
+hv : HasDerivAt (fun ε => 1 + r * ε ^ 2) 0 0
+⊢ reading a b c r = (fun ε => a + 2 * b * ε + c * ε ^ 2) / fun ε => 1 + r * ε ^ 2
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\NormalizedFirstOrder.lean:36:2: error: Type mismatch: After simplification, term
+  reading_hasDerivAt 0 0 k r
+ has type
+  HasDerivAt (reading 0 0 k r) 0 0
+but is expected to have type
+  HasDerivAt (fun ε => k * ε ^ 2 / (1 + r * ε ^ 2)) 0 0
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\NormalizedFirstOrder.lean:47:2: error: failed to prove positivity/nonnegativity/nonzeroness
+'ChatgptAudit.NormalizedFirstOrder016.reading_hasDerivAt' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.NormalizedFirstOrder016.reading_deriv' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.NormalizedFirstOrder016.no_linear_term_iff' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.NormalizedFirstOrder016.normalized_bilateral_hasDerivAt' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.NormalizedFirstOrder016.pair_example_derivative' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.NormalizedFirstOrder016.pair_example_derivative_ne_zero' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

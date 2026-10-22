@@ -1,0 +1,23 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayGaussianTransform_v2.lean:44:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ‖↑?r‖
+in the target expression
+  √(Real.pi / b) ^ 2 * (cexp (-↑(2 * Real.pi ^ 2 / b) * ↑p ^ 2 + ↑(2 * Real.pi ^ 2) * ↑p + 0)).re =
+    (fun x => ‖↑(√(Real.pi / b) * Real.exp (-Real.pi ^ 2 * x ^ 2 / b + Real.pi ^ 2 * x))‖ ^ 2) p
+
+b : ℝ
+hb : 0 < b
+hm : AEStronglyMeasurable (fun p => ↑(gaussianSpectralWeight b p)) volume
+hi :
+  Integrable
+    (fun x => √(Real.pi / b) ^ 2 * RCLike.re (cexp (-↑(2 * Real.pi ^ 2 / b) * ↑x ^ 2 + ↑(2 * Real.pi ^ 2) * ↑x + 0)))
+    volume
+p : ℝ
+⊢ √(Real.pi / b) ^ 2 * (cexp (-↑(2 * Real.pi ^ 2 / b) * ↑p ^ 2 + ↑(2 * Real.pi ^ 2) * ↑p + 0)).re =
+    (fun x => ‖↑(√(Real.pi / b) * Real.exp (-Real.pi ^ 2 * x ^ 2 / b + Real.pi ^ 2 * x))‖ ^ 2) p
+'ChatgptAudit.LightRayCore016.gaussian_spectral_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_spectral_reflection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.gaussian_spectral_memLp' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.LightRayCore016.twisted_gaussian_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]

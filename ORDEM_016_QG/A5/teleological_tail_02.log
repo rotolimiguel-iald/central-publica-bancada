@@ -1,0 +1,29 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:44:25: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:44:25: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:44:25: error: `simp` made no progress
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:37:49: error: unsolved goals
+case e'_9
+f : ℝ → ℝ
+hf : Continuous f
+hint : ∀ (x : ℝ), IntegrableOn f (Ioi x) volume
+hmoment : ∀ (x : ℝ), IntegrableOn (fun u => u * f u) (Ioi x) volume
+x : ℝ
+hd1 : HasDerivAt (tail fun u => u * f u) (-(x * f x)) x
+hd2 : HasDerivAt (id * tail f) (1 * tail f x + id x * -f x) x
+hd : HasDerivAt ((tail fun u => u * f u) - id * tail f) (-(x * f x) - (1 * tail f x + id x * -f x)) x
+heq : weightedTail f = fun y => tail (fun u => u * f u) y - y * tail f y
+⊢ -tail f x = -(x * f x) - (1 * tail f x + x * -f x)
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:52:85: error: `ring_nf` made no progress on the goal
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:52:85: error: `ring_nf` made no progress on the goal
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:53:66: error: `ring_nf` made no progress on the goal
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A5\TeleologicalTail_v2.lean:53:66: error: `ring_nf` made no progress on the goal
+'ChatgptAudit.Teleological016.tail_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.Teleological016.weightedTail_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.Teleological016.weightedTail_hasDerivAt' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'ChatgptAudit.Teleological016.teleological_equations' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

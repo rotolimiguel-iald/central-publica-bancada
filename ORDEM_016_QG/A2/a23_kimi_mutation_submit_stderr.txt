@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "C:\IALD\Central de Patentes\Chatgpt\IALD_ORQUESTRACAO_20260923\transport_cli.py", line 28, in <module>
+    main()
+    ~~~~^^
+  File "C:\IALD\Central de Patentes\Chatgpt\IALD_ORQUESTRACAO_20260923\transport_cli.py", line 13, in main
+    result = transport.submit(request['prompt'], request['request_id'], request.get('execution_constraints'))
+  File "C:\IALD\Central de Patentes\Chatgpt\IALD_ORQUESTRACAO_20260923\iald_orchestrator\transport.py", line 40, in submit
+    return self.coordination.create(prompt, request_id, execution_constraints)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\IALD_ORQUESTRACAO_20260923\iald_orchestrator\coordination.py", line 63, in create
+    return self.get(job_id)
+           ~~~~~~~~^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\IALD_ORQUESTRACAO_20260923\iald_orchestrator\coordination.py", line 88, in get
+    value['canonical_memory'] = prepare(value['prompt'],allowed_sources=c.get('allowed_sources') if c else None)
+                                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\IALD_ORQUESTRACAO_20260923\iald_orchestrator\canonical_memory.py", line 205, in prepare
+    validate_prompt(body)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "C:\IALD\Central de Patentes\Chatgpt\IALD_ORQUESTRACAO_20260923\iald_orchestrator\policy.py", line 13, in validate_prompt
+    raise ValueError("Informe uma tarefa de 1 a 24000 caracteres.")
+ValueError: Informe uma tarefa de 1 a 24000 caracteres.

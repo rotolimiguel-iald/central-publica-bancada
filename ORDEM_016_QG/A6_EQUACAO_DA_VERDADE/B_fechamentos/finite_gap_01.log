@@ -1,0 +1,61 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\FiniteGapRate.lean:14:57: error: unsolved goals
+𝕜 : Type u_1
+E : Type u_2
+inst✝³ : RCLike 𝕜
+inst✝² : NormedAddCommGroup E
+inst✝¹ : InnerProductSpace 𝕜 E
+ι : Type u_3
+inst✝ : Fintype ι
+b : OrthonormalBasis ι 𝕜 E
+L : E →L[𝕜] E
+a : ι → 𝕜
+ha : ∀ (i : ι), L (b i) = a i • b i
+r : ℝ
+hr : 0 ≤ r
+hab : ∀ (i : ι), ‖a i‖ ≤ r
+x : E
+i : ι
+⊢ ∑ x_1, (b.repr x).ofLp x_1 * (a x_1 * Pi.single x_1 1 i) = a i * (b.repr x).ofLp i
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\FiniteGapRate.lean:16:33: warning: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  simp [map_sum, map_smul, ha,̵ ̵m̵u̵l̵_̵c̵o̵m̵m̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\FiniteGapRate.lean:29:0: warning: automatically included section variable(s) unused in theorem `TGLExt.EquationOfTruth.reading_eigen_zero`:
+  [FiniteDimensional 𝕜 E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional 𝕜 E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A6_EQUACAO_DA_VERDADE\B_fechamentos\FiniteGapRate.lean:53:31: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  H (b ?i)
+in the target expression
+  ↑H (b i) = 0
+
+𝕜 : Type u_1
+E : Type u_2
+inst✝⁴ : RCLike 𝕜
+inst✝³ : NormedAddCommGroup E
+inst✝² : InnerProductSpace 𝕜 E
+inst✝¹ : FiniteDimensional 𝕜 E
+inst✝ : CompleteSpace E
+H : E →L[𝕜] E
+hH : IsSelfAdjoint H
+γ : ℝ
+hγ : 0 < γ
+hgap : ∀ (i : Fin (Module.finrank 𝕜 E)), ⋯.eigenvalues ⋯ i = 0 ∨ γ ≤ ⋯.eigenvalues ⋯ i
+s : ℝ
+hs : 0 ≤ s
+x : E
+b : OrthonormalBasis (Fin (Module.finrank 𝕜 E)) 𝕜 E := ⋯.eigenvectorBasis ⋯
+ev : Fin (Module.finrank 𝕜 E) → ℝ := ⋯.eigenvalues ⋯
+a : Fin (Module.finrank 𝕜 E) → 𝕜 := fun i => if ev i = 0 then 0 else ↑(Real.exp (-(s * ev i)))
+hv : ∀ (i : Fin (Module.finrank 𝕜 E)), H (b i) = ↑(ev i) • b i
+i : Fin (Module.finrank 𝕜 E)
+hi : ev i = 0
+⊢ ↑H (b i) = 0
+'TGLExt.EquationOfTruth.diagonal_norm_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'TGLExt.EquationOfTruth.reading_eigen_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TGLExt.EquationOfTruth.finite_gap_norm_rate' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

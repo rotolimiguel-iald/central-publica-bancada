@@ -1,0 +1,16 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\A2\LightRayCoreExtension.lean:27:67: error: unsolved goals
+a b r : ℝ
+ha : 0 ≤ a
+hb : 0 < b
+x : ℝ
+hu : ↑↑((U a) (productCore 0 b r ⋯ hb)) x = transSymbol a x * ↑↑(productCore 0 b r ⋯ hb) x
+hz : ↑↑(productCore 0 b r ⋯ hb) x = multiplier 0 ↑x * twistedGaussian b r ↑x
+ha' : ↑↑(productCore a b r ha hb) x = multiplier a ↑x * twistedGaussian b r ↑x
+⊢ transSymbol a x * (transSymbol 0 x * twistedGaussian b r ↑x) = cexp (I * ↑a * cexp ↑x) * twistedGaussian b r ↑x
+'ChatgptAudit.LightRayCore016.product_core_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.multiplier_eq_transSymbol' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.U_gaussian_core' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ChatgptAudit.LightRayCore016.halfline_isotony_of_gaussian_density' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

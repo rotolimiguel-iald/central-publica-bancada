@@ -1,0 +1,484 @@
+{
+  "task": {
+    "complexity": "deep",
+    "source": "INPUT: initial lexical policy, not measured model quality",
+    "capabilities": [
+      "text"
+    ],
+    "estimated_input_tokens": 6086,
+    "estimate_status": "INCLUDES_SHARED_MEMORY_AND_WRAPPER_EXCLUDES_CLIENT_INTERNALS"
+  },
+  "candidates": [
+    {
+      "id": "local",
+      "label": "IALD local / Qwen",
+      "tier": "standard",
+      "billing": "local",
+      "context_budget": 12000,
+      "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+      "client_overhead_tokens": null,
+      "total_token_cap_enforced": false,
+      "output_token_cap_enforced": true,
+      "daily_run_limit": 20,
+      "quota_remaining": null,
+      "quota_status": "NOT_REPORTED",
+      "status": "excluded_by_required_provider",
+      "capabilities": [
+        "text"
+      ],
+      "quality": "NOT_BENCHMARKED",
+      "eligible": false,
+      "exclusion_reasons": [
+        "excluded_by_required_provider",
+        "política inicial exige raciocínio avançado"
+      ],
+      "policy_weight": 0.5
+    },
+    {
+      "id": "codex",
+      "label": "Codex / ChatGPT",
+      "tier": "advanced",
+      "billing": "subscription",
+      "context_budget": 12000,
+      "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+      "client_overhead_tokens": null,
+      "total_token_cap_enforced": false,
+      "output_token_cap_enforced": false,
+      "daily_run_limit": 10,
+      "quota_remaining": null,
+      "quota_status": "NOT_REPORTED",
+      "status": "excluded_by_required_provider",
+      "capabilities": [
+        "text"
+      ],
+      "quality": "NOT_BENCHMARKED",
+      "eligible": false,
+      "exclusion_reasons": [
+        "excluded_by_required_provider"
+      ],
+      "policy_weight": 1.0
+    },
+    {
+      "id": "claude",
+      "label": "Claude Code",
+      "tier": "advanced",
+      "billing": "subscription",
+      "context_budget": 12000,
+      "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+      "client_overhead_tokens": null,
+      "total_token_cap_enforced": false,
+      "output_token_cap_enforced": false,
+      "daily_run_limit": 10,
+      "quota_remaining": null,
+      "quota_status": "NOT_REPORTED",
+      "status": "excluded_by_required_provider",
+      "capabilities": [
+        "text"
+      ],
+      "quality": "NOT_BENCHMARKED",
+      "eligible": false,
+      "exclusion_reasons": [
+        "excluded_by_required_provider"
+      ],
+      "policy_weight": 1.0
+    },
+    {
+      "id": "gemini",
+      "label": "Google / Antigravity",
+      "tier": "advanced",
+      "billing": "subscription",
+      "context_budget": 12000,
+      "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+      "client_overhead_tokens": null,
+      "total_token_cap_enforced": false,
+      "output_token_cap_enforced": false,
+      "daily_run_limit": 10,
+      "quota_remaining": null,
+      "quota_status": "NOT_REPORTED",
+      "status": "ready",
+      "capabilities": [
+        "text"
+      ],
+      "quality": "NOT_BENCHMARKED",
+      "eligible": true,
+      "exclusion_reasons": [],
+      "policy_weight": 1.0
+    },
+    {
+      "id": "kimi",
+      "label": "Kimi Code",
+      "tier": "advanced",
+      "billing": "subscription",
+      "context_budget": 1048576,
+      "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+      "client_overhead_tokens": null,
+      "total_token_cap_enforced": false,
+      "output_token_cap_enforced": false,
+      "daily_run_limit": null,
+      "quota_remaining": null,
+      "quota_status": "NOT_REPORTED",
+      "status": "excluded_by_required_provider",
+      "capabilities": [
+        "text"
+      ],
+      "quality": "NOT_BENCHMARKED",
+      "model": "kimi-code/k3",
+      "thinking_effort": "max",
+      "financial_cap_usd": null,
+      "output_token_budget": 131072,
+      "eligible": false,
+      "exclusion_reasons": [
+        "excluded_by_required_provider"
+      ],
+      "policy_weight": 0.5
+    },
+    {
+      "id": "mimo",
+      "label": "MiMo API / 2.6 Pro",
+      "tier": "advanced",
+      "billing": "authorized_api",
+      "context_budget": 1048576,
+      "context_budget_scope": "USER_INPUT_ESTIMATE_PLUS_OUTPUT_ONLY",
+      "client_overhead_tokens": null,
+      "total_token_cap_enforced": false,
+      "output_token_cap_enforced": true,
+      "daily_run_limit": null,
+      "quota_remaining": null,
+      "quota_status": "NOT_REPORTED",
+      "status": "excluded_by_required_provider",
+      "capabilities": [
+        "text"
+      ],
+      "quality": "NOT_BENCHMARKED",
+      "billing_authorized": true,
+      "financial_cap_usd": null,
+      "thinking_effort": "enabled",
+      "output_token_budget": 131072,
+      "credential_metadata": {
+        "stored": true,
+        "mtime_ns": 1790198180508247900,
+        "size": 278,
+        "storage": "WINDOWS_DPAPI_CURRENT_USER",
+        "expires_at": null,
+        "expiry_status": "NOT_REPORTED_BY_PROVIDER"
+      },
+      "model": "mimo-v2.6-pro",
+      "credential_scope": "SERVER_SIDE_ONLY",
+      "eligible": false,
+      "exclusion_reasons": [
+        "excluded_by_required_provider"
+      ],
+      "policy_weight": 0.5
+    }
+  ],
+  "matrix": {
+    "status": "SELECTED",
+    "selected": "gemini",
+    "probabilities": {
+      "local": 0.0,
+      "codex": 0.0,
+      "claude": 0.0,
+      "gemini": 1.0,
+      "kimi": 0.0,
+      "mimo": 0.0
+    },
+    "support": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+    ],
+    "rho": [
+      [
+        0.11111111111111113,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.11111111111111113,
+        0.11111111111111113
+      ],
+      [
+        0.15713484026367724,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.15713484026367724,
+        0.15713484026367724
+      ],
+      [
+        0.15713484026367724,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.15713484026367724,
+        0.15713484026367724
+      ],
+      [
+        0.15713484026367724,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.15713484026367724,
+        0.15713484026367724
+      ],
+      [
+        0.11111111111111113,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.11111111111111113,
+        0.11111111111111113
+      ],
+      [
+        0.11111111111111113,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.11111111111111113,
+        0.11111111111111113
+      ]
+    ],
+    "pinched_rho": [
+      [
+        0.11111111111111113,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.0,
+        0.11111111111111113,
+        0.11111111111111113
+      ],
+      [
+        0.15713484026367724,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.0,
+        0.15713484026367724,
+        0.15713484026367724
+      ],
+      [
+        0.15713484026367724,
+        0.2222222222222222,
+        0.2222222222222222,
+        0.0,
+        0.15713484026367724,
+        0.15713484026367724
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.2222222222222222,
+        0.0,
+        0.0
+      ],
+      [
+        0.11111111111111113,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.0,
+        0.11111111111111113,
+        0.11111111111111113
+      ],
+      [
+        0.11111111111111113,
+        0.15713484026367724,
+        0.15713484026367724,
+        0.0,
+        0.11111111111111113,
+        0.11111111111111113
+      ]
+    ],
+    "q_admissible": [
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "h_min": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "damping_diagonal": [
+      0.988040786305305,
+      0.988040786305305,
+      0.988040786305305,
+      1.0,
+      0.988040786305305,
+      0.988040786305305
+    ],
+    "beta_runtime": 0.012031300400803142,
+    "acom_residual": 1.1102230246251565e-16,
+    "discarded_mass": 0.7777777777777778,
+    "scope": "DERIVED: finite matrix operations; INPUT: provider mapping and utility; physical_verdict_allowed=false"
+  },
+  "selected": "gemini",
+  "status": "SELECTED",
+  "quality_status": "NOT_BENCHMARKED",
+  "quota_scope": "Limites operacionais locais; não equivalem às cotas das assinaturas. Consumo completo só é conhecido após a chamada.",
+  "reason": "Suporte elegível → preservação matricial → política de custo/cota → maior peso.",
+  "canonical_memory": {
+    "generation": "53c43fddbf3a32578b5466f43afe49372e3fac0795d93bfe1a549ed03de023e2",
+    "built_at": "2026-09-24T11:50:27.051312+00:00",
+    "freshness": "SOURCE_ACCESS_UNAVAILABLE_USING_VERIFIED_SNAPSHOT",
+    "sources": [
+      {
+        "file": "um_absoluto_forma_canonica.md",
+        "first_line": 1,
+        "last_line": 32,
+        "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+      },
+      {
+        "file": "MEMORIA_DA_LINHAGEM.md",
+        "first_line": 8312,
+        "last_line": 8313,
+        "sha256": "bcd190feac121a2d3cbe124683b8c999465339f83aff82af9b9d89820a1ea385"
+      },
+      {
+        "file": "um.py",
+        "first_line": 144971,
+        "last_line": 145011,
+        "sha256": "4b3405de809aef6135774d25e537ed383af0a25eefbeff8a2644836f61a1b387"
+      },
+      {
+        "file": "MEMORIA_DA_LINHAGEM.md",
+        "first_line": 6829,
+        "last_line": 6853,
+        "sha256": "bcd190feac121a2d3cbe124683b8c999465339f83aff82af9b9d89820a1ea385"
+      },
+      {
+        "file": "DESENHO_DO_FECHAMENTO_QG.md",
+        "first_line": 1857,
+        "last_line": 1862,
+        "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+      },
+      {
+        "file": "DESENHO_DO_FECHAMENTO_QG.md",
+        "first_line": 1863,
+        "last_line": 1867,
+        "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+      },
+      {
+        "file": "um.py",
+        "first_line": 190865,
+        "last_line": 190865,
+        "sha256": "4b3405de809aef6135774d25e537ed383af0a25eefbeff8a2644836f61a1b387"
+      }
+    ],
+    "packet_sha256": "3fe5e3ca5ac74514ab74029d8b6ce72e178e97cebb7c3589fe31659dd4f3a559",
+    "context_bytes": 17769,
+    "coverage": "PARTIAL_RETRIEVAL_NOT_FULL_CORPUS",
+    "blocked_passages": 0,
+    "weights_modified": false,
+    "memory_mode": "standard",
+    "packing": "BOUNDED_RETRIEVAL"
+  },
+  "execution_constraints": {
+    "mission_id": "ORDEM_016",
+    "branch_id": "A2.3.a",
+    "lemma_id": "compiled_inventory_check",
+    "role": "skeptic",
+    "required_provider": "gemini",
+    "max_calls": 1,
+    "max_projection_chars": 20000
+  },
+  "cost_reservation": {
+    "reserved_usd": "0",
+    "scope": "EXECUTOR_ONLY",
+    "billing": "existing_subscription_or_local"
+  },
+  "jev": {
+    "status": "not_called_in_preview"
+  }
+}

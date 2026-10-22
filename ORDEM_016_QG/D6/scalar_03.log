@@ -1,0 +1,52 @@
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D6\ScalarGraphRealization_v2.lean:41:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (y, sy).1
+in the target expression
+  inner ℂ p.2 y = inner ℂ sy ((scalarClosedTomita P) ((scalarTomitaSquareInput P) q))
+
+case mpr.refine_2
+P : SiteProfile
+p : ↥(ScalarGNSHilbert P) × ↥(ScalarGNSHilbert P)
+hp : p ∈ ↑(scalarTomitaSquare P).graph
+q : ↥(scalarTomitaSquare P).domain
+hx : ↑q = p.1
+hz : ↑(scalarTomitaSquare P) q = p.2
+y sy : ↥(ScalarGNSHilbert P)
+t : ↥(scalarClosedTomitaDomain P)
+ht : (fun x => (↑x, (scalarClosedTomita P) x)) t = (y, sy)
+hty : ((fun x => (↑x, (scalarClosedTomita P) x)) t).1 = (y, sy).1
+hts : ((fun x => (↑x, (scalarClosedTomita P) x)) t).2 = (y, sy).2
+⊢ inner ℂ p.2 y = inner ℂ sy ((scalarClosedTomita P) ((scalarTomitaSquareInput P) q))
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    q
+  has type
+    ↥(scalarTomitaSquare P).domain
+  but is expected to have type
+    ↥(scalarTomitaSquareDomain P)
+  in the application
+    (scalarTomitaSquareInput P) q
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D6\ScalarGraphRealization_v2.lean:81:33: error: failed to synthesize
+  SMulCommClass ℝ (↥(ScalarGNSHilbert P) →L[ℂ] ↥(ScalarGNSHilbert P))
+    (↥(ScalarGNSHilbert P) →L[ℂ] ↥(ScalarGNSHilbert P))
+(deterministic) timeout at `typeclass`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option synthInstance.maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D6\ScalarGraphRealization_v2.lean:84:20: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (1800000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+C:\IALD\Central de Patentes\Chatgpt\ORDEM_016_QG\D6\ScalarGraphRealization_v2.lean:104:4: warning: declaration uses `sorry`
+'ORDEM016.D6.scalar_square_relation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.scalar_resolvent_in_relation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.scalar_resolvent_inverse_relation' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.sqrt_damping_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ORDEM016.D6.scalar_polar_regularized' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.scalarGraphRealization' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ORDEM016.D6.scalarGraphReadout' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

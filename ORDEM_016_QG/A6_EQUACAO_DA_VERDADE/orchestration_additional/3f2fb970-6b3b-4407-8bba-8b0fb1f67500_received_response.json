@@ -1,0 +1,2440 @@
+{
+  "job_id": "3f2fb970-6b3b-4407-8bba-8b0fb1f67500",
+  "execution_id": "a099137e-2692-407a-a14d-8d4e00b2a7a4",
+  "received_at": "2026-09-24T19:54:21.517462+00:00",
+  "result": {
+    "text": "# A-5.b — O propagador nulo escalar sob decaimento nomeado: análise, hipóteses, contraprovas e enunciados\n\n**Estatuto desta resposta:** `[DECLARADO]` até auditoria local. Nada aqui foi compilado, executado ou verificado em kernel; nenhum arquivo, gate ou original foi tocado; nenhuma literatura foi pesquisada além do contexto fornecido. As contas abaixo foram feitas à mão nesta resposta e carregam `[DERIVED]` no sentido estrito de \"verificadas por álgebra explícita, não por build\". Os enunciados Lean propostos são rascunhos de tipo — **não se afirma compilação**. Escopo respeitado: canal escalar nulo apenas; sem Fock, sem escolha de tensor físico, sem polar/KMS, `G` permanece `[INPUT]`, `ContratoH2` intacto (mesmo H2); o levantamento matricial/covariância é da unidade Kimi; A5.a/A3/A4 não são repetidos nem estendidos.\n\n---\n\n## 1. A cadeia algébrica, auditada sinal a sinal `[DERIVED]`\n\nConvenção do pedido: `f : ℝ → ℝ`, `c = 8πG` (com `G > 0` `[INPUT]`), e a lei local do `ContratoH3.raychaudhuri_einstein`:\n\n```\nθ'(λ) = −c·f(λ),        a'(λ) = θ(λ)\n```\n\n**Passo 1 — expansão.** A solução geral da primeira EDO é `θ(λ) = θ(λ₀) − c∫_{λ₀}^{λ} f(u)du`. Impondo a condição **teleológica** `θ(λ) → 0` quando `λ → +∞`:\n\n```\n0 − θ(λ) = ∫_{λ}^{∞} θ'(s) ds = −c ∫_{λ}^{∞} f(u) du   ⟹   θ(λ) = +c ∫_{λ}^{∞} f(u) du\n```\n\nSinal conferido: derivando `θ(λ) = c[F(∞) − F(λ)]` com `F' = f`, obtém-se `θ' = −c·f` ✓. Sob NEC (`f ≥ 0`), `θ ≥ 0`: expansão positiva que **morre** no futuro — o gerador absorve e estaciona.\n\n**Passo 2 — área.** A segunda EDO com a condição `a(λ) → 0` em `+∞`:\n\n```\na(λ) = −∫_{λ}^{∞} θ(s) ds = −c ∫_{λ}^{∞} ∫_{s}^{∞} f(u) du ds = −c ∫_{λ}^{∞} (u − λ) f(u) du\n```\n\nonde a última igualdade é a troca de ordem na região triangular `{λ ≤ s ≤ u < ∞}` (detalhada em §3). Confere com a convenção dada (`a_prime = theta`, `theta_prime = −c·f`) ✓.\n\n**Passo 3 — lei de área e Clausius de janela.** A variação total de área desde o corte `λ₀`:\n\n```\nΔa = a(∞) − a(λ₀) = +c ∫_{λ₀}^{∞} (u − λ₀) f(u) du ≥ 0   (sob NEC)\n```\n\nque é exatamente `c × windowCharge` do contrato (linhas 293–301 do SOURCE). Compondo com `S = A/(4G)` `[INPUT/KNOWN: Bekenstein–Hawking]`:\n\n```\nδS = (1/4G)·Δa = (8πG/4G) ∫_{λ₀}^{∞} (u−λ₀) f du = 2π ∫_{λ₀}^{∞} (u−λ₀) f du = windowEntropy\n```\n\n✓ — a identidade `δS = 2π × carga unilateral` do contrato sai por **conta**, sem circularidade, e o `8πG` \"emerge\" de `c/(4G)`. Com `κ = 2π` (`[INPUT]` via normalização de Killing N/BW — **não rederivado aqui**), `δQ = κ × carga = δS`.\n\n**Passo 4 — a solução retardada (espelho).** A condição oposta `θ(−∞) = 0` dá `θ_ret(λ) = −c∫_{−∞}^{λ} f ≤ 0` e `a_ret(λ) = −c∫_{−∞}^{λ} (λ−u) f(u) du ≤ 0`: área **decrescente** — o horizonte passado (emissor). A condição de contorno em `+∞` é o que **seleciona o horizonte de eventos** (absorvedor, segunda lei válida) contra o horizonte passado. Isto é o conteúdo de \"teleológica\": a resposta no ponto depende do **futuro** do gerador — não é acausalidade física, é a definição de horizonte de eventos `[KNOWN: Jacobson 2016; CTT 2017, citados no próprio contrato]`.\n\n---\n\n## 2. O pacote suficiente NOMEADO (e o que cada peça compra)\n\n**Pacote (H) — suficiente para tudo o que segue:**\n\n> **(H1) regularidade:** `f` contínua em `ℝ`.\n> **(H2) decaimento zeroth:** `∫₀^∞ |f(u)| du < ∞`.\n> **(H3) decaimento de primeiro momento:** `∫₀^∞ u·|f(u)| du < ∞` ← **o momento finito NOMEADO, jamais escondido na notação `∫_λ^∞`.**\n\nVersão ainda mais fácil de checar (suficiente para H2+H3): `|f(u)| ≤ C(1+u)^{−p}` com **`p > 2`** para `u ≥ 0`. Em `−∞` basta integrabilidade local, que (H1) já dá.\n\n**Tabela necessário vs. suficiente** `[DERIVED]`:\n\n| conclusão | condição necessária | condição suficiente usada |\n|---|---|---|\n| `θ(λ)` existe como integral imprópria | `∫^∞ f` converge (H2, sob sinal definido) | (H1)+(H2) |\n| `θ'(λ) = −c·f(λ)` **em todo** `λ` (HasDerivAt pontual, como o contrato exige) | `f` contínua em `λ` | (H1) — sem ela, vale só q.t.p. |\n| `θ(λ) → 0` em `+∞` | resto de integral convergente | (H2) |\n| `a(λ)` existe e `a(λ) → 0` | **momento finito** (necessário sob NEC: `a(∞)=0` com `a' = θ ≥ 0` ⟺ `∫θ < ∞` ⟺ momento) | (H3) |\n| termo de fronteira de Fubini/partes se anula | momento finito (§3) | (H3) |\n| unicidade da solução | as **duas** condições finais (§4) | `θ(∞)=0` ∧ `a(∞)=0` |\n| lei de área (`Δa ≥ 0`), `δS ≥ 0`, Tonelli sem valor absoluto | — (não é condição de existência) | NEC (`f ≥ 0`) `[INPUT físico]` |\n\nPontos que a tabela torna inegociáveis:\n\n1. **`L¹` não basta.** `θ` e `a` têm limiares de decaimento **distintos**: `p > 1` para expansão, **`p > 2`** para área. Escrever a fórmula de `a` sem (H3) é esconder divergência — a contraprova (i) mostra o cadáver.\n2. **NEC não é hipótese de existência** (Fubini absoluto cobre sinal arbitrário); é hipótese de **leitura** (monotonicidade, entropia positiva). Separar os dois registros é o que impede \"provar\" a segunda lei por truque contábil.\n3. **Continuidade é hipótese de forma, não de existência:** o contrato exige `HasDerivAt ... em todo ponto`; sem (H1) a lei local vira q.t.p. e o tipo não fecha.\n\n---\n\n## 3. Diferenciação das impróprias, termo de fronteira, limites — o caminho de prova que evita API paramétrica\n\n**Regra de desenho (a mais importante para o build):** nunca invocar \"diferenciação sob integral imprópria paramétrica\". Reduzir tudo a **TFC de intervalo finito** via referência fixa. `[DERIVED — rota de prova; nomes de API a confirmar na auditoria local]`\n\n**(a) `θ' = −c·f`.** Para `λ` dado, escolha `λ₀ < λ`. Por aditividade (válida: `f` integrável em `Ici λ₀` por (H1)+(H2)):\n\n```\nθ(λ) = c·( ∫_{λ₀}^{∞} f  −  ∫_{λ₀}^{λ} f )\n```\n\nO primeiro termo é constante; o segundo é `intervalIntegral` finito, cuja derivada em `λ` é `f(λ)` pelo TFC de função contínua (H1). Logo `θ'(λ) = −c·f(λ)` **em todo ponto**, sem nenhum teorema de Leibniz paramétrico.\n\n**(b) `a' = θ`.** Expanda e derive termo a termo — cada termo é do tipo (a):\n\n```\na(λ) = −c·[ A(λ) − λ·B(λ) ],   A(λ) := ∫_{λ}^{∞} u f(u) du,   B(λ) := ∫_{λ}^{∞} f(u) du\nA'(λ) = −λ f(λ)   (idem (a), usando H3) ;   B'(λ) = −f(λ)\na'(λ) = −c·[ −λf(λ) − B(λ) + λf(λ) ] = c·B(λ) = θ(λ)   ✓\n```\n\nSó regras locais de derivada de produto/soma sobre TFC finito. **Este é o lema de maior risco transformado em exercício de cálculo I.**\n\n**(c) O termo de fronteira é onde o momento mora.** A troca de Fubini do Passo 2 pode ser vista por partes, e aí o termo de fronteira aparece **explicitamente**:\n\n```\n∫_{λ}^{∞} (∫_{s}^{∞} f(u) du) ds = [ s·∫_{s}^{∞} f ]_{s=λ}^{s→∞} + ∫_{λ}^{∞} s f(s) ds\n```\n\nO termo de fronteira em `+∞` é `lim_{s→∞} s·∫_{s}^{∞} f(u) du`, e ele se anula **sse** o momento é finito: sob (H3), `s·∫_{s}^{∞}|f| ≤ ∫_{s}^{∞} u|f(u)| du → 0`. Com `f(u) = 1/(1+u²)`: `s·(π/2 − arctan s) → 1 ≠ 0` — o termo **não** morre e a identidade degenera em `∞ − ∞`. O pedido (\"sem esconder momento finito\") tem aqui sua forma exata: **o momento finito É o termo de fronteira.** Alternativa sem partes: Tonelli (`f ≥ 0`, valor comum possivelmente `+∞`) ou Fubini absoluto (exige exatamente (H3)).\n\n**(d) Limites em `+∞`.**\n\n```\n|θ(λ)| ≤ c ∫_{λ}^{∞} |f| → 0                          (resto de (H2))\n|a(λ)| ≤ c ∫_{λ}^{∞} (u−λ)|f(u)| du ≤ c ∫_{λ}^{∞} u|f(u)| du → 0   (λ ≥ 0; resto de (H3))\n```\n\nPara o build, o caminho limpo é `θ(λ) = c·(∫_{Ici 0} f − ∫_{0..λ} f)` com `∫_{0..λ} f → ∫_{Ici 0} f` por convergência dominada / definição de imprópria — e idem para o resto do momento.\n\n---\n\n## 4. A homogênea `A + B·λ`: decomposição físico/gauge, e por que \"fonte nula\" não é \"sem condição de contorno\"\n\n**Forma geral** `[DERIVED]`: se `(θ̃, ã)` satisfaz as mesmas EDOs (com a mesma `f` contínua), então existem `A, B ∈ ℝ` com\n\n```\nθ̃(λ) = θ(λ) + B,        ã(λ) = a(λ) + B·λ + A\n```\n\n(Prova: `θ̃ − θ` tem derivada nula em `ℝ` ⟹ constante `B`; `ã − a − B·λ` tem derivada `θ̃ − θ − B = 0` ⟹ constante `A`.)\n\nOs dois parâmetros **não são o mesmo tipo de objeto** — e confundi-los é o erro que o pedido manda evitar:\n\n- **`B` é físico.** É uma expansão assintótica residual: um horizonte perpetuamente expansivo **sem fonte tardia** (modo homogêneo = perturbação do fundo/do próprio horizonte de fundo). Muda a lei de área (crescimento linear eterno). A condição **`θ(∞)=0` mata `B`** — e é uma condição *física* (teleologia do horizonte de eventos).\n- **`A` é gauge.** É a constante aditiva da área; só `Δa` entra em Clausius, logo `A` é invisível fisicamente. A condição **`a(∞)=0` mata `A`** — e é uma *escolha de normalização* (o zero da área perturbada).\n\n**Unicidade** `[DERIVED]`: dadas as duas condições finais, `B = 0` (pois `θ̃(∞) = B = 0`) e `A = 0` (pois `ã(∞) = A = 0`). A solução teleológica é **única**.\n\n**Corolário — `propagator_zero` é teorema da seleção, não axioma.** Com `f ≡ 0`: `θ ≡ 0`, `a ≡ 0` — mas **só porque a condição final matou a homogênea**. Sem a condição de contorno, \"fonte nula\" admite `a = A + Bλ ≠ 0`: **ausência de fonte ≠ ausência de condição de contorno.** O campo `propagator_zero` do `ContratoH3` (linha 345) deve ser *provado* como corolário da seleção; quem escreve o propagador sem condição final e postula `propagator_zero` está postulando a seleção disfarçada de linearidade.\n\n---\n\n## 5. Contraprovas: remover hipótese material ⟹ falha concreta `[DERIVED — contas fechadas]`\n\n**(i) `L¹` sem momento: a área não existe.** `f(u) = 1/(1+u²)`: contínua, `∫ f = π < ∞`, mas `u·f ~ 1/u ∉ L¹`.\n\n```\nθ(λ) = c·(π/2 − arctan λ)   ✓ existe, C¹, θ' = −c·f ✓, θ(∞) = 0 ✓\na(λ) = −∫_{λ}^{∞} θ(s) ds = −∞   para todo λ, pois θ(s) ~ c/s\n```\n\nA EDO de primeira ordem admite solução; a de segunda ordem **não admite condição final** — o propagador escalar não existe nesta classe. (H3) é material.\n\n**(v) o limiar exato do decaimento.** `f(u) = (1+u)^{−p}`, `u ≥ 0`: expansão exige `p > 1`; momento exige `p > 2`. Para `1 < p ≤ 2`, `θ` existe e `a ≡ −∞`. (A contraprova (i) é o caso `p = 2`.) O decaimento nomeado deve carregar `p > 2` (ou (H3) diretamente).\n\n**(ii) descontinuidade quebra o tipo.** `f = 𝟙_{[0,1]}`: momento finito ✓, mas `θ` tem quinas em `λ = 0, 1`; `θ' = −c·f` falha nos dois pontos. O contrato exige `HasDerivAt` em todo ponto — (H1) é material (ou se declara a versão q.t.p., decisão de desenho a ratificar).\n\n**(iii) sem condição final, o propagador não é função da fonte.** `f` de suporte compacto (ex.: `f(u) = max(0, 1−u²)`, contínua, todos os momentos finitos): para `λ ≤ −1`, `θ = 4c/3`, `a = (4c/3)λ`; para `λ ≥ 1`, `θ = a = 0`. A família homogênea `+B, +Bλ+A` sobrevive em qualquer aberto sem fonte; sem `θ(∞)=a(∞)=0` há dois parâmetros livres e \"o propagador\" não está definido. A seleção é da **condição de contorno**, nunca da fonte.\n\n**(iv) NEC removida: a matemática vive, a leitura morre.** `f(u) = e^{−u} sin u` (`u ≥ 0`): momento absoluto finito, tudo converge;\n\n```\nθ(λ) = c·e^{−λ}(sin λ + cos λ)/2\n```\n\nque muda de sinal em `λ = 3π/4`: a área deixa de ser monótona, `Δa ≥ 0` falha, `δS ≥ 0` falha. Existência não exige NEC; a lei de área exige. (Conta: `d/du[−e^{−u}(sin u + cos u)/2] = e^{−u} sin u` ✓.)\n\n---\n\n## 6. Enunciados exatos propostos para a prova local `[DECLARADO — rascunho de tipo; não compilado; nomes de API a confirmar na auditoria local por grep/build]`\n\n```lean\n/-! ## A5.b — o propagador nulo escalar sob decaimento NOMEADO (canal escalar; sem Fock;\n     sem tensor físico; G [INPUT]; mesmo H2 intocado) -/\n\n/-- O pacote de decaimento NOMEADO da fonte nula escalar. -/\nstructure NullSource (f : ℝ → ℝ) : Prop where\n  cont : Continuous f\n  int_f : IntegrableOn f (Set.Ici 0) MeasureSpace.volume\n  int_moment : IntegrableOn (fun u => u * f u) (Set.Ici 0) MeasureSpace.volume\n\nnoncomputable def c (G : ℝ) : ℝ := 8 * Real.pi * G\nnoncomputable def theta (G : ℝ) (f : ℝ → ℝ) (l : ℝ) : ℝ := c G * ∫ u in Set.Ici l, f u\nnoncomputable def area (G : ℝ) (f : ℝ → ℝ) (l : ℝ) : ℝ := - c G * ∫ u in Set.Ici l, (u - l) * f u\n\n/-- integrabilidade desce ao corte arbitrário (split local + cauda). -/\ntheorem integrable_Ici_all (hf : NullSource f) (l : ℝ) : IntegrableOn f (Set.Ici l) volume\ntheorem integrable_Ici_moment_all (hf : NullSource f) (l : ℝ) :\n    IntegrableOn (fun u => (u - l) * f u) (Set.Ici l) volume\n\n/-- ★ A LEI LOCAL, em TODO ponto — via redução a intervalo finito + TFC (sem Leibniz paramétrico). -/\ntheorem theta_hasDerivAt (hf : NullSource f) (G : ℝ) (l : ℝ) :\n    HasDerivAt (theta G f) (-(8 * Real.pi * G) * f l) l\ntheorem area_hasDerivAt (hf : NullSource f) (G : ℝ) (l : ℝ) :\n    HasDerivAt (area G f) (theta G f l) l\n\n/-- os limites teleológicos. -/\ntheorem theta_tendsto_zero (hf : NullSource f) (G : ℝ) : Tendsto (theta G f) atTop (𝓝 0)\ntheorem area_tendsto_zero (hf : NullSource f) (G : ℝ) : Tendsto (area G f) atTop (𝓝 0)\n\n/-- ★ A homogênea é exatamente A + B·λ. -/\ntheorem general_solution_form (hf : NullSource f) (G : ℝ) {θ₂ a₂ : ℝ → ℝ}\n    (hθ : ∀ l, HasDerivAt θ₂ (-(8 * Real.pi * G) * f l) l)\n    (ha : ∀ l, HasDerivAt a₂ (θ₂ l) l) :\n    ∃ A B : ℝ, (∀ l, θ₂ l = theta G f l + B) ∧ (∀ l, a₂ l = area G f l + B * l + A)\n\n/-- ★★ SELEÇÃO TELEOLÓGICA: as duas condições finais dão unicidade (B físico morto; A gauge morto). -/\ntheorem teleological_uniqueness (hf : NullSource f) (G : ℝ) {θ₂ a₂ : ℝ → ℝ}\n    (hθ : ∀ l, HasDerivAt θ₂ (-(8 * Real.pi * G) * f l) l)\n    (ha : ∀ l, HasDerivAt a₂ (θ₂ l) l)\n    (hθtop : Tendsto θ₂ atTop (𝓝 0)) (hatop : Tendsto a₂ atTop (𝓝 0)) :\n    (∀ l, θ₂ l = theta G f l) ∧ (∀ l, a₂ l = area G f l)\n\n/-- propagator_zero é TEOREMA da seleção (corolário), não axioma. -/\ntheorem propagator_zero (G : ℝ) :\n    (∀ l, theta G (fun _ => 0) l = 0) ∧ (∀ l, area G (fun _ => 0) l = 0)\n\n/-- a lei de área (NEC é hipótese de LEITURA, declarada à parte). -/\ntheorem area_law (hf : NullSource f) (hNEC : ∀ u, 0 ≤ f u) (hG : 0 < G) (l₀ : ℝ) :\n    0 ≤ theta G f l₀ ∧ area G f l₀ ≤ 0 ∧ 0 ≤ -(area G f l₀)\n\n/-- ★ Clausius de janela: δS = (1/4G)·Δa = 2π × carga unilateral — por CONTA, sem circularidade. -/\ntheorem window_clausius (hf : NullSource f) (hG : 0 < G) (l₀ : ℝ) :\n    -(area G f l₀) / (4 * G) = 2 * Real.pi * ∫ u in Set.Ici l₀, (u - l₀) * f u\n\n/-- ★ contraprova registrada em kernel: L¹ sem momento NÃO tem área. -/\ntheorem no_first_moment_no_area :\n    ¬ IntegrableOn (fun u => u * (1 + u ^ 2 : ℝ)⁻¹) (Set.Ici 0) volume\n```\n\nNotas de desenho para a auditoria local: (1) os lemas de diferenciação seguem a rota de §3 (referência fixa + TFC de `intervalIntegral`); (2) `general_solution_form` depende de \"derivada nula em `ℝ` ⟹ constante\" (nome exato a confirmar); (3) as convergências de resto usam a redução `∫_{Ici l} = ∫_{Ici 0} − ∫_{0..l}` + convergência dominada; (4) **não** usar `erfc` em lugar nenhum (fora da mathlib — ver §7); (5) o mapa destes teoremas para os campos `theta`, `theta_is_expansion`, `raychaudhuri_einstein` e `propagator_zero` do `ContratoH3` é **interface posterior** — exige que a resposta `h` (unidade Kimi) realize `areaDensity h (x + l•n) = area G (nullEnergy T ψ (x + •n)) l`, e essa realização **não** é declarada aqui `[OPEN]`.\n\n---\n\n## 7. Exemplo não nulo admissível: a Gaussiana `[DERIVED — contas fechadas]`\n\n`f(u) = e^{−u²}`: contínua em `ℝ`, **todos** os momentos finitos em `+∞` (pois `u^k e^{−u²}` decai mais rápido que qualquer potência), `f ≥ 0` (NEC satisfeita), `f ≢ 0`. O pacote (H) vale com folga.\n\n```\nθ(λ) = c · ∫_{λ}^{∞} e^{−u²} du          θ'(λ) = −c·e^{−λ²}  ✓   θ(λ) → 0 ✓\na(λ) = −c·[ (1/2)e^{−λ²} − λ·∫_{λ}^{∞} e^{−u²} du ]\na'(λ) = −c·[ −λe^{−λ²} − ∫_{λ}^{∞} e^{−u²}du + λe^{−λ²} ] = c∫_{λ}^{∞} e^{−u²}du = θ ✓\na(λ) → 0  (pois λ·∫_{λ}^{∞} e^{−u²} du ≤ ∫_{λ}^{∞} u e^{−u²} du = (1/2)e^{−λ²} → 0) ✓\n```\n\nÁrea total no corte `λ₀ = 0` (`∫₀^∞ u e^{−u²} du = [−(1/2)e^{−u²}]₀^∞ = 1/2`, por TFC impróprio com a primitiva elementar — **sem `erfc`**):\n\n```\n−a(0) = c·(1/2) = 4πG  ⟹  δS = (1/4G)·(4πG) = π = 2π·(1/2) = windowEntropy ✓\n```\n\nA Clausius de janela fecha **numericamente**: `δS = π`. Este exemplo é simultaneamente (a) testemunha de `admissible_nontrivial` no canal escalar, (b) controle de sinais, e (c) gabarito da identidade `window_clausius`. A ausência de forma fechada para `∫_{λ}^{∞} e^{−u²}du` em `λ ≠ 0` é irrelevante: as EDOs e os limites não precisam dela.\n\n---\n\n## 8. Fronteiras do escopo, lacunas declaradas e o que NÃO foi feito\n\n**Não feito (e dito):** nenhuma compilação ou execução; nenhuma prova de existência de `ContratoH3` nem de produção a partir de `ContratoH2`; nenhuma escolha de tensor `h` físico; nenhuma derivação de polar/KMS, de `κ`, de `G`, de `τ★`; nenhuma reivindicação sobre o setor físico do gate. `G` segue `[INPUT]`; `κ = 2π` segue `[INPUT/BW]`; a NEC segue `[INPUT físico]`.\n\n**Lacunas/riscos para a auditoria local** `[DECLARADO]`: (1) nomes exatos de API (TFC de `intervalIntegral`, resto impróprio, derivada-nula⟹constante, splits `Ici = Icc ∪ Ici`); (2) decisão formal: codificar `f` em `ℝ` inteiro vs. `Ici λ₀` — a versão em `ℝ` é mais geral mas cobra o split local; (3) decisão de desenho pendente de ratificação: lei local pontual (exige (H1)) vs. q.t.p. (permite fontes por partes); (4) a contraprova (i) está enunciada como `¬ IntegrableOn` — sua prova exige a estimativa `u/(1+u²) ≥ 1/(2u)` para `u ≥ 1`, elementar mas a escrever; (5) a ponte destes teoremas escalares para os campos do `ContratoH3` depende da realização de `h` pela outra unidade — interface nomeada, não entregue.\n\n**Síntese da resposta à pergunta única:** o pacote suficiente é **continuidade + integrabilidade + primeiro momento finito nomeado** (ou decaimento `p > 2`), com a NEC declarada à parte como hipótese de leitura. As fórmulas resolvem porque cada derivada se reduz, por referência fixa, a TFC de intervalo finito; selecionam a solução teleológica porque a condição `θ(∞)=0` mata o modo físico homogêneo `B` (expansão residual) e a condição `a(∞)=0` mata o gauge `A` — e porque, sem momento finito, o próprio termo de fronteira de Fubini não se anula e a área simplesmente não existe. `propagator_zero` e a unicidade são **teoremas da seleção**; nada disso vem da fonte, e é por isso que ausência de fonte nunca foi ausência de condição de contorno.",
+    "usage": {
+      "prompt_tokens": 317883,
+      "completion_tokens": 24329,
+      "cached_input_tokens": 313344,
+      "total_tokens": 342212
+    },
+    "model": "kimi-code/k3",
+    "thinking_effort": "max",
+    "context_window": 1048576,
+    "verification": "PROVIDER_COMPLETED_NOT_FACT_CHECKED",
+    "canonical_memory": {
+      "generation": "53c43fddbf3a32578b5466f43afe49372e3fac0795d93bfe1a549ed03de023e2",
+      "built_at": "2026-09-24T11:50:27.051312+00:00",
+      "freshness": "SOURCE_METADATA_CHECKED",
+      "sources": [
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1,
+          "last_line": 32,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 33,
+          "last_line": 66,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 67,
+          "last_line": 85,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 86,
+          "last_line": 95,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 96,
+          "last_line": 103,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 104,
+          "last_line": 111,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 112,
+          "last_line": 119,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 120,
+          "last_line": 143,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 144,
+          "last_line": 164,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 165,
+          "last_line": 179,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 180,
+          "last_line": 192,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 193,
+          "last_line": 210,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 211,
+          "last_line": 230,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 231,
+          "last_line": 231,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 231,
+          "last_line": 231,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 232,
+          "last_line": 250,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 251,
+          "last_line": 265,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 266,
+          "last_line": 277,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 278,
+          "last_line": 287,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 288,
+          "last_line": 307,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 308,
+          "last_line": 323,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 324,
+          "last_line": 342,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 343,
+          "last_line": 367,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 368,
+          "last_line": 390,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 391,
+          "last_line": 415,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 416,
+          "last_line": 430,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 431,
+          "last_line": 455,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 456,
+          "last_line": 479,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 480,
+          "last_line": 500,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 501,
+          "last_line": 529,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 530,
+          "last_line": 539,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 540,
+          "last_line": 556,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 557,
+          "last_line": 577,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 578,
+          "last_line": 587,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 588,
+          "last_line": 594,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 595,
+          "last_line": 600,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 601,
+          "last_line": 605,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 606,
+          "last_line": 612,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 613,
+          "last_line": 620,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 621,
+          "last_line": 628,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 629,
+          "last_line": 637,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 638,
+          "last_line": 651,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 652,
+          "last_line": 666,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 667,
+          "last_line": 679,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 680,
+          "last_line": 691,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 692,
+          "last_line": 706,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 707,
+          "last_line": 717,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 718,
+          "last_line": 732,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 733,
+          "last_line": 751,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 752,
+          "last_line": 770,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 771,
+          "last_line": 787,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 788,
+          "last_line": 809,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 810,
+          "last_line": 822,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 823,
+          "last_line": 848,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 849,
+          "last_line": 864,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 865,
+          "last_line": 879,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 880,
+          "last_line": 895,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 896,
+          "last_line": 916,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 917,
+          "last_line": 930,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 931,
+          "last_line": 946,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 947,
+          "last_line": 964,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 965,
+          "last_line": 983,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 984,
+          "last_line": 1001,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1002,
+          "last_line": 1015,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1016,
+          "last_line": 1031,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1032,
+          "last_line": 1045,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1046,
+          "last_line": 1063,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1064,
+          "last_line": 1083,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "um_absoluto_forma_canonica.md",
+          "first_line": 1084,
+          "last_line": 1093,
+          "sha256": "a6287ab39ae0505a2a92a7ed0ace8cc7288a9bdf0c0010073f889ab1a787256e"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 1,
+          "last_line": 25,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 26,
+          "last_line": 58,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 59,
+          "last_line": 83,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 84,
+          "last_line": 109,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 110,
+          "last_line": 131,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 132,
+          "last_line": 147,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 148,
+          "last_line": 158,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 159,
+          "last_line": 160,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 161,
+          "last_line": 163,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 164,
+          "last_line": 165,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 166,
+          "last_line": 167,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 168,
+          "last_line": 170,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 171,
+          "last_line": 171,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 172,
+          "last_line": 172,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 173,
+          "last_line": 174,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 175,
+          "last_line": 175,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 176,
+          "last_line": 176,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 177,
+          "last_line": 177,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 178,
+          "last_line": 178,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 179,
+          "last_line": 179,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 180,
+          "last_line": 180,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 181,
+          "last_line": 181,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 182,
+          "last_line": 184,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 185,
+          "last_line": 186,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 187,
+          "last_line": 195,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 196,
+          "last_line": 199,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 200,
+          "last_line": 205,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 206,
+          "last_line": 208,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 209,
+          "last_line": 209,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 210,
+          "last_line": 210,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 211,
+          "last_line": 211,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 212,
+          "last_line": 213,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 214,
+          "last_line": 214,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 215,
+          "last_line": 216,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 217,
+          "last_line": 218,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 219,
+          "last_line": 219,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 220,
+          "last_line": 220,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 221,
+          "last_line": 221,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 222,
+          "last_line": 222,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 223,
+          "last_line": 223,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 224,
+          "last_line": 224,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 225,
+          "last_line": 225,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 226,
+          "last_line": 230,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "A_PROVA_DA_QG_TGL_arvore.md",
+          "first_line": 231,
+          "last_line": 234,
+          "sha256": "cb7a6092a92a1f66dba911d649a2186fb0bfcdde5ed1f55672955428221015b8"
+        },
+        {
+          "file": "ERRATA_20260919_sinal_do_acoplamento_nao_minimo.md",
+          "first_line": 1,
+          "last_line": 48,
+          "sha256": "060c82abee57a5d0dd94f2108f8647d273cec17a7f44848b0d58b15b3332a44f"
+        },
+        {
+          "file": "ERRATA_20260919_sinal_do_acoplamento_nao_minimo.md",
+          "first_line": 49,
+          "last_line": 49,
+          "sha256": "060c82abee57a5d0dd94f2108f8647d273cec17a7f44848b0d58b15b3332a44f"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1,
+          "last_line": 58,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 59,
+          "last_line": 90,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 91,
+          "last_line": 126,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 127,
+          "last_line": 168,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 169,
+          "last_line": 219,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 220,
+          "last_line": 263,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 264,
+          "last_line": 308,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 309,
+          "last_line": 349,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 350,
+          "last_line": 397,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 398,
+          "last_line": 441,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 442,
+          "last_line": 486,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 487,
+          "last_line": 531,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 532,
+          "last_line": 575,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 576,
+          "last_line": 611,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 612,
+          "last_line": 653,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 654,
+          "last_line": 697,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 698,
+          "last_line": 743,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 744,
+          "last_line": 783,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 784,
+          "last_line": 826,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 827,
+          "last_line": 874,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 875,
+          "last_line": 916,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 917,
+          "last_line": 956,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 957,
+          "last_line": 997,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 998,
+          "last_line": 1038,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1039,
+          "last_line": 1083,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1084,
+          "last_line": 1130,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1131,
+          "last_line": 1171,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1172,
+          "last_line": 1211,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1212,
+          "last_line": 1249,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1250,
+          "last_line": 1287,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1288,
+          "last_line": 1322,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1323,
+          "last_line": 1361,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1362,
+          "last_line": 1397,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1398,
+          "last_line": 1434,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1435,
+          "last_line": 1470,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1471,
+          "last_line": 1516,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1517,
+          "last_line": 1556,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1557,
+          "last_line": 1598,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1599,
+          "last_line": 1639,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1640,
+          "last_line": 1682,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1683,
+          "last_line": 1730,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1731,
+          "last_line": 1772,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1773,
+          "last_line": 1811,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1812,
+          "last_line": 1856,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1857,
+          "last_line": 1902,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1903,
+          "last_line": 1939,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1940,
+          "last_line": 1984,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 1985,
+          "last_line": 2023,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2024,
+          "last_line": 2062,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2063,
+          "last_line": 2096,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2097,
+          "last_line": 2129,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2130,
+          "last_line": 2162,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2163,
+          "last_line": 2213,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2214,
+          "last_line": 2253,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "A Ponte Einstein Cartan Miguel.tex",
+          "first_line": 2254,
+          "last_line": 2288,
+          "sha256": "8a2792d3c9ce52b6e2b6032bc018aa3fea065eb1a1f05f96669381a8ca12d72d"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1,
+          "last_line": 68,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 69,
+          "last_line": 99,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 100,
+          "last_line": 144,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 145,
+          "last_line": 191,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 192,
+          "last_line": 236,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 237,
+          "last_line": 274,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 275,
+          "last_line": 307,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 308,
+          "last_line": 354,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 355,
+          "last_line": 393,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 394,
+          "last_line": 428,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 429,
+          "last_line": 466,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 467,
+          "last_line": 510,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 511,
+          "last_line": 558,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 559,
+          "last_line": 605,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 606,
+          "last_line": 657,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 658,
+          "last_line": 704,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 705,
+          "last_line": 757,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 758,
+          "last_line": 797,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 798,
+          "last_line": 846,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 847,
+          "last_line": 891,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 892,
+          "last_line": 935,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 936,
+          "last_line": 977,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 978,
+          "last_line": 1014,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1015,
+          "last_line": 1052,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1053,
+          "last_line": 1088,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1089,
+          "last_line": 1129,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1130,
+          "last_line": 1156,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1157,
+          "last_line": 1198,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1199,
+          "last_line": 1234,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1235,
+          "last_line": 1277,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1278,
+          "last_line": 1323,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1324,
+          "last_line": 1356,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1357,
+          "last_line": 1400,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1401,
+          "last_line": 1436,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1437,
+          "last_line": 1479,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1480,
+          "last_line": 1515,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1516,
+          "last_line": 1547,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1548,
+          "last_line": 1577,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1578,
+          "last_line": 1620,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1621,
+          "last_line": 1656,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1657,
+          "last_line": 1693,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1694,
+          "last_line": 1737,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1738,
+          "last_line": 1777,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1778,
+          "last_line": 1810,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1811,
+          "last_line": 1843,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1844,
+          "last_line": 1879,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1880,
+          "last_line": 1921,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1922,
+          "last_line": 1952,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1953,
+          "last_line": 1982,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 1983,
+          "last_line": 2020,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2021,
+          "last_line": 2056,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2057,
+          "last_line": 2105,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2106,
+          "last_line": 2159,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2160,
+          "last_line": 2203,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2204,
+          "last_line": 2239,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2240,
+          "last_line": 2278,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2279,
+          "last_line": 2317,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2318,
+          "last_line": 2355,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2356,
+          "last_line": 2392,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2393,
+          "last_line": 2440,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2441,
+          "last_line": 2476,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2477,
+          "last_line": 2512,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2513,
+          "last_line": 2553,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2554,
+          "last_line": 2593,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2594,
+          "last_line": 2628,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2629,
+          "last_line": 2668,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2669,
+          "last_line": 2704,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2705,
+          "last_line": 2742,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2743,
+          "last_line": 2795,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2796,
+          "last_line": 2835,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2836,
+          "last_line": 2875,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2876,
+          "last_line": 2912,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2913,
+          "last_line": 2950,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2951,
+          "last_line": 2984,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 2985,
+          "last_line": 3013,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3014,
+          "last_line": 3040,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3041,
+          "last_line": 3066,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3067,
+          "last_line": 3074,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3075,
+          "last_line": 3075,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3075,
+          "last_line": 3075,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3076,
+          "last_line": 3102,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3103,
+          "last_line": 3111,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3112,
+          "last_line": 3117,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3118,
+          "last_line": 3124,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3125,
+          "last_line": 3125,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3125,
+          "last_line": 3125,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3126,
+          "last_line": 3136,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3137,
+          "last_line": 3148,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3149,
+          "last_line": 3160,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3161,
+          "last_line": 3170,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3171,
+          "last_line": 3179,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3180,
+          "last_line": 3185,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3186,
+          "last_line": 3189,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3190,
+          "last_line": 3200,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3201,
+          "last_line": 3204,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3205,
+          "last_line": 3207,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3208,
+          "last_line": 3213,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3214,
+          "last_line": 3216,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3217,
+          "last_line": 3219,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3220,
+          "last_line": 3220,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3220,
+          "last_line": 3220,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3221,
+          "last_line": 3221,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3222,
+          "last_line": 3222,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3222,
+          "last_line": 3222,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3223,
+          "last_line": 3225,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3226,
+          "last_line": 3227,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3228,
+          "last_line": 3232,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3233,
+          "last_line": 3234,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3235,
+          "last_line": 3241,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3242,
+          "last_line": 3243,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3244,
+          "last_line": 3248,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3249,
+          "last_line": 3255,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3256,
+          "last_line": 3257,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3258,
+          "last_line": 3261,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3262,
+          "last_line": 3262,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3262,
+          "last_line": 3262,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3263,
+          "last_line": 3266,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3267,
+          "last_line": 3267,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3267,
+          "last_line": 3267,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3268,
+          "last_line": 3276,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3277,
+          "last_line": 3282,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3283,
+          "last_line": 3288,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3289,
+          "last_line": 3294,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3295,
+          "last_line": 3298,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3299,
+          "last_line": 3299,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3299,
+          "last_line": 3299,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3300,
+          "last_line": 3310,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3311,
+          "last_line": 3314,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3315,
+          "last_line": 3333,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3334,
+          "last_line": 3378,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3379,
+          "last_line": 3420,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3421,
+          "last_line": 3467,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3468,
+          "last_line": 3516,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3517,
+          "last_line": 3559,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3560,
+          "last_line": 3601,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3602,
+          "last_line": 3659,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3660,
+          "last_line": 3726,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3727,
+          "last_line": 3779,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "paper_PT.tex",
+          "first_line": 3780,
+          "last_line": 3799,
+          "sha256": "559d79fb81b0af6c0fb8c47549a0e21e3b29f4173a5b5a642f9464611b4fa217"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1,
+          "last_line": 37,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 75,
+          "last_line": 109,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 110,
+          "last_line": 145,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 146,
+          "last_line": 176,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 177,
+          "last_line": 211,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 212,
+          "last_line": 255,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 256,
+          "last_line": 297,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 298,
+          "last_line": 338,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 339,
+          "last_line": 388,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 389,
+          "last_line": 428,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 429,
+          "last_line": 463,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 464,
+          "last_line": 505,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 506,
+          "last_line": 534,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 535,
+          "last_line": 573,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 574,
+          "last_line": 608,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 609,
+          "last_line": 641,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 642,
+          "last_line": 679,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 680,
+          "last_line": 712,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 713,
+          "last_line": 744,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 745,
+          "last_line": 777,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 778,
+          "last_line": 811,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 812,
+          "last_line": 840,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 841,
+          "last_line": 874,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 875,
+          "last_line": 903,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 904,
+          "last_line": 931,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 932,
+          "last_line": 962,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 963,
+          "last_line": 994,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 995,
+          "last_line": 1028,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1029,
+          "last_line": 1067,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1068,
+          "last_line": 1106,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1107,
+          "last_line": 1143,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1144,
+          "last_line": 1181,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1182,
+          "last_line": 1215,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1216,
+          "last_line": 1243,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1244,
+          "last_line": 1270,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1271,
+          "last_line": 1302,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1303,
+          "last_line": 1335,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1336,
+          "last_line": 1368,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1369,
+          "last_line": 1401,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1402,
+          "last_line": 1429,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1430,
+          "last_line": 1456,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1457,
+          "last_line": 1486,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1487,
+          "last_line": 1514,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1515,
+          "last_line": 1546,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1547,
+          "last_line": 1576,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1577,
+          "last_line": 1602,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1603,
+          "last_line": 1630,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1631,
+          "last_line": 1662,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1663,
+          "last_line": 1684,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1685,
+          "last_line": 1701,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1702,
+          "last_line": 1713,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1714,
+          "last_line": 1723,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1724,
+          "last_line": 1731,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1732,
+          "last_line": 1743,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1744,
+          "last_line": 1744,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1744,
+          "last_line": 1744,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1745,
+          "last_line": 1752,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1753,
+          "last_line": 1756,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1757,
+          "last_line": 1764,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1765,
+          "last_line": 1770,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1771,
+          "last_line": 1771,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1771,
+          "last_line": 1771,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1772,
+          "last_line": 1782,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1783,
+          "last_line": 1783,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1783,
+          "last_line": 1783,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1784,
+          "last_line": 1792,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1793,
+          "last_line": 1794,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1795,
+          "last_line": 1795,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1795,
+          "last_line": 1795,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1796,
+          "last_line": 1800,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1801,
+          "last_line": 1801,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1801,
+          "last_line": 1801,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1802,
+          "last_line": 1806,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1807,
+          "last_line": 1807,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1807,
+          "last_line": 1807,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1808,
+          "last_line": 1835,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1836,
+          "last_line": 1853,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1854,
+          "last_line": 1856,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1857,
+          "last_line": 1862,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1863,
+          "last_line": 1867,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "DESENHO_DO_FECHAMENTO_QG.md",
+          "first_line": 1868,
+          "last_line": 1868,
+          "sha256": "2ac3a261263641d529ba770ab14bc138de470fd0ac1a98631672c39fee4cbf3c"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 1,
+          "last_line": 43,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 44,
+          "last_line": 82,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 83,
+          "last_line": 91,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 92,
+          "last_line": 103,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 104,
+          "last_line": 115,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 116,
+          "last_line": 127,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 128,
+          "last_line": 136,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 137,
+          "last_line": 146,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "um_absoluto_selo.json",
+          "first_line": 147,
+          "last_line": 155,
+          "sha256": "989603b8d254bdcbec3645166b161b734e40eeacb9765762e4fddb10ee748fcb"
+        },
+        {
+          "file": "MEMORIA_DA_LINHAGEM.md",
+          "first_line": 8312,
+          "last_line": 8313,
+          "sha256": "bcd190feac121a2d3cbe124683b8c999465339f83aff82af9b9d89820a1ea385"
+        },
+        {
+          "file": "um.py",
+          "first_line": 164651,
+          "last_line": 164651,
+          "sha256": "4b3405de809aef6135774d25e537ed383af0a25eefbeff8a2644836f61a1b387"
+        }
+      ],
+      "packet_sha256": "7a14b11ed0211521b9e6d5749ff401589f153ffbe4653c201df5160cb9ca6937",
+      "context_bytes": 909329,
+      "coverage": "PARTIAL_RETRIEVAL_NOT_FULL_CORPUS",
+      "blocked_passages": 1,
+      "weights_modified": false,
+      "memory_mode": "maximum",
+      "packing": "CONSERVATIVE_UTF8_BYTES"
+    },
+    "elapsed_seconds": 709.656
+  },
+  "review_status": "DECLARADO_PENDING_FULL_LOCAL_REVIEW"
+}

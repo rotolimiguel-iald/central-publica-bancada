@@ -1,0 +1,88 @@
+{
+  "status": "PROPOSED_VALIDATOR_NOT_ADOPTED",
+  "counterexamples": 9,
+  "findings": [
+    {
+      "name": "trace_checker_ignores_term",
+      "observed": {
+        "name": "TRAÇO",
+        "ok": true,
+        "flags": [],
+        "residual": "0",
+        "provenance": "[F1 l.55]; V5"
+      },
+      "required_behavior": "Reject or evaluate the modified coefficient"
+    },
+    {
+      "name": "derivative_checker_accepts_unknown_formula",
+      "observed": {
+        "name": "POLO_DUPLO",
+        "ok": true,
+        "flags": [],
+        "residual": "2*(c_-1-c_-2)",
+        "provenance": "[F1 l.66-68]"
+      },
+      "required_behavior": "Reject unsupported expression"
+    },
+    {
+      "name": "simple_pole_case_always_rejected",
+      "observed": {
+        "name": "POLO_DUPLO",
+        "ok": false,
+        "flags": [
+          "IMPLICIT_TRUNCATION"
+        ],
+        "residual": "c_-2 zerado sem certidao",
+        "provenance": "R3/R9"
+      },
+      "required_behavior": "Allow a verified simple-pole case; API has no certificate input"
+    },
+    {
+      "name": "arity_factor_not_checked",
+      "observed": {
+        "name": "EOM_EM_T",
+        "ok": true,
+        "flags": [],
+        "residual": "contato i*hbar*0",
+        "provenance": "[F2 l.25]"
+      },
+      "required_behavior": "Verify the required n factor"
+    },
+    {
+      "name": "empty_ledger_emits",
+      "observed": "WARD_COEFFICIENT_EMITTED",
+      "required_behavior": "No coefficient emission without coverage and calculated value"
+    },
+    {
+      "name": "gate_ignores_error_flags",
+      "observed": "WARD_COEFFICIENT_EMITTED",
+      "required_behavior": "Block on unresolved errors"
+    },
+    {
+      "name": "metadata_overwrite_without_collision",
+      "observed": {
+        "flags": [],
+        "coefficient": "999"
+      },
+      "required_behavior": "Check all relevant payload fields for immutable registration"
+    },
+    {
+      "name": "additive_cutoff_terms_flagged_as_duplicate",
+      "observed": [
+        "UNRESOLVED_DOUBLE_COUNT_RISK:G_DDMU_1_OVER_Z",
+        "UNRESOLVED_DOUBLE_COUNT_RISK:G_R3_ROUTES",
+        "UNRESOLVED_DOUBLE_COUNT_RISK:G_DVCHI"
+      ],
+      "required_behavior": "CT11 and CT12 are different summands of the same variational derivative, not alternate expressions of one term"
+    },
+    {
+      "name": "CT10_mislabels_nonlinear_remainder",
+      "observed": "-dchi_du*u/(u + 1)",
+      "required_behavior": "Only grad(chi).grad(u) belongs to the quadratic/free subtraction; -u/(1+u) is the interacting remainder"
+    }
+  ],
+  "cpu_seconds": 0.453125,
+  "source_formulas": "The existing R_n and tensor formulas were not changed",
+  "policy": "No new production gate, no wrapper around existing kernel, no original edits",
+  "physical_claim": "No Ward coefficient calculated by metadata"
+}

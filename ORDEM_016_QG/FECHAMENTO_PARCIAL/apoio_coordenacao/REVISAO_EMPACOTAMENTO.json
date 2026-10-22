@@ -1,0 +1,142 @@
+{
+  "status": "LOCAL_STATIC_REVIEW_NO_EXECUTION",
+  "at_utc": "2026-09-26T14:20:47.842320+00:00",
+  "examined": {
+    "assemble_package.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\assemble_package.py",
+      "sha256": "8dd3443f68dd622a6c2694c1dc8911cbb6900b105e69d2ebd057c9e7c2cdd6d6",
+      "bytes": 16453
+    },
+    "PROPOSTA_RUNTIME.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\PROPOSTA_RUNTIME.py",
+      "sha256": "484fa0930e1b1c9c2f3dc6149e2b07d8e7df7a8cb12d3f8004db3a277021fd65",
+      "bytes": 6613
+    },
+    "reproduzir.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\reproduzir.py",
+      "sha256": "8f34028c426946c03a1ede696a6d1b181933ae487d38d7c41b92e5bdd7831c83",
+      "bytes": 4096
+    },
+    "lean/ContratoQG_v32_Proposta.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\lean\\ContratoQG_v32_Proposta.lean",
+      "sha256": "3ab863dddd41f7583156ab6d9335c04cec3d431c6c182a58c224ddd9646ca4a4",
+      "bytes": 5449
+    },
+    "SOURCE_PLAN.json": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\SOURCE_PLAN.json",
+      "sha256": "3ff559e8ddc373f0597a073123ed4863dee6d070ba9d10d73fef51fd0110a445",
+      "bytes": 383440
+    },
+    "SUPPLEMENTAL_PLAN.json": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\SUPPLEMENTAL_PLAN.json",
+      "sha256": "5c063d1e56bdf840504d268c81d8ac7455d02d52cf887138a928e8b14f753db5",
+      "bytes": 5539
+    },
+    "compile_batch.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\compile_batch.py",
+      "sha256": "a45544f6d7fed81c1dcf3e1b807a829a279e53ba357c44f6772aa0b105fb8d40",
+      "bytes": 2574
+    },
+    "finish_compilation.py": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\finish_compilation.py",
+      "sha256": "35be7f4b6739550c766d910acfb68d5df1ed19c3a23f3a8c51e73018c1cdcf38",
+      "bytes": 2163
+    },
+    "../../ORDEM_016_QG/D6/ContentContractProposal.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\D6\\ContentContractProposal.lean",
+      "sha256": "85c83f1a2e3af8f934665d75fbdc18decb4f72b5989fa6d791863afc18366770",
+      "bytes": 2062
+    },
+    "lean/PhotonContractTheorems_v2.lean": {
+      "path": "C:\\IALD\\Central de Patentes\\Chatgpt\\ORDEM_016_QG\\FECHAMENTO_PARCIAL\\lean\\PhotonContractTheorems_v2.lean",
+      "sha256": "4f6d5cd3d0d64045832f59ec3c71c81e5b1b713df4cd17ef96e59211d5f0fd44",
+      "bytes": 66296
+    }
+  },
+  "method": [
+    "byte hashes from files",
+    "Python AST parse only",
+    "read SOURCE_PLAN/SUPPLEMENTAL_PLAN metadata",
+    "read source code without running Lean or package scripts"
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "title": "Ramo de falha da proposta P3 pode ser anunciado como compilado",
+      "locations": [
+        "compile_batch.py:17",
+        "finish_compilation.py:26",
+        "assemble_package.py:158"
+      ],
+      "evidence": "compile_batch inclui ContratoQG_v32_Proposta; finish_compilation importa no joint apenas estados rc0. Se a proposta tiver rc≠0, assemble ainda monta índice que anuncia lean/ContratoQG_v32_Proposta.lean, sem assert de presença. Se rc0, este achado não se aplica.",
+      "impact": "Pacote parcial pode declarar P3 compilado quando o módulo foi excluído por falha.",
+      "action": "Exigir explicitamente módulo e rc0 no joint antes de anunciar a proposta, ou emitir MEDIDA e retirar a afirmação no índice."
+    },
+    {
+      "id": "F3",
+      "severity": "HIGH",
+      "title": "Adulteração de evidência histórica não bloqueia assemble/seal",
+      "locations": [
+        "assemble_package.py:139",
+        "assemble_package.py:147",
+        "assemble_package.py:164"
+      ],
+      "evidence": "P8_COPIAS registra unchanged=sha(dest)==previously_indexed_sha256, porém não exige true. Um relatório alterado após o índice é copiado, e seal() apenas calcula hashes do pacote atual. No instante desta revisão, as fontes P8 e apoio conferem; o defeito é no caminho de recusa futura.",
+      "impact": "Pacote pode ser selado com fonte histórica divergente de hash previamente indexado.",
+      "action": "Comparar hash atual com row.sha256 antes de copiar e falhar visivelmente na divergência; verificar unchanged em seal."
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "title": "Runtime não cruza rc/axiomas declarados com o conteúdo dos recibos",
+      "locations": [
+        "PROPOSTA_RUNTIME.py:62",
+        "PROPOSTA_RUNTIME.py:67",
+        "PROPOSTA_RUNTIME.py:76"
+      ],
+      "evidence": "O leitor confere SHA dos arquivos contra P2 e PRONTO, mas usa unit.rc e unit.axioms do próprio P2 sem comparar rc, source_sha256 e log_sha256 no JSON do recibo nem BENCH_DECL do log. Controles sintéticos atuais mutam bytes de arquivos, não inconsistências entre metadados internamente pinados.",
+      "impact": "Um pacote incorretamente montado pode retornar BENCH_ARTIFACT_CHECKED para metadados rc/axiomas contraditórios ao recibo/log.",
+      "action": "Parsear recibo e linhas BENCH_DECL e exigir equivalência integral aos campos da unidade antes de all_verified."
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "title": "Reprodução não exige pin externo de PRONTO",
+      "locations": [
+        "reproduzir.py:19",
+        "reproduzir.py:22",
+        "reproduzir.py:56"
+      ],
+      "evidence": "O script lê PRONTO.json do próprio pacote, verifica seus arquivos contra a mesma lista e só registra o SHA ao final; não recebe hash esperado independente. Um pacote e PRONTO reescritos em conjunto passam esse controle autorreferente.",
+      "impact": "P7 demonstra consistência interna, mas não custódia contra o selo que a gerência recebeu.",
+      "action": "Aceitar --expected-ready-sha obrigatório e comparar antes de copiar/compilar; manter falha fechada."
+    }
+  ],
+  "limits": [
+    "No Lean compilation or end-to-end package execution; active batch was not duplicated",
+    "No modification of examined scripts, Lean source, or canonical files",
+    "Findings F1/F2 apply to the exact hashes recorded above; recheck after edits",
+    "Adjudicação revisada após resposta da gerência; F1 condicional, F2 retirado, F4 sem falta atual medida"
+  ],
+  "adjudications": [
+    {
+      "id": "A1",
+      "prior": "F1 como ausência atual",
+      "outcome": "CORRIGIDO NA REVISÃO",
+      "basis": "Módulo entra em compile_batch.py:17 e, com rc0, em finish_compilation.py:26. Resta só o ramo de falha descrito em F1."
+    },
+    {
+      "id": "A2",
+      "prior": "F2 como ausência de ligação matemática",
+      "outcome": "RETIRADO COMO DEFEITO",
+      "basis": "D6.same_horizon_by_content_from_realizations deriva a conjugação dos dois fluxos a partir dos realizadores; PhotonContractTheorems_v2.lean:681 demonstra Δit_determined para W/R/N fixos. O contrato deve documentar a projeção e não sugerir que κ/frame decorrem apenas do reconhecimento."
+    },
+    {
+      "id": "A3",
+      "prior": "F4 como import efetivamente ausente",
+      "outcome": "REBAIXADO A FRAGILIDADE",
+      "basis": "Embora assemble_package.py:107 extraia imports só do SOURCE_PLAN, comparação estática atual das importações TGL/TGLExt nos módulos primários e suplementares achou zero imports faltantes. A extração é frágil ante nova fonte, mas não há omissão atual medida."
+    }
+  ]
+}
