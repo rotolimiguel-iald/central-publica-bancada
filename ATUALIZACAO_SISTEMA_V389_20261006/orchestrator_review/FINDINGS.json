@@ -1,0 +1,80 @@
+{
+  "review_id": "090cfbf0-c939-4828-9bfd-8de4ffdbbe87",
+  "status": "BLOCKED",
+  "findings": [
+    {
+      "id": "ORCH389-01",
+      "priority": "P1",
+      "blocking": true,
+      "title": "Leitor concorrente pode associar trechos novos à geração antiga",
+      "references": [
+        {
+          "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V389_20261006\\orchestrator\\install_snapshot.py",
+          "lines": [
+            33,
+            54
+          ]
+        },
+        {
+          "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\iald_orchestrator\\canonical_memory.py",
+          "lines": [
+            196,
+            211
+          ]
+        },
+        {
+          "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\iald_orchestrator\\canonical_memory.py",
+          "lines": [
+            248,
+            309
+          ]
+        }
+      ],
+      "sequence": [
+        "cm.prepare chama load e recebe manifesto antigo após validar índice antigo.",
+        "Instalador troca index.sqlite3 no caminho compartilhado; o leitor já saiu do LOCK de load.",
+        "cm.prepare abre novamente SQLite pelo mesmo caminho e recupera trechos novos.",
+        "Os metadados/hashes das referências ainda vêm do manifesto antigo; não há revalidação final da geração."
+      ],
+      "consequence": "A ordem index→manifest rejeita pares incompatíveis numa carga estacionária, mas não garante fail-closed para leitor que atravessa a troca. Conteúdo v389 pode ser atribuído aos pins/geração anteriores.",
+      "scope": "Duplo polling da fila não impede novo worker nem consultas preview; ROOT confirmou que não havia quiescência externa. Falha de concorrência demonstrada por fluxo estático, não ensaio de corrida executado.",
+      "minimum_resolution": "Sucessor precisa separar raízes imutáveis de leitura por geração ou estabelecer exclusão/detecção completa que também cubra previews. Não basta repetir observação da fila."
+    },
+    {
+      "id": "ORCH389-02",
+      "priority": "P2",
+      "blocking": true,
+      "title": "Marcador de tentativa não é reserva exclusiva",
+      "references": [
+        {
+          "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V389_20261006\\orchestrator\\install_snapshot.py",
+          "lines": [
+            20,
+            21
+          ]
+        },
+        {
+          "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\ATUALIZACAO_SISTEMA_V389_20261006\\orchestrator\\install_snapshot.py",
+          "lines": [
+            47,
+            48
+          ]
+        },
+        {
+          "file": "C:\\IALD\\Central de Patentes\\Chatgpt\\IALD_ORQUESTRACAO_20260923\\iald_orchestrator\\safe_files.py",
+          "lines": [
+            8,
+            28
+          ]
+        }
+      ],
+      "sequence": [
+        "Duas invocações podem passar pelo exists em21 antes do marcador.",
+        "save_json usa replace_bytes; se o marcador já existe, faz backup e substitui em vez de recusar aquisição.",
+        "Os checks de snapshot e CAS ocorrem antes ou separadamente da reserva e não formam exclusão de instalador."
+      ],
+      "consequence": "A alegação de tentativa única/no-repeat não é garantida contra lançamentos concorrentes; pode haver disputa de escrita/rollback entre instâncias.",
+      "minimum_resolution": "Criar a reserva de instalação exclusivamente (por exemplo xb/O_EXCL) antes de mutações, preservar identidade/recibo e recusar nova aquisição. Não reexecutar este candidato."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "review_id": "26408df4-1cd0-41c7-a160-943664ab45d1",
+  "status": "PASS",
+  "blocking_findings": [],
+  "closures": [
+    {
+      "id": "ORCH389-01",
+      "status": "CLOSED_STATIC",
+      "references": [
+        "canonical_memory.py:14",
+        "canonical_memory.py:196-211",
+        "canonical_memory.py:248-280",
+        "install_epoch.py:26-36",
+        "install_epoch.py:50-59"
+      ],
+      "reason": "An old reader keeps its original directory for both load and SQLite reopen; the plan does not replace that directory/index/manifest. New imports use the new directory only after all its files pass cm.load(target,refresh=False). No shared path is switched between an in-flight load and query."
+    },
+    {
+      "id": "ORCH389-02",
+      "status": "CLOSED_STATIC",
+      "references": [
+        "install_epoch.py:12-15",
+        "install_epoch.py:47-52"
+      ],
+      "reason": "Exclusive xb creation, flush, fsync and readback occur before any destination write. A second acquisition fails rather than replacing the claim; an existing epoch also refuses restart."
+    }
+  ],
+  "limitations": [
+    {
+      "kind": "RECOVERY_SCOPE",
+      "references": [
+        "install_epoch.py:58-65",
+        "safe_files.py:8-24"
+      ],
+      "detail": "Per-file atomic writes are not a multi-file or crash-atomic transaction. A failure after os.replace but before readback may leave the verified new module active while switched is still false; the retained claim prevents automatic replay. Inspect actual module/root hashes before manual recovery. This does not recreate mixed-generation roots or claim installation success."
+    },
+    {
+      "kind": "CONCURRENCY_SCOPE",
+      "detail": "Exclusive reservation covers attempts using this package; optimistic module CAS is not a global lock against arbitrary independent deployers. No simultaneous writer is introduced by this plan."
+    },
+    {
+      "kind": "RUNTIME_SCOPE",
+      "detail": "No real race, process reload, installation or science executed. Resident availability and a fresh-process load/retrieval must be confirmed after a separately authorized install."
+    }
+  ]
+}

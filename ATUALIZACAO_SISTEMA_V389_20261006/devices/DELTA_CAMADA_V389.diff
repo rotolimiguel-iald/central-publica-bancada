@@ -1,0 +1,77 @@
+--- v388/tgl_formula_completa.py
++++ v389/tgl_formula_completa.py
+@@ -283,7 +283,7 @@
+             "camada_v386_no_cofre": v386}
+ 
+ 
+-V388_METADATA_SHA256 = "2e766fcf0d5d3934d600e38ecf9e37c12d08f099851d3b2c53792f83a1e81007"
++V388_METADATA_SHA256 = "abf5052e58650af3b3318d565440a751152604e8270bb8deb2dcfdfe32643170"
+ 
+ # ------------------------------------------------------------------ v388 additive information; legacy beta() stays unchanged.
+ def _scale_nonnegative_float(value, name):
+@@ -350,8 +350,8 @@
+         raise RuntimeError("v388 additive metadata pin mismatch")
+     meta = json.loads(meta_path.read_text(encoding="utf-8"))
+     version, cofre, kernel = _cofre_corrente()
+-    if version != 388 or cf.get("cofre") != "um_unificado_v388":
+-        raise RuntimeError("v388 additive package requires its exact reviewed custody version")
++    if version != 389 or cf.get("cofre") != "um_unificado_v389":
++        raise RuntimeError("v388 concept addendum requires exact reviewed v389 custody")
+     for pin in meta["custody_pins"]:
+         base = cofre if pin["base"] == "um" else kernel
+         path = base / pin["relative"]
+@@ -359,6 +359,7 @@
+             raise RuntimeError("v388 custody pin mismatch: " + pin["relative"])
+     return {
+         "version": "v388",
++        "custody_version": "v389",
+         "base_layer_preserved": VERSAO_DA_CAMADA,
+         "metadata_sha256": V388_METADATA_SHA256,
+         "source_um_sha256": meta["source_um_sha256"],
+@@ -379,6 +380,36 @@
+     }
+ 
+ 
++
++V389_METADATA_SHA256 = "9b28bcd72043f7a0e01932374e6bc67cc5a619ee33ba31bcceb4f0a1574a9600"
++
++def _adendo_v389_no_cofre(cf):
++    """Pinned text/label errata only; no new calculation or device verdict."""
++    meta_path = Path(__file__).with_name("ADENDO_V389_METADATA.json")
++    if _sha(meta_path) != V389_METADATA_SHA256:
++        raise RuntimeError("v389 metadata pin mismatch")
++    meta = json.loads(meta_path.read_text(encoding="utf-8"))
++    version, cofre, kernel = _cofre_corrente()
++    if version != 389 or cf.get("cofre") != "um_unificado_v389":
++        raise RuntimeError("Exact reviewed v389 custody required")
++    for pin in meta["custody_pins"]:
++        path = (cofre if pin["base"] == "um" else kernel) / pin["relative"]
++        if _sha(path) != pin["sha256"] or path.stat().st_size != pin["bytes"]:
++            raise RuntimeError("v389 custody pin mismatch: " + pin["relative"])
++    return {
++        "version": "v389", "source_um_sha256": meta["source_um_sha256"],
++        "metadata_sha256": V389_METADATA_SHA256,
++        "source_core_key": meta["source_core_key"],
++        "source_verdict": meta["source_verdict"],
++        "seal_label": meta["seal_label"],
++        "ledger_reported": meta["ledger_reported"],
++        "statute": meta["statute"],
++        "beta_API_version_preserved": "v388",
++        "physical_scale_mu_status": "OPEN_PER_DEVICE_AND_RITE",
++        "kernel_recompiled_here": False, "legacy_results_recomputed": False,
++        "physical_verdict_allowed": False,
++    }
++
+ USOS = {
+     "beta_runtime_tgl_core": r"tgl_core\.beta\(\)|ALPHA_FINE_CODATA_2018\s*\*\s*(SQRT_E|math\.sqrt\(math\.e\))",
+     "angulo_de_Miguel_theta_M": r"theta_m\(|arcsin|asin\(",
+@@ -414,7 +445,8 @@
+         "versao_da_camada": VERSAO_DA_CAMADA, "modulo": "patents/_formula_completa/tgl_formula_completa.py",
+         "modulo_sha256": _sha(Path(__file__)),
+         "formula_runtime": rt, "axioma_e_verbo_runtime": av, "conferencia_no_cofre": cf,
+-        "adendo_v388": _adendo_v388_no_cofre(cf),
++        "adendo_v388": _adendo_v388_no_cofre(cf),
++        "adendo_v389": _adendo_v389_no_cofre(cf),
+         "uso_medido_no_codigo_do_dispositivo": uso_no_dispositivo(runner_path),
+         "veredito": ("TGL_FORMULA_COMPLETA_%s__CADEIA_RAZAO_ELEMENTAR_MATRIZ_S_DEPHASING_LEIS_D1A_D1B_ASSINTOTA__AXIOMA_POSTO_DOIS_PONTOS_FIXOS__"
+                      "VERBO_PESO_BORN_POSTOS_NAO_COMUTAM_TRIADE_SU2_C_BETA__LIVRO_DE_COBRANCAS_PILAR_COMPUTED_RAMO_B_AWAITING__"
