@@ -1,4 +1,0 @@
-import TGLExt.V351PerturbedWeightOrder
-set_option pp.universes true
-#check TGLV350.Regular.scalarWeight_right_perturbed_mono
-#print axioms TGLV350.Regular.scalarWeight_right_perturbed_mono

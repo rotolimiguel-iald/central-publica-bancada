@@ -1,4 +1,0 @@
-import GenericPolarRightAlgebraR2
-set_option pp.universes true
-#print F1Fecho.GenericPolarRightAlgebra.ScalarPolarRight
-#print F1Fecho.GenericPolarRightAlgebra.scalarPolarRightAlgebra

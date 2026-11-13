@@ -1,8 +1,0 @@
-import TGLExt.V351InverseLimitSemifiniteness
-set_option pp.universes true
-#check TGLV350.Regular.scalarInverseLimitWeight_domainCut_bound
-#print axioms TGLV350.Regular.scalarInverseLimitWeight_domainCut_bound
-#check TGLV350.Regular.scalarInverseLimitWeight_domainCut_finite
-#print axioms TGLV350.Regular.scalarInverseLimitWeight_domainCut_finite
-#check TGLV350.Regular.scalarInverseLimitWeight_square_finite_wot_closure
-#print axioms TGLV350.Regular.scalarInverseLimitWeight_square_finite_wot_closure

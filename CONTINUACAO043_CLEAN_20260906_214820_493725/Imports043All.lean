@@ -1,4 +1,0 @@
-import JacobiRiccatiProfile
-import OpticalNullCongruence
-import OpticalEquilibriumScreen
-import OpticalConstructedHeat

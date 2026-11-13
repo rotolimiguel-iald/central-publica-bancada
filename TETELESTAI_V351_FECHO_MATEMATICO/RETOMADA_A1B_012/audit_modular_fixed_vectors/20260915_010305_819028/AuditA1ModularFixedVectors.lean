@@ -1,5 +1,0 @@
-import TGLExt.V351ModularFixedVectors
-#check TGLV350.Regular.scalarTomitaImaginaryPower_fixed_of_fixed_pair
-#print axioms TGLV350.Regular.scalarTomitaImaginaryPower_fixed_of_fixed_pair
-#check TGLV350.Regular.regularAverage_square_modular_fixed
-#print axioms TGLV350.Regular.regularAverage_square_modular_fixed

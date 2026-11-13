@@ -1,3 +1,0 @@
-import TGLExt.V354TraceReaderWall
-#check TGLV350.Regular.scalarTrace_finite_positive_seed
-#check TGLV350.Regular.scalarTrace_finite_projection_exists

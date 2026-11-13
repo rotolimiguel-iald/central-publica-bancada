@@ -1,2 +1,0 @@
-import FisherInformationTensor
-import AffineSamplingObstruction
