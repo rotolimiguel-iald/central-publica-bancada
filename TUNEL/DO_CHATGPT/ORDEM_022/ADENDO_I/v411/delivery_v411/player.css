@@ -1,0 +1,91 @@
+:root {
+  color-scheme: dark;
+  font-family: "Atkinson Hyperlegible Next", "Segoe UI", sans-serif;
+  color: #eeeae2;
+  background: #101212;
+  --panel: #181b1b;
+  --line: #383d3b;
+  --muted: #c0c5bd;
+  --accent: #edc982;
+}
+* { box-sizing: border-box }
+body { margin: 0 }
+main { max-width: 1480px; margin: auto; padding: clamp(16px, 3.5vw, 54px) }
+header, .chapterHead, .transport, .films { display: flex; align-items: center }
+header { justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 24px }
+h1, h2, p, dl, dd { margin: 0 }
+h1, .detail h2 { font-family: "Spectral", Georgia, serif; font-weight: 500 }
+h1 { font-size: clamp(2.2rem, 5vw, 4.5rem); letter-spacing: -.045em; line-height: 1.1 }
+.collection, dt, .settings label { color: var(--muted); font-size: .87rem }
+.collection { margin-bottom: 8px; color: var(--accent) }
+.layout { display: grid; grid-template-columns: minmax(0, 2.7fr) minmax(230px, 1fr); gap: clamp(12px, 2.4vw, 36px); align-items: start }
+.screen, #chapters { min-width: 0 }
+#stage { background: #070909; border: 1px solid var(--line); border-radius: 8px; overflow: hidden }
+video { display: block; width: 100%; aspect-ratio: 16/9; object-fit: contain }
+button, select { font: inherit; color: inherit; background: var(--panel); border: 1px solid var(--line); border-radius: 5px; min-height: 44px; padding: 7px 12px }
+button, select { cursor: pointer }
+button:disabled { opacity: .55; cursor: default }
+button:enabled:hover, select:hover { border-color: var(--accent) }
+button[aria-pressed=true], #play { color: #201e18; background: var(--accent); border-color: var(--accent) }
+:focus-visible { outline: 3px solid #91daff; outline-offset: 2px }
+.films { gap: 5px }
+.transport { flex-wrap: wrap; gap: 8px; margin: 12px 0 18px }
+#repeat { margin-inline-start: auto }
+.settings { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px }
+.settings select { width: 100%; margin-top: 4px; color: #eeeae2 }
+#mediaStatus:not(:empty), #captionStatus:not(:empty), #chapterStatus:not(:empty) { margin: 12px 0; color: var(--accent) }
+.detail { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 18px; overflow-wrap: anywhere }
+h2 { font-size: 1.25rem }
+.detail h2 { font-size: clamp(1.45rem, 3vw, 2rem) }
+.detail p:not(:empty), dl div:not([hidden]) { margin-top: 12px }
+.detail p, dd { white-space: pre-wrap; line-height: 1.5 }
+.formula { color: var(--accent); font-family: "Cambria Math", Georgia, serif; font-size: 1.2rem }
+dd { margin-top: 2px }
+#chapters { border-top: 1px solid var(--line) }
+.chapterHead { justify-content: space-between; padding: 12px 4px }
+#count, .stamp { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .85rem }
+ol { list-style: none; margin: 0; padding: 3px; max-height: 72vh; overflow: auto }
+li button { width: 100%; display: flex; gap: 12px; align-items: baseline; text-align: left; border-radius: 0; border: 0; border-bottom: 1px solid var(--line); padding: 13px 10px; overflow-wrap: anywhere; background: transparent }
+li button[aria-current=true] { background: #302c22; box-shadow: inset 3px 0 var(--accent); color: var(--accent) }
+li button:hover { background: var(--panel) }
+.skip { position: fixed; left: 8px; top: -100px; z-index: 2; padding: 10px; background: #fff; color: #111 }
+.skip:focus { top: 8px }
+@media (max-width: 760px) {
+  .layout { grid-template-columns: minmax(0, 1fr) }
+  .settings { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  #chapters { margin-top: 10px }
+  ol { max-height: none }
+}
+@media (max-width: 420px) { #repeat { margin-inline-start: 0 } }
+.lab { margin-top: 20px; border-block: 1px solid var(--line); font-size: .95rem }
+.lab summary { color: var(--accent); cursor: pointer; padding: 14px 2px; font-weight: 600 }
+.lab-toolbar, .lab-scrub { display: flex; align-items: center; gap: 14px; flex-wrap: wrap }
+.lab-toolbar label, .lab section > label { display: block; color: var(--muted) }
+.lab-toolbar select { display: block; margin-top: 3px }
+.lab-toolbar p { flex: 1 1 220px; color: var(--muted) }
+.lab section { margin: 16px 0 20px; padding-top: 14px; border-top: 1px solid var(--line) }
+.lab h3 { margin: 0 0 5px; font: 500 1.3rem Georgia, serif }
+.lab p { line-height: 1.5 }
+.lab-charts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px }
+.lab figure { background: var(--panel); border-radius: 5px; margin: 10px 0; padding: 9px; min-width: 0 }
+.lab figcaption { font: 1.05rem "Cambria Math", Georgia, serif }
+.lab svg { display: block; width: 100%; height: auto; max-height: 180px; margin: 4px auto }
+.lab svg text { fill: var(--muted); font: 13px "Segoe UI",sans-serif }
+.lab svg .axis { stroke: #777f79; fill: none }
+.lab svg .guide { stroke: #888e81; stroke-dasharray: 3 3 }
+.lab svg .curve { stroke: var(--accent); stroke-width: 2.4; fill: none }
+.lab svg .point { fill: #b5eced; stroke: #101212; stroke-width: 1.5 }
+.lab .reading, .lab label span { color: var(--accent); font-variant-numeric: tabular-nums }
+.lab .reading { font-size: .95rem }
+.lab input[type=range] { width: 100%; min-height: 40px; margin: 0; accent-color: var(--accent) }
+.lab-scrub input { flex: 1 1 130px }
+.lab-params, #labHint { font-size: .86rem }
+.lab-params { color: var(--muted); overflow-wrap: anywhere; margin-top: 6px }
+@media (max-width: 475px) {
+  .lab-charts { grid-template-columns: minmax(0,1fr) }
+}
+@media (forced-colors: active) {
+  .lab svg .curve, .lab svg .axis, .lab svg .guide { stroke: CanvasText }
+  .lab svg .point { fill: Highlight; stroke: CanvasText }
+  .lab svg text { fill: CanvasText }
+}

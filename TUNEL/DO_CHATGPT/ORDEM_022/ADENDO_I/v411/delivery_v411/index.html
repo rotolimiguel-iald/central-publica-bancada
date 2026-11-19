@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Ponte e o Um · Filmes</title>
+  <link rel="stylesheet" href="player.css">
+  <script defer src="scenes.js"></script>
+  <script defer src="captions.js"></script>
+  <script defer src="player.js"></script>
+</head>
+<body>
+  <a class="skip" href="#chapters">Ir para os capítulos</a>
+  <main>
+    <header>
+      <div><p class="collection">Teoria da Gravitação Luminodinâmica</p><h1>A Ponte e o Um</h1></div>
+      <nav aria-label="Selecionar filme" class="films">
+        <button data-film="1" aria-pressed="true">Filme 1</button>
+        <button data-film="2" aria-pressed="false">Filme 2</button>
+      </nav>
+    </header>
+    <noscript>Ative o JavaScript no navegador para usar os controles do player.</noscript>
+    <div class="layout">
+      <section class="screen" aria-label="Reprodução">
+        <div id="stage"></div>
+        <div class="transport">
+          <button id="play" disabled>Reproduzir</button>
+          <button id="back" aria-label="Recuar dez segundos" disabled>−10 s</button>
+          <button id="forward" aria-label="Avançar dez segundos" disabled>+10 s</button>
+          <button id="repeat" aria-pressed="false" disabled>Repetir módulo</button>
+        </div>
+        <div class="settings">
+          <label>Narração<select id="voice"><option value="pt-BR">Português</option><option value="en">Inglês</option></select></label>
+          <label>Legendas<select id="language"></select></label>
+          <label>Vídeo<select id="quality"><option value="auto">Automático</option><option value="1080p.mp4">1080p · MP4</option><option value="1080p.webm">1080p · WebM</option><option value="720p.mp4">720p · MP4</option></select></label>
+          <label>Velocidade<select id="speed"><option>0.5</option><option>0.75</option><option selected>1</option><option>1.25</option><option>1.5</option><option>2</option></select></label>
+        </div>
+        <p role="status" id="mediaStatus"></p>
+        <button id="retry" hidden>Tentar carregar novamente</button>
+        <p role="status" id="captionStatus"></p>
+        <section class="detail" aria-labelledby="sceneTitle">
+          <h2 id="sceneTitle">Cena atual</h2>
+          <p id="formula" class="formula"></p><p id="note"></p>
+          <dl><div id="sourceRow"><dt>Fonte</dt><dd id="source"></dd></div>
+          <div id="statusRow"><dt>Estatuto</dt><dd id="status"></dd></div></dl>
+        </section>
+        <details class="lab" id="lab">
+          <summary>Laboratório de inspeção</summary>
+          <div class="lab-toolbar">
+            <label>Modo de inspeção
+              <select id="labMode">
+                <option value="manual">Inspecionar manualmente</option>
+                <option value="follow">Seguir reprodução</option>
+              </select>
+            </label>
+            <p id="labHint"></p>
+          </div>
+          <section aria-labelledby="modeHeading">
+            <h3 id="modeHeading">Densidade de modo e polarização</h3>
+            <p>A mesma coordenada κ seleciona os dois pontos. A densidade de modo ρ atinge ¼ no centro, onde a polarização q muda de sinal.</p>
+            <div class="lab-charts">
+              <figure><figcaption>ρ = ¼ sech²(κ/2)</figcaption>
+                <svg id="rhoPlot" role="img" aria-label="Densidade de modo em função de κ"></svg>
+                <span class="reading" id="rhoValue"></span>
+              </figure>
+              <figure><figcaption>q = tanh(κ/2)</figcaption>
+                <svg id="qPlot" role="img" aria-label="Polarização em função de κ"></svg>
+                <span class="reading" id="qValue"></span>
+              </figure>
+            </div>
+            <label for="kappa">Coordenada κ <span id="kappaValue"></span></label>
+            <div class="lab-scrub"><input id="kappa" type="range" min="-6" max="6" step="0.01" value="0">
+              <button id="sweep" type="button">Animar κ</button></div>
+          </section>
+          <section aria-labelledby="jacobiHeading">
+            <h3 id="jacobiHeading">Focalização óptica de Jacobi</h3>
+            <p>A(t)/A(0) mede a fração da área inicial do feixe. Abertura inicial igual a 1, com término em 85% do tempo até a primeira cáustica.</p>
+            <figure><figcaption>A(t)/A(0) = cos(√a t) cos(√c t)</figcaption>
+              <svg id="areaPlot" role="img" aria-label="Área óptica relativa em função de t"></svg>
+              <span class="reading" id="areaValue"></span>
+            </figure>
+            <label for="opticalTime">Parâmetro óptico t <span id="timeValue"></span></label>
+            <input id="opticalTime" type="range" min="0" step="any" value="0">
+            <p class="lab-params"><b>[INPUT]</b> a = β, c = β/2 e fração de apresentação 0,85. A faixa de κ de −6 a +6 também é uma escolha de apresentação.</p>
+            <p class="lab-params" id="constants"></p>
+            <p class="lab-params">Fontes: um.py v411 (ALPHA_FINE_CODATA_2018) e delivery_v7/extend_export.py, linhas 72–78 (jacobiOscillator e opticalJacobiArea).</p>
+          </section>
+        </details>
+      </section>
+      <nav id="chapters" tabindex="-1" aria-labelledby="chapHeading">
+        <div class="chapterHead"><h2 id="chapHeading">Capítulos <span id="count"></span></h2>
+          <div><button id="previous" aria-label="Capítulo anterior" title="Capítulo anterior">←</button>
+          <button id="next" aria-label="Próximo capítulo" title="Próximo capítulo">→</button></div></div>
+        <ol id="chapterList"></ol><p id="chapterStatus"></p>
+      </nav>
+    </div>
+  </main>
+</body>
+</html>
