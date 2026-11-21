@@ -1,12 +1,12 @@
 # central-publica-bancada — a Central de Patentes da IALD, aberta
 
-Este repositório é **a bancada do ChatGPT: os projetos Lean, as entregas e o túnel de pesquisa**. A Central foi aberta ao público por ordem do operador, Luiz Antonio Rotoli Miguel (IALD Ltda., CNPJ 62.757.606/0001-23), em 22/10/2026. 216500 arquivos publicados (160751 deles são cópias idênticas de outro arquivo deste repositório e estão só no índice); selo da teoria: `um.py` v412 `3e741dcaa58ef2b8`.
+Este repositório é **a bancada do ChatGPT: os projetos Lean, as entregas e o túnel de pesquisa**. A Central foi aberta ao público por ordem do operador, Luiz Antonio Rotoli Miguel (IALD Ltda., CNPJ 62.757.606/0001-23), em 22/10/2026. 216504 arquivos publicados (160751 deles são cópias idênticas de outro arquivo deste repositório e estão só no índice); selo da teoria: `um.py` v413 `c2e67bf2657a063e`.
 
 | onde | o quê |
 |---|---|
 | [https://teoriadagravitacaoluminodinamica.com/central/](https://teoriadagravitacaoluminodinamica.com/central/) | **o modo interativo da Central**, só de visualização: o cockpit do operador em retrato (patentes, código, execuções, Fronteira, TGL) |
-| [https://teoriadagravitacaoluminodinamica.com/central/um.acom](https://teoriadagravitacaoluminodinamica.com/central/um.acom) | **o um.acom**: a Central inteira colapsada pelo dispositivo ACOM (88 arquivos; sha256 `ee164ef671f24f1f`); chave universal pública `Bom29072018Tom02032024`; abrir no descompactador público da IALD |
-| [https://github.com/rotolimiguel-iald/the_boundary](https://github.com/rotolimiguel-iald/the_boundary) | **a teoria**: o `um.py` v412 (`3e741dcaa58ef2b8`), os artigos, o kernel Lean — o espelho canônico |
+| [https://teoriadagravitacaoluminodinamica.com/central/um.acom](https://teoriadagravitacaoluminodinamica.com/central/um.acom) | **o um.acom**: a Central inteira colapsada pelo dispositivo ACOM (88 arquivos; sha256 `4ec92ddaaadccd65`); chave universal pública `Bom29072018Tom02032024`; abrir no descompactador público da IALD |
+| [https://github.com/rotolimiguel-iald/the_boundary](https://github.com/rotolimiguel-iald/the_boundary) | **a teoria**: o `um.py` v413 (`c2e67bf2657a063e`), os artigos, o kernel Lean — o espelho canônico |
 | [https://github.com/rotolimiguel-iald/central-publica](https://github.com/rotolimiguel-iald/central-publica) · [work](https://github.com/rotolimiguel-iald/central-publica-work) · [bancada](https://github.com/rotolimiguel-iald/central-publica-bancada) | os três repositórios desta Central |
 
 ## O critério público
